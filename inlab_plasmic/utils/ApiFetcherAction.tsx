@@ -1,33 +1,40 @@
 import axios from 'axios';
-import { User, refreshAccessIfNeeded } from './AuthUtils';
+import { InlabUser, refreshAccessIfNeeded, logInDev } from './CommonUtils';
 
 // TODO: Handle errors
 export function axiosCall(
-    user: User | null,
+    user: InlabUser | null,
     baseUrl: string,
-    changeUserCallback: (user: User | null) => void,
+    changeUserCallback: (user: InlabUser | null) => void,
     method: string,
     path: string,
     headers?: any,
     requestBody?: any,
 ): Promise<any> {
     return refreshAccessIfNeeded({baseUrl, changeUserCallback}, user).then(user => {
+        logInDev("axiosCall: refresh: running...");
+
         const authedHeaders: object = {
             'Authorization': 'Bearer ' + user?.access,
             ...headers
         };
         axios.request({
             method,
-            url: path,
+            url: baseUrl + path,
             headers: authedHeaders,
             data: requestBody
         }).then((response) => {
             if (response.status === 200) {
+                logInDev("axiosCall: axios: success: " + JSON.stringify(response.data));
                 return response.data;
             } else {
                 // TODO: A better Error handling needs to be implemented
-                console.log("Request failed with status: " + response.status);
+                logInDev("axiosCall: axios: Request failed with status: " + response.status);
             }
+        }).catch((error) => {
+            logInDev("axios Call: Request error: " + error);
         });
+    }).catch((error) => {
+        logInDev("axiosCall: refresh: error: " + error);
     })
 }

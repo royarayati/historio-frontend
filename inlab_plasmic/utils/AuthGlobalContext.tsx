@@ -1,13 +1,17 @@
-import React, { useEffect, useMemo, useState, useContext, useCallback, createContext } from "react";
+import React, { useEffect, useMemo, useState, useContext, useCallback } from "react";
+import { usePathname } from 'next/navigation'
+
 import { DataProvider, GlobalActionsProvider } from "@plasmicapp/host";
+
 import { 
-  User, 
+  InlabUser, 
   login, 
   logout, 
   getCurrentUser, 
   refreshAccessIfNeeded,
-  GlobalContext
- } from "./AuthUtils";
+  GlobalContext,
+  logInDev
+ } from "./CommonUtils";
  import { axiosCall } from "./ApiFetcherAction";
 
 
@@ -22,18 +26,20 @@ interface AuthGlobalContextProps {
 //       Or error from network or other problems happened ?
 export const AuthGlobalContext = ({ children, baseUrl }: React.PropsWithChildren<AuthGlobalContextProps>) => {
 
+  logInDev("AuthGlobalContext: Rendering AuthGlobalContext.");
   // TODO: Better way to spilit dev / prod environment ?
   baseUrl = baseUrl || useContext(GlobalContext).baseUrl;
 
-  const [user, setUser] = useState<User | null>(null);
+  const [inlabUser, setInlabUser] = useState<InlabUser | null>(getCurrentUser());
 
-  const changeUserCallback = useCallback((user: User | null) => {
-    if (user) {
-      localStorage.setItem('inlab_user', JSON.stringify(user));
+  const changeUserCallback = useCallback((inlabUser: InlabUser | null) => {
+    if (inlabUser) {
+      localStorage.setItem('inlab_user', JSON.stringify(inlabUser));
+      logInDev("changeUserCallback success: " + JSON.stringify(inlabUser));
     } else {
       localStorage.removeItem('inlab_user');
     }
-    setUser(user);
+    setInlabUser(inlabUser);
   }, []);
 
   const globalContext = useMemo(() => ({
@@ -43,9 +49,10 @@ export const AuthGlobalContext = ({ children, baseUrl }: React.PropsWithChildren
 
   // Get current user on mount
   useEffect(() => {
-    refreshAccessIfNeeded( {baseUrl , changeUserCallback} , getCurrentUser())
+    logInDev("AuthGlobalContext: useEffect runned in AuthGlobalContext. ");
+    refreshAccessIfNeeded( {baseUrl , changeUserCallback} , inlabUser)
       .then(user => user)
-      .catch(() => setUser(null));
+      .catch(() => setInlabUser(null));
   }, [baseUrl]);
 
   const actions = useMemo(() => ({
@@ -55,27 +62,35 @@ export const AuthGlobalContext = ({ children, baseUrl }: React.PropsWithChildren
       headers?: any,
       requestBody?: any) => {
         axiosCall(
-          user, 
+          inlabUser, 
           baseUrl, 
           changeUserCallback,
           method, 
           path, 
           headers, 
           requestBody,
-        ).then(data => data);
+        ).then(data => {
+          logInDev("AuthGlobalContext: apiFetcher: success: " + JSON.stringify(data));
+          return data
+        });
       },
     
     login: (username: string, password: string) =>
-      login(username, password, baseUrl).then(user => setUser(user)),
+      login(username, password, baseUrl, changeUserCallback)
+      .then(inlabUser => setInlabUser(inlabUser))
+      .catch(error => console.error(error)),
 
-    logout: () => logout(user, baseUrl).then(() => setUser(null)),
+    logout: () => logout(inlabUser, baseUrl, changeUserCallback).then(() => setInlabUser(null)),
 
-  }), [baseUrl, changeUserCallback, user]);
+  }), [baseUrl, changeUserCallback, inlabUser]);
+
+  logInDev("AuthGlobalContext: inlabUser: " + JSON.stringify(inlabUser));
+  logInDev("AuthGlobalContext: AuthGlobalContext rendered successfully.");
 
   return (
     <GlobalActionsProvider contextName="AuthGlobalContext" actions={actions}>
       <GlobalContext.Provider value={globalContext}>
-        <DataProvider name="auth" data={user}>
+        <DataProvider name="inlab_user" data={inlabUser}>
           {children}
         </DataProvider>
       </GlobalContext.Provider>

@@ -1,7 +1,7 @@
 import { ReactNode , useEffect, useState, useContext } from 'react';
 import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-web/lib/host';
 import axios from 'axios';
-import { GlobalContext , refreshAccessIfNeeded } from './AuthUtils';
+import { GlobalContext, refreshAccessIfNeeded,  logInDev} from './CommonUtils';
 
 interface PropsType {
     className?: string,
@@ -12,17 +12,26 @@ interface PropsType {
     requestBody?: object,
 }
 
+// TODO: We may need to handle axios race condition
 export function ApiFetcher(props: PropsType) {
 
+    logInDev("ApiFetcher: Rendering ApiFetcherComponent");
+
     const globalContext = useContext(GlobalContext);
-    const user = useSelector('auth');
+    const inlabUser = useSelector('inlab_user');
+
+    logInDev("ApiFetcher: globalContext: " + JSON.stringify(globalContext));
+    logInDev("ApiFetcher: user from useSelector: " + JSON.stringify(inlabUser));
 
     const [ data , setData ] = useState();
 
-    // TODO: Handle errors
     useEffect(() => {
-        refreshAccessIfNeeded(globalContext, user).then(user => {
+        logInDev("ApiFetcher: useEffect runned in ApiFetcher. ");
+    
+        // TODO: Handle errors
+        refreshAccessIfNeeded(globalContext, inlabUser).then(user => {
             if (!user) {
+                logInDev("ApiFetcher: useEffect: refresh.then => user is null.")
                 return;
             }
             const authedHeaders: object = {
@@ -39,11 +48,13 @@ export function ApiFetcher(props: PropsType) {
                     setData(response.data);
                 } else {
                     // TODO: A better Error handling needs to be implemented
-                    console.log("Request failed with status: " + response.status);
+                    logInDev("Request failed with status: " + response.status);
                 }
             })
+        }).catch(error => {
+            logInDev("ApiFetcher: useEffect: refresh.catch => error: " + error);
         });
-    })
+    }, [props, globalContext, inlabUser]);
 
     return (
         <div className={props.className}>

@@ -1,38 +1,55 @@
 import { createContext } from 'react';
 import axios from 'axios';
 
-export type User = {
+export type InlabUser = {
     access: string;
     refresh: string;
     user: any;
 };
 
+export interface changeUserType {
+    (user: InlabUser | null): void;
+}
+
 interface GlobalContextType {
     baseUrl: string;
-    changeUserCallback: (user: User | null) => void;
+    changeUserCallback: changeUserType;
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
     baseUrl: process.env.REACT_APP_BASE_URL || '',
-    changeUserCallback: (user: User | null) => { },
+    changeUserCallback: (user: InlabUser | null) => { },
 });
 
+export function logInDev(logText: string | null) {
+    if (logText != null && process.env.NODE_ENV === 'development') {
+        console.log(logText)
+    }
+}
 
-export function login(username: string, password: string, authUrl?: string): Promise<User | null> {
+export function login(
+    username: string,
+    password: string,
+    baseUrl: string,
+    changeUserCallback: changeUserType ): Promise<InlabUser | null> {
     return new Promise((resolve, reject) => {
-        // TODO: Generate device_id
+
+        let device_id = localStorage.getItem('inlab_device_id');
+        if (!device_id) {
+            device_id = crypto.randomUUID();
+            localStorage.setItem('inlab_device_id', device_id);
+        }
+
         const requestBody = {
             username,
             password,
-            device_id: "DEV_ID_0xABA41337CAFE",
+            device_id: device_id,
             force_logout_other_sessions: true
         };
-        axios.post(authUrl + '/api/v2/user/login', requestBody)
+        axios.post(baseUrl + '/api/v2/user/login', requestBody)
             .then(response => {
                 if (response.status === 200) {
-                    // TODO: better naming for keys maybe?
-                    localStorage.setItem('inlab_user', JSON.stringify(response.data));
-                    console.log("Login success: " + response.data);
+                    changeUserCallback(response.data);
                     resolve(response.data);
                 } else {
                     // TODO: A better Error handling needs to be implemented
@@ -41,25 +58,24 @@ export function login(username: string, password: string, authUrl?: string): Pro
             })
             // TODO: A better Error handling needs to be implemented
             .catch(error => {
-                reject(error);
+                reject('Login error: ' + error);
             });
     });
 };
 
-export function logout(user: User | null, authUrl?: string): Promise<void> {
-    console.log("Logout - user before logout: " + user);
-    // if user is null, there is no need to logout
-    if (!user) {
+export function logout(inlabUser: InlabUser | null, baseUrl: string, changeUserCallback: changeUserType): Promise<void> {
+    logInDev("Logout - user before logout: " + inlabUser);
+    // If user is not logged in then do nothing
+    if (!inlabUser) {
+        changeUserCallback(null);
         return Promise.resolve();
     }
     return new Promise((resolve, reject) => {
-        // TODO: Generate device_id
-        const requestBody = { refresh: user.refresh };
-        axios.post(authUrl + '/api/v2/user/logout', requestBody)
+        const requestBody = { refresh: inlabUser.refresh };
+        axios.post(baseUrl + '/api/v2/user/logout', requestBody)
             .then(response => {
                 if (response.status === 200) {
-                    console.log("Logout success: " + response.status);
-                    localStorage.removeItem('inlab_user');
+                    changeUserCallback(null);
                     resolve();
                 } else {
                     // TODO: A better Error handling needs to be implemented
@@ -68,28 +84,28 @@ export function logout(user: User | null, authUrl?: string): Promise<void> {
             })
             // TODO: A better Error handling needs to be implemented
             .catch(error => {
-                reject(error);
+                reject('Logout error: ' + error);
             });
     });
 };
 
-export function getCurrentUser(): User | null {
-    const user = localStorage.getItem('inlab_user');
-    console.log("getCurrentUser: " + user);
+export function getCurrentUser(): InlabUser | null {
+    const inlabUser = localStorage.getItem('inlab_user');
+    logInDev("getCurrentUser: " + inlabUser);
 
-    if (user) {
-        return JSON.parse(user);
+    if (inlabUser) {
+        logInDev("getCurrentUser: user returened with value.");
+        return JSON.parse(inlabUser);
     } else {
+        logInDev("getCurrentUser: user returened null.");
         return null;
     }
 }
 
-export function refreshAccessIfNeeded(globalContext: GlobalContextType, user: User | null): Promise<User | null> {
+export function refreshAccessIfNeeded(globalContext: GlobalContextType, inlabUser: InlabUser | null): Promise<InlabUser | null> {
     return new Promise((resolve, reject) => {
-        // TODO: I could not test refresh token function
-        //       as can repeat expired token easily
 
-        const { baseUrl , changeUserCallback } = globalContext;
+        const { baseUrl, changeUserCallback } = globalContext;
         // Check if the refresh token is not expired
         const isTokenExpired = (token: string) => {
             const payloadBase64 = token.split('.')[1];
@@ -101,37 +117,37 @@ export function refreshAccessIfNeeded(globalContext: GlobalContextType, user: Us
             return exp < now;
         };
 
-        if (!user) {
-            console.log("User is null.");
+        if (!inlabUser) {
+            logInDev("refreshAccessToken: User is null.");
             changeUserCallback(null);
             reject(null); // User is null, return null
 
-        } else if (!isTokenExpired(user.access)) {
-            console.log("Access Token is valid.");
-            resolve(user); // Refresh Token is valid, resolve the promise with the user object
+        } else if (!isTokenExpired(inlabUser.access)) {
+            logInDev("refreshAccessToken: Access Token is valid.");
+            resolve(inlabUser); // Refresh Token is valid, resolve the promise with the user object
 
-        } else if (isTokenExpired(user.refresh)) {
-            console.log("Refresh Token has expired.");
+        } else if (isTokenExpired(inlabUser.refresh)) {
+            logInDev("refreshAccessToken: Refresh Token has expired.");
             changeUserCallback(null);
             reject(null); // Access and Refresh Token have expired, return null.
 
         } else {
-            console.log("Token is about to expire.");
-            console.log("baseUrl: " + baseUrl);
+            logInDev("refreshAccessToken: Token is about to expire.");
+            logInDev("refreshAccessToken: baseUrl: " + baseUrl);
             // Refresh the access token
-            const requestBody = { refresh: user.refresh };
+            const requestBody = { refresh: inlabUser.refresh };
             axios.post(baseUrl + '/api/v2/user/reauth', requestBody)
                 .then(response => {
                     if (response.status === 200) {
                         // TODO: better naming for keys maybe?
-                        user.access = response.data.access;
-                        changeUserCallback(user);
-                        console.log("Refresh success: " + user);
-                        resolve(user);
+                        inlabUser.access = response.data.access;
+                        changeUserCallback(inlabUser);
+                        logInDev("refreshAccessToken: Refresh success: " + inlabUser);
+                        resolve(inlabUser);
                     } else {
                         // TODO: We should handle 401 error and return user to login page
                         // TODO: A better Error handling needs to be implemented
-                        reject(new Error('Refresh failed with status: ' + response.status));
+                        reject(new Error('refreshAccessToken: Refresh failed with status: ' + response.status));
                     }
                 })
                 // TODO: A better Error handling needs to be implemented
