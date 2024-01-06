@@ -1,7 +1,15 @@
-import React, { useEffect, useMemo, useState, createContext } from "react";
+import React, { useEffect, useMemo, useState, useContext, useCallback, createContext } from "react";
 import { DataProvider, GlobalActionsProvider } from "@plasmicapp/host";
-import { User, BaseUrlContext, login, logout, getCurrentUser, refresh } from "./AuthUtils";
-import { axiosCall } from "./ApiFetcherAction";
+import { 
+  User, 
+  login, 
+  logout, 
+  getCurrentUser, 
+  refreshAccessIfNeeded,
+  GlobalContext
+ } from "./AuthUtils";
+ import { axiosCall } from "./ApiFetcherAction";
+
 
 // Users will be able to set these props in Studio.
 interface AuthGlobalContextProps {
@@ -15,38 +23,62 @@ interface AuthGlobalContextProps {
 export const AuthGlobalContext = ({ children, baseUrl }: React.PropsWithChildren<AuthGlobalContextProps>) => {
 
   // TODO: Better way to spilit dev / prod environment ?
-  baseUrl = baseUrl || process.env.REACT_APP_BASE_URL || 'https://inlabgr.synappsgroup.com:8008';
+  baseUrl = baseUrl || useContext(GlobalContext).baseUrl;
 
   const [user, setUser] = useState<User | null>(null);
 
+  const changeUserCallback = useCallback((user: User | null) => {
+    if (user) {
+      localStorage.setItem('inlab_user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('inlab_user');
+    }
+    setUser(user);
+  }, []);
+
+  const globalContext = useMemo(() => ({
+    baseUrl,
+    changeUserCallback
+  }), [baseUrl, changeUserCallback]);
+
   // Get current user on mount
   useEffect(() => {
-    refresh( baseUrl, getCurrentUser() )
-      .then(user => setUser(user))
+    refreshAccessIfNeeded( {baseUrl , changeUserCallback} , getCurrentUser())
+      .then(user => user)
       .catch(() => setUser(null));
-
   }, [baseUrl]);
 
   const actions = useMemo(() => ({
-    // apiFetcher: (
-    //   method: string,
-    //   path: string,
-    //   headers?: any,
-    //   requestBody?: any) => axiosCall(method, baseUrl + path, headers, requestBody , user),
-    login: (username: string, password: string) => 
-              login(username, password, baseUrl).then(user => setUser(user)),
+    apiFetcher: (
+      method: string,
+      path: string,
+      headers?: any,
+      requestBody?: any) => {
+        axiosCall(
+          user, 
+          baseUrl, 
+          changeUserCallback,
+          method, 
+          path, 
+          headers, 
+          requestBody,
+        ).then(data => data);
+      },
+    
+    login: (username: string, password: string) =>
+      login(username, password, baseUrl).then(user => setUser(user)),
 
     logout: () => logout(user, baseUrl).then(() => setUser(null)),
 
-  }), [baseUrl]);
+  }), [baseUrl, changeUserCallback, user]);
 
   return (
     <GlobalActionsProvider contextName="AuthGlobalContext" actions={actions}>
-      <BaseUrlContext.Provider value={baseUrl}>
-        <DataProvider name="auth" data={user}>  
-              {children}
+      <GlobalContext.Provider value={globalContext}>
+        <DataProvider name="auth" data={user}>
+          {children}
         </DataProvider>
-      </BaseUrlContext.Provider>
+      </GlobalContext.Provider>
     </GlobalActionsProvider>
   );
 }

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { PlasmicCanvasHost, registerComponent, registerGlobalContext } from '@plasmicapp/react-web/lib/host';
 
-import { MasoodComponent, MasoodMeta } from '../utils/masood';
-import { Counter } from '../utils/counter';
 import { AuthGlobalContext } from '../utils/AuthGlobalContext';
 import { ApiFetcher, ApiFetcherMeta } from '../utils/ApiFetcherComponent';
 
@@ -14,34 +12,6 @@ import { ApiFetcher, ApiFetcherMeta } from '../utils/ApiFetcherComponent';
 // https://docs.plasmic.app/learn/app-hosting/#set-a-plasmic-project-to-use-your-app-host
 
 // registerComponent(...)
-
-registerComponent(MasoodComponent, MasoodMeta);
-
-registerComponent(Counter, {
-  name:  'Counter',
-  props: {},
-  refActions: {
-    increment: {
-      description: 'Add one to the counter',
-      argTypes: []
-    },
-    decrement: {
-      description: 'Subtract one from the counter',
-      argTypes: []
-    },
-    set: {
-      description: 'Set the counter to any number',
-      argTypes: [
-        {
-          name: 'count',
-          type: 'number'
-        }
-      ]
-    }
-  },
-  importPath: '../utils/counter'
-});
-
 registerGlobalContext(AuthGlobalContext, {
   // name should match GlobalActionsProvider contextName
   name: "AuthGlobalContext",
@@ -51,11 +21,23 @@ registerGlobalContext(AuthGlobalContext, {
   providesData: true,
   // globalActions should match the global context's GlobalActionsProvider
   globalActions: {
-    login: { parameters: [
-                  { name: "username", type: "string" },
-                  { name: "password", type: "string" }
-                ]
-            },
+    apiFetcher: {
+      parameters: [
+        { name: "method",
+          type: "string",
+          displayName: "Method: 'GET', 'POST', 'PUT', 'DELETE'"
+        },
+        { name: "path", type: "string" },
+        { name: "headers", type: "object" },
+        { name: "requestBody", type: "object" },
+      ],
+    },
+    login: {
+      parameters: [
+        { name: "username", type: "string" },
+        { name: "password", type: "string" }
+      ]
+    },
     logout: { parameters: [] },
   },
 

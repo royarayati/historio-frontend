@@ -1,7 +1,7 @@
 import { ReactNode , useEffect, useState, useContext } from 'react';
 import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-web/lib/host';
 import axios from 'axios';
-import { BaseUrlContext , refresh } from './AuthUtils';
+import { GlobalContext , refreshAccessIfNeeded } from './AuthUtils';
 
 interface PropsType {
     className?: string,
@@ -13,17 +13,15 @@ interface PropsType {
 }
 
 export function ApiFetcher(props: PropsType) {
-    const [ data , setData ] = useState();
-    const baseUrl = useContext(BaseUrlContext);
+
+    const globalContext = useContext(GlobalContext);
     const user = useSelector('auth');
+
+    const [ data , setData ] = useState();
 
     // TODO: Handle errors
     useEffect(() => {
-        if (!baseUrl || !user) {
-            return;
-        }
-
-        refresh(baseUrl, user).then(user => {
+        refreshAccessIfNeeded(globalContext, user).then(user => {
             if (!user) {
                 return;
             }
@@ -33,7 +31,7 @@ export function ApiFetcher(props: PropsType) {
             };
             axios.request({
                 method: props.method || 'GET',
-                url: baseUrl + props.path,
+                url: globalContext.baseUrl + props.path,
                 headers: authedHeaders,
                 data: props.requestBody
             }).then((response) => {

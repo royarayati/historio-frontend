@@ -7,7 +7,16 @@ export type User = {
     user: any;
 };
 
-export const BaseUrlContext = createContext<string | undefined>(process.env.REACT_APP_BASE_URL);
+interface GlobalContextType {
+    baseUrl: string;
+    changeUserCallback: (user: User | null) => void;
+}
+
+export const GlobalContext = createContext<GlobalContextType>({
+    baseUrl: process.env.REACT_APP_BASE_URL || '',
+    changeUserCallback: (user: User | null) => { },
+});
+
 
 export function login(username: string, password: string, authUrl?: string): Promise<User | null> {
     return new Promise((resolve, reject) => {
@@ -75,11 +84,12 @@ export function getCurrentUser(): User | null {
     }
 }
 
-export function refresh(baseUrl: string, user: User | null): Promise<User | null> {
+export function refreshAccessIfNeeded(globalContext: GlobalContextType, user: User | null): Promise<User | null> {
     return new Promise((resolve, reject) => {
         // TODO: I could not test refresh token function
         //       as can repeat expired token easily
 
+        const { baseUrl , changeUserCallback } = globalContext;
         // Check if the refresh token is not expired
         const isTokenExpired = (token: string) => {
             const payloadBase64 = token.split('.')[1];
@@ -93,6 +103,7 @@ export function refresh(baseUrl: string, user: User | null): Promise<User | null
 
         if (!user) {
             console.log("User is null.");
+            changeUserCallback(null);
             reject(null); // User is null, return null
 
         } else if (!isTokenExpired(user.access)) {
@@ -101,6 +112,7 @@ export function refresh(baseUrl: string, user: User | null): Promise<User | null
 
         } else if (isTokenExpired(user.refresh)) {
             console.log("Refresh Token has expired.");
+            changeUserCallback(null);
             reject(null); // Access and Refresh Token have expired, return null.
 
         } else {
@@ -113,7 +125,7 @@ export function refresh(baseUrl: string, user: User | null): Promise<User | null
                     if (response.status === 200) {
                         // TODO: better naming for keys maybe?
                         user.access = response.data.access;
-                        localStorage.setItem('inlab_user', JSON.stringify(user));
+                        changeUserCallback(user);
                         console.log("Refresh success: " + user);
                         resolve(user);
                     } else {
@@ -129,4 +141,3 @@ export function refresh(baseUrl: string, user: User | null): Promise<User | null
         }
     });
 }
-
