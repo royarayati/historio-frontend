@@ -1,0 +1,1368 @@
+.root {
+  display: grid;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  justify-items: center;
+  justify-content: flex-start;
+  align-items: center;
+  background: #e8ecf2;
+  min-width: 0;
+  min-height: 0;
+  grid-template-columns:
+    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
+    min(
+      var(--plsmc-standard-width),
+      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
+    )
+    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+}
+.root > * {
+  grid-column: 4;
+}
+.freeBox__ttAvM {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 401px;
+  height: 886px;
+  max-width: 100%;
+  padding: 8px;
+}
+.settingTop {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin-top: 18px;
+  left: auto;
+  top: auto;
+  background: #daedff;
+  min-width: 0;
+  border-radius: 3px;
+  padding: 8px;
+}
+.svg___1AdRl {
+  position: absolute;
+  object-fit: cover;
+  max-width: 100%;
+  color: #191e25;
+  width: 24px;
+  height: 24px;
+  display: block;
+  top: 8px;
+  left: 10px;
+  flex-shrink: 0;
+}
+.setting2 {
+  display: block;
+  font-size: 17px;
+  text-align: center;
+  font-family: "vazirmatn";
+  font-weight: 600;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  color: rgba(24, 29, 36, 1);
+  position: relative;
+  align-self: auto;
+  left: auto;
+  top: auto;
+  width: auto;
+  height: 100%;
+  z-index: 1;
+  margin-top: 2px;
+  margin-left: 0px;
+  min-height: 0;
+}
+.picsAndName {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin-top: 31px;
+  left: auto;
+  top: auto;
+  margin-left: 0px;
+  min-width: 0;
+  padding: 0px 0px 0px 6px;
+}
+.img {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  width: 61px;
+  margin-right: 9px;
+  flex-shrink: 0;
+}
+.img > picture > img {
+  object-fit: cover;
+}
+.freeBox__uqggj {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 11px 0px 0px;
+}
+.freeBox__uqggj > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin-top: calc(0px - 0px);
+  height: calc(100% + 0px);
+}
+.freeBox__uqggj > :global(.__wab_flex-container) > *,
+.freeBox__uqggj > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__uqggj > :global(.__wab_flex-container) > picture > img,
+.freeBox__uqggj
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 0px;
+}
+.name {
+  display: block;
+  font-size: 14px;
+  font-family: "vazirmatn";
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: rgba(24, 29, 36, 1);
+  position: absolute;
+  top: 6px;
+  left: 0px;
+  text-align: left;
+  margin-top: calc(3px + 0px) !important;
+}
+.text__eLhal {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-start;
+  text-align: left;
+  margin-top: calc(15px + 0px) !important;
+  font-size: 13px;
+}
+.myProfile {
+  background: none;
+  width: 351px;
+  height: auto;
+  display: flex;
+  position: relative;
+  top: auto;
+  left: auto;
+  flex-direction: row-reverse;
+  margin-top: 46px;
+  padding: 16px;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
+}
+.myProfile > :global(.__wab_flex-container) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: calc(0px - 8px);
+  width: calc(100% + 8px);
+}
+.myProfile > :global(.__wab_flex-container) > *,
+.myProfile > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.myProfile > :global(.__wab_flex-container) > picture > img,
+.myProfile
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 8px;
+}
+.myProfile2 {
+  display: block;
+  font-size: 14px;
+  font-family: "vazirmatn";
+  font-weight: 400;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  color: rgba(24, 29, 36, 1);
+  position: relative;
+  text-align: left;
+}
+.svg___5QIhx {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  color: #416ce1;
+  width: 15px;
+  height: 21px;
+  display: block;
+  top: auto;
+  left: auto;
+  flex-shrink: 0;
+}
+.hospital {
+  background: none;
+  width: 351px;
+  height: auto;
+  display: flex;
+  position: relative;
+  top: auto;
+  left: auto;
+  flex-direction: row-reverse;
+  margin-top: 18px;
+  padding: 16px;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
+}
+.hospital > :global(.__wab_flex-container) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: calc(0px - 8px);
+  width: calc(100% + 8px);
+}
+.hospital > :global(.__wab_flex-container) > *,
+.hospital > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.hospital > :global(.__wab_flex-container) > picture > img,
+.hospital
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 8px;
+}
+.hospital2 {
+  display: block;
+  font-size: 14px;
+  font-family: "vazirmatn";
+  font-weight: 400;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  color: rgba(24, 29, 36, 1);
+  position: relative;
+  text-align: left;
+  align-self: flex-end;
+}
+.hospital3 {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  color: #416ce1;
+  width: 15px;
+  height: 21px;
+  flex-shrink: 0;
+}
+.resetPassword {
+  background: none;
+  width: 351px;
+  height: auto;
+  display: flex;
+  position: relative;
+  top: auto;
+  left: auto;
+  flex-direction: row-reverse;
+  margin-top: 18px;
+  padding: 16px;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
+}
+.resetPassword > :global(.__wab_flex-container) {
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: calc(0px - 8px);
+  width: calc(100% + 8px);
+}
+.resetPassword > :global(.__wab_flex-container) > *,
+.resetPassword > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.resetPassword > :global(.__wab_flex-container) > picture > img,
+.resetPassword
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 8px;
+}
+.resetPassword2 {
+  display: block;
+  font-size: 14px;
+  font-family: "vazirmatn";
+  font-weight: 400;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  color: rgba(24, 29, 36, 1);
+  position: relative;
+  text-align: left;
+  align-self: flex-end;
+}
+.resetPass {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  color: #416ce1;
+  width: 17px;
+  height: 21px;
+  display: block;
+  flex-shrink: 0;
+}
+.button:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  left: auto;
+  top: auto;
+  margin-top: 81px;
+  flex-shrink: 0;
+}
+.svg__fLi6W {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+  display: none;
+}
+.text__zjr24 {
+  color: #ffffff;
+  background: none;
+  font-size: 12px;
+}
+.svg__uw4Qf {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.frame3119 {
+  background: none;
+  width: 360px;
+  height: 1459px;
+  overflow: hidden;
+  display: none;
+}
+.frame3116 {
+  background: rgba(255, 255, 255, 1);
+  width: auto;
+  height: 1375px;
+  display: flex;
+  position: absolute;
+  top: 54px;
+  left: 0px;
+  flex-direction: column;
+  padding: 24px 16px 204px;
+}
+.frame3116 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 32px);
+  height: calc(100% + 32px);
+}
+.frame3116 > :global(.__wab_flex-container) > *,
+.frame3116 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3116 > :global(.__wab_flex-container) > picture > img,
+.frame3116
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 32px;
+}
+.group1922 {
+  width: 180px;
+  height: 48px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.group3114 {
+  width: 124px;
+  height: 48px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.اردبهشت2 {
+  display: block;
+  font-size: 16px;
+  font-family: "IRANYekanFN";
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: rgba(24, 29, 36, 1);
+  position: absolute;
+  top: 0%;
+  left: 20.16%;
+}
+.اردبهشت3 {
+  display: block;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(24, 29, 36, 1);
+  position: absolute;
+  top: 58.33%;
+  left: 0%;
+}
+.group1720 {
+  width: 48px;
+  height: 48px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 132px;
+}
+.rectangle4142 {
+  width: 48px;
+  height: 48px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.svg__qKc9A {
+  position: absolute;
+  object-fit: cover;
+  max-width: 100%;
+  color: #416ce1;
+  width: 48px;
+  height: 48px;
+  display: block;
+  top: 0%;
+  left: 0%;
+}
+.vuesaxoutlineadd {
+  width: 32px;
+  height: 32px;
+  display: block;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+.vuesaxoutlineadd2 {
+  width: 32px;
+  height: 32px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.svg__lVlSm {
+  position: absolute;
+  object-fit: cover;
+  max-width: 100%;
+  color: #416ce1;
+  width: 32px;
+  height: 32px;
+  top: 0px;
+  left: 0px;
+  display: none;
+}
+.download1 {
+  background: url("/plasmic/inlab/images/download1.jpg") -14px 0px / 72px 48px no-repeat;
+  box-shadow: inset 0px 0px 0px 1.5px rgba(117, 151, 202, 1);
+  width: 48px;
+  height: 48px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px;
+}
+.group3115 {
+  width: 328px;
+  height: 497px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.frame3117 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: absolute;
+  top: 72px;
+  left: 0px;
+  flex-direction: column;
+}
+.frame3117 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: calc(0px - 16px);
+  height: calc(100% + 16px);
+}
+.frame3117 > :global(.__wab_flex-container) > *,
+.frame3117 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3117 > :global(.__wab_flex-container) > picture > img,
+.frame3117
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 16px;
+}
+.frame3120 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.frame3120 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.frame3120 > :global(.__wab_flex-container) > *,
+.frame3120 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3120 > :global(.__wab_flex-container) > picture > img,
+.frame3120
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.اردبهشت5 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(92, 95, 101, 1);
+  position: relative;
+}
+.group3155 {
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.rectangle4304 {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: inset 0px 0px 0px 1px rgba(204, 209, 223, 1);
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px;
+}
+.اردبهشت6 {
+  display: block;
+  font-size: 14px;
+  text-align: right;
+  font-family: "IRANYekanFN";
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(24, 29, 36, 1);
+  position: absolute;
+  top: 8px;
+  left: 295px;
+}
+.frame3121 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.frame3121 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.frame3121 > :global(.__wab_flex-container) > *,
+.frame3121 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3121 > :global(.__wab_flex-container) > picture > img,
+.frame3121
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.اردبهشت7 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(92, 95, 101, 1);
+  position: relative;
+}
+.group3156 {
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.rectangle4305 {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: inset 0px 0px 0px 1px rgba(204, 209, 223, 1);
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px;
+}
+.اردبهشت8 {
+  display: block;
+  font-size: 14px;
+  text-align: right;
+  font-family: "IRANYekanFN";
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(24, 29, 36, 1);
+  position: absolute;
+  top: 8px;
+  left: 256px;
+}
+.frame3122 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.frame3122 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.frame3122 > :global(.__wab_flex-container) > *,
+.frame3122 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3122 > :global(.__wab_flex-container) > picture > img,
+.frame3122
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.اردبهشت9 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(92, 95, 101, 1);
+  position: relative;
+}
+.group3157 {
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.rectangle4306 {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: inset 0px 0px 0px 1px rgba(204, 209, 223, 1);
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px;
+}
+.اردبهشت10 {
+  display: block;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(24, 29, 36, 1);
+  position: absolute;
+  top: 8px;
+  left: 192px;
+}
+.frame3123 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.frame3123 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.frame3123 > :global(.__wab_flex-container) > *,
+.frame3123 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3123 > :global(.__wab_flex-container) > picture > img,
+.frame3123
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.اردبهشت11 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(92, 95, 101, 1);
+  position: relative;
+}
+.group3158 {
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.rectangle4307 {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: inset 0px 0px 0px 1px rgba(204, 209, 223, 1);
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px;
+}
+.اردبهشت12 {
+  display: block;
+  font-size: 14px;
+  text-align: right;
+  font-family: "Azeret Mono";
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(24, 29, 36, 1);
+  position: absolute;
+  top: 8px;
+  left: 215px;
+}
+.frame3124 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.frame3124 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.frame3124 > :global(.__wab_flex-container) > *,
+.frame3124 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3124 > :global(.__wab_flex-container) > picture > img,
+.frame3124
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.اردبهشت13 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(92, 95, 101, 1);
+  position: relative;
+}
+.group3159 {
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.rectangle4308 {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: inset 0px 0px 0px 1px rgba(204, 209, 223, 1);
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px;
+}
+.اردبهشت14 {
+  display: block;
+  font-size: 14px;
+  text-align: right;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(24, 29, 36, 1);
+  position: absolute;
+  top: 8px;
+  left: 102px;
+}
+.group1909 {
+  width: 328px;
+  height: 37px;
+  display: block;
+  position: absolute;
+  top: 460px;
+  left: 0px;
+}
+.buttenMobile {
+  background: rgba(64, 140, 255, 1);
+  width: 328px;
+  height: 37px;
+  display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  flex-direction: row;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+.buttenMobile > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: calc(0px - 10px);
+  width: calc(100% + 10px);
+}
+.buttenMobile > :global(.__wab_flex-container) > *,
+.buttenMobile > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.buttenMobile > :global(.__wab_flex-container) > picture > img,
+.buttenMobile
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 10px;
+}
+.group1734 {
+  width: 86px;
+  height: 20px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.text__h7SHn {
+  display: block;
+  font-size: 14px;
+  text-align: right;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+.group3117 {
+  width: 328px;
+  height: 232px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.frame3125 {
+  background: rgba(241, 243, 249, 1);
+  width: 328px;
+  height: auto;
+  display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  flex-direction: row;
+  border-radius: 6px;
+  padding: 16px;
+}
+.frame3125 > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: calc(0px - 8px);
+  width: calc(100% + 8px);
+}
+.frame3125 > :global(.__wab_flex-container) > *,
+.frame3125 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3125 > :global(.__wab_flex-container) > picture > img,
+.frame3125
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 8px;
+}
+.اردبهشت15 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 700;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  color: rgba(24, 29, 36, 1);
+  position: relative;
+}
+.vuesaxoutlinepath {
+  width: 24px;
+  height: 24px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.vuesaxoutlinepath2 {
+  width: 24px;
+  height: 24px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.svg__e6VuP {
+  position: absolute;
+  object-fit: cover;
+  max-width: 100%;
+  color: #416ce1;
+  width: 24px;
+  height: 24px;
+  display: block;
+  top: 0px;
+  left: 0px;
+}
+.frame3126 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  flex-direction: column;
+}
+.frame3126 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: calc(0px - 16px);
+  height: calc(100% + 16px);
+}
+.frame3126 > :global(.__wab_flex-container) > *,
+.frame3126 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3126 > :global(.__wab_flex-container) > picture > img,
+.frame3126
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 16px;
+}
+.frame3127 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.frame3127 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.frame3127 > :global(.__wab_flex-container) > *,
+.frame3127 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3127 > :global(.__wab_flex-container) > picture > img,
+.frame3127
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.اردبهشت16 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(92, 95, 101, 1);
+  position: relative;
+}
+.group3160 {
+  width: 328px;
+  height: 128px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.rectangle4309 {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 0px 1px rgba(204, 209, 223, 1),
+    inset 0px 0px 0px 1px rgba(204, 209, 223, 1);
+  width: 328px;
+  height: 128px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px;
+}
+.group3161 {
+  width: 165px;
+  height: 68px;
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 82px;
+}
+.vuesaxoutlineexport {
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 62px;
+}
+.vuesaxoutlineexport2 {
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.svg__nWiyb {
+  position: absolute;
+  object-fit: cover;
+  max-width: 100%;
+  color: #8b8f99;
+  width: 40px;
+  height: 40px;
+  display: block;
+  top: 0px;
+  left: 0px;
+}
+.اردبهشت17 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(139, 143, 153, 1);
+  position: absolute;
+  top: 70.58%;
+  left: 0%;
+}
+.group3116 {
+  width: 328px;
+  height: 352px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.frame3129 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  flex-direction: column;
+}
+.frame3129 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: calc(0px - 16px);
+  height: calc(100% + 16px);
+}
+.frame3129 > :global(.__wab_flex-container) > *,
+.frame3129 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3129 > :global(.__wab_flex-container) > picture > img,
+.frame3129
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 16px;
+}
+.frame3130 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.frame3130 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.frame3130 > :global(.__wab_flex-container) > *,
+.frame3130 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3130 > :global(.__wab_flex-container) > picture > img,
+.frame3130
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.اردبهشت19 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(92, 95, 101, 1);
+  position: relative;
+}
+.rectangle4310 {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: inset 0px 0px 0px 1px rgba(204, 209, 223, 1);
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+.frame3131 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.frame3131 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.frame3131 > :global(.__wab_flex-container) > *,
+.frame3131 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3131 > :global(.__wab_flex-container) > picture > img,
+.frame3131
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.اردبهشت20 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(92, 95, 101, 1);
+  position: relative;
+}
+.rectangle4311 {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: inset 0px 0px 0px 1px rgba(204, 209, 223, 1);
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+.frame3132 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.frame3132 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.frame3132 > :global(.__wab_flex-container) > *,
+.frame3132 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3132 > :global(.__wab_flex-container) > picture > img,
+.frame3132
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.اردبهشت21 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(92, 95, 101, 1);
+  position: relative;
+}
+.rectangle4312 {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: inset 0px 0px 0px 1px rgba(204, 209, 223, 1);
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+.group1910 {
+  width: 328px;
+  height: 36px;
+  display: block;
+  position: absolute;
+  top: 316px;
+  left: 0px;
+}
+.buttenMobile2 {
+  background: rgba(64, 140, 255, 1);
+  width: 328px;
+  height: 36px;
+  display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  flex-direction: row;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+.buttenMobile2 > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: calc(0px - 10px);
+  width: calc(100% + 10px);
+}
+.buttenMobile2 > :global(.__wab_flex-container) > *,
+.buttenMobile2 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.buttenMobile2 > :global(.__wab_flex-container) > picture > img,
+.buttenMobile2
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 10px;
+}
+.group1735 {
+  width: 84px;
+  height: 20px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.text__cbetb {
+  display: block;
+  font-size: 14px;
+  text-align: right;
+  font-family: "IRANYekanFN";
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 1.3999899999999998;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+.frame3133 {
+  background: rgba(241, 243, 249, 1);
+  width: 328px;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  border-radius: 6px;
+  padding: 16px;
+}
+.frame3133 > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: calc(0px - 8px);
+  width: calc(100% + 8px);
+}
+.frame3133 > :global(.__wab_flex-container) > *,
+.frame3133 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.frame3133 > :global(.__wab_flex-container) > picture > img,
+.frame3133
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 8px;
+}
+.اردبهشت22 {
+  display: block;
+  font-size: 14px;
+  font-family: "IRANYekanFN";
+  font-weight: 700;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  color: rgba(24, 29, 36, 1);
+  position: relative;
+}
+.svg__crYf {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  color: #ee384e;
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+}

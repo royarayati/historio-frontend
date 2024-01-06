@@ -1,0 +1,37 @@
+{
+  "name": "inlab_plasmic",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@ant-design/pro-components": "^2.6.4",
+    "@plasmicapp/cli": "^0.1.325",
+    "@plasmicapp/react-web": "^0.2.313",
+    "@plasmicpkgs/antd": "^2.0.108",
+    "@plasmicpkgs/antd5": "^0.0.205",
+    "@plasmicpkgs/commerce": "^0.0.186",
+    "@plasmicpkgs/commerce-shopify": "^0.0.193",
+    "@plasmicpkgs/plasmic-query": "^0.0.206",
+    "@plasmicpkgs/plasmic-rich-components": "^1.0.175",
+    "@plasmicpkgs/react-awesome-reveal": "^3.8.189",
+    "antd": "^5.12.6",
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "axios": "^1.6.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "typescript": "^5"
+  }
+}

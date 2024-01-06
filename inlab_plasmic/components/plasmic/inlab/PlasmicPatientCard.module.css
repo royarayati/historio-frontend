@@ -1,0 +1,215 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  position: relative;
+  background: none;
+  min-width: 0;
+  padding: 8px;
+}
+.freeBox__pGm7U {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__pGm7U {
+    box-shadow: 2px 0px 10px 0px var(--token-PfYIgSrHm2bm);
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    min-width: 0;
+    min-height: 0;
+    border-radius: 6px;
+    border: 1px solid #f2f4fa;
+  }
+}
+.freeBox___6WwTq {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox___6WwTq {
+    margin-bottom: 6px;
+  }
+}
+.dataLastUpdate {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .dataLastUpdate {
+    display: none;
+  }
+}
+.patientFirstLastName {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .patientFirstLastName {
+    text-align: right;
+    font-size: 16px;
+  }
+}
+.freeBox__yUu9N {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__yUu9N {
+    justify-content: flex-end;
+  }
+}
+.patientRoomBed {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .patientRoomBed {
+    font-size: 10px;
+    text-align: justify;
+    align-self: center;
+  }
+}
+.patientService {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .patientService {
+    font-size: 12px;
+    text-align: right;
+    width: 75%;
+    padding-right: 4px;
+    align-self: center;
+  }
+}
+.patientButtons {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .patientButtons {
+    justify-content: space-between;
+    border-top-width: 0.5px;
+    border-top-style: dashed;
+    padding-right: 4px;
+    padding-left: 4px;
+    padding-bottom: 4px;
+  }
+}
+.patientProfile {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+}
+.patientProfile > picture > img {
+  object-fit: cover;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .patientProfile {
+    object-position: center center;
+    width: 15px;
+    align-self: center;
+    flex-shrink: 0;
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .patientProfile > picture > img {
+    object-position: center center;
+  }
+}
+.radiologyReport {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+}
+.radiologyReport > picture > img {
+  object-fit: cover;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .radiologyReport {
+    object-position: center center;
+    width: 20px;
+    align-self: center;
+    flex-shrink: 0;
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .radiologyReport > picture > img {
+    object-position: center center;
+  }
+}
+.laboratory {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+}
+.laboratory > picture > img {
+  object-fit: cover;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .laboratory {
+    object-fit: cover;
+    object-position: center center;
+    width: 15px;
+    height: auto;
+    align-self: center;
+    flex-shrink: 0;
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .laboratory > picture > img {
+    object-fit: cover;
+    object-position: center center;
+  }
+}

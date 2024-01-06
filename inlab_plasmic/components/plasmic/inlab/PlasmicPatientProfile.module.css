@@ -1,0 +1,348 @@
+.patientCards {
+  display: grid;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  align-content: flex-start;
+  justify-items: center;
+  justify-content: flex-start;
+  align-items: center;
+  grid-row-gap: var(--token-cSJ2BJk-9JCq);
+  background: #e8ecf2;
+  min-width: 0;
+  min-height: 0;
+  grid-template-columns:
+    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
+    min(
+      var(--plsmc-standard-width),
+      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
+    )
+    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+}
+.patientCards > * {
+  grid-column: 4;
+}
+.pageHeader__jy7Oa:global(.__wab_instance) {
+  max-width: 100%;
+  position: sticky;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+}
+.text__wt4Vb {
+  padding-top: 0px;
+}
+.svg__pyDc {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  align-self: auto;
+  height: 100%;
+  min-height: 0;
+}
+.freeBox__aXnW7 {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.freeBox__aVSl {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 0px;
+}
+.text__hkZlA {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  font-size: 12px;
+  min-width: 0;
+}
+.text__fQ1T {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  min-width: 0;
+}
+.freeBox___3LtSr {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 0px;
+}
+.text__mQhq7 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  font-size: 12px;
+  min-width: 0;
+}
+.text__oCinx {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  position: relative;
+  text-align: right;
+  padding-left: 0px;
+  align-self: center;
+  padding-right: 0px;
+  flex-grow: 0;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+}
+.freeBox__vJEpS {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.freeBox__odIf {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 0px;
+}
+.text__t6FDf {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  font-size: 12px;
+  min-width: 0;
+}
+.text__vAndq {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  min-width: 0;
+}
+.freeBox__cAy4Y {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 0px;
+}
+.text__xJjLo {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  font-size: 12px;
+  min-width: 0;
+}
+.text__ebmD7 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  position: relative;
+  text-align: right;
+  min-width: 0;
+}
+.freeBox__d5Cv {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.freeBox__xEen0 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 0px;
+}
+.text___1WqS {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  font-size: 12px;
+  min-width: 0;
+}
+.text__a14Vw {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  min-width: 0;
+}
+.freeBox__qm32X {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 0px;
+}
+.text__gY1Iu {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  font-size: 12px;
+  min-width: 0;
+}
+.text___08BSh {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  position: relative;
+  text-align: right;
+  min-width: 0;
+}
+.freeBox__rgcA2 {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.freeBox___0ZnLw {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 0px;
+}
+.text__ulRcl {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  font-size: 12px;
+  min-width: 0;
+}
+.text__gmkmC {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  min-width: 0;
+}
+.ul {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0px;
+}
+.li {
+  transform: translateX(0px) translateY(0px) translateZ(0px);
+}
+.freeBox__wttb6 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 0px;
+}
+.text__buSnw {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  font-size: 12px;
+  min-width: 0;
+}
+.text__iGlKj {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  min-width: 0;
+}
+.switchingTab:global(.__wab_instance) {
+  position: fixed;
+  top: auto;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  margin-bottom: 20px;
+  margin-left: 47px;
+}
