@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PlasmicCanvasHost, registerComponent, registerGlobalContext } from '@plasmicapp/react-web/lib/host';
 
 import { AuthGlobalContext } from '../utils/AuthGlobalContext';
-import { ApiFetcher, ApiFetcherMeta } from '../utils/ApiFetcherComponent';
+import { ApiFetcherComponent, ApiFetcherMeta } from '../utils/ApiFetcherComponent';
 
 // You can register any code components that you want to use here; see
 // https://docs.plasmic.app/learn/code-components-ref/
@@ -43,10 +43,10 @@ registerGlobalContext(AuthGlobalContext, {
 
   // Specify how generated Plasmic code should import this component;
   // path is relative to srcDir
-  importPath: "../utils/AuthGlobalContext",
+  importPath: "./utils/AuthGlobalContext",
 });
 
-registerComponent(ApiFetcher, ApiFetcherMeta);
+registerComponent(ApiFetcherComponent, ApiFetcherMeta);
 
 export default function PlasmicHost() {
   return <PlasmicCanvasHost />;

@@ -42,7 +42,7 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
-import PageHeader from "../../PageHeader"; // plasmic-import: qbQinTd349lz/component
+import Header from "../../Header"; // plasmic-import: pMquA3hEaxCO/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
@@ -55,8 +55,6 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicImagingReport1.module.css"; // plasmic-import: AFB-1jxjMqDb/css
 
-import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
-
 createPlasmicElementProxy;
 
 export type PlasmicImagingReport1__VariantMembers = {};
@@ -64,22 +62,24 @@ export type PlasmicImagingReport1__VariantsArgs = {};
 type VariantPropType = keyof PlasmicImagingReport1__VariantsArgs;
 export const PlasmicImagingReport1__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicImagingReport1__ArgsType = {};
+export type PlasmicImagingReport1__ArgsType = {
+  children?: React.ReactNode;
+};
 type ArgPropType = keyof PlasmicImagingReport1__ArgsType;
-export const PlasmicImagingReport1__ArgProps = new Array<ArgPropType>();
+export const PlasmicImagingReport1__ArgProps = new Array<ArgPropType>(
+  "children"
+);
 
 export type PlasmicImagingReport1__OverridesType = {
   imagingReport1?: p.Flex<"div">;
-  pageHeader?: p.Flex<typeof PageHeader>;
-  text?: p.Flex<"div">;
-  svg?: p.Flex<"svg">;
-  imagingReportsList?: p.Flex<"section">;
+  freeBox?: p.Flex<"div">;
+  imagingReportsList?: p.Flex<"div">;
   imagingReports?: p.Flex<"div">;
   imagingReportPerDatetime?: p.Flex<"div">;
   imagingTitle?: p.Flex<"div">;
   imagingDatetime?: p.Flex<"div">;
   imagingType?: p.Flex<"div">;
-  switchingTabs?: p.Flex<"section">;
+  switchingTabs?: p.Flex<"div">;
   switchingTab?: p.Flex<typeof SwitchingTab>;
 };
 
@@ -126,7 +126,7 @@ function PlasmicImagingReport1__RenderFunc(props: {
         sourceId: "7DiAktDjMz852FiyqLgSNX",
         opId: "4909eb55-b483-4f65-9798-bdcfae419482",
         userArgs: {
-          params: [$ctx.params.slug]
+          params: [$ctx.params.code]
         },
         cacheKey: `plasmic.$.4909eb55-b483-4f65-9798-bdcfae419482.$.`,
         invalidatedKeys: null,
@@ -154,95 +154,56 @@ function PlasmicImagingReport1__RenderFunc(props: {
         }
       `}</style>
 
-      <div className={projectcss.plasmic_page_wrapper}>
+      <div
+        data-plasmic-name={"imagingReport1"}
+        data-plasmic-override={overrides.imagingReport1}
+        data-plasmic-root={true}
+        data-plasmic-for-node={forNode}
+        className={classNames(
+          projectcss.all,
+          projectcss.root_reset,
+          projectcss.plasmic_default_styles,
+          projectcss.plasmic_mixins,
+          projectcss.plasmic_tokens,
+          plasmic_antd_5_hostless_css.plasmic_tokens,
+          plasmic_plasmic_rich_components_css.plasmic_tokens,
+          sty.imagingReport1
+        )}
+      >
         <div
-          data-plasmic-name={"imagingReport1"}
-          data-plasmic-override={overrides.imagingReport1}
-          data-plasmic-root={true}
-          data-plasmic-for-node={forNode}
-          className={classNames(
-            projectcss.all,
-            projectcss.root_reset,
-            projectcss.plasmic_default_styles,
-            projectcss.plasmic_mixins,
-            projectcss.plasmic_tokens,
-            plasmic_antd_5_hostless_css.plasmic_tokens,
-            plasmic_plasmic_rich_components_css.plasmic_tokens,
-            sty.imagingReport1
-          )}
+          data-plasmic-name={"freeBox"}
+          data-plasmic-override={overrides.freeBox}
+          className={classNames(projectcss.all, sty.freeBox)}
         >
-          <PageHeader
-            data-plasmic-name={"pageHeader"}
-            data-plasmic-override={overrides.pageHeader}
-            className={classNames("__wab_instance", sty.pageHeader)}
-            slot={
-              <ArrowLeftIcon
-                data-plasmic-name={"svg"}
-                data-plasmic-override={overrides.svg}
-                className={classNames(projectcss.all, sty.svg)}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["goToInlabHomepage"] = true
-                    ? (() => {
-                        const actionArgs = { destination: `/[UserToken]` };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["goToInlabHomepage"] != null &&
-                    typeof $steps["goToInlabHomepage"] === "object" &&
-                    typeof $steps["goToInlabHomepage"].then === "function"
-                  ) {
-                    $steps["goToInlabHomepage"] = await $steps[
-                      "goToInlabHomepage"
-                    ];
-                  }
-                }}
-                role={"img"}
-              />
-            }
-          >
-            <div
-              data-plasmic-name={"text"}
-              data-plasmic-override={overrides.text}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text
-              )}
-            >
-              <React.Fragment>
-                {(() => {
-                  try {
-                    return $ctx.params.slug2;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u06cc\u0645\u0627\u0631";
+          {p.renderPlasmicSlot({
+            defaultContents: (
+              <Header
+                className={classNames("__wab_instance", sty.header__cTveG)}
+              >
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return "test";
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "My Profile";
+                      }
+                      throw e;
                     }
-                    throw e;
-                  }
-                })()}
-              </React.Fragment>
-            </div>
-          </PageHeader>
-          <section
+                  })()}
+                </React.Fragment>
+              </Header>
+            ),
+            value: args.children
+          })}
+          <p.Stack
+            as={"div"}
             data-plasmic-name={"imagingReportsList"}
             data-plasmic-override={overrides.imagingReportsList}
+            hasGap={true}
             className={classNames(projectcss.all, sty.imagingReportsList)}
           >
             {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
@@ -277,26 +238,7 @@ function PlasmicImagingReport1__RenderFunc(props: {
 
                     $steps["goToRadiologyReport2"] = true
                       ? (() => {
-                          const actionArgs = {
-                            destination: `/imaging_report-2/${(() => {
-                              try {
-                                return currentItem.report
-                                  .split("\n")
-                                  .map(line => {
-                                    return line.padStart(line.length + 20);
-                                  })
-                                  .join("\n");
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
-                                }
-                                throw e;
-                              }
-                            })()}`
-                          };
+                          const actionArgs = {};
                           return (({ destination }) => {
                             if (
                               typeof destination === "string" &&
@@ -434,18 +376,18 @@ function PlasmicImagingReport1__RenderFunc(props: {
                 </div>
               );
             })}
-          </section>
-          <section
-            data-plasmic-name={"switchingTabs"}
-            data-plasmic-override={overrides.switchingTabs}
-            className={classNames(projectcss.all, sty.switchingTabs)}
-          >
-            <SwitchingTab
-              data-plasmic-name={"switchingTab"}
-              data-plasmic-override={overrides.switchingTab}
-              className={classNames("__wab_instance", sty.switchingTab)}
-            />
-          </section>
+          </p.Stack>
+        </div>
+        <div
+          data-plasmic-name={"switchingTabs"}
+          data-plasmic-override={overrides.switchingTabs}
+          className={classNames(projectcss.all, sty.switchingTabs)}
+        >
+          <SwitchingTab
+            data-plasmic-name={"switchingTab"}
+            data-plasmic-override={overrides.switchingTab}
+            className={classNames("__wab_instance", sty.switchingTab)}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -455,9 +397,7 @@ function PlasmicImagingReport1__RenderFunc(props: {
 const PlasmicDescendants = {
   imagingReport1: [
     "imagingReport1",
-    "pageHeader",
-    "text",
-    "svg",
+    "freeBox",
     "imagingReportsList",
     "imagingReports",
     "imagingReportPerDatetime",
@@ -467,9 +407,15 @@ const PlasmicDescendants = {
     "switchingTabs",
     "switchingTab"
   ],
-  pageHeader: ["pageHeader", "text", "svg"],
-  text: ["text"],
-  svg: ["svg"],
+  freeBox: [
+    "freeBox",
+    "imagingReportsList",
+    "imagingReports",
+    "imagingReportPerDatetime",
+    "imagingTitle",
+    "imagingDatetime",
+    "imagingType"
+  ],
   imagingReportsList: [
     "imagingReportsList",
     "imagingReports",
@@ -501,16 +447,14 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   imagingReport1: "div";
-  pageHeader: typeof PageHeader;
-  text: "div";
-  svg: "svg";
-  imagingReportsList: "section";
+  freeBox: "div";
+  imagingReportsList: "div";
   imagingReports: "div";
   imagingReportPerDatetime: "div";
   imagingTitle: "div";
   imagingDatetime: "div";
   imagingType: "div";
-  switchingTabs: "section";
+  switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
 };
 
@@ -574,9 +518,7 @@ export const PlasmicImagingReport1 = Object.assign(
   makeNodeComponent("imagingReport1"),
   {
     // Helper components rendering sub-elements
-    pageHeader: makeNodeComponent("pageHeader"),
-    text: makeNodeComponent("text"),
-    svg: makeNodeComponent("svg"),
+    freeBox: makeNodeComponent("freeBox"),
     imagingReportsList: makeNodeComponent("imagingReportsList"),
     imagingReports: makeNodeComponent("imagingReports"),
     imagingReportPerDatetime: makeNodeComponent("imagingReportPerDatetime"),

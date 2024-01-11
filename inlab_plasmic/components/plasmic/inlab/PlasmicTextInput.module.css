@@ -10,13 +10,15 @@
   min-width: 0;
   border-radius: 6px;
   padding: 7px 11px;
-  border: 1px solid #dbdbd7;
+  border: 1px solid var(--token-pRs3-4jrQ4XQ);
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .root {
     padding-right: 12px;
     padding-left: 12px;
     padding-top: 8px;
+    border-width: 0.5px;
+    border-color: var(--token-9iYGdL7i3GKE);
   }
 }
 @media (min-width: 0px) and (max-width: 768px) {
@@ -57,6 +59,9 @@
 .root .startIconContainer___focusVisibleWithin {
   outline: none;
 }
+.slotTargetStartIcon {
+  font-size: var(--token-hYndcje43OGL);
+}
 .slotTargetStartIconshowStartIcon {
   color: #90908c;
 }
@@ -73,7 +78,7 @@
   width: 100%;
   left: auto;
   top: auto;
-  background: var(--token-jgohepLVeKvh);
+  background: #fcfcfc;
   min-width: 0;
   padding: 0px;
   border-width: 0px;

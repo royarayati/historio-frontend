@@ -1,107 +1,38 @@
-import { createContext } from 'react';
 import axios from 'axios';
+import { InlabUser, GlobalContextType, GlobalContext } from './CommonTypes';
 
-export type InlabUser = {
-    access: string;
-    refresh: string;
-    user: any;
-};
-
-export interface changeUserType {
-    (user: InlabUser | null): void;
-}
-
-interface GlobalContextType {
-    baseUrl: string;
-    changeUserCallback: changeUserType;
-}
-
-export const GlobalContext = createContext<GlobalContextType>({
-    baseUrl: process.env.REACT_APP_BASE_URL || '',
-    changeUserCallback: (user: InlabUser | null) => { },
-});
-
-export function logInDev(logText: string | null) {
+export function logForDev(logText: string | null) {
     if (logText != null && process.env.NODE_ENV === 'development') {
         console.log(logText)
     }
 }
 
-export function login(
-    username: string,
-    password: string,
-    baseUrl: string,
-    changeUserCallback: changeUserType ): Promise<InlabUser | null> {
-    return new Promise((resolve, reject) => {
-
-        let device_id = localStorage.getItem('inlab_device_id');
-        if (!device_id) {
-            device_id = crypto.randomUUID();
-            localStorage.setItem('inlab_device_id', device_id);
-        }
-
-        const requestBody = {
-            username,
-            password,
-            device_id: device_id,
-            force_logout_other_sessions: true
-        };
-        axios.post(baseUrl + '/api/v2/user/login', requestBody)
-            .then(response => {
-                if (response.status === 200) {
-                    changeUserCallback(response.data);
-                    resolve(response.data);
-                } else {
-                    // TODO: A better Error handling needs to be implemented
-                    reject(new Error('Login failed with status: ' + response.status));
-                }
-            })
-            // TODO: A better Error handling needs to be implemented
-            .catch(error => {
-                reject('Login error: ' + error);
-            });
-    });
-};
-
-export function logout(inlabUser: InlabUser | null, baseUrl: string, changeUserCallback: changeUserType): Promise<void> {
-    logInDev("Logout - user before logout: " + inlabUser);
-    // If user is not logged in then do nothing
-    if (!inlabUser) {
-        changeUserCallback(null);
-        return Promise.resolve();
+export function getDevicedId(): string {
+    let device_id = localStorage.getItem('inlab_device_id');
+    if (!device_id) {
+        device_id = crypto.randomUUID();
+        localStorage.setItem('inlab_device_id', device_id);
     }
-    return new Promise((resolve, reject) => {
-        const requestBody = { refresh: inlabUser.refresh };
-        axios.post(baseUrl + '/api/v2/user/logout', requestBody)
-            .then(response => {
-                if (response.status === 200) {
-                    changeUserCallback(null);
-                    resolve();
-                } else {
-                    // TODO: A better Error handling needs to be implemented
-                    reject(new Error('Logout failed with status: ' + response.status));
-                }
-            })
-            // TODO: A better Error handling needs to be implemented
-            .catch(error => {
-                reject('Logout error: ' + error);
-            });
-    });
-};
+    return device_id;
+}
 
 export function getCurrentUser(): InlabUser | null {
     const inlabUser = localStorage.getItem('inlab_user');
-    logInDev("getCurrentUser: " + inlabUser);
-
     if (inlabUser) {
-        logInDev("getCurrentUser: user returened with value.");
         return JSON.parse(inlabUser);
     } else {
-        logInDev("getCurrentUser: user returened null.");
         return null;
     }
 }
 
+// This function check for validity of user
+// If user is already valid or gets valid after refreshing => resolve user
+// If user is null or can not be refreshed => reject null
+// If user need refresh but axios error happens => reject error
+// If user changes (either refreshed or exipred) =>
+// => This function handle the changes itself and call ChangeUserCallback
+// note: If user is already null =>  just reject null. but as nothing changed does NOT call ChangeUserCallback
+// note: Also if user is already valid => just resolve user. And does NOT call ChangeUserCallback
 export function refreshAccessIfNeeded(globalContext: GlobalContextType, inlabUser: InlabUser | null): Promise<InlabUser | null> {
     return new Promise((resolve, reject) => {
 
@@ -113,41 +44,42 @@ export function refreshAccessIfNeeded(globalContext: GlobalContextType, inlabUse
             const decoded = JSON.parse(decodedJson);
             const exp = decoded.exp; // Token's expiration timestamp
             const now = Math.floor(Date.now() / 1000); // Current timestamp in seconds
-
+            
             return exp < now;
         };
 
         if (!inlabUser) {
-            logInDev("refreshAccessToken: User is null.");
-            changeUserCallback(null);
+            logForDev("refreshAccessIfNeeded: User is NULL...changeUser => null");
+            // changeUserCallback(null);
             reject(null); // User is null, return null
 
         } else if (!isTokenExpired(inlabUser.access)) {
-            logInDev("refreshAccessToken: Access Token is valid.");
+            logForDev("refreshAccessIfNeeded: Token is Vailid.");
             resolve(inlabUser); // Refresh Token is valid, resolve the promise with the user object
 
         } else if (isTokenExpired(inlabUser.refresh)) {
-            logInDev("refreshAccessToken: Refresh Token has expired.");
+            logForDev("refreshAccessIfNeeded: Refresh Token is Expired...changeUser => null");
             changeUserCallback(null);
             reject(null); // Access and Refresh Token have expired, return null.
 
         } else {
-            logInDev("refreshAccessToken: Token is about to expire.");
-            logInDev("refreshAccessToken: baseUrl: " + baseUrl);
+            logForDev("refreshAccessIfNeeded: Refreshing Access...");
             // Refresh the access token
             const requestBody = { refresh: inlabUser.refresh };
+            // we must await here and interpret the response
             axios.post(baseUrl + '/api/v2/user/reauth', requestBody)
                 .then(response => {
                     if (response.status === 200) {
                         // TODO: better naming for keys maybe?
                         inlabUser.access = response.data.access;
                         changeUserCallback(inlabUser);
-                        logInDev("refreshAccessToken: Refresh success: " + inlabUser);
                         resolve(inlabUser);
                     } else {
                         // TODO: We should handle 401 error and return user to login page
                         // TODO: A better Error handling needs to be implemented
-                        reject(new Error('refreshAccessToken: Refresh failed with status: ' + response.status));
+                        // reject(new Error('refreshAccessToken: Refresh failed with status: ' + response.status));
+                        changeUserCallback(null);
+                        reject(null);
                     }
                 })
                 // TODO: A better Error handling needs to be implemented

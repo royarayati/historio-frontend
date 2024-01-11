@@ -2081,6 +2081,66 @@
       }
     },
     {
+      "name": "Unnamed Style Token 5",
+      "type": "spacing",
+      "value": "1%",
+      "category": "spacing",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "5lcKkzPIP4XU"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 6",
+      "type": "spacing",
+      "value": "77.3%",
+      "category": "spacing",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "C7B1o2G7l0VP"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 7",
+      "type": "spacing",
+      "value": "77.3%",
+      "category": "spacing",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "2On3EdPzy8pO"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 8",
+      "type": "spacing",
+      "value": "77.3%",
+      "category": "spacing",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "JH00tQbi8SYB"
+      }
+    },
+    {
+      "name": "black",
+      "type": "color",
+      "value": "#000000",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "IYO13gyYJHXG"
+      }
+    },
+    {
+      "name": "button color",
+      "type": "color",
+      "value": "#418DFF",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "9iYGdL7i3GKE"
+      }
+    },
+    {
       "name": "light text &background",
       "type": "color",
       "value": "#E7EBF1",

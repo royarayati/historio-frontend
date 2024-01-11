@@ -27,14 +27,14 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .freeBox__pGm7U {
-    box-shadow: 2px 0px 10px 0px var(--token-PfYIgSrHm2bm);
+    box-shadow: 0px 0px 10px 0px var(--token-IYO13gyYJHXG);
     width: 100%;
     height: 100%;
     background: #ffffff;
     min-width: 0;
     min-height: 0;
     border-radius: 6px;
-    border: 1px solid #f2f4fa;
+    border: 0.5px solid var(--token-PfYIgSrHm2bm);
   }
 }
 .freeBox___6WwTq {
@@ -52,6 +52,8 @@
 @media (min-width: 0px) and (max-width: 768px) {
   .freeBox___6WwTq {
     margin-bottom: 6px;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 }
 .dataLastUpdate {
@@ -93,6 +95,8 @@
 @media (min-width: 0px) and (max-width: 768px) {
   .freeBox__yUu9N {
     justify-content: flex-end;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 }
 .patientRoomBed {
@@ -142,15 +146,14 @@
     justify-content: space-between;
     border-top-width: 0.5px;
     border-top-style: dashed;
-    padding-right: 4px;
-    padding-left: 4px;
-    padding-bottom: 4px;
+    padding: 4px 8px;
   }
 }
 .patientProfile {
   position: relative;
   object-fit: cover;
   max-width: 100%;
+  width: auto;
 }
 .patientProfile > picture > img {
   object-fit: cover;

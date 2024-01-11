@@ -1,7 +1,8 @@
-import { ReactNode , useEffect, useState, useContext } from 'react';
-import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-web/lib/host';
+import { ReactNode, useEffect, useState, useContext, useMemo } from 'react';
+import { CodeComponentMeta, DataProvider, GlobalActionsProvider, useSelector } from '@plasmicapp/react-web/lib/host';
 import axios from 'axios';
-import { GlobalContext, refreshAccessIfNeeded,  logInDev} from './CommonUtils';
+import { refreshAccessIfNeeded, logForDev } from './CommonUtils';
+import { GlobalContext } from './CommonTypes';
 
 interface PropsType {
     className?: string,
@@ -13,47 +14,40 @@ interface PropsType {
 }
 
 // TODO: We may need to handle axios race condition
-export function ApiFetcher(props: PropsType) {
+export function ApiFetcherComponent(props: PropsType) {
 
-    logInDev("ApiFetcher: Rendering ApiFetcherComponent");
 
     const globalContext = useContext(GlobalContext);
     const inlabUser = useSelector('inlab_user');
 
-    logInDev("ApiFetcher: globalContext: " + JSON.stringify(globalContext));
-    logInDev("ApiFetcher: user from useSelector: " + JSON.stringify(inlabUser));
-
-    const [ data , setData ] = useState();
+    const [data, setData] = useState({});
 
     useEffect(() => {
-        logInDev("ApiFetcher: useEffect runned in ApiFetcher. ");
-    
+        logForDev("ApiFetcherComponent: useEffect: runned: " + (inlabUser ? "User found" : "User is NULL"));
         // TODO: Handle errors
-        refreshAccessIfNeeded(globalContext, inlabUser).then(user => {
+        inlabUser && refreshAccessIfNeeded(globalContext, inlabUser).then(user => {
             if (!user) {
-                logInDev("ApiFetcher: useEffect: refresh.then => user is null.")
                 return;
             }
+
             const authedHeaders: object = {
                 'Authorization': 'Bearer ' + user.access,
                 ...props.headers
             };
+
             axios.request({
                 method: props.method || 'GET',
                 url: globalContext.baseUrl + props.path,
                 headers: authedHeaders,
                 data: props.requestBody
             }).then((response) => {
-                if (response.status === 200) {
-                    setData(response.data);
-                } else {
-                    // TODO: A better Error handling needs to be implemented
-                    logInDev("Request failed with status: " + response.status);
-                }
+                logForDev("ApiFetcherComponent: axios request success: " + (response.data ? "Data Fetched" : "Data Not Fetched"));
+                setData(response);
+            }).catch((error) => {
+                logForDev("ApiFetcherComponent: axios request error: " + JSON.stringify(error));
+                setData(error);
             })
-        }).catch(error => {
-            logInDev("ApiFetcher: useEffect: refresh.catch => error: " + error);
-        });
+        }).catch(error => { });
     }, [props, globalContext, inlabUser]);
 
     return (
@@ -68,16 +62,16 @@ export function ApiFetcher(props: PropsType) {
 export const ApiFetcherMeta: CodeComponentMeta<PropsType> = {
     name: "ApiFetcherComponent",
     props: {
-      children: 'slot',
-      method: {
-        type: 'choice',
-        options: ['GET', 'POST', 'PUT', 'DELETE'],
-        defaultValue: 'GET',
-      },
-      path: 'string',
-      headers: 'object',
-      requestBody: 'object',
+        children: 'slot',
+        method: {
+            type: 'choice',
+            options: ['GET', 'POST', 'PUT', 'DELETE'],
+            defaultValue: 'GET',
+        },
+        path: 'string',
+        headers: 'object',
+        requestBody: 'object',
     },
     providesData: true,
-    importPath: "../utils/ApiFetcherComponent",
+    importPath: "./utils/ApiFetcherComponent",
 }

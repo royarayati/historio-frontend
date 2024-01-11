@@ -138,7 +138,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
       <p.PlasmicImg
         alt={""}
         className={classNames(sty.img__hfWaD)}
-        displayHeight={"auto"}
+        displayHeight={"25px"}
         displayMaxHeight={"none"}
         displayMaxWidth={"100%"}
         displayMinHeight={"0"}
@@ -153,7 +153,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                 const actionArgs = {
                   destination: `/patient_profile/${(() => {
                     try {
-                      return $ctx.params.slug;
+                      return $ctx.params.code;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -165,7 +165,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                     }
                   })()}/${(() => {
                     try {
-                      return $ctx.params.slug2;
+                      return $ctx.params.patient_name;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -210,7 +210,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
       <p.PlasmicImg
         alt={""}
         className={classNames(sty.img__tHc1)}
-        displayHeight={"auto"}
+        displayHeight={"25px"}
         displayMaxHeight={"none"}
         displayMaxWidth={"100%"}
         displayMinHeight={"0"}
@@ -225,7 +225,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                 const actionArgs = {
                   destination: `/imaging_report/${(() => {
                     try {
-                      return $ctx.params.slug;
+                      return $ctx.params.code;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -237,7 +237,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                     }
                   })()}/${(() => {
                     try {
-                      return $ctx.params.slug2;
+                      return $ctx.params.patient_name;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -282,7 +282,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
       <p.PlasmicImg
         alt={""}
         className={classNames(sty.img__sF9Jz)}
-        displayHeight={"auto"}
+        displayHeight={"25px"}
         displayMaxHeight={"none"}
         displayMaxWidth={"100%"}
         displayMinHeight={"0"}
@@ -297,7 +297,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                 const actionArgs = {
                   destination: `/laboratory_data/${(() => {
                     try {
-                      return $ctx.params.slug;
+                      return $ctx.params.code;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -309,7 +309,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                     }
                   })()}/${(() => {
                     try {
-                      return $ctx.params.slug2;
+                      return $ctx.params.patien_name;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||

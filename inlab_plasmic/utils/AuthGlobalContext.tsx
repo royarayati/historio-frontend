@@ -1,19 +1,18 @@
 import React, { useEffect, useMemo, useState, useContext, useCallback } from "react";
-import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/router'
 
-import { DataProvider, GlobalActionsProvider } from "@plasmicapp/host";
+import { DataProvider, GlobalActionsProvider, PlasmicCanvasContext } from "@plasmicapp/host";
 
-import { 
-  InlabUser, 
-  login, 
-  logout, 
-  getCurrentUser, 
+import axios from "axios";
+
+import {
+  getDevicedId,
+  getCurrentUser,
   refreshAccessIfNeeded,
-  GlobalContext,
-  logInDev
- } from "./CommonUtils";
- import { axiosCall } from "./ApiFetcherAction";
-
+  logForDev
+} from "./CommonUtils";
+import { InlabUser, GlobalContext } from "./CommonTypes";
+import { axiosCall } from "./ApiFetcherAction";
 
 // Users will be able to set these props in Studio.
 interface AuthGlobalContextProps {
@@ -26,67 +25,135 @@ interface AuthGlobalContextProps {
 //       Or error from network or other problems happened ?
 export const AuthGlobalContext = ({ children, baseUrl }: React.PropsWithChildren<AuthGlobalContextProps>) => {
 
-  logInDev("AuthGlobalContext: Rendering AuthGlobalContext.");
-  // TODO: Better way to spilit dev / prod environment ?
+  ////////// READ PROPS //////////
+
   baseUrl = baseUrl || useContext(GlobalContext).baseUrl;
 
-  const [inlabUser, setInlabUser] = useState<InlabUser | null>(getCurrentUser());
 
-  const changeUserCallback = useCallback((inlabUser: InlabUser | null) => {
-    if (inlabUser) {
-      localStorage.setItem('inlab_user', JSON.stringify(inlabUser));
-      logInDev("changeUserCallback success: " + JSON.stringify(inlabUser));
+  ///////// SETUP USER //////////
+
+  const [inlabUser, setInlabUser] = useState<InlabUser | null>(null);
+  logForDev("AuthGlobalContext: After useState: " + (inlabUser ? "User found" : "User is NULL"));
+
+  // Use this function to change stored user in entire app
+  // Handle storing new user and routes to login page
+  // if user is null
+  const changeUserCallback = useCallback((newUser: InlabUser | null) => {
+    logForDev("changeUserCallback: " + (newUser ? "Setting User" : "Setting NULL"));
+    // const router = useRouter();
+
+    if (newUser) {
+      localStorage.setItem('inlab_user', JSON.stringify(newUser));
+    } else if (!useContext(PlasmicCanvasContext)){
+      // && !router.pathname.startsWith('/login')) {
+
+      localStorage.removeItem('inlab_user');
+
+      logForDev("changeUserCallback: We should redirect to Login here..." )
+
     } else {
       localStorage.removeItem('inlab_user');
     }
-    setInlabUser(inlabUser);
+    setInlabUser(newUser);
   }, []);
+
+  useEffect(() => {
+    const userOfLocal = getCurrentUser();
+
+    refreshAccessIfNeeded({ baseUrl, changeUserCallback }, userOfLocal)
+      .then(user => {
+        // We should handle a case here that refreshAccessIfNeeded does not know about it.
+        // If user === userOfLocal means localstorage user was valid and nothing changed
+        // so we need to render the page by only setting userOfLocal as inlabUser
+        if (user === userOfLocal){
+          console.log("AuthGlobalContext: refreshAccessIfNeeded: then: user === userOfLocal");
+          setInlabUser(user);
+        }
+      })
+      // We may need to handle axios errors here
+      .catch(error => {
+        // As above if user === userOfLocal means rejected null without calling changeUserCallback
+        // So we need to handle it here
+        if (userOfLocal === null){
+          changeUserCallback(null);
+        }
+       });
+
+    logForDev("AuthGlobalContext: After refreshAccessIfNeeded: " + (userOfLocal ? "UserOfLocal found" : "UserOfLocal is NULL"));
+    logForDev("AuthGlobalContext: After refreshAccessIfNeeded: " + (inlabUser ? "inlabUser found" : "inlabUser is NULL"));
+  }, [baseUrl]);
+
+  ////////// SETUP CONTEXT //////////
 
   const globalContext = useMemo(() => ({
     baseUrl,
     changeUserCallback
   }), [baseUrl, changeUserCallback]);
 
-  // Get current user on mount
-  useEffect(() => {
-    logInDev("AuthGlobalContext: useEffect runned in AuthGlobalContext. ");
-    refreshAccessIfNeeded( {baseUrl , changeUserCallback} , inlabUser)
-      .then(user => user)
-      .catch(() => setInlabUser(null));
-  }, [baseUrl]);
+  ////////// SETUP ACTIONS //////////
 
   const actions = useMemo(() => ({
-    apiFetcher: (
+    apiFetcher: async function apiFetcher(
       method: string,
       path: string,
       headers?: any,
-      requestBody?: any) => {
-        axiosCall(
-          inlabUser, 
-          baseUrl, 
-          changeUserCallback,
-          method, 
-          path, 
-          headers, 
-          requestBody,
-        ).then(data => {
-          logInDev("AuthGlobalContext: apiFetcher: success: " + JSON.stringify(data));
-          return data
-        });
-      },
-    
-    login: (username: string, password: string) =>
-      login(username, password, baseUrl, changeUserCallback)
-      .then(inlabUser => setInlabUser(inlabUser))
-      .catch(error => console.error(error)),
+      requestBody?: any): Promise<any> {
+      return await axiosCall(
+        inlabUser,
+        baseUrl,
+        changeUserCallback,
+        method,
+        path,
+        headers,
+        requestBody
+      ).then(response => response)
+        .catch(error => {
+          return error
+        })
+    },
 
-    logout: () => logout(inlabUser, baseUrl, changeUserCallback).then(() => setInlabUser(null)),
+    login: async function callLogin(
+      username: string,
+      password: string
+    ): Promise<any> {
+      return await axios.post(
+        baseUrl + '/api/v2/user/login',
+        {
+          username,
+          password,
+          device_id: getDevicedId(),
+          force_logout_other_sessions: true
+        })
+        .then(response => {
+          if (response.status === 200) {
+            changeUserCallback(response.data);
+          }
+          return response;
+        })
+        .catch(error => {
+          return error;
+        });
+    },
+
+    logout: async (): Promise<any> => {
+      if (!inlabUser) {
+        return null;
+      }
+      return await axios.post(baseUrl + '/api/v2/user/logout', { refresh: inlabUser.refresh })
+        .then(response => {
+          if (response.status === 200) {
+            changeUserCallback(null);
+            return null;
+          }
+          return response;
+        }).catch(error => {
+          return error;
+        })
+    },
 
   }), [baseUrl, changeUserCallback, inlabUser]);
 
-  logInDev("AuthGlobalContext: inlabUser: " + JSON.stringify(inlabUser));
-  logInDev("AuthGlobalContext: AuthGlobalContext rendered successfully.");
-
+  ///////// RETURN PROVIDERS //////////
   return (
     <GlobalActionsProvider contextName="AuthGlobalContext" actions={actions}>
       <GlobalContext.Provider value={globalContext}>

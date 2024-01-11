@@ -1,20 +1,17 @@
 .header {
   position: relative;
-  border-bottom-color: var(--token-PfYIgSrHm2bm);
-  background: #ffffff;
-  max-width: 100%;
-  height: auto;
-  width: 100%;
-  justify-content: space-around;
-  align-items: stretch;
-  flex-direction: row;
   display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 12px;
-  border-width: 0.5px;
-  border-style: solid;
 }
 .freeBox__hhLxL {
   display: flex;

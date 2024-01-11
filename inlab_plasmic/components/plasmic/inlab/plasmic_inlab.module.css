@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Vazirmatn%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Inconsolata%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Poppins%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Azeret+Mono%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Inconsolata%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700&display=swap");
 
 .plasmic_tokens {
   --token-PfYIgSrHm2bm: #181d24;
@@ -15,6 +15,18 @@
   --plasmic-token-unnamed-style-token-3: var(--token-u81pX_sDonH7);
   --token-HytueEA5eFib: #d0d0d0;
   --plasmic-token-unnamed-style-token-4: var(--token-HytueEA5eFib);
+  --token-9iYGdL7i3GKE: #418dff;
+  --plasmic-token-button-color: var(--token-9iYGdL7i3GKE);
+  --token-IYO13gyYJHXG: #000000;
+  --plasmic-token-black: var(--token-IYO13gyYJHXG);
+  --token-5lcKkzPIP4XU: 1%;
+  --plasmic-token-unnamed-style-token-5: var(--token-5lcKkzPIP4XU);
+  --token-C7B1o2G7l0VP: var(--token-2On3EdPzy8pO);
+  --plasmic-token-unnamed-style-token-6: var(--token-C7B1o2G7l0VP);
+  --token-2On3EdPzy8pO: var(--token-JH00tQbi8SYB);
+  --plasmic-token-unnamed-style-token-7: var(--token-2On3EdPzy8pO);
+  --token-JH00tQbi8SYB: 77.3%;
+  --plasmic-token-unnamed-style-token-8: var(--token-JH00tQbi8SYB);
 }
 
 @media (min-width: 0px) and (max-width: 768px) {
@@ -48,6 +60,9 @@
   ),
 .plasmic_default_styles:where(
     .global_unnamedGlobalGroupOfVariants2_unnamedVariant
+  ),
+.plasmic_default_styles:where(
+    .global_unnamedGlobalGroupOfVariants3_unnamedVariant
   ) {
   --mixin-pUliKjJdV7fD_font-family: "Vazirmatn", sans-serif;
   --mixin-pUliKjJdV7fD_font-size: 16px;
@@ -179,10 +194,21 @@
     ),
   .plasmic_default_styles:where(
       .global_unnamedGlobalGroupOfVariants2_unnamedVariant
+    ),
+  .plasmic_default_styles:where(
+      .global_unnamedGlobalGroupOfVariants3_unnamedVariant
     ) {
     --mixin-MhdL6TMPl2RD_font-size: 48px;
     --mixin-MhdL6TMPl2RD_white-space: pre-wrap;
   }
+}
+
+.plasmic_mixins,
+.plasmic_mixins:where(.global_unnamedGlobalGroupOfVariants_unnamedVariant),
+.plasmic_mixins:where(.global_unnamedGlobalGroupOfVariants2_unnamedVariant),
+.plasmic_mixins:where(.global_unnamedGlobalGroupOfVariants3_unnamedVariant) {
+  --mixin-cKqN743V90Sj_white-space: pre-wrap;
+  --plasmic-mixin-cards_white-space: var(--mixin-cKqN743V90Sj_white-space);
 }
 
 :where(.all) {

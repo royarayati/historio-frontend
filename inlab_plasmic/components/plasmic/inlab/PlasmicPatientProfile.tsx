@@ -42,7 +42,7 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
-import PageHeader from "../../PageHeader"; // plasmic-import: qbQinTd349lz/component
+import Header from "../../Header"; // plasmic-import: pMquA3hEaxCO/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
@@ -55,8 +55,6 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicPatientProfile.module.css"; // plasmic-import: Ev8txsbuZl9W/css
 
-import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
-
 createPlasmicElementProxy;
 
 export type PlasmicPatientProfile__VariantMembers = {};
@@ -65,17 +63,18 @@ type VariantPropType = keyof PlasmicPatientProfile__VariantsArgs;
 export const PlasmicPatientProfile__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicPatientProfile__ArgsType = {
-  children?: React.ReactNode;
+  patientProfileHeader?: React.ReactNode;
 };
 type ArgPropType = keyof PlasmicPatientProfile__ArgsType;
 export const PlasmicPatientProfile__ArgProps = new Array<ArgPropType>(
-  "children"
+  "patientProfileHeader"
 );
 
 export type PlasmicPatientProfile__OverridesType = {
   patientCards?: p.Flex<"div">;
   ul?: p.Flex<"ul">;
   li?: p.Flex<"li">;
+  switchingTabs?: p.Flex<"div">;
   switchingTab?: p.Flex<typeof SwitchingTab>;
 };
 
@@ -122,7 +121,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
         sourceId: "gRj7icjLhPLm2FywMC8ewh",
         opId: "267a0b53-3612-4f70-a4e7-13360f31f896",
         userArgs: {
-          params: [$ctx.params.slug]
+          params: [$ctx.params.code]
         },
         cacheKey: `plasmic.$.267a0b53-3612-4f70-a4e7-13360f31f896.$.`,
         invalidatedKeys: null,
@@ -167,58 +166,54 @@ function PlasmicPatientProfile__RenderFunc(props: {
             sty.patientCards
           )}
         >
-          {p.renderPlasmicSlot({
-            defaultContents: (
-              <PageHeader
-                className={classNames("__wab_instance", sty.pageHeader__jy7Oa)}
-                slot={
-                  <ArrowLeftIcon
-                    className={classNames(projectcss.all, sty.svg__pyDc)}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["goToInlabHomepage"] = true
-                        ? (() => {
-                            const actionArgs = { destination: `/[UserToken]` };
-                            return (({ destination }) => {
-                              if (
-                                typeof destination === "string" &&
-                                destination.startsWith("#")
-                              ) {
-                                document
-                                  .getElementById(destination.substr(1))
-                                  .scrollIntoView({ behavior: "smooth" });
-                              } else {
-                                __nextRouter?.push(destination);
-                              }
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["goToInlabHomepage"] != null &&
-                        typeof $steps["goToInlabHomepage"] === "object" &&
-                        typeof $steps["goToInlabHomepage"].then === "function"
-                      ) {
-                        $steps["goToInlabHomepage"] = await $steps[
-                          "goToInlabHomepage"
-                        ];
+          <div className={classNames(projectcss.all, sty.freeBox__xkYxB)}>
+            {p.renderPlasmicSlot({
+              defaultContents: (
+                <Header
+                  className={classNames("__wab_instance", sty.header___9U6LP)}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return "Patient profile";
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "My Profile";
+                        }
+                        throw e;
                       }
-                    }}
-                    role={"img"}
-                  />
-                }
-              >
+                    })()}
+                  </React.Fragment>
+                </Header>
+              ),
+              value: args.patientProfileHeader
+            })}
+            <div className={classNames(projectcss.all, sty.freeBox___2Czr)}>
+              <div className={classNames(projectcss.all, sty.freeBox__cs3O)}>
                 <div
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text__wt4Vb
+                    sty.text__wdVi
+                  )}
+                >
+                  {"National ID"}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___1ObUw
                   )}
                 >
                   <React.Fragment>
                     {(() => {
                       try {
-                        return $ctx.params.slug2;
+                        return $queries.patientProfile.data.response
+                          .national_id;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
@@ -231,358 +226,328 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     })()}
                   </React.Fragment>
                 </div>
-              </PageHeader>
-            ),
-            value: args.children
-          })}
-          <div className={classNames(projectcss.all, sty.freeBox__aXnW7)}>
-            <div className={classNames(projectcss.all, sty.freeBox__aVSl)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__hkZlA
-                )}
-              >
-                {"National ID"}
               </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__fQ1T
-                )}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return $queries.patientProfile.data.response.national_id;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
-                      }
-                      throw e;
-                    }
-                  })()}
-                </React.Fragment>
-              </div>
-            </div>
-            <div className={classNames(projectcss.all, sty.freeBox___3LtSr)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__mQhq7
-                )}
-              >
-                {"Name "}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__oCinx
-                )}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return (() => {
-                        const dob = new Date(
-                          $queries.patientProfile.data.response.dob
-                        );
-                        const ageDiffMs = Date.now() - dob.getTime();
-                        const ageDate = new Date(ageDiffMs);
-                        const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-                        const firstname =
-                          $queries.patientProfile.data.response.first_name;
-                        const lastname =
-                          $queries.patientProfile.data.response.last_name;
-                        return `${firstname} ${lastname}
+              <div className={classNames(projectcss.all, sty.freeBox__eIqr2)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__i9GOv
+                  )}
+                >
+                  {"Name "}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__p26D
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return (() => {
+                          const dob = new Date(
+                            $queries.patientProfile.data.response.dob
+                          );
+                          const ageDiffMs = Date.now() - dob.getTime();
+                          const ageDate = new Date(ageDiffMs);
+                          const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+                          const firstname =
+                            $queries.patientProfile.data.response.first_name;
+                          const lastname =
+                            $queries.patientProfile.data.response.last_name;
+                          return `${firstname} ${lastname}
 ${age} ساله`;
-                      })();
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
+                        })();
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
                       }
-                      throw e;
-                    }
-                  })()}
-                </React.Fragment>
+                    })()}
+                  </React.Fragment>
+                </div>
               </div>
             </div>
-          </div>
-          <div className={classNames(projectcss.all, sty.freeBox__vJEpS)}>
-            <div className={classNames(projectcss.all, sty.freeBox__odIf)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__t6FDf
-                )}
-              >
-                {"Addmission"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__vAndq
-                )}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return (() => {
-                        const gregorianDate = new Date(
-                          $queries.patientProfile.data.response.admission_datetime
-                        );
-                        const shamsiDate = new Intl.DateTimeFormat(
-                          "fa-IR"
-                        ).format(gregorianDate);
-                        const shamsiTime = gregorianDate.toLocaleTimeString(
-                          "fa-IR",
-                          { hour12: false }
-                        );
-                        const englishDate = shamsiDate.replace(/[۰-۹]/g, d =>
-                          String.fromCharCode(d.charCodeAt(0) - 1728)
-                        );
-                        const englishTime = shamsiTime.replace(/[۰-۹]/g, d =>
-                          String.fromCharCode(d.charCodeAt(0) - 1728)
-                        );
-                        return `${englishDate}`;
-                      })();
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
+            <div className={classNames(projectcss.all, sty.freeBox___0WcGe)}>
+              <div className={classNames(projectcss.all, sty.freeBox__duKtn)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__pufPy
+                  )}
+                >
+                  {"Addmission"}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__lrgwy
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return (() => {
+                          const gregorianDate = new Date(
+                            $queries.patientProfile.data.response.admission_datetime
+                          );
+                          const shamsiDate = new Intl.DateTimeFormat(
+                            "fa-IR"
+                          ).format(gregorianDate);
+                          const shamsiTime = gregorianDate.toLocaleTimeString(
+                            "fa-IR",
+                            { hour12: false }
+                          );
+                          const englishDate = shamsiDate.replace(/[۰-۹]/g, d =>
+                            String.fromCharCode(d.charCodeAt(0) - 1728)
+                          );
+                          const englishTime = shamsiTime.replace(/[۰-۹]/g, d =>
+                            String.fromCharCode(d.charCodeAt(0) - 1728)
+                          );
+                          return `${englishDate}`;
+                        })();
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
                       }
-                      throw e;
-                    }
-                  })()}
-                </React.Fragment>
+                    })()}
+                  </React.Fragment>
+                </div>
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__whUsW)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__jd7Hn
+                  )}
+                >
+                  {"service "}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__dAxYj
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return $queries.patientProfile.data.response
+                          .service_name;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
               </div>
             </div>
-            <div className={classNames(projectcss.all, sty.freeBox__cAy4Y)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__xJjLo
-                )}
-              >
-                {"service "}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__ebmD7
-                )}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return $queries.patientProfile.data.response.service_name;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
+            <div className={classNames(projectcss.all, sty.freeBox__fa6Rm)}>
+              <div className={classNames(projectcss.all, sty.freeBox__x40Ug)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__oHi1U
+                  )}
+                >
+                  {"No"}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__kxU2
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return $queries.patientProfile.data.response.iid;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
                       }
-                      throw e;
-                    }
-                  })()}
-                </React.Fragment>
+                    })()}
+                  </React.Fragment>
+                </div>
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__jdB4P)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___4JV9I
+                  )}
+                >
+                  {"Ward"}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__rR56W
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return $queries.patientProfile.data.response.ward_name;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
               </div>
             </div>
-          </div>
-          <div className={classNames(projectcss.all, sty.freeBox__d5Cv)}>
-            <div className={classNames(projectcss.all, sty.freeBox__xEen0)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text___1WqS
-                )}
-              >
-                {"No"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__a14Vw
-                )}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return $queries.patientProfile.data.response.iid;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
-                      }
-                      throw e;
-                    }
-                  })()}
-                </React.Fragment>
-              </div>
-            </div>
-            <div className={classNames(projectcss.all, sty.freeBox__qm32X)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__gY1Iu
-                )}
-              >
-                {"Ward"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text___08BSh
-                )}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return $queries.patientProfile.data.response.ward_name;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
-                      }
-                      throw e;
-                    }
-                  })()}
-                </React.Fragment>
-              </div>
-            </div>
-          </div>
-          <div className={classNames(projectcss.all, sty.freeBox__rgcA2)}>
-            <div className={classNames(projectcss.all, sty.freeBox___0ZnLw)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__ulRcl
-                )}
-              >
-                {"PACS"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__gmkmC
-                )}
-              >
-                <React.Fragment>
-                  <React.Fragment>{""}</React.Fragment>
-                  {
-                    <ul
-                      data-plasmic-name={"ul"}
-                      data-plasmic-override={overrides.ul}
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.ul,
-                        sty.ul
-                      )}
-                    >
-                      <li
-                        data-plasmic-name={"li"}
-                        data-plasmic-override={overrides.li}
+            <div className={classNames(projectcss.all, sty.freeBox__zglvp)}>
+              <div className={classNames(projectcss.all, sty.freeBox__gOlr0)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__ehOfA
+                  )}
+                >
+                  {"PACS"}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__vK0RN
+                  )}
+                >
+                  <React.Fragment>
+                    <React.Fragment>{""}</React.Fragment>
+                    {
+                      <ul
+                        data-plasmic-name={"ul"}
+                        data-plasmic-override={overrides.ul}
                         className={classNames(
                           projectcss.all,
-                          projectcss.li,
-                          projectcss.__wab_text,
-                          sty.li
+                          projectcss.ul,
+                          sty.ul
                         )}
                       >
-                        <React.Fragment>
-                          {(() => {
-                            try {
-                              return $queries.patientProfile.data.response
-                                .admission_id;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return "\u0634\u0645\u0627\u0631\u0647 \u067e\u06a9\u0633 \u0628\u0627\u06cc\u062f \u0648\u0627\u0631\u062f \u0634\u0648\u062f";
+                        <li
+                          data-plasmic-name={"li"}
+                          data-plasmic-override={overrides.li}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.li,
+                            projectcss.__wab_text,
+                            sty.li
+                          )}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return $queries.patientProfile.data.response
+                                  .admission_id;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "\u0634\u0645\u0627\u0631\u0647 \u067e\u06a9\u0633 \u0628\u0627\u06cc\u062f \u0648\u0627\u0631\u062f \u0634\u0648\u062f";
+                                }
+                                throw e;
                               }
-                              throw e;
-                            }
-                          })()}
-                        </React.Fragment>
-                      </li>
-                    </ul>
-                  }
-                  <React.Fragment>{""}</React.Fragment>
-                </React.Fragment>
-              </div>
-            </div>
-            <div className={classNames(projectcss.all, sty.freeBox__wttb6)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__buSnw
-                )}
-              >
-                {"Bed"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__iGlKj
-                )}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return (
-                        $queries.patientProfile.data.response.room +
-                        "  " +
-                        $queries.patientProfile.data.response.bed
-                      );
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
-                      }
-                      throw e;
+                            })()}
+                          </React.Fragment>
+                        </li>
+                      </ul>
                     }
-                  })()}
-                </React.Fragment>
+                    <React.Fragment>{""}</React.Fragment>
+                  </React.Fragment>
+                </div>
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__iy0Fr)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__oY5Cm
+                  )}
+                >
+                  {"Bed"}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__dVMw
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return (
+                          $queries.patientProfile.data.response.room +
+                          "  " +
+                          $queries.patientProfile.data.response.bed
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
               </div>
             </div>
           </div>
-          <SwitchingTab
-            data-plasmic-name={"switchingTab"}
-            data-plasmic-override={overrides.switchingTab}
-            className={classNames("__wab_instance", sty.switchingTab)}
-          />
+          <div
+            data-plasmic-name={"switchingTabs"}
+            data-plasmic-override={overrides.switchingTabs}
+            className={classNames(projectcss.all, sty.switchingTabs)}
+          >
+            <SwitchingTab
+              data-plasmic-name={"switchingTab"}
+              data-plasmic-override={overrides.switchingTab}
+              className={classNames("__wab_instance", sty.switchingTab)}
+            />
+          </div>
         </div>
       </div>
     </React.Fragment>
@@ -590,9 +555,10 @@ ${age} ساله`;
 }
 
 const PlasmicDescendants = {
-  patientCards: ["patientCards", "ul", "li", "switchingTab"],
+  patientCards: ["patientCards", "ul", "li", "switchingTabs", "switchingTab"],
   ul: ["ul", "li"],
   li: ["li"],
+  switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -602,6 +568,7 @@ type NodeDefaultElementType = {
   patientCards: "div";
   ul: "ul";
   li: "li";
+  switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
 };
 
@@ -667,6 +634,7 @@ export const PlasmicPatientProfile = Object.assign(
     // Helper components rendering sub-elements
     ul: makeNodeComponent("ul"),
     li: makeNodeComponent("li"),
+    switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
 
     // Metadata about props expected for PlasmicPatientProfile

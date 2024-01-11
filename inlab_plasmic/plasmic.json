@@ -910,7 +910,7 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicLaboratoryData.tsx",
           "importSpec": {
-            "modulePath": "../pages/laboratory_data/[slug]/[slug2].tsx"
+            "modulePath": "../pages/laboratory_data/[code]/[patien_name].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicLaboratoryData.module.css",
           "scheme": "blackbox",
@@ -924,7 +924,7 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicImagingReport1.tsx",
           "importSpec": {
-            "modulePath": "../pages/imaging_report/[slug]/[slug2].tsx"
+            "modulePath": "../pages/imaging_report/[code]/[patient_name].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicImagingReport1.module.css",
           "scheme": "blackbox",
@@ -938,7 +938,7 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicPatientProfile.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient_profile/[slug]/[slug2].tsx"
+            "modulePath": "../pages/patient_profile/[code]/[patient_name].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicPatientProfile.module.css",
           "scheme": "blackbox",
@@ -959,34 +959,6 @@
           "componentType": "component"
         },
         {
-          "id": "8UTGcd-R9N8O",
-          "name": "ImagingReport2",
-          "type": "managed",
-          "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicImagingReport2.tsx",
-          "importSpec": {
-            "modulePath": "../pages/imaging_report-2/[radiologyreport].tsx"
-          },
-          "cssFilePath": "plasmic/inlab/PlasmicImagingReport2.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/imaging_report-2/[radiologyreport]"
-        },
-        {
-          "id": "oQ9IYAdIiE5g",
-          "name": "SearchPatient",
-          "type": "managed",
-          "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicSearchPatient.tsx",
-          "importSpec": {
-            "modulePath": "../pages/[UserToken].tsx"
-          },
-          "cssFilePath": "plasmic/inlab/PlasmicSearchPatient.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/[UserToken]"
-        },
-        {
           "id": "V8IY3Apn5YGs",
           "name": "PatientCard",
           "type": "managed",
@@ -998,20 +970,6 @@
           "cssFilePath": "plasmic/inlab/PlasmicPatientCard.module.css",
           "scheme": "blackbox",
           "componentType": "component"
-        },
-        {
-          "id": "J2d--RhwPuEt",
-          "name": "Login",
-          "type": "managed",
-          "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicLogin.tsx",
-          "importSpec": {
-            "modulePath": "../pages/login.tsx"
-          },
-          "cssFilePath": "plasmic/inlab/PlasmicLogin.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/login"
         },
         {
           "id": "IoZvAstVrNqa",
@@ -1053,6 +1011,75 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/setting"
+        },
+        {
+          "id": "oQ9IYAdIiE5g",
+          "name": "PatientListAndSearch",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicPatientListAndSearch.tsx",
+          "importSpec": {
+            "modulePath": "../pages/patient.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicPatientListAndSearch.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/patient"
+        },
+        {
+          "id": "J2d--RhwPuEt",
+          "name": "InlabLogin",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicInlabLogin.tsx",
+          "importSpec": {
+            "modulePath": "../pages/index.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicInlabLogin.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/"
+        },
+        {
+          "id": "djw6BO6ESgiq",
+          "name": "TestAuth",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicTestAuth.tsx",
+          "importSpec": {
+            "modulePath": "../pages/test-auth.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicTestAuth.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/test-auth"
+        },
+        {
+          "id": "8o6xzPLlyVTQ",
+          "name": "Myprofile",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicMyprofile.tsx",
+          "importSpec": {
+            "modulePath": "../pages/myprofile.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicMyprofile.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/myprofile"
+        },
+        {
+          "id": "pMquA3hEaxCO",
+          "name": "Header",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicHeader.tsx",
+          "importSpec": {
+            "modulePath": "Header.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicHeader.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -1429,6 +1456,18 @@
           "name": "Fetcher",
           "displayName": "plasmic-data-source-fetcher",
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
+        },
+        {
+          "id": "Ys_jKOzaYeYo",
+          "name": "AuthGlobalContext",
+          "displayName": "AuthGlobalContext",
+          "componentImportPath": "./utils/AuthGlobalContext"
+        },
+        {
+          "id": "kxxsrihQ2d7W",
+          "name": "ApiFetcherComponent",
+          "displayName": "ApiFetcherComponent",
+          "componentImportPath": "./utils/ApiFetcherComponent"
         }
       ],
       "customFunctions": []
@@ -1453,6 +1492,12 @@
         "name": "UnnamedGlobalGroupOfVariants2",
         "projectId": "wjafXWEvDytFogT7SiMy2v",
         "contextFilePath": "plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2.tsx"
+      },
+      {
+        "id": "oZYyzxaJcbX_",
+        "name": "UnnamedGlobalGroupOfVariants3",
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "contextFilePath": "plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants3.tsx"
       }
     ]
   },

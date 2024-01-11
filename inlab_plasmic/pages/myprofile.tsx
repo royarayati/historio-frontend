@@ -7,23 +7,23 @@ import { ScreenVariantProvider } from "../components/plasmic/inlab/PlasmicGlobal
 import { UnnamedGlobalGroupOfVariantsContext } from "../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants";
 import { UnnamedGlobalGroupOfVariants2Context } from "../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2";
 import { UnnamedGlobalGroupOfVariants3Context } from "../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants3";
-import { PlasmicInlabLogin } from "../components/plasmic/inlab/PlasmicInlabLogin";
+import { PlasmicMyprofile } from "../components/plasmic/inlab/PlasmicMyprofile";
 import { useRouter } from "next/router";
 
-function InlabLogin() {
-  // Use PlasmicInlabLogin to render this component as it was
+function Myprofile() {
+  // Use PlasmicMyprofile to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicInlabLogin are:
+  // Props you can pass into PlasmicMyprofile are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, PlasmicInlabLogin is wrapped by your project's global
+  // By default, PlasmicMyprofile is wrapped by your project's global
   // variant context providers. These wrappers may be moved to
   // Next.js Custom App component
   // (https://nextjs.org/docs/advanced-features/custom-app).
@@ -37,7 +37,7 @@ function InlabLogin() {
               params={useRouter()?.query}
               query={useRouter()?.query}
             >
-              <PlasmicInlabLogin />
+              <PlasmicMyprofile />
             </ph.PageParamsProvider>
           </GlobalContextsProvider>
         </UnnamedGlobalGroupOfVariantsContext.Provider>
@@ -46,4 +46,4 @@ function InlabLogin() {
   );
 }
 
-export default InlabLogin;
+export default Myprofile;

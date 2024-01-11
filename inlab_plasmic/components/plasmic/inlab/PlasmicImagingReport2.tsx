@@ -36,7 +36,7 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
-import PageHeader from "../../PageHeader"; // plasmic-import: qbQinTd349lz/component
+import Header from "../../Header"; // plasmic-import: pMquA3hEaxCO/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -48,8 +48,6 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicImagingReport2.module.css"; // plasmic-import: 8UTGcd-R9N8O/css
 
-import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
-
 createPlasmicElementProxy;
 
 export type PlasmicImagingReport2__VariantMembers = {};
@@ -58,14 +56,18 @@ type VariantPropType = keyof PlasmicImagingReport2__VariantsArgs;
 export const PlasmicImagingReport2__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicImagingReport2__ArgsType = {
-  header?: React.ReactNode;
+  children?: React.ReactNode;
 };
 type ArgPropType = keyof PlasmicImagingReport2__ArgsType;
-export const PlasmicImagingReport2__ArgProps = new Array<ArgPropType>("header");
+export const PlasmicImagingReport2__ArgProps = new Array<ArgPropType>(
+  "children"
+);
 
 export type PlasmicImagingReport2__OverridesType = {
   root?: p.Flex<"div">;
+  freeBox?: p.Flex<"div">;
   imagingReport?: p.Flex<"div">;
+  switchingTabs?: p.Flex<"div">;
   switchingTab?: p.Flex<typeof SwitchingTab>;
 };
 
@@ -133,110 +135,72 @@ function PlasmicImagingReport2__RenderFunc(props: {
             sty.root
           )}
         >
-          {p.renderPlasmicSlot({
-            defaultContents: (
-              <PageHeader
-                className={classNames("__wab_instance", sty.pageHeader__wcUCi)}
-                slot={
-                  <ArrowLeftIcon
-                    className={classNames(projectcss.all, sty.svg__y69Pt)}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["goToRadiologyReport1"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              destination: `/imaging_report/${(() => {
-                                try {
-                                  return $ctx.params.patient_id;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
-                                  }
-                                  throw e;
-                                }
-                              })()}/${(() => {
-                                try {
-                                  return $ctx.params.patient_name;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
-                                  }
-                                  throw e;
-                                }
-                              })()}`
-                            };
-                            return (({ destination }) => {
-                              if (
-                                typeof destination === "string" &&
-                                destination.startsWith("#")
-                              ) {
-                                document
-                                  .getElementById(destination.substr(1))
-                                  .scrollIntoView({ behavior: "smooth" });
-                              } else {
-                                __nextRouter?.push(destination);
-                              }
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["goToRadiologyReport1"] != null &&
-                        typeof $steps["goToRadiologyReport1"] === "object" &&
-                        typeof $steps["goToRadiologyReport1"].then ===
-                          "function"
-                      ) {
-                        $steps["goToRadiologyReport1"] = await $steps[
-                          "goToRadiologyReport1"
-                        ];
-                      }
-                    }}
-                    role={"img"}
-                  />
-                }
-              />
-            ),
-
-            value: args.header
-          })}
           <div
-            data-plasmic-name={"imagingReport"}
-            data-plasmic-override={overrides.imagingReport}
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.imagingReport
-            )}
+            data-plasmic-name={"freeBox"}
+            data-plasmic-override={overrides.freeBox}
+            className={classNames(projectcss.all, sty.freeBox)}
           >
-            <React.Fragment>
-              {(() => {
-                try {
-                  return $ctx.params.radiologyreport;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return "";
+            {p.renderPlasmicSlot({
+              defaultContents: (
+                <Header
+                  className={classNames("__wab_instance", sty.header___6Lxg)}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return "test";
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "My Profile";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </Header>
+              ),
+              value: args.children
+            })}
+            <div
+              data-plasmic-name={"imagingReport"}
+              data-plasmic-override={overrides.imagingReport}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.imagingReport
+              )}
+            >
+              <React.Fragment>
+                {(() => {
+                  try {
+                    return $ctx.params.radiologyreport;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return "";
+                    }
+                    throw e;
                   }
-                  throw e;
-                }
-              })()}
-            </React.Fragment>
+                })()}
+              </React.Fragment>
+            </div>
           </div>
-          <SwitchingTab
-            data-plasmic-name={"switchingTab"}
-            data-plasmic-override={overrides.switchingTab}
-            className={classNames("__wab_instance", sty.switchingTab)}
-          />
+          <div
+            data-plasmic-name={"switchingTabs"}
+            data-plasmic-override={overrides.switchingTabs}
+            className={classNames(projectcss.all, sty.switchingTabs)}
+          >
+            <SwitchingTab
+              data-plasmic-name={"switchingTab"}
+              data-plasmic-override={overrides.switchingTab}
+              className={classNames("__wab_instance", sty.switchingTab)}
+            />
+          </div>
         </div>
       </div>
     </React.Fragment>
@@ -244,8 +208,10 @@ function PlasmicImagingReport2__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "imagingReport", "switchingTab"],
+  root: ["root", "freeBox", "imagingReport", "switchingTabs", "switchingTab"],
+  freeBox: ["freeBox", "imagingReport"],
   imagingReport: ["imagingReport"],
+  switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -253,7 +219,9 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  freeBox: "div";
   imagingReport: "div";
+  switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
 };
 
@@ -317,7 +285,9 @@ export const PlasmicImagingReport2 = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    freeBox: makeNodeComponent("freeBox"),
     imagingReport: makeNodeComponent("imagingReport"),
+    switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
 
     // Metadata about props expected for PlasmicImagingReport2

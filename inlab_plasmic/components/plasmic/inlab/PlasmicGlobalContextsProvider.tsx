@@ -8,6 +8,7 @@ import * as React from "react";
 import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
 import { CommerceProviderComponent } from "@plasmicpkgs/commerce-shopify";
+import { AuthGlobalContext } from "../../../utils/AuthGlobalContext";
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 export interface GlobalContextsProviderProps {
@@ -15,16 +16,25 @@ export interface GlobalContextsProviderProps {
   antdConfigProviderProps?: Partial<
     Omit<React.ComponentProps<typeof AntdConfigProvider>, "children">
   >;
+
   commerceProviderComponentProps?: Partial<
     Omit<React.ComponentProps<typeof CommerceProviderComponent>, "children">
+  >;
+
+  authGlobalContextProps?: Partial<
+    Omit<React.ComponentProps<typeof AuthGlobalContext>, "children">
   >;
 }
 
 export default function GlobalContextsProvider(
   props: GlobalContextsProviderProps
 ) {
-  const { children, antdConfigProviderProps, commerceProviderComponentProps } =
-    props;
+  const {
+    children,
+    antdConfigProviderProps,
+    commerceProviderComponentProps,
+    authGlobalContextProps
+  } = props;
 
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsjEqVmdAbnKYc()
@@ -147,7 +157,16 @@ export default function GlobalContextsProvider(
             : "next-js-store.myshopify.com"
         }
       >
-        {children}
+        <AuthGlobalContext
+          {...authGlobalContextProps}
+          baseUrl={
+            authGlobalContextProps && "baseUrl" in authGlobalContextProps
+              ? authGlobalContextProps.baseUrl!
+              : "https://inlabgr.synappsgroup.com:8008"
+          }
+        >
+          {children}
+        </AuthGlobalContext>
       </CommerceProviderComponent>
     </AntdConfigProvider>
   );
