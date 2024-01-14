@@ -129,6 +129,7 @@ function PlasmicUserSetting__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
+
     [$props, $ctx, $refs]
   );
   const $state = p.useDollarState(stateSpecs, {
@@ -620,6 +621,7 @@ const PlasmicDescendants = {
     "logout",
     "redirectUserToLoginPage"
   ],
+
   h: ["h"],
   picsAndName2: ["picsAndName2", "name2", "img"],
   name2: ["name2"],
@@ -661,6 +663,7 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicUserSetting__OverridesType,
   DescendantsType<T>
 >;
+
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {

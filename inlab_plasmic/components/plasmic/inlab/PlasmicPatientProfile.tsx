@@ -526,6 +526,7 @@ const PlasmicDescendants = {
     "switchingTab",
     "redirectUserToLoginPage"
   ],
+
   h: ["h"],
   apiFetcherComponent: [
     "apiFetcherComponent",
@@ -541,6 +542,7 @@ const PlasmicDescendants = {
     "patientWard",
     "patientRoomBed"
   ],
+
   freeBox: [
     "freeBox",
     "nationalIdadmissionTimeNopacs",
@@ -554,6 +556,7 @@ const PlasmicDescendants = {
     "patientWard",
     "patientRoomBed"
   ],
+
   nationalIdadmissionTimeNopacs: [
     "nationalIdadmissionTimeNopacs",
     "nationalId",
@@ -561,6 +564,7 @@ const PlasmicDescendants = {
     "patientNo",
     "pacsNumber"
   ],
+
   nationalId: ["nationalId"],
   admissionId: ["admissionId"],
   patientNo: ["patientNo"],
@@ -572,6 +576,7 @@ const PlasmicDescendants = {
     "patientWard",
     "patientRoomBed"
   ],
+
   patientName: ["patientName"],
   patientService: ["patientService"],
   patientWard: ["patientWard"],
@@ -608,6 +613,7 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicPatientProfile__OverridesType,
   DescendantsType<T>
 >;
+
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {

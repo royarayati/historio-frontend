@@ -199,6 +199,7 @@ function PlasmicMyprofile__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
+
     [$props, $ctx, $refs]
   );
   const $state = p.useDollarState(stateSpecs, {
@@ -222,6 +223,7 @@ function PlasmicMyprofile__RenderFunc(props: {
           property="og:title"
           content={PlasmicMyprofile.pageMetadata.title}
         />
+
         <meta
           key="twitter:title"
           name="twitter:title"
@@ -458,6 +460,7 @@ function PlasmicMyprofile__RenderFunc(props: {
                         })()
                     }
                   ],
+
                   []
                 );
                 return (
@@ -537,6 +540,7 @@ function PlasmicMyprofile__RenderFunc(props: {
                         })()
                     }
                   ],
+
                   []
                 );
                 return (
@@ -616,6 +620,7 @@ function PlasmicMyprofile__RenderFunc(props: {
                         })()
                     }
                   ],
+
                   []
                 );
                 return (
@@ -788,6 +793,7 @@ const PlasmicDescendants = {
     "save",
     "redirectUserToLoginPage"
   ],
+
   header: ["header"],
   note: ["note"],
   picsAndName: ["picsAndName", "name", "img"],
@@ -801,6 +807,7 @@ const PlasmicDescendants = {
     "lastName2",
     "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f"
   ],
+
   lastName2: ["lastName2"],
   نامخانواد: ["\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f"],
   email: ["email", "email2", "\u0627\u0645\u0644"],
@@ -812,6 +819,7 @@ const PlasmicDescendants = {
     "\u0639\u0633\u0631\u0648\u0641\u0627\u06442",
     "button"
   ],
+
   email4: ["email4"],
   عسروفال2: ["\u0639\u0633\u0631\u0648\u0641\u0627\u06442", "button"],
   button: ["button"],
@@ -850,6 +858,7 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicMyprofile__OverridesType,
   DescendantsType<T>
 >;
+
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {

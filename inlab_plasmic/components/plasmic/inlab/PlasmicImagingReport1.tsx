@@ -121,6 +121,7 @@ function PlasmicImagingReport1__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
+
     [$props, $ctx, $refs]
   );
   const $state = p.useDollarState(stateSpecs, {
@@ -503,6 +504,7 @@ const PlasmicDescendants = {
     "switchingTab",
     "redirectUserToLoginPage"
   ],
+
   h: ["h"],
   reports: [
     "reports",
@@ -512,6 +514,7 @@ const PlasmicDescendants = {
     "imagingDatetime",
     "imagingType"
   ],
+
   viewPacs: ["viewPacs", "text"],
   text: ["text"],
   imagingTitle: ["imagingTitle"],
@@ -543,6 +546,7 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicImagingReport1__OverridesType,
   DescendantsType<T>
 >;
+
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {

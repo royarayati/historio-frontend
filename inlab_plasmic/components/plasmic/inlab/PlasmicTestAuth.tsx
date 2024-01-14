@@ -163,6 +163,7 @@ function PlasmicTestAuth__RenderFunc(props: {
         )
       }
     ],
+
     [$props, $ctx, $refs]
   );
   const $state = p.useDollarState(stateSpecs, {
@@ -442,6 +443,7 @@ function PlasmicTestAuth__RenderFunc(props: {
                         plasmicStateName: "table.selectedRowKeys"
                       }
                     ],
+
                     [],
                     RichTable_Helpers ?? {},
                     child$Props
@@ -533,6 +535,7 @@ const PlasmicDescendants = {
     "table",
     "redirectUserToLoginPage"
   ],
+
   test: ["test", "someInstruction", "button", "tesext"],
   someInstruction: ["someInstruction"],
   button: ["button"],
@@ -560,6 +563,7 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicTestAuth__OverridesType,
   DescendantsType<T>
 >;
+
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {

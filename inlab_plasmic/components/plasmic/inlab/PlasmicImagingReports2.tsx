@@ -212,6 +212,7 @@ const PlasmicDescendants = {
     "switchingTab",
     "redirectUserToLoginPage"
   ],
+
   imagingReport2: ["imagingReport2", "imagingReport"],
   imagingReport: ["imagingReport"],
   switchingTabs: ["switchingTabs", "switchingTab"],
@@ -235,6 +236,7 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicImagingReports2__OverridesType,
   DescendantsType<T>
 >;
+
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {
