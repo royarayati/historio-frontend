@@ -904,20 +904,6 @@
           "plumeType": "text-input"
         },
         {
-          "id": "YivXi3wItkax",
-          "name": "LaboratoryData",
-          "type": "managed",
-          "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicLaboratoryData.tsx",
-          "importSpec": {
-            "modulePath": "../pages/patient/[code]/[patien_name]/lab.tsx"
-          },
-          "cssFilePath": "plasmic/inlab/PlasmicLaboratoryData.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/laboratory_data/[slug]/[slug2]"
-        },
-        {
           "id": "AFB-1jxjMqDb",
           "name": "ImagingReport1",
           "type": "managed",
@@ -1134,6 +1120,20 @@
           "cssFilePath": "plasmic/inlab/PlasmicH.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "YivXi3wItkax",
+          "name": "LaboratoryData",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicLaboratoryData.tsx",
+          "importSpec": {
+            "modulePath": "../pages/patient/[code]/[patien_name]/lab.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicLaboratoryData.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/patient/[code]/[patien_name]/lab"
         }
       ],
       "icons": [
@@ -1582,7 +1582,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     }
   ],
   "globalVariants": {

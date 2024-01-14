@@ -160,7 +160,7 @@ export default function GlobalContextsProvider(
           baseUrl={
             authGlobalContextProps && "baseUrl" in authGlobalContextProps
               ? authGlobalContextProps.baseUrl!
-              : "https://inlabgr.synappsgroup.com/new_inlab/plasmic-host/"
+              : "https://inlabgr.synappsgroup.com:8008/"
           }
         >
           {children}
