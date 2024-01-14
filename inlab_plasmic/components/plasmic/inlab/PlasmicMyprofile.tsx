@@ -41,6 +41,7 @@ import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/compone
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import RedirectUserToLoginPage from "../../RedirectUserToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -88,6 +89,7 @@ export type PlasmicMyprofile__OverridesType = {
   عسروفال2?: p.Flex<typeof UploadWrapper>;
   button?: p.Flex<typeof AntdButton>;
   save?: p.Flex<typeof Button>;
+  redirectUserToLoginPage?: p.Flex<typeof RedirectUserToLoginPage>;
 };
 
 export interface DefaultMyprofileProps {}
@@ -189,6 +191,12 @@ function PlasmicMyprofile__RenderFunc(props: {
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "save.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -244,13 +252,13 @@ function PlasmicMyprofile__RenderFunc(props: {
             sty.root
           )}
         >
-          <div className={classNames(projectcss.all, sty.freeBox__wr82L)}>
-            <Header
-              data-plasmic-name={"header"}
-              data-plasmic-override={overrides.header}
-              className={classNames("__wab_instance", sty.header)}
-            />
+          <Header
+            data-plasmic-name={"header"}
+            data-plasmic-override={overrides.header}
+            className={classNames("__wab_instance", sty.header)}
+          />
 
+          <div className={classNames(projectcss.all, sty.freeBox__wr82L)}>
             <div
               data-plasmic-name={"note"}
               data-plasmic-override={overrides.note}
@@ -677,6 +685,10 @@ function PlasmicMyprofile__RenderFunc(props: {
               data-plasmic-override={overrides.save}
               className={classNames("__wab_instance", sty.save)}
               color={"blue"}
+              isDisabled={p.generateStateValueProp($state, [
+                "save",
+                "isDisabled"
+              ])}
               onClick={async event => {
                 const $steps = {};
 
@@ -720,11 +732,32 @@ function PlasmicMyprofile__RenderFunc(props: {
                   ];
                 }
               }}
+              onIsDisabledChange={(...eventArgs) => {
+                p.generateStateOnChangeProp($state, ["save", "isDisabled"])(
+                  eventArgs[0]
+                );
+              }}
               submitsForm={false}
             >
-              {"Save"}
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__mDyKf
+                )}
+              >
+                {"Save"}
+              </div>
             </Button>
           </div>
+          <RedirectUserToLoginPage
+            data-plasmic-name={"redirectUserToLoginPage"}
+            data-plasmic-override={overrides.redirectUserToLoginPage}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectUserToLoginPage
+            )}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -752,7 +785,8 @@ const PlasmicDescendants = {
     "email4",
     "\u0639\u0633\u0631\u0648\u0641\u0627\u06442",
     "button",
-    "save"
+    "save",
+    "redirectUserToLoginPage"
   ],
   header: ["header"],
   note: ["note"],
@@ -781,7 +815,8 @@ const PlasmicDescendants = {
   email4: ["email4"],
   عسروفال2: ["\u0639\u0633\u0631\u0648\u0641\u0627\u06442", "button"],
   button: ["button"],
-  save: ["save"]
+  save: ["save"],
+  redirectUserToLoginPage: ["redirectUserToLoginPage"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -807,6 +842,7 @@ type NodeDefaultElementType = {
   عسروفال2: typeof UploadWrapper;
   button: typeof AntdButton;
   save: typeof Button;
+  redirectUserToLoginPage: typeof RedirectUserToLoginPage;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -890,6 +926,7 @@ export const PlasmicMyprofile = Object.assign(
     عسروفال2: makeNodeComponent("\u0639\u0633\u0631\u0648\u0641\u0627\u06442"),
     button: makeNodeComponent("button"),
     save: makeNodeComponent("save"),
+    redirectUserToLoginPage: makeNodeComponent("redirectUserToLoginPage"),
 
     // Metadata about props expected for PlasmicMyprofile
     internalVariantProps: PlasmicMyprofile__VariantProps,

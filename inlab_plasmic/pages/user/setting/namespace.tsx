@@ -6,41 +6,44 @@ import GlobalContextsProvider from "../../../components/plasmic/inlab/PlasmicGlo
 import { ScreenVariantProvider } from "../../../components/plasmic/inlab/PlasmicGlobalVariant__Screen";
 import { UnnamedGlobalGroupOfVariantsContext } from "../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants";
 import { UnnamedGlobalGroupOfVariants2Context } from "../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2";
-import { PlasmicLaboratoryData } from "../../../components/plasmic/inlab/PlasmicLaboratoryData";
+import { UnnamedGlobalGroupOfVariants3Context } from "../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants3";
+import { PlasmicNamespacesSelection } from "../../../components/plasmic/inlab/PlasmicNamespacesSelection";
 import { useRouter } from "next/router";
 
-function LaboratoryData() {
-  // Use PlasmicLaboratoryData to render this component as it was
+function NamespacesSelection() {
+  // Use PlasmicNamespacesSelection to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicLaboratoryData are:
+  // Props you can pass into PlasmicNamespacesSelection are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, PlasmicLaboratoryData is wrapped by your project's global
+  // By default, PlasmicNamespacesSelection is wrapped by your project's global
   // variant context providers. These wrappers may be moved to
   // Next.js Custom App component
   // (https://nextjs.org/docs/advanced-features/custom-app).
   return (
-    <UnnamedGlobalGroupOfVariants2Context.Provider value={undefined}>
-      <UnnamedGlobalGroupOfVariantsContext.Provider value={undefined}>
-        <GlobalContextsProvider>
-          <ph.PageParamsProvider
-            route={useRouter()?.pathname}
-            params={useRouter()?.query}
-            query={useRouter()?.query}
-          >
-            <PlasmicLaboratoryData />
-          </ph.PageParamsProvider>
-        </GlobalContextsProvider>
-      </UnnamedGlobalGroupOfVariantsContext.Provider>
-    </UnnamedGlobalGroupOfVariants2Context.Provider>
+    <UnnamedGlobalGroupOfVariants3Context.Provider value={undefined}>
+      <UnnamedGlobalGroupOfVariants2Context.Provider value={undefined}>
+        <UnnamedGlobalGroupOfVariantsContext.Provider value={undefined}>
+          <GlobalContextsProvider>
+            <ph.PageParamsProvider
+              route={useRouter()?.pathname}
+              params={useRouter()?.query}
+              query={useRouter()?.query}
+            >
+              <PlasmicNamespacesSelection />
+            </ph.PageParamsProvider>
+          </GlobalContextsProvider>
+        </UnnamedGlobalGroupOfVariantsContext.Provider>
+      </UnnamedGlobalGroupOfVariants2Context.Provider>
+    </UnnamedGlobalGroupOfVariants3Context.Provider>
   );
 }
 
-export default LaboratoryData;
+export default NamespacesSelection;

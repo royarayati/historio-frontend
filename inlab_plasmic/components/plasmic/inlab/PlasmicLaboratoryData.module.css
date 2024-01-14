@@ -22,28 +22,43 @@
 .laboratoryData > * {
   grid-column: 4;
 }
-.freeBox {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-  padding: 8px;
+.laboratoryData > * {
+  grid-column: 4;
 }
-.header__s4Slo:global(.__wab_instance) {
+@media (min-width: 0px) and (max-width: 768px) {
+  .laboratoryData > * {
+    grid-column: 4;
+  }
+}
+.laboratoryDataglobal_unnamedGlobalGroupOfVariants_unnamedVariant > * {
+  grid-column: 4;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .laboratoryDataglobal_unnamedGlobalGroupOfVariants_unnamedVariant > * {
+    grid-column: 4;
+  }
+}
+.h:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
+  display: none;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .h:global(.__wab_instance) {
+    display: flex;
+  }
+}
+.apiFetcherComponent:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  position: relative;
+  width: 100%;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
 }
 .laboratoryResults {
   display: flex;
   position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -51,27 +66,14 @@
   transition-property: all;
   transition-duration: 1s;
   margin-bottom: 0px;
-  margin-top: 15px;
+  margin-top: 12px;
+  background: none;
+  align-self: center;
+  flex-direction: column;
   min-width: 0;
   -webkit-transition-property: all;
   -webkit-transition-duration: 1s;
-  padding: 8px 8px 18%;
-}
-.laboratoryResultPerDatetime {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-  min-width: 0;
-  border-radius: 5px;
-  padding: 8px;
-  border-width: 0.5px;
-  border-style: solid;
+  padding: 8px 8px 8%;
 }
 .datetime {
   position: relative;
@@ -79,9 +81,46 @@
   height: auto;
   max-width: 100%;
   text-align: center;
+  background: #ffffff;
+  left: auto;
+  top: auto;
   min-width: 0;
+  border-bottom: 1px solid var(--token-8PxxXPNrIohQ);
 }
-.laboratoryResult {
+.freeBox__rsUXk {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  left: auto;
+  top: auto;
+  min-width: 0;
+  padding: 8px;
+  margin: 0px;
+  border-bottom: 1px solid var(--token-8PxxXPNrIohQ);
+}
+.freeBox__rsUXk > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - 0px);
+  height: calc(100% + 0px);
+}
+.freeBox__rsUXk > :global(.__wab_flex-container) > *,
+.freeBox__rsUXk > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__rsUXk > :global(.__wab_flex-container) > picture > img,
+.freeBox__rsUXk
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 0px;
+}
+.freeBox__sTh7T {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -90,8 +129,31 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-top-style: dashed;
-  border-top-width: 0.5px;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+.labTitles {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  font-size: 14px;
+  padding-top: 0px;
+  background: #418dff1a;
+  min-width: 0;
+  border-bottom: 0.5px solid var(--token-8PxxXPNrIohQ);
+}
+.freeBox__j2FXp {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
   min-width: 0;
   padding: 8px;
 }
@@ -100,6 +162,8 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  text-align: left;
+  font-size: 12px;
   min-width: 0;
 }
 .factorValue {
@@ -109,25 +173,30 @@
   max-width: 100%;
   border-left-style: dashed;
   border-left-width: 1px;
+  font-size: 12px;
   min-width: 0;
 }
 .switchingTabs {
   display: flex;
-  position: fixed;
+  position: relative;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   width: auto;
   height: auto;
   max-width: 100%;
-  left: 0;
+  left: auto;
   top: auto;
   z-index: 1;
-  right: 0;
-  bottom: 0;
+  right: auto;
+  bottom: auto;
   padding: 8px 11.3% 5%;
 }
 .switchingTab:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.redirectUserToLoginPage:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }

@@ -38,7 +38,12 @@ import {
 } from "@plasmicapp/react-web";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 
+import {
+  UnnamedGlobalGroupOfVariants2Value,
+  useUnnamedGlobalGroupOfVariants2
+} from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2"; // plasmic-import: 9LuS2HFY_aeA/globalVariant
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -54,19 +59,29 @@ import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP
 
 createPlasmicElementProxy;
 
-export type PlasmicInlabLogin__VariantMembers = {};
-export type PlasmicInlabLogin__VariantsArgs = {};
-type VariantPropType = keyof PlasmicInlabLogin__VariantsArgs;
-export const PlasmicInlabLogin__VariantProps = new Array<VariantPropType>();
-
-export type PlasmicInlabLogin__ArgsType = {
-  children?: React.ReactNode;
+export type PlasmicInlabLogin__VariantMembers = {
+  disabledLoginButton: "disabledLoginButton";
 };
+export type PlasmicInlabLogin__VariantsArgs = {
+  disabledLoginButton?: SingleBooleanChoiceArg<"disabledLoginButton">;
+};
+type VariantPropType = keyof PlasmicInlabLogin__VariantsArgs;
+export const PlasmicInlabLogin__VariantProps = new Array<VariantPropType>(
+  "disabledLoginButton"
+);
+
+export type PlasmicInlabLogin__ArgsType = {};
 type ArgPropType = keyof PlasmicInlabLogin__ArgsType;
-export const PlasmicInlabLogin__ArgProps = new Array<ArgPropType>("children");
+export const PlasmicInlabLogin__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicInlabLogin__OverridesType = {
   root?: p.Flex<"div">;
+  freeBox?: p.Flex<"div">;
+  username?: p.Flex<typeof TextInput>;
+  password?: p.Flex<typeof TextInput>;
+  loginButton?: p.Flex<typeof Button>;
+  resetPassword?: p.Flex<typeof Button>;
+  redirectUserToHomepage?: p.Flex<typeof SideEffect>;
 };
 
 export interface DefaultInlabLoginProps {}
@@ -104,7 +119,54 @@ function PlasmicInlabLogin__RenderFunc(props: {
 
   const currentUser = p.useCurrentUser?.() || {};
 
+  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "username.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ``
+      },
+      {
+        path: "password.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ``
+      },
+      {
+        path: "resetPassword.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "loginButton.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant($state, "disabledLoginButton", "disabledLoginButton")
+            ? "isDisabled"
+            : undefined
+      },
+      {
+        path: "disabledLoginButton",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          $props.disabledLoginButton
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = p.useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   const globalVariants = ensureGlobalVariants({
+    unnamedGlobalGroupOfVariants2: useUnnamedGlobalGroupOfVariants2(),
     screen: useScreenVariantsjEqVmdAbnKYc()
   });
 
@@ -131,184 +193,413 @@ function PlasmicInlabLogin__RenderFunc(props: {
           projectcss.plasmic_tokens,
           plasmic_antd_5_hostless_css.plasmic_tokens,
           plasmic_plasmic_rich_components_css.plasmic_tokens,
-          sty.root
+          sty.root,
+          {
+            [sty.rootdisabledLoginButton]: hasVariant(
+              $state,
+              "disabledLoginButton",
+              "disabledLoginButton"
+            ),
+            [sty.rootglobal_unnamedGlobalGroupOfVariants2_unnamedVariant]:
+              hasVariant(
+                globalVariants,
+                "unnamedGlobalGroupOfVariants2",
+                "unnamedVariant"
+              )
+          }
         )}
       >
-        {p.renderPlasmicSlot({
-          defaultContents: (
-            <p.Stack
-              as={"div"}
-              hasGap={true}
-              className={classNames(projectcss.all, sty.freeBox___0Yg8K)}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__zvBgx
-                )}
-              >
-                {
-                  "\u0628\u0647 \u0627\u06cc\u0646\u0644\u0628 \u062e\u0648\u0634 \u0622\u0645\u062f\u06cc\u062f "
-                }
-              </div>
-              <TextInput
-                aria-label={``}
-                autoFocus={false}
-                className={classNames("__wab_instance", sty.textInput__lesjL)}
-                name={``}
-                placeholder={"username"}
-                required={false}
-                type={"text"}
-                value={``}
-              />
+        <p.Stack
+          as={"div"}
+          data-plasmic-name={"freeBox"}
+          data-plasmic-override={overrides.freeBox}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.freeBox, {
+            [sty.freeBoxdisabledLoginButton]: hasVariant(
+              $state,
+              "disabledLoginButton",
+              "disabledLoginButton"
+            )
+          })}
+        >
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text__zvBgx
+            )}
+          >
+            {
+              "\u0628\u0647 \u0627\u06cc\u0646\u0644\u0628 \u062e\u0648\u0634 \u0622\u0645\u062f\u06cc\u062f "
+            }
+          </div>
+          <TextInput
+            data-plasmic-name={"username"}
+            data-plasmic-override={overrides.username}
+            aria-label={``}
+            autoFocus={false}
+            className={classNames("__wab_instance", sty.username)}
+            name={``}
+            onChange={(...eventArgs) => {
+              p.generateStateOnChangeProp($state, ["username", "value"])(
+                (e => e.target?.value).apply(null, eventArgs)
+              );
+            }}
+            placeholder={"username"}
+            required={false}
+            type={"text"}
+            value={
+              p.generateStateValueProp($state, ["username", "value"]) ?? ""
+            }
+          />
 
-              <TextInput
-                aria-label={``}
-                className={classNames("__wab_instance", sty.textInput___85NL)}
-                onChange={async event => {
-                  const $steps = {};
-                }}
-                placeholder={"password"}
-                type={"password"}
-                value={``}
-              />
+          <TextInput
+            data-plasmic-name={"password"}
+            data-plasmic-override={overrides.password}
+            aria-label={``}
+            autoFocus={false}
+            className={classNames("__wab_instance", sty.password)}
+            onChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                p.generateStateOnChangeProp($state, ["password", "value"])(
+                  (e => e.target?.value).apply(null, eventArgs)
+                );
+              }).apply(null, eventArgs);
+              (async event => {
+                const $steps = {};
+              }).apply(null, eventArgs);
+            }}
+            placeholder={"password"}
+            type={"password"}
+            value={
+              p.generateStateValueProp($state, ["password", "value"]) ?? ""
+            }
+          />
 
-              <Button
-                className={classNames("__wab_instance", sty.button__zs4PH)}
-                color={"blue"}
-                endIcon={
-                  <IconIcon
-                    className={classNames(projectcss.all, sty.svg__dS9Y)}
-                    role={"img"}
-                  />
-                }
-                onClick={async event => {
-                  const $steps = {};
+          <Button
+            data-plasmic-name={"loginButton"}
+            data-plasmic-override={overrides.loginButton}
+            className={classNames("__wab_instance", sty.loginButton, {
+              [sty.loginButtondisabledLoginButton]: hasVariant(
+                $state,
+                "disabledLoginButton",
+                "disabledLoginButton"
+              )
+            })}
+            color={"blue"}
+            isDisabled={p.generateStateValueProp($state, [
+              "loginButton",
+              "isDisabled"
+            ])}
+            onClick={async event => {
+              const $steps = {};
 
-                  $steps["loginAction"] = true
-                    ? (() => {
-                        const actionArgs = { args: [``, ``] };
-                        return $globalActions["AuthGlobalContext.login"]?.apply(
-                          null,
-                          [...actionArgs.args]
-                        );
-                      })()
-                    : undefined;
-                  if (
-                    $steps["loginAction"] != null &&
-                    typeof $steps["loginAction"] === "object" &&
-                    typeof $steps["loginAction"].then === "function"
-                  ) {
-                    $steps["loginAction"] = await $steps["loginAction"];
-                  }
-
-                  $steps["goToInlabHomepage"] =
-                    $steps.loginAction.status === 200
-                      ? (() => {
-                          const actionArgs = { destination: `/patient` };
-                          return (({ destination }) => {
+              $steps["loginAction"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        (() => {
+                          try {
+                            return $state.username.value;
+                          } catch (e) {
                             if (
-                              typeof destination === "string" &&
-                              destination.startsWith("#")
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
                             ) {
-                              document
-                                .getElementById(destination.substr(1))
-                                .scrollIntoView({ behavior: "smooth" });
-                            } else {
-                              __nextRouter?.push(destination);
+                              return undefined;
                             }
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                  if (
-                    $steps["goToInlabHomepage"] != null &&
-                    typeof $steps["goToInlabHomepage"] === "object" &&
-                    typeof $steps["goToInlabHomepage"].then === "function"
-                  ) {
-                    $steps["goToInlabHomepage"] = await $steps[
-                      "goToInlabHomepage"
-                    ];
-                  }
-                }}
-                shape={"rounded"}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__y32Tg
-                  )}
-                >
-                  {
-                    "\u0648\u0631\u0648\u062f \u0628\u0647 \u0627\u06cc\u0646\u0644\u0628 "
-                  }
-                </div>
-              </Button>
-              <Button
-                className={classNames("__wab_instance", sty.button__aLyVv)}
-                color={"clear"}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["resetPassword"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          destination:
-                            "https://docs.google.com/forms/d/e/1FAIpQLSeVxCqYPfByUBPROGdXtrp3dX10uL6SCMHqNAMy05YBsSgzng/viewform"
-                        };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
+                            throw e;
                           }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["resetPassword"] != null &&
-                    typeof $steps["resetPassword"] === "object" &&
-                    typeof $steps["resetPassword"].then === "function"
-                  ) {
-                    $steps["resetPassword"] = await $steps["resetPassword"];
-                  }
-                }}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__o1JqL
-                  )}
-                >
-                  {
-                    "\u0628\u0627\u0632\u06cc\u0627\u0628\u06cc \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
-                  }
-                </div>
-              </Button>
-            </p.Stack>
-          ),
-          value: args.children
-        })}
+                        })(),
+                        (() => {
+                          try {
+                            return $state.password.value;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["AuthGlobalContext.login"]?.apply(
+                      null,
+                      [...actionArgs.args]
+                    );
+                  })()
+                : undefined;
+              if (
+                $steps["loginAction"] != null &&
+                typeof $steps["loginAction"] === "object" &&
+                typeof $steps["loginAction"].then === "function"
+              ) {
+                $steps["loginAction"] = await $steps["loginAction"];
+              }
+
+              $steps["disablerLoginButton"] = true
+                ? (() => {
+                    const actionArgs = {
+                      vgroup: "disabledLoginButton",
+                      operation: 4
+                    };
+                    return (({ vgroup, value }) => {
+                      if (typeof value === "string") {
+                        value = [value];
+                      }
+
+                      p.set($state, vgroup, true);
+                      return true;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["disablerLoginButton"] != null &&
+                typeof $steps["disablerLoginButton"] === "object" &&
+                typeof $steps["disablerLoginButton"].then === "function"
+              ) {
+                $steps["disablerLoginButton"] = await $steps[
+                  "disablerLoginButton"
+                ];
+              }
+
+              $steps["goToHomepage"] =
+                $steps.loginAction.status === 200
+                  ? (() => {
+                      const actionArgs = { destination: `/patients` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+              if (
+                $steps["goToHomepage"] != null &&
+                typeof $steps["goToHomepage"] === "object" &&
+                typeof $steps["goToHomepage"].then === "function"
+              ) {
+                $steps["goToHomepage"] = await $steps["goToHomepage"];
+              }
+
+              $steps["wrongUser"] =
+                $steps.loginAction.status !== 200
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "info",
+                          "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0646\u0627\u0645\u0639\u062a\u0628\u0631 \u0627\u0633\u062a"
+                        ]
+                      };
+                      return $globalActions[
+                        "plasmic-antd5-config-provider.showNotification"
+                      ]?.apply(null, [...actionArgs.args]);
+                    })()
+                  : undefined;
+              if (
+                $steps["wrongUser"] != null &&
+                typeof $steps["wrongUser"] === "object" &&
+                typeof $steps["wrongUser"].then === "function"
+              ) {
+                $steps["wrongUser"] = await $steps["wrongUser"];
+              }
+
+              $steps["enablerLoginButton"] = true
+                ? (() => {
+                    const actionArgs = {
+                      vgroup: "disabledLoginButton",
+                      operation: 6
+                    };
+                    return (({ vgroup, value }) => {
+                      if (typeof value === "string") {
+                        value = [value];
+                      }
+
+                      p.set($state, vgroup, false);
+                      return false;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["enablerLoginButton"] != null &&
+                typeof $steps["enablerLoginButton"] === "object" &&
+                typeof $steps["enablerLoginButton"].then === "function"
+              ) {
+                $steps["enablerLoginButton"] = await $steps[
+                  "enablerLoginButton"
+                ];
+              }
+            }}
+            onIsDisabledChange={(...eventArgs) => {
+              p.generateStateOnChangeProp($state, [
+                "loginButton",
+                "isDisabled"
+              ])(eventArgs[0]);
+            }}
+            shape={"rounded"}
+          >
+            {
+              "\u0648\u0631\u0648\u062f \u0628\u0647 \u0627\u06cc\u0646\u0644\u0628"
+            }
+          </Button>
+          <Button
+            data-plasmic-name={"resetPassword"}
+            data-plasmic-override={overrides.resetPassword}
+            className={classNames("__wab_instance", sty.resetPassword)}
+            color={"clear"}
+            isDisabled={p.generateStateValueProp($state, [
+              "resetPassword",
+              "isDisabled"
+            ])}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["resetPassword"] = true
+                ? (() => {
+                    const actionArgs = {
+                      destination:
+                        "https://docs.google.com/forms/d/e/1FAIpQLSeVxCqYPfByUBPROGdXtrp3dX10uL6SCMHqNAMy05YBsSgzng/viewform"
+                    };
+                    return (({ destination }) => {
+                      if (
+                        typeof destination === "string" &&
+                        destination.startsWith("#")
+                      ) {
+                        document
+                          .getElementById(destination.substr(1))
+                          .scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        __nextRouter?.push(destination);
+                      }
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["resetPassword"] != null &&
+                typeof $steps["resetPassword"] === "object" &&
+                typeof $steps["resetPassword"].then === "function"
+              ) {
+                $steps["resetPassword"] = await $steps["resetPassword"];
+              }
+            }}
+            onIsDisabledChange={(...eventArgs) => {
+              p.generateStateOnChangeProp($state, [
+                "resetPassword",
+                "isDisabled"
+              ])(eventArgs[0]);
+            }}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__o1JqL
+              )}
+            >
+              {
+                "\u0628\u0627\u0632\u06cc\u0627\u0628\u06cc \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
+              }
+            </div>
+          </Button>
+        </p.Stack>
+        <SideEffect
+          data-plasmic-name={"redirectUserToHomepage"}
+          data-plasmic-override={overrides.redirectUserToHomepage}
+          className={classNames("__wab_instance", sty.redirectUserToHomepage)}
+          onMount={async () => {
+            const $steps = {};
+
+            $steps["log"] = true
+              ? (() => {
+                  const actionArgs = {
+                    customFunction: async () => {
+                      return console.log(
+                        `inlab user: ${localStorage.getItem("inlab_user")}`
+                      );
+                    }
+                  };
+                  return (({ customFunction }) => {
+                    return customFunction();
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["log"] != null &&
+              typeof $steps["log"] === "object" &&
+              typeof $steps["log"].then === "function"
+            ) {
+              $steps["log"] = await $steps["log"];
+            }
+
+            $steps["goToHomepage"] = localStorage.getItem("inlab_user")
+              ? (() => {
+                  const actionArgs = { destination: `/patients` };
+                  return (({ destination }) => {
+                    if (
+                      typeof destination === "string" &&
+                      destination.startsWith("#")
+                    ) {
+                      document
+                        .getElementById(destination.substr(1))
+                        .scrollIntoView({ behavior: "smooth" });
+                    } else {
+                      __nextRouter?.push(destination);
+                    }
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["goToHomepage"] != null &&
+              typeof $steps["goToHomepage"] === "object" &&
+              typeof $steps["goToHomepage"].then === "function"
+            ) {
+              $steps["goToHomepage"] = await $steps["goToHomepage"];
+            }
+          }}
+        />
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root"]
+  root: [
+    "root",
+    "freeBox",
+    "username",
+    "password",
+    "loginButton",
+    "resetPassword",
+    "redirectUserToHomepage"
+  ],
+  freeBox: ["freeBox", "username", "password", "loginButton", "resetPassword"],
+  username: ["username"],
+  password: ["password"],
+  loginButton: ["loginButton"],
+  resetPassword: ["resetPassword"],
+  redirectUserToHomepage: ["redirectUserToHomepage"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  freeBox: "div";
+  username: typeof TextInput;
+  password: typeof TextInput;
+  loginButton: typeof Button;
+  resetPassword: typeof Button;
+  redirectUserToHomepage: typeof SideEffect;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -371,6 +662,12 @@ export const PlasmicInlabLogin = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    freeBox: makeNodeComponent("freeBox"),
+    username: makeNodeComponent("username"),
+    password: makeNodeComponent("password"),
+    loginButton: makeNodeComponent("loginButton"),
+    resetPassword: makeNodeComponent("resetPassword"),
+    redirectUserToHomepage: makeNodeComponent("redirectUserToHomepage"),
 
     // Metadata about props expected for PlasmicInlabLogin
     internalVariantProps: PlasmicInlabLogin__VariantProps,

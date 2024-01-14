@@ -3,7 +3,6 @@ import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-
 import axios from 'axios';
 import { refreshAccessIfNeeded, logForDev } from './CommonUtils';
 import { GlobalContext } from './CommonTypes';
-import { Progress } from 'antd';
 
 interface PropsType {
     className?: string,
@@ -78,8 +77,7 @@ export function ApiFetcherComponent(props: PropsType) {
 
     return (
         <div className={props.className}>
-            {loading && <Progress type="line" percent={100} showInfo={false} status="active" strokeColor={twoColors} strokeLinecap="butt" />}
-            <DataProvider name="fetched_data" data={data}>
+            <DataProvider name="fetched_data" data={{"loading": loading , ...data}}>
                 {props.children}
             </DataProvider>
         </div>

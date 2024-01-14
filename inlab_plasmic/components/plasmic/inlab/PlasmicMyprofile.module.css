@@ -22,6 +22,12 @@
 .root > * {
   grid-column: 4;
 }
+.header:global(.__wab_instance) {
+  position: relative;
+  top: auto;
+  left: auto;
+  margin-top: -4px;
+}
 .freeBox__wr82L {
   display: flex;
   position: relative;
@@ -31,13 +37,8 @@
   width: 401px;
   height: 886px;
   max-width: 100%;
-  padding: 8px;
-}
-.header:global(.__wab_instance) {
-  position: relative;
-  top: auto;
-  left: auto;
-  margin-top: -4px;
+  padding: 0px 8px 8px;
+  margin: 18px 0px 0px;
 }
 .note {
   display: block;
@@ -368,17 +369,24 @@
   max-width: 100%;
   position: relative;
   margin-top: 75px;
-  flex-shrink: 0;
+  height: auto;
 }
-.svg___0L7Fq {
+.svg__jk9IQ {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
 }
-.svg__z0Bbo {
+.text__mDyKf {
+  font-size: 12px;
+}
+.svg__fjOf0 {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.redirectUserToLoginPage:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
 }

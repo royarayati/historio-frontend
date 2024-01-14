@@ -21,12 +21,6 @@ import * as p from "@plasmicapp/react-web";
 import * as ph from "@plasmicapp/react-web/lib/host";
 
 import {
-  executePlasmicDataOp,
-  usePlasmicDataOp,
-  usePlasmicInvalidate
-} from "@plasmicapp/react-web/lib/data-sources";
-
-import {
   hasVariant,
   classNames,
   wrapWithClassName,
@@ -42,9 +36,11 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
-import Header from "../../Header"; // plasmic-import: pMquA3hEaxCO/component
+import H from "../../H"; // plasmic-import: -ckcELWzdUW7/component
+import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
+import RedirectUserToLoginPage from "../../RedirectUserToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -55,6 +51,9 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicImagingReport1.module.css"; // plasmic-import: AFB-1jxjMqDb/css
 
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
+
 createPlasmicElementProxy;
 
 export type PlasmicImagingReport1__VariantMembers = {};
@@ -62,25 +61,22 @@ export type PlasmicImagingReport1__VariantsArgs = {};
 type VariantPropType = keyof PlasmicImagingReport1__VariantsArgs;
 export const PlasmicImagingReport1__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicImagingReport1__ArgsType = {
-  children?: React.ReactNode;
-};
+export type PlasmicImagingReport1__ArgsType = {};
 type ArgPropType = keyof PlasmicImagingReport1__ArgsType;
-export const PlasmicImagingReport1__ArgProps = new Array<ArgPropType>(
-  "children"
-);
+export const PlasmicImagingReport1__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicImagingReport1__OverridesType = {
   imagingReport1?: p.Flex<"div">;
-  freeBox?: p.Flex<"div">;
-  imagingReportsList?: p.Flex<"div">;
-  imagingReports?: p.Flex<"div">;
-  imagingReportPerDatetime?: p.Flex<"div">;
+  h?: p.Flex<typeof H>;
+  reports?: p.Flex<typeof ApiFetcherComponent>;
+  viewPacs?: p.Flex<typeof Button>;
+  text?: p.Flex<"div">;
   imagingTitle?: p.Flex<"div">;
   imagingDatetime?: p.Flex<"div">;
   imagingType?: p.Flex<"div">;
   switchingTabs?: p.Flex<"div">;
   switchingTab?: p.Flex<typeof SwitchingTab>;
+  redirectUserToLoginPage?: p.Flex<typeof RedirectUserToLoginPage>;
 };
 
 export interface DefaultImagingReport1Props {}
@@ -116,29 +112,23 @@ function PlasmicImagingReport1__RenderFunc(props: {
 
   const currentUser = p.useCurrentUser?.() || {};
 
-  let [$queries, setDollarQueries] = React.useState<
-    Record<string, ReturnType<typeof usePlasmicDataOp>>
-  >({});
-
-  const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
-    query: usePlasmicDataOp(() => {
-      return {
-        sourceId: "7DiAktDjMz852FiyqLgSNX",
-        opId: "4909eb55-b483-4f65-9798-bdcfae419482",
-        userArgs: {
-          params: [$ctx.params.code]
-        },
-        cacheKey: `plasmic.$.4909eb55-b483-4f65-9798-bdcfae419482.$.`,
-        invalidatedKeys: null,
-        roleId: null
-      };
-    })
-  };
-  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
-    setDollarQueries(new$Queries);
-
-    $queries = new$Queries;
-  }
+  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "viewPacs.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = p.useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
 
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsjEqVmdAbnKYc()
@@ -170,75 +160,51 @@ function PlasmicImagingReport1__RenderFunc(props: {
           sty.imagingReport1
         )}
       >
-        <div
-          data-plasmic-name={"freeBox"}
-          data-plasmic-override={overrides.freeBox}
-          className={classNames(projectcss.all, sty.freeBox)}
+        <H
+          data-plasmic-name={"h"}
+          data-plasmic-override={overrides.h}
+          className={classNames("__wab_instance", sty.h)}
+        />
+
+        <ApiFetcherComponent
+          data-plasmic-name={"reports"}
+          data-plasmic-override={overrides.reports}
+          className={classNames("__wab_instance", sty.reports)}
+          headers={{ "X-Namespace": 1 }}
+          method={"GET"}
+          path={`/api/v2/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
         >
-          {p.renderPlasmicSlot({
-            defaultContents: (
-              <Header
-                className={classNames("__wab_instance", sty.header__cTveG)}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return "test";
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "My Profile";
-                      }
-                      throw e;
-                    }
-                  })()}
-                </React.Fragment>
-              </Header>
-            ),
-            value: args.children
-          })}
-          <p.Stack
-            as={"div"}
-            data-plasmic-name={"imagingReportsList"}
-            data-plasmic-override={overrides.imagingReportsList}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.imagingReportsList)}
-          >
-            {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-              (() => {
-                try {
-                  return $queries.query.data.response[
-                    "final radiology response"
-                  ].length === 0
-                    ? "تصویربرداری اي براي بيمار انجام نشده است"
-                    : $queries.query.data.response["final radiology response"];
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return [];
-                  }
-                  throw e;
-                }
-              })()
-            ).map((__plasmic_item_0, __plasmic_idx_0) => {
-              const currentItem = __plasmic_item_0;
-              const currentIndex = __plasmic_idx_0;
-              return (
-                <div
-                  data-plasmic-name={"imagingReports"}
-                  data-plasmic-override={overrides.imagingReports}
-                  className={classNames(projectcss.all, sty.imagingReports)}
-                  key={currentIndex}
+          <ph.DataCtxReader>
+            {$ctx => (
+              <React.Fragment>
+                <Button
+                  data-plasmic-name={"viewPacs"}
+                  data-plasmic-override={overrides.viewPacs}
+                  className={classNames("__wab_instance", sty.viewPacs)}
+                  isDisabled={p.generateStateValueProp($state, [
+                    "viewPacs",
+                    "isDisabled"
+                  ])}
                   onClick={async event => {
                     const $steps = {};
 
-                    $steps["goToRadiologyReport2"] = true
+                    $steps["goToPage"] = true
                       ? (() => {
-                          const actionArgs = {};
+                          const actionArgs = {
+                            destination: (() => {
+                              try {
+                                return $ctx.fetched_data.data.pacs_url;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          };
                           return (({ destination }) => {
                             if (
                               typeof destination === "string" &&
@@ -254,130 +220,254 @@ function PlasmicImagingReport1__RenderFunc(props: {
                         })()
                       : undefined;
                     if (
-                      $steps["goToRadiologyReport2"] != null &&
-                      typeof $steps["goToRadiologyReport2"] === "object" &&
-                      typeof $steps["goToRadiologyReport2"].then === "function"
+                      $steps["goToPage"] != null &&
+                      typeof $steps["goToPage"] === "object" &&
+                      typeof $steps["goToPage"].then === "function"
                     ) {
-                      $steps["goToRadiologyReport2"] = await $steps[
-                        "goToRadiologyReport2"
-                      ];
+                      $steps["goToPage"] = await $steps["goToPage"];
                     }
+                  }}
+                  onIsDisabledChange={(...eventArgs) => {
+                    p.generateStateOnChangeProp($state, [
+                      "viewPacs",
+                      "isDisabled"
+                    ])(eventArgs[0]);
                   }}
                 >
                   <div
-                    data-plasmic-name={"imagingReportPerDatetime"}
-                    data-plasmic-override={overrides.imagingReportPerDatetime}
-                    className={classNames(
-                      projectcss.all,
-                      sty.imagingReportPerDatetime
-                    )}
+                    className={classNames(projectcss.all, sty.freeBox___8ASag)}
                   >
                     <div
-                      data-plasmic-name={"imagingTitle"}
-                      data-plasmic-override={overrides.imagingTitle}
+                      data-plasmic-name={"text"}
+                      data-plasmic-override={overrides.text}
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.imagingTitle
+                        sty.text
                       )}
                     >
                       <React.Fragment>
-                        {(() => {
-                          try {
-                            return currentItem.service_name;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return "";
-                            }
-                            throw e;
+                        <span
+                          className={
+                            "plasmic_default__all plasmic_default__span"
                           }
-                        })()}
+                          style={{ color: "#FFFFFF" }}
+                        >
+                          {"View PACS"}
+                        </span>
                       </React.Fragment>
                     </div>
+                  </div>
+                </Button>
+                {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                  (() => {
+                    try {
+                      return $ctx.fetched_data.data.radiology_services;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return [];
+                      }
+                      throw e;
+                    }
+                  })()
+                ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                  const currentItem = __plasmic_item_0;
+                  const currentIndex = __plasmic_idx_0;
+                  return (
                     <div
-                      data-plasmic-name={"imagingDatetime"}
-                      data-plasmic-override={overrides.imagingDatetime}
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.imagingDatetime
-                      )}
+                      className={classNames(projectcss.all, sty.freeBox__rkUf)}
+                      key={currentIndex}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["goToImagingReports2"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                destination: `/patient/${(() => {
+                                  try {
+                                    return $ctx.params.code;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()}/${(() => {
+                                  try {
+                                    return $ctx.params.patient_name;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()}/report/detail/${(() => {
+                                  try {
+                                    return currentItem.report;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()}`
+                              };
+                              return (({ destination }) => {
+                                if (
+                                  typeof destination === "string" &&
+                                  destination.startsWith("#")
+                                ) {
+                                  document
+                                    .getElementById(destination.substr(1))
+                                    .scrollIntoView({ behavior: "smooth" });
+                                } else {
+                                  __nextRouter?.push(destination);
+                                }
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["goToImagingReports2"] != null &&
+                          typeof $steps["goToImagingReports2"] === "object" &&
+                          typeof $steps["goToImagingReports2"].then ===
+                            "function"
+                        ) {
+                          $steps["goToImagingReports2"] = await $steps[
+                            "goToImagingReports2"
+                          ];
+                        }
+                      }}
                     >
-                      <React.Fragment>
-                        {(() => {
-                          try {
-                            return (() => {
-                              if (!currentItem.service_datetime) {
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__zDxkb
+                        )}
+                      >
+                        <div
+                          data-plasmic-name={"imagingTitle"}
+                          data-plasmic-override={overrides.imagingTitle}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.imagingTitle
+                          )}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return currentItem.service_name;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                        <div
+                          data-plasmic-name={"imagingDatetime"}
+                          data-plasmic-override={overrides.imagingDatetime}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.imagingDatetime
+                          )}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return (() => {
+                                  const gregorianDate = new Date(
+                                    currentItem.service_datetime
+                                  );
+                                  const shamsiDate = new Intl.DateTimeFormat(
+                                    "fa-IR"
+                                  ).format(gregorianDate);
+                                  const shamsiTime =
+                                    gregorianDate.toLocaleTimeString("fa-IR", {
+                                      hour12: false
+                                    });
+                                  const englishDate = shamsiDate.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  const englishTime = shamsiTime.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  return `${englishDate}  ${englishTime}`;
+                                })();
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                      </div>
+                      <div
+                        data-plasmic-name={"imagingType"}
+                        data-plasmic-override={overrides.imagingType}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.imagingType
+                        )}
+                      >
+                        <React.Fragment>
+                          {(() => {
+                            try {
+                              return currentItem.title;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
                                 return "";
                               }
-                              const gregorianDate = new Date(
-                                currentItem.service_datetime
-                              );
-                              const shamsiDate = new Intl.DateTimeFormat(
-                                "fa-IR"
-                              ).format(gregorianDate);
-                              const shamsiTime =
-                                gregorianDate.toLocaleTimeString("fa-IR", {
-                                  hour12: false
-                                });
-                              const englishDate = shamsiDate.replace(
-                                /[۰-۹]/g,
-                                d => String.fromCharCode(d.charCodeAt(0) - 1728)
-                              );
-                              const englishTime = shamsiTime.replace(
-                                /[۰-۹]/g,
-                                d => String.fromCharCode(d.charCodeAt(0) - 1728)
-                              );
-                              return `${englishDate}  ${englishTime}`;
-                            })();
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return "";
+                              throw e;
                             }
-                            throw e;
-                          }
-                        })()}
-                      </React.Fragment>
+                          })()}
+                        </React.Fragment>
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    data-plasmic-name={"imagingType"}
-                    data-plasmic-override={overrides.imagingType}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.imagingType
-                    )}
-                  >
-                    <React.Fragment>
-                      {(() => {
-                        try {
-                          return currentItem.title
-                            ? currentItem.title
-                            : "تصويربرداري اي براي بيمار گزارش نشده است";
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return "";
-                          }
-                          throw e;
-                        }
-                      })()}
-                    </React.Fragment>
-                  </div>
-                </div>
-              );
-            })}
-          </p.Stack>
-        </div>
+                  );
+                })}
+              </React.Fragment>
+            )}
+          </ph.DataCtxReader>
+        </ApiFetcherComponent>
         <div
           data-plasmic-name={"switchingTabs"}
           data-plasmic-override={overrides.switchingTabs}
@@ -389,6 +479,11 @@ function PlasmicImagingReport1__RenderFunc(props: {
             className={classNames("__wab_instance", sty.switchingTab)}
           />
         </div>
+        <RedirectUserToLoginPage
+          data-plasmic-name={"redirectUserToLoginPage"}
+          data-plasmic-override={overrides.redirectUserToLoginPage}
+          className={classNames("__wab_instance", sty.redirectUserToLoginPage)}
+        />
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -397,65 +492,50 @@ function PlasmicImagingReport1__RenderFunc(props: {
 const PlasmicDescendants = {
   imagingReport1: [
     "imagingReport1",
-    "freeBox",
-    "imagingReportsList",
-    "imagingReports",
-    "imagingReportPerDatetime",
+    "h",
+    "reports",
+    "viewPacs",
+    "text",
     "imagingTitle",
     "imagingDatetime",
     "imagingType",
     "switchingTabs",
-    "switchingTab"
+    "switchingTab",
+    "redirectUserToLoginPage"
   ],
-  freeBox: [
-    "freeBox",
-    "imagingReportsList",
-    "imagingReports",
-    "imagingReportPerDatetime",
+  h: ["h"],
+  reports: [
+    "reports",
+    "viewPacs",
+    "text",
     "imagingTitle",
     "imagingDatetime",
     "imagingType"
   ],
-  imagingReportsList: [
-    "imagingReportsList",
-    "imagingReports",
-    "imagingReportPerDatetime",
-    "imagingTitle",
-    "imagingDatetime",
-    "imagingType"
-  ],
-  imagingReports: [
-    "imagingReports",
-    "imagingReportPerDatetime",
-    "imagingTitle",
-    "imagingDatetime",
-    "imagingType"
-  ],
-  imagingReportPerDatetime: [
-    "imagingReportPerDatetime",
-    "imagingTitle",
-    "imagingDatetime"
-  ],
+  viewPacs: ["viewPacs", "text"],
+  text: ["text"],
   imagingTitle: ["imagingTitle"],
   imagingDatetime: ["imagingDatetime"],
   imagingType: ["imagingType"],
   switchingTabs: ["switchingTabs", "switchingTab"],
-  switchingTab: ["switchingTab"]
+  switchingTab: ["switchingTab"],
+  redirectUserToLoginPage: ["redirectUserToLoginPage"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   imagingReport1: "div";
-  freeBox: "div";
-  imagingReportsList: "div";
-  imagingReports: "div";
-  imagingReportPerDatetime: "div";
+  h: typeof H;
+  reports: typeof ApiFetcherComponent;
+  viewPacs: typeof Button;
+  text: "div";
   imagingTitle: "div";
   imagingDatetime: "div";
   imagingType: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
+  redirectUserToLoginPage: typeof RedirectUserToLoginPage;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -518,15 +598,16 @@ export const PlasmicImagingReport1 = Object.assign(
   makeNodeComponent("imagingReport1"),
   {
     // Helper components rendering sub-elements
-    freeBox: makeNodeComponent("freeBox"),
-    imagingReportsList: makeNodeComponent("imagingReportsList"),
-    imagingReports: makeNodeComponent("imagingReports"),
-    imagingReportPerDatetime: makeNodeComponent("imagingReportPerDatetime"),
+    h: makeNodeComponent("h"),
+    reports: makeNodeComponent("reports"),
+    viewPacs: makeNodeComponent("viewPacs"),
+    text: makeNodeComponent("text"),
     imagingTitle: makeNodeComponent("imagingTitle"),
     imagingDatetime: makeNodeComponent("imagingDatetime"),
     imagingType: makeNodeComponent("imagingType"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
+    redirectUserToLoginPage: makeNodeComponent("redirectUserToLoginPage"),
 
     // Metadata about props expected for PlasmicImagingReport1
     internalVariantProps: PlasmicImagingReport1__VariantProps,

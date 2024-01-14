@@ -16,17 +16,17 @@
   border-radius: 5px;
   padding: 8px;
 }
-.img__hfWaD {
+.img___6Cjxt {
   position: relative;
   object-fit: fill;
   max-width: 100%;
   width: 101px;
   height: 25px;
   flex-shrink: 0;
-  margin: 1px;
+  margin: 0;
   border-right: 1px solid #aeaeae;
 }
-.img__hfWaD > picture > img {
+.img___6Cjxt > picture > img {
   object-fit: fill;
 }
 .img__tHc1 {
@@ -42,7 +42,7 @@
 .img__tHc1 > picture > img {
   object-fit: fill;
 }
-.img__sF9Jz {
+.img__hhg4W {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -51,8 +51,8 @@
   border-right-width: 1px;
   height: 25px;
   flex-shrink: 0;
-  margin: 1px;
+  margin: 0;
 }
-.img__sF9Jz > picture > img {
+.img__hhg4W > picture > img {
   object-fit: fill;
 }

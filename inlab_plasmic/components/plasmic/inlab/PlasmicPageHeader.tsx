@@ -138,7 +138,7 @@ function PlasmicPageHeader__RenderFunc(props: {
                 $steps["goToLaboratoryData"] = true
                   ? (() => {
                       const actionArgs = {
-                        destination: `/laboratory_data/[code]/[patien_name]`
+                        destination: `/patient/[code]/[patien_name]/lab`
                       };
                       return (({ destination }) => {
                         if (

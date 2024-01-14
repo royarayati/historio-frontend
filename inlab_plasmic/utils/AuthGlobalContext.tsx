@@ -26,34 +26,31 @@ interface AuthGlobalContextProps {
 export const AuthGlobalContext = ({ children, baseUrl }: React.PropsWithChildren<AuthGlobalContextProps>) => {
 
   ////////// READ PROPS //////////
+  console.log("AuthGlobalContext: baseUrl: " + baseUrl);
+  console.log("AuthGlobalContext: baseUrl of env: " + useContext(GlobalContext).baseUrl);
 
-  baseUrl = baseUrl || useContext(GlobalContext).baseUrl;
+  baseUrl = useContext(GlobalContext).baseUrl || baseUrl;
 
 
   ///////// SETUP USER //////////
 
   const [inlabUser, setInlabUser] = useState<InlabUser | null>(null);
+
   logForDev("AuthGlobalContext: After useState: " + (inlabUser ? "User found" : "User is NULL"));
 
   // Use this function to change stored user in entire app
   // Handle storing new user and routes to login page
   // if user is null
   const changeUserCallback = useCallback((newUser: InlabUser | null) => {
-    logForDev("changeUserCallback: " + (newUser ? "Setting User" : "Setting NULL"));
-    // const router = useRouter();
-
+    
     if (newUser) {
       localStorage.setItem('inlab_user', JSON.stringify(newUser));
-    } else if (!useContext(PlasmicCanvasContext)){
-      // && !router.pathname.startsWith('/login')) {
-
-      localStorage.removeItem('inlab_user');
-
-      logForDev("changeUserCallback: We should redirect to Login here..." )
 
     } else {
       localStorage.removeItem('inlab_user');
     }
+    logForDev("changeUserCallback: " + (newUser ? "Setting User" : "Setting NULL"));
+    
     setInlabUser(newUser);
   }, []);
 
@@ -136,7 +133,9 @@ export const AuthGlobalContext = ({ children, baseUrl }: React.PropsWithChildren
     },
 
     logout: async (): Promise<any> => {
+      logForDev("AuthGlobalContext: logout: " + (inlabUser ? "User found" : "User is NULL"));
       if (!inlabUser) {
+        changeUserCallback(null);
         return null;
       }
       return await axios.post(baseUrl + '/api/v2/user/logout', { refresh: inlabUser.refresh })

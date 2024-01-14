@@ -16,6 +16,6 @@ export interface GlobalContextType {
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
-    baseUrl: process.env.REACT_APP_BASE_URL || '',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || '',
     changeUserCallback: (user: InlabUser | null) => { },
 });

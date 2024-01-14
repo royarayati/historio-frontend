@@ -8,7 +8,7 @@ import * as React from "react";
 import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
 import { CommerceProviderComponent } from "@plasmicpkgs/commerce-shopify";
-import { AuthGlobalContext } from "../../../utils/AuthGlobalContext";
+import { AuthGlobalContext } from "../../../utils/AuthGlobalContext"; // plasmic-import: Ys_jKOzaYeYo/codeComponent
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 export interface GlobalContextsProviderProps {
@@ -16,11 +16,9 @@ export interface GlobalContextsProviderProps {
   antdConfigProviderProps?: Partial<
     Omit<React.ComponentProps<typeof AntdConfigProvider>, "children">
   >;
-
   commerceProviderComponentProps?: Partial<
     Omit<React.ComponentProps<typeof CommerceProviderComponent>, "children">
   >;
-
   authGlobalContextProps?: Partial<
     Omit<React.ComponentProps<typeof AuthGlobalContext>, "children">
   >;
@@ -162,7 +160,7 @@ export default function GlobalContextsProvider(
           baseUrl={
             authGlobalContextProps && "baseUrl" in authGlobalContextProps
               ? authGlobalContextProps.baseUrl!
-              : "https://inlabgr.synappsgroup.com:8008"
+              : "https://inlabgr.synappsgroup.com/new_inlab/plasmic-host/"
           }
         >
           {children}

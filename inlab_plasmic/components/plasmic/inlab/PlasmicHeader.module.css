@@ -1,50 +1,27 @@
 .settingTop {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  background: #ffffff;
+  max-width: 100%;
+  height: auto;
   width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  border-radius: 0px;
+  padding: 8px;
+  border-bottom: 1px solid var(--token-8PxxXPNrIohQ);
+}
+.patientName {
+  position: sticky;
+  width: auto;
   height: auto;
   max-width: 100%;
-  background: #84c2fc;
-  position: relative;
-  min-width: 0;
-  border-radius: 3px;
-  padding: 8px;
-}
-.svg {
-  position: absolute;
-  object-fit: cover;
-  max-width: 100%;
-  color: #191e25;
-  width: 24px;
-  height: 24px;
-  display: block;
-  top: 8px;
-  left: 10px;
-  flex-shrink: 0;
-}
-.setting2 {
-  display: flex;
-  position: relative;
-  align-self: auto;
-  left: auto;
-  top: auto;
-  width: auto;
-  height: 100%;
-  z-index: 1;
-  margin-top: 2px;
-  margin-left: 0px;
-  justify-content: center;
-  flex-direction: row;
-  min-height: 0;
-}
-.slotTargetChildren {
-  font-family: "vazirmatn";
-  font-size: 17px;
-  font-weight: 600;
-  color: rgba(24, 29, 36, 1);
   text-align: center;
-  line-height: 1.2;
-  letter-spacing: 0em;
+  align-self: flex-start;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
 }

@@ -17,14 +17,15 @@
     "@plasmicpkgs/antd5": "^0.0.205",
     "@plasmicpkgs/commerce": "^0.0.186",
     "@plasmicpkgs/commerce-shopify": "^0.0.193",
+    "@plasmicpkgs/plasmic-basic-components": "^0.0.207",
     "@plasmicpkgs/plasmic-query": "^0.0.206",
     "@plasmicpkgs/plasmic-rich-components": "^1.0.175",
     "@plasmicpkgs/react-awesome-reveal": "^3.8.189",
     "antd": "^5.12.6",
+    "axios": "^1.6.4",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18",
-    "axios": "^1.6.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",

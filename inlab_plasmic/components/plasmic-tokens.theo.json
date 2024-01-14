@@ -2121,6 +2121,16 @@
       }
     },
     {
+      "name": "background",
+      "type": "color",
+      "value": "#E8ECF2",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "iVK4BLFaCPtm"
+      }
+    },
+    {
       "name": "black",
       "type": "color",
       "value": "#000000",
@@ -2128,6 +2138,16 @@
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",
         "id": "IYO13gyYJHXG"
+      }
+    },
+    {
+      "name": "border",
+      "type": "color",
+      "value": "#BDBDBD",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "8PxxXPNrIohQ"
       }
     },
     {

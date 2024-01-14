@@ -2,10 +2,9 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import {
-  PlasmicPatientCard,
-  DefaultPatientCardProps
-} from "./plasmic/inlab/PlasmicPatientCard";
-import { HTMLElementRefOf } from "@plasmicapp/react-web";
+  PlasmicRedirectUserToLoginPage,
+  DefaultRedirectUserToLoginPageProps
+} from "./plasmic/inlab/PlasmicRedirectUserToLoginPage";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -14,32 +13,32 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 // If you don't want to expose certain variants or slots as a prop, you can use
 // Omit to hide them:
 //
-// interface PatientCardProps extends Omit<DefaultPatientCardProps, "hideProps1"|"hideProp2"> {
+// interface RedirectUserToLoginPageProps extends Omit<DefaultRedirectUserToLoginPageProps, "hideProps1"|"hideProp2"> {
 //   // etc.
 // }
 //
-// You can also stop extending from DefaultPatientCardProps altogether and have
+// You can also stop extending from DefaultRedirectUserToLoginPageProps altogether and have
 // total control over the props for your component.
-export interface PatientCardProps extends DefaultPatientCardProps {}
+export interface RedirectUserToLoginPageProps
+  extends DefaultRedirectUserToLoginPageProps {}
 
-function PatientCard_(props: PatientCardProps, ref: HTMLElementRefOf<"div">) {
-  // Use PlasmicPatientCard to render this component as it was
+function RedirectUserToLoginPage(props: RedirectUserToLoginPageProps) {
+  // Use PlasmicRedirectUserToLoginPage to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicPatientCard are:
+  // Props you can pass into PlasmicRedirectUserToLoginPage are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, we are just piping all PatientCardProps here, but feel free
+  // By default, we are just piping all RedirectUserToLoginPageProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicPatientCard root={{ ref }} {...props} />;
+  return <PlasmicRedirectUserToLoginPage {...props} />;
 }
 
-const PatientCard = React.forwardRef(PatientCard_);
-export default PatientCard;
+export default RedirectUserToLoginPage;
