@@ -16,6 +16,6 @@ export interface GlobalContextType {
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || '',
+    baseUrl:  'https://inlabgr.synappsgroup.com:8008',
     changeUserCallback: (user: InlabUser | null) => { },
 });

@@ -19,6 +19,7 @@
 # misc
 .DS_Store
 *.pem
+public/inlab_env.js
 
 # debug
 npm-debug.log*

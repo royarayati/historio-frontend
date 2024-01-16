@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+    plasmic:
+      build:
+        context: .
+      image: inlab_plasmic
+      container_name: plasmic
+      ports:
+        - 3030:3000
+      volumes:
+        - ../inlab_env.js:/app/public/inlab_env.js

@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState, useContext } from 'react';
 import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-web/lib/host';
 import axios from 'axios';
 import { refreshAccessIfNeeded, logForDev } from './CommonUtils';
-import { GlobalContext } from './CommonTypes';
+import { GlobalContext } from './types/CommonTypes';
 
 interface PropsType {
     className?: string,

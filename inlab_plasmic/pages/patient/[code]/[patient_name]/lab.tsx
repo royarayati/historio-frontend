@@ -2,28 +2,28 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import * as ph from "@plasmicapp/react-web/lib/host";
-import GlobalContextsProvider from "../components/plasmic/inlab/PlasmicGlobalContextsProvider";
-import { ScreenVariantProvider } from "../components/plasmic/inlab/PlasmicGlobalVariant__Screen";
-import { UnnamedGlobalGroupOfVariantsContext } from "../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants";
-import { UnnamedGlobalGroupOfVariants2Context } from "../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2";
-import { UnnamedGlobalGroupOfVariants3Context } from "../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants3";
-import { PlasmicPatientListAndSearch } from "../components/plasmic/inlab/PlasmicPatientListAndSearch";
+import GlobalContextsProvider from "../../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
+import { ScreenVariantProvider } from "../../../../components/plasmic/inlab/PlasmicGlobalVariant__Screen";
+import { UnnamedGlobalGroupOfVariantsContext } from "../../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants";
+import { UnnamedGlobalGroupOfVariants2Context } from "../../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2";
+import { UnnamedGlobalGroupOfVariants3Context } from "../../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants3";
+import { PlasmicLaboratoryData } from "../../../../components/plasmic/inlab/PlasmicLaboratoryData";
 import { useRouter } from "next/router";
 
-function PatientListAndSearch() {
-  // Use PlasmicPatientListAndSearch to render this component as it was
+function LaboratoryData() {
+  // Use PlasmicLaboratoryData to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicPatientListAndSearch are:
+  // Props you can pass into PlasmicLaboratoryData are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, PlasmicPatientListAndSearch is wrapped by your project's global
+  // By default, PlasmicLaboratoryData is wrapped by your project's global
   // variant context providers. These wrappers may be moved to
   // Next.js Custom App component
   // (https://nextjs.org/docs/advanced-features/custom-app).
@@ -37,7 +37,7 @@ function PatientListAndSearch() {
               params={useRouter()?.query}
               query={useRouter()?.query}
             >
-              <PlasmicPatientListAndSearch />
+              <PlasmicLaboratoryData />
             </ph.PageParamsProvider>
           </GlobalContextsProvider>
         </UnnamedGlobalGroupOfVariantsContext.Provider>
@@ -46,4 +46,4 @@ function PatientListAndSearch() {
   );
 }
 
-export default PatientListAndSearch;
+export default LaboratoryData;

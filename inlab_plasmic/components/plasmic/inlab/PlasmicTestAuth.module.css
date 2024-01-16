@@ -82,9 +82,12 @@
   width: auto;
   height: 1em;
 }
-.tesext:global(.__wab_instance) {
+.text__xW4B5 {
   position: relative;
-  margin-top: 24px;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
 }
 .lab:global(.__wab_instance) {
   max-width: 100%;
@@ -110,9 +113,4 @@
   position: relative;
   min-width: 0;
   padding: 16px;
-}
-.redirectUserToLoginPage:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  position: relative;
 }

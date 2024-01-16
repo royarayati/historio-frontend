@@ -16,7 +16,7 @@ registerGlobalContext(AuthGlobalContext, {
   // name should match GlobalActionsProvider contextName
   name: "AuthGlobalContext",
   // props should match AuthGlobalContextProps
-  props: { baseUrl: "string" },
+  props: {},
   // providesData should be true if the global context has a DataProvider
   providesData: true,
   // globalActions should match the global context's GlobalActionsProvider

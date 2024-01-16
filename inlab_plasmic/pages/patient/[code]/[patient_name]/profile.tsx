@@ -2,11 +2,11 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import * as ph from "@plasmicapp/react-web/lib/host";
-import GlobalContextsProvider from "../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
-import { ScreenVariantProvider } from "../../../components/plasmic/inlab/PlasmicGlobalVariant__Screen";
-import { UnnamedGlobalGroupOfVariantsContext } from "../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants";
-import { UnnamedGlobalGroupOfVariants2Context } from "../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2";
-import { PlasmicPatientProfile } from "../../../components/plasmic/inlab/PlasmicPatientProfile";
+import GlobalContextsProvider from "../../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
+import { ScreenVariantProvider } from "../../../../components/plasmic/inlab/PlasmicGlobalVariant__Screen";
+import { UnnamedGlobalGroupOfVariantsContext } from "../../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants";
+import { UnnamedGlobalGroupOfVariants2Context } from "../../../../components/plasmic/inlab/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2";
+import { PlasmicPatientProfile } from "../../../../components/plasmic/inlab/PlasmicPatientProfile";
 import { useRouter } from "next/router";
 
 function PatientProfile() {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { refreshAccessIfNeeded, logForDev } from './CommonUtils';
-import { InlabUser } from './CommonTypes';
+import { InlabUser } from './types/CommonTypes';
 
 // TODO: Handle errors
 export async function axiosCall(  // TODO: better name

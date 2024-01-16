@@ -10,7 +10,7 @@
     "defaultStyleCssFilePath": "plasmic/plasmic__default_style.module.css"
   },
   "images": {
-    "scheme": "public-files",
+    "scheme": "inlined",
     "publicDir": "../public",
     "publicUrlPrefix": "/"
   },
@@ -1083,15 +1083,15 @@
           "path": "/user/setting/namespace"
         },
         {
-          "id": "LYNDA10vbDHE",
-          "name": "Tesext",
+          "id": "-ckcELWzdUW7",
+          "name": "H",
           "type": "managed",
           "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicTesext.tsx",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicH.tsx",
           "importSpec": {
-            "modulePath": "Tesext.tsx"
+            "modulePath": "H.tsx"
           },
-          "cssFilePath": "plasmic/inlab/PlasmicTesext.module.css",
+          "cssFilePath": "plasmic/inlab/PlasmicH.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         },
@@ -1109,17 +1109,18 @@
           "componentType": "component"
         },
         {
-          "id": "-ckcELWzdUW7",
-          "name": "H",
+          "id": "YivXi3wItkax",
+          "name": "LaboratoryData",
           "type": "managed",
           "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicH.tsx",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicLaboratoryData.tsx",
           "importSpec": {
-            "modulePath": "H.tsx"
+            "modulePath": "../pages/patient/[code]/[patient_name]/lab.tsx"
           },
-          "cssFilePath": "plasmic/inlab/PlasmicH.module.css",
+          "cssFilePath": "plasmic/inlab/PlasmicLaboratoryData.module.css",
           "scheme": "blackbox",
-          "componentType": "component"
+          "componentType": "page",
+          "path": "/patient/[code]/[patient_name]/lab"
         }
       ],
       "icons": [
@@ -1510,8 +1511,7 @@
           "componentImportPath": "./utils/ApiFetcherComponent"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "caTPwKxj5ZrD9LQ7DMdK4Z",

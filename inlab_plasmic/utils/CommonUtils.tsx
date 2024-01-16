@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { InlabUser, GlobalContextType, GlobalContext } from './CommonTypes';
+import { InlabUser, GlobalContextType, GlobalContext } from './types/CommonTypes';
 
 export function logForDev(logText: string | null) {
     if (logText != null && process.env.NODE_ENV === 'development') {

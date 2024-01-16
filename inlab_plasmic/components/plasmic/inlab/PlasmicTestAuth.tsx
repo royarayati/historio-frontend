@@ -38,10 +38,8 @@ import {
 } from "@plasmicapp/react-web";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
-import Tesext from "../../Tesext"; // plasmic-import: LYNDA10vbDHE/component
 import { RichTable } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
 import { tableHelpers as RichTable_Helpers } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
-import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -72,10 +70,8 @@ export type PlasmicTestAuth__OverridesType = {
   test?: p.Flex<typeof ApiFetcherComponent>;
   someInstruction?: p.Flex<"div">;
   button?: p.Flex<typeof Button>;
-  tesext?: p.Flex<typeof Tesext>;
   lab?: p.Flex<typeof ApiFetcherComponent>;
   table?: p.Flex<typeof RichTable>;
-  redirectUserToLoginPage?: p.Flex<typeof SideEffect>;
 };
 
 export interface DefaultTestAuthProps {}
@@ -163,7 +159,6 @@ function PlasmicTestAuth__RenderFunc(props: {
         )
       }
     ],
-
     [$props, $ctx, $refs]
   );
   const $state = p.useDollarState(stateSpecs, {
@@ -337,12 +332,29 @@ function PlasmicTestAuth__RenderFunc(props: {
                       {"Click me For Actions"}
                     </div>
                   </Button>
-                  <Tesext
-                    data-plasmic-name={"tesext"}
-                    data-plasmic-override={overrides.tesext}
-                    actionTextResult={$state.actionTextResult}
-                    className={classNames("__wab_instance", sty.tesext)}
-                  />
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__xW4B5
+                    )}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return $state.actionTextResult;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "Action Result";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
+                  </div>
                 </React.Fragment>
               )}
             </ph.DataCtxReader>
@@ -443,7 +455,6 @@ function PlasmicTestAuth__RenderFunc(props: {
                         plasmicStateName: "table.selectedRowKeys"
                       }
                     ],
-
                     [],
                     RichTable_Helpers ?? {},
                     child$Props
@@ -460,64 +471,6 @@ function PlasmicTestAuth__RenderFunc(props: {
               }
             </ph.DataCtxReader>
           </ApiFetcherComponent>
-          <SideEffect
-            data-plasmic-name={"redirectUserToLoginPage"}
-            data-plasmic-override={overrides.redirectUserToLoginPage}
-            className={classNames(
-              "__wab_instance",
-              sty.redirectUserToLoginPage
-            )}
-            onMount={async () => {
-              const $steps = {};
-
-              $steps["log"] = true
-                ? (() => {
-                    const actionArgs = {
-                      customFunction: async () => {
-                        return console.log(
-                          `inlab user: ${localStorage.getItem("inlab_user")}`
-                        );
-                      }
-                    };
-                    return (({ customFunction }) => {
-                      return customFunction();
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["log"] != null &&
-                typeof $steps["log"] === "object" &&
-                typeof $steps["log"].then === "function"
-              ) {
-                $steps["log"] = await $steps["log"];
-              }
-
-              $steps["goToLoginPage"] = !localStorage.getItem("inlab_user")
-                ? (() => {
-                    const actionArgs = { destination: `/login` };
-                    return (({ destination }) => {
-                      if (
-                        typeof destination === "string" &&
-                        destination.startsWith("#")
-                      ) {
-                        document
-                          .getElementById(destination.substr(1))
-                          .scrollIntoView({ behavior: "smooth" });
-                      } else {
-                        __nextRouter?.push(destination);
-                      }
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["goToLoginPage"] != null &&
-                typeof $steps["goToLoginPage"] === "object" &&
-                typeof $steps["goToLoginPage"].then === "function"
-              ) {
-                $steps["goToLoginPage"] = await $steps["goToLoginPage"];
-              }
-            }}
-          />
         </div>
       </div>
     </React.Fragment>
@@ -525,24 +478,12 @@ function PlasmicTestAuth__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: [
-    "root",
-    "test",
-    "someInstruction",
-    "button",
-    "tesext",
-    "lab",
-    "table",
-    "redirectUserToLoginPage"
-  ],
-
-  test: ["test", "someInstruction", "button", "tesext"],
+  root: ["root", "test", "someInstruction", "button", "lab", "table"],
+  test: ["test", "someInstruction", "button"],
   someInstruction: ["someInstruction"],
   button: ["button"],
-  tesext: ["tesext"],
   lab: ["lab", "table"],
-  table: ["table"],
-  redirectUserToLoginPage: ["redirectUserToLoginPage"]
+  table: ["table"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -552,10 +493,8 @@ type NodeDefaultElementType = {
   test: typeof ApiFetcherComponent;
   someInstruction: "div";
   button: typeof Button;
-  tesext: typeof Tesext;
   lab: typeof ApiFetcherComponent;
   table: typeof RichTable;
-  redirectUserToLoginPage: typeof SideEffect;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -563,7 +502,6 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicTestAuth__OverridesType,
   DescendantsType<T>
 >;
-
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {
@@ -622,10 +560,8 @@ export const PlasmicTestAuth = Object.assign(
     test: makeNodeComponent("test"),
     someInstruction: makeNodeComponent("someInstruction"),
     button: makeNodeComponent("button"),
-    tesext: makeNodeComponent("tesext"),
     lab: makeNodeComponent("lab"),
     table: makeNodeComponent("table"),
-    redirectUserToLoginPage: makeNodeComponent("redirectUserToLoginPage"),
 
     // Metadata about props expected for PlasmicTestAuth
     internalVariantProps: PlasmicTestAuth__VariantProps,

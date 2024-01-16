@@ -11,7 +11,7 @@ import {
   refreshAccessIfNeeded,
   logForDev
 } from "./CommonUtils";
-import { InlabUser, GlobalContext } from "./CommonTypes";
+import { InlabUser, GlobalContext } from "./types/CommonTypes";
 import { axiosCall } from "./ApiFetcherAction";
 
 // Users will be able to set these props in Studio.
@@ -23,14 +23,16 @@ interface AuthGlobalContextProps {
 // TODO: We should consider is sending null for all errors is logical or not
 //       Does All errors mean user is logouted ?
 //       Or error from network or other problems happened ?
-export const AuthGlobalContext = ({ children, baseUrl }: React.PropsWithChildren<AuthGlobalContextProps>) => {
+export const AuthGlobalContext = ({ children }: React.PropsWithChildren<AuthGlobalContextProps>) => {
 
   ////////// READ PROPS //////////
-  console.log("AuthGlobalContext: baseUrl: " + baseUrl);
-  console.log("AuthGlobalContext: baseUrl of env: " + useContext(GlobalContext).baseUrl);
-
-  baseUrl = useContext(GlobalContext).baseUrl || baseUrl;
-
+  
+  // TODO: explain WHY if?
+  // without using "if not undefined", throws error and do not know why
+  let baseUrl = '';
+  if (typeof window !== "undefined") {
+    baseUrl = window.env.INLAB_API_URL || '';
+  }
 
   ///////// SETUP USER //////////
 
