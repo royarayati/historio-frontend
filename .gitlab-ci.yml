@@ -21,6 +21,6 @@ variables:
 
 include:
   - local: inlab_plasmic/.gitlab-ci.yml
-      rules:
+    rules:
       - changes:
         - inlab_plasmic/**/*
