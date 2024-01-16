@@ -1,0 +1,26 @@
+stages:
+  - build
+
+variables:
+  FF_NETWORK_PER_BUILD: "true"
+  DOCKER_TLS_CERTDIR: "/certs"
+  DOCKER_DRIVER: overlay2
+  DOCKER_BUILDKIT: 1
+
+.before_script_default:
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin  "$CI_REGISTRY"
+
+.ci_default:
+  image: docker:stable
+  stage: build
+  tags:
+    - not_ir
+  services:
+    - docker:dind
+
+include:
+  - local: inlab_plasmic/.gitlab-ci.yml
+      rules:
+      - changes:
+        - inlab_plasmic/**/*
