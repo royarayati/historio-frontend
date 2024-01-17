@@ -22,12 +22,6 @@
 .root > * {
   grid-column: 4;
 }
-.header:global(.__wab_instance) {
-  position: relative;
-  top: auto;
-  left: auto;
-  margin-top: -4px;
-}
 .freeBox__wr82L {
   display: flex;
   position: relative;

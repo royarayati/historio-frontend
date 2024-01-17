@@ -22,9 +22,29 @@
 .root > * {
   grid-column: 4;
 }
-.h:global(.__wab_instance) {
+.freeBox___8NjX5 {
+  display: flex;
+  position: sticky;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
   max-width: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  background: #ffffff;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  padding: 8px;
+}
+.svg___8Xmn {
   position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  color: var(--token-9iYGdL7i3GKE);
+  height: 1em;
 }
 .freeBox__ttAvM {
   display: flex;
@@ -247,6 +267,19 @@
   height: 21px;
   flex-shrink: 0;
 }
+.freeBox__sDnJy {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+  min-width: 0;
+  padding: 8px;
+}
 .hospital2 {
   display: block;
   font-size: 16px;
@@ -255,8 +288,7 @@
   letter-spacing: 0em;
   line-height: 1.2;
   color: rgba(24, 29, 36, 1);
-  position: relative;
-  text-align: left;
+  text-align: right;
   align-self: flex-end;
 }
 .resetPassword {

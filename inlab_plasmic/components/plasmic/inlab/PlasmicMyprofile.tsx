@@ -36,7 +36,6 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
-import Header from "../../Header"; // plasmic-import: pMquA3hEaxCO/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
@@ -70,7 +69,6 @@ export const PlasmicMyprofile__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicMyprofile__OverridesType = {
   root?: p.Flex<"div">;
-  header?: p.Flex<typeof Header>;
   note?: p.Flex<"div">;
   picsAndName?: p.Flex<"div">;
   name?: p.Flex<"div">;
@@ -199,7 +197,6 @@ function PlasmicMyprofile__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
-
     [$props, $ctx, $refs]
   );
   const $state = p.useDollarState(stateSpecs, {
@@ -223,7 +220,6 @@ function PlasmicMyprofile__RenderFunc(props: {
           property="og:title"
           content={PlasmicMyprofile.pageMetadata.title}
         />
-
         <meta
           key="twitter:title"
           name="twitter:title"
@@ -254,12 +250,6 @@ function PlasmicMyprofile__RenderFunc(props: {
             sty.root
           )}
         >
-          <Header
-            data-plasmic-name={"header"}
-            data-plasmic-override={overrides.header}
-            className={classNames("__wab_instance", sty.header)}
-          />
-
           <div className={classNames(projectcss.all, sty.freeBox__wr82L)}>
             <div
               data-plasmic-name={"note"}
@@ -460,7 +450,6 @@ function PlasmicMyprofile__RenderFunc(props: {
                         })()
                     }
                   ],
-
                   []
                 );
                 return (
@@ -540,7 +529,6 @@ function PlasmicMyprofile__RenderFunc(props: {
                         })()
                     }
                   ],
-
                   []
                 );
                 return (
@@ -620,7 +608,6 @@ function PlasmicMyprofile__RenderFunc(props: {
                         })()
                     }
                   ],
-
                   []
                 );
                 return (
@@ -772,7 +759,6 @@ function PlasmicMyprofile__RenderFunc(props: {
 const PlasmicDescendants = {
   root: [
     "root",
-    "header",
     "note",
     "picsAndName",
     "name",
@@ -793,8 +779,6 @@ const PlasmicDescendants = {
     "save",
     "redirectUserToLoginPage"
   ],
-
-  header: ["header"],
   note: ["note"],
   picsAndName: ["picsAndName", "name", "img"],
   name: ["name"],
@@ -807,7 +791,6 @@ const PlasmicDescendants = {
     "lastName2",
     "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f"
   ],
-
   lastName2: ["lastName2"],
   نامخانواد: ["\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f"],
   email: ["email", "email2", "\u0627\u0645\u0644"],
@@ -819,7 +802,6 @@ const PlasmicDescendants = {
     "\u0639\u0633\u0631\u0648\u0641\u0627\u06442",
     "button"
   ],
-
   email4: ["email4"],
   عسروفال2: ["\u0639\u0633\u0631\u0648\u0641\u0627\u06442", "button"],
   button: ["button"],
@@ -831,7 +813,6 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  header: typeof Header;
   note: "div";
   picsAndName: "div";
   name: "div";
@@ -858,7 +839,6 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicMyprofile__OverridesType,
   DescendantsType<T>
 >;
-
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {
@@ -914,7 +894,6 @@ export const PlasmicMyprofile = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    header: makeNodeComponent("header"),
     note: makeNodeComponent("note"),
     picsAndName: makeNodeComponent("picsAndName"),
     _name: makeNodeComponent("name"),

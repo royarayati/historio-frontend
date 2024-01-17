@@ -36,15 +36,19 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
-import H from "../../H"; // plasmic-import: -ckcELWzdUW7/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import RedirectUserToLoginPage from "../../RedirectUserToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectUserToNamespaceSelection from "../../RedirectUserToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 
 import {
   UnnamedGlobalGroupOfVariantsValue,
   useUnnamedGlobalGroupOfVariants
 } from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants"; // plasmic-import: JLsDjdb5OPmc/globalVariant
+import {
+  UnnamedGlobalGroupOfVariants2Value,
+  useUnnamedGlobalGroupOfVariants2
+} from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2"; // plasmic-import: 9LuS2HFY_aeA/globalVariant
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -53,6 +57,8 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostl
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3wItkax/css
+
+import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
 
 createPlasmicElementProxy;
 
@@ -67,8 +73,10 @@ export const PlasmicLaboratoryData__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicLaboratoryData__OverridesType = {
   laboratoryData?: p.Flex<"div">;
-  h?: p.Flex<typeof H>;
-  apiFetcherComponent?: p.Flex<typeof ApiFetcherComponent>;
+  header?: p.Flex<"div">;
+  svg?: p.Flex<"svg">;
+  text?: p.Flex<"div">;
+  labData?: p.Flex<typeof ApiFetcherComponent>;
   laboratoryResults?: p.Flex<"div">;
   datetime?: p.Flex<"div">;
   labTitles?: p.Flex<"div">;
@@ -77,6 +85,9 @@ export type PlasmicLaboratoryData__OverridesType = {
   switchingTabs?: p.Flex<"div">;
   switchingTab?: p.Flex<typeof SwitchingTab>;
   redirectUserToLoginPage?: p.Flex<typeof RedirectUserToLoginPage>;
+  redirectUserToNamespaceSelection?: p.Flex<
+    typeof RedirectUserToNamespaceSelection
+  >;
 };
 
 export interface DefaultLaboratoryDataProps {}
@@ -112,8 +123,27 @@ function PlasmicLaboratoryData__RenderFunc(props: {
 
   const currentUser = p.useCurrentUser?.() || {};
 
+  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "variable",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = p.useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   const globalVariants = ensureGlobalVariants({
     unnamedGlobalGroupOfVariants: useUnnamedGlobalGroupOfVariants(),
+    unnamedGlobalGroupOfVariants2: useUnnamedGlobalGroupOfVariants2(),
     screen: useScreenVariantsjEqVmdAbnKYc()
   });
 
@@ -142,6 +172,12 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           plasmic_plasmic_rich_components_css.plasmic_tokens,
           sty.laboratoryData,
           {
+            [sty.laboratoryDataglobal_unnamedGlobalGroupOfVariants2_unnamedVariant]:
+              hasVariant(
+                globalVariants,
+                "unnamedGlobalGroupOfVariants2",
+                "unnamedVariant"
+              ),
             [sty.laboratoryDataglobal_unnamedGlobalGroupOfVariants_unnamedVariant]:
               hasVariant(
                 globalVariants,
@@ -151,19 +187,81 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           }
         )}
       >
-        <H
-          data-plasmic-name={"h"}
-          data-plasmic-override={overrides.h}
-          className={classNames("__wab_instance", sty.h)}
-        />
+        <div
+          data-plasmic-name={"header"}
+          data-plasmic-override={overrides.header}
+          className={classNames(projectcss.all, sty.header)}
+        >
+          <ArrowLeftIcon
+            data-plasmic-name={"svg"}
+            data-plasmic-override={overrides.svg}
+            className={classNames(projectcss.all, sty.svg)}
+            onClick={async event => {
+              const $steps = {};
 
+              $steps["goToHomepage"] = true
+                ? (() => {
+                    const actionArgs = { destination: `/patients` };
+                    return (({ destination }) => {
+                      if (
+                        typeof destination === "string" &&
+                        destination.startsWith("#")
+                      ) {
+                        document
+                          .getElementById(destination.substr(1))
+                          .scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        __nextRouter?.push(destination);
+                      }
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["goToHomepage"] != null &&
+                typeof $steps["goToHomepage"] === "object" &&
+                typeof $steps["goToHomepage"].then === "function"
+              ) {
+                $steps["goToHomepage"] = await $steps["goToHomepage"];
+              }
+            }}
+            role={"img"}
+          />
+
+          <div
+            data-plasmic-name={"text"}
+            data-plasmic-override={overrides.text}
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text
+            )}
+          >
+            <React.Fragment>
+              {(() => {
+                try {
+                  return String($ctx.params.patient_name);
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return "";
+                  }
+                  throw e;
+                }
+              })()}
+            </React.Fragment>
+          </div>
+        </div>
         <ApiFetcherComponent
-          data-plasmic-name={"apiFetcherComponent"}
-          data-plasmic-override={overrides.apiFetcherComponent}
-          className={classNames("__wab_instance", sty.apiFetcherComponent)}
+          data-plasmic-name={"labData"}
+          data-plasmic-override={overrides.labData}
+          className={classNames("__wab_instance", sty.labData)}
           headers={(() => {
             try {
-              return { "X-Namespace": 2 };
+              return {
+                "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+              };
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -424,6 +522,15 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           data-plasmic-override={overrides.redirectUserToLoginPage}
           className={classNames("__wab_instance", sty.redirectUserToLoginPage)}
         />
+
+        <RedirectUserToNamespaceSelection
+          data-plasmic-name={"redirectUserToNamespaceSelection"}
+          data-plasmic-override={overrides.redirectUserToNamespaceSelection}
+          className={classNames(
+            "__wab_instance",
+            sty.redirectUserToNamespaceSelection
+          )}
+        />
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -432,8 +539,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
 const PlasmicDescendants = {
   laboratoryData: [
     "laboratoryData",
-    "h",
-    "apiFetcherComponent",
+    "header",
+    "svg",
+    "text",
+    "labData",
     "laboratoryResults",
     "datetime",
     "labTitles",
@@ -441,11 +550,14 @@ const PlasmicDescendants = {
     "factorValue",
     "switchingTabs",
     "switchingTab",
-    "redirectUserToLoginPage"
+    "redirectUserToLoginPage",
+    "redirectUserToNamespaceSelection"
   ],
-  h: ["h"],
-  apiFetcherComponent: [
-    "apiFetcherComponent",
+  header: ["header", "svg", "text"],
+  svg: ["svg"],
+  text: ["text"],
+  labData: [
+    "labData",
     "laboratoryResults",
     "datetime",
     "labTitles",
@@ -465,15 +577,18 @@ const PlasmicDescendants = {
   factorValue: ["factorValue"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"],
-  redirectUserToLoginPage: ["redirectUserToLoginPage"]
+  redirectUserToLoginPage: ["redirectUserToLoginPage"],
+  redirectUserToNamespaceSelection: ["redirectUserToNamespaceSelection"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   laboratoryData: "div";
-  h: typeof H;
-  apiFetcherComponent: typeof ApiFetcherComponent;
+  header: "div";
+  svg: "svg";
+  text: "div";
+  labData: typeof ApiFetcherComponent;
   laboratoryResults: "div";
   datetime: "div";
   labTitles: "div";
@@ -482,6 +597,7 @@ type NodeDefaultElementType = {
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   redirectUserToLoginPage: typeof RedirectUserToLoginPage;
+  redirectUserToNamespaceSelection: typeof RedirectUserToNamespaceSelection;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -544,8 +660,10 @@ export const PlasmicLaboratoryData = Object.assign(
   makeNodeComponent("laboratoryData"),
   {
     // Helper components rendering sub-elements
-    h: makeNodeComponent("h"),
-    apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
+    header: makeNodeComponent("header"),
+    svg: makeNodeComponent("svg"),
+    text: makeNodeComponent("text"),
+    labData: makeNodeComponent("labData"),
     laboratoryResults: makeNodeComponent("laboratoryResults"),
     datetime: makeNodeComponent("datetime"),
     labTitles: makeNodeComponent("labTitles"),
@@ -554,6 +672,9 @@ export const PlasmicLaboratoryData = Object.assign(
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     redirectUserToLoginPage: makeNodeComponent("redirectUserToLoginPage"),
+    redirectUserToNamespaceSelection: makeNodeComponent(
+      "redirectUserToNamespaceSelection"
+    ),
 
     // Metadata about props expected for PlasmicLaboratoryData
     internalVariantProps: PlasmicLaboratoryData__VariantProps,

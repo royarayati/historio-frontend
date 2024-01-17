@@ -1014,19 +1014,6 @@
           "path": "/myprofile"
         },
         {
-          "id": "pMquA3hEaxCO",
-          "name": "Header",
-          "type": "managed",
-          "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicHeader.tsx",
-          "importSpec": {
-            "modulePath": "Header.tsx"
-          },
-          "cssFilePath": "plasmic/inlab/PlasmicHeader.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
           "id": "oQ9IYAdIiE5g",
           "name": "Homepage",
           "type": "managed",
@@ -1061,7 +1048,7 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicImagingReports2.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/[patient_name]/report/detail/[imaging_report].tsx"
+            "modulePath": "../pages/patient/[code]/[patient_name]/report/detail/[reportid].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicImagingReports2.module.css",
           "scheme": "blackbox",
@@ -1081,19 +1068,6 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/user/setting/namespace"
-        },
-        {
-          "id": "-ckcELWzdUW7",
-          "name": "H",
-          "type": "managed",
-          "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicH.tsx",
-          "importSpec": {
-            "modulePath": "H.tsx"
-          },
-          "cssFilePath": "plasmic/inlab/PlasmicH.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
         },
         {
           "id": "0wFpBWYaqpsM",
@@ -1121,6 +1095,45 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/patient/[code]/[patient_name]/lab"
+        },
+        {
+          "id": "-ckcELWzdUW7",
+          "name": "Header",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicHeader.tsx",
+          "importSpec": {
+            "modulePath": "Header.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicHeader.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "86AB0v1-nDyA",
+          "name": "Report",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicReport.tsx",
+          "importSpec": {
+            "modulePath": "Report.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicReport.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "aXAcva2etiX1",
+          "name": "RedirectUserToNamespaceSelection",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicRedirectUserToNamespaceSelection.tsx",
+          "importSpec": {
+            "modulePath": "RedirectUserToNamespaceSelection.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicRedirectUserToNamespaceSelection.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

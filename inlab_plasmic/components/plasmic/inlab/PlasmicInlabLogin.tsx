@@ -156,7 +156,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
           $props.disabledLoginButton
       }
     ],
-
     [$props, $ctx, $refs]
   );
   const $state = p.useDollarState(stateSpecs, {
@@ -295,6 +294,32 @@ function PlasmicInlabLogin__RenderFunc(props: {
             onClick={async event => {
               const $steps = {};
 
+              $steps["disablerLoginButton"] = true
+                ? (() => {
+                    const actionArgs = {
+                      vgroup: "disabledLoginButton",
+                      operation: 4
+                    };
+                    return (({ vgroup, value }) => {
+                      if (typeof value === "string") {
+                        value = [value];
+                      }
+
+                      p.set($state, vgroup, true);
+                      return true;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["disablerLoginButton"] != null &&
+                typeof $steps["disablerLoginButton"] === "object" &&
+                typeof $steps["disablerLoginButton"].then === "function"
+              ) {
+                $steps["disablerLoginButton"] = await $steps[
+                  "disablerLoginButton"
+                ];
+              }
+
               $steps["loginAction"] = true
                 ? (() => {
                     const actionArgs = {
@@ -341,34 +366,40 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 $steps["loginAction"] = await $steps["loginAction"];
               }
 
-              $steps["disablerLoginButton"] = true
-                ? (() => {
-                    const actionArgs = {
-                      vgroup: "disabledLoginButton",
-                      operation: 4
-                    };
-                    return (({ vgroup, value }) => {
-                      if (typeof value === "string") {
-                        value = [value];
-                      }
-
-                      p.set($state, vgroup, true);
-                      return true;
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
+              $steps["goToNamespacesSelection"] =
+                $steps.loginAction.status === 200 &&
+                localStorage.getItem("inlab_user_namespace_id") == null
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/user/setting/namespace`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
               if (
-                $steps["disablerLoginButton"] != null &&
-                typeof $steps["disablerLoginButton"] === "object" &&
-                typeof $steps["disablerLoginButton"].then === "function"
+                $steps["goToNamespacesSelection"] != null &&
+                typeof $steps["goToNamespacesSelection"] === "object" &&
+                typeof $steps["goToNamespacesSelection"].then === "function"
               ) {
-                $steps["disablerLoginButton"] = await $steps[
-                  "disablerLoginButton"
+                $steps["goToNamespacesSelection"] = await $steps[
+                  "goToNamespacesSelection"
                 ];
               }
 
               $steps["goToHomepage"] =
-                $steps.loginAction.status === 200
+                $steps.loginAction.status === 200 &&
+                localStorage.getItem("inlab_user_namespace_id") !== null
                   ? (() => {
                       const actionArgs = { destination: `/patients` };
                       return (({ destination }) => {
@@ -583,7 +614,6 @@ const PlasmicDescendants = {
     "resetPassword",
     "redirectUserToHomepage"
   ],
-
   freeBox: ["freeBox", "username", "password", "loginButton", "resetPassword"],
   username: ["username"],
   password: ["password"],
@@ -609,7 +639,6 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicInlabLogin__OverridesType,
   DescendantsType<T>
 >;
-
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {

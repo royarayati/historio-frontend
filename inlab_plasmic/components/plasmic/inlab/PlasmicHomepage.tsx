@@ -40,6 +40,7 @@ import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/compone
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import RedirectUserToLoginPage from "../../RedirectUserToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectUserToNamespaceSelection from "../../RedirectUserToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -73,7 +74,7 @@ export type PlasmicHomepage__OverridesType = {
   searchsetting?: p.Flex<"div">;
   settingIcon?: p.Flex<"svg">;
   searchbar?: p.Flex<typeof TextInput>;
-  apiFetcherComponent?: p.Flex<typeof ApiFetcherComponent>;
+  homepage?: p.Flex<typeof ApiFetcherComponent>;
   patientCards?: p.Flex<"div">;
   firstlastName?: p.Flex<"div">;
   wardroom?: p.Flex<"div">;
@@ -83,6 +84,9 @@ export type PlasmicHomepage__OverridesType = {
   commentButton?: p.Flex<typeof Button>;
   text?: p.Flex<"div">;
   redirectUserToLoginPage?: p.Flex<typeof RedirectUserToLoginPage>;
+  redirectUserToNamespaceSelection?: p.Flex<
+    typeof RedirectUserToNamespaceSelection
+  >;
 };
 
 export interface DefaultHomepageProps {}
@@ -250,13 +254,15 @@ function PlasmicHomepage__RenderFunc(props: {
             />
           </p.Stack>
           <ApiFetcherComponent
-            data-plasmic-name={"apiFetcherComponent"}
-            data-plasmic-override={overrides.apiFetcherComponent}
-            className={classNames("__wab_instance", sty.apiFetcherComponent)}
-            delay={400}
+            data-plasmic-name={"homepage"}
+            data-plasmic-override={overrides.homepage}
+            className={classNames("__wab_instance", sty.homepage)}
+            delay={300}
             headers={(() => {
               try {
-                return { "X-Namespace": 2 };
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -421,11 +427,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       }
                                     })()}/${(() => {
                                       try {
-                                        return (
-                                          currentItem.first_name +
-                                          " " +
-                                          currentItem.last_name
-                                        );
+                                        return `${currentItem.first_name} ${currentItem.last_name}`;
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
@@ -502,11 +504,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       }
                                     })()}/${(() => {
                                       try {
-                                        return (
-                                          currentItem.first_name +
-                                          " " +
-                                          currentItem.last_name
-                                        );
+                                        return `${currentItem.first_name} ${currentItem.last_name}`;
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
@@ -581,7 +579,20 @@ function PlasmicHomepage__RenderFunc(props: {
                                         }
                                         throw e;
                                       }
-                                    })()}/[patient_name]/lab`
+                                    })()}/${(() => {
+                                      try {
+                                        return `${currentItem.first_name} ${currentItem.last_name}`;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()}/lab`
                                   };
                                   return (({ destination }) => {
                                     if (
@@ -668,6 +679,15 @@ function PlasmicHomepage__RenderFunc(props: {
           data-plasmic-override={overrides.redirectUserToLoginPage}
           className={classNames("__wab_instance", sty.redirectUserToLoginPage)}
         />
+
+        <RedirectUserToNamespaceSelection
+          data-plasmic-name={"redirectUserToNamespaceSelection"}
+          data-plasmic-override={overrides.redirectUserToNamespaceSelection}
+          className={classNames(
+            "__wab_instance",
+            sty.redirectUserToNamespaceSelection
+          )}
+        />
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -680,7 +700,7 @@ const PlasmicDescendants = {
     "searchsetting",
     "settingIcon",
     "searchbar",
-    "apiFetcherComponent",
+    "homepage",
     "patientCards",
     "firstlastName",
     "wardroom",
@@ -689,14 +709,15 @@ const PlasmicDescendants = {
     "patientDataButtons",
     "commentButton",
     "text",
-    "redirectUserToLoginPage"
+    "redirectUserToLoginPage",
+    "redirectUserToNamespaceSelection"
   ],
   pageContent: [
     "pageContent",
     "searchsetting",
     "settingIcon",
     "searchbar",
-    "apiFetcherComponent",
+    "homepage",
     "patientCards",
     "firstlastName",
     "wardroom",
@@ -707,8 +728,8 @@ const PlasmicDescendants = {
   searchsetting: ["searchsetting", "settingIcon", "searchbar"],
   settingIcon: ["settingIcon"],
   searchbar: ["searchbar"],
-  apiFetcherComponent: [
-    "apiFetcherComponent",
+  homepage: [
+    "homepage",
     "patientCards",
     "firstlastName",
     "wardroom",
@@ -731,7 +752,8 @@ const PlasmicDescendants = {
   patientDataButtons: ["patientDataButtons"],
   commentButton: ["commentButton", "text"],
   text: ["text"],
-  redirectUserToLoginPage: ["redirectUserToLoginPage"]
+  redirectUserToLoginPage: ["redirectUserToLoginPage"],
+  redirectUserToNamespaceSelection: ["redirectUserToNamespaceSelection"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -742,7 +764,7 @@ type NodeDefaultElementType = {
   searchsetting: "div";
   settingIcon: "svg";
   searchbar: typeof TextInput;
-  apiFetcherComponent: typeof ApiFetcherComponent;
+  homepage: typeof ApiFetcherComponent;
   patientCards: "div";
   firstlastName: "div";
   wardroom: "div";
@@ -752,6 +774,7 @@ type NodeDefaultElementType = {
   commentButton: typeof Button;
   text: "div";
   redirectUserToLoginPage: typeof RedirectUserToLoginPage;
+  redirectUserToNamespaceSelection: typeof RedirectUserToNamespaceSelection;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -818,7 +841,7 @@ export const PlasmicHomepage = Object.assign(
     searchsetting: makeNodeComponent("searchsetting"),
     settingIcon: makeNodeComponent("settingIcon"),
     searchbar: makeNodeComponent("searchbar"),
-    apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
+    homepage: makeNodeComponent("homepage"),
     patientCards: makeNodeComponent("patientCards"),
     firstlastName: makeNodeComponent("firstlastName"),
     wardroom: makeNodeComponent("wardroom"),
@@ -828,6 +851,9 @@ export const PlasmicHomepage = Object.assign(
     commentButton: makeNodeComponent("commentButton"),
     text: makeNodeComponent("text"),
     redirectUserToLoginPage: makeNodeComponent("redirectUserToLoginPage"),
+    redirectUserToNamespaceSelection: makeNodeComponent(
+      "redirectUserToNamespaceSelection"
+    ),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,

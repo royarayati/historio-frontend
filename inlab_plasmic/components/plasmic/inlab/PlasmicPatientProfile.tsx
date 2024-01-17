@@ -36,10 +36,10 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
-import H from "../../H"; // plasmic-import: -ckcELWzdUW7/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import RedirectUserToLoginPage from "../../RedirectUserToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectUserToNamespaceSelection from "../../RedirectUserToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -49,6 +49,8 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostl
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicPatientProfile.module.css"; // plasmic-import: Ev8txsbuZl9W/css
+
+import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
 
 createPlasmicElementProxy;
 
@@ -62,13 +64,14 @@ type ArgPropType = keyof PlasmicPatientProfile__ArgsType;
 export const PlasmicPatientProfile__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicPatientProfile__OverridesType = {
-  patientCards?: p.Flex<"div">;
-  h?: p.Flex<typeof H>;
-  apiFetcherComponent?: p.Flex<typeof ApiFetcherComponent>;
+  patientProfile2?: p.Flex<"div">;
+  header?: p.Flex<"div">;
+  svg?: p.Flex<"svg">;
+  patientProfile?: p.Flex<typeof ApiFetcherComponent>;
   freeBox?: p.Flex<"div">;
   nationalIdadmissionTimeNopacs?: p.Flex<"div">;
   nationalId?: p.Flex<"div">;
-  admissionId?: p.Flex<"div">;
+  admissionDate?: p.Flex<"div">;
   patientNo?: p.Flex<"div">;
   pacsNumber?: p.Flex<"div">;
   nameservicewardbed?: p.Flex<"div">;
@@ -79,6 +82,9 @@ export type PlasmicPatientProfile__OverridesType = {
   switchingTabs?: p.Flex<"div">;
   switchingTab?: p.Flex<typeof SwitchingTab>;
   redirectUserToLoginPage?: p.Flex<typeof RedirectUserToLoginPage>;
+  redirectUserToNamespaceSelection?: p.Flex<
+    typeof RedirectUserToNamespaceSelection
+  >;
 };
 
 export interface DefaultPatientProfileProps {}
@@ -130,8 +136,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
 
       <div className={projectcss.plasmic_page_wrapper}>
         <div
-          data-plasmic-name={"patientCards"}
-          data-plasmic-override={overrides.patientCards}
+          data-plasmic-name={"patientProfile2"}
+          data-plasmic-override={overrides.patientProfile2}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
@@ -142,22 +148,83 @@ function PlasmicPatientProfile__RenderFunc(props: {
             projectcss.plasmic_tokens,
             plasmic_antd_5_hostless_css.plasmic_tokens,
             plasmic_plasmic_rich_components_css.plasmic_tokens,
-            sty.patientCards
+            sty.patientProfile2
           )}
         >
-          <H
-            data-plasmic-name={"h"}
-            data-plasmic-override={overrides.h}
-            className={classNames("__wab_instance", sty.h)}
-          />
+          <div
+            data-plasmic-name={"header"}
+            data-plasmic-override={overrides.header}
+            className={classNames(projectcss.all, sty.header)}
+          >
+            <ArrowLeftIcon
+              data-plasmic-name={"svg"}
+              data-plasmic-override={overrides.svg}
+              className={classNames(projectcss.all, sty.svg)}
+              onClick={async event => {
+                const $steps = {};
 
+                $steps["goToHomepage"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/patients` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToHomepage"] != null &&
+                  typeof $steps["goToHomepage"] === "object" &&
+                  typeof $steps["goToHomepage"].then === "function"
+                ) {
+                  $steps["goToHomepage"] = await $steps["goToHomepage"];
+                }
+              }}
+              role={"img"}
+            />
+
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__wJfH9
+              )}
+            >
+              <React.Fragment>
+                {(() => {
+                  try {
+                    return String($ctx.params.patient_name);
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return "";
+                    }
+                    throw e;
+                  }
+                })()}
+              </React.Fragment>
+            </div>
+          </div>
           <ApiFetcherComponent
-            data-plasmic-name={"apiFetcherComponent"}
-            data-plasmic-override={overrides.apiFetcherComponent}
-            className={classNames("__wab_instance", sty.apiFetcherComponent)}
+            data-plasmic-name={"patientProfile"}
+            data-plasmic-override={overrides.patientProfile}
+            className={classNames("__wab_instance", sty.patientProfile)}
+            delay={0}
             headers={(() => {
               try {
-                return { "X-Namespace": 2 };
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -207,7 +274,19 @@ function PlasmicPatientProfile__RenderFunc(props: {
                       )}
                     >
                       <React.Fragment>
-                        {$ctx.fetched_data.data.national_id}
+                        {(() => {
+                          try {
+                            return $ctx.fetched_data.data.national_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "";
+                            }
+                            throw e;
+                          }
+                        })()}
                       </React.Fragment>
                     </div>
                     <div
@@ -217,15 +296,15 @@ function PlasmicPatientProfile__RenderFunc(props: {
                         sty.text___3OiCc
                       )}
                     >
-                      {"Addmission"}
+                      {"Admission "}
                     </div>
                     <div
-                      data-plasmic-name={"admissionId"}
-                      data-plasmic-override={overrides.admissionId}
+                      data-plasmic-name={"admissionDate"}
+                      data-plasmic-override={overrides.admissionDate}
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.admissionId
+                        sty.admissionDate
                       )}
                     >
                       <React.Fragment>
@@ -283,7 +362,19 @@ function PlasmicPatientProfile__RenderFunc(props: {
                       )}
                     >
                       <React.Fragment>
-                        {$ctx.fetched_data.data.admission_id}
+                        {(() => {
+                          try {
+                            return $ctx.fetched_data.data.profile_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "";
+                            }
+                            throw e;
+                          }
+                        })()}
                       </React.Fragment>
                     </div>
                     <div
@@ -435,7 +526,19 @@ ${ageYears} Y${
                       )}
                     >
                       <React.Fragment>
-                        {$ctx.fetched_data.data.ward.name}
+                        {(() => {
+                          try {
+                            return $ctx.fetched_data.data.ward.name;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "";
+                            }
+                            throw e;
+                          }
+                        })()}
                       </React.Fragment>
                     </div>
                     <div
@@ -500,6 +603,15 @@ ${ageYears} Y${
               sty.redirectUserToLoginPage
             )}
           />
+
+          <RedirectUserToNamespaceSelection
+            data-plasmic-name={"redirectUserToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectUserToNamespaceSelection}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectUserToNamespaceSelection
+            )}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -507,14 +619,15 @@ ${ageYears} Y${
 }
 
 const PlasmicDescendants = {
-  patientCards: [
-    "patientCards",
-    "h",
-    "apiFetcherComponent",
+  patientProfile2: [
+    "patientProfile2",
+    "header",
+    "svg",
+    "patientProfile",
     "freeBox",
     "nationalIdadmissionTimeNopacs",
     "nationalId",
-    "admissionId",
+    "admissionDate",
     "patientNo",
     "pacsNumber",
     "nameservicewardbed",
@@ -524,16 +637,17 @@ const PlasmicDescendants = {
     "patientRoomBed",
     "switchingTabs",
     "switchingTab",
-    "redirectUserToLoginPage"
+    "redirectUserToLoginPage",
+    "redirectUserToNamespaceSelection"
   ],
-
-  h: ["h"],
-  apiFetcherComponent: [
-    "apiFetcherComponent",
+  header: ["header", "svg"],
+  svg: ["svg"],
+  patientProfile: [
+    "patientProfile",
     "freeBox",
     "nationalIdadmissionTimeNopacs",
     "nationalId",
-    "admissionId",
+    "admissionDate",
     "patientNo",
     "pacsNumber",
     "nameservicewardbed",
@@ -542,12 +656,11 @@ const PlasmicDescendants = {
     "patientWard",
     "patientRoomBed"
   ],
-
   freeBox: [
     "freeBox",
     "nationalIdadmissionTimeNopacs",
     "nationalId",
-    "admissionId",
+    "admissionDate",
     "patientNo",
     "pacsNumber",
     "nameservicewardbed",
@@ -556,17 +669,15 @@ const PlasmicDescendants = {
     "patientWard",
     "patientRoomBed"
   ],
-
   nationalIdadmissionTimeNopacs: [
     "nationalIdadmissionTimeNopacs",
     "nationalId",
-    "admissionId",
+    "admissionDate",
     "patientNo",
     "pacsNumber"
   ],
-
   nationalId: ["nationalId"],
-  admissionId: ["admissionId"],
+  admissionDate: ["admissionDate"],
   patientNo: ["patientNo"],
   pacsNumber: ["pacsNumber"],
   nameservicewardbed: [
@@ -576,26 +687,27 @@ const PlasmicDescendants = {
     "patientWard",
     "patientRoomBed"
   ],
-
   patientName: ["patientName"],
   patientService: ["patientService"],
   patientWard: ["patientWard"],
   patientRoomBed: ["patientRoomBed"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"],
-  redirectUserToLoginPage: ["redirectUserToLoginPage"]
+  redirectUserToLoginPage: ["redirectUserToLoginPage"],
+  redirectUserToNamespaceSelection: ["redirectUserToNamespaceSelection"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  patientCards: "div";
-  h: typeof H;
-  apiFetcherComponent: typeof ApiFetcherComponent;
+  patientProfile2: "div";
+  header: "div";
+  svg: "svg";
+  patientProfile: typeof ApiFetcherComponent;
   freeBox: "div";
   nationalIdadmissionTimeNopacs: "div";
   nationalId: "div";
-  admissionId: "div";
+  admissionDate: "div";
   patientNo: "div";
   pacsNumber: "div";
   nameservicewardbed: "div";
@@ -606,6 +718,7 @@ type NodeDefaultElementType = {
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   redirectUserToLoginPage: typeof RedirectUserToLoginPage;
+  redirectUserToNamespaceSelection: typeof RedirectUserToNamespaceSelection;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -613,7 +726,6 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicPatientProfile__OverridesType,
   DescendantsType<T>
 >;
-
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {
@@ -656,7 +768,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "patientCards") {
+  if (nodeName === "patientProfile2") {
     func.displayName = "PlasmicPatientProfile";
   } else {
     func.displayName = `PlasmicPatientProfile.${nodeName}`;
@@ -666,17 +778,18 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicPatientProfile = Object.assign(
   // Top-level PlasmicPatientProfile renders the root element
-  makeNodeComponent("patientCards"),
+  makeNodeComponent("patientProfile2"),
   {
     // Helper components rendering sub-elements
-    h: makeNodeComponent("h"),
-    apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
+    header: makeNodeComponent("header"),
+    svg: makeNodeComponent("svg"),
+    patientProfile: makeNodeComponent("patientProfile"),
     freeBox: makeNodeComponent("freeBox"),
     nationalIdadmissionTimeNopacs: makeNodeComponent(
       "nationalIdadmissionTimeNopacs"
     ),
     nationalId: makeNodeComponent("nationalId"),
-    admissionId: makeNodeComponent("admissionId"),
+    admissionDate: makeNodeComponent("admissionDate"),
     patientNo: makeNodeComponent("patientNo"),
     pacsNumber: makeNodeComponent("pacsNumber"),
     nameservicewardbed: makeNodeComponent("nameservicewardbed"),
@@ -687,6 +800,9 @@ export const PlasmicPatientProfile = Object.assign(
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     redirectUserToLoginPage: makeNodeComponent("redirectUserToLoginPage"),
+    redirectUserToNamespaceSelection: makeNodeComponent(
+      "redirectUserToNamespaceSelection"
+    ),
 
     // Metadata about props expected for PlasmicPatientProfile
     internalVariantProps: PlasmicPatientProfile__VariantProps,

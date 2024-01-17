@@ -165,7 +165,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                     }
                   })()}/${(() => {
                     try {
-                      return $ctx.params.patien_name;
+                      return $ctx.params.patient_name;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -307,7 +307,19 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                       }
                       throw e;
                     }
-                  })()}/[patient_name]/lab`
+                  })()}/${(() => {
+                    try {
+                      return $ctx.params.patient_name;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}/lab`
                 };
                 return (({ destination }) => {
                   if (

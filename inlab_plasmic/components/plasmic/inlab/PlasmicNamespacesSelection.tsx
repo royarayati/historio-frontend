@@ -36,6 +36,7 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
+import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import RedirectUserToLoginPage from "../../RedirectUserToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -61,6 +62,9 @@ export const PlasmicNamespacesSelection__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicNamespacesSelection__OverridesType = {
   namespaceSelection?: p.Flex<"div">;
+  namespaces2?: p.Flex<"div">;
+  namespaces?: p.Flex<typeof ApiFetcherComponent>;
+  freeBox?: p.Flex<"div">;
   redirectUserToLoginPage?: p.Flex<typeof RedirectUserToLoginPage>;
 };
 
@@ -95,6 +99,8 @@ function PlasmicNamespacesSelection__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = ph.useGlobalActions?.();
+
   const currentUser = p.useCurrentUser?.() || {};
 
   const globalVariants = ensureGlobalVariants({
@@ -128,6 +134,202 @@ function PlasmicNamespacesSelection__RenderFunc(props: {
             sty.namespaceSelection
           )}
         >
+          <p.Stack
+            as={"div"}
+            data-plasmic-name={"namespaces2"}
+            data-plasmic-override={overrides.namespaces2}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.namespaces2)}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___8UYuU
+              )}
+            >
+              {
+                "\u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 \u062e\u0648\u062f \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
+              }
+            </div>
+            <ApiFetcherComponent
+              data-plasmic-name={"namespaces"}
+              data-plasmic-override={overrides.namespaces}
+              className={classNames("__wab_instance", sty.namespaces)}
+              headers={{ "X-Namespace": "undefined " }}
+              method={"GET"}
+              path={"/api/v2/user/user_namespaces"}
+            >
+              <ph.DataCtxReader>
+                {$ctx => (
+                  <div
+                    data-plasmic-name={"freeBox"}
+                    data-plasmic-override={overrides.freeBox}
+                    className={classNames(projectcss.all, sty.freeBox)}
+                  >
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__dwJt
+                          )}
+                          key={currentIndex}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["runCode"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        return localStorage.setItem(
+                                          "inlab_user_namespace_id",
+                                          currentItem.id
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["runCode"] != null &&
+                              typeof $steps["runCode"] === "object" &&
+                              typeof $steps["runCode"].then === "function"
+                            ) {
+                              $steps["runCode"] = await $steps["runCode"];
+                            }
+
+                            $steps["goToHomepage"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    destination: `/patients`
+                                  };
+                                  return (({ destination }) => {
+                                    if (
+                                      typeof destination === "string" &&
+                                      destination.startsWith("#")
+                                    ) {
+                                      document
+                                        .getElementById(destination.substr(1))
+                                        .scrollIntoView({ behavior: "smooth" });
+                                    } else {
+                                      __nextRouter?.push(destination);
+                                    }
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["goToHomepage"] != null &&
+                              typeof $steps["goToHomepage"] === "object" &&
+                              typeof $steps["goToHomepage"].then === "function"
+                            ) {
+                              $steps["goToHomepage"] = await $steps[
+                                "goToHomepage"
+                              ];
+                            }
+                          }}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return currentItem.title;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </ph.DataCtxReader>
+            </ApiFetcherComponent>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___3VsFj
+              )}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["invokeGlobalAction"] = true
+                  ? (() => {
+                      const actionArgs = { args: [] };
+                      return $globalActions["AuthGlobalContext.logout"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
+                    })()
+                  : undefined;
+                if (
+                  $steps["invokeGlobalAction"] != null &&
+                  typeof $steps["invokeGlobalAction"] === "object" &&
+                  typeof $steps["invokeGlobalAction"].then === "function"
+                ) {
+                  $steps["invokeGlobalAction"] = await $steps[
+                    "invokeGlobalAction"
+                  ];
+                }
+
+                $steps["goToInlabLogin"] = !$steps.logout
+                  ? (() => {
+                      const actionArgs = { destination: `/login` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToInlabLogin"] != null &&
+                  typeof $steps["goToInlabLogin"] === "object" &&
+                  typeof $steps["goToInlabLogin"].then === "function"
+                ) {
+                  $steps["goToInlabLogin"] = await $steps["goToInlabLogin"];
+                }
+              }}
+            >
+              {"Back to Login"}
+            </div>
+          </p.Stack>
           <RedirectUserToLoginPage
             data-plasmic-name={"redirectUserToLoginPage"}
             data-plasmic-override={overrides.redirectUserToLoginPage}
@@ -143,7 +345,16 @@ function PlasmicNamespacesSelection__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  namespaceSelection: ["namespaceSelection", "redirectUserToLoginPage"],
+  namespaceSelection: [
+    "namespaceSelection",
+    "namespaces2",
+    "namespaces",
+    "freeBox",
+    "redirectUserToLoginPage"
+  ],
+  namespaces2: ["namespaces2", "namespaces", "freeBox"],
+  namespaces: ["namespaces", "freeBox"],
+  freeBox: ["freeBox"],
   redirectUserToLoginPage: ["redirectUserToLoginPage"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -151,6 +362,9 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   namespaceSelection: "div";
+  namespaces2: "div";
+  namespaces: typeof ApiFetcherComponent;
+  freeBox: "div";
   redirectUserToLoginPage: typeof RedirectUserToLoginPage;
 };
 
@@ -159,7 +373,6 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicNamespacesSelection__OverridesType,
   DescendantsType<T>
 >;
-
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {
@@ -215,6 +428,9 @@ export const PlasmicNamespacesSelection = Object.assign(
   makeNodeComponent("namespaceSelection"),
   {
     // Helper components rendering sub-elements
+    namespaces2: makeNodeComponent("namespaces2"),
+    namespaces: makeNodeComponent("namespaces"),
+    freeBox: makeNodeComponent("freeBox"),
     redirectUserToLoginPage: makeNodeComponent("redirectUserToLoginPage"),
 
     // Metadata about props expected for PlasmicNamespacesSelection
