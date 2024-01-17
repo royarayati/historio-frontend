@@ -1,9 +1,9 @@
-FROM node:18-alpine AS base
+FROM node:18-slim AS base
 
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
+# RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
@@ -32,6 +32,11 @@ COPY . .
 # If using npm comment out above and use below instead
 RUN npm run build
 
+# Lowercase --token-* and --mixin-* in css
+# This was added to fix a bug in arvancdn compression
+RUN /bin/bash lowercase-css-tokens.sh
+
+
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
@@ -56,12 +61,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
-# Lowercase --token-* and --mixin-* in css
-# This was added to fix a bug in arvancdn compression
-RUN find .next/static/css -type f -name "*.css" \
--exec sed -i -E \
-'s/(\-\-token\-[a-zA-Z0-9\-]+:|\-\-token\-[a-zA-Z0-9\-]+\)|\-\-mixin\-[a-zA-Z0-9\-]+(_[a-zA-Z0-9_\-]+)?:|\-\-mixin\-[a-zA-Z0-9\-]+:)/\L\1/g' {} + \
--exec echo "Edited: {}" \;
 
 EXPOSE 3000
 

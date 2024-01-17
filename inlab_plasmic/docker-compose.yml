@@ -9,4 +9,4 @@ services:
       ports:
         - 3030:3000
       volumes:
-        - ../inlab_env.js:/app/public/inlab_env.js
+        - ./public/inlab_env.js:/app/public/inlab_env.js
