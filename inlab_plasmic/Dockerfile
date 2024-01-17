@@ -56,6 +56,13 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
+# Lowercase --token-* and --mixin-* in css
+# This was added to fix a bug in arvancdn compression
+RUN find .next/static/css -type f -name "*.css" \
+-exec sed -i -E \
+'s/(\-\-token\-[a-zA-Z0-9\-]+:|\-\-token\-[a-zA-Z0-9\-]+\)|\-\-mixin\-[a-zA-Z0-9\-]+(_[a-zA-Z0-9_\-]+)?:|\-\-mixin\-[a-zA-Z0-9\-]+:)/\L\1/g' {} + \
+-exec echo "Edited: {}" \;
+
 EXPOSE 3000
 
 ENV PORT 3000
