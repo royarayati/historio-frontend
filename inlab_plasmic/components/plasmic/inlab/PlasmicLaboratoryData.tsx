@@ -123,24 +123,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
 
   const currentUser = p.useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
-    () => [
-      {
-        path: "variable",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      }
-    ],
-    [$props, $ctx, $refs]
-  );
-  const $state = p.useDollarState(stateSpecs, {
-    $props,
-    $ctx,
-    $queries: {},
-    $refs
-  });
-
   const globalVariants = ensureGlobalVariants({
     unnamedGlobalGroupOfVariants: useUnnamedGlobalGroupOfVariants(),
     unnamedGlobalGroupOfVariants2: useUnnamedGlobalGroupOfVariants2(),

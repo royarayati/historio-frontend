@@ -6,6 +6,7 @@ const nextConfig = {
   },
   trailingSlash: true,
   output: "standalone",
+  // sync basePasth with images.publicUrlPrefix in plasmic.json
   basePath: '/new_inlab',
 };
 

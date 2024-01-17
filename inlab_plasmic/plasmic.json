@@ -10,9 +10,9 @@
     "defaultStyleCssFilePath": "plasmic/plasmic__default_style.module.css"
   },
   "images": {
-    "scheme": "inlined",
+    "scheme": "public-files",
     "publicDir": "../public",
-    "publicUrlPrefix": "/"
+    "publicUrlPrefix": "/new_inlab/"
   },
   "tokens": {
     "scheme": "theo",
