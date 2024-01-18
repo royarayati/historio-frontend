@@ -34,7 +34,7 @@ RUN npm run build
 
 # Lowercase --token-* and --mixin-* in css
 # This was added to fix a bug in arvancdn compression
-RUN /bin/bash lowercase-css-tokens.sh
+RUN /bin/bash utils/scripts/lowercase-css-tokens.sh
 
 
 # Production image, copy all the files and run next
