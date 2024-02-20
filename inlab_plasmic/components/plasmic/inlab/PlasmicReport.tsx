@@ -17,25 +17,48 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 
@@ -69,11 +92,12 @@ export const PlasmicReport__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicReport__OverridesType = {
-  reports?: p.Flex<typeof ApiFetcherComponent>;
-  viewPacs?: p.Flex<typeof Button>;
-  imagingTitle?: p.Flex<"div">;
-  imagingDatetime?: p.Flex<"div">;
-  imagingType?: p.Flex<"div">;
+  reports?: Flex__<typeof ApiFetcherComponent>;
+  viewPacs?: Flex__<typeof Button>;
+  imagingTitledatetime?: Flex__<"div">;
+  imagingTitle?: Flex__<"div">;
+  imagingDatetime?: Flex__<"div">;
+  imagingType?: Flex__<"div">;
 };
 
 export interface DefaultReportProps {
@@ -107,13 +131,13 @@ function PlasmicReport__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "reportresult",
@@ -132,7 +156,7 @@ function PlasmicReport__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -176,15 +200,18 @@ function PlasmicReport__RenderFunc(props: {
       })()}
       method={"GET"}
       path={`/api/v2/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
+      ref={ref => {
+        $refs["reports"] = ref;
+      }}
     >
-      <ph.DataCtxReader>
+      <DataCtxReader__>
         {$ctx => (
           <React.Fragment>
             <Button
               data-plasmic-name={"viewPacs"}
               data-plasmic-override={overrides.viewPacs}
               className={classNames("__wab_instance", sty.viewPacs)}
-              isDisabled={p.generateStateValueProp($state, [
+              isDisabled={generateStateValueProp($state, [
                 "viewPacs",
                 "isDisabled"
               ])}
@@ -231,7 +258,7 @@ function PlasmicReport__RenderFunc(props: {
                 }
               }}
               onIsDisabledChange={(...eventArgs) => {
-                p.generateStateOnChangeProp($state, ["viewPacs", "isDisabled"])(
+                generateStateOnChangeProp($state, ["viewPacs", "isDisabled"])(
                   eventArgs[0]
                 );
               }}
@@ -263,7 +290,7 @@ function PlasmicReport__RenderFunc(props: {
                   e instanceof TypeError ||
                   e?.plasmicType === "PlasmicUndefinedDataError"
                 ) {
-                  return true;
+                  return false;
                 }
                 throw e;
               }
@@ -277,6 +304,31 @@ function PlasmicReport__RenderFunc(props: {
               >
                 {
                   "\u06af\u0632\u0627\u0631\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                }
+              </div>
+            ) : null}
+            {(() => {
+              try {
+                return $ctx.fetched_data.loading === true;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return false;
+                }
+                throw e;
+              }
+            })() ? (
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__ttMz
+                )}
+              >
+                {
+                  "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
                 }
               </div>
             ) : null}
@@ -333,7 +385,7 @@ function PlasmicReport__RenderFunc(props: {
                               }
                             })()}/report/detail/${(() => {
                               try {
-                                return currentIndex;
+                                return currentItem.id;
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||
@@ -371,7 +423,55 @@ function PlasmicReport__RenderFunc(props: {
                   }}
                 >
                   <div
-                    className={classNames(projectcss.all, sty.freeBox__dUwXl)}
+                    data-plasmic-name={"imagingTitledatetime"}
+                    data-plasmic-override={overrides.imagingTitledatetime}
+                    className={classNames(
+                      projectcss.all,
+                      sty.imagingTitledatetime
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["goToPage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              destination: (() => {
+                                try {
+                                  return undefined;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            };
+                            return (({ destination }) => {
+                              if (
+                                typeof destination === "string" &&
+                                destination.startsWith("#")
+                              ) {
+                                document
+                                  .getElementById(destination.substr(1))
+                                  .scrollIntoView({ behavior: "smooth" });
+                              } else {
+                                __nextRouter?.push(destination);
+                              }
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["goToPage"] != null &&
+                        typeof $steps["goToPage"] === "object" &&
+                        typeof $steps["goToPage"].then === "function"
+                      ) {
+                        $steps["goToPage"] = await $steps["goToPage"];
+                      }
+                    }}
                   >
                     <div
                       data-plasmic-name={"imagingTitle"}
@@ -456,7 +556,9 @@ function PlasmicReport__RenderFunc(props: {
                     <React.Fragment>
                       {(() => {
                         try {
-                          return currentItem.title;
+                          return currentItem.title
+                            .replace(/\(\s+#\s*\)/g, "")
+                            .replace(/\(\s+#\*\s*\)/g, "");
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -474,7 +576,7 @@ function PlasmicReport__RenderFunc(props: {
             })}
           </React.Fragment>
         )}
-      </ph.DataCtxReader>
+      </DataCtxReader__>
     </ApiFetcherComponent>
   ) as React.ReactElement | null;
 }
@@ -483,11 +585,17 @@ const PlasmicDescendants = {
   reports: [
     "reports",
     "viewPacs",
+    "imagingTitledatetime",
     "imagingTitle",
     "imagingDatetime",
     "imagingType"
   ],
   viewPacs: ["viewPacs"],
+  imagingTitledatetime: [
+    "imagingTitledatetime",
+    "imagingTitle",
+    "imagingDatetime"
+  ],
   imagingTitle: ["imagingTitle"],
   imagingDatetime: ["imagingDatetime"],
   imagingType: ["imagingType"]
@@ -498,6 +606,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   reports: typeof ApiFetcherComponent;
   viewPacs: typeof Button;
+  imagingTitledatetime: "div";
   imagingTitle: "div";
   imagingDatetime: "div";
   imagingType: "div";
@@ -564,6 +673,7 @@ export const PlasmicReport = Object.assign(
   {
     // Helper components rendering sub-elements
     viewPacs: makeNodeComponent("viewPacs"),
+    imagingTitledatetime: makeNodeComponent("imagingTitledatetime"),
     imagingTitle: makeNodeComponent("imagingTitle"),
     imagingDatetime: makeNodeComponent("imagingDatetime"),
     imagingType: makeNodeComponent("imagingType"),

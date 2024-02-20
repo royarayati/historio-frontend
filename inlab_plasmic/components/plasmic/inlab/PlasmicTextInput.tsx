@@ -17,26 +17,49 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
-import * as pp from "@plasmicapp/react-web";
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
+import * as pp from "@plasmicapp/react-web";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -81,6 +104,7 @@ export type PlasmicTextInput__ArgsType = {
   required?: boolean;
   "aria-label"?: string;
   "aria-labelledby"?: string;
+  onChange?: (event: any) => void;
   type?:
     | "text"
     | "password"
@@ -92,6 +116,7 @@ export type PlasmicTextInput__ArgsType = {
     | "email"
     | "tel";
   autoFocus?: boolean;
+  clearSearchbar?: React.ReactNode;
 };
 type ArgPropType = keyof PlasmicTextInput__ArgsType;
 export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
@@ -103,15 +128,17 @@ export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
   "required",
   "aria-label",
   "aria-labelledby",
+  "onChange",
   "type",
-  "autoFocus"
+  "autoFocus",
+  "clearSearchbar"
 );
 
 export type PlasmicTextInput__OverridesType = {
-  root?: p.Flex<"div">;
-  startIconContainer?: p.Flex<"div">;
-  input?: p.Flex<"input">;
-  endIconContainer?: p.Flex<"div">;
+  root?: Flex__<"div">;
+  startIconContainer?: Flex__<"div">;
+  input?: Flex__<"input">;
+  endIconContainer?: Flex__<"div">;
 };
 
 export interface DefaultTextInputProps extends pp.BaseTextInputProps {
@@ -121,6 +148,7 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
   required?: boolean;
   "aria-label"?: string;
   "aria-labelledby"?: string;
+  onChange?: (event: any) => void;
   type?:
     | "text"
     | "password"
@@ -132,6 +160,7 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
     | "email"
     | "tel";
   autoFocus?: boolean;
+  clearSearchbar?: React.ReactNode;
   color?: SingleChoiceArg<"dark">;
 }
 
@@ -169,13 +198,13 @@ function PlasmicTextInput__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "showStartIcon",
@@ -216,10 +245,9 @@ function PlasmicTextInput__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => $props["value"]
       }
     ],
-
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -289,7 +317,7 @@ function PlasmicTextInput__RenderFunc(props: {
           )
         })}
       >
-        {p.renderPlasmicSlot({
+        {renderPlasmicSlot({
           defaultContents: (
             <SearchsvgIcon
               className={classNames(projectcss.all, sty.svg__bNQq)}
@@ -333,9 +361,7 @@ function PlasmicTextInput__RenderFunc(props: {
         }
         name={args.name}
         onChange={e => {
-          p.generateStateOnChangeProp($state, ["input", "value"])(
-            e.target.value
-          );
+          generateStateOnChangeProp($state, ["input", "value"])(e.target.value);
         }}
         placeholder={args.placeholder}
         ref={ref => {
@@ -343,9 +369,19 @@ function PlasmicTextInput__RenderFunc(props: {
         }}
         required={args.required}
         type={args.type}
-        value={p.generateStateValueProp($state, ["input", "value"]) ?? ""}
+        value={generateStateValueProp($state, ["input", "value"]) ?? ""}
       />
 
+      {renderPlasmicSlot({
+        defaultContents: (
+          <SearchsvgIcon
+            className={classNames(projectcss.all, sty.svg__lTYva)}
+            role={"img"}
+          />
+        ),
+
+        value: args.clearSearchbar
+      })}
       <div
         data-plasmic-name={"endIconContainer"}
         data-plasmic-override={overrides.endIconContainer}
@@ -358,7 +394,7 @@ function PlasmicTextInput__RenderFunc(props: {
           )
         })}
       >
-        {p.renderPlasmicSlot({
+        {renderPlasmicSlot({
           defaultContents: (
             <ChecksvgIcon
               className={classNames(projectcss.all, sty.svg__m0Xvn)}
@@ -429,7 +465,6 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicTextInput__OverridesType,
   DescendantsType<T>
 >;
-
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {

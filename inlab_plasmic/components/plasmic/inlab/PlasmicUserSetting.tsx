@@ -17,27 +17,51 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
-import RedirectUserToLoginPage from "../../RedirectUserToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -49,6 +73,7 @@ import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEv
 import sty from "./PlasmicUserSetting.module.css"; // plasmic-import: RHOuYiwuacpG/css
 
 import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
+import PersonCropSquareFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__PersonCropSquareFillSvgrepoComsvg"; // plasmic-import: KRqJj_I4xpne/icon
 import ProfileIcon from "./icons/PlasmicIcon__Profile"; // plasmic-import: -RBNimWBwZ_J/icon
 import Icon3Icon from "./icons/PlasmicIcon__Icon3"; // plasmic-import: Pji6nZZT_lpO/icon
 import Group1917Icon from "./icons/PlasmicIcon__Group1917"; // plasmic-import: ycuumst0kLdp/icon
@@ -67,20 +92,20 @@ type ArgPropType = keyof PlasmicUserSetting__ArgsType;
 export const PlasmicUserSetting__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicUserSetting__OverridesType = {
-  root?: p.Flex<"div">;
-  picsAndName2?: p.Flex<"div">;
-  name2?: p.Flex<"div">;
-  img?: p.Flex<typeof p.PlasmicImg>;
-  myProfile?: p.Flex<"div">;
-  myProfile2?: p.Flex<"div">;
-  hospital?: p.Flex<"div">;
-  hospital3?: p.Flex<"svg">;
-  hospital2?: p.Flex<"div">;
-  resetPassword?: p.Flex<"div">;
-  resetPass?: p.Flex<"svg">;
-  resetPassword2?: p.Flex<"div">;
-  logout?: p.Flex<typeof Button>;
-  redirectUserToLoginPage?: p.Flex<typeof RedirectUserToLoginPage>;
+  userSetting?: Flex__<"div">;
+  picsAndName2?: Flex__<"div">;
+  name2?: Flex__<"div">;
+  myProfile?: Flex__<"div">;
+  myProfile2?: Flex__<"div">;
+  hospital?: Flex__<"div">;
+  hospital3?: Flex__<"svg">;
+  hospital2?: Flex__<"div">;
+  resetPassword?: Flex__<"div">;
+  resetPass?: Flex__<"svg">;
+  resetPassword2?: Flex__<"div">;
+  logout?: Flex__<typeof Button>;
+  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
 };
 
 export interface DefaultUserSettingProps {}
@@ -110,15 +135,15 @@ function PlasmicUserSetting__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const $globalActions = ph.useGlobalActions?.();
+  const $globalActions = useGlobalActions?.();
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "logout.isDisabled",
@@ -129,7 +154,7 @@ function PlasmicUserSetting__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -152,8 +177,8 @@ function PlasmicUserSetting__RenderFunc(props: {
 
       <div className={projectcss.plasmic_page_wrapper}>
         <div
-          data-plasmic-name={"root"}
-          data-plasmic-override={overrides.root}
+          data-plasmic-name={"userSetting"}
+          data-plasmic-override={overrides.userSetting}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
@@ -164,7 +189,7 @@ function PlasmicUserSetting__RenderFunc(props: {
             projectcss.plasmic_tokens,
             plasmic_antd_5_hostless_css.plasmic_tokens,
             plasmic_plasmic_rich_components_css.plasmic_tokens,
-            sty.root
+            sty.userSetting
           )}
         >
           <div className={classNames(projectcss.all, sty.freeBox___8NjX5)}>
@@ -201,7 +226,7 @@ function PlasmicUserSetting__RenderFunc(props: {
               role={"img"}
             />
           </div>
-          <p.Stack
+          <Stack__
             as={"div"}
             hasGap={true}
             className={classNames(projectcss.all, sty.freeBox__ttAvM)}
@@ -211,7 +236,7 @@ function PlasmicUserSetting__RenderFunc(props: {
               data-plasmic-override={overrides.picsAndName2}
               className={classNames(projectcss.all, sty.picsAndName2)}
             >
-              <p.Stack
+              <Stack__
                 as={"div"}
                 hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox__mrH0L)}
@@ -296,28 +321,13 @@ function PlasmicUserSetting__RenderFunc(props: {
                     })()}
                   </React.Fragment>
                 </div>
-              </p.Stack>
-              <p.PlasmicImg
-                data-plasmic-name={"img"}
-                data-plasmic-override={overrides.img}
-                alt={""}
-                className={classNames(sty.img)}
-                displayHeight={"auto"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"61px"}
-                loading={"lazy"}
-                src={{
-                  src: "/new_inlab/plasmic/inlab/images/image3.svg",
-                  fullWidth: 150,
-                  fullHeight: 150,
-                  aspectRatio: 1
-                }}
+              </Stack__>
+              <PersonCropSquareFillSvgrepoComsvgIcon
+                className={classNames(projectcss.all, sty.svg__iEtuG)}
+                role={"img"}
               />
             </div>
-            <p.Stack
+            <Stack__
               as={"div"}
               data-plasmic-name={"myProfile"}
               data-plasmic-override={overrides.myProfile}
@@ -328,7 +338,9 @@ function PlasmicUserSetting__RenderFunc(props: {
 
                 $steps["goToUserProfile"] = true
                   ? (() => {
-                      const actionArgs = { destination: `/myprofile` };
+                      const actionArgs = {
+                        destination: `/user/setting/my_profile`
+                      };
                       return (({ destination }) => {
                         if (
                           typeof destination === "string" &&
@@ -365,7 +377,9 @@ function PlasmicUserSetting__RenderFunc(props: {
 
                   $steps["goToMyprofile"] = true
                     ? (() => {
-                        const actionArgs = { destination: `/myprofile` };
+                        const actionArgs = {
+                          destination: `/user/setting/my_profile`
+                        };
                         return (({ destination }) => {
                           if (
                             typeof destination === "string" &&
@@ -395,8 +409,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                 className={classNames(projectcss.all, sty.svg___5QIhx)}
                 role={"img"}
               />
-            </p.Stack>
-            <p.Stack
+            </Stack__>
+            <Stack__
               as={"div"}
               data-plasmic-name={"hospital"}
               data-plasmic-override={overrides.hospital}
@@ -405,7 +419,61 @@ function PlasmicUserSetting__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
-                $steps["goToNamespacesSelection"] = true
+                $steps["removeInlabUserNamespaceIdValue"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return localStorage.removeItem(
+                            "inlab_user_namespace_id"
+                          );
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["removeInlabUserNamespaceIdValue"] != null &&
+                  typeof $steps["removeInlabUserNamespaceIdValue"] ===
+                    "object" &&
+                  typeof $steps["removeInlabUserNamespaceIdValue"].then ===
+                    "function"
+                ) {
+                  $steps["removeInlabUserNamespaceIdValue"] = await $steps[
+                    "removeInlabUserNamespaceIdValue"
+                  ];
+                }
+
+                $steps["consoleLogInlabUserNamespaceId"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return console.log(
+                            `inlab_user_namespace_id: ${localStorage.getItem(
+                              "inlab_user_namespace_id"
+                            )}`
+                          );
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["consoleLogInlabUserNamespaceId"] != null &&
+                  typeof $steps["consoleLogInlabUserNamespaceId"] ===
+                    "object" &&
+                  typeof $steps["consoleLogInlabUserNamespaceId"].then ===
+                    "function"
+                ) {
+                  $steps["consoleLogInlabUserNamespaceId"] = await $steps[
+                    "consoleLogInlabUserNamespaceId"
+                  ];
+                }
+
+                $steps["goToNamespaceSelection"] = true
                   ? (() => {
                       const actionArgs = {
                         destination: `/user/setting/namespace`
@@ -425,12 +493,12 @@ function PlasmicUserSetting__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["goToNamespacesSelection"] != null &&
-                  typeof $steps["goToNamespacesSelection"] === "object" &&
-                  typeof $steps["goToNamespacesSelection"].then === "function"
+                  $steps["goToNamespaceSelection"] != null &&
+                  typeof $steps["goToNamespaceSelection"] === "object" &&
+                  typeof $steps["goToNamespaceSelection"].then === "function"
                 ) {
-                  $steps["goToNamespacesSelection"] = await $steps[
-                    "goToNamespacesSelection"
+                  $steps["goToNamespaceSelection"] = await $steps[
+                    "goToNamespaceSelection"
                   ];
                 }
               }}
@@ -442,7 +510,11 @@ function PlasmicUserSetting__RenderFunc(props: {
                 role={"img"}
               />
 
-              <div className={classNames(projectcss.all, sty.freeBox__sDnJy)}>
+              <Stack__
+                as={"div"}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.freeBox__sDnJy)}
+              >
                 <div
                   data-plasmic-name={"hospital2"}
                   data-plasmic-override={overrides.hospital2}
@@ -454,9 +526,73 @@ function PlasmicUserSetting__RenderFunc(props: {
                 >
                   {"\u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 "}
                 </div>
-              </div>
-            </p.Stack>
-            <p.Stack
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__lpJy
+                  )}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["runCode"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            customFunction: async () => {
+                              return (() => {
+                                return localStorage.setItem(
+                                  "inlab_user_namespace_id",
+                                  currentItem.id
+                                );
+                              })();
+                            }
+                          };
+                          return (({ customFunction }) => {
+                            return customFunction();
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["runCode"] != null &&
+                      typeof $steps["runCode"] === "object" &&
+                      typeof $steps["runCode"].then === "function"
+                    ) {
+                      $steps["runCode"] = await $steps["runCode"];
+                    }
+
+                    $steps["goToHomepage"] = true
+                      ? (() => {
+                          const actionArgs = { destination: `/patients` };
+                          return (({ destination }) => {
+                            if (
+                              typeof destination === "string" &&
+                              destination.startsWith("#")
+                            ) {
+                              document
+                                .getElementById(destination.substr(1))
+                                .scrollIntoView({ behavior: "smooth" });
+                            } else {
+                              __nextRouter?.push(destination);
+                            }
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["goToHomepage"] != null &&
+                      typeof $steps["goToHomepage"] === "object" &&
+                      typeof $steps["goToHomepage"].then === "function"
+                    ) {
+                      $steps["goToHomepage"] = await $steps["goToHomepage"];
+                    }
+                  }}
+                >
+                  <React.Fragment>
+                    {localStorage.getItem("inlab_user_namespace_title")}
+                  </React.Fragment>
+                </div>
+              </Stack__>
+            </Stack__>
+            <Stack__
               as={"div"}
               data-plasmic-name={"resetPassword"}
               data-plasmic-override={overrides.resetPassword}
@@ -569,12 +705,12 @@ function PlasmicUserSetting__RenderFunc(props: {
                   "\u0628\u0627\u0632\u06cc\u0627\u0628\u06cc \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
                 }
               </div>
-            </p.Stack>
+            </Stack__>
             <Button
               data-plasmic-name={"logout"}
               data-plasmic-override={overrides.logout}
               className={classNames("__wab_instance", sty.logout)}
-              isDisabled={p.generateStateValueProp($state, [
+              isDisabled={generateStateValueProp($state, [
                 "logout",
                 "isDisabled"
               ])}
@@ -600,7 +736,7 @@ function PlasmicUserSetting__RenderFunc(props: {
 
                 $steps["goToInlabLoginPage"] = !$steps.logout
                   ? (() => {
-                      const actionArgs = { destination: `/login` };
+                      const actionArgs = { destination: `/inlab_login` };
                       return (({ destination }) => {
                         if (
                           typeof destination === "string" &&
@@ -626,7 +762,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                 }
               }}
               onIsDisabledChange={(...eventArgs) => {
-                p.generateStateOnChangeProp($state, ["logout", "isDisabled"])(
+                generateStateOnChangeProp($state, ["logout", "isDisabled"])(
                   eventArgs[0]
                 );
               }}
@@ -647,13 +783,19 @@ function PlasmicUserSetting__RenderFunc(props: {
                 {"Log Out"}
               </div>
             </Button>
-          </p.Stack>
-          <RedirectUserToLoginPage
-            data-plasmic-name={"redirectUserToLoginPage"}
-            data-plasmic-override={overrides.redirectUserToLoginPage}
+          </Stack__>
+          <RedirectToLoginPage
+            data-plasmic-name={"redirectToLoginPage"}
+            data-plasmic-override={overrides.redirectToLoginPage}
+            className={classNames("__wab_instance", sty.redirectToLoginPage)}
+          />
+
+          <RedirectToNamespaceSelection
+            data-plasmic-name={"redirectToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectToNamespaceSelection}
             className={classNames(
               "__wab_instance",
-              sty.redirectUserToLoginPage
+              sty.redirectToNamespaceSelection
             )}
           />
         </div>
@@ -663,11 +805,10 @@ function PlasmicUserSetting__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: [
-    "root",
+  userSetting: [
+    "userSetting",
     "picsAndName2",
     "name2",
-    "img",
     "myProfile",
     "myProfile2",
     "hospital",
@@ -677,11 +818,11 @@ const PlasmicDescendants = {
     "resetPass",
     "resetPassword2",
     "logout",
-    "redirectUserToLoginPage"
+    "redirectToLoginPage",
+    "redirectToNamespaceSelection"
   ],
-  picsAndName2: ["picsAndName2", "name2", "img"],
+  picsAndName2: ["picsAndName2", "name2"],
   name2: ["name2"],
-  img: ["img"],
   myProfile: ["myProfile", "myProfile2"],
   myProfile2: ["myProfile2"],
   hospital: ["hospital", "hospital3", "hospital2"],
@@ -691,16 +832,16 @@ const PlasmicDescendants = {
   resetPass: ["resetPass"],
   resetPassword2: ["resetPassword2"],
   logout: ["logout"],
-  redirectUserToLoginPage: ["redirectUserToLoginPage"]
+  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  root: "div";
+  userSetting: "div";
   picsAndName2: "div";
   name2: "div";
-  img: typeof p.PlasmicImg;
   myProfile: "div";
   myProfile2: "div";
   hospital: "div";
@@ -710,7 +851,8 @@ type NodeDefaultElementType = {
   resetPass: "svg";
   resetPassword2: "div";
   logout: typeof Button;
-  redirectUserToLoginPage: typeof RedirectUserToLoginPage;
+  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -760,7 +902,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "root") {
+  if (nodeName === "userSetting") {
     func.displayName = "PlasmicUserSetting";
   } else {
     func.displayName = `PlasmicUserSetting.${nodeName}`;
@@ -770,12 +912,11 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicUserSetting = Object.assign(
   // Top-level PlasmicUserSetting renders the root element
-  makeNodeComponent("root"),
+  makeNodeComponent("userSetting"),
   {
     // Helper components rendering sub-elements
     picsAndName2: makeNodeComponent("picsAndName2"),
     name2: makeNodeComponent("name2"),
-    img: makeNodeComponent("img"),
     myProfile: makeNodeComponent("myProfile"),
     myProfile2: makeNodeComponent("myProfile2"),
     hospital: makeNodeComponent("hospital"),
@@ -785,7 +926,10 @@ export const PlasmicUserSetting = Object.assign(
     resetPass: makeNodeComponent("resetPass"),
     resetPassword2: makeNodeComponent("resetPassword2"),
     logout: makeNodeComponent("logout"),
-    redirectUserToLoginPage: makeNodeComponent("redirectUserToLoginPage"),
+    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
 
     // Metadata about props expected for PlasmicUserSetting
     internalVariantProps: PlasmicUserSetting__VariantProps,

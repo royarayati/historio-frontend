@@ -58,16 +58,7 @@
   );
 }
 
-.plasmic_default_styles,
-.plasmic_default_styles:where(
-    .global_unnamedGlobalGroupOfVariants_unnamedVariant
-  ),
-.plasmic_default_styles:where(
-    .global_unnamedGlobalGroupOfVariants2_unnamedVariant
-  ),
-.plasmic_default_styles:where(
-    .global_unnamedGlobalGroupOfVariants3_unnamedVariant
-  ) {
+.plasmic_default_styles {
   --mixin-pUliKjJdV7fD_font-family: var(--VazirmatnCustom);
   --mixin-pUliKjJdV7fD_font-size: 16px;
   --mixin-pUliKjJdV7fD_font-weight: 400;
@@ -192,25 +183,13 @@
 }
 
 @media (min-width: 0px) and (max-width: 768px) {
-  .plasmic_default_styles,
-  .plasmic_default_styles:where(
-      .global_unnamedGlobalGroupOfVariants_unnamedVariant
-    ),
-  .plasmic_default_styles:where(
-      .global_unnamedGlobalGroupOfVariants2_unnamedVariant
-    ),
-  .plasmic_default_styles:where(
-      .global_unnamedGlobalGroupOfVariants3_unnamedVariant
-    ) {
+  .plasmic_default_styles {
     --mixin-MhdL6TMPl2RD_font-size: 48px;
     --mixin-MhdL6TMPl2RD_white-space: pre-wrap;
   }
 }
 
-.plasmic_mixins,
-.plasmic_mixins:where(.global_unnamedGlobalGroupOfVariants_unnamedVariant),
-.plasmic_mixins:where(.global_unnamedGlobalGroupOfVariants2_unnamedVariant),
-.plasmic_mixins:where(.global_unnamedGlobalGroupOfVariants3_unnamedVariant) {
+.plasmic_mixins {
   --mixin-cKqN743V90Sj_white-space: pre-wrap;
   --plasmic-mixin-cards_white-space: var(--mixin-cKqN743V90Sj_white-space);
 }

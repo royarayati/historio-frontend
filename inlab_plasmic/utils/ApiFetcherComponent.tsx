@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState, useContext } from 'react';
+import { ReactNode, useEffect, useState, useContext, forwardRef, useImperativeHandle } from 'react';
 import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-web/lib/host';
 import axios from 'axios';
 import { refreshAccessIfNeeded, logForDev } from './CommonUtils';
@@ -12,11 +12,14 @@ interface PropsType {
     headers?: object,
     requestBody?: object,
     delay?: number,
+    dependsOn?: object,
 }
 
-// TODO: We may need to handle axios race condition
-export function ApiFetcherComponent(props: PropsType) {
+interface ApiActions {
+    reload(): void;
+}
 
+export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>(function ApiFetcherComponent(props: PropsType, ref) {
 
     const globalContext = useContext(GlobalContext);
     const inlabUser = useSelector('inlab_user');
@@ -24,9 +27,21 @@ export function ApiFetcherComponent(props: PropsType) {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
 
-    const twoColors = { "0%": "#108ee9", "100%": "#87d068" };
+    useImperativeHandle(
+        ref,
+        () => {
+            return {
+                reload() {
+                    console.log("ApiFetcherComponent: refActions: reload")
+                }
+            };
+        },
+        []
+    );
 
     useEffect(() => {
+        logForDev("ApiFetcherComponent: useEffect: " + (inlabUser ? "User found" : "User is NULL"));
+
         const control = new AbortController();
         const searchTimeOut = setTimeout(() => {
 
@@ -77,12 +92,12 @@ export function ApiFetcherComponent(props: PropsType) {
 
     return (
         <div className={props.className}>
-            <DataProvider name="fetched_data" data={{"loading": loading , ...data}}>
+            <DataProvider name="fetched_data" data={{ "loading": loading, ...data }}>
                 {props.children}
             </DataProvider>
         </div>
     )
-}
+})
 
 export const ApiFetcherMeta: CodeComponentMeta<PropsType> = {
     name: "ApiFetcherComponent",
@@ -97,6 +112,13 @@ export const ApiFetcherMeta: CodeComponentMeta<PropsType> = {
         headers: 'object',
         requestBody: 'object',
         delay: 'number',
+        dependsOn: 'object',
+    },
+    refActions: {
+        reload: {
+            description: "Reload query",
+            argTypes: [],
+        }
     },
     providesData: true,
     importPath: "./utils/ApiFetcherComponent",

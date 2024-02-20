@@ -1,0 +1,10 @@
+.favorite {
+  object-fit: cover;
+  max-width: 85%;
+  height: 45px;
+  position: relative;
+  color: var(--token-9iYGdL7i3GKE);
+}
+.favoritefavoriteTest {
+  color: var(--token-9iYGdL7i3GKE);
+}

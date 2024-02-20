@@ -17,25 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -58,7 +80,7 @@ type ArgPropType = keyof PlasmicSwitchingTab__ArgsType;
 export const PlasmicSwitchingTab__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicSwitchingTab__OverridesType = {
-  root?: p.Flex<"div">;
+  root?: Flex__<"div">;
 };
 
 export interface DefaultSwitchingTabProps {
@@ -90,13 +112,13 @@ function PlasmicSwitchingTab__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "variable",
@@ -107,7 +129,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -135,7 +157,53 @@ function PlasmicSwitchingTab__RenderFunc(props: {
         sty.root
       )}
     >
-      <p.PlasmicImg
+      <PlasmicImg__
+        alt={""}
+        className={classNames(sty.img__jjHgx)}
+        displayHeight={"25px"}
+        displayMaxHeight={"none"}
+        displayMaxWidth={"100%"}
+        displayMinHeight={"0"}
+        displayMinWidth={"0"}
+        displayWidth={"25%"}
+        loading={"lazy"}
+        onClick={async event => {
+          const $steps = {};
+
+          $steps["goToHomepage"] = true
+            ? (() => {
+                const actionArgs = { destination: `/patients` };
+                return (({ destination }) => {
+                  if (
+                    typeof destination === "string" &&
+                    destination.startsWith("#")
+                  ) {
+                    document
+                      .getElementById(destination.substr(1))
+                      .scrollIntoView({ behavior: "smooth" });
+                  } else {
+                    __nextRouter?.push(destination);
+                  }
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["goToHomepage"] != null &&
+            typeof $steps["goToHomepage"] === "object" &&
+            typeof $steps["goToHomepage"].then === "function"
+          ) {
+            $steps["goToHomepage"] = await $steps["goToHomepage"];
+          }
+        }}
+        src={{
+          src: "/new_inlab/plasmic/inlab/images/icons8Home1Svg.svg",
+          fullWidth: 150,
+          fullHeight: 150,
+          aspectRatio: 1
+        }}
+      />
+
+      <PlasmicImg__
         alt={""}
         className={classNames(sty.img___6Cjxt)}
         displayHeight={"25px"}
@@ -143,7 +211,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
         displayMaxWidth={"100%"}
         displayMinHeight={"0"}
         displayMinWidth={"0"}
-        displayWidth={"101px"}
+        displayWidth={"25%"}
         loading={"lazy"}
         onClick={async event => {
           const $steps = {};
@@ -207,7 +275,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
         }}
       />
 
-      <p.PlasmicImg
+      <PlasmicImg__
         alt={""}
         className={classNames(sty.img__tHc1)}
         displayHeight={"25px"}
@@ -215,7 +283,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
         displayMaxWidth={"100%"}
         displayMinHeight={"0"}
         displayMinWidth={"0"}
-        displayWidth={"101px"}
+        displayWidth={"25%"}
         loading={"lazy"}
         onClick={async event => {
           const $steps = {};
@@ -279,7 +347,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
         }}
       />
 
-      <p.PlasmicImg
+      <PlasmicImg__
         alt={""}
         className={classNames(sty.img__hhg4W)}
         displayHeight={"25px"}
@@ -287,7 +355,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
         displayMaxWidth={"100%"}
         displayMinHeight={"0"}
         displayMinWidth={"0"}
-        displayWidth={"101px"}
+        displayWidth={"25%"}
         loading={"lazy"}
         onClick={async event => {
           const $steps = {};

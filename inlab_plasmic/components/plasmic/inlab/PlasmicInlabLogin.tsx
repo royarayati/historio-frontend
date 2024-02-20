@@ -17,33 +17,53 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
-import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
+import RedirectInlabLoginToNamespaceSelection from "../../RedirectInlabLoginToNamespaceSelection"; // plasmic-import: Y1uAoiZCKyAg/component
+import RedirectInlabLoginToHomepage from "../../RedirectInlabLoginToHomepage"; // plasmic-import: VQNRVvXObcnc/component
 
-import {
-  UnnamedGlobalGroupOfVariants2Value,
-  useUnnamedGlobalGroupOfVariants2
-} from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2"; // plasmic-import: 9LuS2HFY_aeA/globalVariant
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -75,13 +95,16 @@ type ArgPropType = keyof PlasmicInlabLogin__ArgsType;
 export const PlasmicInlabLogin__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicInlabLogin__OverridesType = {
-  root?: p.Flex<"div">;
-  freeBox?: p.Flex<"div">;
-  username?: p.Flex<typeof TextInput>;
-  password?: p.Flex<typeof TextInput>;
-  loginButton?: p.Flex<typeof Button>;
-  resetPassword?: p.Flex<typeof Button>;
-  redirectUserToHomepage?: p.Flex<typeof SideEffect>;
+  inlabLogin?: Flex__<"div">;
+  freeBox?: Flex__<"div">;
+  username?: Flex__<typeof TextInput>;
+  password?: Flex__<typeof TextInput>;
+  loginButton?: Flex__<typeof Button>;
+  resetPassword?: Flex__<typeof Button>;
+  redirectInlabLoginToNamespaceSelection?: Flex__<
+    typeof RedirectInlabLoginToNamespaceSelection
+  >;
+  redirectInlabLoginToHomepage?: Flex__<typeof RedirectInlabLoginToHomepage>;
 };
 
 export interface DefaultInlabLoginProps {}
@@ -111,15 +134,15 @@ function PlasmicInlabLogin__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const $globalActions = ph.useGlobalActions?.();
+  const $globalActions = useGlobalActions?.();
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "username.value",
@@ -158,7 +181,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -166,7 +189,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
   });
 
   const globalVariants = ensureGlobalVariants({
-    unnamedGlobalGroupOfVariants2: useUnnamedGlobalGroupOfVariants2(),
     screen: useScreenVariantsjEqVmdAbnKYc()
   });
 
@@ -181,8 +203,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
       `}</style>
 
       <div
-        data-plasmic-name={"root"}
-        data-plasmic-override={overrides.root}
+        data-plasmic-name={"inlabLogin"}
+        data-plasmic-override={overrides.inlabLogin}
         data-plasmic-root={true}
         data-plasmic-for-node={forNode}
         className={classNames(
@@ -193,23 +215,17 @@ function PlasmicInlabLogin__RenderFunc(props: {
           projectcss.plasmic_tokens,
           plasmic_antd_5_hostless_css.plasmic_tokens,
           plasmic_plasmic_rich_components_css.plasmic_tokens,
-          sty.root,
+          sty.inlabLogin,
           {
-            [sty.rootdisabledLoginButton]: hasVariant(
+            [sty.inlabLogindisabledLoginButton]: hasVariant(
               $state,
               "disabledLoginButton",
               "disabledLoginButton"
-            ),
-            [sty.rootglobal_unnamedGlobalGroupOfVariants2_unnamedVariant]:
-              hasVariant(
-                globalVariants,
-                "unnamedGlobalGroupOfVariants2",
-                "unnamedVariant"
-              )
+            )
           }
         )}
       >
-        <p.Stack
+        <Stack__
           as={"div"}
           data-plasmic-name={"freeBox"}
           data-plasmic-override={overrides.freeBox}
@@ -241,16 +257,14 @@ function PlasmicInlabLogin__RenderFunc(props: {
             className={classNames("__wab_instance", sty.username)}
             name={``}
             onChange={(...eventArgs) => {
-              p.generateStateOnChangeProp($state, ["username", "value"])(
+              generateStateOnChangeProp($state, ["username", "value"])(
                 (e => e.target?.value).apply(null, eventArgs)
               );
             }}
             placeholder={"username"}
             required={false}
             type={"text"}
-            value={
-              p.generateStateValueProp($state, ["username", "value"]) ?? ""
-            }
+            value={generateStateValueProp($state, ["username", "value"]) ?? ""}
           />
 
           <TextInput
@@ -261,7 +275,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
             className={classNames("__wab_instance", sty.password)}
             onChange={async (...eventArgs: any) => {
               ((...eventArgs) => {
-                p.generateStateOnChangeProp($state, ["password", "value"])(
+                generateStateOnChangeProp($state, ["password", "value"])(
                   (e => e.target?.value).apply(null, eventArgs)
                 );
               }).apply(null, eventArgs);
@@ -271,9 +285,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
             }}
             placeholder={"password"}
             type={"password"}
-            value={
-              p.generateStateValueProp($state, ["password", "value"]) ?? ""
-            }
+            value={generateStateValueProp($state, ["password", "value"]) ?? ""}
           />
 
           <Button
@@ -287,7 +299,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
               )
             })}
             color={"blue"}
-            isDisabled={p.generateStateValueProp($state, [
+            isDisabled={generateStateValueProp($state, [
               "loginButton",
               "isDisabled"
             ])}
@@ -305,7 +317,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                         value = [value];
                       }
 
-                      p.set($state, vgroup, true);
+                      $stateSet($state, vgroup, true);
                       return true;
                     })?.apply(null, [actionArgs]);
                   })()
@@ -367,8 +379,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
               }
 
               $steps["goToNamespacesSelection"] =
-                $steps.loginAction.status === 200 &&
-                localStorage.getItem("inlab_user_namespace_id") == null
+                $steps.loginAction.status === 200
                   ? (() => {
                       const actionArgs = {
                         destination: `/user/setting/namespace`
@@ -395,33 +406,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 $steps["goToNamespacesSelection"] = await $steps[
                   "goToNamespacesSelection"
                 ];
-              }
-
-              $steps["goToHomepage"] =
-                $steps.loginAction.status === 200 &&
-                localStorage.getItem("inlab_user_namespace_id") !== null
-                  ? (() => {
-                      const actionArgs = { destination: `/patients` };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-              if (
-                $steps["goToHomepage"] != null &&
-                typeof $steps["goToHomepage"] === "object" &&
-                typeof $steps["goToHomepage"].then === "function"
-              ) {
-                $steps["goToHomepage"] = await $steps["goToHomepage"];
               }
 
               $steps["wrongUser"] =
@@ -457,7 +441,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                         value = [value];
                       }
 
-                      p.set($state, vgroup, false);
+                      $stateSet($state, vgroup, false);
                       return false;
                     })?.apply(null, [actionArgs]);
                   })()
@@ -473,10 +457,9 @@ function PlasmicInlabLogin__RenderFunc(props: {
               }
             }}
             onIsDisabledChange={(...eventArgs) => {
-              p.generateStateOnChangeProp($state, [
-                "loginButton",
-                "isDisabled"
-              ])(eventArgs[0]);
+              generateStateOnChangeProp($state, ["loginButton", "isDisabled"])(
+                eventArgs[0]
+              );
             }}
             shape={"rounded"}
           >
@@ -489,7 +472,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
             data-plasmic-override={overrides.resetPassword}
             className={classNames("__wab_instance", sty.resetPassword)}
             color={"clear"}
-            isDisabled={p.generateStateValueProp($state, [
+            isDisabled={generateStateValueProp($state, [
               "resetPassword",
               "isDisabled"
             ])}
@@ -525,7 +508,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
               }
             }}
             onIsDisabledChange={(...eventArgs) => {
-              p.generateStateOnChangeProp($state, [
+              generateStateOnChangeProp($state, [
                 "resetPassword",
                 "isDisabled"
               ])(eventArgs[0]);
@@ -543,61 +526,25 @@ function PlasmicInlabLogin__RenderFunc(props: {
               }
             </div>
           </Button>
-        </p.Stack>
-        <SideEffect
-          data-plasmic-name={"redirectUserToHomepage"}
-          data-plasmic-override={overrides.redirectUserToHomepage}
-          className={classNames("__wab_instance", sty.redirectUserToHomepage)}
-          onMount={async () => {
-            const $steps = {};
+        </Stack__>
+        <RedirectInlabLoginToNamespaceSelection
+          data-plasmic-name={"redirectInlabLoginToNamespaceSelection"}
+          data-plasmic-override={
+            overrides.redirectInlabLoginToNamespaceSelection
+          }
+          className={classNames(
+            "__wab_instance",
+            sty.redirectInlabLoginToNamespaceSelection
+          )}
+        />
 
-            $steps["log"] = true
-              ? (() => {
-                  const actionArgs = {
-                    customFunction: async () => {
-                      return console.log(
-                        `inlab user: ${localStorage.getItem("inlab_user")}`
-                      );
-                    }
-                  };
-                  return (({ customFunction }) => {
-                    return customFunction();
-                  })?.apply(null, [actionArgs]);
-                })()
-              : undefined;
-            if (
-              $steps["log"] != null &&
-              typeof $steps["log"] === "object" &&
-              typeof $steps["log"].then === "function"
-            ) {
-              $steps["log"] = await $steps["log"];
-            }
-
-            $steps["goToHomepage"] = localStorage.getItem("inlab_user")
-              ? (() => {
-                  const actionArgs = { destination: `/patients` };
-                  return (({ destination }) => {
-                    if (
-                      typeof destination === "string" &&
-                      destination.startsWith("#")
-                    ) {
-                      document
-                        .getElementById(destination.substr(1))
-                        .scrollIntoView({ behavior: "smooth" });
-                    } else {
-                      __nextRouter?.push(destination);
-                    }
-                  })?.apply(null, [actionArgs]);
-                })()
-              : undefined;
-            if (
-              $steps["goToHomepage"] != null &&
-              typeof $steps["goToHomepage"] === "object" &&
-              typeof $steps["goToHomepage"].then === "function"
-            ) {
-              $steps["goToHomepage"] = await $steps["goToHomepage"];
-            }
-          }}
+        <RedirectInlabLoginToHomepage
+          data-plasmic-name={"redirectInlabLoginToHomepage"}
+          data-plasmic-override={overrides.redirectInlabLoginToHomepage}
+          className={classNames(
+            "__wab_instance",
+            sty.redirectInlabLoginToHomepage
+          )}
         />
       </div>
     </React.Fragment>
@@ -605,33 +552,38 @@ function PlasmicInlabLogin__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: [
-    "root",
+  inlabLogin: [
+    "inlabLogin",
     "freeBox",
     "username",
     "password",
     "loginButton",
     "resetPassword",
-    "redirectUserToHomepage"
+    "redirectInlabLoginToNamespaceSelection",
+    "redirectInlabLoginToHomepage"
   ],
   freeBox: ["freeBox", "username", "password", "loginButton", "resetPassword"],
   username: ["username"],
   password: ["password"],
   loginButton: ["loginButton"],
   resetPassword: ["resetPassword"],
-  redirectUserToHomepage: ["redirectUserToHomepage"]
+  redirectInlabLoginToNamespaceSelection: [
+    "redirectInlabLoginToNamespaceSelection"
+  ],
+  redirectInlabLoginToHomepage: ["redirectInlabLoginToHomepage"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  root: "div";
+  inlabLogin: "div";
   freeBox: "div";
   username: typeof TextInput;
   password: typeof TextInput;
   loginButton: typeof Button;
   resetPassword: typeof Button;
-  redirectUserToHomepage: typeof SideEffect;
+  redirectInlabLoginToNamespaceSelection: typeof RedirectInlabLoginToNamespaceSelection;
+  redirectInlabLoginToHomepage: typeof RedirectInlabLoginToHomepage;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -681,7 +633,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "root") {
+  if (nodeName === "inlabLogin") {
     func.displayName = "PlasmicInlabLogin";
   } else {
     func.displayName = `PlasmicInlabLogin.${nodeName}`;
@@ -691,7 +643,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicInlabLogin = Object.assign(
   // Top-level PlasmicInlabLogin renders the root element
-  makeNodeComponent("root"),
+  makeNodeComponent("inlabLogin"),
   {
     // Helper components rendering sub-elements
     freeBox: makeNodeComponent("freeBox"),
@@ -699,7 +651,12 @@ export const PlasmicInlabLogin = Object.assign(
     password: makeNodeComponent("password"),
     loginButton: makeNodeComponent("loginButton"),
     resetPassword: makeNodeComponent("resetPassword"),
-    redirectUserToHomepage: makeNodeComponent("redirectUserToHomepage"),
+    redirectInlabLoginToNamespaceSelection: makeNodeComponent(
+      "redirectInlabLoginToNamespaceSelection"
+    ),
+    redirectInlabLoginToHomepage: makeNodeComponent(
+      "redirectInlabLoginToHomepage"
+    ),
 
     // Metadata about props expected for PlasmicInlabLogin
     internalVariantProps: PlasmicInlabLogin__VariantProps,

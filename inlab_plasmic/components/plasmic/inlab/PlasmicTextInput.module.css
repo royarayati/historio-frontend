@@ -9,7 +9,7 @@
   position: sticky;
   min-width: 0;
   border-radius: 6px;
-  padding: 7px 11px;
+  padding: 7px 6px 7px 11px;
   border: 1px solid var(--token-pRs3-4jrQ4XQ);
 }
 @media (min-width: 0px) and (max-width: 768px) {
@@ -110,6 +110,13 @@
 }
 .root:focus-within .input::placeholder {
   outline: none;
+}
+.svg__lTYva {
+  position: relative;
+  object-fit: cover;
+  width: var(--token-UEz8jpx4ZeEk);
+  height: 1em;
+  color: #418dff;
 }
 .endIconContainer {
   position: relative;

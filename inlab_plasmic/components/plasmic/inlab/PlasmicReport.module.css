@@ -57,8 +57,22 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  padding-top: 8px;
+  background: #ffffff;
+  text-align: center;
+  margin-top: 12px;
   min-width: 0;
+  padding: 0px;
+}
+.text__ttMz {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin-top: 8px;
+  align-self: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
 }
 .freeBox__m5Qvi {
   display: flex;
@@ -76,7 +90,7 @@
   padding: 8px;
   border: 0.5px solid var(--token-8PxxXPNrIohQ);
 }
-.freeBox__dUwXl {
+.imagingTitledatetime {
   display: flex;
   position: relative;
   flex-direction: row;
