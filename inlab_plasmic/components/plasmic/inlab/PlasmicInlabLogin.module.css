@@ -1,4 +1,4 @@
-.root {
+.inlabLogin {
   display: grid;
   flex-direction: column;
   position: relative;
@@ -20,24 +20,21 @@
       calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
     )
     minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
-  padding: 10px;
+  padding: 16px;
 }
-.root > * {
+.inlabLogin > * {
   grid-column: 4;
 }
 @media (min-width: 0px) and (max-width: 768px) {
-  .root > * {
+  .inlabLogin > * {
     grid-column: 4;
   }
 }
-.rootglobal_unnamedGlobalGroupOfVariants2_unnamedVariant > * {
-  grid-column: 4;
-}
-.rootdisabledLoginButton > * {
+.inlabLogindisabledLoginButton > * {
   grid-column: 4;
 }
 @media (min-width: 0px) and (max-width: 768px) {
-  .rootdisabledLoginButton > * {
+  .inlabLogindisabledLoginButton > * {
     grid-column: 4;
   }
 }
@@ -56,8 +53,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: calc(0px - var(--token-oYI7ebdZitcv));
-  height: calc(100% + var(--token-oYI7ebdZitcv));
+  margin-top: calc(0px - 12px);
+  height: calc(100% + 12px);
 }
 .freeBox > :global(.__wab_flex-container) > *,
 .freeBox > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
@@ -67,7 +64,7 @@
   > :global(.__wab_slot)
   > picture
   > img {
-  margin-top: var(--token-oYI7ebdZitcv);
+  margin-top: 12px;
 }
 .text__zvBgx {
   position: relative;
@@ -77,38 +74,44 @@
   text-align: center;
 }
 .username:global(.__wab_instance) {
-  max-width: 100%;
+  max-width: 80%;
   position: relative;
-  width: auto;
+  width: 100%;
+  min-width: 0;
 }
 .svg__falId {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
+  color: var(--token-9iYGdL7i3GKE);
 }
-.svg__rNmzx {
+.svg__sIovl {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
+  color: var(--token-9iYGdL7i3GKE);
 }
 .password:global(.__wab_instance) {
-  max-width: 100%;
+  max-width: 80%;
   position: relative;
-  width: auto;
+  width: 100%;
+  min-width: 0;
 }
 .svg__fnFNb {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
+  color: var(--token-9iYGdL7i3GKE);
 }
-.svg__isi1I {
+.svg__lOk9F {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
+  color: var(--token-9iYGdL7i3GKE);
 }
 .loginButton:global(.__wab_instance) {
   max-width: 100%;
@@ -148,8 +151,11 @@
   width: auto;
   height: 1em;
 }
-.redirectUserToHomepage:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
+.redirectInlabLoginToNamespaceSelection:global(.__wab_instance):global(
+    .__wab_instance
+  ) {
+  position: relative;
+}
+.redirectInlabLoginToHomepage:global(.__wab_instance):global(.__wab_instance) {
   position: relative;
 }

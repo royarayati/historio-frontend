@@ -17,38 +17,62 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
+import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
-import { RichTable } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
-import { tableHelpers as RichTable_Helpers } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
+import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicTestAuth.module.css"; // plasmic-import: djw6BO6ESgiq/css
 
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
@@ -66,12 +90,13 @@ type ArgPropType = keyof PlasmicTestAuth__ArgsType;
 export const PlasmicTestAuth__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicTestAuth__OverridesType = {
-  root?: p.Flex<"div">;
-  test?: p.Flex<typeof ApiFetcherComponent>;
-  someInstruction?: p.Flex<"div">;
-  button?: p.Flex<typeof Button>;
-  lab?: p.Flex<typeof ApiFetcherComponent>;
-  table?: p.Flex<typeof RichTable>;
+  testAuth?: Flex__<"div">;
+  httpRestApiFetcher?: Flex__<typeof DataFetcher>;
+  test?: Flex__<typeof ApiFetcherComponent>;
+  someInstruction?: Flex__<"div">;
+  button?: Flex__<typeof Button>;
+  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
 };
 
 export interface DefaultTestAuthProps {}
@@ -101,15 +126,15 @@ function PlasmicTestAuth__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const $globalActions = ph.useGlobalActions?.();
+  const $globalActions = useGlobalActions?.();
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "actionTextResult",
@@ -122,46 +147,11 @@ function PlasmicTestAuth__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "table.selectedRowKey",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: p.generateOnMutateForSpec("selectedRowKey", RichTable_Helpers)
-      },
-      {
-        path: "table.selectedRow",
-        type: "private",
-        variableType: "object",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: p.generateOnMutateForSpec("selectedRow", RichTable_Helpers)
-      },
-      {
-        path: "table.selectedRows",
-        type: "private",
-        variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: p.generateOnMutateForSpec("selectedRows", RichTable_Helpers)
-      },
-      {
-        path: "table.selectedRowKeys",
-        type: "private",
-        variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: p.generateOnMutateForSpec(
-          "selectedRowKeys",
-          RichTable_Helpers
-        )
       }
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -183,59 +173,58 @@ function PlasmicTestAuth__RenderFunc(props: {
       `}</style>
 
       <div className={projectcss.plasmic_page_wrapper}>
-        <div
-          data-plasmic-name={"root"}
-          data-plasmic-override={overrides.root}
-          data-plasmic-root={true}
-          data-plasmic-for-node={forNode}
-          className={classNames(
-            projectcss.all,
-            projectcss.root_reset,
-            projectcss.plasmic_default_styles,
-            projectcss.plasmic_mixins,
-            projectcss.plasmic_tokens,
-            plasmic_antd_5_hostless_css.plasmic_tokens,
-            plasmic_plasmic_rich_components_css.plasmic_tokens,
-            sty.root
-          )}
-        >
-          <ApiFetcherComponent
-            data-plasmic-name={"test"}
-            data-plasmic-override={overrides.test}
-            className={classNames("__wab_instance", sty.test)}
-            method={"GET"}
-            path={"/api/v2/user/info"}
+        {false ? (
+          <div
+            data-plasmic-name={"testAuth"}
+            data-plasmic-override={overrides.testAuth}
+            data-plasmic-root={true}
+            data-plasmic-for-node={forNode}
+            className={classNames(
+              projectcss.all,
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              projectcss.plasmic_tokens,
+              plasmic_antd_5_hostless_css.plasmic_tokens,
+              plasmic_plasmic_rich_components_css.plasmic_tokens,
+              sty.testAuth
+            )}
           >
-            <ph.DataCtxReader>
-              {$ctx => (
-                <React.Fragment>
+            <DataFetcher
+              data-plasmic-name={"httpRestApiFetcher"}
+              data-plasmic-override={overrides.httpRestApiFetcher}
+              className={classNames("__wab_instance", sty.httpRestApiFetcher)}
+              dataName={"fetchedData"}
+              errorDisplay={
+                <DataCtxReader__>
+                  {$ctx => "Error fetching data"}
+                </DataCtxReader__>
+              }
+              errorName={"fetchError"}
+              headers={{
+                "Content-Type": "application/json",
+                Accept: "application/json"
+              }}
+              loadingDisplay={
+                <DataCtxReader__>{$ctx => "Loading..."}</DataCtxReader__>
+              }
+              method={"GET"}
+              noLayout={false}
+              url={"https://api.github.com/users/plasmicapp/repos"}
+            >
+              <DataCtxReader__>
+                {$ctx => (
                   <div
-                    data-plasmic-name={"someInstruction"}
-                    data-plasmic-override={overrides.someInstruction}
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.someInstruction
+                      sty.text__rtlRh
                     )}
-                  >
-                    {
-                      "Below is a textbox that its content is generated from an API Call tha ApiFetcherComponent has proveded:"
-                    }
-                  </div>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__vVeKr
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-                    }}
                   >
                     <React.Fragment>
                       {(() => {
                         try {
-                          return $ctx.fetched_data.data.rank.role;
+                          return $ctx.fetchedData[0].id;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -248,253 +237,225 @@ function PlasmicTestAuth__RenderFunc(props: {
                       })()}
                     </React.Fragment>
                   </div>
-                  <Button
-                    data-plasmic-name={"button"}
-                    data-plasmic-override={overrides.button}
-                    className={classNames("__wab_instance", sty.button)}
-                    color={"green"}
-                    isDisabled={p.generateStateValueProp($state, [
-                      "button",
-                      "isDisabled"
-                    ])}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["myAction"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: ["GET", "/api/v2/user/info"]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["myAction"] != null &&
-                        typeof $steps["myAction"] === "object" &&
-                        typeof $steps["myAction"].then === "function"
-                      ) {
-                        $steps["myAction"] = await $steps["myAction"];
+                )}
+              </DataCtxReader__>
+            </DataFetcher>
+            <ApiFetcherComponent
+              data-plasmic-name={"test"}
+              data-plasmic-override={overrides.test}
+              className={classNames("__wab_instance", sty.test)}
+              method={"GET"}
+              path={`/api/v2/user/info?user=${$ctx.inlab_user.user.id}`}
+              ref={ref => {
+                $refs["test"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <React.Fragment>
+                    <div
+                      data-plasmic-name={"someInstruction"}
+                      data-plasmic-override={overrides.someInstruction}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.someInstruction
+                      )}
+                    >
+                      {
+                        "Below is a textbox that its content is generated from an API Call tha ApiFetcherComponent has proveded:"
                       }
-
-                      $steps["updateActionTextResult"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["actionTextResult"]
-                              },
-                              operation: 0,
-                              value: JSON.stringify($steps.myAction)
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              p.set(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateActionTextResult"] != null &&
-                        typeof $steps["updateActionTextResult"] === "object" &&
-                        typeof $steps["updateActionTextResult"].then ===
-                          "function"
-                      ) {
-                        $steps["updateActionTextResult"] = await $steps[
-                          "updateActionTextResult"
-                        ];
-                      }
-                    }}
-                    onIsDisabledChange={(...eventArgs) => {
-                      p.generateStateOnChangeProp($state, [
-                        "button",
-                        "isDisabled"
-                      ])(eventArgs[0]);
-                    }}
-                  >
+                    </div>
                     <div
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.text__x3Kgi
+                        sty.text__vVeKr
+                      )}
+                      onClick={async event => {
+                        const $steps = {};
+                      }}
+                    >
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return $ctx.fetched_data.data.rank.role;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
+                    </div>
+                    <Button
+                      data-plasmic-name={"button"}
+                      data-plasmic-override={overrides.button}
+                      className={classNames("__wab_instance", sty.button)}
+                      color={"green"}
+                      isDisabled={generateStateValueProp($state, [
+                        "button",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["myAction"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  "GET",
+                                  `/api/v2/user/info?id=${$ctx.inlab_user.user.id}`
+                                ]
+                              };
+                              return $globalActions[
+                                "AuthGlobalContext.apiFetcher"
+                              ]?.apply(null, [...actionArgs.args]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["myAction"] != null &&
+                          typeof $steps["myAction"] === "object" &&
+                          typeof $steps["myAction"].then === "function"
+                        ) {
+                          $steps["myAction"] = await $steps["myAction"];
+                        }
+
+                        $steps["updateActionTextResult"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["actionTextResult"]
+                                },
+                                operation: 0,
+                                value: JSON.stringify($steps.myAction)
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateActionTextResult"] != null &&
+                          typeof $steps["updateActionTextResult"] ===
+                            "object" &&
+                          typeof $steps["updateActionTextResult"].then ===
+                            "function"
+                        ) {
+                          $steps["updateActionTextResult"] = await $steps[
+                            "updateActionTextResult"
+                          ];
+                        }
+                      }}
+                      onIsDisabledChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__x3Kgi
+                        )}
+                      >
+                        {"Click me For Actions"}
+                      </div>
+                    </Button>
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__xW4B5
                       )}
                     >
-                      {"Click me For Actions"}
-                    </div>
-                  </Button>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__xW4B5
-                    )}
-                  >
-                    <React.Fragment>
-                      {(() => {
-                        try {
-                          return $state.actionTextResult;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return "Action Result";
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return $state.actionTextResult;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "Action Result";
+                            }
+                            throw e;
                           }
-                          throw e;
-                        }
-                      })()}
-                    </React.Fragment>
-                  </div>
-                </React.Fragment>
-              )}
-            </ph.DataCtxReader>
-          </ApiFetcherComponent>
-          <ApiFetcherComponent
-            data-plasmic-name={"lab"}
-            data-plasmic-override={overrides.lab}
-            className={classNames("__wab_instance", sty.lab)}
-            headers={{ "X-Namespace": 1 }}
-            method={"GET"}
-            path={
-              "/api/v2/patient/633587/raw_lab_tests/recent?offset=0&limit=20"
-            }
-          >
-            <ph.DataCtxReader>
-              {$ctx =>
-                (() => {
-                  const child$Props = {
-                    className: classNames("__wab_instance", sty.table),
-                    data: (() => {
-                      try {
-                        return undefined;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return undefined;
-                        }
-                        throw e;
-                      }
-                    })(),
-                    hideColumnPicker: true,
-                    hideExports: true,
-                    hideSearch: true,
-                    onRowSelectionChanged: async (...eventArgs: any) => {
-                      p.generateStateOnChangePropForCodeComponents(
-                        $state,
-                        "selectedRowKey",
-                        ["table", "selectedRowKey"],
-                        RichTable_Helpers
-                      ).apply(null, eventArgs);
-                      p.generateStateOnChangePropForCodeComponents(
-                        $state,
-                        "selectedRow",
-                        ["table", "selectedRow"],
-                        RichTable_Helpers
-                      ).apply(null, eventArgs);
-                      p.generateStateOnChangePropForCodeComponents(
-                        $state,
-                        "selectedRows",
-                        ["table", "selectedRows"],
-                        RichTable_Helpers
-                      ).apply(null, eventArgs);
-                      p.generateStateOnChangePropForCodeComponents(
-                        $state,
-                        "selectedRowKeys",
-                        ["table", "selectedRowKeys"],
-                        RichTable_Helpers
-                      ).apply(null, eventArgs);
-                    },
-                    scopeClassName: sty["table__instance"],
-                    selectedRowKey: p.generateStateValueProp($state, [
-                      "table",
-                      "selectedRowKey"
-                    ]),
-                    selectedRowKeys: p.generateStateValueProp($state, [
-                      "table",
-                      "selectedRowKeys"
-                    ]),
-                    themeResetClassName: classNames(
-                      projectcss.root_reset,
-                      projectcss.root_reset_tags,
-                      projectcss.plasmic_default_styles,
-                      projectcss.plasmic_mixins,
-                      projectcss.plasmic_tokens,
-                      plasmic_antd_5_hostless_css.plasmic_tokens,
-                      plasmic_plasmic_rich_components_css.plasmic_tokens
-                    )
-                  };
-                  p.initializeCodeComponentStates(
-                    $state,
-                    [
-                      {
-                        name: "selectedRowKey",
-                        plasmicStateName: "table.selectedRowKey"
-                      },
-                      {
-                        name: "selectedRow",
-                        plasmicStateName: "table.selectedRow"
-                      },
-                      {
-                        name: "selectedRows",
-                        plasmicStateName: "table.selectedRows"
-                      },
-                      {
-                        name: "selectedRowKeys",
-                        plasmicStateName: "table.selectedRowKeys"
-                      }
-                    ],
-                    [],
-                    RichTable_Helpers ?? {},
-                    child$Props
-                  );
+                        })()}
+                      </React.Fragment>
+                    </div>
+                  </React.Fragment>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponent>
+            <RedirectToLoginPage
+              data-plasmic-name={"redirectToLoginPage"}
+              data-plasmic-override={overrides.redirectToLoginPage}
+              className={classNames("__wab_instance", sty.redirectToLoginPage)}
+            />
 
-                  return (
-                    <RichTable
-                      data-plasmic-name={"table"}
-                      data-plasmic-override={overrides.table}
-                      {...child$Props}
-                    />
-                  );
-                })()
-              }
-            </ph.DataCtxReader>
-          </ApiFetcherComponent>
-        </div>
+            <RedirectToNamespaceSelection
+              data-plasmic-name={"redirectToNamespaceSelection"}
+              data-plasmic-override={overrides.redirectToNamespaceSelection}
+              className={classNames(
+                "__wab_instance",
+                sty.redirectToNamespaceSelection
+              )}
+            />
+          </div>
+        ) : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "test", "someInstruction", "button", "lab", "table"],
+  testAuth: [
+    "testAuth",
+    "httpRestApiFetcher",
+    "test",
+    "someInstruction",
+    "button",
+    "redirectToLoginPage",
+    "redirectToNamespaceSelection"
+  ],
+  httpRestApiFetcher: ["httpRestApiFetcher"],
   test: ["test", "someInstruction", "button"],
   someInstruction: ["someInstruction"],
   button: ["button"],
-  lab: ["lab", "table"],
-  table: ["table"]
+  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  root: "div";
+  testAuth: "div";
+  httpRestApiFetcher: typeof DataFetcher;
   test: typeof ApiFetcherComponent;
   someInstruction: "div";
   button: typeof Button;
-  lab: typeof ApiFetcherComponent;
-  table: typeof RichTable;
+  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -544,7 +505,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "root") {
+  if (nodeName === "testAuth") {
     func.displayName = "PlasmicTestAuth";
   } else {
     func.displayName = `PlasmicTestAuth.${nodeName}`;
@@ -554,14 +515,17 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicTestAuth = Object.assign(
   // Top-level PlasmicTestAuth renders the root element
-  makeNodeComponent("root"),
+  makeNodeComponent("testAuth"),
   {
     // Helper components rendering sub-elements
+    httpRestApiFetcher: makeNodeComponent("httpRestApiFetcher"),
     test: makeNodeComponent("test"),
     someInstruction: makeNodeComponent("someInstruction"),
     button: makeNodeComponent("button"),
-    lab: makeNodeComponent("lab"),
-    table: makeNodeComponent("table"),
+    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
 
     // Metadata about props expected for PlasmicTestAuth
     internalVariantProps: PlasmicTestAuth__VariantProps,

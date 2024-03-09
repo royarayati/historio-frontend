@@ -1,50 +1,43 @@
-import React, { useEffect, useMemo, useState, useContext, useCallback } from "react";
-import { useRouter } from 'next/router'
+import React, { useEffect, useMemo, useState, useCallback, PropsWithChildren } from "react";
 
-import { DataProvider, GlobalActionsProvider, PlasmicCanvasContext } from "@plasmicapp/host";
+import { DataProvider, GlobalActionsProvider } from "@plasmicapp/host";
 
 import axios from "axios";
 
 import {
   getDevicedId,
   getCurrentUser,
-  refreshAccessIfNeeded,
-  logForDev
+  logForDev,
+  checkUserValidity
 } from "./CommonUtils";
+
 import { InlabUser, GlobalContext } from "./types/CommonTypes";
 import { axiosCall } from "./ApiFetcherAction";
 
-// Users will be able to set these props in Studio.
 interface AuthGlobalContextProps {
-  // You might use this to override the auth URL to a test or local URL.
-  baseUrl: string;
+  // Any props plasmic-studio users want to set as project settings
 }
 
-// TODO: We should consider is sending null for all errors is logical or not
-//       Does All errors mean user is logouted ?
-//       Or error from network or other problems happened ?
-export const AuthGlobalContext = ({ children }: React.PropsWithChildren<AuthGlobalContextProps>) => {
+export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalContextProps>) => {
 
-  ////////// READ PROPS //////////
-  
-  // TODO: explain WHY if?
-  // without using "if not undefined", throws error and do not know why
+  ////////// SET BASE URL //////////
+
   let baseUrl = '';
   if (typeof window !== "undefined") {
-    baseUrl = window.env.INLAB_API_URL || '';
+    logForDev("AuthGlobalContext: window is defined");
+    baseUrl = window.env.INLAB_API_URL;
   }
 
   ///////// SETUP USER //////////
 
-  const [inlabUser, setInlabUser] = useState<InlabUser | null>(null);
+  const [inlabUser, setInlabUser] = useState<InlabUser>(getCurrentUser());
+  const [userIsReady, setUserIsReady] = useState(false);
 
-  logForDev("AuthGlobalContext: After useState: " + (inlabUser ? "User found" : "User is NULL"));
+  logForDev("AuthGlobalContext: After useState: inlabUser is " + (typeof inlabUser));
 
-  // Use this function to change stored user in entire app
-  // Handle storing new user and routes to login page
-  // if user is null
-  const changeUserCallback = useCallback((newUser: InlabUser | null) => {
-    
+  // Use this function to change user in entire app
+  const changeUserCallback = useCallback((newUser: InlabUser) => {
+
     if (newUser) {
       localStorage.setItem('inlab_user', JSON.stringify(newUser));
 
@@ -52,35 +45,16 @@ export const AuthGlobalContext = ({ children }: React.PropsWithChildren<AuthGlob
       localStorage.removeItem('inlab_user');
     }
     logForDev("changeUserCallback: " + (newUser ? "Setting User" : "Setting NULL"));
-    
+
     setInlabUser(newUser);
   }, []);
 
   useEffect(() => {
-    const userOfLocal = getCurrentUser();
+    console.log("AuthGlobalContext: useEffect: START");
 
-    refreshAccessIfNeeded({ baseUrl, changeUserCallback }, userOfLocal)
-      .then(user => {
-        // We should handle a case here that refreshAccessIfNeeded does not know about it.
-        // If user === userOfLocal means localstorage user was valid and nothing changed
-        // so we need to render the page by only setting userOfLocal as inlabUser
-        if (user === userOfLocal){
-          console.log("AuthGlobalContext: refreshAccessIfNeeded: then: user === userOfLocal");
-          setInlabUser(user);
-        }
-      })
-      // We may need to handle axios errors here
-      .catch(error => {
-        // As above if user === userOfLocal means rejected null without calling changeUserCallback
-        // So we need to handle it here
-        if (userOfLocal === null){
-          changeUserCallback(null);
-        }
-       });
+    setUserIsReady(checkUserValidity(inlabUser, baseUrl, changeUserCallback));
 
-    logForDev("AuthGlobalContext: After refreshAccessIfNeeded: " + (userOfLocal ? "UserOfLocal found" : "UserOfLocal is NULL"));
-    logForDev("AuthGlobalContext: After refreshAccessIfNeeded: " + (inlabUser ? "inlabUser found" : "inlabUser is NULL"));
-  }, [baseUrl]);
+  }, []);
 
   ////////// SETUP CONTEXT //////////
 
@@ -89,14 +63,14 @@ export const AuthGlobalContext = ({ children }: React.PropsWithChildren<AuthGlob
     changeUserCallback
   }), [baseUrl, changeUserCallback]);
 
-  ////////// SETUP ACTIONS //////////
+  ////////// SETUP GLOBAL ACTIONS //////////
 
   const actions = useMemo(() => ({
-    apiFetcher: async function apiFetcher(
+    apiFetcher: async (
       method: string,
       path: string,
       headers?: any,
-      requestBody?: any): Promise<any> {
+      requestBody?: any): Promise<any> => {
       return await axiosCall(
         inlabUser,
         baseUrl,
@@ -106,15 +80,13 @@ export const AuthGlobalContext = ({ children }: React.PropsWithChildren<AuthGlob
         headers,
         requestBody
       ).then(response => response)
-        .catch(error => {
-          return error
-        })
+        .catch(error => error)
     },
 
-    login: async function callLogin(
+    login: async (
       username: string,
       password: string
-    ): Promise<any> {
+    ): Promise<any> => {
       return await axios.post(
         baseUrl + '/api/v2/user/login',
         {
@@ -154,12 +126,14 @@ export const AuthGlobalContext = ({ children }: React.PropsWithChildren<AuthGlob
 
   }), [baseUrl, changeUserCallback, inlabUser]);
 
+  console.log("AuthGlobalContext: END: userIsReady: " + userIsReady);
+
   ///////// RETURN PROVIDERS //////////
   return (
     <GlobalActionsProvider contextName="AuthGlobalContext" actions={actions}>
       <GlobalContext.Provider value={globalContext}>
         <DataProvider name="inlab_user" data={inlabUser}>
-          {children}
+          {userIsReady && children}
         </DataProvider>
       </GlobalContext.Provider>
     </GlobalActionsProvider>

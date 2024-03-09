@@ -16,11 +16,9 @@ export interface GlobalContextsProviderProps {
   antdConfigProviderProps?: Partial<
     Omit<React.ComponentProps<typeof AntdConfigProvider>, "children">
   >;
-
   commerceProviderComponentProps?: Partial<
     Omit<React.ComponentProps<typeof CommerceProviderComponent>, "children">
   >;
-
   authGlobalContextProps?: Partial<
     Omit<React.ComponentProps<typeof AuthGlobalContext>, "children">
   >;
@@ -118,7 +116,7 @@ export default function GlobalContextsProvider(
           ? antdConfigProviderProps.themeStyles!
           : hasVariant(globalVariants, "screen", "mobileFirst")
           ? {
-              fontFamily: "Vazirmatn",
+              fontFamily: "var(--VazirmatnCustom)",
               fontSize: "16px",
               fontWeight: "400",
               lineHeight: "1.5",
@@ -127,7 +125,7 @@ export default function GlobalContextsProvider(
             }
           : true
           ? {
-              fontFamily: "Vazirmatn",
+              fontFamily: "var(--VazirmatnCustom)",
               fontSize: "16px",
               fontWeight: "400",
               lineHeight: "1.5",
@@ -157,14 +155,7 @@ export default function GlobalContextsProvider(
             : "next-js-store.myshopify.com"
         }
       >
-        <AuthGlobalContext
-          {...authGlobalContextProps}
-          baseUrl={
-            authGlobalContextProps && "baseUrl" in authGlobalContextProps
-              ? authGlobalContextProps.baseUrl!
-              : "https://inlabgr.synappsgroup.com:8008/"
-          }
-        >
+        <AuthGlobalContext {...authGlobalContextProps}>
           {children}
         </AuthGlobalContext>
       </CommerceProviderComponent>

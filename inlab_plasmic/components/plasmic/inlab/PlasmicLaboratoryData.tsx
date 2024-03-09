@@ -17,42 +17,64 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
-import H from "../../H"; // plasmic-import: -ckcELWzdUW7/component
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
-import RedirectUserToLoginPage from "../../RedirectUserToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
+import OnloadUserPatientInteractionCount from "../../OnloadUserPatientInteractionCount"; // plasmic-import: 6oEGl3M40QrL/component
 
-import {
-  UnnamedGlobalGroupOfVariantsValue,
-  useUnnamedGlobalGroupOfVariants
-} from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants"; // plasmic-import: JLsDjdb5OPmc/globalVariant
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3wItkax/css
+
+import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
 
 createPlasmicElementProxy;
 
@@ -66,17 +88,25 @@ type ArgPropType = keyof PlasmicLaboratoryData__ArgsType;
 export const PlasmicLaboratoryData__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicLaboratoryData__OverridesType = {
-  laboratoryData?: p.Flex<"div">;
-  h?: p.Flex<typeof H>;
-  apiFetcherComponent?: p.Flex<typeof ApiFetcherComponent>;
-  laboratoryResults?: p.Flex<"div">;
-  datetime?: p.Flex<"div">;
-  labTitles?: p.Flex<"div">;
-  factorName?: p.Flex<"div">;
-  factorValue?: p.Flex<"div">;
-  switchingTabs?: p.Flex<"div">;
-  switchingTab?: p.Flex<typeof SwitchingTab>;
-  redirectUserToLoginPage?: p.Flex<typeof RedirectUserToLoginPage>;
+  laboratoryData?: Flex__<"div">;
+  header?: Flex__<"div">;
+  svg?: Flex__<"svg">;
+  labData?: Flex__<typeof ApiFetcherComponent>;
+  laboratoryLists?: Flex__<"div">;
+  laboratoryTitle?: Flex__<"div">;
+  labPerDate?: Flex__<"div">;
+  dateOfReport?: Flex__<"div">;
+  labLists?: Flex__<"div">;
+  factorNamevalue?: Flex__<"div">;
+  factorName?: Flex__<"div">;
+  factorValue?: Flex__<"div">;
+  switchingTabs?: Flex__<"div">;
+  switchingTab?: Flex__<typeof SwitchingTab>;
+  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
+  onloadUserPatientInteractionCount?: Flex__<
+    typeof OnloadUserPatientInteractionCount
+  >;
 };
 
 export interface DefaultLaboratoryDataProps {}
@@ -106,14 +136,13 @@ function PlasmicLaboratoryData__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
   const globalVariants = ensureGlobalVariants({
-    unnamedGlobalGroupOfVariants: useUnnamedGlobalGroupOfVariants(),
     screen: useScreenVariantsjEqVmdAbnKYc()
   });
 
@@ -140,30 +169,60 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           projectcss.plasmic_tokens,
           plasmic_antd_5_hostless_css.plasmic_tokens,
           plasmic_plasmic_rich_components_css.plasmic_tokens,
-          sty.laboratoryData,
-          {
-            [sty.laboratoryDataglobal_unnamedGlobalGroupOfVariants_unnamedVariant]:
-              hasVariant(
-                globalVariants,
-                "unnamedGlobalGroupOfVariants",
-                "unnamedVariant"
-              )
-          }
+          sty.laboratoryData
         )}
       >
-        <H
-          data-plasmic-name={"h"}
-          data-plasmic-override={overrides.h}
-          className={classNames("__wab_instance", sty.h)}
-        />
+        <div
+          data-plasmic-name={"header"}
+          data-plasmic-override={overrides.header}
+          className={classNames(projectcss.all, sty.header)}
+        >
+          {false ? (
+            <ArrowLeftIcon
+              data-plasmic-name={"svg"}
+              data-plasmic-override={overrides.svg}
+              className={classNames(projectcss.all, sty.svg)}
+              onClick={async event => {
+                const $steps = {};
 
+                $steps["goToHomepage"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/patients` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToHomepage"] != null &&
+                  typeof $steps["goToHomepage"] === "object" &&
+                  typeof $steps["goToHomepage"].then === "function"
+                ) {
+                  $steps["goToHomepage"] = await $steps["goToHomepage"];
+                }
+              }}
+              role={"img"}
+            />
+          ) : null}
+        </div>
         <ApiFetcherComponent
-          data-plasmic-name={"apiFetcherComponent"}
-          data-plasmic-override={overrides.apiFetcherComponent}
-          className={classNames("__wab_instance", sty.apiFetcherComponent)}
+          data-plasmic-name={"labData"}
+          data-plasmic-override={overrides.labData}
+          className={classNames("__wab_instance", sty.labData)}
           headers={(() => {
             try {
-              return { "X-Namespace": 2 };
+              return {
+                "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+              };
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -176,237 +235,326 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           })()}
           method={"GET"}
           path={`/api/v2/patient/${$ctx.params.code}/raw_lab_tests/recent?offset=0&limit=20`}
+          ref={ref => {
+            $refs["labData"] = ref;
+          }}
         >
-          <ph.DataCtxReader>
-            {$ctx =>
-              (_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                (() => {
+          <DataCtxReader__>
+            {$ctx => (
+              <React.Fragment>
+                {(() => {
                   try {
-                    return $ctx.fetched_data.data;
+                    return $ctx.fetched_data.data.lab_test_groups == 0;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
                       e?.plasmicType === "PlasmicUndefinedDataError"
                     ) {
-                      return [];
+                      return false;
                     }
                     throw e;
                   }
-                })()
-              ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                const currentItem = __plasmic_item_0;
-                const currentIndex = __plasmic_idx_0;
-                return (
+                })() ? (
                   <div
-                    data-plasmic-name={"laboratoryResults"}
-                    data-plasmic-override={overrides.laboratoryResults}
                     className={classNames(
                       projectcss.all,
-                      sty.laboratoryResults
+                      projectcss.__wab_text,
+                      sty.text__vcc6L
                     )}
-                    key={currentIndex}
                   >
+                    {
+                      "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                    }
+                  </div>
+                ) : null}
+                {(() => {
+                  try {
+                    return $ctx.fetched_data.loading == true;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return false;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__woDte
+                    )}
+                  >
+                    {
+                      "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                    }
+                  </div>
+                ) : null}
+                {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                  (() => {
+                    try {
+                      return $ctx.fetched_data.data.lab_test_groups;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return [];
+                      }
+                      throw e;
+                    }
+                  })()
+                ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                  const currentItem = __plasmic_item_0;
+                  const currentIndex = __plasmic_idx_0;
+                  return (
                     <div
-                      data-plasmic-name={"datetime"}
-                      data-plasmic-override={overrides.datetime}
+                      data-plasmic-name={"laboratoryLists"}
+                      data-plasmic-override={overrides.laboratoryLists}
                       className={classNames(
                         projectcss.all,
-                        projectcss.__wab_text,
-                        sty.datetime
+                        sty.laboratoryLists
                       )}
+                      key={currentIndex}
                     >
-                      <React.Fragment>
-                        {(() => {
-                          try {
-                            return (() => {
-                              if (currentItem.lab_test_groups.length === 0) {
-                                return "آزمایشی وجود ندارد";
-                              } else {
-                                const gregorianDate = new Date(
-                                  currentItem.last_updated
-                                );
-                                const shamsiDate = new Intl.DateTimeFormat(
-                                  "fa-IR"
-                                ).format(gregorianDate);
-                                const shamsiTime =
-                                  gregorianDate.toLocaleTimeString("fa-IR", {
-                                    hour12: false
-                                  });
-                                const englishDate = shamsiDate.replace(
-                                  /[۰-۹]/g,
-                                  d =>
-                                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                                );
-                                const englishTime = shamsiTime.replace(
-                                  /[۰-۹]/g,
-                                  d =>
-                                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                                );
-                                return `${englishDate}  ${englishTime}`;
+                      <div
+                        data-plasmic-name={"laboratoryTitle"}
+                        data-plasmic-override={overrides.laboratoryTitle}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.laboratoryTitle
+                        )}
+                      >
+                        <React.Fragment>
+                          {(() => {
+                            try {
+                              return currentItem.title.replace(" (  # ) ", "");
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return "";
                               }
-                            })();
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return "";
+                              throw e;
                             }
-                            throw e;
-                          }
-                        })()}
-                      </React.Fragment>
-                    </div>
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return currentItem.lab_test_groups;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
-                          }
-                          throw e;
-                        }
-                      })()
-                    ).map((__plasmic_item_1, __plasmic_idx_1) => {
-                      const currentItem = __plasmic_item_1;
-                      const currentIndex = __plasmic_idx_1;
-                      return (
-                        <p.Stack
-                          as={"div"}
-                          hasGap={true}
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__rsUXk
-                          )}
-                          key={currentIndex}
-                        >
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              sty.freeBox__sTh7T
-                            )}
-                          >
-                            <div
-                              data-plasmic-name={"labTitles"}
-                              data-plasmic-override={overrides.labTitles}
+                          })()}
+                        </React.Fragment>
+                      </div>
+                      <Stack__
+                        as={"div"}
+                        hasGap={true}
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__voaEt
+                        )}
+                      >
+                        {(_par =>
+                          !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                          (() => {
+                            try {
+                              return currentItem.results;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return [];
+                              }
+                              throw e;
+                            }
+                          })()
+                        ).map((__plasmic_item_1, __plasmic_idx_1) => {
+                          const currentItem = __plasmic_item_1;
+                          const currentIndex = __plasmic_idx_1;
+                          return (
+                            <Stack__
+                              as={"div"}
+                              data-plasmic-name={"labPerDate"}
+                              data-plasmic-override={overrides.labPerDate}
+                              hasGap={true}
                               className={classNames(
                                 projectcss.all,
-                                projectcss.__wab_text,
-                                sty.labTitles
+                                sty.labPerDate
                               )}
+                              key={currentIndex}
                             >
-                              <React.Fragment>
-                                {(() => {
+                              <div
+                                data-plasmic-name={"dateOfReport"}
+                                data-plasmic-override={overrides.dateOfReport}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.dateOfReport
+                                )}
+                              >
+                                <React.Fragment>
+                                  {(() => {
+                                    try {
+                                      return (() => {
+                                        const gregorianDate = new Date(
+                                          currentItem.report_datetime
+                                        );
+                                        const shamsiDate =
+                                          new Intl.DateTimeFormat(
+                                            "fa-IR"
+                                          ).format(gregorianDate);
+                                        const englishNumbers =
+                                          shamsiDate.replace(
+                                            /[\u0660-\u0669]/g,
+                                            c =>
+                                              String.fromCharCode(
+                                                c.charCodeAt(0) -
+                                                  0x0660 +
+                                                  0x0030
+                                              )
+                                          );
+                                        return englishNumbers;
+                                      })();
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return "";
+                                      }
+                                      throw e;
+                                    }
+                                  })()}
+                                </React.Fragment>
+                              </div>
+                              {(_par =>
+                                !_par
+                                  ? []
+                                  : Array.isArray(_par)
+                                  ? _par
+                                  : [_par])(
+                                (() => {
                                   try {
-                                    return currentItem.title;
+                                    return currentItem.values;
                                   } catch (e) {
                                     if (
                                       e instanceof TypeError ||
                                       e?.plasmicType ===
                                         "PlasmicUndefinedDataError"
                                     ) {
-                                      return "";
+                                      return [];
                                     }
                                     throw e;
                                   }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                          </div>
-                          {(_par =>
-                            !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                            (() => {
-                              try {
-                                return currentItem.factors;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return [];
-                                }
-                                throw e;
-                              }
-                            })()
-                          ).map((__plasmic_item_2, __plasmic_idx_2) => {
-                            const currentItem = __plasmic_item_2;
-                            const currentIndex = __plasmic_idx_2;
-                            return (
-                              <div
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.freeBox__j2FXp
-                                )}
-                                key={currentIndex}
-                              >
-                                <div
-                                  data-plasmic-name={"factorName"}
-                                  data-plasmic-override={overrides.factorName}
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.factorName
-                                  )}
-                                >
-                                  <React.Fragment>
-                                    {(() => {
-                                      try {
-                                        return currentItem.name;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return "";
-                                        }
-                                        throw e;
+                                })()
+                              ).map((__plasmic_item_2, __plasmic_idx_2) => {
+                                const currentItem = __plasmic_item_2;
+                                const currentIndex = __plasmic_idx_2;
+                                return (
+                                  <Stack__
+                                    as={"div"}
+                                    data-plasmic-name={"labLists"}
+                                    data-plasmic-override={overrides.labLists}
+                                    hasGap={true}
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.labLists
+                                    )}
+                                    key={currentIndex}
+                                  >
+                                    <Stack__
+                                      as={"div"}
+                                      data-plasmic-name={"factorNamevalue"}
+                                      data-plasmic-override={
+                                        overrides.factorNamevalue
                                       }
-                                    })()}
-                                  </React.Fragment>
-                                </div>
-                                <div
-                                  data-plasmic-name={"factorValue"}
-                                  data-plasmic-override={overrides.factorValue}
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.factorValue
-                                  )}
-                                >
-                                  <React.Fragment>
-                                    {(() => {
-                                      try {
-                                        return currentItem.id;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return "";
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                  </React.Fragment>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </p.Stack>
-                      );
-                    })}
-                  </div>
-                );
-              })
-            }
-          </ph.DataCtxReader>
+                                      hasGap={true}
+                                      className={classNames(
+                                        projectcss.all,
+                                        sty.factorNamevalue
+                                      )}
+                                    >
+                                      <div
+                                        className={classNames(
+                                          projectcss.all,
+                                          sty.freeBox__tc6Bm
+                                        )}
+                                      >
+                                        <div
+                                          data-plasmic-name={"factorName"}
+                                          data-plasmic-override={
+                                            overrides.factorName
+                                          }
+                                          className={classNames(
+                                            projectcss.all,
+                                            projectcss.__wab_text,
+                                            sty.factorName
+                                          )}
+                                        >
+                                          <React.Fragment>
+                                            {(() => {
+                                              try {
+                                                return currentItem.factor_name.replace(
+                                                  " (  # )",
+                                                  "",
+                                                  "(#*)"
+                                                );
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return "";
+                                                }
+                                                throw e;
+                                              }
+                                            })()}
+                                          </React.Fragment>
+                                        </div>
+                                        <div
+                                          data-plasmic-name={"factorValue"}
+                                          data-plasmic-override={
+                                            overrides.factorValue
+                                          }
+                                          className={classNames(
+                                            projectcss.all,
+                                            projectcss.__wab_text,
+                                            sty.factorValue
+                                          )}
+                                        >
+                                          <React.Fragment>
+                                            {(() => {
+                                              try {
+                                                return currentItem.value;
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return "";
+                                                }
+                                                throw e;
+                                              }
+                                            })()}
+                                          </React.Fragment>
+                                        </div>
+                                      </div>
+                                    </Stack__>
+                                  </Stack__>
+                                );
+                              })}
+                            </Stack__>
+                          );
+                        })}
+                      </Stack__>
+                    </div>
+                  );
+                })}
+              </React.Fragment>
+            )}
+          </DataCtxReader__>
         </ApiFetcherComponent>
         <div
           data-plasmic-name={"switchingTabs"}
@@ -419,10 +567,41 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             className={classNames("__wab_instance", sty.switchingTab)}
           />
         </div>
-        <RedirectUserToLoginPage
-          data-plasmic-name={"redirectUserToLoginPage"}
-          data-plasmic-override={overrides.redirectUserToLoginPage}
-          className={classNames("__wab_instance", sty.redirectUserToLoginPage)}
+        <RedirectToLoginPage
+          data-plasmic-name={"redirectToLoginPage"}
+          data-plasmic-override={overrides.redirectToLoginPage}
+          className={classNames("__wab_instance", sty.redirectToLoginPage)}
+        />
+
+        <RedirectToNamespaceSelection
+          data-plasmic-name={"redirectToNamespaceSelection"}
+          data-plasmic-override={overrides.redirectToNamespaceSelection}
+          className={classNames(
+            "__wab_instance",
+            sty.redirectToNamespaceSelection
+          )}
+        />
+
+        <OnloadUserPatientInteractionCount
+          data-plasmic-name={"onloadUserPatientInteractionCount"}
+          data-plasmic-override={overrides.onloadUserPatientInteractionCount}
+          className={classNames(
+            "__wab_instance",
+            sty.onloadUserPatientInteractionCount
+          )}
+          patientIdForOnloadUserPatientInteractionCount={(() => {
+            try {
+              return $ctx.params.code;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()}
         />
       </div>
     </React.Fragment>
@@ -432,56 +611,87 @@ function PlasmicLaboratoryData__RenderFunc(props: {
 const PlasmicDescendants = {
   laboratoryData: [
     "laboratoryData",
-    "h",
-    "apiFetcherComponent",
-    "laboratoryResults",
-    "datetime",
-    "labTitles",
+    "header",
+    "svg",
+    "labData",
+    "laboratoryLists",
+    "laboratoryTitle",
+    "labPerDate",
+    "dateOfReport",
+    "labLists",
+    "factorNamevalue",
     "factorName",
     "factorValue",
     "switchingTabs",
     "switchingTab",
-    "redirectUserToLoginPage"
+    "redirectToLoginPage",
+    "redirectToNamespaceSelection",
+    "onloadUserPatientInteractionCount"
   ],
-  h: ["h"],
-  apiFetcherComponent: [
-    "apiFetcherComponent",
-    "laboratoryResults",
-    "datetime",
-    "labTitles",
+  header: ["header", "svg"],
+  svg: ["svg"],
+  labData: [
+    "labData",
+    "laboratoryLists",
+    "laboratoryTitle",
+    "labPerDate",
+    "dateOfReport",
+    "labLists",
+    "factorNamevalue",
     "factorName",
     "factorValue"
   ],
-  laboratoryResults: [
-    "laboratoryResults",
-    "datetime",
-    "labTitles",
+  laboratoryLists: [
+    "laboratoryLists",
+    "laboratoryTitle",
+    "labPerDate",
+    "dateOfReport",
+    "labLists",
+    "factorNamevalue",
     "factorName",
     "factorValue"
   ],
-  datetime: ["datetime"],
-  labTitles: ["labTitles"],
+  laboratoryTitle: ["laboratoryTitle"],
+  labPerDate: [
+    "labPerDate",
+    "dateOfReport",
+    "labLists",
+    "factorNamevalue",
+    "factorName",
+    "factorValue"
+  ],
+  dateOfReport: ["dateOfReport"],
+  labLists: ["labLists", "factorNamevalue", "factorName", "factorValue"],
+  factorNamevalue: ["factorNamevalue", "factorName", "factorValue"],
   factorName: ["factorName"],
   factorValue: ["factorValue"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"],
-  redirectUserToLoginPage: ["redirectUserToLoginPage"]
+  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
+  onloadUserPatientInteractionCount: ["onloadUserPatientInteractionCount"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   laboratoryData: "div";
-  h: typeof H;
-  apiFetcherComponent: typeof ApiFetcherComponent;
-  laboratoryResults: "div";
-  datetime: "div";
-  labTitles: "div";
+  header: "div";
+  svg: "svg";
+  labData: typeof ApiFetcherComponent;
+  laboratoryLists: "div";
+  laboratoryTitle: "div";
+  labPerDate: "div";
+  dateOfReport: "div";
+  labLists: "div";
+  factorNamevalue: "div";
   factorName: "div";
   factorValue: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
-  redirectUserToLoginPage: typeof RedirectUserToLoginPage;
+  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
+  onloadUserPatientInteractionCount: typeof OnloadUserPatientInteractionCount;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -544,16 +754,26 @@ export const PlasmicLaboratoryData = Object.assign(
   makeNodeComponent("laboratoryData"),
   {
     // Helper components rendering sub-elements
-    h: makeNodeComponent("h"),
-    apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
-    laboratoryResults: makeNodeComponent("laboratoryResults"),
-    datetime: makeNodeComponent("datetime"),
-    labTitles: makeNodeComponent("labTitles"),
+    header: makeNodeComponent("header"),
+    svg: makeNodeComponent("svg"),
+    labData: makeNodeComponent("labData"),
+    laboratoryLists: makeNodeComponent("laboratoryLists"),
+    laboratoryTitle: makeNodeComponent("laboratoryTitle"),
+    labPerDate: makeNodeComponent("labPerDate"),
+    dateOfReport: makeNodeComponent("dateOfReport"),
+    labLists: makeNodeComponent("labLists"),
+    factorNamevalue: makeNodeComponent("factorNamevalue"),
     factorName: makeNodeComponent("factorName"),
     factorValue: makeNodeComponent("factorValue"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
-    redirectUserToLoginPage: makeNodeComponent("redirectUserToLoginPage"),
+    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
+    onloadUserPatientInteractionCount: makeNodeComponent(
+      "onloadUserPatientInteractionCount"
+    ),
 
     // Metadata about props expected for PlasmicLaboratoryData
     internalVariantProps: PlasmicLaboratoryData__VariantProps,

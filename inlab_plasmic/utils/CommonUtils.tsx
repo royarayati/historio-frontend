@@ -16,12 +16,90 @@ export function getDevicedId(): string {
     return device_id;
 }
 
-export function getCurrentUser(): InlabUser | null {
-    const inlabUser = localStorage.getItem('inlab_user');
-    if (inlabUser) {
-        return JSON.parse(inlabUser);
+export function getCurrentUser(): InlabUser {
+    if (typeof window !== "undefined") {
+        logForDev("getCurrentUser: reading user.");
+        const inlabUser = localStorage.getItem('inlab_user');
+        if (inlabUser) {
+            return JSON.parse(inlabUser);
+        } else {
+            return null;
+        }
     } else {
-        return null;
+        logForDev("getCurrentUser: window is undefined.");
+        return undefined;
+    }
+}
+
+export function isTokenExpired(token: string): boolean {
+    const payloadBase64 = token.split('.')[1];
+    const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
+    const decoded = JSON.parse(decodedJson);
+    const exp = decoded.exp; // Token's expiration timestamp
+    const now = Math.floor(Date.now() / 1000); // Current timestamp in seconds
+
+    return exp < now;
+};
+
+export async function refreshUser(
+    inlabUser: InlabUser,
+    baseUrl: string,
+    changeUserCallback: (user: InlabUser) => void
+) {
+    logForDev("AuthGlobalContext: useEffect: refreshUser runned.");
+    if (!inlabUser) {
+        return;
+    }
+
+    const requestBody = { refresh: inlabUser.refresh };
+    // we must await here and interpret the response
+    await axios.post(baseUrl + '/api/v2/user/reauth', requestBody)
+        .then(response => {
+            if (response.status === 200) {
+                console.log("CommonUtils: refreshUser: success: 200");
+                inlabUser.access = response.data.access;
+                changeUserCallback(inlabUser);
+            } else {
+                changeUserCallback(null);
+            }
+        })
+        // TODO: A better Error handling needs to be implemented
+        .catch(error => {
+            if (error.response.status === 401) {
+                changeUserCallback(null);
+            }
+            console.log("CommonUtils: refreshUser: Catch: " + error);
+        });
+}
+
+export function checkUserValidity(
+    inlabUser: InlabUser,
+    baseUrl: string,
+    changeUserCallback: (user: InlabUser) => void
+): boolean {
+
+    // Check if user is valid
+    if (inlabUser === undefined) {
+        logForDev("CheckUserValidity: USER_CHECK: window is undefined");
+        return false;
+
+    } else if (inlabUser === null) {
+        logForDev("CheckUserValidity: USER_CHECK: User is NULL");
+        return true;
+
+    } else if (isTokenExpired(inlabUser.refresh)) {
+        logForDev("CheckUserValidity: USER_CHECK: User is expired. setting uesr to Null");
+        changeUserCallback(null);
+        return false;
+
+    } else if (isTokenExpired(inlabUser.access)) {
+        logForDev("CheckUserValidity: USER_CHECK: User need refresh.");
+        refreshUser(inlabUser, baseUrl, changeUserCallback);
+        return true;
+
+    } else {
+        logForDev("CheckUserValidity: USER_CHECK: User is OK.");
+        return true;
     }
 }
 
@@ -33,20 +111,10 @@ export function getCurrentUser(): InlabUser | null {
 // => This function handle the changes itself and call ChangeUserCallback
 // note: If user is already null =>  just reject null. but as nothing changed does NOT call ChangeUserCallback
 // note: Also if user is already valid => just resolve user. And does NOT call ChangeUserCallback
-export function refreshAccessIfNeeded(globalContext: GlobalContextType, inlabUser: InlabUser | null): Promise<InlabUser | null> {
+export function refreshAccessIfNeeded(globalContext: GlobalContextType, inlabUser: InlabUser): Promise<InlabUser | null> {
     return new Promise((resolve, reject) => {
 
         const { baseUrl, changeUserCallback } = globalContext;
-        // Check if the refresh token is not expired
-        const isTokenExpired = (token: string) => {
-            const payloadBase64 = token.split('.')[1];
-            const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
-            const decoded = JSON.parse(decodedJson);
-            const exp = decoded.exp; // Token's expiration timestamp
-            const now = Math.floor(Date.now() / 1000); // Current timestamp in seconds
-            
-            return exp < now;
-        };
 
         if (!inlabUser) {
             logForDev("refreshAccessIfNeeded: User is NULL...changeUser => null");

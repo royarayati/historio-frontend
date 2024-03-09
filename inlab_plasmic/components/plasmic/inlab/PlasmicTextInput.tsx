@@ -17,38 +17,61 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
-
-import * as pp from "@plasmicapp/react-web";
 import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
+  Flex as Flex__,
   MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
   SingleBooleanChoiceArg,
   SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
+  Stack as Stack__,
   StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
 } from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
+
+import * as pp from "@plasmicapp/react-web";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicTextInput.module.css"; // plasmic-import: WB4OwDxc51ck/css
 
 import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
 
 createPlasmicElementProxy;
 
@@ -81,6 +104,7 @@ export type PlasmicTextInput__ArgsType = {
   required?: boolean;
   "aria-label"?: string;
   "aria-labelledby"?: string;
+  onChange?: (event: any) => void;
   type?:
     | "text"
     | "password"
@@ -103,15 +127,16 @@ export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
   "required",
   "aria-label",
   "aria-labelledby",
+  "onChange",
   "type",
   "autoFocus"
 );
 
 export type PlasmicTextInput__OverridesType = {
-  root?: p.Flex<"div">;
-  startIconContainer?: p.Flex<"div">;
-  input?: p.Flex<"input">;
-  endIconContainer?: p.Flex<"div">;
+  root?: Flex__<"div">;
+  startIconContainer?: Flex__<"div">;
+  input?: Flex__<"input">;
+  endIconContainer?: Flex__<"div">;
 };
 
 export interface DefaultTextInputProps extends pp.BaseTextInputProps {
@@ -121,6 +146,7 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
   required?: boolean;
   "aria-label"?: string;
   "aria-labelledby"?: string;
+  onChange?: (event: any) => void;
   type?:
     | "text"
     | "password"
@@ -156,7 +182,7 @@ function PlasmicTextInput__RenderFunc(props: {
     () =>
       Object.assign(
         {
-          placeholder: "Enter something…"
+          placeholder: ``
         },
         props.args
       ),
@@ -169,13 +195,13 @@ function PlasmicTextInput__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const currentUser = useCurrentUser?.() || {};
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "showStartIcon",
@@ -216,10 +242,9 @@ function PlasmicTextInput__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => $props["value"]
       }
     ],
-
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -257,6 +282,11 @@ function PlasmicTextInput__RenderFunc(props: {
           [sty.root___focusVisibleWithin]: triggers.focusVisibleWithin_root,
           [sty.rootcolor_dark]: hasVariant($state, "color", "dark"),
           [sty.rootisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
+          [sty.rootshowEndIcon]: hasVariant(
+            $state,
+            "showEndIcon",
+            "showEndIcon"
+          ),
           [sty.rootshowStartIcon]: hasVariant(
             $state,
             "showStartIcon",
@@ -282,6 +312,11 @@ function PlasmicTextInput__RenderFunc(props: {
             "isDisabled",
             "isDisabled"
           ),
+          [sty.startIconContainershowEndIcon]: hasVariant(
+            $state,
+            "showEndIcon",
+            "showEndIcon"
+          ),
           [sty.startIconContainershowStartIcon]: hasVariant(
             $state,
             "showStartIcon",
@@ -289,7 +324,7 @@ function PlasmicTextInput__RenderFunc(props: {
           )
         })}
       >
-        {p.renderPlasmicSlot({
+        {renderPlasmicSlot({
           defaultContents: (
             <SearchsvgIcon
               className={classNames(projectcss.all, sty.svg__bNQq)}
@@ -315,9 +350,6 @@ function PlasmicTextInput__RenderFunc(props: {
       <input
         data-plasmic-name={"input"}
         data-plasmic-override={overrides.input}
-        aria-label={args["aria-label"]}
-        aria-labelledby={args["aria-labelledby"]}
-        autoFocus={args.autoFocus}
         className={classNames(projectcss.all, projectcss.input, sty.input, {
           [sty.input___focusVisibleWithin]: triggers.focusVisibleWithin_root,
           [sty.inputcolor_dark]: hasVariant($state, "color", "dark"),
@@ -331,56 +363,67 @@ function PlasmicTextInput__RenderFunc(props: {
         disabled={
           hasVariant($state, "isDisabled", "isDisabled") ? true : undefined
         }
-        name={args.name}
         onChange={e => {
-          p.generateStateOnChangeProp($state, ["input", "value"])(
-            e.target.value
-          );
+          generateStateOnChangeProp($state, ["input", "value"])(e.target.value);
         }}
         placeholder={args.placeholder}
         ref={ref => {
           $refs["input"] = ref;
         }}
-        required={args.required}
         type={args.type}
-        value={p.generateStateValueProp($state, ["input", "value"]) ?? ""}
+        value={generateStateValueProp($state, ["input", "value"]) ?? ""}
       />
 
-      <div
-        data-plasmic-name={"endIconContainer"}
-        data-plasmic-override={overrides.endIconContainer}
-        className={classNames(projectcss.all, sty.endIconContainer, {
-          [sty.endIconContainercolor_dark]: hasVariant($state, "color", "dark"),
-          [sty.endIconContainershowEndIcon]: hasVariant(
-            $state,
-            "showEndIcon",
-            "showEndIcon"
-          )
-        })}
-      >
-        {p.renderPlasmicSlot({
-          defaultContents: (
-            <ChecksvgIcon
-              className={classNames(projectcss.all, sty.svg__m0Xvn)}
-              role={"img"}
-            />
-          ),
-
-          value: args.endIcon,
-          className: classNames(sty.slotTargetEndIcon, {
-            [sty.slotTargetEndIconcolor_dark]: hasVariant(
+      {(
+        hasVariant($state, "showEndIcon", "showEndIcon")
+          ? true
+          : $state.value !== ""
+      ) ? (
+        <div
+          data-plasmic-name={"endIconContainer"}
+          data-plasmic-override={overrides.endIconContainer}
+          className={classNames(projectcss.all, sty.endIconContainer, {
+            [sty.endIconContainercolor_dark]: hasVariant(
               $state,
               "color",
               "dark"
             ),
-            [sty.slotTargetEndIconshowEndIcon]: hasVariant(
+            [sty.endIconContainerisDisabled]: hasVariant(
+              $state,
+              "isDisabled",
+              "isDisabled"
+            ),
+            [sty.endIconContainershowEndIcon]: hasVariant(
               $state,
               "showEndIcon",
               "showEndIcon"
             )
-          })
-        })}
-      </div>
+          })}
+        >
+          {renderPlasmicSlot({
+            defaultContents:
+              $state.value !== "" ? (
+                <Icons8ClosesvgIcon
+                  className={classNames(projectcss.all, sty.svg__m0Xvn)}
+                  role={"img"}
+                />
+              ) : null,
+            value: args.endIcon,
+            className: classNames(sty.slotTargetEndIcon, {
+              [sty.slotTargetEndIconcolor_dark]: hasVariant(
+                $state,
+                "color",
+                "dark"
+              ),
+              [sty.slotTargetEndIconshowEndIcon]: hasVariant(
+                $state,
+                "showEndIcon",
+                "showEndIcon"
+              )
+            })
+          })}
+        </div>
+      ) : null}
     </div>
   ) as React.ReactElement | null;
 }
@@ -429,7 +472,6 @@ type NodeOverridesType<T extends NodeNameType> = Pick<
   PlasmicTextInput__OverridesType,
   DescendantsType<T>
 >;
-
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {

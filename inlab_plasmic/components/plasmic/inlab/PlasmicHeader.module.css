@@ -1,27 +1,67 @@
-.settingTop {
-  position: relative;
-  background: #ffffff;
-  max-width: 100%;
-  height: auto;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
+.root {
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-self: flex-start;
+  background: #ffffff80;
+  position: relative;
+  max-height: 100%;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
-  border-radius: 0px;
   padding: 8px;
-  border-bottom: 1px solid var(--token-8PxxXPNrIohQ);
 }
-.patientName {
-  position: sticky;
+.root > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: calc(0px - 0px);
+  width: calc(100% + 0px);
+}
+.root > :global(.__wab_flex-container) > *,
+.root > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.root > :global(.__wab_flex-container) > picture > img,
+.root > :global(.__wab_flex-container) > :global(.__wab_slot) > picture > img {
+  margin-left: 0px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .root > :global(.__wab_flex-container) {
+    justify-content: space-between;
+    align-items: center;
+    margin-left: calc(0px - 8px);
+    width: calc(100% + 8px);
+    margin-top: calc(0px - 0px);
+    height: calc(100% + 0px);
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .root > :global(.__wab_flex-container) > *,
+  .root > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+  .root > :global(.__wab_flex-container) > picture > img,
+  .root
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > picture
+    > img {
+    margin-left: 8px;
+    margin-top: 0px;
+  }
+}
+.svg {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  color: #418dff;
+  height: 100%;
+  width: auto;
+  min-height: 0;
+}
+.text {
+  position: relative;
   width: auto;
   height: auto;
   max-width: 100%;
   text-align: center;
-  align-self: flex-start;
-  left: 0px;
-  top: 0px;
-  z-index: 1;
+  margin-right: 0px;
 }

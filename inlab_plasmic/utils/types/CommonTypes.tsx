@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-export type InlabUser = {
+export type InlabUser = null | undefined | {
     access: string;
     refresh: string;
     user: any;
@@ -16,6 +16,6 @@ export interface GlobalContextType {
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
-    baseUrl:  'https://inlabgr.synappsgroup.com:8008',
-    changeUserCallback: (user: InlabUser | null) => { },
+    baseUrl:  'https://inlabgr.synappsgroup.com',
+    changeUserCallback: (user: InlabUser) => { },
 });

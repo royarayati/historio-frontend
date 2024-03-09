@@ -2,12 +2,7 @@
   display: flex;
   position: relative;
   flex-direction: row;
-  background: radial-gradient(
-      ellipse 40% 60% at 20% 20%,
-      #0000fd 0%,
-      #0303a6 100%
-    )
-    0% 0% / 100% 100% repeat;
+  background: var(--token-pRs3-4jrQ4XQ);
   cursor: pointer;
   transition-property: background;
   transition-duration: 0.1s;
