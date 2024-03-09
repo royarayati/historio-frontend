@@ -40,7 +40,7 @@ function RedirectInlabLoginToNamespaceSelection(
   // By default, we are just piping all RedirectInlabLoginToNamespaceSelectionProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectInlabLoginToNamespaceSelection />;
+  return <PlasmicRedirectInlabLoginToNamespaceSelection  />;
 }
 
 export default RedirectInlabLoginToNamespaceSelection;

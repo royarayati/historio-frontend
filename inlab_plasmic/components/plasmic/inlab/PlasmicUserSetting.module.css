@@ -159,11 +159,11 @@
 }
 .svg__iEtuG {
   position: relative;
-  object-fit: cover;
-  max-width: 80%;
-  align-self: center;
-  height: 100%;
   width: auto;
+  height: 100%;
+  align-self: center;
+  max-width: 80%;
+  object-fit: cover;
   color: var(--token-pRs3-4jrQ4XQ);
   min-height: 0;
 }
@@ -404,6 +404,8 @@
   font-size: 12px;
   text-align: left;
   padding-left: 0px;
+  padding-right: 0px;
+  height: auto;
 }
 .svg___3NRjF {
   position: relative;

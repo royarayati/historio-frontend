@@ -20,7 +20,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, []);
   return (
     <PlasmicRootProvider Head={Head}>
-      <Script src="../inlab_env.js" strategy="beforeInteractive" />
+      <Script src="/new_inlab/inlab_env.js" strategy="beforeInteractive" />
       <Component {...pageProps} />
     </PlasmicRootProvider>
   );

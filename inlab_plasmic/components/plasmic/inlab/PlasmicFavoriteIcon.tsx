@@ -63,9 +63,9 @@ import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlo
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicFavoriteIcon.module.css"; // plasmic-import: PK_hwsu90gKT/css
 
 import FavoriteSvgrepoComsvgIcon from "./icons/PlasmicIcon__FavoriteSvgrepoComsvg"; // plasmic-import: 9MJJOBGA9bFX/icon
@@ -88,12 +88,14 @@ export type PlasmicFavoriteIcon__ArgsType = {
   selected?: boolean;
   onSelectedChange?: (val: string) => void;
   patientId?: number;
+  trigerReload?: () => void;
 };
 type ArgPropType = keyof PlasmicFavoriteIcon__ArgsType;
 export const PlasmicFavoriteIcon__ArgProps = new Array<ArgPropType>(
   "selected",
   "onSelectedChange",
-  "patientId"
+  "patientId",
+  "trigerReload"
 );
 
 export type PlasmicFavoriteIcon__OverridesType = {
@@ -104,6 +106,7 @@ export interface DefaultFavoriteIconProps {
   selected?: boolean;
   onSelectedChange?: (val: string) => void;
   patientId?: number;
+  trigerReload?: () => void;
   favoriteTest?: SingleBooleanChoiceArg<"favoriteTest">;
   className?: string;
 }
@@ -241,59 +244,21 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
           $steps["toggleFavorite"] = await $steps["toggleFavorite"];
         }
 
-        $steps["updateFavoriteState"] =
+        $steps["runTrigerReload"] =
           $steps.toggleFavorite.status === 200
             ? (() => {
-                const actionArgs = {
-                  variable: {
-                    objRoot: $state,
-                    variablePath: ["selected"]
-                  },
-                  operation: 0
-                };
-                return (({ variable, value, startIndex, deleteCount }) => {
-                  if (!variable) {
-                    return;
-                  }
-                  const { objRoot, variablePath } = variable;
-
-                  $stateSet(objRoot, variablePath, value);
-                  return value;
+                const actionArgs = { eventRef: $props["trigerReload"] };
+                return (({ eventRef, args }) => {
+                  return eventRef?.(...(args ?? []));
                 })?.apply(null, [actionArgs]);
               })()
             : undefined;
         if (
-          $steps["updateFavoriteState"] != null &&
-          typeof $steps["updateFavoriteState"] === "object" &&
-          typeof $steps["updateFavoriteState"].then === "function"
+          $steps["runTrigerReload"] != null &&
+          typeof $steps["runTrigerReload"] === "object" &&
+          typeof $steps["runTrigerReload"].then === "function"
         ) {
-          $steps["updateFavoriteState"] = await $steps["updateFavoriteState"];
-        }
-
-        $steps["goToHomepage"] =
-          $steps.toggleFavorite.status === 200
-            ? (() => {
-                const actionArgs = { destination: `/patients` };
-                return (({ destination }) => {
-                  if (
-                    typeof destination === "string" &&
-                    destination.startsWith("#")
-                  ) {
-                    document
-                      .getElementById(destination.substr(1))
-                      .scrollIntoView({ behavior: "smooth" });
-                  } else {
-                    __nextRouter?.push(destination);
-                  }
-                })?.apply(null, [actionArgs]);
-              })()
-            : undefined;
-        if (
-          $steps["goToHomepage"] != null &&
-          typeof $steps["goToHomepage"] === "object" &&
-          typeof $steps["goToHomepage"].then === "function"
-        ) {
-          $steps["goToHomepage"] = await $steps["goToHomepage"];
+          $steps["runTrigerReload"] = await $steps["runTrigerReload"];
         }
       }}
       role={"img"}

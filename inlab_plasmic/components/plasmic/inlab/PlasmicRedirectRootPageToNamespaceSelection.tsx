@@ -65,9 +65,9 @@ import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlo
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicRedirectRootPageToNamespaceSelection.module.css"; // plasmic-import: rhyWwtv3sPGn/css
 
 createPlasmicElementProxy;
@@ -79,16 +79,19 @@ type VariantPropType =
 export const PlasmicRedirectRootPageToNamespaceSelection__VariantProps =
   new Array<VariantPropType>();
 
-export type PlasmicRedirectRootPageToNamespaceSelection__ArgsType = {};
+export type PlasmicRedirectRootPageToNamespaceSelection__ArgsType = {
+  typeignore?: string;
+};
 type ArgPropType = keyof PlasmicRedirectRootPageToNamespaceSelection__ArgsType;
 export const PlasmicRedirectRootPageToNamespaceSelection__ArgProps =
-  new Array<ArgPropType>();
+  new Array<ArgPropType>("typeignore");
 
 export type PlasmicRedirectRootPageToNamespaceSelection__OverridesType = {
   redirectRootPageToNamespaceSelection?: Flex__<typeof SideEffect>;
 };
 
 export interface DefaultRedirectRootPageToNamespaceSelectionProps {
+  typeignore?: string;
   className?: string;
 }
 

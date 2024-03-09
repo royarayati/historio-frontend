@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { InlabUser, GlobalContextType, GlobalContext } from './types/CommonTypes';
-import { Switch } from 'antd';
 
 export function logForDev(logText: string | null) {
     if (logText != null && process.env.NODE_ENV === 'development') {
@@ -19,6 +18,7 @@ export function getDevicedId(): string {
 
 export function getCurrentUser(): InlabUser {
     if (typeof window !== "undefined") {
+        logForDev("getCurrentUser: reading user.");
         const inlabUser = localStorage.getItem('inlab_user');
         if (inlabUser) {
             return JSON.parse(inlabUser);
@@ -26,6 +26,7 @@ export function getCurrentUser(): InlabUser {
             return null;
         }
     } else {
+        logForDev("getCurrentUser: window is undefined.");
         return undefined;
     }
 }
@@ -40,7 +41,7 @@ export function isTokenExpired(token: string): boolean {
     return exp < now;
 };
 
-async function refreshUser(
+export async function refreshUser(
     inlabUser: InlabUser,
     baseUrl: string,
     changeUserCallback: (user: InlabUser) => void
@@ -55,19 +56,19 @@ async function refreshUser(
     await axios.post(baseUrl + '/api/v2/user/reauth', requestBody)
         .then(response => {
             if (response.status === 200) {
-                // TODO: better naming for keys maybe?
+                console.log("CommonUtils: refreshUser: success: 200");
                 inlabUser.access = response.data.access;
                 changeUserCallback(inlabUser);
             } else {
-                // TODO: We should handle 401 error and return user to login page
-                // TODO: A better Error handling needs to be implemented
-                // reject(new Error('refreshAccessToken: Refresh failed with status: ' + response.status));
                 changeUserCallback(null);
             }
         })
         // TODO: A better Error handling needs to be implemented
         .catch(error => {
-            logForDev("AuthGlobalContext: useEffect: Catch: " + error);
+            if (error.response.status === 401) {
+                changeUserCallback(null);
+            }
+            console.log("CommonUtils: refreshUser: Catch: " + error);
         });
 }
 
@@ -79,25 +80,25 @@ export function checkUserValidity(
 
     // Check if user is valid
     if (inlabUser === undefined) {
-        logForDev("AuthGlobalContext: USER_CHECK: window is undefined");
+        logForDev("CheckUserValidity: USER_CHECK: window is undefined");
         return false;
 
     } else if (inlabUser === null) {
-        logForDev("AuthGlobalContext: USER_CHECK: User is NULL");
+        logForDev("CheckUserValidity: USER_CHECK: User is NULL");
         return true;
 
     } else if (isTokenExpired(inlabUser.refresh)) {
-        logForDev("AuthGlobalContext: USER_CHECK: User is expired. setting uesr to Null");
+        logForDev("CheckUserValidity: USER_CHECK: User is expired. setting uesr to Null");
         changeUserCallback(null);
         return false;
 
     } else if (isTokenExpired(inlabUser.access)) {
-        logForDev("AuthGlobalContext: USER_CHECK: User need refresh.");
+        logForDev("CheckUserValidity: USER_CHECK: User need refresh.");
         refreshUser(inlabUser, baseUrl, changeUserCallback);
         return true;
 
     } else {
-        logForDev("AuthGlobalContext: USER_CHECK: User is OK.");
+        logForDev("CheckUserValidity: USER_CHECK: User is OK.");
         return true;
     }
 }

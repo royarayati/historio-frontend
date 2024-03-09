@@ -65,9 +65,9 @@ import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlo
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicOnloadUserPatientInteractionCount.module.css"; // plasmic-import: 6oEGl3M40QrL/css
 
 createPlasmicElementProxy;

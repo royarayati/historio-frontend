@@ -66,9 +66,9 @@ import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlo
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicGuideToMakeNewPage.module.css"; // plasmic-import: lSZzDzmRkcIg/css
 
 createPlasmicElementProxy;
@@ -138,51 +138,53 @@ function PlasmicGuideToMakeNewPage__RenderFunc(props: {
       `}</style>
 
       <div className={projectcss.plasmic_page_wrapper}>
-        <div
-          data-plasmic-name={"guideToMakeNewPage"}
-          data-plasmic-override={overrides.guideToMakeNewPage}
-          data-plasmic-root={true}
-          data-plasmic-for-node={forNode}
-          className={classNames(
-            projectcss.all,
-            projectcss.root_reset,
-            projectcss.plasmic_default_styles,
-            projectcss.plasmic_mixins,
-            projectcss.plasmic_tokens,
-            plasmic_antd_5_hostless_css.plasmic_tokens,
-            plasmic_plasmic_rich_components_css.plasmic_tokens,
-            sty.guideToMakeNewPage
-          )}
-        >
-          <RedirectToLoginPage
-            data-plasmic-name={"redirectToLoginPage"}
-            data-plasmic-override={overrides.redirectToLoginPage}
-            className={classNames("__wab_instance", sty.redirectToLoginPage)}
-          />
-
-          <RedirectToNamespaceSelection
-            data-plasmic-name={"redirectToNamespaceSelection"}
-            data-plasmic-override={overrides.redirectToNamespaceSelection}
-            className={classNames(
-              "__wab_instance",
-              sty.redirectToNamespaceSelection
-            )}
-          />
-
+        {false ? (
           <div
-            data-plasmic-name={"guideLeaflet"}
-            data-plasmic-override={overrides.guideLeaflet}
+            data-plasmic-name={"guideToMakeNewPage"}
+            data-plasmic-override={overrides.guideToMakeNewPage}
+            data-plasmic-root={true}
+            data-plasmic-for-node={forNode}
             className={classNames(
               projectcss.all,
-              projectcss.__wab_text,
-              sty.guideLeaflet
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              projectcss.plasmic_tokens,
+              plasmic_antd_5_hostless_css.plasmic_tokens,
+              plasmic_plasmic_rich_components_css.plasmic_tokens,
+              sty.guideToMakeNewPage
             )}
           >
-            {
-              "\n\u0628\u0639\u062f \u0627\u0632 \u0633\u0627\u062e\u062a \u06cc\u06a9 \u0635\u0641\u062d\u0647 \u062c\u062f\u06cc\u062f\u060c \u062d\u062a\u0645\u0627 \u062f\u0648 \u06a9\u0627\u0645\u067e\u0648\u0646\u0646\u062a\u06cc \u06a9\u0647 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647 \u0642\u0631\u0627\u0631 \u062f\u0627\u062f\u0647 \u0634\u062f\u0647 \u0627\u0633\u062a\u060c \u0642\u0628\u0644 \u0627\u0632 \u0647\u0631 \u06a9\u0627\u0631\u06cc \u0628\u0647 \u0622\u0646 \u0635\u0641\u062d\u0647 \u062c\u062f\u06cc\u062f \u0627\u0636\u0627\u0641\u0647 \u06a9\u0646\u06cc\u062f.\n\n\n\u0644\u0627\u0632\u0645 \u0628\u0647 \u0630\u06a9\u0631 \u0627\u0633\u062a \u0627\u06af\u0631 \u062f\u0631 \u0635\u0641\u062d\u0647 \u0627\u06cc\u062c\u0627\u062f \u0634\u062f\u0647 \u0639\u0645\u0644\u06af\u0631\u0647\u0627\u06cc\u06cc \u0648\u062c\u0648\u062f \u062f\u0627\u0634\u062a \u06a9\u0647 \u0642\u0631\u0627\u0631 \u0628\u0648\u062f \u0645\u0642\u062f\u0627\u0631 inlab_user \u06cc\u0627 inlab_user_namespace_id \u0631\u0627 \u062a\u063a\u06cc\u06cc\u0631 \u062f\u0647\u062f \u062d\u062a\u0645\u0627 \u062c\u0647\u062a \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u0627\u06cc\u0646 \u06a9\u0627\u0645\u067e\u0648\u0646\u0646\u062a \u0647\u0627 \u062f\u0642\u062a \u0646\u0645\u0627\u06cc\u06cc\u062f \u0686\u0631\u0627\u06a9\u0647 \u0642\u0627\u0646\u0648\u0646 \u062b\u0627\u0628\u062a \u0628\u0627\u0644\u0627 \u0645\u0645\u06a9\u0646 \u0627\u0633\u062a \u0635\u062d\u06cc\u062d \u0646\u0628\u0627\u0634\u062f. \u0628\u0647 \u0646\u0633\u062e\u0647 \u067e\u0631\u06cc\u0645\u06cc\u0648\u0645 \u0645\u0631\u0627\u062c\u0639\u0647 \u0646\u0645\u0627\u06cc\u06cc\u062f:)).\n"
-            }
+            <RedirectToLoginPage
+              data-plasmic-name={"redirectToLoginPage"}
+              data-plasmic-override={overrides.redirectToLoginPage}
+              className={classNames("__wab_instance", sty.redirectToLoginPage)}
+            />
+
+            <RedirectToNamespaceSelection
+              data-plasmic-name={"redirectToNamespaceSelection"}
+              data-plasmic-override={overrides.redirectToNamespaceSelection}
+              className={classNames(
+                "__wab_instance",
+                sty.redirectToNamespaceSelection
+              )}
+            />
+
+            <div
+              data-plasmic-name={"guideLeaflet"}
+              data-plasmic-override={overrides.guideLeaflet}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.guideLeaflet
+              )}
+            >
+              {
+                "\n\u0628\u0639\u062f \u0627\u0632 \u0633\u0627\u062e\u062a \u06cc\u06a9 \u0635\u0641\u062d\u0647 \u062c\u062f\u06cc\u062f\u060c \u062d\u062a\u0645\u0627 \u062f\u0648 \u06a9\u0627\u0645\u067e\u0648\u0646\u0646\u062a\u06cc \u06a9\u0647 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647 \u0642\u0631\u0627\u0631 \u062f\u0627\u062f\u0647 \u0634\u062f\u0647 \u0627\u0633\u062a\u060c \u0642\u0628\u0644 \u0627\u0632 \u0647\u0631 \u06a9\u0627\u0631\u06cc \u0628\u0647 \u0622\u0646 \u0635\u0641\u062d\u0647 \u062c\u062f\u06cc\u062f \u0627\u0636\u0627\u0641\u0647 \u06a9\u0646\u06cc\u062f.\n\n\n\u0644\u0627\u0632\u0645 \u0628\u0647 \u0630\u06a9\u0631 \u0627\u0633\u062a \u0627\u06af\u0631 \u062f\u0631 \u0635\u0641\u062d\u0647 \u0627\u06cc\u062c\u0627\u062f \u0634\u062f\u0647 \u0639\u0645\u0644\u06af\u0631\u0647\u0627\u06cc\u06cc \u0648\u062c\u0648\u062f \u062f\u0627\u0634\u062a \u06a9\u0647 \u0642\u0631\u0627\u0631 \u0628\u0648\u062f \u0645\u0642\u062f\u0627\u0631 inlab_user \u06cc\u0627 inlab_user_namespace_id \u0631\u0627 \u062a\u063a\u06cc\u06cc\u0631 \u062f\u0647\u062f \u062d\u062a\u0645\u0627 \u062c\u0647\u062a \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u0627\u06cc\u0646 \u06a9\u0627\u0645\u067e\u0648\u0646\u0646\u062a \u0647\u0627 \u062f\u0642\u062a \u0646\u0645\u0627\u06cc\u06cc\u062f \u0686\u0631\u0627\u06a9\u0647 \u0642\u0627\u0646\u0648\u0646 \u062b\u0627\u0628\u062a \u0628\u0627\u0644\u0627 \u0645\u0645\u06a9\u0646 \u0627\u0633\u062a \u0635\u062d\u06cc\u062d \u0646\u0628\u0627\u0634\u062f. \u0628\u0647 \u0646\u0633\u062e\u0647 \u067e\u0631\u06cc\u0645\u06cc\u0648\u0645 \u0645\u0631\u0627\u062c\u0639\u0647 \u0646\u0645\u0627\u06cc\u06cc\u062f:)).\n"
+              }
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;

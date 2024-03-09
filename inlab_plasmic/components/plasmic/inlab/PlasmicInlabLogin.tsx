@@ -68,12 +68,14 @@ import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlo
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicInlabLogin.module.css"; // plasmic-import: J2d--RhwPuEt/css
 
-import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import MdiaccountIcon from "./icons/PlasmicIcon__Mdiaccount"; // plasmic-import: mC78MSouMgiO/icon
+import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
+import LockPasswordSvgrepoComsvgIcon from "./icons/PlasmicIcon__LockPasswordSvgrepoComsvg"; // plasmic-import: 2bxvHhfddyLp/icon
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
@@ -255,14 +257,70 @@ function PlasmicInlabLogin__RenderFunc(props: {
             aria-label={``}
             autoFocus={false}
             className={classNames("__wab_instance", sty.username)}
+            endIcon={
+              $state.username.value !== "" ? (
+                <Icons8ClosesvgIcon
+                  className={classNames(projectcss.all, sty.svg__sIovl)}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateUsernameValue"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["username", "value"]
+                            },
+                            operation: 0,
+                            value: ""
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateUsernameValue"] != null &&
+                      typeof $steps["updateUsernameValue"] === "object" &&
+                      typeof $steps["updateUsernameValue"].then === "function"
+                    ) {
+                      $steps["updateUsernameValue"] = await $steps[
+                        "updateUsernameValue"
+                      ];
+                    }
+                  }}
+                  role={"img"}
+                />
+              ) : null
+            }
             name={``}
             onChange={(...eventArgs) => {
               generateStateOnChangeProp($state, ["username", "value"])(
                 (e => e.target?.value).apply(null, eventArgs)
               );
             }}
-            placeholder={"username"}
+            placeholder={
+              "\u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc"
+            }
             required={false}
+            showStartIcon={true}
+            startIcon={
+              <MdiaccountIcon
+                className={classNames(projectcss.all, sty.svg__falId)}
+                role={"img"}
+              />
+            }
             type={"text"}
             value={generateStateValueProp($state, ["username", "value"]) ?? ""}
           />
@@ -273,6 +331,53 @@ function PlasmicInlabLogin__RenderFunc(props: {
             aria-label={``}
             autoFocus={false}
             className={classNames("__wab_instance", sty.password)}
+            endIcon={
+              $state.password.value !== "" ? (
+                <Icons8ClosesvgIcon
+                  className={classNames(projectcss.all, sty.svg__lOk9F)}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updatePasswordValue"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["password", "value"]
+                            },
+                            operation: 0,
+                            value: ""
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updatePasswordValue"] != null &&
+                      typeof $steps["updatePasswordValue"] === "object" &&
+                      typeof $steps["updatePasswordValue"].then === "function"
+                    ) {
+                      $steps["updatePasswordValue"] = await $steps[
+                        "updatePasswordValue"
+                      ];
+                    }
+                  }}
+                  role={"img"}
+                />
+              ) : null
+            }
             onChange={async (...eventArgs: any) => {
               ((...eventArgs) => {
                 generateStateOnChangeProp($state, ["password", "value"])(
@@ -283,7 +388,14 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 const $steps = {};
               }).apply(null, eventArgs);
             }}
-            placeholder={"password"}
+            placeholder={"\u0631\u0645\u0632 \u0639\u0628\u0648\u0631"}
+            showStartIcon={true}
+            startIcon={
+              <LockPasswordSvgrepoComsvgIcon
+                className={classNames(projectcss.all, sty.svg__fnFNb)}
+                role={"img"}
+              />
+            }
             type={"password"}
             value={generateStateValueProp($state, ["password", "value"]) ?? ""}
           />

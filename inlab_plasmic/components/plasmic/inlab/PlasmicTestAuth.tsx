@@ -62,15 +62,17 @@ import {
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicTestAuth.module.css"; // plasmic-import: djw6BO6ESgiq/css
 
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
@@ -88,11 +90,13 @@ type ArgPropType = keyof PlasmicTestAuth__ArgsType;
 export const PlasmicTestAuth__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicTestAuth__OverridesType = {
-  root?: Flex__<"div">;
+  testAuth?: Flex__<"div">;
   httpRestApiFetcher?: Flex__<typeof DataFetcher>;
   test?: Flex__<typeof ApiFetcherComponent>;
   someInstruction?: Flex__<"div">;
   button?: Flex__<typeof Button>;
+  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
 };
 
 export interface DefaultTestAuthProps {}
@@ -169,110 +173,58 @@ function PlasmicTestAuth__RenderFunc(props: {
       `}</style>
 
       <div className={projectcss.plasmic_page_wrapper}>
-        <div
-          data-plasmic-name={"root"}
-          data-plasmic-override={overrides.root}
-          data-plasmic-root={true}
-          data-plasmic-for-node={forNode}
-          className={classNames(
-            projectcss.all,
-            projectcss.root_reset,
-            projectcss.plasmic_default_styles,
-            projectcss.plasmic_mixins,
-            projectcss.plasmic_tokens,
-            plasmic_antd_5_hostless_css.plasmic_tokens,
-            plasmic_plasmic_rich_components_css.plasmic_tokens,
-            sty.root
-          )}
-        >
-          <DataFetcher
-            data-plasmic-name={"httpRestApiFetcher"}
-            data-plasmic-override={overrides.httpRestApiFetcher}
-            className={classNames("__wab_instance", sty.httpRestApiFetcher)}
-            dataName={"fetchedData"}
-            errorDisplay={
-              <DataCtxReader__>{$ctx => "Error fetching data"}</DataCtxReader__>
-            }
-            errorName={"fetchError"}
-            headers={{
-              "Content-Type": "application/json",
-              Accept: "application/json"
-            }}
-            loadingDisplay={
-              <DataCtxReader__>{$ctx => "Loading..."}</DataCtxReader__>
-            }
-            method={"GET"}
-            noLayout={false}
-            url={"https://api.github.com/users/plasmicapp/repos"}
+        {false ? (
+          <div
+            data-plasmic-name={"testAuth"}
+            data-plasmic-override={overrides.testAuth}
+            data-plasmic-root={true}
+            data-plasmic-for-node={forNode}
+            className={classNames(
+              projectcss.all,
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              projectcss.plasmic_tokens,
+              plasmic_antd_5_hostless_css.plasmic_tokens,
+              plasmic_plasmic_rich_components_css.plasmic_tokens,
+              sty.testAuth
+            )}
           >
-            <DataCtxReader__>
-              {$ctx => (
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__rtlRh
-                  )}
-                >
-                  <React.Fragment>
-                    {(() => {
-                      try {
-                        return $ctx.fetchedData[0].id;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return "";
-                        }
-                        throw e;
-                      }
-                    })()}
-                  </React.Fragment>
-                </div>
-              )}
-            </DataCtxReader__>
-          </DataFetcher>
-          <ApiFetcherComponent
-            data-plasmic-name={"test"}
-            data-plasmic-override={overrides.test}
-            className={classNames("__wab_instance", sty.test)}
-            method={"GET"}
-            path={`/api/v2/user/info?user=${$ctx.inlab_user.user.id}`}
-            ref={ref => {
-              $refs["test"] = ref;
-            }}
-          >
-            <DataCtxReader__>
-              {$ctx => (
-                <React.Fragment>
-                  <div
-                    data-plasmic-name={"someInstruction"}
-                    data-plasmic-override={overrides.someInstruction}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.someInstruction
-                    )}
-                  >
-                    {
-                      "Below is a textbox that its content is generated from an API Call tha ApiFetcherComponent has proveded:"
-                    }
-                  </div>
+            <DataFetcher
+              data-plasmic-name={"httpRestApiFetcher"}
+              data-plasmic-override={overrides.httpRestApiFetcher}
+              className={classNames("__wab_instance", sty.httpRestApiFetcher)}
+              dataName={"fetchedData"}
+              errorDisplay={
+                <DataCtxReader__>
+                  {$ctx => "Error fetching data"}
+                </DataCtxReader__>
+              }
+              errorName={"fetchError"}
+              headers={{
+                "Content-Type": "application/json",
+                Accept: "application/json"
+              }}
+              loadingDisplay={
+                <DataCtxReader__>{$ctx => "Loading..."}</DataCtxReader__>
+              }
+              method={"GET"}
+              noLayout={false}
+              url={"https://api.github.com/users/plasmicapp/repos"}
+            >
+              <DataCtxReader__>
+                {$ctx => (
                   <div
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.text__vVeKr
+                      sty.text__rtlRh
                     )}
-                    onClick={async event => {
-                      const $steps = {};
-                    }}
                   >
                     <React.Fragment>
                       {(() => {
                         try {
-                          return $ctx.fetched_data.data.rank.role;
+                          return $ctx.fetchedData[0].id;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -285,142 +237,225 @@ function PlasmicTestAuth__RenderFunc(props: {
                       })()}
                     </React.Fragment>
                   </div>
-                  <Button
-                    data-plasmic-name={"button"}
-                    data-plasmic-override={overrides.button}
-                    className={classNames("__wab_instance", sty.button)}
-                    color={"green"}
-                    isDisabled={generateStateValueProp($state, [
-                      "button",
-                      "isDisabled"
-                    ])}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["myAction"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "GET",
-                                `/api/v2/user/info?id=${$ctx.inlab_user.user.id}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["myAction"] != null &&
-                        typeof $steps["myAction"] === "object" &&
-                        typeof $steps["myAction"].then === "function"
-                      ) {
-                        $steps["myAction"] = await $steps["myAction"];
+                )}
+              </DataCtxReader__>
+            </DataFetcher>
+            <ApiFetcherComponent
+              data-plasmic-name={"test"}
+              data-plasmic-override={overrides.test}
+              className={classNames("__wab_instance", sty.test)}
+              method={"GET"}
+              path={`/api/v2/user/info?user=${$ctx.inlab_user.user.id}`}
+              ref={ref => {
+                $refs["test"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <React.Fragment>
+                    <div
+                      data-plasmic-name={"someInstruction"}
+                      data-plasmic-override={overrides.someInstruction}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.someInstruction
+                      )}
+                    >
+                      {
+                        "Below is a textbox that its content is generated from an API Call tha ApiFetcherComponent has proveded:"
                       }
-
-                      $steps["updateActionTextResult"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["actionTextResult"]
-                              },
-                              operation: 0,
-                              value: JSON.stringify($steps.myAction)
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateActionTextResult"] != null &&
-                        typeof $steps["updateActionTextResult"] === "object" &&
-                        typeof $steps["updateActionTextResult"].then ===
-                          "function"
-                      ) {
-                        $steps["updateActionTextResult"] = await $steps[
-                          "updateActionTextResult"
-                        ];
-                      }
-                    }}
-                    onIsDisabledChange={(...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "button",
-                        "isDisabled"
-                      ])(eventArgs[0]);
-                    }}
-                  >
+                    </div>
                     <div
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.text__x3Kgi
+                        sty.text__vVeKr
+                      )}
+                      onClick={async event => {
+                        const $steps = {};
+                      }}
+                    >
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return $ctx.fetched_data.data.rank.role;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
+                    </div>
+                    <Button
+                      data-plasmic-name={"button"}
+                      data-plasmic-override={overrides.button}
+                      className={classNames("__wab_instance", sty.button)}
+                      color={"green"}
+                      isDisabled={generateStateValueProp($state, [
+                        "button",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["myAction"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  "GET",
+                                  `/api/v2/user/info?id=${$ctx.inlab_user.user.id}`
+                                ]
+                              };
+                              return $globalActions[
+                                "AuthGlobalContext.apiFetcher"
+                              ]?.apply(null, [...actionArgs.args]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["myAction"] != null &&
+                          typeof $steps["myAction"] === "object" &&
+                          typeof $steps["myAction"].then === "function"
+                        ) {
+                          $steps["myAction"] = await $steps["myAction"];
+                        }
+
+                        $steps["updateActionTextResult"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["actionTextResult"]
+                                },
+                                operation: 0,
+                                value: JSON.stringify($steps.myAction)
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateActionTextResult"] != null &&
+                          typeof $steps["updateActionTextResult"] ===
+                            "object" &&
+                          typeof $steps["updateActionTextResult"].then ===
+                            "function"
+                        ) {
+                          $steps["updateActionTextResult"] = await $steps[
+                            "updateActionTextResult"
+                          ];
+                        }
+                      }}
+                      onIsDisabledChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__x3Kgi
+                        )}
+                      >
+                        {"Click me For Actions"}
+                      </div>
+                    </Button>
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__xW4B5
                       )}
                     >
-                      {"Click me For Actions"}
-                    </div>
-                  </Button>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__xW4B5
-                    )}
-                  >
-                    <React.Fragment>
-                      {(() => {
-                        try {
-                          return $state.actionTextResult;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return "Action Result";
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return $state.actionTextResult;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "Action Result";
+                            }
+                            throw e;
                           }
-                          throw e;
-                        }
-                      })()}
-                    </React.Fragment>
-                  </div>
-                </React.Fragment>
+                        })()}
+                      </React.Fragment>
+                    </div>
+                  </React.Fragment>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponent>
+            <RedirectToLoginPage
+              data-plasmic-name={"redirectToLoginPage"}
+              data-plasmic-override={overrides.redirectToLoginPage}
+              className={classNames("__wab_instance", sty.redirectToLoginPage)}
+            />
+
+            <RedirectToNamespaceSelection
+              data-plasmic-name={"redirectToNamespaceSelection"}
+              data-plasmic-override={overrides.redirectToNamespaceSelection}
+              className={classNames(
+                "__wab_instance",
+                sty.redirectToNamespaceSelection
               )}
-            </DataCtxReader__>
-          </ApiFetcherComponent>
-        </div>
+            />
+          </div>
+        ) : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "httpRestApiFetcher", "test", "someInstruction", "button"],
+  testAuth: [
+    "testAuth",
+    "httpRestApiFetcher",
+    "test",
+    "someInstruction",
+    "button",
+    "redirectToLoginPage",
+    "redirectToNamespaceSelection"
+  ],
   httpRestApiFetcher: ["httpRestApiFetcher"],
   test: ["test", "someInstruction", "button"],
   someInstruction: ["someInstruction"],
-  button: ["button"]
+  button: ["button"],
+  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  root: "div";
+  testAuth: "div";
   httpRestApiFetcher: typeof DataFetcher;
   test: typeof ApiFetcherComponent;
   someInstruction: "div";
   button: typeof Button;
+  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -470,7 +505,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "root") {
+  if (nodeName === "testAuth") {
     func.displayName = "PlasmicTestAuth";
   } else {
     func.displayName = `PlasmicTestAuth.${nodeName}`;
@@ -480,13 +515,17 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicTestAuth = Object.assign(
   // Top-level PlasmicTestAuth renders the root element
-  makeNodeComponent("root"),
+  makeNodeComponent("testAuth"),
   {
     // Helper components rendering sub-elements
     httpRestApiFetcher: makeNodeComponent("httpRestApiFetcher"),
     test: makeNodeComponent("test"),
     someInstruction: makeNodeComponent("someInstruction"),
     button: makeNodeComponent("button"),
+    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
 
     // Metadata about props expected for PlasmicTestAuth
     internalVariantProps: PlasmicTestAuth__VariantProps,

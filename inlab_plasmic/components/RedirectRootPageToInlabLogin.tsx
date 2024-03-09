@@ -40,7 +40,7 @@ function RedirectRootPageToInlabLogin(
   // By default, we are just piping all RedirectRootPageToInlabLoginProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectRootPageToInlabLogin />;
+  return <PlasmicRedirectRootPageToInlabLogin  />;
 }
 
 export default RedirectRootPageToInlabLogin;

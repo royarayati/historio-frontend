@@ -35,11 +35,10 @@
   left: 0px;
   top: 0px;
   z-index: 1;
-  background: #ffffff;
+  background: none;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   padding: 8px;
-  border-bottom: 1px solid var(--token-8PxxXPNrIohQ);
 }
 .svg {
   position: relative;

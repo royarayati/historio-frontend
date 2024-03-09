@@ -192,6 +192,8 @@
 .plasmic_mixins {
   --mixin-cKqN743V90Sj_white-space: pre-wrap;
   --plasmic-mixin-cards_white-space: var(--mixin-cKqN743V90Sj_white-space);
+  --mixin-pO1WIMDIdw_g_white-space: pre-wrap;
+  --plasmic-mixin-buttons_white-space: var(--mixin-pO1WIMDIdw_g_white-space);
 }
 
 :where(.all) {

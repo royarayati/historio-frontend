@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useState, useCallback, PropsWithChildren } from "react";
 
 import { DataProvider, GlobalActionsProvider } from "@plasmicapp/host";
 
@@ -14,22 +14,17 @@ import {
 import { InlabUser, GlobalContext } from "./types/CommonTypes";
 import { axiosCall } from "./ApiFetcherAction";
 
-// Users will be able to set these props in Studio.
 interface AuthGlobalContextProps {
-  // You might use this to override the auth URL to a test or local URL.
-  baseUrl: string;
+  // Any props plasmic-studio users want to set as project settings
 }
 
-// TODO: We should consider is sending null for all errors is logical or not
-//       Does All errors mean user is logouted ?
-//       Or error from network or other problems happened ?
-export const AuthGlobalContext = ({ children }: React.PropsWithChildren<AuthGlobalContextProps>) => {
-  console.log("AuthGlobalContext: Main: START");
+export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalContextProps>) => {
 
-  ////////// READ PROPS //////////
+  ////////// SET BASE URL //////////
 
   let baseUrl = '';
   if (typeof window !== "undefined") {
+    logForDev("AuthGlobalContext: window is defined");
     baseUrl = window.env.INLAB_API_URL;
   }
 
@@ -68,7 +63,7 @@ export const AuthGlobalContext = ({ children }: React.PropsWithChildren<AuthGlob
     changeUserCallback
   }), [baseUrl, changeUserCallback]);
 
-  ////////// SETUP ACTIONS //////////
+  ////////// SETUP GLOBAL ACTIONS //////////
 
   const actions = useMemo(() => ({
     apiFetcher: async (
@@ -130,6 +125,8 @@ export const AuthGlobalContext = ({ children }: React.PropsWithChildren<AuthGlob
     },
 
   }), [baseUrl, changeUserCallback, inlabUser]);
+
+  console.log("AuthGlobalContext: END: userIsReady: " + userIsReady);
 
   ///////// RETURN PROVIDERS //////////
   return (

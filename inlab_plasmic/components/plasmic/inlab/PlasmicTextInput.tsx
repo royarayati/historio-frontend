@@ -65,13 +65,13 @@ import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlo
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicTextInput.module.css"; // plasmic-import: WB4OwDxc51ck/css
 
 import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
 
 createPlasmicElementProxy;
 
@@ -116,7 +116,6 @@ export type PlasmicTextInput__ArgsType = {
     | "email"
     | "tel";
   autoFocus?: boolean;
-  clearSearchbar?: React.ReactNode;
 };
 type ArgPropType = keyof PlasmicTextInput__ArgsType;
 export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
@@ -130,8 +129,7 @@ export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
   "aria-labelledby",
   "onChange",
   "type",
-  "autoFocus",
-  "clearSearchbar"
+  "autoFocus"
 );
 
 export type PlasmicTextInput__OverridesType = {
@@ -160,7 +158,6 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
     | "email"
     | "tel";
   autoFocus?: boolean;
-  clearSearchbar?: React.ReactNode;
   color?: SingleChoiceArg<"dark">;
 }
 
@@ -185,7 +182,7 @@ function PlasmicTextInput__RenderFunc(props: {
     () =>
       Object.assign(
         {
-          placeholder: "Enter something…"
+          placeholder: ``
         },
         props.args
       ),
@@ -285,6 +282,11 @@ function PlasmicTextInput__RenderFunc(props: {
           [sty.root___focusVisibleWithin]: triggers.focusVisibleWithin_root,
           [sty.rootcolor_dark]: hasVariant($state, "color", "dark"),
           [sty.rootisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
+          [sty.rootshowEndIcon]: hasVariant(
+            $state,
+            "showEndIcon",
+            "showEndIcon"
+          ),
           [sty.rootshowStartIcon]: hasVariant(
             $state,
             "showStartIcon",
@@ -309,6 +311,11 @@ function PlasmicTextInput__RenderFunc(props: {
             $state,
             "isDisabled",
             "isDisabled"
+          ),
+          [sty.startIconContainershowEndIcon]: hasVariant(
+            $state,
+            "showEndIcon",
+            "showEndIcon"
           ),
           [sty.startIconContainershowStartIcon]: hasVariant(
             $state,
@@ -343,9 +350,6 @@ function PlasmicTextInput__RenderFunc(props: {
       <input
         data-plasmic-name={"input"}
         data-plasmic-override={overrides.input}
-        aria-label={args["aria-label"]}
-        aria-labelledby={args["aria-labelledby"]}
-        autoFocus={args.autoFocus}
         className={classNames(projectcss.all, projectcss.input, sty.input, {
           [sty.input___focusVisibleWithin]: triggers.focusVisibleWithin_root,
           [sty.inputcolor_dark]: hasVariant($state, "color", "dark"),
@@ -359,7 +363,6 @@ function PlasmicTextInput__RenderFunc(props: {
         disabled={
           hasVariant($state, "isDisabled", "isDisabled") ? true : undefined
         }
-        name={args.name}
         onChange={e => {
           generateStateOnChangeProp($state, ["input", "value"])(e.target.value);
         }}
@@ -367,56 +370,60 @@ function PlasmicTextInput__RenderFunc(props: {
         ref={ref => {
           $refs["input"] = ref;
         }}
-        required={args.required}
         type={args.type}
         value={generateStateValueProp($state, ["input", "value"]) ?? ""}
       />
 
-      {renderPlasmicSlot({
-        defaultContents: (
-          <SearchsvgIcon
-            className={classNames(projectcss.all, sty.svg__lTYva)}
-            role={"img"}
-          />
-        ),
-
-        value: args.clearSearchbar
-      })}
-      <div
-        data-plasmic-name={"endIconContainer"}
-        data-plasmic-override={overrides.endIconContainer}
-        className={classNames(projectcss.all, sty.endIconContainer, {
-          [sty.endIconContainercolor_dark]: hasVariant($state, "color", "dark"),
-          [sty.endIconContainershowEndIcon]: hasVariant(
-            $state,
-            "showEndIcon",
-            "showEndIcon"
-          )
-        })}
-      >
-        {renderPlasmicSlot({
-          defaultContents: (
-            <ChecksvgIcon
-              className={classNames(projectcss.all, sty.svg__m0Xvn)}
-              role={"img"}
-            />
-          ),
-
-          value: args.endIcon,
-          className: classNames(sty.slotTargetEndIcon, {
-            [sty.slotTargetEndIconcolor_dark]: hasVariant(
+      {(
+        hasVariant($state, "showEndIcon", "showEndIcon")
+          ? true
+          : $state.value !== ""
+      ) ? (
+        <div
+          data-plasmic-name={"endIconContainer"}
+          data-plasmic-override={overrides.endIconContainer}
+          className={classNames(projectcss.all, sty.endIconContainer, {
+            [sty.endIconContainercolor_dark]: hasVariant(
               $state,
               "color",
               "dark"
             ),
-            [sty.slotTargetEndIconshowEndIcon]: hasVariant(
+            [sty.endIconContainerisDisabled]: hasVariant(
+              $state,
+              "isDisabled",
+              "isDisabled"
+            ),
+            [sty.endIconContainershowEndIcon]: hasVariant(
               $state,
               "showEndIcon",
               "showEndIcon"
             )
-          })
-        })}
-      </div>
+          })}
+        >
+          {renderPlasmicSlot({
+            defaultContents:
+              $state.value !== "" ? (
+                <Icons8ClosesvgIcon
+                  className={classNames(projectcss.all, sty.svg__m0Xvn)}
+                  role={"img"}
+                />
+              ) : null,
+            value: args.endIcon,
+            className: classNames(sty.slotTargetEndIcon, {
+              [sty.slotTargetEndIconcolor_dark]: hasVariant(
+                $state,
+                "color",
+                "dark"
+              ),
+              [sty.slotTargetEndIconshowEndIcon]: hasVariant(
+                $state,
+                "showEndIcon",
+                "showEndIcon"
+              )
+            })
+          })}
+        </div>
+      ) : null}
     </div>
   ) as React.ReactElement | null;
 }

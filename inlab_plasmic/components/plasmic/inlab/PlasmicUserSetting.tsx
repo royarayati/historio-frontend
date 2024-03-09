@@ -67,9 +67,9 @@ import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlo
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicUserSetting.module.css"; // plasmic-import: RHOuYiwuacpG/css
 
 import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
@@ -780,7 +780,14 @@ function PlasmicUserSetting__RenderFunc(props: {
                   sty.text__zjr24
                 )}
               >
-                {"Log Out"}
+                <React.Fragment>
+                  <span
+                    className={"plasmic_default__all plasmic_default__span"}
+                    style={{ color: "var(--token-jgohepLVeKvh)" }}
+                  >
+                    {"Log Out"}
+                  </span>
+                </React.Fragment>
               </div>
             </Button>
           </Stack__>

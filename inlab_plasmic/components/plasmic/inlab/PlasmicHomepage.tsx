@@ -65,21 +65,20 @@ import FavoriteIcon from "../../FavoriteIcon"; // plasmic-import: PK_hwsu90gKT/c
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic_antd_5_hostless.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic_plasmic_rich_components.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
-import projectcss from "./plasmic_inlab.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicHomepage.module.css"; // plasmic-import: oQ9IYAdIiE5g/css
 
 import MenuIcon from "./icons/PlasmicIcon__Menu"; // plasmic-import: YlP_1riCYk4W/icon
 import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
@@ -95,7 +94,7 @@ type ArgPropType = keyof PlasmicHomepage__ArgsType;
 export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicHomepage__OverridesType = {
-  patientListsearch?: Flex__<"div">;
+  homepage?: Flex__<"div">;
   pageContent?: Flex__<"div">;
   searchsetting?: Flex__<"div">;
   settingIcon?: Flex__<"svg">;
@@ -157,22 +156,7 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "searchbar.value",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          hasVariant(globalVariants, "screen", "mobileFirst")
-            ? ``
-            : (() => {
-                try {
-                  return "چچچچچچچ";
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
-                }
-              })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       },
       {
         path: "commentButton.isDisabled",
@@ -210,8 +194,8 @@ function PlasmicHomepage__RenderFunc(props: {
       `}</style>
 
       <div
-        data-plasmic-name={"patientListsearch"}
-        data-plasmic-override={overrides.patientListsearch}
+        data-plasmic-name={"homepage"}
+        data-plasmic-override={overrides.homepage}
         data-plasmic-root={true}
         data-plasmic-for-node={forNode}
         className={classNames(
@@ -222,7 +206,7 @@ function PlasmicHomepage__RenderFunc(props: {
           projectcss.plasmic_tokens,
           plasmic_antd_5_hostless_css.plasmic_tokens,
           plasmic_plasmic_rich_components_css.plasmic_tokens,
-          sty.patientListsearch
+          sty.homepage
         )}
       >
         <div
@@ -273,88 +257,85 @@ function PlasmicHomepage__RenderFunc(props: {
             <TextInput
               data-plasmic-name={"searchbar"}
               data-plasmic-override={overrides.searchbar}
-              autoFocus={true}
               className={classNames("__wab_instance", sty.searchbar)}
-              clearSearchbar={
-                (() => {
-                  try {
-                    return $state.searchbar.value !== "";
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return false;
-                    }
-                    throw e;
-                  }
-                })() ? (
-                  <Icons8ClosesvgIcon
-                    className={classNames(projectcss.all, sty.svg__kHhsj)}
-                    onClick={async event => {
-                      const $steps = {};
+              endIcon={
+                <Icons8ClosesvgIcon
+                  className={classNames(projectcss.all, sty.svg__mRwyU)}
+                  onClick={async event => {
+                    const $steps = {};
 
-                      $steps["updateSearchbarValue"] = true
+                    $steps["updateSearchbarValue"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["searchbar", "value"]
+                            },
+                            operation: 0,
+                            value: ""
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateSearchbarValue"] != null &&
+                      typeof $steps["updateSearchbarValue"] === "object" &&
+                      typeof $steps["updateSearchbarValue"].then === "function"
+                    ) {
+                      $steps["updateSearchbarValue"] = await $steps[
+                        "updateSearchbarValue"
+                      ];
+                    }
+
+                    $steps["runActionOnFavPatients"] =
+                      $steps.updateSearchbarValue.status === 200
                         ? (() => {
                             const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["searchbar", "value"]
-                              },
-                              operation: 0,
-                              value: ""
+                              tplRef: "favPatients",
+                              action: "reload"
                             };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
+                            return (({ tplRef, action, args }) => {
+                              return $refs?.[tplRef]?.[action]?.(
+                                ...(args ?? [])
+                              );
                             })?.apply(null, [actionArgs]);
                           })()
                         : undefined;
-                      if (
-                        $steps["updateSearchbarValue"] != null &&
-                        typeof $steps["updateSearchbarValue"] === "object" &&
-                        typeof $steps["updateSearchbarValue"].then ===
-                          "function"
-                      ) {
-                        $steps["updateSearchbarValue"] = await $steps[
-                          "updateSearchbarValue"
-                        ];
-                      }
-                    }}
-                    role={"img"}
-                  />
-                ) : null
-              }
-              endIcon={
-                <ChecksvgIcon
-                  className={classNames(projectcss.all, sty.svg__mRwyU)}
+                    if (
+                      $steps["runActionOnFavPatients"] != null &&
+                      typeof $steps["runActionOnFavPatients"] === "object" &&
+                      typeof $steps["runActionOnFavPatients"].then ===
+                        "function"
+                    ) {
+                      $steps["runActionOnFavPatients"] = await $steps[
+                        "runActionOnFavPatients"
+                      ];
+                    }
+                  }}
                   role={"img"}
                 />
               }
-              onChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, ["searchbar", "value"])(
-                    (e => e.target?.value).apply(null, eventArgs)
-                  );
-                }).apply(null, eventArgs);
-                (async event => {
-                  const $steps = {};
-                }).apply(null, eventArgs);
+              onChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["searchbar", "value"])(
+                  (e => e.target?.value).apply(null, eventArgs)
+                );
               }}
               placeholder={
                 "\u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u0634\u0645\u0627\u0631\u0647 \u067e\u0631\u0648\u0646\u062f\u0647\u060c \u06a9\u062f \u0645\u0644\u06cc\u060c \u06a9\u062f \u067e\u06a9\u0633 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
               }
-              required={false}
               showStartIcon={true}
               startIcon={
                 <SearchsvgIcon
@@ -384,19 +365,7 @@ function PlasmicHomepage__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
-                  {(() => {
-                    try {
-                      return $ctx.fetched_data.loading == true;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return false;
-                      }
-                      throw e;
-                    }
-                  })() ? (
+                  {$ctx.fetched_data.loading === true ? (
                     <div
                       className={classNames(
                         projectcss.all,
@@ -409,22 +378,9 @@ function PlasmicHomepage__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {(() => {
-                    try {
-                      return (
-                        $ctx.fetched_data.loading === false &&
-                        $state.searchbar.value === ""
-                      );
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return false;
-                      }
-                      throw e;
-                    }
-                  })() ? (
+                  {$ctx.fetched_data.loading === false &&
+                  $state.searchbar.value === "" &&
+                  $ctx.fetched_data.data !== "" ? (
                     <div
                       className={classNames(
                         projectcss.all,
@@ -436,7 +392,7 @@ function PlasmicHomepage__RenderFunc(props: {
 
                         $steps["runActionOnSearchedPatients"] = true
                           ? (() => {
-                              const actionArgs = { tplRef: "favPatients" };
+                              const actionArgs = {};
                               return (({ tplRef, action, args }) => {
                                 return $refs?.[tplRef]?.[action]?.(
                                   ...(args ?? [])
@@ -462,23 +418,9 @@ function PlasmicHomepage__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {(() => {
-                    try {
-                      return (
-                        $ctx.fetched_data.loading === false &&
-                        $ctx.fetched_data.data[0].search_response === "" &&
-                        $state.searchbar.value === ""
-                      );
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return false;
-                      }
-                      throw e;
-                    }
-                  })() ? (
+                  {$ctx.fetched_data.loading === false &&
+                  $state.searchbar.value === "" &&
+                  $ctx.fetched_data.data === "" ? (
                     <div
                       className={classNames(
                         projectcss.all,
@@ -487,27 +429,13 @@ function PlasmicHomepage__RenderFunc(props: {
                       )}
                     >
                       {
-                        "\u0628\u06cc\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0633\u0631\u0686 \u06a9\u0646\u06cc\u062f\n\u0628\u0631 \u0631\u0648\u06cc \u2b50(\u0633\u062a\u0627\u0631\u0647) \u0628\u0632\u0646\u06cc\u062f\n\u0628\u064a\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \u0627\u064a\u0646 \u0635\u0641\u062d\u0647 \u0627\u0636\u0627\u0641\u0647 \u064a\u0627 \u0627\u0632 \u0622\u0646 \u062d\u0630\u0641 \u06a9\u0646\u064a\u062f"
+                        "\u0628\u06cc\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0633\u0631\u0686 \u06a9\u0646\u06cc\u062f\n\u0628\u0631 \u0631\u0648\u06cc\u2b50(\u0633\u062a\u0627\u0631\u0647) \u0628\u0632\u0646\u06cc\u062f\n\u0628\u064a\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \u0627\u064a\u0646 \u0635\u0641\u062d\u0647 \u0627\u0636\u0627\u0641\u0647 \u064a\u0627 \u0627\u0632 \u0622\u0646 \u062d\u0630\u0641 \u06a9\u0646\u064a\u062f"
                       }
                     </div>
                   ) : null}
-                  {(() => {
-                    try {
-                      return (
-                        $ctx.fetched_data.loading === false &&
-                        $ctx.fetched_data.data[0].search_response === "" &&
-                        $state.searchbar.value !== ""
-                      );
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return false;
-                      }
-                      throw e;
-                    }
-                  })() ? (
+                  {$ctx.fetched_data.loading === false &&
+                  $state.searchbar.value !== "" &&
+                  $ctx.fetched_data.data === "" ? (
                     <div
                       data-plasmic-name={
                         "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"
@@ -524,22 +452,14 @@ function PlasmicHomepage__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {(() => {
-                    try {
-                      return !(
-                        $ctx.fetched_data.loading === false &&
-                        $ctx.fetched_data.data[0].search_response === ""
-                      );
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return true;
-                      }
-                      throw e;
-                    }
-                  })()
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? !(
+                          $ctx.fetched_data.loading === false &&
+                          $ctx.fetched_data.search_response == 0
+                        )
+                      : $ctx.fetched_data.data !== ""
+                  )
                     ? (_par =>
                         !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                         (() => {
@@ -592,24 +512,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )}
                               >
                                 <React.Fragment>
-                                  {(() => {
-                                    try {
-                                      return (
-                                        currentItem.first_name +
-                                        " " +
-                                        currentItem.last_name
-                                      );
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return "";
-                                      }
-                                      throw e;
-                                    }
-                                  })()}
+                                  {currentItem.first_name +
+                                    " " +
+                                    currentItem.last_name}
                                 </React.Fragment>
                               </div>
                               {(() => {
@@ -644,7 +549,40 @@ function PlasmicHomepage__RenderFunc(props: {
                                     "searchedPatientFavIcon",
                                     __plasmic_idx_0,
                                     "selected"
-                                  ])
+                                  ]),
+                                  trigerReload: async () => {
+                                    const $steps = {};
+
+                                    $steps["runActionOnFavPatients"] = true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            tplRef: "favPatients",
+                                            action: "reload"
+                                          };
+                                          return (({
+                                            tplRef,
+                                            action,
+                                            args
+                                          }) => {
+                                            return $refs?.[tplRef]?.[action]?.(
+                                              ...(args ?? [])
+                                            );
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                    if (
+                                      $steps["runActionOnFavPatients"] !=
+                                        null &&
+                                      typeof $steps[
+                                        "runActionOnFavPatients"
+                                      ] === "object" &&
+                                      typeof $steps["runActionOnFavPatients"]
+                                        .then === "function"
+                                    ) {
+                                      $steps["runActionOnFavPatients"] =
+                                        await $steps["runActionOnFavPatients"];
+                                    }
+                                  }
                                 };
 
                                 initializePlasmicStates(
@@ -1075,8 +1013,8 @@ function PlasmicHomepage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  patientListsearch: [
-    "patientListsearch",
+  homepage: [
+    "homepage",
     "pageContent",
     "searchsetting",
     "settingIcon",
@@ -1176,7 +1114,7 @@ type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  patientListsearch: "div";
+  homepage: "div";
   pageContent: "div";
   searchsetting: "div";
   settingIcon: "svg";
@@ -1246,7 +1184,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "patientListsearch") {
+  if (nodeName === "homepage") {
     func.displayName = "PlasmicHomepage";
   } else {
     func.displayName = `PlasmicHomepage.${nodeName}`;
@@ -1256,7 +1194,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicHomepage = Object.assign(
   // Top-level PlasmicHomepage renders the root element
-  makeNodeComponent("patientListsearch"),
+  makeNodeComponent("homepage"),
   {
     // Helper components rendering sub-elements
     pageContent: makeNodeComponent("pageContent"),

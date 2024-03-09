@@ -2,7 +2,7 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import { PageParamsProvider as PageParamsProvider__ } from "@plasmicapp/react-web/lib/host";
-import GlobalContextsProvider from "../components/plasmic/antd_5_hostless/PlasmicGlobalContextsProvider";
+import GlobalContextsProvider from "../components/plasmic/inlab/PlasmicGlobalContextsProvider";
 import { ScreenVariantProvider } from "../components/plasmic/inlab/PlasmicGlobalVariant__Screen";
 import { PlasmicGuideToMakeNewPage } from "../components/plasmic/inlab/PlasmicGuideToMakeNewPage";
 import { useRouter } from "next/router";

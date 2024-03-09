@@ -11,28 +11,60 @@ interface PropsType {
     path: string,
     headers?: object,
     requestBody?: object,
-    delay?: number,
-    dependsOn?: object,
+    delay?: number
 }
 
 interface ApiActions {
     reload(): void;
 }
 
-export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>(function ApiFetcherComponent(props: PropsType, ref) {
+export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>((props: PropsType, ref) => {
+
+    logForDev("ApiFetcherComponent: called.")
 
     const globalContext = useContext(GlobalContext);
     const inlabUser = useSelector('inlab_user');
 
     const [data, setData] = useState({});
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    function onAxiosSuccess(response: any): void {
+        logForDev("ApiFetcherComponent: axios request success: " + (response.data ? "Data Fetched" : "Data Not Fetched"));
+        setLoading(false);
+        setData(response);
+    }
+
+    function onAxiosError(error: any): void {
+        if (axios.isCancel(error)) {
+            return;
+        }
+        logForDev("ApiFetcherComponent: axios request error: " + JSON.stringify(error));
+        setLoading(false);
+        setData(error);
+    }
 
     useImperativeHandle(
         ref,
         () => {
             return {
                 reload() {
-                    console.log("ApiFetcherComponent: refActions: reload")
+                    logForDev("ApiFetcherComponent: reload called.");
+                    setLoading(true);
+
+                    const authedHeaders = {
+                        'Authorization': 'Bearer ' + inlabUser.access,
+                        ...props.headers
+                    };
+
+                    axios.request({
+                        method: props.method || 'GET',
+                        url: globalContext.baseUrl + props.path,
+                        headers: authedHeaders,
+                        data: props.requestBody,
+                    })
+                        .then(onAxiosSuccess)
+                        .catch(onAxiosError)
+
                 }
             };
         },
@@ -52,12 +84,12 @@ export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>(function Ap
                     return;
                 }
 
-                const authedHeaders: object = {
-                    'Authorization': 'Bearer ' + user.access,
+                setLoading(true);
+
+                const authedHeaders = {
+                    'Authorization': 'Bearer ' + inlabUser.access,
                     ...props.headers
                 };
-
-                setLoading(true);
 
                 axios.request({
                     method: props.method || 'GET',
@@ -65,30 +97,30 @@ export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>(function Ap
                     headers: authedHeaders,
                     data: props.requestBody,
                     signal: control.signal,
-                }).then((response) => {
-                    logForDev("ApiFetcherComponent: axios request success: " + (response.data ? "Data Fetched" : "Data Not Fetched"));
-                    setLoading(false);
-                    setData(response);
-                }).catch((error) => {
-                    if (axios.isCancel(error)) {
-                        return;
-                    }
-                    logForDev("ApiFetcherComponent: axios request error: " + JSON.stringify(error));
-                    setLoading(false);
-                    setData(error);
                 })
+                    .then(onAxiosSuccess)
+                    .catch(onAxiosError)
 
 
 
-            }).catch(error => { });
+            }).catch(error => {
+                // TODO: Handle errors of refreshing user
+                logForDev("ApiFetcherComponent: useEffect: Refreshing user failed!!! ");
+                setLoading(false);
+            });
 
         }, props.delay || 0);
 
         return () => {
+            // useEffect return. Cleanup.
+            logForDev("ApiFetcherComponent: useEffect: cleanup");
             control.abort();
             clearTimeout(searchTimeOut);
         }
+
     }, [props, globalContext, inlabUser]);
+
+
 
     return (
         <div className={props.className}>
@@ -97,6 +129,7 @@ export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>(function Ap
             </DataProvider>
         </div>
     )
+
 })
 
 export const ApiFetcherMeta: CodeComponentMeta<PropsType> = {
@@ -111,8 +144,7 @@ export const ApiFetcherMeta: CodeComponentMeta<PropsType> = {
         path: 'string',
         headers: 'object',
         requestBody: 'object',
-        delay: 'number',
-        dependsOn: 'object',
+        delay: 'number'
     },
     refActions: {
         reload: {
