@@ -23,6 +23,7 @@
     "@plasmicpkgs/react-awesome-reveal": "^3.8.192",
     "antd": "^5.12.6",
     "axios": "^1.6.4",
+    "firebase": "^10.8.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18"
