@@ -38,7 +38,7 @@ function RedirectToLoginPage(props: RedirectToLoginPageProps) {
   // By default, we are just piping all RedirectToLoginPageProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToLoginPage />;
+  return <PlasmicRedirectToLoginPage  />;
 }
 
 export default RedirectToLoginPage;

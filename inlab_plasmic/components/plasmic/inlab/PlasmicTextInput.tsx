@@ -79,20 +79,17 @@ export type PlasmicTextInput__VariantMembers = {
   showStartIcon: "showStartIcon";
   showEndIcon: "showEndIcon";
   isDisabled: "isDisabled";
-  color: "dark";
 };
 export type PlasmicTextInput__VariantsArgs = {
   showStartIcon?: SingleBooleanChoiceArg<"showStartIcon">;
   showEndIcon?: SingleBooleanChoiceArg<"showEndIcon">;
   isDisabled?: SingleBooleanChoiceArg<"isDisabled">;
-  color?: SingleChoiceArg<"dark">;
 };
 type VariantPropType = keyof PlasmicTextInput__VariantsArgs;
 export const PlasmicTextInput__VariantProps = new Array<VariantPropType>(
   "showStartIcon",
   "showEndIcon",
-  "isDisabled",
-  "color"
+  "isDisabled"
 );
 
 export type PlasmicTextInput__ArgsType = {
@@ -158,7 +155,6 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
     | "email"
     | "tel";
   autoFocus?: boolean;
-  color?: SingleChoiceArg<"dark">;
 }
 
 const $$ = {};
@@ -264,11 +260,13 @@ function PlasmicTextInput__RenderFunc(props: {
   });
 
   return (
-    <div
+    <Stack__
+      as={"div"}
       data-plasmic-name={"root"}
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
+      hasGap={true}
       className={classNames(
         projectcss.all,
         projectcss.root_reset,
@@ -280,7 +278,6 @@ function PlasmicTextInput__RenderFunc(props: {
         sty.root,
         {
           [sty.root___focusVisibleWithin]: triggers.focusVisibleWithin_root,
-          [sty.rootcolor_dark]: hasVariant($state, "color", "dark"),
           [sty.rootisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
           [sty.rootshowEndIcon]: hasVariant(
             $state,
@@ -302,11 +299,6 @@ function PlasmicTextInput__RenderFunc(props: {
         className={classNames(projectcss.all, sty.startIconContainer, {
           [sty.startIconContainer___focusVisibleWithin]:
             triggers.focusVisibleWithin_root,
-          [sty.startIconContainercolor_dark]: hasVariant(
-            $state,
-            "color",
-            "dark"
-          ),
           [sty.startIconContainerisDisabled]: hasVariant(
             $state,
             "isDisabled",
@@ -334,11 +326,6 @@ function PlasmicTextInput__RenderFunc(props: {
 
           value: args.startIcon,
           className: classNames(sty.slotTargetStartIcon, {
-            [sty.slotTargetStartIconcolor_dark]: hasVariant(
-              $state,
-              "color",
-              "dark"
-            ),
             [sty.slotTargetStartIconshowStartIcon]: hasVariant(
               $state,
               "showStartIcon",
@@ -352,7 +339,6 @@ function PlasmicTextInput__RenderFunc(props: {
         data-plasmic-override={overrides.input}
         className={classNames(projectcss.all, projectcss.input, sty.input, {
           [sty.input___focusVisibleWithin]: triggers.focusVisibleWithin_root,
-          [sty.inputcolor_dark]: hasVariant($state, "color", "dark"),
           [sty.inputisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
           [sty.inputshowStartIcon]: hasVariant(
             $state,
@@ -383,11 +369,6 @@ function PlasmicTextInput__RenderFunc(props: {
           data-plasmic-name={"endIconContainer"}
           data-plasmic-override={overrides.endIconContainer}
           className={classNames(projectcss.all, sty.endIconContainer, {
-            [sty.endIconContainercolor_dark]: hasVariant(
-              $state,
-              "color",
-              "dark"
-            ),
             [sty.endIconContainerisDisabled]: hasVariant(
               $state,
               "isDisabled",
@@ -410,11 +391,6 @@ function PlasmicTextInput__RenderFunc(props: {
               ) : null,
             value: args.endIcon,
             className: classNames(sty.slotTargetEndIcon, {
-              [sty.slotTargetEndIconcolor_dark]: hasVariant(
-                $state,
-                "color",
-                "dark"
-              ),
               [sty.slotTargetEndIconshowEndIcon]: hasVariant(
                 $state,
                 "showEndIcon",
@@ -424,7 +400,7 @@ function PlasmicTextInput__RenderFunc(props: {
           })}
         </div>
       ) : null}
-    </div>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 

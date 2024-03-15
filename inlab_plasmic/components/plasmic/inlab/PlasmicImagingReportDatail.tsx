@@ -92,8 +92,9 @@ export type PlasmicImagingReportDatail__OverridesType = {
   header?: Flex__<"div">;
   svg?: Flex__<"svg">;
   text?: Flex__<"div">;
-  reportText?: Flex__<typeof ApiFetcherComponent>;
-  imagingReport2?: Flex__<"div">;
+  reportDetail?: Flex__<typeof ApiFetcherComponent>;
+  imagingReportList?: Flex__<"div">;
+  imagingReportCard?: Flex__<"div">;
   imagingReport?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
@@ -261,9 +262,9 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
             </div>
           </div>
           <ApiFetcherComponent
-            data-plasmic-name={"reportText"}
-            data-plasmic-override={overrides.reportText}
-            className={classNames("__wab_instance", sty.reportText)}
+            data-plasmic-name={"reportDetail"}
+            data-plasmic-override={overrides.reportDetail}
+            className={classNames("__wab_instance", sty.reportDetail)}
             headers={(() => {
               try {
                 return {
@@ -282,7 +283,7 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
             method={"GET"}
             path={`/api/v2/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
             ref={ref => {
-              $refs["reportText"] = ref;
+              $refs["reportDetail"] = ref;
             }}
           >
             <DataCtxReader__>
@@ -307,35 +308,37 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                   return (
                     <Stack__
                       as={"div"}
-                      data-plasmic-name={"imagingReport2"}
-                      data-plasmic-override={overrides.imagingReport2}
+                      data-plasmic-name={"imagingReportList"}
+                      data-plasmic-override={overrides.imagingReportList}
                       hasGap={true}
-                      className={classNames(projectcss.all, sty.imagingReport2)}
+                      className={classNames(
+                        projectcss.all,
+                        sty.imagingReportList
+                      )}
                       key={currentIndex}
                     >
-                      {(() => {
-                        try {
-                          return currentItem.id == $ctx.params.reportID;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return false;
-                          }
-                          throw e;
-                        }
-                      })() ? (
+                      {currentItem.id == $ctx.params.reportID ? (
                         <div
-                          data-plasmic-name={"imagingReport"}
-                          data-plasmic-override={overrides.imagingReport}
+                          data-plasmic-name={"imagingReportCard"}
+                          data-plasmic-override={overrides.imagingReportCard}
                           className={classNames(
                             projectcss.all,
-                            projectcss.__wab_text,
-                            sty.imagingReport
+                            sty.imagingReportCard
                           )}
                         >
-                          <React.Fragment>{currentItem.report}</React.Fragment>
+                          <div
+                            data-plasmic-name={"imagingReport"}
+                            data-plasmic-override={overrides.imagingReport}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.imagingReport
+                            )}
+                          >
+                            <React.Fragment>
+                              {currentItem.report}
+                            </React.Fragment>
+                          </div>
                         </div>
                       ) : null}
                     </Stack__>
@@ -381,8 +384,9 @@ const PlasmicDescendants = {
     "header",
     "svg",
     "text",
-    "reportText",
-    "imagingReport2",
+    "reportDetail",
+    "imagingReportList",
+    "imagingReportCard",
     "imagingReport",
     "switchingTabs",
     "switchingTab",
@@ -392,8 +396,18 @@ const PlasmicDescendants = {
   header: ["header", "svg", "text"],
   svg: ["svg"],
   text: ["text"],
-  reportText: ["reportText", "imagingReport2", "imagingReport"],
-  imagingReport2: ["imagingReport2", "imagingReport"],
+  reportDetail: [
+    "reportDetail",
+    "imagingReportList",
+    "imagingReportCard",
+    "imagingReport"
+  ],
+  imagingReportList: [
+    "imagingReportList",
+    "imagingReportCard",
+    "imagingReport"
+  ],
+  imagingReportCard: ["imagingReportCard", "imagingReport"],
   imagingReport: ["imagingReport"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"],
@@ -408,8 +422,9 @@ type NodeDefaultElementType = {
   header: "div";
   svg: "svg";
   text: "div";
-  reportText: typeof ApiFetcherComponent;
-  imagingReport2: "div";
+  reportDetail: typeof ApiFetcherComponent;
+  imagingReportList: "div";
+  imagingReportCard: "div";
   imagingReport: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
@@ -480,8 +495,9 @@ export const PlasmicImagingReportDatail = Object.assign(
     header: makeNodeComponent("header"),
     svg: makeNodeComponent("svg"),
     text: makeNodeComponent("text"),
-    reportText: makeNodeComponent("reportText"),
-    imagingReport2: makeNodeComponent("imagingReport2"),
+    reportDetail: makeNodeComponent("reportDetail"),
+    imagingReportList: makeNodeComponent("imagingReportList"),
+    imagingReportCard: makeNodeComponent("imagingReportCard"),
     imagingReport: makeNodeComponent("imagingReport"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),

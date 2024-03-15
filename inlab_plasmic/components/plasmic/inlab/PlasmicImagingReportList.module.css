@@ -54,7 +54,7 @@
   color: var(--token-9iYGdL7i3GKE);
   height: 1em;
 }
-.text {
+.text__ulPY {
   position: relative;
   width: auto;
   height: auto;
@@ -65,9 +65,146 @@
   text-align: center;
   display: none;
 }
-.reports:global(.__wab_instance):global(.__wab_instance) {
-  position: relative;
+.imagingReport:global(.__wab_instance) {
   max-width: 85%;
+  object-fit: cover;
+  position: relative;
+  width: 100%;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+}
+.viewPacsButton:global(.__wab_instance) {
+  width: 100%;
+  height: 30px;
+  max-width: 100%;
+  position: relative;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-top: 12px;
+  min-width: 0;
+}
+.svg__yjBuh {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__rsAXu {
+  text-align: center;
+  height: 100%;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--token-jgohepLVeKvh);
+  min-height: 0;
+}
+.svg__nnMfD {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__xjbZv {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  flex-grow: 0;
+  margin-top: 12px;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+.text__scVr8 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  flex-grow: 0;
+  margin-top: 12px;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+.imagingReportList2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: none;
+  min-width: 0;
+  padding: 8px;
+}
+.imagingReportList2 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.imagingReportList2 > :global(.__wab_flex-container) > *,
+.imagingReportList2 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.imagingReportList2 > :global(.__wab_flex-container) > picture > img,
+.imagingReportList2
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
+}
+.imagingReportCard {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid var(--token-Pxe4wDL2kJpb);
+}
+.imagingTitledatetime {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+  min-width: 0;
+  padding: 8px;
+}
+.imagingTitle {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.imagingDatetime {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  border-left: 0.5px solid var(--token-IYO13gyYJHXG);
+}
+.imagingType {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding-top: 4px;
+  min-width: 0;
 }
 .switchingTabs {
   display: flex;

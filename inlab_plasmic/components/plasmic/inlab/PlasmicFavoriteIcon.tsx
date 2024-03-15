@@ -70,18 +70,22 @@ import sty from "./PlasmicFavoriteIcon.module.css"; // plasmic-import: PK_hwsu90
 
 import FavoriteSvgrepoComsvgIcon from "./icons/PlasmicIcon__FavoriteSvgrepoComsvg"; // plasmic-import: 9MJJOBGA9bFX/icon
 import FavoriteSvgrepoCom1SvgIcon from "./icons/PlasmicIcon__FavoriteSvgrepoCom1Svg"; // plasmic-import: 5QQKf_ZsnABX/icon
+import LoadingLoaderSvgrepoComsvgIcon from "./icons/PlasmicIcon__LoadingLoaderSvgrepoComsvg"; // plasmic-import: FYp_b7bC4SRG/icon
 
 createPlasmicElementProxy;
 
 export type PlasmicFavoriteIcon__VariantMembers = {
-  favoriteTest: "favoriteTest";
+  favorited: "favorited";
+  loadingFavorite: "loadingFavorite";
 };
 export type PlasmicFavoriteIcon__VariantsArgs = {
-  favoriteTest?: SingleBooleanChoiceArg<"favoriteTest">;
+  favorited?: SingleBooleanChoiceArg<"favorited">;
+  loadingFavorite?: SingleBooleanChoiceArg<"loadingFavorite">;
 };
 type VariantPropType = keyof PlasmicFavoriteIcon__VariantsArgs;
 export const PlasmicFavoriteIcon__VariantProps = new Array<VariantPropType>(
-  "favoriteTest"
+  "favorited",
+  "loadingFavorite"
 );
 
 export type PlasmicFavoriteIcon__ArgsType = {
@@ -107,7 +111,8 @@ export interface DefaultFavoriteIconProps {
   onSelectedChange?: (val: string) => void;
   patientId?: number;
   trigerReload?: () => void;
-  favoriteTest?: SingleBooleanChoiceArg<"favoriteTest">;
+  favorited?: SingleBooleanChoiceArg<"favorited">;
+  loadingFavorite?: SingleBooleanChoiceArg<"loadingFavorite">;
   className?: string;
 }
 
@@ -147,13 +152,13 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "favoriteTest",
+        path: "favorited",
         type: "private",
         variableType: "variant",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.selected == true;
+              return $state.selected === true;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -163,7 +168,7 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
               }
               throw e;
             }
-          })() ?? $props.favoriteTest
+          })() ?? $props.favorited
       },
       {
         path: "selected",
@@ -172,6 +177,12 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
 
         valueProp: "selected",
         onChangeProp: "onSelectedChange"
+      },
+      {
+        path: "loadingFavorite",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.loadingFavorite
       }
     ],
     [$props, $ctx, $refs]
@@ -194,7 +205,9 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
       PlasmicIconType={
-        hasVariant($state, "favoriteTest", "favoriteTest")
+        hasVariant($state, "loadingFavorite", "loadingFavorite")
+          ? LoadingLoaderSvgrepoComsvgIcon
+          : hasVariant($state, "favorited", "favorited")
           ? FavoriteSvgrepoCom1SvgIcon
           : FavoriteSvgrepoComsvgIcon
       }
@@ -208,15 +221,39 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
         plasmic_plasmic_rich_components_css.plasmic_tokens,
         sty.favorite,
         {
-          [sty.favoritefavoriteTest]: hasVariant(
+          [sty.favoritefavorited]: hasVariant($state, "favorited", "favorited"),
+          [sty.favoriteloadingFavorite]: hasVariant(
             $state,
-            "favoriteTest",
-            "favoriteTest"
+            "loadingFavorite",
+            "loadingFavorite"
           )
         }
       )}
       onClick={async event => {
         const $steps = {};
+
+        $steps["activateLoadingFavoriteVariant"] = true
+          ? (() => {
+              const actionArgs = { vgroup: "loadingFavorite", operation: 4 };
+              return (({ vgroup, value }) => {
+                if (typeof value === "string") {
+                  value = [value];
+                }
+
+                $stateSet($state, vgroup, true);
+                return true;
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
+        if (
+          $steps["activateLoadingFavoriteVariant"] != null &&
+          typeof $steps["activateLoadingFavoriteVariant"] === "object" &&
+          typeof $steps["activateLoadingFavoriteVariant"].then === "function"
+        ) {
+          $steps["activateLoadingFavoriteVariant"] = await $steps[
+            "activateLoadingFavoriteVariant"
+          ];
+        }
 
         $steps["toggleFavorite"] = true
           ? (() => {
@@ -259,6 +296,30 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
           typeof $steps["runTrigerReload"].then === "function"
         ) {
           $steps["runTrigerReload"] = await $steps["runTrigerReload"];
+        }
+
+        $steps["deactivateLoadingFavoriteVariant"] =
+          $steps.toggleFavorite.status === 200
+            ? (() => {
+                const actionArgs = { vgroup: "loadingFavorite", operation: 6 };
+                return (({ vgroup, value }) => {
+                  if (typeof value === "string") {
+                    value = [value];
+                  }
+
+                  $stateSet($state, vgroup, false);
+                  return false;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+        if (
+          $steps["deactivateLoadingFavoriteVariant"] != null &&
+          typeof $steps["deactivateLoadingFavoriteVariant"] === "object" &&
+          typeof $steps["deactivateLoadingFavoriteVariant"].then === "function"
+        ) {
+          $steps["deactivateLoadingFavoriteVariant"] = await $steps[
+            "deactivateLoadingFavoriteVariant"
+          ];
         }
       }}
       role={"img"}

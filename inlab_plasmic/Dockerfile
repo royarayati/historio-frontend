@@ -1,4 +1,4 @@
-FROM node:18-slim AS base
+FROM node:20-slim AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -31,6 +31,8 @@ COPY . .
 
 # If using npm comment out above and use below instead
 RUN npm run build
+# Setup proxy for google firebase
+RUN find .next/static/ -name "*.js" -type f | xargs -t sed -i "s/\bfirebase\.googleapis\.com\b/firebase.synappsgroup.com/g"
 
 # Lowercase --token-* and --mixin-* in css
 # This was added to fix a bug in arvancdn compression

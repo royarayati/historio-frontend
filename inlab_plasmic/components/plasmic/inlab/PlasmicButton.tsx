@@ -78,20 +78,20 @@ createPlasmicElementProxy;
 export type PlasmicButton__VariantMembers = {
   isDisabled: "isDisabled";
   shape: "rounded" | "round" | "sharp";
-  size: "compact";
+  size4: "compact";
   color: "blue" | "green" | "red" | "clear" | "link";
 };
 export type PlasmicButton__VariantsArgs = {
   isDisabled?: SingleBooleanChoiceArg<"isDisabled">;
   shape?: SingleChoiceArg<"rounded" | "round" | "sharp">;
-  size?: SingleChoiceArg<"compact">;
+  size4?: SingleChoiceArg<"compact">;
   color?: SingleChoiceArg<"blue" | "green" | "red" | "clear" | "link">;
 };
 type VariantPropType = keyof PlasmicButton__VariantsArgs;
 export const PlasmicButton__VariantProps = new Array<VariantPropType>(
   "isDisabled",
   "shape",
-  "size",
+  "size4",
   "color"
 );
 
@@ -127,7 +127,7 @@ export interface DefaultButtonProps extends pp.BaseButtonProps {
   target?: boolean;
   onIsDisabledChange?: (val: any) => void;
   shape?: SingleChoiceArg<"rounded" | "round" | "sharp">;
-  size?: SingleChoiceArg<"compact">;
+  size4?: SingleChoiceArg<"compact">;
   color?: SingleChoiceArg<"blue" | "green" | "red" | "clear" | "link">;
 }
 
@@ -179,10 +179,10 @@ function PlasmicButton__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => $props.shape
       },
       {
-        path: "size",
+        path: "size4",
         type: "private",
         variableType: "variant",
-        initFunc: ({ $props, $state, $queries, $ctx }) => $props.size
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.size4
       },
       {
         path: "color",
@@ -230,14 +230,14 @@ function PlasmicButton__RenderFunc(props: {
           [sty.rootcolor_red]: hasVariant($state, "color", "red"),
           [sty.rootisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
           [sty.rootshape_round]: hasVariant($state, "shape", "round"),
-          [sty.rootshape_round_size_compact]:
+          [sty.rootshape_round_size4_compact]:
             hasVariant($state, "shape", "round") &&
-            hasVariant($state, "size", "compact"),
+            hasVariant($state, "size4", "compact"),
           [sty.rootshape_rounded]: hasVariant($state, "shape", "rounded"),
           [sty.rootshape_sharp]: hasVariant($state, "shape", "sharp"),
-          [sty.rootsize_compact]: hasVariant($state, "size", "compact"),
-          [sty.rootsize_compact_shape_rounded]:
-            hasVariant($state, "size", "compact") &&
+          [sty.rootsize4_compact]: hasVariant($state, "size4", "compact"),
+          [sty.rootsize4_compact_shape_rounded]:
+            hasVariant($state, "size4", "compact") &&
             hasVariant($state, "shape", "rounded")
         }
       )}

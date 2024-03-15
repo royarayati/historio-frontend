@@ -60,7 +60,6 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -70,9 +69,6 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicReport.module.css"; // plasmic-import: 86AB0v1-nDyA/css
-
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
-import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
 
@@ -93,7 +89,7 @@ export const PlasmicReport__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicReport__OverridesType = {
   reports?: Flex__<typeof ApiFetcherComponent>;
-  viewPacs?: Flex__<typeof Button>;
+  freeBox?: Flex__<"div">;
   imagingTitledatetime?: Flex__<"div">;
   imagingTitle?: Flex__<"div">;
   imagingDatetime?: Flex__<"div">;
@@ -146,12 +142,6 @@ function PlasmicReport__RenderFunc(props: {
 
         valueProp: "reportresult",
         onChangeProp: "onReportresultChange"
-      },
-      {
-        path: "viewPacs.isDisabled",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -207,81 +197,6 @@ function PlasmicReport__RenderFunc(props: {
       <DataCtxReader__>
         {$ctx => (
           <React.Fragment>
-            <Button
-              data-plasmic-name={"viewPacs"}
-              data-plasmic-override={overrides.viewPacs}
-              className={classNames("__wab_instance", sty.viewPacs)}
-              isDisabled={generateStateValueProp($state, [
-                "viewPacs",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["goToPage"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: (() => {
-                          try {
-                            return $ctx.fetched_data.data.pacs_url;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToPage"] != null &&
-                  typeof $steps["goToPage"] === "object" &&
-                  typeof $steps["goToPage"].then === "function"
-                ) {
-                  $steps["goToPage"] = await $steps["goToPage"];
-                }
-              }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, ["viewPacs", "isDisabled"])(
-                  eventArgs[0]
-                );
-              }}
-            >
-              <div className={classNames(projectcss.all, sty.freeBox___7XRgz)}>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__grUgy
-                  )}
-                >
-                  <React.Fragment>
-                    <span
-                      className={"plasmic_default__all plasmic_default__span"}
-                      style={{ color: "#FFFFFF" }}
-                    >
-                      {"View PACS"}
-                    </span>
-                  </React.Fragment>
-                </div>
-              </div>
-            </Button>
             {(() => {
               try {
                 return $ctx.fetched_data.data.radiology_services.length === 0;
@@ -351,7 +266,9 @@ function PlasmicReport__RenderFunc(props: {
               const currentIndex = __plasmic_idx_0;
               return (
                 <div
-                  className={classNames(projectcss.all, sty.freeBox__m5Qvi)}
+                  data-plasmic-name={"freeBox"}
+                  data-plasmic-override={overrides.freeBox}
+                  className={classNames(projectcss.all, sty.freeBox)}
                   key={currentIndex}
                   onClick={async event => {
                     const $steps = {};
@@ -584,13 +501,19 @@ function PlasmicReport__RenderFunc(props: {
 const PlasmicDescendants = {
   reports: [
     "reports",
-    "viewPacs",
+    "freeBox",
     "imagingTitledatetime",
     "imagingTitle",
     "imagingDatetime",
     "imagingType"
   ],
-  viewPacs: ["viewPacs"],
+  freeBox: [
+    "freeBox",
+    "imagingTitledatetime",
+    "imagingTitle",
+    "imagingDatetime",
+    "imagingType"
+  ],
   imagingTitledatetime: [
     "imagingTitledatetime",
     "imagingTitle",
@@ -605,7 +528,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   reports: typeof ApiFetcherComponent;
-  viewPacs: typeof Button;
+  freeBox: "div";
   imagingTitledatetime: "div";
   imagingTitle: "div";
   imagingDatetime: "div";
@@ -672,7 +595,7 @@ export const PlasmicReport = Object.assign(
   makeNodeComponent("reports"),
   {
     // Helper components rendering sub-elements
-    viewPacs: makeNodeComponent("viewPacs"),
+    freeBox: makeNodeComponent("freeBox"),
     imagingTitledatetime: makeNodeComponent("imagingTitledatetime"),
     imagingTitle: makeNodeComponent("imagingTitle"),
     imagingDatetime: makeNodeComponent("imagingDatetime"),

@@ -62,6 +62,21 @@ import {
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import { TiptapWrapper } from "@plasmicpkgs/tiptap/skinny/registerTiptap";
+import { Bold } from "@plasmicpkgs/tiptap/skinny/registerBold";
+import { Italic } from "@plasmicpkgs/tiptap/skinny/registerItalic";
+import { Underline } from "@plasmicpkgs/tiptap/skinny/registerUnderline";
+import { Link as Link2 } from "@plasmicpkgs/tiptap/skinny/registerLink";
+import { Code } from "@plasmicpkgs/tiptap/skinny/registerCode";
+import { Strike } from "@plasmicpkgs/tiptap/skinny/registerStrike";
+import { Mention } from "@plasmicpkgs/tiptap/skinny/registerMention";
+import { ToolbarBold } from "@plasmicpkgs/tiptap/skinny/registerToolbarBold";
+import { ToolbarItalic } from "@plasmicpkgs/tiptap/skinny/registerToolbarItalic";
+import { ToolbarUnderline } from "@plasmicpkgs/tiptap/skinny/registerToolbarUnderline";
+import { ToolbarLink } from "@plasmicpkgs/tiptap/skinny/registerToolbarLink";
+import { ToolbarCode } from "@plasmicpkgs/tiptap/skinny/registerToolbarCode";
+import { ToolbarStrike } from "@plasmicpkgs/tiptap/skinny/registerToolbarStrike";
+import { ToolbarMention } from "@plasmicpkgs/tiptap/skinny/registerToolbarMention";
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
@@ -75,6 +90,7 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicTestAuth.module.css"; // plasmic-import: djw6BO6ESgiq/css
 
+import LoadingLoaderSvgrepoComsvgIcon from "./icons/PlasmicIcon__LoadingLoaderSvgrepoComsvg"; // plasmic-import: FYp_b7bC4SRG/icon
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
@@ -94,7 +110,23 @@ export type PlasmicTestAuth__OverridesType = {
   httpRestApiFetcher?: Flex__<typeof DataFetcher>;
   test?: Flex__<typeof ApiFetcherComponent>;
   someInstruction?: Flex__<"div">;
+  svg?: Flex__<"svg">;
   button?: Flex__<typeof Button>;
+  tiptapRichTextEditor?: Flex__<typeof TiptapWrapper>;
+  tiptapBold?: Flex__<typeof Bold>;
+  tiptapItalic?: Flex__<typeof Italic>;
+  tiptapUnderline?: Flex__<typeof Underline>;
+  tiptapLink?: Flex__<typeof Link2>;
+  tiptapCode?: Flex__<typeof Code>;
+  tiptapStrike?: Flex__<typeof Strike>;
+  tiptapMention?: Flex__<typeof Mention>;
+  tiptapBoldToolbarOption?: Flex__<typeof ToolbarBold>;
+  tiptapItalicToolbarOption?: Flex__<typeof ToolbarItalic>;
+  tiptapUnderlineToolbarOption?: Flex__<typeof ToolbarUnderline>;
+  tiptapLinkToolbarOption?: Flex__<typeof ToolbarLink>;
+  tiptapCodeToolbarOption?: Flex__<typeof ToolbarCode>;
+  tiptapStrikeToolbarOption?: Flex__<typeof ToolbarStrike>;
+  tiptapMentionToolbarOption?: Flex__<typeof ToolbarMention>;
   redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
 };
@@ -147,6 +179,12 @@ function PlasmicTestAuth__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "tiptapRichTextEditor.content",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -173,58 +211,110 @@ function PlasmicTestAuth__RenderFunc(props: {
       `}</style>
 
       <div className={projectcss.plasmic_page_wrapper}>
-        {false ? (
-          <div
-            data-plasmic-name={"testAuth"}
-            data-plasmic-override={overrides.testAuth}
-            data-plasmic-root={true}
-            data-plasmic-for-node={forNode}
-            className={classNames(
-              projectcss.all,
-              projectcss.root_reset,
-              projectcss.plasmic_default_styles,
-              projectcss.plasmic_mixins,
-              projectcss.plasmic_tokens,
-              plasmic_antd_5_hostless_css.plasmic_tokens,
-              plasmic_plasmic_rich_components_css.plasmic_tokens,
-              sty.testAuth
-            )}
+        <div
+          data-plasmic-name={"testAuth"}
+          data-plasmic-override={overrides.testAuth}
+          data-plasmic-root={true}
+          data-plasmic-for-node={forNode}
+          className={classNames(
+            projectcss.all,
+            projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens,
+            sty.testAuth
+          )}
+        >
+          <DataFetcher
+            data-plasmic-name={"httpRestApiFetcher"}
+            data-plasmic-override={overrides.httpRestApiFetcher}
+            className={classNames("__wab_instance", sty.httpRestApiFetcher)}
+            dataName={"fetchedData"}
+            errorDisplay={
+              <DataCtxReader__>{$ctx => "Error fetching data"}</DataCtxReader__>
+            }
+            errorName={"fetchError"}
+            headers={{
+              "Content-Type": "application/json",
+              Accept: "application/json"
+            }}
+            loadingDisplay={
+              <DataCtxReader__>{$ctx => "Loading..."}</DataCtxReader__>
+            }
+            method={"GET"}
+            noLayout={false}
+            url={"https://api.github.com/users/plasmicapp/repos"}
           >
-            <DataFetcher
-              data-plasmic-name={"httpRestApiFetcher"}
-              data-plasmic-override={overrides.httpRestApiFetcher}
-              className={classNames("__wab_instance", sty.httpRestApiFetcher)}
-              dataName={"fetchedData"}
-              errorDisplay={
-                <DataCtxReader__>
-                  {$ctx => "Error fetching data"}
-                </DataCtxReader__>
-              }
-              errorName={"fetchError"}
-              headers={{
-                "Content-Type": "application/json",
-                Accept: "application/json"
-              }}
-              loadingDisplay={
-                <DataCtxReader__>{$ctx => "Loading..."}</DataCtxReader__>
-              }
-              method={"GET"}
-              noLayout={false}
-              url={"https://api.github.com/users/plasmicapp/repos"}
-            >
-              <DataCtxReader__>
-                {$ctx => (
+            <DataCtxReader__>
+              {$ctx => (
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__rtlRh
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return $ctx.fetchedData[0].id;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
+              )}
+            </DataCtxReader__>
+          </DataFetcher>
+          <ApiFetcherComponent
+            data-plasmic-name={"test"}
+            data-plasmic-override={overrides.test}
+            className={classNames("__wab_instance", sty.test)}
+            method={"GET"}
+            path={`/api/v2/user/info?user=${$ctx.inlab_user.user.id}`}
+            ref={ref => {
+              $refs["test"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <React.Fragment>
+                  <div
+                    data-plasmic-name={"someInstruction"}
+                    data-plasmic-override={overrides.someInstruction}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.someInstruction
+                    )}
+                  >
+                    {
+                      "Below is a textbox that its content is generated from an API Call tha ApiFetcherComponent has proveded:"
+                    }
+                  </div>
                   <div
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.text__rtlRh
+                      sty.text__vVeKr
                     )}
+                    onClick={async event => {
+                      const $steps = {};
+                    }}
                   >
                     <React.Fragment>
                       {(() => {
                         try {
-                          return $ctx.fetchedData[0].id;
+                          return $ctx.fetched_data.data.rank.role;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -237,192 +327,416 @@ function PlasmicTestAuth__RenderFunc(props: {
                       })()}
                     </React.Fragment>
                   </div>
-                )}
-              </DataCtxReader__>
-            </DataFetcher>
-            <ApiFetcherComponent
-              data-plasmic-name={"test"}
-              data-plasmic-override={overrides.test}
-              className={classNames("__wab_instance", sty.test)}
-              method={"GET"}
-              path={`/api/v2/user/info?user=${$ctx.inlab_user.user.id}`}
-              ref={ref => {
-                $refs["test"] = ref;
-              }}
-            >
-              <DataCtxReader__>
-                {$ctx => (
-                  <React.Fragment>
-                    <div
-                      data-plasmic-name={"someInstruction"}
-                      data-plasmic-override={overrides.someInstruction}
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.someInstruction
-                      )}
-                    >
-                      {
-                        "Below is a textbox that its content is generated from an API Call tha ApiFetcherComponent has proveded:"
+                  <LoadingLoaderSvgrepoComsvgIcon
+                    data-plasmic-name={"svg"}
+                    data-plasmic-override={overrides.svg}
+                    className={classNames(projectcss.all, sty.svg)}
+                    role={"img"}
+                  />
+
+                  <Button
+                    data-plasmic-name={"button"}
+                    data-plasmic-override={overrides.button}
+                    className={classNames("__wab_instance", sty.button)}
+                    color={"green"}
+                    isDisabled={generateStateValueProp($state, [
+                      "button",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["myAction"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "GET",
+                                `/api/v2/user/info?id=${$ctx.inlab_user.user.id}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["myAction"] != null &&
+                        typeof $steps["myAction"] === "object" &&
+                        typeof $steps["myAction"].then === "function"
+                      ) {
+                        $steps["myAction"] = await $steps["myAction"];
                       }
-                    </div>
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__vVeKr
-                      )}
-                      onClick={async event => {
-                        const $steps = {};
-                      }}
-                    >
-                      <React.Fragment>
-                        {(() => {
-                          try {
-                            return $ctx.fetched_data.data.rank.role;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return "";
-                            }
-                            throw e;
-                          }
-                        })()}
-                      </React.Fragment>
-                    </div>
-                    <Button
-                      data-plasmic-name={"button"}
-                      data-plasmic-override={overrides.button}
-                      className={classNames("__wab_instance", sty.button)}
-                      color={"green"}
-                      isDisabled={generateStateValueProp($state, [
+
+                      $steps["updateActionTextResult"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["actionTextResult"]
+                              },
+                              operation: 0,
+                              value: JSON.stringify($steps.myAction)
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateActionTextResult"] != null &&
+                        typeof $steps["updateActionTextResult"] === "object" &&
+                        typeof $steps["updateActionTextResult"].then ===
+                          "function"
+                      ) {
+                        $steps["updateActionTextResult"] = await $steps[
+                          "updateActionTextResult"
+                        ];
+                      }
+                    }}
+                    onIsDisabledChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
                         "button",
                         "isDisabled"
-                      ])}
-                      onClick={async event => {
-                        const $steps = {};
-
-                        $steps["myAction"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                args: [
-                                  "GET",
-                                  `/api/v2/user/info?id=${$ctx.inlab_user.user.id}`
-                                ]
-                              };
-                              return $globalActions[
-                                "AuthGlobalContext.apiFetcher"
-                              ]?.apply(null, [...actionArgs.args]);
-                            })()
-                          : undefined;
-                        if (
-                          $steps["myAction"] != null &&
-                          typeof $steps["myAction"] === "object" &&
-                          typeof $steps["myAction"].then === "function"
-                        ) {
-                          $steps["myAction"] = await $steps["myAction"];
-                        }
-
-                        $steps["updateActionTextResult"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["actionTextResult"]
-                                },
-                                operation: 0,
-                                value: JSON.stringify($steps.myAction)
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                        if (
-                          $steps["updateActionTextResult"] != null &&
-                          typeof $steps["updateActionTextResult"] ===
-                            "object" &&
-                          typeof $steps["updateActionTextResult"].then ===
-                            "function"
-                        ) {
-                          $steps["updateActionTextResult"] = await $steps[
-                            "updateActionTextResult"
-                          ];
-                        }
-                      }}
-                      onIsDisabledChange={(...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "button",
-                          "isDisabled"
-                        ])(eventArgs[0]);
-                      }}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__x3Kgi
-                        )}
-                      >
-                        {"Click me For Actions"}
-                      </div>
-                    </Button>
+                      ])(eventArgs[0]);
+                    }}
+                  >
                     <div
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.text__xW4B5
+                        sty.text__x3Kgi
                       )}
                     >
-                      <React.Fragment>
-                        {(() => {
-                          try {
-                            return $state.actionTextResult;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return "Action Result";
-                            }
-                            throw e;
-                          }
-                        })()}
-                      </React.Fragment>
+                      {"Click me For Actions"}
                     </div>
-                  </React.Fragment>
-                )}
-              </DataCtxReader__>
-            </ApiFetcherComponent>
-            <RedirectToLoginPage
-              data-plasmic-name={"redirectToLoginPage"}
-              data-plasmic-override={overrides.redirectToLoginPage}
-              className={classNames("__wab_instance", sty.redirectToLoginPage)}
-            />
+                  </Button>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__xW4B5
+                    )}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return $state.actionTextResult;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "Action Result";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
+                  </div>
+                  <TiptapWrapper
+                    data-plasmic-name={"tiptapRichTextEditor"}
+                    data-plasmic-override={overrides.tiptapRichTextEditor}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.tiptapRichTextEditor
+                    )}
+                    contentJson={generateStateValueProp($state, [
+                      "tiptapRichTextEditor",
+                      "content"
+                    ])}
+                    extensions={
+                      <React.Fragment>
+                        <Bold
+                          data-plasmic-name={"tiptapBold"}
+                          data-plasmic-override={overrides.tiptapBold}
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapBold
+                          )}
+                        />
 
-            <RedirectToNamespaceSelection
-              data-plasmic-name={"redirectToNamespaceSelection"}
-              data-plasmic-override={overrides.redirectToNamespaceSelection}
-              className={classNames(
-                "__wab_instance",
-                sty.redirectToNamespaceSelection
+                        <Italic
+                          data-plasmic-name={"tiptapItalic"}
+                          data-plasmic-override={overrides.tiptapItalic}
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapItalic
+                          )}
+                        />
+
+                        <Underline
+                          data-plasmic-name={"tiptapUnderline"}
+                          data-plasmic-override={overrides.tiptapUnderline}
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapUnderline
+                          )}
+                        />
+
+                        <Link2
+                          data-plasmic-name={"tiptapLink"}
+                          data-plasmic-override={overrides.tiptapLink}
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapLink
+                          )}
+                        />
+
+                        <Code
+                          data-plasmic-name={"tiptapCode"}
+                          data-plasmic-override={overrides.tiptapCode}
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapCode
+                          )}
+                        />
+
+                        <Strike
+                          data-plasmic-name={"tiptapStrike"}
+                          data-plasmic-override={overrides.tiptapStrike}
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapStrike
+                          )}
+                        />
+
+                        <Mention
+                          data-plasmic-name={"tiptapMention"}
+                          data-plasmic-override={overrides.tiptapMention}
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapMention
+                          )}
+                          dataStatic={[
+                            { id: "thomasEd1", label: "Thomas Edison" },
+                            { id: "sherlock221b", label: "Sherlock Holmes" },
+                            { id: "eliot_thomas", label: "T.S Eliot" },
+                            {
+                              id: "shakespeare74",
+                              label: "William Shakespeare"
+                            }
+                          ]}
+                        />
+                      </React.Fragment>
+                    }
+                    onChange={generateStateOnChangeProp($state, [
+                      "tiptapRichTextEditor",
+                      "content"
+                    ])}
+                    toolbar={
+                      <React.Fragment>
+                        <ToolbarBold
+                          data-plasmic-name={"tiptapBoldToolbarOption"}
+                          data-plasmic-override={
+                            overrides.tiptapBoldToolbarOption
+                          }
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapBoldToolbarOption
+                          )}
+                          toolbarBoldScopeClassName={
+                            sty["tiptapBoldToolbarOption__toolbarBold"]
+                          }
+                        >
+                          <PlasmicImg__
+                            alt={""}
+                            className={classNames(sty.img__jaUf)}
+                            displayHeight={"auto"}
+                            displayMaxHeight={"none"}
+                            displayMaxWidth={"none"}
+                            displayMinHeight={"0"}
+                            displayMinWidth={"0"}
+                            displayWidth={"auto"}
+                            src={"https://static1.plasmic.app/bold.svg"}
+                          />
+                        </ToolbarBold>
+                        <ToolbarItalic
+                          data-plasmic-name={"tiptapItalicToolbarOption"}
+                          data-plasmic-override={
+                            overrides.tiptapItalicToolbarOption
+                          }
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapItalicToolbarOption
+                          )}
+                          toolbarItalicScopeClassName={
+                            sty["tiptapItalicToolbarOption__toolbarItalic"]
+                          }
+                        >
+                          <PlasmicImg__
+                            alt={""}
+                            className={classNames(sty.img__nEgbv)}
+                            displayHeight={"auto"}
+                            displayMaxHeight={"none"}
+                            displayMaxWidth={"none"}
+                            displayMinHeight={"0"}
+                            displayMinWidth={"0"}
+                            displayWidth={"auto"}
+                            src={"https://static1.plasmic.app/italic.svg"}
+                          />
+                        </ToolbarItalic>
+                        <ToolbarUnderline
+                          data-plasmic-name={"tiptapUnderlineToolbarOption"}
+                          data-plasmic-override={
+                            overrides.tiptapUnderlineToolbarOption
+                          }
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapUnderlineToolbarOption
+                          )}
+                          toolbarUnderlineScopeClassName={
+                            sty[
+                              "tiptapUnderlineToolbarOption__toolbarUnderline"
+                            ]
+                          }
+                        >
+                          <PlasmicImg__
+                            alt={""}
+                            className={classNames(sty.img___5T1O5)}
+                            displayHeight={"auto"}
+                            displayMaxHeight={"none"}
+                            displayMaxWidth={"none"}
+                            displayMinHeight={"0"}
+                            displayMinWidth={"0"}
+                            displayWidth={"auto"}
+                            src={"https://static1.plasmic.app/underline.svg"}
+                          />
+                        </ToolbarUnderline>
+                        <ToolbarLink
+                          data-plasmic-name={"tiptapLinkToolbarOption"}
+                          data-plasmic-override={
+                            overrides.tiptapLinkToolbarOption
+                          }
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapLinkToolbarOption
+                          )}
+                          toolbarLinkScopeClassName={
+                            sty["tiptapLinkToolbarOption__toolbarLink"]
+                          }
+                        >
+                          <PlasmicImg__
+                            alt={""}
+                            className={classNames(sty.img__rE33F)}
+                            displayHeight={"auto"}
+                            displayMaxHeight={"none"}
+                            displayMaxWidth={"none"}
+                            displayMinHeight={"0"}
+                            displayMinWidth={"0"}
+                            displayWidth={"auto"}
+                            src={"https://static1.plasmic.app/link.svg"}
+                          />
+                        </ToolbarLink>
+                        <ToolbarCode
+                          data-plasmic-name={"tiptapCodeToolbarOption"}
+                          data-plasmic-override={
+                            overrides.tiptapCodeToolbarOption
+                          }
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapCodeToolbarOption
+                          )}
+                          toolbarCodeScopeClassName={
+                            sty["tiptapCodeToolbarOption__toolbarCode"]
+                          }
+                        >
+                          <PlasmicImg__
+                            alt={""}
+                            className={classNames(sty.img__zMBlZ)}
+                            displayHeight={"auto"}
+                            displayMaxHeight={"none"}
+                            displayMaxWidth={"none"}
+                            displayMinHeight={"0"}
+                            displayMinWidth={"0"}
+                            displayWidth={"auto"}
+                            src={"https://static1.plasmic.app/code.svg"}
+                          />
+                        </ToolbarCode>
+                        <ToolbarStrike
+                          data-plasmic-name={"tiptapStrikeToolbarOption"}
+                          data-plasmic-override={
+                            overrides.tiptapStrikeToolbarOption
+                          }
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapStrikeToolbarOption
+                          )}
+                          toolbarStrikeScopeClassName={
+                            sty["tiptapStrikeToolbarOption__toolbarStrike"]
+                          }
+                        >
+                          <PlasmicImg__
+                            alt={""}
+                            className={classNames(sty.img__bK8Dt)}
+                            displayHeight={"auto"}
+                            displayMaxHeight={"none"}
+                            displayMaxWidth={"none"}
+                            displayMinHeight={"0"}
+                            displayMinWidth={"0"}
+                            displayWidth={"auto"}
+                            src={
+                              "https://static1.plasmic.app/strikethrough.svg"
+                            }
+                          />
+                        </ToolbarStrike>
+                        <ToolbarMention
+                          data-plasmic-name={"tiptapMentionToolbarOption"}
+                          data-plasmic-override={
+                            overrides.tiptapMentionToolbarOption
+                          }
+                          className={classNames(
+                            "__wab_instance",
+                            sty.tiptapMentionToolbarOption
+                          )}
+                          toolbarMentionScopeClassName={
+                            sty["tiptapMentionToolbarOption__toolbarMention"]
+                          }
+                        >
+                          <PlasmicImg__
+                            alt={""}
+                            className={classNames(sty.img___6O4P)}
+                            displayHeight={"auto"}
+                            displayMaxHeight={"none"}
+                            displayMaxWidth={"none"}
+                            displayMinHeight={"0"}
+                            displayMinWidth={"0"}
+                            displayWidth={"auto"}
+                            src={"https://static1.plasmic.app/mention.svg"}
+                          />
+                        </ToolbarMention>
+                      </React.Fragment>
+                    }
+                  />
+                </React.Fragment>
               )}
-            />
-          </div>
-        ) : null}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
+          <RedirectToLoginPage
+            data-plasmic-name={"redirectToLoginPage"}
+            data-plasmic-override={overrides.redirectToLoginPage}
+            className={classNames("__wab_instance", sty.redirectToLoginPage)}
+          />
+
+          <RedirectToNamespaceSelection
+            data-plasmic-name={"redirectToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectToNamespaceSelection}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectToNamespaceSelection
+            )}
+          />
+        </div>
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -434,14 +748,82 @@ const PlasmicDescendants = {
     "httpRestApiFetcher",
     "test",
     "someInstruction",
+    "svg",
     "button",
+    "tiptapRichTextEditor",
+    "tiptapBold",
+    "tiptapItalic",
+    "tiptapUnderline",
+    "tiptapLink",
+    "tiptapCode",
+    "tiptapStrike",
+    "tiptapMention",
+    "tiptapBoldToolbarOption",
+    "tiptapItalicToolbarOption",
+    "tiptapUnderlineToolbarOption",
+    "tiptapLinkToolbarOption",
+    "tiptapCodeToolbarOption",
+    "tiptapStrikeToolbarOption",
+    "tiptapMentionToolbarOption",
     "redirectToLoginPage",
     "redirectToNamespaceSelection"
   ],
   httpRestApiFetcher: ["httpRestApiFetcher"],
-  test: ["test", "someInstruction", "button"],
+  test: [
+    "test",
+    "someInstruction",
+    "svg",
+    "button",
+    "tiptapRichTextEditor",
+    "tiptapBold",
+    "tiptapItalic",
+    "tiptapUnderline",
+    "tiptapLink",
+    "tiptapCode",
+    "tiptapStrike",
+    "tiptapMention",
+    "tiptapBoldToolbarOption",
+    "tiptapItalicToolbarOption",
+    "tiptapUnderlineToolbarOption",
+    "tiptapLinkToolbarOption",
+    "tiptapCodeToolbarOption",
+    "tiptapStrikeToolbarOption",
+    "tiptapMentionToolbarOption"
+  ],
   someInstruction: ["someInstruction"],
+  svg: ["svg"],
   button: ["button"],
+  tiptapRichTextEditor: [
+    "tiptapRichTextEditor",
+    "tiptapBold",
+    "tiptapItalic",
+    "tiptapUnderline",
+    "tiptapLink",
+    "tiptapCode",
+    "tiptapStrike",
+    "tiptapMention",
+    "tiptapBoldToolbarOption",
+    "tiptapItalicToolbarOption",
+    "tiptapUnderlineToolbarOption",
+    "tiptapLinkToolbarOption",
+    "tiptapCodeToolbarOption",
+    "tiptapStrikeToolbarOption",
+    "tiptapMentionToolbarOption"
+  ],
+  tiptapBold: ["tiptapBold"],
+  tiptapItalic: ["tiptapItalic"],
+  tiptapUnderline: ["tiptapUnderline"],
+  tiptapLink: ["tiptapLink"],
+  tiptapCode: ["tiptapCode"],
+  tiptapStrike: ["tiptapStrike"],
+  tiptapMention: ["tiptapMention"],
+  tiptapBoldToolbarOption: ["tiptapBoldToolbarOption"],
+  tiptapItalicToolbarOption: ["tiptapItalicToolbarOption"],
+  tiptapUnderlineToolbarOption: ["tiptapUnderlineToolbarOption"],
+  tiptapLinkToolbarOption: ["tiptapLinkToolbarOption"],
+  tiptapCodeToolbarOption: ["tiptapCodeToolbarOption"],
+  tiptapStrikeToolbarOption: ["tiptapStrikeToolbarOption"],
+  tiptapMentionToolbarOption: ["tiptapMentionToolbarOption"],
   redirectToLoginPage: ["redirectToLoginPage"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"]
 } as const;
@@ -453,7 +835,23 @@ type NodeDefaultElementType = {
   httpRestApiFetcher: typeof DataFetcher;
   test: typeof ApiFetcherComponent;
   someInstruction: "div";
+  svg: "svg";
   button: typeof Button;
+  tiptapRichTextEditor: typeof TiptapWrapper;
+  tiptapBold: typeof Bold;
+  tiptapItalic: typeof Italic;
+  tiptapUnderline: typeof Underline;
+  tiptapLink: typeof Link2;
+  tiptapCode: typeof Code;
+  tiptapStrike: typeof Strike;
+  tiptapMention: typeof Mention;
+  tiptapBoldToolbarOption: typeof ToolbarBold;
+  tiptapItalicToolbarOption: typeof ToolbarItalic;
+  tiptapUnderlineToolbarOption: typeof ToolbarUnderline;
+  tiptapLinkToolbarOption: typeof ToolbarLink;
+  tiptapCodeToolbarOption: typeof ToolbarCode;
+  tiptapStrikeToolbarOption: typeof ToolbarStrike;
+  tiptapMentionToolbarOption: typeof ToolbarMention;
   redirectToLoginPage: typeof RedirectToLoginPage;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
 };
@@ -521,7 +919,25 @@ export const PlasmicTestAuth = Object.assign(
     httpRestApiFetcher: makeNodeComponent("httpRestApiFetcher"),
     test: makeNodeComponent("test"),
     someInstruction: makeNodeComponent("someInstruction"),
+    svg: makeNodeComponent("svg"),
     button: makeNodeComponent("button"),
+    tiptapRichTextEditor: makeNodeComponent("tiptapRichTextEditor"),
+    tiptapBold: makeNodeComponent("tiptapBold"),
+    tiptapItalic: makeNodeComponent("tiptapItalic"),
+    tiptapUnderline: makeNodeComponent("tiptapUnderline"),
+    tiptapLink: makeNodeComponent("tiptapLink"),
+    tiptapCode: makeNodeComponent("tiptapCode"),
+    tiptapStrike: makeNodeComponent("tiptapStrike"),
+    tiptapMention: makeNodeComponent("tiptapMention"),
+    tiptapBoldToolbarOption: makeNodeComponent("tiptapBoldToolbarOption"),
+    tiptapItalicToolbarOption: makeNodeComponent("tiptapItalicToolbarOption"),
+    tiptapUnderlineToolbarOption: makeNodeComponent(
+      "tiptapUnderlineToolbarOption"
+    ),
+    tiptapLinkToolbarOption: makeNodeComponent("tiptapLinkToolbarOption"),
+    tiptapCodeToolbarOption: makeNodeComponent("tiptapCodeToolbarOption"),
+    tiptapStrikeToolbarOption: makeNodeComponent("tiptapStrikeToolbarOption"),
+    tiptapMentionToolbarOption: makeNodeComponent("tiptapMentionToolbarOption"),
     redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"

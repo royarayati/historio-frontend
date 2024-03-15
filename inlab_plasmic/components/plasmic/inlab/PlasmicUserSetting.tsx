@@ -59,6 +59,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import { LoadingBoundary } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
@@ -82,10 +83,16 @@ import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP
 
 createPlasmicElementProxy;
 
-export type PlasmicUserSetting__VariantMembers = {};
-export type PlasmicUserSetting__VariantsArgs = {};
+export type PlasmicUserSetting__VariantMembers = {
+  disabledLogoutButton: "disabledLogoutButton";
+};
+export type PlasmicUserSetting__VariantsArgs = {
+  disabledLogoutButton?: SingleBooleanChoiceArg<"disabledLogoutButton">;
+};
 type VariantPropType = keyof PlasmicUserSetting__VariantsArgs;
-export const PlasmicUserSetting__VariantProps = new Array<VariantPropType>();
+export const PlasmicUserSetting__VariantProps = new Array<VariantPropType>(
+  "disabledLogoutButton"
+);
 
 export type PlasmicUserSetting__ArgsType = {};
 type ArgPropType = keyof PlasmicUserSetting__ArgsType;
@@ -93,17 +100,27 @@ export const PlasmicUserSetting__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicUserSetting__OverridesType = {
   userSetting?: Flex__<"div">;
-  picsAndName2?: Flex__<"div">;
-  name2?: Flex__<"div">;
+  backButton?: Flex__<"div">;
+  backButton2?: Flex__<"svg">;
+  pageContent?: Flex__<"div">;
+  pictureAndName?: Flex__<"div">;
+  nameRankUsername?: Flex__<"div">;
+  name?: Flex__<"div">;
+  userRankTitle?: Flex__<"div">;
+  usernameValue?: Flex__<"div">;
+  userPicture?: Flex__<"svg">;
   myProfile?: Flex__<"div">;
   myProfile2?: Flex__<"div">;
-  hospital?: Flex__<"div">;
-  hospital3?: Flex__<"svg">;
+  namespace?: Flex__<"div">;
+  hospitalIcon?: Flex__<"svg">;
+  namespaceTitle?: Flex__<"div">;
   hospital2?: Flex__<"div">;
+  hospitalName?: Flex__<"div">;
   resetPassword?: Flex__<"div">;
-  resetPass?: Flex__<"svg">;
+  resetPasswordImage?: Flex__<"svg">;
   resetPassword2?: Flex__<"div">;
-  logout?: Flex__<typeof Button>;
+  loadingSupportedLogoutButton?: Flex__<typeof LoadingBoundary>;
+  logoutButton?: Flex__<typeof Button>;
   redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
 };
@@ -146,10 +163,20 @@ function PlasmicUserSetting__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "logout.isDisabled",
+        path: "logoutButton.isDisabled",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant($state, "disabledLogoutButton", "disabledLogoutButton")
+            ? "isDisabled"
+            : undefined
+      },
+      {
+        path: "disabledLogoutButton",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          $props.disabledLogoutButton
       }
     ],
     [$props, $ctx, $refs]
@@ -189,12 +216,25 @@ function PlasmicUserSetting__RenderFunc(props: {
             projectcss.plasmic_tokens,
             plasmic_antd_5_hostless_css.plasmic_tokens,
             plasmic_plasmic_rich_components_css.plasmic_tokens,
-            sty.userSetting
+            sty.userSetting,
+            {
+              [sty.userSettingdisabledLogoutButton]: hasVariant(
+                $state,
+                "disabledLogoutButton",
+                "disabledLogoutButton"
+              )
+            }
           )}
         >
-          <div className={classNames(projectcss.all, sty.freeBox___8NjX5)}>
+          <div
+            data-plasmic-name={"backButton"}
+            data-plasmic-override={overrides.backButton}
+            className={classNames(projectcss.all, sty.backButton)}
+          >
             <ArrowLeftIcon
-              className={classNames(projectcss.all, sty.svg___8Xmn)}
+              data-plasmic-name={"backButton2"}
+              data-plasmic-override={overrides.backButton2}
+              className={classNames(projectcss.all, sty.backButton2)}
               onClick={async event => {
                 const $steps = {};
 
@@ -228,26 +268,48 @@ function PlasmicUserSetting__RenderFunc(props: {
           </div>
           <Stack__
             as={"div"}
+            data-plasmic-name={"pageContent"}
+            data-plasmic-override={overrides.pageContent}
             hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox__ttAvM)}
+            className={classNames(projectcss.all, sty.pageContent, {
+              [sty.pageContentdisabledLogoutButton]: hasVariant(
+                $state,
+                "disabledLogoutButton",
+                "disabledLogoutButton"
+              )
+            })}
           >
             <div
-              data-plasmic-name={"picsAndName2"}
-              data-plasmic-override={overrides.picsAndName2}
-              className={classNames(projectcss.all, sty.picsAndName2)}
+              data-plasmic-name={"pictureAndName"}
+              data-plasmic-override={overrides.pictureAndName}
+              className={classNames(projectcss.all, sty.pictureAndName, {
+                [sty.pictureAndNamedisabledLogoutButton]: hasVariant(
+                  $state,
+                  "disabledLogoutButton",
+                  "disabledLogoutButton"
+                )
+              })}
             >
               <Stack__
                 as={"div"}
+                data-plasmic-name={"nameRankUsername"}
+                data-plasmic-override={overrides.nameRankUsername}
                 hasGap={true}
-                className={classNames(projectcss.all, sty.freeBox__mrH0L)}
+                className={classNames(projectcss.all, sty.nameRankUsername, {
+                  [sty.nameRankUsernamedisabledLogoutButton]: hasVariant(
+                    $state,
+                    "disabledLogoutButton",
+                    "disabledLogoutButton"
+                  )
+                })}
               >
                 <div
-                  data-plasmic-name={"name2"}
-                  data-plasmic-override={overrides.name2}
+                  data-plasmic-name={"name"}
+                  data-plasmic-override={overrides.name}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.name2
+                    sty.name
                   )}
                 >
                   <React.Fragment>
@@ -276,10 +338,12 @@ function PlasmicUserSetting__RenderFunc(props: {
                   </React.Fragment>
                 </div>
                 <div
+                  data-plasmic-name={"userRankTitle"}
+                  data-plasmic-override={overrides.userRankTitle}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text__nrO8M
+                    sty.userRankTitle
                   )}
                 >
                   <React.Fragment>
@@ -299,10 +363,12 @@ function PlasmicUserSetting__RenderFunc(props: {
                   </React.Fragment>
                 </div>
                 <div
+                  data-plasmic-name={"usernameValue"}
+                  data-plasmic-override={overrides.usernameValue}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text___9Fkg4
+                    sty.usernameValue
                   )}
                 >
                   <React.Fragment>
@@ -323,7 +389,9 @@ function PlasmicUserSetting__RenderFunc(props: {
                 </div>
               </Stack__>
               <PersonCropSquareFillSvgrepoComsvgIcon
-                className={classNames(projectcss.all, sty.svg__iEtuG)}
+                data-plasmic-name={"userPicture"}
+                data-plasmic-override={overrides.userPicture}
+                className={classNames(projectcss.all, sty.userPicture)}
                 role={"img"}
               />
             </div>
@@ -412,10 +480,16 @@ function PlasmicUserSetting__RenderFunc(props: {
             </Stack__>
             <Stack__
               as={"div"}
-              data-plasmic-name={"hospital"}
-              data-plasmic-override={overrides.hospital}
+              data-plasmic-name={"namespace"}
+              data-plasmic-override={overrides.namespace}
               hasGap={true}
-              className={classNames(projectcss.all, sty.hospital)}
+              className={classNames(projectcss.all, sty.namespace, {
+                [sty.namespacedisabledLogoutButton]: hasVariant(
+                  $state,
+                  "disabledLogoutButton",
+                  "disabledLogoutButton"
+                )
+              })}
               onClick={async event => {
                 const $steps = {};
 
@@ -504,16 +578,18 @@ function PlasmicUserSetting__RenderFunc(props: {
               }}
             >
               <Icon3Icon
-                data-plasmic-name={"hospital3"}
-                data-plasmic-override={overrides.hospital3}
-                className={classNames(projectcss.all, sty.hospital3)}
+                data-plasmic-name={"hospitalIcon"}
+                data-plasmic-override={overrides.hospitalIcon}
+                className={classNames(projectcss.all, sty.hospitalIcon)}
                 role={"img"}
               />
 
               <Stack__
                 as={"div"}
+                data-plasmic-name={"namespaceTitle"}
+                data-plasmic-override={overrides.namespaceTitle}
                 hasGap={true}
-                className={classNames(projectcss.all, sty.freeBox__sDnJy)}
+                className={classNames(projectcss.all, sty.namespaceTitle)}
               >
                 <div
                   data-plasmic-name={"hospital2"}
@@ -521,70 +597,33 @@ function PlasmicUserSetting__RenderFunc(props: {
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.hospital2
+                    sty.hospital2,
+                    {
+                      [sty.hospital2disabledLogoutButton]: hasVariant(
+                        $state,
+                        "disabledLogoutButton",
+                        "disabledLogoutButton"
+                      )
+                    }
                   )}
                 >
                   {"\u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 "}
                 </div>
                 <div
+                  data-plasmic-name={"hospitalName"}
+                  data-plasmic-override={overrides.hospitalName}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text__lpJy
+                    sty.hospitalName,
+                    {
+                      [sty.hospitalNamedisabledLogoutButton]: hasVariant(
+                        $state,
+                        "disabledLogoutButton",
+                        "disabledLogoutButton"
+                      )
+                    }
                   )}
-                  onClick={async event => {
-                    const $steps = {};
-
-                    $steps["runCode"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            customFunction: async () => {
-                              return (() => {
-                                return localStorage.setItem(
-                                  "inlab_user_namespace_id",
-                                  currentItem.id
-                                );
-                              })();
-                            }
-                          };
-                          return (({ customFunction }) => {
-                            return customFunction();
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["runCode"] != null &&
-                      typeof $steps["runCode"] === "object" &&
-                      typeof $steps["runCode"].then === "function"
-                    ) {
-                      $steps["runCode"] = await $steps["runCode"];
-                    }
-
-                    $steps["goToHomepage"] = true
-                      ? (() => {
-                          const actionArgs = { destination: `/patients` };
-                          return (({ destination }) => {
-                            if (
-                              typeof destination === "string" &&
-                              destination.startsWith("#")
-                            ) {
-                              document
-                                .getElementById(destination.substr(1))
-                                .scrollIntoView({ behavior: "smooth" });
-                            } else {
-                              __nextRouter?.push(destination);
-                            }
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["goToHomepage"] != null &&
-                      typeof $steps["goToHomepage"] === "object" &&
-                      typeof $steps["goToHomepage"].then === "function"
-                    ) {
-                      $steps["goToHomepage"] = await $steps["goToHomepage"];
-                    }
-                  }}
                 >
                   <React.Fragment>
                     {localStorage.getItem("inlab_user_namespace_title")}
@@ -597,7 +636,13 @@ function PlasmicUserSetting__RenderFunc(props: {
               data-plasmic-name={"resetPassword"}
               data-plasmic-override={overrides.resetPassword}
               hasGap={true}
-              className={classNames(projectcss.all, sty.resetPassword)}
+              className={classNames(projectcss.all, sty.resetPassword, {
+                [sty.resetPassworddisabledLogoutButton]: hasVariant(
+                  $state,
+                  "disabledLogoutButton",
+                  "disabledLogoutButton"
+                )
+              })}
               onClick={async event => {
                 const $steps = {};
 
@@ -643,9 +688,9 @@ function PlasmicUserSetting__RenderFunc(props: {
               }}
             >
               <Group1917Icon
-                data-plasmic-name={"resetPass"}
-                data-plasmic-override={overrides.resetPass}
-                className={classNames(projectcss.all, sty.resetPass)}
+                data-plasmic-name={"resetPasswordImage"}
+                data-plasmic-override={overrides.resetPasswordImage}
+                className={classNames(projectcss.all, sty.resetPasswordImage)}
                 role={"img"}
               />
 
@@ -655,7 +700,14 @@ function PlasmicUserSetting__RenderFunc(props: {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.resetPassword2
+                  sty.resetPassword2,
+                  {
+                    [sty.resetPassword2disabledLogoutButton]: hasVariant(
+                      $state,
+                      "disabledLogoutButton",
+                      "disabledLogoutButton"
+                    )
+                  }
                 )}
                 onClick={async event => {
                   const $steps = {};
@@ -706,90 +758,185 @@ function PlasmicUserSetting__RenderFunc(props: {
                 }
               </div>
             </Stack__>
-            <Button
-              data-plasmic-name={"logout"}
-              data-plasmic-override={overrides.logout}
-              className={classNames("__wab_instance", sty.logout)}
-              isDisabled={generateStateValueProp($state, [
-                "logout",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["logout"] = true
-                  ? (() => {
-                      const actionArgs = { args: [] };
-                      return $globalActions["AuthGlobalContext.logout"]?.apply(
-                        null,
-                        [...actionArgs.args]
-                      );
-                    })()
-                  : undefined;
-                if (
-                  $steps["logout"] != null &&
-                  typeof $steps["logout"] === "object" &&
-                  typeof $steps["logout"].then === "function"
-                ) {
-                  $steps["logout"] = await $steps["logout"];
-                }
-
-                $steps["goToInlabLoginPage"] = !$steps.logout
-                  ? (() => {
-                      const actionArgs = { destination: `/inlab_login` };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToInlabLoginPage"] != null &&
-                  typeof $steps["goToInlabLoginPage"] === "object" &&
-                  typeof $steps["goToInlabLoginPage"].then === "function"
-                ) {
-                  $steps["goToInlabLoginPage"] = await $steps[
-                    "goToInlabLoginPage"
-                  ];
-                }
-              }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, ["logout", "isDisabled"])(
-                  eventArgs[0]
-                );
-              }}
-              startIcon={
-                <ChecksvgIcon
-                  className={classNames(projectcss.all, sty.svg__fLi6W)}
-                  role={"img"}
-                />
+            <LoadingBoundary
+              data-plasmic-name={"loadingSupportedLogoutButton"}
+              data-plasmic-override={overrides.loadingSupportedLogoutButton}
+              className={classNames(
+                "__wab_instance",
+                sty.loadingSupportedLogoutButton
+              )}
+              loadingState={
+                <DataCtxReader__>
+                  {$ctx => (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__eUka9
+                      )}
+                    >
+                      {"Loading..."}
+                    </div>
+                  )}
+                </DataCtxReader__>
               }
             >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__zjr24
-                )}
-              >
-                <React.Fragment>
-                  <span
-                    className={"plasmic_default__all plasmic_default__span"}
-                    style={{ color: "var(--token-jgohepLVeKvh)" }}
+              <DataCtxReader__>
+                {$ctx => (
+                  <Button
+                    data-plasmic-name={"logoutButton"}
+                    data-plasmic-override={overrides.logoutButton}
+                    className={classNames("__wab_instance", sty.logoutButton, {
+                      [sty.logoutButtondisabledLogoutButton]: hasVariant(
+                        $state,
+                        "disabledLogoutButton",
+                        "disabledLogoutButton"
+                      )
+                    })}
+                    color={"blue"}
+                    isDisabled={generateStateValueProp($state, [
+                      "logoutButton",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["disablerLogoutButton"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              vgroup: "disabledLogoutButton",
+                              operation: 4,
+                              value: "disabledLogoutButton"
+                            };
+                            return (({ vgroup, value }) => {
+                              if (typeof value === "string") {
+                                value = [value];
+                              }
+
+                              $stateSet($state, vgroup, true);
+                              return true;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["disablerLogoutButton"] != null &&
+                        typeof $steps["disablerLogoutButton"] === "object" &&
+                        typeof $steps["disablerLogoutButton"].then ===
+                          "function"
+                      ) {
+                        $steps["disablerLogoutButton"] = await $steps[
+                          "disablerLogoutButton"
+                        ];
+                      }
+
+                      $steps["logoutAction"] = true
+                        ? (() => {
+                            const actionArgs = { args: [] };
+                            return $globalActions[
+                              "AuthGlobalContext.logout"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["logoutAction"] != null &&
+                        typeof $steps["logoutAction"] === "object" &&
+                        typeof $steps["logoutAction"].then === "function"
+                      ) {
+                        $steps["logoutAction"] = await $steps["logoutAction"];
+                      }
+
+                      $steps["goToInlabLoginPage"] = !$steps.logoutAction
+                        ? (() => {
+                            const actionArgs = { destination: `/inlab_login` };
+                            return (({ destination }) => {
+                              if (
+                                typeof destination === "string" &&
+                                destination.startsWith("#")
+                              ) {
+                                document
+                                  .getElementById(destination.substr(1))
+                                  .scrollIntoView({ behavior: "smooth" });
+                              } else {
+                                __nextRouter?.push(destination);
+                              }
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["goToInlabLoginPage"] != null &&
+                        typeof $steps["goToInlabLoginPage"] === "object" &&
+                        typeof $steps["goToInlabLoginPage"].then === "function"
+                      ) {
+                        $steps["goToInlabLoginPage"] = await $steps[
+                          "goToInlabLoginPage"
+                        ];
+                      }
+
+                      $steps["enablerLogoutButton"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              vgroup: "disabledLogoutButton",
+                              operation: 6,
+                              value: "disabledLogoutButton"
+                            };
+                            return (({ vgroup, value }) => {
+                              if (typeof value === "string") {
+                                value = [value];
+                              }
+
+                              $stateSet($state, vgroup, false);
+                              return false;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["enablerLogoutButton"] != null &&
+                        typeof $steps["enablerLogoutButton"] === "object" &&
+                        typeof $steps["enablerLogoutButton"].then === "function"
+                      ) {
+                        $steps["enablerLogoutButton"] = await $steps[
+                          "enablerLogoutButton"
+                        ];
+                      }
+                    }}
+                    onIsDisabledChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "logoutButton",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }}
+                    shape={"rounded"}
+                    startIcon={
+                      <ChecksvgIcon
+                        className={classNames(projectcss.all, sty.svg__fLi6W)}
+                        role={"img"}
+                      />
+                    }
                   >
-                    {"Log Out"}
-                  </span>
-                </React.Fragment>
-              </div>
-            </Button>
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__zjr24
+                      )}
+                    >
+                      <React.Fragment>
+                        <span
+                          className={
+                            "plasmic_default__all plasmic_default__span"
+                          }
+                          style={{ color: "var(--token-jgohepLVeKvh)" }}
+                        >
+                          {
+                            "\u062e\u0631\u0648\u062c \u0627\u0632 \u0627\u06cc\u0646\u0644\u0628"
+                          }
+                        </span>
+                      </React.Fragment>
+                    </div>
+                  </Button>
+                )}
+              </DataCtxReader__>
+            </LoadingBoundary>
           </Stack__>
           <RedirectToLoginPage
             data-plasmic-name={"redirectToLoginPage"}
@@ -814,31 +961,92 @@ function PlasmicUserSetting__RenderFunc(props: {
 const PlasmicDescendants = {
   userSetting: [
     "userSetting",
-    "picsAndName2",
-    "name2",
+    "backButton",
+    "backButton2",
+    "pageContent",
+    "pictureAndName",
+    "nameRankUsername",
+    "name",
+    "userRankTitle",
+    "usernameValue",
+    "userPicture",
     "myProfile",
     "myProfile2",
-    "hospital",
-    "hospital3",
+    "namespace",
+    "hospitalIcon",
+    "namespaceTitle",
     "hospital2",
+    "hospitalName",
     "resetPassword",
-    "resetPass",
+    "resetPasswordImage",
     "resetPassword2",
-    "logout",
+    "loadingSupportedLogoutButton",
+    "logoutButton",
     "redirectToLoginPage",
     "redirectToNamespaceSelection"
   ],
-  picsAndName2: ["picsAndName2", "name2"],
-  name2: ["name2"],
+  backButton: ["backButton", "backButton2"],
+  backButton2: ["backButton2"],
+  pageContent: [
+    "pageContent",
+    "pictureAndName",
+    "nameRankUsername",
+    "name",
+    "userRankTitle",
+    "usernameValue",
+    "userPicture",
+    "myProfile",
+    "myProfile2",
+    "namespace",
+    "hospitalIcon",
+    "namespaceTitle",
+    "hospital2",
+    "hospitalName",
+    "resetPassword",
+    "resetPasswordImage",
+    "resetPassword2",
+    "loadingSupportedLogoutButton",
+    "logoutButton"
+  ],
+  pictureAndName: [
+    "pictureAndName",
+    "nameRankUsername",
+    "name",
+    "userRankTitle",
+    "usernameValue",
+    "userPicture"
+  ],
+  nameRankUsername: [
+    "nameRankUsername",
+    "name",
+    "userRankTitle",
+    "usernameValue"
+  ],
+  name: ["name"],
+  userRankTitle: ["userRankTitle"],
+  usernameValue: ["usernameValue"],
+  userPicture: ["userPicture"],
   myProfile: ["myProfile", "myProfile2"],
   myProfile2: ["myProfile2"],
-  hospital: ["hospital", "hospital3", "hospital2"],
-  hospital3: ["hospital3"],
+  namespace: [
+    "namespace",
+    "hospitalIcon",
+    "namespaceTitle",
+    "hospital2",
+    "hospitalName"
+  ],
+  hospitalIcon: ["hospitalIcon"],
+  namespaceTitle: ["namespaceTitle", "hospital2", "hospitalName"],
   hospital2: ["hospital2"],
-  resetPassword: ["resetPassword", "resetPass", "resetPassword2"],
-  resetPass: ["resetPass"],
+  hospitalName: ["hospitalName"],
+  resetPassword: ["resetPassword", "resetPasswordImage", "resetPassword2"],
+  resetPasswordImage: ["resetPasswordImage"],
   resetPassword2: ["resetPassword2"],
-  logout: ["logout"],
+  loadingSupportedLogoutButton: [
+    "loadingSupportedLogoutButton",
+    "logoutButton"
+  ],
+  logoutButton: ["logoutButton"],
   redirectToLoginPage: ["redirectToLoginPage"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"]
 } as const;
@@ -847,17 +1055,27 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   userSetting: "div";
-  picsAndName2: "div";
-  name2: "div";
+  backButton: "div";
+  backButton2: "svg";
+  pageContent: "div";
+  pictureAndName: "div";
+  nameRankUsername: "div";
+  name: "div";
+  userRankTitle: "div";
+  usernameValue: "div";
+  userPicture: "svg";
   myProfile: "div";
   myProfile2: "div";
-  hospital: "div";
-  hospital3: "svg";
+  namespace: "div";
+  hospitalIcon: "svg";
+  namespaceTitle: "div";
   hospital2: "div";
+  hospitalName: "div";
   resetPassword: "div";
-  resetPass: "svg";
+  resetPasswordImage: "svg";
   resetPassword2: "div";
-  logout: typeof Button;
+  loadingSupportedLogoutButton: typeof LoadingBoundary;
+  logoutButton: typeof Button;
   redirectToLoginPage: typeof RedirectToLoginPage;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
 };
@@ -922,17 +1140,29 @@ export const PlasmicUserSetting = Object.assign(
   makeNodeComponent("userSetting"),
   {
     // Helper components rendering sub-elements
-    picsAndName2: makeNodeComponent("picsAndName2"),
-    name2: makeNodeComponent("name2"),
+    backButton: makeNodeComponent("backButton"),
+    backButton2: makeNodeComponent("backButton2"),
+    pageContent: makeNodeComponent("pageContent"),
+    pictureAndName: makeNodeComponent("pictureAndName"),
+    nameRankUsername: makeNodeComponent("nameRankUsername"),
+    _name: makeNodeComponent("name"),
+    userRankTitle: makeNodeComponent("userRankTitle"),
+    usernameValue: makeNodeComponent("usernameValue"),
+    userPicture: makeNodeComponent("userPicture"),
     myProfile: makeNodeComponent("myProfile"),
     myProfile2: makeNodeComponent("myProfile2"),
-    hospital: makeNodeComponent("hospital"),
-    hospital3: makeNodeComponent("hospital3"),
+    namespace: makeNodeComponent("namespace"),
+    hospitalIcon: makeNodeComponent("hospitalIcon"),
+    namespaceTitle: makeNodeComponent("namespaceTitle"),
     hospital2: makeNodeComponent("hospital2"),
+    hospitalName: makeNodeComponent("hospitalName"),
     resetPassword: makeNodeComponent("resetPassword"),
-    resetPass: makeNodeComponent("resetPass"),
+    resetPasswordImage: makeNodeComponent("resetPasswordImage"),
     resetPassword2: makeNodeComponent("resetPassword2"),
-    logout: makeNodeComponent("logout"),
+    loadingSupportedLogoutButton: makeNodeComponent(
+      "loadingSupportedLogoutButton"
+    ),
+    logoutButton: makeNodeComponent("logoutButton"),
     redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"

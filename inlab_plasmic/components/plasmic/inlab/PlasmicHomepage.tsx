@@ -96,17 +96,17 @@ export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 export type PlasmicHomepage__OverridesType = {
   homepage?: Flex__<"div">;
   pageContent?: Flex__<"div">;
-  searchsetting?: Flex__<"div">;
+  searchbarSetting?: Flex__<"div">;
   settingIcon?: Flex__<"svg">;
   searchbar?: Flex__<typeof TextInput>;
   favPatients?: Flex__<typeof ApiFetcherComponent>;
   بمارافتنشد?: Flex__<"div">;
   patientCards?: Flex__<"div">;
-  nameaddToHomeIcon?: Flex__<"div">;
-  firstlastName?: Flex__<"div">;
+  patientNameFavoriteIcon?: Flex__<"div">;
+  firstLastName?: Flex__<"div">;
   searchedPatientFavIcon?: Flex__<typeof FavoriteIcon>;
-  wardroom?: Flex__<"div">;
-  roombed?: Flex__<"div">;
+  wardRoom?: Flex__<"div">;
+  roomBed?: Flex__<"div">;
   ward?: Flex__<"div">;
   patientDataButtons?: Flex__<"div">;
   patientProfile?: Flex__<typeof PlasmicImg__>;
@@ -215,9 +215,9 @@ function PlasmicHomepage__RenderFunc(props: {
           className={classNames(projectcss.all, sty.pageContent)}
         >
           <div
-            data-plasmic-name={"searchsetting"}
-            data-plasmic-override={overrides.searchsetting}
-            className={classNames(projectcss.all, sty.searchsetting)}
+            data-plasmic-name={"searchbarSetting"}
+            data-plasmic-override={overrides.searchbarSetting}
+            className={classNames(projectcss.all, sty.searchbarSetting)}
           >
             <MenuIcon
               data-plasmic-name={"settingIcon"}
@@ -492,23 +492,23 @@ function PlasmicHomepage__RenderFunc(props: {
                           >
                             <Stack__
                               as={"div"}
-                              data-plasmic-name={"nameaddToHomeIcon"}
+                              data-plasmic-name={"patientNameFavoriteIcon"}
                               data-plasmic-override={
-                                overrides.nameaddToHomeIcon
+                                overrides.patientNameFavoriteIcon
                               }
                               hasGap={true}
                               className={classNames(
                                 projectcss.all,
-                                sty.nameaddToHomeIcon
+                                sty.patientNameFavoriteIcon
                               )}
                             >
                               <div
-                                data-plasmic-name={"firstlastName"}
-                                data-plasmic-override={overrides.firstlastName}
+                                data-plasmic-name={"firstLastName"}
+                                data-plasmic-override={overrides.firstLastName}
                                 className={classNames(
                                   projectcss.all,
                                   projectcss.__wab_text,
-                                  sty.firstlastName
+                                  sty.firstLastName
                                 )}
                               >
                                 <React.Fragment>
@@ -625,20 +625,20 @@ function PlasmicHomepage__RenderFunc(props: {
                               })()}
                             </Stack__>
                             <div
-                              data-plasmic-name={"wardroom"}
-                              data-plasmic-override={overrides.wardroom}
+                              data-plasmic-name={"wardRoom"}
+                              data-plasmic-override={overrides.wardRoom}
                               className={classNames(
                                 projectcss.all,
-                                sty.wardroom
+                                sty.wardRoom
                               )}
                             >
                               <div
-                                data-plasmic-name={"roombed"}
-                                data-plasmic-override={overrides.roombed}
+                                data-plasmic-name={"roomBed"}
+                                data-plasmic-override={overrides.roomBed}
                                 className={classNames(
                                   projectcss.all,
                                   projectcss.__wab_text,
-                                  sty.roombed
+                                  sty.roomBed
                                 )}
                               >
                                 <React.Fragment>
@@ -975,7 +975,7 @@ function PlasmicHomepage__RenderFunc(props: {
             );
           }}
           shape={"round"}
-          size={"compact"}
+          size4={"compact"}
           target={true}
         >
           <Icon2Icon
@@ -1016,17 +1016,17 @@ const PlasmicDescendants = {
   homepage: [
     "homepage",
     "pageContent",
-    "searchsetting",
+    "searchbarSetting",
     "settingIcon",
     "searchbar",
     "favPatients",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "patientCards",
-    "nameaddToHomeIcon",
-    "firstlastName",
+    "patientNameFavoriteIcon",
+    "firstLastName",
     "searchedPatientFavIcon",
-    "wardroom",
-    "roombed",
+    "wardRoom",
+    "roomBed",
     "ward",
     "patientDataButtons",
     "patientProfile",
@@ -1038,35 +1038,35 @@ const PlasmicDescendants = {
   ],
   pageContent: [
     "pageContent",
-    "searchsetting",
+    "searchbarSetting",
     "settingIcon",
     "searchbar",
     "favPatients",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "patientCards",
-    "nameaddToHomeIcon",
-    "firstlastName",
+    "patientNameFavoriteIcon",
+    "firstLastName",
     "searchedPatientFavIcon",
-    "wardroom",
-    "roombed",
+    "wardRoom",
+    "roomBed",
     "ward",
     "patientDataButtons",
     "patientProfile",
     "radiologyReport",
     "laboratoryData"
   ],
-  searchsetting: ["searchsetting", "settingIcon", "searchbar"],
+  searchbarSetting: ["searchbarSetting", "settingIcon", "searchbar"],
   settingIcon: ["settingIcon"],
   searchbar: ["searchbar"],
   favPatients: [
     "favPatients",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "patientCards",
-    "nameaddToHomeIcon",
-    "firstlastName",
+    "patientNameFavoriteIcon",
+    "firstLastName",
     "searchedPatientFavIcon",
-    "wardroom",
-    "roombed",
+    "wardRoom",
+    "roomBed",
     "ward",
     "patientDataButtons",
     "patientProfile",
@@ -1076,26 +1076,26 @@ const PlasmicDescendants = {
   بمارافتنشد: ["\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"],
   patientCards: [
     "patientCards",
-    "nameaddToHomeIcon",
-    "firstlastName",
+    "patientNameFavoriteIcon",
+    "firstLastName",
     "searchedPatientFavIcon",
-    "wardroom",
-    "roombed",
+    "wardRoom",
+    "roomBed",
     "ward",
     "patientDataButtons",
     "patientProfile",
     "radiologyReport",
     "laboratoryData"
   ],
-  nameaddToHomeIcon: [
-    "nameaddToHomeIcon",
-    "firstlastName",
+  patientNameFavoriteIcon: [
+    "patientNameFavoriteIcon",
+    "firstLastName",
     "searchedPatientFavIcon"
   ],
-  firstlastName: ["firstlastName"],
+  firstLastName: ["firstLastName"],
   searchedPatientFavIcon: ["searchedPatientFavIcon"],
-  wardroom: ["wardroom", "roombed", "ward"],
-  roombed: ["roombed"],
+  wardRoom: ["wardRoom", "roomBed", "ward"],
+  roomBed: ["roomBed"],
   ward: ["ward"],
   patientDataButtons: [
     "patientDataButtons",
@@ -1116,17 +1116,17 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   homepage: "div";
   pageContent: "div";
-  searchsetting: "div";
+  searchbarSetting: "div";
   settingIcon: "svg";
   searchbar: typeof TextInput;
   favPatients: typeof ApiFetcherComponent;
   بمارافتنشد: "div";
   patientCards: "div";
-  nameaddToHomeIcon: "div";
-  firstlastName: "div";
+  patientNameFavoriteIcon: "div";
+  firstLastName: "div";
   searchedPatientFavIcon: typeof FavoriteIcon;
-  wardroom: "div";
-  roombed: "div";
+  wardRoom: "div";
+  roomBed: "div";
   ward: "div";
   patientDataButtons: "div";
   patientProfile: typeof PlasmicImg__;
@@ -1198,7 +1198,7 @@ export const PlasmicHomepage = Object.assign(
   {
     // Helper components rendering sub-elements
     pageContent: makeNodeComponent("pageContent"),
-    searchsetting: makeNodeComponent("searchsetting"),
+    searchbarSetting: makeNodeComponent("searchbarSetting"),
     settingIcon: makeNodeComponent("settingIcon"),
     searchbar: makeNodeComponent("searchbar"),
     favPatients: makeNodeComponent("favPatients"),
@@ -1206,11 +1206,11 @@ export const PlasmicHomepage = Object.assign(
       "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"
     ),
     patientCards: makeNodeComponent("patientCards"),
-    nameaddToHomeIcon: makeNodeComponent("nameaddToHomeIcon"),
-    firstlastName: makeNodeComponent("firstlastName"),
+    patientNameFavoriteIcon: makeNodeComponent("patientNameFavoriteIcon"),
+    firstLastName: makeNodeComponent("firstLastName"),
     searchedPatientFavIcon: makeNodeComponent("searchedPatientFavIcon"),
-    wardroom: makeNodeComponent("wardroom"),
-    roombed: makeNodeComponent("roombed"),
+    wardRoom: makeNodeComponent("wardRoom"),
+    roomBed: makeNodeComponent("roomBed"),
     ward: makeNodeComponent("ward"),
     patientDataButtons: makeNodeComponent("patientDataButtons"),
     patientProfile: makeNodeComponent("patientProfile"),

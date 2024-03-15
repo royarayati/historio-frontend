@@ -94,10 +94,12 @@ export type PlasmicLaboratoryData__OverridesType = {
   labData?: Flex__<typeof ApiFetcherComponent>;
   laboratoryLists?: Flex__<"div">;
   laboratoryTitle?: Flex__<"div">;
+  laboratoryResultsPerTitle?: Flex__<"div">;
   labPerDate?: Flex__<"div">;
   dateOfReport?: Flex__<"div">;
   labLists?: Flex__<"div">;
   factorNamevalue?: Flex__<"div">;
+  factorNamevalue2?: Flex__<"div">;
   factorName?: Flex__<"div">;
   factorValue?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
@@ -242,19 +244,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           <DataCtxReader__>
             {$ctx => (
               <React.Fragment>
-                {(() => {
-                  try {
-                    return $ctx.fetched_data.data.lab_test_groups == 0;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return false;
-                    }
-                    throw e;
-                  }
-                })() ? (
+                {$ctx.fetched_data.loading == false &&
+                $ctx.fetched_data.data.lab_test_groups == 0 ? (
                   <div
                     className={classNames(
                       projectcss.all,
@@ -267,19 +258,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     }
                   </div>
                 ) : null}
-                {(() => {
-                  try {
-                    return $ctx.fetched_data.loading == true;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return false;
-                    }
-                    throw e;
-                  }
-                })() ? (
+                {$ctx.fetched_data.loading == true ? (
                   <div
                     className={classNames(
                       projectcss.all,
@@ -329,27 +308,19 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         )}
                       >
                         <React.Fragment>
-                          {(() => {
-                            try {
-                              return currentItem.title.replace(" (  # ) ", "");
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return "";
-                              }
-                              throw e;
-                            }
-                          })()}
+                          {currentItem.title.replace(" (  # ) ", "")}
                         </React.Fragment>
                       </div>
                       <Stack__
                         as={"div"}
+                        data-plasmic-name={"laboratoryResultsPerTitle"}
+                        data-plasmic-override={
+                          overrides.laboratoryResultsPerTitle
+                        }
                         hasGap={true}
                         className={classNames(
                           projectcss.all,
-                          sty.freeBox__voaEt
+                          sty.laboratoryResultsPerTitle
                         )}
                       >
                         {(_par =>
@@ -475,9 +446,13 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                       )}
                                     >
                                       <div
+                                        data-plasmic-name={"factorNamevalue2"}
+                                        data-plasmic-override={
+                                          overrides.factorNamevalue2
+                                        }
                                         className={classNames(
                                           projectcss.all,
-                                          sty.freeBox__tc6Bm
+                                          sty.factorNamevalue2
                                         )}
                                       >
                                         <div
@@ -616,10 +591,12 @@ const PlasmicDescendants = {
     "labData",
     "laboratoryLists",
     "laboratoryTitle",
+    "laboratoryResultsPerTitle",
     "labPerDate",
     "dateOfReport",
     "labLists",
     "factorNamevalue",
+    "factorNamevalue2",
     "factorName",
     "factorValue",
     "switchingTabs",
@@ -634,35 +611,62 @@ const PlasmicDescendants = {
     "labData",
     "laboratoryLists",
     "laboratoryTitle",
+    "laboratoryResultsPerTitle",
     "labPerDate",
     "dateOfReport",
     "labLists",
     "factorNamevalue",
+    "factorNamevalue2",
     "factorName",
     "factorValue"
   ],
   laboratoryLists: [
     "laboratoryLists",
     "laboratoryTitle",
+    "laboratoryResultsPerTitle",
     "labPerDate",
     "dateOfReport",
     "labLists",
     "factorNamevalue",
+    "factorNamevalue2",
     "factorName",
     "factorValue"
   ],
   laboratoryTitle: ["laboratoryTitle"],
+  laboratoryResultsPerTitle: [
+    "laboratoryResultsPerTitle",
+    "labPerDate",
+    "dateOfReport",
+    "labLists",
+    "factorNamevalue",
+    "factorNamevalue2",
+    "factorName",
+    "factorValue"
+  ],
   labPerDate: [
     "labPerDate",
     "dateOfReport",
     "labLists",
     "factorNamevalue",
+    "factorNamevalue2",
     "factorName",
     "factorValue"
   ],
   dateOfReport: ["dateOfReport"],
-  labLists: ["labLists", "factorNamevalue", "factorName", "factorValue"],
-  factorNamevalue: ["factorNamevalue", "factorName", "factorValue"],
+  labLists: [
+    "labLists",
+    "factorNamevalue",
+    "factorNamevalue2",
+    "factorName",
+    "factorValue"
+  ],
+  factorNamevalue: [
+    "factorNamevalue",
+    "factorNamevalue2",
+    "factorName",
+    "factorValue"
+  ],
+  factorNamevalue2: ["factorNamevalue2", "factorName", "factorValue"],
   factorName: ["factorName"],
   factorValue: ["factorValue"],
   switchingTabs: ["switchingTabs", "switchingTab"],
@@ -681,10 +685,12 @@ type NodeDefaultElementType = {
   labData: typeof ApiFetcherComponent;
   laboratoryLists: "div";
   laboratoryTitle: "div";
+  laboratoryResultsPerTitle: "div";
   labPerDate: "div";
   dateOfReport: "div";
   labLists: "div";
   factorNamevalue: "div";
+  factorNamevalue2: "div";
   factorName: "div";
   factorValue: "div";
   switchingTabs: "div";
@@ -759,10 +765,12 @@ export const PlasmicLaboratoryData = Object.assign(
     labData: makeNodeComponent("labData"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     laboratoryTitle: makeNodeComponent("laboratoryTitle"),
+    laboratoryResultsPerTitle: makeNodeComponent("laboratoryResultsPerTitle"),
     labPerDate: makeNodeComponent("labPerDate"),
     dateOfReport: makeNodeComponent("dateOfReport"),
     labLists: makeNodeComponent("labLists"),
     factorNamevalue: makeNodeComponent("factorNamevalue"),
+    factorNamevalue2: makeNodeComponent("factorNamevalue2"),
     factorName: makeNodeComponent("factorName"),
     factorValue: makeNodeComponent("factorValue"),
     switchingTabs: makeNodeComponent("switchingTabs"),
