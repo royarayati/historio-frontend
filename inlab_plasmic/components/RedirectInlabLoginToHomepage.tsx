@@ -40,7 +40,7 @@ function RedirectInlabLoginToHomepage(
   // By default, we are just piping all RedirectInlabLoginToHomepageProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectInlabLoginToHomepage  />;
+  return <PlasmicRedirectInlabLoginToHomepage />;
 }
 
 export default RedirectInlabLoginToHomepage;

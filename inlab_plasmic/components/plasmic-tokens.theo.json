@@ -2161,6 +2161,16 @@
       }
     },
     {
+      "name": "buttons",
+      "type": "fontsize",
+      "value": "14px",
+      "category": "fontsize",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "NMUbRE7XpwuK"
+      }
+    },
+    {
       "name": "light text &background",
       "type": "color",
       "value": "#E7EBF1",
@@ -2181,9 +2191,19 @@
       }
     },
     {
-      "name": "name text ",
+      "name": "subtitles",
       "type": "fontsize",
-      "value": "16px",
+      "value": "12px",
+      "category": "fontsize",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "CdE1_0ZaCyT1"
+      }
+    },
+    {
+      "name": "titles",
+      "type": "fontsize",
+      "value": "14px",
       "category": "fontsize",
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",

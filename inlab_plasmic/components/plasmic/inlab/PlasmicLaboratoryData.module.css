@@ -56,7 +56,7 @@
   height: 1em;
 }
 .labData:global(.__wab_instance) {
-  max-width: 90%;
+  max-width: 85%;
   object-fit: cover;
   position: relative;
   width: 100%;
@@ -118,11 +118,11 @@
   z-index: 1;
   align-self: center;
   background: none;
-  font-size: 14px;
+  font-size: var(--token-sOr3fJ5Up5fq);
   min-width: 0;
   padding: 4px;
 }
-.freeBox__voaEt {
+.laboratoryResultsPerTitle {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -134,7 +134,7 @@
   min-width: 0;
   padding: 0px 0px 4px;
 }
-.freeBox__voaEt > :global(.__wab_flex-container) {
+.laboratoryResultsPerTitle > :global(.__wab_flex-container) {
   flex-direction: row;
   align-items: stretch;
   justify-content: flex-start;
@@ -142,10 +142,13 @@
   margin-left: calc(0px - 4px);
   width: calc(100% + 4px);
 }
-.freeBox__voaEt > :global(.__wab_flex-container) > *,
-.freeBox__voaEt > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__voaEt > :global(.__wab_flex-container) > picture > img,
-.freeBox__voaEt
+.laboratoryResultsPerTitle > :global(.__wab_flex-container) > *,
+.laboratoryResultsPerTitle
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.laboratoryResultsPerTitle > :global(.__wab_flex-container) > picture > img,
+.laboratoryResultsPerTitle
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
@@ -166,7 +169,7 @@
   background: #ffffff;
   flex-shrink: 0;
   padding: 8px;
-  border: 0.5px solid var(--token-8PxxXPNrIohQ);
+  border: 1px solid var(--token-8PxxXPNrIohQ);
 }
 .labPerDate > :global(.__wab_flex-container) {
   flex-direction: column;
@@ -260,7 +263,7 @@
   > img {
   margin-left: 8px;
 }
-.freeBox__tc6Bm {
+.factorNamevalue2 {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -289,8 +292,8 @@
   text-align: center;
   padding-left: 2px;
   min-width: 0;
-  border-right: 0.5px none var(--token-8PxxXPNrIohQ);
-  border-left: 0.5px solid var(--token-8PxxXPNrIohQ);
+  border-right: 0.5px none var(--token-IYO13gyYJHXG);
+  border-left: 0.5px solid var(--token-IYO13gyYJHXG);
 }
 .switchingTabs {
   display: flex;

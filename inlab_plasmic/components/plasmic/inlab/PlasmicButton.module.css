@@ -1,20 +1,15 @@
 .root {
-  display: flex;
+  background: var(--token-9iYGdL7i3GKE);
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  display: inline-flex;
   position: relative;
   flex-direction: row;
-  background: var(--token-pRs3-4jrQ4XQ);
   cursor: pointer;
-  transition-property: background;
-  transition-duration: 0.1s;
-  width: 100%;
   justify-self: flex-start;
-  height: 100%;
-  grid-column-start: 3 !important;
-  grid-column-end: -3 !important;
   min-height: 0;
-  -webkit-transition-property: background;
-  -webkit-transition-duration: 0.1s;
-  border-radius: 6px;
+  border-radius: 5px;
   padding: 7px 10px;
   border-width: 0px;
 }
@@ -52,7 +47,7 @@
 .rootshape_sharp {
   border-radius: 0px;
 }
-.rootsize_compact {
+.rootsize4_compact {
   padding: 6px 16px;
 }
 .rootcolor_blue {
@@ -70,7 +65,7 @@
 .rootcolor_link {
   background: #ffffff00;
 }
-.rootshape_round_size_compact {
+.rootshape_round_size4_compact {
   padding: 6px;
 }
 .startIconContainer {

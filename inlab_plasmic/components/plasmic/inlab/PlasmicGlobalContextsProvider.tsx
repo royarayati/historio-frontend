@@ -117,7 +117,7 @@ export default function GlobalContextsProvider(
           : hasVariant(globalVariants, "screen", "mobileFirst")
           ? {
               fontFamily: "var(--VazirmatnCustom)",
-              fontSize: "16px",
+              fontSize: "14px",
               fontWeight: "400",
               lineHeight: "1.5",
               color: "#000000",
@@ -126,7 +126,7 @@ export default function GlobalContextsProvider(
           : true
           ? {
               fontFamily: "var(--VazirmatnCustom)",
-              fontSize: "16px",
+              fontSize: "14px",
               fontWeight: "400",
               lineHeight: "1.5",
               color: "#000000",

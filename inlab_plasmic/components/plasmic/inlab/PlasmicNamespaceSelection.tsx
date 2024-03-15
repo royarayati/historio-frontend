@@ -311,21 +311,7 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                             }
                           }}
                         >
-                          <React.Fragment>
-                            {(() => {
-                              try {
-                                return currentItem.title;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return "";
-                                }
-                                throw e;
-                              }
-                            })()}
-                          </React.Fragment>
+                          <React.Fragment>{currentItem.title}</React.Fragment>
                         </div>
                       );
                     })}

@@ -38,7 +38,7 @@
     grid-column: 4;
   }
 }
-.freeBox {
+.pageContent {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -49,17 +49,17 @@
   grid-column-end: -1 !important;
   padding: 8px;
 }
-.freeBox > :global(.__wab_flex-container) {
+.pageContent > :global(.__wab_flex-container) {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   margin-top: calc(0px - 12px);
   height: calc(100% + 12px);
 }
-.freeBox > :global(.__wab_flex-container) > *,
-.freeBox > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox > :global(.__wab_flex-container) > picture > img,
-.freeBox
+.pageContent > :global(.__wab_flex-container) > *,
+.pageContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.pageContent > :global(.__wab_flex-container) > picture > img,
+.pageContent
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
@@ -113,18 +113,33 @@
   height: 1em;
   color: var(--token-9iYGdL7i3GKE);
 }
+.loadingSupportedLoginButton:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  position: relative;
+}
+.text__daKnA {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
 .loginButton:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   width: auto;
 }
-.svg___173Th {
+.svg__pkM9C {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
 }
-.svg__obis3 {
+.text__gSrrw {
+  white-space: pre;
+}
+.svg__r5Um {
   position: relative;
   object-fit: cover;
   width: auto;
@@ -143,7 +158,7 @@
   height: 1em;
 }
 .text__o1JqL {
-  font-size: 12px;
+  font-size: 14px;
 }
 .svg__zg6Gv {
   position: relative;

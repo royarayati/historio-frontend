@@ -12,17 +12,17 @@ echo -e "\n----------Syncing Plasmic----------"
 
 echo -e "\n----------Deleting Plasmic files----------"
 
-rm -r components
-rm -r pages/patient pages/user 
+rm -r components || true
+rm -r pages/patient pages/user || true
 rm -r \
     pages/guide_make_new_page.tsx \
     pages/index.tsx \
     pages/inlab_login.tsx \
     pages/patients.tsx \
-    pages/test-auth.tsx
-rm -r public/plasmic
-rm plasmic.json
-rm plasmic.lock
+    pages/test-auth.tsx || true
+rm -r public/plasmic || true
+rm plasmic.json || true
+rm plasmic.lock || true
 
 echo -e "\n----------Installing npm packages----------"
 
@@ -32,6 +32,7 @@ echo -e "\n----------Initializing plasmic----------"
 
 npx plasmic init \
     --yes \
+    --auth .plasmic.auth \
     --platform "nextjs" \
     --code-lang "ts" \
     --images-scheme "public-files" \
@@ -42,6 +43,7 @@ echo -e "\n----------Syncing plasmic----------"
 
 npx plasmic sync \
     --yes \
+    --auth .plasmic.auth \
     --force \
     --force-overwrite \
     --all-files \

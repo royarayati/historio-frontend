@@ -5,8 +5,8 @@
   --plasmic-token-unnamed-style-token: var(--token-PfYIgSrHm2bm);
   --token-mgmtnHTyq9Ck: #000000;
   --plasmic-token-main-text: var(--token-mgmtnHTyq9Ck);
-  --token-sOr3fJ5Up5fq: 16px;
-  --plasmic-token-name-text: var(--token-sOr3fJ5Up5fq);
+  --token-sOr3fJ5Up5fq: 14px;
+  --plasmic-token-titles: var(--token-sOr3fJ5Up5fq);
   --token-Z1GKA271f-te: rgba(83, 83, 83, 0.88);
   --plasmic-token-unnamed-style-token-2: var(--token-Z1GKA271f-te);
   --token-TDMfC1aQaGpq: #e7ebf1;
@@ -31,6 +31,10 @@
   --plasmic-token-border: var(--token-8PxxXPNrIohQ);
   --token-iVK4BLFaCPtm: #e8ecf2;
   --plasmic-token-background: var(--token-iVK4BLFaCPtm);
+  --token-CdE1_0ZaCyT1: 12px;
+  --plasmic-token-subtitles: var(--token-CdE1_0ZaCyT1);
+  --token-NMUbRE7XpwuK: 14px;
+  --plasmic-token-buttons: var(--token-NMUbRE7XpwuK);
 }
 
 @media (min-width: 0px) and (max-width: 768px) {
@@ -40,7 +44,7 @@
     --token-mgmtnHTyq9Ck: #000000;
     --plasmic-token-main-text: var(--token-mgmtnHTyq9Ck);
     --token-sOr3fJ5Up5fq: 14px;
-    --plasmic-token-name-text: var(--token-sOr3fJ5Up5fq);
+    --plasmic-token-titles: var(--token-sOr3fJ5Up5fq);
     --token-Z1GKA271f-te: #535353e0;
     --plasmic-token-unnamed-style-token-2: var(--token-Z1GKA271f-te);
     --token-TDMfC1aQaGpq: #e7ebf1;
@@ -60,10 +64,10 @@
 
 .plasmic_default_styles {
   --mixin-pUliKjJdV7fD_font-family: var(--VazirmatnCustom);
-  --mixin-pUliKjJdV7fD_font-size: 16px;
+  --mixin-pUliKjJdV7fD_font-size: var(--token-sOr3fJ5Up5fq);
   --mixin-pUliKjJdV7fD_font-weight: 400;
   --mixin-pUliKjJdV7fD_font-style: normal;
-  --mixin-pUliKjJdV7fD_color: var(--token-mgmtnHTyq9Ck);
+  --mixin-pUliKjJdV7fD_color: var(--token-IYO13gyYJHXG);
   --mixin-pUliKjJdV7fD_text-align: center;
   --mixin-pUliKjJdV7fD_text-transform: none;
   --mixin-pUliKjJdV7fD_line-height: 1.5;
@@ -194,6 +198,8 @@
   --plasmic-mixin-cards_white-space: var(--mixin-cKqN743V90Sj_white-space);
   --mixin-pO1WIMDIdw_g_white-space: pre-wrap;
   --plasmic-mixin-buttons_white-space: var(--mixin-pO1WIMDIdw_g_white-space);
+  --mixin-sa71uyMn4xoy_white-space: pre-wrap;
+  --plasmic-mixin-icons_white-space: var(--mixin-sa71uyMn4xoy_white-space);
 }
 
 :where(.all) {
