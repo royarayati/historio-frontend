@@ -22,33 +22,13 @@
 .userSetting > * {
   grid-column: 4;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .userSetting > * {
+    grid-column: 4;
+  }
+}
 .userSettingdisabledLogoutButton > * {
   grid-column: 4;
-}
-.backButton {
-  display: flex;
-  position: sticky;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-  left: 0px;
-  top: 0px;
-  z-index: 1;
-  justify-self: auto;
-  grid-column-start: 1 !important;
-  grid-column-end: -1 !important;
-  padding: 8px;
-}
-.backButton2 {
-  color: var(--token-pRs3-4jrQ4XQ);
-  position: relative;
-  object-fit: cover;
-  max-width: 100%;
-  height: 1em;
 }
 .pageContent {
   display: flex;
@@ -137,7 +117,7 @@
   font-size: var(--token-sOr3fJ5Up5fq);
   font-family: "vazirmatn";
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   line-height: 1.2;
   color: rgba(24, 29, 36, 1);
   position: relative;
@@ -145,6 +125,7 @@
   left: auto;
   text-align: right;
   margin-top: calc(3px + 0px) !important;
+  white-space: pre-wrap;
 }
 .userRankTitle {
   position: relative;
@@ -155,6 +136,7 @@
   text-align: right;
   margin-top: calc(5px + 0px) !important;
   font-size: var(--token-sOr3fJ5Up5fq);
+  white-space: pre-wrap;
 }
 .usernameValue {
   position: relative;
@@ -165,15 +147,16 @@
   text-align: right;
   margin-top: calc(5px + 0px) !important;
   font-size: var(--token-sOr3fJ5Up5fq);
+  white-space: pre-wrap;
 }
 .userPicture {
-  color: var(--token-pRs3-4jrQ4XQ);
   position: relative;
   object-fit: cover;
   max-width: 80%;
   align-self: center;
   height: 100%;
   width: auto;
+  color: var(--token-9iYGdL7i3GKE);
   min-height: 0;
 }
 .myProfile {
@@ -270,12 +253,12 @@
   margin-top: calc(0px + 18px) !important;
 }
 .hospitalIcon {
-  color: var(--token-pRs3-4jrQ4XQ);
   position: relative;
   object-fit: cover;
   max-width: 100%;
   width: 17px;
   height: 21px;
+  color: var(--token-9iYGdL7i3GKE);
   flex-shrink: 0;
 }
 .namespaceTitle {
@@ -312,13 +295,14 @@
   font-size: var(--token-sOr3fJ5Up5fq);
   font-family: "vazirmatn";
   font-weight: 400;
-  letter-spacing: 0em;
+  letter-spacing: normal;
   line-height: 1.2;
   color: rgba(24, 29, 36, 1);
   text-align: right;
   align-self: flex-end;
+  white-space: pre-wrap;
 }
-.hospitalName {
+.namespaceName {
   position: relative;
   width: auto;
   height: auto;
@@ -330,9 +314,10 @@
   text-align: right;
   font-size: var(--token-sOr3fJ5Up5fq);
   color: var(--token-9iYGdL7i3GKE);
+  white-space: pre-wrap;
   padding: 0px;
 }
-.hospitalNamedisabledLogoutButton {
+.namespaceNamedisabledLogoutButton {
   margin-top: calc(0px + 4px) !important;
 }
 .resetPassword {
@@ -375,13 +360,13 @@
   margin-top: calc(0px + 18px) !important;
 }
 .resetPasswordImage {
-  color: var(--token-pRs3-4jrQ4XQ);
   position: relative;
   object-fit: cover;
   max-width: 100%;
   width: 17px;
   height: 21px;
   display: block;
+  color: var(--token-9iYGdL7i3GKE);
   flex-shrink: 0;
 }
 .resetPassword2 {
@@ -389,36 +374,30 @@
   font-size: var(--token-sOr3fJ5Up5fq);
   font-family: "vazirmatn";
   font-weight: 400;
-  letter-spacing: 0em;
+  letter-spacing: normal;
   line-height: 1.2;
   color: rgba(24, 29, 36, 1);
   position: relative;
   text-align: right;
   align-self: flex-end;
-}
-.loadingSupportedLogoutButton:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  position: relative;
-}
-.text__eUka9 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
+  white-space: pre-wrap;
 }
 .logoutButton:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   left: auto;
   top: auto;
+  margin-top: calc(0px + 18px) !important;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
   height: auto;
-  margin: 0px;
 }
 .logoutButtondisabledLogoutButton:global(.__wab_instance) {
   left: auto;
   top: auto;
+  opacity: 0.6;
+  margin-top: calc(0px + 18px) !important;
 }
 .svg__fLi6W {
   position: relative;
@@ -427,24 +406,92 @@
   height: 1em;
   display: none;
 }
-.text__zjr24 {
+.text {
   background: none;
-  font-weight: 400;
-  font-family: var(--VazirmatnCustom);
-  color: var(--token-9iYGdL7i3GKE);
-  text-align: center;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
   padding-left: 0px;
   padding-right: 0px;
-  min-width: 0;
+  height: auto;
+  white-space: pre-wrap;
 }
 .svg___3NRjF {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.homepageSwitchingTab {
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  margin-top: 18px;
+  left: 0;
+  top: auto;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  padding: 20px 11.3% 5%;
+}
+.switchingTab:global(.__wab_instance) {
+  max-width: 50%;
+  position: relative;
+}
+.img__dqRhw {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 0;
+  border-right: 1px none #aeaeae;
+}
+.img__dqRhw > picture > img {
+  object-fit: fill;
+}
+.img__abpDa {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  display: none !important;
+  margin: 0;
+  border-left: 1px solid #00000045;
+}
+.img__abpDa > picture > img {
+  object-fit: fill;
+}
+.img__pQ1Fd {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  display: none !important;
+  margin: 1px;
+  border-right: 1px solid #00000045;
+  border-left: 1px solid #00000045;
+}
+.img__pQ1Fd > picture > img {
+  object-fit: fill;
+}
+.img__u1C8X {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  border-right-style: none;
+  border-right-width: 1px;
+  height: 25px;
+  display: none !important;
+  margin: 0;
+}
+.img__u1C8X > picture > img {
+  object-fit: fill;
 }
 .redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;

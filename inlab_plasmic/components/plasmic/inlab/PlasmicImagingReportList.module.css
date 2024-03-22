@@ -66,7 +66,7 @@
   display: none;
 }
 .imagingReport:global(.__wab_instance) {
-  max-width: 85%;
+  max-width: 90%;
   object-fit: cover;
   position: relative;
   width: 100%;
@@ -113,7 +113,10 @@
   flex-grow: 0;
   margin-top: 12px;
   background: #ffffff;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  white-space: pre-wrap;
   min-width: 0;
+  border-radius: 5px;
   padding: 8px;
 }
 .text__scVr8 {
@@ -123,23 +126,28 @@
   flex-grow: 0;
   margin-top: 12px;
   background: #ffffff;
+  white-space: pre-wrap;
   min-width: 0;
+  border-radius: 5px;
   padding: 8px;
 }
 .imagingReportList2 {
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: auto;
   max-width: 100%;
   background: none;
+  flex-grow: 1;
+  width: 100%;
   min-width: 0;
   padding: 8px;
 }
 .imagingReportList2 > :global(.__wab_flex-container) {
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-content: stretch;
   min-width: 0;
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
@@ -154,6 +162,17 @@
   > img {
   margin-top: 8px;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .imagingReportList2 {
+    width: 100%;
+    min-width: 0;
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .imagingReportList2 > :global(.__wab_flex-container) {
+    min-width: 0;
+  }
+}
 .imagingReportCard {
   display: flex;
   position: relative;
@@ -164,17 +183,21 @@
   height: auto;
   max-width: 100%;
   background: #ffffff;
+  flex-grow: 1;
   min-width: 0;
   border-radius: 5px;
   padding: 8px;
   border: 1px solid var(--token-Pxe4wDL2kJpb);
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .imagingReportCard {
+    width: auto;
+  }
+}
 .imagingTitledatetime {
   display: flex;
   position: relative;
   flex-direction: row;
-  align-items: stretch;
-  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -183,11 +206,33 @@
   min-width: 0;
   padding: 8px;
 }
+.imagingTitledatetime > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-left: calc(0px - 2px);
+  width: calc(100% + 2px);
+}
+.imagingTitledatetime > :global(.__wab_flex-container) > *,
+.imagingTitledatetime
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.imagingTitledatetime > :global(.__wab_flex-container) > picture > img,
+.imagingTitledatetime
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 2px;
+}
 .imagingTitle {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
+  white-space: pre-wrap;
   min-width: 0;
 }
 .imagingDatetime {
@@ -195,16 +240,29 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  white-space: pre-wrap;
   min-width: 0;
   border-left: 0.5px solid var(--token-IYO13gyYJHXG);
 }
 .imagingType {
   position: relative;
-  width: 100%;
   height: auto;
-  max-width: 100%;
-  padding-top: 4px;
-  min-width: 0;
+  max-width: 400%;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  text-align: center;
+  width: auto;
+  white-space: pre-wrap;
+  padding: 4px 0px 0px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .imagingType {
+    font-size: var(--token-CdE1_0ZaCyT1);
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    align-self: auto;
+    min-width: 0;
+  }
 }
 .switchingTabs {
   display: flex;
@@ -225,6 +283,56 @@
 .switchingTab:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
+}
+.img__ccuIt {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 0;
+  border-right: 1px none #aeaeae;
+}
+.img__ccuIt > picture > img {
+  object-fit: fill;
+}
+.img__uamjw {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 0;
+  border-left: 1px solid #00000045;
+}
+.img__uamjw > picture > img {
+  object-fit: fill;
+}
+.img__sztas {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 1px;
+  border-right: 1px solid #00000045;
+  border-left: 1px solid #00000045;
+}
+.img__sztas > picture > img {
+  object-fit: fill;
+}
+.img___8TrdL {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  border-right-style: none;
+  border-right-width: 1px;
+  height: 25px;
+  margin: 0;
+}
+.img___8TrdL > picture > img {
+  object-fit: fill;
 }
 .redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;

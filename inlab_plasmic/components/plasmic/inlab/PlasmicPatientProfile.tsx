@@ -92,7 +92,7 @@ export type PlasmicPatientProfile__OverridesType = {
   header?: Flex__<"div">;
   svg?: Flex__<"svg">;
   patientProfile?: Flex__<typeof ApiFetcherComponent>;
-  freeBox?: Flex__<"div">;
+  patientProfileBox?: Flex__<"div">;
   nationalIdadmissionTimeNopacs?: Flex__<"div">;
   nationalId?: Flex__<"div">;
   admissionDate?: Flex__<"div">;
@@ -310,10 +310,13 @@ function PlasmicPatientProfile__RenderFunc(props: {
                   })() ? (
                     <Stack__
                       as={"div"}
-                      data-plasmic-name={"freeBox"}
-                      data-plasmic-override={overrides.freeBox}
+                      data-plasmic-name={"patientProfileBox"}
+                      data-plasmic-override={overrides.patientProfileBox}
                       hasGap={true}
-                      className={classNames(projectcss.all, sty.freeBox)}
+                      className={classNames(
+                        projectcss.all,
+                        sty.patientProfileBox
+                      )}
                     >
                       <div
                         data-plasmic-name={"nationalIdadmissionTimeNopacs"}
@@ -724,7 +727,7 @@ const PlasmicDescendants = {
     "header",
     "svg",
     "patientProfile",
-    "freeBox",
+    "patientProfileBox",
     "nationalIdadmissionTimeNopacs",
     "nationalId",
     "admissionDate",
@@ -745,7 +748,7 @@ const PlasmicDescendants = {
   svg: ["svg"],
   patientProfile: [
     "patientProfile",
-    "freeBox",
+    "patientProfileBox",
     "nationalIdadmissionTimeNopacs",
     "nationalId",
     "admissionDate",
@@ -757,8 +760,8 @@ const PlasmicDescendants = {
     "patientWard",
     "patientRoomBed"
   ],
-  freeBox: [
-    "freeBox",
+  patientProfileBox: [
+    "patientProfileBox",
     "nationalIdadmissionTimeNopacs",
     "nationalId",
     "admissionDate",
@@ -806,7 +809,7 @@ type NodeDefaultElementType = {
   header: "div";
   svg: "svg";
   patientProfile: typeof ApiFetcherComponent;
-  freeBox: "div";
+  patientProfileBox: "div";
   nationalIdadmissionTimeNopacs: "div";
   nationalId: "div";
   admissionDate: "div";
@@ -887,7 +890,7 @@ export const PlasmicPatientProfile = Object.assign(
     header: makeNodeComponent("header"),
     svg: makeNodeComponent("svg"),
     patientProfile: makeNodeComponent("patientProfile"),
-    freeBox: makeNodeComponent("freeBox"),
+    patientProfileBox: makeNodeComponent("patientProfileBox"),
     nationalIdadmissionTimeNopacs: makeNodeComponent(
       "nationalIdadmissionTimeNopacs"
     ),

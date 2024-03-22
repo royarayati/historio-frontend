@@ -88,7 +88,8 @@ export type PlasmicNamespaceSelection__OverridesType = {
   namespaceSelection?: Flex__<"div">;
   namespaces2?: Flex__<"div">;
   namespaces?: Flex__<typeof ApiFetcherComponent>;
-  freeBox?: Flex__<"div">;
+  namespacesList?: Flex__<"div">;
+  namespaceName?: Flex__<"div">;
   redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
   redirectNamespaceSelectionToHomepage?: Flex__<
     typeof RedirectNamespaceSelectionToHomepage
@@ -194,10 +195,10 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                 {$ctx => (
                   <Stack__
                     as={"div"}
-                    data-plasmic-name={"freeBox"}
-                    data-plasmic-override={overrides.freeBox}
+                    data-plasmic-name={"namespacesList"}
+                    data-plasmic-override={overrides.namespacesList}
                     hasGap={true}
-                    className={classNames(projectcss.all, sty.freeBox)}
+                    className={classNames(projectcss.all, sty.namespacesList)}
                   >
                     {(_par =>
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
@@ -219,10 +220,12 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                       const currentIndex = __plasmic_idx_0;
                       return (
                         <div
+                          data-plasmic-name={"namespaceName"}
+                          data-plasmic-override={overrides.namespaceName}
                           className={classNames(
                             projectcss.all,
                             projectcss.__wab_text,
-                            sty.text__dwJt
+                            sty.namespaceName
                           )}
                           key={currentIndex}
                           onClick={async event => {
@@ -371,7 +374,9 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                 }
               }}
             >
-              {"Back to Login"}
+              {
+                "\u0628\u0631\u06af\u0634\u062a \u0628\u0647 \u0635\u0641\u062d\u0647 \u0648\u0631\u0648\u062f \u0628\u0647 \u0627\u06cc\u0646\u0644\u0628"
+              }
             </div>
           </Stack__>
           <RedirectToLoginPage
@@ -401,13 +406,15 @@ const PlasmicDescendants = {
     "namespaceSelection",
     "namespaces2",
     "namespaces",
-    "freeBox",
+    "namespacesList",
+    "namespaceName",
     "redirectToLoginPage",
     "redirectNamespaceSelectionToHomepage"
   ],
-  namespaces2: ["namespaces2", "namespaces", "freeBox"],
-  namespaces: ["namespaces", "freeBox"],
-  freeBox: ["freeBox"],
+  namespaces2: ["namespaces2", "namespaces", "namespacesList", "namespaceName"],
+  namespaces: ["namespaces", "namespacesList", "namespaceName"],
+  namespacesList: ["namespacesList", "namespaceName"],
+  namespaceName: ["namespaceName"],
   redirectToLoginPage: ["redirectToLoginPage"],
   redirectNamespaceSelectionToHomepage: ["redirectNamespaceSelectionToHomepage"]
 } as const;
@@ -418,7 +425,8 @@ type NodeDefaultElementType = {
   namespaceSelection: "div";
   namespaces2: "div";
   namespaces: typeof ApiFetcherComponent;
-  freeBox: "div";
+  namespacesList: "div";
+  namespaceName: "div";
   redirectToLoginPage: typeof RedirectToLoginPage;
   redirectNamespaceSelectionToHomepage: typeof RedirectNamespaceSelectionToHomepage;
 };
@@ -485,7 +493,8 @@ export const PlasmicNamespaceSelection = Object.assign(
     // Helper components rendering sub-elements
     namespaces2: makeNodeComponent("namespaces2"),
     namespaces: makeNodeComponent("namespaces"),
-    freeBox: makeNodeComponent("freeBox"),
+    namespacesList: makeNodeComponent("namespacesList"),
+    namespaceName: makeNodeComponent("namespaceName"),
     redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
     redirectNamespaceSelectionToHomepage: makeNodeComponent(
       "redirectNamespaceSelectionToHomepage"

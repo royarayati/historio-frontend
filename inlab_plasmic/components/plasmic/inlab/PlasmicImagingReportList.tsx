@@ -374,7 +374,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   </div>
                 ) : null}
                 {$ctx.fetched_data.loading === false &&
-                $ctx.fetched_data.data.radiology_services === 0 ? (
+                $ctx.fetched_data.data.radiology_services == 0 ? (
                   <div
                     className={classNames(
                       projectcss.all,
@@ -497,9 +497,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           }
                         }}
                       >
-                        <div
+                        <Stack__
+                          as={"div"}
                           data-plasmic-name={"imagingTitledatetime"}
                           data-plasmic-override={overrides.imagingTitledatetime}
+                          hasGap={true}
                           className={classNames(
                             projectcss.all,
                             sty.imagingTitledatetime
@@ -515,20 +517,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.service_name;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
+                              {currentItem.service_name}
                             </React.Fragment>
                           </div>
                           <div
@@ -566,7 +555,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                               })()}
                             </React.Fragment>
                           </div>
-                        </div>
+                        </Stack__>
                         <div
                           data-plasmic-name={"imagingType"}
                           data-plasmic-override={overrides.imagingType}
@@ -577,21 +566,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           )}
                         >
                           <React.Fragment>
-                            {(() => {
-                              try {
-                                return currentItem.title
-                                  .replace(/\(\s+#\s*\)/g, "")
-                                  .replace(/\(\s+#\*\s*\)/g, "");
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return "";
-                                }
-                                throw e;
-                              }
-                            })()}
+                            {currentItem.title.replace(/\(\s+#\s*\)/g, "")}
                           </React.Fragment>
                         </div>
                       </div>

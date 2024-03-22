@@ -123,6 +123,7 @@
   font-size: 14px;
   text-align: right;
   padding-right: 11px;
+  white-space: pre-wrap;
   min-width: 0;
 }
 .switchingTabs {
@@ -144,6 +145,56 @@
 .switchingTab:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
+}
+.img__g3E9S {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 0;
+  border-right: 1px none #aeaeae;
+}
+.img__g3E9S > picture > img {
+  object-fit: fill;
+}
+.img__wykfJ {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 0;
+  border-left: 1px solid #00000045;
+}
+.img__wykfJ > picture > img {
+  object-fit: fill;
+}
+.img__ozOiE {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 1px;
+  border-right: 1px solid #00000045;
+  border-left: 1px solid #00000045;
+}
+.img__ozOiE > picture > img {
+  object-fit: fill;
+}
+.img__w78Jt {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  border-right-style: none;
+  border-right-width: 1px;
+  height: 25px;
+  margin: 0;
+}
+.img__w78Jt > picture > img {
+  object-fit: fill;
 }
 .redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;

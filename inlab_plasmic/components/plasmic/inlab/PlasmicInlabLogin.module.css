@@ -72,6 +72,7 @@
   height: auto;
   max-width: 100%;
   text-align: center;
+  white-space: pre-wrap;
 }
 .username:global(.__wab_instance) {
   max-width: 80%;
@@ -113,22 +114,13 @@
   height: 1em;
   color: var(--token-9iYGdL7i3GKE);
 }
-.loadingSupportedLoginButton:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  position: relative;
-}
-.text__daKnA {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
 .loginButton:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   width: auto;
+}
+.loginButtondisabledLoginButton:global(.__wab_instance) {
+  opacity: 0.6;
 }
 .svg__pkM9C {
   position: relative;
@@ -137,7 +129,7 @@
   height: 1em;
 }
 .text__gSrrw {
-  white-space: pre;
+  white-space: pre-wrap;
 }
 .svg__r5Um {
   position: relative;
@@ -149,7 +141,7 @@
   max-width: 60%;
   position: relative;
   height: auto;
-  width: 75vh;
+  width: 15vh;
 }
 .svg__dg3Oe {
   position: relative;
@@ -159,6 +151,7 @@
 }
 .text__o1JqL {
   font-size: 14px;
+  white-space: pre-wrap;
 }
 .svg__zg6Gv {
   position: relative;
