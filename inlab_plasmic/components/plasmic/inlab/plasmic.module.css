@@ -72,10 +72,9 @@
   --mixin-pUliKjJdV7fD_text-transform: none;
   --mixin-pUliKjJdV7fD_line-height: 1.5;
   --mixin-pUliKjJdV7fD_letter-spacing: normal;
-  --mixin-pUliKjJdV7fD_white-space: pre-wrap;
-  --mixin-pUliKjJdV7fD_user-select: text;
+  --mixin-pUliKjJdV7fD_white-space: nowrap;
+  --mixin-pUliKjJdV7fD_user-select: none;
   --mixin-pUliKjJdV7fD_text-decoration-line: none;
-  --mixin-pUliKjJdV7fD_text-overflow: clip;
   --mixin-MhdL6TMPl2RD_color: #000000;
   --mixin-MhdL6TMPl2RD_font-weight: 700;
   --mixin-MhdL6TMPl2RD_font-size: 64px;

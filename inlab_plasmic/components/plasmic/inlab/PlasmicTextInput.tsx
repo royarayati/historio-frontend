@@ -130,7 +130,7 @@ export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicTextInput__OverridesType = {
-  root?: Flex__<"div">;
+  textInput?: Flex__<"div">;
   startIconContainer?: Flex__<"div">;
   input?: Flex__<"input">;
   endIconContainer?: Flex__<"div">;
@@ -247,12 +247,16 @@ function PlasmicTextInput__RenderFunc(props: {
     $refs
   });
 
-  const [isRootFocusVisibleWithin, triggerRootFocusVisibleWithinProps] =
-    useTrigger("useFocusVisibleWithin", {
-      isTextInput: false
-    });
+  const [
+    isTextInputFocusVisibleWithin,
+    triggerTextInputFocusVisibleWithinProps
+  ] = useTrigger("useFocusVisibleWithin", {
+    isTextInput: false
+  });
+  const [isInputFocus, triggerInputFocusProps] = useTrigger("useFocused", {});
   const triggers = {
-    focusVisibleWithin_root: isRootFocusVisibleWithin
+    focusVisibleWithin_textInput: isTextInputFocusVisibleWithin,
+    focus_input: isInputFocus
   };
 
   const globalVariants = ensureGlobalVariants({
@@ -262,8 +266,8 @@ function PlasmicTextInput__RenderFunc(props: {
   return (
     <Stack__
       as={"div"}
-      data-plasmic-name={"root"}
-      data-plasmic-override={overrides.root}
+      data-plasmic-name={"textInput"}
+      data-plasmic-override={overrides.textInput}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
       hasGap={true}
@@ -275,30 +279,44 @@ function PlasmicTextInput__RenderFunc(props: {
         projectcss.plasmic_tokens,
         plasmic_antd_5_hostless_css.plasmic_tokens,
         plasmic_plasmic_rich_components_css.plasmic_tokens,
-        sty.root,
+        sty.textInput,
         {
-          [sty.root___focusVisibleWithin]: triggers.focusVisibleWithin_root,
-          [sty.rootisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
-          [sty.rootshowEndIcon]: hasVariant(
+          [sty.textInput___focusVisibleWithin]:
+            triggers.focusVisibleWithin_textInput,
+          [sty.textInput___focusVisibleWithin_showStartIcon]:
+            hasVariant($state, "showStartIcon", "showStartIcon") &&
+            triggers.focusVisibleWithin_textInput,
+          [sty.textInputisDisabled]: hasVariant(
+            $state,
+            "isDisabled",
+            "isDisabled"
+          ),
+          [sty.textInputshowEndIcon]: hasVariant(
             $state,
             "showEndIcon",
             "showEndIcon"
           ),
-          [sty.rootshowStartIcon]: hasVariant(
+          [sty.textInputshowEndIcon_isDisabled]:
+            hasVariant($state, "showEndIcon", "showEndIcon") &&
+            hasVariant($state, "isDisabled", "isDisabled"),
+          [sty.textInputshowEndIcon_showStartIcon]:
+            hasVariant($state, "showStartIcon", "showStartIcon") &&
+            hasVariant($state, "showEndIcon", "showEndIcon"),
+          [sty.textInputshowStartIcon]: hasVariant(
             $state,
             "showStartIcon",
             "showStartIcon"
           )
         }
       )}
-      data-plasmic-trigger-props={[triggerRootFocusVisibleWithinProps]}
+      data-plasmic-trigger-props={[triggerTextInputFocusVisibleWithinProps]}
     >
       <div
         data-plasmic-name={"startIconContainer"}
         data-plasmic-override={overrides.startIconContainer}
         className={classNames(projectcss.all, sty.startIconContainer, {
           [sty.startIconContainer___focusVisibleWithin]:
-            triggers.focusVisibleWithin_root,
+            triggers.focusVisibleWithin_textInput,
           [sty.startIconContainerisDisabled]: hasVariant(
             $state,
             "isDisabled",
@@ -338,7 +356,8 @@ function PlasmicTextInput__RenderFunc(props: {
         data-plasmic-name={"input"}
         data-plasmic-override={overrides.input}
         className={classNames(projectcss.all, projectcss.input, sty.input, {
-          [sty.input___focusVisibleWithin]: triggers.focusVisibleWithin_root,
+          [sty.input___focusVisibleWithin]:
+            triggers.focusVisibleWithin_textInput,
           [sty.inputisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
           [sty.inputshowStartIcon]: hasVariant(
             $state,
@@ -358,6 +377,7 @@ function PlasmicTextInput__RenderFunc(props: {
         }}
         type={args.type}
         value={generateStateValueProp($state, ["input", "value"]) ?? ""}
+        data-plasmic-trigger-props={[triggerInputFocusProps]}
       />
 
       {(
@@ -428,7 +448,7 @@ function useBehavior<P extends pp.PlumeTextInputProps>(
 }
 
 const PlasmicDescendants = {
-  root: ["root", "startIconContainer", "input", "endIconContainer"],
+  textInput: ["textInput", "startIconContainer", "input", "endIconContainer"],
   startIconContainer: ["startIconContainer"],
   input: ["input"],
   endIconContainer: ["endIconContainer"]
@@ -437,7 +457,7 @@ type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  root: "div";
+  textInput: "div";
   startIconContainer: "div";
   input: "input";
   endIconContainer: "div";
@@ -490,7 +510,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "root") {
+  if (nodeName === "textInput") {
     func.displayName = "PlasmicTextInput";
   } else {
     func.displayName = `PlasmicTextInput.${nodeName}`;
@@ -500,7 +520,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicTextInput = Object.assign(
   // Top-level PlasmicTextInput renders the root element
-  makeNodeComponent("root"),
+  makeNodeComponent("textInput"),
   {
     // Helper components rendering sub-elements
     startIconContainer: makeNodeComponent("startIconContainer"),

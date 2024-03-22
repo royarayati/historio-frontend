@@ -84,7 +84,7 @@ export const PlasmicHeader__ArgProps = new Array<ArgPropType>();
 export type PlasmicHeader__OverridesType = {
   root?: Flex__<"div">;
   svg?: Flex__<"svg">;
-  text?: Flex__<"div">;
+  patientName?: Flex__<"div">;
 };
 
 export interface DefaultHeaderProps {
@@ -181,9 +181,13 @@ function PlasmicHeader__RenderFunc(props: {
       />
 
       <div
-        data-plasmic-name={"text"}
-        data-plasmic-override={overrides.text}
-        className={classNames(projectcss.all, projectcss.__wab_text, sty.text)}
+        data-plasmic-name={"patientName"}
+        data-plasmic-override={overrides.patientName}
+        className={classNames(
+          projectcss.all,
+          projectcss.__wab_text,
+          sty.patientName
+        )}
       >
         {hasVariant(globalVariants, "screen", "mobileFirst") ? (
           <React.Fragment>
@@ -224,9 +228,9 @@ function PlasmicHeader__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "svg", "text"],
+  root: ["root", "svg", "patientName"],
   svg: ["svg"],
-  text: ["text"]
+  patientName: ["patientName"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -234,7 +238,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   svg: "svg";
-  text: "div";
+  patientName: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -298,7 +302,7 @@ export const PlasmicHeader = Object.assign(
   {
     // Helper components rendering sub-elements
     svg: makeNodeComponent("svg"),
-    text: makeNodeComponent("text"),
+    patientName: makeNodeComponent("patientName"),
 
     // Metadata about props expected for PlasmicHeader
     internalVariantProps: PlasmicHeader__VariantProps,

@@ -1,4 +1,4 @@
-.root {
+.textInput {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -11,7 +11,7 @@
   padding: 8px;
   border: 1px solid var(--token-9iYGdL7i3GKE);
 }
-.root > :global(.__wab_flex-container) {
+.textInput > :global(.__wab_flex-container) {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -19,34 +19,44 @@
   margin-left: calc(0px - 8px);
   width: calc(100% + 8px);
 }
-.root > :global(.__wab_flex-container) > *,
-.root > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.root > :global(.__wab_flex-container) > picture > img,
-.root > :global(.__wab_flex-container) > :global(.__wab_slot) > picture > img {
+.textInput > :global(.__wab_flex-container) > *,
+.textInput > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.textInput > :global(.__wab_flex-container) > picture > img,
+.textInput
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
   margin-left: 8px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
-  .root {
+  .textInput {
     padding-right: 12px;
     padding-left: 12px;
     padding-top: 8px;
+    pointer-events: none;
     border-width: 0.5px;
     border-color: var(--token-9iYGdL7i3GKE);
   }
 }
 @media (min-width: 0px) and (max-width: 768px) {
-  .rootshowStartIcon {
+  .textInputshowStartIcon {
     padding-right: 0px;
   }
 }
-.root:hover {
+.textInput:hover {
   background: var(--token-jgohepLVeKvh);
   border-color: var(--token-9iYGdL7i3GKE);
 }
-.root___focusVisibleWithin {
-  box-shadow: 0px 0px 0px 3px #96c7f2;
+.textInput___focusVisibleWithin {
+  box-shadow: 0px 0px 0px 2px #96c7f2;
+  background: #ffffff;
   outline: none;
-  border-radius: 6px;
+  border-radius: 5px;
+  border-width: 0.75px;
+}
+.textInput___focusVisibleWithin_showStartIcon {
+  outline: none;
 }
 .startIconContainer {
   display: flex;
@@ -70,11 +80,11 @@
 .startIconContainerisDisabled {
   margin-left: calc(0px + 8px) !important;
 }
-.root:hover .startIconContainer {
+.textInput:hover .startIconContainer {
   background: var(--token-jgohepLVeKvh);
   margin-left: calc(0px + 8px) !important;
 }
-.root .startIconContainer___focusVisibleWithin {
+.textInput .startIconContainer___focusVisibleWithin {
   margin-left: calc(0px + 8px) !important;
   outline: none;
 }
@@ -94,36 +104,42 @@
   width: 100%;
   left: auto;
   top: auto;
-  background: #fcfcfc;
-  font-size: 12px;
+  background: var(--token-O-63NKRcNhLJ);
+  font-size: var(--token-CdE1_0ZaCyT1);
   text-align: right;
+  cursor: auto;
+  pointer-events: auto;
+  color: var(--token-IYO13gyYJHXG);
   min-width: 0;
   padding: 0px 4px 0px 0px;
   border-width: 0px;
+  border-style: none;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .input {
     font-size: 10px;
+    background: var(--token-Yq556PvPjGii);
   }
 }
 .inputisDisabled {
   cursor: not-allowed;
 }
-.root:hover .input {
-  background: var(--token-jgohepLVeKvh);
+.textInput:hover .input {
+  background: var(--token-Yq556PvPjGii);
 }
-.root .input___focusVisibleWithin {
-  background: var(--token-41VRhDKfihhY);
+.textInput .input___focusVisibleWithin {
+  background: var(--token-Yq556PvPjGii);
+  outline: none;
+  border-style: none;
+}
+.textInput .input:focus {
   outline: none;
 }
-.root .input:focus {
+.textInput .input___focusVisibleWithin:focus {
   outline: none;
 }
-.root .input::placeholder {
-  color: #706f6c;
-}
-.root .input___focusVisibleWithin::placeholder {
-  background: var(--token-jgohepLVeKvh);
+.textInput .input___focusVisibleWithin::placeholder {
+  background: var(--token-Yq556PvPjGii);
   outline: none;
 }
 .endIconContainer {

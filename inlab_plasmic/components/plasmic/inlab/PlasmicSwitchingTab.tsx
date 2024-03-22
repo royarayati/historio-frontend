@@ -75,15 +75,18 @@ export type PlasmicSwitchingTab__VariantsArgs = {};
 type VariantPropType = keyof PlasmicSwitchingTab__VariantsArgs;
 export const PlasmicSwitchingTab__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicSwitchingTab__ArgsType = {};
+export type PlasmicSwitchingTab__ArgsType = {
+  children?: React.ReactNode;
+};
 type ArgPropType = keyof PlasmicSwitchingTab__ArgsType;
-export const PlasmicSwitchingTab__ArgProps = new Array<ArgPropType>();
+export const PlasmicSwitchingTab__ArgProps = new Array<ArgPropType>("children");
 
 export type PlasmicSwitchingTab__OverridesType = {
   root?: Flex__<"div">;
 };
 
 export interface DefaultSwitchingTabProps {
+  children?: React.ReactNode;
   className?: string;
 }
 
@@ -157,267 +160,280 @@ function PlasmicSwitchingTab__RenderFunc(props: {
         sty.root
       )}
     >
-      <PlasmicImg__
-        alt={""}
-        className={classNames(sty.img__jjHgx)}
-        displayHeight={"25px"}
-        displayMaxHeight={"none"}
-        displayMaxWidth={"100%"}
-        displayMinHeight={"0"}
-        displayMinWidth={"0"}
-        displayWidth={"25%"}
-        loading={"lazy"}
-        onClick={async event => {
-          const $steps = {};
+      {renderPlasmicSlot({
+        defaultContents: (
+          <React.Fragment>
+            <PlasmicImg__
+              alt={""}
+              className={classNames(sty.img__ljkDq)}
+              displayHeight={"25px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"25%"}
+              loading={"lazy"}
+              onClick={async event => {
+                const $steps = {};
 
-          $steps["goToHomepage"] = true
-            ? (() => {
-                const actionArgs = { destination: `/patients` };
-                return (({ destination }) => {
-                  if (
-                    typeof destination === "string" &&
-                    destination.startsWith("#")
-                  ) {
-                    document
-                      .getElementById(destination.substr(1))
-                      .scrollIntoView({ behavior: "smooth" });
-                  } else {
-                    __nextRouter?.push(destination);
-                  }
-                })?.apply(null, [actionArgs]);
-              })()
-            : undefined;
-          if (
-            $steps["goToHomepage"] != null &&
-            typeof $steps["goToHomepage"] === "object" &&
-            typeof $steps["goToHomepage"].then === "function"
-          ) {
-            $steps["goToHomepage"] = await $steps["goToHomepage"];
-          }
-        }}
-        src={{
-          src: "/new_inlab/plasmic/inlab/images/icons8Home1Svg.svg",
-          fullWidth: 150,
-          fullHeight: 150,
-          aspectRatio: 1
-        }}
-      />
+                $steps["goToHomepage"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/patients` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToHomepage"] != null &&
+                  typeof $steps["goToHomepage"] === "object" &&
+                  typeof $steps["goToHomepage"].then === "function"
+                ) {
+                  $steps["goToHomepage"] = await $steps["goToHomepage"];
+                }
+              }}
+              src={{
+                src: "/new_inlab/plasmic/inlab/images/icons8Home1Svg.svg",
+                fullWidth: 150,
+                fullHeight: 150,
+                aspectRatio: 1
+              }}
+            />
 
-      <PlasmicImg__
-        alt={""}
-        className={classNames(sty.img___6Cjxt)}
-        displayHeight={"25px"}
-        displayMaxHeight={"none"}
-        displayMaxWidth={"100%"}
-        displayMinHeight={"0"}
-        displayMinWidth={"0"}
-        displayWidth={"25%"}
-        loading={"lazy"}
-        onClick={async event => {
-          const $steps = {};
+            <PlasmicImg__
+              alt={""}
+              className={classNames(sty.img__zxtub)}
+              displayHeight={"25px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"25%"}
+              loading={"lazy"}
+              onClick={async event => {
+                const $steps = {};
 
-          $steps["goToPatientProfile"] = true
-            ? (() => {
-                const actionArgs = {
-                  destination: `/patient/${(() => {
-                    try {
-                      return $ctx.params.code;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}/${(() => {
-                    try {
-                      return $ctx.params.patient_name;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}/profile`
-                };
-                return (({ destination }) => {
-                  if (
-                    typeof destination === "string" &&
-                    destination.startsWith("#")
-                  ) {
-                    document
-                      .getElementById(destination.substr(1))
-                      .scrollIntoView({ behavior: "smooth" });
-                  } else {
-                    __nextRouter?.push(destination);
-                  }
-                })?.apply(null, [actionArgs]);
-              })()
-            : undefined;
-          if (
-            $steps["goToPatientProfile"] != null &&
-            typeof $steps["goToPatientProfile"] === "object" &&
-            typeof $steps["goToPatientProfile"].then === "function"
-          ) {
-            $steps["goToPatientProfile"] = await $steps["goToPatientProfile"];
-          }
-        }}
-        src={{
-          src: "/new_inlab/plasmic/inlab/images/group2063.svg",
-          fullWidth: 18.77,
-          fullHeight: 20.34,
-          aspectRatio: 0.904762
-        }}
-      />
+                $steps["goToPatientProfile"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/patient/${(() => {
+                          try {
+                            return $ctx.params.code;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/${(() => {
+                          try {
+                            return $ctx.params.patient_name;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/profile`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToPatientProfile"] != null &&
+                  typeof $steps["goToPatientProfile"] === "object" &&
+                  typeof $steps["goToPatientProfile"].then === "function"
+                ) {
+                  $steps["goToPatientProfile"] = await $steps[
+                    "goToPatientProfile"
+                  ];
+                }
+              }}
+              src={{
+                src: "/new_inlab/plasmic/inlab/images/group2063.svg",
+                fullWidth: 18.77,
+                fullHeight: 20.34,
+                aspectRatio: 0.904762
+              }}
+            />
 
-      <PlasmicImg__
-        alt={""}
-        className={classNames(sty.img__tHc1)}
-        displayHeight={"25px"}
-        displayMaxHeight={"none"}
-        displayMaxWidth={"100%"}
-        displayMinHeight={"0"}
-        displayMinWidth={"0"}
-        displayWidth={"25%"}
-        loading={"lazy"}
-        onClick={async event => {
-          const $steps = {};
+            <PlasmicImg__
+              alt={""}
+              className={classNames(sty.img__t9RC)}
+              displayHeight={"25px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"25%"}
+              loading={"lazy"}
+              onClick={async event => {
+                const $steps = {};
 
-          $steps["goToImagingReport1"] = true
-            ? (() => {
-                const actionArgs = {
-                  destination: `/patient/${(() => {
-                    try {
-                      return $ctx.params.code;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}/${(() => {
-                    try {
-                      return $ctx.params.patient_name;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}/report/list`
-                };
-                return (({ destination }) => {
-                  if (
-                    typeof destination === "string" &&
-                    destination.startsWith("#")
-                  ) {
-                    document
-                      .getElementById(destination.substr(1))
-                      .scrollIntoView({ behavior: "smooth" });
-                  } else {
-                    __nextRouter?.push(destination);
-                  }
-                })?.apply(null, [actionArgs]);
-              })()
-            : undefined;
-          if (
-            $steps["goToImagingReport1"] != null &&
-            typeof $steps["goToImagingReport1"] === "object" &&
-            typeof $steps["goToImagingReport1"].then === "function"
-          ) {
-            $steps["goToImagingReport1"] = await $steps["goToImagingReport1"];
-          }
-        }}
-        src={{
-          src: "/new_inlab/plasmic/inlab/images/group376.svg",
-          fullWidth: 19.424,
-          fullHeight: 19.98,
-          aspectRatio: 1
-        }}
-      />
+                $steps["goToImagingReport1"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/patient/${(() => {
+                          try {
+                            return $ctx.params.code;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/${(() => {
+                          try {
+                            return $ctx.params.patient_name;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/report/list`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToImagingReport1"] != null &&
+                  typeof $steps["goToImagingReport1"] === "object" &&
+                  typeof $steps["goToImagingReport1"].then === "function"
+                ) {
+                  $steps["goToImagingReport1"] = await $steps[
+                    "goToImagingReport1"
+                  ];
+                }
+              }}
+              src={{
+                src: "/new_inlab/plasmic/inlab/images/group376.svg",
+                fullWidth: 19.424,
+                fullHeight: 19.98,
+                aspectRatio: 1
+              }}
+            />
 
-      <PlasmicImg__
-        alt={""}
-        className={classNames(sty.img__hhg4W)}
-        displayHeight={"25px"}
-        displayMaxHeight={"none"}
-        displayMaxWidth={"100%"}
-        displayMinHeight={"0"}
-        displayMinWidth={"0"}
-        displayWidth={"25%"}
-        loading={"lazy"}
-        onClick={async event => {
-          const $steps = {};
+            <PlasmicImg__
+              alt={""}
+              className={classNames(sty.img___1E1E6)}
+              displayHeight={"25px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"25%"}
+              loading={"lazy"}
+              onClick={async event => {
+                const $steps = {};
 
-          $steps["goToLaboratoryData"] = true
-            ? (() => {
-                const actionArgs = {
-                  destination: `/patient/${(() => {
-                    try {
-                      return $ctx.params.code;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}/${(() => {
-                    try {
-                      return $ctx.params.patient_name;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}/lab`
-                };
-                return (({ destination }) => {
-                  if (
-                    typeof destination === "string" &&
-                    destination.startsWith("#")
-                  ) {
-                    document
-                      .getElementById(destination.substr(1))
-                      .scrollIntoView({ behavior: "smooth" });
-                  } else {
-                    __nextRouter?.push(destination);
-                  }
-                })?.apply(null, [actionArgs]);
-              })()
-            : undefined;
-          if (
-            $steps["goToLaboratoryData"] != null &&
-            typeof $steps["goToLaboratoryData"] === "object" &&
-            typeof $steps["goToLaboratoryData"].then === "function"
-          ) {
-            $steps["goToLaboratoryData"] = await $steps["goToLaboratoryData"];
-          }
-        }}
-        src={{
-          src: "/new_inlab/plasmic/inlab/images/group384.svg",
-          fullWidth: 14.575,
-          fullHeight: 18.692,
-          aspectRatio: 0.789474
-        }}
-      />
+                $steps["goToLaboratoryData"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/patient/${(() => {
+                          try {
+                            return $ctx.params.code;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/${(() => {
+                          try {
+                            return $ctx.params.patient_name;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/lab`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToLaboratoryData"] != null &&
+                  typeof $steps["goToLaboratoryData"] === "object" &&
+                  typeof $steps["goToLaboratoryData"].then === "function"
+                ) {
+                  $steps["goToLaboratoryData"] = await $steps[
+                    "goToLaboratoryData"
+                  ];
+                }
+              }}
+              src={{
+                src: "/new_inlab/plasmic/inlab/images/group384.svg",
+                fullWidth: 14.575,
+                fullHeight: 18.692,
+                aspectRatio: 0.789474
+              }}
+            />
+          </React.Fragment>
+        ),
+        value: args.children
+      })}
     </div>
   ) as React.ReactElement | null;
 }

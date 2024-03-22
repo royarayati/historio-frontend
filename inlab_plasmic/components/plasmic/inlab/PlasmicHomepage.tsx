@@ -336,7 +336,6 @@ function PlasmicHomepage__RenderFunc(props: {
               placeholder={
                 "\u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u0634\u0645\u0627\u0631\u0647 \u067e\u0631\u0648\u0646\u062f\u0647\u060c \u06a9\u062f \u0645\u0644\u06cc\u060c \u06a9\u062f \u067e\u06a9\u0633 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
               }
-              showStartIcon={true}
               startIcon={
                 <SearchsvgIcon
                   className={classNames(projectcss.all, sty.svg__nPrTh)}
@@ -365,7 +364,23 @@ function PlasmicHomepage__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
-                  {$ctx.fetched_data.loading === true ? (
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? $ctx.fetched_data.loading == true
+                      : (() => {
+                          try {
+                            return $ctx.fetched_data.loading === true;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })()
+                  ) ? (
                     <div
                       className={classNames(
                         projectcss.all,
@@ -385,36 +400,40 @@ function PlasmicHomepage__RenderFunc(props: {
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.text__qaK4M
+                        sty.text__tXFgc
                       )}
-                      onClick={async event => {
-                        const $steps = {};
-
-                        $steps["runActionOnSearchedPatients"] = true
-                          ? (() => {
-                              const actionArgs = {};
-                              return (({ tplRef, action, args }) => {
-                                return $refs?.[tplRef]?.[action]?.(
-                                  ...(args ?? [])
-                                );
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                        if (
-                          $steps["runActionOnSearchedPatients"] != null &&
-                          typeof $steps["runActionOnSearchedPatients"] ===
-                            "object" &&
-                          typeof $steps["runActionOnSearchedPatients"].then ===
-                            "function"
-                        ) {
-                          $steps["runActionOnSearchedPatients"] = await $steps[
-                            "runActionOnSearchedPatients"
-                          ];
-                        }
-                      }}
                     >
                       {
                         "\u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0645\u0646"
+                      }
+                    </div>
+                  ) : null}
+                  {(() => {
+                    try {
+                      return (
+                        $ctx.fetched_data.loading === false &&
+                        $state.searchbar.value !== "" &&
+                        $ctx.fetched_data.data !== ""
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__sfj2Z
+                      )}
+                    >
+                      {
+                        "\u0646\u062a\u0627\u06cc\u062c \u062c\u0633\u062a \u0648 \u062c\u0648"
                       }
                     </div>
                   ) : null}
@@ -454,10 +473,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   ) : null}
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
-                      ? !(
-                          $ctx.fetched_data.loading === false &&
-                          $ctx.fetched_data.search_response == 0
-                        )
+                      ? $ctx.fetched_data.data !== ""
                       : $ctx.fetched_data.data !== ""
                   )
                     ? (_par =>

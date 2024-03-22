@@ -445,11 +445,13 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                         sty.factorNamevalue
                                       )}
                                     >
-                                      <div
+                                      <Stack__
+                                        as={"div"}
                                         data-plasmic-name={"factorNamevalue2"}
                                         data-plasmic-override={
                                           overrides.factorNamevalue2
                                         }
+                                        hasGap={true}
                                         className={classNames(
                                           projectcss.all,
                                           sty.factorNamevalue2
@@ -467,24 +469,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                           )}
                                         >
                                           <React.Fragment>
-                                            {(() => {
-                                              try {
-                                                return currentItem.factor_name.replace(
-                                                  " (  # )",
-                                                  "",
-                                                  "(#*)"
-                                                );
-                                              } catch (e) {
-                                                if (
-                                                  e instanceof TypeError ||
-                                                  e?.plasmicType ===
-                                                    "PlasmicUndefinedDataError"
-                                                ) {
-                                                  return "";
-                                                }
-                                                throw e;
-                                              }
-                                            })()}
+                                            {currentItem.factor_name.replace(
+                                              " (  # )",
+                                              "",
+                                              "(#*)"
+                                            )}
                                           </React.Fragment>
                                         </div>
                                         <div
@@ -499,23 +488,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                           )}
                                         >
                                           <React.Fragment>
-                                            {(() => {
-                                              try {
-                                                return currentItem.value;
-                                              } catch (e) {
-                                                if (
-                                                  e instanceof TypeError ||
-                                                  e?.plasmicType ===
-                                                    "PlasmicUndefinedDataError"
-                                                ) {
-                                                  return "";
-                                                }
-                                                throw e;
-                                              }
-                                            })()}
+                                            {currentItem.value}
                                           </React.Fragment>
                                         </div>
-                                      </div>
+                                      </Stack__>
                                     </Stack__>
                                   </Stack__>
                                 );
