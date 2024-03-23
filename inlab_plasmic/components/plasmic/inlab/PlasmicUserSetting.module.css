@@ -115,7 +115,7 @@
 .name {
   display: block;
   font-size: var(--token-sOr3fJ5Up5fq);
-  font-family: "vazirmatn";
+  font-family: var(--VazirmatnCustom);
   font-weight: 500;
   letter-spacing: normal;
   line-height: 1.2;
@@ -293,7 +293,7 @@
 .hospital2 {
   display: block;
   font-size: var(--token-sOr3fJ5Up5fq);
-  font-family: "vazirmatn";
+  font-family: var(--VazirmatnCustom);
   font-weight: 400;
   letter-spacing: normal;
   line-height: 1.2;
@@ -372,7 +372,7 @@
 .resetPassword2 {
   display: block;
   font-size: var(--token-sOr3fJ5Up5fq);
-  font-family: "vazirmatn";
+  font-family: var(--VazirmatnCustom);
   font-weight: 400;
   letter-spacing: normal;
   line-height: 1.2;
@@ -412,6 +412,9 @@
   padding-right: 0px;
   height: auto;
   white-space: pre-wrap;
+}
+.textdisabledLogoutButton {
+  height: auto;
 }
 .svg___3NRjF {
   position: relative;
