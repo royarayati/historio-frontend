@@ -199,6 +199,8 @@
   --plasmic-mixin-buttons_white-space: var(--mixin-pO1WIMDIdw_g_white-space);
   --mixin-sa71uyMn4xoy_white-space: pre-wrap;
   --plasmic-mixin-icons_white-space: var(--mixin-sa71uyMn4xoy_white-space);
+  --mixin-JI_GXnZKYu6c_white-space: pre-wrap;
+  --plasmic-mixin-text-input_white-space: var(--mixin-JI_GXnZKYu6c_white-space);
 }
 
 :where(.all) {

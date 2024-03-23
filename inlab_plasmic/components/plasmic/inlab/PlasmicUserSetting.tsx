@@ -273,26 +273,12 @@ function PlasmicUserSetting__RenderFunc(props: {
                 >
                   <React.Fragment>
                     {(() => {
-                      try {
-                        return (() => {
-                          const output =
-                            $ctx.inlab_user &&
-                            $ctx.inlab_user?.user?.first_name +
-                              " " +
-                              $ctx.inlab_user?.user?.last_name;
-                          return output !== null
-                            ? output
-                            : "نام و نام خانوادگی";
-                        })();
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc";
-                        }
-                        throw e;
-                      }
+                      const output =
+                        $ctx.inlab_user &&
+                        $ctx.inlab_user?.user?.first_name +
+                          " " +
+                          $ctx.inlab_user?.user?.last_name;
+                      return output !== null ? output : "نام و نام خانوادگی";
                     })()}
                   </React.Fragment>
                 </div>
@@ -874,7 +860,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                       style={{ color: "var(--token-jgohepLVeKvh)" }}
                     >
                       {
-                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f..."
+                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
                       }
                     </span>
                   </React.Fragment>
