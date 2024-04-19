@@ -59,6 +59,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
@@ -74,14 +75,21 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3wItkax/css
 
-import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
 
-export type PlasmicLaboratoryData__VariantMembers = {};
-export type PlasmicLaboratoryData__VariantsArgs = {};
+export type PlasmicLaboratoryData__VariantMembers = {
+  viewNormalRange: "viewNormalRange";
+};
+export type PlasmicLaboratoryData__VariantsArgs = {
+  viewNormalRange?: SingleBooleanChoiceArg<"viewNormalRange">;
+};
 type VariantPropType = keyof PlasmicLaboratoryData__VariantsArgs;
-export const PlasmicLaboratoryData__VariantProps = new Array<VariantPropType>();
+export const PlasmicLaboratoryData__VariantProps = new Array<VariantPropType>(
+  "viewNormalRange"
+);
 
 export type PlasmicLaboratoryData__ArgsType = {};
 type ArgPropType = keyof PlasmicLaboratoryData__ArgsType;
@@ -90,18 +98,22 @@ export const PlasmicLaboratoryData__ArgProps = new Array<ArgPropType>();
 export type PlasmicLaboratoryData__OverridesType = {
   laboratoryData?: Flex__<"div">;
   header?: Flex__<"div">;
-  svg?: Flex__<"svg">;
+  patientNameage?: Flex__<"div">;
+  normalRangeButton?: Flex__<typeof Button>;
   labData?: Flex__<typeof ApiFetcherComponent>;
   laboratoryLists?: Flex__<"div">;
   laboratoryTitle?: Flex__<"div">;
   laboratoryResultsPerTitle?: Flex__<"div">;
   labPerDate?: Flex__<"div">;
-  dateOfReport?: Flex__<"div">;
+  reportDatetime?: Flex__<"div">;
+  issuedDatetime?: Flex__<"div">;
   labLists?: Flex__<"div">;
   factorNamevalue?: Flex__<"div">;
   factorNamevalue2?: Flex__<"div">;
   factorName?: Flex__<"div">;
-  factorValue?: Flex__<"div">;
+  normalFactorValue?: Flex__<"div">;
+  abnormalFactorValue?: Flex__<"div">;
+  normalRanged?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
@@ -144,6 +156,30 @@ function PlasmicLaboratoryData__RenderFunc(props: {
 
   const currentUser = useCurrentUser?.() || {};
 
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "viewNormalRange",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.viewNormalRange
+      },
+      {
+        path: "normalRangeButton.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsjEqVmdAbnKYc()
   });
@@ -171,7 +207,14 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           projectcss.plasmic_tokens,
           plasmic_antd_5_hostless_css.plasmic_tokens,
           plasmic_plasmic_rich_components_css.plasmic_tokens,
-          sty.laboratoryData
+          sty.laboratoryData,
+          {
+            [sty.laboratoryDataviewNormalRange]: hasVariant(
+              $state,
+              "viewNormalRange",
+              "viewNormalRange"
+            )
+          }
         )}
       >
         <div
@@ -179,43 +222,76 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
-          {false ? (
-            <ArrowLeftIcon
-              data-plasmic-name={"svg"}
-              data-plasmic-override={overrides.svg}
-              className={classNames(projectcss.all, sty.svg)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["goToHomepage"] = true
-                  ? (() => {
-                      const actionArgs = { destination: `/patients` };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToHomepage"] != null &&
-                  typeof $steps["goToHomepage"] === "object" &&
-                  typeof $steps["goToHomepage"].then === "function"
-                ) {
-                  $steps["goToHomepage"] = await $steps["goToHomepage"];
-                }
-              }}
-              role={"img"}
-            />
-          ) : null}
+          <div
+            data-plasmic-name={"patientNameage"}
+            data-plasmic-override={overrides.patientNameage}
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.patientNameage
+            )}
+          >
+            {"Enter some text"}
+          </div>
         </div>
+        <Button
+          data-plasmic-name={"normalRangeButton"}
+          data-plasmic-override={overrides.normalRangeButton}
+          className={classNames("__wab_instance", sty.normalRangeButton)}
+          color={"blue"}
+          isDisabled={generateStateValueProp($state, [
+            "normalRangeButton",
+            "isDisabled"
+          ])}
+          onClick={async event => {
+            const $steps = {};
+
+            $steps["updateViewNormalRange"] = true
+              ? (() => {
+                  const actionArgs = {
+                    vgroup: "viewNormalRange",
+                    operation: 2,
+                    value: "viewNormalRange"
+                  };
+                  return (({ vgroup, value }) => {
+                    if (typeof value === "string") {
+                      value = [value];
+                    }
+
+                    const oldValue = $stateGet($state, vgroup);
+                    $stateSet($state, vgroup, !oldValue);
+                    return !oldValue;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["updateViewNormalRange"] != null &&
+              typeof $steps["updateViewNormalRange"] === "object" &&
+              typeof $steps["updateViewNormalRange"].then === "function"
+            ) {
+              $steps["updateViewNormalRange"] = await $steps[
+                "updateViewNormalRange"
+              ];
+            }
+          }}
+          onIsDisabledChange={(...eventArgs) => {
+            generateStateOnChangeProp($state, [
+              "normalRangeButton",
+              "isDisabled"
+            ])(eventArgs[0]);
+          }}
+          shape={"rounded"}
+        >
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text___4D8Ob
+            )}
+          >
+            {"Normal Ranges"}
+          </div>
+        </Button>
         <ApiFetcherComponent
           data-plasmic-name={"labData"}
           data-plasmic-override={overrides.labData}
@@ -349,55 +425,129 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               hasGap={true}
                               className={classNames(
                                 projectcss.all,
-                                sty.labPerDate
+                                sty.labPerDate,
+                                {
+                                  [sty.labPerDateviewNormalRange]: hasVariant(
+                                    $state,
+                                    "viewNormalRange",
+                                    "viewNormalRange"
+                                  )
+                                }
                               )}
                               key={currentIndex}
                             >
-                              <div
-                                data-plasmic-name={"dateOfReport"}
-                                data-plasmic-override={overrides.dateOfReport}
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.dateOfReport
-                                )}
-                              >
-                                <React.Fragment>
-                                  {(() => {
-                                    try {
-                                      return (() => {
-                                        const gregorianDate = new Date(
-                                          currentItem.report_datetime
+                              {currentItem.report_datetime !== null ? (
+                                <div
+                                  data-plasmic-name={"reportDatetime"}
+                                  data-plasmic-override={
+                                    overrides.reportDatetime
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.reportDatetime
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      const gregorianDate = new Date(
+                                        currentItem.report_datetime
+                                      );
+                                      const shamsiDate =
+                                        new Intl.DateTimeFormat("fa-IR").format(
+                                          gregorianDate
                                         );
-                                        const shamsiDate =
-                                          new Intl.DateTimeFormat(
-                                            "fa-IR"
-                                          ).format(gregorianDate);
-                                        const englishNumbers =
-                                          shamsiDate.replace(
-                                            /[\u0660-\u0669]/g,
-                                            c =>
-                                              String.fromCharCode(
-                                                c.charCodeAt(0) -
-                                                  0x0660 +
-                                                  0x0030
-                                              )
+                                      const shamsiTime =
+                                        gregorianDate.toLocaleTimeString(
+                                          "fa-IR",
+                                          { hour12: false }
+                                        );
+                                      const englishDate = shamsiDate.replace(
+                                        /[۰-۹]/g,
+                                        d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                      );
+
+                                      // Extracting only the hour and minutes from shamsiTime
+                                      const englishTime = shamsiTime
+                                        .split(":")
+                                        .slice(0, 2)
+                                        .join(":")
+                                        .replace(/[۰-۹]/g, d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                        );
+
+                                      return `${englishDate}  ${englishTime}`;
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                              ) : null}
+                              {currentItem.report_datetime == null ? (
+                                <div
+                                  data-plasmic-name={"issuedDatetime"}
+                                  data-plasmic-override={
+                                    overrides.issuedDatetime
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.issuedDatetime
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      try {
+                                        return (() => {
+                                          const gregorianDate = new Date(
+                                            currentItem.issued_datetime
                                           );
-                                        return englishNumbers;
-                                      })();
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return "";
+                                          const shamsiDate =
+                                            new Intl.DateTimeFormat(
+                                              "fa-IR"
+                                            ).format(gregorianDate);
+                                          const shamsiTime =
+                                            gregorianDate.toLocaleTimeString(
+                                              "fa-IR",
+                                              { hour12: false }
+                                            );
+                                          const englishDate =
+                                            shamsiDate.replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
+
+                                          // Extracting only the hour and minutes from shamsiTime
+                                          const englishTime = shamsiTime
+                                            .split(":")
+                                            .slice(0, 2)
+                                            .join(":")
+                                            .replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
+
+                                          return `${englishDate}  ${englishTime}`;
+                                        })();
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return "";
+                                        }
+                                        throw e;
                                       }
-                                      throw e;
-                                    }
-                                  })()}
-                                </React.Fragment>
-                              </div>
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                              ) : null}
                               {(_par =>
                                 !_par
                                   ? []
@@ -429,7 +579,15 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     hasGap={true}
                                     className={classNames(
                                       projectcss.all,
-                                      sty.labLists
+                                      sty.labLists,
+                                      {
+                                        [sty.labListsviewNormalRange]:
+                                          hasVariant(
+                                            $state,
+                                            "viewNormalRange",
+                                            "viewNormalRange"
+                                          )
+                                      }
                                     )}
                                     key={currentIndex}
                                   >
@@ -442,7 +600,15 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                       hasGap={true}
                                       className={classNames(
                                         projectcss.all,
-                                        sty.factorNamevalue
+                                        sty.factorNamevalue,
+                                        {
+                                          [sty.factorNamevalueviewNormalRange]:
+                                            hasVariant(
+                                              $state,
+                                              "viewNormalRange",
+                                              "viewNormalRange"
+                                            )
+                                        }
                                       )}
                                     >
                                       <Stack__
@@ -476,23 +642,69 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                             )}
                                           </React.Fragment>
                                         </div>
-                                        <div
-                                          data-plasmic-name={"factorValue"}
-                                          data-plasmic-override={
-                                            overrides.factorValue
-                                          }
-                                          className={classNames(
-                                            projectcss.all,
-                                            projectcss.__wab_text,
-                                            sty.factorValue
-                                          )}
-                                        >
-                                          <React.Fragment>
-                                            {currentItem.value}
-                                          </React.Fragment>
-                                        </div>
+                                        {currentItem.abnormal == false ? (
+                                          <div
+                                            data-plasmic-name={
+                                              "normalFactorValue"
+                                            }
+                                            data-plasmic-override={
+                                              overrides.normalFactorValue
+                                            }
+                                            className={classNames(
+                                              projectcss.all,
+                                              projectcss.__wab_text,
+                                              sty.normalFactorValue
+                                            )}
+                                          >
+                                            <React.Fragment>
+                                              {currentItem.value}
+                                            </React.Fragment>
+                                          </div>
+                                        ) : null}
+                                        {currentItem.abnormal == true ? (
+                                          <div
+                                            data-plasmic-name={
+                                              "abnormalFactorValue"
+                                            }
+                                            data-plasmic-override={
+                                              overrides.abnormalFactorValue
+                                            }
+                                            className={classNames(
+                                              projectcss.all,
+                                              projectcss.__wab_text,
+                                              sty.abnormalFactorValue
+                                            )}
+                                          >
+                                            <React.Fragment>
+                                              {currentItem.value}
+                                            </React.Fragment>
+                                          </div>
+                                        ) : null}
                                       </Stack__>
                                     </Stack__>
+                                    <div
+                                      data-plasmic-name={"normalRanged"}
+                                      data-plasmic-override={
+                                        overrides.normalRanged
+                                      }
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.normalRanged,
+                                        {
+                                          [sty.normalRangedviewNormalRange]:
+                                            hasVariant(
+                                              $state,
+                                              "viewNormalRange",
+                                              "viewNormalRange"
+                                            )
+                                        }
+                                      )}
+                                    >
+                                      <React.Fragment>
+                                        {currentItem.normal_range}
+                                      </React.Fragment>
+                                    </div>
                                   </Stack__>
                                 );
                               })}
@@ -563,88 +775,116 @@ const PlasmicDescendants = {
   laboratoryData: [
     "laboratoryData",
     "header",
-    "svg",
+    "patientNameage",
+    "normalRangeButton",
     "labData",
     "laboratoryLists",
     "laboratoryTitle",
     "laboratoryResultsPerTitle",
     "labPerDate",
-    "dateOfReport",
+    "reportDatetime",
+    "issuedDatetime",
     "labLists",
     "factorNamevalue",
     "factorNamevalue2",
     "factorName",
-    "factorValue",
+    "normalFactorValue",
+    "abnormalFactorValue",
+    "normalRanged",
     "switchingTabs",
     "switchingTab",
     "redirectToLoginPage",
     "redirectToNamespaceSelection",
     "onloadUserPatientInteractionCount"
   ],
-  header: ["header", "svg"],
-  svg: ["svg"],
+  header: ["header", "patientNameage"],
+  patientNameage: ["patientNameage"],
+  normalRangeButton: ["normalRangeButton"],
   labData: [
     "labData",
     "laboratoryLists",
     "laboratoryTitle",
     "laboratoryResultsPerTitle",
     "labPerDate",
-    "dateOfReport",
+    "reportDatetime",
+    "issuedDatetime",
     "labLists",
     "factorNamevalue",
     "factorNamevalue2",
     "factorName",
-    "factorValue"
+    "normalFactorValue",
+    "abnormalFactorValue",
+    "normalRanged"
   ],
   laboratoryLists: [
     "laboratoryLists",
     "laboratoryTitle",
     "laboratoryResultsPerTitle",
     "labPerDate",
-    "dateOfReport",
+    "reportDatetime",
+    "issuedDatetime",
     "labLists",
     "factorNamevalue",
     "factorNamevalue2",
     "factorName",
-    "factorValue"
+    "normalFactorValue",
+    "abnormalFactorValue",
+    "normalRanged"
   ],
   laboratoryTitle: ["laboratoryTitle"],
   laboratoryResultsPerTitle: [
     "laboratoryResultsPerTitle",
     "labPerDate",
-    "dateOfReport",
+    "reportDatetime",
+    "issuedDatetime",
     "labLists",
     "factorNamevalue",
     "factorNamevalue2",
     "factorName",
-    "factorValue"
+    "normalFactorValue",
+    "abnormalFactorValue",
+    "normalRanged"
   ],
   labPerDate: [
     "labPerDate",
-    "dateOfReport",
+    "reportDatetime",
+    "issuedDatetime",
     "labLists",
     "factorNamevalue",
     "factorNamevalue2",
     "factorName",
-    "factorValue"
+    "normalFactorValue",
+    "abnormalFactorValue",
+    "normalRanged"
   ],
-  dateOfReport: ["dateOfReport"],
+  reportDatetime: ["reportDatetime"],
+  issuedDatetime: ["issuedDatetime"],
   labLists: [
     "labLists",
     "factorNamevalue",
     "factorNamevalue2",
     "factorName",
-    "factorValue"
+    "normalFactorValue",
+    "abnormalFactorValue",
+    "normalRanged"
   ],
   factorNamevalue: [
     "factorNamevalue",
     "factorNamevalue2",
     "factorName",
-    "factorValue"
+    "normalFactorValue",
+    "abnormalFactorValue"
   ],
-  factorNamevalue2: ["factorNamevalue2", "factorName", "factorValue"],
+  factorNamevalue2: [
+    "factorNamevalue2",
+    "factorName",
+    "normalFactorValue",
+    "abnormalFactorValue"
+  ],
   factorName: ["factorName"],
-  factorValue: ["factorValue"],
+  normalFactorValue: ["normalFactorValue"],
+  abnormalFactorValue: ["abnormalFactorValue"],
+  normalRanged: ["normalRanged"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"],
   redirectToLoginPage: ["redirectToLoginPage"],
@@ -657,18 +897,22 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   laboratoryData: "div";
   header: "div";
-  svg: "svg";
+  patientNameage: "div";
+  normalRangeButton: typeof Button;
   labData: typeof ApiFetcherComponent;
   laboratoryLists: "div";
   laboratoryTitle: "div";
   laboratoryResultsPerTitle: "div";
   labPerDate: "div";
-  dateOfReport: "div";
+  reportDatetime: "div";
+  issuedDatetime: "div";
   labLists: "div";
   factorNamevalue: "div";
   factorNamevalue2: "div";
   factorName: "div";
-  factorValue: "div";
+  normalFactorValue: "div";
+  abnormalFactorValue: "div";
+  normalRanged: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   redirectToLoginPage: typeof RedirectToLoginPage;
@@ -737,18 +981,22 @@ export const PlasmicLaboratoryData = Object.assign(
   {
     // Helper components rendering sub-elements
     header: makeNodeComponent("header"),
-    svg: makeNodeComponent("svg"),
+    patientNameage: makeNodeComponent("patientNameage"),
+    normalRangeButton: makeNodeComponent("normalRangeButton"),
     labData: makeNodeComponent("labData"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     laboratoryTitle: makeNodeComponent("laboratoryTitle"),
     laboratoryResultsPerTitle: makeNodeComponent("laboratoryResultsPerTitle"),
     labPerDate: makeNodeComponent("labPerDate"),
-    dateOfReport: makeNodeComponent("dateOfReport"),
+    reportDatetime: makeNodeComponent("reportDatetime"),
+    issuedDatetime: makeNodeComponent("issuedDatetime"),
     labLists: makeNodeComponent("labLists"),
     factorNamevalue: makeNodeComponent("factorNamevalue"),
     factorNamevalue2: makeNodeComponent("factorNamevalue2"),
     factorName: makeNodeComponent("factorName"),
-    factorValue: makeNodeComponent("factorValue"),
+    normalFactorValue: makeNodeComponent("normalFactorValue"),
+    abnormalFactorValue: makeNodeComponent("abnormalFactorValue"),
+    normalRanged: makeNodeComponent("normalRanged"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),

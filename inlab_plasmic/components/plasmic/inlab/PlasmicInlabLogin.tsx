@@ -83,13 +83,16 @@ createPlasmicElementProxy;
 
 export type PlasmicInlabLogin__VariantMembers = {
   disabledLoginButton: "disabledLoginButton";
+  wrongUser: "wrongUser";
 };
 export type PlasmicInlabLogin__VariantsArgs = {
   disabledLoginButton?: SingleBooleanChoiceArg<"disabledLoginButton">;
+  wrongUser?: SingleBooleanChoiceArg<"wrongUser">;
 };
 type VariantPropType = keyof PlasmicInlabLogin__VariantsArgs;
 export const PlasmicInlabLogin__VariantProps = new Array<VariantPropType>(
-  "disabledLoginButton"
+  "disabledLoginButton",
+  "wrongUser"
 );
 
 export type PlasmicInlabLogin__ArgsType = {};
@@ -179,6 +182,12 @@ function PlasmicInlabLogin__RenderFunc(props: {
           hasVariant($state, "disabledLoginButton", "disabledLoginButton")
             ? "isDisabled"
             : undefined
+      },
+      {
+        path: "wrongUser",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.wrongUser
       }
     ],
     [$props, $ctx, $refs]
@@ -223,6 +232,11 @@ function PlasmicInlabLogin__RenderFunc(props: {
               $state,
               "disabledLoginButton",
               "disabledLoginButton"
+            ),
+            [sty.inlabLoginwrongUser]: hasVariant(
+              $state,
+              "wrongUser",
+              "wrongUser"
             )
           }
         )}
@@ -413,6 +427,11 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 $state,
                 "disabledLoginButton",
                 "disabledLoginButton"
+              ),
+              [sty.loginButtonwrongUser]: hasVariant(
+                $state,
+                "wrongUser",
+                "wrongUser"
               )
             })}
             color={"blue"}
@@ -528,15 +547,15 @@ function PlasmicInlabLogin__RenderFunc(props: {
               $steps["wrongUser"] =
                 $steps.loginAction.status !== 200
                   ? (() => {
-                      const actionArgs = {
-                        args: [
-                          "error",
-                          "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0646\u0627\u0645\u0639\u062a\u0628\u0631 \u0627\u0633\u062a"
-                        ]
-                      };
-                      return $globalActions[
-                        "plasmic-antd5-config-provider.showNotification"
-                      ]?.apply(null, [...actionArgs.args]);
+                      const actionArgs = { vgroup: "wrongUser", operation: 4 };
+                      return (({ vgroup, value }) => {
+                        if (typeof value === "string") {
+                          value = [value];
+                        }
+
+                        $stateSet($state, vgroup, true);
+                        return true;
+                      })?.apply(null, [actionArgs]);
                     })()
                   : undefined;
               if (
@@ -615,13 +634,16 @@ function PlasmicInlabLogin__RenderFunc(props: {
               "resetPassword",
               "isDisabled"
             ])}
-            link={""}
+            link={
+              "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
+            }
             onIsDisabledChange={(...eventArgs) => {
               generateStateOnChangeProp($state, [
                 "resetPassword",
                 "isDisabled"
               ])(eventArgs[0]);
             }}
+            target={true}
           >
             <div
               className={classNames(
@@ -686,6 +708,25 @@ function PlasmicInlabLogin__RenderFunc(props: {
             sty.redirectInlabLoginToHomepage
           )}
         />
+
+        <div
+          className={classNames(
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text__tp4Ll,
+            {
+              [sty.textwrongUser__tp4LlaawZh]: hasVariant(
+                $state,
+                "wrongUser",
+                "wrongUser"
+              )
+            }
+          )}
+        >
+          {
+            "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0648\u0627\u0631\u062f \u0634\u062f\u0647 \u0646\u0627\u0645\u0639\u062a\u0628\u0631 \u0627\u0633\u062a"
+          }
+        </div>
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;

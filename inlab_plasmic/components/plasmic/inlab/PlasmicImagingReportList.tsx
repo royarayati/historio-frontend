@@ -96,7 +96,9 @@ export type PlasmicImagingReportList__OverridesType = {
   header?: Flex__<"div">;
   svg?: Flex__<"svg">;
   imagingReport?: Flex__<typeof ApiFetcherComponent>;
-  viewPacsButton?: Flex__<typeof Button>;
+  viewPacsButtons?: Flex__<"div">;
+  activeViewPacsButton?: Flex__<typeof Button>;
+  deactivePacsButton?: Flex__<"div">;
   imagingReportList2?: Flex__<"div">;
   imagingReportCard?: Flex__<"div">;
   imagingTitledatetime?: Flex__<"div">;
@@ -148,7 +150,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "viewPacsButton.isDisabled",
+        path: "activeViewPacsButton.isDisabled",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -286,80 +288,111 @@ function PlasmicImagingReportList__RenderFunc(props: {
           <DataCtxReader__>
             {$ctx => (
               <React.Fragment>
-                <Button
-                  data-plasmic-name={"viewPacsButton"}
-                  data-plasmic-override={overrides.viewPacsButton}
-                  className={classNames("__wab_instance", sty.viewPacsButton)}
-                  isDisabled={generateStateValueProp($state, [
-                    "viewPacsButton",
-                    "isDisabled"
-                  ])}
-                  onClick={async event => {
-                    const $steps = {};
-
-                    $steps["goToPage"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            destination: (() => {
-                              try {
-                                return $ctx.fetched_data.data.pacs_url;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
-                                }
-                                throw e;
-                              }
-                            })()
-                          };
-                          return (({ destination }) => {
-                            if (
-                              typeof destination === "string" &&
-                              destination.startsWith("#")
-                            ) {
-                              document
-                                .getElementById(destination.substr(1))
-                                .scrollIntoView({ behavior: "smooth" });
-                            } else {
-                              __nextRouter?.push(destination);
-                            }
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["goToPage"] != null &&
-                      typeof $steps["goToPage"] === "object" &&
-                      typeof $steps["goToPage"].then === "function"
-                    ) {
-                      $steps["goToPage"] = await $steps["goToPage"];
-                    }
-                  }}
-                  onIsDisabledChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "viewPacsButton",
-                      "isDisabled"
-                    ])(eventArgs[0]);
-                  }}
+                <Stack__
+                  as={"div"}
+                  data-plasmic-name={"viewPacsButtons"}
+                  data-plasmic-override={overrides.viewPacsButtons}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.viewPacsButtons)}
                 >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__rsAXu
-                    )}
-                  >
-                    <React.Fragment>
-                      <span
-                        className={"plasmic_default__all plasmic_default__span"}
-                        style={{ color: "#FFFFFF" }}
+                  {$ctx.fetched_data.loading == false &&
+                  $ctx.fetched_data.data.pacs_url !== null ? (
+                    <Button
+                      data-plasmic-name={"activeViewPacsButton"}
+                      data-plasmic-override={overrides.activeViewPacsButton}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.activeViewPacsButton
+                      )}
+                      isDisabled={generateStateValueProp($state, [
+                        "activeViewPacsButton",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["goToPage"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                destination: (() => {
+                                  try {
+                                    return $ctx.fetched_data.data.pacs_url;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()
+                              };
+                              return (({ destination }) => {
+                                if (
+                                  typeof destination === "string" &&
+                                  destination.startsWith("#")
+                                ) {
+                                  document
+                                    .getElementById(destination.substr(1))
+                                    .scrollIntoView({ behavior: "smooth" });
+                                } else {
+                                  __nextRouter?.push(destination);
+                                }
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["goToPage"] != null &&
+                          typeof $steps["goToPage"] === "object" &&
+                          typeof $steps["goToPage"].then === "function"
+                        ) {
+                          $steps["goToPage"] = await $steps["goToPage"];
+                        }
+                      }}
+                      onIsDisabledChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "activeViewPacsButton",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__ad5Pb
+                        )}
                       >
-                        {"View PACS"}
-                      </span>
-                    </React.Fragment>
-                  </div>
-                </Button>
+                        <React.Fragment>
+                          <span
+                            className={
+                              "plasmic_default__all plasmic_default__span"
+                            }
+                            style={{ color: "#FFFFFF" }}
+                          >
+                            {"View PACS"}
+                          </span>
+                        </React.Fragment>
+                      </div>
+                    </Button>
+                  ) : null}
+                  {$ctx.fetched_data.loading == false &&
+                  $ctx.fetched_data.data.pacs_url == null ? (
+                    <div
+                      data-plasmic-name={"deactivePacsButton"}
+                      data-plasmic-override={overrides.deactivePacsButton}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.deactivePacsButton
+                      )}
+                    >
+                      {"View PACS"}
+                    </div>
+                  ) : null}
+                </Stack__>
                 {$ctx.fetched_data.loading === true ? (
                   <div
                     className={classNames(
@@ -373,8 +406,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     }
                   </div>
                 ) : null}
-                {$ctx.fetched_data.loading === false &&
-                $ctx.fetched_data.data.radiology_services == 0 ? (
+                {$ctx.fetched_data.loading == false &&
+                $ctx.fetched_data.data.radiology_services == "" ? (
                   <div
                     className={classNames(
                       projectcss.all,
@@ -635,7 +668,9 @@ const PlasmicDescendants = {
     "header",
     "svg",
     "imagingReport",
-    "viewPacsButton",
+    "viewPacsButtons",
+    "activeViewPacsButton",
+    "deactivePacsButton",
     "imagingReportList2",
     "imagingReportCard",
     "imagingTitledatetime",
@@ -652,7 +687,9 @@ const PlasmicDescendants = {
   svg: ["svg"],
   imagingReport: [
     "imagingReport",
-    "viewPacsButton",
+    "viewPacsButtons",
+    "activeViewPacsButton",
+    "deactivePacsButton",
     "imagingReportList2",
     "imagingReportCard",
     "imagingTitledatetime",
@@ -660,7 +697,13 @@ const PlasmicDescendants = {
     "imagingDatetime",
     "imagingType"
   ],
-  viewPacsButton: ["viewPacsButton"],
+  viewPacsButtons: [
+    "viewPacsButtons",
+    "activeViewPacsButton",
+    "deactivePacsButton"
+  ],
+  activeViewPacsButton: ["activeViewPacsButton"],
+  deactivePacsButton: ["deactivePacsButton"],
   imagingReportList2: [
     "imagingReportList2",
     "imagingReportCard",
@@ -698,7 +741,9 @@ type NodeDefaultElementType = {
   header: "div";
   svg: "svg";
   imagingReport: typeof ApiFetcherComponent;
-  viewPacsButton: typeof Button;
+  viewPacsButtons: "div";
+  activeViewPacsButton: typeof Button;
+  deactivePacsButton: "div";
   imagingReportList2: "div";
   imagingReportCard: "div";
   imagingTitledatetime: "div";
@@ -775,7 +820,9 @@ export const PlasmicImagingReportList = Object.assign(
     header: makeNodeComponent("header"),
     svg: makeNodeComponent("svg"),
     imagingReport: makeNodeComponent("imagingReport"),
-    viewPacsButton: makeNodeComponent("viewPacsButton"),
+    viewPacsButtons: makeNodeComponent("viewPacsButtons"),
+    activeViewPacsButton: makeNodeComponent("activeViewPacsButton"),
+    deactivePacsButton: makeNodeComponent("deactivePacsButton"),
     imagingReportList2: makeNodeComponent("imagingReportList2"),
     imagingReportCard: makeNodeComponent("imagingReportCard"),
     imagingTitledatetime: makeNodeComponent("imagingTitledatetime"),

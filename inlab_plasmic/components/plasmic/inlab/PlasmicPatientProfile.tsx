@@ -270,19 +270,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
-                  {(() => {
-                    try {
-                      return $ctx.fetched_data.loading == true;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return false;
-                      }
-                      throw e;
-                    }
-                  })() ? (
+                  {$ctx.fetched_data.loading == true ? (
                     <div
                       className={classNames(
                         projectcss.all,
@@ -646,7 +634,7 @@ ${ageYears} ${
                               try {
                                 return (
                                   $ctx.fetched_data.data.room +
-                                  " " +
+                                  " - " +
                                   $ctx.fetched_data.data.bed
                                 );
                               } catch (e) {

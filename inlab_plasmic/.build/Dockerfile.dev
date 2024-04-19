@@ -1,0 +1,20 @@
+FROM node:20-slim
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends curl git nano supervisor \
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir /app \
+  && chown node:node /app
+
+COPY .build/supervisord.conf /etc/supervisord.conf
+
+WORKDIR /app
+
+USER node
+
+EXPOSE 3000
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+
+entrypoint ["./.build/entrypoint.sh"]
+CMD ["supervisord"]

@@ -62,7 +62,7 @@
   display: none;
 }
 .patientProfile:global(.__wab_instance) {
-  max-width: 85%;
+  max-width: 100%;
   object-fit: cover;
   position: relative;
   width: 100%;

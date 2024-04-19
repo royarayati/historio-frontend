@@ -38,7 +38,7 @@ function RedirectRootPageToHomepage(props: RedirectRootPageToHomepageProps) {
   // By default, we are just piping all RedirectRootPageToHomepageProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectRootPageToHomepage  />;
+  return <PlasmicRedirectRootPageToHomepage />;
 }
 
 export default RedirectRootPageToHomepage;

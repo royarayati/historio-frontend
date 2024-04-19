@@ -38,6 +38,9 @@
     grid-column: 4;
   }
 }
+.inlabLoginwrongUser > * {
+  grid-column: 4;
+}
 .pageContent {
   display: flex;
   position: relative;
@@ -76,13 +79,11 @@
 }
 .username:global(.__wab_instance) {
   position: relative;
-  width: 100%;
-  max-width: 30%;
-  min-width: 0;
+  width: 250px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .username:global(.__wab_instance) {
-    max-width: 70%;
+    width: 200px;
   }
 }
 .svg__falId {
@@ -100,14 +101,12 @@
   color: var(--token-9iYGdL7i3GKE);
 }
 .password:global(.__wab_instance) {
-  max-width: 30%;
   position: relative;
-  width: 100%;
-  min-width: 0;
+  width: 250px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .password:global(.__wab_instance) {
-    max-width: 70%;
+    width: 200px;
   }
 }
 .svg__fnFNb {
@@ -140,6 +139,8 @@
 }
 .text__gSrrw {
   white-space: pre-wrap;
+  padding-left: 0px;
+  margin-left: 0px;
 }
 .svg__r5Um {
   position: relative;
@@ -148,12 +149,18 @@
   height: 1em;
 }
 .resetPassword:global(.__wab_instance) {
-  max-width: 70%;
+  max-width: 300px;
   position: relative;
   height: auto;
   width: 100%;
-  margin-right: 0px;
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .resetPassword:global(.__wab_instance) {
+    max-width: 53.14%;
+    width: 100%;
+    min-width: 0;
+  }
 }
 .svg__dg3Oe {
   position: relative;
@@ -181,4 +188,28 @@
 }
 .redirectInlabLoginToHomepage:global(.__wab_instance):global(.__wab_instance) {
   position: relative;
+}
+.text__tp4Ll {
+  position: fixed;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: 120px;
+  z-index: 1;
+  background: #ffffff;
+  font-size: 18px;
+  box-shadow: 0px 0px 10px 0px var(--token-IYO13gyYJHXG);
+  right: 50px;
+  justify-self: flex-start;
+  color: var(--token-IYO13gyYJHXG);
+  font-weight: 700;
+  flex-grow: 1;
+  display: none;
+  border-radius: 5px;
+  padding: 12px;
+  border: 0.5px solid var(--token-pRs3-4jrQ4XQ);
+}
+.textwrongUser__tp4LlaawZh {
+  display: block;
 }
