@@ -448,7 +448,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       )}
                     >
                       {
-                        "\u0628\u06cc\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0633\u0631\u0686 \u06a9\u0646\u06cc\u062f\n\u0628\u0631 \u0631\u0648\u06cc\u2b50(\u0633\u062a\u0627\u0631\u0647) \u0628\u0632\u0646\u06cc\u062f\n\u0628\u064a\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \u0627\u064a\u0646 \u0635\u0641\u062d\u0647 \u0627\u0636\u0627\u0641\u0647 \u064a\u0627 \u0627\u0632 \u0622\u0646 \u062d\u0630\u0641 \u06a9\u0646\u064a\u062f"
+                        "\u062f\u0631 \u06a9\u0627\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0628\u0631 \u0631\u0648\u06cc\u2b50(\u0633\u062a\u0627\u0631\u0647) \u0628\u0632\u0646\u06cc\u062f\n\u0628\u064a\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \u0635\u0641\u062d\u0647 \u0627\u0636\u0627\u0641\u0647 \u064a\u0627 \u062d\u0630\u0641 \u06a9\u0646\u064a\u062f"
                       }
                     </div>
                   ) : null}
@@ -658,22 +658,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )}
                               >
                                 <React.Fragment>
-                                  {(() => {
-                                    try {
-                                      return (
-                                        currentItem.room + " " + currentItem.bed
-                                      );
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return "";
-                                      }
-                                      throw e;
-                                    }
-                                  })()}
+                                  {currentItem.room + "-" + currentItem.bed}
                                 </React.Fragment>
                               </div>
                               <div

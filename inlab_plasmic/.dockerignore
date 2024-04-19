@@ -50,5 +50,5 @@ Thumbs.db
 
 # docker files
 .dockerignore
-Dockerfile
+./.build/Dockerfile*
 docker-compose.yml

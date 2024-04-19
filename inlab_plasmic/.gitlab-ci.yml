@@ -7,6 +7,6 @@ inlab_plasmic:
   script:
     - docker build
       -t "${CI_REGISTRY_IMAGE}/inlab_plasmic:${CI_COMMIT_BRANCH}"
-      -f Dockerfile .
+      -f ./.build/Dockerfile .
 
     - docker push "${CI_REGISTRY_IMAGE}/inlab_plasmic:${CI_COMMIT_BRANCH}"

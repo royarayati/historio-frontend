@@ -95,6 +95,7 @@ export type PlasmicImagingReportDatail__OverridesType = {
   reportDetail?: Flex__<typeof ApiFetcherComponent>;
   imagingReportList?: Flex__<"div">;
   imagingReportCard?: Flex__<"div">;
+  imagingReportDate?: Flex__<"div">;
   imagingReport?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
@@ -318,14 +319,51 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                       key={currentIndex}
                     >
                       {currentItem.id == $ctx.params.reportID ? (
-                        <div
+                        <Stack__
+                          as={"div"}
                           data-plasmic-name={"imagingReportCard"}
                           data-plasmic-override={overrides.imagingReportCard}
+                          hasGap={true}
                           className={classNames(
                             projectcss.all,
                             sty.imagingReportCard
                           )}
                         >
+                          <div
+                            data-plasmic-name={"imagingReportDate"}
+                            data-plasmic-override={overrides.imagingReportDate}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.imagingReportDate
+                            )}
+                          >
+                            <React.Fragment>
+                              {(() => {
+                                const gregorianDate = new Date(
+                                  currentItem.service_datetime
+                                );
+                                const shamsiDate = new Intl.DateTimeFormat(
+                                  "fa-IR"
+                                ).format(gregorianDate);
+                                const shamsiTime =
+                                  gregorianDate.toLocaleTimeString("fa-IR", {
+                                    hour12: false
+                                  });
+                                const englishDate = shamsiDate.replace(
+                                  /[۰-۹]/g,
+                                  d =>
+                                    String.fromCharCode(d.charCodeAt(0) - 1728)
+                                );
+                                const englishTime = shamsiTime.replace(
+                                  /[۰-۹]/g,
+                                  d =>
+                                    String.fromCharCode(d.charCodeAt(0) - 1728)
+                                );
+                                return `${englishDate} - ${englishTime}`;
+                              })()}
+                            </React.Fragment>
+                          </div>
                           <div
                             data-plasmic-name={"imagingReport"}
                             data-plasmic-override={overrides.imagingReport}
@@ -339,7 +377,7 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                               {currentItem.report}
                             </React.Fragment>
                           </div>
-                        </div>
+                        </Stack__>
                       ) : null}
                     </Stack__>
                   );
@@ -387,6 +425,7 @@ const PlasmicDescendants = {
     "reportDetail",
     "imagingReportList",
     "imagingReportCard",
+    "imagingReportDate",
     "imagingReport",
     "switchingTabs",
     "switchingTab",
@@ -400,14 +439,21 @@ const PlasmicDescendants = {
     "reportDetail",
     "imagingReportList",
     "imagingReportCard",
+    "imagingReportDate",
     "imagingReport"
   ],
   imagingReportList: [
     "imagingReportList",
     "imagingReportCard",
+    "imagingReportDate",
     "imagingReport"
   ],
-  imagingReportCard: ["imagingReportCard", "imagingReport"],
+  imagingReportCard: [
+    "imagingReportCard",
+    "imagingReportDate",
+    "imagingReport"
+  ],
+  imagingReportDate: ["imagingReportDate"],
   imagingReport: ["imagingReport"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"],
@@ -425,6 +471,7 @@ type NodeDefaultElementType = {
   reportDetail: typeof ApiFetcherComponent;
   imagingReportList: "div";
   imagingReportCard: "div";
+  imagingReportDate: "div";
   imagingReport: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
@@ -498,6 +545,7 @@ export const PlasmicImagingReportDatail = Object.assign(
     reportDetail: makeNodeComponent("reportDetail"),
     imagingReportList: makeNodeComponent("imagingReportList"),
     imagingReportCard: makeNodeComponent("imagingReportCard"),
+    imagingReportDate: makeNodeComponent("imagingReportDate"),
     imagingReport: makeNodeComponent("imagingReport"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),

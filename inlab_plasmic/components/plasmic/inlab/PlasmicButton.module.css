@@ -1,33 +1,20 @@
 .root {
-  background: var(--token-9iYGdL7i3GKE);
-  width: auto;
-  height: 100%;
-  max-width: 100%;
   display: inline-flex;
   position: relative;
-  flex-direction: row;
   cursor: pointer;
+  width: auto;
   justify-self: flex-start;
+  height: 100%;
+  box-shadow: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  background: none;
   min-height: 0;
   border-radius: 5px;
   padding: 7px 10px;
-  border-width: 0px;
-}
-.root > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: center;
-  flex-wrap: nowrap;
-  align-content: stretch;
-  min-height: 0;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-}
-.root > :global(.__wab_flex-container) > *,
-.root > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.root > :global(.__wab_flex-container) > picture > img,
-.root > :global(.__wab_flex-container) > :global(.__wab_slot) > picture > img {
-  margin-left: 8px;
 }
 .rootisDisabled {
   cursor: not-allowed;
@@ -60,7 +47,8 @@
   background: #e54d2e;
 }
 .rootcolor_clear {
-  background: #ffffff00;
+  background: #e8ecf2;
+  border: 1px solid #e8ecf2;
 }
 .rootcolor_link {
   background: #ffffff00;
@@ -68,27 +56,25 @@
 .rootshape_round_size4_compact {
   padding: 6px;
 }
-.startIconContainer {
-  display: flex;
+.text___0K9Kh {
   position: relative;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  min-width: 0;
+  display: none;
 }
-.slotTargetStartIcon {
-  color: #ededec;
-}
-.slotTargetStartIconcolor_clear {
-  color: #1b1b18;
-}
-.slotTargetStartIconcolor_link {
-  color: #0091ff;
-}
-.svg__z81Hd {
+.text__cOxxN {
   position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  min-width: 0;
+  display: none;
 }
 .contentContainer {
   display: flex;
@@ -96,6 +82,8 @@
   flex-direction: row;
   align-items: stretch;
   justify-content: flex-start;
+  left: auto;
+  top: auto;
 }
 .slotTargetChildren {
   color: #ededec;
@@ -117,12 +105,42 @@
 .slotTargetChildrencolor_link {
   color: #0091ff;
 }
+.startIconContainer {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  left: auto;
+  top: auto;
+  bottom: auto;
+  right: auto;
+}
+.slotTargetStartIcon {
+  color: #ededec;
+}
+.slotTargetStartIconcolor_clear {
+  color: #1b1b18;
+}
+.slotTargetStartIconcolor_link {
+  color: #0091ff;
+}
+.svg__z81Hd {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
 .endIconContainer {
   display: flex;
   position: relative;
   flex-direction: row;
   align-items: stretch;
   justify-content: flex-start;
+  left: auto;
+  top: auto;
+  bottom: auto;
+  right: auto;
 }
 .slotTargetEndIcon {
   color: #ededec;
@@ -138,20 +156,4 @@
   object-fit: cover;
   width: auto;
   height: 1em;
-}
-.text___0K9Kh {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-  display: none;
-}
-.text__cOxxN {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-  display: none;
 }

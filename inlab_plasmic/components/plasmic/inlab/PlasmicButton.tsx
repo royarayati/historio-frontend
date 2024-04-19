@@ -117,8 +117,8 @@ export const PlasmicButton__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicButton__OverridesType = {
   root?: Flex__<"button">;
-  startIconContainer?: Flex__<"div">;
   contentContainer?: Flex__<"div">;
+  startIconContainer?: Flex__<"div">;
   endIconContainer?: Flex__<"div">;
 };
 
@@ -205,13 +205,11 @@ function PlasmicButton__RenderFunc(props: {
   });
 
   return (
-    <Stack__
-      as={"button"}
+    <button
       data-plasmic-name={"root"}
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      hasGap={true}
       className={classNames(
         projectcss.all,
         projectcss.button,
@@ -243,47 +241,24 @@ function PlasmicButton__RenderFunc(props: {
       )}
       disabled={hasVariant($state, "isDisabled", "isDisabled") ? false : false}
     >
-      {false ? (
-        <div
-          data-plasmic-name={"startIconContainer"}
-          data-plasmic-override={overrides.startIconContainer}
-          className={classNames(projectcss.all, sty.startIconContainer, {
-            [sty.startIconContainercolor_blue]: hasVariant(
-              $state,
-              "color",
-              "blue"
-            )
-          })}
-        >
-          {renderPlasmicSlot({
-            defaultContents: (
-              <ChecksvgIcon
-                className={classNames(projectcss.all, sty.svg__z81Hd)}
-                role={"img"}
-              />
-            ),
-
-            value: args.startIcon,
-            className: classNames(sty.slotTargetStartIcon, {
-              [sty.slotTargetStartIconcolor_blue]: hasVariant(
-                $state,
-                "color",
-                "blue"
-              ),
-              [sty.slotTargetStartIconcolor_clear]: hasVariant(
-                $state,
-                "color",
-                "clear"
-              ),
-              [sty.slotTargetStartIconcolor_link]: hasVariant(
-                $state,
-                "color",
-                "link"
-              )
-            })
-          })}
-        </div>
-      ) : null}
+      <div
+        className={classNames(
+          projectcss.all,
+          projectcss.__wab_text,
+          sty.text___0K9Kh
+        )}
+      >
+        {"Enter some text"}
+      </div>
+      <div
+        className={classNames(
+          projectcss.all,
+          projectcss.__wab_text,
+          sty.text__cOxxN
+        )}
+      >
+        {"Enter some text"}
+      </div>
       <div
         data-plasmic-name={"contentContainer"}
         data-plasmic-override={overrides.contentContainer}
@@ -344,6 +319,47 @@ function PlasmicButton__RenderFunc(props: {
       </div>
       {false ? (
         <div
+          data-plasmic-name={"startIconContainer"}
+          data-plasmic-override={overrides.startIconContainer}
+          className={classNames(projectcss.all, sty.startIconContainer, {
+            [sty.startIconContainercolor_blue]: hasVariant(
+              $state,
+              "color",
+              "blue"
+            )
+          })}
+        >
+          {renderPlasmicSlot({
+            defaultContents: (
+              <ChecksvgIcon
+                className={classNames(projectcss.all, sty.svg__z81Hd)}
+                role={"img"}
+              />
+            ),
+
+            value: args.startIcon,
+            className: classNames(sty.slotTargetStartIcon, {
+              [sty.slotTargetStartIconcolor_blue]: hasVariant(
+                $state,
+                "color",
+                "blue"
+              ),
+              [sty.slotTargetStartIconcolor_clear]: hasVariant(
+                $state,
+                "color",
+                "clear"
+              ),
+              [sty.slotTargetStartIconcolor_link]: hasVariant(
+                $state,
+                "color",
+                "link"
+              )
+            })
+          })}
+        </div>
+      ) : null}
+      {false ? (
+        <div
           data-plasmic-name={"endIconContainer"}
           data-plasmic-override={overrides.endIconContainer}
           className={classNames(projectcss.all, sty.endIconContainer)}
@@ -372,25 +388,7 @@ function PlasmicButton__RenderFunc(props: {
           })}
         </div>
       ) : null}
-      <div
-        className={classNames(
-          projectcss.all,
-          projectcss.__wab_text,
-          sty.text___0K9Kh
-        )}
-      >
-        {"Enter some text"}
-      </div>
-      <div
-        className={classNames(
-          projectcss.all,
-          projectcss.__wab_text,
-          sty.text__cOxxN
-        )}
-      >
-        {"Enter some text"}
-      </div>
-    </Stack__>
+    </button>
   ) as React.ReactElement | null;
 }
 
@@ -424,9 +422,9 @@ function useBehavior<P extends pp.PlumeButtonProps>(
 }
 
 const PlasmicDescendants = {
-  root: ["root", "startIconContainer", "contentContainer", "endIconContainer"],
-  startIconContainer: ["startIconContainer"],
+  root: ["root", "contentContainer", "startIconContainer", "endIconContainer"],
   contentContainer: ["contentContainer"],
+  startIconContainer: ["startIconContainer"],
   endIconContainer: ["endIconContainer"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -434,8 +432,8 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "button";
-  startIconContainer: "div";
   contentContainer: "div";
+  startIconContainer: "div";
   endIconContainer: "div";
 };
 
@@ -499,8 +497,8 @@ export const PlasmicButton = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    startIconContainer: makeNodeComponent("startIconContainer"),
     contentContainer: makeNodeComponent("contentContainer"),
+    startIconContainer: makeNodeComponent("startIconContainer"),
     endIconContainer: makeNodeComponent("endIconContainer"),
 
     // Metadata about props expected for PlasmicButton
