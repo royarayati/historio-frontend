@@ -1,6 +1,36 @@
 {
   "props": [
     {
+      "name": "Guide BG Color",
+      "type": "color",
+      "value": "#BDD1F8",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "PIJd_nie0KbY"
+      }
+    },
+    {
+      "name": "Inlab Background",
+      "type": "color",
+      "value": "#E0ECFF",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "Hd7stmcqwCJ-"
+      }
+    },
+    {
+      "name": "Main Inlab BG",
+      "type": "color",
+      "value": "#DEE7F8",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "u0TFUrtkrRh1"
+      }
+    },
+    {
       "name": "System: Bg Container",
       "type": "color",
       "value": "var(--antd-colorBgContainer)",
@@ -2123,7 +2153,7 @@
     {
       "name": "background",
       "type": "color",
-      "value": "#E8ECF2",
+      "value": "#E0ECFF",
       "category": "color",
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",

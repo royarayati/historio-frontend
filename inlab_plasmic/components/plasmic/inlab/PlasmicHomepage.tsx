@@ -61,7 +61,7 @@ import {
 
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import FavoriteIcon from "../../FavoriteIcon"; // plasmic-import: PK_hwsu90gKT/component
+import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
@@ -78,6 +78,8 @@ import sty from "./PlasmicHomepage.module.css"; // plasmic-import: oQ9IYAdIiE5g/
 import MenuIcon from "./icons/PlasmicIcon__Menu"; // plasmic-import: YlP_1riCYk4W/icon
 import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
 import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
+import BookmarkPlusSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg"; // plasmic-import: laC4EyEnFr3s/icon
+import BookmarkDashFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg"; // plasmic-import: OXlS9uB7Ffdy/icon
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
@@ -99,12 +101,12 @@ export type PlasmicHomepage__OverridesType = {
   searchbarSetting?: Flex__<"div">;
   settingIcon?: Flex__<"svg">;
   searchbar?: Flex__<typeof TextInput>;
-  favPatients?: Flex__<typeof ApiFetcherComponent>;
+  bookmarkedPatients?: Flex__<typeof ApiFetcherComponent>;
   بمارافتنشد?: Flex__<"div">;
   patientCards?: Flex__<"div">;
-  patientNameFavoriteIcon?: Flex__<"div">;
+  patientNameBookmarkIcon?: Flex__<"div">;
   firstLastName?: Flex__<"div">;
-  searchedPatientFavIcon?: Flex__<typeof FavoriteIcon>;
+  searchedPatientBookmarkIcon?: Flex__<typeof BookmarkIcon>;
   wardRoom?: Flex__<"div">;
   roomBed?: Flex__<"div">;
   ward?: Flex__<"div">;
@@ -165,7 +167,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "searchedPatientFavIcon[].selected",
+        path: "searchedPatientBookmarkIcon[].selected",
         type: "private",
         variableType: "boolean"
       }
@@ -304,7 +306,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       $steps.updateSearchbarValue.status === 200
                         ? (() => {
                             const actionArgs = {
-                              tplRef: "favPatients",
+                              tplRef: "bookmarkedPatients",
                               action: "reload"
                             };
                             return (({ tplRef, action, args }) => {
@@ -348,16 +350,16 @@ function PlasmicHomepage__RenderFunc(props: {
             />
           </div>
           <ApiFetcherComponent
-            data-plasmic-name={"favPatients"}
-            data-plasmic-override={overrides.favPatients}
-            className={classNames("__wab_instance", sty.favPatients)}
+            data-plasmic-name={"bookmarkedPatients"}
+            data-plasmic-override={overrides.bookmarkedPatients}
+            className={classNames("__wab_instance", sty.bookmarkedPatients)}
             delay={300}
             method={"GET"}
-            path={`/n8n/webhook/fav_patients?search=${
+            path={`/n8n/webhook/bookmarked_patientcard?search=${
               $state.searchbar.value
             }&namespace_id=${localStorage.getItem("inlab_user_namespace_id")}`}
             ref={ref => {
-              $refs["favPatients"] = ref;
+              $refs["bookmarkedPatients"] = ref;
             }}
             requestBody={undefined}
           >
@@ -438,21 +440,6 @@ function PlasmicHomepage__RenderFunc(props: {
                     </div>
                   ) : null}
                   {$ctx.fetched_data.loading === false &&
-                  $state.searchbar.value === "" &&
-                  $ctx.fetched_data.data === "" ? (
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__wldne
-                      )}
-                    >
-                      {
-                        "\u062f\u0631 \u06a9\u0627\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0628\u0631 \u0631\u0648\u06cc\u2b50(\u0633\u062a\u0627\u0631\u0647) \u0628\u0632\u0646\u06cc\u062f\n\u0628\u064a\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \u0635\u0641\u062d\u0647 \u0627\u0636\u0627\u0641\u0647 \u064a\u0627 \u062d\u0630\u0641 \u06a9\u0646\u064a\u062f"
-                      }
-                    </div>
-                  ) : null}
-                  {$ctx.fetched_data.loading === false &&
                   $state.searchbar.value !== "" &&
                   $ctx.fetched_data.data === "" ? (
                     <div
@@ -469,6 +456,77 @@ function PlasmicHomepage__RenderFunc(props: {
                       {
                         "\u0628\u06cc\u0645\u0627\u0631\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
                       }
+                    </div>
+                  ) : null}
+                  {(() => {
+                    try {
+                      return (
+                        $ctx.fetched_data.loading === false &&
+                        $state.searchbar.value === "" &&
+                        $ctx.fetched_data.data === ""
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      className={classNames(projectcss.all, sty.freeBox__z4HP)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__sWlYr
+                        )}
+                      >
+                        <BookmarkPlusSvgrepoComsvgIcon
+                          className={classNames(
+                            projectcss.all,
+                            sty.svg___3Xxzq
+                          )}
+                          role={"img"}
+                        />
+
+                        <BookmarkDashFillSvgrepoComsvgIcon
+                          className={classNames(projectcss.all, sty.svg__qaU7L)}
+                          role={"img"}
+                        />
+                      </div>
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__vy9MM
+                        )}
+                      >
+                        <React.Fragment>
+                          <React.Fragment>
+                            {
+                              '\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 "\u0622\u06cc\u06a9\u0648\u0646 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9" \u0628\u06cc\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \n\u0644\u06cc\u0633\u062a '
+                            }
+                          </React.Fragment>
+                          <span
+                            className={
+                              "plasmic_default__all plasmic_default__span"
+                            }
+                            style={{ fontWeight: 700 }}
+                          >
+                            {
+                              '"\u0628\u06cc\u0645\u0627\u0631 \u0647\u0627\u06cc \u0645\u0646"'
+                            }
+                          </span>
+                          <React.Fragment>
+                            {
+                              " \u0627\u0636\u0627\u0641\u0647 \u06cc\u0627 \u062d\u0630\u0641 \u06a9\u0646\u06cc\u062f"
+                            }
+                          </React.Fragment>
+                        </React.Fragment>
+                      </div>
                     </div>
                   ) : null}
                   {(
@@ -508,14 +566,14 @@ function PlasmicHomepage__RenderFunc(props: {
                           >
                             <Stack__
                               as={"div"}
-                              data-plasmic-name={"patientNameFavoriteIcon"}
+                              data-plasmic-name={"patientNameBookmarkIcon"}
                               data-plasmic-override={
-                                overrides.patientNameFavoriteIcon
+                                overrides.patientNameBookmarkIcon
                               }
                               hasGap={true}
                               className={classNames(
                                 projectcss.all,
-                                sty.patientNameFavoriteIcon
+                                sty.patientNameBookmarkIcon
                               )}
                             >
                               <div
@@ -537,12 +595,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                 const child$Props = {
                                   className: classNames(
                                     "__wab_instance",
-                                    sty.searchedPatientFavIcon
+                                    sty.searchedPatientBookmarkIcon
                                   ),
                                   onSelectedChange: generateStateOnChangeProp(
                                     $state,
                                     [
-                                      "searchedPatientFavIcon",
+                                      "searchedPatientBookmarkIcon",
                                       __plasmic_idx_0,
                                       "selected"
                                     ]
@@ -562,7 +620,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     }
                                   })(),
                                   selected: generateStateValueProp($state, [
-                                    "searchedPatientFavIcon",
+                                    "searchedPatientBookmarkIcon",
                                     __plasmic_idx_0,
                                     "selected"
                                   ]),
@@ -572,7 +630,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     $steps["runActionOnFavPatients"] = true
                                       ? (() => {
                                           const actionArgs = {
-                                            tplRef: "favPatients",
+                                            tplRef: "bookmarkedPatients",
                                             action: "reload"
                                           };
                                           return (({
@@ -605,7 +663,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   $state,
                                   [
                                     {
-                                      name: "searchedPatientFavIcon[].selected",
+                                      name: "searchedPatientBookmarkIcon[].selected",
                                       initFunc: ({
                                         $props,
                                         $state,
@@ -613,7 +671,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       }) =>
                                         (() => {
                                           try {
-                                            return currentItem.favorited;
+                                            return currentItem.bookmarked;
                                           } catch (e) {
                                             if (
                                               e instanceof TypeError ||
@@ -630,10 +688,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                   [__plasmic_idx_0]
                                 );
                                 return (
-                                  <FavoriteIcon
-                                    data-plasmic-name={"searchedPatientFavIcon"}
+                                  <BookmarkIcon
+                                    data-plasmic-name={
+                                      "searchedPatientBookmarkIcon"
+                                    }
                                     data-plasmic-override={
-                                      overrides.searchedPatientFavIcon
+                                      overrides.searchedPatientBookmarkIcon
                                     }
                                     {...child$Props}
                                   />
@@ -728,19 +788,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                               throw e;
                                             }
-                                          })()}/${(() => {
-                                            try {
-                                              return `${currentItem.first_name} ${currentItem.last_name}`;
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return undefined;
-                                              }
-                                              throw e;
-                                            }
                                           })()}/profile`
                                         };
                                         return (({ destination }) => {
@@ -813,19 +860,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                               throw e;
                                             }
-                                          })()}/${(() => {
-                                            try {
-                                              return `${currentItem.first_name} ${currentItem.last_name}`;
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return undefined;
-                                              }
-                                              throw e;
-                                            }
                                           })()}/report/list`
                                         };
                                         return (({ destination }) => {
@@ -886,19 +920,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                           destination: `/patient/${(() => {
                                             try {
                                               return currentItem.profile_id;
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return undefined;
-                                              }
-                                              throw e;
-                                            }
-                                          })()}/${(() => {
-                                            try {
-                                              return `${currentItem.first_name} ${currentItem.last_name}`;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -1020,12 +1041,12 @@ const PlasmicDescendants = {
     "searchbarSetting",
     "settingIcon",
     "searchbar",
-    "favPatients",
+    "bookmarkedPatients",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "patientCards",
-    "patientNameFavoriteIcon",
+    "patientNameBookmarkIcon",
     "firstLastName",
-    "searchedPatientFavIcon",
+    "searchedPatientBookmarkIcon",
     "wardRoom",
     "roomBed",
     "ward",
@@ -1042,12 +1063,12 @@ const PlasmicDescendants = {
     "searchbarSetting",
     "settingIcon",
     "searchbar",
-    "favPatients",
+    "bookmarkedPatients",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "patientCards",
-    "patientNameFavoriteIcon",
+    "patientNameBookmarkIcon",
     "firstLastName",
-    "searchedPatientFavIcon",
+    "searchedPatientBookmarkIcon",
     "wardRoom",
     "roomBed",
     "ward",
@@ -1059,13 +1080,13 @@ const PlasmicDescendants = {
   searchbarSetting: ["searchbarSetting", "settingIcon", "searchbar"],
   settingIcon: ["settingIcon"],
   searchbar: ["searchbar"],
-  favPatients: [
-    "favPatients",
+  bookmarkedPatients: [
+    "bookmarkedPatients",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "patientCards",
-    "patientNameFavoriteIcon",
+    "patientNameBookmarkIcon",
     "firstLastName",
-    "searchedPatientFavIcon",
+    "searchedPatientBookmarkIcon",
     "wardRoom",
     "roomBed",
     "ward",
@@ -1077,9 +1098,9 @@ const PlasmicDescendants = {
   بمارافتنشد: ["\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"],
   patientCards: [
     "patientCards",
-    "patientNameFavoriteIcon",
+    "patientNameBookmarkIcon",
     "firstLastName",
-    "searchedPatientFavIcon",
+    "searchedPatientBookmarkIcon",
     "wardRoom",
     "roomBed",
     "ward",
@@ -1088,13 +1109,13 @@ const PlasmicDescendants = {
     "radiologyReport",
     "laboratoryData"
   ],
-  patientNameFavoriteIcon: [
-    "patientNameFavoriteIcon",
+  patientNameBookmarkIcon: [
+    "patientNameBookmarkIcon",
     "firstLastName",
-    "searchedPatientFavIcon"
+    "searchedPatientBookmarkIcon"
   ],
   firstLastName: ["firstLastName"],
-  searchedPatientFavIcon: ["searchedPatientFavIcon"],
+  searchedPatientBookmarkIcon: ["searchedPatientBookmarkIcon"],
   wardRoom: ["wardRoom", "roomBed", "ward"],
   roomBed: ["roomBed"],
   ward: ["ward"],
@@ -1120,12 +1141,12 @@ type NodeDefaultElementType = {
   searchbarSetting: "div";
   settingIcon: "svg";
   searchbar: typeof TextInput;
-  favPatients: typeof ApiFetcherComponent;
+  bookmarkedPatients: typeof ApiFetcherComponent;
   بمارافتنشد: "div";
   patientCards: "div";
-  patientNameFavoriteIcon: "div";
+  patientNameBookmarkIcon: "div";
   firstLastName: "div";
-  searchedPatientFavIcon: typeof FavoriteIcon;
+  searchedPatientBookmarkIcon: typeof BookmarkIcon;
   wardRoom: "div";
   roomBed: "div";
   ward: "div";
@@ -1202,14 +1223,16 @@ export const PlasmicHomepage = Object.assign(
     searchbarSetting: makeNodeComponent("searchbarSetting"),
     settingIcon: makeNodeComponent("settingIcon"),
     searchbar: makeNodeComponent("searchbar"),
-    favPatients: makeNodeComponent("favPatients"),
+    bookmarkedPatients: makeNodeComponent("bookmarkedPatients"),
     بمارافتنشد: makeNodeComponent(
       "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"
     ),
     patientCards: makeNodeComponent("patientCards"),
-    patientNameFavoriteIcon: makeNodeComponent("patientNameFavoriteIcon"),
+    patientNameBookmarkIcon: makeNodeComponent("patientNameBookmarkIcon"),
     firstLastName: makeNodeComponent("firstLastName"),
-    searchedPatientFavIcon: makeNodeComponent("searchedPatientFavIcon"),
+    searchedPatientBookmarkIcon: makeNodeComponent(
+      "searchedPatientBookmarkIcon"
+    ),
     wardRoom: makeNodeComponent("wardRoom"),
     roomBed: makeNodeComponent("roomBed"),
     ward: makeNodeComponent("ward"),

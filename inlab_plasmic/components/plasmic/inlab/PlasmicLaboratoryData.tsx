@@ -59,12 +59,13 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import OnloadUserPatientInteractionCount from "../../OnloadUserPatientInteractionCount"; // plasmic-import: 6oEGl3M40QrL/component
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -82,13 +83,16 @@ createPlasmicElementProxy;
 
 export type PlasmicLaboratoryData__VariantMembers = {
   viewNormalRange: "viewNormalRange";
+  highlightSpecificLabResult: "highlightSpecificLabResult";
 };
 export type PlasmicLaboratoryData__VariantsArgs = {
   viewNormalRange?: SingleBooleanChoiceArg<"viewNormalRange">;
+  highlightSpecificLabResult?: SingleBooleanChoiceArg<"highlightSpecificLabResult">;
 };
 type VariantPropType = keyof PlasmicLaboratoryData__VariantsArgs;
 export const PlasmicLaboratoryData__VariantProps = new Array<VariantPropType>(
-  "viewNormalRange"
+  "viewNormalRange",
+  "highlightSpecificLabResult"
 );
 
 export type PlasmicLaboratoryData__ArgsType = {};
@@ -98,7 +102,7 @@ export const PlasmicLaboratoryData__ArgProps = new Array<ArgPropType>();
 export type PlasmicLaboratoryData__OverridesType = {
   laboratoryData?: Flex__<"div">;
   header?: Flex__<"div">;
-  patientNameage?: Flex__<"div">;
+  patientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
   normalRangeButton?: Flex__<typeof Button>;
   labData?: Flex__<typeof ApiFetcherComponent>;
   laboratoryLists?: Flex__<"div">;
@@ -113,6 +117,11 @@ export type PlasmicLaboratoryData__OverridesType = {
   factorName?: Flex__<"div">;
   normalFactorValue?: Flex__<"div">;
   abnormalFactorValue?: Flex__<"div">;
+  highlightFactorNamevalue3?: Flex__<"div">;
+  factorNamevalue4?: Flex__<"div">;
+  factorName3?: Flex__<"div">;
+  normalFactorValue3?: Flex__<"div">;
+  abnormalFactorValue3?: Flex__<"div">;
   normalRanged?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
@@ -169,6 +178,19 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "labFactorId",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 0
+      },
+      {
+        path: "highlightSpecificLabResult",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          $props.highlightSpecificLabResult
       }
     ],
     [$props, $ctx, $refs]
@@ -209,11 +231,23 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           plasmic_plasmic_rich_components_css.plasmic_tokens,
           sty.laboratoryData,
           {
+            [sty.laboratoryDatahighlightSpecificLabResult]: hasVariant(
+              $state,
+              "highlightSpecificLabResult",
+              "highlightSpecificLabResult"
+            ),
             [sty.laboratoryDataviewNormalRange]: hasVariant(
               $state,
               "viewNormalRange",
               "viewNormalRange"
-            )
+            ),
+            [sty.laboratoryDataviewNormalRange_highlightSpecificLabResult]:
+              hasVariant($state, "viewNormalRange", "viewNormalRange") &&
+              hasVariant(
+                $state,
+                "highlightSpecificLabResult",
+                "highlightSpecificLabResult"
+              )
           }
         )}
       >
@@ -222,17 +256,77 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
-          <div
-            data-plasmic-name={"patientNameage"}
-            data-plasmic-override={overrides.patientNameage}
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.patientNameage
-            )}
+          <ApiFetcherComponent
+            data-plasmic-name={"patientDataApiFetcher"}
+            data-plasmic-override={overrides.patientDataApiFetcher}
+            className={classNames("__wab_instance", sty.patientDataApiFetcher)}
+            delay={50}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v2/patient/${$ctx.params.code}`}
+            ref={ref => {
+              $refs["patientDataApiFetcher"] = ref;
+            }}
           >
-            {"Enter some text"}
-          </div>
+            <DataCtxReader__>
+              {$ctx => (
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__t37T4
+                  )}
+                >
+                  <React.Fragment>
+                    {$ctx.fetched_data.loading == false &&
+                      (() => {
+                        const dob = new Date($ctx.fetched_data.data.dob);
+                        const ageDiffMs = Date.now() - dob.getTime();
+                        const ageDate = new Date(ageDiffMs);
+                        const ageYears = Math.abs(
+                          ageDate.getUTCFullYear() - 1970
+                        );
+                        const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
+                        if (ageYears < 1) {
+                          const ageMonths = ageDate.getUTCMonth();
+                          return `${fullName} 
+${ageMonths} months ${
+                            $ctx.fetched_data.data.gender === "F"
+                              ? " ♀️"
+                              : $ctx.fetched_data.data.gender === "M"
+                              ? " ♂️"
+                              : ""
+                          }`;
+                        } else {
+                          return `${fullName} 
+${ageYears} ${
+                            $ctx.fetched_data.data.gender === "F"
+                              ? " ♀️"
+                              : $ctx.fetched_data.data.gender === "M"
+                              ? " ♂️"
+                              : ""
+                          }`;
+                        }
+                      })()}
+                  </React.Fragment>
+                </div>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
         </div>
         <Button
           data-plasmic-name={"normalRangeButton"}
@@ -295,7 +389,18 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         <ApiFetcherComponent
           data-plasmic-name={"labData"}
           data-plasmic-override={overrides.labData}
-          className={classNames("__wab_instance", sty.labData)}
+          className={classNames("__wab_instance", sty.labData, {
+            [sty.labDatahighlightSpecificLabResult]: hasVariant(
+              $state,
+              "highlightSpecificLabResult",
+              "highlightSpecificLabResult"
+            ),
+            [sty.labDataviewNormalRange]: hasVariant(
+              $state,
+              "viewNormalRange",
+              "viewNormalRange"
+            )
+          })}
           headers={(() => {
             try {
               return {
@@ -334,7 +439,19 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     }
                   </div>
                 ) : null}
-                {$ctx.fetched_data.loading == true ? (
+                {(() => {
+                  try {
+                    return $ctx.fetched_data.loading == true;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
                   <div
                     className={classNames(
                       projectcss.all,
@@ -370,7 +487,15 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       data-plasmic-override={overrides.laboratoryLists}
                       className={classNames(
                         projectcss.all,
-                        sty.laboratoryLists
+                        sty.laboratoryLists,
+                        {
+                          [sty.laboratoryListshighlightSpecificLabResult]:
+                            hasVariant(
+                              $state,
+                              "highlightSpecificLabResult",
+                              "highlightSpecificLabResult"
+                            )
+                        }
                       )}
                       key={currentIndex}
                     >
@@ -380,7 +505,20 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         className={classNames(
                           projectcss.all,
                           projectcss.__wab_text,
-                          sty.laboratoryTitle
+                          sty.laboratoryTitle,
+                          {
+                            [sty.laboratoryTitlehighlightSpecificLabResult]:
+                              hasVariant(
+                                $state,
+                                "highlightSpecificLabResult",
+                                "highlightSpecificLabResult"
+                              ),
+                            [sty.laboratoryTitleviewNormalRange]: hasVariant(
+                              $state,
+                              "viewNormalRange",
+                              "viewNormalRange"
+                            )
+                          }
                         )}
                       >
                         <React.Fragment>
@@ -396,7 +534,32 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         hasGap={true}
                         className={classNames(
                           projectcss.all,
-                          sty.laboratoryResultsPerTitle
+                          sty.laboratoryResultsPerTitle,
+                          {
+                            [sty.laboratoryResultsPerTitlehighlightSpecificLabResult]:
+                              hasVariant(
+                                $state,
+                                "highlightSpecificLabResult",
+                                "highlightSpecificLabResult"
+                              ),
+                            [sty.laboratoryResultsPerTitleviewNormalRange]:
+                              hasVariant(
+                                $state,
+                                "viewNormalRange",
+                                "viewNormalRange"
+                              ),
+                            [sty.laboratoryResultsPerTitleviewNormalRange_highlightSpecificLabResult]:
+                              hasVariant(
+                                $state,
+                                "viewNormalRange",
+                                "viewNormalRange"
+                              ) &&
+                              hasVariant(
+                                $state,
+                                "highlightSpecificLabResult",
+                                "highlightSpecificLabResult"
+                              )
+                          }
                         )}
                       >
                         {(_par =>
@@ -427,6 +590,12 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                 projectcss.all,
                                 sty.labPerDate,
                                 {
+                                  [sty.labPerDatehighlightSpecificLabResult]:
+                                    hasVariant(
+                                      $state,
+                                      "highlightSpecificLabResult",
+                                      "highlightSpecificLabResult"
+                                    ),
                                   [sty.labPerDateviewNormalRange]: hasVariant(
                                     $state,
                                     "viewNormalRange",
@@ -581,6 +750,12 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                       projectcss.all,
                                       sty.labLists,
                                       {
+                                        [sty.labListshighlightSpecificLabResult]:
+                                          hasVariant(
+                                            $state,
+                                            "highlightSpecificLabResult",
+                                            "highlightSpecificLabResult"
+                                          ),
                                         [sty.labListsviewNormalRange]:
                                           hasVariant(
                                             $state,
@@ -602,14 +777,115 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                         projectcss.all,
                                         sty.factorNamevalue,
                                         {
+                                          [sty.factorNamevaluehighlightSpecificLabResult]:
+                                            hasVariant(
+                                              $state,
+                                              "highlightSpecificLabResult",
+                                              "highlightSpecificLabResult"
+                                            ),
                                           [sty.factorNamevalueviewNormalRange]:
                                             hasVariant(
                                               $state,
                                               "viewNormalRange",
                                               "viewNormalRange"
+                                            ),
+                                          [sty.factorNamevalueviewNormalRange_highlightSpecificLabResult]:
+                                            hasVariant(
+                                              $state,
+                                              "viewNormalRange",
+                                              "viewNormalRange"
+                                            ) &&
+                                            hasVariant(
+                                              $state,
+                                              "highlightSpecificLabResult",
+                                              "highlightSpecificLabResult"
                                             )
                                         }
                                       )}
+                                      onClick={async event => {
+                                        const $steps = {};
+
+                                        $steps["updateLabFactorId"] = true
+                                          ? (() => {
+                                              const actionArgs = {
+                                                variable: {
+                                                  objRoot: $state,
+                                                  variablePath: ["labFactorId"]
+                                                },
+                                                operation: 0,
+                                                value: currentItem.factor_id
+                                              };
+                                              return (({
+                                                variable,
+                                                value,
+                                                startIndex,
+                                                deleteCount
+                                              }) => {
+                                                if (!variable) {
+                                                  return;
+                                                }
+                                                const {
+                                                  objRoot,
+                                                  variablePath
+                                                } = variable;
+
+                                                $stateSet(
+                                                  objRoot,
+                                                  variablePath,
+                                                  value
+                                                );
+                                                return value;
+                                              })?.apply(null, [actionArgs]);
+                                            })()
+                                          : undefined;
+                                        if (
+                                          $steps["updateLabFactorId"] != null &&
+                                          typeof $steps["updateLabFactorId"] ===
+                                            "object" &&
+                                          typeof $steps["updateLabFactorId"]
+                                            .then === "function"
+                                        ) {
+                                          $steps["updateLabFactorId"] =
+                                            await $steps["updateLabFactorId"];
+                                        }
+
+                                        $steps[
+                                          "updateHighlightSpecificLabResult"
+                                        ] = true
+                                          ? (() => {
+                                              const actionArgs = {
+                                                vgroup:
+                                                  "highlightSpecificLabResult",
+                                                operation: 4
+                                              };
+                                              return (({ vgroup, value }) => {
+                                                if (typeof value === "string") {
+                                                  value = [value];
+                                                }
+
+                                                $stateSet($state, vgroup, true);
+                                                return true;
+                                              })?.apply(null, [actionArgs]);
+                                            })()
+                                          : undefined;
+                                        if (
+                                          $steps[
+                                            "updateHighlightSpecificLabResult"
+                                          ] != null &&
+                                          typeof $steps[
+                                            "updateHighlightSpecificLabResult"
+                                          ] === "object" &&
+                                          typeof $steps[
+                                            "updateHighlightSpecificLabResult"
+                                          ].then === "function"
+                                        ) {
+                                          $steps[
+                                            "updateHighlightSpecificLabResult"
+                                          ] = await $steps[
+                                            "updateHighlightSpecificLabResult"
+                                          ];
+                                        }
+                                      }}
                                     >
                                       <Stack__
                                         as={"div"}
@@ -620,7 +896,32 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                         hasGap={true}
                                         className={classNames(
                                           projectcss.all,
-                                          sty.factorNamevalue2
+                                          sty.factorNamevalue2,
+                                          {
+                                            [sty.factorNamevalue2highlightSpecificLabResult]:
+                                              hasVariant(
+                                                $state,
+                                                "highlightSpecificLabResult",
+                                                "highlightSpecificLabResult"
+                                              ),
+                                            [sty.factorNamevalue2viewNormalRange]:
+                                              hasVariant(
+                                                $state,
+                                                "viewNormalRange",
+                                                "viewNormalRange"
+                                              ),
+                                            [sty.factorNamevalue2viewNormalRange_highlightSpecificLabResult]:
+                                              hasVariant(
+                                                $state,
+                                                "viewNormalRange",
+                                                "viewNormalRange"
+                                              ) &&
+                                              hasVariant(
+                                                $state,
+                                                "highlightSpecificLabResult",
+                                                "highlightSpecificLabResult"
+                                              )
+                                          }
                                         )}
                                       >
                                         <div
@@ -631,7 +932,32 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                           className={classNames(
                                             projectcss.all,
                                             projectcss.__wab_text,
-                                            sty.factorName
+                                            sty.factorName,
+                                            {
+                                              [sty.factorNamehighlightSpecificLabResult]:
+                                                hasVariant(
+                                                  $state,
+                                                  "highlightSpecificLabResult",
+                                                  "highlightSpecificLabResult"
+                                                ),
+                                              [sty.factorNameviewNormalRange]:
+                                                hasVariant(
+                                                  $state,
+                                                  "viewNormalRange",
+                                                  "viewNormalRange"
+                                                ),
+                                              [sty.factorNameviewNormalRange_highlightSpecificLabResult]:
+                                                hasVariant(
+                                                  $state,
+                                                  "viewNormalRange",
+                                                  "viewNormalRange"
+                                                ) &&
+                                                hasVariant(
+                                                  $state,
+                                                  "highlightSpecificLabResult",
+                                                  "highlightSpecificLabResult"
+                                                )
+                                            }
                                           )}
                                         >
                                           <React.Fragment>
@@ -653,7 +979,15 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                             className={classNames(
                                               projectcss.all,
                                               projectcss.__wab_text,
-                                              sty.normalFactorValue
+                                              sty.normalFactorValue,
+                                              {
+                                                [sty.normalFactorValuehighlightSpecificLabResult]:
+                                                  hasVariant(
+                                                    $state,
+                                                    "highlightSpecificLabResult",
+                                                    "highlightSpecificLabResult"
+                                                  )
+                                              }
                                             )}
                                           >
                                             <React.Fragment>
@@ -661,7 +995,20 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                             </React.Fragment>
                                           </div>
                                         ) : null}
-                                        {currentItem.abnormal == true ? (
+                                        {(
+                                          hasVariant(
+                                            $state,
+                                            "viewNormalRange",
+                                            "viewNormalRange"
+                                          ) &&
+                                          hasVariant(
+                                            $state,
+                                            "highlightSpecificLabResult",
+                                            "highlightSpecificLabResult"
+                                          )
+                                            ? true
+                                            : currentItem.abnormal == true
+                                        ) ? (
                                           <div
                                             data-plasmic-name={
                                               "abnormalFactorValue"
@@ -672,7 +1019,20 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                             className={classNames(
                                               projectcss.all,
                                               projectcss.__wab_text,
-                                              sty.abnormalFactorValue
+                                              sty.abnormalFactorValue,
+                                              {
+                                                [sty.abnormalFactorValueviewNormalRange_highlightSpecificLabResult]:
+                                                  hasVariant(
+                                                    $state,
+                                                    "viewNormalRange",
+                                                    "viewNormalRange"
+                                                  ) &&
+                                                  hasVariant(
+                                                    $state,
+                                                    "highlightSpecificLabResult",
+                                                    "highlightSpecificLabResult"
+                                                  )
+                                              }
                                             )}
                                           >
                                             <React.Fragment>
@@ -682,29 +1042,387 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                         ) : null}
                                       </Stack__>
                                     </Stack__>
-                                    <div
-                                      data-plasmic-name={"normalRanged"}
-                                      data-plasmic-override={
-                                        overrides.normalRanged
-                                      }
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.__wab_text,
-                                        sty.normalRanged,
-                                        {
-                                          [sty.normalRangedviewNormalRange]:
+                                    {(
+                                      hasVariant(
+                                        $state,
+                                        "highlightSpecificLabResult",
+                                        "highlightSpecificLabResult"
+                                      )
+                                        ? (() => {
+                                            try {
+                                              return (
+                                                currentItem.factor_id ==
+                                                $state.labFactorId
+                                              );
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return true;
+                                              }
+                                              throw e;
+                                            }
+                                          })()
+                                        : false
+                                    ) ? (
+                                      <Stack__
+                                        as={"div"}
+                                        data-plasmic-name={
+                                          "highlightFactorNamevalue3"
+                                        }
+                                        data-plasmic-override={
+                                          overrides.highlightFactorNamevalue3
+                                        }
+                                        hasGap={true}
+                                        className={classNames(
+                                          projectcss.all,
+                                          sty.highlightFactorNamevalue3,
+                                          {
+                                            [sty.highlightFactorNamevalue3highlightSpecificLabResult]:
+                                              hasVariant(
+                                                $state,
+                                                "highlightSpecificLabResult",
+                                                "highlightSpecificLabResult"
+                                              ),
+                                            [sty.highlightFactorNamevalue3viewNormalRange]:
+                                              hasVariant(
+                                                $state,
+                                                "viewNormalRange",
+                                                "viewNormalRange"
+                                              ),
+                                            [sty.highlightFactorNamevalue3viewNormalRange_highlightSpecificLabResult]:
+                                              hasVariant(
+                                                $state,
+                                                "viewNormalRange",
+                                                "viewNormalRange"
+                                              ) &&
+                                              hasVariant(
+                                                $state,
+                                                "highlightSpecificLabResult",
+                                                "highlightSpecificLabResult"
+                                              )
+                                          }
+                                        )}
+                                        onClick={async event => {
+                                          const $steps = {};
+
+                                          $steps["updateLabFactorId"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  variable: {
+                                                    objRoot: $state,
+                                                    variablePath: [
+                                                      "labFactorId"
+                                                    ]
+                                                  },
+                                                  operation: 0,
+                                                  value: currentItem.factor_id
+                                                };
+                                                return (({
+                                                  variable,
+                                                  value,
+                                                  startIndex,
+                                                  deleteCount
+                                                }) => {
+                                                  if (!variable) {
+                                                    return;
+                                                  }
+                                                  const {
+                                                    objRoot,
+                                                    variablePath
+                                                  } = variable;
+
+                                                  $stateSet(
+                                                    objRoot,
+                                                    variablePath,
+                                                    value
+                                                  );
+                                                  return value;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["updateLabFactorId"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "updateLabFactorId"
+                                            ] === "object" &&
+                                            typeof $steps["updateLabFactorId"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["updateLabFactorId"] =
+                                              await $steps["updateLabFactorId"];
+                                          }
+
+                                          $steps[
+                                            "updateHighlightSpecificLabResult"
+                                          ] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  vgroup:
+                                                    "highlightSpecificLabResult",
+                                                  operation: 4
+                                                };
+                                                return (({ vgroup, value }) => {
+                                                  if (
+                                                    typeof value === "string"
+                                                  ) {
+                                                    value = [value];
+                                                  }
+
+                                                  $stateSet(
+                                                    $state,
+                                                    vgroup,
+                                                    true
+                                                  );
+                                                  return true;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps[
+                                              "updateHighlightSpecificLabResult"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updateHighlightSpecificLabResult"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updateHighlightSpecificLabResult"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updateHighlightSpecificLabResult"
+                                            ] = await $steps[
+                                              "updateHighlightSpecificLabResult"
+                                            ];
+                                          }
+                                        }}
+                                      >
+                                        <Stack__
+                                          as={"div"}
+                                          data-plasmic-name={"factorNamevalue4"}
+                                          data-plasmic-override={
+                                            overrides.factorNamevalue4
+                                          }
+                                          hasGap={true}
+                                          className={classNames(
+                                            projectcss.all,
+                                            sty.factorNamevalue4,
+                                            {
+                                              [sty.factorNamevalue4highlightSpecificLabResult]:
+                                                hasVariant(
+                                                  $state,
+                                                  "highlightSpecificLabResult",
+                                                  "highlightSpecificLabResult"
+                                                ),
+                                              [sty.factorNamevalue4viewNormalRange]:
+                                                hasVariant(
+                                                  $state,
+                                                  "viewNormalRange",
+                                                  "viewNormalRange"
+                                                ),
+                                              [sty.factorNamevalue4viewNormalRange_highlightSpecificLabResult]:
+                                                hasVariant(
+                                                  $state,
+                                                  "viewNormalRange",
+                                                  "viewNormalRange"
+                                                ) &&
+                                                hasVariant(
+                                                  $state,
+                                                  "highlightSpecificLabResult",
+                                                  "highlightSpecificLabResult"
+                                                )
+                                            }
+                                          )}
+                                        >
+                                          <div
+                                            data-plasmic-name={"factorName3"}
+                                            data-plasmic-override={
+                                              overrides.factorName3
+                                            }
+                                            className={classNames(
+                                              projectcss.all,
+                                              projectcss.__wab_text,
+                                              sty.factorName3,
+                                              {
+                                                [sty.factorName3highlightSpecificLabResult]:
+                                                  hasVariant(
+                                                    $state,
+                                                    "highlightSpecificLabResult",
+                                                    "highlightSpecificLabResult"
+                                                  ),
+                                                [sty.factorName3viewNormalRange]:
+                                                  hasVariant(
+                                                    $state,
+                                                    "viewNormalRange",
+                                                    "viewNormalRange"
+                                                  ),
+                                                [sty.factorName3viewNormalRange_highlightSpecificLabResult]:
+                                                  hasVariant(
+                                                    $state,
+                                                    "viewNormalRange",
+                                                    "viewNormalRange"
+                                                  ) &&
+                                                  hasVariant(
+                                                    $state,
+                                                    "highlightSpecificLabResult",
+                                                    "highlightSpecificLabResult"
+                                                  )
+                                              }
+                                            )}
+                                          >
+                                            <React.Fragment>
+                                              {currentItem.factor_name.replace(
+                                                " (  # )",
+                                                "",
+                                                "(#*)"
+                                              )}
+                                            </React.Fragment>
+                                          </div>
+                                          {currentItem.abnormal == false ? (
+                                            <div
+                                              data-plasmic-name={
+                                                "normalFactorValue3"
+                                              }
+                                              data-plasmic-override={
+                                                overrides.normalFactorValue3
+                                              }
+                                              className={classNames(
+                                                projectcss.all,
+                                                projectcss.__wab_text,
+                                                sty.normalFactorValue3,
+                                                {
+                                                  [sty.normalFactorValue3highlightSpecificLabResult]:
+                                                    hasVariant(
+                                                      $state,
+                                                      "highlightSpecificLabResult",
+                                                      "highlightSpecificLabResult"
+                                                    )
+                                                }
+                                              )}
+                                            >
+                                              <React.Fragment>
+                                                {currentItem.value}
+                                              </React.Fragment>
+                                            </div>
+                                          ) : null}
+                                          {(
                                             hasVariant(
                                               $state,
                                               "viewNormalRange",
                                               "viewNormalRange"
+                                            ) &&
+                                            hasVariant(
+                                              $state,
+                                              "highlightSpecificLabResult",
+                                              "highlightSpecificLabResult"
                                             )
+                                              ? true
+                                              : currentItem.abnormal == true
+                                          ) ? (
+                                            <div
+                                              data-plasmic-name={
+                                                "abnormalFactorValue3"
+                                              }
+                                              data-plasmic-override={
+                                                overrides.abnormalFactorValue3
+                                              }
+                                              className={classNames(
+                                                projectcss.all,
+                                                projectcss.__wab_text,
+                                                sty.abnormalFactorValue3,
+                                                {
+                                                  [sty.abnormalFactorValue3viewNormalRange_highlightSpecificLabResult]:
+                                                    hasVariant(
+                                                      $state,
+                                                      "viewNormalRange",
+                                                      "viewNormalRange"
+                                                    ) &&
+                                                    hasVariant(
+                                                      $state,
+                                                      "highlightSpecificLabResult",
+                                                      "highlightSpecificLabResult"
+                                                    )
+                                                }
+                                              )}
+                                            >
+                                              <React.Fragment>
+                                                {currentItem.value}
+                                              </React.Fragment>
+                                            </div>
+                                          ) : null}
+                                        </Stack__>
+                                      </Stack__>
+                                    ) : null}
+                                    {(
+                                      hasVariant(
+                                        $state,
+                                        "viewNormalRange",
+                                        "viewNormalRange"
+                                      ) &&
+                                      hasVariant(
+                                        $state,
+                                        "highlightSpecificLabResult",
+                                        "highlightSpecificLabResult"
+                                      )
+                                        ? true
+                                        : hasVariant(
+                                            $state,
+                                            "highlightSpecificLabResult",
+                                            "highlightSpecificLabResult"
+                                          )
+                                        ? $state.normalRangeButton.isDisabled
+                                        : hasVariant(
+                                            $state,
+                                            "viewNormalRange",
+                                            "viewNormalRange"
+                                          )
+                                        ? true
+                                        : true
+                                    ) ? (
+                                      <div
+                                        data-plasmic-name={"normalRanged"}
+                                        data-plasmic-override={
+                                          overrides.normalRanged
                                         }
-                                      )}
-                                    >
-                                      <React.Fragment>
-                                        {currentItem.normal_range}
-                                      </React.Fragment>
-                                    </div>
+                                        className={classNames(
+                                          projectcss.all,
+                                          projectcss.__wab_text,
+                                          sty.normalRanged,
+                                          {
+                                            [sty.normalRangedhighlightSpecificLabResult]:
+                                              hasVariant(
+                                                $state,
+                                                "highlightSpecificLabResult",
+                                                "highlightSpecificLabResult"
+                                              ),
+                                            [sty.normalRangedviewNormalRange]:
+                                              hasVariant(
+                                                $state,
+                                                "viewNormalRange",
+                                                "viewNormalRange"
+                                              ),
+                                            [sty.normalRangedviewNormalRange_highlightSpecificLabResult]:
+                                              hasVariant(
+                                                $state,
+                                                "viewNormalRange",
+                                                "viewNormalRange"
+                                              ) &&
+                                              hasVariant(
+                                                $state,
+                                                "highlightSpecificLabResult",
+                                                "highlightSpecificLabResult"
+                                              )
+                                          }
+                                        )}
+                                      >
+                                        <React.Fragment>
+                                          {currentItem.normal_range}
+                                        </React.Fragment>
+                                      </div>
+                                    ) : null}
                                   </Stack__>
                                 );
                               })}
@@ -775,7 +1493,7 @@ const PlasmicDescendants = {
   laboratoryData: [
     "laboratoryData",
     "header",
-    "patientNameage",
+    "patientDataApiFetcher",
     "normalRangeButton",
     "labData",
     "laboratoryLists",
@@ -790,6 +1508,11 @@ const PlasmicDescendants = {
     "factorName",
     "normalFactorValue",
     "abnormalFactorValue",
+    "highlightFactorNamevalue3",
+    "factorNamevalue4",
+    "factorName3",
+    "normalFactorValue3",
+    "abnormalFactorValue3",
     "normalRanged",
     "switchingTabs",
     "switchingTab",
@@ -797,8 +1520,8 @@ const PlasmicDescendants = {
     "redirectToNamespaceSelection",
     "onloadUserPatientInteractionCount"
   ],
-  header: ["header", "patientNameage"],
-  patientNameage: ["patientNameage"],
+  header: ["header", "patientDataApiFetcher"],
+  patientDataApiFetcher: ["patientDataApiFetcher"],
   normalRangeButton: ["normalRangeButton"],
   labData: [
     "labData",
@@ -814,6 +1537,11 @@ const PlasmicDescendants = {
     "factorName",
     "normalFactorValue",
     "abnormalFactorValue",
+    "highlightFactorNamevalue3",
+    "factorNamevalue4",
+    "factorName3",
+    "normalFactorValue3",
+    "abnormalFactorValue3",
     "normalRanged"
   ],
   laboratoryLists: [
@@ -829,6 +1557,11 @@ const PlasmicDescendants = {
     "factorName",
     "normalFactorValue",
     "abnormalFactorValue",
+    "highlightFactorNamevalue3",
+    "factorNamevalue4",
+    "factorName3",
+    "normalFactorValue3",
+    "abnormalFactorValue3",
     "normalRanged"
   ],
   laboratoryTitle: ["laboratoryTitle"],
@@ -843,6 +1576,11 @@ const PlasmicDescendants = {
     "factorName",
     "normalFactorValue",
     "abnormalFactorValue",
+    "highlightFactorNamevalue3",
+    "factorNamevalue4",
+    "factorName3",
+    "normalFactorValue3",
+    "abnormalFactorValue3",
     "normalRanged"
   ],
   labPerDate: [
@@ -855,6 +1593,11 @@ const PlasmicDescendants = {
     "factorName",
     "normalFactorValue",
     "abnormalFactorValue",
+    "highlightFactorNamevalue3",
+    "factorNamevalue4",
+    "factorName3",
+    "normalFactorValue3",
+    "abnormalFactorValue3",
     "normalRanged"
   ],
   reportDatetime: ["reportDatetime"],
@@ -866,6 +1609,11 @@ const PlasmicDescendants = {
     "factorName",
     "normalFactorValue",
     "abnormalFactorValue",
+    "highlightFactorNamevalue3",
+    "factorNamevalue4",
+    "factorName3",
+    "normalFactorValue3",
+    "abnormalFactorValue3",
     "normalRanged"
   ],
   factorNamevalue: [
@@ -884,6 +1632,22 @@ const PlasmicDescendants = {
   factorName: ["factorName"],
   normalFactorValue: ["normalFactorValue"],
   abnormalFactorValue: ["abnormalFactorValue"],
+  highlightFactorNamevalue3: [
+    "highlightFactorNamevalue3",
+    "factorNamevalue4",
+    "factorName3",
+    "normalFactorValue3",
+    "abnormalFactorValue3"
+  ],
+  factorNamevalue4: [
+    "factorNamevalue4",
+    "factorName3",
+    "normalFactorValue3",
+    "abnormalFactorValue3"
+  ],
+  factorName3: ["factorName3"],
+  normalFactorValue3: ["normalFactorValue3"],
+  abnormalFactorValue3: ["abnormalFactorValue3"],
   normalRanged: ["normalRanged"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"],
@@ -897,7 +1661,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   laboratoryData: "div";
   header: "div";
-  patientNameage: "div";
+  patientDataApiFetcher: typeof ApiFetcherComponent;
   normalRangeButton: typeof Button;
   labData: typeof ApiFetcherComponent;
   laboratoryLists: "div";
@@ -912,6 +1676,11 @@ type NodeDefaultElementType = {
   factorName: "div";
   normalFactorValue: "div";
   abnormalFactorValue: "div";
+  highlightFactorNamevalue3: "div";
+  factorNamevalue4: "div";
+  factorName3: "div";
+  normalFactorValue3: "div";
+  abnormalFactorValue3: "div";
   normalRanged: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
@@ -981,7 +1750,7 @@ export const PlasmicLaboratoryData = Object.assign(
   {
     // Helper components rendering sub-elements
     header: makeNodeComponent("header"),
-    patientNameage: makeNodeComponent("patientNameage"),
+    patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
     normalRangeButton: makeNodeComponent("normalRangeButton"),
     labData: makeNodeComponent("labData"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
@@ -996,6 +1765,11 @@ export const PlasmicLaboratoryData = Object.assign(
     factorName: makeNodeComponent("factorName"),
     normalFactorValue: makeNodeComponent("normalFactorValue"),
     abnormalFactorValue: makeNodeComponent("abnormalFactorValue"),
+    highlightFactorNamevalue3: makeNodeComponent("highlightFactorNamevalue3"),
+    factorNamevalue4: makeNodeComponent("factorNamevalue4"),
+    factorName3: makeNodeComponent("factorName3"),
+    normalFactorValue3: makeNodeComponent("normalFactorValue3"),
+    abnormalFactorValue3: makeNodeComponent("abnormalFactorValue3"),
     normalRanged: makeNodeComponent("normalRanged"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),

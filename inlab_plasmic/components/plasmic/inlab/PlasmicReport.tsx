@@ -288,18 +288,6 @@ function PlasmicReport__RenderFunc(props: {
                                 }
                                 throw e;
                               }
-                            })()}/${(() => {
-                              try {
-                                return $ctx.params.patient_name;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
-                                }
-                                throw e;
-                              }
                             })()}/report/detail/${(() => {
                               try {
                                 return currentItem.id;

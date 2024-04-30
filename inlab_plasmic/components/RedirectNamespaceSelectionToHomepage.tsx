@@ -40,7 +40,7 @@ function RedirectNamespaceSelectionToHomepage(
   // By default, we are just piping all RedirectNamespaceSelectionToHomepageProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectNamespaceSelectionToHomepage  />;
+  return <PlasmicRedirectNamespaceSelectionToHomepage/>;
 }
 
 export default RedirectNamespaceSelectionToHomepage;

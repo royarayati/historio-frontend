@@ -398,6 +398,11 @@ function PlasmicTextInput__RenderFunc(props: {
               $state,
               "showEndIcon",
               "showEndIcon"
+            ),
+            [sty.endIconContainershowStartIcon]: hasVariant(
+              $state,
+              "showStartIcon",
+              "showStartIcon"
             )
           })}
         >
@@ -415,6 +420,11 @@ function PlasmicTextInput__RenderFunc(props: {
                 $state,
                 "showEndIcon",
                 "showEndIcon"
+              ),
+              [sty.slotTargetEndIconshowStartIcon]: hasVariant(
+                $state,
+                "showStartIcon",
+                "showStartIcon"
               )
             })
           })}

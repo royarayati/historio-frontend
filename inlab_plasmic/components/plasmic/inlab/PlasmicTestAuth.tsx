@@ -721,6 +721,7 @@ function PlasmicTestAuth__RenderFunc(props: {
                           </ToolbarMention>
                         </React.Fragment>
                       }
+                      useJson={false}
                     />
                   </React.Fragment>
                 )}

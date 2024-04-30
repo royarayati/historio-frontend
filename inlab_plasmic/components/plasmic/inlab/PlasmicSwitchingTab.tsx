@@ -237,18 +237,6 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}/${(() => {
-                          try {
-                            return $ctx.params.patient_name;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
                         })()}/profile`
                       };
                       return (({ destination }) => {
@@ -311,18 +299,6 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}/${(() => {
-                          try {
-                            return $ctx.params.patient_name;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
                         })()}/report/list`
                       };
                       return (({ destination }) => {
@@ -376,18 +352,6 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                         destination: `/patient/${(() => {
                           try {
                             return $ctx.params.code;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/${(() => {
-                          try {
-                            return $ctx.params.patient_name;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
