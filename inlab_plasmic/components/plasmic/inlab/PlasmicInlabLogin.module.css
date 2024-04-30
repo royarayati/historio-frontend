@@ -79,11 +79,12 @@
 }
 .username:global(.__wab_instance) {
   position: relative;
-  width: 250px;
+  width: 350px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .username:global(.__wab_instance) {
     width: 200px;
+    flex-shrink: 0;
   }
 }
 .svg__falId {
@@ -92,6 +93,7 @@
   width: auto;
   height: 1em;
   color: var(--token-9iYGdL7i3GKE);
+  margin-left: 3px;
 }
 .svg__sIovl {
   position: relative;
@@ -102,11 +104,12 @@
 }
 .password:global(.__wab_instance) {
   position: relative;
-  width: 250px;
+  width: 350px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .password:global(.__wab_instance) {
     width: 200px;
+    flex-shrink: 0;
   }
 }
 .svg__fnFNb {
@@ -115,6 +118,7 @@
   width: auto;
   height: 1em;
   color: var(--token-9iYGdL7i3GKE);
+  margin-left: 3px;
 }
 .svg__lOk9F {
   position: relative;

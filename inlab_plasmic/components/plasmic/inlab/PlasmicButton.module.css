@@ -4,7 +4,7 @@
   cursor: pointer;
   width: auto;
   justify-self: flex-start;
-  height: 100%;
+  height: auto;
   box-shadow: none;
   flex-direction: row;
   justify-content: center;
@@ -12,7 +12,6 @@
   flex-wrap: nowrap;
   align-content: stretch;
   background: none;
-  min-height: 0;
   border-radius: 5px;
   padding: 7px 10px;
 }

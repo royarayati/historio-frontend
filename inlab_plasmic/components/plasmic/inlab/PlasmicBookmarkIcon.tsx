@@ -66,53 +66,53 @@ import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
-import sty from "./PlasmicFavoriteIcon.module.css"; // plasmic-import: PK_hwsu90gKT/css
+import sty from "./PlasmicBookmarkIcon.module.css"; // plasmic-import: PK_hwsu90gKT/css
 
-import FavoriteSvgrepoComsvgIcon from "./icons/PlasmicIcon__FavoriteSvgrepoComsvg"; // plasmic-import: 9MJJOBGA9bFX/icon
-import FavoriteSvgrepoCom1SvgIcon from "./icons/PlasmicIcon__FavoriteSvgrepoCom1Svg"; // plasmic-import: 5QQKf_ZsnABX/icon
+import BookmarkPlusSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg"; // plasmic-import: laC4EyEnFr3s/icon
+import BookmarkDashFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg"; // plasmic-import: OXlS9uB7Ffdy/icon
 import LoadingLoaderSvgrepoComsvgIcon from "./icons/PlasmicIcon__LoadingLoaderSvgrepoComsvg"; // plasmic-import: FYp_b7bC4SRG/icon
 
 createPlasmicElementProxy;
 
-export type PlasmicFavoriteIcon__VariantMembers = {
-  favorited: "favorited";
-  loadingFavorite: "loadingFavorite";
+export type PlasmicBookmarkIcon__VariantMembers = {
+  bookmarked: "bookmarked";
+  loadingBookmark: "loadingBookmark";
 };
-export type PlasmicFavoriteIcon__VariantsArgs = {
-  favorited?: SingleBooleanChoiceArg<"favorited">;
-  loadingFavorite?: SingleBooleanChoiceArg<"loadingFavorite">;
+export type PlasmicBookmarkIcon__VariantsArgs = {
+  bookmarked?: SingleBooleanChoiceArg<"bookmarked">;
+  loadingBookmark?: SingleBooleanChoiceArg<"loadingBookmark">;
 };
-type VariantPropType = keyof PlasmicFavoriteIcon__VariantsArgs;
-export const PlasmicFavoriteIcon__VariantProps = new Array<VariantPropType>(
-  "favorited",
-  "loadingFavorite"
+type VariantPropType = keyof PlasmicBookmarkIcon__VariantsArgs;
+export const PlasmicBookmarkIcon__VariantProps = new Array<VariantPropType>(
+  "bookmarked",
+  "loadingBookmark"
 );
 
-export type PlasmicFavoriteIcon__ArgsType = {
+export type PlasmicBookmarkIcon__ArgsType = {
   selected?: boolean;
   onSelectedChange?: (val: string) => void;
   patientId?: number;
   trigerReload?: () => void;
 };
-type ArgPropType = keyof PlasmicFavoriteIcon__ArgsType;
-export const PlasmicFavoriteIcon__ArgProps = new Array<ArgPropType>(
+type ArgPropType = keyof PlasmicBookmarkIcon__ArgsType;
+export const PlasmicBookmarkIcon__ArgProps = new Array<ArgPropType>(
   "selected",
   "onSelectedChange",
   "patientId",
   "trigerReload"
 );
 
-export type PlasmicFavoriteIcon__OverridesType = {
-  favorite?: Flex__<"svg">;
+export type PlasmicBookmarkIcon__OverridesType = {
+  bookmark?: Flex__<"svg">;
 };
 
-export interface DefaultFavoriteIconProps {
+export interface DefaultBookmarkIconProps {
   selected?: boolean;
   onSelectedChange?: (val: string) => void;
   patientId?: number;
   trigerReload?: () => void;
-  favorited?: SingleBooleanChoiceArg<"favorited">;
-  loadingFavorite?: SingleBooleanChoiceArg<"loadingFavorite">;
+  bookmarked?: SingleBooleanChoiceArg<"bookmarked">;
+  loadingBookmark?: SingleBooleanChoiceArg<"loadingBookmark">;
   className?: string;
 }
 
@@ -125,10 +125,10 @@ function useNextRouter() {
   return undefined;
 }
 
-function PlasmicFavoriteIcon__RenderFunc(props: {
-  variants: PlasmicFavoriteIcon__VariantsArgs;
-  args: PlasmicFavoriteIcon__ArgsType;
-  overrides: PlasmicFavoriteIcon__OverridesType;
+function PlasmicBookmarkIcon__RenderFunc(props: {
+  variants: PlasmicBookmarkIcon__VariantsArgs;
+  args: PlasmicBookmarkIcon__ArgsType;
+  overrides: PlasmicBookmarkIcon__OverridesType;
   forNode?: string;
 }) {
   const { variants, overrides, forNode } = props;
@@ -152,7 +152,7 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "favorited",
+        path: "bookmarked",
         type: "private",
         variableType: "variant",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -168,7 +168,7 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
               }
               throw e;
             }
-          })() ?? $props.favorited
+          })() ?? $props.bookmarked
       },
       {
         path: "selected",
@@ -179,10 +179,10 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
         onChangeProp: "onSelectedChange"
       },
       {
-        path: "loadingFavorite",
+        path: "loadingBookmark",
         type: "private",
         variableType: "variant",
-        initFunc: ({ $props, $state, $queries, $ctx }) => $props.loadingFavorite
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.loadingBookmark
       }
     ],
     [$props, $ctx, $refs]
@@ -200,16 +200,16 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
 
   return (
     <PlasmicIcon__
-      data-plasmic-name={"favorite"}
-      data-plasmic-override={overrides.favorite}
+      data-plasmic-name={"bookmark"}
+      data-plasmic-override={overrides.bookmark}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
       PlasmicIconType={
-        hasVariant($state, "loadingFavorite", "loadingFavorite")
+        hasVariant($state, "loadingBookmark", "loadingBookmark")
           ? LoadingLoaderSvgrepoComsvgIcon
-          : hasVariant($state, "favorited", "favorited")
-          ? FavoriteSvgrepoCom1SvgIcon
-          : FavoriteSvgrepoComsvgIcon
+          : hasVariant($state, "bookmarked", "bookmarked")
+          ? BookmarkDashFillSvgrepoComsvgIcon
+          : BookmarkPlusSvgrepoComsvgIcon
       }
       className={classNames(
         projectcss.all,
@@ -219,22 +219,26 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
         projectcss.plasmic_tokens,
         plasmic_antd_5_hostless_css.plasmic_tokens,
         plasmic_plasmic_rich_components_css.plasmic_tokens,
-        sty.favorite,
+        sty.bookmark,
         {
-          [sty.favoritefavorited]: hasVariant($state, "favorited", "favorited"),
-          [sty.favoriteloadingFavorite]: hasVariant(
+          [sty.bookmarkbookmarked]: hasVariant(
             $state,
-            "loadingFavorite",
-            "loadingFavorite"
+            "bookmarked",
+            "bookmarked"
+          ),
+          [sty.bookmarkloadingBookmark]: hasVariant(
+            $state,
+            "loadingBookmark",
+            "loadingBookmark"
           )
         }
       )}
       onClick={async event => {
         const $steps = {};
 
-        $steps["activateLoadingFavoriteVariant"] = true
+        $steps["activateLoadingBookmarkVariant"] = true
           ? (() => {
-              const actionArgs = { vgroup: "loadingFavorite", operation: 4 };
+              const actionArgs = { vgroup: "loadingBookmark", operation: 4 };
               return (({ vgroup, value }) => {
                 if (typeof value === "string") {
                   value = [value];
@@ -246,25 +250,25 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
             })()
           : undefined;
         if (
-          $steps["activateLoadingFavoriteVariant"] != null &&
-          typeof $steps["activateLoadingFavoriteVariant"] === "object" &&
-          typeof $steps["activateLoadingFavoriteVariant"].then === "function"
+          $steps["activateLoadingBookmarkVariant"] != null &&
+          typeof $steps["activateLoadingBookmarkVariant"] === "object" &&
+          typeof $steps["activateLoadingBookmarkVariant"].then === "function"
         ) {
-          $steps["activateLoadingFavoriteVariant"] = await $steps[
-            "activateLoadingFavoriteVariant"
+          $steps["activateLoadingBookmarkVariant"] = await $steps[
+            "activateLoadingBookmarkVariant"
           ];
         }
 
-        $steps["toggleFavorite"] = true
+        $steps["toggleBookmark"] = true
           ? (() => {
               const actionArgs = {
                 args: [
                   "PATCH",
-                  `/n8n/webhook/fav_patients?patient_id=${
+                  `/n8n/webhook/bookmark_patientcard?patient_id=${
                     $props.patientId
                   }&namespace_id=${localStorage.getItem(
                     "inlab_user_namespace_id"
-                  )}&favorited=${!$state.selected}`
+                  )}&bookmark=${!$state.selected}`
                 ]
               };
               return $globalActions["AuthGlobalContext.apiFetcher"]?.apply(
@@ -274,15 +278,15 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
             })()
           : undefined;
         if (
-          $steps["toggleFavorite"] != null &&
-          typeof $steps["toggleFavorite"] === "object" &&
-          typeof $steps["toggleFavorite"].then === "function"
+          $steps["toggleBookmark"] != null &&
+          typeof $steps["toggleBookmark"] === "object" &&
+          typeof $steps["toggleBookmark"].then === "function"
         ) {
-          $steps["toggleFavorite"] = await $steps["toggleFavorite"];
+          $steps["toggleBookmark"] = await $steps["toggleBookmark"];
         }
 
         $steps["runTrigerReload"] =
-          $steps.toggleFavorite.status === 200
+          $steps.toggleBookmark.status === 200
             ? (() => {
                 const actionArgs = { eventRef: $props["trigerReload"] };
                 return (({ eventRef, args }) => {
@@ -298,10 +302,10 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
           $steps["runTrigerReload"] = await $steps["runTrigerReload"];
         }
 
-        $steps["deactivateLoadingFavoriteVariant"] =
-          $steps.toggleFavorite.status === 200
+        $steps["deactivateLoadingBookmarkVariant"] =
+          $steps.toggleBookmark.status === 200
             ? (() => {
-                const actionArgs = { vgroup: "loadingFavorite", operation: 6 };
+                const actionArgs = { vgroup: "loadingBookmark", operation: 6 };
                 return (({ vgroup, value }) => {
                   if (typeof value === "string") {
                     value = [value];
@@ -313,12 +317,12 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
               })()
             : undefined;
         if (
-          $steps["deactivateLoadingFavoriteVariant"] != null &&
-          typeof $steps["deactivateLoadingFavoriteVariant"] === "object" &&
-          typeof $steps["deactivateLoadingFavoriteVariant"].then === "function"
+          $steps["deactivateLoadingBookmarkVariant"] != null &&
+          typeof $steps["deactivateLoadingBookmarkVariant"] === "object" &&
+          typeof $steps["deactivateLoadingBookmarkVariant"].then === "function"
         ) {
-          $steps["deactivateLoadingFavoriteVariant"] = await $steps[
-            "deactivateLoadingFavoriteVariant"
+          $steps["deactivateLoadingBookmarkVariant"] = await $steps[
+            "deactivateLoadingBookmarkVariant"
           ];
         }
       }}
@@ -328,29 +332,29 @@ function PlasmicFavoriteIcon__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  favorite: ["favorite"]
+  bookmark: ["bookmark"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  favorite: "svg";
+  bookmark: "svg";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
 type NodeOverridesType<T extends NodeNameType> = Pick<
-  PlasmicFavoriteIcon__OverridesType,
+  PlasmicBookmarkIcon__OverridesType,
   DescendantsType<T>
 >;
 type NodeComponentProps<T extends NodeNameType> =
   // Explicitly specify variants, args, and overrides as objects
   {
-    variants?: PlasmicFavoriteIcon__VariantsArgs;
-    args?: PlasmicFavoriteIcon__ArgsType;
+    variants?: PlasmicBookmarkIcon__VariantsArgs;
+    args?: PlasmicBookmarkIcon__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicFavoriteIcon__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } & Omit<PlasmicBookmarkIcon__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
     /* Specify args directly as props*/ Omit<
-      PlasmicFavoriteIcon__ArgsType,
+      PlasmicBookmarkIcon__ArgsType,
       ReservedPropsType
     > &
     /* Specify overrides for each element directly as props*/ Omit<
@@ -372,37 +376,37 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
         deriveRenderOpts(props, {
           name: nodeName,
           descendantNames: PlasmicDescendants[nodeName],
-          internalArgPropNames: PlasmicFavoriteIcon__ArgProps,
-          internalVariantPropNames: PlasmicFavoriteIcon__VariantProps
+          internalArgPropNames: PlasmicBookmarkIcon__ArgProps,
+          internalVariantPropNames: PlasmicBookmarkIcon__VariantProps
         }),
       [props, nodeName]
     );
-    return PlasmicFavoriteIcon__RenderFunc({
+    return PlasmicBookmarkIcon__RenderFunc({
       variants,
       args,
       overrides,
       forNode: nodeName
     });
   };
-  if (nodeName === "favorite") {
-    func.displayName = "PlasmicFavoriteIcon";
+  if (nodeName === "bookmark") {
+    func.displayName = "PlasmicBookmarkIcon";
   } else {
-    func.displayName = `PlasmicFavoriteIcon.${nodeName}`;
+    func.displayName = `PlasmicBookmarkIcon.${nodeName}`;
   }
   return func;
 }
 
-export const PlasmicFavoriteIcon = Object.assign(
-  // Top-level PlasmicFavoriteIcon renders the root element
-  makeNodeComponent("favorite"),
+export const PlasmicBookmarkIcon = Object.assign(
+  // Top-level PlasmicBookmarkIcon renders the root element
+  makeNodeComponent("bookmark"),
   {
     // Helper components rendering sub-elements
 
-    // Metadata about props expected for PlasmicFavoriteIcon
-    internalVariantProps: PlasmicFavoriteIcon__VariantProps,
-    internalArgProps: PlasmicFavoriteIcon__ArgProps
+    // Metadata about props expected for PlasmicBookmarkIcon
+    internalVariantProps: PlasmicBookmarkIcon__VariantProps,
+    internalArgProps: PlasmicBookmarkIcon__ArgProps
   }
 );
 
-export default PlasmicFavoriteIcon;
+export default PlasmicBookmarkIcon;
 /* prettier-ignore-end */

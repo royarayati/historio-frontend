@@ -1201,12 +1201,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicLaboratoryData.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/[patient_name]/lab.tsx"
+            "modulePath": "../pages/patient/[code]/lab.tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicLaboratoryData.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/patient/[code]/[patient_name]/lab"
+          "path": "/patient/[code]/lab"
         },
         {
           "id": "AFB-1jxjMqDb",
@@ -1215,12 +1215,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicImagingReportList.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/[patient_name]/report/list.tsx"
+            "modulePath": "../pages/patient/[code]/report/list.tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicImagingReportList.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/patient/[code]/[patient_name]/report/list"
+          "path": "/patient/[code]/report/list"
         },
         {
           "id": "Ev8txsbuZl9W",
@@ -1229,12 +1229,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicPatientProfile.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/[patient_name]/profile.tsx"
+            "modulePath": "../pages/patient/[code]/profile.tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicPatientProfile.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/patient/[code]/[patient_name]/profile"
+          "path": "/patient/[code]/profile"
         },
         {
           "id": "oQ9IYAdIiE5g",
@@ -1340,12 +1340,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicImagingReportDatail.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/[patient_name]/report/detail/[reportID].tsx"
+            "modulePath": "../pages/patient/[code]/report/detail/[reportID].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicImagingReportDatail.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/patient/[code]/[patient_name]/report/detail/[reportID]"
+          "path": "/patient/[code]/report/detail/[reportID]"
         },
         {
           "id": "yfSr1skfxkHn",
@@ -1428,14 +1428,14 @@
         },
         {
           "id": "PK_hwsu90gKT",
-          "name": "FavoriteIcon",
+          "name": "BookmarkIcon",
           "type": "managed",
           "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicFavoriteIcon.tsx",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicBookmarkIcon.tsx",
           "importSpec": {
-            "modulePath": "FavoriteIcon.tsx"
+            "modulePath": "BookmarkIcon.tsx"
           },
-          "cssFilePath": "plasmic/inlab/PlasmicFavoriteIcon.module.css",
+          "cssFilePath": "plasmic/inlab/PlasmicBookmarkIcon.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         },
@@ -1936,6 +1936,51 @@
           "id": "FYp_b7bC4SRG",
           "name": "LoadingLoaderSvgrepoComsvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__LoadingLoaderSvgrepoComsvg.tsx"
+        },
+        {
+          "id": "kP8tgJWFi5f8",
+          "name": "Bookmark1SvgrepoComsvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Bookmark1SvgrepoComsvg.tsx"
+        },
+        {
+          "id": "akWClYKh0NXz",
+          "name": "BookmarkSquareSvgrepoComsvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__BookmarkSquareSvgrepoComsvg.tsx"
+        },
+        {
+          "id": "j6KfmMMNdunq",
+          "name": "BookmarkSvgrepoCom2SvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__BookmarkSvgrepoCom2Svg.tsx"
+        },
+        {
+          "id": "WpOunCdxkfxz",
+          "name": "BookmarkCircleSvgrepoComsvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__BookmarkCircleSvgrepoComsvg.tsx"
+        },
+        {
+          "id": "Afo4-59OKegd",
+          "name": "BookmarkSvgrepoCom1Svg2Icon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__BookmarkSvgrepoCom1Svg2.tsx"
+        },
+        {
+          "id": "mw45S2ohkgeU",
+          "name": "BookmarkAddSvgrepoComsvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__BookmarkAddSvgrepoComsvg.tsx"
+        },
+        {
+          "id": "o54G7Go_UaaH",
+          "name": "BookmarkRemoveSvgrepoComsvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__BookmarkRemoveSvgrepoComsvg.tsx"
+        },
+        {
+          "id": "OXlS9uB7Ffdy",
+          "name": "BookmarkDashFillSvgrepoComsvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg.tsx"
+        },
+        {
+          "id": "laC4EyEnFr3s",
+          "name": "BookmarkPlusSvgrepoComsvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg.tsx"
         }
       ],
       "images": [
@@ -2033,6 +2078,31 @@
           "id": "HCp9IhcASZ1L",
           "name": "icons8-home (1).svg",
           "filePath": "../public/plasmic/inlab/images/icons8Home1Svg.svg"
+        },
+        {
+          "id": "PZmhMmaCvlBO",
+          "name": "image-removebg-preview.png",
+          "filePath": "../public/plasmic/inlab/images/imageRemovebgPreviewpng.png"
+        },
+        {
+          "id": "OmIICEi10rFq",
+          "name": "image-removebg-preview (1).png",
+          "filePath": "../public/plasmic/inlab/images/imageRemovebgPreview1Png.png"
+        },
+        {
+          "id": "62S4rk6ET4LZ",
+          "name": "image-removebg-preview (2).png",
+          "filePath": "../public/plasmic/inlab/images/imageRemovebgPreview2Png.png"
+        },
+        {
+          "id": "QXLmCwGkVSFX",
+          "name": "image 5",
+          "filePath": "../public/plasmic/inlab/images/image5.png"
+        },
+        {
+          "id": "-JNwpK8PJMUA",
+          "name": "image 6",
+          "filePath": "../public/plasmic/inlab/images/image6.png"
         }
       ],
       "indirect": false,

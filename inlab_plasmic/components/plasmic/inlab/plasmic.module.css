@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800&display=swap");
 
 .plasmic_tokens {
   --token-PfYIgSrHm2bm: #181d24;
@@ -29,12 +29,18 @@
   --plasmic-token-unnamed-style-token-8: var(--token-JH00tQbi8SYB);
   --token-8PxxXPNrIohQ: #bdbdbd;
   --plasmic-token-border: var(--token-8PxxXPNrIohQ);
-  --token-iVK4BLFaCPtm: #e8ecf2;
+  --token-iVK4BLFaCPtm: var(--token-Hd7stmcqwCJ-);
   --plasmic-token-background: var(--token-iVK4BLFaCPtm);
   --token-CdE1_0ZaCyT1: 12px;
   --plasmic-token-subtitles: var(--token-CdE1_0ZaCyT1);
   --token-NMUbRE7XpwuK: 14px;
   --plasmic-token-buttons: var(--token-NMUbRE7XpwuK);
+  --token-Hd7stmcqwCJ-: #e0ecff;
+  --plasmic-token-inlab-background: var(--token-Hd7stmcqwCJ-);
+  --token-PIJd_nie0KbY: #bdd1f8;
+  --plasmic-token-guide-bg-color: var(--token-PIJd_nie0KbY);
+  --token-u0TFUrtkrRh1: #dee7f8;
+  --plasmic-token-main-inlab-bg: var(--token-u0TFUrtkrRh1);
 }
 
 @media (min-width: 0px) and (max-width: 768px) {
@@ -201,6 +207,10 @@
   --plasmic-mixin-icons_white-space: var(--mixin-sa71uyMn4xoy_white-space);
   --mixin-JI_GXnZKYu6c_white-space: pre-wrap;
   --plasmic-mixin-text-input_white-space: var(--mixin-JI_GXnZKYu6c_white-space);
+  --mixin-F7_TFM9EJGLB_white-space: pre-wrap;
+  --plasmic-mixin-error-color_white-space: var(
+    --mixin-F7_TFM9EJGLB_white-space
+  );
 }
 
 :where(.all) {

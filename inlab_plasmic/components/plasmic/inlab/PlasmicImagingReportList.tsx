@@ -75,7 +75,6 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicImagingReportList.module.css"; // plasmic-import: AFB-1jxjMqDb/css
 
-import ArrowLeftIcon from "./icons/PlasmicIcon__ArrowLeft"; // plasmic-import: OPwXrI9x1012/icon
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
@@ -94,7 +93,7 @@ export const PlasmicImagingReportList__ArgProps = new Array<ArgPropType>();
 export type PlasmicImagingReportList__OverridesType = {
   imagingReportList?: Flex__<"div">;
   header?: Flex__<"div">;
-  svg?: Flex__<"svg">;
+  apiFetcherComponent?: Flex__<typeof ApiFetcherComponent>;
   imagingReport?: Flex__<typeof ApiFetcherComponent>;
   viewPacsButtons?: Flex__<"div">;
   activeViewPacsButton?: Flex__<typeof Button>;
@@ -200,65 +199,90 @@ function PlasmicImagingReportList__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
-          {false ? (
-            <ArrowLeftIcon
-              data-plasmic-name={"svg"}
-              data-plasmic-override={overrides.svg}
-              className={classNames(projectcss.all, sty.svg)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["goToHomepage"] = true
-                  ? (() => {
-                      const actionArgs = { destination: `/patients` };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
+          <ApiFetcherComponent
+            data-plasmic-name={"apiFetcherComponent"}
+            data-plasmic-override={overrides.apiFetcherComponent}
+            className={classNames("__wab_instance", sty.apiFetcherComponent)}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
                 if (
-                  $steps["goToHomepage"] != null &&
-                  typeof $steps["goToHomepage"] === "object" &&
-                  typeof $steps["goToHomepage"].then === "function"
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
                 ) {
-                  $steps["goToHomepage"] = await $steps["goToHomepage"];
+                  return undefined;
                 }
-              }}
-              role={"img"}
-            />
-          ) : null}
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text__ulPY
-            )}
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v2/patient/${$ctx.params.code}`}
+            ref={ref => {
+              $refs["apiFetcherComponent"] = ref;
+            }}
           >
-            <React.Fragment>
-              {(() => {
-                try {
-                  return String($ctx.params.patient_name);
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return "";
-                  }
-                  throw e;
-                }
-              })()}
-            </React.Fragment>
-          </div>
+            <DataCtxReader__>
+              {$ctx => (
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___5FkMo
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return (
+                          $ctx.fetched_data.loading == false &&
+                          (() => {
+                            const dob = new Date($ctx.fetched_data.data.dob);
+                            const ageDiffMs = Date.now() - dob.getTime();
+                            const ageDate = new Date(ageDiffMs);
+                            const ageYears = Math.abs(
+                              ageDate.getUTCFullYear() - 1970
+                            );
+                            const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
+                            if (ageYears < 1) {
+                              const ageMonths = ageDate.getUTCMonth();
+                              return `${fullName} 
+${ageMonths} months ${
+                                $ctx.fetched_data.data.gender === "F"
+                                  ? " ♀️"
+                                  : $ctx.fetched_data.data.gender === "M"
+                                  ? " ♂️"
+                                  : ""
+                              }`;
+                            } else {
+                              return `${fullName} 
+${ageYears} ${
+                                $ctx.fetched_data.data.gender === "F"
+                                  ? " ♀️"
+                                  : $ctx.fetched_data.data.gender === "M"
+                                  ? " ♂️"
+                                  : ""
+                              }`;
+                            }
+                          })()
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
         </div>
         <ApiFetcherComponent
           data-plasmic-name={"imagingReport"}
@@ -304,6 +328,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                         "__wab_instance",
                         sty.activeViewPacsButton
                       )}
+                      color={"blue"}
                       isDisabled={generateStateValueProp($state, [
                         "activeViewPacsButton",
                         "isDisabled"
@@ -465,19 +490,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   destination: `/patient/${(() => {
                                     try {
                                       return $ctx.params.code;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()}/${(() => {
-                                    try {
-                                      return $ctx.params.patient_name;
                                     } catch (e) {
                                       if (
                                         e instanceof TypeError ||
@@ -666,7 +678,7 @@ const PlasmicDescendants = {
   imagingReportList: [
     "imagingReportList",
     "header",
-    "svg",
+    "apiFetcherComponent",
     "imagingReport",
     "viewPacsButtons",
     "activeViewPacsButton",
@@ -683,8 +695,8 @@ const PlasmicDescendants = {
     "redirectToNamespaceSelection",
     "onloadUserPatientInteractionCount"
   ],
-  header: ["header", "svg"],
-  svg: ["svg"],
+  header: ["header", "apiFetcherComponent"],
+  apiFetcherComponent: ["apiFetcherComponent"],
   imagingReport: [
     "imagingReport",
     "viewPacsButtons",
@@ -739,7 +751,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   imagingReportList: "div";
   header: "div";
-  svg: "svg";
+  apiFetcherComponent: typeof ApiFetcherComponent;
   imagingReport: typeof ApiFetcherComponent;
   viewPacsButtons: "div";
   activeViewPacsButton: typeof Button;
@@ -818,7 +830,7 @@ export const PlasmicImagingReportList = Object.assign(
   {
     // Helper components rendering sub-elements
     header: makeNodeComponent("header"),
-    svg: makeNodeComponent("svg"),
+    apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
     imagingReport: makeNodeComponent("imagingReport"),
     viewPacsButtons: makeNodeComponent("viewPacsButtons"),
     activeViewPacsButton: makeNodeComponent("activeViewPacsButton"),
