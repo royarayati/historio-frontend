@@ -106,6 +106,7 @@ export type PlasmicInlabLogin__OverridesType = {
   password?: Flex__<typeof TextInput>;
   loginButton?: Flex__<typeof Button>;
   resetPassword?: Flex__<typeof Button>;
+  createAccount?: Flex__<typeof Button>;
   redirectInlabLoginToNamespaceSelection?: Flex__<
     typeof RedirectInlabLoginToNamespaceSelection
   >;
@@ -188,6 +189,12 @@ function PlasmicInlabLogin__RenderFunc(props: {
         type: "private",
         variableType: "variant",
         initFunc: ({ $props, $state, $queries, $ctx }) => $props.wrongUser
+      },
+      {
+        path: "createAccount.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -688,6 +695,75 @@ function PlasmicInlabLogin__RenderFunc(props: {
               }
             </div>
           </Button>
+          <Button
+            data-plasmic-name={"createAccount"}
+            data-plasmic-override={overrides.createAccount}
+            className={classNames("__wab_instance", sty.createAccount, {
+              [sty.createAccountdisabledLoginButton]: hasVariant(
+                $state,
+                "disabledLoginButton",
+                "disabledLoginButton"
+              )
+            })}
+            color={"clear"}
+            isDisabled={generateStateValueProp($state, [
+              "createAccount",
+              "isDisabled"
+            ])}
+            link={
+              "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
+            }
+            onIsDisabledChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "createAccount",
+                "isDisabled"
+              ])(eventArgs[0]);
+            }}
+            target={true}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__i1Uwd
+              )}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["resetPassword"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination:
+                          "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform?usp=sf_link"
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["resetPassword"] != null &&
+                  typeof $steps["resetPassword"] === "object" &&
+                  typeof $steps["resetPassword"].then === "function"
+                ) {
+                  $steps["resetPassword"] = await $steps["resetPassword"];
+                }
+              }}
+            >
+              {
+                "\u0633\u0627\u062e\u062a \u062d\u0633\u0627\u0628 \u0627\u06cc\u0646\u0644\u0628 "
+              }
+            </div>
+          </Button>
         </Stack__>
         <RedirectInlabLoginToNamespaceSelection
           data-plasmic-name={"redirectInlabLoginToNamespaceSelection"}
@@ -740,6 +816,7 @@ const PlasmicDescendants = {
     "password",
     "loginButton",
     "resetPassword",
+    "createAccount",
     "redirectInlabLoginToNamespaceSelection",
     "redirectInlabLoginToHomepage"
   ],
@@ -748,12 +825,14 @@ const PlasmicDescendants = {
     "username",
     "password",
     "loginButton",
-    "resetPassword"
+    "resetPassword",
+    "createAccount"
   ],
   username: ["username"],
   password: ["password"],
   loginButton: ["loginButton"],
   resetPassword: ["resetPassword"],
+  createAccount: ["createAccount"],
   redirectInlabLoginToNamespaceSelection: [
     "redirectInlabLoginToNamespaceSelection"
   ],
@@ -769,6 +848,7 @@ type NodeDefaultElementType = {
   password: typeof TextInput;
   loginButton: typeof Button;
   resetPassword: typeof Button;
+  createAccount: typeof Button;
   redirectInlabLoginToNamespaceSelection: typeof RedirectInlabLoginToNamespaceSelection;
   redirectInlabLoginToHomepage: typeof RedirectInlabLoginToHomepage;
 };
@@ -838,6 +918,7 @@ export const PlasmicInlabLogin = Object.assign(
     password: makeNodeComponent("password"),
     loginButton: makeNodeComponent("loginButton"),
     resetPassword: makeNodeComponent("resetPassword"),
+    createAccount: makeNodeComponent("createAccount"),
     redirectInlabLoginToNamespaceSelection: makeNodeComponent(
       "redirectInlabLoginToNamespaceSelection"
     ),

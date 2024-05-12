@@ -185,6 +185,41 @@
   width: auto;
   height: 1em;
 }
+.createAccount:global(.__wab_instance) {
+  max-width: 300px;
+  position: relative;
+  height: auto;
+  width: 100%;
+  min-width: 0;
+  display: none;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .createAccount:global(.__wab_instance) {
+    max-width: 53.14%;
+    width: 100%;
+    min-width: 0;
+  }
+}
+.svg__n3Mz {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__i1Uwd {
+  font-size: var(--token-sOr3fJ5Up5fq);
+  white-space: pre-wrap;
+  max-width: 164px;
+  width: 100%;
+  text-align: center;
+  min-width: 0;
+}
+.svg__i4Luv {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
 .redirectInlabLoginToNamespaceSelection:global(.__wab_instance):global(
     .__wab_instance
   ) {

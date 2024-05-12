@@ -103,6 +103,8 @@ export type PlasmicHomepage__OverridesType = {
   searchbar?: Flex__<typeof TextInput>;
   bookmarkedPatients?: Flex__<typeof ApiFetcherComponent>;
   بمارافتنشد?: Flex__<"div">;
+  bookmarkImage?: Flex__<"svg">;
+  bookmarkedImage?: Flex__<"svg">;
   patientCards?: Flex__<"div">;
   patientNameBookmarkIcon?: Flex__<"div">;
   firstLastName?: Flex__<"div">;
@@ -485,15 +487,22 @@ function PlasmicHomepage__RenderFunc(props: {
                         )}
                       >
                         <BookmarkPlusSvgrepoComsvgIcon
+                          data-plasmic-name={"bookmarkImage"}
+                          data-plasmic-override={overrides.bookmarkImage}
                           className={classNames(
                             projectcss.all,
-                            sty.svg___3Xxzq
+                            sty.bookmarkImage
                           )}
                           role={"img"}
                         />
 
                         <BookmarkDashFillSvgrepoComsvgIcon
-                          className={classNames(projectcss.all, sty.svg__qaU7L)}
+                          data-plasmic-name={"bookmarkedImage"}
+                          data-plasmic-override={overrides.bookmarkedImage}
+                          className={classNames(
+                            projectcss.all,
+                            sty.bookmarkedImage
+                          )}
                           role={"img"}
                         />
                       </div>
@@ -1043,6 +1052,8 @@ const PlasmicDescendants = {
     "searchbar",
     "bookmarkedPatients",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
+    "bookmarkImage",
+    "bookmarkedImage",
     "patientCards",
     "patientNameBookmarkIcon",
     "firstLastName",
@@ -1065,6 +1076,8 @@ const PlasmicDescendants = {
     "searchbar",
     "bookmarkedPatients",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
+    "bookmarkImage",
+    "bookmarkedImage",
     "patientCards",
     "patientNameBookmarkIcon",
     "firstLastName",
@@ -1083,6 +1096,8 @@ const PlasmicDescendants = {
   bookmarkedPatients: [
     "bookmarkedPatients",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
+    "bookmarkImage",
+    "bookmarkedImage",
     "patientCards",
     "patientNameBookmarkIcon",
     "firstLastName",
@@ -1096,6 +1111,8 @@ const PlasmicDescendants = {
     "laboratoryData"
   ],
   بمارافتنشد: ["\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"],
+  bookmarkImage: ["bookmarkImage"],
+  bookmarkedImage: ["bookmarkedImage"],
   patientCards: [
     "patientCards",
     "patientNameBookmarkIcon",
@@ -1143,6 +1160,8 @@ type NodeDefaultElementType = {
   searchbar: typeof TextInput;
   bookmarkedPatients: typeof ApiFetcherComponent;
   بمارافتنشد: "div";
+  bookmarkImage: "svg";
+  bookmarkedImage: "svg";
   patientCards: "div";
   patientNameBookmarkIcon: "div";
   firstLastName: "div";
@@ -1227,6 +1246,8 @@ export const PlasmicHomepage = Object.assign(
     بمارافتنشد: makeNodeComponent(
       "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"
     ),
+    bookmarkImage: makeNodeComponent("bookmarkImage"),
+    bookmarkedImage: makeNodeComponent("bookmarkedImage"),
     patientCards: makeNodeComponent("patientCards"),
     patientNameBookmarkIcon: makeNodeComponent("patientNameBookmarkIcon"),
     firstLastName: makeNodeComponent("firstLastName"),
