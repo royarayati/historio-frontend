@@ -41,9 +41,9 @@
   height: 100%;
   max-width: 100%;
   background: #ffffff;
-  max-height: 28px;
-  left: 0px;
-  top: 0px;
+  max-height: 30px;
+  left: auto;
+  top: 0%;
   z-index: 1;
   border-top-width: 0px;
   border-right-width: 0px;
@@ -421,9 +421,10 @@
   left: 0;
   top: auto;
   z-index: 1;
+  margin-top: 45px;
+  bottom: 1%;
   right: 0;
-  bottom: 0;
-  padding: 8px 11.3% 5%;
+  padding: 20px 40px 5px;
 }
 .switchingTab:global(.__wab_instance) {
   max-width: 100%;

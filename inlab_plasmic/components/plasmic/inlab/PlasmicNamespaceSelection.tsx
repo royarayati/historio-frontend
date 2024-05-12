@@ -374,9 +374,16 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                 }
               }}
             >
-              {
-                "\u0628\u0631\u06af\u0634\u062a \u0628\u0647 \u0635\u0641\u062d\u0647 \u0648\u0631\u0648\u062f \u0628\u0647 \u0627\u06cc\u0646\u0644\u0628"
-              }
+              <React.Fragment>
+                <span
+                  className={"plasmic_default__all plasmic_default__span"}
+                  style={{ fontWeight: 700 }}
+                >
+                  {
+                    "\u062e\u0631\u0648\u062c \u0627\u0632 \u0627\u06cc\u0646\u0644\u0628"
+                  }
+                </span>
+              </React.Fragment>
             </div>
           </Stack__>
           <RedirectToLoginPage
