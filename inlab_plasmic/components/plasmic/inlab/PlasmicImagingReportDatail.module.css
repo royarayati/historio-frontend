@@ -91,8 +91,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
+  margin-top: calc(0px - 0px);
+  height: calc(100% + 0px);
 }
 .imagingReportList > :global(.__wab_flex-container) > *,
 .imagingReportList > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
@@ -102,7 +102,7 @@
   > :global(.__wab_slot)
   > picture
   > img {
-  margin-top: 8px;
+  margin-top: 0px;
 }
 .imagingReportCard {
   display: flex;

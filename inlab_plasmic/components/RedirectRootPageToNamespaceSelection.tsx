@@ -40,7 +40,7 @@ function RedirectRootPageToNamespaceSelection(
   // By default, we are just piping all RedirectRootPageToNamespaceSelectionProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectRootPageToNamespaceSelection  />;
+  return <PlasmicRedirectRootPageToNamespaceSelection />;
 }
 
 export default RedirectRootPageToNamespaceSelection;

@@ -236,8 +236,7 @@ ${ageMonths} months ${
                                     : ""
                                 }`;
                               } else {
-                                return `${fullName} 
-${ageYears} ${
+                                return `${fullName} ${ageYears} ${
                                   $ctx.fetched_data.data.gender === "F"
                                     ? " ♀️"
                                     : $ctx.fetched_data.data.gender === "M"

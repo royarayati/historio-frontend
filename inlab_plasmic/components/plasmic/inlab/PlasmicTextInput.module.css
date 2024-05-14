@@ -5,11 +5,11 @@
   height: auto;
   position: sticky;
   flex-grow: 1;
-  background: #ffffff;
+  background: var(--token-zy6xhYnWF8Y7);
   min-width: 0;
   border-radius: 5px;
   padding: 5px 0px;
-  border: 1px solid var(--token-9iYGdL7i3GKE);
+  border: 2px solid var(--token-9iYGdL7i3GKE);
 }
 .textInput > :global(.__wab_flex-container) {
   flex-direction: row;
@@ -83,7 +83,7 @@
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: calc(0px + 8px) !important;
-  background: #ffffff;
+  background: var(--token-zy6xhYnWF8Y7);
 }
 .startIconContainershowStartIcon {
   margin-left: calc(0px + 8px) !important;
@@ -118,7 +118,7 @@
   width: 100%;
   left: auto;
   top: auto;
-  background: var(--token-O-63NKRcNhLJ);
+  background: var(--token-zy6xhYnWF8Y7);
   font-size: 14px;
   text-align: right;
   cursor: auto;
