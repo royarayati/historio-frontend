@@ -89,6 +89,9 @@
   font-weight: 500;
   white-space: pre;
 }
+.slotTargetChildrenisDisabled {
+  color: #ffffff;
+}
 .slotTargetChildrencolor_blue {
   color: #ffffff;
 }

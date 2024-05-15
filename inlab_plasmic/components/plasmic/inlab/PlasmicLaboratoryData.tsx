@@ -406,7 +406,7 @@ ${ageMonths} months ${
                       e instanceof TypeError ||
                       e?.plasmicType === "PlasmicUndefinedDataError"
                     ) {
-                      return true;
+                      return false;
                     }
                     throw e;
                   }
@@ -467,7 +467,13 @@ ${ageMonths} months ${
                         )}
                       >
                         <React.Fragment>
-                          {currentItem.title.replace(" (  # ) ", "")}
+                          {currentItem.title
+                            .replace(" (  #* ) ", "")
+                            .replace(" (  # ) ", "")
+                            .replace("( #)", "")
+                            .replace("( #*)", "")
+                            .replace("* ( #*)", "")
+                            .replace("(  #* )", "")}
                         </React.Fragment>
                       </div>
                       <div
@@ -550,20 +556,15 @@ ${ageMonths} months ${
                                 key={currentIndex}
                               >
                                 <React.Fragment>
-                                  {(() => {
-                                    try {
-                                      return currentItem.name;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return "";
-                                      }
-                                      throw e;
-                                    }
-                                  })()}
+                                  {currentItem.name
+                                    .replace(" (  #* ) ", "")
+                                    .replace(" (  # ) ", "")
+                                    .replace("( #)", "")
+                                    .replace("( #*)", "")
+                                    .replace("* ( #*)", "")
+                                    .replace("(  #* )", "")
+                                    .replace("* ( #* )", "")
+                                    .replace("( #* )", "")}
                                 </React.Fragment>
                               </div>
                             );

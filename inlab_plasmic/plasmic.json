@@ -1544,6 +1544,32 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/guide_make_new_page"
+        },
+        {
+          "id": "SeOv9wf5ITYF",
+          "name": "FilterIcon",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicFilterIcon.tsx",
+          "importSpec": {
+            "modulePath": "FilterIcon.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicFilterIcon.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "zrroSsNrWnZg",
+          "name": "BookmarkIcon",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicBookmarkIcon.tsx",
+          "importSpec": {
+            "modulePath": "BookmarkIcon.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicBookmarkIcon.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -1981,6 +2007,16 @@
           "id": "laC4EyEnFr3s",
           "name": "BookmarkPlusSvgrepoComsvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg.tsx"
+        },
+        {
+          "id": "h3U6GmF6J6H4",
+          "name": "Ellipse4081SvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Ellipse4081Svg.tsx"
+        },
+        {
+          "id": "3WLAeBup0ObK",
+          "name": "GearSvgrepoComsvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__GearSvgrepoComsvg.tsx"
         }
       ],
       "images": [

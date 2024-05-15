@@ -61,7 +61,7 @@ import {
 
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
+import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: zrroSsNrWnZg/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
@@ -86,10 +86,22 @@ import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP
 
 createPlasmicElementProxy;
 
-export type PlasmicHomepage__VariantMembers = {};
-export type PlasmicHomepage__VariantsArgs = {};
+export type PlasmicHomepage__VariantMembers = {
+  bookmarkedSelected: "bookmarkedSelected";
+  serviceSelected: "serviceSelected";
+  bothFilterSelected: "bothFilterSelected";
+};
+export type PlasmicHomepage__VariantsArgs = {
+  bookmarkedSelected?: SingleBooleanChoiceArg<"bookmarkedSelected">;
+  serviceSelected?: SingleBooleanChoiceArg<"serviceSelected">;
+  bothFilterSelected?: SingleBooleanChoiceArg<"bothFilterSelected">;
+};
 type VariantPropType = keyof PlasmicHomepage__VariantsArgs;
-export const PlasmicHomepage__VariantProps = new Array<VariantPropType>();
+export const PlasmicHomepage__VariantProps = new Array<VariantPropType>(
+  "bookmarkedSelected",
+  "serviceSelected",
+  "bothFilterSelected"
+);
 
 export type PlasmicHomepage__ArgsType = {};
 type ArgPropType = keyof PlasmicHomepage__ArgsType;
@@ -98,7 +110,7 @@ export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 export type PlasmicHomepage__OverridesType = {
   homepage?: Flex__<"div">;
   pageContent?: Flex__<"div">;
-  searchbarSetting?: Flex__<"div">;
+  topPanel?: Flex__<"div">;
   settingIcon?: Flex__<"svg">;
   searchbar?: Flex__<typeof TextInput>;
   bookmarkedPatients?: Flex__<typeof ApiFetcherComponent>;
@@ -157,10 +169,24 @@ function PlasmicHomepage__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "searchbar.value",
+        path: "bookmarkedSelected",
         type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          $props.bookmarkedSelected
+      },
+      {
+        path: "serviceSelected",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.serviceSelected
+      },
+      {
+        path: "bothFilterSelected",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          $props.bothFilterSelected
       },
       {
         path: "commentButton.isDisabled",
@@ -169,7 +195,13 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "searchedPatientBookmarkIcon[].selected",
+        path: "searchbar.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "searchedPatientBookmarkIcon[].selected2",
         type: "private",
         variableType: "boolean"
       }
@@ -219,9 +251,9 @@ function PlasmicHomepage__RenderFunc(props: {
           className={classNames(projectcss.all, sty.pageContent)}
         >
           <div
-            data-plasmic-name={"searchbarSetting"}
-            data-plasmic-override={overrides.searchbarSetting}
-            className={classNames(projectcss.all, sty.searchbarSetting)}
+            data-plasmic-name={"topPanel"}
+            data-plasmic-override={overrides.topPanel}
+            className={classNames(projectcss.all, sty.topPanel)}
           >
             <MenuIcon
               data-plasmic-name={"settingIcon"}
@@ -230,7 +262,7 @@ function PlasmicHomepage__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
-                $steps["goToSetting"] = true
+                $steps["goToUserSetting"] = true
                   ? (() => {
                       const actionArgs = { destination: `/user/setting` };
                       return (({ destination }) => {
@@ -248,11 +280,11 @@ function PlasmicHomepage__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["goToSetting"] != null &&
-                  typeof $steps["goToSetting"] === "object" &&
-                  typeof $steps["goToSetting"].then === "function"
+                  $steps["goToUserSetting"] != null &&
+                  typeof $steps["goToUserSetting"] === "object" &&
+                  typeof $steps["goToUserSetting"].then === "function"
                 ) {
-                  $steps["goToSetting"] = await $steps["goToSetting"];
+                  $steps["goToUserSetting"] = await $steps["goToUserSetting"];
                 }
               }}
               role={"img"}
@@ -264,7 +296,7 @@ function PlasmicHomepage__RenderFunc(props: {
               className={classNames("__wab_instance", sty.searchbar)}
               endIcon={
                 <Icons8ClosesvgIcon
-                  className={classNames(projectcss.all, sty.svg__mRwyU)}
+                  className={classNames(projectcss.all, sty.svg__i7Mco)}
                   onClick={async event => {
                     const $steps = {};
 
@@ -304,7 +336,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       ];
                     }
 
-                    $steps["runActionOnFavPatients"] =
+                    $steps["runActionOnBookmarkedPatients"] =
                       $steps.updateSearchbarValue.status === 200
                         ? (() => {
                             const actionArgs = {
@@ -319,13 +351,14 @@ function PlasmicHomepage__RenderFunc(props: {
                           })()
                         : undefined;
                     if (
-                      $steps["runActionOnFavPatients"] != null &&
-                      typeof $steps["runActionOnFavPatients"] === "object" &&
-                      typeof $steps["runActionOnFavPatients"].then ===
+                      $steps["runActionOnBookmarkedPatients"] != null &&
+                      typeof $steps["runActionOnBookmarkedPatients"] ===
+                        "object" &&
+                      typeof $steps["runActionOnBookmarkedPatients"].then ===
                         "function"
                     ) {
-                      $steps["runActionOnFavPatients"] = await $steps[
-                        "runActionOnFavPatients"
+                      $steps["runActionOnBookmarkedPatients"] = await $steps[
+                        "runActionOnBookmarkedPatients"
                       ];
                     }
                   }}
@@ -342,7 +375,7 @@ function PlasmicHomepage__RenderFunc(props: {
               }
               startIcon={
                 <SearchsvgIcon
-                  className={classNames(projectcss.all, sty.svg__nPrTh)}
+                  className={classNames(projectcss.all, sty.svg__iIknF)}
                   role={"img"}
                 />
               }
@@ -368,28 +401,24 @@ function PlasmicHomepage__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
-                  {(
-                    hasVariant(globalVariants, "screen", "mobileFirst")
-                      ? $ctx.fetched_data.loading == true
-                      : (() => {
-                          try {
-                            return $ctx.fetched_data.loading === true;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return true;
-                            }
-                            throw e;
-                          }
-                        })()
-                  ) ? (
+                  {(() => {
+                    try {
+                      return $ctx.fetched_data.loading === true;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
                     <div
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.text__xrr1P
+                        sty.text__bPmfB
                       )}
                     >
                       {
@@ -397,14 +426,28 @@ function PlasmicHomepage__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {$ctx.fetched_data.loading === false &&
-                  $state.searchbar.value === "" &&
-                  $ctx.fetched_data.data !== "" ? (
+                  {(() => {
+                    try {
+                      return (
+                        $ctx.fetched_data.loading === false &&
+                        $state.searchbar.value === "" &&
+                        $ctx.fetched_data.data !== ""
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
                     <div
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.text__tXFgc
+                        sty.text___4NWqk
                       )}
                     >
                       {
@@ -433,7 +476,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.text__sfj2Z
+                        sty.text__lg59U
                       )}
                     >
                       {
@@ -441,9 +484,23 @@ function PlasmicHomepage__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {$ctx.fetched_data.loading === false &&
-                  $state.searchbar.value !== "" &&
-                  $ctx.fetched_data.data === "" ? (
+                  {(() => {
+                    try {
+                      return (
+                        $ctx.fetched_data.loading === false &&
+                        $state.searchbar.value !== "" &&
+                        $ctx.fetched_data.data === ""
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
                     <div
                       data-plasmic-name={
                         "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"
@@ -478,12 +535,12 @@ function PlasmicHomepage__RenderFunc(props: {
                     }
                   })() ? (
                     <div
-                      className={classNames(projectcss.all, sty.freeBox__z4HP)}
+                      className={classNames(projectcss.all, sty.freeBox__zgr5)}
                     >
                       <div
                         className={classNames(
                           projectcss.all,
-                          sty.freeBox__sWlYr
+                          sty.freeBox__meyUm
                         )}
                       >
                         <BookmarkPlusSvgrepoComsvgIcon
@@ -510,7 +567,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         className={classNames(
                           projectcss.all,
                           projectcss.__wab_text,
-                          sty.text__vy9MM
+                          sty.text___3YOe4
                         )}
                       >
                         <React.Fragment>
@@ -538,11 +595,19 @@ function PlasmicHomepage__RenderFunc(props: {
                       </div>
                     </div>
                   ) : null}
-                  {(
-                    hasVariant(globalVariants, "screen", "mobileFirst")
-                      ? $ctx.fetched_data.data !== ""
-                      : $ctx.fetched_data.data !== ""
-                  )
+                  {(() => {
+                    try {
+                      return $ctx.fetched_data.data !== "";
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })()
                     ? (_par =>
                         !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                         (() => {
@@ -606,12 +671,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                     "__wab_instance",
                                     sty.searchedPatientBookmarkIcon
                                   ),
-                                  onSelectedChange: generateStateOnChangeProp(
+                                  onSelected2Change: generateStateOnChangeProp(
                                     $state,
                                     [
                                       "searchedPatientBookmarkIcon",
                                       __plasmic_idx_0,
-                                      "selected"
+                                      "selected2"
                                     ]
                                   ),
                                   patientId: (() => {
@@ -628,42 +693,46 @@ function PlasmicHomepage__RenderFunc(props: {
                                       throw e;
                                     }
                                   })(),
-                                  selected: generateStateValueProp($state, [
+                                  selected2: generateStateValueProp($state, [
                                     "searchedPatientBookmarkIcon",
                                     __plasmic_idx_0,
-                                    "selected"
+                                    "selected2"
                                   ]),
                                   trigerReload: async () => {
                                     const $steps = {};
 
-                                    $steps["runActionOnFavPatients"] = true
-                                      ? (() => {
-                                          const actionArgs = {
-                                            tplRef: "bookmarkedPatients",
-                                            action: "reload"
-                                          };
-                                          return (({
-                                            tplRef,
-                                            action,
-                                            args
-                                          }) => {
-                                            return $refs?.[tplRef]?.[action]?.(
-                                              ...(args ?? [])
-                                            );
-                                          })?.apply(null, [actionArgs]);
-                                        })()
-                                      : undefined;
+                                    $steps["runActionOnBookmarkedPatients"] =
+                                      true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              tplRef: "bookmarkedPatients",
+                                              action: "reload"
+                                            };
+                                            return (({
+                                              tplRef,
+                                              action,
+                                              args
+                                            }) => {
+                                              return $refs?.[tplRef]?.[
+                                                action
+                                              ]?.(...(args ?? []));
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
                                     if (
-                                      $steps["runActionOnFavPatients"] !=
+                                      $steps["runActionOnBookmarkedPatients"] !=
                                         null &&
                                       typeof $steps[
-                                        "runActionOnFavPatients"
+                                        "runActionOnBookmarkedPatients"
                                       ] === "object" &&
-                                      typeof $steps["runActionOnFavPatients"]
-                                        .then === "function"
+                                      typeof $steps[
+                                        "runActionOnBookmarkedPatients"
+                                      ].then === "function"
                                     ) {
-                                      $steps["runActionOnFavPatients"] =
-                                        await $steps["runActionOnFavPatients"];
+                                      $steps["runActionOnBookmarkedPatients"] =
+                                        await $steps[
+                                          "runActionOnBookmarkedPatients"
+                                        ];
                                     }
                                   }
                                 };
@@ -672,7 +741,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   $state,
                                   [
                                     {
-                                      name: "searchedPatientBookmarkIcon[].selected",
+                                      name: "searchedPatientBookmarkIcon[].selected2",
                                       initFunc: ({
                                         $props,
                                         $state,
@@ -853,7 +922,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 onClick={async event => {
                                   const $steps = {};
 
-                                  $steps["goToImagingReport1"] = true
+                                  $steps["goToImagingReportList"] = true
                                     ? (() => {
                                         const actionArgs = {
                                           destination: `/patient/${(() => {
@@ -890,15 +959,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
-                                    $steps["goToImagingReport1"] != null &&
-                                    typeof $steps["goToImagingReport1"] ===
+                                    $steps["goToImagingReportList"] != null &&
+                                    typeof $steps["goToImagingReportList"] ===
                                       "object" &&
-                                    typeof $steps["goToImagingReport1"].then ===
-                                      "function"
+                                    typeof $steps["goToImagingReportList"]
+                                      .then === "function"
                                   ) {
-                                    $steps["goToImagingReport1"] = await $steps[
-                                      "goToImagingReport1"
-                                    ];
+                                    $steps["goToImagingReportList"] =
+                                      await $steps["goToImagingReportList"];
                                   }
                                 }}
                                 src={{
@@ -1010,7 +1078,7 @@ function PlasmicHomepage__RenderFunc(props: {
           target={true}
         >
           <Icon2Icon
-            className={classNames(projectcss.all, sty.svg__ijSG)}
+            className={classNames(projectcss.all, sty.svg__c1FGp)}
             role={"img"}
           />
 
@@ -1018,7 +1086,7 @@ function PlasmicHomepage__RenderFunc(props: {
             className={classNames(
               projectcss.all,
               projectcss.__wab_text,
-              sty.text__mAIy
+              sty.text__dtHRl
             )}
           >
             {""}
@@ -1047,7 +1115,7 @@ const PlasmicDescendants = {
   homepage: [
     "homepage",
     "pageContent",
-    "searchbarSetting",
+    "topPanel",
     "settingIcon",
     "searchbar",
     "bookmarkedPatients",
@@ -1071,7 +1139,7 @@ const PlasmicDescendants = {
   ],
   pageContent: [
     "pageContent",
-    "searchbarSetting",
+    "topPanel",
     "settingIcon",
     "searchbar",
     "bookmarkedPatients",
@@ -1090,7 +1158,7 @@ const PlasmicDescendants = {
     "radiologyReport",
     "laboratoryData"
   ],
-  searchbarSetting: ["searchbarSetting", "settingIcon", "searchbar"],
+  topPanel: ["topPanel", "settingIcon", "searchbar"],
   settingIcon: ["settingIcon"],
   searchbar: ["searchbar"],
   bookmarkedPatients: [
@@ -1155,7 +1223,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   homepage: "div";
   pageContent: "div";
-  searchbarSetting: "div";
+  topPanel: "div";
   settingIcon: "svg";
   searchbar: typeof TextInput;
   bookmarkedPatients: typeof ApiFetcherComponent;
@@ -1239,7 +1307,7 @@ export const PlasmicHomepage = Object.assign(
   {
     // Helper components rendering sub-elements
     pageContent: makeNodeComponent("pageContent"),
-    searchbarSetting: makeNodeComponent("searchbarSetting"),
+    topPanel: makeNodeComponent("topPanel"),
     settingIcon: makeNodeComponent("settingIcon"),
     searchbar: makeNodeComponent("searchbar"),
     bookmarkedPatients: makeNodeComponent("bookmarkedPatients"),
