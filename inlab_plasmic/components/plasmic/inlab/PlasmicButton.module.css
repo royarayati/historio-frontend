@@ -52,6 +52,9 @@
 .rootcolor_link {
   background: #ffffff00;
 }
+.rootselected {
+  background: var(--token-pRs3-4jrQ4XQ);
+}
 .rootshape_round_size4_compact {
   padding: 6px;
 }
@@ -65,6 +68,9 @@
   min-width: 0;
   display: none;
 }
+.textcolor_clear___0K9KhQeFss {
+  display: none;
+}
 .text__cOxxN {
   position: relative;
   width: 100%;
@@ -73,6 +79,9 @@
   left: auto;
   top: auto;
   min-width: 0;
+  display: none;
+}
+.textcolor_clear__cOxxNQeFss {
   display: none;
 }
 .contentContainer {
@@ -106,6 +115,12 @@
 }
 .slotTargetChildrencolor_link {
   color: #0091ff;
+}
+.slotTargetChildrenselected {
+  color: #ffffff;
+}
+.slotTargetChildrendeselected {
+  color: #000000;
 }
 .startIconContainer {
   display: flex;

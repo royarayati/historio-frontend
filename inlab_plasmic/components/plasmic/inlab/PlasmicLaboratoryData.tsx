@@ -60,7 +60,6 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
@@ -74,9 +73,6 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3wItkax/css
-
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
-import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
 
@@ -99,7 +95,8 @@ export type PlasmicLaboratoryData__OverridesType = {
   laboratoryData?: Flex__<"div">;
   header?: Flex__<"div">;
   patientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
-  normalRangeButton?: Flex__<typeof Button>;
+  normalRangeButton?: Flex__<"div">;
+  normalRangeButtonCircle?: Flex__<"div">;
   labData?: Flex__<typeof ApiFetcherComponent>;
   laboratoryLists?: Flex__<"div">;
   laboratoryTitle?: Flex__<"div">;
@@ -112,7 +109,6 @@ export type PlasmicLaboratoryData__OverridesType = {
   issuedDatetime?: Flex__<"div">;
   labLists?: Flex__<"div">;
   factorNamevalue?: Flex__<"div">;
-  freeBox?: Flex__<"div">;
   normalFactorValue?: Flex__<"div">;
   abnormalFactorValue?: Flex__<"div">;
   normalRanged?: Flex__<"div">;
@@ -169,12 +165,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         type: "private",
         variableType: "variant",
         initFunc: ({ $props, $state, $queries, $ctx }) => $props.viewNormalRange
-      },
-      {
-        path: "normalRangeButton.isDisabled",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -260,7 +250,14 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text__t37T4
+                    sty.text__t37T4,
+                    {
+                      [sty.textviewNormalRange__t37T4Bwg80]: hasVariant(
+                        $state,
+                        "viewNormalRange",
+                        "viewNormalRange"
+                      )
+                    }
                   )}
                 >
                   <React.Fragment>
@@ -298,71 +295,97 @@ ${ageMonths} months ${
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
-        </div>
-        <Button
-          data-plasmic-name={"normalRangeButton"}
-          data-plasmic-override={overrides.normalRangeButton}
-          className={classNames("__wab_instance", sty.normalRangeButton, {
-            [sty.normalRangeButtonviewNormalRange]: hasVariant(
-              $state,
-              "viewNormalRange",
-              "viewNormalRange"
-            )
-          })}
-          color={"blue"}
-          isDisabled={generateStateValueProp($state, [
-            "normalRangeButton",
-            "isDisabled"
-          ])}
-          onClick={async event => {
-            const $steps = {};
-
-            $steps["updateViewNormalRange"] = true
-              ? (() => {
-                  const actionArgs = {
-                    vgroup: "viewNormalRange",
-                    operation: 2,
-                    value: "viewNormalRange"
-                  };
-                  return (({ vgroup, value }) => {
-                    if (typeof value === "string") {
-                      value = [value];
-                    }
-
-                    const oldValue = $stateGet($state, vgroup);
-                    $stateSet($state, vgroup, !oldValue);
-                    return !oldValue;
-                  })?.apply(null, [actionArgs]);
-                })()
-              : undefined;
-            if (
-              $steps["updateViewNormalRange"] != null &&
-              typeof $steps["updateViewNormalRange"] === "object" &&
-              typeof $steps["updateViewNormalRange"].then === "function"
-            ) {
-              $steps["updateViewNormalRange"] = await $steps[
-                "updateViewNormalRange"
-              ];
-            }
-          }}
-          onIsDisabledChange={(...eventArgs) => {
-            generateStateOnChangeProp($state, [
-              "normalRangeButton",
-              "isDisabled"
-            ])(eventArgs[0]);
-          }}
-          shape={"rounded"}
-        >
           <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text___4D8Ob
-            )}
+            data-plasmic-name={"normalRangeButton"}
+            data-plasmic-override={overrides.normalRangeButton}
+            className={classNames(projectcss.all, sty.normalRangeButton, {
+              [sty.normalRangeButtonviewNormalRange]: hasVariant(
+                $state,
+                "viewNormalRange",
+                "viewNormalRange"
+              )
+            })}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["updateViewNormalRange"] = true
+                ? (() => {
+                    const actionArgs = {
+                      vgroup: "viewNormalRange",
+                      operation: 2,
+                      value: "viewNormalRange"
+                    };
+                    return (({ vgroup, value }) => {
+                      if (typeof value === "string") {
+                        value = [value];
+                      }
+
+                      const oldValue = $stateGet($state, vgroup);
+                      $stateSet($state, vgroup, !oldValue);
+                      return !oldValue;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateViewNormalRange"] != null &&
+                typeof $steps["updateViewNormalRange"] === "object" &&
+                typeof $steps["updateViewNormalRange"].then === "function"
+              ) {
+                $steps["updateViewNormalRange"] = await $steps[
+                  "updateViewNormalRange"
+                ];
+              }
+            }}
           >
-            {"Normal Ranges"}
+            <div
+              data-plasmic-name={"normalRangeButtonCircle"}
+              data-plasmic-override={overrides.normalRangeButtonCircle}
+              className={classNames(
+                projectcss.all,
+                sty.normalRangeButtonCircle,
+                {
+                  [sty.normalRangeButtonCircleviewNormalRange]: hasVariant(
+                    $state,
+                    "viewNormalRange",
+                    "viewNormalRange"
+                  )
+                }
+              )}
+            />
+
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__oI3Bw,
+                {
+                  [sty.textviewNormalRange__oI3BwBwg80]: hasVariant(
+                    $state,
+                    "viewNormalRange",
+                    "viewNormalRange"
+                  )
+                }
+              )}
+            >
+              {"Normal Ranges"}
+            </div>
+            {(
+              hasVariant($state, "viewNormalRange", "viewNormalRange")
+                ? true
+                : false
+            ) ? (
+              <div
+                className={classNames(projectcss.all, sty.freeBox__pziWk, {
+                  [sty.freeBoxviewNormalRange__pziWkBwg80]: hasVariant(
+                    $state,
+                    "viewNormalRange",
+                    "viewNormalRange"
+                  )
+                })}
+              />
+            ) : null}
           </div>
-        </Button>
+        </div>
         <ApiFetcherComponent
           data-plasmic-name={"labData"}
           data-plasmic-override={overrides.labData}
@@ -517,7 +540,15 @@ ${ageMonths} months ${
                               }
                             )}
                           >
-                            {"factor"}
+                            <React.Fragment>
+                              {currentItem.title
+                                .replace(" (  #* ) ", "")
+                                .replace(" (  # ) ", "")
+                                .replace("( #)", "")
+                                .replace("( #*)", "")
+                                .replace("* ( #*)", "")
+                                .replace("(  #* )", "")}
+                            </React.Fragment>
                           </div>
                           {(_par =>
                             !_par ? [] : Array.isArray(_par) ? _par : [_par])(
@@ -811,15 +842,11 @@ ${ageMonths} months ${
                                         )}
                                       >
                                         <div
-                                          data-plasmic-name={"freeBox"}
-                                          data-plasmic-override={
-                                            overrides.freeBox
-                                          }
                                           className={classNames(
                                             projectcss.all,
-                                            sty.freeBox,
+                                            sty.freeBox___4Tel,
                                             {
-                                              [sty.freeBoxviewNormalRange]:
+                                              [sty.freeBoxviewNormalRange___4TelBwg80]:
                                                 hasVariant(
                                                   $state,
                                                   "viewNormalRange",
@@ -1220,6 +1247,7 @@ const PlasmicDescendants = {
     "header",
     "patientDataApiFetcher",
     "normalRangeButton",
+    "normalRangeButtonCircle",
     "labData",
     "laboratoryLists",
     "laboratoryTitle",
@@ -1232,7 +1260,6 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
-    "freeBox",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged",
@@ -1246,9 +1273,15 @@ const PlasmicDescendants = {
     "redirectToNamespaceSelection",
     "onloadUserPatientInteractionCount"
   ],
-  header: ["header", "patientDataApiFetcher"],
+  header: [
+    "header",
+    "patientDataApiFetcher",
+    "normalRangeButton",
+    "normalRangeButtonCircle"
+  ],
   patientDataApiFetcher: ["patientDataApiFetcher"],
-  normalRangeButton: ["normalRangeButton"],
+  normalRangeButton: ["normalRangeButton", "normalRangeButtonCircle"],
+  normalRangeButtonCircle: ["normalRangeButtonCircle"],
   labData: [
     "labData",
     "laboratoryLists",
@@ -1262,7 +1295,6 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
-    "freeBox",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged"
@@ -1279,7 +1311,6 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
-    "freeBox",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged"
@@ -1295,7 +1326,6 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
-    "freeBox",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged"
@@ -1309,7 +1339,6 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
-    "freeBox",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged"
@@ -1320,7 +1349,6 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
-    "freeBox",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged"
@@ -1330,20 +1358,12 @@ const PlasmicDescendants = {
   labLists: [
     "labLists",
     "factorNamevalue",
-    "freeBox",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged"
   ],
   factorNamevalue: [
     "factorNamevalue",
-    "freeBox",
-    "normalFactorValue",
-    "abnormalFactorValue",
-    "normalRanged"
-  ],
-  freeBox: [
-    "freeBox",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged"
@@ -1381,7 +1401,8 @@ type NodeDefaultElementType = {
   laboratoryData: "div";
   header: "div";
   patientDataApiFetcher: typeof ApiFetcherComponent;
-  normalRangeButton: typeof Button;
+  normalRangeButton: "div";
+  normalRangeButtonCircle: "div";
   labData: typeof ApiFetcherComponent;
   laboratoryLists: "div";
   laboratoryTitle: "div";
@@ -1394,7 +1415,6 @@ type NodeDefaultElementType = {
   issuedDatetime: "div";
   labLists: "div";
   factorNamevalue: "div";
-  freeBox: "div";
   normalFactorValue: "div";
   abnormalFactorValue: "div";
   normalRanged: "div";
@@ -1472,6 +1492,7 @@ export const PlasmicLaboratoryData = Object.assign(
     header: makeNodeComponent("header"),
     patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
     normalRangeButton: makeNodeComponent("normalRangeButton"),
+    normalRangeButtonCircle: makeNodeComponent("normalRangeButtonCircle"),
     labData: makeNodeComponent("labData"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     laboratoryTitle: makeNodeComponent("laboratoryTitle"),
@@ -1484,7 +1505,6 @@ export const PlasmicLaboratoryData = Object.assign(
     issuedDatetime: makeNodeComponent("issuedDatetime"),
     labLists: makeNodeComponent("labLists"),
     factorNamevalue: makeNodeComponent("factorNamevalue"),
-    freeBox: makeNodeComponent("freeBox"),
     normalFactorValue: makeNodeComponent("normalFactorValue"),
     abnormalFactorValue: makeNodeComponent("abnormalFactorValue"),
     normalRanged: makeNodeComponent("normalRanged"),

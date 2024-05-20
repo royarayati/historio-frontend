@@ -1557,19 +1557,6 @@
           "cssFilePath": "plasmic/inlab/PlasmicFilterIcon.module.css",
           "scheme": "blackbox",
           "componentType": "component"
-        },
-        {
-          "id": "zrroSsNrWnZg",
-          "name": "BookmarkIcon",
-          "type": "managed",
-          "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicBookmarkIcon.tsx",
-          "importSpec": {
-            "modulePath": "BookmarkIcon.tsx"
-          },
-          "cssFilePath": "plasmic/inlab/PlasmicBookmarkIcon.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
         }
       ],
       "icons": [

@@ -35,7 +35,7 @@
     height: 35px;
     flex-grow: 1;
     flex-shrink: 1;
-    padding: 0px;
+    padding: 2px 5px 2px 2px;
     border-width: 0.5px;
     border-color: var(--token-9iYGdL7i3GKE);
   }
@@ -84,6 +84,7 @@
   margin-bottom: 0px;
   margin-left: calc(0px + 8px) !important;
   background: var(--token-zy6xhYnWF8Y7);
+  align-self: center;
 }
 .startIconContainershowStartIcon {
   margin-left: calc(0px + 8px) !important;
@@ -119,27 +120,28 @@
   left: auto;
   top: auto;
   background: var(--token-zy6xhYnWF8Y7);
-  font-size: 14px;
+  font-size: 16px;
   text-align: right;
   cursor: auto;
   pointer-events: auto;
   color: var(--token-IYO13gyYJHXG);
   font-weight: 700;
   height: 100%;
-  margin-top: 8px;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  margin-left: calc(8px + 8px) !important;
+  margin-top: 4px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  margin-left: calc(4px + 8px) !important;
+  align-self: center;
   min-width: 0;
   min-height: 0;
-  padding: 0px 4px 0px 0px;
+  padding: 0px 8px 0px 0px;
   border-width: 0px;
   border-style: none;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .input {
-    background: var(--token-Yq556PvPjGii);
-    font-size: 10px;
+    background: none;
+    font-size: 12px;
     text-align: right;
     max-width: 100%;
     width: 100%;
@@ -151,12 +153,13 @@
     transform: translateX(5px) translateY(0px) translateZ(0px);
     margin-left: calc(0px + 8px) !important;
     padding-right: 4px;
+    margin-right: 2px;
     min-width: 0;
     min-height: 0;
   }
 }
 .inputshowStartIcon {
-  margin-left: calc(8px + 8px) !important;
+  margin-left: calc(4px + 8px) !important;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .inputshowStartIcon {
@@ -165,28 +168,28 @@
 }
 .inputisDisabled {
   cursor: not-allowed;
-  margin-left: calc(8px + 8px) !important;
+  margin-left: calc(4px + 8px) !important;
 }
 .textInput:hover .input {
   background: var(--token-Yq556PvPjGii);
-  margin-left: calc(8px + 8px) !important;
+  margin-left: calc(4px + 8px) !important;
 }
 .textInput .input___focusVisibleWithin {
   background: var(--token-Yq556PvPjGii);
-  margin-left: calc(8px + 8px) !important;
+  margin-left: calc(4px + 8px) !important;
   outline: none;
   border-style: none;
 }
 .textInput .input:focus {
-  margin-left: calc(8px + 8px) !important;
+  margin-left: calc(4px + 8px) !important;
   outline: none;
 }
 .textInput .input___focusVisibleWithin:focus {
-  margin-left: calc(8px + 8px) !important;
+  margin-left: calc(4px + 8px) !important;
   outline: none;
 }
 .textInput .input::placeholder {
-  margin-left: calc(8px + 8px) !important;
+  margin-left: calc(4px + 8px) !important;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .textInput .input::placeholder {
@@ -194,11 +197,11 @@
   }
 }
 .textInput:hover .input::placeholder {
-  margin-left: calc(8px + 8px) !important;
+  margin-left: calc(4px + 8px) !important;
 }
 .textInput .input___focusVisibleWithin::placeholder {
   background: var(--token-Yq556PvPjGii);
-  margin-left: calc(8px + 8px) !important;
+  margin-left: calc(4px + 8px) !important;
   outline: none;
 }
 .endIconContainer {

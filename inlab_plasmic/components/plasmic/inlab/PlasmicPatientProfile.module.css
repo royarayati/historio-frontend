@@ -153,10 +153,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   max-width: 100%;
   margin-right: 0px;
+  min-width: 0;
+  min-height: 0;
   padding: 8px;
 }
 .text__aZwd {
@@ -222,7 +224,7 @@
   white-space: pre-wrap;
   min-width: 0;
 }
-.text___4ElHr {
+.text__zzbJi {
   position: relative;
   width: 100%;
   height: auto;
@@ -242,6 +244,26 @@
   white-space: pre-wrap;
   min-width: 0;
 }
+.text___4ElHr {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: var(--token-8PxxXPNrIohQ);
+  white-space: pre;
+  min-width: 0;
+}
+.pacsNumber2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: left;
+  white-space: pre-wrap;
+  min-width: 0;
+}
 .nameservicewardbed {
   display: flex;
   position: relative;
@@ -249,31 +271,30 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: auto;
+  height: 100%;
   max-width: 100%;
   margin-left: calc(0px + 4px) !important;
   margin-top: 0px;
   margin-right: 0px;
   margin-bottom: 0px;
   min-width: 0;
+  min-height: 0;
   padding: 8px;
 }
 .patientName {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   max-width: 100%;
   text-align: right;
-  padding-left: 0px;
-  padding-right: 0px;
-  flex-grow: 0;
+  flex-grow: 1;
   flex-shrink: 1;
-  padding-bottom: 8px;
   font-size: var(--token-hYndcje43OGL);
   white-space: pre-wrap;
   background: none;
   font-weight: 400;
-  min-width: 0;
-  min-height: 0;
+  align-self: flex-end;
+  text-transform: uppercase;
+  padding: 0px;
 }
 .text__qdLuE {
   position: relative;
@@ -339,36 +360,18 @@
   white-space: pre-wrap;
   min-width: 0;
 }
-.freeBox {
-  display: flex;
+.وضعتبمار {
   position: relative;
-  flex-direction: row;
-  width: 100%;
+  width: auto;
   height: auto;
   max-width: 100%;
-  background: #ffffff;
-  margin-top: calc(8px + 8px) !important;
-  align-self: auto;
-  min-width: 0;
-  padding: 8px;
-}
-.freeBox > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  min-width: 0;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-}
-.freeBox > :global(.__wab_flex-container) > *,
-.freeBox > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox > :global(.__wab_flex-container) > picture > img,
-.freeBox
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 8px;
+  text-align: right;
+  color: var(--token-Pxe4wDL2kJpb);
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 400;
+  align-self: flex-end;
+  white-space: pre-wrap;
+  padding: 0px;
 }
 .text__ivCly {
   position: relative;
@@ -380,7 +383,8 @@
   margin-right: 0px;
   font-size: var(--token-sOr3fJ5Up5fq);
   white-space: pre-wrap;
-  padding: 8px;
+  align-self: flex-end;
+  padding: 0px;
   border: 0px none var(--token-pRs3-4jrQ4XQ);
 }
 .text__fpWlo {
@@ -396,18 +400,25 @@
   padding: 8px;
   border: 0px none var(--token-pRs3-4jrQ4XQ);
 }
-.وضعتبمار {
-  position: relative;
-  width: auto;
-  height: auto;
+.bioArcPrescription:global(.__wab_instance) {
   max-width: 100%;
-  text-align: right;
-  color: var(--token-IYO13gyYJHXG);
-  font-size: var(--token-CdE1_0ZaCyT1);
-  font-weight: 400;
+  position: relative;
+  width: 100%;
   align-self: center;
-  white-space: pre-wrap;
-  padding: 8px;
+  min-width: 0;
+  display: none;
+}
+.svg__rCqW {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__jsFe3 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }
 .switchingTabs {
   display: flex;
