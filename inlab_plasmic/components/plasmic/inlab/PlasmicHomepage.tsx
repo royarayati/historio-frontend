@@ -78,7 +78,7 @@ import sty from "./PlasmicHomepage.module.css"; // plasmic-import: oQ9IYAdIiE5g/
 
 import BookmarkPlusSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg"; // plasmic-import: laC4EyEnFr3s/icon
 import BookmarkDashFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg"; // plasmic-import: OXlS9uB7Ffdy/icon
-import GearSvgrepoComsvgIcon from "./icons/PlasmicIcon__GearSvgrepoComsvg"; // plasmic-import: 3WLAeBup0ObK/icon
+import MenuIcon from "./icons/PlasmicIcon__Menu"; // plasmic-import: YlP_1riCYk4W/icon
 import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
 import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
@@ -127,7 +127,7 @@ export type PlasmicHomepage__OverridesType = {
   patientProfile?: Flex__<typeof PlasmicImg__>;
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratoryData?: Flex__<typeof PlasmicImg__>;
-  bottomPanel?: Flex__<"div">;
+  controlPanel?: Flex__<"div">;
   searchSetting?: Flex__<"div">;
   settingIcon?: Flex__<"svg">;
   searchbar?: Flex__<typeof TextInput>;
@@ -971,17 +971,17 @@ function PlasmicHomepage__RenderFunc(props: {
           </ApiFetcherComponent>
           <Stack__
             as={"div"}
-            data-plasmic-name={"bottomPanel"}
-            data-plasmic-override={overrides.bottomPanel}
+            data-plasmic-name={"controlPanel"}
+            data-plasmic-override={overrides.controlPanel}
             hasGap={true}
-            className={classNames(projectcss.all, sty.bottomPanel)}
+            className={classNames(projectcss.all, sty.controlPanel)}
           >
             <div
               data-plasmic-name={"searchSetting"}
               data-plasmic-override={overrides.searchSetting}
               className={classNames(projectcss.all, sty.searchSetting)}
             >
-              <GearSvgrepoComsvgIcon
+              <MenuIcon
                 data-plasmic-name={"settingIcon"}
                 data-plasmic-override={overrides.settingIcon}
                 className={classNames(projectcss.all, sty.settingIcon)}
@@ -1066,10 +1066,15 @@ function PlasmicHomepage__RenderFunc(props: {
                     role={"img"}
                   />
                 }
-                onChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, ["searchbar", "value"])(
-                    (e => e.target?.value).apply(null, eventArgs)
-                  );
+                onChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["searchbar", "value"])(
+                      (e => e.target?.value).apply(null, eventArgs)
+                    );
+                  }).apply(null, eventArgs);
+                  (async event => {
+                    const $steps = {};
+                  }).apply(null, eventArgs);
                 }}
                 placeholder={
                   hasVariant(globalVariants, "screen", "mobileFirst")
@@ -1383,11 +1388,11 @@ function PlasmicHomepage__RenderFunc(props: {
                             localStorage.getItem("filter_service_name") !== null
                           ) {
                             return (
-                              "بر اساس سرویس : " +
+                              "سرویس : " +
                               localStorage.getItem("filter_service_name")
                             );
                           } else {
-                            return "بر اساس سرویس";
+                            return "سرویس";
                           }
                         })();
                       } catch (e) {
@@ -1642,25 +1647,6 @@ function PlasmicHomepage__RenderFunc(props: {
                       ];
                     }
 
-                    $steps["reloadPatients"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            tplRef: "patients",
-                            action: "reload"
-                          };
-                          return (({ tplRef, action, args }) => {
-                            return $refs?.[tplRef]?.[action]?.(...(args ?? []));
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["reloadPatients"] != null &&
-                      typeof $steps["reloadPatients"] === "object" &&
-                      typeof $steps["reloadPatients"].then === "function"
-                    ) {
-                      $steps["reloadPatients"] = await $steps["reloadPatients"];
-                    }
-
                     $steps["consoleLog4"] = true
                       ? (() => {
                           const actionArgs = {
@@ -1681,6 +1667,25 @@ function PlasmicHomepage__RenderFunc(props: {
                       typeof $steps["consoleLog4"].then === "function"
                     ) {
                       $steps["consoleLog4"] = await $steps["consoleLog4"];
+                    }
+
+                    $steps["reloadPatients"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            tplRef: "patients",
+                            action: "reload"
+                          };
+                          return (({ tplRef, action, args }) => {
+                            return $refs?.[tplRef]?.[action]?.(...(args ?? []));
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["reloadPatients"] != null &&
+                      typeof $steps["reloadPatients"] === "object" &&
+                      typeof $steps["reloadPatients"].then === "function"
+                    ) {
+                      $steps["reloadPatients"] = await $steps["reloadPatients"];
                     }
                   }}
                   onIsDisabledChange={(...eventArgs) => {
@@ -1705,6 +1710,15 @@ function PlasmicHomepage__RenderFunc(props: {
                 >
                   {"\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"}
                 </Button>
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___4EgCq
+                )}
+              >
+                {":  \u0641\u06cc\u0644\u062a\u0631"}
               </div>
             </Stack__>
           </Stack__>
@@ -1809,10 +1823,21 @@ function PlasmicHomepage__RenderFunc(props: {
             data-plasmic-name={"services"}
             data-plasmic-override={overrides.services}
             className={classNames("__wab_instance", sty.services)}
-            headers={{
-              "X-Namespace":
-                "((localStorage.getItem('inlab_user_namespace_id'))) "
-            }}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             method={"GET"}
             path={"/api/v2/service"}
             ref={ref => {
@@ -2232,7 +2257,7 @@ const PlasmicDescendants = {
     "patientProfile",
     "radiologyReport",
     "laboratoryData",
-    "bottomPanel",
+    "controlPanel",
     "searchSetting",
     "settingIcon",
     "searchbar",
@@ -2271,7 +2296,7 @@ const PlasmicDescendants = {
     "patientProfile",
     "radiologyReport",
     "laboratoryData",
-    "bottomPanel",
+    "controlPanel",
     "searchSetting",
     "settingIcon",
     "searchbar",
@@ -2348,8 +2373,8 @@ const PlasmicDescendants = {
   patientProfile: ["patientProfile"],
   radiologyReport: ["radiologyReport"],
   laboratoryData: ["laboratoryData"],
-  bottomPanel: [
-    "bottomPanel",
+  controlPanel: [
+    "controlPanel",
     "searchSetting",
     "settingIcon",
     "searchbar",
@@ -2407,7 +2432,7 @@ type NodeDefaultElementType = {
   patientProfile: typeof PlasmicImg__;
   radiologyReport: typeof PlasmicImg__;
   laboratoryData: typeof PlasmicImg__;
-  bottomPanel: "div";
+  controlPanel: "div";
   searchSetting: "div";
   settingIcon: "svg";
   searchbar: typeof TextInput;
@@ -2512,7 +2537,7 @@ export const PlasmicHomepage = Object.assign(
     patientProfile: makeNodeComponent("patientProfile"),
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratoryData: makeNodeComponent("laboratoryData"),
-    bottomPanel: makeNodeComponent("bottomPanel"),
+    controlPanel: makeNodeComponent("controlPanel"),
     searchSetting: makeNodeComponent("searchSetting"),
     settingIcon: makeNodeComponent("settingIcon"),
     searchbar: makeNodeComponent("searchbar"),

@@ -371,6 +371,9 @@ function PlasmicTextInput__RenderFunc(props: {
         onChange={e => {
           generateStateOnChangeProp($state, ["input", "value"])(e.target.value);
         }}
+        onClick={async event => {
+          const $steps = {};
+        }}
         placeholder={args.placeholder}
         ref={ref => {
           $refs["input"] = ref;

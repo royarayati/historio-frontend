@@ -225,6 +225,10 @@
   margin-top: 32px;
   font-size: var(--token-CdE1_0ZaCyT1);
   white-space: pre-wrap;
+  left: auto;
+  top: auto;
+  bottom: auto;
+  right: auto;
   min-width: 0;
   border-radius: 5px;
   padding: 8px;

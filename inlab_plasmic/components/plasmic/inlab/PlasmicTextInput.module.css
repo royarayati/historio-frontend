@@ -35,7 +35,7 @@
     height: 35px;
     flex-grow: 1;
     flex-shrink: 1;
-    padding: 2px 5px 2px 2px;
+    padding: 2px 0px 2px 2px;
     border-width: 0.5px;
     border-color: var(--token-9iYGdL7i3GKE);
   }
@@ -152,8 +152,8 @@
     height: 100%;
     transform: translateX(5px) translateY(0px) translateZ(0px);
     margin-left: calc(0px + 8px) !important;
-    padding-right: 4px;
-    margin-right: 2px;
+    padding-right: 2px;
+    margin-right: 6px;
     min-width: 0;
     min-height: 0;
   }

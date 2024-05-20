@@ -230,6 +230,12 @@
   background: #ffffff;
   font-size: var(--token-CdE1_0ZaCyT1);
   white-space: pre-wrap;
+  position: absolute;
+  left: auto;
+  top: 5%;
+  bottom: auto;
+  right: auto;
+  z-index: 1;
   min-width: 0;
   border-radius: 5px;
   padding: 8px;

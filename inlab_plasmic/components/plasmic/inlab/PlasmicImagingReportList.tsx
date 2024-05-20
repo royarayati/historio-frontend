@@ -518,7 +518,7 @@ ${ageMonths} months ${
                     ) : null}
                   </Stack__>
                 ) : null}
-                {$ctx.fetched_data.loading === true ? (
+                {$ctx.fetched_data.loading == true ? (
                   <div
                     className={classNames(
                       projectcss.all,
