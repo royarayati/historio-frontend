@@ -658,126 +658,122 @@ ${ageMonths} months ${
                                 )}
                                 key={currentIndex}
                               >
-                                {currentItem.report_datetime !== null ? (
-                                  <div
-                                    data-plasmic-name={"reportDatetime"}
-                                    data-plasmic-override={
-                                      overrides.reportDatetime
+                                <div
+                                  data-plasmic-name={"reportDatetime"}
+                                  data-plasmic-override={
+                                    overrides.reportDatetime
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.reportDatetime,
+                                    {
+                                      [sty.reportDatetimeviewNormalRange]:
+                                        hasVariant(
+                                          $state,
+                                          "viewNormalRange",
+                                          "viewNormalRange"
+                                        )
                                     }
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.__wab_text,
-                                      sty.reportDatetime,
-                                      {
-                                        [sty.reportDatetimeviewNormalRange]:
-                                          hasVariant(
-                                            $state,
-                                            "viewNormalRange",
-                                            "viewNormalRange"
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      const gregorianDate = new Date(
+                                        currentItem.report_datetime
+                                      );
+                                      const shamsiDate =
+                                        new Intl.DateTimeFormat("fa-IR").format(
+                                          gregorianDate
+                                        );
+                                      const shamsiTime =
+                                        gregorianDate.toLocaleTimeString(
+                                          "fa-IR",
+                                          { hour12: false }
+                                        );
+                                      const englishDate = shamsiDate.replace(
+                                        /[۰-۹]/g,
+                                        d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
                                           )
-                                      }
-                                    )}
-                                  >
-                                    <React.Fragment>
-                                      {(() => {
-                                        const gregorianDate = new Date(
-                                          currentItem.report_datetime
-                                        );
-                                        const shamsiDate =
-                                          new Intl.DateTimeFormat(
-                                            "fa-IR"
-                                          ).format(gregorianDate);
-                                        const shamsiTime =
-                                          gregorianDate.toLocaleTimeString(
-                                            "fa-IR",
-                                            { hour12: false }
-                                          );
-                                        const englishDate = shamsiDate.replace(
-                                          /[۰-۹]/g,
-                                          d =>
-                                            String.fromCharCode(
-                                              d.charCodeAt(0) - 1728
-                                            )
+                                      );
+
+                                      // Extracting only the hour and minutes from shamsiTime
+                                      const englishTime = shamsiTime
+                                        .split(":")
+                                        .slice(0, 2)
+                                        .join(":")
+                                        .replace(/[۰-۹]/g, d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
                                         );
 
-                                        // Extracting only the hour and minutes from shamsiTime
-                                        const englishTime = shamsiTime
-                                          .split(":")
-                                          .slice(0, 2)
-                                          .join(":")
-                                          .replace(/[۰-۹]/g, d =>
-                                            String.fromCharCode(
-                                              d.charCodeAt(0) - 1728
-                                            )
+                                      return `${englishDate}  ${englishTime}`;
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                                <div
+                                  data-plasmic-name={"issuedDatetime"}
+                                  data-plasmic-override={
+                                    overrides.issuedDatetime
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.issuedDatetime
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      try {
+                                        return (() => {
+                                          const gregorianDate = new Date(
+                                            currentItem.issued_datetime
                                           );
-
-                                        return `${englishDate}  ${englishTime}`;
-                                      })()}
-                                    </React.Fragment>
-                                  </div>
-                                ) : null}
-                                {currentItem.report_datetime == null ? (
-                                  <div
-                                    data-plasmic-name={"issuedDatetime"}
-                                    data-plasmic-override={
-                                      overrides.issuedDatetime
-                                    }
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.__wab_text,
-                                      sty.issuedDatetime
-                                    )}
-                                  >
-                                    <React.Fragment>
-                                      {(() => {
-                                        try {
-                                          return (() => {
-                                            const gregorianDate = new Date(
-                                              currentItem.issued_datetime
+                                          const shamsiDate =
+                                            new Intl.DateTimeFormat(
+                                              "fa-IR"
+                                            ).format(gregorianDate);
+                                          const shamsiTime =
+                                            gregorianDate.toLocaleTimeString(
+                                              "fa-IR",
+                                              { hour12: false }
                                             );
-                                            const shamsiDate =
-                                              new Intl.DateTimeFormat(
-                                                "fa-IR"
-                                              ).format(gregorianDate);
-                                            const shamsiTime =
-                                              gregorianDate.toLocaleTimeString(
-                                                "fa-IR",
-                                                { hour12: false }
-                                              );
-                                            const englishDate =
-                                              shamsiDate.replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
+                                          const englishDate =
+                                            shamsiDate.replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
 
-                                            // Extracting only the hour and minutes from shamsiTime
-                                            const englishTime = shamsiTime
-                                              .split(":")
-                                              .slice(0, 2)
-                                              .join(":")
-                                              .replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
+                                          // Extracting only the hour and minutes from shamsiTime
+                                          const englishTime = shamsiTime
+                                            .split(":")
+                                            .slice(0, 2)
+                                            .join(":")
+                                            .replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
 
-                                            return `${englishDate}  ${englishTime}`;
-                                          })();
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return "";
-                                          }
-                                          throw e;
+                                          return `${englishDate}  ${englishTime}`;
+                                        })();
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return "";
                                         }
-                                      })()}
-                                    </React.Fragment>
-                                  </div>
-                                ) : null}
+                                        throw e;
+                                      }
+                                    })()}
+                                  </React.Fragment>
+                                </div>
                                 {(_par =>
                                   !_par
                                     ? []

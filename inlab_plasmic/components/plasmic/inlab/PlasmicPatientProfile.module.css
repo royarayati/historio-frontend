@@ -387,19 +387,6 @@
   padding: 0px;
   border: 0px none var(--token-pRs3-4jrQ4XQ);
 }
-.text__fpWlo {
-  position: relative;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  background: none;
-  color: var(--token-IYO13gyYJHXG);
-  margin-right: 0px;
-  font-size: var(--token-sOr3fJ5Up5fq);
-  white-space: pre-wrap;
-  padding: 8px;
-  border: 0px none var(--token-pRs3-4jrQ4XQ);
-}
 .bioArcPrescription:global(.__wab_instance) {
   max-width: 100%;
   position: relative;

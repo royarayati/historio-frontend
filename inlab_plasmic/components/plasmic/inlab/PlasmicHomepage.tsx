@@ -488,19 +488,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       </div>
                     </div>
                   ) : null}
-                  {(() => {
-                    try {
-                      return $ctx.fetched_data.loading === true;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return true;
-                      }
-                      throw e;
-                    }
-                  })() ? (
+                  {$ctx.fetched_data.loading == true ? (
                     <div
                       data-plasmic-name={
                         "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f"
@@ -1718,7 +1706,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   sty.text___4EgCq
                 )}
               >
-                {":  \u0641\u06cc\u0644\u062a\u0631"}
+                {"\u0641\u06cc\u0644\u062a\u0631 "}
               </div>
             </Stack__>
           </Stack__>

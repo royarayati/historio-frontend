@@ -344,6 +344,8 @@ function PlasmicTextInput__RenderFunc(props: {
 
           value: args.startIcon,
           className: classNames(sty.slotTargetStartIcon, {
+            [sty.slotTargetStartIcon___focusVisibleWithin]:
+              triggers.focusVisibleWithin_textInput,
             [sty.slotTargetStartIconshowStartIcon]: hasVariant(
               $state,
               "showStartIcon",

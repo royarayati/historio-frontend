@@ -474,6 +474,7 @@
   flex-grow: 0;
   min-width: 0;
   flex-shrink: 0;
+  display: none;
   padding: 4px;
   border-bottom: 0px none var(--token-Pxe4wDL2kJpb);
 }

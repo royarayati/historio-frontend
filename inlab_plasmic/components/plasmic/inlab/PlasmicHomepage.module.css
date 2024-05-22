@@ -506,8 +506,8 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  margin-top: calc(0px - 10px);
-  height: calc(100% + 10px);
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
 }
 .controlPanel > :global(.__wab_flex-container) > *,
 .controlPanel > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
@@ -517,7 +517,7 @@
   > :global(.__wab_slot)
   > picture
   > img {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .controlPanel {
@@ -798,6 +798,7 @@
   align-self: center;
   text-align: right;
   margin-left: calc(5px + 5px) !important;
+  padding-right: 2px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .text___4EgCq {
@@ -957,14 +958,23 @@
 .svg___5W4Yy {
   position: relative;
   object-fit: cover;
-  max-width: 100%;
+  max-width: 50px;
   align-self: flex-start;
-  height: 25px;
   color: var(--token-RvPI6LyeIPmd);
   left: auto;
   top: auto;
   margin-right: 30px;
+  width: 100%;
+  height: 100%;
+  max-height: 60%;
+  min-width: 0;
+  min-height: 0;
   border-radius: 8px;
   border-width: 1px;
   border-style: solid;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .svg___5W4Yy {
+    max-height: 50%;
+  }
 }

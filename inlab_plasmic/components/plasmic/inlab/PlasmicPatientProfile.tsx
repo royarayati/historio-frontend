@@ -564,28 +564,32 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631"
                             }
                           </div>
-                          {$ctx.fetched_data.data.dismissed == 1 ? (
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__ivCly
-                              )}
-                            >
-                              {"\u062a\u0631\u062e\u06cc\u0635"}
-                            </div>
-                          ) : null}
-                          {$ctx.fetched_data.data.dismissed == 0 ? (
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__fpWlo
-                              )}
-                            >
-                              {"\u0628\u0633\u062a\u0631\u06cc "}
-                            </div>
-                          ) : null}
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__ivCly
+                            )}
+                          >
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return $ctx.fetched_data.data.dismissed
+                                    ? "ترخیص"
+                                    : "بستری";
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "\u062a\u0631\u062e\u06cc\u0635";
+                                  }
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
+                          </div>
                         </div>
                       </Stack__>
                       <Button
