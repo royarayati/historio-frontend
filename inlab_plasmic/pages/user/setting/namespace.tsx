@@ -3,7 +3,7 @@
 import * as React from "react";
 import { PageParamsProvider as PageParamsProvider__ } from "@plasmicapp/react-web/lib/host";
 import GlobalContextsProvider from "../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
-import { ScreenVariantProvider } from "../../../components/plasmic/inlab/PlasmicGlobalVariant__Screen";
+
 import { PlasmicNamespaceSelection } from "../../../components/plasmic/inlab/PlasmicNamespaceSelection";
 import { useRouter } from "next/router";
 

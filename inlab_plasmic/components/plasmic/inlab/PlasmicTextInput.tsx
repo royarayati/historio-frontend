@@ -344,6 +344,8 @@ function PlasmicTextInput__RenderFunc(props: {
 
           value: args.startIcon,
           className: classNames(sty.slotTargetStartIcon, {
+            [sty.slotTargetStartIcon___focusVisibleWithin]:
+              triggers.focusVisibleWithin_textInput,
             [sty.slotTargetStartIconshowStartIcon]: hasVariant(
               $state,
               "showStartIcon",
@@ -370,6 +372,9 @@ function PlasmicTextInput__RenderFunc(props: {
         }
         onChange={e => {
           generateStateOnChangeProp($state, ["input", "value"])(e.target.value);
+        }}
+        onClick={async event => {
+          const $steps = {};
         }}
         placeholder={args.placeholder}
         ref={ref => {

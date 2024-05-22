@@ -60,6 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
@@ -73,6 +74,9 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicPatientProfile.module.css"; // plasmic-import: Ev8txsbuZl9W/css
+
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
 
@@ -96,13 +100,14 @@ export type PlasmicPatientProfile__OverridesType = {
   admissionDate?: Flex__<"div">;
   patientNo?: Flex__<"div">;
   pacsNumber?: Flex__<"div">;
+  pacsNumber2?: Flex__<"div">;
   nameservicewardbed?: Flex__<"div">;
   patientName?: Flex__<"div">;
   patientService?: Flex__<"div">;
   patientWard?: Flex__<"div">;
   patientRoomBed?: Flex__<"div">;
-  freeBox?: Flex__<"div">;
   وضعتبمار?: Flex__<"div">;
+  bioArcPrescription?: Flex__<typeof Button>;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
@@ -144,6 +149,24 @@ function PlasmicPatientProfile__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const currentUser = useCurrentUser?.() || {};
+
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "bioArcPrescription.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
 
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsjEqVmdAbnKYc()
@@ -368,7 +391,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.text___4ElHr
+                              sty.text__zzbJi
                             )}
                           >
                             {"PACS"}
@@ -384,6 +407,28 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           >
                             <React.Fragment>
                               {$ctx.fetched_data.data.admission_id}
+                            </React.Fragment>
+                          </div>
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text___4ElHr
+                            )}
+                          >
+                            {"Phone Number"}
+                          </div>
+                          <div
+                            data-plasmic-name={"pacsNumber2"}
+                            data-plasmic-override={overrides.pacsNumber2}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.pacsNumber2
+                            )}
+                          >
+                            <React.Fragment>
+                              {$ctx.fetched_data.data.phone_number_1}
                             </React.Fragment>
                           </div>
                         </div>
@@ -417,8 +462,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                 const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
                                 if (ageYears < 1) {
                                   const ageMonths = ageDate.getUTCMonth();
-                                  return `${fullName} 
-${ageMonths} months ${
+                                  return `${fullName} ${ageMonths} months ${
                                     $ctx.fetched_data.data.gender === "F"
                                       ? " ♀️"
                                       : $ctx.fetched_data.data.gender === "M"
@@ -426,7 +470,7 @@ ${ageMonths} months ${
                                       : ""
                                   }`;
                                 } else {
-                                  return `${fullName} ${ageYears} ${
+                                  return `${fullName} ${ageYears}${
                                     $ctx.fetched_data.data.gender === "F"
                                       ? " ♀️"
                                       : $ctx.fetched_data.data.gender === "M"
@@ -505,16 +549,21 @@ ${ageMonths} months ${
                                 $ctx.fetched_data.data.bed}
                             </React.Fragment>
                           </div>
-                        </div>
-                      </Stack__>
-                      <Stack__
-                        as={"div"}
-                        data-plasmic-name={"freeBox"}
-                        data-plasmic-override={overrides.freeBox}
-                        hasGap={true}
-                        className={classNames(projectcss.all, sty.freeBox)}
-                      >
-                        {$ctx.fetched_data.data.dismissed == 1 ? (
+                          <div
+                            data-plasmic-name={
+                              "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+                            }
+                            data-plasmic-override={overrides.وضعتبمار}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.وضعتبمار
+                            )}
+                          >
+                            {
+                              "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631"
+                            }
+                          </div>
                           <div
                             className={classNames(
                               projectcss.all,
@@ -522,36 +571,78 @@ ${ageMonths} months ${
                               sty.text__ivCly
                             )}
                           >
-                            {"\u062a\u0631\u062e\u06cc\u0635"}
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return $ctx.fetched_data.data.dismissed
+                                    ? "ترخیص"
+                                    : "بستری";
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "\u062a\u0631\u062e\u06cc\u0635";
+                                  }
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
                           </div>
-                        ) : null}
-                        {$ctx.fetched_data.data.dismissed == 0 ? (
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__fpWlo
-                            )}
-                          >
-                            {"\u0628\u0633\u062a\u0631\u06cc "}
-                          </div>
-                        ) : null}
-                        <div
-                          data-plasmic-name={
-                            "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
-                          }
-                          data-plasmic-override={overrides.وضعتبمار}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.وضعتبمار
-                          )}
-                        >
-                          {
-                            "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631"
-                          }
                         </div>
                       </Stack__>
+                      <Button
+                        data-plasmic-name={"bioArcPrescription"}
+                        data-plasmic-override={overrides.bioArcPrescription}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.bioArcPrescription
+                        )}
+                        color={"blue"}
+                        isDisabled={generateStateValueProp($state, [
+                          "bioArcPrescription",
+                          "isDisabled"
+                        ])}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["goToPage"] = true
+                            ? (() => {
+                                const actionArgs = {};
+                                return (({ destination }) => {
+                                  if (
+                                    typeof destination === "string" &&
+                                    destination.startsWith("#")
+                                  ) {
+                                    document
+                                      .getElementById(destination.substr(1))
+                                      .scrollIntoView({ behavior: "smooth" });
+                                  } else {
+                                    __nextRouter?.push(destination);
+                                  }
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["goToPage"] != null &&
+                            typeof $steps["goToPage"] === "object" &&
+                            typeof $steps["goToPage"].then === "function"
+                          ) {
+                            $steps["goToPage"] = await $steps["goToPage"];
+                          }
+                        }}
+                        onIsDisabledChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bioArcPrescription",
+                            "isDisabled"
+                          ])(eventArgs[0]);
+                        }}
+                      >
+                        {
+                          "\u0646\u0633\u062e\u0647 \u0646\u0648\u06cc\u0633\u06cc \u0628\u0627 \u0628\u06cc\u0648\u0622\u0631\u06a9 "
+                        }
+                      </Button>
                     </Stack__>
                   ) : null}
                 </React.Fragment>
@@ -623,13 +714,14 @@ const PlasmicDescendants = {
     "admissionDate",
     "patientNo",
     "pacsNumber",
+    "pacsNumber2",
     "nameservicewardbed",
     "patientName",
     "patientService",
     "patientWard",
     "patientRoomBed",
-    "freeBox",
     "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
+    "bioArcPrescription",
     "switchingTabs",
     "switchingTab",
     "redirectToLoginPage",
@@ -646,13 +738,14 @@ const PlasmicDescendants = {
     "admissionDate",
     "patientNo",
     "pacsNumber",
+    "pacsNumber2",
     "nameservicewardbed",
     "patientName",
     "patientService",
     "patientWard",
     "patientRoomBed",
-    "freeBox",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
+    "bioArcPrescription"
   ],
   patientData: [
     "patientData",
@@ -662,13 +755,14 @@ const PlasmicDescendants = {
     "admissionDate",
     "patientNo",
     "pacsNumber",
+    "pacsNumber2",
     "nameservicewardbed",
     "patientName",
     "patientService",
     "patientWard",
     "patientRoomBed",
-    "freeBox",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
+    "bioArcPrescription"
   ],
   patientProfileBox: [
     "patientProfileBox",
@@ -677,36 +771,41 @@ const PlasmicDescendants = {
     "admissionDate",
     "patientNo",
     "pacsNumber",
+    "pacsNumber2",
     "nameservicewardbed",
     "patientName",
     "patientService",
     "patientWard",
-    "patientRoomBed"
+    "patientRoomBed",
+    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
   ],
   nationalIdadmissionTimeNopacs: [
     "nationalIdadmissionTimeNopacs",
     "nationalId",
     "admissionDate",
     "patientNo",
-    "pacsNumber"
+    "pacsNumber",
+    "pacsNumber2"
   ],
   nationalId: ["nationalId"],
   admissionDate: ["admissionDate"],
   patientNo: ["patientNo"],
   pacsNumber: ["pacsNumber"],
+  pacsNumber2: ["pacsNumber2"],
   nameservicewardbed: [
     "nameservicewardbed",
     "patientName",
     "patientService",
     "patientWard",
-    "patientRoomBed"
+    "patientRoomBed",
+    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
   ],
   patientName: ["patientName"],
   patientService: ["patientService"],
   patientWard: ["patientWard"],
   patientRoomBed: ["patientRoomBed"],
-  freeBox: ["freeBox", "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"],
   وضعتبمار: ["\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"],
+  bioArcPrescription: ["bioArcPrescription"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"],
   redirectToLoginPage: ["redirectToLoginPage"],
@@ -727,13 +826,14 @@ type NodeDefaultElementType = {
   admissionDate: "div";
   patientNo: "div";
   pacsNumber: "div";
+  pacsNumber2: "div";
   nameservicewardbed: "div";
   patientName: "div";
   patientService: "div";
   patientWard: "div";
   patientRoomBed: "div";
-  freeBox: "div";
   وضعتبمار: "div";
+  bioArcPrescription: typeof Button;
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   redirectToLoginPage: typeof RedirectToLoginPage;
@@ -812,15 +912,16 @@ export const PlasmicPatientProfile = Object.assign(
     admissionDate: makeNodeComponent("admissionDate"),
     patientNo: makeNodeComponent("patientNo"),
     pacsNumber: makeNodeComponent("pacsNumber"),
+    pacsNumber2: makeNodeComponent("pacsNumber2"),
     nameservicewardbed: makeNodeComponent("nameservicewardbed"),
     patientName: makeNodeComponent("patientName"),
     patientService: makeNodeComponent("patientService"),
     patientWard: makeNodeComponent("patientWard"),
     patientRoomBed: makeNodeComponent("patientRoomBed"),
-    freeBox: makeNodeComponent("freeBox"),
     وضعتبمار: makeNodeComponent(
       "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
     ),
+    bioArcPrescription: makeNodeComponent("bioArcPrescription"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
