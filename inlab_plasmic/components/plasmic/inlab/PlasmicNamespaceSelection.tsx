@@ -60,6 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectNamespaceSelectionToHomepage from "../../RedirectNamespaceSelectionToHomepage"; // plasmic-import: PfCRFyUxWRzS/component
 
@@ -87,9 +88,11 @@ export const PlasmicNamespaceSelection__ArgProps = new Array<ArgPropType>();
 export type PlasmicNamespaceSelection__OverridesType = {
   namespaceSelection?: Flex__<"div">;
   namespaces2?: Flex__<"div">;
+  text?: Flex__<"div">;
   namespaces?: Flex__<typeof ApiFetcherComponent>;
   namespacesList?: Flex__<"div">;
   namespaceName?: Flex__<"div">;
+  shareTool?: Flex__<typeof ShareTool>;
   redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
   redirectNamespaceSelectionToHomepage?: Flex__<
     typeof RedirectNamespaceSelectionToHomepage
@@ -126,8 +129,6 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
-
-  const $globalActions = useGlobalActions?.();
 
   const currentUser = useCurrentUser?.() || {};
 
@@ -170,10 +171,12 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
             className={classNames(projectcss.all, sty.namespaces2)}
           >
             <div
+              data-plasmic-name={"text"}
+              data-plasmic-override={overrides.text}
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.text___8UYuU
+                sty.text
               )}
             >
               {
@@ -322,69 +325,11 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                 )}
               </DataCtxReader__>
             </ApiFetcherComponent>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text___3VsFj
-              )}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["logout"] = true
-                  ? (() => {
-                      const actionArgs = { args: [] };
-                      return $globalActions["AuthGlobalContext.logout"]?.apply(
-                        null,
-                        [...actionArgs.args]
-                      );
-                    })()
-                  : undefined;
-                if (
-                  $steps["logout"] != null &&
-                  typeof $steps["logout"] === "object" &&
-                  typeof $steps["logout"].then === "function"
-                ) {
-                  $steps["logout"] = await $steps["logout"];
-                }
-
-                $steps["goToInlabLogin"] = !$steps.logout
-                  ? (() => {
-                      const actionArgs = { destination: `/inlab_login` };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToInlabLogin"] != null &&
-                  typeof $steps["goToInlabLogin"] === "object" &&
-                  typeof $steps["goToInlabLogin"].then === "function"
-                ) {
-                  $steps["goToInlabLogin"] = await $steps["goToInlabLogin"];
-                }
-              }}
-            >
-              <React.Fragment>
-                <span
-                  className={"plasmic_default__all plasmic_default__span"}
-                  style={{ fontWeight: 700 }}
-                >
-                  {
-                    "\u062e\u0631\u0648\u062c \u0627\u0632 \u0627\u06cc\u0646\u0644\u0628"
-                  }
-                </span>
-              </React.Fragment>
-            </div>
+            <ShareTool
+              data-plasmic-name={"shareTool"}
+              data-plasmic-override={overrides.shareTool}
+              className={classNames("__wab_instance", sty.shareTool)}
+            />
           </Stack__>
           <RedirectToLoginPage
             data-plasmic-name={"redirectToLoginPage"}
@@ -412,16 +357,27 @@ const PlasmicDescendants = {
   namespaceSelection: [
     "namespaceSelection",
     "namespaces2",
+    "text",
     "namespaces",
     "namespacesList",
     "namespaceName",
+    "shareTool",
     "redirectToLoginPage",
     "redirectNamespaceSelectionToHomepage"
   ],
-  namespaces2: ["namespaces2", "namespaces", "namespacesList", "namespaceName"],
+  namespaces2: [
+    "namespaces2",
+    "text",
+    "namespaces",
+    "namespacesList",
+    "namespaceName",
+    "shareTool"
+  ],
+  text: ["text"],
   namespaces: ["namespaces", "namespacesList", "namespaceName"],
   namespacesList: ["namespacesList", "namespaceName"],
   namespaceName: ["namespaceName"],
+  shareTool: ["shareTool"],
   redirectToLoginPage: ["redirectToLoginPage"],
   redirectNamespaceSelectionToHomepage: ["redirectNamespaceSelectionToHomepage"]
 } as const;
@@ -431,9 +387,11 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   namespaceSelection: "div";
   namespaces2: "div";
+  text: "div";
   namespaces: typeof ApiFetcherComponent;
   namespacesList: "div";
   namespaceName: "div";
+  shareTool: typeof ShareTool;
   redirectToLoginPage: typeof RedirectToLoginPage;
   redirectNamespaceSelectionToHomepage: typeof RedirectNamespaceSelectionToHomepage;
 };
@@ -499,9 +457,11 @@ export const PlasmicNamespaceSelection = Object.assign(
   {
     // Helper components rendering sub-elements
     namespaces2: makeNodeComponent("namespaces2"),
+    text: makeNodeComponent("text"),
     namespaces: makeNodeComponent("namespaces"),
     namespacesList: makeNodeComponent("namespacesList"),
     namespaceName: makeNodeComponent("namespaceName"),
+    shareTool: makeNodeComponent("shareTool"),
     redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
     redirectNamespaceSelectionToHomepage: makeNodeComponent(
       "redirectNamespaceSelectionToHomepage"

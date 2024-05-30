@@ -61,6 +61,7 @@ import {
 
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/component
 import RedirectInlabLoginToNamespaceSelection from "../../RedirectInlabLoginToNamespaceSelection"; // plasmic-import: Y1uAoiZCKyAg/component
 import RedirectInlabLoginToHomepage from "../../RedirectInlabLoginToHomepage"; // plasmic-import: VQNRVvXObcnc/component
 
@@ -101,12 +102,16 @@ export const PlasmicInlabLogin__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicInlabLogin__OverridesType = {
   inlabLogin?: Flex__<"div">;
+  wrongUserAnnouncement?: Flex__<"div">;
+  inlabInlabPlusAccountSimilarityAnnouncement?: Flex__<"div">;
   pageContent?: Flex__<"div">;
   username?: Flex__<typeof TextInput>;
   password?: Flex__<typeof TextInput>;
   loginButton?: Flex__<typeof Button>;
+  createAccountResetPassword?: Flex__<"div">;
   resetPassword?: Flex__<typeof Button>;
   createAccount?: Flex__<typeof Button>;
+  shareTool?: Flex__<typeof ShareTool>;
   redirectInlabLoginToNamespaceSelection?: Flex__<
     typeof RedirectInlabLoginToNamespaceSelection
   >;
@@ -191,7 +196,43 @@ function PlasmicInlabLogin__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => $props.wrongUser
       },
       {
+        path: "loginButton.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "resetPassword.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "loginButton.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "resetPassword.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
         path: "createAccount.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "createAccount.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "createAccount.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -244,10 +285,75 @@ function PlasmicInlabLogin__RenderFunc(props: {
               $state,
               "wrongUser",
               "wrongUser"
-            )
+            ),
+            [sty.inlabLoginwrongUser_disabledLoginButton]:
+              hasVariant($state, "wrongUser", "wrongUser") &&
+              hasVariant($state, "disabledLoginButton", "disabledLoginButton")
           }
         )}
       >
+        <div
+          data-plasmic-name={"wrongUserAnnouncement"}
+          data-plasmic-override={overrides.wrongUserAnnouncement}
+          className={classNames(
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.wrongUserAnnouncement,
+            {
+              [sty.wrongUserAnnouncementdisabledLoginButton]: hasVariant(
+                $state,
+                "disabledLoginButton",
+                "disabledLoginButton"
+              ),
+              [sty.wrongUserAnnouncementwrongUser]: hasVariant(
+                $state,
+                "wrongUser",
+                "wrongUser"
+              ),
+              [sty.wrongUserAnnouncementwrongUser_disabledLoginButton]:
+                hasVariant(
+                  $state,
+                  "disabledLoginButton",
+                  "disabledLoginButton"
+                ) && hasVariant($state, "wrongUser", "wrongUser")
+            }
+          )}
+        >
+          {
+            "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0648\u0627\u0631\u062f \u0634\u062f\u0647 \u0646\u0627\u0645\u0639\u062a\u0628\u0631 \u0627\u0633\u062a"
+          }
+        </div>
+        <div
+          data-plasmic-name={"inlabInlabPlusAccountSimilarityAnnouncement"}
+          data-plasmic-override={
+            overrides.inlabInlabPlusAccountSimilarityAnnouncement
+          }
+          className={classNames(
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.inlabInlabPlusAccountSimilarityAnnouncement,
+            {
+              [sty.inlabInlabPlusAccountSimilarityAnnouncementdisabledLoginButton]:
+                hasVariant(
+                  $state,
+                  "disabledLoginButton",
+                  "disabledLoginButton"
+                ),
+              [sty.inlabInlabPlusAccountSimilarityAnnouncementwrongUser]:
+                hasVariant($state, "wrongUser", "wrongUser"),
+              [sty.inlabInlabPlusAccountSimilarityAnnouncementwrongUser_disabledLoginButton]:
+                hasVariant(
+                  $state,
+                  "disabledLoginButton",
+                  "disabledLoginButton"
+                ) && hasVariant($state, "wrongUser", "wrongUser")
+            }
+          )}
+        >
+          {
+            "\u062d\u0633\u0627\u0628 \u06a9\u0627\u0631\u0628\u0631\u06cc \u0634\u0645\u0627 \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u0628\u0627 \u0627\u06cc\u0646\u0644\u0628 \u06cc\u06a9\u0633\u0627\u0646 \u0627\u0633\u062a"
+          }
+        </div>
         <Stack__
           as={"div"}
           data-plasmic-name={"pageContent"}
@@ -258,6 +364,11 @@ function PlasmicInlabLogin__RenderFunc(props: {
               $state,
               "disabledLoginButton",
               "disabledLoginButton"
+            ),
+            [sty.pageContentwrongUser]: hasVariant(
+              $state,
+              "wrongUser",
+              "wrongUser"
             )
           })}
         >
@@ -269,7 +380,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
             )}
           >
             {
-              "\u0628\u0647 \u0627\u06cc\u0646\u0644\u0628 \u062e\u0648\u0634 \u0622\u0645\u062f\u06cc\u062f "
+              "\u0628\u0647 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u062e\u0648\u0634 \u0622\u0645\u062f\u06cc\u062f "
             }
           </div>
           <TextInput
@@ -442,6 +553,10 @@ function PlasmicInlabLogin__RenderFunc(props: {
               )
             })}
             color={"blue"}
+            deselected={generateStateValueProp($state, [
+              "loginButton",
+              "deselected"
+            ])}
             isDisabled={generateStateValueProp($state, [
               "loginButton",
               "isDisabled"
@@ -599,11 +714,25 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 ];
               }
             }}
+            onDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, ["loginButton", "deselected"])(
+                eventArgs[0]
+              );
+            }}
             onIsDisabledChange={(...eventArgs) => {
               generateStateOnChangeProp($state, ["loginButton", "isDisabled"])(
                 eventArgs[0]
               );
             }}
+            onSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, ["loginButton", "selected"])(
+                eventArgs[0]
+              );
+            }}
+            selected={generateStateValueProp($state, [
+              "loginButton",
+              "selected"
+            ])}
             shape={"rounded"}
             submitsForm={false}
           >
@@ -623,147 +752,201 @@ function PlasmicInlabLogin__RenderFunc(props: {
             >
               {hasVariant($state, "disabledLoginButton", "disabledLoginButton")
                 ? "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                : "\u0648\u0631\u0648\u062f \u0628\u0647 \u0627\u06cc\u0646\u0644\u0628"}
+                : "\u0648\u0631\u0648\u062f \u0628\u0647 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633"}
             </div>
           </Button>
-          <Button
-            data-plasmic-name={"resetPassword"}
-            data-plasmic-override={overrides.resetPassword}
-            className={classNames("__wab_instance", sty.resetPassword, {
-              [sty.resetPassworddisabledLoginButton]: hasVariant(
-                $state,
-                "disabledLoginButton",
-                "disabledLoginButton"
-              )
-            })}
-            color={"clear"}
-            isDisabled={generateStateValueProp($state, [
-              "resetPassword",
-              "isDisabled"
-            ])}
-            link={
-              "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
-            }
-            onIsDisabledChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
+          <div
+            data-plasmic-name={"createAccountResetPassword"}
+            data-plasmic-override={overrides.createAccountResetPassword}
+            className={classNames(
+              projectcss.all,
+              sty.createAccountResetPassword
+            )}
+          >
+            <Button
+              data-plasmic-name={"resetPassword"}
+              data-plasmic-override={overrides.resetPassword}
+              className={classNames("__wab_instance", sty.resetPassword, {
+                [sty.resetPassworddisabledLoginButton]: hasVariant(
+                  $state,
+                  "disabledLoginButton",
+                  "disabledLoginButton"
+                )
+              })}
+              color={"clear"}
+              deselected={generateStateValueProp($state, [
+                "resetPassword",
+                "deselected"
+              ])}
+              isDisabled={generateStateValueProp($state, [
                 "resetPassword",
                 "isDisabled"
-              ])(eventArgs[0]);
-            }}
-            target={true}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__o1JqL
-              )}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["resetPassword"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination:
-                          "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform?usp=sf_link"
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["resetPassword"] != null &&
-                  typeof $steps["resetPassword"] === "object" &&
-                  typeof $steps["resetPassword"].then === "function"
-                ) {
-                  $steps["resetPassword"] = await $steps["resetPassword"];
-                }
-              }}
-            >
-              {
-                "\u0628\u0627\u0632\u06cc\u0627\u0628\u06cc \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
+              ])}
+              link={
+                "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
               }
-            </div>
-          </Button>
-          <Button
-            data-plasmic-name={"createAccount"}
-            data-plasmic-override={overrides.createAccount}
-            className={classNames("__wab_instance", sty.createAccount, {
-              [sty.createAccountdisabledLoginButton]: hasVariant(
-                $state,
-                "disabledLoginButton",
-                "disabledLoginButton"
-              )
-            })}
-            color={"clear"}
-            isDisabled={generateStateValueProp($state, [
-              "createAccount",
-              "isDisabled"
-            ])}
-            link={
-              "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
-            }
-            onIsDisabledChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
+              onDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "resetPassword",
+                  "deselected"
+                ])(eventArgs[0]);
+              }}
+              onIsDisabledChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "resetPassword",
+                  "isDisabled"
+                ])(eventArgs[0]);
+              }}
+              onSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "resetPassword",
+                  "selected"
+                ])(eventArgs[0]);
+              }}
+              selected={generateStateValueProp($state, [
+                "resetPassword",
+                "selected"
+              ])}
+              target={true}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__o1JqL
+                )}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["resetPassword"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination:
+                            "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform?usp=sf_link"
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["resetPassword"] != null &&
+                    typeof $steps["resetPassword"] === "object" &&
+                    typeof $steps["resetPassword"].then === "function"
+                  ) {
+                    $steps["resetPassword"] = await $steps["resetPassword"];
+                  }
+                }}
+              >
+                {
+                  "\u0628\u0627\u0632\u06cc\u0627\u0628\u06cc \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
+                }
+              </div>
+            </Button>
+            <Button
+              data-plasmic-name={"createAccount"}
+              data-plasmic-override={overrides.createAccount}
+              className={classNames("__wab_instance", sty.createAccount, {
+                [sty.createAccountdisabledLoginButton]: hasVariant(
+                  $state,
+                  "disabledLoginButton",
+                  "disabledLoginButton"
+                )
+              })}
+              color={"clear"}
+              deselected={generateStateValueProp($state, [
+                "createAccount",
+                "deselected"
+              ])}
+              isDisabled={generateStateValueProp($state, [
                 "createAccount",
                 "isDisabled"
-              ])(eventArgs[0]);
-            }}
-            target={true}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__i1Uwd
-              )}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["resetPassword"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination:
-                          "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform?usp=sf_link"
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["resetPassword"] != null &&
-                  typeof $steps["resetPassword"] === "object" &&
-                  typeof $steps["resetPassword"].then === "function"
-                ) {
-                  $steps["resetPassword"] = await $steps["resetPassword"];
-                }
-              }}
-            >
-              {
-                "\u0633\u0627\u062e\u062a \u062d\u0633\u0627\u0628 \u0627\u06cc\u0646\u0644\u0628 "
+              ])}
+              link={
+                "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
               }
-            </div>
-          </Button>
+              onDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "createAccount",
+                  "deselected"
+                ])(eventArgs[0]);
+              }}
+              onIsDisabledChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "createAccount",
+                  "isDisabled"
+                ])(eventArgs[0]);
+              }}
+              onSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "createAccount",
+                  "selected"
+                ])(eventArgs[0]);
+              }}
+              selected={generateStateValueProp($state, [
+                "createAccount",
+                "selected"
+              ])}
+              target={true}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__j140
+                )}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["createAccount"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination:
+                            "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform?usp=sf_link"
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["createAccount"] != null &&
+                    typeof $steps["createAccount"] === "object" &&
+                    typeof $steps["createAccount"].then === "function"
+                  ) {
+                    $steps["createAccount"] = await $steps["createAccount"];
+                  }
+                }}
+              >
+                {
+                  "\u0633\u0627\u062e\u062a \u062d\u0633\u0627\u0628 \u06a9\u0627\u0631\u0628\u0631\u06cc"
+                }
+              </div>
+            </Button>
+          </div>
+          <ShareTool
+            data-plasmic-name={"shareTool"}
+            data-plasmic-override={overrides.shareTool}
+            className={classNames("__wab_instance", sty.shareTool)}
+          />
         </Stack__>
         <RedirectInlabLoginToNamespaceSelection
           data-plasmic-name={"redirectInlabLoginToNamespaceSelection"}
@@ -784,25 +967,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
             sty.redirectInlabLoginToHomepage
           )}
         />
-
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__tp4Ll,
-            {
-              [sty.textwrongUser__tp4LlaawZh]: hasVariant(
-                $state,
-                "wrongUser",
-                "wrongUser"
-              )
-            }
-          )}
-        >
-          {
-            "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0648\u0627\u0631\u062f \u0634\u062f\u0647 \u0646\u0627\u0645\u0639\u062a\u0628\u0631 \u0627\u0633\u062a"
-          }
-        </div>
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -811,28 +975,44 @@ function PlasmicInlabLogin__RenderFunc(props: {
 const PlasmicDescendants = {
   inlabLogin: [
     "inlabLogin",
+    "wrongUserAnnouncement",
+    "inlabInlabPlusAccountSimilarityAnnouncement",
     "pageContent",
     "username",
     "password",
     "loginButton",
+    "createAccountResetPassword",
     "resetPassword",
     "createAccount",
+    "shareTool",
     "redirectInlabLoginToNamespaceSelection",
     "redirectInlabLoginToHomepage"
+  ],
+  wrongUserAnnouncement: ["wrongUserAnnouncement"],
+  inlabInlabPlusAccountSimilarityAnnouncement: [
+    "inlabInlabPlusAccountSimilarityAnnouncement"
   ],
   pageContent: [
     "pageContent",
     "username",
     "password",
     "loginButton",
+    "createAccountResetPassword",
     "resetPassword",
-    "createAccount"
+    "createAccount",
+    "shareTool"
   ],
   username: ["username"],
   password: ["password"],
   loginButton: ["loginButton"],
+  createAccountResetPassword: [
+    "createAccountResetPassword",
+    "resetPassword",
+    "createAccount"
+  ],
   resetPassword: ["resetPassword"],
   createAccount: ["createAccount"],
+  shareTool: ["shareTool"],
   redirectInlabLoginToNamespaceSelection: [
     "redirectInlabLoginToNamespaceSelection"
   ],
@@ -843,12 +1023,16 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   inlabLogin: "div";
+  wrongUserAnnouncement: "div";
+  inlabInlabPlusAccountSimilarityAnnouncement: "div";
   pageContent: "div";
   username: typeof TextInput;
   password: typeof TextInput;
   loginButton: typeof Button;
+  createAccountResetPassword: "div";
   resetPassword: typeof Button;
   createAccount: typeof Button;
+  shareTool: typeof ShareTool;
   redirectInlabLoginToNamespaceSelection: typeof RedirectInlabLoginToNamespaceSelection;
   redirectInlabLoginToHomepage: typeof RedirectInlabLoginToHomepage;
 };
@@ -913,12 +1097,18 @@ export const PlasmicInlabLogin = Object.assign(
   makeNodeComponent("inlabLogin"),
   {
     // Helper components rendering sub-elements
+    wrongUserAnnouncement: makeNodeComponent("wrongUserAnnouncement"),
+    inlabInlabPlusAccountSimilarityAnnouncement: makeNodeComponent(
+      "inlabInlabPlusAccountSimilarityAnnouncement"
+    ),
     pageContent: makeNodeComponent("pageContent"),
     username: makeNodeComponent("username"),
     password: makeNodeComponent("password"),
     loginButton: makeNodeComponent("loginButton"),
+    createAccountResetPassword: makeNodeComponent("createAccountResetPassword"),
     resetPassword: makeNodeComponent("resetPassword"),
     createAccount: makeNodeComponent("createAccount"),
+    shareTool: makeNodeComponent("shareTool"),
     redirectInlabLoginToNamespaceSelection: makeNodeComponent(
       "redirectInlabLoginToNamespaceSelection"
     ),

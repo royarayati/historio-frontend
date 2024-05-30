@@ -102,10 +102,12 @@ export type PlasmicPatientProfile__OverridesType = {
   pacsNumber?: Flex__<"div">;
   pacsNumber2?: Flex__<"div">;
   nameservicewardbed?: Flex__<"div">;
-  patientName?: Flex__<"div">;
+  patientName2?: Flex__<"div">;
   patientService?: Flex__<"div">;
   patientWard?: Flex__<"div">;
   patientRoomBed?: Flex__<"div">;
+  freeBox?: Flex__<"div">;
+  patientStatus?: Flex__<"div">;
   وضعتبمار?: Flex__<"div">;
   bioArcPrescription?: Flex__<typeof Button>;
   switchingTabs?: Flex__<"div">;
@@ -154,6 +156,18 @@ function PlasmicPatientProfile__RenderFunc(props: {
     () => [
       {
         path: "bioArcPrescription.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bioArcPrescription.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bioArcPrescription.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -441,42 +455,58 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           )}
                         >
                           <div
-                            data-plasmic-name={"patientName"}
-                            data-plasmic-override={overrides.patientName}
+                            data-plasmic-name={"patientName2"}
+                            data-plasmic-override={overrides.patientName2}
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.patientName
+                              sty.patientName2
                             )}
                           >
                             <React.Fragment>
                               {(() => {
-                                const dob = new Date(
-                                  $ctx.fetched_data.data.dob
-                                );
-                                const ageDiffMs = Date.now() - dob.getTime();
-                                const ageDate = new Date(ageDiffMs);
-                                const ageYears = Math.abs(
-                                  ageDate.getUTCFullYear() - 1970
-                                );
-                                const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
-                                if (ageYears < 1) {
-                                  const ageMonths = ageDate.getUTCMonth();
-                                  return `${fullName} ${ageMonths} months ${
-                                    $ctx.fetched_data.data.gender === "F"
-                                      ? " ♀️"
-                                      : $ctx.fetched_data.data.gender === "M"
-                                      ? " ♂️"
-                                      : ""
-                                  }`;
-                                } else {
-                                  return `${fullName} ${ageYears}${
-                                    $ctx.fetched_data.data.gender === "F"
-                                      ? " ♀️"
-                                      : $ctx.fetched_data.data.gender === "M"
-                                      ? " ♂️"
-                                      : ""
-                                  }`;
+                                try {
+                                  return (() => {
+                                    const dob = new Date(
+                                      $ctx.fetched_data.data.dob
+                                    );
+                                    const ageDiffMs =
+                                      Date.now() - dob.getTime();
+                                    const ageDate = new Date(ageDiffMs);
+                                    const ageYears = Math.abs(
+                                      ageDate.getUTCFullYear() - 1970
+                                    );
+                                    const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
+                                    if (ageYears < 1) {
+                                      const ageMonths = ageDate.getUTCMonth();
+                                      return `${fullName} ${ageMonths} months ${
+                                        $ctx.fetched_data.data.gender === "F"
+                                          ? " ♀️"
+                                          : $ctx.fetched_data.data.gender ===
+                                            "M"
+                                          ? " ♂️"
+                                          : ""
+                                      }`;
+                                    } else {
+                                      return `${fullName} ${ageYears}${
+                                        $ctx.fetched_data.data.gender === "F"
+                                          ? " ♀️"
+                                          : $ctx.fetched_data.data.gender ===
+                                            "M"
+                                          ? " ♂️"
+                                          : ""
+                                      }`;
+                                    }
+                                  })();
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "";
+                                  }
+                                  throw e;
                                 }
                               })()}
                             </React.Fragment>
@@ -549,47 +579,56 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                 $ctx.fetched_data.data.bed}
                             </React.Fragment>
                           </div>
-                          <div
-                            data-plasmic-name={
-                              "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
-                            }
-                            data-plasmic-override={overrides.وضعتبمار}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.وضعتبمار
-                            )}
-                          >
-                            {
-                              "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631"
-                            }
-                          </div>
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__ivCly
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return $ctx.fetched_data.data.dismissed
-                                    ? "ترخیص"
-                                    : "بستری";
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "\u062a\u0631\u062e\u06cc\u0635";
-                                  }
-                                  throw e;
+                        </div>
+                      </Stack__>
+                      <Stack__
+                        as={"div"}
+                        data-plasmic-name={"freeBox"}
+                        data-plasmic-override={overrides.freeBox}
+                        hasGap={true}
+                        className={classNames(projectcss.all, sty.freeBox)}
+                      >
+                        <div
+                          data-plasmic-name={"patientStatus"}
+                          data-plasmic-override={overrides.patientStatus}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.patientStatus
+                          )}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return $ctx.fetched_data.data.dismissed
+                                  ? "ترخیص"
+                                  : "بستری";
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "\u062a\u0631\u062e\u06cc\u0635";
                                 }
-                              })()}
-                            </React.Fragment>
-                          </div>
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                        <div
+                          data-plasmic-name={
+                            "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+                          }
+                          data-plasmic-override={overrides.وضعتبمار}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.وضعتبمار
+                          )}
+                        >
+                          {
+                            "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631"
+                          }
                         </div>
                       </Stack__>
                       <Button
@@ -600,6 +639,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           sty.bioArcPrescription
                         )}
                         color={"blue"}
+                        deselected={generateStateValueProp($state, [
+                          "bioArcPrescription",
+                          "deselected"
+                        ])}
                         isDisabled={generateStateValueProp($state, [
                           "bioArcPrescription",
                           "isDisabled"
@@ -632,12 +675,28 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             $steps["goToPage"] = await $steps["goToPage"];
                           }
                         }}
+                        onDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bioArcPrescription",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }}
                         onIsDisabledChange={(...eventArgs) => {
                           generateStateOnChangeProp($state, [
                             "bioArcPrescription",
                             "isDisabled"
                           ])(eventArgs[0]);
                         }}
+                        onSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bioArcPrescription",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }}
+                        selected={generateStateValueProp($state, [
+                          "bioArcPrescription",
+                          "selected"
+                        ])}
                       >
                         {
                           "\u0646\u0633\u062e\u0647 \u0646\u0648\u06cc\u0633\u06cc \u0628\u0627 \u0628\u06cc\u0648\u0622\u0631\u06a9 "
@@ -716,10 +775,12 @@ const PlasmicDescendants = {
     "pacsNumber",
     "pacsNumber2",
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed",
+    "freeBox",
+    "patientStatus",
     "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
     "bioArcPrescription",
     "switchingTabs",
@@ -740,10 +801,12 @@ const PlasmicDescendants = {
     "pacsNumber",
     "pacsNumber2",
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed",
+    "freeBox",
+    "patientStatus",
     "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
     "bioArcPrescription"
   ],
@@ -757,10 +820,12 @@ const PlasmicDescendants = {
     "pacsNumber",
     "pacsNumber2",
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed",
+    "freeBox",
+    "patientStatus",
     "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
     "bioArcPrescription"
   ],
@@ -773,11 +838,10 @@ const PlasmicDescendants = {
     "pacsNumber",
     "pacsNumber2",
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
-    "patientRoomBed",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+    "patientRoomBed"
   ],
   nationalIdadmissionTimeNopacs: [
     "nationalIdadmissionTimeNopacs",
@@ -794,16 +858,21 @@ const PlasmicDescendants = {
   pacsNumber2: ["pacsNumber2"],
   nameservicewardbed: [
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
-    "patientRoomBed",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+    "patientRoomBed"
   ],
-  patientName: ["patientName"],
+  patientName2: ["patientName2"],
   patientService: ["patientService"],
   patientWard: ["patientWard"],
   patientRoomBed: ["patientRoomBed"],
+  freeBox: [
+    "freeBox",
+    "patientStatus",
+    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+  ],
+  patientStatus: ["patientStatus"],
   وضعتبمار: ["\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"],
   bioArcPrescription: ["bioArcPrescription"],
   switchingTabs: ["switchingTabs", "switchingTab"],
@@ -828,10 +897,12 @@ type NodeDefaultElementType = {
   pacsNumber: "div";
   pacsNumber2: "div";
   nameservicewardbed: "div";
-  patientName: "div";
+  patientName2: "div";
   patientService: "div";
   patientWard: "div";
   patientRoomBed: "div";
+  freeBox: "div";
+  patientStatus: "div";
   وضعتبمار: "div";
   bioArcPrescription: typeof Button;
   switchingTabs: "div";
@@ -914,10 +985,12 @@ export const PlasmicPatientProfile = Object.assign(
     pacsNumber: makeNodeComponent("pacsNumber"),
     pacsNumber2: makeNodeComponent("pacsNumber2"),
     nameservicewardbed: makeNodeComponent("nameservicewardbed"),
-    patientName: makeNodeComponent("patientName"),
+    patientName2: makeNodeComponent("patientName2"),
     patientService: makeNodeComponent("patientService"),
     patientWard: makeNodeComponent("patientWard"),
     patientRoomBed: makeNodeComponent("patientRoomBed"),
+    freeBox: makeNodeComponent("freeBox"),
+    patientStatus: makeNodeComponent("patientStatus"),
     وضعتبمار: makeNodeComponent(
       "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
     ),

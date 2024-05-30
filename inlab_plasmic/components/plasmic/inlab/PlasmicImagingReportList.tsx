@@ -161,6 +161,30 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton2.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton2.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -320,7 +344,8 @@ ${ageMonths} months ${
           <DataCtxReader__>
             {$ctx => (
               <React.Fragment>
-                {$ctx.fetched_data.loading == false ? (
+                {$ctx.fetched_data.loading == false &&
+                $ctx.fetched_data.data.pacs_url !== null ? (
                   <Stack__
                     as={"div"}
                     data-plasmic-name={"viewPacsButtons"}
@@ -337,6 +362,10 @@ ${ageMonths} months ${
                           sty.activeViewPacsButton
                         )}
                         color={"blue"}
+                        deselected={generateStateValueProp($state, [
+                          "activeViewPacsButton",
+                          "deselected"
+                        ])}
                         isDisabled={generateStateValueProp($state, [
                           "activeViewPacsButton",
                           "isDisabled"
@@ -384,12 +413,28 @@ ${ageMonths} months ${
                             $steps["goToPage"] = await $steps["goToPage"];
                           }
                         }}
+                        onDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }}
                         onIsDisabledChange={(...eventArgs) => {
                           generateStateOnChangeProp($state, [
                             "activeViewPacsButton",
                             "isDisabled"
                           ])(eventArgs[0]);
                         }}
+                        onSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }}
+                        selected={generateStateValueProp($state, [
+                          "activeViewPacsButton",
+                          "selected"
+                        ])}
                       >
                         <div
                           className={classNames(
@@ -422,100 +467,115 @@ ${ageMonths} months ${
                     >
                       {"View PACS"}
                     </div>
-                    {$ctx.fetched_data.data.pacs_url == null ? (
-                      <div
-                        data-plasmic-name={"deactiveViewPacs"}
-                        data-plasmic-override={overrides.deactiveViewPacs}
+                    <div
+                      data-plasmic-name={"deactiveViewPacs"}
+                      data-plasmic-override={overrides.deactiveViewPacs}
+                      className={classNames(
+                        projectcss.all,
+                        sty.deactiveViewPacs
+                      )}
+                    >
+                      <Button
+                        data-plasmic-name={"activeViewPacsButton2"}
+                        data-plasmic-override={overrides.activeViewPacsButton2}
                         className={classNames(
-                          projectcss.all,
-                          sty.deactiveViewPacs
+                          "__wab_instance",
+                          sty.activeViewPacsButton2
                         )}
-                      >
-                        <Button
-                          data-plasmic-name={"activeViewPacsButton2"}
-                          data-plasmic-override={
-                            overrides.activeViewPacsButton2
+                        deselected={generateStateValueProp($state, [
+                          "activeViewPacsButton2",
+                          "deselected"
+                        ])}
+                        isDisabled={generateStateValueProp($state, [
+                          "activeViewPacsButton2",
+                          "isDisabled"
+                        ])}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["goToPage"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  destination: (() => {
+                                    try {
+                                      return $ctx.fetched_data.data.pacs_url;
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                };
+                                return (({ destination }) => {
+                                  if (
+                                    typeof destination === "string" &&
+                                    destination.startsWith("#")
+                                  ) {
+                                    document
+                                      .getElementById(destination.substr(1))
+                                      .scrollIntoView({ behavior: "smooth" });
+                                  } else {
+                                    __nextRouter?.push(destination);
+                                  }
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["goToPage"] != null &&
+                            typeof $steps["goToPage"] === "object" &&
+                            typeof $steps["goToPage"].then === "function"
+                          ) {
+                            $steps["goToPage"] = await $steps["goToPage"];
                           }
-                          className={classNames(
-                            "__wab_instance",
-                            sty.activeViewPacsButton2
-                          )}
-                          color={"clear"}
-                          isDisabled={generateStateValueProp($state, [
+                        }}
+                        onDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton2",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onIsDisabledChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
                             "activeViewPacsButton2",
                             "isDisabled"
-                          ])}
-                          onClick={async event => {
-                            const $steps = {};
-
-                            $steps["goToPage"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    destination: (() => {
-                                      try {
-                                        return $ctx.fetched_data.data.pacs_url;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                  };
-                                  return (({ destination }) => {
-                                    if (
-                                      typeof destination === "string" &&
-                                      destination.startsWith("#")
-                                    ) {
-                                      document
-                                        .getElementById(destination.substr(1))
-                                        .scrollIntoView({ behavior: "smooth" });
-                                    } else {
-                                      __nextRouter?.push(destination);
-                                    }
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["goToPage"] != null &&
-                              typeof $steps["goToPage"] === "object" &&
-                              typeof $steps["goToPage"].then === "function"
-                            ) {
-                              $steps["goToPage"] = await $steps["goToPage"];
-                            }
-                          }}
-                          onIsDisabledChange={(...eventArgs) => {
-                            generateStateOnChangeProp($state, [
-                              "activeViewPacsButton2",
-                              "isDisabled"
-                            ])(eventArgs[0]);
-                          }}
+                          ])(eventArgs[0]);
+                        }}
+                        onSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton2",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }}
+                        selected={generateStateValueProp($state, [
+                          "activeViewPacsButton2",
+                          "selected"
+                        ])}
+                      >
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__bzrkq
+                          )}
                         >
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__bzrkq
-                            )}
-                          >
-                            <React.Fragment>
-                              <span
-                                className={
-                                  "plasmic_default__all plasmic_default__span"
-                                }
-                                style={{ color: "#FFFFFF" }}
-                              >
-                                {"View PACS"}
-                              </span>
-                            </React.Fragment>
-                          </div>
-                        </Button>
-                      </div>
-                    ) : null}
+                          <React.Fragment>
+                            <span
+                              className={
+                                "plasmic_default__all plasmic_default__span"
+                              }
+                              style={{ color: "#FFFFFF" }}
+                            >
+                              {"View PACS"}
+                            </span>
+                          </React.Fragment>
+                        </div>
+                      </Button>
+                    </div>
                   </Stack__>
                 ) : null}
                 {$ctx.fetched_data.loading == true ? (
@@ -545,179 +605,194 @@ ${ageMonths} months ${
                     }
                   </div>
                 ) : null}
-                {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                  (() => {
-                    try {
-                      return $ctx.fetched_data.data.radiology_services;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return [];
-                      }
-                      throw e;
-                    }
-                  })()
-                ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                  const currentItem = __plasmic_item_0;
-                  const currentIndex = __plasmic_idx_0;
-                  return (
-                    <Stack__
-                      as={"div"}
-                      data-plasmic-name={"imagingReportList2"}
-                      data-plasmic-override={overrides.imagingReportList2}
-                      hasGap={true}
-                      className={classNames(
-                        projectcss.all,
-                        sty.imagingReportList2
-                      )}
-                      key={currentIndex}
-                    >
-                      <div
-                        data-plasmic-name={"imagingReportCard"}
-                        data-plasmic-override={overrides.imagingReportCard}
-                        className={classNames(
-                          projectcss.all,
-                          sty.imagingReportCard
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["goToImagingReportDatail"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  destination: `/patient/${(() => {
-                                    try {
-                                      return $ctx.params.code;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()}/report/detail/${(() => {
-                                    try {
-                                      return currentItem.id;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()}`
-                                };
-                                return (({ destination }) => {
-                                  if (
-                                    typeof destination === "string" &&
-                                    destination.startsWith("#")
-                                  ) {
-                                    document
-                                      .getElementById(destination.substr(1))
-                                      .scrollIntoView({ behavior: "smooth" });
-                                  } else {
-                                    __nextRouter?.push(destination);
-                                  }
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
+                {$ctx.fetched_data.loading == false
+                  ? (_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data.radiology_services;
+                        } catch (e) {
                           if (
-                            $steps["goToImagingReportDatail"] != null &&
-                            typeof $steps["goToImagingReportDatail"] ===
-                              "object" &&
-                            typeof $steps["goToImagingReportDatail"].then ===
-                              "function"
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
                           ) {
-                            $steps["goToImagingReportDatail"] = await $steps[
-                              "goToImagingReportDatail"
-                            ];
+                            return [];
                           }
-                        }}
-                      >
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
                         <Stack__
                           as={"div"}
-                          data-plasmic-name={"imagingTitledatetime"}
-                          data-plasmic-override={overrides.imagingTitledatetime}
+                          data-plasmic-name={"imagingReportList2"}
+                          data-plasmic-override={overrides.imagingReportList2}
                           hasGap={true}
                           className={classNames(
                             projectcss.all,
-                            sty.imagingTitledatetime
+                            sty.imagingReportList2
                           )}
+                          key={currentIndex}
                         >
-                          <div
-                            data-plasmic-name={"imagingTitle"}
-                            data-plasmic-override={overrides.imagingTitle}
+                          <Stack__
+                            as={"div"}
+                            data-plasmic-name={"imagingReportCard"}
+                            data-plasmic-override={overrides.imagingReportCard}
+                            hasGap={true}
                             className={classNames(
                               projectcss.all,
-                              projectcss.__wab_text,
-                              sty.imagingTitle
+                              sty.imagingReportCard
                             )}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["goToImagingReportDatail"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      destination: `/patient/${(() => {
+                                        try {
+                                          return $ctx.params.code;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()}/report/detail/${(() => {
+                                        try {
+                                          return currentItem.id;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()}`
+                                    };
+                                    return (({ destination }) => {
+                                      if (
+                                        typeof destination === "string" &&
+                                        destination.startsWith("#")
+                                      ) {
+                                        document
+                                          .getElementById(destination.substr(1))
+                                          .scrollIntoView({
+                                            behavior: "smooth"
+                                          });
+                                      } else {
+                                        __nextRouter?.push(destination);
+                                      }
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["goToImagingReportDatail"] != null &&
+                                typeof $steps["goToImagingReportDatail"] ===
+                                  "object" &&
+                                typeof $steps["goToImagingReportDatail"]
+                                  .then === "function"
+                              ) {
+                                $steps["goToImagingReportDatail"] =
+                                  await $steps["goToImagingReportDatail"];
+                              }
+                            }}
                           >
-                            <React.Fragment>
-                              {currentItem.service_name}
-                            </React.Fragment>
-                          </div>
-                          <div
-                            data-plasmic-name={"imagingDatetime"}
-                            data-plasmic-override={overrides.imagingDatetime}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.imagingDatetime
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                const gregorianDate = new Date(
-                                  currentItem.service_datetime
-                                );
-                                const shamsiDate = new Intl.DateTimeFormat(
-                                  "fa-IR"
-                                ).format(gregorianDate);
-                                const shamsiTime =
-                                  gregorianDate.toLocaleTimeString("fa-IR", {
-                                    hour12: false
-                                  });
-                                const englishDate = shamsiDate.replace(
-                                  /[۰-۹]/g,
-                                  d =>
-                                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                                );
-                                const englishTime = shamsiTime.replace(
-                                  /[۰-۹]/g,
-                                  d =>
-                                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                                );
-                                return `${englishDate}  ${englishTime}`;
-                              })()}
-                            </React.Fragment>
-                          </div>
+                            <Stack__
+                              as={"div"}
+                              data-plasmic-name={"imagingTitledatetime"}
+                              data-plasmic-override={
+                                overrides.imagingTitledatetime
+                              }
+                              hasGap={true}
+                              className={classNames(
+                                projectcss.all,
+                                sty.imagingTitledatetime
+                              )}
+                            >
+                              <div
+                                data-plasmic-name={"imagingTitle"}
+                                data-plasmic-override={overrides.imagingTitle}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.imagingTitle
+                                )}
+                              >
+                                <React.Fragment>
+                                  {currentItem.service_name}
+                                </React.Fragment>
+                              </div>
+                              <div
+                                data-plasmic-name={"imagingDatetime"}
+                                data-plasmic-override={
+                                  overrides.imagingDatetime
+                                }
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.imagingDatetime
+                                )}
+                              >
+                                <React.Fragment>
+                                  {(() => {
+                                    const gregorianDate = new Date(
+                                      currentItem.service_datetime
+                                    );
+                                    const shamsiDate = new Intl.DateTimeFormat(
+                                      "fa-IR"
+                                    ).format(gregorianDate);
+                                    const shamsiTime =
+                                      gregorianDate.toLocaleTimeString(
+                                        "fa-IR",
+                                        { hour12: false }
+                                      );
+                                    const englishDate = shamsiDate.replace(
+                                      /[۰-۹]/g,
+                                      d =>
+                                        String.fromCharCode(
+                                          d.charCodeAt(0) - 1728
+                                        )
+                                    );
+                                    const englishTime = shamsiTime.replace(
+                                      /[۰-۹]/g,
+                                      d =>
+                                        String.fromCharCode(
+                                          d.charCodeAt(0) - 1728
+                                        )
+                                    );
+                                    return `${englishDate}  ${englishTime}`;
+                                  })()}
+                                </React.Fragment>
+                              </div>
+                            </Stack__>
+                            <div
+                              data-plasmic-name={"imagingType"}
+                              data-plasmic-override={overrides.imagingType}
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.imagingType
+                              )}
+                            >
+                              <React.Fragment>
+                                {currentItem.title.replace(/\(\s+#\s*\)/g, "")}
+                              </React.Fragment>
+                            </div>
+                          </Stack__>
                         </Stack__>
-                        <div
-                          data-plasmic-name={"imagingType"}
-                          data-plasmic-override={overrides.imagingType}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.imagingType
-                          )}
-                        >
-                          <React.Fragment>
-                            {currentItem.title.replace(/\(\s+#\s*\)/g, "")}
-                          </React.Fragment>
-                        </div>
-                      </div>
-                    </Stack__>
-                  );
-                })}
+                      );
+                    })
+                  : null}
               </React.Fragment>
             )}
           </DataCtxReader__>

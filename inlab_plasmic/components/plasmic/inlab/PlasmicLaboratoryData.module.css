@@ -8,7 +8,7 @@
   justify-items: center;
   justify-content: flex-start;
   align-items: center;
-  background: #e8ecf2;
+  background: var(--token-Hd7stmcqwCJ-);
   max-width: 100%;
   overflow: auto;
   min-width: 0;
@@ -26,12 +26,12 @@
 .laboratoryData > * {
   grid-column: 4;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .laboratoryData {
     overflow: auto;
   }
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .laboratoryData > * {
     grid-column: 4;
   }
@@ -61,7 +61,7 @@
   margin: 0px;
   border-bottom: 0.2px solid var(--token-IYO13gyYJHXG);
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .header {
     justify-content: space-around;
   }
@@ -111,12 +111,13 @@
   right: auto;
   max-height: 22px;
   align-self: center;
+  background: #ffffff;
   min-height: 0;
   border-radius: 100px;
   padding: 4px;
   border: 0.5px solid var(--token-Pxe4wDL2kJpb);
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .normalRangeButton {
     width: auto;
     padding-top: 2px;
@@ -132,7 +133,7 @@
   width: 12px;
   height: 12px;
   max-width: 100%;
-  background: var(--token-Pxe4wDL2kJpb);
+  background: var(--token-8PxxXPNrIohQ);
   align-self: center;
   flex-shrink: 0;
   border-radius: 100px;
@@ -150,7 +151,7 @@
   font-size: 10px;
   text-align: center;
   align-self: center;
-  color: var(--token-RvPI6LyeIPmd);
+  color: var(--token-IYO13gyYJHXG);
   white-space: pre;
   text-transform: capitalize;
   user-select: none;
@@ -158,7 +159,7 @@
   min-width: 0;
   padding: 0px 4px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .text__oI3Bw {
     width: 100%;
     align-self: stretch;
@@ -175,7 +176,7 @@
   width: 12px;
   height: 12px;
   max-width: 100%;
-  background: var(--token-Pxe4wDL2kJpb);
+  background: var(--token-8PxxXPNrIohQ);
   align-self: center;
   flex-shrink: 0;
   border-radius: 100px;
@@ -280,7 +281,7 @@
   min-width: 0;
   padding: 0px 2px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .labResults {
     justify-content: center;
     align-items: stretch;
@@ -322,7 +323,7 @@
   padding: 2px;
   border-color: var(--token-Pxe4wDL2kJpb);
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .checkedFactors {
     align-self: flex-start;
   }
@@ -398,7 +399,7 @@
   > img {
   margin-left: 0px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .laboratoryResultsPerTitle {
     position: relative;
     left: auto;
@@ -450,7 +451,7 @@
   > img {
   margin-top: 0px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .labPerDate {
     margin-left: calc(0px + 0px) !important;
   }
@@ -478,7 +479,7 @@
   padding: 4px;
   border-bottom: 0px none var(--token-Pxe4wDL2kJpb);
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .reportDatetime {
     width: auto;
     height: 40px;
@@ -580,7 +581,7 @@
   > img {
   margin-left: 0px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .factorNamevalue {
     margin-top: calc(0px + 0px) !important;
   }
@@ -618,7 +619,7 @@
   min-height: 0;
   padding: 2px 0px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .normalFactorValue {
     text-align: center;
   }
@@ -632,7 +633,6 @@
   top: auto;
 }
 .abnormalFactorValue {
-  color: var(--token--ypw6enySR1T);
   width: 100%;
   height: 100%;
   max-width: 500%;
@@ -642,11 +642,12 @@
   font-weight: 600;
   align-self: center;
   position: relative;
+  color: var(--token-KdlBqVo3oFfa);
   min-width: 0;
   min-height: 0;
   padding: 0px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .abnormalFactorValue {
     text-align: center;
   }
@@ -659,7 +660,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  color: var(--token-2aHIw8xI62Xi);
+  color: var(--token-8PxxXPNrIohQ);
   font-weight: 400;
   white-space: pre-wrap;
   min-width: 0;
@@ -690,7 +691,7 @@
   left: 0;
   top: auto;
   z-index: 1;
-  bottom: 1%;
+  bottom: 0.5%;
   right: 0;
   overflow: auto;
   padding: 24px 40px 5px;

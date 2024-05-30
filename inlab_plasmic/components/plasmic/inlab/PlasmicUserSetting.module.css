@@ -8,7 +8,7 @@
   justify-items: center;
   justify-content: flex-start;
   align-items: center;
-  background: #e8ecf2;
+  background: var(--token-Hd7stmcqwCJ-);
   min-width: 0;
   min-height: 0;
   grid-template-columns:
@@ -22,7 +22,7 @@
 .userSetting > * {
   grid-column: 4;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .userSetting > * {
     grid-column: 4;
   }
@@ -382,6 +382,10 @@
   align-self: flex-end;
   white-space: pre-wrap;
 }
+.shareTool:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
 .logoutButton:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
@@ -412,6 +416,7 @@
   padding-right: 0px;
   height: auto;
   white-space: pre-wrap;
+  color: #ffffff;
 }
 .textdisabledLogoutButton {
   height: auto;

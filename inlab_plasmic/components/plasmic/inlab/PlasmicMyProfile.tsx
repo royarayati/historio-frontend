@@ -220,6 +220,18 @@ function PlasmicMyProfile__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "save.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "save.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -699,6 +711,10 @@ function PlasmicMyProfile__RenderFunc(props: {
               data-plasmic-override={overrides.save}
               className={classNames("__wab_instance", sty.save)}
               color={"blue"}
+              deselected={generateStateValueProp($state, [
+                "save",
+                "deselected"
+              ])}
               isDisabled={generateStateValueProp($state, [
                 "save",
                 "isDisabled"
@@ -746,11 +762,22 @@ function PlasmicMyProfile__RenderFunc(props: {
                   ];
                 }
               }}
+              onDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["save", "deselected"])(
+                  eventArgs[0]
+                );
+              }}
               onIsDisabledChange={(...eventArgs) => {
                 generateStateOnChangeProp($state, ["save", "isDisabled"])(
                   eventArgs[0]
                 );
               }}
+              onSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["save", "selected"])(
+                  eventArgs[0]
+                );
+              }}
+              selected={generateStateValueProp($state, ["save", "selected"])}
               submitsForm={false}
             >
               <div

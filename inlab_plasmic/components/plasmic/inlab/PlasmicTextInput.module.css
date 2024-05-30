@@ -5,11 +5,11 @@
   height: auto;
   position: sticky;
   flex-grow: 1;
-  background: var(--token-zy6xhYnWF8Y7);
+  background: #ffffff;
   min-width: 0;
   border-radius: 5px;
   padding: 5px 0px;
-  border: 2px solid var(--token-9iYGdL7i3GKE);
+  border: 1px solid var(--token-9iYGdL7i3GKE);
 }
 .textInput > :global(.__wab_flex-container) {
   flex-direction: row;
@@ -29,21 +29,22 @@
   > img {
   margin-left: 8px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .textInput {
     pointer-events: none;
     height: 35px;
     flex-grow: 1;
     flex-shrink: 1;
+    background: #ffffff;
     padding: 2px 0px 2px 2px;
-    border-width: 0.5px;
+    border-width: 0.75px;
     border-color: var(--token-9iYGdL7i3GKE);
   }
 }
 .textInputshowStartIcon {
   width: 250px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .textInputshowStartIcon {
     padding-right: 0px;
     width: 200px;
@@ -63,7 +64,7 @@
   border-radius: 5px;
   border-width: 0.75px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .textInput___focusVisibleWithin {
     outline: none;
   }
@@ -83,8 +84,13 @@
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: calc(0px + 8px) !important;
-  background: var(--token-Yq556PvPjGii);
+  background: none;
   align-self: center;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .startIconContainer {
+    margin-left: calc(0px + 8px) !important;
+  }
 }
 .startIconContainershowStartIcon {
   margin-left: calc(0px + 8px) !important;
@@ -96,7 +102,7 @@
   margin-left: calc(0px + 8px) !important;
 }
 .textInput:hover .startIconContainer {
-  background: #ffffff;
+  background: none;
   margin-left: calc(0px + 8px) !important;
 }
 .textInput .startIconContainer___focusVisibleWithin {
@@ -154,12 +160,12 @@
   width: 100%;
   left: auto;
   top: auto;
-  background: var(--token-Yq556PvPjGii);
+  background: none;
   font-size: 16px;
   text-align: right;
   cursor: auto;
   pointer-events: auto;
-  color: var(--token-IYO13gyYJHXG);
+  color: #000000;
   font-weight: 700;
   height: 100%;
   margin-top: 4px;
@@ -170,10 +176,10 @@
   min-width: 0;
   min-height: 0;
   padding: 0px 8px 0px 0px;
-  border-width: 0px;
+  border-width: 1px;
   border-style: none;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .input {
     background: none;
     font-size: 12px;
@@ -196,7 +202,7 @@
 .inputshowStartIcon {
   margin-left: calc(4px + 8px) !important;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .inputshowStartIcon {
     margin-left: calc(0px + 8px) !important;
   }
@@ -206,11 +212,11 @@
   margin-left: calc(4px + 8px) !important;
 }
 .textInput:hover .input {
-  background: var(--token-Yq556PvPjGii);
+  background: none;
   margin-left: calc(4px + 8px) !important;
 }
 .textInput .input___focusVisibleWithin {
-  background: var(--token-Yq556PvPjGii);
+  background: none;
   margin-left: calc(4px + 8px) !important;
   outline: none;
   border-style: none;
@@ -227,7 +233,7 @@
   background: var(--token-Yq556PvPjGii);
   margin-left: calc(4px + 8px) !important;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .textInput .input::placeholder {
     margin-left: calc(0px + 8px) !important;
   }
@@ -249,11 +255,17 @@
   left: auto;
   top: auto;
   margin-left: calc(8px + 8px) !important;
+  background: #ffffff;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .endIconContainer {
+    margin-left: calc(8px + 8px) !important;
+  }
 }
 .endIconContainershowStartIcon {
   margin-left: calc(8px + 8px) !important;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .endIconContainershowStartIcon {
     margin-left: calc(8px + 8px) !important;
   }

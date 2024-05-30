@@ -9,7 +9,7 @@
   justify-content: flex-start;
   align-items: center;
   padding-bottom: 8px;
-  background: #e8ecf2;
+  background: var(--token-Hd7stmcqwCJ-);
   overflow: auto;
   max-width: 100%;
   min-width: 0;
@@ -24,7 +24,7 @@
 .imagingReportList > * {
   grid-column: 4;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .imagingReportList > * {
     grid-column: 4;
   }
@@ -175,7 +175,6 @@
   padding: 7px 10px;
 }
 .deactiveViewPacs {
-  display: flex;
   position: relative;
   flex-direction: row;
   align-items: stretch;
@@ -185,6 +184,7 @@
   max-width: 100%;
   margin-top: calc(12px + 0px) !important;
   min-width: 0;
+  display: none;
   border-radius: 5px;
   padding: 0px;
   border: 0.5px solid var(--token-Pxe4wDL2kJpb);
@@ -212,7 +212,7 @@
   height: 100%;
   font-size: 14px;
   font-weight: 300;
-  color: var(--token-jgohepLVeKvh);
+  color: #ffffff;
   min-height: 0;
 }
 .svg__iDq0H {
@@ -230,11 +230,9 @@
   background: #ffffff;
   font-size: var(--token-CdE1_0ZaCyT1);
   white-space: pre-wrap;
-  position: absolute;
-  left: auto;
-  top: 5%;
-  bottom: auto;
-  right: auto;
+  position: fixed;
+  left: 0px;
+  top: 90px;
   z-index: 1;
   min-width: 0;
   border-radius: 5px;
@@ -248,6 +246,10 @@
   margin-top: 12px;
   background: #ffffff;
   white-space: pre-wrap;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
   min-width: 0;
   border-radius: 5px;
   padding: 8px;
@@ -283,13 +285,13 @@
   > img {
   margin-top: 8px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .imagingReportList2 {
     width: 100%;
     min-width: 0;
   }
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .imagingReportList2 > :global(.__wab_flex-container) {
     min-width: 0;
   }
@@ -298,19 +300,37 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
   background: #ffffff;
   flex-grow: 1;
+  margin-bottom: 5px;
+  box-shadow: 5px 5px 10px 0px var(--token-RvPI6LyeIPmd);
   min-width: 0;
   border-radius: 5px;
   padding: 8px;
-  border: 1px solid var(--token-Pxe4wDL2kJpb);
+  border: 0.5px solid var(--token-8PxxXPNrIohQ);
 }
-@media (min-width: 0px) and (max-width: 768px) {
+.imagingReportCard > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - 6px);
+  height: calc(100% + 6px);
+}
+.imagingReportCard > :global(.__wab_flex-container) > *,
+.imagingReportCard > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.imagingReportCard > :global(.__wab_flex-container) > picture > img,
+.imagingReportCard
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 6px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
   .imagingReportCard {
     width: auto;
   }
@@ -375,7 +395,7 @@
   white-space: pre-wrap;
   padding: 4px 0px 0px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 760px) {
   .imagingType {
     font-size: var(--token-CdE1_0ZaCyT1);
     text-align: center;

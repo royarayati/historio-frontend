@@ -109,6 +109,8 @@ export type PlasmicButton__ArgsType = {
   submitsForm?: boolean;
   target?: boolean;
   onIsDisabledChange?: (val: any) => void;
+  onSelectedChange?: (val: any) => void;
+  onDeselectedChange?: (val: any) => void;
 };
 type ArgPropType = keyof PlasmicButton__ArgsType;
 export const PlasmicButton__ArgProps = new Array<ArgPropType>(
@@ -118,7 +120,9 @@ export const PlasmicButton__ArgProps = new Array<ArgPropType>(
   "link",
   "submitsForm",
   "target",
-  "onIsDisabledChange"
+  "onIsDisabledChange",
+  "onSelectedChange",
+  "onDeselectedChange"
 );
 
 export type PlasmicButton__OverridesType = {
@@ -132,6 +136,8 @@ export interface DefaultButtonProps extends pp.BaseButtonProps {
   submitsForm?: boolean;
   target?: boolean;
   onIsDisabledChange?: (val: any) => void;
+  onSelectedChange?: (val: any) => void;
+  onDeselectedChange?: (val: any) => void;
   shape?: SingleChoiceArg<"rounded" | "round" | "sharp">;
   size4?: SingleChoiceArg<"compact">;
   color?: SingleChoiceArg<"blue" | "green" | "red" | "clear" | "link">;
@@ -200,15 +206,19 @@ function PlasmicButton__RenderFunc(props: {
       },
       {
         path: "selected",
-        type: "private",
+        type: "writable",
         variableType: "variant",
-        initFunc: ({ $props, $state, $queries, $ctx }) => $props.selected
+
+        valueProp: "selected",
+        onChangeProp: "onSelectedChange"
       },
       {
         path: "deselected",
-        type: "private",
+        type: "writable",
         variableType: "variant",
-        initFunc: ({ $props, $state, $queries, $ctx }) => $props.deselected
+
+        valueProp: "deselected",
+        onChangeProp: "onDeselectedChange"
       }
     ],
     [$props, $ctx, $refs]
@@ -246,8 +256,12 @@ function PlasmicButton__RenderFunc(props: {
           [sty.rootcolor_green]: hasVariant($state, "color", "green"),
           [sty.rootcolor_link]: hasVariant($state, "color", "link"),
           [sty.rootcolor_red]: hasVariant($state, "color", "red"),
+          [sty.rootdeselected]: hasVariant($state, "deselected", "deselected"),
           [sty.rootisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
           [sty.rootselected]: hasVariant($state, "selected", "selected"),
+          [sty.rootselected_deselected]:
+            hasVariant($state, "deselected", "deselected") &&
+            hasVariant($state, "selected", "selected"),
           [sty.rootshape_round]: hasVariant($state, "shape", "round"),
           [sty.rootshape_round_size4_compact]:
             hasVariant($state, "shape", "round") &&
@@ -272,6 +286,11 @@ function PlasmicButton__RenderFunc(props: {
               $state,
               "color",
               "clear"
+            ),
+            [sty.textselected___0K9KhBtTsH]: hasVariant(
+              $state,
+              "selected",
+              "selected"
             )
           }
         )}
@@ -288,6 +307,11 @@ function PlasmicButton__RenderFunc(props: {
               $state,
               "color",
               "clear"
+            ),
+            [sty.textselected__cOxxNBtTsH]: hasVariant(
+              $state,
+              "selected",
+              "selected"
             )
           }
         )}
@@ -303,10 +327,20 @@ function PlasmicButton__RenderFunc(props: {
             "color",
             "clear"
           ),
+          [sty.contentContainerdeselected]: hasVariant(
+            $state,
+            "deselected",
+            "deselected"
+          ),
           [sty.contentContainerisDisabled]: hasVariant(
             $state,
             "isDisabled",
             "isDisabled"
+          ),
+          [sty.contentContainerselected]: hasVariant(
+            $state,
+            "selected",
+            "selected"
           ),
           [sty.contentContainershape_rounded]: hasVariant(
             $state,
