@@ -508,6 +508,9 @@
   border-top-color: var(--token-Pxe4wDL2kJpb);
   border-right-width: 1px;
   border-left-width: 1px;
+  left: auto;
+  top: auto;
+  z-index: 1;
   min-width: 0;
   flex-shrink: 0;
   padding: 4px;

@@ -300,6 +300,11 @@
   border-radius: 5px;
   padding: 0px 0px 8px;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientName2 {
+    font-size: var(--token-sOr3fJ5Up5fq);
+  }
+}
 .text__qdLuE {
   position: relative;
   width: 100%;
