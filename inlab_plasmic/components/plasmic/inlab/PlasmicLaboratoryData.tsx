@@ -369,21 +369,15 @@ ${ageMonths} months ${
             >
               {"Normal Ranges"}
             </div>
-            {(
-              hasVariant($state, "viewNormalRange", "viewNormalRange")
-                ? true
-                : false
-            ) ? (
-              <div
-                className={classNames(projectcss.all, sty.freeBox__pziWk, {
-                  [sty.freeBoxviewNormalRange__pziWkBwg80]: hasVariant(
-                    $state,
-                    "viewNormalRange",
-                    "viewNormalRange"
-                  )
-                })}
-              />
-            ) : null}
+            <div
+              className={classNames(projectcss.all, sty.freeBox__pziWk, {
+                [sty.freeBoxviewNormalRange__pziWkBwg80]: hasVariant(
+                  $state,
+                  "viewNormalRange",
+                  "viewNormalRange"
+                )
+              })}
+            />
           </div>
         </div>
         <ApiFetcherComponent

@@ -59,6 +59,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
@@ -116,6 +117,7 @@ export type PlasmicUserSetting__OverridesType = {
   resetPassword?: Flex__<"div">;
   resetPasswordImage?: Flex__<"svg">;
   resetPassword2?: Flex__<"div">;
+  shareTool?: Flex__<typeof ShareTool>;
   logoutButton?: Flex__<typeof Button>;
   text?: Flex__<"div">;
   homepageSwitchingTab?: Flex__<"div">;
@@ -176,6 +178,18 @@ function PlasmicUserSetting__RenderFunc(props: {
         variableType: "variant",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           $props.disabledLogoutButton
+      },
+      {
+        path: "logoutButton.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "logoutButton.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -703,6 +717,12 @@ function PlasmicUserSetting__RenderFunc(props: {
                 }
               </div>
             </Stack__>
+            <ShareTool
+              data-plasmic-name={"shareTool"}
+              data-plasmic-override={overrides.shareTool}
+              className={classNames("__wab_instance", sty.shareTool)}
+            />
+
             <Button
               data-plasmic-name={"logoutButton"}
               data-plasmic-override={overrides.logoutButton}
@@ -713,7 +733,11 @@ function PlasmicUserSetting__RenderFunc(props: {
                   "disabledLogoutButton"
                 )
               })}
-              color={"blue"}
+              color={"red"}
+              deselected={generateStateValueProp($state, [
+                "logoutButton",
+                "deselected"
+              ])}
               isDisabled={generateStateValueProp($state, [
                 "logoutButton",
                 "isDisabled"
@@ -819,12 +843,27 @@ function PlasmicUserSetting__RenderFunc(props: {
                   ];
                 }
               }}
+              onDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "logoutButton",
+                  "deselected"
+                ])(eventArgs[0]);
+              }}
               onIsDisabledChange={(...eventArgs) => {
                 generateStateOnChangeProp($state, [
                   "logoutButton",
                   "isDisabled"
                 ])(eventArgs[0]);
               }}
+              onSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["logoutButton", "selected"])(
+                  eventArgs[0]
+                );
+              }}
+              selected={generateStateValueProp($state, [
+                "logoutButton",
+                "selected"
+              ])}
               shape={"rounded"}
               startIcon={
                 <ChecksvgIcon
@@ -871,7 +910,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                       style={{ color: "var(--token-jgohepLVeKvh)" }}
                     >
                       {
-                        "\u062e\u0631\u0648\u062c \u0627\u0632 \u0627\u06cc\u0646\u0644\u0628"
+                        "\u062e\u0631\u0648\u062c \u0627\u0632 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633"
                       }
                     </span>
                   </React.Fragment>
@@ -1162,6 +1201,7 @@ const PlasmicDescendants = {
     "resetPassword",
     "resetPasswordImage",
     "resetPassword2",
+    "shareTool",
     "logoutButton",
     "text",
     "homepageSwitchingTab",
@@ -1187,6 +1227,7 @@ const PlasmicDescendants = {
     "resetPassword",
     "resetPasswordImage",
     "resetPassword2",
+    "shareTool",
     "logoutButton",
     "text"
   ],
@@ -1224,6 +1265,7 @@ const PlasmicDescendants = {
   resetPassword: ["resetPassword", "resetPasswordImage", "resetPassword2"],
   resetPasswordImage: ["resetPasswordImage"],
   resetPassword2: ["resetPassword2"],
+  shareTool: ["shareTool"],
   logoutButton: ["logoutButton", "text"],
   text: ["text"],
   homepageSwitchingTab: ["homepageSwitchingTab", "switchingTab"],
@@ -1253,6 +1295,7 @@ type NodeDefaultElementType = {
   resetPassword: "div";
   resetPasswordImage: "svg";
   resetPassword2: "div";
+  shareTool: typeof ShareTool;
   logoutButton: typeof Button;
   text: "div";
   homepageSwitchingTab: "div";
@@ -1338,6 +1381,7 @@ export const PlasmicUserSetting = Object.assign(
     resetPassword: makeNodeComponent("resetPassword"),
     resetPasswordImage: makeNodeComponent("resetPasswordImage"),
     resetPassword2: makeNodeComponent("resetPassword2"),
+    shareTool: makeNodeComponent("shareTool"),
     logoutButton: makeNodeComponent("logoutButton"),
     text: makeNodeComponent("text"),
     homepageSwitchingTab: makeNodeComponent("homepageSwitchingTab"),

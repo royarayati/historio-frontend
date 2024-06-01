@@ -53,7 +53,20 @@
   background: #ffffff00;
 }
 .rootselected {
-  background: var(--token-pRs3-4jrQ4XQ);
+  background: none;
+  border-top-style: none;
+  border-top-width: 0px;
+  border-right-style: none;
+  border-right-width: 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-left-style: none;
+  border-left-width: 0px;
+  border-color: var(--token-tawGjJMbHvx-);
+}
+.rootdeselected {
+  border-width: 1px;
+  border-style: none;
 }
 .rootshape_round_size4_compact {
   padding: 6px;
@@ -94,7 +107,7 @@
   top: auto;
 }
 .slotTargetChildren {
-  color: #ededec;
+  color: var(--token-8PxxXPNrIohQ);
   font-weight: 500;
   white-space: pre;
 }
@@ -117,10 +130,10 @@
   color: #0091ff;
 }
 .slotTargetChildrenselected {
-  color: #ffffff;
+  color: var(--token-IYO13gyYJHXG);
 }
 .slotTargetChildrendeselected {
-  color: #000000;
+  color: #bbbbbb;
 }
 .startIconContainer {
   display: flex;

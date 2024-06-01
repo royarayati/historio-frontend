@@ -1,0 +1,32 @@
+.shareContent {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 320px;
+  height: auto;
+  max-width: 100%;
+  position: relative;
+  padding: 8px;
+}
+.text {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-weight: 700;
+  white-space: pre-wrap;
+  user-select: none;
+  line-height: 3;
+  font-size: 16px;
+  min-width: 0;
+}
+.inlabPlusLinkShare2 {
+  object-fit: cover;
+  color: var(--token-9iYGdL7i3GKE);
+  max-width: 100%;
+  width: 30px;
+  height: 43px;
+  margin-left: 0px;
+  flex-shrink: 0;
+}

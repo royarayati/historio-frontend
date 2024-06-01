@@ -367,6 +367,7 @@ function PlasmicTextInput__RenderFunc(props: {
             "showStartIcon"
           )
         })}
+        dir={"rtl"}
         disabled={
           hasVariant($state, "isDisabled", "isDisabled") ? true : undefined
         }

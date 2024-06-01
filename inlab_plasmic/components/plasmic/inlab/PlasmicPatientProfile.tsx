@@ -77,6 +77,7 @@ import sty from "./PlasmicPatientProfile.module.css"; // plasmic-import: Ev8txsb
 
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
+import BookmarkSvgrepoCom1SvgIcon from "./icons/PlasmicIcon__BookmarkSvgrepoCom1Svg"; // plasmic-import: GllYzc9jUw9r/icon
 
 createPlasmicElementProxy;
 
@@ -102,14 +103,21 @@ export type PlasmicPatientProfile__OverridesType = {
   pacsNumber?: Flex__<"div">;
   pacsNumber2?: Flex__<"div">;
   nameservicewardbed?: Flex__<"div">;
-  patientName?: Flex__<"div">;
+  patientName2?: Flex__<"div">;
   patientService?: Flex__<"div">;
   patientWard?: Flex__<"div">;
   patientRoomBed?: Flex__<"div">;
+  freeBox?: Flex__<"div">;
+  patientStatus?: Flex__<"div">;
   وضعتبمار?: Flex__<"div">;
   bioArcPrescription?: Flex__<typeof Button>;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
+  homepage?: Flex__<typeof PlasmicImg__>;
+  patientProfile3?: Flex__<typeof PlasmicImg__>;
+  radiologyReport?: Flex__<typeof PlasmicImg__>;
+  laboratory?: Flex__<typeof PlasmicImg__>;
+  bookmark?: Flex__<"svg">;
   redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   onloadUserPatientInteractionCount?: Flex__<
@@ -148,12 +156,26 @@ function PlasmicPatientProfile__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = useGlobalActions?.();
+
   const currentUser = useCurrentUser?.() || {};
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "bioArcPrescription.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bioArcPrescription.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bioArcPrescription.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -441,42 +463,58 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           )}
                         >
                           <div
-                            data-plasmic-name={"patientName"}
-                            data-plasmic-override={overrides.patientName}
+                            data-plasmic-name={"patientName2"}
+                            data-plasmic-override={overrides.patientName2}
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.patientName
+                              sty.patientName2
                             )}
                           >
                             <React.Fragment>
                               {(() => {
-                                const dob = new Date(
-                                  $ctx.fetched_data.data.dob
-                                );
-                                const ageDiffMs = Date.now() - dob.getTime();
-                                const ageDate = new Date(ageDiffMs);
-                                const ageYears = Math.abs(
-                                  ageDate.getUTCFullYear() - 1970
-                                );
-                                const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
-                                if (ageYears < 1) {
-                                  const ageMonths = ageDate.getUTCMonth();
-                                  return `${fullName} ${ageMonths} months ${
-                                    $ctx.fetched_data.data.gender === "F"
-                                      ? " ♀️"
-                                      : $ctx.fetched_data.data.gender === "M"
-                                      ? " ♂️"
-                                      : ""
-                                  }`;
-                                } else {
-                                  return `${fullName} ${ageYears}${
-                                    $ctx.fetched_data.data.gender === "F"
-                                      ? " ♀️"
-                                      : $ctx.fetched_data.data.gender === "M"
-                                      ? " ♂️"
-                                      : ""
-                                  }`;
+                                try {
+                                  return (() => {
+                                    const dob = new Date(
+                                      $ctx.fetched_data.data.dob
+                                    );
+                                    const ageDiffMs =
+                                      Date.now() - dob.getTime();
+                                    const ageDate = new Date(ageDiffMs);
+                                    const ageYears = Math.abs(
+                                      ageDate.getUTCFullYear() - 1970
+                                    );
+                                    const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
+                                    if (ageYears < 1) {
+                                      const ageMonths = ageDate.getUTCMonth();
+                                      return `${fullName} ${ageMonths} months ${
+                                        $ctx.fetched_data.data.gender === "F"
+                                          ? " ♀️"
+                                          : $ctx.fetched_data.data.gender ===
+                                            "M"
+                                          ? " ♂️"
+                                          : ""
+                                      }`;
+                                    } else {
+                                      return `${fullName} ${ageYears}${
+                                        $ctx.fetched_data.data.gender === "F"
+                                          ? " ♀️"
+                                          : $ctx.fetched_data.data.gender ===
+                                            "M"
+                                          ? " ♂️"
+                                          : ""
+                                      }`;
+                                    }
+                                  })();
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "";
+                                  }
+                                  throw e;
                                 }
                               })()}
                             </React.Fragment>
@@ -549,47 +587,56 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                 $ctx.fetched_data.data.bed}
                             </React.Fragment>
                           </div>
-                          <div
-                            data-plasmic-name={
-                              "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
-                            }
-                            data-plasmic-override={overrides.وضعتبمار}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.وضعتبمار
-                            )}
-                          >
-                            {
-                              "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631"
-                            }
-                          </div>
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__ivCly
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return $ctx.fetched_data.data.dismissed
-                                    ? "ترخیص"
-                                    : "بستری";
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "\u062a\u0631\u062e\u06cc\u0635";
-                                  }
-                                  throw e;
+                        </div>
+                      </Stack__>
+                      <Stack__
+                        as={"div"}
+                        data-plasmic-name={"freeBox"}
+                        data-plasmic-override={overrides.freeBox}
+                        hasGap={true}
+                        className={classNames(projectcss.all, sty.freeBox)}
+                      >
+                        <div
+                          data-plasmic-name={"patientStatus"}
+                          data-plasmic-override={overrides.patientStatus}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.patientStatus
+                          )}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return $ctx.fetched_data.data.dismissed
+                                  ? "ترخیص"
+                                  : "بستری";
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "\u062a\u0631\u062e\u06cc\u0635";
                                 }
-                              })()}
-                            </React.Fragment>
-                          </div>
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                        <div
+                          data-plasmic-name={
+                            "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+                          }
+                          data-plasmic-override={overrides.وضعتبمار}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.وضعتبمار
+                          )}
+                        >
+                          {
+                            "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631"
+                          }
                         </div>
                       </Stack__>
                       <Button
@@ -600,6 +647,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           sty.bioArcPrescription
                         )}
                         color={"blue"}
+                        deselected={generateStateValueProp($state, [
+                          "bioArcPrescription",
+                          "deselected"
+                        ])}
                         isDisabled={generateStateValueProp($state, [
                           "bioArcPrescription",
                           "isDisabled"
@@ -632,12 +683,28 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             $steps["goToPage"] = await $steps["goToPage"];
                           }
                         }}
+                        onDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bioArcPrescription",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }}
                         onIsDisabledChange={(...eventArgs) => {
                           generateStateOnChangeProp($state, [
                             "bioArcPrescription",
                             "isDisabled"
                           ])(eventArgs[0]);
                         }}
+                        onSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bioArcPrescription",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }}
+                        selected={generateStateValueProp($state, [
+                          "bioArcPrescription",
+                          "selected"
+                        ])}
                       >
                         {
                           "\u0646\u0633\u062e\u0647 \u0646\u0648\u06cc\u0633\u06cc \u0628\u0627 \u0628\u06cc\u0648\u0622\u0631\u06a9 "
@@ -658,7 +725,268 @@ function PlasmicPatientProfile__RenderFunc(props: {
               data-plasmic-name={"switchingTab"}
               data-plasmic-override={overrides.switchingTab}
               className={classNames("__wab_instance", sty.switchingTab)}
-            />
+            >
+              <PlasmicImg__
+                data-plasmic-name={"homepage"}
+                data-plasmic-override={overrides.homepage}
+                alt={""}
+                className={classNames(sty.homepage)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"25%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToHomepage"] = true
+                    ? (() => {
+                        const actionArgs = { destination: `/patients` };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToHomepage"] != null &&
+                    typeof $steps["goToHomepage"] === "object" &&
+                    typeof $steps["goToHomepage"].then === "function"
+                  ) {
+                    $steps["goToHomepage"] = await $steps["goToHomepage"];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/icons8Home1Svg.svg",
+                  fullWidth: 150,
+                  fullHeight: 150,
+                  aspectRatio: 1
+                }}
+              />
+
+              <PlasmicImg__
+                data-plasmic-name={"patientProfile3"}
+                data-plasmic-override={overrides.patientProfile3}
+                alt={""}
+                className={classNames(sty.patientProfile3)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"25%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToHomepage"] = true
+                    ? (() => {
+                        const actionArgs = { destination: `/patients` };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToHomepage"] != null &&
+                    typeof $steps["goToHomepage"] === "object" &&
+                    typeof $steps["goToHomepage"].then === "function"
+                  ) {
+                    $steps["goToHomepage"] = await $steps["goToHomepage"];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/group2063.svg",
+                  fullWidth: 18.77,
+                  fullHeight: 20.34,
+                  aspectRatio: 0.904762
+                }}
+              />
+
+              <PlasmicImg__
+                data-plasmic-name={"radiologyReport"}
+                data-plasmic-override={overrides.radiologyReport}
+                alt={""}
+                className={classNames(sty.radiologyReport)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"25%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToImagingReport1"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}/report/list`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToImagingReport1"] != null &&
+                    typeof $steps["goToImagingReport1"] === "object" &&
+                    typeof $steps["goToImagingReport1"].then === "function"
+                  ) {
+                    $steps["goToImagingReport1"] = await $steps[
+                      "goToImagingReport1"
+                    ];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/group376.svg",
+                  fullWidth: 19.424,
+                  fullHeight: 19.98,
+                  aspectRatio: 1
+                }}
+              />
+
+              <PlasmicImg__
+                data-plasmic-name={"laboratory"}
+                data-plasmic-override={overrides.laboratory}
+                alt={""}
+                className={classNames(sty.laboratory)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"25%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToLaboratoryData"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}/lab`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToLaboratoryData"] != null &&
+                    typeof $steps["goToLaboratoryData"] === "object" &&
+                    typeof $steps["goToLaboratoryData"].then === "function"
+                  ) {
+                    $steps["goToLaboratoryData"] = await $steps[
+                      "goToLaboratoryData"
+                    ];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/group384.svg",
+                  fullWidth: 14.575,
+                  fullHeight: 18.692,
+                  aspectRatio: 0.789474
+                }}
+              />
+
+              <BookmarkSvgrepoCom1SvgIcon
+                data-plasmic-name={"bookmark"}
+                data-plasmic-override={overrides.bookmark}
+                className={classNames(projectcss.all, sty.bookmark)}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["invokeGlobalAction"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "patch ",
+                            `/n8n/webhook/bookmark_patientcard?patient_id=${
+                              $ctx.params.code
+                            }&namespace_id= ${localStorage.getItem(
+                              "inlab_user_namespace_id"
+                            )}&bookmark=selected`
+                          ]
+                        };
+                        return $globalActions[
+                          "AuthGlobalContext.apiFetcher"
+                        ]?.apply(null, [...actionArgs.args]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["invokeGlobalAction"] != null &&
+                    typeof $steps["invokeGlobalAction"] === "object" &&
+                    typeof $steps["invokeGlobalAction"].then === "function"
+                  ) {
+                    $steps["invokeGlobalAction"] = await $steps[
+                      "invokeGlobalAction"
+                    ];
+                  }
+                }}
+                role={"img"}
+              />
+            </SwitchingTab>
           </div>
           <RedirectToLoginPage
             data-plasmic-name={"redirectToLoginPage"}
@@ -716,14 +1044,21 @@ const PlasmicDescendants = {
     "pacsNumber",
     "pacsNumber2",
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed",
+    "freeBox",
+    "patientStatus",
     "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
     "bioArcPrescription",
     "switchingTabs",
     "switchingTab",
+    "homepage",
+    "patientProfile3",
+    "radiologyReport",
+    "laboratory",
+    "bookmark",
     "redirectToLoginPage",
     "redirectToNamespaceSelection",
     "onloadUserPatientInteractionCount"
@@ -740,10 +1075,12 @@ const PlasmicDescendants = {
     "pacsNumber",
     "pacsNumber2",
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed",
+    "freeBox",
+    "patientStatus",
     "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
     "bioArcPrescription"
   ],
@@ -757,10 +1094,12 @@ const PlasmicDescendants = {
     "pacsNumber",
     "pacsNumber2",
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed",
+    "freeBox",
+    "patientStatus",
     "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
     "bioArcPrescription"
   ],
@@ -773,11 +1112,10 @@ const PlasmicDescendants = {
     "pacsNumber",
     "pacsNumber2",
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
-    "patientRoomBed",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+    "patientRoomBed"
   ],
   nationalIdadmissionTimeNopacs: [
     "nationalIdadmissionTimeNopacs",
@@ -794,20 +1132,45 @@ const PlasmicDescendants = {
   pacsNumber2: ["pacsNumber2"],
   nameservicewardbed: [
     "nameservicewardbed",
-    "patientName",
+    "patientName2",
     "patientService",
     "patientWard",
-    "patientRoomBed",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+    "patientRoomBed"
   ],
-  patientName: ["patientName"],
+  patientName2: ["patientName2"],
   patientService: ["patientService"],
   patientWard: ["patientWard"],
   patientRoomBed: ["patientRoomBed"],
+  freeBox: [
+    "freeBox",
+    "patientStatus",
+    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+  ],
+  patientStatus: ["patientStatus"],
   وضعتبمار: ["\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"],
   bioArcPrescription: ["bioArcPrescription"],
-  switchingTabs: ["switchingTabs", "switchingTab"],
-  switchingTab: ["switchingTab"],
+  switchingTabs: [
+    "switchingTabs",
+    "switchingTab",
+    "homepage",
+    "patientProfile3",
+    "radiologyReport",
+    "laboratory",
+    "bookmark"
+  ],
+  switchingTab: [
+    "switchingTab",
+    "homepage",
+    "patientProfile3",
+    "radiologyReport",
+    "laboratory",
+    "bookmark"
+  ],
+  homepage: ["homepage"],
+  patientProfile3: ["patientProfile3"],
+  radiologyReport: ["radiologyReport"],
+  laboratory: ["laboratory"],
+  bookmark: ["bookmark"],
   redirectToLoginPage: ["redirectToLoginPage"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   onloadUserPatientInteractionCount: ["onloadUserPatientInteractionCount"]
@@ -828,14 +1191,21 @@ type NodeDefaultElementType = {
   pacsNumber: "div";
   pacsNumber2: "div";
   nameservicewardbed: "div";
-  patientName: "div";
+  patientName2: "div";
   patientService: "div";
   patientWard: "div";
   patientRoomBed: "div";
+  freeBox: "div";
+  patientStatus: "div";
   وضعتبمار: "div";
   bioArcPrescription: typeof Button;
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
+  homepage: typeof PlasmicImg__;
+  patientProfile3: typeof PlasmicImg__;
+  radiologyReport: typeof PlasmicImg__;
+  laboratory: typeof PlasmicImg__;
+  bookmark: "svg";
   redirectToLoginPage: typeof RedirectToLoginPage;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   onloadUserPatientInteractionCount: typeof OnloadUserPatientInteractionCount;
@@ -914,16 +1284,23 @@ export const PlasmicPatientProfile = Object.assign(
     pacsNumber: makeNodeComponent("pacsNumber"),
     pacsNumber2: makeNodeComponent("pacsNumber2"),
     nameservicewardbed: makeNodeComponent("nameservicewardbed"),
-    patientName: makeNodeComponent("patientName"),
+    patientName2: makeNodeComponent("patientName2"),
     patientService: makeNodeComponent("patientService"),
     patientWard: makeNodeComponent("patientWard"),
     patientRoomBed: makeNodeComponent("patientRoomBed"),
+    freeBox: makeNodeComponent("freeBox"),
+    patientStatus: makeNodeComponent("patientStatus"),
     وضعتبمار: makeNodeComponent(
       "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
     ),
     bioArcPrescription: makeNodeComponent("bioArcPrescription"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
+    homepage: makeNodeComponent("homepage"),
+    patientProfile3: makeNodeComponent("patientProfile3"),
+    radiologyReport: makeNodeComponent("radiologyReport"),
+    laboratory: makeNodeComponent("laboratory"),
+    bookmark: makeNodeComponent("bookmark"),
     redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"

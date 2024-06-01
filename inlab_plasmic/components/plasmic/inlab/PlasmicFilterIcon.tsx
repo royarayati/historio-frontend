@@ -163,6 +163,18 @@ function PlasmicFilterIcon__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "filterIcon.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "filterIcon.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -203,6 +215,10 @@ function PlasmicFilterIcon__RenderFunc(props: {
           [sty.filterIconselected]: hasVariant($state, "selected", "selected")
         })}
         color={hasVariant($state, "selected", "selected") ? "blue" : "clear"}
+        deselected={generateStateValueProp($state, [
+          "filterIcon",
+          "deselected"
+        ])}
         isDisabled={generateStateValueProp($state, [
           "filterIcon",
           "isDisabled"
@@ -256,11 +272,22 @@ function PlasmicFilterIcon__RenderFunc(props: {
             $steps["runCode"] = await $steps["runCode"];
           }
         }}
+        onDeselectedChange={(...eventArgs) => {
+          generateStateOnChangeProp($state, ["filterIcon", "deselected"])(
+            eventArgs[0]
+          );
+        }}
         onIsDisabledChange={(...eventArgs) => {
           generateStateOnChangeProp($state, ["filterIcon", "isDisabled"])(
             eventArgs[0]
           );
         }}
+        onSelectedChange={(...eventArgs) => {
+          generateStateOnChangeProp($state, ["filterIcon", "selected"])(
+            eventArgs[0]
+          );
+        }}
+        selected={generateStateValueProp($state, ["filterIcon", "selected"])}
         shape={"rounded"}
         size4={"compact"}
       >

@@ -372,6 +372,7 @@ ${ageMonths} months ${
                               projectcss.__wab_text,
                               sty.imagingReport
                             )}
+                            dir={"rtl"}
                           >
                             <React.Fragment>
                               {currentItem.report}

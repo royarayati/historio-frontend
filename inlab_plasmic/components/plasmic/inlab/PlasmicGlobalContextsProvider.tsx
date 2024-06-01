@@ -9,6 +9,7 @@ import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
 import { CommerceProviderComponent } from "@plasmicpkgs/commerce-shopify";
 import { AuthGlobalContext } from "../../../utils/AuthGlobalContext"; // plasmic-import: Ys_jKOzaYeYo/codeComponent
+import { EmbedCss } from "@plasmicpkgs/plasmic-embed-css";
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 export interface GlobalContextsProviderProps {
@@ -22,6 +23,9 @@ export interface GlobalContextsProviderProps {
   authGlobalContextProps?: Partial<
     Omit<React.ComponentProps<typeof AuthGlobalContext>, "children">
   >;
+  embedCssProps?: Partial<
+    Omit<React.ComponentProps<typeof EmbedCss>, "children">
+  >;
 }
 
 export default function GlobalContextsProvider(
@@ -31,7 +35,8 @@ export default function GlobalContextsProvider(
     children,
     antdConfigProviderProps,
     commerceProviderComponentProps,
-    authGlobalContextProps
+    authGlobalContextProps,
+    embedCssProps
   } = props;
 
   const globalVariants = ensureGlobalVariants({
@@ -156,7 +161,16 @@ export default function GlobalContextsProvider(
         }
       >
         <AuthGlobalContext {...authGlobalContextProps}>
-          {children}
+          <EmbedCss
+            {...embedCssProps}
+            css={
+              embedCssProps && "css" in embedCssProps
+                ? embedCssProps.css!
+                : undefined
+            }
+          >
+            {children}
+          </EmbedCss>
         </AuthGlobalContext>
       </CommerceProviderComponent>
     </AntdConfigProvider>

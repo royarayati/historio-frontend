@@ -185,6 +185,18 @@ function PlasmicTestAuth__RenderFunc(props: {
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -342,6 +354,10 @@ function PlasmicTestAuth__RenderFunc(props: {
                       data-plasmic-override={overrides.button}
                       className={classNames("__wab_instance", sty.button)}
                       color={"green"}
+                      deselected={generateStateValueProp($state, [
+                        "button",
+                        "deselected"
+                      ])}
                       isDisabled={generateStateValueProp($state, [
                         "button",
                         "isDisabled"
@@ -408,12 +424,28 @@ function PlasmicTestAuth__RenderFunc(props: {
                           ];
                         }
                       }}
+                      onDeselectedChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "deselected"
+                        ])(eventArgs[0]);
+                      }}
                       onIsDisabledChange={(...eventArgs) => {
                         generateStateOnChangeProp($state, [
                           "button",
                           "isDisabled"
                         ])(eventArgs[0]);
                       }}
+                      onSelectedChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "selected"
+                        ])(eventArgs[0]);
+                      }}
+                      selected={generateStateValueProp($state, [
+                        "button",
+                        "selected"
+                      ])}
                     >
                       <div
                         className={classNames(
