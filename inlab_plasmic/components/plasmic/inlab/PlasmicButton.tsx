@@ -327,6 +327,7 @@ function PlasmicButton__RenderFunc(props: {
             "color",
             "clear"
           ),
+          [sty.contentContainercolor_red]: hasVariant($state, "color", "red"),
           [sty.contentContainerdeselected]: hasVariant(
             $state,
             "deselected",

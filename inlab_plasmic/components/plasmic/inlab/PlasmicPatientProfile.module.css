@@ -471,7 +471,7 @@
   max-width: 100%;
   position: relative;
 }
-.img__us8Pz {
+.homepage {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -480,22 +480,23 @@
   margin: 0;
   border-right: 1px none #aeaeae;
 }
-.img__us8Pz > picture > img {
+.homepage > picture > img {
   object-fit: fill;
 }
-.img___3YmrN {
+.patientProfile3 {
   position: relative;
   object-fit: fill;
   max-width: 100%;
   width: 25%;
   height: 25px;
   margin: 0;
-  border-left: 1px solid #00000045;
+  border-right: 1px solid #aeaeae;
+  border-left: 1px solid #aeaeae;
 }
-.img___3YmrN > picture > img {
+.patientProfile3 > picture > img {
   object-fit: fill;
 }
-.img__iBmOc {
+.radiologyReport {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -505,10 +506,10 @@
   border-right: 1px solid #00000045;
   border-left: 1px solid #00000045;
 }
-.img__iBmOc > picture > img {
+.radiologyReport > picture > img {
   object-fit: fill;
 }
-.img___41Cc {
+.laboratory {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -518,8 +519,18 @@
   height: 25px;
   margin: 0;
 }
-.img___41Cc > picture > img {
+.laboratory > picture > img {
   object-fit: fill;
+}
+.bookmark {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  color: var(--token-tawGjJMbHvx-);
+  width: 25%;
+  height: 25px;
+  display: none;
+  border-left: 1px solid #00000045;
 }
 .redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;

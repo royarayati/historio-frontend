@@ -703,10 +703,10 @@
   text-decoration-line: none !important;
   left: 20%;
   top: 15px;
-  right: 20%;
   z-index: 2;
   max-width: 80%;
   box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
+  right: 20%;
   border-radius: 5px;
   padding: 8px;
 }

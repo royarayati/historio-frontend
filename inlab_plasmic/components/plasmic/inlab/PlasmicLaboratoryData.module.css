@@ -99,7 +99,6 @@
   margin: 0px;
 }
 .normalRangeButton {
-  display: flex;
   position: relative;
   flex-direction: row;
   align-items: stretch;
@@ -111,8 +110,9 @@
   right: auto;
   max-height: 22px;
   align-self: center;
-  background: #ffffff;
+  background: var(--token-tawGjJMbHvx-);
   min-height: 0;
+  display: none;
   border-radius: 100px;
   padding: 4px;
   border: 0.5px solid var(--token-Pxe4wDL2kJpb);
@@ -128,14 +128,14 @@
   background: var(--token-pRs3-4jrQ4XQ);
 }
 .normalRangeButtonCircle {
-  display: block;
   position: relative;
   width: 12px;
   height: 12px;
   max-width: 100%;
-  background: var(--token-8PxxXPNrIohQ);
+  background: var(--token-41VRhDKfihhY);
   align-self: center;
   flex-shrink: 0;
+  display: none;
   border-radius: 100px;
   padding: 8px;
 }
@@ -151,7 +151,7 @@
   font-size: 10px;
   text-align: center;
   align-self: center;
-  color: var(--token-IYO13gyYJHXG);
+  color: var(--token-41VRhDKfihhY);
   white-space: pre;
   text-transform: capitalize;
   user-select: none;
@@ -176,7 +176,7 @@
   width: 12px;
   height: 12px;
   max-width: 100%;
-  background: var(--token-8PxxXPNrIohQ);
+  background: #ffffff;
   align-self: center;
   flex-shrink: 0;
   border-radius: 100px;
@@ -278,8 +278,9 @@
   overflow: auto;
   left: auto;
   top: auto;
+  align-self: center;
   min-width: 0;
-  padding: 0px 2px;
+  padding: 4px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .labResults {
@@ -347,12 +348,13 @@
 .factorName {
   position: relative;
   width: 100%;
-  height: 40px;
+  height: 70px;
   max-width: 100%;
   white-space: pre-wrap;
   align-self: center;
   text-align: justify;
   font-size: var(--token-CdE1_0ZaCyT1);
+  flex-grow: 1;
   min-width: 0;
   flex-shrink: 0;
   padding: 2px;
@@ -510,7 +512,6 @@
   border-left-width: 1px;
   left: auto;
   top: auto;
-  z-index: 1;
   min-width: 0;
   flex-shrink: 0;
   padding: 4px;
@@ -549,7 +550,7 @@
   position: relative;
   flex-direction: row;
   width: 100%;
-  height: 40px;
+  height: 70px;
   max-width: 100%;
   background: none;
   margin-bottom: 0px;
@@ -560,9 +561,9 @@
   align-self: center;
   min-width: 0;
   flex-shrink: 0;
-  padding: 4px;
+  padding: 2px;
   border-top: 0.5px solid var(--token-Pxe4wDL2kJpb);
-  border-bottom: 0.5px none var(--token-8PxxXPNrIohQ);
+  border-bottom: 0px none var(--token-8PxxXPNrIohQ);
 }
 .factorNamevalue > :global(.__wab_flex-container) {
   flex-direction: row;
@@ -612,14 +613,17 @@
 }
 .normalFactorValue {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 500%;
   font-size: var(--token-CdE1_0ZaCyT1);
   text-align: center;
   white-space: pre-wrap;
   line-height: 1.2;
+  align-self: auto;
+  position: relative;
+  left: auto;
+  top: auto;
   min-width: 0;
-  min-height: 0;
   padding: 2px 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -637,7 +641,7 @@
 }
 .abnormalFactorValue {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 500%;
   font-size: var(--token-CdE1_0ZaCyT1);
   text-align: center;
@@ -647,7 +651,6 @@
   position: relative;
   color: var(--token-KdlBqVo3oFfa);
   min-width: 0;
-  min-height: 0;
   padding: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -666,9 +669,15 @@
   color: var(--token-8PxxXPNrIohQ);
   font-weight: 400;
   white-space: pre-wrap;
+  flex-shrink: 1;
+  flex-grow: 1;
+  font-size: 8px;
+  align-self: center;
+  text-align: center;
   min-width: 0;
-  display: none;
-  padding: 2px;
+  padding: 0px;
+  margin: 2px 0px 0px;
+  border: 0px none var(--token-Pxe4wDL2kJpb);
 }
 .normalRangedviewNormalRange {
   flex-shrink: 1;
@@ -677,7 +686,6 @@
   align-self: center;
   white-space: pre-wrap;
   text-align: center;
-  display: block;
   padding: 0px;
   margin: 2px 0px 0px;
   border: 0px none var(--token-Pxe4wDL2kJpb);
