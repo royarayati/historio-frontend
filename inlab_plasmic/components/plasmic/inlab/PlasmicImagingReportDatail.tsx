@@ -60,6 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
@@ -72,6 +73,9 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicImagingReportDatail.module.css"; // plasmic-import: QnDyAyhvLYc4/css
+
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
 
@@ -92,6 +96,7 @@ export type PlasmicImagingReportDatail__OverridesType = {
   text?: Flex__<"div">;
   reportDetail?: Flex__<typeof ApiFetcherComponent>;
   imagingReportList?: Flex__<"div">;
+  button?: Flex__<typeof Button>;
   imagingReportCard?: Flex__<"div">;
   imagingReportDate?: Flex__<"div">;
   imagingReport?: Flex__<"div">;
@@ -137,6 +142,43 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const currentUser = useCurrentUser?.() || {};
+
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "button[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].sortSelected",
+        type: "private",
+        variableType: "boolean"
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
 
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsjEqVmdAbnKYc()
@@ -318,6 +360,166 @@ ${ageMonths} months ${
                       )}
                       key={currentIndex}
                     >
+                      {$ctx.fetched_data.data.pacs_url !== null
+                        ? (() => {
+                            const child$Props = {
+                              className: classNames(
+                                "__wab_instance",
+                                sty.button
+                              ),
+                              color: "blue",
+                              deselected: generateStateValueProp($state, [
+                                "button",
+                                __plasmic_idx_0,
+                                "deselected"
+                              ]),
+                              isDisabled: generateStateValueProp($state, [
+                                "button",
+                                __plasmic_idx_0,
+                                "isDisabled"
+                              ]),
+                              onClick: async event => {
+                                const $steps = {};
+
+                                $steps["goToPage"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        destination: (() => {
+                                          try {
+                                            return $ctx.fetched_data.data
+                                              .pacs_url;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })()
+                                      };
+                                      return (({ destination }) => {
+                                        if (
+                                          typeof destination === "string" &&
+                                          destination.startsWith("#")
+                                        ) {
+                                          document
+                                            .getElementById(
+                                              destination.substr(1)
+                                            )
+                                            .scrollIntoView({
+                                              behavior: "smooth"
+                                            });
+                                        } else {
+                                          __nextRouter?.push(destination);
+                                        }
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["goToPage"] != null &&
+                                  typeof $steps["goToPage"] === "object" &&
+                                  typeof $steps["goToPage"].then === "function"
+                                ) {
+                                  $steps["goToPage"] = await $steps["goToPage"];
+                                }
+                              },
+                              onDeselectedChange: (...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "button",
+                                  __plasmic_idx_0,
+                                  "deselected"
+                                ])(eventArgs[0]);
+                              },
+                              onIsDisabledChange: (...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "button",
+                                  __plasmic_idx_0,
+                                  "isDisabled"
+                                ])(eventArgs[0]);
+                              },
+                              onSelectedChange: (...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "button",
+                                  __plasmic_idx_0,
+                                  "selected"
+                                ])(eventArgs[0]);
+                              },
+                              onSortDeselectedChange: (...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "button",
+                                  __plasmic_idx_0,
+                                  "sortDeselected"
+                                ])(eventArgs[0]);
+                              },
+                              onSortSelectedChange: (...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "button",
+                                  __plasmic_idx_0,
+                                  "sortSelected"
+                                ])(eventArgs[0]);
+                              },
+                              selected: generateStateValueProp($state, [
+                                "button",
+                                __plasmic_idx_0,
+                                "selected"
+                              ]),
+                              sortDeselected: generateStateValueProp($state, [
+                                "button",
+                                __plasmic_idx_0,
+                                "sortDeselected"
+                              ]),
+                              sortSelected: generateStateValueProp($state, [
+                                "button",
+                                __plasmic_idx_0,
+                                "sortSelected"
+                              ])
+                            };
+
+                            initializePlasmicStates(
+                              $state,
+                              [
+                                {
+                                  name: "button[].isDisabled",
+                                  initFunc: ({ $props, $state, $queries }) =>
+                                    undefined
+                                },
+                                {
+                                  name: "button[].selected",
+                                  initFunc: ({ $props, $state, $queries }) =>
+                                    undefined
+                                },
+                                {
+                                  name: "button[].deselected",
+                                  initFunc: ({ $props, $state, $queries }) =>
+                                    undefined
+                                },
+                                {
+                                  name: "button[].sortDeselected",
+                                  initFunc: ({ $props, $state, $queries }) =>
+                                    undefined
+                                },
+                                {
+                                  name: "button[].sortSelected",
+                                  initFunc: ({ $props, $state, $queries }) =>
+                                    undefined
+                                }
+                              ],
+                              [__plasmic_idx_0]
+                            );
+                            return (
+                              <Button
+                                data-plasmic-name={"button"}
+                                data-plasmic-override={overrides.button}
+                                {...child$Props}
+                              >
+                                {"View PACS"}
+                              </Button>
+                            );
+                          })()
+                        : null}
                       {currentItem.id == $ctx.params.reportID ? (
                         <Stack__
                           as={"div"}
@@ -665,6 +867,7 @@ const PlasmicDescendants = {
     "text",
     "reportDetail",
     "imagingReportList",
+    "button",
     "imagingReportCard",
     "imagingReportDate",
     "imagingReport",
@@ -683,16 +886,19 @@ const PlasmicDescendants = {
   reportDetail: [
     "reportDetail",
     "imagingReportList",
+    "button",
     "imagingReportCard",
     "imagingReportDate",
     "imagingReport"
   ],
   imagingReportList: [
     "imagingReportList",
+    "button",
     "imagingReportCard",
     "imagingReportDate",
     "imagingReport"
   ],
+  button: ["button"],
   imagingReportCard: [
     "imagingReportCard",
     "imagingReportDate",
@@ -732,6 +938,7 @@ type NodeDefaultElementType = {
   text: "div";
   reportDetail: typeof ApiFetcherComponent;
   imagingReportList: "div";
+  button: typeof Button;
   imagingReportCard: "div";
   imagingReportDate: "div";
   imagingReport: "div";
@@ -810,6 +1017,7 @@ export const PlasmicImagingReportDatail = Object.assign(
     text: makeNodeComponent("text"),
     reportDetail: makeNodeComponent("reportDetail"),
     imagingReportList: makeNodeComponent("imagingReportList"),
+    button: makeNodeComponent("button"),
     imagingReportCard: makeNodeComponent("imagingReportCard"),
     imagingReportDate: makeNodeComponent("imagingReportDate"),
     imagingReport: makeNodeComponent("imagingReport"),

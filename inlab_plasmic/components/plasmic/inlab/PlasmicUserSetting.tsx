@@ -190,6 +190,18 @@ function PlasmicUserSetting__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "logoutButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "logoutButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -860,11 +872,31 @@ function PlasmicUserSetting__RenderFunc(props: {
                   eventArgs[0]
                 );
               }}
+              onSortDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "logoutButton",
+                  "sortDeselected"
+                ])(eventArgs[0]);
+              }}
+              onSortSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "logoutButton",
+                  "sortSelected"
+                ])(eventArgs[0]);
+              }}
               selected={generateStateValueProp($state, [
                 "logoutButton",
                 "selected"
               ])}
               shape={"rounded"}
+              sortDeselected={generateStateValueProp($state, [
+                "logoutButton",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "logoutButton",
+                "sortSelected"
+              ])}
               startIcon={
                 <ChecksvgIcon
                   className={classNames(projectcss.all, sty.svg__fLi6W)}

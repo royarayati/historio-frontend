@@ -236,6 +236,42 @@ function PlasmicInlabLogin__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "loginButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "resetPassword.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "createAccount.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "loginButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "resetPassword.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "createAccount.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -729,11 +765,31 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 eventArgs[0]
               );
             }}
+            onSortDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "loginButton",
+                "sortDeselected"
+              ])(eventArgs[0]);
+            }}
+            onSortSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "loginButton",
+                "sortSelected"
+              ])(eventArgs[0]);
+            }}
             selected={generateStateValueProp($state, [
               "loginButton",
               "selected"
             ])}
             shape={"rounded"}
+            sortDeselected={generateStateValueProp($state, [
+              "loginButton",
+              "sortDeselected"
+            ])}
+            sortSelected={generateStateValueProp($state, [
+              "loginButton",
+              "sortSelected"
+            ])}
             submitsForm={false}
           >
             <div
@@ -803,9 +859,29 @@ function PlasmicInlabLogin__RenderFunc(props: {
                   "selected"
                 ])(eventArgs[0]);
               }}
+              onSortDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "resetPassword",
+                  "sortDeselected"
+                ])(eventArgs[0]);
+              }}
+              onSortSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "resetPassword",
+                  "sortSelected"
+                ])(eventArgs[0]);
+              }}
               selected={generateStateValueProp($state, [
                 "resetPassword",
                 "selected"
+              ])}
+              sortDeselected={generateStateValueProp($state, [
+                "resetPassword",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "resetPassword",
+                "sortSelected"
               ])}
               target={true}
             >
@@ -892,9 +968,29 @@ function PlasmicInlabLogin__RenderFunc(props: {
                   "selected"
                 ])(eventArgs[0]);
               }}
+              onSortDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "createAccount",
+                  "sortDeselected"
+                ])(eventArgs[0]);
+              }}
+              onSortSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "createAccount",
+                  "sortSelected"
+                ])(eventArgs[0]);
+              }}
               selected={generateStateValueProp($state, [
                 "createAccount",
                 "selected"
+              ])}
+              sortDeselected={generateStateValueProp($state, [
+                "createAccount",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "createAccount",
+                "sortSelected"
               ])}
               target={true}
             >

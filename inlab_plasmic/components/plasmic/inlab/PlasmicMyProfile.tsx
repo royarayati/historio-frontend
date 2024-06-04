@@ -232,6 +232,18 @@ function PlasmicMyProfile__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "save.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "save.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -777,7 +789,25 @@ function PlasmicMyProfile__RenderFunc(props: {
                   eventArgs[0]
                 );
               }}
+              onSortDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["save", "sortDeselected"])(
+                  eventArgs[0]
+                );
+              }}
+              onSortSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["save", "sortSelected"])(
+                  eventArgs[0]
+                );
+              }}
               selected={generateStateValueProp($state, ["save", "selected"])}
+              sortDeselected={generateStateValueProp($state, [
+                "save",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "save",
+                "sortSelected"
+              ])}
               submitsForm={false}
             >
               <div

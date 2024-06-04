@@ -179,6 +179,18 @@ function PlasmicPatientProfile__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bioArcPrescription.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bioArcPrescription.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -701,9 +713,29 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             "selected"
                           ])(eventArgs[0]);
                         }}
+                        onSortDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bioArcPrescription",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bioArcPrescription",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }}
                         selected={generateStateValueProp($state, [
                           "bioArcPrescription",
                           "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "bioArcPrescription",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "bioArcPrescription",
+                          "sortSelected"
                         ])}
                       >
                         {

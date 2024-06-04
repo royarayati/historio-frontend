@@ -185,6 +185,30 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton2.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton2.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -431,9 +455,29 @@ ${ageMonths} months ${
                             "selected"
                           ])(eventArgs[0]);
                         }}
+                        onSortDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }}
                         selected={generateStateValueProp($state, [
                           "activeViewPacsButton",
                           "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "activeViewPacsButton",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "activeViewPacsButton",
+                          "sortSelected"
                         ])}
                       >
                         <div
@@ -551,9 +595,29 @@ ${ageMonths} months ${
                             "selected"
                           ])(eventArgs[0]);
                         }}
+                        onSortDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton2",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton2",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }}
                         selected={generateStateValueProp($state, [
                           "activeViewPacsButton2",
                           "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "activeViewPacsButton2",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "activeViewPacsButton2",
+                          "sortSelected"
                         ])}
                       >
                         <div

@@ -61,11 +61,11 @@ import {
 
 import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
+import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
-import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -82,6 +82,7 @@ import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic
 import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: kYUnvWOY7oUw/icon
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
+import Icon5Icon from "./icons/PlasmicIcon__Icon5"; // plasmic-import: AgX6cnN3YV61/icon
 import BookmarkPlusSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg"; // plasmic-import: laC4EyEnFr3s/icon
 import BookmarkDashFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg"; // plasmic-import: OXlS9uB7Ffdy/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
@@ -108,6 +109,7 @@ export type PlasmicHomepage__OverridesType = {
   redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   pageContent?: Flex__<"div">;
+  modalRemoveBookmarks?: Flex__<typeof AntdModal>;
   header?: Flex__<"div">;
   namespaceTitle?: Flex__<"div">;
   controlPanel?: Flex__<"div">;
@@ -121,9 +123,11 @@ export type PlasmicHomepage__OverridesType = {
   bookmarked?: Flex__<typeof Button>;
   نتايحجستوجو?: Flex__<"div">;
   patients?: Flex__<typeof ApiFetcherComponent>;
+  header2?: Flex__<"div">;
+  buttonاردنهمهبومارها?: Flex__<typeof Button>;
+  bookmarksSort?: Flex__<typeof Button>;
   بمارافتنشد?: Flex__<"div">;
   bookmarkGuide?: Flex__<"div">;
-  freeBox?: Flex__<"div">;
   bookmarkImage?: Flex__<"svg">;
   bookmarkedImage?: Flex__<"svg">;
   لطفامنتظربماند?: Flex__<"div">;
@@ -139,7 +143,7 @@ export type PlasmicHomepage__OverridesType = {
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratoryData?: Flex__<typeof PlasmicImg__>;
   commentButton?: Flex__<typeof Button>;
-  modal?: Flex__<typeof AntdModal>;
+  modalServices?: Flex__<typeof AntdModal>;
   services?: Flex__<typeof ApiFetcherComponent>;
   servicesList?: Flex__<"div">;
   servicesName?: Flex__<"div">;
@@ -185,6 +189,8 @@ function PlasmicHomepage__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = useGlobalActions?.();
+
   const currentUser = useCurrentUser?.() || {};
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
@@ -214,7 +220,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "modal.open",
+        path: "modalServices.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -353,6 +359,155 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "buttonاردنهمهبومارها.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "buttonاردنهمهبومارها.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "buttonاردنهمهبومارها.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "modalRemoveBookmarks.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bookmarksSort.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bookmarksSort.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bookmarksSort.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "service.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bookmarked.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "buttonاردنهمهبومارها.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bookmarksSort.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return !$state.bookmarksSort2;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "commentButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "service.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bookmarked.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "buttonاردنهمهبومارها.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bookmarksSort.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.bookmarksSort2;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "commentButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bookmarksSort2",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return localStorage.getItem("bookmarks_sort") === "تخت"
+                ? true
+                : false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -414,6 +569,140 @@ function PlasmicHomepage__RenderFunc(props: {
           data-plasmic-override={overrides.pageContent}
           className={classNames(projectcss.all, sty.pageContent)}
         >
+          <AntdModal
+            data-plasmic-name={"modalRemoveBookmarks"}
+            data-plasmic-override={overrides.modalRemoveBookmarks}
+            cancelText={"\u0644\u063a\u0648"}
+            className={classNames("__wab_instance", sty.modalRemoveBookmarks)}
+            defaultStylesClassName={classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              projectcss.plasmic_tokens,
+              plasmic_antd_5_hostless_css.plasmic_tokens,
+              plasmic_plasmic_rich_components_css.plasmic_tokens
+            )}
+            modalScopeClassName={sty["modalRemoveBookmarks__modal"]}
+            okText={
+              "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
+            }
+            onCancel={async () => {
+              const $steps = {};
+
+              $steps["updateModalRemoveBookmarksOpen"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["modalRemoveBookmarks", "open"]
+                      },
+                      operation: 0,
+                      value: false
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateModalRemoveBookmarksOpen"] != null &&
+                typeof $steps["updateModalRemoveBookmarksOpen"] === "object" &&
+                typeof $steps["updateModalRemoveBookmarksOpen"].then ===
+                  "function"
+              ) {
+                $steps["updateModalRemoveBookmarksOpen"] = await $steps[
+                  "updateModalRemoveBookmarksOpen"
+                ];
+              }
+            }}
+            onOk={async () => {
+              const $steps = {};
+
+              $steps["deletePatientsBookmarked"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        "DELETE",
+                        `/hapi/api/rest/patient/bookmarked/${
+                          $ctx.inlab_user.user.id
+                        }/${localStorage.getItem("inlab_user_namespace_id")}`,
+                        { "x-hasura-admin-secret": "j2crcdkjWkVdk2bDdbGLfaeD" }
+                      ]
+                    };
+                    return $globalActions[
+                      "AuthGlobalContext.apiFetcher"
+                    ]?.apply(null, [...actionArgs.args]);
+                  })()
+                : undefined;
+              if (
+                $steps["deletePatientsBookmarked"] != null &&
+                typeof $steps["deletePatientsBookmarked"] === "object" &&
+                typeof $steps["deletePatientsBookmarked"].then === "function"
+              ) {
+                $steps["deletePatientsBookmarked"] = await $steps[
+                  "deletePatientsBookmarked"
+                ];
+              }
+            }}
+            onOpenChange={generateStateOnChangeProp($state, [
+              "modalRemoveBookmarks",
+              "open"
+            ])}
+            open={generateStateValueProp($state, [
+              "modalRemoveBookmarks",
+              "open"
+            ])}
+            title={
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__tR3Z
+                )}
+              >
+                {
+                  "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"
+                }
+              </div>
+            }
+            trigger={null}
+          >
+            <div className={classNames(projectcss.all, sty.freeBox__rSn5A)}>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__vVRbL
+                )}
+              >
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return (
+                        "آيا اطمينان داريد که مي خواهيد تمام بيماران بوکمارک شده خود در " +
+                        localStorage.getItem("inlab_user_namespace_title") +
+                        " را پاک کنيد؟ "
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "\u0622\u064a\u0627 \u0627\u0637\u0645\u064a\u0646\u0627\u0646 \u062f\u0627\u0631\u064a\u062f \u06a9\u0647 \u0645\u064a \u062e\u0648\u0627\u0647\u064a\u062f \u062a\u0645\u0627\u0645 \u0628\u064a\u0645\u0627\u0631\u0627\u0646 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0634\u062f\u0647 \u062e\u0648\u062f \u062f\u0631 \u0628\u064a\u0645\u0627\u0631\u0633\u062a\u0627\u0646 \u0631\u0627 \u067e\u0627\u06a9 \u06a9\u0646\u064a\u062f\u061f";
+                      }
+                      throw e;
+                    }
+                  })()}
+                </React.Fragment>
+              </div>
+            </div>
+          </AntdModal>
           <div
             data-plasmic-name={"header"}
             data-plasmic-override={overrides.header}
@@ -656,7 +945,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   const actionArgs = {
                                     variable: {
                                       objRoot: $state,
-                                      variablePath: ["modal", "open"]
+                                      variablePath: ["modalServices", "open"]
                                     },
                                     operation: 4
                                   };
@@ -904,9 +1193,29 @@ function PlasmicHomepage__RenderFunc(props: {
                             "selected"
                           ])(eventArgs[0]);
                         }}
+                        onSortDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "service",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "service",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }}
                         selected={generateStateValueProp($state, [
                           "service",
                           "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "service",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "service",
+                          "sortSelected"
                         ])}
                       >
                         <div
@@ -1245,9 +1554,29 @@ function PlasmicHomepage__RenderFunc(props: {
                         "selected"
                       ])(eventArgs[0]);
                     }}
+                    onSortDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "bookmarked",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "bookmarked",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }}
                     selected={generateStateValueProp($state, [
                       "bookmarked",
                       "selected"
+                    ])}
+                    sortDeselected={generateStateValueProp($state, [
+                      "bookmarked",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "bookmarked",
+                      "sortSelected"
                     ])}
                   >
                     <div
@@ -1303,9 +1632,7 @@ function PlasmicHomepage__RenderFunc(props: {
               $state.searchbar.value
             }&namespace_id=${localStorage.getItem(
               "inlab_user_namespace_id"
-            )}&filter_service=${localStorage.getItem(
-              "filter_service"
-            )}&service_id=${localStorage.getItem("filter_service_id")}`}
+            )}&sort=${localStorage.getItem("bookmarks_sort")}`}
             ref={ref => {
               $refs["patients"] = ref;
             }}
@@ -1314,6 +1641,394 @@ function PlasmicHomepage__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
+                  {(() => {
+                    try {
+                      return (
+                        $state.bookmarked.selected &&
+                        $state.searchbar.value === "" &&
+                        $ctx.fetched_data.data !== ""
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      data-plasmic-name={"header2"}
+                      data-plasmic-override={overrides.header2}
+                      className={classNames(projectcss.all, sty.header2)}
+                    >
+                      <Button
+                        data-plasmic-name={
+                          "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
+                        }
+                        data-plasmic-override={overrides.buttonاردنهمهبومارها}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.buttonاردنهمهبومارها
+                        )}
+                        color={"red"}
+                        deselected={generateStateValueProp($state, [
+                          "buttonاردنهمهبومارها",
+                          "deselected"
+                        ])}
+                        isDisabled={generateStateValueProp($state, [
+                          "buttonاردنهمهبومارها",
+                          "isDisabled"
+                        ])}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateModalRemoveBookmarksOpen"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: [
+                                      "modalRemoveBookmarks",
+                                      "open"
+                                    ]
+                                  },
+                                  operation: 0,
+                                  value: true
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateModalRemoveBookmarksOpen"] != null &&
+                            typeof $steps["updateModalRemoveBookmarksOpen"] ===
+                              "object" &&
+                            typeof $steps["updateModalRemoveBookmarksOpen"]
+                              .then === "function"
+                          ) {
+                            $steps["updateModalRemoveBookmarksOpen"] =
+                              await $steps["updateModalRemoveBookmarksOpen"];
+                          }
+                        }}
+                        onDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "buttonاردنهمهبومارها",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onIsDisabledChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "buttonاردنهمهبومارها",
+                            "isDisabled"
+                          ])(eventArgs[0]);
+                        }}
+                        onSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "buttonاردنهمهبومارها",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "buttonاردنهمهبومارها",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "buttonاردنهمهبومارها",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }}
+                        selected={generateStateValueProp($state, [
+                          "buttonاردنهمهبومارها",
+                          "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "buttonاردنهمهبومارها",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "buttonاردنهمهبومارها",
+                          "sortSelected"
+                        ])}
+                      >
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__ze1An
+                          )}
+                        >
+                          {
+                            "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
+                          }
+                        </div>
+                      </Button>
+                      <Button
+                        data-plasmic-name={"bookmarksSort"}
+                        data-plasmic-override={overrides.bookmarksSort}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.bookmarksSort
+                        )}
+                        deselected={generateStateValueProp($state, [
+                          "bookmarksSort",
+                          "deselected"
+                        ])}
+                        isDisabled={generateStateValueProp($state, [
+                          "bookmarksSort",
+                          "isDisabled"
+                        ])}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateBookmarksSort3"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["bookmarksSort2"]
+                                  },
+                                  operation: 4
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  const oldValue = $stateGet(
+                                    objRoot,
+                                    variablePath
+                                  );
+                                  $stateSet(objRoot, variablePath, !oldValue);
+                                  return !oldValue;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateBookmarksSort3"] != null &&
+                            typeof $steps["updateBookmarksSort3"] ===
+                              "object" &&
+                            typeof $steps["updateBookmarksSort3"].then ===
+                              "function"
+                          ) {
+                            $steps["updateBookmarksSort3"] = await $steps[
+                              "updateBookmarksSort3"
+                            ];
+                          }
+
+                          $steps["setLocalBookmarksSort"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return $state.bookmarksSort2
+                                      ? localStorage.setItem(
+                                          "bookmarks_sort",
+                                          "تخت"
+                                        )
+                                      : localStorage.setItem(
+                                          "bookmarks_sort",
+                                          ""
+                                        );
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["setLocalBookmarksSort"] != null &&
+                            typeof $steps["setLocalBookmarksSort"] ===
+                              "object" &&
+                            typeof $steps["setLocalBookmarksSort"].then ===
+                              "function"
+                          ) {
+                            $steps["setLocalBookmarksSort"] = await $steps[
+                              "setLocalBookmarksSort"
+                            ];
+                          }
+
+                          $steps["runActionOnPatients"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  tplRef: "patients",
+                                  action: "reload"
+                                };
+                                return (({ tplRef, action, args }) => {
+                                  return $refs?.[tplRef]?.[action]?.(
+                                    ...(args ?? [])
+                                  );
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runActionOnPatients"] != null &&
+                            typeof $steps["runActionOnPatients"] === "object" &&
+                            typeof $steps["runActionOnPatients"].then ===
+                              "function"
+                          ) {
+                            $steps["runActionOnPatients"] = await $steps[
+                              "runActionOnPatients"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      console.log(
+                                        `state_bookmarksSort: ${$state.bookmarksSort2} `
+                                      );
+                                      return console.log(
+                                        `localstorage_bookmarks_sort: ${localStorage.getItem(
+                                          "bookmarks_sort"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+                        }}
+                        onDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bookmarksSort",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onIsDisabledChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bookmarksSort",
+                            "isDisabled"
+                          ])(eventArgs[0]);
+                        }}
+                        onSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bookmarksSort",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bookmarksSort",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "bookmarksSort",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }}
+                        selected={generateStateValueProp($state, [
+                          "bookmarksSort",
+                          "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "bookmarksSort",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "bookmarksSort",
+                          "sortSelected"
+                        ])}
+                      >
+                        {(() => {
+                          try {
+                            return $state.bookmarksSort2;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })() ? (
+                          <PlasmicIcon__
+                            PlasmicIconType={
+                              hasVariant(
+                                globalVariants,
+                                "screen",
+                                "mobileFirst"
+                              )
+                                ? Icons8ClosesvgIcon
+                                : Icons8ClosesvgIcon
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              sty.svg__tw0X
+                            )}
+                            role={"img"}
+                          />
+                        ) : null}
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__pMcsf
+                          )}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return "مرتب سازی : تخت";
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                        <Icon5Icon
+                          className={classNames(
+                            projectcss.all,
+                            sty.svg___5KDcq
+                          )}
+                          role={"img"}
+                        />
+                      </Button>
+                    </div>
+                  ) : null}
                   {(() => {
                     try {
                       return (
@@ -1372,9 +2087,10 @@ function PlasmicHomepage__RenderFunc(props: {
                       className={classNames(projectcss.all, sty.bookmarkGuide)}
                     >
                       <div
-                        data-plasmic-name={"freeBox"}
-                        data-plasmic-override={overrides.freeBox}
-                        className={classNames(projectcss.all, sty.freeBox)}
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__y0Cq
+                        )}
                       >
                         <BookmarkPlusSvgrepoComsvgIcon
                           data-plasmic-name={"bookmarkImage"}
@@ -1933,12 +2649,32 @@ function PlasmicHomepage__RenderFunc(props: {
               eventArgs[0]
             );
           }}
+          onSortDeselectedChange={(...eventArgs) => {
+            generateStateOnChangeProp($state, [
+              "commentButton",
+              "sortDeselected"
+            ])(eventArgs[0]);
+          }}
+          onSortSelectedChange={(...eventArgs) => {
+            generateStateOnChangeProp($state, [
+              "commentButton",
+              "sortSelected"
+            ])(eventArgs[0]);
+          }}
           selected={generateStateValueProp($state, [
             "commentButton",
             "selected"
           ])}
           shape={"round"}
           size4={"compact"}
+          sortDeselected={generateStateValueProp($state, [
+            "commentButton",
+            "sortDeselected"
+          ])}
+          sortSelected={generateStateValueProp($state, [
+            "commentButton",
+            "sortSelected"
+          ])}
           target={true}
         >
           <Icon2Icon
@@ -1958,9 +2694,9 @@ function PlasmicHomepage__RenderFunc(props: {
         </Button>
         {false ? (
           <AntdModal
-            data-plasmic-name={"modal"}
-            data-plasmic-override={overrides.modal}
-            className={classNames("__wab_instance", sty.modal)}
+            data-plasmic-name={"modalServices"}
+            data-plasmic-override={overrides.modalServices}
+            className={classNames("__wab_instance", sty.modalServices)}
             closeButtonClassName={classNames({
               [sty["pcls_d2EHzAfk33c5"]]: true
             })}
@@ -2005,9 +2741,12 @@ function PlasmicHomepage__RenderFunc(props: {
             modalContentClassName={classNames({
               [sty["pcls_ovYNN16Mla3e"]]: true
             })}
-            modalScopeClassName={sty["modal__modal"]}
-            onOpenChange={generateStateOnChangeProp($state, ["modal", "open"])}
-            open={generateStateValueProp($state, ["modal", "open"])}
+            modalScopeClassName={sty["modalServices__modal"]}
+            onOpenChange={generateStateOnChangeProp($state, [
+              "modalServices",
+              "open"
+            ])}
+            open={generateStateValueProp($state, ["modalServices", "open"])}
             title={null}
             trigger={null}
             wrapClassName={classNames({ [sty["pcls_9pcykcaA_oRg"]]: true })}
@@ -2366,7 +3105,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   const actionArgs = {
                                     variable: {
                                       objRoot: $state,
-                                      variablePath: ["modal", "open"]
+                                      variablePath: ["modalServices", "open"]
                                     },
                                     operation: 0,
                                     value: false
@@ -2445,6 +3184,7 @@ const PlasmicDescendants = {
     "redirectToLoginPage",
     "redirectToNamespaceSelection",
     "pageContent",
+    "modalRemoveBookmarks",
     "header",
     "namespaceTitle",
     "controlPanel",
@@ -2458,9 +3198,11 @@ const PlasmicDescendants = {
     "bookmarked",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
     "patients",
+    "header2",
+    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
+    "bookmarksSort",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
-    "freeBox",
     "bookmarkImage",
     "bookmarkedImage",
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
@@ -2476,7 +3218,7 @@ const PlasmicDescendants = {
     "radiologyReport",
     "laboratoryData",
     "commentButton",
-    "modal",
+    "modalServices",
     "services",
     "servicesList",
     "servicesName"
@@ -2485,6 +3227,7 @@ const PlasmicDescendants = {
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   pageContent: [
     "pageContent",
+    "modalRemoveBookmarks",
     "header",
     "namespaceTitle",
     "controlPanel",
@@ -2498,9 +3241,11 @@ const PlasmicDescendants = {
     "bookmarked",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
     "patients",
+    "header2",
+    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
+    "bookmarksSort",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
-    "freeBox",
     "bookmarkImage",
     "bookmarkedImage",
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
@@ -2516,6 +3261,7 @@ const PlasmicDescendants = {
     "radiologyReport",
     "laboratoryData"
   ],
+  modalRemoveBookmarks: ["modalRemoveBookmarks"],
   header: ["header", "namespaceTitle"],
   namespaceTitle: ["namespaceTitle"],
   controlPanel: [
@@ -2549,9 +3295,11 @@ const PlasmicDescendants = {
   ],
   patients: [
     "patients",
+    "header2",
+    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
+    "bookmarksSort",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
-    "freeBox",
     "bookmarkImage",
     "bookmarkedImage",
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
@@ -2567,14 +3315,17 @@ const PlasmicDescendants = {
     "radiologyReport",
     "laboratoryData"
   ],
-  بمارافتنشد: ["\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"],
-  bookmarkGuide: [
-    "bookmarkGuide",
-    "freeBox",
-    "bookmarkImage",
-    "bookmarkedImage"
+  header2: [
+    "header2",
+    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
+    "bookmarksSort"
   ],
-  freeBox: ["freeBox", "bookmarkImage", "bookmarkedImage"],
+  buttonاردنهمهبومارها: [
+    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
+  ],
+  bookmarksSort: ["bookmarksSort"],
+  بمارافتنشد: ["\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"],
+  bookmarkGuide: ["bookmarkGuide", "bookmarkImage", "bookmarkedImage"],
   bookmarkImage: ["bookmarkImage"],
   bookmarkedImage: ["bookmarkedImage"],
   لطفامنتظربماند: [
@@ -2613,7 +3364,7 @@ const PlasmicDescendants = {
   radiologyReport: ["radiologyReport"],
   laboratoryData: ["laboratoryData"],
   commentButton: ["commentButton"],
-  modal: ["modal", "services", "servicesList", "servicesName"],
+  modalServices: ["modalServices", "services", "servicesList", "servicesName"],
   services: ["services", "servicesList", "servicesName"],
   servicesList: ["servicesList", "servicesName"],
   servicesName: ["servicesName"]
@@ -2626,6 +3377,7 @@ type NodeDefaultElementType = {
   redirectToLoginPage: typeof RedirectToLoginPage;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   pageContent: "div";
+  modalRemoveBookmarks: typeof AntdModal;
   header: "div";
   namespaceTitle: "div";
   controlPanel: "div";
@@ -2639,9 +3391,11 @@ type NodeDefaultElementType = {
   bookmarked: typeof Button;
   نتايحجستوجو: "div";
   patients: typeof ApiFetcherComponent;
+  header2: "div";
+  buttonاردنهمهبومارها: typeof Button;
+  bookmarksSort: typeof Button;
   بمارافتنشد: "div";
   bookmarkGuide: "div";
-  freeBox: "div";
   bookmarkImage: "svg";
   bookmarkedImage: "svg";
   لطفامنتظربماند: "div";
@@ -2657,7 +3411,7 @@ type NodeDefaultElementType = {
   radiologyReport: typeof PlasmicImg__;
   laboratoryData: typeof PlasmicImg__;
   commentButton: typeof Button;
-  modal: typeof AntdModal;
+  modalServices: typeof AntdModal;
   services: typeof ApiFetcherComponent;
   servicesList: "div";
   servicesName: "div";
@@ -2728,6 +3482,7 @@ export const PlasmicHomepage = Object.assign(
       "redirectToNamespaceSelection"
     ),
     pageContent: makeNodeComponent("pageContent"),
+    modalRemoveBookmarks: makeNodeComponent("modalRemoveBookmarks"),
     header: makeNodeComponent("header"),
     namespaceTitle: makeNodeComponent("namespaceTitle"),
     controlPanel: makeNodeComponent("controlPanel"),
@@ -2743,11 +3498,15 @@ export const PlasmicHomepage = Object.assign(
       "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648"
     ),
     patients: makeNodeComponent("patients"),
+    header2: makeNodeComponent("header2"),
+    buttonاردنهمهبومارها: makeNodeComponent(
+      "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
+    ),
+    bookmarksSort: makeNodeComponent("bookmarksSort"),
     بمارافتنشد: makeNodeComponent(
       "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"
     ),
     bookmarkGuide: makeNodeComponent("bookmarkGuide"),
-    freeBox: makeNodeComponent("freeBox"),
     bookmarkImage: makeNodeComponent("bookmarkImage"),
     bookmarkedImage: makeNodeComponent("bookmarkedImage"),
     لطفامنتظربماند: makeNodeComponent(
@@ -2765,7 +3524,7 @@ export const PlasmicHomepage = Object.assign(
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratoryData: makeNodeComponent("laboratoryData"),
     commentButton: makeNodeComponent("commentButton"),
-    modal: makeNodeComponent("modal"),
+    modalServices: makeNodeComponent("modalServices"),
     services: makeNodeComponent("services"),
     servicesList: makeNodeComponent("servicesList"),
     servicesName: makeNodeComponent("servicesName"),

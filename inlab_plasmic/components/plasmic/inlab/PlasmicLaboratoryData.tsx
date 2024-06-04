@@ -102,10 +102,10 @@ export type PlasmicLaboratoryData__OverridesType = {
   laboratoryTitle?: Flex__<"div">;
   labResults?: Flex__<"div">;
   checkedFactors?: Flex__<"div">;
+  emptyCell?: Flex__<"div">;
   factorName?: Flex__<"div">;
   laboratoryResultsPerTitle?: Flex__<"div">;
   labPerDate?: Flex__<"div">;
-  reportDatetime?: Flex__<"div">;
   issuedDatetime?: Flex__<"div">;
   labLists?: Flex__<"div">;
   factorNamevalue?: Flex__<"div">;
@@ -520,29 +520,22 @@ ${ageMonths} months ${
                           )}
                         >
                           <div
+                            data-plasmic-name={"emptyCell"}
+                            data-plasmic-override={overrides.emptyCell}
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.text__nlbdN,
+                              sty.emptyCell,
                               {
-                                [sty.textviewNormalRange__nlbdNBwg80]:
-                                  hasVariant(
-                                    $state,
-                                    "viewNormalRange",
-                                    "viewNormalRange"
-                                  )
+                                [sty.emptyCellviewNormalRange]: hasVariant(
+                                  $state,
+                                  "viewNormalRange",
+                                  "viewNormalRange"
+                                )
                               }
                             )}
                           >
-                            <React.Fragment>
-                              {currentItem.title
-                                .replace(" (  #* ) ", "")
-                                .replace(" (  # ) ", "")
-                                .replace("( #)", "")
-                                .replace("( #*)", "")
-                                .replace("* ( #*)", "")
-                                .replace("(  #* )", "")}
-                            </React.Fragment>
+                            {""}
                           </div>
                           {(_par =>
                             !_par ? [] : Array.isArray(_par) ? _par : [_par])(
@@ -653,62 +646,6 @@ ${ageMonths} months ${
                                 key={currentIndex}
                               >
                                 <div
-                                  data-plasmic-name={"reportDatetime"}
-                                  data-plasmic-override={
-                                    overrides.reportDatetime
-                                  }
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.reportDatetime,
-                                    {
-                                      [sty.reportDatetimeviewNormalRange]:
-                                        hasVariant(
-                                          $state,
-                                          "viewNormalRange",
-                                          "viewNormalRange"
-                                        )
-                                    }
-                                  )}
-                                >
-                                  <React.Fragment>
-                                    {(() => {
-                                      const gregorianDate = new Date(
-                                        currentItem.report_datetime
-                                      );
-                                      const shamsiDate =
-                                        new Intl.DateTimeFormat("fa-IR").format(
-                                          gregorianDate
-                                        );
-                                      const shamsiTime =
-                                        gregorianDate.toLocaleTimeString(
-                                          "fa-IR",
-                                          { hour12: false }
-                                        );
-                                      const englishDate = shamsiDate.replace(
-                                        /[۰-۹]/g,
-                                        d =>
-                                          String.fromCharCode(
-                                            d.charCodeAt(0) - 1728
-                                          )
-                                      );
-
-                                      // Extracting only the hour and minutes from shamsiTime
-                                      const englishTime = shamsiTime
-                                        .split(":")
-                                        .slice(0, 2)
-                                        .join(":")
-                                        .replace(/[۰-۹]/g, d =>
-                                          String.fromCharCode(
-                                            d.charCodeAt(0) - 1728
-                                          )
-                                        );
-
-                                      return `${englishDate}  ${englishTime}`;
-                                    })()}
-                                  </React.Fragment>
-                                </div>
-                                <div
                                   data-plasmic-name={"issuedDatetime"}
                                   data-plasmic-override={
                                     overrides.issuedDatetime
@@ -716,7 +653,15 @@ ${ageMonths} months ${
                                   className={classNames(
                                     projectcss.all,
                                     projectcss.__wab_text,
-                                    sty.issuedDatetime
+                                    sty.issuedDatetime,
+                                    {
+                                      [sty.issuedDatetimeviewNormalRange]:
+                                        hasVariant(
+                                          $state,
+                                          "viewNormalRange",
+                                          "viewNormalRange"
+                                        )
+                                    }
                                   )}
                                 >
                                   <React.Fragment>
@@ -1243,10 +1188,10 @@ const PlasmicDescendants = {
     "laboratoryTitle",
     "labResults",
     "checkedFactors",
+    "emptyCell",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
-    "reportDatetime",
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
@@ -1278,10 +1223,10 @@ const PlasmicDescendants = {
     "laboratoryTitle",
     "labResults",
     "checkedFactors",
+    "emptyCell",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
-    "reportDatetime",
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
@@ -1294,10 +1239,10 @@ const PlasmicDescendants = {
     "laboratoryTitle",
     "labResults",
     "checkedFactors",
+    "emptyCell",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
-    "reportDatetime",
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
@@ -1309,10 +1254,10 @@ const PlasmicDescendants = {
   labResults: [
     "labResults",
     "checkedFactors",
+    "emptyCell",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
-    "reportDatetime",
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
@@ -1320,12 +1265,12 @@ const PlasmicDescendants = {
     "abnormalFactorValue",
     "normalRanged"
   ],
-  checkedFactors: ["checkedFactors", "factorName"],
+  checkedFactors: ["checkedFactors", "emptyCell", "factorName"],
+  emptyCell: ["emptyCell"],
   factorName: ["factorName"],
   laboratoryResultsPerTitle: [
     "laboratoryResultsPerTitle",
     "labPerDate",
-    "reportDatetime",
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
@@ -1335,7 +1280,6 @@ const PlasmicDescendants = {
   ],
   labPerDate: [
     "labPerDate",
-    "reportDatetime",
     "issuedDatetime",
     "labLists",
     "factorNamevalue",
@@ -1343,7 +1287,6 @@ const PlasmicDescendants = {
     "abnormalFactorValue",
     "normalRanged"
   ],
-  reportDatetime: ["reportDatetime"],
   issuedDatetime: ["issuedDatetime"],
   labLists: [
     "labLists",
@@ -1398,10 +1341,10 @@ type NodeDefaultElementType = {
   laboratoryTitle: "div";
   labResults: "div";
   checkedFactors: "div";
+  emptyCell: "div";
   factorName: "div";
   laboratoryResultsPerTitle: "div";
   labPerDate: "div";
-  reportDatetime: "div";
   issuedDatetime: "div";
   labLists: "div";
   factorNamevalue: "div";
@@ -1488,10 +1431,10 @@ export const PlasmicLaboratoryData = Object.assign(
     laboratoryTitle: makeNodeComponent("laboratoryTitle"),
     labResults: makeNodeComponent("labResults"),
     checkedFactors: makeNodeComponent("checkedFactors"),
+    emptyCell: makeNodeComponent("emptyCell"),
     factorName: makeNodeComponent("factorName"),
     laboratoryResultsPerTitle: makeNodeComponent("laboratoryResultsPerTitle"),
     labPerDate: makeNodeComponent("labPerDate"),
-    reportDatetime: makeNodeComponent("reportDatetime"),
     issuedDatetime: makeNodeComponent("issuedDatetime"),
     labLists: makeNodeComponent("labLists"),
     factorNamevalue: makeNodeComponent("factorNamevalue"),

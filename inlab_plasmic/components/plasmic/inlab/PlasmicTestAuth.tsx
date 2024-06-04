@@ -197,6 +197,18 @@ function PlasmicTestAuth__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -442,9 +454,29 @@ function PlasmicTestAuth__RenderFunc(props: {
                           "selected"
                         ])(eventArgs[0]);
                       }}
+                      onSortDeselectedChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "sortDeselected"
+                        ])(eventArgs[0]);
+                      }}
+                      onSortSelectedChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "sortSelected"
+                        ])(eventArgs[0]);
+                      }}
                       selected={generateStateValueProp($state, [
                         "button",
                         "selected"
+                      ])}
+                      sortDeselected={generateStateValueProp($state, [
+                        "button",
+                        "sortDeselected"
+                      ])}
+                      sortSelected={generateStateValueProp($state, [
+                        "button",
+                        "sortSelected"
                       ])}
                     >
                       <div
