@@ -66,6 +66,15 @@
 .modalRemoveBookmarks:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
+  background: none;
+}
+.modalRemoveBookmarks__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.pcls_gF08-ctR0P0b {
+  background: none;
+  outline: none;
 }
 .freeBox__rSn5A {
   display: flex;

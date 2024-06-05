@@ -578,6 +578,9 @@ function PlasmicHomepage__RenderFunc(props: {
               plasmic_antd_5_hostless_css.plasmic_tokens,
               plasmic_plasmic_rich_components_css.plasmic_tokens
             )}
+            modalContentClassName={classNames({
+              [sty["pcls_pFu_x0Xy_idR"]]: true
+            })}
             modalScopeClassName={sty["modalRemoveBookmarks__modal"]}
             okText={
               "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
@@ -668,6 +671,7 @@ function PlasmicHomepage__RenderFunc(props: {
               </div>
             }
             trigger={null}
+            wrapClassName={classNames({ [sty["pcls_gF08-ctR0P0b"]]: true })}
           >
             <div className={classNames(projectcss.all, sty.freeBox__rSn5A)}>
               <div
