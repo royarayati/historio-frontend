@@ -237,9 +237,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return localStorage.getItem("filter_bookmarked") === "false"
-                ? "false"
-                : "true";
+              return true;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -258,9 +256,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return localStorage.getItem("filter_service") === "true"
-                ? "true"
-                : "false";
+              return false;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -298,7 +294,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.filterBookmarked !== "false";
+              return $state.filterBookmarked;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -342,7 +338,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.filterBookmarked === "false";
+              return !$state.filterBookmarked;
             } catch (e) {
               if (
                 e instanceof TypeError ||
