@@ -29,6 +29,14 @@
     grid-column: 4;
   }
 }
+.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.redirectToNamespaceSelection:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
 .header {
   display: flex;
   position: fixed;
@@ -476,14 +484,6 @@
 }
 .img___8TrdL > picture > img {
   object-fit: fill;
-}
-.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
-}
-.redirectToNamespaceSelection:global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
 }
 .onloadUserPatientInteractionCount:global(.__wab_instance):global(
     .__wab_instance

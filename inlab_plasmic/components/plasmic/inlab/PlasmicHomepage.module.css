@@ -69,12 +69,12 @@
   background: none;
 }
 .modalRemoveBookmarks__modal :global(.ant-modal-content) {
-  background: var(--token-jgohepLVeKvh);
+  background: #ffffff;
   font-family: var(--VazirmatnCustom);
   outline: none;
 }
 .pcls_gF08-ctR0P0b {
-  background: var(--token-Le07ngBUPl2h);
+  background: none;
   outline: none;
 }
 .modalRemoveBookmarks__modal :global(.ant-modal-close) {
@@ -121,12 +121,83 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none !important;
-  background: var(--token-jgohepLVeKvh);
+  background: #ffffff;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .text__tR3Z {
     font-weight: 700;
   }
+}
+.deletecancel {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  min-width: 0;
+  padding: 0px;
+}
+.deletecancel > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  margin-left: calc(0px - 4px);
+  width: calc(100% + 4px);
+}
+.deletecancel > :global(.__wab_flex-container) > *,
+.deletecancel > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.deletecancel > :global(.__wab_flex-container) > picture > img,
+.deletecancel
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 4px;
+}
+.cancelButton:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  width: auto;
+  height: auto;
+}
+.text__x2Idr {
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 500;
+  letter-spacing: normal;
+}
+.svg__gsIKb {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg___39Aka {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.deleteAllBookmarks:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.text__so9CR {
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 500;
+}
+.svg__sPyt {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__dPO {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }
 .header {
   display: flex;

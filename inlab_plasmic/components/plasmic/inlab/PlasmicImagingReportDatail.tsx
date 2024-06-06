@@ -59,11 +59,11 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -91,6 +91,8 @@ export const PlasmicImagingReportDatail__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicImagingReportDatail__OverridesType = {
   imagingReportsDatail?: Flex__<"div">;
+  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   apiFetcherComponent?: Flex__<typeof ApiFetcherComponent>;
   text?: Flex__<"div">;
@@ -106,8 +108,6 @@ export type PlasmicImagingReportDatail__OverridesType = {
   patientProfilePage?: Flex__<typeof PlasmicImg__>;
   radiologyReportPage?: Flex__<typeof PlasmicImg__>;
   laboratoryPage?: Flex__<typeof PlasmicImg__>;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
-  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
 };
 
 export interface DefaultImagingReportDatailProps {}
@@ -211,6 +211,21 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
             sty.imagingReportsDatail
           )}
         >
+          <RedirectToLoginPage
+            data-plasmic-name={"redirectToLoginPage"}
+            data-plasmic-override={overrides.redirectToLoginPage}
+            className={classNames("__wab_instance", sty.redirectToLoginPage)}
+          />
+
+          <RedirectToNamespaceSelection
+            data-plasmic-name={"redirectToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectToNamespaceSelection}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectToNamespaceSelection
+            )}
+          />
+
           <div
             data-plasmic-name={"header"}
             data-plasmic-override={overrides.header}
@@ -839,20 +854,6 @@ ${ageMonths} months ${
               />
             </SwitchingTab>
           </div>
-          <RedirectToLoginPage
-            data-plasmic-name={"redirectToLoginPage"}
-            data-plasmic-override={overrides.redirectToLoginPage}
-            className={classNames("__wab_instance", sty.redirectToLoginPage)}
-          />
-
-          <RedirectToNamespaceSelection
-            data-plasmic-name={"redirectToNamespaceSelection"}
-            data-plasmic-override={overrides.redirectToNamespaceSelection}
-            className={classNames(
-              "__wab_instance",
-              sty.redirectToNamespaceSelection
-            )}
-          />
         </div>
       </div>
     </React.Fragment>
@@ -862,6 +863,8 @@ ${ageMonths} months ${
 const PlasmicDescendants = {
   imagingReportsDatail: [
     "imagingReportsDatail",
+    "redirectToLoginPage",
+    "redirectToNamespaceSelection",
     "header",
     "apiFetcherComponent",
     "text",
@@ -876,10 +879,10 @@ const PlasmicDescendants = {
     "homepagePage",
     "patientProfilePage",
     "radiologyReportPage",
-    "laboratoryPage",
-    "redirectToLoginPage",
-    "redirectToNamespaceSelection"
+    "laboratoryPage"
   ],
+  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: ["header", "apiFetcherComponent", "text"],
   apiFetcherComponent: ["apiFetcherComponent", "text"],
   text: ["text"],
@@ -924,15 +927,15 @@ const PlasmicDescendants = {
   homepagePage: ["homepagePage"],
   patientProfilePage: ["patientProfilePage"],
   radiologyReportPage: ["radiologyReportPage"],
-  laboratoryPage: ["laboratoryPage"],
-  redirectToLoginPage: ["redirectToLoginPage"],
-  redirectToNamespaceSelection: ["redirectToNamespaceSelection"]
+  laboratoryPage: ["laboratoryPage"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   imagingReportsDatail: "div";
+  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   apiFetcherComponent: typeof ApiFetcherComponent;
   text: "div";
@@ -948,8 +951,6 @@ type NodeDefaultElementType = {
   patientProfilePage: typeof PlasmicImg__;
   radiologyReportPage: typeof PlasmicImg__;
   laboratoryPage: typeof PlasmicImg__;
-  redirectToLoginPage: typeof RedirectToLoginPage;
-  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -1012,6 +1013,10 @@ export const PlasmicImagingReportDatail = Object.assign(
   makeNodeComponent("imagingReportsDatail"),
   {
     // Helper components rendering sub-elements
+    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
     header: makeNodeComponent("header"),
     apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
     text: makeNodeComponent("text"),
@@ -1027,10 +1032,6 @@ export const PlasmicImagingReportDatail = Object.assign(
     patientProfilePage: makeNodeComponent("patientProfilePage"),
     radiologyReportPage: makeNodeComponent("radiologyReportPage"),
     laboratoryPage: makeNodeComponent("laboratoryPage"),
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
-    redirectToNamespaceSelection: makeNodeComponent(
-      "redirectToNamespaceSelection"
-    ),
 
     // Metadata about props expected for PlasmicImagingReportDatail
     internalVariantProps: PlasmicImagingReportDatail__VariantProps,

@@ -59,11 +59,11 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import OnloadUserPatientInteractionCount from "../../OnloadUserPatientInteractionCount"; // plasmic-import: 6oEGl3M40QrL/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -92,6 +92,8 @@ export const PlasmicPatientProfile__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicPatientProfile__OverridesType = {
   patientProfile2?: Flex__<"div">;
+  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   patientProfile?: Flex__<typeof ApiFetcherComponent>;
   patientData?: Flex__<"div">;
@@ -118,8 +120,6 @@ export type PlasmicPatientProfile__OverridesType = {
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratory?: Flex__<typeof PlasmicImg__>;
   bookmark?: Flex__<"svg">;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
-  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   onloadUserPatientInteractionCount?: Flex__<
     typeof OnloadUserPatientInteractionCount
   >;
@@ -233,6 +233,21 @@ function PlasmicPatientProfile__RenderFunc(props: {
             sty.patientProfile2
           )}
         >
+          <RedirectToLoginPage
+            data-plasmic-name={"redirectToLoginPage"}
+            data-plasmic-override={overrides.redirectToLoginPage}
+            className={classNames("__wab_instance", sty.redirectToLoginPage)}
+          />
+
+          <RedirectToNamespaceSelection
+            data-plasmic-name={"redirectToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectToNamespaceSelection}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectToNamespaceSelection
+            )}
+          />
+
           <div
             data-plasmic-name={"header"}
             data-plasmic-override={overrides.header}
@@ -1020,21 +1035,6 @@ function PlasmicPatientProfile__RenderFunc(props: {
               />
             </SwitchingTab>
           </div>
-          <RedirectToLoginPage
-            data-plasmic-name={"redirectToLoginPage"}
-            data-plasmic-override={overrides.redirectToLoginPage}
-            className={classNames("__wab_instance", sty.redirectToLoginPage)}
-          />
-
-          <RedirectToNamespaceSelection
-            data-plasmic-name={"redirectToNamespaceSelection"}
-            data-plasmic-override={overrides.redirectToNamespaceSelection}
-            className={classNames(
-              "__wab_instance",
-              sty.redirectToNamespaceSelection
-            )}
-          />
-
           <OnloadUserPatientInteractionCount
             data-plasmic-name={"onloadUserPatientInteractionCount"}
             data-plasmic-override={overrides.onloadUserPatientInteractionCount}
@@ -1065,6 +1065,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
 const PlasmicDescendants = {
   patientProfile2: [
     "patientProfile2",
+    "redirectToLoginPage",
+    "redirectToNamespaceSelection",
     "header",
     "patientProfile",
     "patientData",
@@ -1091,10 +1093,10 @@ const PlasmicDescendants = {
     "radiologyReport",
     "laboratory",
     "bookmark",
-    "redirectToLoginPage",
-    "redirectToNamespaceSelection",
     "onloadUserPatientInteractionCount"
   ],
+  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: ["header"],
   patientProfile: [
     "patientProfile",
@@ -1203,8 +1205,6 @@ const PlasmicDescendants = {
   radiologyReport: ["radiologyReport"],
   laboratory: ["laboratory"],
   bookmark: ["bookmark"],
-  redirectToLoginPage: ["redirectToLoginPage"],
-  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   onloadUserPatientInteractionCount: ["onloadUserPatientInteractionCount"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -1212,6 +1212,8 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   patientProfile2: "div";
+  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   patientProfile: typeof ApiFetcherComponent;
   patientData: "div";
@@ -1238,8 +1240,6 @@ type NodeDefaultElementType = {
   radiologyReport: typeof PlasmicImg__;
   laboratory: typeof PlasmicImg__;
   bookmark: "svg";
-  redirectToLoginPage: typeof RedirectToLoginPage;
-  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   onloadUserPatientInteractionCount: typeof OnloadUserPatientInteractionCount;
 };
 
@@ -1303,6 +1303,10 @@ export const PlasmicPatientProfile = Object.assign(
   makeNodeComponent("patientProfile2"),
   {
     // Helper components rendering sub-elements
+    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
     header: makeNodeComponent("header"),
     patientProfile: makeNodeComponent("patientProfile"),
     patientData: makeNodeComponent("patientData"),
@@ -1333,10 +1337,6 @@ export const PlasmicPatientProfile = Object.assign(
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratory: makeNodeComponent("laboratory"),
     bookmark: makeNodeComponent("bookmark"),
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
-    redirectToNamespaceSelection: makeNodeComponent(
-      "redirectToNamespaceSelection"
-    ),
     onloadUserPatientInteractionCount: makeNodeComponent(
       "onloadUserPatientInteractionCount"
     ),

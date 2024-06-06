@@ -30,6 +30,14 @@
 .userSettingdisabledLogoutButton > * {
   grid-column: 4;
 }
+.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.redirectToNamespaceSelection:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
 .pageContent {
   display: flex;
   position: relative;
@@ -500,12 +508,4 @@
 }
 .img__u1C8X > picture > img {
   object-fit: fill;
-}
-.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
-}
-.redirectToNamespaceSelection:global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
 }
