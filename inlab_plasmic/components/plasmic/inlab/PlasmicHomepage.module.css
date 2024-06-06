@@ -69,11 +69,16 @@
   background: none;
 }
 .modalRemoveBookmarks__modal :global(.ant-modal-content) {
-  background: #ffffff;
+  background: var(--token-jgohepLVeKvh);
+  font-family: var(--VazirmatnCustom);
   outline: none;
 }
 .pcls_gF08-ctR0P0b {
-  background: none;
+  background: var(--token-Le07ngBUPl2h);
+  outline: none;
+}
+.modalRemoveBookmarks__modal :global(.ant-modal-close) {
+  background: #ffffff;
   outline: none;
 }
 .freeBox__rSn5A {
@@ -116,6 +121,7 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none !important;
+  background: var(--token-jgohepLVeKvh);
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .text__tR3Z {
@@ -151,14 +157,13 @@
 }
 .namespaceTitle {
   position: relative;
-  width: 10em;
+  width: auto;
   height: auto;
   max-width: 100%;
   font-size: var(--token-sOr3fJ5Up5fq);
   font-family: "Vazirmatn", sans-serif;
   color: var(--token-IYO13gyYJHXG);
   font-weight: 600;
-  flex-shrink: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .namespaceTitle {

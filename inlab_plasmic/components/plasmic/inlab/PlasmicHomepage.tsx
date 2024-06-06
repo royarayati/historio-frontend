@@ -570,6 +570,9 @@ function PlasmicHomepage__RenderFunc(props: {
             data-plasmic-override={overrides.modalRemoveBookmarks}
             cancelText={"\u0644\u063a\u0648"}
             className={classNames("__wab_instance", sty.modalRemoveBookmarks)}
+            closeButtonClassName={classNames({
+              [sty["pcls_G2iYBhrSoKBv"]]: true
+            })}
             defaultStylesClassName={classNames(
               projectcss.root_reset,
               projectcss.plasmic_default_styles,
