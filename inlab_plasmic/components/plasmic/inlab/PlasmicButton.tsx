@@ -82,6 +82,8 @@ export type PlasmicButton__VariantMembers = {
   color: "blue" | "green" | "red" | "clear" | "link";
   selected: "selected";
   deselected: "deselected";
+  sortDeselected: "sortDeselected";
+  sortSelected: "sortSelected";
 };
 export type PlasmicButton__VariantsArgs = {
   isDisabled?: SingleBooleanChoiceArg<"isDisabled">;
@@ -90,6 +92,8 @@ export type PlasmicButton__VariantsArgs = {
   color?: SingleChoiceArg<"blue" | "green" | "red" | "clear" | "link">;
   selected?: SingleBooleanChoiceArg<"selected">;
   deselected?: SingleBooleanChoiceArg<"deselected">;
+  sortDeselected?: SingleBooleanChoiceArg<"sortDeselected">;
+  sortSelected?: SingleBooleanChoiceArg<"sortSelected">;
 };
 type VariantPropType = keyof PlasmicButton__VariantsArgs;
 export const PlasmicButton__VariantProps = new Array<VariantPropType>(
@@ -98,7 +102,9 @@ export const PlasmicButton__VariantProps = new Array<VariantPropType>(
   "size4",
   "color",
   "selected",
-  "deselected"
+  "deselected",
+  "sortDeselected",
+  "sortSelected"
 );
 
 export type PlasmicButton__ArgsType = {
@@ -111,6 +117,8 @@ export type PlasmicButton__ArgsType = {
   onIsDisabledChange?: (val: any) => void;
   onSelectedChange?: (val: any) => void;
   onDeselectedChange?: (val: any) => void;
+  onSortDeselectedChange?: (val: any) => void;
+  onSortSelectedChange?: (val: any) => void;
 };
 type ArgPropType = keyof PlasmicButton__ArgsType;
 export const PlasmicButton__ArgProps = new Array<ArgPropType>(
@@ -122,7 +130,9 @@ export const PlasmicButton__ArgProps = new Array<ArgPropType>(
   "target",
   "onIsDisabledChange",
   "onSelectedChange",
-  "onDeselectedChange"
+  "onDeselectedChange",
+  "onSortDeselectedChange",
+  "onSortSelectedChange"
 );
 
 export type PlasmicButton__OverridesType = {
@@ -138,11 +148,15 @@ export interface DefaultButtonProps extends pp.BaseButtonProps {
   onIsDisabledChange?: (val: any) => void;
   onSelectedChange?: (val: any) => void;
   onDeselectedChange?: (val: any) => void;
+  onSortDeselectedChange?: (val: any) => void;
+  onSortSelectedChange?: (val: any) => void;
   shape?: SingleChoiceArg<"rounded" | "round" | "sharp">;
   size4?: SingleChoiceArg<"compact">;
   color?: SingleChoiceArg<"blue" | "green" | "red" | "clear" | "link">;
   selected?: SingleBooleanChoiceArg<"selected">;
   deselected?: SingleBooleanChoiceArg<"deselected">;
+  sortDeselected?: SingleBooleanChoiceArg<"sortDeselected">;
+  sortSelected?: SingleBooleanChoiceArg<"sortSelected">;
 }
 
 const $$ = {};
@@ -219,6 +233,22 @@ function PlasmicButton__RenderFunc(props: {
 
         valueProp: "deselected",
         onChangeProp: "onDeselectedChange"
+      },
+      {
+        path: "sortDeselected",
+        type: "writable",
+        variableType: "variant",
+
+        valueProp: "sortDeselected",
+        onChangeProp: "onSortDeselectedChange"
+      },
+      {
+        path: "sortSelected",
+        type: "writable",
+        variableType: "variant",
+
+        valueProp: "sortSelected",
+        onChangeProp: "onSortSelectedChange"
       }
     ],
     [$props, $ctx, $refs]
@@ -271,7 +301,17 @@ function PlasmicButton__RenderFunc(props: {
           [sty.rootsize4_compact]: hasVariant($state, "size4", "compact"),
           [sty.rootsize4_compact_shape_rounded]:
             hasVariant($state, "size4", "compact") &&
-            hasVariant($state, "shape", "rounded")
+            hasVariant($state, "shape", "rounded"),
+          [sty.rootsortDeselected]: hasVariant(
+            $state,
+            "sortDeselected",
+            "sortDeselected"
+          ),
+          [sty.rootsortSelected]: hasVariant(
+            $state,
+            "sortSelected",
+            "sortSelected"
+          )
         }
       )}
       disabled={hasVariant($state, "isDisabled", "isDisabled") ? false : false}
@@ -347,6 +387,11 @@ function PlasmicButton__RenderFunc(props: {
             $state,
             "shape",
             "rounded"
+          ),
+          [sty.contentContainersortDeselected]: hasVariant(
+            $state,
+            "sortDeselected",
+            "sortDeselected"
           )
         })}
       >
@@ -398,6 +443,16 @@ function PlasmicButton__RenderFunc(props: {
               $state,
               "shape",
               "rounded"
+            ),
+            [sty.slotTargetChildrensortDeselected]: hasVariant(
+              $state,
+              "sortDeselected",
+              "sortDeselected"
+            ),
+            [sty.slotTargetChildrensortSelected]: hasVariant(
+              $state,
+              "sortSelected",
+              "sortSelected"
             )
           })
         })}

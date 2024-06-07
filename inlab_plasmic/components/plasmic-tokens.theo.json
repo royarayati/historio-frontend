@@ -2181,6 +2181,16 @@
       }
     },
     {
+      "name": "selected button bg",
+      "type": "color",
+      "value": "#0D6DD414",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "WRbeWXZefKPR"
+      }
+    },
+    {
       "name": "subtitles",
       "type": "fontsize",
       "value": "12px",

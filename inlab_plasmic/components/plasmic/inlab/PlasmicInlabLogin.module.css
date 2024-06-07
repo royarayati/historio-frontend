@@ -49,6 +49,14 @@
 .inlabLoginwrongUser_disabledLoginButton > * {
   grid-column: 4;
 }
+.redirectInlabLoginToNamespaceSelection:global(.__wab_instance):global(
+    .__wab_instance
+  ) {
+  position: relative;
+}
+.redirectInlabLoginToHomepage:global(.__wab_instance):global(.__wab_instance) {
+  position: relative;
+}
 .wrongUserAnnouncement {
   position: fixed;
   width: auto;
@@ -364,12 +372,4 @@
   .shareTool:global(.__wab_instance) {
     margin-top: calc(0px + 12px) !important;
   }
-}
-.redirectInlabLoginToNamespaceSelection:global(.__wab_instance):global(
-    .__wab_instance
-  ) {
-  position: relative;
-}
-.redirectInlabLoginToHomepage:global(.__wab_instance):global(.__wab_instance) {
-  position: relative;
 }

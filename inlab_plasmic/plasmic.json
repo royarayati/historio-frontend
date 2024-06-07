@@ -2096,6 +2096,11 @@
           "id": "5tIBWi0zESLM",
           "name": "ShareSvgrepoComsvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__ShareSvgrepoComsvg.tsx"
+        },
+        {
+          "id": "AgX6cnN3YV61",
+          "name": "Icon5Icon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Icon5.tsx"
         }
       ],
       "images": [

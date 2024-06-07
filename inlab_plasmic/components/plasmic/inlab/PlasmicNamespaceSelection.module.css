@@ -22,6 +22,15 @@
 .namespaceSelection > * {
   grid-column: 4;
 }
+.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.redirectNamespaceSelectionToHomepage:global(.__wab_instance):global(
+    .__wab_instance
+  ) {
+  position: relative;
+}
 .namespaces2 {
   display: flex;
   position: fixed;
@@ -134,14 +143,5 @@
 }
 .shareTool:global(.__wab_instance) {
   max-width: 100%;
-  position: relative;
-}
-.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
-}
-.redirectNamespaceSelectionToHomepage:global(.__wab_instance):global(
-    .__wab_instance
-  ) {
   position: relative;
 }

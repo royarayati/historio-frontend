@@ -30,11 +30,11 @@
 .redirectRootPageToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
   position: relative;
 }
-.redirectRootPageToHomepage:global(.__wab_instance):global(.__wab_instance) {
-  position: relative;
-}
 .redirectRootPageToNamespaceSelection:global(.__wab_instance):global(
     .__wab_instance
   ) {
+  position: relative;
+}
+.redirectRootPageToHomepage:global(.__wab_instance):global(.__wab_instance) {
   position: relative;
 }

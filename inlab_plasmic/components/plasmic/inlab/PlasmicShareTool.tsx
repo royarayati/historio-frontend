@@ -187,7 +187,7 @@ function PlasmicShareTool__RenderFunc(props: {
               const actionArgs = {
                 customFunction: async () => {
                   return $$.copyToClipboard(
-                    "https://synapps.tums.ac.ir/new_inlab/"
+                    "🤩 InLab plus link: https://synapps.tums.ac.ir/new_inlab/\n\n🥇 پزشک عزیز؛ شما توسط همکارتون به اینلب پلاس دعوت شدید\n\n🥳 از هر جایی که هستید به اطلاعات بیمار بستری تون دسترسی داشته باشید\n\n😊 حساب کاربری شما در اینلب پلاس همون حساب کاربری تون در اینلب است"
                   );
                 }
               };

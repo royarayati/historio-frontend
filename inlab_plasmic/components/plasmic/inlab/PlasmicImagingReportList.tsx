@@ -59,11 +59,11 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import OnloadUserPatientInteractionCount from "../../OnloadUserPatientInteractionCount"; // plasmic-import: 6oEGl3M40QrL/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -92,6 +92,8 @@ export const PlasmicImagingReportList__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicImagingReportList__OverridesType = {
   imagingReportList?: Flex__<"div">;
+  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   apiFetcherComponent?: Flex__<typeof ApiFetcherComponent>;
   imagingReport?: Flex__<typeof ApiFetcherComponent>;
@@ -108,8 +110,6 @@ export type PlasmicImagingReportList__OverridesType = {
   imagingType?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
-  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   onloadUserPatientInteractionCount?: Flex__<
     typeof OnloadUserPatientInteractionCount
   >;
@@ -185,6 +185,30 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton2.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "activeViewPacsButton2.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -226,6 +250,21 @@ function PlasmicImagingReportList__RenderFunc(props: {
           sty.imagingReportList
         )}
       >
+        <RedirectToLoginPage
+          data-plasmic-name={"redirectToLoginPage"}
+          data-plasmic-override={overrides.redirectToLoginPage}
+          className={classNames("__wab_instance", sty.redirectToLoginPage)}
+        />
+
+        <RedirectToNamespaceSelection
+          data-plasmic-name={"redirectToNamespaceSelection"}
+          data-plasmic-override={overrides.redirectToNamespaceSelection}
+          className={classNames(
+            "__wab_instance",
+            sty.redirectToNamespaceSelection
+          )}
+        />
+
         <div
           data-plasmic-name={"header"}
           data-plasmic-override={overrides.header}
@@ -431,9 +470,29 @@ ${ageMonths} months ${
                             "selected"
                           ])(eventArgs[0]);
                         }}
+                        onSortDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }}
                         selected={generateStateValueProp($state, [
                           "activeViewPacsButton",
                           "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "activeViewPacsButton",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "activeViewPacsButton",
+                          "sortSelected"
                         ])}
                       >
                         <div
@@ -551,9 +610,29 @@ ${ageMonths} months ${
                             "selected"
                           ])(eventArgs[0]);
                         }}
+                        onSortDeselectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton2",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }}
+                        onSortSelectedChange={(...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "activeViewPacsButton2",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }}
                         selected={generateStateValueProp($state, [
                           "activeViewPacsButton2",
                           "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "activeViewPacsButton2",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "activeViewPacsButton2",
+                          "sortSelected"
                         ])}
                       >
                         <div
@@ -808,21 +887,6 @@ ${ageMonths} months ${
             className={classNames("__wab_instance", sty.switchingTab)}
           />
         </div>
-        <RedirectToLoginPage
-          data-plasmic-name={"redirectToLoginPage"}
-          data-plasmic-override={overrides.redirectToLoginPage}
-          className={classNames("__wab_instance", sty.redirectToLoginPage)}
-        />
-
-        <RedirectToNamespaceSelection
-          data-plasmic-name={"redirectToNamespaceSelection"}
-          data-plasmic-override={overrides.redirectToNamespaceSelection}
-          className={classNames(
-            "__wab_instance",
-            sty.redirectToNamespaceSelection
-          )}
-        />
-
         <OnloadUserPatientInteractionCount
           data-plasmic-name={"onloadUserPatientInteractionCount"}
           data-plasmic-override={overrides.onloadUserPatientInteractionCount}
@@ -852,6 +916,8 @@ ${ageMonths} months ${
 const PlasmicDescendants = {
   imagingReportList: [
     "imagingReportList",
+    "redirectToLoginPage",
+    "redirectToNamespaceSelection",
     "header",
     "apiFetcherComponent",
     "imagingReport",
@@ -868,10 +934,10 @@ const PlasmicDescendants = {
     "imagingType",
     "switchingTabs",
     "switchingTab",
-    "redirectToLoginPage",
-    "redirectToNamespaceSelection",
     "onloadUserPatientInteractionCount"
   ],
+  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: ["header", "apiFetcherComponent"],
   apiFetcherComponent: ["apiFetcherComponent"],
   imagingReport: [
@@ -924,8 +990,6 @@ const PlasmicDescendants = {
   imagingType: ["imagingType"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"],
-  redirectToLoginPage: ["redirectToLoginPage"],
-  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   onloadUserPatientInteractionCount: ["onloadUserPatientInteractionCount"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -933,6 +997,8 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   imagingReportList: "div";
+  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   apiFetcherComponent: typeof ApiFetcherComponent;
   imagingReport: typeof ApiFetcherComponent;
@@ -949,8 +1015,6 @@ type NodeDefaultElementType = {
   imagingType: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
-  redirectToLoginPage: typeof RedirectToLoginPage;
-  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   onloadUserPatientInteractionCount: typeof OnloadUserPatientInteractionCount;
 };
 
@@ -1014,6 +1078,10 @@ export const PlasmicImagingReportList = Object.assign(
   makeNodeComponent("imagingReportList"),
   {
     // Helper components rendering sub-elements
+    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
     header: makeNodeComponent("header"),
     apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
     imagingReport: makeNodeComponent("imagingReport"),
@@ -1030,10 +1098,6 @@ export const PlasmicImagingReportList = Object.assign(
     imagingType: makeNodeComponent("imagingType"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
-    redirectToNamespaceSelection: makeNodeComponent(
-      "redirectToNamespaceSelection"
-    ),
     onloadUserPatientInteractionCount: makeNodeComponent(
       "onloadUserPatientInteractionCount"
     ),

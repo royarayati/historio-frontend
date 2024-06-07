@@ -60,8 +60,8 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import RedirectRootPageToInlabLogin from "../../RedirectRootPageToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
-import RedirectRootPageToHomepage from "../../RedirectRootPageToHomepage"; // plasmic-import: x1Fxn6tnPsJ0/component
 import RedirectRootPageToNamespaceSelection from "../../RedirectRootPageToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
+import RedirectRootPageToHomepage from "../../RedirectRootPageToHomepage"; // plasmic-import: x1Fxn6tnPsJ0/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -86,10 +86,10 @@ export const PlasmicRootpage__ArgProps = new Array<ArgPropType>();
 export type PlasmicRootpage__OverridesType = {
   rootpage?: Flex__<"div">;
   redirectRootPageToInlabLogin?: Flex__<typeof RedirectRootPageToInlabLogin>;
-  redirectRootPageToHomepage?: Flex__<typeof RedirectRootPageToHomepage>;
   redirectRootPageToNamespaceSelection?: Flex__<
     typeof RedirectRootPageToNamespaceSelection
   >;
+  redirectRootPageToHomepage?: Flex__<typeof RedirectRootPageToHomepage>;
 };
 
 export interface DefaultRootpageProps {}
@@ -165,15 +165,6 @@ function PlasmicRootpage__RenderFunc(props: {
             )}
           />
 
-          <RedirectRootPageToHomepage
-            data-plasmic-name={"redirectRootPageToHomepage"}
-            data-plasmic-override={overrides.redirectRootPageToHomepage}
-            className={classNames(
-              "__wab_instance",
-              sty.redirectRootPageToHomepage
-            )}
-          />
-
           <RedirectRootPageToNamespaceSelection
             data-plasmic-name={"redirectRootPageToNamespaceSelection"}
             data-plasmic-override={
@@ -182,6 +173,15 @@ function PlasmicRootpage__RenderFunc(props: {
             className={classNames(
               "__wab_instance",
               sty.redirectRootPageToNamespaceSelection
+            )}
+          />
+
+          <RedirectRootPageToHomepage
+            data-plasmic-name={"redirectRootPageToHomepage"}
+            data-plasmic-override={overrides.redirectRootPageToHomepage}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectRootPageToHomepage
             )}
           />
         </div>
@@ -194,12 +194,14 @@ const PlasmicDescendants = {
   rootpage: [
     "rootpage",
     "redirectRootPageToInlabLogin",
-    "redirectRootPageToHomepage",
-    "redirectRootPageToNamespaceSelection"
+    "redirectRootPageToNamespaceSelection",
+    "redirectRootPageToHomepage"
   ],
   redirectRootPageToInlabLogin: ["redirectRootPageToInlabLogin"],
-  redirectRootPageToHomepage: ["redirectRootPageToHomepage"],
-  redirectRootPageToNamespaceSelection: ["redirectRootPageToNamespaceSelection"]
+  redirectRootPageToNamespaceSelection: [
+    "redirectRootPageToNamespaceSelection"
+  ],
+  redirectRootPageToHomepage: ["redirectRootPageToHomepage"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -207,8 +209,8 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   rootpage: "div";
   redirectRootPageToInlabLogin: typeof RedirectRootPageToInlabLogin;
-  redirectRootPageToHomepage: typeof RedirectRootPageToHomepage;
   redirectRootPageToNamespaceSelection: typeof RedirectRootPageToNamespaceSelection;
+  redirectRootPageToHomepage: typeof RedirectRootPageToHomepage;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -274,10 +276,10 @@ export const PlasmicRootpage = Object.assign(
     redirectRootPageToInlabLogin: makeNodeComponent(
       "redirectRootPageToInlabLogin"
     ),
-    redirectRootPageToHomepage: makeNodeComponent("redirectRootPageToHomepage"),
     redirectRootPageToNamespaceSelection: makeNodeComponent(
       "redirectRootPageToNamespaceSelection"
     ),
+    redirectRootPageToHomepage: makeNodeComponent("redirectRootPageToHomepage"),
 
     // Metadata about props expected for PlasmicRootpage
     internalVariantProps: PlasmicRootpage__VariantProps,

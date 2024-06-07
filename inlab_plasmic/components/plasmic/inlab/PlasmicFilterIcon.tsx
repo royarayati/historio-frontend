@@ -175,6 +175,18 @@ function PlasmicFilterIcon__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "filterIcon.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "filterIcon.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -287,9 +299,27 @@ function PlasmicFilterIcon__RenderFunc(props: {
             eventArgs[0]
           );
         }}
+        onSortDeselectedChange={(...eventArgs) => {
+          generateStateOnChangeProp($state, ["filterIcon", "sortDeselected"])(
+            eventArgs[0]
+          );
+        }}
+        onSortSelectedChange={(...eventArgs) => {
+          generateStateOnChangeProp($state, ["filterIcon", "sortSelected"])(
+            eventArgs[0]
+          );
+        }}
         selected={generateStateValueProp($state, ["filterIcon", "selected"])}
         shape={"rounded"}
         size4={"compact"}
+        sortDeselected={generateStateValueProp($state, [
+          "filterIcon",
+          "sortDeselected"
+        ])}
+        sortSelected={generateStateValueProp($state, [
+          "filterIcon",
+          "sortSelected"
+        ])}
       >
         {renderPlasmicSlot({
           defaultContents: (

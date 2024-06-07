@@ -59,11 +59,11 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -100,6 +100,8 @@ export const PlasmicUserSetting__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicUserSetting__OverridesType = {
   userSetting?: Flex__<"div">;
+  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   pageContent?: Flex__<"div">;
   pictureAndName?: Flex__<"div">;
   nameRankUsername?: Flex__<"div">;
@@ -122,8 +124,6 @@ export type PlasmicUserSetting__OverridesType = {
   text?: Flex__<"div">;
   homepageSwitchingTab?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
-  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
 };
 
 export interface DefaultUserSettingProps {}
@@ -190,6 +190,18 @@ function PlasmicUserSetting__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "logoutButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "logoutButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -239,6 +251,21 @@ function PlasmicUserSetting__RenderFunc(props: {
             }
           )}
         >
+          <RedirectToLoginPage
+            data-plasmic-name={"redirectToLoginPage"}
+            data-plasmic-override={overrides.redirectToLoginPage}
+            className={classNames("__wab_instance", sty.redirectToLoginPage)}
+          />
+
+          <RedirectToNamespaceSelection
+            data-plasmic-name={"redirectToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectToNamespaceSelection}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectToNamespaceSelection
+            )}
+          />
+
           <Stack__
             as={"div"}
             data-plasmic-name={"pageContent"}
@@ -860,11 +887,31 @@ function PlasmicUserSetting__RenderFunc(props: {
                   eventArgs[0]
                 );
               }}
+              onSortDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "logoutButton",
+                  "sortDeselected"
+                ])(eventArgs[0]);
+              }}
+              onSortSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "logoutButton",
+                  "sortSelected"
+                ])(eventArgs[0]);
+              }}
               selected={generateStateValueProp($state, [
                 "logoutButton",
                 "selected"
               ])}
               shape={"rounded"}
+              sortDeselected={generateStateValueProp($state, [
+                "logoutButton",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "logoutButton",
+                "sortSelected"
+              ])}
               startIcon={
                 <ChecksvgIcon
                   className={classNames(projectcss.all, sty.svg__fLi6W)}
@@ -1161,20 +1208,6 @@ function PlasmicUserSetting__RenderFunc(props: {
               />
             </SwitchingTab>
           </div>
-          <RedirectToLoginPage
-            data-plasmic-name={"redirectToLoginPage"}
-            data-plasmic-override={overrides.redirectToLoginPage}
-            className={classNames("__wab_instance", sty.redirectToLoginPage)}
-          />
-
-          <RedirectToNamespaceSelection
-            data-plasmic-name={"redirectToNamespaceSelection"}
-            data-plasmic-override={overrides.redirectToNamespaceSelection}
-            className={classNames(
-              "__wab_instance",
-              sty.redirectToNamespaceSelection
-            )}
-          />
         </div>
       </div>
     </React.Fragment>
@@ -1184,6 +1217,8 @@ function PlasmicUserSetting__RenderFunc(props: {
 const PlasmicDescendants = {
   userSetting: [
     "userSetting",
+    "redirectToLoginPage",
+    "redirectToNamespaceSelection",
     "pageContent",
     "pictureAndName",
     "nameRankUsername",
@@ -1205,10 +1240,10 @@ const PlasmicDescendants = {
     "logoutButton",
     "text",
     "homepageSwitchingTab",
-    "switchingTab",
-    "redirectToLoginPage",
-    "redirectToNamespaceSelection"
+    "switchingTab"
   ],
+  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   pageContent: [
     "pageContent",
     "pictureAndName",
@@ -1269,15 +1304,15 @@ const PlasmicDescendants = {
   logoutButton: ["logoutButton", "text"],
   text: ["text"],
   homepageSwitchingTab: ["homepageSwitchingTab", "switchingTab"],
-  switchingTab: ["switchingTab"],
-  redirectToLoginPage: ["redirectToLoginPage"],
-  redirectToNamespaceSelection: ["redirectToNamespaceSelection"]
+  switchingTab: ["switchingTab"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   userSetting: "div";
+  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   pageContent: "div";
   pictureAndName: "div";
   nameRankUsername: "div";
@@ -1300,8 +1335,6 @@ type NodeDefaultElementType = {
   text: "div";
   homepageSwitchingTab: "div";
   switchingTab: typeof SwitchingTab;
-  redirectToLoginPage: typeof RedirectToLoginPage;
-  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -1364,6 +1397,10 @@ export const PlasmicUserSetting = Object.assign(
   makeNodeComponent("userSetting"),
   {
     // Helper components rendering sub-elements
+    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
     pageContent: makeNodeComponent("pageContent"),
     pictureAndName: makeNodeComponent("pictureAndName"),
     nameRankUsername: makeNodeComponent("nameRankUsername"),
@@ -1386,10 +1423,6 @@ export const PlasmicUserSetting = Object.assign(
     text: makeNodeComponent("text"),
     homepageSwitchingTab: makeNodeComponent("homepageSwitchingTab"),
     switchingTab: makeNodeComponent("switchingTab"),
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
-    redirectToNamespaceSelection: makeNodeComponent(
-      "redirectToNamespaceSelection"
-    ),
 
     // Metadata about props expected for PlasmicUserSetting
     internalVariantProps: PlasmicUserSetting__VariantProps,
