@@ -85,6 +85,7 @@ import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: kYUnvWOY7
 import Icon5Icon from "./icons/PlasmicIcon__Icon5"; // plasmic-import: AgX6cnN3YV61/icon
 import BookmarkPlusSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg"; // plasmic-import: laC4EyEnFr3s/icon
 import BookmarkDashFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg"; // plasmic-import: OXlS9uB7Ffdy/icon
+import IndicatorIcon from "./icons/PlasmicIcon__Indicator"; // plasmic-import: B34gCeBlzVGZ/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
 
 createPlasmicElementProxy;
@@ -136,6 +137,7 @@ export type PlasmicHomepage__OverridesType = {
   لطفامنتظربماند?: Flex__<"div">;
   patientCards?: Flex__<"div">;
   patientNameBookmarkIcon?: Flex__<"div">;
+  dismision?: Flex__<"div">;
   firstLastName?: Flex__<"div">;
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
   wardRoom?: Flex__<"div">;
@@ -2478,6 +2480,57 @@ function PlasmicHomepage__RenderFunc(props: {
                                 sty.patientNameBookmarkIcon
                               )}
                             >
+                              {(() => {
+                                try {
+                                  return currentItem.dismissed;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return true;
+                                  }
+                                  throw e;
+                                }
+                              })() ? (
+                                <Stack__
+                                  as={"div"}
+                                  data-plasmic-name={"dismision"}
+                                  data-plasmic-override={overrides.dismision}
+                                  hasGap={true}
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.dismision
+                                  )}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__tJgau
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      <span
+                                        className={
+                                          "plasmic_default__all plasmic_default__span"
+                                        }
+                                        style={{ color: "#DA0000" }}
+                                      >
+                                        {"\u062a\u0631\u062e\u06cc\u0635"}
+                                      </span>
+                                    </React.Fragment>
+                                  </div>
+                                  <IndicatorIcon
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.svg__anjLh
+                                    )}
+                                    role={"img"}
+                                  />
+                                </Stack__>
+                              ) : null}
                               <div
                                 data-plasmic-name={"firstLastName"}
                                 data-plasmic-override={overrides.firstLastName}
@@ -2532,7 +2585,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     $steps["runActionOnPatients"] = true
                                       ? (() => {
                                           const actionArgs = {
-                                            tplRef: "patients"
+                                            tplRef: "patients",
+                                            action: "reload"
                                           };
                                           return (({
                                             tplRef,
@@ -3509,6 +3563,7 @@ const PlasmicDescendants = {
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -3555,6 +3610,7 @@ const PlasmicDescendants = {
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -3617,6 +3673,7 @@ const PlasmicDescendants = {
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -3646,6 +3703,7 @@ const PlasmicDescendants = {
   patientCards: [
     "patientCards",
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -3658,9 +3716,11 @@ const PlasmicDescendants = {
   ],
   patientNameBookmarkIcon: [
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon"
   ],
+  dismision: ["dismision"],
   firstLastName: ["firstLastName"],
   bookmarkIcon: ["bookmarkIcon"],
   wardRoom: ["wardRoom", "roomBed", "ward"],
@@ -3716,6 +3776,7 @@ type NodeDefaultElementType = {
   لطفامنتظربماند: "div";
   patientCards: "div";
   patientNameBookmarkIcon: "div";
+  dismision: "div";
   firstLastName: "div";
   bookmarkIcon: typeof BookmarkIcon;
   wardRoom: "div";
@@ -3832,6 +3893,7 @@ export const PlasmicHomepage = Object.assign(
     ),
     patientCards: makeNodeComponent("patientCards"),
     patientNameBookmarkIcon: makeNodeComponent("patientNameBookmarkIcon"),
+    dismision: makeNodeComponent("dismision"),
     firstLastName: makeNodeComponent("firstLastName"),
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
     wardRoom: makeNodeComponent("wardRoom"),

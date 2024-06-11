@@ -1095,6 +1095,86 @@
   > img {
   margin-left: 2px;
 }
+.dismision {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  max-width: 100%;
+  align-self: center;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  padding: 0px;
+}
+.dismision > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-left: calc(0px - 5px);
+  width: calc(100% + 5px);
+}
+.dismision > :global(.__wab_flex-container) > *,
+.dismision > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.dismision > :global(.__wab_flex-container) > picture > img,
+.dismision
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 5px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .dismision > :global(.__wab_flex-container) {
+    margin-left: calc(0px - 2.5px);
+    width: calc(100% + 2.5px);
+    margin-top: calc(0px - 0px);
+    height: calc(100% + 0px);
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .dismision > :global(.__wab_flex-container) > *,
+  .dismision > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+  .dismision > :global(.__wab_flex-container) > picture > img,
+  .dismision
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > picture
+    > img {
+    margin-left: 2.5px;
+    margin-top: 0px;
+  }
+}
+.text__tJgau {
+  position: relative;
+  max-width: 100%;
+  text-align: left;
+  align-self: center;
+  color: var(--token-Bo2_tT25lwh4);
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+}
+.svg__anjLh {
+  position: relative;
+  object-fit: cover;
+  max-width: 1%;
+  color: var(--token-Bo2_tT25lwh4);
+  align-self: center;
+  height: 1em;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .svg__anjLh {
+    max-width: 3.2%;
+  }
+}
 .firstLastName {
   width: 100%;
   height: auto;
