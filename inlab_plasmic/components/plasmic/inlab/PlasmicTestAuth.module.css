@@ -21,6 +21,18 @@
 .testAuth > * {
   grid-column: 4;
 }
+.redirectToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.redirectToNamespaceSelection:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.redirectToHomepage:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
 .httpRestApiFetcher:global(.__wab_instance) {
   width: 100%;
   max-width: 100%;
@@ -238,12 +250,4 @@
 }
 .img___6O4P > picture > img {
   object-fit: cover;
-}
-.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
-}
-.redirectToNamespaceSelection:global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
 }

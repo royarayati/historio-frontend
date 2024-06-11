@@ -35,6 +35,10 @@
   --plasmic-token-previos-bg: var(--token-1UqUJCyPAFo5);
   --token-WRbeWXZefKPR: #0d6dd414;
   --plasmic-token-selected-button-bg: var(--token-WRbeWXZefKPR);
+  --token-iXeFGjNjlsEs: #ffffff;
+  --plasmic-token-unnamed-style-token: var(--token-iXeFGjNjlsEs);
+  --token-Eg_kJBXf8xV1: Roboto;
+  --plasmic-token-unnamed-style-token-3: var(--token-Eg_kJBXf8xV1);
 }
 
 @media (min-width: 0px) and (max-width: 760px) {

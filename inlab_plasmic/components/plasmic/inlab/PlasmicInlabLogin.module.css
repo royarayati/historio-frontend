@@ -49,12 +49,12 @@
 .inlabLoginwrongUser_disabledLoginButton > * {
   grid-column: 4;
 }
-.redirectInlabLoginToNamespaceSelection:global(.__wab_instance):global(
-    .__wab_instance
-  ) {
+.redirectToNamespaceSelection:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
   position: relative;
 }
-.redirectInlabLoginToHomepage:global(.__wab_instance):global(.__wab_instance) {
+.redirectToHomepage:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
   position: relative;
 }
 .wrongUserAnnouncement {
@@ -113,11 +113,11 @@
   background: #ffffff;
   font-size: 15px;
   box-shadow: 0px 0px 10px 0px var(--token-IYO13gyYJHXG);
-  right: 50px;
   justify-self: flex-start;
   color: var(--token-IYO13gyYJHXG);
   font-weight: 700;
   flex-grow: 1;
+  right: 50px;
   border-radius: 5px;
   padding: 12px;
   border: 0.5px dashed var(--token-9iYGdL7i3GKE);
@@ -362,14 +362,6 @@
   height: 1em;
 }
 .shareTool:global(.__wab_instance) {
+  max-width: 100%;
   position: relative;
-  margin-top: calc(0px + 12px) !important;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .shareTool:global(.__wab_instance) {
-    margin-top: calc(0px + 12px) !important;
-  }
 }

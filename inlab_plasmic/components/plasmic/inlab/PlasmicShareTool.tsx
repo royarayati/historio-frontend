@@ -131,8 +131,6 @@ function PlasmicShareTool__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = useCurrentUser?.() || {};
-
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -157,11 +155,13 @@ function PlasmicShareTool__RenderFunc(props: {
   });
 
   return (
-    <div
+    <Stack__
+      as={"div"}
       data-plasmic-name={"shareContent"}
       data-plasmic-override={overrides.shareContent}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
+      hasGap={true}
       className={classNames(
         projectcss.all,
         projectcss.root_reset,
@@ -187,7 +187,7 @@ function PlasmicShareTool__RenderFunc(props: {
               const actionArgs = {
                 customFunction: async () => {
                   return $$.copyToClipboard(
-                    "🤩 InLab plus link: https://synapps.tums.ac.ir/new_inlab/\n\n🥇 پزشک عزیز؛ شما توسط همکارتون به اینلب پلاس دعوت شدید\n\n🥳 از هر جایی که هستید به اطلاعات بیمار بستری تون دسترسی داشته باشید\n\n😊 حساب کاربری شما در اینلب پلاس همون حساب کاربری تون در اینلب است"
+                    "🤩 InLab plus link: https://synapps.tums.ac.ir/new_inlab/\n🥇 پزشک عزیز؛ شما توسط همکارتون به اینلب پلاس دعوت شدید\n🥳 از اینلب پلاس، نسخه جدید اینلب، با قابلیت های جدیدتر لذت ببرید\n😊 حساب کاربری شما در اینلب پلاس همون حساب کاربری تون در اینلب است"
                   );
                 }
               };
@@ -252,7 +252,7 @@ function PlasmicShareTool__RenderFunc(props: {
           "copyToClipboardAnnouncement"
         )
           ? "\u0644\u06cc\u0646\u06a9 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u06a9\u067e\u06cc \u0634\u062f"
-          : "\ufeff\u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u0631\u0648 \u0628\u0647 \u0647\u0645\u06a9\u0627\u0631\u0627\u0646\u062a\u0648\u0646 \u0645\u0639\u0631\u0641\u06cc \u06a9\u0646\u06cc\u062f"}
+          : "\u062f\u0639\u0648\u062a \u0627\u0632 \u0647\u0645\u06a9\u0627\u0631\u0627\u0646"}
       </div>
       <ShareSvgrepoComsvgIcon
         data-plasmic-name={"inlabPlusLinkShare2"}
@@ -260,7 +260,7 @@ function PlasmicShareTool__RenderFunc(props: {
         className={classNames(projectcss.all, sty.inlabPlusLinkShare2)}
         role={"img"}
       />
-    </div>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 

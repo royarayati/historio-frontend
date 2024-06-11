@@ -59,8 +59,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
@@ -106,7 +106,7 @@ export const PlasmicHomepage__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicHomepage__OverridesType = {
   homepage?: Flex__<"div">;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   pageContent?: Flex__<"div">;
   modalRemoveBookmarks?: Flex__<typeof AntdModal>;
@@ -193,8 +193,6 @@ function PlasmicHomepage__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const $globalActions = useGlobalActions?.();
-
-  const currentUser = useCurrentUser?.() || {};
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -608,10 +606,10 @@ function PlasmicHomepage__RenderFunc(props: {
           sty.homepage
         )}
       >
-        <RedirectToLoginPage
-          data-plasmic-name={"redirectToLoginPage"}
-          data-plasmic-override={overrides.redirectToLoginPage}
-          className={classNames("__wab_instance", sty.redirectToLoginPage)}
+        <RedirectToInlabLogin
+          data-plasmic-name={"redirectToInlabLogin"}
+          data-plasmic-override={overrides.redirectToInlabLogin}
+          className={classNames("__wab_instance", sty.redirectToInlabLogin)}
         />
 
         <RedirectToNamespaceSelection
@@ -767,7 +765,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     "__wab_instance",
                     sty.deleteAllBookmarks
                   )}
-                  color={"blue"}
+                  color={"red"}
                   deselected={generateStateValueProp($state, [
                     "deleteAllBookmarks",
                     "deselected"
@@ -784,15 +782,10 @@ function PlasmicHomepage__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "DELETE",
-                              `/hapi/api/rest/patient/bookmarked/${
-                                $ctx.inlab_user.user.id
-                              }/${localStorage.getItem(
+                              `/n8n/webhook/bookmark_patientcard?namespace_id=${localStorage.getItem(
                                 "inlab_user_namespace_id"
                               )}`,
-                              {
-                                "x-hasura-admin-secret":
-                                  "j2crcdkjWkVdk2bDdbGLfaeD"
-                              }
+                              {}
                             ]
                           };
                           return $globalActions[
@@ -2539,8 +2532,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     $steps["runActionOnPatients"] = true
                                       ? (() => {
                                           const actionArgs = {
-                                            tplRef: "patients",
-                                            action: "reload"
+                                            tplRef: "patients"
                                           };
                                           return (({
                                             tplRef,
@@ -2623,7 +2615,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )}
                               >
                                 <React.Fragment>
-                                  {currentItem.room + "-" + currentItem.bed}
+                                  {currentItem.bed.includes("تخت")
+                                    ? currentItem.bed
+                                    : "تخت " + currentItem.bed}
                                 </React.Fragment>
                               </div>
                               <div
@@ -2683,6 +2677,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                           destination: `/patient/${(() => {
                                             try {
                                               return currentItem.profile_id;
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
+                                          })()}/${(() => {
+                                            try {
+                                              return currentItem.bookmarked;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -2765,6 +2772,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                               throw e;
                                             }
+                                          })()}/${(() => {
+                                            try {
+                                              return currentItem.bookmarked;
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
                                           })()}/report/list`
                                         };
                                         return (({ destination }) => {
@@ -2824,6 +2844,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                           destination: `/patient/${(() => {
                                             try {
                                               return currentItem.profile_id;
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
+                                          })()}/${(() => {
+                                            try {
+                                              return currentItem.bookmarked;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -3446,7 +3479,7 @@ function PlasmicHomepage__RenderFunc(props: {
 const PlasmicDescendants = {
   homepage: [
     "homepage",
-    "redirectToLoginPage",
+    "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "pageContent",
     "modalRemoveBookmarks",
@@ -3491,7 +3524,7 @@ const PlasmicDescendants = {
     "servicesList",
     "servicesName"
   ],
-  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   pageContent: [
     "pageContent",
@@ -3653,7 +3686,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   homepage: "div";
-  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   pageContent: "div";
   modalRemoveBookmarks: typeof AntdModal;
@@ -3759,7 +3792,7 @@ export const PlasmicHomepage = Object.assign(
   makeNodeComponent("homepage"),
   {
     // Helper components rendering sub-elements
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"
     ),

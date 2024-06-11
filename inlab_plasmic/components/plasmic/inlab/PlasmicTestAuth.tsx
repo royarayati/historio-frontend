@@ -59,6 +59,9 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
+import RedirectToHomepage from "../../RedirectToHomepage"; // plasmic-import: x1Fxn6tnPsJ0/component
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
@@ -77,8 +80,6 @@ import { ToolbarLink } from "@plasmicpkgs/tiptap/skinny/registerToolbarLink";
 import { ToolbarCode } from "@plasmicpkgs/tiptap/skinny/registerToolbarCode";
 import { ToolbarStrike } from "@plasmicpkgs/tiptap/skinny/registerToolbarStrike";
 import { ToolbarMention } from "@plasmicpkgs/tiptap/skinny/registerToolbarMention";
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -107,6 +108,9 @@ export const PlasmicTestAuth__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicTestAuth__OverridesType = {
   testAuth?: Flex__<"div">;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
+  redirectToHomepage?: Flex__<typeof RedirectToHomepage>;
   httpRestApiFetcher?: Flex__<typeof DataFetcher>;
   test?: Flex__<typeof ApiFetcherComponent>;
   someInstruction?: Flex__<"div">;
@@ -127,8 +131,6 @@ export type PlasmicTestAuth__OverridesType = {
   tiptapCodeToolbarOption?: Flex__<typeof ToolbarCode>;
   tiptapStrikeToolbarOption?: Flex__<typeof ToolbarStrike>;
   tiptapMentionToolbarOption?: Flex__<typeof ToolbarMention>;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
-  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
 };
 
 export interface DefaultTestAuthProps {}
@@ -163,8 +165,6 @@ function PlasmicTestAuth__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const $globalActions = useGlobalActions?.();
-
-  const currentUser = useCurrentUser?.() || {};
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -252,6 +252,28 @@ function PlasmicTestAuth__RenderFunc(props: {
               sty.testAuth
             )}
           >
+            <RedirectToInlabLogin
+              data-plasmic-name={"redirectToInlabLogin"}
+              data-plasmic-override={overrides.redirectToInlabLogin}
+              className={classNames("__wab_instance", sty.redirectToInlabLogin)}
+            />
+
+            <RedirectToNamespaceSelection
+              data-plasmic-name={"redirectToNamespaceSelection"}
+              data-plasmic-override={overrides.redirectToNamespaceSelection}
+              className={classNames(
+                "__wab_instance",
+                sty.redirectToNamespaceSelection
+              )}
+            />
+
+            {false ? (
+              <RedirectToHomepage
+                data-plasmic-name={"redirectToHomepage"}
+                data-plasmic-override={overrides.redirectToHomepage}
+                className={classNames("__wab_instance", sty.redirectToHomepage)}
+              />
+            ) : null}
             <DataFetcher
               data-plasmic-name={"httpRestApiFetcher"}
               data-plasmic-override={overrides.httpRestApiFetcher}
@@ -791,20 +813,6 @@ function PlasmicTestAuth__RenderFunc(props: {
                 )}
               </DataCtxReader__>
             </ApiFetcherComponent>
-            <RedirectToLoginPage
-              data-plasmic-name={"redirectToLoginPage"}
-              data-plasmic-override={overrides.redirectToLoginPage}
-              className={classNames("__wab_instance", sty.redirectToLoginPage)}
-            />
-
-            <RedirectToNamespaceSelection
-              data-plasmic-name={"redirectToNamespaceSelection"}
-              data-plasmic-override={overrides.redirectToNamespaceSelection}
-              className={classNames(
-                "__wab_instance",
-                sty.redirectToNamespaceSelection
-              )}
-            />
           </div>
         ) : null}
       </div>
@@ -815,6 +823,9 @@ function PlasmicTestAuth__RenderFunc(props: {
 const PlasmicDescendants = {
   testAuth: [
     "testAuth",
+    "redirectToInlabLogin",
+    "redirectToNamespaceSelection",
+    "redirectToHomepage",
     "httpRestApiFetcher",
     "test",
     "someInstruction",
@@ -834,10 +845,11 @@ const PlasmicDescendants = {
     "tiptapLinkToolbarOption",
     "tiptapCodeToolbarOption",
     "tiptapStrikeToolbarOption",
-    "tiptapMentionToolbarOption",
-    "redirectToLoginPage",
-    "redirectToNamespaceSelection"
+    "tiptapMentionToolbarOption"
   ],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
+  redirectToHomepage: ["redirectToHomepage"],
   httpRestApiFetcher: ["httpRestApiFetcher"],
   test: [
     "test",
@@ -893,15 +905,16 @@ const PlasmicDescendants = {
   tiptapLinkToolbarOption: ["tiptapLinkToolbarOption"],
   tiptapCodeToolbarOption: ["tiptapCodeToolbarOption"],
   tiptapStrikeToolbarOption: ["tiptapStrikeToolbarOption"],
-  tiptapMentionToolbarOption: ["tiptapMentionToolbarOption"],
-  redirectToLoginPage: ["redirectToLoginPage"],
-  redirectToNamespaceSelection: ["redirectToNamespaceSelection"]
+  tiptapMentionToolbarOption: ["tiptapMentionToolbarOption"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   testAuth: "div";
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
+  redirectToHomepage: typeof RedirectToHomepage;
   httpRestApiFetcher: typeof DataFetcher;
   test: typeof ApiFetcherComponent;
   someInstruction: "div";
@@ -922,8 +935,6 @@ type NodeDefaultElementType = {
   tiptapCodeToolbarOption: typeof ToolbarCode;
   tiptapStrikeToolbarOption: typeof ToolbarStrike;
   tiptapMentionToolbarOption: typeof ToolbarMention;
-  redirectToLoginPage: typeof RedirectToLoginPage;
-  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -986,6 +997,11 @@ export const PlasmicTestAuth = Object.assign(
   makeNodeComponent("testAuth"),
   {
     // Helper components rendering sub-elements
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
+    redirectToHomepage: makeNodeComponent("redirectToHomepage"),
     httpRestApiFetcher: makeNodeComponent("httpRestApiFetcher"),
     test: makeNodeComponent("test"),
     someInstruction: makeNodeComponent("someInstruction"),
@@ -1008,10 +1024,6 @@ export const PlasmicTestAuth = Object.assign(
     tiptapCodeToolbarOption: makeNodeComponent("tiptapCodeToolbarOption"),
     tiptapStrikeToolbarOption: makeNodeComponent("tiptapStrikeToolbarOption"),
     tiptapMentionToolbarOption: makeNodeComponent("tiptapMentionToolbarOption"),
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
-    redirectToNamespaceSelection: makeNodeComponent(
-      "redirectToNamespaceSelection"
-    ),
 
     // Metadata about props expected for PlasmicTestAuth
     internalVariantProps: PlasmicTestAuth__VariantProps,

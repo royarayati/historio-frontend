@@ -59,8 +59,9 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
+import RedirectToHomepage from "../../RedirectToHomepage"; // plasmic-import: x1Fxn6tnPsJ0/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -85,8 +86,9 @@ export const PlasmicGuideToMakeNewPage__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicGuideToMakeNewPage__OverridesType = {
   guideToMakeNewPage?: Flex__<"div">;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
+  redirectToHomepage?: Flex__<typeof RedirectToHomepage>;
   guideLeaflet?: Flex__<"div">;
 };
 
@@ -121,8 +123,6 @@ function PlasmicGuideToMakeNewPage__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = useCurrentUser?.() || {};
-
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsjEqVmdAbnKYc()
   });
@@ -155,10 +155,10 @@ function PlasmicGuideToMakeNewPage__RenderFunc(props: {
               sty.guideToMakeNewPage
             )}
           >
-            <RedirectToLoginPage
-              data-plasmic-name={"redirectToLoginPage"}
-              data-plasmic-override={overrides.redirectToLoginPage}
-              className={classNames("__wab_instance", sty.redirectToLoginPage)}
+            <RedirectToInlabLogin
+              data-plasmic-name={"redirectToInlabLogin"}
+              data-plasmic-override={overrides.redirectToInlabLogin}
+              className={classNames("__wab_instance", sty.redirectToInlabLogin)}
             />
 
             <RedirectToNamespaceSelection
@@ -168,6 +168,12 @@ function PlasmicGuideToMakeNewPage__RenderFunc(props: {
                 "__wab_instance",
                 sty.redirectToNamespaceSelection
               )}
+            />
+
+            <RedirectToHomepage
+              data-plasmic-name={"redirectToHomepage"}
+              data-plasmic-override={overrides.redirectToHomepage}
+              className={classNames("__wab_instance", sty.redirectToHomepage)}
             />
 
             <div
@@ -193,12 +199,14 @@ function PlasmicGuideToMakeNewPage__RenderFunc(props: {
 const PlasmicDescendants = {
   guideToMakeNewPage: [
     "guideToMakeNewPage",
-    "redirectToLoginPage",
+    "redirectToInlabLogin",
     "redirectToNamespaceSelection",
+    "redirectToHomepage",
     "guideLeaflet"
   ],
-  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
+  redirectToHomepage: ["redirectToHomepage"],
   guideLeaflet: ["guideLeaflet"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -206,8 +214,9 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   guideToMakeNewPage: "div";
-  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
+  redirectToHomepage: typeof RedirectToHomepage;
   guideLeaflet: "div";
 };
 
@@ -271,10 +280,11 @@ export const PlasmicGuideToMakeNewPage = Object.assign(
   makeNodeComponent("guideToMakeNewPage"),
   {
     // Helper components rendering sub-elements
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"
     ),
+    redirectToHomepage: makeNodeComponent("redirectToHomepage"),
     guideLeaflet: makeNodeComponent("guideLeaflet"),
 
     // Metadata about props expected for PlasmicGuideToMakeNewPage

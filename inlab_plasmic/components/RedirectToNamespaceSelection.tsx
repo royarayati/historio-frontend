@@ -5,7 +5,6 @@ import {
   PlasmicRedirectToNamespaceSelection,
   DefaultRedirectToNamespaceSelectionProps
 } from "./plasmic/inlab/PlasmicRedirectToNamespaceSelection";
-import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -23,9 +22,8 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 export interface RedirectToNamespaceSelectionProps
   extends DefaultRedirectToNamespaceSelectionProps {}
 
-function RedirectToNamespaceSelection_(
-  props: RedirectToNamespaceSelectionProps,
-  ref: HTMLElementRefOf<"div">
+function RedirectToNamespaceSelection(
+  props: RedirectToNamespaceSelectionProps
 ) {
   // Use PlasmicRedirectToNamespaceSelection to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
@@ -42,10 +40,7 @@ function RedirectToNamespaceSelection_(
   // By default, we are just piping all RedirectToNamespaceSelectionProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToNamespaceSelection root={{ ref }} {...props} />;
+  return <PlasmicRedirectToNamespaceSelection  />;
 }
 
-const RedirectToNamespaceSelection = React.forwardRef(
-  RedirectToNamespaceSelection_
-);
 export default RedirectToNamespaceSelection;

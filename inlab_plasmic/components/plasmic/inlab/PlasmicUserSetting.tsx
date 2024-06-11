@@ -59,8 +59,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -100,7 +100,7 @@ export const PlasmicUserSetting__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicUserSetting__OverridesType = {
   userSetting?: Flex__<"div">;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   pageContent?: Flex__<"div">;
   pictureAndName?: Flex__<"div">;
@@ -119,6 +119,7 @@ export type PlasmicUserSetting__OverridesType = {
   resetPassword?: Flex__<"div">;
   resetPasswordImage?: Flex__<"svg">;
   resetPassword2?: Flex__<"div">;
+  shareToolContent?: Flex__<"div">;
   shareTool?: Flex__<typeof ShareTool>;
   logoutButton?: Flex__<typeof Button>;
   text?: Flex__<"div">;
@@ -158,8 +159,6 @@ function PlasmicUserSetting__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const $globalActions = useGlobalActions?.();
-
-  const currentUser = useCurrentUser?.() || {};
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -251,10 +250,10 @@ function PlasmicUserSetting__RenderFunc(props: {
             }
           )}
         >
-          <RedirectToLoginPage
-            data-plasmic-name={"redirectToLoginPage"}
-            data-plasmic-override={overrides.redirectToLoginPage}
-            className={classNames("__wab_instance", sty.redirectToLoginPage)}
+          <RedirectToInlabLogin
+            data-plasmic-name={"redirectToInlabLogin"}
+            data-plasmic-override={overrides.redirectToInlabLogin}
+            className={classNames("__wab_instance", sty.redirectToInlabLogin)}
           />
 
           <RedirectToNamespaceSelection
@@ -744,12 +743,25 @@ function PlasmicUserSetting__RenderFunc(props: {
                 }
               </div>
             </Stack__>
-            <ShareTool
-              data-plasmic-name={"shareTool"}
-              data-plasmic-override={overrides.shareTool}
-              className={classNames("__wab_instance", sty.shareTool)}
-            />
-
+            <Stack__
+              as={"div"}
+              data-plasmic-name={"shareToolContent"}
+              data-plasmic-override={overrides.shareToolContent}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.shareToolContent, {
+                [sty.shareToolContentdisabledLogoutButton]: hasVariant(
+                  $state,
+                  "disabledLogoutButton",
+                  "disabledLogoutButton"
+                )
+              })}
+            >
+              <ShareTool
+                data-plasmic-name={"shareTool"}
+                data-plasmic-override={overrides.shareTool}
+                className={classNames("__wab_instance", sty.shareTool)}
+              />
+            </Stack__>
             <Button
               data-plasmic-name={"logoutButton"}
               data-plasmic-override={overrides.logoutButton}
@@ -1049,7 +1061,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/profile`
+                          })()}/[bookmarked]/profile`
                         };
                         return (({ destination }) => {
                           if (
@@ -1111,7 +1123,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/report/list`
+                          })()}/[bookmarked]/report/list`
                         };
                         return (({ destination }) => {
                           if (
@@ -1173,7 +1185,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/lab`
+                          })()}/[bookmarked]/lab`
                         };
                         return (({ destination }) => {
                           if (
@@ -1217,7 +1229,7 @@ function PlasmicUserSetting__RenderFunc(props: {
 const PlasmicDescendants = {
   userSetting: [
     "userSetting",
-    "redirectToLoginPage",
+    "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "pageContent",
     "pictureAndName",
@@ -1236,13 +1248,14 @@ const PlasmicDescendants = {
     "resetPassword",
     "resetPasswordImage",
     "resetPassword2",
+    "shareToolContent",
     "shareTool",
     "logoutButton",
     "text",
     "homepageSwitchingTab",
     "switchingTab"
   ],
-  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   pageContent: [
     "pageContent",
@@ -1262,6 +1275,7 @@ const PlasmicDescendants = {
     "resetPassword",
     "resetPasswordImage",
     "resetPassword2",
+    "shareToolContent",
     "shareTool",
     "logoutButton",
     "text"
@@ -1300,6 +1314,7 @@ const PlasmicDescendants = {
   resetPassword: ["resetPassword", "resetPasswordImage", "resetPassword2"],
   resetPasswordImage: ["resetPasswordImage"],
   resetPassword2: ["resetPassword2"],
+  shareToolContent: ["shareToolContent", "shareTool"],
   shareTool: ["shareTool"],
   logoutButton: ["logoutButton", "text"],
   text: ["text"],
@@ -1311,7 +1326,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   userSetting: "div";
-  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   pageContent: "div";
   pictureAndName: "div";
@@ -1330,6 +1345,7 @@ type NodeDefaultElementType = {
   resetPassword: "div";
   resetPasswordImage: "svg";
   resetPassword2: "div";
+  shareToolContent: "div";
   shareTool: typeof ShareTool;
   logoutButton: typeof Button;
   text: "div";
@@ -1397,7 +1413,7 @@ export const PlasmicUserSetting = Object.assign(
   makeNodeComponent("userSetting"),
   {
     // Helper components rendering sub-elements
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"
     ),
@@ -1418,6 +1434,7 @@ export const PlasmicUserSetting = Object.assign(
     resetPassword: makeNodeComponent("resetPassword"),
     resetPasswordImage: makeNodeComponent("resetPasswordImage"),
     resetPassword2: makeNodeComponent("resetPassword2"),
+    shareToolContent: makeNodeComponent("shareToolContent"),
     shareTool: makeNodeComponent("shareTool"),
     logoutButton: makeNodeComponent("logoutButton"),
     text: makeNodeComponent("text"),

@@ -119,8 +119,6 @@ function PlasmicSwitchingTab__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = useCurrentUser?.() || {};
-
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -237,7 +235,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}/profile`
+                        })()}/[bookmarked]/profile`
                       };
                       return (({ destination }) => {
                         if (
@@ -299,7 +297,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}/report/list`
+                        })()}/[bookmarked]/report/list`
                       };
                       return (({ destination }) => {
                         if (
@@ -361,7 +359,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}/lab`
+                        })()}/[bookmarked]/lab`
                       };
                       return (({ destination }) => {
                         if (
