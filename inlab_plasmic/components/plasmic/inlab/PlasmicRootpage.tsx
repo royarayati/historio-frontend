@@ -59,9 +59,9 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import RedirectRootPageToInlabLogin from "../../RedirectRootPageToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
-import RedirectRootPageToNamespaceSelection from "../../RedirectRootPageToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
-import RedirectRootPageToHomepage from "../../RedirectRootPageToHomepage"; // plasmic-import: x1Fxn6tnPsJ0/component
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
+import RedirectToHomepage from "../../RedirectToHomepage"; // plasmic-import: x1Fxn6tnPsJ0/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -85,11 +85,9 @@ export const PlasmicRootpage__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicRootpage__OverridesType = {
   rootpage?: Flex__<"div">;
-  redirectRootPageToInlabLogin?: Flex__<typeof RedirectRootPageToInlabLogin>;
-  redirectRootPageToNamespaceSelection?: Flex__<
-    typeof RedirectRootPageToNamespaceSelection
-  >;
-  redirectRootPageToHomepage?: Flex__<typeof RedirectRootPageToHomepage>;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
+  redirectToHomepage?: Flex__<typeof RedirectToHomepage>;
 };
 
 export interface DefaultRootpageProps {}
@@ -123,8 +121,6 @@ function PlasmicRootpage__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = useCurrentUser?.() || {};
-
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsjEqVmdAbnKYc()
   });
@@ -156,33 +152,25 @@ function PlasmicRootpage__RenderFunc(props: {
             sty.rootpage
           )}
         >
-          <RedirectRootPageToInlabLogin
-            data-plasmic-name={"redirectRootPageToInlabLogin"}
-            data-plasmic-override={overrides.redirectRootPageToInlabLogin}
+          <RedirectToInlabLogin
+            data-plasmic-name={"redirectToInlabLogin"}
+            data-plasmic-override={overrides.redirectToInlabLogin}
+            className={classNames("__wab_instance", sty.redirectToInlabLogin)}
+          />
+
+          <RedirectToNamespaceSelection
+            data-plasmic-name={"redirectToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectToNamespaceSelection}
             className={classNames(
               "__wab_instance",
-              sty.redirectRootPageToInlabLogin
+              sty.redirectToNamespaceSelection
             )}
           />
 
-          <RedirectRootPageToNamespaceSelection
-            data-plasmic-name={"redirectRootPageToNamespaceSelection"}
-            data-plasmic-override={
-              overrides.redirectRootPageToNamespaceSelection
-            }
-            className={classNames(
-              "__wab_instance",
-              sty.redirectRootPageToNamespaceSelection
-            )}
-          />
-
-          <RedirectRootPageToHomepage
-            data-plasmic-name={"redirectRootPageToHomepage"}
-            data-plasmic-override={overrides.redirectRootPageToHomepage}
-            className={classNames(
-              "__wab_instance",
-              sty.redirectRootPageToHomepage
-            )}
+          <RedirectToHomepage
+            data-plasmic-name={"redirectToHomepage"}
+            data-plasmic-override={overrides.redirectToHomepage}
+            className={classNames("__wab_instance", sty.redirectToHomepage)}
           />
         </div>
       </div>
@@ -193,24 +181,22 @@ function PlasmicRootpage__RenderFunc(props: {
 const PlasmicDescendants = {
   rootpage: [
     "rootpage",
-    "redirectRootPageToInlabLogin",
-    "redirectRootPageToNamespaceSelection",
-    "redirectRootPageToHomepage"
+    "redirectToInlabLogin",
+    "redirectToNamespaceSelection",
+    "redirectToHomepage"
   ],
-  redirectRootPageToInlabLogin: ["redirectRootPageToInlabLogin"],
-  redirectRootPageToNamespaceSelection: [
-    "redirectRootPageToNamespaceSelection"
-  ],
-  redirectRootPageToHomepage: ["redirectRootPageToHomepage"]
+  redirectToInlabLogin: ["redirectToInlabLogin"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
+  redirectToHomepage: ["redirectToHomepage"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   rootpage: "div";
-  redirectRootPageToInlabLogin: typeof RedirectRootPageToInlabLogin;
-  redirectRootPageToNamespaceSelection: typeof RedirectRootPageToNamespaceSelection;
-  redirectRootPageToHomepage: typeof RedirectRootPageToHomepage;
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
+  redirectToHomepage: typeof RedirectToHomepage;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -273,13 +259,11 @@ export const PlasmicRootpage = Object.assign(
   makeNodeComponent("rootpage"),
   {
     // Helper components rendering sub-elements
-    redirectRootPageToInlabLogin: makeNodeComponent(
-      "redirectRootPageToInlabLogin"
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
     ),
-    redirectRootPageToNamespaceSelection: makeNodeComponent(
-      "redirectRootPageToNamespaceSelection"
-    ),
-    redirectRootPageToHomepage: makeNodeComponent("redirectRootPageToHomepage"),
+    redirectToHomepage: makeNodeComponent("redirectToHomepage"),
 
     // Metadata about props expected for PlasmicRootpage
     internalVariantProps: PlasmicRootpage__VariantProps,

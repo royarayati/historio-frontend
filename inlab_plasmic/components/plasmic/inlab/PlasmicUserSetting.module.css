@@ -30,11 +30,11 @@
 .userSettingdisabledLogoutButton > * {
   grid-column: 4;
 }
-.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
+.redirectToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }
-.redirectToNamespaceSelection:global(.__wab_instance) {
+.redirectToNamespaceSelection:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }
@@ -55,8 +55,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin-top: calc(0px - 18px);
-  height: calc(100% + 18px);
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
 }
 .pageContent > :global(.__wab_flex-container) > *,
 .pageContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
@@ -66,7 +66,7 @@
   > :global(.__wab_slot)
   > picture
   > img {
-  margin-top: 18px;
+  margin-top: 8px;
 }
 .pictureAndName {
   display: flex;
@@ -77,7 +77,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  margin-top: calc(0px + 18px) !important;
+  margin-top: calc(0px + 8px) !important;
   left: auto;
   top: auto;
   margin-left: 0px;
@@ -90,7 +90,7 @@
   border-bottom: 1px solid var(--token-8PxxXPNrIohQ);
 }
 .pictureAndNamedisabledLogoutButton {
-  margin-top: calc(0px + 18px) !important;
+  margin-top: calc(0px + 8px) !important;
 }
 .nameRankUsername {
   display: flex;
@@ -124,7 +124,7 @@
   display: block;
   font-size: var(--token-sOr3fJ5Up5fq);
   font-family: var(--VazirmatnCustom);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: normal;
   line-height: 1.2;
   color: rgba(24, 29, 36, 1);
@@ -145,6 +145,7 @@
   margin-top: calc(5px + 0px) !important;
   font-size: var(--token-sOr3fJ5Up5fq);
   white-space: pre-wrap;
+  font-weight: 500;
 }
 .usernameValue {
   position: relative;
@@ -156,6 +157,7 @@
   margin-top: calc(5px + 0px) !important;
   font-size: var(--token-sOr3fJ5Up5fq);
   white-space: pre-wrap;
+  font-weight: 500;
 }
 .userPicture {
   position: relative;
@@ -175,7 +177,7 @@
   top: auto;
   left: auto;
   flex-direction: row-reverse;
-  margin-top: calc(46px + 18px) !important;
+  margin-top: calc(46px + 8px) !important;
   display: none;
   padding: 16px;
   border-top: 1px solid #bdbdbd;
@@ -230,7 +232,7 @@
   top: auto;
   left: auto;
   flex-direction: row-reverse;
-  margin-top: calc(0px + 18px) !important;
+  margin-top: calc(0px + 8px) !important;
   margin-right: 0px;
   margin-bottom: 0px;
   margin-left: 0px;
@@ -258,14 +260,14 @@
   margin-left: 8px;
 }
 .namespacedisabledLogoutButton {
-  margin-top: calc(0px + 18px) !important;
+  margin-top: calc(0px + 8px) !important;
 }
 .hospitalIcon {
   position: relative;
   object-fit: cover;
   max-width: 100%;
-  width: 17px;
-  height: 21px;
+  width: 30px;
+  height: 43px;
   color: var(--token-9iYGdL7i3GKE);
   flex-shrink: 0;
 }
@@ -302,7 +304,7 @@
   display: block;
   font-size: var(--token-sOr3fJ5Up5fq);
   font-family: var(--VazirmatnCustom);
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: normal;
   line-height: 1.2;
   color: rgba(24, 29, 36, 1);
@@ -323,6 +325,7 @@
   font-size: var(--token-sOr3fJ5Up5fq);
   color: var(--token-9iYGdL7i3GKE);
   white-space: pre-wrap;
+  font-weight: 700;
   padding: 0px;
 }
 .namespaceNamedisabledLogoutButton {
@@ -337,12 +340,12 @@
   top: auto;
   left: auto;
   flex-direction: row-reverse;
-  margin-top: calc(0px + 18px) !important;
+  margin-top: calc(0px + 8px) !important;
   margin-right: 0px;
-  margin-bottom: 17px;
+  margin-bottom: 0px;
   margin-left: 0px;
   min-width: 0;
-  padding: 16px;
+  padding: 0px 16px;
   border-top: 1px solid #bdbdbd;
   border-bottom: 1px solid #bdbdbd;
 }
@@ -365,14 +368,14 @@
   margin-left: 8px;
 }
 .resetPassworddisabledLogoutButton {
-  margin-top: calc(0px + 18px) !important;
+  margin-top: calc(0px + 8px) !important;
 }
 .resetPasswordImage {
   position: relative;
   object-fit: cover;
   max-width: 100%;
-  width: 17px;
-  height: 21px;
+  width: 30px;
+  height: 43px;
   display: block;
   color: var(--token-9iYGdL7i3GKE);
   flex-shrink: 0;
@@ -381,14 +384,57 @@
   display: block;
   font-size: var(--token-sOr3fJ5Up5fq);
   font-family: var(--VazirmatnCustom);
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: normal;
   line-height: 1.2;
   color: rgba(24, 29, 36, 1);
   position: relative;
   text-align: right;
-  align-self: flex-end;
+  align-self: center;
   white-space: pre-wrap;
+}
+.shareToolContent {
+  background: #ffffff;
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  top: auto;
+  left: auto;
+  flex-direction: row-reverse;
+  margin-top: calc(0px + 8px) !important;
+  margin-right: 0px;
+  margin-bottom: 17px;
+  margin-left: 0px;
+  min-width: 0;
+  padding: 0px 16px;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
+}
+.shareToolContent > :global(.__wab_flex-container) {
+  flex-direction: row-reverse;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  min-width: 0;
+  margin-left: calc(0px - 8px);
+  width: calc(100% + 8px);
+}
+.shareToolContent > :global(.__wab_flex-container) > *,
+.shareToolContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.shareToolContent > :global(.__wab_flex-container) > picture > img,
+.shareToolContent
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 8px;
+}
+.shareToolContentdisabledLogoutButton {
+  left: auto;
+  top: auto;
+  margin-top: calc(0px + 8px) !important;
 }
 .shareTool:global(.__wab_instance) {
   max-width: 100%;
@@ -399,7 +445,7 @@
   position: relative;
   left: auto;
   top: auto;
-  margin-top: calc(0px + 18px) !important;
+  margin-top: calc(0px + 8px) !important;
   margin-right: 0px;
   margin-bottom: 0px;
   margin-left: 0px;
@@ -409,7 +455,7 @@
   left: auto;
   top: auto;
   opacity: 0.6;
-  margin-top: calc(0px + 18px) !important;
+  margin-top: calc(0px + 8px) !important;
 }
 .svg__fLi6W {
   position: relative;

@@ -131,8 +131,6 @@ function PlasmicReport__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = useCurrentUser?.() || {};
-
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -288,7 +286,7 @@ function PlasmicReport__RenderFunc(props: {
                                 }
                                 throw e;
                               }
-                            })()}/report/detail/${(() => {
+                            })()}/[bookmarked]/report/detail/${(() => {
                               try {
                                 return currentItem.id;
                               } catch (e) {

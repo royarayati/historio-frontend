@@ -2,9 +2,9 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import {
-  PlasmicRedirectRootPageToHomepage,
-  DefaultRedirectRootPageToHomepageProps
-} from "./plasmic/inlab/PlasmicRedirectRootPageToHomepage";
+  PlasmicRedirectToInlabLogin,
+  DefaultRedirectToInlabLoginProps
+} from "./plasmic/inlab/PlasmicRedirectToInlabLogin";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -13,32 +13,32 @@ import {
 // If you don't want to expose certain variants or slots as a prop, you can use
 // Omit to hide them:
 //
-// interface RedirectRootPageToHomepageProps extends Omit<DefaultRedirectRootPageToHomepageProps, "hideProps1"|"hideProp2"> {
+// interface RedirectToInlabLoginProps extends Omit<DefaultRedirectToInlabLoginProps, "hideProps1"|"hideProp2"> {
 //   // etc.
 // }
 //
-// You can also stop extending from DefaultRedirectRootPageToHomepageProps altogether and have
+// You can also stop extending from DefaultRedirectToInlabLoginProps altogether and have
 // total control over the props for your component.
-export interface RedirectRootPageToHomepageProps
-  extends DefaultRedirectRootPageToHomepageProps {}
+export interface RedirectToInlabLoginProps
+  extends DefaultRedirectToInlabLoginProps {}
 
-function RedirectRootPageToHomepage(props: RedirectRootPageToHomepageProps) {
-  // Use PlasmicRedirectRootPageToHomepage to render this component as it was
+function RedirectToInlabLogin(props: RedirectToInlabLoginProps) {
+  // Use PlasmicRedirectToInlabLogin to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicRedirectRootPageToHomepage are:
+  // Props you can pass into PlasmicRedirectToInlabLogin are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, we are just piping all RedirectRootPageToHomepageProps here, but feel free
+  // By default, we are just piping all RedirectToInlabLoginProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectRootPageToHomepage />;
+  return <PlasmicRedirectToInlabLogin  />;
 }
 
-export default RedirectRootPageToHomepage;
+export default RedirectToInlabLogin;

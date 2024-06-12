@@ -59,8 +59,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -91,14 +91,14 @@ export const PlasmicImagingReportDatail__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicImagingReportDatail__OverridesType = {
   imagingReportsDatail?: Flex__<"div">;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
-  apiFetcherComponent?: Flex__<typeof ApiFetcherComponent>;
+  patientName?: Flex__<typeof ApiFetcherComponent>;
   text?: Flex__<"div">;
   reportDetail?: Flex__<typeof ApiFetcherComponent>;
-  imagingReportList?: Flex__<"div">;
   button?: Flex__<typeof Button>;
+  imagingReportList?: Flex__<"div">;
   imagingReportCard?: Flex__<"div">;
   imagingReportDate?: Flex__<"div">;
   imagingReport?: Flex__<"div">;
@@ -141,34 +141,37 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = useCurrentUser?.() || {};
-
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "button[].isDisabled",
+        path: "button.isDisabled",
         type: "private",
-        variableType: "boolean"
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "button[].selected",
+        path: "button.selected",
         type: "private",
-        variableType: "boolean"
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "button[].deselected",
+        path: "button.deselected",
         type: "private",
-        variableType: "boolean"
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "button[].sortDeselected",
+        path: "button.sortDeselected",
         type: "private",
-        variableType: "boolean"
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "button[].sortSelected",
+        path: "button.sortSelected",
         type: "private",
-        variableType: "boolean"
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -211,10 +214,10 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
             sty.imagingReportsDatail
           )}
         >
-          <RedirectToLoginPage
-            data-plasmic-name={"redirectToLoginPage"}
-            data-plasmic-override={overrides.redirectToLoginPage}
-            className={classNames("__wab_instance", sty.redirectToLoginPage)}
+          <RedirectToInlabLogin
+            data-plasmic-name={"redirectToInlabLogin"}
+            data-plasmic-override={overrides.redirectToInlabLogin}
+            className={classNames("__wab_instance", sty.redirectToInlabLogin)}
           />
 
           <RedirectToNamespaceSelection
@@ -232,9 +235,9 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
             className={classNames(projectcss.all, sty.header)}
           >
             <ApiFetcherComponent
-              data-plasmic-name={"apiFetcherComponent"}
-              data-plasmic-override={overrides.apiFetcherComponent}
-              className={classNames("__wab_instance", sty.apiFetcherComponent)}
+              data-plasmic-name={"patientName"}
+              data-plasmic-override={overrides.patientName}
+              className={classNames("__wab_instance", sty.patientName)}
               headers={(() => {
                 try {
                   return {
@@ -255,7 +258,7 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
               method={"GET"}
               path={`/api/v2/patient/${$ctx.params.code}`}
               ref={ref => {
-                $refs["apiFetcherComponent"] = ref;
+                $refs["patientName"] = ref;
               }}
             >
               <DataCtxReader__>
@@ -345,262 +348,214 @@ ${ageMonths} months ${
             }}
           >
             <DataCtxReader__>
-              {$ctx =>
-                (_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                  (() => {
-                    try {
-                      return $ctx.fetched_data.data.radiology_services;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return [];
-                      }
-                      throw e;
-                    }
-                  })()
-                ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                  const currentItem = __plasmic_item_0;
-                  const currentIndex = __plasmic_idx_0;
-                  return (
-                    <Stack__
-                      as={"div"}
-                      data-plasmic-name={"imagingReportList"}
-                      data-plasmic-override={overrides.imagingReportList}
-                      hasGap={true}
-                      className={classNames(
-                        projectcss.all,
-                        sty.imagingReportList
-                      )}
-                      key={currentIndex}
-                    >
-                      {$ctx.fetched_data.data.pacs_url !== null
-                        ? (() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.button
-                              ),
-                              color: "blue",
-                              deselected: generateStateValueProp($state, [
-                                "button",
-                                __plasmic_idx_0,
-                                "deselected"
-                              ]),
-                              isDisabled: generateStateValueProp($state, [
-                                "button",
-                                __plasmic_idx_0,
-                                "isDisabled"
-                              ]),
-                              onClick: async event => {
-                                const $steps = {};
+              {$ctx => (
+                <React.Fragment>
+                  {$ctx.fetched_data.loading == false &&
+                  $ctx.fetched_data.data.pacs_url !== null ? (
+                    <Button
+                      data-plasmic-name={"button"}
+                      data-plasmic-override={overrides.button}
+                      className={classNames("__wab_instance", sty.button)}
+                      color={"blue"}
+                      deselected={generateStateValueProp($state, [
+                        "button",
+                        "deselected"
+                      ])}
+                      isDisabled={generateStateValueProp($state, [
+                        "button",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
 
-                                $steps["goToPage"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        destination: (() => {
-                                          try {
-                                            return $ctx.fetched_data.data
-                                              .pacs_url;
-                                          } catch (e) {
-                                            if (
-                                              e instanceof TypeError ||
-                                              e?.plasmicType ===
-                                                "PlasmicUndefinedDataError"
-                                            ) {
-                                              return undefined;
-                                            }
-                                            throw e;
-                                          }
-                                        })()
-                                      };
-                                      return (({ destination }) => {
-                                        if (
-                                          typeof destination === "string" &&
-                                          destination.startsWith("#")
-                                        ) {
-                                          document
-                                            .getElementById(
-                                              destination.substr(1)
-                                            )
-                                            .scrollIntoView({
-                                              behavior: "smooth"
-                                            });
-                                        } else {
-                                          __nextRouter?.push(destination);
-                                        }
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
+                        $steps["goToPage"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                destination: (() => {
+                                  try {
+                                    return $ctx.fetched_data.data.pacs_url;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()
+                              };
+                              return (({ destination }) => {
                                 if (
-                                  $steps["goToPage"] != null &&
-                                  typeof $steps["goToPage"] === "object" &&
-                                  typeof $steps["goToPage"].then === "function"
+                                  typeof destination === "string" &&
+                                  destination.startsWith("#")
                                 ) {
-                                  $steps["goToPage"] = await $steps["goToPage"];
+                                  document
+                                    .getElementById(destination.substr(1))
+                                    .scrollIntoView({ behavior: "smooth" });
+                                } else {
+                                  __nextRouter?.push(destination);
                                 }
-                              },
-                              onDeselectedChange: (...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "button",
-                                  __plasmic_idx_0,
-                                  "deselected"
-                                ])(eventArgs[0]);
-                              },
-                              onIsDisabledChange: (...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "button",
-                                  __plasmic_idx_0,
-                                  "isDisabled"
-                                ])(eventArgs[0]);
-                              },
-                              onSelectedChange: (...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "button",
-                                  __plasmic_idx_0,
-                                  "selected"
-                                ])(eventArgs[0]);
-                              },
-                              onSortDeselectedChange: (...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "button",
-                                  __plasmic_idx_0,
-                                  "sortDeselected"
-                                ])(eventArgs[0]);
-                              },
-                              onSortSelectedChange: (...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "button",
-                                  __plasmic_idx_0,
-                                  "sortSelected"
-                                ])(eventArgs[0]);
-                              },
-                              selected: generateStateValueProp($state, [
-                                "button",
-                                __plasmic_idx_0,
-                                "selected"
-                              ]),
-                              sortDeselected: generateStateValueProp($state, [
-                                "button",
-                                __plasmic_idx_0,
-                                "sortDeselected"
-                              ]),
-                              sortSelected: generateStateValueProp($state, [
-                                "button",
-                                __plasmic_idx_0,
-                                "sortSelected"
-                              ])
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "button[].isDisabled",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                },
-                                {
-                                  name: "button[].selected",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                },
-                                {
-                                  name: "button[].deselected",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                },
-                                {
-                                  name: "button[].sortDeselected",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                },
-                                {
-                                  name: "button[].sortSelected",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                }
-                              ],
-                              [__plasmic_idx_0]
-                            );
-                            return (
-                              <Button
-                                data-plasmic-name={"button"}
-                                data-plasmic-override={overrides.button}
-                                {...child$Props}
-                              >
-                                {"View PACS"}
-                              </Button>
-                            );
-                          })()
-                        : null}
-                      {currentItem.id == $ctx.params.reportID ? (
-                        <Stack__
-                          as={"div"}
-                          data-plasmic-name={"imagingReportCard"}
-                          data-plasmic-override={overrides.imagingReportCard}
-                          hasGap={true}
-                          className={classNames(
-                            projectcss.all,
-                            sty.imagingReportCard
-                          )}
-                        >
-                          <div
-                            data-plasmic-name={"imagingReportDate"}
-                            data-plasmic-override={overrides.imagingReportDate}
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["goToPage"] != null &&
+                          typeof $steps["goToPage"] === "object" &&
+                          typeof $steps["goToPage"].then === "function"
+                        ) {
+                          $steps["goToPage"] = await $steps["goToPage"];
+                        }
+                      }}
+                      onDeselectedChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "deselected"
+                        ])(eventArgs[0]);
+                      }}
+                      onIsDisabledChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }}
+                      onSelectedChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "selected"
+                        ])(eventArgs[0]);
+                      }}
+                      onSortDeselectedChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "sortDeselected"
+                        ])(eventArgs[0]);
+                      }}
+                      onSortSelectedChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "button",
+                          "sortSelected"
+                        ])(eventArgs[0]);
+                      }}
+                      selected={generateStateValueProp($state, [
+                        "button",
+                        "selected"
+                      ])}
+                      sortDeselected={generateStateValueProp($state, [
+                        "button",
+                        "sortDeselected"
+                      ])}
+                      sortSelected={generateStateValueProp($state, [
+                        "button",
+                        "sortSelected"
+                      ])}
+                    >
+                      {"View PACS"}
+                    </Button>
+                  ) : null}
+                  {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                    (() => {
+                      try {
+                        return $ctx.fetched_data.data.radiology_services;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
+                        }
+                        throw e;
+                      }
+                    })()
+                  ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                    const currentItem = __plasmic_item_0;
+                    const currentIndex = __plasmic_idx_0;
+                    return (
+                      <Stack__
+                        as={"div"}
+                        data-plasmic-name={"imagingReportList"}
+                        data-plasmic-override={overrides.imagingReportList}
+                        hasGap={true}
+                        className={classNames(
+                          projectcss.all,
+                          sty.imagingReportList
+                        )}
+                        key={currentIndex}
+                      >
+                        {currentItem.id == $ctx.params.reportID ? (
+                          <Stack__
+                            as={"div"}
+                            data-plasmic-name={"imagingReportCard"}
+                            data-plasmic-override={overrides.imagingReportCard}
+                            hasGap={true}
                             className={classNames(
                               projectcss.all,
-                              projectcss.__wab_text,
-                              sty.imagingReportDate
+                              sty.imagingReportCard
                             )}
                           >
-                            <React.Fragment>
-                              {(() => {
-                                const gregorianDate = new Date(
-                                  currentItem.service_datetime
-                                );
-                                const shamsiDate = new Intl.DateTimeFormat(
-                                  "fa-IR"
-                                ).format(gregorianDate);
-                                const shamsiTime =
-                                  gregorianDate.toLocaleTimeString("fa-IR", {
-                                    hour12: false
-                                  });
-                                const englishDate = shamsiDate.replace(
-                                  /[۰-۹]/g,
-                                  d =>
-                                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                                );
-                                const englishTime = shamsiTime.replace(
-                                  /[۰-۹]/g,
-                                  d =>
-                                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                                );
-                                return `${englishDate} - ${englishTime}`;
-                              })()}
-                            </React.Fragment>
-                          </div>
-                          <div
-                            data-plasmic-name={"imagingReport"}
-                            data-plasmic-override={overrides.imagingReport}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.imagingReport
-                            )}
-                            dir={"rtl"}
-                          >
-                            <React.Fragment>
-                              {currentItem.report}
-                            </React.Fragment>
-                          </div>
-                        </Stack__>
-                      ) : null}
-                    </Stack__>
-                  );
-                })
-              }
+                            <div
+                              data-plasmic-name={"imagingReportDate"}
+                              data-plasmic-override={
+                                overrides.imagingReportDate
+                              }
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.imagingReportDate
+                              )}
+                            >
+                              <React.Fragment>
+                                {(() => {
+                                  const gregorianDate = new Date(
+                                    currentItem.service_datetime
+                                  );
+                                  const shamsiDate = new Intl.DateTimeFormat(
+                                    "fa-IR"
+                                  ).format(gregorianDate);
+                                  const shamsiTime =
+                                    gregorianDate.toLocaleTimeString("fa-IR", {
+                                      hour12: false
+                                    });
+                                  const englishDate = shamsiDate.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  const englishTime = shamsiTime.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  return `${englishDate} - ${englishTime}`;
+                                })()}
+                              </React.Fragment>
+                            </div>
+                            <div
+                              data-plasmic-name={"imagingReport"}
+                              data-plasmic-override={overrides.imagingReport}
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.imagingReport
+                              )}
+                              dir={"rtl"}
+                            >
+                              <React.Fragment>
+                                {currentItem.report}
+                              </React.Fragment>
+                            </div>
+                          </Stack__>
+                        ) : null}
+                      </Stack__>
+                    );
+                  })}
+                </React.Fragment>
+              )}
             </DataCtxReader__>
           </ApiFetcherComponent>
           <div
@@ -691,6 +646,20 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
+                          })()}/${(() => {
+                            try {
+                              return $ctx.params.bookmarked === "true"
+                                ? true
+                                : false;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
                           })()}/profile`
                         };
                         return (({ destination }) => {
@@ -746,6 +715,20 @@ ${ageMonths} months ${
                           destination: `/patient/${(() => {
                             try {
                               return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}/${(() => {
+                            try {
+                              return $ctx.params.bookmarked === "true"
+                                ? true
+                                : false;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -819,6 +802,20 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
+                          })()}/${(() => {
+                            try {
+                              return $ctx.params.bookmarked === "true"
+                                ? true
+                                : false;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
                           })()}/lab`
                         };
                         return (({ destination }) => {
@@ -863,14 +860,14 @@ ${ageMonths} months ${
 const PlasmicDescendants = {
   imagingReportsDatail: [
     "imagingReportsDatail",
-    "redirectToLoginPage",
+    "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "header",
-    "apiFetcherComponent",
+    "patientName",
     "text",
     "reportDetail",
-    "imagingReportList",
     "button",
+    "imagingReportList",
     "imagingReportCard",
     "imagingReportDate",
     "imagingReport",
@@ -881,27 +878,26 @@ const PlasmicDescendants = {
     "radiologyReportPage",
     "laboratoryPage"
   ],
-  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
-  header: ["header", "apiFetcherComponent", "text"],
-  apiFetcherComponent: ["apiFetcherComponent", "text"],
+  header: ["header", "patientName", "text"],
+  patientName: ["patientName", "text"],
   text: ["text"],
   reportDetail: [
     "reportDetail",
-    "imagingReportList",
     "button",
-    "imagingReportCard",
-    "imagingReportDate",
-    "imagingReport"
-  ],
-  imagingReportList: [
     "imagingReportList",
-    "button",
     "imagingReportCard",
     "imagingReportDate",
     "imagingReport"
   ],
   button: ["button"],
+  imagingReportList: [
+    "imagingReportList",
+    "imagingReportCard",
+    "imagingReportDate",
+    "imagingReport"
+  ],
   imagingReportCard: [
     "imagingReportCard",
     "imagingReportDate",
@@ -934,14 +930,14 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   imagingReportsDatail: "div";
-  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
-  apiFetcherComponent: typeof ApiFetcherComponent;
+  patientName: typeof ApiFetcherComponent;
   text: "div";
   reportDetail: typeof ApiFetcherComponent;
-  imagingReportList: "div";
   button: typeof Button;
+  imagingReportList: "div";
   imagingReportCard: "div";
   imagingReportDate: "div";
   imagingReport: "div";
@@ -1013,16 +1009,16 @@ export const PlasmicImagingReportDatail = Object.assign(
   makeNodeComponent("imagingReportsDatail"),
   {
     // Helper components rendering sub-elements
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"
     ),
     header: makeNodeComponent("header"),
-    apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
+    patientName: makeNodeComponent("patientName"),
     text: makeNodeComponent("text"),
     reportDetail: makeNodeComponent("reportDetail"),
-    imagingReportList: makeNodeComponent("imagingReportList"),
     button: makeNodeComponent("button"),
+    imagingReportList: makeNodeComponent("imagingReportList"),
     imagingReportCard: makeNodeComponent("imagingReportCard"),
     imagingReportDate: makeNodeComponent("imagingReportDate"),
     imagingReport: makeNodeComponent("imagingReport"),

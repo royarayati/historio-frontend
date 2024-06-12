@@ -27,14 +27,12 @@
     grid-column: 4;
   }
 }
-.redirectRootPageToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
+.redirectToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
   position: relative;
 }
-.redirectRootPageToNamespaceSelection:global(.__wab_instance):global(
-    .__wab_instance
-  ) {
+.redirectToNamespaceSelection:global(.__wab_instance):global(.__wab_instance) {
   position: relative;
 }
-.redirectRootPageToHomepage:global(.__wab_instance):global(.__wab_instance) {
+.redirectToHomepage:global(.__wab_instance):global(.__wab_instance) {
   position: relative;
 }

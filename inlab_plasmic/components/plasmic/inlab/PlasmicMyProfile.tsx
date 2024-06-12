@@ -59,8 +59,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
@@ -93,7 +93,7 @@ export const PlasmicMyProfile__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicMyProfile__OverridesType = {
   myProfile?: Flex__<"div">;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   note?: Flex__<"div">;
   picsAndName?: Flex__<"div">;
@@ -147,8 +147,6 @@ function PlasmicMyProfile__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const $globalActions = useGlobalActions?.();
-
-  const currentUser = useCurrentUser?.() || {};
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -299,10 +297,10 @@ function PlasmicMyProfile__RenderFunc(props: {
             sty.myProfile
           )}
         >
-          <RedirectToLoginPage
-            data-plasmic-name={"redirectToLoginPage"}
-            data-plasmic-override={overrides.redirectToLoginPage}
-            className={classNames("__wab_instance", sty.redirectToLoginPage)}
+          <RedirectToInlabLogin
+            data-plasmic-name={"redirectToInlabLogin"}
+            data-plasmic-override={overrides.redirectToInlabLogin}
+            className={classNames("__wab_instance", sty.redirectToInlabLogin)}
           />
 
           <RedirectToNamespaceSelection
@@ -845,7 +843,7 @@ function PlasmicMyProfile__RenderFunc(props: {
 const PlasmicDescendants = {
   myProfile: [
     "myProfile",
-    "redirectToLoginPage",
+    "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "note",
     "picsAndName",
@@ -866,7 +864,7 @@ const PlasmicDescendants = {
     "button",
     "save"
   ],
-  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   note: ["note"],
   picsAndName: ["picsAndName", "name", "img"],
@@ -901,7 +899,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   myProfile: "div";
-  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   note: "div";
   picsAndName: "div";
@@ -983,7 +981,7 @@ export const PlasmicMyProfile = Object.assign(
   makeNodeComponent("myProfile"),
   {
     // Helper components rendering sub-elements
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"
     ),

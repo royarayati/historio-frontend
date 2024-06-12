@@ -126,8 +126,6 @@ function PlasmicOnloadUserPatientInteractionCount__RenderFunc(props: {
 
   const $globalActions = useGlobalActions?.();
 
-  const currentUser = useCurrentUser?.() || {};
-
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsjEqVmdAbnKYc()
   });

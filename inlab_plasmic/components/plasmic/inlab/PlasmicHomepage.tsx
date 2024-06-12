@@ -59,8 +59,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
@@ -85,6 +85,7 @@ import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: kYUnvWOY7
 import Icon5Icon from "./icons/PlasmicIcon__Icon5"; // plasmic-import: AgX6cnN3YV61/icon
 import BookmarkPlusSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg"; // plasmic-import: laC4EyEnFr3s/icon
 import BookmarkDashFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg"; // plasmic-import: OXlS9uB7Ffdy/icon
+import IndicatorIcon from "./icons/PlasmicIcon__Indicator"; // plasmic-import: B34gCeBlzVGZ/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
 
 createPlasmicElementProxy;
@@ -106,7 +107,7 @@ export const PlasmicHomepage__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicHomepage__OverridesType = {
   homepage?: Flex__<"div">;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   pageContent?: Flex__<"div">;
   modalRemoveBookmarks?: Flex__<typeof AntdModal>;
@@ -136,6 +137,7 @@ export type PlasmicHomepage__OverridesType = {
   لطفامنتظربماند?: Flex__<"div">;
   patientCards?: Flex__<"div">;
   patientNameBookmarkIcon?: Flex__<"div">;
+  dismision?: Flex__<"div">;
   firstLastName?: Flex__<"div">;
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
   wardRoom?: Flex__<"div">;
@@ -193,8 +195,6 @@ function PlasmicHomepage__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const $globalActions = useGlobalActions?.();
-
-  const currentUser = useCurrentUser?.() || {};
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -608,10 +608,10 @@ function PlasmicHomepage__RenderFunc(props: {
           sty.homepage
         )}
       >
-        <RedirectToLoginPage
-          data-plasmic-name={"redirectToLoginPage"}
-          data-plasmic-override={overrides.redirectToLoginPage}
-          className={classNames("__wab_instance", sty.redirectToLoginPage)}
+        <RedirectToInlabLogin
+          data-plasmic-name={"redirectToInlabLogin"}
+          data-plasmic-override={overrides.redirectToInlabLogin}
+          className={classNames("__wab_instance", sty.redirectToInlabLogin)}
         />
 
         <RedirectToNamespaceSelection
@@ -767,7 +767,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     "__wab_instance",
                     sty.deleteAllBookmarks
                   )}
-                  color={"blue"}
+                  color={"red"}
                   deselected={generateStateValueProp($state, [
                     "deleteAllBookmarks",
                     "deselected"
@@ -784,15 +784,10 @@ function PlasmicHomepage__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "DELETE",
-                              `/hapi/api/rest/patient/bookmarked/${
-                                $ctx.inlab_user.user.id
-                              }/${localStorage.getItem(
+                              `/n8n/webhook/bookmark_patientcard?namespace_id=${localStorage.getItem(
                                 "inlab_user_namespace_id"
                               )}`,
-                              {
-                                "x-hasura-admin-secret":
-                                  "j2crcdkjWkVdk2bDdbGLfaeD"
-                              }
+                              {}
                             ]
                           };
                           return $globalActions[
@@ -2485,6 +2480,57 @@ function PlasmicHomepage__RenderFunc(props: {
                                 sty.patientNameBookmarkIcon
                               )}
                             >
+                              {(() => {
+                                try {
+                                  return currentItem.dismissed;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return true;
+                                  }
+                                  throw e;
+                                }
+                              })() ? (
+                                <Stack__
+                                  as={"div"}
+                                  data-plasmic-name={"dismision"}
+                                  data-plasmic-override={overrides.dismision}
+                                  hasGap={true}
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.dismision
+                                  )}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__tJgau
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      <span
+                                        className={
+                                          "plasmic_default__all plasmic_default__span"
+                                        }
+                                        style={{ color: "#DA0000" }}
+                                      >
+                                        {"\u062a\u0631\u062e\u06cc\u0635"}
+                                      </span>
+                                    </React.Fragment>
+                                  </div>
+                                  <IndicatorIcon
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.svg__anjLh
+                                    )}
+                                    role={"img"}
+                                  />
+                                </Stack__>
+                              ) : null}
                               <div
                                 data-plasmic-name={"firstLastName"}
                                 data-plasmic-override={overrides.firstLastName}
@@ -2623,7 +2669,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )}
                               >
                                 <React.Fragment>
-                                  {currentItem.room + "-" + currentItem.bed}
+                                  {currentItem.bed.includes("تخت")
+                                    ? currentItem.bed
+                                    : "تخت " + currentItem.bed}
                                 </React.Fragment>
                               </div>
                               <div
@@ -2683,6 +2731,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                           destination: `/patient/${(() => {
                                             try {
                                               return currentItem.profile_id;
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
+                                          })()}/${(() => {
+                                            try {
+                                              return currentItem.bookmarked;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -2765,6 +2826,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                               throw e;
                                             }
+                                          })()}/${(() => {
+                                            try {
+                                              return currentItem.bookmarked;
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
                                           })()}/report/list`
                                         };
                                         return (({ destination }) => {
@@ -2824,6 +2898,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                           destination: `/patient/${(() => {
                                             try {
                                               return currentItem.profile_id;
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
+                                          })()}/${(() => {
+                                            try {
+                                              return currentItem.bookmarked;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -3446,7 +3533,7 @@ function PlasmicHomepage__RenderFunc(props: {
 const PlasmicDescendants = {
   homepage: [
     "homepage",
-    "redirectToLoginPage",
+    "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "pageContent",
     "modalRemoveBookmarks",
@@ -3476,6 +3563,7 @@ const PlasmicDescendants = {
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -3491,7 +3579,7 @@ const PlasmicDescendants = {
     "servicesList",
     "servicesName"
   ],
-  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   pageContent: [
     "pageContent",
@@ -3522,6 +3610,7 @@ const PlasmicDescendants = {
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -3584,6 +3673,7 @@ const PlasmicDescendants = {
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -3613,6 +3703,7 @@ const PlasmicDescendants = {
   patientCards: [
     "patientCards",
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -3625,9 +3716,11 @@ const PlasmicDescendants = {
   ],
   patientNameBookmarkIcon: [
     "patientNameBookmarkIcon",
+    "dismision",
     "firstLastName",
     "bookmarkIcon"
   ],
+  dismision: ["dismision"],
   firstLastName: ["firstLastName"],
   bookmarkIcon: ["bookmarkIcon"],
   wardRoom: ["wardRoom", "roomBed", "ward"],
@@ -3653,7 +3746,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   homepage: "div";
-  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   pageContent: "div";
   modalRemoveBookmarks: typeof AntdModal;
@@ -3683,6 +3776,7 @@ type NodeDefaultElementType = {
   لطفامنتظربماند: "div";
   patientCards: "div";
   patientNameBookmarkIcon: "div";
+  dismision: "div";
   firstLastName: "div";
   bookmarkIcon: typeof BookmarkIcon;
   wardRoom: "div";
@@ -3759,7 +3853,7 @@ export const PlasmicHomepage = Object.assign(
   makeNodeComponent("homepage"),
   {
     // Helper components rendering sub-elements
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"
     ),
@@ -3799,6 +3893,7 @@ export const PlasmicHomepage = Object.assign(
     ),
     patientCards: makeNodeComponent("patientCards"),
     patientNameBookmarkIcon: makeNodeComponent("patientNameBookmarkIcon"),
+    dismision: makeNodeComponent("dismision"),
     firstLastName: makeNodeComponent("firstLastName"),
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
     wardRoom: makeNodeComponent("wardRoom"),

@@ -31,11 +31,11 @@
     grid-column: 4;
   }
 }
-.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
+.redirectToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }
-.redirectToNamespaceSelection:global(.__wab_instance) {
+.redirectToNamespaceSelection:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }
@@ -486,22 +486,9 @@
   width: 25%;
   height: 25px;
   margin: 0;
-  border-right: 1px none #aeaeae;
+  border-right: 1px solid #aeaeae;
 }
 .homepage > picture > img {
-  object-fit: fill;
-}
-.patientProfile3 {
-  position: relative;
-  object-fit: fill;
-  max-width: 100%;
-  width: 25%;
-  height: 25px;
-  margin: 0;
-  border-right: 1px solid #aeaeae;
-  border-left: 1px solid #aeaeae;
-}
-.patientProfile3 > picture > img {
   object-fit: fill;
 }
 .radiologyReport {
@@ -512,7 +499,7 @@
   height: 25px;
   margin: 1px;
   border-right: 1px solid #00000045;
-  border-left: 1px solid #00000045;
+  border-left: 1px none #00000045;
 }
 .radiologyReport > picture > img {
   object-fit: fill;
@@ -522,23 +509,18 @@
   object-fit: fill;
   max-width: 100%;
   width: 25%;
-  border-right-style: none;
-  border-right-width: 1px;
   height: 25px;
   margin: 0;
+  border-right: 1px solid #aeaeae;
 }
 .laboratory > picture > img {
   object-fit: fill;
 }
-.bookmark {
-  position: relative;
-  object-fit: cover;
+.bookmarkIcon:global(.__wab_instance) {
   max-width: 100%;
-  color: var(--token-tawGjJMbHvx-);
+  position: relative;
   width: 25%;
   height: 25px;
-  display: none;
-  border-left: 1px solid #00000045;
 }
 .onloadUserPatientInteractionCount:global(.__wab_instance):global(
     .__wab_instance

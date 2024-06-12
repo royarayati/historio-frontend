@@ -59,11 +59,12 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import RedirectToLoginPage from "../../RedirectToLoginPage"; // plasmic-import: 0wFpBWYaqpsM/component
-import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: aXAcva2etiX1/component
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
+import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 import OnloadUserPatientInteractionCount from "../../OnloadUserPatientInteractionCount"; // plasmic-import: 6oEGl3M40QrL/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -80,11 +81,15 @@ import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP
 
 createPlasmicElementProxy;
 
-export type PlasmicImagingReportList__VariantMembers = {};
-export type PlasmicImagingReportList__VariantsArgs = {};
+export type PlasmicImagingReportList__VariantMembers = {
+  bookmarked: "bookmarked";
+};
+export type PlasmicImagingReportList__VariantsArgs = {
+  bookmarked?: SingleBooleanChoiceArg<"bookmarked">;
+};
 type VariantPropType = keyof PlasmicImagingReportList__VariantsArgs;
 export const PlasmicImagingReportList__VariantProps =
-  new Array<VariantPropType>();
+  new Array<VariantPropType>("bookmarked");
 
 export type PlasmicImagingReportList__ArgsType = {};
 type ArgPropType = keyof PlasmicImagingReportList__ArgsType;
@@ -92,7 +97,7 @@ export const PlasmicImagingReportList__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicImagingReportList__OverridesType = {
   imagingReportList?: Flex__<"div">;
-  redirectToLoginPage?: Flex__<typeof RedirectToLoginPage>;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   apiFetcherComponent?: Flex__<typeof ApiFetcherComponent>;
@@ -110,6 +115,10 @@ export type PlasmicImagingReportList__OverridesType = {
   imagingType?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
+  homepage?: Flex__<typeof PlasmicImg__>;
+  patientProfile?: Flex__<typeof PlasmicImg__>;
+  laboratory?: Flex__<typeof PlasmicImg__>;
+  bookmarkIcon?: Flex__<typeof BookmarkIcon>;
   onloadUserPatientInteractionCount?: Flex__<
     typeof OnloadUserPatientInteractionCount
   >;
@@ -145,8 +154,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
-
-  const currentUser = useCurrentUser?.() || {};
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -209,6 +216,31 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "bookmarked",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.bookmarked
+      },
+      {
+        path: "bookmarkIcon.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $ctx.params.bookmarked === "true" ? true : false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -247,13 +279,20 @@ function PlasmicImagingReportList__RenderFunc(props: {
           projectcss.plasmic_tokens,
           plasmic_antd_5_hostless_css.plasmic_tokens,
           plasmic_plasmic_rich_components_css.plasmic_tokens,
-          sty.imagingReportList
+          sty.imagingReportList,
+          {
+            [sty.imagingReportListbookmarked]: hasVariant(
+              $state,
+              "bookmarked",
+              "bookmarked"
+            )
+          }
         )}
       >
-        <RedirectToLoginPage
-          data-plasmic-name={"redirectToLoginPage"}
-          data-plasmic-override={overrides.redirectToLoginPage}
-          className={classNames("__wab_instance", sty.redirectToLoginPage)}
+        <RedirectToInlabLogin
+          data-plasmic-name={"redirectToInlabLogin"}
+          data-plasmic-override={overrides.redirectToInlabLogin}
+          className={classNames("__wab_instance", sty.redirectToInlabLogin)}
         />
 
         <RedirectToNamespaceSelection
@@ -743,6 +782,22 @@ ${ageMonths} months ${
                                           }
                                           throw e;
                                         }
+                                      })()}/${(() => {
+                                        try {
+                                          return $ctx.params.bookmarked ===
+                                            "true"
+                                            ? true
+                                            : false;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
                                       })()}/report/detail/${(() => {
                                         try {
                                           return currentItem.id;
@@ -885,7 +940,302 @@ ${ageMonths} months ${
             data-plasmic-name={"switchingTab"}
             data-plasmic-override={overrides.switchingTab}
             className={classNames("__wab_instance", sty.switchingTab)}
-          />
+          >
+            <PlasmicImg__
+              data-plasmic-name={"homepage"}
+              data-plasmic-override={overrides.homepage}
+              alt={""}
+              className={classNames(sty.homepage)}
+              displayHeight={"25px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"25%"}
+              loading={"lazy"}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["goToHomepage"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/patients` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToHomepage"] != null &&
+                  typeof $steps["goToHomepage"] === "object" &&
+                  typeof $steps["goToHomepage"].then === "function"
+                ) {
+                  $steps["goToHomepage"] = await $steps["goToHomepage"];
+                }
+              }}
+              src={{
+                src: "/new_inlab/plasmic/inlab/images/icons8Home1Svg.svg",
+                fullWidth: 150,
+                fullHeight: 150,
+                aspectRatio: 1
+              }}
+            />
+
+            <PlasmicImg__
+              data-plasmic-name={"patientProfile"}
+              data-plasmic-override={overrides.patientProfile}
+              alt={""}
+              className={classNames(sty.patientProfile)}
+              displayHeight={"25px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"25%"}
+              loading={"lazy"}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["goToPatientProfile"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/patient/${(() => {
+                          try {
+                            return $ctx.params.code;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/${(() => {
+                          try {
+                            return $ctx.params.bookmarked === "true"
+                              ? true
+                              : false;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/profile`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToPatientProfile"] != null &&
+                  typeof $steps["goToPatientProfile"] === "object" &&
+                  typeof $steps["goToPatientProfile"].then === "function"
+                ) {
+                  $steps["goToPatientProfile"] = await $steps[
+                    "goToPatientProfile"
+                  ];
+                }
+              }}
+              src={{
+                src: "/new_inlab/plasmic/inlab/images/group2063.svg",
+                fullWidth: 18.77,
+                fullHeight: 20.34,
+                aspectRatio: 0.904762
+              }}
+            />
+
+            <PlasmicImg__
+              data-plasmic-name={"laboratory"}
+              data-plasmic-override={overrides.laboratory}
+              alt={""}
+              className={classNames(sty.laboratory)}
+              displayHeight={"25px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"25%"}
+              loading={"lazy"}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["goToLaboratoryData"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/patient/${(() => {
+                          try {
+                            return $ctx.params.code;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/${(() => {
+                          try {
+                            return $ctx.params.bookmarked === "true"
+                              ? true
+                              : false;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/lab`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToLaboratoryData"] != null &&
+                  typeof $steps["goToLaboratoryData"] === "object" &&
+                  typeof $steps["goToLaboratoryData"].then === "function"
+                ) {
+                  $steps["goToLaboratoryData"] = await $steps[
+                    "goToLaboratoryData"
+                  ];
+                }
+              }}
+              src={{
+                src: "/new_inlab/plasmic/inlab/images/group384.svg",
+                fullWidth: 14.575,
+                fullHeight: 18.692,
+                aspectRatio: 0.789474
+              }}
+            />
+
+            {(() => {
+              const child$Props = {
+                className: classNames("__wab_instance", sty.bookmarkIcon),
+                onSelectedChange: generateStateOnChangeProp($state, [
+                  "bookmarkIcon",
+                  "selected"
+                ]),
+                patientId: (() => {
+                  try {
+                    return $ctx.params.code;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })(),
+                selected: generateStateValueProp($state, [
+                  "bookmarkIcon",
+                  "selected"
+                ]),
+                trigerReload: async () => {
+                  const $steps = {};
+
+                  $steps["updateBookmarked"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          vgroup: "bookmarked",
+                          operation: 2,
+                          value: "bookmarked"
+                        };
+                        return (({ vgroup, value }) => {
+                          if (typeof value === "string") {
+                            value = [value];
+                          }
+
+                          const oldValue = $stateGet($state, vgroup);
+                          $stateSet($state, vgroup, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateBookmarked"] != null &&
+                    typeof $steps["updateBookmarked"] === "object" &&
+                    typeof $steps["updateBookmarked"].then === "function"
+                  ) {
+                    $steps["updateBookmarked"] = await $steps[
+                      "updateBookmarked"
+                    ];
+                  }
+                }
+              };
+
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "bookmarkIcon.selected",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      (() => {
+                        try {
+                          return $ctx.params.bookmarked === "true"
+                            ? true
+                            : false;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return false;
+                          }
+                          throw e;
+                        }
+                      })()
+                  }
+                ],
+                []
+              );
+              return (
+                <BookmarkIcon
+                  data-plasmic-name={"bookmarkIcon"}
+                  data-plasmic-override={overrides.bookmarkIcon}
+                  {...child$Props}
+                />
+              );
+            })()}
+          </SwitchingTab>
         </div>
         <OnloadUserPatientInteractionCount
           data-plasmic-name={"onloadUserPatientInteractionCount"}
@@ -916,7 +1266,7 @@ ${ageMonths} months ${
 const PlasmicDescendants = {
   imagingReportList: [
     "imagingReportList",
-    "redirectToLoginPage",
+    "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "header",
     "apiFetcherComponent",
@@ -934,9 +1284,13 @@ const PlasmicDescendants = {
     "imagingType",
     "switchingTabs",
     "switchingTab",
+    "homepage",
+    "patientProfile",
+    "laboratory",
+    "bookmarkIcon",
     "onloadUserPatientInteractionCount"
   ],
-  redirectToLoginPage: ["redirectToLoginPage"],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: ["header", "apiFetcherComponent"],
   apiFetcherComponent: ["apiFetcherComponent"],
@@ -988,8 +1342,25 @@ const PlasmicDescendants = {
   imagingTitle: ["imagingTitle"],
   imagingDatetime: ["imagingDatetime"],
   imagingType: ["imagingType"],
-  switchingTabs: ["switchingTabs", "switchingTab"],
-  switchingTab: ["switchingTab"],
+  switchingTabs: [
+    "switchingTabs",
+    "switchingTab",
+    "homepage",
+    "patientProfile",
+    "laboratory",
+    "bookmarkIcon"
+  ],
+  switchingTab: [
+    "switchingTab",
+    "homepage",
+    "patientProfile",
+    "laboratory",
+    "bookmarkIcon"
+  ],
+  homepage: ["homepage"],
+  patientProfile: ["patientProfile"],
+  laboratory: ["laboratory"],
+  bookmarkIcon: ["bookmarkIcon"],
   onloadUserPatientInteractionCount: ["onloadUserPatientInteractionCount"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -997,7 +1368,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   imagingReportList: "div";
-  redirectToLoginPage: typeof RedirectToLoginPage;
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   apiFetcherComponent: typeof ApiFetcherComponent;
@@ -1015,6 +1386,10 @@ type NodeDefaultElementType = {
   imagingType: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
+  homepage: typeof PlasmicImg__;
+  patientProfile: typeof PlasmicImg__;
+  laboratory: typeof PlasmicImg__;
+  bookmarkIcon: typeof BookmarkIcon;
   onloadUserPatientInteractionCount: typeof OnloadUserPatientInteractionCount;
 };
 
@@ -1078,7 +1453,7 @@ export const PlasmicImagingReportList = Object.assign(
   makeNodeComponent("imagingReportList"),
   {
     // Helper components rendering sub-elements
-    redirectToLoginPage: makeNodeComponent("redirectToLoginPage"),
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
     redirectToNamespaceSelection: makeNodeComponent(
       "redirectToNamespaceSelection"
     ),
@@ -1098,6 +1473,10 @@ export const PlasmicImagingReportList = Object.assign(
     imagingType: makeNodeComponent("imagingType"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
+    homepage: makeNodeComponent("homepage"),
+    patientProfile: makeNodeComponent("patientProfile"),
+    laboratory: makeNodeComponent("laboratory"),
+    bookmarkIcon: makeNodeComponent("bookmarkIcon"),
     onloadUserPatientInteractionCount: makeNodeComponent(
       "onloadUserPatientInteractionCount"
     ),

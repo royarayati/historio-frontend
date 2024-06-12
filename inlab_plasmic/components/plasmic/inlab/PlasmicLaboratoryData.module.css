@@ -39,11 +39,17 @@
 .laboratoryDataviewNormalRange > * {
   grid-column: 4;
 }
-.redirectToLoginPage:global(.__wab_instance):global(.__wab_instance) {
+.laboratoryDatabookmarkedPatient > * {
+  grid-column: 4;
+}
+.laboratoryDataviewNormalRange_bookmarkedPatient > * {
+  grid-column: 4;
+}
+.redirectToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }
-.redirectToNamespaceSelection:global(.__wab_instance) {
+.redirectToNamespaceSelection:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }
@@ -781,18 +787,11 @@
 .radiologyReport > picture > img {
   object-fit: fill;
 }
-.laboratory {
-  position: relative;
-  object-fit: fill;
+.bookmarkIcon:global(.__wab_instance) {
   max-width: 100%;
+  position: relative;
   width: 25%;
-  border-right-style: none;
-  border-right-width: 1px;
   height: 25px;
-  margin: 0;
-}
-.laboratory > picture > img {
-  object-fit: fill;
 }
 .onloadUserPatientInteractionCount:global(.__wab_instance):global(
     .__wab_instance
