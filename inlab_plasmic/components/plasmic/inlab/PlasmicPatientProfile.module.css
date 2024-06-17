@@ -486,9 +486,21 @@
   width: 25%;
   height: 25px;
   margin: 0;
-  border-right: 1px solid #aeaeae;
+  border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
 }
 .homepage > picture > img {
+  object-fit: fill;
+}
+.patientProfile5 {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 0;
+  border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
+}
+.patientProfile5 > picture > img {
   object-fit: fill;
 }
 .radiologyReport {
@@ -498,8 +510,8 @@
   width: 25%;
   height: 25px;
   margin: 1px;
-  border-right: 1px solid #00000045;
-  border-left: 1px none #00000045;
+  border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
+  border-left: 0px none #00000045;
 }
 .radiologyReport > picture > img {
   object-fit: fill;
@@ -511,7 +523,7 @@
   width: 25%;
   height: 25px;
   margin: 0;
-  border-right: 1px solid #aeaeae;
+  border-right: 0px none #aeaeae;
 }
 .laboratory > picture > img {
   object-fit: fill;
@@ -527,4 +539,165 @@
   ) {
   max-width: 100%;
   position: relative;
+}
+.footer {
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: 0;
+  top: auto;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  border-radius: 0px;
+  padding: 6px 4px 4px;
+  border-top: 0.25px solid var(--token-8PxxXPNrIohQ);
+}
+.homepage3 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 25%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  padding: 0px;
+  border-right: 0.25px solid var(--token-8PxxXPNrIohQ);
+}
+.homepage2 {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.homepage2 > picture > img {
+  object-fit: fill;
+}
+.text__jFPfm {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: var(--token-tawGjJMbHvx-);
+  min-width: 0;
+}
+.patientProfile4 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 25%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  padding: 0px;
+  border-right: 0.25px solid var(--token-8PxxXPNrIohQ);
+}
+.patientProfile3 {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.patientProfile3 > picture > img {
+  object-fit: fill;
+}
+.text__zme15 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: var(--token-IYO13gyYJHXG);
+  opacity: 0.5;
+  min-width: 0;
+}
+.radiologyPage {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 25%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  padding: 0px;
+  border-right: 0.25px solid var(--token-8PxxXPNrIohQ);
+}
+.radiologyIcon {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  opacity: 1;
+  flex-shrink: 0;
+}
+.radiologyIcon > picture > img {
+  object-fit: fill;
+}
+.text___6K2Cs {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  opacity: 1;
+  color: var(--token-tawGjJMbHvx-);
+  min-width: 0;
+}
+.laboratoryPage {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 25%;
+  height: auto;
+  max-width: 100%;
+  border-right-color: var(--token-8PxxXPNrIohQ);
+  align-self: center;
+  padding: 0px;
+  border-width: 0.25px;
+  border-style: none;
+}
+.laboratoryIcon {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.laboratoryIcon > picture > img {
+  object-fit: fill;
+}
+.text__zjnl4 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: var(--token-tawGjJMbHvx-);
+  min-width: 0;
 }

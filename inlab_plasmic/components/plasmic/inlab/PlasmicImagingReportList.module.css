@@ -93,7 +93,7 @@
   position: relative;
   width: 100%;
   margin-top: 32px;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
   padding-bottom: 50px;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
@@ -317,7 +317,7 @@
   background: #ffffff;
   flex-grow: 1;
   margin-bottom: 5px;
-  box-shadow: 5px 5px 10px 0px var(--token-RvPI6LyeIPmd);
+  box-shadow: 2.5px 2.5px 5px 0px var(--token-RvPI6LyeIPmd);
   min-width: 0;
   border-radius: 5px;
   padding: 8px;
@@ -445,7 +445,7 @@
   width: 25%;
   height: 25px;
   margin: 0;
-  border-right: 1px solid #aeaeae;
+  border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
 }
 .homepage > picture > img {
   object-fit: fill;
@@ -457,10 +457,23 @@
   width: 25%;
   height: 25px;
   margin: 0;
-  border-right: 1px solid #aeaeae;
-  border-left: 1px none #0000004d;
+  border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
+  border-left: 0px none #0000004d;
 }
 .patientProfile > picture > img {
+  object-fit: fill;
+}
+.radiologyReport {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 0;
+  border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
+  border-left: 0px none #0000004d;
+}
+.radiologyReport > picture > img {
   object-fit: fill;
 }
 .laboratory {
@@ -470,8 +483,8 @@
   width: 25%;
   height: 25px;
   margin: 0;
-  border-right: 1px solid #aeaeae;
-  border-left: 1px none #0000004d;
+  border-right: 0px none var(--token-8PxxXPNrIohQ);
+  border-left: 0px none #0000004d;
 }
 .laboratory > picture > img {
   object-fit: fill;
@@ -488,4 +501,162 @@
   ) {
   max-width: 100%;
   position: relative;
+}
+.footer {
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: 0;
+  top: auto;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  border-radius: 0px;
+  padding: 6px 4px 4px;
+  border-top: 0.25px solid var(--token-8PxxXPNrIohQ);
+}
+.homepage3 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 25%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  padding: 0px;
+  border-right: 0.25px solid var(--token-8PxxXPNrIohQ);
+}
+.homepage2 {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.homepage2 > picture > img {
+  object-fit: fill;
+}
+.text__gNKq {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: var(--token-tawGjJMbHvx-);
+  min-width: 0;
+}
+.patientProfile2 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 25%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  padding: 0px;
+  border-right: 0.25px solid var(--token-8PxxXPNrIohQ);
+}
+.patientProfile3 {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.patientProfile3 > picture > img {
+  object-fit: fill;
+}
+.text___2Brha {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: var(--token-tawGjJMbHvx-);
+  min-width: 0;
+}
+.radiologyPage {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 25%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  padding: 0px;
+  border-right: 0.25px solid var(--token-8PxxXPNrIohQ);
+}
+.radiologyIcon {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.radiologyIcon > picture > img {
+  object-fit: fill;
+}
+.text__m07KX {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  opacity: 0.5;
+  min-width: 0;
+}
+.laboratoryPage {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 25%;
+  height: auto;
+  max-width: 100%;
+  border-right-color: var(--token-8PxxXPNrIohQ);
+  align-self: center;
+  padding: 0px;
+  border-width: 0.25px;
+  border-style: none;
+}
+.laboratoryIcon {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.laboratoryIcon > picture > img {
+  object-fit: fill;
+}
+.text__hBaq {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: var(--token-tawGjJMbHvx-);
+  min-width: 0;
 }
