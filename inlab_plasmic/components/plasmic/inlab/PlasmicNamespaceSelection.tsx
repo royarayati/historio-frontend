@@ -293,6 +293,46 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                 await $steps["namespaceTitleLocalStorage"];
                             }
 
+                            $steps["resetFilterWardWardNameWardId"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        localStorage.setItem(
+                                          "filter_bookmarked",
+                                          true
+                                        );
+                                        localStorage.setItem(
+                                          "filter_ward",
+                                          false
+                                        );
+                                        localStorage.setItem(
+                                          "filter_ward_name",
+                                          ""
+                                        );
+                                        return localStorage.setItem(
+                                          "filter_ward_id",
+                                          ""
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["resetFilterWardWardNameWardId"] != null &&
+                              typeof $steps["resetFilterWardWardNameWardId"] ===
+                                "object" &&
+                              typeof $steps["resetFilterWardWardNameWardId"]
+                                .then === "function"
+                            ) {
+                              $steps["resetFilterWardWardNameWardId"] =
+                                await $steps["resetFilterWardWardNameWardId"];
+                            }
+
                             $steps["goToHomepage"] = true
                               ? (() => {
                                   const actionArgs = {
