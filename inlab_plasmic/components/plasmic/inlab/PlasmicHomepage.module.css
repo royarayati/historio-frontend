@@ -450,7 +450,7 @@
     margin-top: 0px;
   }
 }
-.serviceButtonStack {
+.wardButtonStack {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -460,18 +460,18 @@
   align-self: center;
   padding: 0px;
 }
-.serviceButtonStack > :global(.__wab_flex-container) {
+.wardButtonStack > :global(.__wab_flex-container) {
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .serviceButtonStack {
+  .wardButtonStack {
     padding: 0px;
   }
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .serviceButtonStack > :global(.__wab_flex-container) {
+  .wardButtonStack > :global(.__wab_flex-container) {
     justify-content: space-between;
     margin-left: calc(0px - 0px);
     width: calc(100% + 0px);
@@ -480,13 +480,10 @@
   }
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .serviceButtonStack > :global(.__wab_flex-container) > *,
-  .serviceButtonStack
-    > :global(.__wab_flex-container)
-    > :global(.__wab_slot)
-    > *,
-  .serviceButtonStack > :global(.__wab_flex-container) > picture > img,
-  .serviceButtonStack
+  .wardButtonStack > :global(.__wab_flex-container) > *,
+  .wardButtonStack > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+  .wardButtonStack > :global(.__wab_flex-container) > picture > img,
+  .wardButtonStack
     > :global(.__wab_flex-container)
     > :global(.__wab_slot)
     > picture
@@ -513,28 +510,27 @@
   max-width: 100%;
   color: var(--token-8PxxXPNrIohQ);
   align-self: center;
-  margin-right: -20px;
+  margin-right: 0px;
   height: 1em;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .svg__fskx3 {
-    margin-right: -12px;
+    margin-right: -5px;
     max-width: 100%;
     width: 10px;
     flex-shrink: 0;
   }
 }
-.service:global(.__wab_instance) {
+.ward2:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
-  width: 200px;
-  flex-shrink: 0;
+  width: 100%;
+  min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .service:global(.__wab_instance) {
-    width: 135px;
+  .ward2:global(.__wab_instance) {
+    width: auto;
     height: auto;
-    flex-shrink: 0;
   }
 }
 .text___69F6Z {
@@ -1341,16 +1337,16 @@
   width: auto;
   height: 1em;
 }
-.modalServices:global(.__wab_instance) {
+.modalWard:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   background: none;
 }
-.modalServices__modal :global(.ant-modal-content) {
+.modalWard__modal :global(.ant-modal-content) {
   background: #ffffff;
   outline: none;
 }
-.services:global(.__wab_instance) {
+.ward3:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   position: relative;
@@ -1361,7 +1357,7 @@
   bottom: auto;
   background: none;
 }
-.servicesList {
+.wardsList {
   display: flex;
   position: relative;
   width: auto;
@@ -1374,24 +1370,24 @@
   padding: 8px;
   border: 0px none var(--token-9iYGdL7i3GKE);
 }
-.servicesList > :global(.__wab_flex-container) {
+.wardsList > :global(.__wab_flex-container) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: calc(0px - 6px);
   height: calc(100% + 6px);
 }
-.servicesList > :global(.__wab_flex-container) > *,
-.servicesList > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.servicesList > :global(.__wab_flex-container) > picture > img,
-.servicesList
+.wardsList > :global(.__wab_flex-container) > *,
+.wardsList > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.wardsList > :global(.__wab_flex-container) > picture > img,
+.wardsList
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
   > img {
   margin-top: 6px;
 }
-.servicesName {
+.wardsName {
   position: relative;
   width: 270px;
   height: auto;
@@ -1421,7 +1417,7 @@
   border: 1px solid var(--token-9iYGdL7i3GKE);
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .servicesName {
+  .wardsName {
     margin-top: calc(0px + 6px) !important;
   }
 }

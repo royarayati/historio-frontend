@@ -120,8 +120,8 @@ export type PlasmicHomepage__OverridesType = {
   settingIcon?: Flex__<"svg">;
   searchbar?: Flex__<typeof TextInput>;
   tabs?: Flex__<"div">;
-  serviceButtonStack?: Flex__<"div">;
-  service?: Flex__<typeof Button>;
+  wardButtonStack?: Flex__<"div">;
+  ward2?: Flex__<typeof Button>;
   bookmarkedButtonStack?: Flex__<"div">;
   bookmarked?: Flex__<typeof Button>;
   نتايحجستوجو?: Flex__<"div">;
@@ -147,10 +147,10 @@ export type PlasmicHomepage__OverridesType = {
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratoryData?: Flex__<typeof PlasmicImg__>;
   commentButton?: Flex__<typeof Button>;
-  modalServices?: Flex__<typeof AntdModal>;
-  services?: Flex__<typeof ApiFetcherComponent>;
-  servicesList?: Flex__<"div">;
-  servicesName?: Flex__<"div">;
+  modalWard?: Flex__<typeof AntdModal>;
+  ward3?: Flex__<typeof ApiFetcherComponent>;
+  wardsList?: Flex__<"div">;
+  wardsName?: Flex__<"div">;
 };
 
 export interface DefaultHomepageProps {}
@@ -204,7 +204,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
       },
       {
-        path: "service.isDisabled",
+        path: "ward2.isDisabled",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -222,7 +222,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "modalServices.open",
+        path: "modalWard.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -239,7 +239,9 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return true;
+              return localStorage.getItem("filter_bookmarked") === "false"
+                ? false
+                : true;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -252,13 +254,15 @@ function PlasmicHomepage__RenderFunc(props: {
           })()
       },
       {
-        path: "filterService",
+        path: "filterWard",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return false;
+              return localStorage.getItem("filter_ward") === "true"
+                ? true
+                : false;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -271,13 +275,13 @@ function PlasmicHomepage__RenderFunc(props: {
           })()
       },
       {
-        path: "service.selected",
+        path: "ward2.selected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.filterService === "true";
+              return $state.filterWard;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -315,13 +319,13 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "service.deselected",
+        path: "ward2.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.filterService !== "true";
+              return $state.filterWard !== true;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -340,7 +344,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return !$state.filterBookmarked;
+              return $state.filterBookmarked === false;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -401,7 +405,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "service.sortDeselected",
+        path: "ward2.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -444,7 +448,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "service.sortSelected",
+        path: "ward2.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -1130,389 +1134,374 @@ function PlasmicHomepage__RenderFunc(props: {
                 hasGap={true}
                 className={classNames(projectcss.all, sty.tabs)}
               >
-                {false ? (
-                  <Stack__
-                    as={"div"}
-                    data-plasmic-name={"serviceButtonStack"}
-                    data-plasmic-override={overrides.serviceButtonStack}
-                    hasGap={true}
-                    className={classNames(
-                      projectcss.all,
-                      sty.serviceButtonStack
-                    )}
-                  >
-                    <Icons8ClosesvgIcon
-                      className={classNames(projectcss.all, sty.svg__jbwB)}
+                <Stack__
+                  as={"div"}
+                  data-plasmic-name={"wardButtonStack"}
+                  data-plasmic-override={overrides.wardButtonStack}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.wardButtonStack)}
+                >
+                  <Icons8ClosesvgIcon
+                    className={classNames(projectcss.all, sty.svg__jbwB)}
+                    role={"img"}
+                  />
+
+                  {(() => {
+                    try {
+                      return $state.filterWard;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <Icon4Icon
+                      className={classNames(projectcss.all, sty.svg__fskx3)}
                       role={"img"}
                     />
-
-                    {(() => {
-                      try {
-                        return $state.service.selected;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })() ? (
-                      <Icon4Icon
-                        className={classNames(projectcss.all, sty.svg__fskx3)}
+                  ) : null}
+                  <Button
+                    data-plasmic-name={"ward2"}
+                    data-plasmic-override={overrides.ward2}
+                    className={classNames("__wab_instance", sty.ward2)}
+                    deselected={generateStateValueProp($state, [
+                      "ward2",
+                      "deselected"
+                    ])}
+                    endIcon={
+                      <IconIcon
+                        className={classNames(projectcss.all, sty.svg__uruAv)}
                         role={"img"}
                       />
-                    ) : null}
-                    {false ? (
-                      <Button
-                        data-plasmic-name={"service"}
-                        data-plasmic-override={overrides.service}
-                        className={classNames("__wab_instance", sty.service)}
-                        deselected={generateStateValueProp($state, [
-                          "service",
-                          "deselected"
-                        ])}
-                        endIcon={
-                          <IconIcon
-                            className={classNames(
-                              projectcss.all,
-                              sty.svg__uruAv
-                            )}
-                            role={"img"}
-                          />
-                        }
-                        isDisabled={generateStateValueProp($state, [
-                          "service",
-                          "isDisabled"
-                        ])}
-                        onClick={async event => {
-                          const $steps = {};
+                    }
+                    isDisabled={generateStateValueProp($state, [
+                      "ward2",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
 
-                          $steps["updateModalOpen"] =
-                            localStorage.getItem("filter_service") === "true" ||
-                            (localStorage.getItem("filter_service_id") ||
-                              localStorage.getItem("filter_service_name")) ===
-                              null
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalServices", "open"]
-                                    },
-                                    operation: 4
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    const oldValue = $stateGet(
-                                      objRoot,
-                                      variablePath
-                                    );
-                                    $stateSet(objRoot, variablePath, !oldValue);
-                                    return !oldValue;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalOpen"] != null &&
-                            typeof $steps["updateModalOpen"] === "object" &&
-                            typeof $steps["updateModalOpen"].then === "function"
-                          ) {
-                            $steps["updateModalOpen"] = await $steps[
-                              "updateModalOpen"
-                            ];
-                          }
-
-                          $steps["setTrueFilterServiceLocalStorage"] =
-                            (localStorage.getItem("filter_service_id") ||
-                              localStorage.getItem("filter_service_name")) !==
-                            null
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return localStorage.setItem(
-                                        "filter_service",
-                                        "true"
-                                      );
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["setTrueFilterServiceLocalStorage"] !=
-                              null &&
-                            typeof $steps[
-                              "setTrueFilterServiceLocalStorage"
-                            ] === "object" &&
-                            typeof $steps["setTrueFilterServiceLocalStorage"]
-                              .then === "function"
-                          ) {
-                            $steps["setTrueFilterServiceLocalStorage"] =
-                              await $steps["setTrueFilterServiceLocalStorage"];
-                          }
-
-                          $steps["trueStateFilterService"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["filterService"]
-                                  },
-                                  operation: 0,
-                                  value: localStorage.getItem("filter_service")
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["trueStateFilterService"] != null &&
-                            typeof $steps["trueStateFilterService"] ===
-                              "object" &&
-                            typeof $steps["trueStateFilterService"].then ===
-                              "function"
-                          ) {
-                            $steps["trueStateFilterService"] = await $steps[
-                              "trueStateFilterService"
-                            ];
-                          }
-
-                          $steps["setFalseFilterBookmarkedLocalStorage"] =
-                            (localStorage.getItem("filter_service_id") ||
-                              localStorage.getItem("filter_service_name")) !==
-                            null
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return localStorage.setItem(
-                                        "filter_bookmarked",
-                                        "false"
-                                      );
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["setFalseFilterBookmarkedLocalStorage"] !=
-                              null &&
-                            typeof $steps[
-                              "setFalseFilterBookmarkedLocalStorage"
-                            ] === "object" &&
-                            typeof $steps[
-                              "setFalseFilterBookmarkedLocalStorage"
-                            ].then === "function"
-                          ) {
-                            $steps["setFalseFilterBookmarkedLocalStorage"] =
-                              await $steps[
-                                "setFalseFilterBookmarkedLocalStorage"
-                              ];
-                          }
-
-                          $steps["falseStateFilterBookmarked"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["filterBookmarked"]
-                                  },
-                                  operation: 0,
-                                  value:
-                                    localStorage.getItem("filter_bookmarked")
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["falseStateFilterBookmarked"] != null &&
-                            typeof $steps["falseStateFilterBookmarked"] ===
-                              "object" &&
-                            typeof $steps["falseStateFilterBookmarked"].then ===
-                              "function"
-                          ) {
-                            $steps["falseStateFilterBookmarked"] = await $steps[
-                              "falseStateFilterBookmarked"
-                            ];
-                          }
-
-                          $steps["logConsole"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      console.log(
-                                        `filter_bookmarked: ${localStorage.getItem(
-                                          "filter_bookmarked"
-                                        )}`
-                                      );
-                                      return console.log(
-                                        `filter_service: ${localStorage.getItem(
-                                          "filter_service"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["logConsole"] != null &&
-                            typeof $steps["logConsole"] === "object" &&
-                            typeof $steps["logConsole"].then === "function"
-                          ) {
-                            $steps["logConsole"] = await $steps["logConsole"];
-                          }
-
-                          $steps["reloadPatients"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  tplRef: "patients",
-                                  action: "reload"
-                                };
-                                return (({ tplRef, action, args }) => {
-                                  return $refs?.[tplRef]?.[action]?.(
-                                    ...(args ?? [])
-                                  );
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["reloadPatients"] != null &&
-                            typeof $steps["reloadPatients"] === "object" &&
-                            typeof $steps["reloadPatients"].then === "function"
-                          ) {
-                            $steps["reloadPatients"] = await $steps[
-                              "reloadPatients"
-                            ];
-                          }
-                        }}
-                        onDeselectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "service",
-                            "deselected"
-                          ])(eventArgs[0]);
-                        }}
-                        onIsDisabledChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "service",
-                            "isDisabled"
-                          ])(eventArgs[0]);
-                        }}
-                        onSelectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "service",
-                            "selected"
-                          ])(eventArgs[0]);
-                        }}
-                        onSortDeselectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "service",
-                            "sortDeselected"
-                          ])(eventArgs[0]);
-                        }}
-                        onSortSelectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "service",
-                            "sortSelected"
-                          ])(eventArgs[0]);
-                        }}
-                        selected={generateStateValueProp($state, [
-                          "service",
-                          "selected"
-                        ])}
-                        sortDeselected={generateStateValueProp($state, [
-                          "service",
-                          "sortDeselected"
-                        ])}
-                        sortSelected={generateStateValueProp($state, [
-                          "service",
-                          "sortSelected"
-                        ])}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text___69F6Z
-                          )}
-                        >
-                          <React.Fragment>
-                            {(() => {
-                              try {
-                                return (() => {
-                                  if (
-                                    localStorage.getItem(
-                                      "filter_service_name"
-                                    ) !== null
-                                  ) {
-                                    return (
-                                      "سرویس : " +
-                                      localStorage.getItem(
-                                        "filter_service_name"
-                                      )
-                                    );
-                                  } else {
-                                    return "سرویس";
-                                  }
-                                })();
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return "Button";
+                      $steps["updateModalOpen"] =
+                        localStorage.getItem("filter_ward") === "true" ||
+                        (localStorage.getItem("filter_ward_id") ||
+                          localStorage.getItem("filter_ward_name")) ===
+                          (null || "")
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalWard", "open"]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
                                 }
-                                throw e;
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalOpen"] != null &&
+                        typeof $steps["updateModalOpen"] === "object" &&
+                        typeof $steps["updateModalOpen"].then === "function"
+                      ) {
+                        $steps["updateModalOpen"] = await $steps[
+                          "updateModalOpen"
+                        ];
+                      }
+
+                      $steps["setTrueFilterWardLocalStorage"] =
+                        (localStorage.getItem("filter_ward_id") ||
+                          localStorage.getItem("filter_ward_name")) !==
+                        (null || "")
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return localStorage.setItem(
+                                    "filter_ward",
+                                    true
+                                  );
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["setTrueFilterWardLocalStorage"] != null &&
+                        typeof $steps["setTrueFilterWardLocalStorage"] ===
+                          "object" &&
+                        typeof $steps["setTrueFilterWardLocalStorage"].then ===
+                          "function"
+                      ) {
+                        $steps["setTrueFilterWardLocalStorage"] = await $steps[
+                          "setTrueFilterWardLocalStorage"
+                        ];
+                      }
+
+                      $steps["trueStateFilterWard"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["filterWard"]
+                              },
+                              operation: 0,
+                              value:
+                                localStorage.getItem("filter_ward") === "true"
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
                               }
-                            })()}
-                          </React.Fragment>
-                        </div>
-                      </Button>
-                    ) : null}
-                  </Stack__>
-                ) : null}
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["trueStateFilterWard"] != null &&
+                        typeof $steps["trueStateFilterWard"] === "object" &&
+                        typeof $steps["trueStateFilterWard"].then === "function"
+                      ) {
+                        $steps["trueStateFilterWard"] = await $steps[
+                          "trueStateFilterWard"
+                        ];
+                      }
+
+                      $steps["setFalseFilterBookmarkedLocalStorage"] =
+                        (localStorage.getItem("filter_ward_id") ||
+                          localStorage.getItem("filter_ward_name")) !==
+                        (null || "")
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return localStorage.setItem(
+                                    "filter_bookmarked",
+                                    false
+                                  );
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["setFalseFilterBookmarkedLocalStorage"] !=
+                          null &&
+                        typeof $steps[
+                          "setFalseFilterBookmarkedLocalStorage"
+                        ] === "object" &&
+                        typeof $steps["setFalseFilterBookmarkedLocalStorage"]
+                          .then === "function"
+                      ) {
+                        $steps["setFalseFilterBookmarkedLocalStorage"] =
+                          await $steps["setFalseFilterBookmarkedLocalStorage"];
+                      }
+
+                      $steps["falseStateFilterBookmarked"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["filterBookmarked"]
+                              },
+                              operation: 0,
+                              value:
+                                localStorage.getItem("filter_bookmarked") ===
+                                "true"
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["falseStateFilterBookmarked"] != null &&
+                        typeof $steps["falseStateFilterBookmarked"] ===
+                          "object" &&
+                        typeof $steps["falseStateFilterBookmarked"].then ===
+                          "function"
+                      ) {
+                        $steps["falseStateFilterBookmarked"] = await $steps[
+                          "falseStateFilterBookmarked"
+                        ];
+                      }
+
+                      $steps["logConsole"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  console.log(
+                                    `filter_bookmarked: ${localStorage.getItem(
+                                      "filter_bookmarked"
+                                    )}`
+                                  );
+                                  return console.log(
+                                    `filter_ward: ${localStorage.getItem(
+                                      "filter_ward"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["logConsole"] != null &&
+                        typeof $steps["logConsole"] === "object" &&
+                        typeof $steps["logConsole"].then === "function"
+                      ) {
+                        $steps["logConsole"] = await $steps["logConsole"];
+                      }
+
+                      $steps["reloadPatients"] = !(
+                        localStorage.getItem("filter_ward") === "true" ||
+                        (localStorage.getItem("filter_ward_id") ||
+                          localStorage.getItem("filter_ward_name")) ===
+                          (null || "")
+                      )
+                        ? (() => {
+                            const actionArgs = {
+                              tplRef: "patients",
+                              action: "reload"
+                            };
+                            return (({ tplRef, action, args }) => {
+                              return $refs?.[tplRef]?.[action]?.(
+                                ...(args ?? [])
+                              );
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["reloadPatients"] != null &&
+                        typeof $steps["reloadPatients"] === "object" &&
+                        typeof $steps["reloadPatients"].then === "function"
+                      ) {
+                        $steps["reloadPatients"] = await $steps[
+                          "reloadPatients"
+                        ];
+                      }
+                    }}
+                    onDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "ward2",
+                        "deselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onIsDisabledChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "ward2",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }}
+                    onSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, ["ward2", "selected"])(
+                        eventArgs[0]
+                      );
+                    }}
+                    onSortDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "ward2",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "ward2",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "ward2",
+                      "selected"
+                    ])}
+                    sortDeselected={generateStateValueProp($state, [
+                      "ward2",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "ward2",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___69F6Z
+                      )}
+                    >
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return (() => {
+                              const filterWardName =
+                                localStorage.getItem("filter_ward_name");
+                              if (filterWardName !== null) {
+                                return filterWardName.includes("بخش")
+                                  ? filterWardName
+                                  : "بخش " + filterWardName;
+                              } else {
+                                return "بخش";
+                              }
+                            })();
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "Button";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
+                    </div>
+                  </Button>
+                </Stack__>
                 <div
                   data-plasmic-name={"bookmarkedButtonStack"}
                   data-plasmic-override={overrides.bookmarkedButtonStack}
@@ -1597,7 +1586,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         $steps["consoleLog"] = await $steps["consoleLog"];
                       }
 
-                      $steps["trueStateFilterBookmarked"] = false
+                      $steps["trueStateFilterBookmarked"] = true
                         ? (() => {
                             const actionArgs = {
                               variable: {
@@ -1605,7 +1594,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                 variablePath: ["filterBookmarked"]
                               },
                               operation: 0,
-                              value: localStorage.getItem("filter_bookmarked")
+                              value:
+                                localStorage.getItem("filter_bookmarked") ===
+                                "true"
                             };
                             return (({
                               variable,
@@ -1657,13 +1648,13 @@ function PlasmicHomepage__RenderFunc(props: {
                         $steps["consoleLog3"] = await $steps["consoleLog3"];
                       }
 
-                      $steps["setFalseFilterServiceLocalStorage"] = true
+                      $steps["setFalseFilterWardLocalStorage"] = true
                         ? (() => {
                             const actionArgs = {
                               customFunction: async () => {
                                 return localStorage.setItem(
-                                  "filter_service",
-                                  "false"
+                                  "filter_ward",
+                                  false
                                 );
                               }
                             };
@@ -1673,14 +1664,15 @@ function PlasmicHomepage__RenderFunc(props: {
                           })()
                         : undefined;
                       if (
-                        $steps["setFalseFilterServiceLocalStorage"] != null &&
-                        typeof $steps["setFalseFilterServiceLocalStorage"] ===
+                        $steps["setFalseFilterWardLocalStorage"] != null &&
+                        typeof $steps["setFalseFilterWardLocalStorage"] ===
                           "object" &&
-                        typeof $steps["setFalseFilterServiceLocalStorage"]
-                          .then === "function"
+                        typeof $steps["setFalseFilterWardLocalStorage"].then ===
+                          "function"
                       ) {
-                        $steps["setFalseFilterServiceLocalStorage"] =
-                          await $steps["setFalseFilterServiceLocalStorage"];
+                        $steps["setFalseFilterWardLocalStorage"] = await $steps[
+                          "setFalseFilterWardLocalStorage"
+                        ];
                       }
 
                       $steps["consoleLog2"] = true
@@ -1688,8 +1680,8 @@ function PlasmicHomepage__RenderFunc(props: {
                             const actionArgs = {
                               customFunction: async () => {
                                 return console.log(
-                                  `filter_service: ${localStorage.getItem(
-                                    "filter_service"
+                                  `filter_ward: ${localStorage.getItem(
+                                    "filter_ward"
                                   )}`
                                 );
                               }
@@ -1707,15 +1699,17 @@ function PlasmicHomepage__RenderFunc(props: {
                         $steps["consoleLog2"] = await $steps["consoleLog2"];
                       }
 
-                      $steps["falseStateFilterService"] = false
+                      $steps["falseStateFilterWard"] = true
                         ? (() => {
                             const actionArgs = {
                               variable: {
                                 objRoot: $state,
-                                variablePath: ["filterService"]
+                                variablePath: ["filterWard"]
                               },
                               operation: 0,
-                              value: localStorage.getItem("filter_service")
+                              value:
+                                localStorage.getItem("filter_service") ===
+                                "true"
                             };
                             return (({
                               variable,
@@ -1734,13 +1728,13 @@ function PlasmicHomepage__RenderFunc(props: {
                           })()
                         : undefined;
                       if (
-                        $steps["falseStateFilterService"] != null &&
-                        typeof $steps["falseStateFilterService"] === "object" &&
-                        typeof $steps["falseStateFilterService"].then ===
+                        $steps["falseStateFilterWard"] != null &&
+                        typeof $steps["falseStateFilterWard"] === "object" &&
+                        typeof $steps["falseStateFilterWard"].then ===
                           "function"
                       ) {
-                        $steps["falseStateFilterService"] = await $steps[
-                          "falseStateFilterService"
+                        $steps["falseStateFilterWard"] = await $steps[
+                          "falseStateFilterWard"
                         ];
                       }
 
@@ -1749,7 +1743,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             const actionArgs = {
                               customFunction: async () => {
                                 return console.log(
-                                  `state_filter_service: ${$state.filterService} `
+                                  `state_filter_ward: ${$state.filterWard} `
                                 );
                               }
                             };
@@ -1885,7 +1879,9 @@ function PlasmicHomepage__RenderFunc(props: {
               $state.searchbar.value
             }&namespace_id=${localStorage.getItem(
               "inlab_user_namespace_id"
-            )}&sort=${localStorage.getItem("bookmarks_sort")}`}
+            )}&sort=${localStorage.getItem("bookmarks_sort")}&ward_id=${
+              $state.filterWard ? localStorage.getItem("filter_ward_id") : ""
+            }`}
             ref={ref => {
               $refs["patients"] = ref;
             }}
@@ -2287,8 +2283,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       return (
                         $ctx.fetched_data.loading === false &&
                         $ctx.fetched_data.data === "" &&
-                        ($state.searchbar.value !== "" ||
-                          $state.service.selected)
+                        ($state.searchbar.value !== "" || $state.ward2.selected)
                       );
                     } catch (e) {
                       if (
@@ -3061,487 +3056,473 @@ function PlasmicHomepage__RenderFunc(props: {
             {""}
           </div>
         </Button>
-        {false ? (
-          <AntdModal
-            data-plasmic-name={"modalServices"}
-            data-plasmic-override={overrides.modalServices}
-            className={classNames("__wab_instance", sty.modalServices)}
-            closeButtonClassName={classNames({
-              [sty["pcls_d2EHzAfk33c5"]]: true
-            })}
-            closeIcon={
-              <Icons8ClosesvgIcon
-                className={classNames(projectcss.all, sty.svg___5W4Yy)}
-                onClick={async event => {
-                  const $steps = {};
+        <AntdModal
+          data-plasmic-name={"modalWard"}
+          data-plasmic-override={overrides.modalWard}
+          className={classNames("__wab_instance", sty.modalWard)}
+          closeButtonClassName={classNames({
+            [sty["pcls_d2EHzAfk33c5"]]: true
+          })}
+          closeIcon={
+            <Icons8ClosesvgIcon
+              className={classNames(projectcss.all, sty.svg___5W4Yy)}
+              onClick={async event => {
+                const $steps = {};
 
-                  $steps["reloadPatients"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          tplRef: "patients",
-                          action: "reload"
-                        };
-                        return (({ tplRef, action, args }) => {
-                          return $refs?.[tplRef]?.[action]?.(...(args ?? []));
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["reloadPatients"] != null &&
-                    typeof $steps["reloadPatients"] === "object" &&
-                    typeof $steps["reloadPatients"].then === "function"
-                  ) {
-                    $steps["reloadPatients"] = await $steps["reloadPatients"];
-                  }
-                }}
-                role={"img"}
-              />
-            }
-            defaultStylesClassName={classNames(
-              projectcss.root_reset,
-              projectcss.plasmic_default_styles,
-              projectcss.plasmic_mixins,
-              projectcss.plasmic_tokens,
-              plasmic_antd_5_hostless_css.plasmic_tokens,
-              plasmic_plasmic_rich_components_css.plasmic_tokens
-            )}
-            hideFooter={true}
-            maskClosable={false}
-            modalContentClassName={classNames({
-              [sty["pcls_ovYNN16Mla3e"]]: true
-            })}
-            modalScopeClassName={sty["modalServices__modal"]}
-            onOpenChange={generateStateOnChangeProp($state, [
-              "modalServices",
-              "open"
-            ])}
-            open={generateStateValueProp($state, ["modalServices", "open"])}
-            title={null}
-            trigger={null}
-            wrapClassName={classNames({ [sty["pcls_9pcykcaA_oRg"]]: true })}
-          >
-            <ApiFetcherComponent
-              data-plasmic-name={"services"}
-              data-plasmic-override={overrides.services}
-              className={classNames("__wab_instance", sty.services)}
-              headers={(() => {
-                try {
-                  return {
-                    "X-Namespace": localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )
-                  };
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
+                $steps["reloadPatients"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        tplRef: "patients",
+                        action: "reload"
+                      };
+                      return (({ tplRef, action, args }) => {
+                        return $refs?.[tplRef]?.[action]?.(...(args ?? []));
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["reloadPatients"] != null &&
+                  typeof $steps["reloadPatients"] === "object" &&
+                  typeof $steps["reloadPatients"].then === "function"
+                ) {
+                  $steps["reloadPatients"] = await $steps["reloadPatients"];
                 }
-              })()}
-              method={"GET"}
-              path={"/api/v2/service"}
-              ref={ref => {
-                $refs["services"] = ref;
               }}
-            >
-              <DataCtxReader__>
-                {$ctx => (
-                  <Stack__
-                    as={"div"}
-                    data-plasmic-name={"servicesList"}
-                    data-plasmic-override={overrides.servicesList}
-                    hasGap={true}
-                    className={classNames(projectcss.all, sty.servicesList)}
-                  >
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return $ctx.fetched_data.data.services;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
-                          }
-                          throw e;
+              role={"img"}
+            />
+          }
+          defaultStylesClassName={classNames(
+            projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens
+          )}
+          hideFooter={true}
+          maskClosable={false}
+          modalContentClassName={classNames({
+            [sty["pcls_ovYNN16Mla3e"]]: true
+          })}
+          modalScopeClassName={sty["modalWard__modal"]}
+          onOpenChange={generateStateOnChangeProp($state, [
+            "modalWard",
+            "open"
+          ])}
+          open={generateStateValueProp($state, ["modalWard", "open"])}
+          title={null}
+          trigger={null}
+          wrapClassName={classNames({ [sty["pcls_9pcykcaA_oRg"]]: true })}
+        >
+          <ApiFetcherComponent
+            data-plasmic-name={"ward3"}
+            data-plasmic-override={overrides.ward3}
+            className={classNames("__wab_instance", sty.ward3)}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={"/api/v2/ward"}
+            ref={ref => {
+              $refs["ward3"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <Stack__
+                  as={"div"}
+                  data-plasmic-name={"wardsList"}
+                  data-plasmic-override={overrides.wardsList}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.wardsList)}
+                >
+                  {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                    (() => {
+                      try {
+                        return $ctx.fetched_data.data.wards;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
                         }
-                      })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (
-                        <div
-                          data-plasmic-name={"servicesName"}
-                          data-plasmic-override={overrides.servicesName}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.servicesName
-                          )}
-                          key={currentIndex}
-                          onClick={async event => {
-                            const $steps = {};
+                        throw e;
+                      }
+                    })()
+                  ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                    const currentItem = __plasmic_item_0;
+                    const currentIndex = __plasmic_idx_0;
+                    return (
+                      <div
+                        data-plasmic-name={"wardsName"}
+                        data-plasmic-override={overrides.wardsName}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.wardsName
+                        )}
+                        key={currentIndex}
+                        onClick={async event => {
+                          const $steps = {};
 
-                            $steps["setTrueFilterServiceLocalStorage"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return localStorage.setItem(
-                                        "filter_service",
-                                        "true"
-                                      );
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["setTrueFilterServiceLocalStorage"] !=
-                                null &&
-                              typeof $steps[
-                                "setTrueFilterServiceLocalStorage"
-                              ] === "object" &&
-                              typeof $steps["setTrueFilterServiceLocalStorage"]
-                                .then === "function"
-                            ) {
-                              $steps["setTrueFilterServiceLocalStorage"] =
-                                await $steps[
-                                  "setTrueFilterServiceLocalStorage"
-                                ];
-                            }
-
-                            $steps["trueStateFilterService"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["filterService"]
-                                    },
-                                    operation: 0,
-                                    value:
-                                      localStorage.getItem("filter_service")
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["trueStateFilterService"] != null &&
-                              typeof $steps["trueStateFilterService"] ===
-                                "object" &&
-                              typeof $steps["trueStateFilterService"].then ===
-                                "function"
-                            ) {
-                              $steps["trueStateFilterService"] = await $steps[
-                                "trueStateFilterService"
-                              ];
-                            }
-
-                            $steps["consoleLog3"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return console.log(
-                                        `state_filter_service: ${$state.filterService} `
-                                      );
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["consoleLog3"] != null &&
-                              typeof $steps["consoleLog3"] === "object" &&
-                              typeof $steps["consoleLog3"].then === "function"
-                            ) {
-                              $steps["consoleLog3"] = await $steps[
-                                "consoleLog3"
-                              ];
-                            }
-
-                            $steps["setFalseFilterBookmarkedLocalStorage"] =
-                              true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "filter_bookmarked",
-                                          "false"
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                            if (
-                              $steps["setFalseFilterBookmarkedLocalStorage"] !=
-                                null &&
-                              typeof $steps[
-                                "setFalseFilterBookmarkedLocalStorage"
-                              ] === "object" &&
-                              typeof $steps[
-                                "setFalseFilterBookmarkedLocalStorage"
-                              ].then === "function"
-                            ) {
-                              $steps["setFalseFilterBookmarkedLocalStorage"] =
-                                await $steps[
-                                  "setFalseFilterBookmarkedLocalStorage"
-                                ];
-                            }
-
-                            $steps["falseStateFilterBookmarked"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["filterBookmarked"]
-                                    },
-                                    operation: 0,
-                                    value:
-                                      localStorage.getItem("filter_bookmarked")
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["falseStateFilterBookmarked"] != null &&
-                              typeof $steps["falseStateFilterBookmarked"] ===
-                                "object" &&
-                              typeof $steps["falseStateFilterBookmarked"]
-                                .then === "function"
-                            ) {
-                              $steps["falseStateFilterBookmarked"] =
-                                await $steps["falseStateFilterBookmarked"];
-                            }
-
-                            $steps["consoleLog2"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return console.log(
-                                        `state_filter_bookmarked: ${$state.filterBookmarked} `
-                                      );
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["consoleLog2"] != null &&
-                              typeof $steps["consoleLog2"] === "object" &&
-                              typeof $steps["consoleLog2"].then === "function"
-                            ) {
-                              $steps["consoleLog2"] = await $steps[
-                                "consoleLog2"
-                              ];
-                            }
-
-                            $steps["filterServiceIdLocalStorage"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return localStorage.setItem(
-                                        "filter_service_id",
-                                        currentItem.id
-                                      );
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["filterServiceIdLocalStorage"] != null &&
-                              typeof $steps["filterServiceIdLocalStorage"] ===
-                                "object" &&
-                              typeof $steps["filterServiceIdLocalStorage"]
-                                .then === "function"
-                            ) {
-                              $steps["filterServiceIdLocalStorage"] =
-                                await $steps["filterServiceIdLocalStorage"];
-                            }
-
-                            $steps["filterServiceTitleLocalStorage"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return localStorage.setItem(
-                                        "filter_service_name",
-                                        currentItem.name
-                                      );
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["filterServiceTitleLocalStorage"] !=
-                                null &&
-                              typeof $steps[
-                                "filterServiceTitleLocalStorage"
-                              ] === "object" &&
-                              typeof $steps["filterServiceTitleLocalStorage"]
-                                .then === "function"
-                            ) {
-                              $steps["filterServiceTitleLocalStorage"] =
-                                await $steps["filterServiceTitleLocalStorage"];
-                            }
-
-                            $steps["consoleLog"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return (() => {
-                                        console.log(
-                                          `filter_bookmarked: ${localStorage.getItem(
-                                            "filter_bookmarked"
-                                          )}`
-                                        );
-                                        console.log(
-                                          `filter_service: ${localStorage.getItem(
-                                            "filter_service"
-                                          )}`
-                                        );
-                                        console.log(
-                                          `filter_service_id: ${localStorage.getItem(
-                                            "filter_service_id"
-                                          )}`
-                                        );
-                                        return console.log(
-                                          `filter_service_name: ${localStorage.getItem(
-                                            "filter_service_name"
-                                          )}`
-                                        );
-                                      })();
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["consoleLog"] != null &&
-                              typeof $steps["consoleLog"] === "object" &&
-                              typeof $steps["consoleLog"].then === "function"
-                            ) {
-                              $steps["consoleLog"] = await $steps["consoleLog"];
-                            }
-
-                            $steps["updateModalOpen"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalServices", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["updateModalOpen"] != null &&
-                              typeof $steps["updateModalOpen"] === "object" &&
-                              typeof $steps["updateModalOpen"].then ===
-                                "function"
-                            ) {
-                              $steps["updateModalOpen"] = await $steps[
-                                "updateModalOpen"
-                              ];
-                            }
-
-                            $steps["runActionOnPatients"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    tplRef: "patients",
-                                    action: "reload"
-                                  };
-                                  return (({ tplRef, action, args }) => {
-                                    return $refs?.[tplRef]?.[action]?.(
-                                      ...(args ?? [])
+                          $steps["setTrueFilterWardLocalStorage"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return localStorage.setItem(
+                                      "filter_ward",
+                                      true
                                     );
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["runActionOnPatients"] != null &&
-                              typeof $steps["runActionOnPatients"] ===
-                                "object" &&
-                              typeof $steps["runActionOnPatients"].then ===
-                                "function"
-                            ) {
-                              $steps["runActionOnPatients"] = await $steps[
-                                "runActionOnPatients"
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["setTrueFilterWardLocalStorage"] != null &&
+                            typeof $steps["setTrueFilterWardLocalStorage"] ===
+                              "object" &&
+                            typeof $steps["setTrueFilterWardLocalStorage"]
+                              .then === "function"
+                          ) {
+                            $steps["setTrueFilterWardLocalStorage"] =
+                              await $steps["setTrueFilterWardLocalStorage"];
+                          }
+
+                          $steps["trueStateFilterWard"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["filterWard"]
+                                  },
+                                  operation: 0,
+                                  value:
+                                    localStorage.getItem("filter_ward") ===
+                                    "true"
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["trueStateFilterWard"] != null &&
+                            typeof $steps["trueStateFilterWard"] === "object" &&
+                            typeof $steps["trueStateFilterWard"].then ===
+                              "function"
+                          ) {
+                            $steps["trueStateFilterWard"] = await $steps[
+                              "trueStateFilterWard"
+                            ];
+                          }
+
+                          $steps["consoleLog3"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return console.log(
+                                      `state_filter_service: ${$state.filterWard} `
+                                    );
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["consoleLog3"] != null &&
+                            typeof $steps["consoleLog3"] === "object" &&
+                            typeof $steps["consoleLog3"].then === "function"
+                          ) {
+                            $steps["consoleLog3"] = await $steps["consoleLog3"];
+                          }
+
+                          $steps["setFalseFilterBookmarkedLocalStorage"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return localStorage.setItem(
+                                      "filter_bookmarked",
+                                      false
+                                    );
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["setFalseFilterBookmarkedLocalStorage"] !=
+                              null &&
+                            typeof $steps[
+                              "setFalseFilterBookmarkedLocalStorage"
+                            ] === "object" &&
+                            typeof $steps[
+                              "setFalseFilterBookmarkedLocalStorage"
+                            ].then === "function"
+                          ) {
+                            $steps["setFalseFilterBookmarkedLocalStorage"] =
+                              await $steps[
+                                "setFalseFilterBookmarkedLocalStorage"
                               ];
-                            }
-                          }}
-                        >
-                          <React.Fragment>{currentItem.name}</React.Fragment>
-                        </div>
-                      );
-                    })}
-                  </Stack__>
-                )}
-              </DataCtxReader__>
-            </ApiFetcherComponent>
-          </AntdModal>
-        ) : null}
+                          }
+
+                          $steps["falseStateFilterBookmarked"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["filterBookmarked"]
+                                  },
+                                  operation: 0,
+                                  value:
+                                    localStorage.getItem(
+                                      "filter_bookmarked"
+                                    ) === "true"
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["falseStateFilterBookmarked"] != null &&
+                            typeof $steps["falseStateFilterBookmarked"] ===
+                              "object" &&
+                            typeof $steps["falseStateFilterBookmarked"].then ===
+                              "function"
+                          ) {
+                            $steps["falseStateFilterBookmarked"] = await $steps[
+                              "falseStateFilterBookmarked"
+                            ];
+                          }
+
+                          $steps["consoleLog2"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return console.log(
+                                      `state_filter_bookmarked: ${$state.filterBookmarked} `
+                                    );
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["consoleLog2"] != null &&
+                            typeof $steps["consoleLog2"] === "object" &&
+                            typeof $steps["consoleLog2"].then === "function"
+                          ) {
+                            $steps["consoleLog2"] = await $steps["consoleLog2"];
+                          }
+
+                          $steps["filterWardIdLocalStorage"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return localStorage.setItem(
+                                      "filter_ward_id",
+                                      currentItem.id
+                                    );
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["filterWardIdLocalStorage"] != null &&
+                            typeof $steps["filterWardIdLocalStorage"] ===
+                              "object" &&
+                            typeof $steps["filterWardIdLocalStorage"].then ===
+                              "function"
+                          ) {
+                            $steps["filterWardIdLocalStorage"] = await $steps[
+                              "filterWardIdLocalStorage"
+                            ];
+                          }
+
+                          $steps["filterWardTitleLocalStorage"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return localStorage.setItem(
+                                      "filter_ward_name",
+                                      currentItem.name
+                                    );
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["filterWardTitleLocalStorage"] != null &&
+                            typeof $steps["filterWardTitleLocalStorage"] ===
+                              "object" &&
+                            typeof $steps["filterWardTitleLocalStorage"]
+                              .then === "function"
+                          ) {
+                            $steps["filterWardTitleLocalStorage"] =
+                              await $steps["filterWardTitleLocalStorage"];
+                          }
+
+                          $steps["consoleLog"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      console.log(
+                                        `filter_bookmarked: ${localStorage.getItem(
+                                          "filter_bookmarked"
+                                        )}`
+                                      );
+                                      console.log(
+                                        `filter_ward: ${localStorage.getItem(
+                                          "filter_ward"
+                                        )}`
+                                      );
+                                      console.log(
+                                        `filter_ward_id: ${localStorage.getItem(
+                                          "filter_ward_id"
+                                        )}`
+                                      );
+                                      return console.log(
+                                        `filter_ward_name: ${localStorage.getItem(
+                                          "filter_ward_name"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["consoleLog"] != null &&
+                            typeof $steps["consoleLog"] === "object" &&
+                            typeof $steps["consoleLog"].then === "function"
+                          ) {
+                            $steps["consoleLog"] = await $steps["consoleLog"];
+                          }
+
+                          $steps["updateModalOpen"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["modalWard", "open"]
+                                  },
+                                  operation: 0,
+                                  value: false
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateModalOpen"] != null &&
+                            typeof $steps["updateModalOpen"] === "object" &&
+                            typeof $steps["updateModalOpen"].then === "function"
+                          ) {
+                            $steps["updateModalOpen"] = await $steps[
+                              "updateModalOpen"
+                            ];
+                          }
+
+                          $steps["runActionOnPatients"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  tplRef: "patients",
+                                  action: "reload"
+                                };
+                                return (({ tplRef, action, args }) => {
+                                  return $refs?.[tplRef]?.[action]?.(
+                                    ...(args ?? [])
+                                  );
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runActionOnPatients"] != null &&
+                            typeof $steps["runActionOnPatients"] === "object" &&
+                            typeof $steps["runActionOnPatients"].then ===
+                              "function"
+                          ) {
+                            $steps["runActionOnPatients"] = await $steps[
+                              "runActionOnPatients"
+                            ];
+                          }
+                        }}
+                      >
+                        <React.Fragment>{currentItem.name}</React.Fragment>
+                      </div>
+                    );
+                  })}
+                </Stack__>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
+        </AntdModal>
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -3563,8 +3544,8 @@ const PlasmicDescendants = {
     "settingIcon",
     "searchbar",
     "tabs",
-    "serviceButtonStack",
-    "service",
+    "wardButtonStack",
+    "ward2",
     "bookmarkedButtonStack",
     "bookmarked",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
@@ -3590,10 +3571,10 @@ const PlasmicDescendants = {
     "radiologyReport",
     "laboratoryData",
     "commentButton",
-    "modalServices",
-    "services",
-    "servicesList",
-    "servicesName"
+    "modalWard",
+    "ward3",
+    "wardsList",
+    "wardsName"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -3609,8 +3590,8 @@ const PlasmicDescendants = {
     "settingIcon",
     "searchbar",
     "tabs",
-    "serviceButtonStack",
-    "service",
+    "wardButtonStack",
+    "ward2",
     "bookmarkedButtonStack",
     "bookmarked",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
@@ -3652,8 +3633,8 @@ const PlasmicDescendants = {
     "settingIcon",
     "searchbar",
     "tabs",
-    "serviceButtonStack",
-    "service",
+    "wardButtonStack",
+    "ward2",
     "bookmarkedButtonStack",
     "bookmarked",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648"
@@ -3664,13 +3645,13 @@ const PlasmicDescendants = {
   searchbar: ["searchbar"],
   tabs: [
     "tabs",
-    "serviceButtonStack",
-    "service",
+    "wardButtonStack",
+    "ward2",
     "bookmarkedButtonStack",
     "bookmarked"
   ],
-  serviceButtonStack: ["serviceButtonStack", "service"],
-  service: ["service"],
+  wardButtonStack: ["wardButtonStack", "ward2"],
+  ward2: ["ward2"],
   bookmarkedButtonStack: ["bookmarkedButtonStack", "bookmarked"],
   bookmarked: ["bookmarked"],
   نتايحجستوجو: [
@@ -3751,10 +3732,10 @@ const PlasmicDescendants = {
   radiologyReport: ["radiologyReport"],
   laboratoryData: ["laboratoryData"],
   commentButton: ["commentButton"],
-  modalServices: ["modalServices", "services", "servicesList", "servicesName"],
-  services: ["services", "servicesList", "servicesName"],
-  servicesList: ["servicesList", "servicesName"],
-  servicesName: ["servicesName"]
+  modalWard: ["modalWard", "ward3", "wardsList", "wardsName"],
+  ward3: ["ward3", "wardsList", "wardsName"],
+  wardsList: ["wardsList", "wardsName"],
+  wardsName: ["wardsName"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -3774,8 +3755,8 @@ type NodeDefaultElementType = {
   settingIcon: "svg";
   searchbar: typeof TextInput;
   tabs: "div";
-  serviceButtonStack: "div";
-  service: typeof Button;
+  wardButtonStack: "div";
+  ward2: typeof Button;
   bookmarkedButtonStack: "div";
   bookmarked: typeof Button;
   نتايحجستوجو: "div";
@@ -3801,10 +3782,10 @@ type NodeDefaultElementType = {
   radiologyReport: typeof PlasmicImg__;
   laboratoryData: typeof PlasmicImg__;
   commentButton: typeof Button;
-  modalServices: typeof AntdModal;
-  services: typeof ApiFetcherComponent;
-  servicesList: "div";
-  servicesName: "div";
+  modalWard: typeof AntdModal;
+  ward3: typeof ApiFetcherComponent;
+  wardsList: "div";
+  wardsName: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -3882,8 +3863,8 @@ export const PlasmicHomepage = Object.assign(
     settingIcon: makeNodeComponent("settingIcon"),
     searchbar: makeNodeComponent("searchbar"),
     tabs: makeNodeComponent("tabs"),
-    serviceButtonStack: makeNodeComponent("serviceButtonStack"),
-    service: makeNodeComponent("service"),
+    wardButtonStack: makeNodeComponent("wardButtonStack"),
+    ward2: makeNodeComponent("ward2"),
     bookmarkedButtonStack: makeNodeComponent("bookmarkedButtonStack"),
     bookmarked: makeNodeComponent("bookmarked"),
     نتايحجستوجو: makeNodeComponent(
@@ -3917,10 +3898,10 @@ export const PlasmicHomepage = Object.assign(
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratoryData: makeNodeComponent("laboratoryData"),
     commentButton: makeNodeComponent("commentButton"),
-    modalServices: makeNodeComponent("modalServices"),
-    services: makeNodeComponent("services"),
-    servicesList: makeNodeComponent("servicesList"),
-    servicesName: makeNodeComponent("servicesName"),
+    modalWard: makeNodeComponent("modalWard"),
+    ward3: makeNodeComponent("ward3"),
+    wardsList: makeNodeComponent("wardsList"),
+    wardsName: makeNodeComponent("wardsName"),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,

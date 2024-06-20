@@ -492,7 +492,14 @@ ${ageMonths} months ${
                       hasGap={true}
                       className={classNames(
                         projectcss.all,
-                        sty.laboratoryLists
+                        sty.laboratoryLists,
+                        {
+                          [sty.laboratoryListsviewNormalRange]: hasVariant(
+                            $state,
+                            "viewNormalRange",
+                            "viewNormalRange"
+                          )
+                        }
                       )}
                       key={currentIndex}
                     >
