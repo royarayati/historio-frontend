@@ -1325,28 +1325,29 @@ ${ageMonths} months ${
               : null}
           </SwitchingTab>
         </div>
-        <OnloadUserPatientInteractionCount
-          data-plasmic-name={"onloadUserPatientInteractionCount"}
-          data-plasmic-override={overrides.onloadUserPatientInteractionCount}
-          className={classNames(
-            "__wab_instance",
-            sty.onloadUserPatientInteractionCount
-          )}
-          patientIdForOnloadUserPatientInteractionCount={(() => {
-            try {
-              return $ctx.params.code;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
+        {false ? (
+          <OnloadUserPatientInteractionCount
+            data-plasmic-name={"onloadUserPatientInteractionCount"}
+            data-plasmic-override={overrides.onloadUserPatientInteractionCount}
+            className={classNames(
+              "__wab_instance",
+              sty.onloadUserPatientInteractionCount
+            )}
+            patientIdForOnloadUserPatientInteractionCount={(() => {
+              try {
+                return $ctx.params.code;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
               }
-              throw e;
-            }
-          })()}
-        />
-
+            })()}
+          />
+        ) : null}
         {false ? (
           <div
             data-plasmic-name={"footer"}

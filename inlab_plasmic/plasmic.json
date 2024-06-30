@@ -1564,6 +1564,32 @@
           "cssFilePath": "plasmic/inlab/PlasmicShareTool.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "3tcwCShdS0g0",
+          "name": "NewFeatureBanner",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicNewFeatureBanner.tsx",
+          "importSpec": {
+            "modulePath": "NewFeatureBanner.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicNewFeatureBanner.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "a9E2wGEF0Qy9",
+          "name": "Alert",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicAlert.tsx",
+          "importSpec": {
+            "modulePath": "Alert.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicAlert.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -2036,6 +2062,31 @@
           "id": "AgX6cnN3YV61",
           "name": "Icon5Icon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Icon5.tsx"
+        },
+        {
+          "id": "qdjybZJw3tm3",
+          "name": "Icon6Icon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Icon6.tsx"
+        },
+        {
+          "id": "tSD0oiaMd-7V",
+          "name": "InformationIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Information.tsx"
+        },
+        {
+          "id": "p45OcLcX4zji",
+          "name": "SuccessIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Success.tsx"
+        },
+        {
+          "id": "GgMvWgkE294e",
+          "name": "ErrorIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Error.tsx"
+        },
+        {
+          "id": "Eijn17-Ve4IZ",
+          "name": "WarningIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Warning.tsx"
         }
       ],
       "images": [
