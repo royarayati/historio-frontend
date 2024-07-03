@@ -101,6 +101,7 @@ export type PlasmicImagingReportList__OverridesType = {
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   apiFetcherComponent?: Flex__<typeof ApiFetcherComponent>;
+  patientNameagegender?: Flex__<"div">;
   imagingReport?: Flex__<typeof ApiFetcherComponent>;
   viewPacsButtons?: Flex__<"div">;
   activeViewPacsButton?: Flex__<typeof Button>;
@@ -347,10 +348,12 @@ function PlasmicImagingReportList__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <div
+                  data-plasmic-name={"patientNameagegender"}
+                  data-plasmic-override={overrides.patientNameagegender}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text___5FkMo
+                    sty.patientNameagegender
                   )}
                 >
                   <React.Fragment>
@@ -1716,6 +1719,7 @@ const PlasmicDescendants = {
     "redirectToNamespaceSelection",
     "header",
     "apiFetcherComponent",
+    "patientNameagegender",
     "imagingReport",
     "viewPacsButtons",
     "activeViewPacsButton",
@@ -1748,8 +1752,9 @@ const PlasmicDescendants = {
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
-  header: ["header", "apiFetcherComponent"],
-  apiFetcherComponent: ["apiFetcherComponent"],
+  header: ["header", "apiFetcherComponent", "patientNameagegender"],
+  apiFetcherComponent: ["apiFetcherComponent", "patientNameagegender"],
+  patientNameagegender: ["patientNameagegender"],
   imagingReport: [
     "imagingReport",
     "viewPacsButtons",
@@ -1850,6 +1855,7 @@ type NodeDefaultElementType = {
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   apiFetcherComponent: typeof ApiFetcherComponent;
+  patientNameagegender: "div";
   imagingReport: typeof ApiFetcherComponent;
   viewPacsButtons: "div";
   activeViewPacsButton: typeof Button;
@@ -1947,6 +1953,7 @@ export const PlasmicImagingReportList = Object.assign(
     ),
     header: makeNodeComponent("header"),
     apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
+    patientNameagegender: makeNodeComponent("patientNameagegender"),
     imagingReport: makeNodeComponent("imagingReport"),
     viewPacsButtons: makeNodeComponent("viewPacsButtons"),
     activeViewPacsButton: makeNodeComponent("activeViewPacsButton"),

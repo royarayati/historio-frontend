@@ -184,7 +184,7 @@ function PlasmicHomepage__RenderFunc(props: {
       Object.assign(
         {
           open: false,
-          newVersionDatetime: "10/04/1403"
+          newVersionDatetime: "12/04/1403"
         },
         props.args
       ),
@@ -3261,6 +3261,253 @@ function PlasmicHomepage__RenderFunc(props: {
                           sty.wardsName
                         )}
                         key={currentIndex}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateModalWardOpen"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["modalWard", "open"]
+                                  },
+                                  operation: 0,
+                                  value: false
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateModalWardOpen"] != null &&
+                            typeof $steps["updateModalWardOpen"] === "object" &&
+                            typeof $steps["updateModalWardOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalWardOpen"] = await $steps[
+                              "updateModalWardOpen"
+                            ];
+                          }
+
+                          $steps["trueStateFilterWard"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["filterWard"]
+                                  },
+                                  operation: 0,
+                                  value: true
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["trueStateFilterWard"] != null &&
+                            typeof $steps["trueStateFilterWard"] === "object" &&
+                            typeof $steps["trueStateFilterWard"].then ===
+                              "function"
+                          ) {
+                            $steps["trueStateFilterWard"] = await $steps[
+                              "trueStateFilterWard"
+                            ];
+                          }
+
+                          $steps["setFilterWardLocalStorage"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return localStorage.setItem(
+                                      "filter_ward",
+                                      $state.filterWard.toString()
+                                    );
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["setFilterWardLocalStorage"] != null &&
+                            typeof $steps["setFilterWardLocalStorage"] ===
+                              "object" &&
+                            typeof $steps["setFilterWardLocalStorage"].then ===
+                              "function"
+                          ) {
+                            $steps["setFilterWardLocalStorage"] = await $steps[
+                              "setFilterWardLocalStorage"
+                            ];
+                          }
+
+                          $steps["falseStateFilterBookmarked"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["filterBookmarked"]
+                                  },
+                                  operation: 0,
+                                  value: false
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["falseStateFilterBookmarked"] != null &&
+                            typeof $steps["falseStateFilterBookmarked"] ===
+                              "object" &&
+                            typeof $steps["falseStateFilterBookmarked"].then ===
+                              "function"
+                          ) {
+                            $steps["falseStateFilterBookmarked"] = await $steps[
+                              "falseStateFilterBookmarked"
+                            ];
+                          }
+
+                          $steps["setFilterBookmarkedLocalStorage"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return localStorage.setItem(
+                                      "filter_bookmarked",
+                                      $state.filterBookmarked.toString()
+                                    );
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["setFilterBookmarkedLocalStorage"] != null &&
+                            typeof $steps["setFilterBookmarkedLocalStorage"] ===
+                              "object" &&
+                            typeof $steps["setFilterBookmarkedLocalStorage"]
+                              .then === "function"
+                          ) {
+                            $steps["setFilterBookmarkedLocalStorage"] =
+                              await $steps["setFilterBookmarkedLocalStorage"];
+                          }
+
+                          $steps["setWardNameWardIdLocalStorage"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "filter_ward_name",
+                                        currentItem.name
+                                      );
+                                      return localStorage.setItem(
+                                        "filter_ward_id",
+                                        currentItem.id
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["setWardNameWardIdLocalStorage"] != null &&
+                            typeof $steps["setWardNameWardIdLocalStorage"] ===
+                              "object" &&
+                            typeof $steps["setWardNameWardIdLocalStorage"]
+                              .then === "function"
+                          ) {
+                            $steps["setWardNameWardIdLocalStorage"] =
+                              await $steps["setWardNameWardIdLocalStorage"];
+                          }
+
+                          $steps["logConsole"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      console.log(
+                                        `filter_bookmarked: ${localStorage.getItem(
+                                          "filter_bookmarked"
+                                        )}`
+                                      );
+                                      console.log(
+                                        `state_filter_bookmarked: ${$state.bookmarked.selected}`
+                                      );
+                                      console.log(
+                                        `filter_ward: ${localStorage.getItem(
+                                          "filter_ward"
+                                        )}`
+                                      );
+                                      console.log(
+                                        `state_filter_ward: ${$state.ward2.selected}`
+                                      );
+                                      console.log(
+                                        `filter_ward_name: ${localStorage.getItem(
+                                          "filter_ward_name"
+                                        )}`
+                                      );
+                                      return console.log(
+                                        `filter_ward_id: ${localStorage.getItem(
+                                          "filter_ward_id"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["logConsole"] != null &&
+                            typeof $steps["logConsole"] === "object" &&
+                            typeof $steps["logConsole"].then === "function"
+                          ) {
+                            $steps["logConsole"] = await $steps["logConsole"];
+                          }
+                        }}
                       >
                         <React.Fragment>{currentItem.name}</React.Fragment>
                       </div>
@@ -3384,7 +3631,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 newVersionDatetime2={args.newVersionDatetime}
               >
                 {
-                  "\u0641\u06cc\u0644\u062a\u0631 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633 \u0646\u0627\u0645 \u0628\u062e\u0634 \u0628\u0633\u062a\u0631\u06cc \u0622\u0646 \u0647\u0627 \n\u0645\u0634\u0627\u0647\u062f\u0647 \u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634 \u0622\u0646\u062a\u06cc \u0628\u06cc\u0648\u06af\u0631\u0627\u0645 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \n\u06a9\u0627\u0647\u0634 \u0633\u0627\u06cc\u0632 \u062c\u062f\u0648\u0644 \u0627\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u062c\u0647\u062a \u0645\u0634\u0627\u0647\u062f\u0647 \u0627\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u0628\u06cc\u0634\u062a\u0631 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 "
+                  "\u0641\u06cc\u0644\u062a\u0631 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633 \u0646\u0627\u0645 \u0628\u062e\u0634 \u0628\u0633\u062a\u0631\u06cc \u0622\u0646 \u0647\u0627 \n \u06a9\u0627\u0647\u0634 \u0633\u0627\u06cc\u0632 \u062c\u062f\u0648\u0644 \u0627\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u062c\u0647\u062a \u0645\u0634\u0627\u0647\u062f\u0647 \u0627\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u0628\u06cc\u0634\u062a\u0631 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 "
                 }
               </NewFeatureBanner>
               <Button
@@ -3468,6 +3715,32 @@ function PlasmicHomepage__RenderFunc(props: {
                     $steps["updateModalFeatureBannerOpen"] = await $steps[
                       "updateModalFeatureBannerOpen"
                     ];
+                  }
+
+                  $steps["runCode"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (() => {
+                              return console.log(
+                                `"new_version_datetime": ${localStorage.getItem(
+                                  "new_version_datetime"
+                                )}`
+                              );
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["runCode"] != null &&
+                    typeof $steps["runCode"] === "object" &&
+                    typeof $steps["runCode"].then === "function"
+                  ) {
+                    $steps["runCode"] = await $steps["runCode"];
                   }
                 }}
                 onDeselectedChange={(...eventArgs) => {

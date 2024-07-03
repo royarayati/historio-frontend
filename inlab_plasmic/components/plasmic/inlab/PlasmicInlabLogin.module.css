@@ -126,10 +126,10 @@
   .inlabInlabPlusAccountSimilarityAnnouncement {
     top: 20px;
     width: auto;
-    left: 50px;
+    left: 25px;
     font-size: 14px;
     margin-right: 0px;
-    right: 0px;
+    right: 25px;
     border-color: var(--token-9iYGdL7i3GKE);
   }
 }

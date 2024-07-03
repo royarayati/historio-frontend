@@ -100,6 +100,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   patientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
+  patientNameagegender?: Flex__<"div">;
   normalRangeButton?: Flex__<"div">;
   normalRangeButtonCircle?: Flex__<"div">;
   labData?: Flex__<typeof ApiFetcherComponent>;
@@ -284,12 +285,14 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <div
+                  data-plasmic-name={"patientNameagegender"}
+                  data-plasmic-override={overrides.patientNameagegender}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text__t37T4,
+                    sty.patientNameagegender,
                     {
-                      [sty.textviewNormalRange__t37T4Bwg80]: hasVariant(
+                      [sty.patientNameagegenderviewNormalRange]: hasVariant(
                         $state,
                         "viewNormalRange",
                         "viewNormalRange"
@@ -920,19 +923,7 @@ ${ageMonths} months ${
             )}
           </DataCtxReader__>
         </ApiFetcherComponent>
-        {(() => {
-          try {
-            return true;
-          } catch (e) {
-            if (
-              e instanceof TypeError ||
-              e?.plasmicType === "PlasmicUndefinedDataError"
-            ) {
-              return true;
-            }
-            throw e;
-          }
-        })() ? (
+        {true ? (
           <ApiFetcherComponent
             data-plasmic-name={"antibiogramData"}
             data-plasmic-override={overrides.antibiogramData}
@@ -943,6 +934,7 @@ ${ageMonths} months ${
                 "viewNormalRange"
               )
             })}
+            delay={300}
             headers={(() => {
               try {
                 return {
@@ -1460,6 +1452,7 @@ const PlasmicDescendants = {
     "redirectToNamespaceSelection",
     "header",
     "patientDataApiFetcher",
+    "patientNameagegender",
     "normalRangeButton",
     "normalRangeButtonCircle",
     "labData",
@@ -1496,10 +1489,12 @@ const PlasmicDescendants = {
   header: [
     "header",
     "patientDataApiFetcher",
+    "patientNameagegender",
     "normalRangeButton",
     "normalRangeButtonCircle"
   ],
-  patientDataApiFetcher: ["patientDataApiFetcher"],
+  patientDataApiFetcher: ["patientDataApiFetcher", "patientNameagegender"],
+  patientNameagegender: ["patientNameagegender"],
   normalRangeButton: ["normalRangeButton", "normalRangeButtonCircle"],
   normalRangeButtonCircle: ["normalRangeButtonCircle"],
   labData: [
@@ -1638,6 +1633,7 @@ type NodeDefaultElementType = {
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   patientDataApiFetcher: typeof ApiFetcherComponent;
+  patientNameagegender: "div";
   normalRangeButton: "div";
   normalRangeButtonCircle: "div";
   labData: typeof ApiFetcherComponent;
@@ -1736,6 +1732,7 @@ export const PlasmicLaboratoryData = Object.assign(
     ),
     header: makeNodeComponent("header"),
     patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
+    patientNameagegender: makeNodeComponent("patientNameagegender"),
     normalRangeButton: makeNodeComponent("normalRangeButton"),
     normalRangeButtonCircle: makeNodeComponent("normalRangeButtonCircle"),
     labData: makeNodeComponent("labData"),
