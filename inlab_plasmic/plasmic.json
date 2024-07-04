@@ -2087,6 +2087,26 @@
           "id": "Eijn17-Ve4IZ",
           "name": "WarningIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Warning.tsx"
+        },
+        {
+          "id": "UvXMj66shTDo",
+          "name": "LoaderSpineIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__LoaderSpine.tsx"
+        },
+        {
+          "id": "bIxkatK6rGzW",
+          "name": "LoaderEclipseIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__LoaderEclipse.tsx"
+        },
+        {
+          "id": "gh3GiSXYzCWP",
+          "name": "LoaderBlocksIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__LoaderBlocks.tsx"
+        },
+        {
+          "id": "-kAkKYtWcc8f",
+          "name": "LoaderSpinnerIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__LoaderSpinner.tsx"
         }
       ],
       "images": [

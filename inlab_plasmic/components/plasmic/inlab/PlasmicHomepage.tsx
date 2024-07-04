@@ -184,7 +184,7 @@ function PlasmicHomepage__RenderFunc(props: {
       Object.assign(
         {
           open: false,
-          newVersionDatetime: "12/04/1403"
+          newVersionDatetime: "10/04/1403"
         },
         props.args
       ),

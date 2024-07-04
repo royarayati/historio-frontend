@@ -107,7 +107,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   laboratoryLists?: Flex__<"div">;
   labResults?: Flex__<"div">;
   checkedFactors?: Flex__<"div">;
-  emptyCell?: Flex__<"div">;
+  labGroupName?: Flex__<"div">;
   factorName?: Flex__<"div">;
   laboratoryResultsPerTitle?: Flex__<"div">;
   labPerDate?: Flex__<"div">;
@@ -538,14 +538,14 @@ ${ageMonths} months ${
                           )}
                         >
                           <div
-                            data-plasmic-name={"emptyCell"}
-                            data-plasmic-override={overrides.emptyCell}
+                            data-plasmic-name={"labGroupName"}
+                            data-plasmic-override={overrides.labGroupName}
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.emptyCell,
+                              sty.labGroupName,
                               {
-                                [sty.emptyCellviewNormalRange]: hasVariant(
+                                [sty.labGroupNameviewNormalRange]: hasVariant(
                                   $state,
                                   "viewNormalRange",
                                   "viewNormalRange"
@@ -1459,7 +1459,7 @@ const PlasmicDescendants = {
     "laboratoryLists",
     "labResults",
     "checkedFactors",
-    "emptyCell",
+    "labGroupName",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
@@ -1502,7 +1502,7 @@ const PlasmicDescendants = {
     "laboratoryLists",
     "labResults",
     "checkedFactors",
-    "emptyCell",
+    "labGroupName",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
@@ -1517,7 +1517,7 @@ const PlasmicDescendants = {
     "laboratoryLists",
     "labResults",
     "checkedFactors",
-    "emptyCell",
+    "labGroupName",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
@@ -1531,7 +1531,7 @@ const PlasmicDescendants = {
   labResults: [
     "labResults",
     "checkedFactors",
-    "emptyCell",
+    "labGroupName",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
@@ -1542,8 +1542,8 @@ const PlasmicDescendants = {
     "abnormalFactorValue",
     "normalRanged"
   ],
-  checkedFactors: ["checkedFactors", "emptyCell", "factorName"],
-  emptyCell: ["emptyCell"],
+  checkedFactors: ["checkedFactors", "labGroupName", "factorName"],
+  labGroupName: ["labGroupName"],
   factorName: ["factorName"],
   laboratoryResultsPerTitle: [
     "laboratoryResultsPerTitle",
@@ -1640,7 +1640,7 @@ type NodeDefaultElementType = {
   laboratoryLists: "div";
   labResults: "div";
   checkedFactors: "div";
-  emptyCell: "div";
+  labGroupName: "div";
   factorName: "div";
   laboratoryResultsPerTitle: "div";
   labPerDate: "div";
@@ -1739,7 +1739,7 @@ export const PlasmicLaboratoryData = Object.assign(
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     labResults: makeNodeComponent("labResults"),
     checkedFactors: makeNodeComponent("checkedFactors"),
-    emptyCell: makeNodeComponent("emptyCell"),
+    labGroupName: makeNodeComponent("labGroupName"),
     factorName: makeNodeComponent("factorName"),
     laboratoryResultsPerTitle: makeNodeComponent("laboratoryResultsPerTitle"),
     labPerDate: makeNodeComponent("labPerDate"),
