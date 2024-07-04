@@ -300,12 +300,9 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                       return (() => {
                                         localStorage.setItem(
                                           "filter_bookmarked",
-                                          true
+                                          ""
                                         );
-                                        localStorage.setItem(
-                                          "filter_ward",
-                                          false
-                                        );
+                                        localStorage.setItem("filter_ward", "");
                                         localStorage.setItem(
                                           "filter_ward_name",
                                           ""
@@ -331,6 +328,47 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                             ) {
                               $steps["resetFilterWardWardNameWardId"] =
                                 await $steps["resetFilterWardWardNameWardId"];
+                            }
+
+                            $steps["runCode"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        console.log(
+                                          `filter_bookmarked: ${localStorage.getItem(
+                                            "filter_bookmarked"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `filter_ward: ${localStorage.getItem(
+                                            "filter_ward"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `filter_ward_name: ${localStorage.getItem(
+                                            "filter_ward_name"
+                                          )}`
+                                        );
+                                        return console.log(
+                                          `filter_ward_id: ${localStorage.getItem(
+                                            "filter_ward_id"
+                                          )}`
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["runCode"] != null &&
+                              typeof $steps["runCode"] === "object" &&
+                              typeof $steps["runCode"].then === "function"
+                            ) {
+                              $steps["runCode"] = await $steps["runCode"];
                             }
 
                             $steps["goToHomepage"] = true

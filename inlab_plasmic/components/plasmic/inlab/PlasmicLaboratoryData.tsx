@@ -100,13 +100,14 @@ export type PlasmicLaboratoryData__OverridesType = {
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   patientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
+  patientNameagegender?: Flex__<"div">;
   normalRangeButton?: Flex__<"div">;
   normalRangeButtonCircle?: Flex__<"div">;
   labData?: Flex__<typeof ApiFetcherComponent>;
   laboratoryLists?: Flex__<"div">;
   labResults?: Flex__<"div">;
   checkedFactors?: Flex__<"div">;
-  emptyCell?: Flex__<"div">;
+  labGroupName?: Flex__<"div">;
   factorName?: Flex__<"div">;
   laboratoryResultsPerTitle?: Flex__<"div">;
   labPerDate?: Flex__<"div">;
@@ -116,6 +117,13 @@ export type PlasmicLaboratoryData__OverridesType = {
   normalFactorValue?: Flex__<"div">;
   abnormalFactorValue?: Flex__<"div">;
   normalRanged?: Flex__<"div">;
+  antibiogramData?: Flex__<typeof ApiFetcherComponent>;
+  antibiogramPerDate?: Flex__<"div">;
+  datetimename?: Flex__<"div">;
+  datetime?: Flex__<"div">;
+  antibiogram?: Flex__<"div">;
+  antibioticName?: Flex__<"div">;
+  antibioticResult?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   homepage?: Flex__<typeof PlasmicImg__>;
@@ -125,15 +133,6 @@ export type PlasmicLaboratoryData__OverridesType = {
   onloadUserPatientInteractionCount?: Flex__<
     typeof OnloadUserPatientInteractionCount
   >;
-  footer?: Flex__<"div">;
-  homepage3?: Flex__<"div">;
-  homepage2?: Flex__<typeof PlasmicImg__>;
-  patientProfile2?: Flex__<"div">;
-  patientProfile3?: Flex__<typeof PlasmicImg__>;
-  radiologyPage?: Flex__<"div">;
-  radiologyIcon?: Flex__<typeof PlasmicImg__>;
-  laboratoryPage?: Flex__<"div">;
-  laboratoryIcon?: Flex__<typeof PlasmicImg__>;
 };
 
 export interface DefaultLaboratoryDataProps {}
@@ -286,12 +285,14 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <div
+                  data-plasmic-name={"patientNameagegender"}
+                  data-plasmic-override={overrides.patientNameagegender}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text__t37T4,
+                    sty.patientNameagegender,
                     {
-                      [sty.textviewNormalRange__t37T4Bwg80]: hasVariant(
+                      [sty.patientNameagegenderviewNormalRange]: hasVariant(
                         $state,
                         "viewNormalRange",
                         "viewNormalRange"
@@ -537,14 +538,14 @@ ${ageMonths} months ${
                           )}
                         >
                           <div
-                            data-plasmic-name={"emptyCell"}
-                            data-plasmic-override={overrides.emptyCell}
+                            data-plasmic-name={"labGroupName"}
+                            data-plasmic-override={overrides.labGroupName}
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.emptyCell,
+                              sty.labGroupName,
                               {
-                                [sty.emptyCellviewNormalRange]: hasVariant(
+                                [sty.labGroupNameviewNormalRange]: hasVariant(
                                   $state,
                                   "viewNormalRange",
                                   "viewNormalRange"
@@ -922,6 +923,209 @@ ${ageMonths} months ${
             )}
           </DataCtxReader__>
         </ApiFetcherComponent>
+        {true ? (
+          <ApiFetcherComponent
+            data-plasmic-name={"antibiogramData"}
+            data-plasmic-override={overrides.antibiogramData}
+            className={classNames("__wab_instance", sty.antibiogramData, {
+              [sty.antibiogramDataviewNormalRange]: hasVariant(
+                $state,
+                "viewNormalRange",
+                "viewNormalRange"
+              )
+            })}
+            delay={300}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v3/patient/antibiogram/${$ctx.params.code}`}
+            ref={ref => {
+              $refs["antibiogramData"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx =>
+                $ctx.fetched_data.data !== 0
+                  ? (_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data[0];
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          data-plasmic-name={"antibiogramPerDate"}
+                          data-plasmic-override={overrides.antibiogramPerDate}
+                          className={classNames(
+                            projectcss.all,
+                            sty.antibiogramPerDate
+                          )}
+                          key={currentIndex}
+                        >
+                          <div
+                            data-plasmic-name={"datetimename"}
+                            data-plasmic-override={overrides.datetimename}
+                            className={classNames(
+                              projectcss.all,
+                              sty.datetimename
+                            )}
+                          >
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__nnvRv
+                              )}
+                            >
+                              {"antibiogram"}
+                            </div>
+                            <div
+                              data-plasmic-name={"datetime"}
+                              data-plasmic-override={overrides.datetime}
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.datetime
+                              )}
+                            >
+                              <React.Fragment>
+                                {(() => {
+                                  try {
+                                    return currentItem.answer_datetime_jalali_str;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return "";
+                                    }
+                                    throw e;
+                                  }
+                                })()}
+                              </React.Fragment>
+                            </div>
+                          </div>
+                          {(_par =>
+                            !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                            (() => {
+                              try {
+                                return currentItem.labgiveanti_set;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return [];
+                                }
+                                throw e;
+                              }
+                            })()
+                          ).map((__plasmic_item_1, __plasmic_idx_1) => {
+                            const currentItem = __plasmic_item_1;
+                            const currentIndex = __plasmic_idx_1;
+                            return (
+                              <div
+                                data-plasmic-name={"antibiogram"}
+                                data-plasmic-override={overrides.antibiogram}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.antibiogram
+                                )}
+                                key={currentIndex}
+                              >
+                                <div
+                                  data-plasmic-name={"antibioticName"}
+                                  data-plasmic-override={
+                                    overrides.antibioticName
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.antibioticName
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      try {
+                                        return currentItem.labgiveanti_name;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return "";
+                                        }
+                                        throw e;
+                                      }
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                                <div
+                                  data-plasmic-name={"antibioticResult"}
+                                  data-plasmic-override={
+                                    overrides.antibioticResult
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.antibioticResult
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      try {
+                                        return currentItem.labgiveanti_status;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return "";
+                                        }
+                                        throw e;
+                                      }
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    })
+                  : null
+              }
+            </DataCtxReader__>
+          </ApiFetcherComponent>
+        ) : null}
         <div
           data-plasmic-name={"switchingTabs"}
           data-plasmic-override={overrides.switchingTabs}
@@ -1213,383 +1417,28 @@ ${ageMonths} months ${
             />
           </SwitchingTab>
         </div>
-        <OnloadUserPatientInteractionCount
-          data-plasmic-name={"onloadUserPatientInteractionCount"}
-          data-plasmic-override={overrides.onloadUserPatientInteractionCount}
-          className={classNames(
-            "__wab_instance",
-            sty.onloadUserPatientInteractionCount
-          )}
-          patientIdForOnloadUserPatientInteractionCount={(() => {
-            try {
-              return $ctx.params.code;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()}
-        />
-
         {false ? (
-          <div
-            data-plasmic-name={"footer"}
-            data-plasmic-override={overrides.footer}
-            className={classNames(projectcss.all, sty.footer)}
-          >
-            <div
-              data-plasmic-name={"homepage3"}
-              data-plasmic-override={overrides.homepage3}
-              className={classNames(projectcss.all, sty.homepage3)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["goToHomepage"] = true
-                  ? (() => {
-                      const actionArgs = { destination: `/patients` };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
+          <OnloadUserPatientInteractionCount
+            data-plasmic-name={"onloadUserPatientInteractionCount"}
+            data-plasmic-override={overrides.onloadUserPatientInteractionCount}
+            className={classNames(
+              "__wab_instance",
+              sty.onloadUserPatientInteractionCount
+            )}
+            patientIdForOnloadUserPatientInteractionCount={(() => {
+              try {
+                return $ctx.params.code;
+              } catch (e) {
                 if (
-                  $steps["goToHomepage"] != null &&
-                  typeof $steps["goToHomepage"] === "object" &&
-                  typeof $steps["goToHomepage"].then === "function"
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
                 ) {
-                  $steps["goToHomepage"] = await $steps["goToHomepage"];
+                  return undefined;
                 }
-              }}
-            >
-              <PlasmicImg__
-                data-plasmic-name={"homepage2"}
-                data-plasmic-override={overrides.homepage2}
-                alt={""}
-                className={classNames(sty.homepage2)}
-                displayHeight={"20px"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"20px"}
-                loading={"lazy"}
-                src={{
-                  src: "/new_inlab/plasmic/inlab/images/icons8Home1Svg.svg",
-                  fullWidth: 150,
-                  fullHeight: 150,
-                  aspectRatio: 1
-                }}
-              />
-
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__rBePh
-                )}
-              >
-                {"\u0635\u0641\u062d\u0647 \u0627\u0635\u0644\u06cc"}
-              </div>
-            </div>
-            <div
-              data-plasmic-name={"patientProfile2"}
-              data-plasmic-override={overrides.patientProfile2}
-              className={classNames(projectcss.all, sty.patientProfile2)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["goToPatientProfile"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: `/patient/${(() => {
-                          try {
-                            return $ctx.params.code;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/${(() => {
-                          try {
-                            return $ctx.params.bookmarked === "true"
-                              ? true
-                              : false;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/profile`
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToPatientProfile"] != null &&
-                  typeof $steps["goToPatientProfile"] === "object" &&
-                  typeof $steps["goToPatientProfile"].then === "function"
-                ) {
-                  $steps["goToPatientProfile"] = await $steps[
-                    "goToPatientProfile"
-                  ];
-                }
-              }}
-            >
-              <PlasmicImg__
-                data-plasmic-name={"patientProfile3"}
-                data-plasmic-override={overrides.patientProfile3}
-                alt={""}
-                className={classNames(sty.patientProfile3)}
-                displayHeight={"20px"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"20px"}
-                loading={"lazy"}
-                src={{
-                  src: "/new_inlab/plasmic/inlab/images/group2063.svg",
-                  fullWidth: 18.77,
-                  fullHeight: 20.34,
-                  aspectRatio: 0.904762
-                }}
-              />
-
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__uwJnZ
-                )}
-              >
-                {
-                  "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u06cc\u0645\u0627\u0631"
-                }
-              </div>
-            </div>
-            <div
-              data-plasmic-name={"radiologyPage"}
-              data-plasmic-override={overrides.radiologyPage}
-              className={classNames(projectcss.all, sty.radiologyPage)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["goToImagingReportList"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: `/patient/${(() => {
-                          try {
-                            return $ctx.params.code;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/${(() => {
-                          try {
-                            return $ctx.params.bookmarked === "true"
-                              ? true
-                              : false;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/report/list`
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToImagingReportList"] != null &&
-                  typeof $steps["goToImagingReportList"] === "object" &&
-                  typeof $steps["goToImagingReportList"].then === "function"
-                ) {
-                  $steps["goToImagingReportList"] = await $steps[
-                    "goToImagingReportList"
-                  ];
-                }
-              }}
-            >
-              <PlasmicImg__
-                data-plasmic-name={"radiologyIcon"}
-                data-plasmic-override={overrides.radiologyIcon}
-                alt={""}
-                className={classNames(sty.radiologyIcon)}
-                displayHeight={"20px"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"20px"}
-                loading={"lazy"}
-                src={{
-                  src: "/new_inlab/plasmic/inlab/images/group376.svg",
-                  fullWidth: 19.424,
-                  fullHeight: 19.98,
-                  aspectRatio: 1
-                }}
-              />
-
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__gtP1
-                )}
-              >
-                {
-                  "\u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631"
-                }
-              </div>
-            </div>
-            <div
-              data-plasmic-name={"laboratoryPage"}
-              data-plasmic-override={overrides.laboratoryPage}
-              className={classNames(projectcss.all, sty.laboratoryPage)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["goToLaboratoryData"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: `/patient/${(() => {
-                          try {
-                            return $ctx.params.code;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/${(() => {
-                          try {
-                            return $ctx.params.bookmarked === "true"
-                              ? true
-                              : false;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/lab`
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToLaboratoryData"] != null &&
-                  typeof $steps["goToLaboratoryData"] === "object" &&
-                  typeof $steps["goToLaboratoryData"].then === "function"
-                ) {
-                  $steps["goToLaboratoryData"] = await $steps[
-                    "goToLaboratoryData"
-                  ];
-                }
-              }}
-            >
-              <PlasmicImg__
-                data-plasmic-name={"laboratoryIcon"}
-                data-plasmic-override={overrides.laboratoryIcon}
-                alt={""}
-                className={classNames(sty.laboratoryIcon)}
-                displayHeight={"20px"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"20px"}
-                loading={"lazy"}
-                src={{
-                  src: "/new_inlab/plasmic/inlab/images/group384.svg",
-                  fullWidth: 14.575,
-                  fullHeight: 18.692,
-                  aspectRatio: 0.789474
-                }}
-              />
-
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__x5RM
-                )}
-              >
-                {
-                  "\u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u0628\u06cc\u0645\u0627\u0631"
-                }
-              </div>
-            </div>
-          </div>
+                throw e;
+              }
+            })()}
+          />
         ) : null}
       </div>
     </React.Fragment>
@@ -1603,13 +1452,14 @@ const PlasmicDescendants = {
     "redirectToNamespaceSelection",
     "header",
     "patientDataApiFetcher",
+    "patientNameagegender",
     "normalRangeButton",
     "normalRangeButtonCircle",
     "labData",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
-    "emptyCell",
+    "labGroupName",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
@@ -1619,32 +1469,32 @@ const PlasmicDescendants = {
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged",
+    "antibiogramData",
+    "antibiogramPerDate",
+    "datetimename",
+    "datetime",
+    "antibiogram",
+    "antibioticName",
+    "antibioticResult",
     "switchingTabs",
     "switchingTab",
     "homepage",
     "patientProfile",
     "radiologyReport",
     "laboratoryPage2",
-    "onloadUserPatientInteractionCount",
-    "footer",
-    "homepage3",
-    "homepage2",
-    "patientProfile2",
-    "patientProfile3",
-    "radiologyPage",
-    "radiologyIcon",
-    "laboratoryPage",
-    "laboratoryIcon"
+    "onloadUserPatientInteractionCount"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: [
     "header",
     "patientDataApiFetcher",
+    "patientNameagegender",
     "normalRangeButton",
     "normalRangeButtonCircle"
   ],
-  patientDataApiFetcher: ["patientDataApiFetcher"],
+  patientDataApiFetcher: ["patientDataApiFetcher", "patientNameagegender"],
+  patientNameagegender: ["patientNameagegender"],
   normalRangeButton: ["normalRangeButton", "normalRangeButtonCircle"],
   normalRangeButtonCircle: ["normalRangeButtonCircle"],
   labData: [
@@ -1652,7 +1502,7 @@ const PlasmicDescendants = {
     "laboratoryLists",
     "labResults",
     "checkedFactors",
-    "emptyCell",
+    "labGroupName",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
@@ -1667,7 +1517,7 @@ const PlasmicDescendants = {
     "laboratoryLists",
     "labResults",
     "checkedFactors",
-    "emptyCell",
+    "labGroupName",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
@@ -1681,7 +1531,7 @@ const PlasmicDescendants = {
   labResults: [
     "labResults",
     "checkedFactors",
-    "emptyCell",
+    "labGroupName",
     "factorName",
     "laboratoryResultsPerTitle",
     "labPerDate",
@@ -1692,8 +1542,8 @@ const PlasmicDescendants = {
     "abnormalFactorValue",
     "normalRanged"
   ],
-  checkedFactors: ["checkedFactors", "emptyCell", "factorName"],
-  emptyCell: ["emptyCell"],
+  checkedFactors: ["checkedFactors", "labGroupName", "factorName"],
+  labGroupName: ["labGroupName"],
   factorName: ["factorName"],
   laboratoryResultsPerTitle: [
     "laboratoryResultsPerTitle",
@@ -1731,6 +1581,28 @@ const PlasmicDescendants = {
   normalFactorValue: ["normalFactorValue"],
   abnormalFactorValue: ["abnormalFactorValue"],
   normalRanged: ["normalRanged"],
+  antibiogramData: [
+    "antibiogramData",
+    "antibiogramPerDate",
+    "datetimename",
+    "datetime",
+    "antibiogram",
+    "antibioticName",
+    "antibioticResult"
+  ],
+  antibiogramPerDate: [
+    "antibiogramPerDate",
+    "datetimename",
+    "datetime",
+    "antibiogram",
+    "antibioticName",
+    "antibioticResult"
+  ],
+  datetimename: ["datetimename", "datetime"],
+  datetime: ["datetime"],
+  antibiogram: ["antibiogram", "antibioticName", "antibioticResult"],
+  antibioticName: ["antibioticName"],
+  antibioticResult: ["antibioticResult"],
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
@@ -1750,26 +1622,7 @@ const PlasmicDescendants = {
   patientProfile: ["patientProfile"],
   radiologyReport: ["radiologyReport"],
   laboratoryPage2: ["laboratoryPage2"],
-  onloadUserPatientInteractionCount: ["onloadUserPatientInteractionCount"],
-  footer: [
-    "footer",
-    "homepage3",
-    "homepage2",
-    "patientProfile2",
-    "patientProfile3",
-    "radiologyPage",
-    "radiologyIcon",
-    "laboratoryPage",
-    "laboratoryIcon"
-  ],
-  homepage3: ["homepage3", "homepage2"],
-  homepage2: ["homepage2"],
-  patientProfile2: ["patientProfile2", "patientProfile3"],
-  patientProfile3: ["patientProfile3"],
-  radiologyPage: ["radiologyPage", "radiologyIcon"],
-  radiologyIcon: ["radiologyIcon"],
-  laboratoryPage: ["laboratoryPage", "laboratoryIcon"],
-  laboratoryIcon: ["laboratoryIcon"]
+  onloadUserPatientInteractionCount: ["onloadUserPatientInteractionCount"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -1780,13 +1633,14 @@ type NodeDefaultElementType = {
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   patientDataApiFetcher: typeof ApiFetcherComponent;
+  patientNameagegender: "div";
   normalRangeButton: "div";
   normalRangeButtonCircle: "div";
   labData: typeof ApiFetcherComponent;
   laboratoryLists: "div";
   labResults: "div";
   checkedFactors: "div";
-  emptyCell: "div";
+  labGroupName: "div";
   factorName: "div";
   laboratoryResultsPerTitle: "div";
   labPerDate: "div";
@@ -1796,6 +1650,13 @@ type NodeDefaultElementType = {
   normalFactorValue: "div";
   abnormalFactorValue: "div";
   normalRanged: "div";
+  antibiogramData: typeof ApiFetcherComponent;
+  antibiogramPerDate: "div";
+  datetimename: "div";
+  datetime: "div";
+  antibiogram: "div";
+  antibioticName: "div";
+  antibioticResult: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   homepage: typeof PlasmicImg__;
@@ -1803,15 +1664,6 @@ type NodeDefaultElementType = {
   radiologyReport: typeof PlasmicImg__;
   laboratoryPage2: typeof PlasmicImg__;
   onloadUserPatientInteractionCount: typeof OnloadUserPatientInteractionCount;
-  footer: "div";
-  homepage3: "div";
-  homepage2: typeof PlasmicImg__;
-  patientProfile2: "div";
-  patientProfile3: typeof PlasmicImg__;
-  radiologyPage: "div";
-  radiologyIcon: typeof PlasmicImg__;
-  laboratoryPage: "div";
-  laboratoryIcon: typeof PlasmicImg__;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -1880,13 +1732,14 @@ export const PlasmicLaboratoryData = Object.assign(
     ),
     header: makeNodeComponent("header"),
     patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
+    patientNameagegender: makeNodeComponent("patientNameagegender"),
     normalRangeButton: makeNodeComponent("normalRangeButton"),
     normalRangeButtonCircle: makeNodeComponent("normalRangeButtonCircle"),
     labData: makeNodeComponent("labData"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     labResults: makeNodeComponent("labResults"),
     checkedFactors: makeNodeComponent("checkedFactors"),
-    emptyCell: makeNodeComponent("emptyCell"),
+    labGroupName: makeNodeComponent("labGroupName"),
     factorName: makeNodeComponent("factorName"),
     laboratoryResultsPerTitle: makeNodeComponent("laboratoryResultsPerTitle"),
     labPerDate: makeNodeComponent("labPerDate"),
@@ -1896,6 +1749,13 @@ export const PlasmicLaboratoryData = Object.assign(
     normalFactorValue: makeNodeComponent("normalFactorValue"),
     abnormalFactorValue: makeNodeComponent("abnormalFactorValue"),
     normalRanged: makeNodeComponent("normalRanged"),
+    antibiogramData: makeNodeComponent("antibiogramData"),
+    antibiogramPerDate: makeNodeComponent("antibiogramPerDate"),
+    datetimename: makeNodeComponent("datetimename"),
+    datetime: makeNodeComponent("datetime"),
+    antibiogram: makeNodeComponent("antibiogram"),
+    antibioticName: makeNodeComponent("antibioticName"),
+    antibioticResult: makeNodeComponent("antibioticResult"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),
@@ -1905,15 +1765,6 @@ export const PlasmicLaboratoryData = Object.assign(
     onloadUserPatientInteractionCount: makeNodeComponent(
       "onloadUserPatientInteractionCount"
     ),
-    footer: makeNodeComponent("footer"),
-    homepage3: makeNodeComponent("homepage3"),
-    homepage2: makeNodeComponent("homepage2"),
-    patientProfile2: makeNodeComponent("patientProfile2"),
-    patientProfile3: makeNodeComponent("patientProfile3"),
-    radiologyPage: makeNodeComponent("radiologyPage"),
-    radiologyIcon: makeNodeComponent("radiologyIcon"),
-    laboratoryPage: makeNodeComponent("laboratoryPage"),
-    laboratoryIcon: makeNodeComponent("laboratoryIcon"),
 
     // Metadata about props expected for PlasmicLaboratoryData
     internalVariantProps: PlasmicLaboratoryData__VariantProps,
