@@ -65,6 +65,7 @@ import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 
@@ -83,7 +84,6 @@ import MenuIcon from "./icons/PlasmicIcon__Menu"; // plasmic-import: YlP_1riCYk4
 import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
 import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
 import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: kYUnvWOY7oUw/icon
-import Icon5Icon from "./icons/PlasmicIcon__Icon5"; // plasmic-import: AgX6cnN3YV61/icon
 import BookmarkPlusSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg"; // plasmic-import: laC4EyEnFr3s/icon
 import BookmarkDashFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg"; // plasmic-import: OXlS9uB7Ffdy/icon
 import IndicatorIcon from "./icons/PlasmicIcon__Indicator"; // plasmic-import: B34gCeBlzVGZ/icon
@@ -131,7 +131,6 @@ export type PlasmicHomepage__OverridesType = {
   patients?: Flex__<typeof ApiFetcherComponent>;
   header2?: Flex__<"div">;
   buttonاردنهمهبومارها?: Flex__<typeof Button>;
-  bookmarksSort?: Flex__<typeof Button>;
   بمارافتنشد?: Flex__<"div">;
   bookmarkGuide?: Flex__<"div">;
   bookmarkImage?: Flex__<"svg">;
@@ -248,9 +247,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return localStorage.getItem("filter_bookmarked") === "false"
-                ? false
-                : true;
+              return $state.selectedTab === "bookmark";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -269,9 +266,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return localStorage.getItem("filter_ward") === "true"
-                ? true
-                : false;
+              return $state.selectedTab === "ward";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -290,7 +285,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.filterWard;
+              return $state.selectedTab === "ward";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -309,7 +304,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.filterBookmarked;
+              return $state.selectedTab === "bookmark";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -334,7 +329,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.filterWard === false;
+              return $state.selectedTab !== "ward";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -353,7 +348,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.filterBookmarked === false;
+              return $state.selectedTab !== "bookmark";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -396,24 +391,6 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "bookmarksSort.isDisabled",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "bookmarksSort.selected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "bookmarksSort.deselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "ward2.sortDeselected",
         type: "private",
         variableType: "boolean",
@@ -430,25 +407,6 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "bookmarksSort.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return !$state.bookmarksSort2;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
       },
       {
         path: "commentButton.sortDeselected",
@@ -475,50 +433,10 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "bookmarksSort.sortSelected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.bookmarksSort2;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
-      },
-      {
         path: "commentButton.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "bookmarksSort2",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return localStorage.getItem("bookmarks_sort") === "ward"
-                ? true
-                : false;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return false;
-              }
-              throw e;
-            }
-          })()
       },
       {
         path: "cancelButton.isDisabled",
@@ -654,6 +572,53 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "filterwardname",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return localStorage.getItem("filter_ward_name");
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "selectedTab",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return localStorage.getItem("selected_tab") ===
+                (null || "" || "null" || "undefined" || undefined)
+                ? "bookmark"
+                : localStorage.getItem("selected_tab");
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "bookmarkedList",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
     [$props, $ctx, $refs]
@@ -1316,7 +1281,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         ];
                       }
 
-                      $steps["trueStateFilterWard"] =
+                      $steps["setStateSelectedTab"] =
                         !$state.filterWard &&
                         (localStorage.getItem("filter_ward_id") ||
                           localStorage.getItem("filter_ward_name")) !==
@@ -1325,10 +1290,10 @@ function PlasmicHomepage__RenderFunc(props: {
                               const actionArgs = {
                                 variable: {
                                   objRoot: $state,
-                                  variablePath: ["filterWard"]
+                                  variablePath: ["selectedTab"]
                                 },
                                 operation: 0,
-                                value: true
+                                value: "ward"
                               };
                               return (({
                                 variable,
@@ -1347,22 +1312,22 @@ function PlasmicHomepage__RenderFunc(props: {
                             })()
                           : undefined;
                       if (
-                        $steps["trueStateFilterWard"] != null &&
-                        typeof $steps["trueStateFilterWard"] === "object" &&
-                        typeof $steps["trueStateFilterWard"].then === "function"
+                        $steps["setStateSelectedTab"] != null &&
+                        typeof $steps["setStateSelectedTab"] === "object" &&
+                        typeof $steps["setStateSelectedTab"].then === "function"
                       ) {
-                        $steps["trueStateFilterWard"] = await $steps[
-                          "trueStateFilterWard"
+                        $steps["setStateSelectedTab"] = await $steps[
+                          "setStateSelectedTab"
                         ];
                       }
 
-                      $steps["setFilterWardLocalStorage"] = true
+                      $steps["setSelectedTabLocalStorage"] = true
                         ? (() => {
                             const actionArgs = {
                               customFunction: async () => {
                                 return localStorage.setItem(
-                                  "filter_ward",
-                                  $state.filterWard.toString()
+                                  "selected_tab",
+                                  $state.selectedTab.toString()
                                 );
                               }
                             };
@@ -1372,83 +1337,15 @@ function PlasmicHomepage__RenderFunc(props: {
                           })()
                         : undefined;
                       if (
-                        $steps["setFilterWardLocalStorage"] != null &&
-                        typeof $steps["setFilterWardLocalStorage"] ===
+                        $steps["setSelectedTabLocalStorage"] != null &&
+                        typeof $steps["setSelectedTabLocalStorage"] ===
                           "object" &&
-                        typeof $steps["setFilterWardLocalStorage"].then ===
+                        typeof $steps["setSelectedTabLocalStorage"].then ===
                           "function"
                       ) {
-                        $steps["setFilterWardLocalStorage"] = await $steps[
-                          "setFilterWardLocalStorage"
+                        $steps["setSelectedTabLocalStorage"] = await $steps[
+                          "setSelectedTabLocalStorage"
                         ];
-                      }
-
-                      $steps["falseStateFilterBookmarked"] =
-                        $state.filterWard &&
-                        (localStorage.getItem("filter_ward_id") ||
-                          localStorage.getItem("filter_ward_name")) !==
-                          (null || "")
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["filterBookmarked"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["falseStateFilterBookmarked"] != null &&
-                        typeof $steps["falseStateFilterBookmarked"] ===
-                          "object" &&
-                        typeof $steps["falseStateFilterBookmarked"].then ===
-                          "function"
-                      ) {
-                        $steps["falseStateFilterBookmarked"] = await $steps[
-                          "falseStateFilterBookmarked"
-                        ];
-                      }
-
-                      $steps["setFilterBookmarkedLocalStorage"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return localStorage.setItem(
-                                  "filter_bookmarked",
-                                  $state.filterBookmarked.toString()
-                                );
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["setFilterBookmarkedLocalStorage"] != null &&
-                        typeof $steps["setFilterBookmarkedLocalStorage"] ===
-                          "object" &&
-                        typeof $steps["setFilterBookmarkedLocalStorage"]
-                          .then === "function"
-                      ) {
-                        $steps["setFilterBookmarkedLocalStorage"] =
-                          await $steps["setFilterBookmarkedLocalStorage"];
                       }
 
                       $steps["logConsole"] = true
@@ -1457,20 +1354,34 @@ function PlasmicHomepage__RenderFunc(props: {
                               customFunction: async () => {
                                 return (() => {
                                   console.log(
-                                    `filter_bookmarked: ${localStorage.getItem(
-                                      "filter_bookmarked"
+                                    `state_selected_tab: ${$state.selectedTab}`
+                                  );
+                                  console.log(
+                                    `state_filter_bookmarked: ${$state.bookmarked.selected}`
+                                  );
+                                  console.log(
+                                    `state_filter_ward: ${$state.ward2.selected}`
+                                  );
+                                  console.log(
+                                    `state_filter_ward_name: ${$state.filterwardname}`
+                                  );
+                                  console.log(
+                                    `state_filter_professors: ${$state.filterProfessors}`
+                                  );
+                                  console.log(
+                                    `selected_tab: ${localStorage.getItem(
+                                      "selected_tab"
                                     )}`
                                   );
                                   console.log(
-                                    `state_filter_bookmarked: ${$state.filterBookmarked} `
-                                  );
-                                  console.log(
-                                    `filter_ward: ${localStorage.getItem(
-                                      "filter_ward"
+                                    `filter_ward_name: ${localStorage.getItem(
+                                      "filter_ward_name"
                                     )}`
                                   );
                                   return console.log(
-                                    `state_filter_ward: ${$state.filterWard} `
+                                    `filter_ward_id: ${localStorage.getItem(
+                                      "filter_ward_id"
+                                    )}`
                                   );
                                 })();
                               }
@@ -1541,9 +1452,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         {(() => {
                           try {
                             return (() => {
-                              const filterWardName =
-                                localStorage.getItem("filter_ward_name");
-                              if (filterWardName !== null) {
+                              const filterWardName = $state.filterwardname;
+                              if (filterWardName !== "") {
                                 return filterWardName.includes("بخش")
                                   ? filterWardName
                                   : "بخش " + filterWardName;
@@ -1599,15 +1509,15 @@ function PlasmicHomepage__RenderFunc(props: {
                     onClick={async event => {
                       const $steps = {};
 
-                      $steps["trueStateFilterBookmarked"] = true
+                      $steps["setBookmarkSelectedTab"] = true
                         ? (() => {
                             const actionArgs = {
                               variable: {
                                 objRoot: $state,
-                                variablePath: ["filterBookmarked"]
+                                variablePath: ["selectedTab"]
                               },
                               operation: 0,
-                              value: true
+                              value: "bookmark"
                             };
                             return (({
                               variable,
@@ -1626,24 +1536,23 @@ function PlasmicHomepage__RenderFunc(props: {
                           })()
                         : undefined;
                       if (
-                        $steps["trueStateFilterBookmarked"] != null &&
-                        typeof $steps["trueStateFilterBookmarked"] ===
-                          "object" &&
-                        typeof $steps["trueStateFilterBookmarked"].then ===
+                        $steps["setBookmarkSelectedTab"] != null &&
+                        typeof $steps["setBookmarkSelectedTab"] === "object" &&
+                        typeof $steps["setBookmarkSelectedTab"].then ===
                           "function"
                       ) {
-                        $steps["trueStateFilterBookmarked"] = await $steps[
-                          "trueStateFilterBookmarked"
+                        $steps["setBookmarkSelectedTab"] = await $steps[
+                          "setBookmarkSelectedTab"
                         ];
                       }
 
-                      $steps["setTrueFilterBookmarkedLocalStorage"] = true
+                      $steps["setSelectedTabLocalStorage"] = true
                         ? (() => {
                             const actionArgs = {
                               customFunction: async () => {
                                 return localStorage.setItem(
-                                  "filter_bookmarked",
-                                  $state.filterBookmarked.toString()
+                                  "selected_tab",
+                                  $state.selectedTab.toString()
                                 );
                               }
                             };
@@ -1653,77 +1562,14 @@ function PlasmicHomepage__RenderFunc(props: {
                           })()
                         : undefined;
                       if (
-                        $steps["setTrueFilterBookmarkedLocalStorage"] != null &&
-                        typeof $steps["setTrueFilterBookmarkedLocalStorage"] ===
+                        $steps["setSelectedTabLocalStorage"] != null &&
+                        typeof $steps["setSelectedTabLocalStorage"] ===
                           "object" &&
-                        typeof $steps["setTrueFilterBookmarkedLocalStorage"]
-                          .then === "function"
-                      ) {
-                        $steps["setTrueFilterBookmarkedLocalStorage"] =
-                          await $steps["setTrueFilterBookmarkedLocalStorage"];
-                      }
-
-                      $steps["falseStateFilterWard"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["filterWard"]
-                              },
-                              operation: 0,
-                              value: false
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["falseStateFilterWard"] != null &&
-                        typeof $steps["falseStateFilterWard"] === "object" &&
-                        typeof $steps["falseStateFilterWard"].then ===
+                        typeof $steps["setSelectedTabLocalStorage"].then ===
                           "function"
                       ) {
-                        $steps["falseStateFilterWard"] = await $steps[
-                          "falseStateFilterWard"
-                        ];
-                      }
-
-                      $steps["setFalseFilterWardLocalStorage"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return localStorage.setItem(
-                                  "filter_ward",
-                                  $state.filterWard.toString()
-                                );
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["setFalseFilterWardLocalStorage"] != null &&
-                        typeof $steps["setFalseFilterWardLocalStorage"] ===
-                          "object" &&
-                        typeof $steps["setFalseFilterWardLocalStorage"].then ===
-                          "function"
-                      ) {
-                        $steps["setFalseFilterWardLocalStorage"] = await $steps[
-                          "setFalseFilterWardLocalStorage"
+                        $steps["setSelectedTabLocalStorage"] = await $steps[
+                          "setSelectedTabLocalStorage"
                         ];
                       }
 
@@ -1733,20 +1579,15 @@ function PlasmicHomepage__RenderFunc(props: {
                               customFunction: async () => {
                                 return (() => {
                                   console.log(
-                                    `filter_bookmarked: ${localStorage.getItem(
-                                      "filter_bookmarked"
-                                    )}`
+                                    `state_selected_tab: ${$state.selectedTab} `
                                   );
                                   console.log(
                                     `state_filter_bookmarked: ${$state.filterBookmarked} `
                                   );
-                                  console.log(
-                                    `filter_ward: ${localStorage.getItem(
-                                      "filter_ward"
-                                    )}`
-                                  );
                                   return console.log(
-                                    `state_filter_ward: ${$state.filterWard} `
+                                    `selected_tab: ${localStorage.getItem(
+                                      "selected_tab"
+                                    )}`
                                   );
                                 })();
                               }
@@ -1860,7 +1701,7 @@ function PlasmicHomepage__RenderFunc(props: {
               $state.searchbar.value
             }&namespace_id=${localStorage.getItem(
               "inlab_user_namespace_id"
-            )}&sort=${localStorage.getItem("bookmarks_sort")}&ward_id=${
+            )}&ward_id=${
               $state.filterWard ? localStorage.getItem("filter_ward_id") : ""
             }`}
             ref={ref => {
@@ -1871,6 +1712,65 @@ function PlasmicHomepage__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
+                  <ConditionGuard
+                    children={null}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.conditionGuard__lytQs
+                    )}
+                    condition={(() => {
+                      try {
+                        return $ctx.fetched_data.loading;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return false;
+                        }
+                        throw e;
+                      }
+                    })()}
+                    onNotSatisfied={async () => {
+                      const $steps = {};
+
+                      $steps["setLocalBookmarkedList"] =
+                        $state.searchbar.value === "" && $state.filterBookmarked
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "bookmarked_list",
+                                      JSON.stringify($ctx.fetched_data.data)
+                                    );
+                                    return console.log(
+                                      `bookmarked_list: ${localStorage.getItem(
+                                        "bookmarked_list"
+                                      )}`
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["setLocalBookmarkedList"] != null &&
+                        typeof $steps["setLocalBookmarkedList"] === "object" &&
+                        typeof $steps["setLocalBookmarkedList"].then ===
+                          "function"
+                      ) {
+                        $steps["setLocalBookmarkedList"] = await $steps[
+                          "setLocalBookmarkedList"
+                        ];
+                      }
+                    }}
+                    skipPaths={[]}
+                  />
+
                   {(() => {
                     try {
                       return (
@@ -2008,254 +1908,6 @@ function PlasmicHomepage__RenderFunc(props: {
                             "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
                           }
                         </div>
-                      </Button>
-                      <Button
-                        data-plasmic-name={"bookmarksSort"}
-                        data-plasmic-override={overrides.bookmarksSort}
-                        className={classNames(
-                          "__wab_instance",
-                          sty.bookmarksSort
-                        )}
-                        deselected={generateStateValueProp($state, [
-                          "bookmarksSort",
-                          "deselected"
-                        ])}
-                        isDisabled={generateStateValueProp($state, [
-                          "bookmarksSort",
-                          "isDisabled"
-                        ])}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateBookmarksSort3"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["bookmarksSort2"]
-                                  },
-                                  operation: 4
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  const oldValue = $stateGet(
-                                    objRoot,
-                                    variablePath
-                                  );
-                                  $stateSet(objRoot, variablePath, !oldValue);
-                                  return !oldValue;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateBookmarksSort3"] != null &&
-                            typeof $steps["updateBookmarksSort3"] ===
-                              "object" &&
-                            typeof $steps["updateBookmarksSort3"].then ===
-                              "function"
-                          ) {
-                            $steps["updateBookmarksSort3"] = await $steps[
-                              "updateBookmarksSort3"
-                            ];
-                          }
-
-                          $steps["setLocalBookmarksSort"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return $state.bookmarksSort2
-                                      ? localStorage.setItem(
-                                          "bookmarks_sort",
-                                          "ward"
-                                        )
-                                      : localStorage.setItem(
-                                          "bookmarks_sort",
-                                          ""
-                                        );
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["setLocalBookmarksSort"] != null &&
-                            typeof $steps["setLocalBookmarksSort"] ===
-                              "object" &&
-                            typeof $steps["setLocalBookmarksSort"].then ===
-                              "function"
-                          ) {
-                            $steps["setLocalBookmarksSort"] = await $steps[
-                              "setLocalBookmarksSort"
-                            ];
-                          }
-
-                          $steps["runActionOnPatients"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  tplRef: "patients",
-                                  action: "reload"
-                                };
-                                return (({ tplRef, action, args }) => {
-                                  return $refs?.[tplRef]?.[action]?.(
-                                    ...(args ?? [])
-                                  );
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runActionOnPatients"] != null &&
-                            typeof $steps["runActionOnPatients"] === "object" &&
-                            typeof $steps["runActionOnPatients"].then ===
-                              "function"
-                          ) {
-                            $steps["runActionOnPatients"] = await $steps[
-                              "runActionOnPatients"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      console.log(
-                                        `state_bookmarksSort: ${$state.bookmarksSort2} `
-                                      );
-                                      return console.log(
-                                        `localstorage_bookmarks_sort: ${localStorage.getItem(
-                                          "bookmarks_sort"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-                        }}
-                        onDeselectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bookmarksSort",
-                            "deselected"
-                          ])(eventArgs[0]);
-                        }}
-                        onIsDisabledChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bookmarksSort",
-                            "isDisabled"
-                          ])(eventArgs[0]);
-                        }}
-                        onSelectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bookmarksSort",
-                            "selected"
-                          ])(eventArgs[0]);
-                        }}
-                        onSortDeselectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bookmarksSort",
-                            "sortDeselected"
-                          ])(eventArgs[0]);
-                        }}
-                        onSortSelectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bookmarksSort",
-                            "sortSelected"
-                          ])(eventArgs[0]);
-                        }}
-                        selected={generateStateValueProp($state, [
-                          "bookmarksSort",
-                          "selected"
-                        ])}
-                        sortDeselected={generateStateValueProp($state, [
-                          "bookmarksSort",
-                          "sortDeselected"
-                        ])}
-                        sortSelected={generateStateValueProp($state, [
-                          "bookmarksSort",
-                          "sortSelected"
-                        ])}
-                      >
-                        {(() => {
-                          try {
-                            return $state.bookmarksSort2;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return true;
-                            }
-                            throw e;
-                          }
-                        })() ? (
-                          <PlasmicIcon__
-                            PlasmicIconType={
-                              hasVariant(
-                                globalVariants,
-                                "screen",
-                                "mobileFirst"
-                              )
-                                ? Icons8ClosesvgIcon
-                                : Icons8ClosesvgIcon
-                            }
-                            className={classNames(
-                              projectcss.all,
-                              sty.svg__tw0X
-                            )}
-                            role={"img"}
-                          />
-                        ) : null}
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__pMcsf
-                          )}
-                        >
-                          <React.Fragment>
-                            {(() => {
-                              try {
-                                return "مرتب سازی : بخش";
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc";
-                                }
-                                throw e;
-                              }
-                            })()}
-                          </React.Fragment>
-                        </div>
-                        <Icon5Icon
-                          className={classNames(
-                            projectcss.all,
-                            sty.svg___5KDcq
-                          )}
-                          role={"img"}
-                        />
                       </Button>
                     </div>
                   ) : null}
@@ -2435,7 +2087,15 @@ function PlasmicHomepage__RenderFunc(props: {
                         !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                         (() => {
                           try {
-                            return $ctx.fetched_data.data;
+                            return localStorage.getItem("bookmarked_list") !==
+                              (null || undefined || "" || "undefined") &&
+                              $ctx.fetched_data.loading &&
+                              $state.filterBookmarked &&
+                              $state.searchbar.value === ""
+                              ? JSON.parse(
+                                  localStorage.getItem("bookmarked_list")
+                                )
+                              : $ctx.fetched_data.data;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -3227,293 +2887,338 @@ function PlasmicHomepage__RenderFunc(props: {
           >
             <DataCtxReader__>
               {$ctx => (
-                <Stack__
-                  as={"div"}
-                  data-plasmic-name={"wardsList"}
-                  data-plasmic-override={overrides.wardsList}
-                  hasGap={true}
-                  className={classNames(projectcss.all, sty.wardsList)}
-                >
-                  {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                    (() => {
+                <React.Fragment>
+                  <ConditionGuard
+                    children={null}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.conditionGuard__vzTt2
+                    )}
+                    condition={(() => {
                       try {
-                        return $ctx.fetched_data.data;
+                        return $ctx.fetched_data.loading;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
                           e?.plasmicType === "PlasmicUndefinedDataError"
                         ) {
-                          return [];
+                          return false;
                         }
                         throw e;
                       }
-                    })()
-                  ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                    const currentItem = __plasmic_item_0;
-                    const currentIndex = __plasmic_idx_0;
-                    return (
-                      <div
-                        data-plasmic-name={"wardsName"}
-                        data-plasmic-override={overrides.wardsName}
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.wardsName
-                        )}
-                        key={currentIndex}
-                        onClick={async event => {
-                          const $steps = {};
+                    })()}
+                    onNotSatisfied={async () => {
+                      const $steps = {};
 
-                          $steps["updateModalWardOpen"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["modalWard", "open"]
-                                  },
-                                  operation: 0,
-                                  value: false
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateModalWardOpen"] != null &&
-                            typeof $steps["updateModalWardOpen"] === "object" &&
-                            typeof $steps["updateModalWardOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalWardOpen"] = await $steps[
-                              "updateModalWardOpen"
-                            ];
-                          }
-
-                          $steps["trueStateFilterWard"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["filterWard"]
-                                  },
-                                  operation: 0,
-                                  value: true
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["trueStateFilterWard"] != null &&
-                            typeof $steps["trueStateFilterWard"] === "object" &&
-                            typeof $steps["trueStateFilterWard"].then ===
-                              "function"
-                          ) {
-                            $steps["trueStateFilterWard"] = await $steps[
-                              "trueStateFilterWard"
-                            ];
-                          }
-
-                          $steps["setFilterWardLocalStorage"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return localStorage.setItem(
-                                      "filter_ward",
-                                      $state.filterWard.toString()
+                      $steps["setLocalWardList"] =
+                        $state.searchbarWard.value === "" &&
+                        $state.modalWard.open
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "ward_list",
+                                      JSON.stringify($ctx.fetched_data.data)
                                     );
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["setFilterWardLocalStorage"] != null &&
-                            typeof $steps["setFilterWardLocalStorage"] ===
-                              "object" &&
-                            typeof $steps["setFilterWardLocalStorage"].then ===
-                              "function"
-                          ) {
-                            $steps["setFilterWardLocalStorage"] = await $steps[
-                              "setFilterWardLocalStorage"
-                            ];
-                          }
-
-                          $steps["falseStateFilterBookmarked"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["filterBookmarked"]
-                                  },
-                                  operation: 0,
-                                  value: false
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["falseStateFilterBookmarked"] != null &&
-                            typeof $steps["falseStateFilterBookmarked"] ===
-                              "object" &&
-                            typeof $steps["falseStateFilterBookmarked"].then ===
-                              "function"
-                          ) {
-                            $steps["falseStateFilterBookmarked"] = await $steps[
-                              "falseStateFilterBookmarked"
-                            ];
-                          }
-
-                          $steps["setFilterBookmarkedLocalStorage"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return localStorage.setItem(
-                                      "filter_bookmarked",
-                                      $state.filterBookmarked.toString()
+                                    return console.log(
+                                      `ward_list: ${localStorage.getItem(
+                                        "ward_list"
+                                      )}`
                                     );
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["setFilterBookmarkedLocalStorage"] != null &&
-                            typeof $steps["setFilterBookmarkedLocalStorage"] ===
-                              "object" &&
-                            typeof $steps["setFilterBookmarkedLocalStorage"]
-                              .then === "function"
-                          ) {
-                            $steps["setFilterBookmarkedLocalStorage"] =
-                              await $steps["setFilterBookmarkedLocalStorage"];
-                          }
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["setLocalWardList"] != null &&
+                        typeof $steps["setLocalWardList"] === "object" &&
+                        typeof $steps["setLocalWardList"].then === "function"
+                      ) {
+                        $steps["setLocalWardList"] = await $steps[
+                          "setLocalWardList"
+                        ];
+                      }
+                    }}
+                    skipPaths={[]}
+                  />
 
-                          $steps["setWardNameWardIdLocalStorage"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "filter_ward_name",
-                                        currentItem.name
-                                      );
+                  <Stack__
+                    as={"div"}
+                    data-plasmic-name={"wardsList"}
+                    data-plasmic-override={overrides.wardsList}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.wardsList)}
+                  >
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return localStorage.getItem("ward_list") !==
+                            (null || undefined || "" || "undefined") &&
+                            $state.searchbarWard.value === ""
+                            ? JSON.parse(localStorage.getItem("ward_list"))
+                            : $ctx.fetched_data.data;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          data-plasmic-name={"wardsName"}
+                          data-plasmic-override={overrides.wardsName}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.wardsName
+                          )}
+                          key={currentIndex}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["updateModalWardOpen"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalWard", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateModalWardOpen"] != null &&
+                              typeof $steps["updateModalWardOpen"] ===
+                                "object" &&
+                              typeof $steps["updateModalWardOpen"].then ===
+                                "function"
+                            ) {
+                              $steps["updateModalWardOpen"] = await $steps[
+                                "updateModalWardOpen"
+                              ];
+                            }
+
+                            $steps["setStateSelectedTab"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["selectedTab"]
+                                    },
+                                    operation: 0,
+                                    value: "ward"
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["setStateSelectedTab"] != null &&
+                              typeof $steps["setStateSelectedTab"] ===
+                                "object" &&
+                              typeof $steps["setStateSelectedTab"].then ===
+                                "function"
+                            ) {
+                              $steps["setStateSelectedTab"] = await $steps[
+                                "setStateSelectedTab"
+                              ];
+                            }
+
+                            $steps["setSelectedTabLocalStorage"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
                                       return localStorage.setItem(
-                                        "filter_ward_id",
-                                        currentItem.id
+                                        "selected_tab",
+                                        $state.selectedTab.toString()
                                       );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["setWardNameWardIdLocalStorage"] != null &&
-                            typeof $steps["setWardNameWardIdLocalStorage"] ===
-                              "object" &&
-                            typeof $steps["setWardNameWardIdLocalStorage"]
-                              .then === "function"
-                          ) {
-                            $steps["setWardNameWardIdLocalStorage"] =
-                              await $steps["setWardNameWardIdLocalStorage"];
-                          }
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["setSelectedTabLocalStorage"] != null &&
+                              typeof $steps["setSelectedTabLocalStorage"] ===
+                                "object" &&
+                              typeof $steps["setSelectedTabLocalStorage"]
+                                .then === "function"
+                            ) {
+                              $steps["setSelectedTabLocalStorage"] =
+                                await $steps["setSelectedTabLocalStorage"];
+                            }
 
-                          $steps["logConsole"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      console.log(
-                                        `filter_bookmarked: ${localStorage.getItem(
-                                          "filter_bookmarked"
-                                        )}`
-                                      );
-                                      console.log(
-                                        `state_filter_bookmarked: ${$state.bookmarked.selected}`
-                                      );
-                                      console.log(
-                                        `filter_ward: ${localStorage.getItem(
-                                          "filter_ward"
-                                        )}`
-                                      );
-                                      console.log(
-                                        `state_filter_ward: ${$state.ward2.selected}`
-                                      );
-                                      console.log(
-                                        `filter_ward_name: ${localStorage.getItem(
-                                          "filter_ward_name"
-                                        )}`
-                                      );
-                                      return console.log(
-                                        `filter_ward_id: ${localStorage.getItem(
-                                          "filter_ward_id"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["logConsole"] != null &&
-                            typeof $steps["logConsole"] === "object" &&
-                            typeof $steps["logConsole"].then === "function"
-                          ) {
-                            $steps["logConsole"] = await $steps["logConsole"];
-                          }
-                        }}
-                      >
-                        <React.Fragment>{currentItem.name}</React.Fragment>
-                      </div>
-                    );
-                  })}
-                </Stack__>
+                            $steps["setStateFilterwardname"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["filterwardname"]
+                                    },
+                                    operation: 0,
+                                    value: currentItem.name
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["setStateFilterwardname"] != null &&
+                              typeof $steps["setStateFilterwardname"] ===
+                                "object" &&
+                              typeof $steps["setStateFilterwardname"].then ===
+                                "function"
+                            ) {
+                              $steps["setStateFilterwardname"] = await $steps[
+                                "setStateFilterwardname"
+                              ];
+                            }
+
+                            $steps["setWardNameWardIdLocalStorage"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        localStorage.setItem(
+                                          "filter_ward_name",
+                                          $state.filterwardname.toString()
+                                        );
+                                        return localStorage.setItem(
+                                          "filter_ward_id",
+                                          currentItem.id
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["setWardNameWardIdLocalStorage"] != null &&
+                              typeof $steps["setWardNameWardIdLocalStorage"] ===
+                                "object" &&
+                              typeof $steps["setWardNameWardIdLocalStorage"]
+                                .then === "function"
+                            ) {
+                              $steps["setWardNameWardIdLocalStorage"] =
+                                await $steps["setWardNameWardIdLocalStorage"];
+                            }
+
+                            $steps["logConsole"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        console.log(
+                                          `state_selected_tab: ${$state.selectedTab}`
+                                        );
+                                        console.log(
+                                          `state_filter_bookmarked: ${$state.bookmarked.selected}`
+                                        );
+                                        console.log(
+                                          `state_filter_ward: ${$state.ward2.selected}`
+                                        );
+                                        console.log(
+                                          `state_filter_ward_name: ${$state.filterwardname}`
+                                        );
+                                        console.log(
+                                          `state_filter_professors: ${$state.filterProfessors}`
+                                        );
+                                        console.log(
+                                          `selected_tab: ${localStorage.getItem(
+                                            "selected_tab"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `filter_ward_name: ${localStorage.getItem(
+                                            "filter_ward_name"
+                                          )}`
+                                        );
+                                        return console.log(
+                                          `filter_ward_id: ${localStorage.getItem(
+                                            "filter_ward_id"
+                                          )}`
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["logConsole"] != null &&
+                              typeof $steps["logConsole"] === "object" &&
+                              typeof $steps["logConsole"].then === "function"
+                            ) {
+                              $steps["logConsole"] = await $steps["logConsole"];
+                            }
+                          }}
+                        >
+                          <React.Fragment>{currentItem.name}</React.Fragment>
+                        </div>
+                      );
+                    })}
+                  </Stack__>
+                </React.Fragment>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
@@ -3826,7 +3531,6 @@ const PlasmicDescendants = {
     "patients",
     "header2",
     "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
-    "bookmarksSort",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
     "bookmarkImage",
@@ -3876,7 +3580,6 @@ const PlasmicDescendants = {
     "patients",
     "header2",
     "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
-    "bookmarksSort",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
     "bookmarkImage",
@@ -3939,7 +3642,6 @@ const PlasmicDescendants = {
     "patients",
     "header2",
     "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
-    "bookmarksSort",
     "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
     "bookmarkImage",
@@ -3960,13 +3662,11 @@ const PlasmicDescendants = {
   ],
   header2: [
     "header2",
-    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
-    "bookmarksSort"
+    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
   ],
   buttonاردنهمهبومارها: [
     "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
   ],
-  bookmarksSort: ["bookmarksSort"],
   بمارافتنشد: ["\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"],
   bookmarkGuide: ["bookmarkGuide", "bookmarkImage", "bookmarkedImage"],
   bookmarkImage: ["bookmarkImage"],
@@ -4049,7 +3749,6 @@ type NodeDefaultElementType = {
   patients: typeof ApiFetcherComponent;
   header2: "div";
   buttonاردنهمهبومارها: typeof Button;
-  bookmarksSort: typeof Button;
   بمارافتنشد: "div";
   bookmarkGuide: "div";
   bookmarkImage: "svg";
@@ -4165,7 +3864,6 @@ export const PlasmicHomepage = Object.assign(
     buttonاردنهمهبومارها: makeNodeComponent(
       "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
     ),
-    bookmarksSort: makeNodeComponent("bookmarksSort"),
     بمارافتنشد: makeNodeComponent(
       "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"
     ),

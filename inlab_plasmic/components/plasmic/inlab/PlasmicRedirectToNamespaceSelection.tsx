@@ -196,27 +196,76 @@ function PlasmicRedirectToNamespaceSelection__RenderFunc(props: {
           ];
         }
 
-        $steps["goToNamespaceSelection"] =
-          localStorage.getItem("inlab_user") != null &&
-          localStorage.getItem("inlab_user") != undefined &&
-          (localStorage.getItem("inlab_user_namespace_id") == null ||
-            localStorage.getItem("inlab_user_namespace_id") == undefined)
-            ? (() => {
-                const actionArgs = { destination: `/user/setting/namespace` };
-                return (({ destination }) => {
-                  if (
-                    typeof destination === "string" &&
-                    destination.startsWith("#")
-                  ) {
-                    document
-                      .getElementById(destination.substr(1))
-                      .scrollIntoView({ behavior: "smooth" });
-                  } else {
-                    __nextRouter?.push(destination);
-                  }
-                })?.apply(null, [actionArgs]);
-              })()
-            : undefined;
+        $steps["consoleLogOfTokenExpirationStatus"] = localStorage.getItem(
+          "inlab_user"
+        )
+          ? (() => {
+              const actionArgs = {
+                customFunction: async () => {
+                  return (() => {
+                    const token = JSON.parse(
+                      localStorage.getItem("inlab_user")
+                    ).access;
+                    const payloadBase64 = token.split(".")[1];
+                    const decodedpayload = window.atob(payloadBase64);
+                    const payload = JSON.parse(decodedpayload);
+                    const token_expiration_date = payload.exp;
+                    const current_timestamp = Math.floor(Date.now() / 1000);
+                    const is_token_expired =
+                      token_expiration_date < current_timestamp;
+                    return console.log(`is_token_expired: ${is_token_expired}`);
+                  })();
+                }
+              };
+              return (({ customFunction }) => {
+                return customFunction();
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
+        if (
+          $steps["consoleLogOfTokenExpirationStatus"] != null &&
+          typeof $steps["consoleLogOfTokenExpirationStatus"] === "object" &&
+          typeof $steps["consoleLogOfTokenExpirationStatus"].then === "function"
+        ) {
+          $steps["consoleLogOfTokenExpirationStatus"] = await $steps[
+            "consoleLogOfTokenExpirationStatus"
+          ];
+        }
+
+        $steps["goToNamespaceSelection"] = (() => {
+          if (localStorage.getItem("inlab_user")) {
+            const token = JSON.parse(localStorage.getItem("inlab_user")).access;
+            const payloadBase64 = token.split(".")[1];
+            const decodedpayload = window.atob(payloadBase64);
+            const payload = JSON.parse(decodedpayload);
+            const token_expiration_date = payload.exp;
+            const current_timestamp = Math.floor(Date.now() / 1000);
+            const compare_date = token_expiration_date > current_timestamp;
+            return (
+              compare_date &&
+              (localStorage.getItem("inlab_user") != null ||
+                localStorage.getItem("inlab_user") != undefined) &&
+              (localStorage.getItem("inlab_user_namespace_id") == null ||
+                localStorage.getItem("inlab_user_namespace_id") == undefined)
+            );
+          }
+        })()
+          ? (() => {
+              const actionArgs = { destination: `/user/setting/namespace` };
+              return (({ destination }) => {
+                if (
+                  typeof destination === "string" &&
+                  destination.startsWith("#")
+                ) {
+                  document
+                    .getElementById(destination.substr(1))
+                    .scrollIntoView({ behavior: "smooth" });
+                } else {
+                  __nextRouter?.push(destination);
+                }
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
         if (
           $steps["goToNamespaceSelection"] != null &&
           typeof $steps["goToNamespaceSelection"] === "object" &&

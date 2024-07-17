@@ -608,3 +608,37 @@
 2024-07-04 18:15:22,458 INFO supervisord started with pid 1
 2024-07-04 18:15:23,471 INFO spawned: 'npm' with pid 18
 2024-07-04 18:15:24,718 INFO success: npm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-08 13:42:28,279 WARN received SIGTERM indicating exit request
+2024-07-08 13:42:28,364 INFO waiting for npm to die
+2024-07-08 13:42:29,385 WARN stopped: npm (terminated by SIGTERM)
+2024-07-08 13:43:37,118 INFO RPC interface 'supervisor' initialized
+2024-07-08 13:43:37,119 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2024-07-08 13:43:37,119 INFO supervisord started with pid 1
+2024-07-08 13:43:38,123 INFO spawned: 'npm' with pid 18
+2024-07-08 13:43:39,427 INFO success: npm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-08 13:54:13,884 INFO waiting for npm to stop
+2024-07-08 13:54:13,921 WARN stopped: npm (terminated by SIGTERM)
+2024-07-08 14:00:00,855 INFO reaped unknown pid 365 (exit status 0)
+2024-07-08 14:02:24,030 INFO reaped unknown pid 30 (exit status 0)
+2024-07-08 14:02:24,033 INFO reaped unknown pid 41 (exit status 0)
+2024-07-08 14:02:24,033 INFO reaped unknown pid 454 (exit status 0)
+2024-07-08 14:04:53,844 INFO spawned: 'npm' with pid 499
+2024-07-08 14:04:55,122 INFO success: npm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-09 16:30:33,261 INFO exited: npm (exit status 0; expected)
+2024-07-09 16:30:33,716 INFO spawned: 'npm' with pid 551
+2024-07-09 16:30:34,753 INFO success: npm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-11 23:56:30,510 INFO exited: npm (exit status 0; expected)
+2024-07-11 23:56:31,687 INFO spawned: 'npm' with pid 603
+2024-07-11 23:56:33,507 INFO success: npm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-14 17:44:18,820 INFO exited: npm (exit status 0; expected)
+2024-07-14 17:44:18,985 INFO spawned: 'npm' with pid 655
+2024-07-14 17:44:19,994 INFO success: npm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-14 19:01:20,556 INFO reaped unknown pid 1307 (exit status 0)
+2024-07-17 16:32:27,088 WARN received SIGTERM indicating exit request
+2024-07-17 16:32:27,129 INFO waiting for npm to die
+2024-07-17 16:32:28,146 WARN stopped: npm (terminated by SIGTERM)
+2024-07-17 16:33:28,191 INFO RPC interface 'supervisor' initialized
+2024-07-17 16:33:28,191 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2024-07-17 16:33:28,192 INFO supervisord started with pid 1
+2024-07-17 16:33:29,196 INFO spawned: 'npm' with pid 18
+2024-07-17 16:33:30,481 INFO success: npm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)

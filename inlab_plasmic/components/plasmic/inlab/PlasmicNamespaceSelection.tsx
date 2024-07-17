@@ -240,14 +240,20 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                           onClick={async event => {
                             const $steps = {};
 
-                            $steps["namespaceIdLocalStorage"] = true
+                            $steps["namespaceIdTitleLocalStorage"] = true
                               ? (() => {
                                   const actionArgs = {
                                     customFunction: async () => {
-                                      return localStorage.setItem(
-                                        "inlab_user_namespace_id",
-                                        currentItem.id
-                                      );
+                                      return (() => {
+                                        localStorage.setItem(
+                                          "inlab_user_namespace_id",
+                                          currentItem.id
+                                        );
+                                        return localStorage.setItem(
+                                          "inlab_user_namespace_title",
+                                          currentItem.title
+                                        );
+                                      })();
                                     }
                                   };
                                   return (({ customFunction }) => {
@@ -256,41 +262,14 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                 })()
                               : undefined;
                             if (
-                              $steps["namespaceIdLocalStorage"] != null &&
-                              typeof $steps["namespaceIdLocalStorage"] ===
+                              $steps["namespaceIdTitleLocalStorage"] != null &&
+                              typeof $steps["namespaceIdTitleLocalStorage"] ===
                                 "object" &&
-                              typeof $steps["namespaceIdLocalStorage"].then ===
-                                "function"
-                            ) {
-                              $steps["namespaceIdLocalStorage"] = await $steps[
-                                "namespaceIdLocalStorage"
-                              ];
-                            }
-
-                            $steps["namespaceTitleLocalStorage"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return localStorage.setItem(
-                                        "inlab_user_namespace_title",
-                                        currentItem.title
-                                      );
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["namespaceTitleLocalStorage"] != null &&
-                              typeof $steps["namespaceTitleLocalStorage"] ===
-                                "object" &&
-                              typeof $steps["namespaceTitleLocalStorage"]
+                              typeof $steps["namespaceIdTitleLocalStorage"]
                                 .then === "function"
                             ) {
-                              $steps["namespaceTitleLocalStorage"] =
-                                await $steps["namespaceTitleLocalStorage"];
+                              $steps["namespaceIdTitleLocalStorage"] =
+                                await $steps["namespaceIdTitleLocalStorage"];
                             }
 
                             $steps["resetFilterWardWardNameWardId"] = true
@@ -299,10 +278,17 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                     customFunction: async () => {
                                       return (() => {
                                         localStorage.setItem(
-                                          "filter_bookmarked",
-                                          ""
+                                          "selected_tab",
+                                          "bookmark"
                                         );
-                                        localStorage.setItem("filter_ward", "");
+                                        localStorage.setItem(
+                                          "bookmark_list",
+                                          undefined
+                                        );
+                                        localStorage.setItem(
+                                          "ward_list",
+                                          undefined
+                                        );
                                         localStorage.setItem(
                                           "filter_ward_name",
                                           ""
@@ -330,19 +316,24 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                 await $steps["resetFilterWardWardNameWardId"];
                             }
 
-                            $steps["runCode"] = true
+                            $steps["logConsole"] = true
                               ? (() => {
                                   const actionArgs = {
                                     customFunction: async () => {
                                       return (() => {
                                         console.log(
-                                          `filter_bookmarked: ${localStorage.getItem(
-                                            "filter_bookmarked"
+                                          `selected_tab: ${localStorage.getItem(
+                                            "selected_tab"
                                           )}`
                                         );
                                         console.log(
-                                          `filter_ward: ${localStorage.getItem(
-                                            "filter_ward"
+                                          `bookmark_list: ${localStorage.getItem(
+                                            "bookmark_list"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `ward_list: ${localStorage.getItem(
+                                            "ward_list"
                                           )}`
                                         );
                                         console.log(
@@ -364,11 +355,11 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                 })()
                               : undefined;
                             if (
-                              $steps["runCode"] != null &&
-                              typeof $steps["runCode"] === "object" &&
-                              typeof $steps["runCode"].then === "function"
+                              $steps["logConsole"] != null &&
+                              typeof $steps["logConsole"] === "object" &&
+                              typeof $steps["logConsole"].then === "function"
                             ) {
-                              $steps["runCode"] = await $steps["runCode"];
+                              $steps["logConsole"] = await $steps["logConsole"];
                             }
 
                             $steps["goToHomepage"] = true

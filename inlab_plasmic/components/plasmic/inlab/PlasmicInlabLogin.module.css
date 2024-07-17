@@ -108,7 +108,7 @@
   height: auto;
   max-width: 100%;
   left: auto;
-  top: 120px;
+  top: 5%;
   z-index: 1;
   background: #ffffff;
   font-size: 15px;
@@ -117,19 +117,19 @@
   color: var(--token-IYO13gyYJHXG);
   font-weight: 700;
   flex-grow: 1;
-  right: 50px;
+  right: 35%;
   border-radius: 5px;
   padding: 12px;
   border: 0.5px dashed var(--token-9iYGdL7i3GKE);
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .inlabInlabPlusAccountSimilarityAnnouncement {
-    top: 20px;
     width: auto;
-    left: 25px;
     font-size: 14px;
     margin-right: 0px;
-    right: 25px;
+    max-width: 100%;
+    text-align: center;
+    right: 5%;
     border-color: var(--token-9iYGdL7i3GKE);
   }
 }

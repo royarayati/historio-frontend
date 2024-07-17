@@ -62,6 +62,8 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
+import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import OnloadUserPatientInteractionCount from "../../OnloadUserPatientInteractionCount"; // plasmic-import: 6oEGl3M40QrL/component
 
@@ -73,6 +75,9 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3wItkax/css
+
+import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
 
 createPlasmicElementProxy;
 
@@ -101,9 +106,12 @@ export type PlasmicLaboratoryData__OverridesType = {
   header?: Flex__<"div">;
   patientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
   patientNameagegender?: Flex__<"div">;
+  saveAdmissionDatetime?: Flex__<typeof SideEffect>;
   normalRangeButton?: Flex__<"div">;
   normalRangeButtonCircle?: Flex__<"div">;
   labData?: Flex__<typeof ApiFetcherComponent>;
+  searchLabName?: Flex__<typeof TextInput>;
+  svg?: Flex__<"svg">;
   laboratoryLists?: Flex__<"div">;
   labResults?: Flex__<"div">;
   checkedFactors?: Flex__<"div">;
@@ -117,6 +125,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   normalFactorValue?: Flex__<"div">;
   abnormalFactorValue?: Flex__<"div">;
   normalRanged?: Flex__<"div">;
+  overlayLayer?: Flex__<"div">;
   antibiogramData?: Flex__<typeof ApiFetcherComponent>;
   antibiogramPerDate?: Flex__<"div">;
   datetimename?: Flex__<"div">;
@@ -180,6 +189,18 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         variableType: "variant",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           $props.bookmarkedPatient
+      },
+      {
+        path: "admissionDatetime",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "searchLabName.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -284,54 +305,105 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           >
             <DataCtxReader__>
               {$ctx => (
-                <div
-                  data-plasmic-name={"patientNameagegender"}
-                  data-plasmic-override={overrides.patientNameagegender}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.patientNameagegender,
-                    {
-                      [sty.patientNameagegenderviewNormalRange]: hasVariant(
-                        $state,
-                        "viewNormalRange",
-                        "viewNormalRange"
-                      )
-                    }
-                  )}
-                >
-                  <React.Fragment>
-                    {$ctx.fetched_data.loading == false &&
-                      (() => {
-                        const dob = new Date($ctx.fetched_data.data.dob);
-                        const ageDiffMs = Date.now() - dob.getTime();
-                        const ageDate = new Date(ageDiffMs);
-                        const ageYears = Math.abs(
-                          ageDate.getUTCFullYear() - 1970
-                        );
-                        const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
-                        if (ageYears < 1) {
-                          const ageMonths = ageDate.getUTCMonth();
-                          return `${fullName} 
+                <React.Fragment>
+                  <div
+                    data-plasmic-name={"patientNameagegender"}
+                    data-plasmic-override={overrides.patientNameagegender}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.patientNameagegender,
+                      {
+                        [sty.patientNameagegenderviewNormalRange]: hasVariant(
+                          $state,
+                          "viewNormalRange",
+                          "viewNormalRange"
+                        )
+                      }
+                    )}
+                  >
+                    <React.Fragment>
+                      {$ctx.fetched_data.loading == false &&
+                        (() => {
+                          const dob = new Date($ctx.fetched_data.data.dob);
+                          const ageDiffMs = Date.now() - dob.getTime();
+                          const ageDate = new Date(ageDiffMs);
+                          const ageYears = Math.abs(
+                            ageDate.getUTCFullYear() - 1970
+                          );
+                          const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
+                          if (ageYears < 1) {
+                            const ageMonths = ageDate.getUTCMonth();
+                            return `${fullName} 
 ${ageMonths} months ${
-                            $ctx.fetched_data.data.gender === "F"
-                              ? " ♀️"
-                              : $ctx.fetched_data.data.gender === "M"
-                              ? " ♂️"
-                              : ""
-                          }`;
-                        } else {
-                          return `${fullName} ${ageYears}${
-                            $ctx.fetched_data.data.gender === "F"
-                              ? " ♀️"
-                              : $ctx.fetched_data.data.gender === "M"
-                              ? " ♂️"
-                              : ""
-                          }`;
-                        }
-                      })()}
-                  </React.Fragment>
-                </div>
+                              $ctx.fetched_data.data.gender === "F"
+                                ? " ♀️"
+                                : $ctx.fetched_data.data.gender === "M"
+                                ? " ♂️"
+                                : ""
+                            }`;
+                          } else {
+                            return `${fullName} ${ageYears}${
+                              $ctx.fetched_data.data.gender === "F"
+                                ? " ♀️"
+                                : $ctx.fetched_data.data.gender === "M"
+                                ? " ♂️"
+                                : ""
+                            }`;
+                          }
+                        })()}
+                    </React.Fragment>
+                  </div>
+                  <SideEffect
+                    data-plasmic-name={"saveAdmissionDatetime"}
+                    data-plasmic-override={overrides.saveAdmissionDatetime}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.saveAdmissionDatetime
+                    )}
+                    onMount={async () => {
+                      const $steps = {};
+
+                      $steps["updateAdmissionDatetime"] =
+                        $ctx.fetched_data.loading == false
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["admissionDatetime"]
+                                },
+                                operation: 0,
+                                value: $ctx.fetched_data.data.admission_datetime
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateAdmissionDatetime"] != null &&
+                        typeof $steps["updateAdmissionDatetime"] === "object" &&
+                        typeof $steps["updateAdmissionDatetime"].then ===
+                          "function"
+                      ) {
+                        $steps["updateAdmissionDatetime"] = await $steps[
+                          "updateAdmissionDatetime"
+                        ];
+                      }
+                    }}
+                  />
+                </React.Fragment>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
@@ -441,6 +513,80 @@ ${ageMonths} months ${
           <DataCtxReader__>
             {$ctx => (
               <React.Fragment>
+                {false ? (
+                  <TextInput
+                    data-plasmic-name={"searchLabName"}
+                    data-plasmic-override={overrides.searchLabName}
+                    className={classNames("__wab_instance", sty.searchLabName)}
+                    endIcon={
+                      $state.value !== "" ? (
+                        <Icons8ClosesvgIcon
+                          data-plasmic-name={"svg"}
+                          data-plasmic-override={overrides.svg}
+                          className={classNames(projectcss.all, sty.svg)}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["updateSearchLabNameValue"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["searchLabName", "value"]
+                                    },
+                                    operation: 0,
+                                    value: ($state.searchLabName.value = "")
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateSearchLabNameValue"] != null &&
+                              typeof $steps["updateSearchLabNameValue"] ===
+                                "object" &&
+                              typeof $steps["updateSearchLabNameValue"].then ===
+                                "function"
+                            ) {
+                              $steps["updateSearchLabNameValue"] = await $steps[
+                                "updateSearchLabNameValue"
+                              ];
+                            }
+                          }}
+                          role={"img"}
+                        />
+                      ) : null
+                    }
+                    onChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "searchLabName",
+                        "value"
+                      ])((e => e.target?.value).apply(null, eventArgs));
+                    }}
+                    placeholder={
+                      "\u0646\u0627\u0645 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0645\u0648\u0631\u062f \u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
+                    }
+                    showEndIcon={true}
+                    value={
+                      generateStateValueProp($state, [
+                        "searchLabName",
+                        "value"
+                      ]) ?? ""
+                    }
+                  />
+                ) : null}
                 {$ctx.fetched_data.loading == false &&
                 $ctx.fetched_data.data.lab_test_groups == 0 ? (
                   <div
@@ -537,45 +683,59 @@ ${ageMonths} months ${
                             }
                           )}
                         >
-                          <div
-                            data-plasmic-name={"labGroupName"}
-                            data-plasmic-override={overrides.labGroupName}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.labGroupName,
-                              {
-                                [sty.labGroupNameviewNormalRange]: hasVariant(
-                                  $state,
-                                  "viewNormalRange",
-                                  "viewNormalRange"
-                                )
+                          {(() => {
+                            try {
+                              return currentItem != null;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return true;
                               }
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.title
-                                    .replace(" (  #* ) ", "")
-                                    .replace(" (  # ) ", "")
-                                    .replace("( #)", "")
-                                    .replace("( #*)", "")
-                                    .replace("* ( #*)", "")
-                                    .replace("(  #* )", "");
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
+                              throw e;
+                            }
+                          })() ? (
+                            <div
+                              data-plasmic-name={"labGroupName"}
+                              data-plasmic-override={overrides.labGroupName}
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.labGroupName,
+                                {
+                                  [sty.labGroupNameviewNormalRange]: hasVariant(
+                                    $state,
+                                    "viewNormalRange",
+                                    "viewNormalRange"
+                                  )
                                 }
-                              })()}
-                            </React.Fragment>
-                          </div>
+                              )}
+                            >
+                              <React.Fragment>
+                                {(() => {
+                                  try {
+                                    return currentItem.title
+                                      .replace(" (  #* ) ", "")
+                                      .replace(" (  # ) ", "")
+                                      .replace("( #)", "")
+                                      .replace("( #*)", "")
+                                      .replace("* ( #*)", "")
+                                      .replace("(  #* )", "");
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return "";
+                                    }
+                                    throw e;
+                                  }
+                                })()}
+                              </React.Fragment>
+                            </div>
+                          ) : null}
                           {(_par =>
                             !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                             (() => {
@@ -911,6 +1071,22 @@ ${ageMonths} months ${
                                     </Stack__>
                                   );
                                 })}
+                                {new Date(currentItem.issued_datetime) <
+                                new Date($state.admissionDatetime) ? (
+                                  <div
+                                    data-plasmic-name={"overlayLayer"}
+                                    data-plasmic-override={
+                                      overrides.overlayLayer
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.overlayLayer
+                                    )}
+                                  >
+                                    {""}
+                                  </div>
+                                ) : null}
                               </Stack__>
                             );
                           })}
@@ -1453,9 +1629,12 @@ const PlasmicDescendants = {
     "header",
     "patientDataApiFetcher",
     "patientNameagegender",
+    "saveAdmissionDatetime",
     "normalRangeButton",
     "normalRangeButtonCircle",
     "labData",
+    "searchLabName",
+    "svg",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -1469,6 +1648,7 @@ const PlasmicDescendants = {
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged",
+    "overlayLayer",
     "antibiogramData",
     "antibiogramPerDate",
     "datetimename",
@@ -1490,15 +1670,23 @@ const PlasmicDescendants = {
     "header",
     "patientDataApiFetcher",
     "patientNameagegender",
+    "saveAdmissionDatetime",
     "normalRangeButton",
     "normalRangeButtonCircle"
   ],
-  patientDataApiFetcher: ["patientDataApiFetcher", "patientNameagegender"],
+  patientDataApiFetcher: [
+    "patientDataApiFetcher",
+    "patientNameagegender",
+    "saveAdmissionDatetime"
+  ],
   patientNameagegender: ["patientNameagegender"],
+  saveAdmissionDatetime: ["saveAdmissionDatetime"],
   normalRangeButton: ["normalRangeButton", "normalRangeButtonCircle"],
   normalRangeButtonCircle: ["normalRangeButtonCircle"],
   labData: [
     "labData",
+    "searchLabName",
+    "svg",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -1511,8 +1699,11 @@ const PlasmicDescendants = {
     "factorNamevalue",
     "normalFactorValue",
     "abnormalFactorValue",
-    "normalRanged"
+    "normalRanged",
+    "overlayLayer"
   ],
+  searchLabName: ["searchLabName", "svg"],
+  svg: ["svg"],
   laboratoryLists: [
     "laboratoryLists",
     "labResults",
@@ -1526,7 +1717,8 @@ const PlasmicDescendants = {
     "factorNamevalue",
     "normalFactorValue",
     "abnormalFactorValue",
-    "normalRanged"
+    "normalRanged",
+    "overlayLayer"
   ],
   labResults: [
     "labResults",
@@ -1540,7 +1732,8 @@ const PlasmicDescendants = {
     "factorNamevalue",
     "normalFactorValue",
     "abnormalFactorValue",
-    "normalRanged"
+    "normalRanged",
+    "overlayLayer"
   ],
   checkedFactors: ["checkedFactors", "labGroupName", "factorName"],
   labGroupName: ["labGroupName"],
@@ -1553,7 +1746,8 @@ const PlasmicDescendants = {
     "factorNamevalue",
     "normalFactorValue",
     "abnormalFactorValue",
-    "normalRanged"
+    "normalRanged",
+    "overlayLayer"
   ],
   labPerDate: [
     "labPerDate",
@@ -1562,7 +1756,8 @@ const PlasmicDescendants = {
     "factorNamevalue",
     "normalFactorValue",
     "abnormalFactorValue",
-    "normalRanged"
+    "normalRanged",
+    "overlayLayer"
   ],
   issuedDatetime: ["issuedDatetime"],
   labLists: [
@@ -1581,6 +1776,7 @@ const PlasmicDescendants = {
   normalFactorValue: ["normalFactorValue"],
   abnormalFactorValue: ["abnormalFactorValue"],
   normalRanged: ["normalRanged"],
+  overlayLayer: ["overlayLayer"],
   antibiogramData: [
     "antibiogramData",
     "antibiogramPerDate",
@@ -1634,9 +1830,12 @@ type NodeDefaultElementType = {
   header: "div";
   patientDataApiFetcher: typeof ApiFetcherComponent;
   patientNameagegender: "div";
+  saveAdmissionDatetime: typeof SideEffect;
   normalRangeButton: "div";
   normalRangeButtonCircle: "div";
   labData: typeof ApiFetcherComponent;
+  searchLabName: typeof TextInput;
+  svg: "svg";
   laboratoryLists: "div";
   labResults: "div";
   checkedFactors: "div";
@@ -1650,6 +1849,7 @@ type NodeDefaultElementType = {
   normalFactorValue: "div";
   abnormalFactorValue: "div";
   normalRanged: "div";
+  overlayLayer: "div";
   antibiogramData: typeof ApiFetcherComponent;
   antibiogramPerDate: "div";
   datetimename: "div";
@@ -1733,9 +1933,12 @@ export const PlasmicLaboratoryData = Object.assign(
     header: makeNodeComponent("header"),
     patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
     patientNameagegender: makeNodeComponent("patientNameagegender"),
+    saveAdmissionDatetime: makeNodeComponent("saveAdmissionDatetime"),
     normalRangeButton: makeNodeComponent("normalRangeButton"),
     normalRangeButtonCircle: makeNodeComponent("normalRangeButtonCircle"),
     labData: makeNodeComponent("labData"),
+    searchLabName: makeNodeComponent("searchLabName"),
+    svg: makeNodeComponent("svg"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     labResults: makeNodeComponent("labResults"),
     checkedFactors: makeNodeComponent("checkedFactors"),
@@ -1749,6 +1952,7 @@ export const PlasmicLaboratoryData = Object.assign(
     normalFactorValue: makeNodeComponent("normalFactorValue"),
     abnormalFactorValue: makeNodeComponent("abnormalFactorValue"),
     normalRanged: makeNodeComponent("normalRanged"),
+    overlayLayer: makeNodeComponent("overlayLayer"),
     antibiogramData: makeNodeComponent("antibiogramData"),
     antibiogramPerDate: makeNodeComponent("antibiogramPerDate"),
     datetimename: makeNodeComponent("datetimename"),

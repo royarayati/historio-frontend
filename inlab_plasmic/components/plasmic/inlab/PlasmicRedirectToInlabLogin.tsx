@@ -166,7 +166,7 @@ function PlasmicRedirectToInlabLogin__RenderFunc(props: {
           ];
         }
 
-        $steps["goToInlabLogin"] =
+        $steps["goToInlabLoginIfInlabUserNull"] =
           localStorage.getItem("inlab_user") == null ||
           localStorage.getItem("inlab_user") == undefined
             ? (() => {
@@ -186,11 +186,87 @@ function PlasmicRedirectToInlabLogin__RenderFunc(props: {
               })()
             : undefined;
         if (
-          $steps["goToInlabLogin"] != null &&
-          typeof $steps["goToInlabLogin"] === "object" &&
-          typeof $steps["goToInlabLogin"].then === "function"
+          $steps["goToInlabLoginIfInlabUserNull"] != null &&
+          typeof $steps["goToInlabLoginIfInlabUserNull"] === "object" &&
+          typeof $steps["goToInlabLoginIfInlabUserNull"].then === "function"
         ) {
-          $steps["goToInlabLogin"] = await $steps["goToInlabLogin"];
+          $steps["goToInlabLoginIfInlabUserNull"] = await $steps[
+            "goToInlabLoginIfInlabUserNull"
+          ];
+        }
+
+        $steps["consoleLogOfTokenExpirationStatus"] = localStorage.getItem(
+          "inlab_user"
+        )
+          ? (() => {
+              const actionArgs = {
+                customFunction: async () => {
+                  return (() => {
+                    const token = JSON.parse(
+                      localStorage.getItem("inlab_user")
+                    ).access;
+                    const payloadBase64 = token.split(".")[1];
+                    const decodedpayload = window.atob(payloadBase64);
+                    const payload = JSON.parse(decodedpayload);
+                    const token_expiration_date = payload.exp;
+                    const current_timestamp = Math.floor(Date.now() / 1000);
+                    const is_token_expired =
+                      token_expiration_date < current_timestamp;
+                    return console.log(`is_token_expired: ${is_token_expired}`);
+                  })();
+                }
+              };
+              return (({ customFunction }) => {
+                return customFunction();
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
+        if (
+          $steps["consoleLogOfTokenExpirationStatus"] != null &&
+          typeof $steps["consoleLogOfTokenExpirationStatus"] === "object" &&
+          typeof $steps["consoleLogOfTokenExpirationStatus"].then === "function"
+        ) {
+          $steps["consoleLogOfTokenExpirationStatus"] = await $steps[
+            "consoleLogOfTokenExpirationStatus"
+          ];
+        }
+
+        $steps["goToInlabLoginIfTokenExpired"] = (() => {
+          if (localStorage.getItem("inlab_user")) {
+            const token = JSON.parse(localStorage.getItem("inlab_user")).access;
+            const payloadBase64 = token.split(".")[1];
+            const decodedpayload = window.atob(payloadBase64);
+            const payload = JSON.parse(decodedpayload);
+            const token_expiration_date = payload.exp;
+            const current_timestamp = Math.floor(Date.now() / 1000);
+            const compare_date = token_expiration_date < current_timestamp;
+            return compare_date;
+          }
+        })()
+          ? (() => {
+              const actionArgs = { destination: `/inlab_login` };
+              return (({ destination }) => {
+                if (
+                  typeof destination === "string" &&
+                  destination.startsWith("#")
+                ) {
+                  document
+                    .getElementById(destination.substr(1))
+                    .scrollIntoView({ behavior: "smooth" });
+                } else {
+                  __nextRouter?.push(destination);
+                }
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
+        if (
+          $steps["goToInlabLoginIfTokenExpired"] != null &&
+          typeof $steps["goToInlabLoginIfTokenExpired"] === "object" &&
+          typeof $steps["goToInlabLoginIfTokenExpired"].then === "function"
+        ) {
+          $steps["goToInlabLoginIfTokenExpired"] = await $steps[
+            "goToInlabLoginIfTokenExpired"
+          ];
         }
       }}
     />

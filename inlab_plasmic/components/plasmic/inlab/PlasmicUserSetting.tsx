@@ -637,7 +637,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                   ? (() => {
                       const actionArgs = {
                         destination:
-                          "https://docs.google.com/forms/d/e/1FAIpQLSe4wNlYlhx_5dvlGE28gca-nJLO_zxGxiMsvPXEjuDz5Xb1_w/viewform?usp=sf_link"
+                          "https://docs.google.com/forms/d/e/1FAIpQLSe4wNlYlhx_5dvlGE28gca-nJLO_zxGxiMsvPXEjuDz5Xb1_w/viewform"
                       };
                       return (({ destination }) => {
                         if (
@@ -698,12 +698,12 @@ function PlasmicUserSetting__RenderFunc(props: {
                   const $steps = {};
 
                   $steps[
-                    "goToHttpsdocsgooglecomformsde1FaIpQlScmvuKNhINyeNxRdba6NrmsCqzl5Ncc60Hbkqa6X42KIhXgkQviewformuspsfLink"
+                    "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
                   ] = true
                     ? (() => {
                         const actionArgs = {
                           destination:
-                            "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform?usp=sf_link"
+                            "https://docs.google.com/forms/d/e/1FAIpQLSe4wNlYlhx_5dvlGE28gca-nJLO_zxGxiMsvPXEjuDz5Xb1_w/viewform"
                         };
                         return (({ destination }) => {
                           if (
@@ -721,19 +721,19 @@ function PlasmicUserSetting__RenderFunc(props: {
                     : undefined;
                   if (
                     $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlScmvuKNhINyeNxRdba6NrmsCqzl5Ncc60Hbkqa6X42KIhXgkQviewformuspsfLink"
+                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
                     ] != null &&
                     typeof $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlScmvuKNhINyeNxRdba6NrmsCqzl5Ncc60Hbkqa6X42KIhXgkQviewformuspsfLink"
+                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
                     ] === "object" &&
                     typeof $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlScmvuKNhINyeNxRdba6NrmsCqzl5Ncc60Hbkqa6X42KIhXgkQviewformuspsfLink"
+                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
                     ].then === "function"
                   ) {
                     $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlScmvuKNhINyeNxRdba6NrmsCqzl5Ncc60Hbkqa6X42KIhXgkQviewformuspsfLink"
+                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
                     ] = await $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlScmvuKNhINyeNxRdba6NrmsCqzl5Ncc60Hbkqa6X42KIhXgkQviewformuspsfLink"
+                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
                     ];
                   }
                 }}

@@ -850,7 +850,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "isDisabled"
               ])}
               link={
-                "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
+                "https://docs.google.com/forms/d/e/1FAIpQLSe4wNlYlhx_5dvlGE28gca-nJLO_zxGxiMsvPXEjuDz5Xb1_w/viewform"
               }
               onDeselectedChange={(...eventArgs) => {
                 generateStateOnChangeProp($state, [
@@ -959,7 +959,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "isDisabled"
               ])}
               link={
-                "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
+                "https://docs.google.com/forms/d/e/1FAIpQLSe4wNlYlhx_5dvlGE28gca-nJLO_zxGxiMsvPXEjuDz5Xb1_w/viewform"
               }
               onDeselectedChange={(...eventArgs) => {
                 generateStateOnChangeProp($state, [

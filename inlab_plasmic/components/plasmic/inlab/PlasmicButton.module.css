@@ -11,7 +11,7 @@
   align-items: stretch;
   flex-wrap: nowrap;
   align-content: stretch;
-  background: none;
+  background: var(--token-4VVKgsFPDvBb);
   border-radius: 5px;
   padding: 7px 10px;
 }
@@ -65,11 +65,13 @@
   border-color: var(--token-tawGjJMbHvx-);
 }
 .rootdeselected {
+  background: none;
   border-width: 1px;
   border-style: none;
 }
 .rootsortDeselected {
   box-shadow: none;
+  background: none;
   border-radius: 10px;
   border-width: 1px;
   border-style: solid;

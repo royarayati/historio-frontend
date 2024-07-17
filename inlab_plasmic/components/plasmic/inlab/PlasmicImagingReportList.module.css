@@ -54,7 +54,7 @@
   z-index: 1;
   background: #ffffff;
   overflow: hidden;
-  max-height: 45px;
+  max-height: 35px;
   right: 0;
   border-top-style: none;
   border-top-width: 0px;
@@ -85,8 +85,14 @@
   max-height: 30px;
   font-size: var(--token-hYndcje43OGL);
   color: #70727a;
+  white-space: pre;
   min-width: 0;
   padding: 4px;
+}
+.saveAdmissionDatetime:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  position: relative;
 }
 .imagingReport:global(.__wab_instance) {
   max-width: 95%;
@@ -245,7 +251,7 @@
   position: fixed;
   left: 0px;
   top: 90px;
-  z-index: 1;
+  z-index: 0;
   min-width: 0;
   border-radius: 5px;
   padding: 8px;
@@ -379,6 +385,26 @@
   > picture
   > img {
   margin-left: 2px;
+}
+.previousAdmission:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  align-self: center;
+}
+.text__a9Ld4 {
+  width: auto;
+}
+.svg___0ZlXb {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__w4LGz {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }
 .imagingTitle {
   position: relative;

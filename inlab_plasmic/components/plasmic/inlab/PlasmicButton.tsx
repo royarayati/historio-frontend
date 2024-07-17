@@ -437,6 +437,9 @@ function PlasmicButton__RenderFunc(props: {
               "selected",
               "selected"
             ),
+            [sty.slotTargetChildrenselected_deselected]:
+              hasVariant($state, "selected", "selected") &&
+              hasVariant($state, "deselected", "deselected"),
             [sty.slotTargetChildrenshape_rounded]: hasVariant(
               $state,
               "shape",
