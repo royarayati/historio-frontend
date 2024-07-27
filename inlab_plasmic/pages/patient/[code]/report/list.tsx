@@ -2,25 +2,25 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import { PageParamsProvider as PageParamsProvider__ } from "@plasmicapp/react-web/lib/host";
-import GlobalContextsProvider from "../../../../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
+import GlobalContextsProvider from "../../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
 
-import { PlasmicImagingReportDatail } from "../../../../../../components/plasmic/inlab/PlasmicImagingReportDatail";
+import { PlasmicImagingReportList } from "../../../../components/plasmic/inlab/PlasmicImagingReportList";
 import { useRouter } from "next/router";
 
-function ImagingReportDatail() {
-  // Use PlasmicImagingReportDatail to render this component as it was
+function ImagingReportList() {
+  // Use PlasmicImagingReportList to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicImagingReportDatail are:
+  // Props you can pass into PlasmicImagingReportList are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, PlasmicImagingReportDatail is wrapped by your project's global
+  // By default, PlasmicImagingReportList is wrapped by your project's global
   // variant context providers. These wrappers may be moved to
   // Next.js Custom App component
   // (https://nextjs.org/docs/advanced-features/custom-app).
@@ -31,10 +31,10 @@ function ImagingReportDatail() {
         params={useRouter()?.query}
         query={useRouter()?.query}
       >
-        <PlasmicImagingReportDatail />
+        <PlasmicImagingReportList />
       </PageParamsProvider__>
     </GlobalContextsProvider>
   );
 }
 
-export default ImagingReportDatail;
+export default ImagingReportList;

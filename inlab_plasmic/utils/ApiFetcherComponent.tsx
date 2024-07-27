@@ -18,7 +18,7 @@ interface ApiActions {
     reload(): void;
 }
 
-export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>((props: PropsType, ref) => {
+export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>((props: PropsType, ref) => { 
 
     logForDev("ApiFetcherComponent: called.")
 
@@ -28,13 +28,15 @@ export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>((props: Pro
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
 
-    function onAxiosSuccess(response: any): void {
+    const onAxiosSuccess = (response: any): void => {
         logForDev("ApiFetcherComponent: axios request success: " + (response.data ? "Data Fetched" : "Data Not Fetched"));
         setLoading(false);
         setData(response);
     }
 
-    function onAxiosError(error: any): void {
+
+//     // function onAxiosError(error: any): void {
+    const onAxiosError = (error: any): void => {
         if (axios.isCancel(error)) {
             return;
         }
@@ -43,33 +45,32 @@ export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>((props: Pro
         setData(error);
     }
 
-    useImperativeHandle(
-        ref,
-        () => {
-            return {
-                reload() {
-                    logForDev("ApiFetcherComponent: reload called.");
-                    setLoading(true);
+useImperativeHandle(
+    ref,
+    () => ({
+        reload() {
+            logForDev("ApiFetcherComponent: reload called.");
+            setLoading(true);
 
-                    const authedHeaders = {
-                        'Authorization': 'Bearer ' + inlabUser.access,
-                        ...props.headers
-                    };
-
-                    axios.request({
-                        method: props.method || 'GET',
-                        url: globalContext.baseUrl + props.path,
-                        headers: authedHeaders,
-                        data: props.requestBody,
-                    })
-                        .then(onAxiosSuccess)
-                        .catch(onAxiosError)
-
-                }
+            const authedHeaders = {
+                'Authorization': 'Bearer ' + inlabUser.access,
+                ...props.headers
             };
-        },
-        []
-    );
+
+            axios.request({
+                method: props.method || 'GET',
+                url: globalContext.baseUrl + props.path,
+                headers: authedHeaders,
+                data: props.requestBody,
+            })
+                .then(onAxiosSuccess)
+                .catch(onAxiosError)
+
+        }
+    }),
+    // [props.path, props.headers, props.method, props.requestBody, inlabUser, globalContext.baseUrl]
+    [props, globalContext, inlabUser]
+);
 
     useEffect(() => {
         logForDev("ApiFetcherComponent: useEffect: " + (inlabUser ? "User found" : "User is NULL"));
@@ -101,9 +102,8 @@ export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>((props: Pro
                     .then(onAxiosSuccess)
                     .catch(onAxiosError)
 
-
-
             }).catch(error => {
+        
                 // TODO: Handle errors of refreshing user
                 logForDev("ApiFetcherComponent: useEffect: Refreshing user failed!!! ");
                 setLoading(false);
@@ -120,7 +120,7 @@ export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>((props: Pro
 
     }, [props, globalContext, inlabUser]);
 
-
+    
 
     return (
         <div className={props.className}>

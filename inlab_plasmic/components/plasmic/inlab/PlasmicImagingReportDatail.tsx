@@ -652,20 +652,6 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/${(() => {
-                            try {
-                              return $ctx.params.bookmarked === "true"
-                                ? true
-                                : false;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
                           })()}/profile`
                         };
                         return (({ destination }) => {
@@ -730,20 +716,6 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/${(() => {
-                            try {
-                              return $ctx.params.bookmarked === "true"
-                                ? true
-                                : false;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
                           })()}/report/list`
                         };
                         return (({ destination }) => {
@@ -799,20 +771,6 @@ ${ageMonths} months ${
                           destination: `/patient/${(() => {
                             try {
                               return $ctx.params.code;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()}/${(() => {
-                            try {
-                              return $ctx.params.bookmarked === "true"
-                                ? true
-                                : false;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -948,20 +906,6 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/${(() => {
-                            try {
-                              return $ctx.params.bookmarked === "true"
-                                ? true
-                                : false;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
                           })()}/profile`
                         };
                         return (({ destination }) => {
@@ -1043,18 +987,6 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/${(() => {
-                            try {
-                              return $ctx.params.bookmarked;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
                           })()}/report/list`
                         };
                         return (({ destination }) => {
@@ -1127,20 +1059,6 @@ ${ageMonths} months ${
                           destination: `/patient/${(() => {
                             try {
                               return $ctx.params.code;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()}/${(() => {
-                            try {
-                              return $ctx.params.bookmarked === "true"
-                                ? true
-                                : false;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||

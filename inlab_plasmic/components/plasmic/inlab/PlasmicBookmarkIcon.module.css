@@ -15,5 +15,8 @@
   color: var(--token-9iYGdL7i3GKE);
 }
 .bookmarkloadingBookmark {
-  color: #ff0000;
+  color: var(--token-4VVKgsFPDvBb);
+  max-width: 100%;
+  width: 3em;
+  height: 3em;
 }
