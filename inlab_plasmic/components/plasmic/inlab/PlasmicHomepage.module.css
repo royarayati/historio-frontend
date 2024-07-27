@@ -660,9 +660,10 @@
   margin-bottom: 0px;
   align-self: center;
   height: auto;
+  max-height: 100%;
   min-width: 0;
   row-gap: 5px;
-  padding: 0% 10px 100px;
+  padding: 0% 0px 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .patients:global(.__wab_instance) {
@@ -1478,6 +1479,9 @@
 .modalFeatureBanner__modal :global(.ant-modal-content) {
   background: #ffffff;
   outline: none;
+}
+.text__o7FzR {
+  line-height: 1.8;
 }
 .متوجهشدم:global(.__wab_instance) {
   max-width: 100%;

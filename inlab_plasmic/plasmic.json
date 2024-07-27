@@ -1260,12 +1260,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicLaboratoryData.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/[bookmarked]/lab.tsx"
+            "modulePath": "../pages/patient/[code]/lab.tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicLaboratoryData.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/patient/[code]/[bookmarked]/lab"
+          "path": "/patient/[code]/lab"
         },
         {
           "id": "AFB-1jxjMqDb",
@@ -1274,12 +1274,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicImagingReportList.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/[bookmarked]/report/list.tsx"
+            "modulePath": "../pages/patient/[code]/report/list.tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicImagingReportList.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/patient/[code]/[bookmarked]/report/list"
+          "path": "/patient/[code]/report/list"
         },
         {
           "id": "Ev8txsbuZl9W",
@@ -1288,12 +1288,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicPatientProfile.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/[bookmarked]/profile.tsx"
+            "modulePath": "../pages/patient/[code]/profile.tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicPatientProfile.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/patient/[code]/[bookmarked]/profile"
+          "path": "/patient/[code]/profile"
         },
         {
           "id": "oQ9IYAdIiE5g",
@@ -1399,12 +1399,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicImagingReportDatail.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/[bookmarked]/report/detail/[reportID].tsx"
+            "modulePath": "../pages/patient/[code]/report/detail/[reportID].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicImagingReportDatail.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/patient/[code]/[bookmarked]/report/detail/[reportID]"
+          "path": "/patient/[code]/report/detail/[reportID]"
         },
         {
           "id": "yfSr1skfxkHn",

@@ -183,7 +183,7 @@ function PlasmicHomepage__RenderFunc(props: {
       Object.assign(
         {
           open: false,
-          newVersionDatetime: "10/04/1403"
+          newVersionDatetime: "06/05/1403"
         },
         props.args
       ),
@@ -2394,19 +2394,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                               throw e;
                                             }
-                                          })()}/${(() => {
-                                            try {
-                                              return currentItem.bookmarked;
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return undefined;
-                                              }
-                                              throw e;
-                                            }
                                           })()}/profile`
                                         };
                                         return (({ destination }) => {
@@ -2479,19 +2466,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                               throw e;
                                             }
-                                          })()}/${(() => {
-                                            try {
-                                              return currentItem.bookmarked;
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return undefined;
-                                              }
-                                              throw e;
-                                            }
                                           })()}/report/list`
                                         };
                                         return (({ destination }) => {
@@ -2551,19 +2525,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                           destination: `/patient/${(() => {
                                             try {
                                               return currentItem.profile_id;
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return undefined;
-                                              }
-                                              throw e;
-                                            }
-                                          })()}/${(() => {
-                                            try {
-                                              return currentItem.bookmarked;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -2911,8 +2872,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       const $steps = {};
 
                       $steps["setLocalWardList"] =
-                        $state.searchbarWard.value === "" &&
-                        $state.modalWard.open
+                        $state.searchbarWard.value == ""
                           ? (() => {
                               const actionArgs = {
                                 customFunction: async () => {
@@ -3335,9 +3295,17 @@ function PlasmicHomepage__RenderFunc(props: {
                 className={classNames("__wab_instance", sty.newFeatureBanner)}
                 newVersionDatetime2={args.newVersionDatetime}
               >
-                {
-                  "\u0641\u06cc\u0644\u062a\u0631 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633 \u0646\u0627\u0645 \u0628\u062e\u0634 \u0628\u0633\u062a\u0631\u06cc \u0622\u0646 \u0647\u0627 \n \u06a9\u0627\u0647\u0634 \u0633\u0627\u06cc\u0632 \u062c\u062f\u0648\u0644 \u0627\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u062c\u0647\u062a \u0645\u0634\u0627\u0647\u062f\u0647 \u0627\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u0628\u06cc\u0634\u062a\u0631 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 "
-                }
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__o7FzR
+                  )}
+                >
+                  {
+                    "\u0627\u0641\u0632\u0627\u06cc\u0634 \u0633\u0631\u0639\u062a \u0646\u0645\u0627\u06cc\u0634 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0634\u062f\u0647\n\u0627\u0641\u0632\u0627\u06cc\u0634 \u0633\u0631\u0639\u062a \u0646\u0645\u0627\u06cc\u0634 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u062e\u0634 \u0647\u0627\n\u0631\u0641\u0639 \u0628\u0627\u06af \u062f\u0631 \u0646\u0645\u0627\u06cc\u0634 \u0644\u06cc\u0633\u062a \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
+                  }
+                </div>
               </NewFeatureBanner>
               <Button
                 data-plasmic-name={

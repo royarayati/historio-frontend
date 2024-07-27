@@ -1061,7 +1061,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/[bookmarked]/profile`
+                          })()}/profile`
                         };
                         return (({ destination }) => {
                           if (
@@ -1123,7 +1123,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/[bookmarked]/report/list`
+                          })()}/report/list`
                         };
                         return (({ destination }) => {
                           if (
@@ -1185,7 +1185,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/[bookmarked]/lab`
+                          })()}/lab`
                         };
                         return (({ destination }) => {
                           if (
