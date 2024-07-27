@@ -110,7 +110,6 @@ export type PlasmicImagingReportList__OverridesType = {
   deactivePacsButton?: Flex__<"div">;
   deactiveViewPacs?: Flex__<"div">;
   activeViewPacsButton2?: Flex__<typeof Button>;
-  ikhcPacsButton?: Flex__<typeof Button>;
   imagingReportList2?: Flex__<"div">;
   imagingReportCard?: Flex__<"div">;
   imagingTitledatetime?: Flex__<"div">;
@@ -289,36 +288,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
         path: "previousAdmission[].sortSelected",
         type: "private",
         variableType: "boolean"
-      },
-      {
-        path: "ikhcPacsButton.isDisabled",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "ikhcPacsButton.selected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "ikhcPacsButton.deselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "ikhcPacsButton.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "ikhcPacsButton.sortSelected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -567,7 +536,8 @@ ${ageMonths} months ${
                     hasGap={true}
                     className={classNames(projectcss.all, sty.viewPacsButtons)}
                   >
-                    {$ctx.fetched_data.data.pacs_url !== null ? (
+                    {$ctx.fetched_data.data.pacs_url !== null ||
+                    localStorage.getItem("namespace_id") === "5" ? (
                       <Button
                         data-plasmic-name={"activeViewPacsButton"}
                         data-plasmic-override={overrides.activeViewPacsButton}
@@ -626,6 +596,31 @@ ${ageMonths} months ${
                             typeof $steps["goToPage"].then === "function"
                           ) {
                             $steps["goToPage"] = await $steps["goToPage"];
+                          }
+
+                          $steps["invokeGlobalAction"] =
+                            localStorage.getItem("namespace_id") === 5
+                              ? (() => {
+                                  const actionArgs = {
+                                    args: [
+                                      "GET",
+                                      `https://synapps.tums.ac.ir/n8n/webhook/PACS?patient_id=${$ctx.params.code}`
+                                    ]
+                                  };
+                                  return $globalActions[
+                                    "AuthGlobalContext.apiFetcher"
+                                  ]?.apply(null, [...actionArgs.args]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["invokeGlobalAction"] != null &&
+                            typeof $steps["invokeGlobalAction"] === "object" &&
+                            typeof $steps["invokeGlobalAction"].then ===
+                              "function"
+                          ) {
+                            $steps["invokeGlobalAction"] = await $steps[
+                              "invokeGlobalAction"
+                            ];
                           }
                         }}
                         onDeselectedChange={(...eventArgs) => {
@@ -832,93 +827,6 @@ ${ageMonths} months ${
                       </Button>
                     </div>
                   </Stack__>
-                ) : null}
-                {localStorage.getItem("namespace_id") === 5 ? (
-                  <Button
-                    data-plasmic-name={"ikhcPacsButton"}
-                    data-plasmic-override={overrides.ikhcPacsButton}
-                    className={classNames("__wab_instance", sty.ikhcPacsButton)}
-                    color={"blue"}
-                    deselected={generateStateValueProp($state, [
-                      "ikhcPacsButton",
-                      "deselected"
-                    ])}
-                    isDisabled={generateStateValueProp($state, [
-                      "ikhcPacsButton",
-                      "isDisabled"
-                    ])}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["invokeGlobalAction"] =
-                        localStorage.getItem("namespace_id") === 5
-                          ? (() => {
-                              const actionArgs = {
-                                args: [
-                                  "GET",
-                                  `https://synapps.tums.ac.ir/n8n/webhook/PACS?patient_id=${$ctx.params.code}`
-                                ]
-                              };
-                              return $globalActions[
-                                "AuthGlobalContext.apiFetcher"
-                              ]?.apply(null, [...actionArgs.args]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["invokeGlobalAction"] != null &&
-                        typeof $steps["invokeGlobalAction"] === "object" &&
-                        typeof $steps["invokeGlobalAction"].then === "function"
-                      ) {
-                        $steps["invokeGlobalAction"] = await $steps[
-                          "invokeGlobalAction"
-                        ];
-                      }
-                    }}
-                    onDeselectedChange={(...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "ikhcPacsButton",
-                        "deselected"
-                      ])(eventArgs[0]);
-                    }}
-                    onIsDisabledChange={(...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "ikhcPacsButton",
-                        "isDisabled"
-                      ])(eventArgs[0]);
-                    }}
-                    onSelectedChange={(...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "ikhcPacsButton",
-                        "selected"
-                      ])(eventArgs[0]);
-                    }}
-                    onSortDeselectedChange={(...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "ikhcPacsButton",
-                        "sortDeselected"
-                      ])(eventArgs[0]);
-                    }}
-                    onSortSelectedChange={(...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "ikhcPacsButton",
-                        "sortSelected"
-                      ])(eventArgs[0]);
-                    }}
-                    selected={generateStateValueProp($state, [
-                      "ikhcPacsButton",
-                      "selected"
-                    ])}
-                    sortDeselected={generateStateValueProp($state, [
-                      "ikhcPacsButton",
-                      "sortDeselected"
-                    ])}
-                    sortSelected={generateStateValueProp($state, [
-                      "ikhcPacsButton",
-                      "sortSelected"
-                    ])}
-                  >
-                    {"View PACS"}
-                  </Button>
                 ) : null}
                 {$ctx.fetched_data.loading == true ? (
                   <div
@@ -1971,7 +1879,6 @@ const PlasmicDescendants = {
     "deactivePacsButton",
     "deactiveViewPacs",
     "activeViewPacsButton2",
-    "ikhcPacsButton",
     "imagingReportList2",
     "imagingReportCard",
     "imagingTitledatetime",
@@ -2019,7 +1926,6 @@ const PlasmicDescendants = {
     "deactivePacsButton",
     "deactiveViewPacs",
     "activeViewPacsButton2",
-    "ikhcPacsButton",
     "imagingReportList2",
     "imagingReportCard",
     "imagingTitledatetime",
@@ -2039,7 +1945,6 @@ const PlasmicDescendants = {
   deactivePacsButton: ["deactivePacsButton"],
   deactiveViewPacs: ["deactiveViewPacs", "activeViewPacsButton2"],
   activeViewPacsButton2: ["activeViewPacsButton2"],
-  ikhcPacsButton: ["ikhcPacsButton"],
   imagingReportList2: [
     "imagingReportList2",
     "imagingReportCard",
@@ -2127,7 +2032,6 @@ type NodeDefaultElementType = {
   deactivePacsButton: "div";
   deactiveViewPacs: "div";
   activeViewPacsButton2: typeof Button;
-  ikhcPacsButton: typeof Button;
   imagingReportList2: "div";
   imagingReportCard: "div";
   imagingTitledatetime: "div";
@@ -2228,7 +2132,6 @@ export const PlasmicImagingReportList = Object.assign(
     deactivePacsButton: makeNodeComponent("deactivePacsButton"),
     deactiveViewPacs: makeNodeComponent("deactiveViewPacs"),
     activeViewPacsButton2: makeNodeComponent("activeViewPacsButton2"),
-    ikhcPacsButton: makeNodeComponent("ikhcPacsButton"),
     imagingReportList2: makeNodeComponent("imagingReportList2"),
     imagingReportCard: makeNodeComponent("imagingReportCard"),
     imagingTitledatetime: makeNodeComponent("imagingTitledatetime"),
