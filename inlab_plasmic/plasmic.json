@@ -1590,6 +1590,19 @@
           "cssFilePath": "plasmic/inlab/PlasmicAlert.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "X347FgRZh6HH",
+          "name": "NewNoticeBanner",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicNewNoticeBanner.tsx",
+          "importSpec": {
+            "modulePath": "NewNoticeBanner.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicNewNoticeBanner.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

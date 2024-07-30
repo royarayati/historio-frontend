@@ -1537,3 +1537,62 @@
   background: #ffffff;
   min-width: 0;
 }
+.modalNoticeBanner:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  background: none;
+}
+.modalNoticeBanner__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.متوجهشدم2:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  align-self: center;
+}
+.text___3SwMh {
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 500;
+  font-family: var(--VazirmatnCustom);
+  font-style: normal;
+  color: #ffffff;
+  text-align: right;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__dkMqG {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__cgvlF {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__xga15 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  background: #ffffff;
+  min-width: 0;
+}
