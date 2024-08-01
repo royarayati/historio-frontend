@@ -521,6 +521,22 @@
     flex-shrink: 0;
   }
 }
+.bookmarkedPatientNumber2 {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-NMUbRE7XpwuK);
+  font-weight: 300;
+  text-align: center;
+  background: var(--token-4VVKgsFPDvBb);
+  color: var(--token-jgohepLVeKvh);
+  padding-right: 2.5px;
+  padding-left: 2.5px;
+  align-self: center;
+  margin-right: 0px;
+  border-radius: 100%;
+}
 .ward2:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
@@ -584,6 +600,28 @@
   border-radius: 8px;
   border-width: 1px;
   border-style: solid;
+}
+.bookmarkedPatientNumber {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-NMUbRE7XpwuK);
+  font-weight: 300;
+  text-align: center;
+  background: var(--token-4VVKgsFPDvBb);
+  color: var(--token-jgohepLVeKvh);
+  padding-right: 2.5px;
+  padding-left: 2.5px;
+  align-self: center;
+  margin-right: -40px;
+  border-radius: 100%;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .bookmarkedPatientNumber {
+    margin-right: -10px;
+    font-size: var(--token-CdE1_0ZaCyT1);
+  }
 }
 .bookmarked:global(.__wab_instance) {
   max-width: 100%;
