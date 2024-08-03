@@ -636,19 +636,7 @@ ${ageMonths} months ${
                 {(
                   hasVariant(globalVariants, "screen", "mobileFirst")
                     ? $ctx.fetched_data.loading === true
-                    : (() => {
-                        try {
-                          return $ctx.fetched_data.loading === true;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })()
+                    : $ctx.fetched_data.loading === true
                 ) ? (
                   <LoaderSpinnerIcon
                     data-plasmic-name={"svg"}

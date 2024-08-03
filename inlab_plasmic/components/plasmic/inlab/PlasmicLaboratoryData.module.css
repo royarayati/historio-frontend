@@ -758,7 +758,7 @@
   min-height: 0;
 }
 .antibiogramData:global(.__wab_instance) {
-  max-width: 100%;
+  max-width: 95%;
   object-fit: cover;
   position: relative;
   width: 100%;
@@ -766,7 +766,7 @@
   height: auto;
   max-height: 100%;
   margin-bottom: 65px;
-  justify-self: flex-start;
+  justify-self: center;
   font-size: var(--token-CdE1_0ZaCyT1);
   margin-top: 5px;
   overflow: visible;
