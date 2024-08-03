@@ -521,22 +521,6 @@
     flex-shrink: 0;
   }
 }
-.bookmarkedPatientNumber2 {
-  position: relative;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  font-size: var(--token-NMUbRE7XpwuK);
-  font-weight: 300;
-  text-align: center;
-  background: var(--token-4VVKgsFPDvBb);
-  color: var(--token-jgohepLVeKvh);
-  padding-right: 2.5px;
-  padding-left: 2.5px;
-  align-self: center;
-  margin-right: 0px;
-  border-radius: 100%;
-}
 .ward2:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
@@ -547,6 +531,34 @@
   .ward2:global(.__wab_instance) {
     width: auto;
     height: auto;
+  }
+}
+.wardPatientNumber {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  max-width: 100%;
+  font-size: var(--token-NMUbRE7XpwuK);
+  font-weight: 300;
+  text-align: center;
+  background: var(--token-4VVKgsFPDvBb);
+  color: var(--token-jgohepLVeKvh);
+  padding-right: 0.1rem;
+  padding-left: 0.1rem;
+  align-self: center;
+  margin-right: 0.3rem;
+  line-height: 1.8;
+  border-radius: 100%;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .wardPatientNumber {
+    width: 1.3rem;
+    height: 1.3rem;
+    background: var(--token-4VVKgsFPDvBb);
+    color: var(--token-jgohepLVeKvh);
+    font-size: var(--token-CdE1_0ZaCyT1);
+    line-height: 1.9;
+    display: block;
   }
 }
 .text___69F6Z {
@@ -601,28 +613,6 @@
   border-width: 1px;
   border-style: solid;
 }
-.bookmarkedPatientNumber {
-  position: relative;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  font-size: var(--token-NMUbRE7XpwuK);
-  font-weight: 300;
-  text-align: center;
-  background: var(--token-4VVKgsFPDvBb);
-  color: var(--token-jgohepLVeKvh);
-  padding-right: 2.5px;
-  padding-left: 2.5px;
-  align-self: center;
-  margin-right: -40px;
-  border-radius: 100%;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .bookmarkedPatientNumber {
-    margin-right: -10px;
-    font-size: var(--token-CdE1_0ZaCyT1);
-  }
-}
 .bookmarked:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
@@ -633,6 +623,32 @@
   .bookmarked:global(.__wab_instance) {
     width: 100px;
     flex-shrink: 0;
+  }
+}
+.bookmarkedPatientNumber {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  max-width: 100%;
+  font-size: var(--token-NMUbRE7XpwuK);
+  font-weight: 300;
+  text-align: center;
+  background: var(--token-4VVKgsFPDvBb);
+  color: var(--token-jgohepLVeKvh);
+  padding-right: 0.1rem;
+  padding-left: 0.1rem;
+  align-self: center;
+  line-height: 1.8;
+  border-radius: 100%;
+  margin: 0px 0.3rem 0px 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .bookmarkedPatientNumber {
+    font-size: var(--token-CdE1_0ZaCyT1);
+    width: 1.3rem;
+    height: 1.3rem;
+    line-height: 1.9;
+    margin: 0px 0.3rem 0px 0px;
   }
 }
 .text___5DmEl {

@@ -107,7 +107,7 @@
   overflow: auto;
   z-index: 1;
   left: 0px;
-  top: 40px;
+  top: 60px;
   bottom: 66px;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
@@ -118,7 +118,7 @@
   .imagingReport:global(.__wab_instance) {
     z-index: 1;
     left: 0px;
-    top: 40px;
+    top: 60px;
     position: fixed;
     padding-top: 0px;
     bottom: 66px;
@@ -161,21 +161,22 @@
   width: auto;
   height: 1em;
 }
-.svg {
-  object-fit: cover;
-  max-width: 100%;
-  color: var(--token-tawGjJMbHvx-);
-  width: auto;
-  height: 30px;
-  align-self: center;
-  left: 48%;
-  top: 30px;
+.text__pIosL {
   position: fixed;
-  right: 48%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: 17px;
+  top: 45px;
   z-index: 1;
+  text-align: center;
+  background: #ffffff80;
+  right: 17px;
+  font-size: 12px;
+  border-radius: 5px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .svg {
+  .text__pIosL {
     display: block;
   }
 }
@@ -218,6 +219,11 @@
 }
 .imagingReportsSection > * {
   grid-column: 4;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .imagingReportsSection {
+    overflow: auto;
+  }
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .imagingReportsSection > * {

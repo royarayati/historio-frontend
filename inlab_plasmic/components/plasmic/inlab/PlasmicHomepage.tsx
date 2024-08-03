@@ -127,11 +127,11 @@ export type PlasmicHomepage__OverridesType = {
   searchbar?: Flex__<typeof TextInput>;
   tabs?: Flex__<"div">;
   wardButtonStack?: Flex__<"div">;
-  bookmarkedPatientNumber2?: Flex__<"div">;
   ward2?: Flex__<typeof Button>;
+  wardPatientNumber?: Flex__<"div">;
   bookmarkedButtonStack?: Flex__<"div">;
-  bookmarkedPatientNumber?: Flex__<"div">;
   bookmarked?: Flex__<typeof Button>;
+  bookmarkedPatientNumber?: Flex__<"div">;
   نتايحجستوجو?: Flex__<"div">;
   patients?: Flex__<typeof ApiFetcherComponent>;
   header2?: Flex__<"div">;
@@ -1302,45 +1302,6 @@ function PlasmicHomepage__RenderFunc(props: {
                       role={"img"}
                     />
                   ) : null}
-                  {(() => {
-                    try {
-                      return $state.filterWard;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return true;
-                      }
-                      throw e;
-                    }
-                  })() ? (
-                    <div
-                      data-plasmic-name={"bookmarkedPatientNumber2"}
-                      data-plasmic-override={overrides.bookmarkedPatientNumber2}
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.bookmarkedPatientNumber2
-                      )}
-                    >
-                      <React.Fragment>
-                        {(() => {
-                          try {
-                            return $state.patientNumber;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return "";
-                            }
-                            throw e;
-                          }
-                        })()}
-                      </React.Fragment>
-                    </div>
-                  ) : null}
                   <Button
                     data-plasmic-name={"ward2"}
                     data-plasmic-override={overrides.ward2}
@@ -1569,6 +1530,61 @@ function PlasmicHomepage__RenderFunc(props: {
                       "sortSelected"
                     ])}
                   >
+                    {(
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return $state.filterWard;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : (() => {
+                            try {
+                              return $state.filterWard;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return true;
+                              }
+                              throw e;
+                            }
+                          })()
+                    ) ? (
+                      <div
+                        data-plasmic-name={"wardPatientNumber"}
+                        data-plasmic-override={overrides.wardPatientNumber}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.wardPatientNumber
+                        )}
+                      >
+                        <React.Fragment>
+                          {(() => {
+                            try {
+                              return $state.patientNumber;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return "";
+                              }
+                              throw e;
+                            }
+                          })()}
+                        </React.Fragment>
+                      </div>
+                    ) : null}
                     <div
                       className={classNames(
                         projectcss.all,
@@ -1616,45 +1632,6 @@ function PlasmicHomepage__RenderFunc(props: {
                     role={"img"}
                   />
 
-                  {(() => {
-                    try {
-                      return $state.filterBookmarked;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return true;
-                      }
-                      throw e;
-                    }
-                  })() ? (
-                    <div
-                      data-plasmic-name={"bookmarkedPatientNumber"}
-                      data-plasmic-override={overrides.bookmarkedPatientNumber}
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.bookmarkedPatientNumber
-                      )}
-                    >
-                      <React.Fragment>
-                        {(() => {
-                          try {
-                            return $state.patientNumber;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return "";
-                            }
-                            throw e;
-                          }
-                        })()}
-                      </React.Fragment>
-                    </div>
-                  ) : null}
                   <Button
                     data-plasmic-name={"bookmarked"}
                     data-plasmic-override={overrides.bookmarked}
@@ -1815,6 +1792,47 @@ function PlasmicHomepage__RenderFunc(props: {
                       "sortSelected"
                     ])}
                   >
+                    {(() => {
+                      try {
+                        return $state.filterBookmarked;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={"bookmarkedPatientNumber"}
+                        data-plasmic-override={
+                          overrides.bookmarkedPatientNumber
+                        }
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.bookmarkedPatientNumber
+                        )}
+                      >
+                        <React.Fragment>
+                          {(() => {
+                            try {
+                              return $state.patientNumber;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return "";
+                              }
+                              throw e;
+                            }
+                          })()}
+                        </React.Fragment>
+                      </div>
+                    ) : null}
                     <div
                       className={classNames(
                         projectcss.all,
@@ -1944,7 +1962,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                   variablePath: ["patientNumber"]
                                 },
                                 operation: 0,
-                                value: $ctx.fetched_data.data.length
+                                value:
+                                  $ctx.fetched_data.data != (null || undefined)
+                                    ? $ctx.fetched_data.data.length
+                                    : ""
                               };
                               return (({
                                 variable,
@@ -2560,7 +2581,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )}
                               >
                                 <React.Fragment>
-                                  {currentItem.bed.includes("تخت")
+                                  {currentItem.bed === null
+                                    ? ""
+                                    : currentItem.bed.includes("تخت")
                                     ? currentItem.bed
                                     : "تخت " + currentItem.bed}
                                 </React.Fragment>
@@ -4010,11 +4033,11 @@ const PlasmicDescendants = {
     "searchbar",
     "tabs",
     "wardButtonStack",
-    "bookmarkedPatientNumber2",
     "ward2",
+    "wardPatientNumber",
     "bookmarkedButtonStack",
-    "bookmarkedPatientNumber",
     "bookmarked",
+    "bookmarkedPatientNumber",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
     "patients",
     "header2",
@@ -4064,11 +4087,11 @@ const PlasmicDescendants = {
     "searchbar",
     "tabs",
     "wardButtonStack",
-    "bookmarkedPatientNumber2",
     "ward2",
+    "wardPatientNumber",
     "bookmarkedButtonStack",
-    "bookmarkedPatientNumber",
     "bookmarked",
+    "bookmarkedPatientNumber",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
     "patients",
     "header2",
@@ -4108,11 +4131,11 @@ const PlasmicDescendants = {
     "searchbar",
     "tabs",
     "wardButtonStack",
-    "bookmarkedPatientNumber2",
     "ward2",
+    "wardPatientNumber",
     "bookmarkedButtonStack",
-    "bookmarkedPatientNumber",
     "bookmarked",
+    "bookmarkedPatientNumber",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648"
   ],
   namespaceTitle: ["namespaceTitle"],
@@ -4122,22 +4145,22 @@ const PlasmicDescendants = {
   tabs: [
     "tabs",
     "wardButtonStack",
-    "bookmarkedPatientNumber2",
     "ward2",
+    "wardPatientNumber",
     "bookmarkedButtonStack",
-    "bookmarkedPatientNumber",
-    "bookmarked"
+    "bookmarked",
+    "bookmarkedPatientNumber"
   ],
-  wardButtonStack: ["wardButtonStack", "bookmarkedPatientNumber2", "ward2"],
-  bookmarkedPatientNumber2: ["bookmarkedPatientNumber2"],
-  ward2: ["ward2"],
+  wardButtonStack: ["wardButtonStack", "ward2", "wardPatientNumber"],
+  ward2: ["ward2", "wardPatientNumber"],
+  wardPatientNumber: ["wardPatientNumber"],
   bookmarkedButtonStack: [
     "bookmarkedButtonStack",
-    "bookmarkedPatientNumber",
-    "bookmarked"
+    "bookmarked",
+    "bookmarkedPatientNumber"
   ],
+  bookmarked: ["bookmarked", "bookmarkedPatientNumber"],
   bookmarkedPatientNumber: ["bookmarkedPatientNumber"],
-  bookmarked: ["bookmarked"],
   نتايحجستوجو: [
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648"
   ],
@@ -4252,11 +4275,11 @@ type NodeDefaultElementType = {
   searchbar: typeof TextInput;
   tabs: "div";
   wardButtonStack: "div";
-  bookmarkedPatientNumber2: "div";
   ward2: typeof Button;
+  wardPatientNumber: "div";
   bookmarkedButtonStack: "div";
-  bookmarkedPatientNumber: "div";
   bookmarked: typeof Button;
+  bookmarkedPatientNumber: "div";
   نتايحجستوجو: "div";
   patients: typeof ApiFetcherComponent;
   header2: "div";
@@ -4368,11 +4391,11 @@ export const PlasmicHomepage = Object.assign(
     searchbar: makeNodeComponent("searchbar"),
     tabs: makeNodeComponent("tabs"),
     wardButtonStack: makeNodeComponent("wardButtonStack"),
-    bookmarkedPatientNumber2: makeNodeComponent("bookmarkedPatientNumber2"),
     ward2: makeNodeComponent("ward2"),
+    wardPatientNumber: makeNodeComponent("wardPatientNumber"),
     bookmarkedButtonStack: makeNodeComponent("bookmarkedButtonStack"),
-    bookmarkedPatientNumber: makeNodeComponent("bookmarkedPatientNumber"),
     bookmarked: makeNodeComponent("bookmarked"),
+    bookmarkedPatientNumber: makeNodeComponent("bookmarkedPatientNumber"),
     نتايحجستوجو: makeNodeComponent(
       "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648"
     ),

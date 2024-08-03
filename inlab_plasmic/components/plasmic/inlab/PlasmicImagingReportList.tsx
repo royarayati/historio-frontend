@@ -79,7 +79,6 @@ import sty from "./PlasmicImagingReportList.module.css"; // plasmic-import: AFB-
 
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
-import LoaderSpinnerIcon from "./icons/PlasmicIcon__LoaderSpinner"; // plasmic-import: -kAkKYtWcc8f/icon
 
 createPlasmicElementProxy;
 
@@ -107,7 +106,6 @@ export type PlasmicImagingReportList__OverridesType = {
   saveAdmissionDatetime?: Flex__<typeof SideEffect>;
   imagingReport?: Flex__<typeof ApiFetcherComponent>;
   viewPacsButton?: Flex__<typeof Button>;
-  svg?: Flex__<"svg">;
   imagingReportsSection?: Flex__<"section">;
   imagingReportSection?: Flex__<"section">;
   imagingReportList2?: Flex__<"div">;
@@ -635,15 +633,44 @@ ${ageMonths} months ${
                 </Button>
                 {(
                   hasVariant(globalVariants, "screen", "mobileFirst")
-                    ? $ctx.fetched_data.loading === true
-                    : $ctx.fetched_data.loading === true
+                    ? (() => {
+                        try {
+                          return $ctx.fetched_data.loading === true;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })()
+                    : (() => {
+                        try {
+                          return $ctx.fetched_data.loading === true;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })()
                 ) ? (
-                  <LoaderSpinnerIcon
-                    data-plasmic-name={"svg"}
-                    data-plasmic-override={overrides.svg}
-                    className={classNames(projectcss.all, sty.svg)}
-                    role={"img"}
-                  />
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__pIosL
+                    )}
+                  >
+                    {
+                      "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                    }
+                  </div>
                 ) : null}
                 {$ctx.fetched_data.loading == false &&
                 $ctx.fetched_data.data.radiology_services == "" ? (
@@ -1405,7 +1432,6 @@ const PlasmicDescendants = {
     "saveAdmissionDatetime",
     "imagingReport",
     "viewPacsButton",
-    "svg",
     "imagingReportsSection",
     "imagingReportSection",
     "imagingReportList2",
@@ -1442,7 +1468,6 @@ const PlasmicDescendants = {
   imagingReport: [
     "imagingReport",
     "viewPacsButton",
-    "svg",
     "imagingReportsSection",
     "imagingReportSection",
     "imagingReportList2",
@@ -1454,7 +1479,6 @@ const PlasmicDescendants = {
     "imagingType"
   ],
   viewPacsButton: ["viewPacsButton"],
-  svg: ["svg"],
   imagingReportsSection: [
     "imagingReportsSection",
     "imagingReportSection",
@@ -1540,7 +1564,6 @@ type NodeDefaultElementType = {
   saveAdmissionDatetime: typeof SideEffect;
   imagingReport: typeof ApiFetcherComponent;
   viewPacsButton: typeof Button;
-  svg: "svg";
   imagingReportsSection: "section";
   imagingReportSection: "section";
   imagingReportList2: "div";
@@ -1630,7 +1653,6 @@ export const PlasmicImagingReportList = Object.assign(
     saveAdmissionDatetime: makeNodeComponent("saveAdmissionDatetime"),
     imagingReport: makeNodeComponent("imagingReport"),
     viewPacsButton: makeNodeComponent("viewPacsButton"),
-    svg: makeNodeComponent("svg"),
     imagingReportsSection: makeNodeComponent("imagingReportsSection"),
     imagingReportSection: makeNodeComponent("imagingReportSection"),
     imagingReportList2: makeNodeComponent("imagingReportList2"),
