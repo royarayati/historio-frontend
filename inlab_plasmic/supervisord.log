@@ -669,3 +669,6 @@
 2024-07-30 08:01:34,395 INFO supervisord started with pid 1
 2024-07-30 08:01:35,401 INFO spawned: 'npm' with pid 18
 2024-07-30 08:01:36,644 INFO success: npm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-07-30 19:04:44,537 WARN received SIGTERM indicating exit request
+2024-07-30 19:04:44,585 INFO waiting for npm to die
+2024-07-30 19:04:45,613 WARN stopped: npm (terminated by SIGTERM)

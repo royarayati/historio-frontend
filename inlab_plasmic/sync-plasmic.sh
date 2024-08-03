@@ -4,7 +4,8 @@ set -Ee
 
 # This script can not initialize plasmic 
 # if you don't have plasmic project create once using create-plasmic-app
-# Also it needs plasmic auth files exists, does not authenticate for now
+
+# plasmic.auth file is required in root directory
 
 PLASMIC_PROJECT_ID='wjafXWEvDytFogT7SiMy2v'
 
