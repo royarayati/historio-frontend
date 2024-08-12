@@ -127,7 +127,7 @@
   font-weight: 700;
   letter-spacing: normal;
   line-height: 1.2;
-  color: rgba(24, 29, 36, 1);
+  color: var(--token-IYO13gyYJHXG);
   position: relative;
   top: auto;
   left: auto;
@@ -307,7 +307,7 @@
   font-weight: 700;
   letter-spacing: normal;
   line-height: 1.2;
-  color: rgba(24, 29, 36, 1);
+  color: var(--token-IYO13gyYJHXG);
   text-align: right;
   align-self: flex-end;
   white-space: pre-wrap;
@@ -387,7 +387,7 @@
   font-weight: 700;
   letter-spacing: normal;
   line-height: 1.2;
-  color: rgba(24, 29, 36, 1);
+  color: var(--token-IYO13gyYJHXG);
   position: relative;
   text-align: right;
   align-self: center;

@@ -1265,7 +1265,7 @@ ${ageMonths} months ${
                             }
                             throw e;
                           }
-                        })()}/lab`
+                        })()}/lab/[adm_id]`
                       };
                       return (({ destination }) => {
                         if (

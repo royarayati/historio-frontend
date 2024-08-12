@@ -61,6 +61,7 @@ import {
 
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import RedirectToHomepage from "../../RedirectToHomepage"; // plasmic-import: x1Fxn6tnPsJ0/component
+import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/component
@@ -74,6 +75,7 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicInlabLogin.module.css"; // plasmic-import: J2d--RhwPuEt/css
 
+import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 import MdiaccountIcon from "./icons/PlasmicIcon__Mdiaccount"; // plasmic-import: mC78MSouMgiO/icon
 import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
 import LockPasswordSvgrepoComsvgIcon from "./icons/PlasmicIcon__LockPasswordSvgrepoComsvg"; // plasmic-import: 2bxvHhfddyLp/icon
@@ -104,8 +106,8 @@ export type PlasmicInlabLogin__OverridesType = {
   inlabLogin?: Flex__<"div">;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   redirectToHomepage?: Flex__<typeof RedirectToHomepage>;
-  wrongUserAnnouncement?: Flex__<"div">;
   inlabInlabPlusAccountSimilarityAnnouncement?: Flex__<"div">;
+  alert?: Flex__<typeof Alert>;
   pageContent?: Flex__<"div">;
   username?: Flex__<typeof TextInput>;
   password?: Flex__<typeof TextInput>;
@@ -340,37 +342,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
         />
 
         <div
-          data-plasmic-name={"wrongUserAnnouncement"}
-          data-plasmic-override={overrides.wrongUserAnnouncement}
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.wrongUserAnnouncement,
-            {
-              [sty.wrongUserAnnouncementdisabledLoginButton]: hasVariant(
-                $state,
-                "disabledLoginButton",
-                "disabledLoginButton"
-              ),
-              [sty.wrongUserAnnouncementwrongUser]: hasVariant(
-                $state,
-                "wrongUser",
-                "wrongUser"
-              ),
-              [sty.wrongUserAnnouncementwrongUser_disabledLoginButton]:
-                hasVariant(
-                  $state,
-                  "disabledLoginButton",
-                  "disabledLoginButton"
-                ) && hasVariant($state, "wrongUser", "wrongUser")
-            }
-          )}
-        >
-          {
-            "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0648\u0627\u0631\u062f \u0634\u062f\u0647 \u0646\u0627\u0645\u0639\u062a\u0628\u0631 \u0627\u0633\u062a"
-          }
-        </div>
-        <div
           data-plasmic-name={"inlabInlabPlusAccountSimilarityAnnouncement"}
           data-plasmic-override={
             overrides.inlabInlabPlusAccountSimilarityAnnouncement
@@ -401,6 +372,32 @@ function PlasmicInlabLogin__RenderFunc(props: {
             "\u062d\u0633\u0627\u0628 \u06a9\u0627\u0631\u0628\u0631\u06cc \u0634\u0645\u0627 \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u0628\u0627 \u0627\u06cc\u0646\u0644\u0628 \u06cc\u06a9\u0633\u0627\u0646 \u0627\u0633\u062a"
           }
         </div>
+        <Alert
+          data-plasmic-name={"alert"}
+          data-plasmic-override={overrides.alert}
+          className={classNames("__wab_instance", sty.alert)}
+          header={
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__hvY3
+              )}
+            >
+              {
+                "\u062d\u0633\u0627\u0628 \u06a9\u0627\u0631\u0628\u0631\u06cc \u0634\u0645\u0627 \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u0628\u0627 \u0627\u06cc\u0646\u0644\u0628 \u06cc\u06a9\u0633\u0627\u0646 \u0627\u0633\u062a"
+              }
+            </div>
+          }
+          icon={
+            <Icon6Icon
+              className={classNames(projectcss.all, sty.svg__ptCLr)}
+              role={"img"}
+            />
+          }
+          informationNoDescription={true}
+        />
+
         <Stack__
           as={"div"}
           data-plasmic-name={"pageContent"}
@@ -487,6 +484,19 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 />
               ) : null
             }
+            error={(() => {
+              try {
+                return $state.wrongUser;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return [];
+                }
+                throw e;
+              }
+            })()}
             name={``}
             onChange={(...eventArgs) => {
               generateStateOnChangeProp($state, ["username", "value"])(
@@ -496,6 +506,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
             placeholder={
               "\u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc"
             }
+            required={false}
             showStartIcon={true}
             startIcon={
               <MdiaccountIcon
@@ -566,6 +577,19 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 />
               ) : null
             }
+            error={(() => {
+              try {
+                return $state.wrongUser;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return [];
+                }
+                throw e;
+              }
+            })()}
             onChange={(...eventArgs) => {
               generateStateOnChangeProp($state, ["password", "value"])(
                 (e => e.target?.value).apply(null, eventArgs)
@@ -584,6 +608,31 @@ function PlasmicInlabLogin__RenderFunc(props: {
             value={generateStateValueProp($state, ["password", "value"]) ?? ""}
           />
 
+          {(() => {
+            try {
+              return $state.wrongUser;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__rvtSi
+              )}
+            >
+              {
+                "\u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc \u0648 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0627\u0634\u062a\u0628\u0627\u0647 \u0627\u0633\u062a."
+              }
+            </div>
+          ) : null}
           <Button
             data-plasmic-name={"loginButton"}
             data-plasmic-override={overrides.loginButton}
@@ -599,7 +648,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "wrongUser"
               )
             })}
-            color={"blue"}
             deselected={generateStateValueProp($state, [
               "loginButton",
               "deselected"
@@ -1065,8 +1113,8 @@ const PlasmicDescendants = {
     "inlabLogin",
     "redirectToNamespaceSelection",
     "redirectToHomepage",
-    "wrongUserAnnouncement",
     "inlabInlabPlusAccountSimilarityAnnouncement",
+    "alert",
     "pageContent",
     "username",
     "password",
@@ -1078,10 +1126,10 @@ const PlasmicDescendants = {
   ],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   redirectToHomepage: ["redirectToHomepage"],
-  wrongUserAnnouncement: ["wrongUserAnnouncement"],
   inlabInlabPlusAccountSimilarityAnnouncement: [
     "inlabInlabPlusAccountSimilarityAnnouncement"
   ],
+  alert: ["alert"],
   pageContent: [
     "pageContent",
     "username",
@@ -1111,8 +1159,8 @@ type NodeDefaultElementType = {
   inlabLogin: "div";
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   redirectToHomepage: typeof RedirectToHomepage;
-  wrongUserAnnouncement: "div";
   inlabInlabPlusAccountSimilarityAnnouncement: "div";
+  alert: typeof Alert;
   pageContent: "div";
   username: typeof TextInput;
   password: typeof TextInput;
@@ -1187,10 +1235,10 @@ export const PlasmicInlabLogin = Object.assign(
       "redirectToNamespaceSelection"
     ),
     redirectToHomepage: makeNodeComponent("redirectToHomepage"),
-    wrongUserAnnouncement: makeNodeComponent("wrongUserAnnouncement"),
     inlabInlabPlusAccountSimilarityAnnouncement: makeNodeComponent(
       "inlabInlabPlusAccountSimilarityAnnouncement"
     ),
+    alert: makeNodeComponent("alert"),
     pageContent: makeNodeComponent("pageContent"),
     username: makeNodeComponent("username"),
     password: makeNodeComponent("password"),

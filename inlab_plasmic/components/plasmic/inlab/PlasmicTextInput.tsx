@@ -79,17 +79,20 @@ export type PlasmicTextInput__VariantMembers = {
   showStartIcon: "showStartIcon";
   showEndIcon: "showEndIcon";
   isDisabled: "isDisabled";
+  error: "error";
 };
 export type PlasmicTextInput__VariantsArgs = {
   showStartIcon?: SingleBooleanChoiceArg<"showStartIcon">;
   showEndIcon?: SingleBooleanChoiceArg<"showEndIcon">;
   isDisabled?: SingleBooleanChoiceArg<"isDisabled">;
+  error?: SingleBooleanChoiceArg<"error">;
 };
 type VariantPropType = keyof PlasmicTextInput__VariantsArgs;
 export const PlasmicTextInput__VariantProps = new Array<VariantPropType>(
   "showStartIcon",
   "showEndIcon",
-  "isDisabled"
+  "isDisabled",
+  "error"
 );
 
 export type PlasmicTextInput__ArgsType = {
@@ -155,6 +158,7 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
     | "email"
     | "tel";
   autoFocus?: boolean;
+  error?: SingleBooleanChoiceArg<"error">;
 }
 
 const $$ = {};
@@ -234,6 +238,12 @@ function PlasmicTextInput__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => $props["value"]
+      },
+      {
+        path: "error",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.error
       }
     ],
     [$props, $ctx, $refs]
@@ -284,6 +294,7 @@ function PlasmicTextInput__RenderFunc(props: {
           [sty.textInput___focusVisibleWithin_showStartIcon]:
             hasVariant($state, "showStartIcon", "showStartIcon") &&
             triggers.focusVisibleWithin_textInput,
+          [sty.textInputerror]: hasVariant($state, "error", "error"),
           [sty.textInputisDisabled]: hasVariant(
             $state,
             "isDisabled",
@@ -315,6 +326,7 @@ function PlasmicTextInput__RenderFunc(props: {
         className={classNames(projectcss.all, sty.startIconContainer, {
           [sty.startIconContainer___focusVisibleWithin]:
             triggers.focusVisibleWithin_textInput,
+          [sty.startIconContainererror]: hasVariant($state, "error", "error"),
           [sty.startIconContainerisDisabled]: hasVariant(
             $state,
             "isDisabled",

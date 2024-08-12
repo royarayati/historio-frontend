@@ -52,6 +52,9 @@
     padding-bottom: 5px;
   }
 }
+.textInputerror {
+  border-color: var(--token-b7Myz3RtiwPQ);
+}
 .textInput:hover {
   background: #ffffff;
   flex-grow: 0;
@@ -99,6 +102,9 @@
   margin-left: calc(0px + 8px) !important;
 }
 .startIconContainerisDisabled {
+  margin-left: calc(0px + 8px) !important;
+}
+.startIconContainererror {
   margin-left: calc(0px + 8px) !important;
 }
 .textInput:hover .startIconContainer {
@@ -155,6 +161,7 @@
   object-fit: cover;
   width: auto;
   height: 1em;
+  color: var(--token-b7Myz3RtiwPQ);
 }
 .input {
   width: 100%;
