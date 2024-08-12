@@ -117,7 +117,7 @@ function PlasmicNewNoticeBanner__RenderFunc(props: {
     () =>
       Object.assign(
         {
-          newNoticeDatetime: "05/05/1403"
+          newNoticeDatetime: "22/05/1403"
         },
         props.args
       ),
@@ -153,9 +153,60 @@ function PlasmicNewNoticeBanner__RenderFunc(props: {
         className={classNames(projectcss.all, projectcss.__wab_text, sty.text)}
         dir={"rtl"}
       >
-        {
-          "\u0633\u0644\u0627\u0645 \u0648 \u0648\u0642\u062a \u0628\u062e\u06cc\u0631\n\n\u0628\u0647 \u0639\u0644\u062a \u0627\u0646\u062c\u0627\u0645 \u0628\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06cc \u0632\u06cc\u0631\u0633\u0627\u062e\u062a\u06cc \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628\u060c \u0633\u0631\u0639\u062a \u0633\u0631\u0686 \u06a9\u0646\u062f \u0634\u062f\u0647 \u0627\u0633\u062a. \u062a\u06cc\u0645 \u0633\u06cc\u0646\u0627\u067e\u0633 \u062f\u0631 \u062d\u0627\u0644 \u0631\u0641\u0639 \u0645\u0634\u06a9\u0644 \u0627\u0633\u062a \u0648 \u0628\u0647 \u0632\u0648\u062f\u06cc \u0627\u06cc\u0646 \u06a9\u0646\u062f\u06cc \u0628\u0631\u0637\u0631\u0641 \u062e\u0648\u0627\u0647\u062f \u0634\u062f.\n\n\u0627\u0632 \u0627\u06cc\u0646 \u0628\u0627\u0628\u062a \u067e\u0648\u0632\u0634 \u0645\u06cc\u062e\u0648\u0627\u0647\u06cc\u0645 \u0648 \u0627\u0632 \u0635\u0628\u0648\u0631\u06cc\u200c\u062a\u0627\u0646 \u0645\u062a\u0634\u06a9\u0631\u06cc\u0645 \n\n\u0628\u0627 \u0639\u0634\u0642 \u0648 \u0627\u062d\u062a\u0631\u0627\u0645 - \u062a\u06cc\u0645 \u0633\u06cc\u0646\u0627\u067e\u0633 \ud83d\ude0a\ud83c\udf39"
-        }
+        <React.Fragment>
+          <React.Fragment>
+            {
+              "\u0628\u0647 \u062f\u0644\u06cc\u0644 \u06cc\u06a9 \u0628\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06cc \u0632\u06cc\u0631\u0633\u0627\u062e\u062a\u06cc \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628\u060c \n\n\u0645\u0648\u0642\u062a\u0627 \u062c\u0633\u062a \u0648 \u062c\u0648 "
+            }
+          </React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700 }}
+          >
+            {
+              "\u0635\u0631\u0641\u0627 \u0628\u0627 \u00ab\u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u00bb\u060c \u00ab\u06a9\u062f\u0645\u0644\u06cc\u00bb \u0648 \u06cc\u0627 \u00ab\u06a9\u062f \u067e\u0630\u06cc\u0631\u0634\u00bb "
+            }
+          </span>
+          <React.Fragment>
+            {
+              "\u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0627\u0633\u062a\n\n"
+            }
+          </React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700 }}
+          >
+            {"\u0645\u0648\u0642\u062a\u0627 \u0627\u0632 \u00ab"}
+          </span>
+          <React.Fragment>{""}</React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700, textDecorationLine: "underline" }}
+          >
+            {"\u0646\u0627\u0645"}
+          </span>
+          <React.Fragment>{""}</React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700 }}
+          >
+            {
+              "\u00bb \u062f\u0631 \u0633\u0631\u0686 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 "
+            }
+          </span>
+          <React.Fragment>{""}</React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700, textDecorationLine: "underline" }}
+          >
+            {"\u0646\u06a9\u0646\u06cc\u062f"}
+          </span>
+          <React.Fragment>
+            {
+              "\n\n\u0627\u0632 \u0628\u0627\u0628\u062a \u0628\u0631\u0648\u0632 \u0627\u06cc\u0646 \u0645\u0634\u06a9\u0644 \u0645\u062a\u0623\u0633\u0641\u06cc\u0645\ud83d\ude4f \u062a\u06cc\u0645 \u0633\u06cc\u0646\u0627\u067e\u0633 \u062f\u0631 \u062d\u0627\u0644 \u062a\u0644\u0627\u0634 \u0628\u0631\u0627\u06cc \u0631\u0641\u0639 \u0633\u0631\u06cc\u0639\u062a\u0631 \u0645\u0634\u06a9\u0644 \u0647\u0633\u062a\u0646\u062f"
+            }
+          </React.Fragment>
+        </React.Fragment>
       </div>
     </NewFeatureBanner>
   ) as React.ReactElement | null;

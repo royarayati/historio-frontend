@@ -433,12 +433,14 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                   d =>
                                     String.fromCharCode(d.charCodeAt(0) - 1728)
                                 );
-                                const englishTime = shamsiTime.replace(
-                                  /[۰-۹]/g,
-                                  d =>
+                                const englishTime = shamsiTime
+                                  .replace(/[۰-۹]/g, d =>
                                     String.fromCharCode(d.charCodeAt(0) - 1728)
-                                );
-                                return `${englishDate}`;
+                                  )
+                                  .split(":")
+                                  .slice(0, 2)
+                                  .join(":");
+                                return `${englishDate}-${englishTime}`;
                               })()}
                             </React.Fragment>
                           </div>
@@ -1007,7 +1009,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/lab`
+                          })()}/lab/[adm_id]`
                         };
                         return (({ destination }) => {
                           if (

@@ -739,7 +739,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                 }}
               >
                 {
-                  "\u0628\u0627\u0632\u06cc\u0627\u0628\u06cc \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
+                  "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
                 }
               </div>
             </Stack__>
@@ -1185,7 +1185,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/lab`
+                          })()}/lab/[adm_id]`
                         };
                         return (({ destination }) => {
                           if (

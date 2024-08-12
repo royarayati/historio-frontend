@@ -359,7 +359,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}/lab`
+                        })()}/lab/[adm_id]`
                       };
                       return (({ destination }) => {
                         if (

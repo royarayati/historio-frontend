@@ -68,6 +68,7 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicAlert.module.css"; // plasmic-import: a9E2wGEF0Qy9/css
 
+import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 
 createPlasmicElementProxy;
@@ -127,6 +128,7 @@ export const PlasmicAlert__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicAlert__OverridesType = {
   root?: Flex__<"div">;
+  svg?: Flex__<"svg">;
   h6?: Flex__<"h6">;
 };
 
@@ -311,220 +313,267 @@ function PlasmicAlert__RenderFunc(props: {
         }
       )}
     >
-      <Stack__
-        as={"div"}
-        hasGap={true}
-        className={classNames(projectcss.all, sty.freeBox___714Pb, {
-          [sty.freeBoxerrorNoDescription___714PbYlYx4]: hasVariant(
-            $state,
-            "errorNoDescription",
-            "errorNoDescription"
-          ),
-          [sty.freeBoxerror___714PbvqevA]: hasVariant($state, "error", "error"),
-          [sty.freeBoxinformationNoDescription___714Pb2Zkny]: hasVariant(
-            $state,
-            "informationNoDescription",
-            "informationNoDescription"
-          ),
-          [sty.freeBoxinformation___714PbTl87Q]: hasVariant(
-            $state,
-            "information",
-            "information"
-          ),
-          [sty.freeBoxnoBody___714PbdxExi]: hasVariant(
-            $state,
-            "noBody",
-            "noBody"
-          ),
-          [sty.freeBoxnoHeader___714PbkpkU]: hasVariant(
-            $state,
-            "noHeader",
-            "noHeader"
-          ),
-          [sty.freeBoxnoIcon___714Pbmkx82]: hasVariant(
-            $state,
-            "noIcon",
-            "noIcon"
-          ),
-          [sty.freeBoxsuccessNoDescription___714PbcucpD]: hasVariant(
-            $state,
-            "successNoDescription",
-            "successNoDescription"
-          ),
-          [sty.freeBoxsuccess___714PbK6FQx]: hasVariant(
-            $state,
-            "success",
-            "success"
-          ),
-          [sty.freeBoxwarningNoDescription___714PbZ73B]: hasVariant(
-            $state,
-            "warningNoDescription",
-            "warningNoDescription"
-          ),
-          [sty.freeBoxwarning___714PbBcd6]: hasVariant(
-            $state,
-            "warning",
-            "warning"
-          )
-        })}
-      >
+      {(() => {
+        try {
+          return setTimeout(() => {
+            false;
+          }, 10000);
+        } catch (e) {
+          if (
+            e instanceof TypeError ||
+            e?.plasmicType === "PlasmicUndefinedDataError"
+          ) {
+            return true;
+          }
+          throw e;
+        }
+      })() ? (
         <Stack__
           as={"div"}
           hasGap={true}
-          className={classNames(projectcss.all, sty.freeBox__cUclm, {
-            [sty.freeBoxerrorNoDescription__cUclmylYx4]: hasVariant(
+          className={classNames(projectcss.all, sty.freeBox___714Pb, {
+            [sty.freeBoxerrorNoDescription___714PbYlYx4]: hasVariant(
               $state,
               "errorNoDescription",
               "errorNoDescription"
             ),
-            [sty.freeBoxerror__cUclMvqevA]: hasVariant(
+            [sty.freeBoxerror___714PbvqevA]: hasVariant(
               $state,
               "error",
               "error"
             ),
-            [sty.freeBoxinformationNoDescription__cUclm2Zkny]: hasVariant(
+            [sty.freeBoxinformationNoDescription___714Pb2Zkny]: hasVariant(
               $state,
               "informationNoDescription",
               "informationNoDescription"
             ),
-            [sty.freeBoxinformation__cUclmTl87Q]: hasVariant(
+            [sty.freeBoxinformation___714PbTl87Q]: hasVariant(
               $state,
               "information",
               "information"
             ),
-            [sty.freeBoxnoHeader__cUclMkpkU]: hasVariant(
+            [sty.freeBoxnoBody___714PbdxExi]: hasVariant(
+              $state,
+              "noBody",
+              "noBody"
+            ),
+            [sty.freeBoxnoHeader___714PbkpkU]: hasVariant(
               $state,
               "noHeader",
               "noHeader"
             ),
-            [sty.freeBoxnoIcon__cUclMmkx82]: hasVariant(
+            [sty.freeBoxnoIcon___714Pbmkx82]: hasVariant(
               $state,
               "noIcon",
               "noIcon"
             ),
-            [sty.freeBoxsuccessNoDescription__cUclMcucpD]: hasVariant(
+            [sty.freeBoxsuccessNoDescription___714PbcucpD]: hasVariant(
               $state,
               "successNoDescription",
               "successNoDescription"
             ),
-            [sty.freeBoxsuccess__cUclmk6FQx]: hasVariant(
+            [sty.freeBoxsuccess___714PbK6FQx]: hasVariant(
               $state,
               "success",
               "success"
             ),
-            [sty.freeBoxwarningNoDescription__cUclmz73B]: hasVariant(
+            [sty.freeBoxwarningNoDescription___714PbZ73B]: hasVariant(
               $state,
               "warningNoDescription",
               "warningNoDescription"
             ),
-            [sty.freeBoxwarning__cUclmBcd6]: hasVariant(
+            [sty.freeBoxwarning___714PbBcd6]: hasVariant(
               $state,
               "warning",
               "warning"
             )
           })}
         >
-          <h6
-            data-plasmic-name={"h6"}
-            data-plasmic-override={overrides.h6}
-            className={classNames(projectcss.all, projectcss.h6, sty.h6, {
-              [sty.h6noHeader]: hasVariant($state, "noHeader", "noHeader"),
-              [sty.h6noIcon]: hasVariant($state, "noIcon", "noIcon")
-            })}
-          >
-            {renderPlasmicSlot({
-              defaultContents: "Heads up!",
-              value: args.header
-            })}
-          </h6>
-          <div
-            className={classNames(projectcss.all, sty.freeBox__nYlk9, {
-              [sty.freeBoxerrorNoDescription__nYlk9YlYx4]: hasVariant(
+          <Icons8ClosesvgIcon
+            data-plasmic-name={"svg"}
+            data-plasmic-override={overrides.svg}
+            className={classNames(projectcss.all, sty.svg)}
+            role={"img"}
+          />
+
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__cUclm, {
+              [sty.freeBoxerrorNoDescription__cUclmylYx4]: hasVariant(
                 $state,
                 "errorNoDescription",
                 "errorNoDescription"
               ),
-              [sty.freeBoxerror__nYlk9VqevA]: hasVariant(
+              [sty.freeBoxerror__cUclMvqevA]: hasVariant(
                 $state,
                 "error",
                 "error"
               ),
-              [sty.freeBoxinformationNoDescription__nYlk92Zkny]: hasVariant(
+              [sty.freeBoxinformationNoDescription__cUclm2Zkny]: hasVariant(
                 $state,
                 "informationNoDescription",
                 "informationNoDescription"
               ),
-              [sty.freeBoxinformation__nYlk9Tl87Q]: hasVariant(
+              [sty.freeBoxinformation__cUclmTl87Q]: hasVariant(
                 $state,
                 "information",
                 "information"
               ),
-              [sty.freeBoxnoBody__nYlk9DxExi]: hasVariant(
-                $state,
-                "noBody",
-                "noBody"
-              ),
-              [sty.freeBoxnoHeader__nYlk9KpkU]: hasVariant(
+              [sty.freeBoxnoHeader__cUclMkpkU]: hasVariant(
                 $state,
                 "noHeader",
                 "noHeader"
               ),
-              [sty.freeBoxsuccessNoDescription__nYlk9CucpD]: hasVariant(
+              [sty.freeBoxnoIcon__cUclMmkx82]: hasVariant(
+                $state,
+                "noIcon",
+                "noIcon"
+              ),
+              [sty.freeBoxsuccessNoDescription__cUclMcucpD]: hasVariant(
                 $state,
                 "successNoDescription",
                 "successNoDescription"
               ),
-              [sty.freeBoxsuccess__nYlk9K6FQx]: hasVariant(
+              [sty.freeBoxsuccess__cUclmk6FQx]: hasVariant(
                 $state,
                 "success",
                 "success"
               ),
-              [sty.freeBoxwarningNoDescription__nYlk9Z73B]: hasVariant(
+              [sty.freeBoxwarningNoDescription__cUclmz73B]: hasVariant(
                 $state,
                 "warningNoDescription",
                 "warningNoDescription"
               ),
-              [sty.freeBoxwarning__nYlk9Bcd6]: hasVariant(
+              [sty.freeBoxwarning__cUclmBcd6]: hasVariant(
                 $state,
                 "warning",
                 "warning"
               )
             })}
           >
+            <h6
+              data-plasmic-name={"h6"}
+              data-plasmic-override={overrides.h6}
+              className={classNames(projectcss.all, projectcss.h6, sty.h6, {
+                [sty.h6noHeader]: hasVariant($state, "noHeader", "noHeader"),
+                [sty.h6noIcon]: hasVariant($state, "noIcon", "noIcon")
+              })}
+            >
+              {renderPlasmicSlot({
+                defaultContents: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__agUol
+                    )}
+                  >
+                    {"Heads up"}
+                  </div>
+                ),
+                value: args.header
+              })}
+            </h6>
+            <div
+              className={classNames(projectcss.all, sty.freeBox__nYlk9, {
+                [sty.freeBoxerrorNoDescription__nYlk9YlYx4]: hasVariant(
+                  $state,
+                  "errorNoDescription",
+                  "errorNoDescription"
+                ),
+                [sty.freeBoxerror__nYlk9VqevA]: hasVariant(
+                  $state,
+                  "error",
+                  "error"
+                ),
+                [sty.freeBoxinformationNoDescription__nYlk92Zkny]: hasVariant(
+                  $state,
+                  "informationNoDescription",
+                  "informationNoDescription"
+                ),
+                [sty.freeBoxinformation__nYlk9Tl87Q]: hasVariant(
+                  $state,
+                  "information",
+                  "information"
+                ),
+                [sty.freeBoxnoBody__nYlk9DxExi]: hasVariant(
+                  $state,
+                  "noBody",
+                  "noBody"
+                ),
+                [sty.freeBoxnoHeader__nYlk9KpkU]: hasVariant(
+                  $state,
+                  "noHeader",
+                  "noHeader"
+                ),
+                [sty.freeBoxsuccessNoDescription__nYlk9CucpD]: hasVariant(
+                  $state,
+                  "successNoDescription",
+                  "successNoDescription"
+                ),
+                [sty.freeBoxsuccess__nYlk9K6FQx]: hasVariant(
+                  $state,
+                  "success",
+                  "success"
+                ),
+                [sty.freeBoxwarningNoDescription__nYlk9Z73B]: hasVariant(
+                  $state,
+                  "warningNoDescription",
+                  "warningNoDescription"
+                ),
+                [sty.freeBoxwarning__nYlk9Bcd6]: hasVariant(
+                  $state,
+                  "warning",
+                  "warning"
+                )
+              })}
+            >
+              {renderPlasmicSlot({
+                defaultContents: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__kxRxU
+                    )}
+                  >
+                    {"Here is the body text description for the alert!"}
+                  </div>
+                ),
+                value: args.body
+              })}
+            </div>
+          </Stack__>
+          <div
+            className={classNames(projectcss.all, sty.freeBox__sca1K, {
+              [sty.freeBoxnoIcon__sca1Kmkx82]: hasVariant(
+                $state,
+                "noIcon",
+                "noIcon"
+              )
+            })}
+          >
             {renderPlasmicSlot({
-              defaultContents:
-                "Here is the body text description for the alert!",
-              value: args.body
+              defaultContents: (
+                <Icon6Icon
+                  className={classNames(projectcss.all, sty.svg__oIKl0)}
+                  role={"img"}
+                />
+              ),
+
+              value: args.icon
             })}
           </div>
         </Stack__>
-        <div
-          className={classNames(projectcss.all, sty.freeBox__sca1K, {
-            [sty.freeBoxnoIcon__sca1Kmkx82]: hasVariant(
-              $state,
-              "noIcon",
-              "noIcon"
-            )
-          })}
-        >
-          {renderPlasmicSlot({
-            defaultContents: (
-              <Icon6Icon
-                className={classNames(projectcss.all, sty.svg__oIKl0)}
-                role={"img"}
-              />
-            ),
-
-            value: args.icon
-          })}
-        </div>
-      </Stack__>
+      ) : null}
     </div>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "h6"],
+  root: ["root", "svg", "h6"],
+  svg: ["svg"],
   h6: ["h6"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -532,6 +581,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  svg: "svg";
   h6: "h6";
 };
 
@@ -595,6 +645,7 @@ export const PlasmicAlert = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    svg: makeNodeComponent("svg"),
     h6: makeNodeComponent("h6"),
 
     // Metadata about props expected for PlasmicAlert
