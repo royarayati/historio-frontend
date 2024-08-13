@@ -61,8 +61,12 @@ import {
 
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
-import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/component
+import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
+import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
+import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
+import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -78,6 +82,8 @@ import PersonCropSquareFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__PersonCr
 import ProfileIcon from "./icons/PlasmicIcon__Profile"; // plasmic-import: -RBNimWBwZ_J/icon
 import Icon3Icon from "./icons/PlasmicIcon__Icon3"; // plasmic-import: Pji6nZZT_lpO/icon
 import Group1917Icon from "./icons/PlasmicIcon__Group1917"; // plasmic-import: ycuumst0kLdp/icon
+import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
+import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
@@ -118,11 +124,18 @@ export type PlasmicUserSetting__OverridesType = {
   namespaceName?: Flex__<"div">;
   resetPassword?: Flex__<"div">;
   resetPasswordImage?: Flex__<"svg">;
-  resetPassword2?: Flex__<"div">;
+  modalChangePassword?: Flex__<typeof AntdModal>;
+  modalContent?: Flex__<"div">;
+  password?: Flex__<typeof TextInput>;
+  repeatPassword?: Flex__<typeof TextInput>;
+  passwordRepeatPasswordMismatch2?: Flex__<typeof Alert>;
+  successfulChangePassword2?: Flex__<typeof Alert>;
+  unsuccessfulChangePassword2?: Flex__<typeof Alert>;
+  changePasswordButton?: Flex__<typeof Button>;
+  triggerToOpenModalButton?: Flex__<typeof AntdButton>;
   shareToolContent?: Flex__<"div">;
   shareTool?: Flex__<typeof ShareTool>;
   logoutButton?: Flex__<typeof Button>;
-  text?: Flex__<"div">;
   homepageSwitchingTab?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
 };
@@ -201,6 +214,72 @@ function PlasmicUserSetting__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "modalChangePassword.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "password.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "repeatPassword.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "changePasswordButton.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "changePasswordButton.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "changePasswordButton.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "changePasswordButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "changePasswordButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "passwordRepeatPasswordMismatch",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => true
+      },
+      {
+        path: "successfulChangePassword",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => true
+      },
+      {
+        path: "unsuccessfulChangePassword",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => true
       }
     ],
     [$props, $ctx, $refs]
@@ -628,49 +707,6 @@ function PlasmicUserSetting__RenderFunc(props: {
                   "disabledLogoutButton"
                 )
               })}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps[
-                  "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1WviewformuspsfLink"
-                ] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination:
-                          "https://docs.google.com/forms/d/e/1FAIpQLSe4wNlYlhx_5dvlGE28gca-nJLO_zxGxiMsvPXEjuDz5Xb1_w/viewform"
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps[
-                    "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1WviewformuspsfLink"
-                  ] != null &&
-                  typeof $steps[
-                    "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1WviewformuspsfLink"
-                  ] === "object" &&
-                  typeof $steps[
-                    "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1WviewformuspsfLink"
-                  ].then === "function"
-                ) {
-                  $steps[
-                    "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1WviewformuspsfLink"
-                  ] = await $steps[
-                    "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1WviewformuspsfLink"
-                  ];
-                }
-              }}
             >
               <Group1917Icon
                 data-plasmic-name={"resetPasswordImage"}
@@ -679,69 +715,731 @@ function PlasmicUserSetting__RenderFunc(props: {
                 role={"img"}
               />
 
-              <div
-                data-plasmic-name={"resetPassword2"}
-                data-plasmic-override={overrides.resetPassword2}
+              <AntdModal
+                data-plasmic-name={"modalChangePassword"}
+                data-plasmic-override={overrides.modalChangePassword}
                 className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.resetPassword2,
-                  {
-                    [sty.resetPassword2disabledLogoutButton]: hasVariant(
-                      $state,
-                      "disabledLogoutButton",
-                      "disabledLogoutButton"
-                    )
-                  }
+                  "__wab_instance",
+                  sty.modalChangePassword
                 )}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps[
-                    "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
-                  ] = true
-                    ? (() => {
-                        const actionArgs = {
-                          destination:
-                            "https://docs.google.com/forms/d/e/1FAIpQLSe4wNlYlhx_5dvlGE28gca-nJLO_zxGxiMsvPXEjuDz5Xb1_w/viewform"
-                        };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
-                    ] != null &&
-                    typeof $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
-                    ] === "object" &&
-                    typeof $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
-                    ].then === "function"
-                  ) {
-                    $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
-                    ] = await $steps[
-                      "goToHttpsdocsgooglecomformsde1FaIpQlSe4WNlYlhx5DvlGe28GcaNJloZxGxiMsvPxEjuDz5Xb1Wviewform"
-                    ];
-                  }
-                }}
-              >
-                {
-                  "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
+                defaultStylesClassName={classNames(
+                  projectcss.root_reset,
+                  projectcss.plasmic_default_styles,
+                  projectcss.plasmic_mixins,
+                  projectcss.plasmic_tokens,
+                  plasmic_antd_5_hostless_css.plasmic_tokens,
+                  plasmic_plasmic_rich_components_css.plasmic_tokens
+                )}
+                hideFooter={true}
+                maskClosable={true}
+                modalScopeClassName={sty["modalChangePassword__modal"]}
+                onOpenChange={generateStateOnChangeProp($state, [
+                  "modalChangePassword",
+                  "open"
+                ])}
+                open={generateStateValueProp($state, [
+                  "modalChangePassword",
+                  "open"
+                ])}
+                title={
+                  "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062e\u0648\u062f \u0631\u0627 \u062a\u063a\u06cc\u06cc\u0631 \u062f\u0647\u06cc\u062f"
                 }
-              </div>
+                trigger={
+                  <AntdButton
+                    data-plasmic-name={"triggerToOpenModalButton"}
+                    data-plasmic-override={overrides.triggerToOpenModalButton}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.triggerToOpenModalButton
+                    )}
+                    onClick={async () => {
+                      const $steps = {};
+
+                      $steps["makeFalsePasswordRepeatPasswordMismatchState"] =
+                        true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "passwordRepeatPasswordMismatch"
+                                  ]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps[
+                          "makeFalsePasswordRepeatPasswordMismatchState"
+                        ] != null &&
+                        typeof $steps[
+                          "makeFalsePasswordRepeatPasswordMismatchState"
+                        ] === "object" &&
+                        typeof $steps[
+                          "makeFalsePasswordRepeatPasswordMismatchState"
+                        ].then === "function"
+                      ) {
+                        $steps["makeFalsePasswordRepeatPasswordMismatchState"] =
+                          await $steps[
+                            "makeFalsePasswordRepeatPasswordMismatchState"
+                          ];
+                      }
+
+                      $steps["makeFalseSuccessfulChangePassword"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["successfulChangePassword"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["makeFalseSuccessfulChangePassword"] != null &&
+                        typeof $steps["makeFalseSuccessfulChangePassword"] ===
+                          "object" &&
+                        typeof $steps["makeFalseSuccessfulChangePassword"]
+                          .then === "function"
+                      ) {
+                        $steps["makeFalseSuccessfulChangePassword"] =
+                          await $steps["makeFalseSuccessfulChangePassword"];
+                      }
+
+                      $steps["makeFalseUnsuccessfulChangePassword"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["unsuccessfulChangePassword"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["makeFalseUnsuccessfulChangePassword"] != null &&
+                        typeof $steps["makeFalseUnsuccessfulChangePassword"] ===
+                          "object" &&
+                        typeof $steps["makeFalseUnsuccessfulChangePassword"]
+                          .then === "function"
+                      ) {
+                        $steps["makeFalseUnsuccessfulChangePassword"] =
+                          await $steps["makeFalseUnsuccessfulChangePassword"];
+                      }
+                    }}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__wv95T
+                      )}
+                    >
+                      {
+                        " \u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 "
+                      }
+                    </div>
+                  </AntdButton>
+                }
+              >
+                <div
+                  data-plasmic-name={"modalContent"}
+                  data-plasmic-override={overrides.modalContent}
+                  className={classNames(projectcss.all, sty.modalContent)}
+                >
+                  <TextInput
+                    data-plasmic-name={"password"}
+                    data-plasmic-override={overrides.password}
+                    className={classNames("__wab_instance", sty.password)}
+                    onChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, ["password", "value"])(
+                        (e => e.target?.value).apply(null, eventArgs)
+                      );
+                    }}
+                    placeholder={
+                      "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
+                    }
+                    startIcon={null}
+                    type={"password"}
+                    value={
+                      generateStateValueProp($state, ["password", "value"]) ??
+                      ""
+                    }
+                  />
+
+                  <TextInput
+                    data-plasmic-name={"repeatPassword"}
+                    data-plasmic-override={overrides.repeatPassword}
+                    autoFocus={false}
+                    className={classNames("__wab_instance", sty.repeatPassword)}
+                    onChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "repeatPassword",
+                        "value"
+                      ])((e => e.target?.value).apply(null, eventArgs));
+                    }}
+                    placeholder={
+                      "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0645\u062c\u062f\u062f\u0627 \u062a\u06a9\u0631\u0627\u0631 \u06a9\u0646\u06cc\u062f"
+                    }
+                    startIcon={null}
+                    type={"password"}
+                    value={
+                      generateStateValueProp($state, [
+                        "repeatPassword",
+                        "value"
+                      ]) ?? ""
+                    }
+                  />
+
+                  {(() => {
+                    try {
+                      return $state.passwordRepeatPasswordMismatch;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <Alert
+                      data-plasmic-name={"passwordRepeatPasswordMismatch2"}
+                      data-plasmic-override={
+                        overrides.passwordRepeatPasswordMismatch2
+                      }
+                      className={classNames(
+                        "__wab_instance",
+                        sty.passwordRepeatPasswordMismatch2
+                      )}
+                      error={true}
+                      header={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text___9IY1
+                          )}
+                        >
+                          {
+                            "\u062a\u06a9\u0631\u0627\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u06cc\u06a9\u0633\u0627\u0646 \u0646\u06cc\u0633\u062a"
+                          }
+                        </div>
+                      }
+                      noBody={true}
+                    />
+                  ) : null}
+                  {(() => {
+                    try {
+                      return $state.successfulChangePassword;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <Alert
+                      data-plasmic-name={"successfulChangePassword2"}
+                      data-plasmic-override={
+                        overrides.successfulChangePassword2
+                      }
+                      className={classNames(
+                        "__wab_instance",
+                        sty.successfulChangePassword2
+                      )}
+                      header={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text___6O8Tn
+                          )}
+                        >
+                          {
+                            "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0627\u0646\u062c\u0627\u0645 \u0634\u062f"
+                          }
+                        </div>
+                      }
+                      noBody={true}
+                      success={true}
+                    />
+                  ) : null}
+                  {(() => {
+                    try {
+                      return $state.unsuccessfulChangePassword;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <Alert
+                      data-plasmic-name={"unsuccessfulChangePassword2"}
+                      data-plasmic-override={
+                        overrides.unsuccessfulChangePassword2
+                      }
+                      className={classNames(
+                        "__wab_instance",
+                        sty.unsuccessfulChangePassword2
+                      )}
+                      error={true}
+                      header={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text___5HjGe
+                          )}
+                        >
+                          {
+                            "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u062e\u0637\u0627 \u0647\u0645\u0631\u0627\u0647 \u0634\u062f"
+                          }
+                        </div>
+                      }
+                      noBody={true}
+                    />
+                  ) : null}
+                  <Button
+                    data-plasmic-name={"changePasswordButton"}
+                    data-plasmic-override={overrides.changePasswordButton}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.changePasswordButton
+                    )}
+                    color={"blue"}
+                    deselected={generateStateValueProp($state, [
+                      "changePasswordButton",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "changePasswordButton",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["makeFalsePasswordRepeatPasswordMismatchState"] =
+                        true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "passwordRepeatPasswordMismatch"
+                                  ]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps[
+                          "makeFalsePasswordRepeatPasswordMismatchState"
+                        ] != null &&
+                        typeof $steps[
+                          "makeFalsePasswordRepeatPasswordMismatchState"
+                        ] === "object" &&
+                        typeof $steps[
+                          "makeFalsePasswordRepeatPasswordMismatchState"
+                        ].then === "function"
+                      ) {
+                        $steps["makeFalsePasswordRepeatPasswordMismatchState"] =
+                          await $steps[
+                            "makeFalsePasswordRepeatPasswordMismatchState"
+                          ];
+                      }
+
+                      $steps["makeFalseSuccessfulChangePassword"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["successfulChangePassword"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["makeFalseSuccessfulChangePassword"] != null &&
+                        typeof $steps["makeFalseSuccessfulChangePassword"] ===
+                          "object" &&
+                        typeof $steps["makeFalseSuccessfulChangePassword"]
+                          .then === "function"
+                      ) {
+                        $steps["makeFalseSuccessfulChangePassword"] =
+                          await $steps["makeFalseSuccessfulChangePassword"];
+                      }
+
+                      $steps["makeFalseUnsuccessfulChangePassword"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["unsuccessfulChangePassword"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["makeFalseUnsuccessfulChangePassword"] != null &&
+                        typeof $steps["makeFalseUnsuccessfulChangePassword"] ===
+                          "object" &&
+                        typeof $steps["makeFalseUnsuccessfulChangePassword"]
+                          .then === "function"
+                      ) {
+                        $steps["makeFalseUnsuccessfulChangePassword"] =
+                          await $steps["makeFalseUnsuccessfulChangePassword"];
+                      }
+
+                      $steps["makeTruePasswordRepeatPasswordMismatchState"] =
+                        $state.password.value != $state.repeatPassword.value
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "passwordRepeatPasswordMismatch"
+                                  ]
+                                },
+                                operation: 0,
+                                value: "True"
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["makeTruePasswordRepeatPasswordMismatchState"] !=
+                          null &&
+                        typeof $steps[
+                          "makeTruePasswordRepeatPasswordMismatchState"
+                        ] === "object" &&
+                        typeof $steps[
+                          "makeTruePasswordRepeatPasswordMismatchState"
+                        ].then === "function"
+                      ) {
+                        $steps["makeTruePasswordRepeatPasswordMismatchState"] =
+                          await $steps[
+                            "makeTruePasswordRepeatPasswordMismatchState"
+                          ];
+                      }
+
+                      $steps["patchUserpassword"] =
+                        $state.password.value == $state.repeatPassword.value
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  "PATCH",
+                                  `/api/v3/users/password/${$ctx.inlab_user.user.id}`,
+                                  undefined,
+                                  (() => {
+                                    try {
+                                      return {
+                                        password: $state.password.value
+                                      };
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                ]
+                              };
+                              return $globalActions[
+                                "AuthGlobalContext.apiFetcher"
+                              ]?.apply(null, [...actionArgs.args]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["patchUserpassword"] != null &&
+                        typeof $steps["patchUserpassword"] === "object" &&
+                        typeof $steps["patchUserpassword"].then === "function"
+                      ) {
+                        $steps["patchUserpassword"] = await $steps[
+                          "patchUserpassword"
+                        ];
+                      }
+
+                      $steps["consoleLogPatchUserspasswordStatus"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return console.log(
+                                  `PATCH user/password status: ${$steps.patchUserpassword?.status}`
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["consoleLogPatchUserspasswordStatus"] != null &&
+                        typeof $steps["consoleLogPatchUserspasswordStatus"] ===
+                          "object" &&
+                        typeof $steps["consoleLogPatchUserspasswordStatus"]
+                          .then === "function"
+                      ) {
+                        $steps["consoleLogPatchUserspasswordStatus"] =
+                          await $steps["consoleLogPatchUserspasswordStatus"];
+                      }
+
+                      $steps["makeTrueSuccessfulChangePassword"] =
+                        $steps.patchUserpassword.status === 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["successfulChangePassword"]
+                                },
+                                operation: 0,
+                                value: "True"
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["makeTrueSuccessfulChangePassword"] != null &&
+                        typeof $steps["makeTrueSuccessfulChangePassword"] ===
+                          "object" &&
+                        typeof $steps["makeTrueSuccessfulChangePassword"]
+                          .then === "function"
+                      ) {
+                        $steps["makeTrueSuccessfulChangePassword"] =
+                          await $steps["makeTrueSuccessfulChangePassword"];
+                      }
+
+                      $steps["makeTrueUnsuccessfulChangePassword"] =
+                        $steps.patchUserpassword == undefined ||
+                        $steps.patchUserpassword.status != 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["unsuccessfulChangePassword"]
+                                },
+                                operation: 0,
+                                value: "True"
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["makeTrueUnsuccessfulChangePassword"] != null &&
+                        typeof $steps["makeTrueUnsuccessfulChangePassword"] ===
+                          "object" &&
+                        typeof $steps["makeTrueUnsuccessfulChangePassword"]
+                          .then === "function"
+                      ) {
+                        $steps["makeTrueUnsuccessfulChangePassword"] =
+                          await $steps["makeTrueUnsuccessfulChangePassword"];
+                      }
+                    }}
+                    onDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "changePasswordButton",
+                        "deselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onIsDisabledChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "changePasswordButton",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }}
+                    onSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "changePasswordButton",
+                        "selected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "changePasswordButton",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "changePasswordButton",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "changePasswordButton",
+                      "selected"
+                    ])}
+                    sortDeselected={generateStateValueProp($state, [
+                      "changePasswordButton",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "changePasswordButton",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__tlPId
+                      )}
+                    >
+                      {
+                        "\u0630\u062e\u06cc\u0631\u0647 \u062a\u063a\u06cc\u06cc\u0631\u0627\u062a"
+                      }
+                    </div>
+                  </Button>
+                </div>
+              </AntdModal>
             </Stack__>
             <Stack__
               as={"div"}
@@ -932,14 +1630,12 @@ function PlasmicUserSetting__RenderFunc(props: {
               }
             >
               <div
-                data-plasmic-name={"text"}
-                data-plasmic-override={overrides.text}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text,
+                  sty.text__zjr24,
                   {
-                    [sty.textdisabledLogoutButton]: hasVariant(
+                    [sty.textdisabledLogoutButton__zjr24L5PSg]: hasVariant(
                       $state,
                       "disabledLogoutButton",
                       "disabledLogoutButton"
@@ -1247,11 +1943,18 @@ const PlasmicDescendants = {
     "namespaceName",
     "resetPassword",
     "resetPasswordImage",
-    "resetPassword2",
+    "modalChangePassword",
+    "modalContent",
+    "password",
+    "repeatPassword",
+    "passwordRepeatPasswordMismatch2",
+    "successfulChangePassword2",
+    "unsuccessfulChangePassword2",
+    "changePasswordButton",
+    "triggerToOpenModalButton",
     "shareToolContent",
     "shareTool",
     "logoutButton",
-    "text",
     "homepageSwitchingTab",
     "switchingTab"
   ],
@@ -1274,11 +1977,18 @@ const PlasmicDescendants = {
     "namespaceName",
     "resetPassword",
     "resetPasswordImage",
-    "resetPassword2",
+    "modalChangePassword",
+    "modalContent",
+    "password",
+    "repeatPassword",
+    "passwordRepeatPasswordMismatch2",
+    "successfulChangePassword2",
+    "unsuccessfulChangePassword2",
+    "changePasswordButton",
+    "triggerToOpenModalButton",
     "shareToolContent",
     "shareTool",
-    "logoutButton",
-    "text"
+    "logoutButton"
   ],
   pictureAndName: [
     "pictureAndName",
@@ -1311,13 +2021,50 @@ const PlasmicDescendants = {
   namespaceTitle: ["namespaceTitle", "hospital2", "namespaceName"],
   hospital2: ["hospital2"],
   namespaceName: ["namespaceName"],
-  resetPassword: ["resetPassword", "resetPasswordImage", "resetPassword2"],
+  resetPassword: [
+    "resetPassword",
+    "resetPasswordImage",
+    "modalChangePassword",
+    "modalContent",
+    "password",
+    "repeatPassword",
+    "passwordRepeatPasswordMismatch2",
+    "successfulChangePassword2",
+    "unsuccessfulChangePassword2",
+    "changePasswordButton",
+    "triggerToOpenModalButton"
+  ],
   resetPasswordImage: ["resetPasswordImage"],
-  resetPassword2: ["resetPassword2"],
+  modalChangePassword: [
+    "modalChangePassword",
+    "modalContent",
+    "password",
+    "repeatPassword",
+    "passwordRepeatPasswordMismatch2",
+    "successfulChangePassword2",
+    "unsuccessfulChangePassword2",
+    "changePasswordButton",
+    "triggerToOpenModalButton"
+  ],
+  modalContent: [
+    "modalContent",
+    "password",
+    "repeatPassword",
+    "passwordRepeatPasswordMismatch2",
+    "successfulChangePassword2",
+    "unsuccessfulChangePassword2",
+    "changePasswordButton"
+  ],
+  password: ["password"],
+  repeatPassword: ["repeatPassword"],
+  passwordRepeatPasswordMismatch2: ["passwordRepeatPasswordMismatch2"],
+  successfulChangePassword2: ["successfulChangePassword2"],
+  unsuccessfulChangePassword2: ["unsuccessfulChangePassword2"],
+  changePasswordButton: ["changePasswordButton"],
+  triggerToOpenModalButton: ["triggerToOpenModalButton"],
   shareToolContent: ["shareToolContent", "shareTool"],
   shareTool: ["shareTool"],
-  logoutButton: ["logoutButton", "text"],
-  text: ["text"],
+  logoutButton: ["logoutButton"],
   homepageSwitchingTab: ["homepageSwitchingTab", "switchingTab"],
   switchingTab: ["switchingTab"]
 } as const;
@@ -1344,11 +2091,18 @@ type NodeDefaultElementType = {
   namespaceName: "div";
   resetPassword: "div";
   resetPasswordImage: "svg";
-  resetPassword2: "div";
+  modalChangePassword: typeof AntdModal;
+  modalContent: "div";
+  password: typeof TextInput;
+  repeatPassword: typeof TextInput;
+  passwordRepeatPasswordMismatch2: typeof Alert;
+  successfulChangePassword2: typeof Alert;
+  unsuccessfulChangePassword2: typeof Alert;
+  changePasswordButton: typeof Button;
+  triggerToOpenModalButton: typeof AntdButton;
   shareToolContent: "div";
   shareTool: typeof ShareTool;
   logoutButton: typeof Button;
-  text: "div";
   homepageSwitchingTab: "div";
   switchingTab: typeof SwitchingTab;
 };
@@ -1433,11 +2187,22 @@ export const PlasmicUserSetting = Object.assign(
     namespaceName: makeNodeComponent("namespaceName"),
     resetPassword: makeNodeComponent("resetPassword"),
     resetPasswordImage: makeNodeComponent("resetPasswordImage"),
-    resetPassword2: makeNodeComponent("resetPassword2"),
+    modalChangePassword: makeNodeComponent("modalChangePassword"),
+    modalContent: makeNodeComponent("modalContent"),
+    password: makeNodeComponent("password"),
+    repeatPassword: makeNodeComponent("repeatPassword"),
+    passwordRepeatPasswordMismatch2: makeNodeComponent(
+      "passwordRepeatPasswordMismatch2"
+    ),
+    successfulChangePassword2: makeNodeComponent("successfulChangePassword2"),
+    unsuccessfulChangePassword2: makeNodeComponent(
+      "unsuccessfulChangePassword2"
+    ),
+    changePasswordButton: makeNodeComponent("changePasswordButton"),
+    triggerToOpenModalButton: makeNodeComponent("triggerToOpenModalButton"),
     shareToolContent: makeNodeComponent("shareToolContent"),
     shareTool: makeNodeComponent("shareTool"),
     logoutButton: makeNodeComponent("logoutButton"),
-    text: makeNodeComponent("text"),
     homepageSwitchingTab: makeNodeComponent("homepageSwitchingTab"),
     switchingTab: makeNodeComponent("switchingTab"),
 

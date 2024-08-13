@@ -380,18 +380,161 @@
   color: var(--token-9iYGdL7i3GKE);
   flex-shrink: 0;
 }
-.resetPassword2 {
-  display: block;
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-family: var(--VazirmatnCustom);
-  font-weight: 700;
-  letter-spacing: normal;
-  line-height: 1.2;
-  color: var(--token-IYO13gyYJHXG);
+.modalChangePassword:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.modalContent {
+  display: flex;
+  flex-direction: column;
   position: relative;
-  text-align: right;
-  align-self: center;
-  white-space: pre-wrap;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.password:global(.__wab_instance) {
+  max-width: 100%;
+  margin: 1em;
+}
+.svg__nsK2A {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.repeatPassword:global(.__wab_instance) {
+  max-width: 100%;
+  margin: 1em;
+}
+.svg__kHsuF {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.passwordRepeatPasswordMismatch2:global(.__wab_instance) {
+  max-width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.text___9IY1 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-sOr3fJ5Up5fq);
+  min-width: 0;
+}
+.text__sm7N9 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.svg__zsuLh {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.successfulChangePassword2:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  min-width: 0;
+}
+.text___6O8Tn {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-sOr3fJ5Up5fq);
+  min-width: 0;
+}
+.text___4M8Gn {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.svg__nOVwY {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.unsuccessfulChangePassword2:global(.__wab_instance) {
+  max-width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.text___5HjGe {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-sOr3fJ5Up5fq);
+  min-width: 0;
+}
+.text__qFkjM {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.svg__frEx2 {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.changePasswordButton:global(.__wab_instance) {
+  max-width: 100%;
+  margin-top: 10px;
+}
+.text__tlPId {
+  color: var(--token-jgohepLVeKvh);
+  font-weight: 700;
+}
+.svg___8GsW9 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__mwN5Q {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.triggerToOpenModalButton:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  font-weight: 700;
+  border-width: 1px;
+  border-style: none;
+}
+.text__wv95T {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-weight: 700;
+  line-height: 1.5em;
+  flex-shrink: 0;
+  min-width: 0;
 }
 .shareToolContent {
   background: #ffffff;
@@ -464,7 +607,7 @@
   height: 1em;
   display: none;
 }
-.text {
+.text__zjr24 {
   background: none;
   padding-left: 0px;
   padding-right: 0px;
@@ -472,7 +615,7 @@
   white-space: pre-wrap;
   color: #ffffff;
 }
-.textdisabledLogoutButton {
+.textdisabledLogoutButton__zjr24L5PSg {
   height: auto;
 }
 .svg__uvacG {

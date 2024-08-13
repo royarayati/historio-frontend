@@ -648,6 +648,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "wrongUser"
               )
             })}
+            color={"blue"}
             deselected={generateStateValueProp($state, [
               "loginButton",
               "deselected"
