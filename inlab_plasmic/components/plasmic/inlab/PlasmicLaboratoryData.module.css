@@ -1101,8 +1101,12 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  background: #ffffff;
   min-width: 0;
   padding: 0px;
+}
+.factorName2 {
+  background: #ffffff;
 }
 .switchingTabs {
   display: flex;

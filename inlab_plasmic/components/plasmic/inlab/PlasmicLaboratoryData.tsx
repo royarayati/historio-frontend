@@ -744,7 +744,7 @@ ${ageMonths} months ${
               )}
             >
               {
-                "\u0641\u0627\u06a9\u062a\u0648\u0631 \u0647\u0627\u06cc \u0686\u06a9 \u0634\u062f\u0647 "
+                "\u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 "
               }
             </div>
           </Button>
@@ -1746,7 +1746,7 @@ ${ageMonths} months ${
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
                         try {
-                          return $ctx.fetched_data.data;
+                          return $ctx.fetched_data.data.reverse();
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -1850,6 +1850,7 @@ ${ageMonths} months ${
                                             "__wab_instance",
                                             sty.factor
                                           ),
+                                          defaultOpen: false,
                                           label2: (
                                             <React.Fragment>
                                               {(() => {
@@ -1910,7 +1911,7 @@ ${ageMonths} months ${
                                                 $props,
                                                 $state,
                                                 $queries
-                                              }) => undefined
+                                              }) => false
                                             }
                                           ],
                                           [__plasmic_idx_0, __plasmic_idx_1]
