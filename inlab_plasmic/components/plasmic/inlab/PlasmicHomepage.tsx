@@ -2679,7 +2679,20 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                               throw e;
                                             }
-                                          })()}/profile`
+                                          })()}/profile/${(() => {
+                                            try {
+                                              return currentItem.admission_id;
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
+                                          })()}`
                                         };
                                         return (({ destination }) => {
                                           if (
@@ -2751,7 +2764,20 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                               throw e;
                                             }
-                                          })()}/report/list`
+                                          })()}/report/list/${(() => {
+                                            try {
+                                              return currentItem.admission_id;
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
+                                          })()}`
                                         };
                                         return (({ destination }) => {
                                           if (

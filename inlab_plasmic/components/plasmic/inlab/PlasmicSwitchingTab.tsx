@@ -235,7 +235,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}/profile`
+                        })()}/profile/[adm_id]`
                       };
                       return (({ destination }) => {
                         if (
@@ -297,7 +297,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}/report/list`
+                        })()}/report/list/[adm_id]`
                       };
                       return (({ destination }) => {
                         if (

@@ -65,6 +65,8 @@ import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // pla
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
+import { AntdSingleCollapse } from "@plasmicpkgs/antd5/skinny/registerCollapse";
+import { singleCollapseHelpers as AntdSingleCollapse_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -139,6 +141,12 @@ export type PlasmicLaboratoryData__OverridesType = {
   normalRanged?: Flex__<"div">;
   overlayLayer?: Flex__<"div">;
   checkedFactorsApiFetcher?: Flex__<typeof ApiFetcherComponent>;
+  labFactorList?: Flex__<"div">;
+  labFactorPerDate?: Flex__<"div">;
+  labFactorDatetime?: Flex__<"div">;
+  factorsList?: Flex__<"div">;
+  factor?: Flex__<typeof AntdSingleCollapse>;
+  factorName2?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   homepage?: Flex__<typeof PlasmicImg__>;
@@ -218,7 +226,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.checkedLabFactors == "checked_factors";
+              return $state.selectedTab == "CheckedFactors";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -237,7 +245,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.checkedLabFactors !== "checked_factors";
+              return $state.selectedTab !== "CheckedFactors";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -274,13 +282,13 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.laboratoryResults === "labresults";
+              return $state.selectedTab == "LabTestResult";
             } catch (e) {
               if (
                 e instanceof TypeError ||
                 e?.plasmicType === "PlasmicUndefinedDataError"
               ) {
-                return "selected";
+                return [];
               }
               throw e;
             }
@@ -293,7 +301,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.laboratoryResults !== "labresults";
+              return $state.selectedTab !== "LabTestResult";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -318,16 +326,30 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "laboratoryResults",
+        path: "selectedTab",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return "LabTestResult";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
-        path: "checkedLabFactors",
+        path: "factor[][].open",
         type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+        variableType: "boolean",
+
+        onMutate: generateOnMutateForSpec("open", AntdSingleCollapse_Helpers)
       }
     ],
     [$props, $ctx, $refs]
@@ -619,351 +641,339 @@ ${ageMonths} months ${
             />
           </div>
         </div>
-        {false ? (
-          <Stack__
-            as={"div"}
-            data-plasmic-name={"tabButtons"}
-            data-plasmic-override={overrides.tabButtons}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.tabButtons)}
-          >
-            <Button
-              data-plasmic-name={"checkedFactor"}
-              data-plasmic-override={overrides.checkedFactor}
-              className={classNames("__wab_instance", sty.checkedFactor)}
-              deselected={generateStateValueProp($state, [
-                "checkedFactor",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "checkedFactor",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateCheckedFactors2"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["checkedLabFactors"]
-                        },
-                        operation: 0,
-                        value: "checked_factors"
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateCheckedFactors2"] != null &&
-                  typeof $steps["updateCheckedFactors2"] === "object" &&
-                  typeof $steps["updateCheckedFactors2"].then === "function"
-                ) {
-                  $steps["updateCheckedFactors2"] = await $steps[
-                    "updateCheckedFactors2"
-                  ];
-                }
-              }}
-              onDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "checkedFactor",
-                  "deselected"
-                ])(eventArgs[0]);
-              }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "checkedFactor",
-                  "isDisabled"
-                ])(eventArgs[0]);
-              }}
-              onSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "checkedFactor",
-                  "selected"
-                ])(eventArgs[0]);
-              }}
-              onSortDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "checkedFactor",
-                  "sortDeselected"
-                ])(eventArgs[0]);
-              }}
-              onSortSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "checkedFactor",
-                  "sortSelected"
-                ])(eventArgs[0]);
-              }}
-              selected={generateStateValueProp($state, [
-                "checkedFactor",
-                "selected"
-              ])}
-              sortDeselected={generateStateValueProp($state, [
-                "checkedFactor",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "checkedFactor",
-                "sortSelected"
-              ])}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__eZjWx
-                )}
-              >
-                {
-                  "\u0641\u0627\u06a9\u062a\u0648\u0631 \u0647\u0627\u06cc \u0686\u06a9 \u0634\u062f\u0647 "
-                }
-              </div>
-            </Button>
-            <Button
-              data-plasmic-name={"laboratoryResult"}
-              data-plasmic-override={overrides.laboratoryResult}
-              className={classNames("__wab_instance", sty.laboratoryResult)}
-              deselected={generateStateValueProp($state, [
-                "laboratoryResult",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "laboratoryResult",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateLaboratoryResults"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["laboratoryResults"]
-                        },
-                        operation: 0,
-                        value: "labresults"
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateLaboratoryResults"] != null &&
-                  typeof $steps["updateLaboratoryResults"] === "object" &&
-                  typeof $steps["updateLaboratoryResults"].then === "function"
-                ) {
-                  $steps["updateLaboratoryResults"] = await $steps[
-                    "updateLaboratoryResults"
-                  ];
-                }
-              }}
-              onDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "laboratoryResult",
-                  "deselected"
-                ])(eventArgs[0]);
-              }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "laboratoryResult",
-                  "isDisabled"
-                ])(eventArgs[0]);
-              }}
-              onSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "laboratoryResult",
-                  "selected"
-                ])(eventArgs[0]);
-              }}
-              onSortDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "laboratoryResult",
-                  "sortDeselected"
-                ])(eventArgs[0]);
-              }}
-              onSortSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "laboratoryResult",
-                  "sortSelected"
-                ])(eventArgs[0]);
-              }}
-              selected={generateStateValueProp($state, [
-                "laboratoryResult",
-                "selected"
-              ])}
-              sortDeselected={generateStateValueProp($state, [
-                "laboratoryResult",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "laboratoryResult",
-                "sortSelected"
-              ])}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__p8XU0
-                )}
-              >
-                {
-                  "\u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a "
-                }
-              </div>
-            </Button>
-          </Stack__>
-        ) : null}
-        <ApiFetcherComponent
-          data-plasmic-name={"labData"}
-          data-plasmic-override={overrides.labData}
-          className={classNames("__wab_instance", sty.labData, {
-            [sty.labDataviewNormalRange]: hasVariant(
-              $state,
-              "viewNormalRange",
-              "viewNormalRange"
-            )
-          })}
-          method={"GET"}
-          path={`/api/v3/patient/lab/${
-            $ctx.params.code
-          }?namespace_id=${localStorage.getItem("inlab_user_namespace_id")}`}
-          ref={ref => {
-            $refs["labData"] = ref;
-          }}
+        <Stack__
+          as={"div"}
+          data-plasmic-name={"tabButtons"}
+          data-plasmic-override={overrides.tabButtons}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.tabButtons)}
         >
-          <DataCtxReader__>
-            {$ctx => (
-              <React.Fragment>
-                {false ? (
-                  <TextInput
-                    data-plasmic-name={"searchLabName"}
-                    data-plasmic-override={overrides.searchLabName}
-                    className={classNames("__wab_instance", sty.searchLabName)}
-                    endIcon={
-                      $state.value !== "" ? (
-                        <Icons8ClosesvgIcon
-                          data-plasmic-name={"svg"}
-                          data-plasmic-override={overrides.svg}
-                          className={classNames(projectcss.all, sty.svg)}
-                          onClick={async event => {
-                            const $steps = {};
+          <Button
+            data-plasmic-name={"checkedFactor"}
+            data-plasmic-override={overrides.checkedFactor}
+            className={classNames("__wab_instance", sty.checkedFactor)}
+            deselected={generateStateValueProp($state, [
+              "checkedFactor",
+              "deselected"
+            ])}
+            isDisabled={generateStateValueProp($state, [
+              "checkedFactor",
+              "isDisabled"
+            ])}
+            onClick={async event => {
+              const $steps = {};
 
-                            $steps["updateSearchLabNameValue"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["searchLabName", "value"]
-                                    },
-                                    operation: 0,
-                                    value: ($state.searchLabName.value = "")
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
+              $steps["updateCheckedFactors2"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["selectedTab"]
+                      },
+                      operation: 0,
+                      value: "CheckedFactors"
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
 
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["updateSearchLabNameValue"] != null &&
-                              typeof $steps["updateSearchLabNameValue"] ===
-                                "object" &&
-                              typeof $steps["updateSearchLabNameValue"].then ===
-                                "function"
-                            ) {
-                              $steps["updateSearchLabNameValue"] = await $steps[
-                                "updateSearchLabNameValue"
-                              ];
-                            }
-                          }}
-                          role={"img"}
-                        />
-                      ) : null
-                    }
-                    onChange={(...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "searchLabName",
-                        "value"
-                      ])((e => e.target?.value).apply(null, eventArgs));
-                    }}
-                    placeholder={
-                      "\u0646\u0627\u0645 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0645\u0648\u0631\u062f \u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
-                    }
-                    showEndIcon={true}
-                    value={
-                      generateStateValueProp($state, [
-                        "searchLabName",
-                        "value"
-                      ]) ?? ""
-                    }
-                  />
-                ) : null}
-                {$ctx.fetched_data.loading == false &&
-                $ctx.fetched_data.data.lab_test_groups == 0 ? (
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__vcc6L
-                    )}
-                  >
-                    {
-                      "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
-                    }
-                  </div>
-                ) : null}
-                {$ctx.fetched_data.loading == true ? (
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__woDte
-                    )}
-                  >
-                    {
-                      "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                    }
-                  </div>
-                ) : null}
-                {true ? (
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateCheckedFactors2"] != null &&
+                typeof $steps["updateCheckedFactors2"] === "object" &&
+                typeof $steps["updateCheckedFactors2"].then === "function"
+              ) {
+                $steps["updateCheckedFactors2"] = await $steps[
+                  "updateCheckedFactors2"
+                ];
+              }
+            }}
+            onDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "checkedFactor",
+                "deselected"
+              ])(eventArgs[0]);
+            }}
+            onIsDisabledChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "checkedFactor",
+                "isDisabled"
+              ])(eventArgs[0]);
+            }}
+            onSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, ["checkedFactor", "selected"])(
+                eventArgs[0]
+              );
+            }}
+            onSortDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "checkedFactor",
+                "sortDeselected"
+              ])(eventArgs[0]);
+            }}
+            onSortSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "checkedFactor",
+                "sortSelected"
+              ])(eventArgs[0]);
+            }}
+            selected={generateStateValueProp($state, [
+              "checkedFactor",
+              "selected"
+            ])}
+            sortDeselected={generateStateValueProp($state, [
+              "checkedFactor",
+              "sortDeselected"
+            ])}
+            sortSelected={generateStateValueProp($state, [
+              "checkedFactor",
+              "sortSelected"
+            ])}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__eZjWx
+              )}
+            >
+              {
+                "\u0641\u0627\u06a9\u062a\u0648\u0631 \u0647\u0627\u06cc \u0686\u06a9 \u0634\u062f\u0647 "
+              }
+            </div>
+          </Button>
+          <Button
+            data-plasmic-name={"laboratoryResult"}
+            data-plasmic-override={overrides.laboratoryResult}
+            className={classNames("__wab_instance", sty.laboratoryResult)}
+            deselected={generateStateValueProp($state, [
+              "laboratoryResult",
+              "deselected"
+            ])}
+            isDisabled={generateStateValueProp($state, [
+              "laboratoryResult",
+              "isDisabled"
+            ])}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["updateSelectedTab"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["selectedTab"]
+                      },
+                      operation: 0,
+                      value: "LabTestResult"
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateSelectedTab"] != null &&
+                typeof $steps["updateSelectedTab"] === "object" &&
+                typeof $steps["updateSelectedTab"].then === "function"
+              ) {
+                $steps["updateSelectedTab"] = await $steps["updateSelectedTab"];
+              }
+            }}
+            onDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "laboratoryResult",
+                "deselected"
+              ])(eventArgs[0]);
+            }}
+            onIsDisabledChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "laboratoryResult",
+                "isDisabled"
+              ])(eventArgs[0]);
+            }}
+            onSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "laboratoryResult",
+                "selected"
+              ])(eventArgs[0]);
+            }}
+            onSortDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "laboratoryResult",
+                "sortDeselected"
+              ])(eventArgs[0]);
+            }}
+            onSortSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "laboratoryResult",
+                "sortSelected"
+              ])(eventArgs[0]);
+            }}
+            selected={generateStateValueProp($state, [
+              "laboratoryResult",
+              "selected"
+            ])}
+            sortDeselected={generateStateValueProp($state, [
+              "laboratoryResult",
+              "sortDeselected"
+            ])}
+            sortSelected={generateStateValueProp($state, [
+              "laboratoryResult",
+              "sortSelected"
+            ])}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__p8XU0
+              )}
+            >
+              {
+                "\u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a "
+              }
+            </div>
+          </Button>
+        </Stack__>
+        {$state.selectedTab === "LabTestResult" ? (
+          <ApiFetcherComponent
+            data-plasmic-name={"labData"}
+            data-plasmic-override={overrides.labData}
+            className={classNames("__wab_instance", sty.labData, {
+              [sty.labDataviewNormalRange]: hasVariant(
+                $state,
+                "viewNormalRange",
+                "viewNormalRange"
+              )
+            })}
+            method={"GET"}
+            path={`/api/v3/patient/lab/${
+              $ctx.params.code
+            }?namespace_id=${localStorage.getItem("inlab_user_namespace_id")}`}
+            ref={ref => {
+              $refs["labData"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <React.Fragment>
+                  {false ? (
+                    <TextInput
+                      data-plasmic-name={"searchLabName"}
+                      data-plasmic-override={overrides.searchLabName}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.searchLabName
+                      )}
+                      endIcon={
+                        $state.value !== "" ? (
+                          <Icons8ClosesvgIcon
+                            data-plasmic-name={"svg"}
+                            data-plasmic-override={overrides.svg}
+                            className={classNames(projectcss.all, sty.svg)}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["updateSearchLabNameValue"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["searchLabName", "value"]
+                                      },
+                                      operation: 0,
+                                      value: ($state.searchLabName.value = "")
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["updateSearchLabNameValue"] != null &&
+                                typeof $steps["updateSearchLabNameValue"] ===
+                                  "object" &&
+                                typeof $steps["updateSearchLabNameValue"]
+                                  .then === "function"
+                              ) {
+                                $steps["updateSearchLabNameValue"] =
+                                  await $steps["updateSearchLabNameValue"];
+                              }
+                            }}
+                            role={"img"}
+                          />
+                        ) : null
+                      }
+                      onChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "searchLabName",
+                          "value"
+                        ])((e => e.target?.value).apply(null, eventArgs));
+                      }}
+                      placeholder={
+                        "\u0646\u0627\u0645 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0645\u0648\u0631\u062f \u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
+                      }
+                      showEndIcon={true}
+                      value={
+                        generateStateValueProp($state, [
+                          "searchLabName",
+                          "value"
+                        ]) ?? ""
+                      }
+                    />
+                  ) : null}
+                  {$ctx.fetched_data.loading == false &&
+                  $ctx.fetched_data.data.lab_test_groups == 0 ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__vcc6L
+                      )}
+                    >
+                      {
+                        "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                      }
+                    </div>
+                  ) : null}
+                  {$ctx.fetched_data.loading == true ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__woDte
+                      )}
+                    >
+                      {
+                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                      }
+                    </div>
+                  ) : null}
                   <ApiFetcherComponent
                     data-plasmic-name={"antibiogramData"}
                     data-plasmic-override={overrides.antibiogramData}
@@ -1183,69 +1193,57 @@ ${ageMonths} months ${
                       }
                     </DataCtxReader__>
                   </ApiFetcherComponent>
-                ) : null}
-                {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                  (() => {
-                    try {
-                      return $ctx.fetched_data.data.lab_test_groups;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return [];
-                      }
-                      throw e;
-                    }
-                  })()
-                ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                  const currentItem = __plasmic_item_0;
-                  const currentIndex = __plasmic_idx_0;
-                  return (
-                    <Stack__
-                      as={"div"}
-                      data-plasmic-name={"laboratoryLists"}
-                      data-plasmic-override={overrides.laboratoryLists}
-                      hasGap={true}
-                      className={classNames(
-                        projectcss.all,
-                        sty.laboratoryLists,
-                        {
-                          [sty.laboratoryListsviewNormalRange]: hasVariant(
-                            $state,
-                            "viewNormalRange",
-                            "viewNormalRange"
-                          )
+                  {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                    (() => {
+                      try {
+                        return $ctx.fetched_data.data.lab_test_groups;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
                         }
-                      )}
-                      key={currentIndex}
-                    >
-                      <div
+                        throw e;
+                      }
+                    })()
+                  ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                    const currentItem = __plasmic_item_0;
+                    const currentIndex = __plasmic_idx_0;
+                    return (
+                      <Stack__
+                        as={"div"}
+                        data-plasmic-name={"laboratoryLists"}
+                        data-plasmic-override={overrides.laboratoryLists}
+                        hasGap={true}
                         className={classNames(
                           projectcss.all,
-                          sty.freeBox__b1Ehi
+                          sty.laboratoryLists,
+                          {
+                            [sty.laboratoryListsviewNormalRange]: hasVariant(
+                              $state,
+                              "viewNormalRange",
+                              "viewNormalRange"
+                            )
+                          }
                         )}
-                      />
-
-                      <div
-                        data-plasmic-name={"labResults"}
-                        data-plasmic-override={overrides.labResults}
-                        className={classNames(projectcss.all, sty.labResults, {
-                          [sty.labResultsviewNormalRange]: hasVariant(
-                            $state,
-                            "viewNormalRange",
-                            "viewNormalRange"
-                          )
-                        })}
+                        key={currentIndex}
                       >
                         <div
-                          data-plasmic-name={"checkedFactors"}
-                          data-plasmic-override={overrides.checkedFactors}
                           className={classNames(
                             projectcss.all,
-                            sty.checkedFactors,
+                            sty.freeBox__b1Ehi
+                          )}
+                        />
+
+                        <div
+                          data-plasmic-name={"labResults"}
+                          data-plasmic-override={overrides.labResults}
+                          className={classNames(
+                            projectcss.all,
+                            sty.labResults,
                             {
-                              [sty.checkedFactorsviewNormalRange]: hasVariant(
+                              [sty.labResultsviewNormalRange]: hasVariant(
                                 $state,
                                 "viewNormalRange",
                                 "viewNormalRange"
@@ -1253,178 +1251,104 @@ ${ageMonths} months ${
                             }
                           )}
                         >
-                          {(() => {
-                            try {
-                              return currentItem != null;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return true;
-                              }
-                              throw e;
-                            }
-                          })() ? (
-                            <div
-                              data-plasmic-name={"labGroupName"}
-                              data-plasmic-override={overrides.labGroupName}
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.labGroupName,
-                                {
-                                  [sty.labGroupNameviewNormalRange]: hasVariant(
-                                    $state,
-                                    "viewNormalRange",
-                                    "viewNormalRange"
-                                  )
-                                }
-                              )}
-                            >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.title
-                                      .replace(" (  #* ) ", "")
-                                      .replace(" (  # ) ", "")
-                                      .replace("( #)", "")
-                                      .replace("( #*)", "")
-                                      .replace("* ( #*)", "")
-                                      .replace("(  #* )", "");
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
-                                    }
-                                    throw e;
-                                  }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                          ) : null}
-                          {(_par =>
-                            !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                            (() => {
-                              try {
-                                return currentItem.factors;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return [];
-                                }
-                                throw e;
-                              }
-                            })()
-                          ).map((__plasmic_item_1, __plasmic_idx_1) => {
-                            const currentItem = __plasmic_item_1;
-                            const currentIndex = __plasmic_idx_1;
-                            return (
-                              <div
-                                data-plasmic-name={"factorName"}
-                                data-plasmic-override={overrides.factorName}
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.factorName,
-                                  {
-                                    [sty.factorNameviewNormalRange]: hasVariant(
-                                      $state,
-                                      "viewNormalRange",
-                                      "viewNormalRange"
-                                    )
-                                  }
-                                )}
-                                key={currentIndex}
-                              >
-                                <React.Fragment>
-                                  {currentItem.name
-                                    .replace(" (  #* ) ", "")
-                                    .replace(" (  # ) ", "")
-                                    .replace("( #)", "")
-                                    .replace("( #*)", "")
-                                    .replace("* ( #*)", "")
-                                    .replace("(  #* )", "")
-                                    .replace("* ( #* )", "")
-                                    .replace("( #* )", "")}
-                                </React.Fragment>
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <Stack__
-                          as={"div"}
-                          data-plasmic-name={"laboratoryResultsPerTitle"}
-                          data-plasmic-override={
-                            overrides.laboratoryResultsPerTitle
-                          }
-                          hasGap={true}
-                          className={classNames(
-                            projectcss.all,
-                            sty.laboratoryResultsPerTitle,
-                            {
-                              [sty.laboratoryResultsPerTitleviewNormalRange]:
-                                hasVariant(
+                          <div
+                            data-plasmic-name={"checkedFactors"}
+                            data-plasmic-override={overrides.checkedFactors}
+                            className={classNames(
+                              projectcss.all,
+                              sty.checkedFactors,
+                              {
+                                [sty.checkedFactorsviewNormalRange]: hasVariant(
                                   $state,
                                   "viewNormalRange",
                                   "viewNormalRange"
                                 )
-                            }
-                          )}
-                        >
-                          {(_par =>
-                            !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                            (() => {
+                              }
+                            )}
+                          >
+                            {(() => {
                               try {
-                                return currentItem.results;
+                                return currentItem != null;
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||
                                   e?.plasmicType === "PlasmicUndefinedDataError"
                                 ) {
-                                  return [];
+                                  return true;
                                 }
                                 throw e;
                               }
-                            })()
-                          ).map((__plasmic_item_1, __plasmic_idx_1) => {
-                            const currentItem = __plasmic_item_1;
-                            const currentIndex = __plasmic_idx_1;
-                            return (
-                              <Stack__
-                                as={"div"}
-                                data-plasmic-name={"labPerDate"}
-                                data-plasmic-override={overrides.labPerDate}
-                                hasGap={true}
+                            })() ? (
+                              <div
+                                data-plasmic-name={"labGroupName"}
+                                data-plasmic-override={overrides.labGroupName}
                                 className={classNames(
                                   projectcss.all,
-                                  sty.labPerDate,
+                                  projectcss.__wab_text,
+                                  sty.labGroupName,
                                   {
-                                    [sty.labPerDateviewNormalRange]: hasVariant(
-                                      $state,
-                                      "viewNormalRange",
-                                      "viewNormalRange"
-                                    )
+                                    [sty.labGroupNameviewNormalRange]:
+                                      hasVariant(
+                                        $state,
+                                        "viewNormalRange",
+                                        "viewNormalRange"
+                                      )
                                   }
                                 )}
-                                key={currentIndex}
                               >
-                                <div
-                                  data-plasmic-name={"issuedDatetime"}
-                                  data-plasmic-override={
-                                    overrides.issuedDatetime
+                                <React.Fragment>
+                                  {(() => {
+                                    try {
+                                      return currentItem.title
+                                        .replace(" (  #* ) ", "")
+                                        .replace(" (  # ) ", "")
+                                        .replace("( #)", "")
+                                        .replace("( #*)", "")
+                                        .replace("* ( #*)", "")
+                                        .replace("(  #* )", "");
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return "";
+                                      }
+                                      throw e;
+                                    }
+                                  })()}
+                                </React.Fragment>
+                              </div>
+                            ) : null}
+                            {(_par =>
+                              !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                              (() => {
+                                try {
+                                  return currentItem.factors;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return [];
                                   }
+                                  throw e;
+                                }
+                              })()
+                            ).map((__plasmic_item_1, __plasmic_idx_1) => {
+                              const currentItem = __plasmic_item_1;
+                              const currentIndex = __plasmic_idx_1;
+                              return (
+                                <div
+                                  data-plasmic-name={"factorName"}
+                                  data-plasmic-override={overrides.factorName}
                                   className={classNames(
                                     projectcss.all,
                                     projectcss.__wab_text,
-                                    sty.issuedDatetime,
+                                    sty.factorName,
                                     {
-                                      [sty.issuedDatetimeviewNormalRange]:
+                                      [sty.factorNameviewNormalRange]:
                                         hasVariant(
                                           $state,
                                           "viewNormalRange",
@@ -1432,111 +1356,186 @@ ${ageMonths} months ${
                                         )
                                     }
                                   )}
+                                  key={currentIndex}
                                 >
                                   <React.Fragment>
-                                    {(() => {
+                                    {currentItem.name
+                                      .replace(" (  #* ) ", "")
+                                      .replace(" (  # ) ", "")
+                                      .replace("( #)", "")
+                                      .replace("( #*)", "")
+                                      .replace("* ( #*)", "")
+                                      .replace("(  #* )", "")
+                                      .replace("* ( #* )", "")
+                                      .replace("( #* )", "")}
+                                  </React.Fragment>
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <Stack__
+                            as={"div"}
+                            data-plasmic-name={"laboratoryResultsPerTitle"}
+                            data-plasmic-override={
+                              overrides.laboratoryResultsPerTitle
+                            }
+                            hasGap={true}
+                            className={classNames(
+                              projectcss.all,
+                              sty.laboratoryResultsPerTitle,
+                              {
+                                [sty.laboratoryResultsPerTitleviewNormalRange]:
+                                  hasVariant(
+                                    $state,
+                                    "viewNormalRange",
+                                    "viewNormalRange"
+                                  )
+                              }
+                            )}
+                          >
+                            {(_par =>
+                              !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                              (() => {
+                                try {
+                                  return currentItem.results;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return [];
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            ).map((__plasmic_item_1, __plasmic_idx_1) => {
+                              const currentItem = __plasmic_item_1;
+                              const currentIndex = __plasmic_idx_1;
+                              return (
+                                <Stack__
+                                  as={"div"}
+                                  data-plasmic-name={"labPerDate"}
+                                  data-plasmic-override={overrides.labPerDate}
+                                  hasGap={true}
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.labPerDate,
+                                    {
+                                      [sty.labPerDateviewNormalRange]:
+                                        hasVariant(
+                                          $state,
+                                          "viewNormalRange",
+                                          "viewNormalRange"
+                                        )
+                                    }
+                                  )}
+                                  key={currentIndex}
+                                >
+                                  <div
+                                    data-plasmic-name={"issuedDatetime"}
+                                    data-plasmic-override={
+                                      overrides.issuedDatetime
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.issuedDatetime,
+                                      {
+                                        [sty.issuedDatetimeviewNormalRange]:
+                                          hasVariant(
+                                            $state,
+                                            "viewNormalRange",
+                                            "viewNormalRange"
+                                          )
+                                      }
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return (() => {
+                                            const gregorianDate = new Date(
+                                              currentItem.issued_datetime
+                                            );
+                                            const shamsiDate =
+                                              new Intl.DateTimeFormat(
+                                                "fa-IR"
+                                              ).format(gregorianDate);
+                                            const shamsiTime =
+                                              gregorianDate.toLocaleTimeString(
+                                                "fa-IR",
+                                                { hour12: false }
+                                              );
+                                            const englishDate =
+                                              shamsiDate.replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              );
+
+                                            // Extracting only the hour and minutes from shamsiTime
+                                            const englishTime = shamsiTime
+                                              .split(":")
+                                              .slice(0, 2)
+                                              .join(":")
+                                              .replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              );
+
+                                            return `${englishDate} ${englishTime}`;
+                                          })();
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                  {(_par =>
+                                    !_par
+                                      ? []
+                                      : Array.isArray(_par)
+                                      ? _par
+                                      : [_par])(
+                                    (() => {
                                       try {
-                                        return (() => {
-                                          const gregorianDate = new Date(
-                                            currentItem.issued_datetime
-                                          );
-                                          const shamsiDate =
-                                            new Intl.DateTimeFormat(
-                                              "fa-IR"
-                                            ).format(gregorianDate);
-                                          const shamsiTime =
-                                            gregorianDate.toLocaleTimeString(
-                                              "fa-IR",
-                                              { hour12: false }
-                                            );
-                                          const englishDate =
-                                            shamsiDate.replace(/[۰-۹]/g, d =>
-                                              String.fromCharCode(
-                                                d.charCodeAt(0) - 1728
-                                              )
-                                            );
-
-                                          // Extracting only the hour and minutes from shamsiTime
-                                          const englishTime = shamsiTime
-                                            .split(":")
-                                            .slice(0, 2)
-                                            .join(":")
-                                            .replace(/[۰-۹]/g, d =>
-                                              String.fromCharCode(
-                                                d.charCodeAt(0) - 1728
-                                              )
-                                            );
-
-                                          return `${englishDate} ${englishTime}`;
-                                        })();
+                                        return currentItem.values;
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
                                           e?.plasmicType ===
                                             "PlasmicUndefinedDataError"
                                         ) {
-                                          return "";
+                                          return [];
                                         }
                                         throw e;
                                       }
-                                    })()}
-                                  </React.Fragment>
-                                </div>
-                                {(_par =>
-                                  !_par
-                                    ? []
-                                    : Array.isArray(_par)
-                                    ? _par
-                                    : [_par])(
-                                  (() => {
-                                    try {
-                                      return currentItem.values;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return [];
-                                      }
-                                      throw e;
-                                    }
-                                  })()
-                                ).map((__plasmic_item_2, __plasmic_idx_2) => {
-                                  const currentItem = __plasmic_item_2;
-                                  const currentIndex = __plasmic_idx_2;
-                                  return (
-                                    <Stack__
-                                      as={"div"}
-                                      data-plasmic-name={"labLists"}
-                                      data-plasmic-override={overrides.labLists}
-                                      hasGap={true}
-                                      className={classNames(
-                                        projectcss.all,
-                                        sty.labLists,
-                                        {
-                                          [sty.labListsviewNormalRange]:
-                                            hasVariant(
-                                              $state,
-                                              "viewNormalRange",
-                                              "viewNormalRange"
-                                            )
-                                        }
-                                      )}
-                                      key={currentIndex}
-                                    >
+                                    })()
+                                  ).map((__plasmic_item_2, __plasmic_idx_2) => {
+                                    const currentItem = __plasmic_item_2;
+                                    const currentIndex = __plasmic_idx_2;
+                                    return (
                                       <Stack__
                                         as={"div"}
-                                        data-plasmic-name={"factorNamevalue"}
+                                        data-plasmic-name={"labLists"}
                                         data-plasmic-override={
-                                          overrides.factorNamevalue
+                                          overrides.labLists
                                         }
                                         hasGap={true}
                                         className={classNames(
                                           projectcss.all,
-                                          sty.factorNamevalue,
+                                          sty.labLists,
                                           {
-                                            [sty.factorNamevalueviewNormalRange]:
+                                            [sty.labListsviewNormalRange]:
                                               hasVariant(
                                                 $state,
                                                 "viewNormalRange",
@@ -1544,13 +1543,20 @@ ${ageMonths} months ${
                                               )
                                           }
                                         )}
+                                        key={currentIndex}
                                       >
-                                        <div
+                                        <Stack__
+                                          as={"div"}
+                                          data-plasmic-name={"factorNamevalue"}
+                                          data-plasmic-override={
+                                            overrides.factorNamevalue
+                                          }
+                                          hasGap={true}
                                           className={classNames(
                                             projectcss.all,
-                                            sty.freeBox___4Tel,
+                                            sty.factorNamevalue,
                                             {
-                                              [sty.freeBoxviewNormalRange___4TelBwg80]:
+                                              [sty.factorNamevalueviewNormalRange]:
                                                 hasVariant(
                                                   $state,
                                                   "viewNormalRange",
@@ -1559,71 +1565,12 @@ ${ageMonths} months ${
                                             }
                                           )}
                                         >
-                                          {currentItem.abnormal == false ? (
-                                            <div
-                                              data-plasmic-name={
-                                                "normalFactorValue"
-                                              }
-                                              data-plasmic-override={
-                                                overrides.normalFactorValue
-                                              }
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.__wab_text,
-                                                sty.normalFactorValue,
-                                                {
-                                                  [sty.normalFactorValueviewNormalRange]:
-                                                    hasVariant(
-                                                      $state,
-                                                      "viewNormalRange",
-                                                      "viewNormalRange"
-                                                    )
-                                                }
-                                              )}
-                                            >
-                                              <React.Fragment>
-                                                {currentItem.value}
-                                              </React.Fragment>
-                                            </div>
-                                          ) : null}
-                                          {currentItem.abnormal == true ? (
-                                            <div
-                                              data-plasmic-name={
-                                                "abnormalFactorValue"
-                                              }
-                                              data-plasmic-override={
-                                                overrides.abnormalFactorValue
-                                              }
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.__wab_text,
-                                                sty.abnormalFactorValue,
-                                                {
-                                                  [sty.abnormalFactorValueviewNormalRange]:
-                                                    hasVariant(
-                                                      $state,
-                                                      "viewNormalRange",
-                                                      "viewNormalRange"
-                                                    )
-                                                }
-                                              )}
-                                            >
-                                              <React.Fragment>
-                                                {currentItem.value}
-                                              </React.Fragment>
-                                            </div>
-                                          ) : null}
                                           <div
-                                            data-plasmic-name={"normalRanged"}
-                                            data-plasmic-override={
-                                              overrides.normalRanged
-                                            }
                                             className={classNames(
                                               projectcss.all,
-                                              projectcss.__wab_text,
-                                              sty.normalRanged,
+                                              sty.freeBox___4Tel,
                                               {
-                                                [sty.normalRangedviewNormalRange]:
+                                                [sty.freeBoxviewNormalRange___4TelBwg80]:
                                                   hasVariant(
                                                     $state,
                                                     "viewNormalRange",
@@ -1632,44 +1579,118 @@ ${ageMonths} months ${
                                               }
                                             )}
                                           >
-                                            <React.Fragment>
-                                              {currentItem.normal_range}
-                                            </React.Fragment>
+                                            {currentItem.abnormal == false ? (
+                                              <div
+                                                data-plasmic-name={
+                                                  "normalFactorValue"
+                                                }
+                                                data-plasmic-override={
+                                                  overrides.normalFactorValue
+                                                }
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  projectcss.__wab_text,
+                                                  sty.normalFactorValue,
+                                                  {
+                                                    [sty.normalFactorValueviewNormalRange]:
+                                                      hasVariant(
+                                                        $state,
+                                                        "viewNormalRange",
+                                                        "viewNormalRange"
+                                                      )
+                                                  }
+                                                )}
+                                              >
+                                                <React.Fragment>
+                                                  {currentItem.value}
+                                                </React.Fragment>
+                                              </div>
+                                            ) : null}
+                                            {currentItem.abnormal == true ? (
+                                              <div
+                                                data-plasmic-name={
+                                                  "abnormalFactorValue"
+                                                }
+                                                data-plasmic-override={
+                                                  overrides.abnormalFactorValue
+                                                }
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  projectcss.__wab_text,
+                                                  sty.abnormalFactorValue,
+                                                  {
+                                                    [sty.abnormalFactorValueviewNormalRange]:
+                                                      hasVariant(
+                                                        $state,
+                                                        "viewNormalRange",
+                                                        "viewNormalRange"
+                                                      )
+                                                  }
+                                                )}
+                                              >
+                                                <React.Fragment>
+                                                  {currentItem.value}
+                                                </React.Fragment>
+                                              </div>
+                                            ) : null}
+                                            <div
+                                              data-plasmic-name={"normalRanged"}
+                                              data-plasmic-override={
+                                                overrides.normalRanged
+                                              }
+                                              className={classNames(
+                                                projectcss.all,
+                                                projectcss.__wab_text,
+                                                sty.normalRanged,
+                                                {
+                                                  [sty.normalRangedviewNormalRange]:
+                                                    hasVariant(
+                                                      $state,
+                                                      "viewNormalRange",
+                                                      "viewNormalRange"
+                                                    )
+                                                }
+                                              )}
+                                            >
+                                              <React.Fragment>
+                                                {currentItem.normal_range}
+                                              </React.Fragment>
+                                            </div>
                                           </div>
-                                        </div>
+                                        </Stack__>
                                       </Stack__>
-                                    </Stack__>
-                                  );
-                                })}
-                                {new Date(currentItem.issued_datetime) <
-                                new Date($state.admissionDatetime) ? (
-                                  <div
-                                    data-plasmic-name={"overlayLayer"}
-                                    data-plasmic-override={
-                                      overrides.overlayLayer
-                                    }
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.__wab_text,
-                                      sty.overlayLayer
-                                    )}
-                                  >
-                                    {""}
-                                  </div>
-                                ) : null}
-                              </Stack__>
-                            );
-                          })}
-                        </Stack__>
-                      </div>
-                    </Stack__>
-                  );
-                })}
-              </React.Fragment>
-            )}
-          </DataCtxReader__>
-        </ApiFetcherComponent>
-        {false ? (
+                                    );
+                                  })}
+                                  {new Date(currentItem.issued_datetime) <
+                                  new Date($state.admissionDatetime) ? (
+                                    <div
+                                      data-plasmic-name={"overlayLayer"}
+                                      data-plasmic-override={
+                                        overrides.overlayLayer
+                                      }
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.overlayLayer
+                                      )}
+                                    >
+                                      {""}
+                                    </div>
+                                  ) : null}
+                                </Stack__>
+                              );
+                            })}
+                          </Stack__>
+                        </div>
+                      </Stack__>
+                    );
+                  })}
+                </React.Fragment>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
+        ) : null}
+        {$state.selectedTab === "CheckedFactors" ? (
           <ApiFetcherComponent
             data-plasmic-name={"checkedFactorsApiFetcher"}
             data-plasmic-override={overrides.checkedFactorsApiFetcher}
@@ -1677,39 +1698,317 @@ ${ageMonths} months ${
               "__wab_instance",
               sty.checkedFactorsApiFetcher
             )}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             method={"GET"}
-            path={`/api/v3/patient/lab_factors/${
-              $ctx.params.adm_id
-            }?namespace_id=${localStorage.getItem("inlab_user_namespace_id")}`}
+            path={`/api/v3/patient/lab_factors/${$ctx.params.adm_id}`}
             ref={ref => {
               $refs["checkedFactorsApiFetcher"] = ref;
             }}
           >
             <DataCtxReader__>
               {$ctx => (
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__hNrOu
-                  )}
-                >
-                  <React.Fragment>
-                    {(() => {
-                      try {
-                        return undefined;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return "";
-                        }
-                        throw e;
+                <React.Fragment>
+                  {$ctx.fetched_data.loading == true ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__bmUQf
+                      )}
+                    >
+                      {
+                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
                       }
-                    })()}
-                  </React.Fragment>
-                </div>
+                    </div>
+                  ) : null}
+                  <Stack__
+                    as={"div"}
+                    data-plasmic-name={"labFactorList"}
+                    data-plasmic-override={overrides.labFactorList}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.labFactorList)}
+                  >
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          data-plasmic-name={"labFactorPerDate"}
+                          data-plasmic-override={overrides.labFactorPerDate}
+                          className={classNames(
+                            projectcss.all,
+                            sty.labFactorPerDate
+                          )}
+                          key={currentIndex}
+                        >
+                          <div
+                            data-plasmic-name={"labFactorDatetime"}
+                            data-plasmic-override={overrides.labFactorDatetime}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.labFactorDatetime
+                            )}
+                          >
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return currentItem.issued_datetime;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "";
+                                  }
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
+                          </div>
+                          <div
+                            data-plasmic-name={"factorsList"}
+                            data-plasmic-override={overrides.factorsList}
+                            className={classNames(
+                              projectcss.all,
+                              sty.factorsList
+                            )}
+                          >
+                            {(_par =>
+                              !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                              (() => {
+                                try {
+                                  return currentItem.lab_groups;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return [];
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            ).map((__plasmic_item_1, __plasmic_idx_1) => {
+                              const currentItem = __plasmic_item_1;
+                              const currentIndex = __plasmic_idx_1;
+                              return (
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.freeBox___1NlKt
+                                  )}
+                                  key={currentIndex}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.freeBox__irl0O
+                                    )}
+                                  >
+                                    <div
+                                      className={classNames(
+                                        projectcss.all,
+                                        sty.freeBox__xC6Cb
+                                      )}
+                                    >
+                                      {(() => {
+                                        const child$Props = {
+                                          bordered: true,
+                                          className: classNames(
+                                            "__wab_instance",
+                                            sty.factor
+                                          ),
+                                          label2: (
+                                            <React.Fragment>
+                                              {(() => {
+                                                try {
+                                                  return currentItem.gname;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return "Collapse Header";
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()}
+                                            </React.Fragment>
+                                          ),
+                                          onChange:
+                                            generateStateOnChangePropForCodeComponents(
+                                              $state,
+                                              "open",
+                                              [
+                                                "factor",
+                                                __plasmic_idx_0,
+                                                __plasmic_idx_1,
+                                                "open"
+                                              ],
+                                              AntdSingleCollapse_Helpers
+                                            ),
+                                          open: generateStateValueProp($state, [
+                                            "factor",
+                                            __plasmic_idx_0,
+                                            __plasmic_idx_1,
+                                            "open"
+                                          ]),
+                                          showArrow: true
+                                        };
+                                        initializeCodeComponentStates(
+                                          $state,
+                                          [
+                                            {
+                                              name: "open",
+                                              plasmicStateName:
+                                                "factor[][].open"
+                                            }
+                                          ],
+                                          [__plasmic_idx_0, __plasmic_idx_1],
+                                          AntdSingleCollapse_Helpers ?? {},
+                                          child$Props
+                                        );
+                                        initializePlasmicStates(
+                                          $state,
+                                          [
+                                            {
+                                              name: "factor[][].open",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            }
+                                          ],
+                                          [__plasmic_idx_0, __plasmic_idx_1]
+                                        );
+                                        return (
+                                          <AntdSingleCollapse
+                                            data-plasmic-name={"factor"}
+                                            data-plasmic-override={
+                                              overrides.factor
+                                            }
+                                            {...child$Props}
+                                          >
+                                            {(_par =>
+                                              !_par
+                                                ? []
+                                                : Array.isArray(_par)
+                                                ? _par
+                                                : [_par])(
+                                              (() => {
+                                                try {
+                                                  return currentItem.lab_results;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return [];
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()
+                                            ).map(
+                                              (
+                                                __plasmic_item_2,
+                                                __plasmic_idx_2
+                                              ) => {
+                                                const currentItem =
+                                                  __plasmic_item_2;
+                                                const currentIndex =
+                                                  __plasmic_idx_2;
+                                                return (
+                                                  <div
+                                                    className={classNames(
+                                                      projectcss.all,
+                                                      sty.freeBox__fxDb6
+                                                    )}
+                                                    key={currentIndex}
+                                                  >
+                                                    <div
+                                                      data-plasmic-name={
+                                                        "factorName2"
+                                                      }
+                                                      data-plasmic-override={
+                                                        overrides.factorName2
+                                                      }
+                                                      className={classNames(
+                                                        projectcss.all,
+                                                        projectcss.__wab_text,
+                                                        sty.factorName2
+                                                      )}
+                                                    >
+                                                      <React.Fragment>
+                                                        {(() => {
+                                                          try {
+                                                            return currentItem.tname;
+                                                          } catch (e) {
+                                                            if (
+                                                              e instanceof
+                                                                TypeError ||
+                                                              e?.plasmicType ===
+                                                                "PlasmicUndefinedDataError"
+                                                            ) {
+                                                              return "Collapsible text...";
+                                                            }
+                                                            throw e;
+                                                          }
+                                                        })()}
+                                                      </React.Fragment>
+                                                    </div>
+                                                  </div>
+                                                );
+                                              }
+                                            )}
+                                          </AntdSingleCollapse>
+                                        );
+                                      })()}
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </Stack__>
+                </React.Fragment>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
@@ -1802,7 +2101,19 @@ ${ageMonths} months ${
                             }
                             throw e;
                           }
-                        })()}/profile`
+                        })()}/profile/${(() => {
+                          try {
+                            return $ctx.params.adm_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
                       };
                       return (({ destination }) => {
                         if (
@@ -1866,7 +2177,19 @@ ${ageMonths} months ${
                             }
                             throw e;
                           }
-                        })()}/report/list`
+                        })()}/report/list/${(() => {
+                          try {
+                            return $ctx.params.adm_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
                       };
                       return (({ destination }) => {
                         if (
@@ -1930,7 +2253,19 @@ ${ageMonths} months ${
                             }
                             throw e;
                           }
-                        })()}/lab/[adm_id]`
+                        })()}/lab/${(() => {
+                          try {
+                            return $ctx.params.adm_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
                       };
                       return (({ destination }) => {
                         if (
@@ -2009,6 +2344,12 @@ const PlasmicDescendants = {
     "normalRanged",
     "overlayLayer",
     "checkedFactorsApiFetcher",
+    "labFactorList",
+    "labFactorPerDate",
+    "labFactorDatetime",
+    "factorsList",
+    "factor",
+    "factorName2",
     "switchingTabs",
     "switchingTab",
     "homepage",
@@ -2161,7 +2502,34 @@ const PlasmicDescendants = {
   abnormalFactorValue: ["abnormalFactorValue"],
   normalRanged: ["normalRanged"],
   overlayLayer: ["overlayLayer"],
-  checkedFactorsApiFetcher: ["checkedFactorsApiFetcher"],
+  checkedFactorsApiFetcher: [
+    "checkedFactorsApiFetcher",
+    "labFactorList",
+    "labFactorPerDate",
+    "labFactorDatetime",
+    "factorsList",
+    "factor",
+    "factorName2"
+  ],
+  labFactorList: [
+    "labFactorList",
+    "labFactorPerDate",
+    "labFactorDatetime",
+    "factorsList",
+    "factor",
+    "factorName2"
+  ],
+  labFactorPerDate: [
+    "labFactorPerDate",
+    "labFactorDatetime",
+    "factorsList",
+    "factor",
+    "factorName2"
+  ],
+  labFactorDatetime: ["labFactorDatetime"],
+  factorsList: ["factorsList", "factor", "factorName2"],
+  factor: ["factor", "factorName2"],
+  factorName2: ["factorName2"],
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
@@ -2223,6 +2591,12 @@ type NodeDefaultElementType = {
   normalRanged: "div";
   overlayLayer: "div";
   checkedFactorsApiFetcher: typeof ApiFetcherComponent;
+  labFactorList: "div";
+  labFactorPerDate: "div";
+  labFactorDatetime: "div";
+  factorsList: "div";
+  factor: typeof AntdSingleCollapse;
+  factorName2: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   homepage: typeof PlasmicImg__;
@@ -2329,6 +2703,12 @@ export const PlasmicLaboratoryData = Object.assign(
     normalRanged: makeNodeComponent("normalRanged"),
     overlayLayer: makeNodeComponent("overlayLayer"),
     checkedFactorsApiFetcher: makeNodeComponent("checkedFactorsApiFetcher"),
+    labFactorList: makeNodeComponent("labFactorList"),
+    labFactorPerDate: makeNodeComponent("labFactorPerDate"),
+    labFactorDatetime: makeNodeComponent("labFactorDatetime"),
+    factorsList: makeNodeComponent("factorsList"),
+    factor: makeNodeComponent("factor"),
+    factorName2: makeNodeComponent("factorName2"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),

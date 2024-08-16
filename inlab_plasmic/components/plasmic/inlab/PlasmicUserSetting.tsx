@@ -126,7 +126,9 @@ export type PlasmicUserSetting__OverridesType = {
   resetPasswordImage?: Flex__<"svg">;
   modalChangePassword?: Flex__<typeof AntdModal>;
   modalContent?: Flex__<"div">;
+  passwordContent?: Flex__<"div">;
   password?: Flex__<typeof TextInput>;
+  repeatPasswordContent?: Flex__<"div">;
   repeatPassword?: Flex__<typeof TextInput>;
   passwordRepeatPasswordMismatch2?: Flex__<typeof Alert>;
   successfulChangePassword2?: Flex__<typeof Alert>;
@@ -722,6 +724,9 @@ function PlasmicUserSetting__RenderFunc(props: {
                   "__wab_instance",
                   sty.modalChangePassword
                 )}
+                closeButtonClassName={classNames({
+                  [sty["pcls__psrn3OXhphL"]]: true
+                })}
                 defaultStylesClassName={classNames(
                   projectcss.root_reset,
                   projectcss.plasmic_default_styles,
@@ -895,50 +900,175 @@ function PlasmicUserSetting__RenderFunc(props: {
                   data-plasmic-override={overrides.modalContent}
                   className={classNames(projectcss.all, sty.modalContent)}
                 >
-                  <TextInput
-                    data-plasmic-name={"password"}
-                    data-plasmic-override={overrides.password}
-                    className={classNames("__wab_instance", sty.password)}
-                    onChange={(...eventArgs) => {
-                      generateStateOnChangeProp($state, ["password", "value"])(
-                        (e => e.target?.value).apply(null, eventArgs)
-                      );
-                    }}
-                    placeholder={
-                      "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
-                    }
-                    startIcon={null}
-                    type={"password"}
-                    value={
-                      generateStateValueProp($state, ["password", "value"]) ??
-                      ""
-                    }
-                  />
+                  <div
+                    data-plasmic-name={"passwordContent"}
+                    data-plasmic-override={overrides.passwordContent}
+                    className={classNames(projectcss.all, sty.passwordContent)}
+                  >
+                    <TextInput
+                      data-plasmic-name={"password"}
+                      data-plasmic-override={overrides.password}
+                      className={classNames("__wab_instance", sty.password)}
+                      endIcon={
+                        $state.value !== "" ? (
+                          <Icons8ClosesvgIcon
+                            className={classNames(
+                              projectcss.all,
+                              sty.svg__nsK2A
+                            )}
+                            onClick={async event => {
+                              const $steps = {};
 
-                  <TextInput
-                    data-plasmic-name={"repeatPassword"}
-                    data-plasmic-override={overrides.repeatPassword}
-                    autoFocus={false}
-                    className={classNames("__wab_instance", sty.repeatPassword)}
-                    onChange={(...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "repeatPassword",
-                        "value"
-                      ])((e => e.target?.value).apply(null, eventArgs));
-                    }}
-                    placeholder={
-                      "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0645\u062c\u062f\u062f\u0627 \u062a\u06a9\u0631\u0627\u0631 \u06a9\u0646\u06cc\u062f"
-                    }
-                    startIcon={null}
-                    type={"password"}
-                    value={
-                      generateStateValueProp($state, [
-                        "repeatPassword",
-                        "value"
-                      ]) ?? ""
-                    }
-                  />
+                              $steps["clearPasswordValue"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["password", "value"]
+                                      },
+                                      operation: 0,
+                                      value: ""
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
 
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["clearPasswordValue"] != null &&
+                                typeof $steps["clearPasswordValue"] ===
+                                  "object" &&
+                                typeof $steps["clearPasswordValue"].then ===
+                                  "function"
+                              ) {
+                                $steps["clearPasswordValue"] = await $steps[
+                                  "clearPasswordValue"
+                                ];
+                              }
+                            }}
+                            role={"img"}
+                          />
+                        ) : null
+                      }
+                      onChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "password",
+                          "value"
+                        ])((e => e.target?.value).apply(null, eventArgs));
+                      }}
+                      placeholder={
+                        "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
+                      }
+                      startIcon={null}
+                      type={"password"}
+                      value={
+                        generateStateValueProp($state, ["password", "value"]) ??
+                        ""
+                      }
+                    />
+                  </div>
+                  <div
+                    data-plasmic-name={"repeatPasswordContent"}
+                    data-plasmic-override={overrides.repeatPasswordContent}
+                    className={classNames(
+                      projectcss.all,
+                      sty.repeatPasswordContent
+                    )}
+                  >
+                    <TextInput
+                      data-plasmic-name={"repeatPassword"}
+                      data-plasmic-override={overrides.repeatPassword}
+                      autoFocus={false}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.repeatPassword
+                      )}
+                      endIcon={
+                        $state.value !== "" ? (
+                          <Icons8ClosesvgIcon
+                            className={classNames(
+                              projectcss.all,
+                              sty.svg__kHsuF
+                            )}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["clearRepeatPasswordValue"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: [
+                                          "repeatPassword",
+                                          "value"
+                                        ]
+                                      },
+                                      operation: 0,
+                                      value: ""
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["clearRepeatPasswordValue"] != null &&
+                                typeof $steps["clearRepeatPasswordValue"] ===
+                                  "object" &&
+                                typeof $steps["clearRepeatPasswordValue"]
+                                  .then === "function"
+                              ) {
+                                $steps["clearRepeatPasswordValue"] =
+                                  await $steps["clearRepeatPasswordValue"];
+                              }
+                            }}
+                            role={"img"}
+                          />
+                        ) : null
+                      }
+                      onChange={(...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "repeatPassword",
+                          "value"
+                        ])((e => e.target?.value).apply(null, eventArgs));
+                      }}
+                      placeholder={
+                        "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0645\u062c\u062f\u062f\u0627 \u062a\u06a9\u0631\u0627\u0631 \u06a9\u0646\u06cc\u062f"
+                      }
+                      startIcon={null}
+                      type={"password"}
+                      value={
+                        generateStateValueProp($state, [
+                          "repeatPassword",
+                          "value"
+                        ]) ?? ""
+                      }
+                    />
+                  </div>
                   {(() => {
                     try {
                       return $state.passwordRepeatPasswordMismatch;
@@ -1757,7 +1887,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/profile`
+                          })()}/profile/[adm_id]`
                         };
                         return (({ destination }) => {
                           if (
@@ -1819,7 +1949,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/report/list`
+                          })()}/report/list/[adm_id]`
                         };
                         return (({ destination }) => {
                           if (
@@ -1945,7 +2075,9 @@ const PlasmicDescendants = {
     "resetPasswordImage",
     "modalChangePassword",
     "modalContent",
+    "passwordContent",
     "password",
+    "repeatPasswordContent",
     "repeatPassword",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
@@ -1979,7 +2111,9 @@ const PlasmicDescendants = {
     "resetPasswordImage",
     "modalChangePassword",
     "modalContent",
+    "passwordContent",
     "password",
+    "repeatPasswordContent",
     "repeatPassword",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
@@ -2026,7 +2160,9 @@ const PlasmicDescendants = {
     "resetPasswordImage",
     "modalChangePassword",
     "modalContent",
+    "passwordContent",
     "password",
+    "repeatPasswordContent",
     "repeatPassword",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
@@ -2038,7 +2174,9 @@ const PlasmicDescendants = {
   modalChangePassword: [
     "modalChangePassword",
     "modalContent",
+    "passwordContent",
     "password",
+    "repeatPasswordContent",
     "repeatPassword",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
@@ -2048,14 +2186,18 @@ const PlasmicDescendants = {
   ],
   modalContent: [
     "modalContent",
+    "passwordContent",
     "password",
+    "repeatPasswordContent",
     "repeatPassword",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
     "unsuccessfulChangePassword2",
     "changePasswordButton"
   ],
+  passwordContent: ["passwordContent", "password"],
   password: ["password"],
+  repeatPasswordContent: ["repeatPasswordContent", "repeatPassword"],
   repeatPassword: ["repeatPassword"],
   passwordRepeatPasswordMismatch2: ["passwordRepeatPasswordMismatch2"],
   successfulChangePassword2: ["successfulChangePassword2"],
@@ -2093,7 +2235,9 @@ type NodeDefaultElementType = {
   resetPasswordImage: "svg";
   modalChangePassword: typeof AntdModal;
   modalContent: "div";
+  passwordContent: "div";
   password: typeof TextInput;
+  repeatPasswordContent: "div";
   repeatPassword: typeof TextInput;
   passwordRepeatPasswordMismatch2: typeof Alert;
   successfulChangePassword2: typeof Alert;
@@ -2189,7 +2333,9 @@ export const PlasmicUserSetting = Object.assign(
     resetPasswordImage: makeNodeComponent("resetPasswordImage"),
     modalChangePassword: makeNodeComponent("modalChangePassword"),
     modalContent: makeNodeComponent("modalContent"),
+    passwordContent: makeNodeComponent("passwordContent"),
     password: makeNodeComponent("password"),
+    repeatPasswordContent: makeNodeComponent("repeatPasswordContent"),
     repeatPassword: makeNodeComponent("repeatPassword"),
     passwordRepeatPasswordMismatch2: makeNodeComponent(
       "passwordRepeatPasswordMismatch2"

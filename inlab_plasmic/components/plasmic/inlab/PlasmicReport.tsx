@@ -298,7 +298,7 @@ function PlasmicReport__RenderFunc(props: {
                                 }
                                 throw e;
                               }
-                            })()}`
+                            })()}/[adm_id]`
                           };
                           return (({ destination }) => {
                             if (
