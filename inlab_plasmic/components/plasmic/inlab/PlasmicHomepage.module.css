@@ -1330,7 +1330,7 @@
 .modalWard:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
-  background: none;
+  background: #ffffff;
 }
 .modalWard__modal :global(.ant-modal-content) {
   background: #ffffff;

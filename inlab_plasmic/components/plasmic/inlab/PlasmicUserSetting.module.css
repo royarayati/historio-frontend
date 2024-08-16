@@ -383,22 +383,38 @@
 .modalChangePassword:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
+  height: 200px;
+  background: #ffffff;
 }
 .modalContent {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 100%;
+  width: 505px;
   height: auto;
   max-width: 100%;
   justify-content: flex-start;
   align-items: center;
+  overflow: auto;
+  align-self: center;
+  padding: 8px;
+}
+.passwordContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
   min-width: 0;
   padding: 8px;
 }
 .password:global(.__wab_instance) {
   max-width: 100%;
-  margin: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
 }
 .svg__nsK2A {
   position: relative;
@@ -406,9 +422,22 @@
   width: auto;
   height: 1em;
 }
+.repeatPasswordContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
 .repeatPassword:global(.__wab_instance) {
   max-width: 100%;
-  margin: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
 }
 .svg__kHsuF {
   position: relative;
@@ -523,6 +552,7 @@
   max-width: 100%;
   object-fit: cover;
   font-weight: 700;
+  background: #ffffff;
   border-width: 1px;
   border-style: none;
 }

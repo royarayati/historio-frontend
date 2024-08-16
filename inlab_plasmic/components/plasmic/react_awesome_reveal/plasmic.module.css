@@ -1,5 +1,5 @@
 .plasmic_default_styles {
-  --mixin-pvZsL8utzp-58GpZ_white-space: pre-wrap;
+  --mixin-pvZsL8utzp_white-space: pre-wrap;
 }
 
 :where(.all) {
@@ -311,5 +311,5 @@
   white-space: normal;
 }
 :where(.root_reset) {
-  white-space: var(--mixin-pvZsL8utzp-58GpZ_white-space);
+  white-space: var(--mixin-pvZsL8utzp_white-space);
 }

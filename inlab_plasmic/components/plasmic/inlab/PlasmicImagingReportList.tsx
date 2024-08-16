@@ -66,7 +66,6 @@ import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
-import OnloadUserPatientInteractionCount from "../../OnloadUserPatientInteractionCount"; // plasmic-import: 6oEGl3M40QrL/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -122,9 +121,6 @@ export type PlasmicImagingReportList__OverridesType = {
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratory?: Flex__<typeof PlasmicImg__>;
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
-  onloadUserPatientInteractionCount?: Flex__<
-    typeof OnloadUserPatientInteractionCount
-  >;
 };
 
 export interface DefaultImagingReportListProps {}
@@ -773,6 +769,19 @@ ${ageMonths} months ${
                                           }
                                           throw e;
                                         }
+                                      })()}/${(() => {
+                                        try {
+                                          return $ctx.params.adm_id;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
                                       })()}`
                                     };
                                     return (({ destination }) => {
@@ -1137,7 +1146,19 @@ ${ageMonths} months ${
                             }
                             throw e;
                           }
-                        })()}/profile`
+                        })()}/profile/${(() => {
+                          try {
+                            return $ctx.params.adm_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
                       };
                       return (({ destination }) => {
                         if (
@@ -1201,7 +1222,19 @@ ${ageMonths} months ${
                             }
                             throw e;
                           }
-                        })()}/report/list`
+                        })()}/report/list/${(() => {
+                          try {
+                            return $ctx.params.adm_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
                       };
                       return (({ destination }) => {
                         if (
@@ -1265,7 +1298,19 @@ ${ageMonths} months ${
                             }
                             throw e;
                           }
-                        })()}/lab/[adm_id]`
+                        })()}/lab/${(() => {
+                          try {
+                            return $ctx.params.adm_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
                       };
                       return (({ destination }) => {
                         if (
@@ -1393,29 +1438,6 @@ ${ageMonths} months ${
               : null}
           </SwitchingTab>
         </div>
-        {false ? (
-          <OnloadUserPatientInteractionCount
-            data-plasmic-name={"onloadUserPatientInteractionCount"}
-            data-plasmic-override={overrides.onloadUserPatientInteractionCount}
-            className={classNames(
-              "__wab_instance",
-              sty.onloadUserPatientInteractionCount
-            )}
-            patientIdForOnloadUserPatientInteractionCount={(() => {
-              try {
-                return $ctx.params.code;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
-              }
-            })()}
-          />
-        ) : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -1447,8 +1469,7 @@ const PlasmicDescendants = {
     "patientProfile",
     "radiologyReport",
     "laboratory",
-    "bookmarkIcon",
-    "onloadUserPatientInteractionCount"
+    "bookmarkIcon"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -1548,8 +1569,7 @@ const PlasmicDescendants = {
   patientProfile: ["patientProfile"],
   radiologyReport: ["radiologyReport"],
   laboratory: ["laboratory"],
-  bookmarkIcon: ["bookmarkIcon"],
-  onloadUserPatientInteractionCount: ["onloadUserPatientInteractionCount"]
+  bookmarkIcon: ["bookmarkIcon"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -1580,7 +1600,6 @@ type NodeDefaultElementType = {
   radiologyReport: typeof PlasmicImg__;
   laboratory: typeof PlasmicImg__;
   bookmarkIcon: typeof BookmarkIcon;
-  onloadUserPatientInteractionCount: typeof OnloadUserPatientInteractionCount;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -1669,9 +1688,6 @@ export const PlasmicImagingReportList = Object.assign(
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratory: makeNodeComponent("laboratory"),
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
-    onloadUserPatientInteractionCount: makeNodeComponent(
-      "onloadUserPatientInteractionCount"
-    ),
 
     // Metadata about props expected for PlasmicImagingReportList
     internalVariantProps: PlasmicImagingReportList__VariantProps,

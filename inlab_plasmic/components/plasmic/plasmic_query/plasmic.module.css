@@ -1,5 +1,5 @@
 .plasmic_default_styles {
-  --mixin-mQdTSVoit_mw-YUiM7_white-space: pre-wrap;
+  --mixin-mQdTSVoit_mw_white-space: pre-wrap;
 }
 
 :where(.all) {
@@ -311,5 +311,5 @@
   white-space: normal;
 }
 :where(.root_reset) {
-  white-space: var(--mixin-mQdTSVoit_mw-YUiM7_white-space);
+  white-space: var(--mixin-mQdTSVoit_mw_white-space);
 }
