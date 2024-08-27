@@ -115,6 +115,8 @@ export type PlasmicLaboratoryData__OverridesType = {
   normalRangeButtonCircle?: Flex__<"div">;
   tabButtons?: Flex__<"div">;
   checkedFactor?: Flex__<typeof Button>;
+  newFeatureTag?: Flex__<"div">;
+  button?: Flex__<typeof Button>;
   laboratoryResult?: Flex__<typeof Button>;
   labData?: Flex__<typeof ApiFetcherComponent>;
   searchLabName?: Flex__<typeof TextInput>;
@@ -350,6 +352,36 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         variableType: "boolean",
 
         onMutate: generateOnMutateForSpec("open", AntdSingleCollapse_Helpers)
+      },
+      {
+        path: "button.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -737,6 +769,76 @@ ${ageMonths} months ${
             ])}
           >
             <div
+              data-plasmic-name={"newFeatureTag"}
+              data-plasmic-override={overrides.newFeatureTag}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.newFeatureTag
+              )}
+            >
+              {"New"}
+            </div>
+            <Button
+              data-plasmic-name={"button"}
+              data-plasmic-override={overrides.button}
+              className={classNames("__wab_instance", sty.button)}
+              deselected={generateStateValueProp($state, [
+                "button",
+                "deselected"
+              ])}
+              isDisabled={generateStateValueProp($state, [
+                "button",
+                "isDisabled"
+              ])}
+              onDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "deselected"])(
+                  eventArgs[0]
+                );
+              }}
+              onIsDisabledChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "isDisabled"])(
+                  eventArgs[0]
+                );
+              }}
+              onSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "selected"])(
+                  eventArgs[0]
+                );
+              }}
+              onSortDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "sortDeselected"])(
+                  eventArgs[0]
+                );
+              }}
+              onSortSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "sortSelected"])(
+                  eventArgs[0]
+                );
+              }}
+              selected={generateStateValueProp($state, ["button", "selected"])}
+              shape={"rounded"}
+              size4={"compact"}
+              sortDeselected={generateStateValueProp($state, [
+                "button",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "button",
+                "sortSelected"
+              ])}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__n9GNm
+                )}
+              >
+                {"New "}
+              </div>
+            </Button>
+            <div
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
@@ -870,6 +972,31 @@ ${ageMonths} months ${
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
+                  {(() => {
+                    try {
+                      return $ctx.fetched_data.loading == true;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return false;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__woDte
+                      )}
+                    >
+                      {
+                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                      }
+                    </div>
+                  ) : null}
                   {false ? (
                     <TextInput
                       data-plasmic-name={"searchLabName"}
@@ -958,19 +1085,6 @@ ${ageMonths} months ${
                     >
                       {
                         "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
-                      }
-                    </div>
-                  ) : null}
-                  {$ctx.fetched_data.loading == true ? (
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__woDte
-                      )}
-                    >
-                      {
-                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
                       }
                     </div>
                   ) : null}
@@ -1851,6 +1965,9 @@ ${ageMonths} months ${
                                             sty.factor
                                           ),
                                           defaultOpen: false,
+                                          headerClass: classNames({
+                                            [sty["pcls_q2lYXHR-r9ME"]]: true
+                                          }),
                                           label2: (
                                             <React.Fragment>
                                               {(() => {
@@ -2319,6 +2436,8 @@ const PlasmicDescendants = {
     "normalRangeButtonCircle",
     "tabButtons",
     "checkedFactor",
+    "newFeatureTag",
+    "button",
     "laboratoryResult",
     "labData",
     "searchLabName",
@@ -2377,8 +2496,16 @@ const PlasmicDescendants = {
   saveAdmissionDatetime: ["saveAdmissionDatetime"],
   normalRangeButton: ["normalRangeButton", "normalRangeButtonCircle"],
   normalRangeButtonCircle: ["normalRangeButtonCircle"],
-  tabButtons: ["tabButtons", "checkedFactor", "laboratoryResult"],
-  checkedFactor: ["checkedFactor"],
+  tabButtons: [
+    "tabButtons",
+    "checkedFactor",
+    "newFeatureTag",
+    "button",
+    "laboratoryResult"
+  ],
+  checkedFactor: ["checkedFactor", "newFeatureTag", "button"],
+  newFeatureTag: ["newFeatureTag"],
+  button: ["button"],
   laboratoryResult: ["laboratoryResult"],
   labData: [
     "labData",
@@ -2566,6 +2693,8 @@ type NodeDefaultElementType = {
   normalRangeButtonCircle: "div";
   tabButtons: "div";
   checkedFactor: typeof Button;
+  newFeatureTag: "div";
+  button: typeof Button;
   laboratoryResult: typeof Button;
   labData: typeof ApiFetcherComponent;
   searchLabName: typeof TextInput;
@@ -2678,6 +2807,8 @@ export const PlasmicLaboratoryData = Object.assign(
     normalRangeButtonCircle: makeNodeComponent("normalRangeButtonCircle"),
     tabButtons: makeNodeComponent("tabButtons"),
     checkedFactor: makeNodeComponent("checkedFactor"),
+    newFeatureTag: makeNodeComponent("newFeatureTag"),
+    button: makeNodeComponent("button"),
     laboratoryResult: makeNodeComponent("laboratoryResult"),
     labData: makeNodeComponent("labData"),
     searchLabName: makeNodeComponent("searchLabName"),

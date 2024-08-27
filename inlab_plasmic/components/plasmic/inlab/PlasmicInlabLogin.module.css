@@ -109,10 +109,23 @@
 }
 .alert:global(.__wab_instance) {
   max-width: 100%;
-  left: 183px;
-  top: 43px;
-  position: absolute;
-  width: auto;
+  left: auto;
+  top: 4em;
+  position: fixed;
+  width: 28.5%;
+  z-index: 1;
+  right: 35.75%;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .alert:global(.__wab_instance) {
+    left: auto;
+    top: 2em;
+    z-index: 1;
+    position: fixed;
+    right: 10%;
+    margin-right: 0px;
+    width: 80%;
+  }
 }
 .text__hvY3 {
   height: auto;

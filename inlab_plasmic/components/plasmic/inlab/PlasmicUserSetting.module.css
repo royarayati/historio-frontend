@@ -386,6 +386,10 @@
   height: 200px;
   background: #ffffff;
 }
+.modalChangePassword__modal :global(.ant-modal-content) {
+  color: #ffffff;
+  outline: none;
+}
 .modalContent {
   display: flex;
   flex-direction: column;
@@ -397,6 +401,7 @@
   align-items: center;
   overflow: auto;
   align-self: center;
+  background: #ffffff;
   padding: 8px;
 }
 .passwordContent {
@@ -547,6 +552,9 @@
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.text__lCl1 {
+  background: #ffffff;
 }
 .triggerToOpenModalButton:global(.__wab_instance) {
   max-width: 100%;

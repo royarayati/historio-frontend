@@ -116,6 +116,8 @@ export type PlasmicTextInput__ArgsType = {
     | "email"
     | "tel";
   autoFocus?: boolean;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
 };
 type ArgPropType = keyof PlasmicTextInput__ArgsType;
 export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
@@ -129,7 +131,9 @@ export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
   "aria-labelledby",
   "onChange",
   "type",
-  "autoFocus"
+  "autoFocus",
+  "aria-label",
+  "aria-labelledby"
 );
 
 export type PlasmicTextInput__OverridesType = {
@@ -158,6 +162,8 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
     | "email"
     | "tel";
   autoFocus?: boolean;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
   error?: SingleBooleanChoiceArg<"error">;
 }
 

@@ -737,6 +737,9 @@ function PlasmicUserSetting__RenderFunc(props: {
                 )}
                 hideFooter={true}
                 maskClosable={true}
+                modalContentClassName={classNames({
+                  [sty["pcls_VyKcQQz6TGrW"]]: true
+                })}
                 modalScopeClassName={sty["modalChangePassword__modal"]}
                 onOpenChange={generateStateOnChangeProp($state, [
                   "modalChangePassword",
@@ -747,7 +750,17 @@ function PlasmicUserSetting__RenderFunc(props: {
                   "open"
                 ])}
                 title={
-                  "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062e\u0648\u062f \u0631\u0627 \u062a\u063a\u06cc\u06cc\u0631 \u062f\u0647\u06cc\u062f"
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__lCl1
+                    )}
+                  >
+                    {
+                      "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062e\u0648\u062f \u0631\u0627 \u062a\u063a\u06cc\u06cc\u0631 \u062f\u0647\u06cc\u062f"
+                    }
+                  </div>
                 }
                 trigger={
                   <AntdButton
@@ -894,6 +907,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                     </div>
                   </AntdButton>
                 }
+                wrapClassName={classNames({ [sty["pcls_mE8Tgpm2y9Lm"]]: true })}
               >
                 <div
                   data-plasmic-name={"modalContent"}

@@ -222,7 +222,7 @@
   max-width: 100%;
   left: 0px;
   top: 35px;
-  z-index: 1;
+  z-index: 2;
   background: #ffffff;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
@@ -250,6 +250,47 @@
   max-width: 100%;
   height: 100%;
   min-height: 0;
+}
+.newFeatureTag {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: #ffffff;
+  align-self: center;
+  background: var(--token-9iYGdL7i3GKE);
+  margin-right: 5px;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 0px 6px;
+}
+.button:global(.__wab_instance) {
+  max-width: 100%;
+  height: 100%;
+  width: 100%;
+  align-self: center;
+  min-width: 0;
+  min-height: 0;
+  display: none;
+}
+.text__n9GNm {
+  color: #ffffff;
+  font-weight: 400;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  align-self: center;
+  text-align: center;
+}
+.svg__m6SG9 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__f72SL {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }
 .text__eZjWx {
   color: var(--token-IYO13gyYJHXG);
@@ -301,7 +342,7 @@
   flex-direction: column;
   justify-content: flex-start;
   left: 0px;
-  top: 60px;
+  top: 68px;
   z-index: 1;
   bottom: 60px;
   grid-column-start: 1 !important;
@@ -313,6 +354,24 @@
   .labData:global(.__wab_instance) {
     padding-left: 0px;
   }
+}
+.text__woDte {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  align-self: flex-start;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  white-space: pre-wrap;
+  left: 0px;
+  top: 75px;
+  z-index: 0;
+  text-align: center;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 0px;
 }
 .searchLabName:global(.__wab_instance) {
   max-width: 90%;
@@ -351,26 +410,7 @@
   border-radius: 5px;
   padding: 8px;
 }
-.text__woDte {
-  position: absolute;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-  align-self: center;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  white-space: pre-wrap;
-  left: 0;
-  top: 50px;
-  z-index: 0;
-  right: 0;
-  bottom: auto;
-  border-radius: 5px;
-  padding: 2px;
-  margin: 0px;
-}
 .antibiogramData:global(.__wab_instance) {
-  max-width: 95%;
   object-fit: cover;
   position: relative;
   width: 100%;
@@ -383,10 +423,11 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  text-align: center;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
-  padding: 4px 2px 2px;
-  margin: 12px 0px 0px;
+  padding: 6px;
+  margin: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .antibiogramData:global(.__wab_instance) {
@@ -433,7 +474,7 @@
 }
 .text__nnvRv {
   position: relative;
-  width: 130px;
+  width: 150px;
   height: 35px;
   max-width: 100%;
   text-transform: capitalize;
@@ -446,7 +487,7 @@
 }
 .datetime {
   position: relative;
-  width: 125px;
+  width: 140px;
   height: 30px;
   max-width: 100%;
   align-self: center;
@@ -474,7 +515,7 @@
 }
 .antibioticName {
   position: relative;
-  width: 130px;
+  width: 150px;
   height: auto;
   max-width: 100%;
   white-space: pre-wrap;
@@ -486,7 +527,7 @@
 }
 .antibioticResult {
   position: relative;
-  width: 125px;
+  width: 140px;
   height: auto;
   max-width: 100%;
   align-self: center;
@@ -1094,6 +1135,10 @@
   object-fit: cover;
   background: #ffffff;
   min-width: 0;
+}
+.pcls_q2lYXHR-r9ME {
+  background: #ffffff;
+  outline: none;
 }
 .freeBox__fxDb6 {
   display: flex;
