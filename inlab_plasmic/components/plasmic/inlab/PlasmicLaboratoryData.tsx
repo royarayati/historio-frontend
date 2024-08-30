@@ -124,6 +124,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   antibiogramData?: Flex__<typeof ApiFetcherComponent>;
   antibiogramPerDate?: Flex__<"div">;
   datetimename?: Flex__<"div">;
+  antibiogramGroupName?: Flex__<"div">;
   datetime?: Flex__<"div">;
   antibiogram?: Flex__<"div">;
   antibioticName?: Flex__<"div">;
@@ -846,7 +847,7 @@ ${ageMonths} months ${
               )}
             >
               {
-                "\u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 "
+                "\u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 "
               }
             </div>
           </Button>
@@ -945,7 +946,7 @@ ${ageMonths} months ${
               )}
             >
               {
-                "\u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a "
+                "\u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 "
               }
             </div>
           </Button>
@@ -1171,13 +1172,19 @@ ${ageMonths} months ${
                                     )}
                                   >
                                     <div
+                                      data-plasmic-name={"antibiogramGroupName"}
+                                      data-plasmic-override={
+                                        overrides.antibiogramGroupName
+                                      }
                                       className={classNames(
                                         projectcss.all,
                                         projectcss.__wab_text,
-                                        sty.text__nnvRv
+                                        sty.antibiogramGroupName
                                       )}
                                     >
-                                      {"antibiogram"}
+                                      <React.Fragment>
+                                        {currentItem.gname}
+                                      </React.Fragment>
                                     </div>
                                     <div
                                       data-plasmic-name={"datetime"}
@@ -1860,7 +1867,7 @@ ${ageMonths} months ${
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
                         try {
-                          return $ctx.fetched_data.data.reverse();
+                          return $ctx.fetched_data.data;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -2445,6 +2452,7 @@ const PlasmicDescendants = {
     "antibiogramData",
     "antibiogramPerDate",
     "datetimename",
+    "antibiogramGroupName",
     "datetime",
     "antibiogram",
     "antibioticName",
@@ -2514,6 +2522,7 @@ const PlasmicDescendants = {
     "antibiogramData",
     "antibiogramPerDate",
     "datetimename",
+    "antibiogramGroupName",
     "datetime",
     "antibiogram",
     "antibioticName",
@@ -2539,6 +2548,7 @@ const PlasmicDescendants = {
     "antibiogramData",
     "antibiogramPerDate",
     "datetimename",
+    "antibiogramGroupName",
     "datetime",
     "antibiogram",
     "antibioticName",
@@ -2547,12 +2557,14 @@ const PlasmicDescendants = {
   antibiogramPerDate: [
     "antibiogramPerDate",
     "datetimename",
+    "antibiogramGroupName",
     "datetime",
     "antibiogram",
     "antibioticName",
     "antibioticResult"
   ],
-  datetimename: ["datetimename", "datetime"],
+  datetimename: ["datetimename", "antibiogramGroupName", "datetime"],
+  antibiogramGroupName: ["antibiogramGroupName"],
   datetime: ["datetime"],
   antibiogram: ["antibiogram", "antibioticName", "antibioticResult"],
   antibioticName: ["antibioticName"],
@@ -2702,6 +2714,7 @@ type NodeDefaultElementType = {
   antibiogramData: typeof ApiFetcherComponent;
   antibiogramPerDate: "div";
   datetimename: "div";
+  antibiogramGroupName: "div";
   datetime: "div";
   antibiogram: "div";
   antibioticName: "div";
@@ -2816,6 +2829,7 @@ export const PlasmicLaboratoryData = Object.assign(
     antibiogramData: makeNodeComponent("antibiogramData"),
     antibiogramPerDate: makeNodeComponent("antibiogramPerDate"),
     datetimename: makeNodeComponent("datetimename"),
+    antibiogramGroupName: makeNodeComponent("antibiogramGroupName"),
     datetime: makeNodeComponent("datetime"),
     antibiogram: makeNodeComponent("antibiogram"),
     antibioticName: makeNodeComponent("antibioticName"),

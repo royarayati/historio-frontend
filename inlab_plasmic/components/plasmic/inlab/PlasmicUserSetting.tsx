@@ -124,7 +124,7 @@ export type PlasmicUserSetting__OverridesType = {
   namespaceName?: Flex__<"div">;
   resetPassword?: Flex__<"div">;
   resetPasswordImage?: Flex__<"svg">;
-  modalChangePassword?: Flex__<typeof AntdModal>;
+  changePassword?: Flex__<typeof AntdModal>;
   modalContent?: Flex__<"div">;
   passwordContent?: Flex__<"div">;
   password?: Flex__<typeof TextInput>;
@@ -218,7 +218,7 @@ function PlasmicUserSetting__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "modalChangePassword.open",
+        path: "changePassword.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -718,12 +718,9 @@ function PlasmicUserSetting__RenderFunc(props: {
               />
 
               <AntdModal
-                data-plasmic-name={"modalChangePassword"}
-                data-plasmic-override={overrides.modalChangePassword}
-                className={classNames(
-                  "__wab_instance",
-                  sty.modalChangePassword
-                )}
+                data-plasmic-name={"changePassword"}
+                data-plasmic-override={overrides.changePassword}
+                className={classNames("__wab_instance", sty.changePassword)}
                 closeButtonClassName={classNames({
                   [sty["pcls__psrn3OXhphL"]]: true
                 })}
@@ -740,13 +737,13 @@ function PlasmicUserSetting__RenderFunc(props: {
                 modalContentClassName={classNames({
                   [sty["pcls_VyKcQQz6TGrW"]]: true
                 })}
-                modalScopeClassName={sty["modalChangePassword__modal"]}
+                modalScopeClassName={sty["changePassword__modal"]}
                 onOpenChange={generateStateOnChangeProp($state, [
-                  "modalChangePassword",
+                  "changePassword",
                   "open"
                 ])}
                 open={generateStateValueProp($state, [
-                  "modalChangePassword",
+                  "changePassword",
                   "open"
                 ])}
                 title={
@@ -2087,7 +2084,7 @@ const PlasmicDescendants = {
     "namespaceName",
     "resetPassword",
     "resetPasswordImage",
-    "modalChangePassword",
+    "changePassword",
     "modalContent",
     "passwordContent",
     "password",
@@ -2123,7 +2120,7 @@ const PlasmicDescendants = {
     "namespaceName",
     "resetPassword",
     "resetPasswordImage",
-    "modalChangePassword",
+    "changePassword",
     "modalContent",
     "passwordContent",
     "password",
@@ -2172,7 +2169,7 @@ const PlasmicDescendants = {
   resetPassword: [
     "resetPassword",
     "resetPasswordImage",
-    "modalChangePassword",
+    "changePassword",
     "modalContent",
     "passwordContent",
     "password",
@@ -2185,8 +2182,8 @@ const PlasmicDescendants = {
     "triggerToOpenModalButton"
   ],
   resetPasswordImage: ["resetPasswordImage"],
-  modalChangePassword: [
-    "modalChangePassword",
+  changePassword: [
+    "changePassword",
     "modalContent",
     "passwordContent",
     "password",
@@ -2247,7 +2244,7 @@ type NodeDefaultElementType = {
   namespaceName: "div";
   resetPassword: "div";
   resetPasswordImage: "svg";
-  modalChangePassword: typeof AntdModal;
+  changePassword: typeof AntdModal;
   modalContent: "div";
   passwordContent: "div";
   password: typeof TextInput;
@@ -2345,7 +2342,7 @@ export const PlasmicUserSetting = Object.assign(
     namespaceName: makeNodeComponent("namespaceName"),
     resetPassword: makeNodeComponent("resetPassword"),
     resetPasswordImage: makeNodeComponent("resetPasswordImage"),
-    modalChangePassword: makeNodeComponent("modalChangePassword"),
+    changePassword: makeNodeComponent("changePassword"),
     modalContent: makeNodeComponent("modalContent"),
     passwordContent: makeNodeComponent("passwordContent"),
     password: makeNodeComponent("password"),

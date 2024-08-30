@@ -472,7 +472,7 @@
   padding: 0px;
   border-color: #e7e7e7;
 }
-.text__nnvRv {
+.antibiogramGroupName {
   position: relative;
   width: 150px;
   height: 35px;
@@ -1138,6 +1138,7 @@
 }
 .pcls_q2lYXHR-r9ME {
   background: #ffffff;
+  font-family: "Vazirmatn", sans-serif;
   outline: none;
 }
 .freeBox__fxDb6 {

@@ -380,13 +380,13 @@
   color: var(--token-9iYGdL7i3GKE);
   flex-shrink: 0;
 }
-.modalChangePassword:global(.__wab_instance) {
+.changePassword:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   height: 200px;
   background: #ffffff;
 }
-.modalChangePassword__modal :global(.ant-modal-content) {
+.changePassword__modal :global(.ant-modal-content) {
   color: #ffffff;
   outline: none;
 }

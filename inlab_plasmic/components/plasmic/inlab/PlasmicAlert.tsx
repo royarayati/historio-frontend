@@ -68,7 +68,6 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicAlert.module.css"; // plasmic-import: a9E2wGEF0Qy9/css
 
-import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 
 createPlasmicElementProxy;
@@ -128,7 +127,6 @@ export const PlasmicAlert__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicAlert__OverridesType = {
   root?: Flex__<"div">;
-  svg?: Flex__<"svg">;
   h6?: Flex__<"h6">;
 };
 
@@ -389,13 +387,6 @@ function PlasmicAlert__RenderFunc(props: {
             )
           })}
         >
-          <Icons8ClosesvgIcon
-            data-plasmic-name={"svg"}
-            data-plasmic-override={overrides.svg}
-            className={classNames(projectcss.all, sty.svg)}
-            role={"img"}
-          />
-
           <Stack__
             as={"div"}
             hasGap={true}
@@ -572,8 +563,7 @@ function PlasmicAlert__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "svg", "h6"],
-  svg: ["svg"],
+  root: ["root", "h6"],
   h6: ["h6"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -581,7 +571,6 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  svg: "svg";
   h6: "h6";
 };
 
@@ -645,7 +634,6 @@ export const PlasmicAlert = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    svg: makeNodeComponent("svg"),
     h6: makeNodeComponent("h6"),
 
     // Metadata about props expected for PlasmicAlert

@@ -1142,6 +1142,175 @@
     max-width: 3.2%;
   }
 }
+.generalHealthStatus:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  background: #ffffff;
+  height: 266px;
+}
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+.criticalCondition:global(.__wab_instance) {
+  max-width: 100%;
+  margin-bottom: 5px;
+  width: 200px;
+  height: 40px;
+  flex-shrink: 0;
+}
+.text__cecl4 {
+  color: #ffffff;
+  font-size: 18px;
+}
+.svg__peiGc {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg___5ZoG {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.criticalDefinition {
+  font-weight: 400;
+  font-size: var(--token-sOr3fJ5Up5fq);
+  margin-bottom: 20px;
+}
+.stableCondition:global(.__wab_instance) {
+  max-width: 100%;
+  margin-bottom: 5px;
+  width: 200px;
+  height: 40px;
+  flex-shrink: 0;
+}
+.text___6MHn {
+  color: #ffffff;
+  font-size: 18px;
+}
+.svg__b4UEz {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg___2A343 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text___3F4LM {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-sOr3fJ5Up5fq);
+  margin-bottom: 20px;
+  min-width: 0;
+}
+.criticalConditionAdd:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__nfrg2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__jvZv {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.svg__ubmKc {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.stableConditionReset:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__aXf30 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__fJ1Ms {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.svg__rc3PZ {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.text__iziA8 {
+  background: #ffffff;
+}
+.triggerToOpenModal:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  border-width: 1px;
+  border-style: none;
+}
+.text__i5JAh {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  display: none;
+}
+.getMessagehealthStatus:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__q9Pfi {
+  position: relative;
+  width: 100px;
+  height: auto;
+  max-width: 100%;
+  background: #8bff61;
+}
+.text__cUnex {
+  position: relative;
+  width: 100px;
+  height: auto;
+  max-width: 100%;
+  background: #ff6565;
+}
+.numberOfDoctorReporting {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
 .firstLastName {
   width: 100%;
   height: auto;
@@ -1540,6 +1709,7 @@
 }
 .text__o7FzR {
   line-height: 1.8;
+  padding-top: 0px;
 }
 .متوجهشدم:global(.__wab_instance) {
   max-width: 100%;
