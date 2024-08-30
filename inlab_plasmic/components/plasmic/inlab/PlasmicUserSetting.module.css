@@ -386,8 +386,12 @@
   height: 200px;
   background: #ffffff;
 }
+.pcls_mE8Tgpm2y9Lm {
+  background: none;
+  outline: none;
+}
 .changePassword__modal :global(.ant-modal-content) {
-  color: #ffffff;
+  background: #ffffff;
   outline: none;
 }
 .modalContent {
@@ -538,7 +542,7 @@
   margin-top: 10px;
 }
 .text__tlPId {
-  color: var(--token-jgohepLVeKvh);
+  color: #ffffff;
   font-weight: 700;
 }
 .svg___8GsW9 {

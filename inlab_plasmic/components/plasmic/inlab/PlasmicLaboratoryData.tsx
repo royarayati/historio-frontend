@@ -1972,6 +1972,7 @@ ${ageMonths} months ${
                                             sty.factor
                                           ),
                                           defaultOpen: false,
+                                          ghost: true,
                                           headerClass: classNames({
                                             [sty["pcls_q2lYXHR-r9ME"]]: true
                                           }),

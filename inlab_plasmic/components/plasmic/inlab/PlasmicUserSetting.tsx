@@ -890,6 +890,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                           await $steps["makeFalseUnsuccessfulChangePassword"];
                       }
                     }}
+                    type={"default"}
                   >
                     <div
                       className={classNames(

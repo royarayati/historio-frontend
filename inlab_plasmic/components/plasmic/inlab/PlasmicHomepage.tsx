@@ -410,7 +410,7 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "modalRemoveBookmarks.open",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
         path: "ward2.sortDeselected",
@@ -2562,6 +2562,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     plasmic_plasmic_rich_components_css.plasmic_tokens
                                   ),
                                   hideFooter: true,
+                                  maskClosable: false,
                                   modalContentClassName: classNames({
                                     [sty["pcls_kWuPUuhlM2_n"]]: true
                                   }),
@@ -3320,9 +3321,31 @@ function PlasmicHomepage__RenderFunc(props: {
                                         )}
                                         dir={"rtl"}
                                       >
-                                        {
-                                          "\u0628\u0647 \u0645\u0639\u0646\u0627\u06cc \u0639\u0644\u0627\u0626\u0645 \u062d\u06cc\u0627\u062a\u06cc \u0646\u0627\u067e\u0627\u06cc\u062f\u0627\u0631 \u06cc\u0627 \u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u062e\u062a ICU \u06cc\u0627 \u0628\u0633\u062a\u0631\u06cc \u062f\u0631 ICU\n\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u0647\u0631 \u0628\u0627\u0631 \u06a9\u0644\u06cc\u06a9\u060c \u06cc\u06a9 \u0646\u0641\u0631 \u0628\u0647 \u062a\u0639\u062f\u0627\u062f \u06af\u0632\u0627\u0631\u0634 \u062f\u0647\u0646\u062f\u06af\u0627\u0646 \u0627\u06cc\u0646 \u0648\u0636\u0639\u06cc\u062a \u0627\u0636\u0627\u0641\u0647 \u0645\u06cc \u0634\u0648\u062f"
-                                        }
+                                        <React.Fragment>
+                                          <span
+                                            className={
+                                              "plasmic_default__all plasmic_default__span"
+                                            }
+                                            style={{ color: "#000000" }}
+                                          >
+                                            {
+                                              "\u0628\u0647 \u0645\u0639\u0646\u0627\u06cc \u0639\u0644\u0627\u0626\u0645 \u062d\u06cc\u0627\u062a\u06cc \u0646\u0627\u067e\u0627\u06cc\u062f\u0627\u0631 \u06cc\u0627 \u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u062e\u062a ICU \u06cc\u0627 \u0628\u0633\u062a\u0631\u06cc \u062f\u0631 ICU"
+                                            }
+                                          </span>
+                                          <React.Fragment>
+                                            {"\n"}
+                                          </React.Fragment>
+                                          <span
+                                            className={
+                                              "plasmic_default__all plasmic_default__span"
+                                            }
+                                            style={{ color: "#000000" }}
+                                          >
+                                            {
+                                              "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u0647\u0631 \u0628\u0627\u0631 \u06a9\u0644\u06cc\u06a9\u060c \u06cc\u06a9 \u0646\u0641\u0631 \u0628\u0647 \u062a\u0639\u062f\u0627\u062f \u06af\u0632\u0627\u0631\u0634 \u062f\u0647\u0646\u062f\u06af\u0627\u0646 \u0627\u06cc\u0646 \u0648\u0636\u0639\u06cc\u062a \u0627\u0636\u0627\u0641\u0647 \u0645\u06cc \u0634\u0648\u062f"
+                                            }
+                                          </span>
+                                        </React.Fragment>
                                       </div>
                                       {(() => {
                                         const child$Props = {
@@ -3729,9 +3752,31 @@ function PlasmicHomepage__RenderFunc(props: {
                                           sty.text___3F4LM
                                         )}
                                       >
-                                        {
-                                          "\u0628\u0647 \u0645\u0639\u0646\u0627\u06cc \u062e\u0631\u0648\u062c \u0628\u06cc\u0645\u0627\u0631 \u0627\u0632 \u0648\u0636\u0639\u06cc\u062a \u0628\u062d\u0631\u0627\u0646\u06cc\n\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u0627\u0639\u0644\u0627\u0645\u060c \u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 \u0628\u0647 \u062d\u0627\u0644\u062a \u067e\u0627\u06cc\u062f\u0627\u0631 \u062f\u0631 \u0645\u06cc \u0622\u06cc\u062f"
-                                        }
+                                        <React.Fragment>
+                                          <span
+                                            className={
+                                              "plasmic_default__all plasmic_default__span"
+                                            }
+                                            style={{ color: "#000000" }}
+                                          >
+                                            {
+                                              "\u0628\u0647 \u0645\u0639\u0646\u0627\u06cc \u062e\u0631\u0648\u062c \u0628\u06cc\u0645\u0627\u0631 \u0627\u0632 \u0648\u0636\u0639\u06cc\u062a \u0628\u062d\u0631\u0627\u0646\u06cc"
+                                            }
+                                          </span>
+                                          <React.Fragment>
+                                            {"\n"}
+                                          </React.Fragment>
+                                          <span
+                                            className={
+                                              "plasmic_default__all plasmic_default__span"
+                                            }
+                                            style={{ color: "#000000" }}
+                                          >
+                                            {
+                                              "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u0627\u0639\u0644\u0627\u0645\u060c \u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 \u0628\u0647 \u062d\u0627\u0644\u062a \u067e\u0627\u06cc\u062f\u0627\u0631 \u062f\u0631 \u0645\u06cc \u0622\u06cc\u062f"
+                                            }
+                                          </span>
+                                        </React.Fragment>
                                       </div>
                                       {(() => {
                                         try {
