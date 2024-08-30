@@ -22,7 +22,7 @@
     "@plasmicpkgs/plasmic-embed-css": "^0.1.191",
     "@plasmicpkgs/plasmic-link-preview": "^1.0.103",
     "@plasmicpkgs/plasmic-query": "^0.0.206",
-    "@plasmicpkgs/plasmic-rich-components": "^1.0.195",
+    "@plasmicpkgs/plasmic-rich-components": "^1.0.196",
     "@plasmicpkgs/radix-ui": "^0.0.45",
     "@plasmicpkgs/react-awesome-reveal": "^3.8.208",
     "@plasmicpkgs/react-parallax-tilt": "^0.0.191",

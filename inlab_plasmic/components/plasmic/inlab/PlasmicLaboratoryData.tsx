@@ -115,6 +115,8 @@ export type PlasmicLaboratoryData__OverridesType = {
   normalRangeButtonCircle?: Flex__<"div">;
   tabButtons?: Flex__<"div">;
   checkedFactor?: Flex__<typeof Button>;
+  newFeatureTag?: Flex__<"div">;
+  button?: Flex__<typeof Button>;
   laboratoryResult?: Flex__<typeof Button>;
   labData?: Flex__<typeof ApiFetcherComponent>;
   searchLabName?: Flex__<typeof TextInput>;
@@ -122,6 +124,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   antibiogramData?: Flex__<typeof ApiFetcherComponent>;
   antibiogramPerDate?: Flex__<"div">;
   datetimename?: Flex__<"div">;
+  antibiogramGroupName?: Flex__<"div">;
   datetime?: Flex__<"div">;
   antibiogram?: Flex__<"div">;
   antibioticName?: Flex__<"div">;
@@ -350,6 +353,36 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         variableType: "boolean",
 
         onMutate: generateOnMutateForSpec("open", AntdSingleCollapse_Helpers)
+      },
+      {
+        path: "button.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "button.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -737,6 +770,76 @@ ${ageMonths} months ${
             ])}
           >
             <div
+              data-plasmic-name={"newFeatureTag"}
+              data-plasmic-override={overrides.newFeatureTag}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.newFeatureTag
+              )}
+            >
+              {"New"}
+            </div>
+            <Button
+              data-plasmic-name={"button"}
+              data-plasmic-override={overrides.button}
+              className={classNames("__wab_instance", sty.button)}
+              deselected={generateStateValueProp($state, [
+                "button",
+                "deselected"
+              ])}
+              isDisabled={generateStateValueProp($state, [
+                "button",
+                "isDisabled"
+              ])}
+              onDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "deselected"])(
+                  eventArgs[0]
+                );
+              }}
+              onIsDisabledChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "isDisabled"])(
+                  eventArgs[0]
+                );
+              }}
+              onSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "selected"])(
+                  eventArgs[0]
+                );
+              }}
+              onSortDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "sortDeselected"])(
+                  eventArgs[0]
+                );
+              }}
+              onSortSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["button", "sortSelected"])(
+                  eventArgs[0]
+                );
+              }}
+              selected={generateStateValueProp($state, ["button", "selected"])}
+              shape={"rounded"}
+              size4={"compact"}
+              sortDeselected={generateStateValueProp($state, [
+                "button",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "button",
+                "sortSelected"
+              ])}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__n9GNm
+                )}
+              >
+                {"New "}
+              </div>
+            </Button>
+            <div
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
@@ -744,7 +847,7 @@ ${ageMonths} months ${
               )}
             >
               {
-                "\u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 "
+                "\u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 "
               }
             </div>
           </Button>
@@ -843,7 +946,7 @@ ${ageMonths} months ${
               )}
             >
               {
-                "\u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a "
+                "\u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 "
               }
             </div>
           </Button>
@@ -870,6 +973,31 @@ ${ageMonths} months ${
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
+                  {(() => {
+                    try {
+                      return $ctx.fetched_data.loading == true;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return false;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__woDte
+                      )}
+                    >
+                      {
+                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                      }
+                    </div>
+                  ) : null}
                   {false ? (
                     <TextInput
                       data-plasmic-name={"searchLabName"}
@@ -961,19 +1089,6 @@ ${ageMonths} months ${
                       }
                     </div>
                   ) : null}
-                  {$ctx.fetched_data.loading == true ? (
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__woDte
-                      )}
-                    >
-                      {
-                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                      }
-                    </div>
-                  ) : null}
                   <ApiFetcherComponent
                     data-plasmic-name={"antibiogramData"}
                     data-plasmic-override={overrides.antibiogramData}
@@ -1057,13 +1172,19 @@ ${ageMonths} months ${
                                     )}
                                   >
                                     <div
+                                      data-plasmic-name={"antibiogramGroupName"}
+                                      data-plasmic-override={
+                                        overrides.antibiogramGroupName
+                                      }
                                       className={classNames(
                                         projectcss.all,
                                         projectcss.__wab_text,
-                                        sty.text__nnvRv
+                                        sty.antibiogramGroupName
                                       )}
                                     >
-                                      {"antibiogram"}
+                                      <React.Fragment>
+                                        {currentItem.gname}
+                                      </React.Fragment>
                                     </div>
                                     <div
                                       data-plasmic-name={"datetime"}
@@ -1746,7 +1867,7 @@ ${ageMonths} months ${
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
                         try {
-                          return $ctx.fetched_data.data.reverse();
+                          return $ctx.fetched_data.data;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -1851,6 +1972,10 @@ ${ageMonths} months ${
                                             sty.factor
                                           ),
                                           defaultOpen: false,
+                                          ghost: true,
+                                          headerClass: classNames({
+                                            [sty["pcls_q2lYXHR-r9ME"]]: true
+                                          }),
                                           label2: (
                                             <React.Fragment>
                                               {(() => {
@@ -2319,6 +2444,8 @@ const PlasmicDescendants = {
     "normalRangeButtonCircle",
     "tabButtons",
     "checkedFactor",
+    "newFeatureTag",
+    "button",
     "laboratoryResult",
     "labData",
     "searchLabName",
@@ -2326,6 +2453,7 @@ const PlasmicDescendants = {
     "antibiogramData",
     "antibiogramPerDate",
     "datetimename",
+    "antibiogramGroupName",
     "datetime",
     "antibiogram",
     "antibioticName",
@@ -2377,8 +2505,16 @@ const PlasmicDescendants = {
   saveAdmissionDatetime: ["saveAdmissionDatetime"],
   normalRangeButton: ["normalRangeButton", "normalRangeButtonCircle"],
   normalRangeButtonCircle: ["normalRangeButtonCircle"],
-  tabButtons: ["tabButtons", "checkedFactor", "laboratoryResult"],
-  checkedFactor: ["checkedFactor"],
+  tabButtons: [
+    "tabButtons",
+    "checkedFactor",
+    "newFeatureTag",
+    "button",
+    "laboratoryResult"
+  ],
+  checkedFactor: ["checkedFactor", "newFeatureTag", "button"],
+  newFeatureTag: ["newFeatureTag"],
+  button: ["button"],
   laboratoryResult: ["laboratoryResult"],
   labData: [
     "labData",
@@ -2387,6 +2523,7 @@ const PlasmicDescendants = {
     "antibiogramData",
     "antibiogramPerDate",
     "datetimename",
+    "antibiogramGroupName",
     "datetime",
     "antibiogram",
     "antibioticName",
@@ -2412,6 +2549,7 @@ const PlasmicDescendants = {
     "antibiogramData",
     "antibiogramPerDate",
     "datetimename",
+    "antibiogramGroupName",
     "datetime",
     "antibiogram",
     "antibioticName",
@@ -2420,12 +2558,14 @@ const PlasmicDescendants = {
   antibiogramPerDate: [
     "antibiogramPerDate",
     "datetimename",
+    "antibiogramGroupName",
     "datetime",
     "antibiogram",
     "antibioticName",
     "antibioticResult"
   ],
-  datetimename: ["datetimename", "datetime"],
+  datetimename: ["datetimename", "antibiogramGroupName", "datetime"],
+  antibiogramGroupName: ["antibiogramGroupName"],
   datetime: ["datetime"],
   antibiogram: ["antibiogram", "antibioticName", "antibioticResult"],
   antibioticName: ["antibioticName"],
@@ -2566,6 +2706,8 @@ type NodeDefaultElementType = {
   normalRangeButtonCircle: "div";
   tabButtons: "div";
   checkedFactor: typeof Button;
+  newFeatureTag: "div";
+  button: typeof Button;
   laboratoryResult: typeof Button;
   labData: typeof ApiFetcherComponent;
   searchLabName: typeof TextInput;
@@ -2573,6 +2715,7 @@ type NodeDefaultElementType = {
   antibiogramData: typeof ApiFetcherComponent;
   antibiogramPerDate: "div";
   datetimename: "div";
+  antibiogramGroupName: "div";
   datetime: "div";
   antibiogram: "div";
   antibioticName: "div";
@@ -2678,6 +2821,8 @@ export const PlasmicLaboratoryData = Object.assign(
     normalRangeButtonCircle: makeNodeComponent("normalRangeButtonCircle"),
     tabButtons: makeNodeComponent("tabButtons"),
     checkedFactor: makeNodeComponent("checkedFactor"),
+    newFeatureTag: makeNodeComponent("newFeatureTag"),
+    button: makeNodeComponent("button"),
     laboratoryResult: makeNodeComponent("laboratoryResult"),
     labData: makeNodeComponent("labData"),
     searchLabName: makeNodeComponent("searchLabName"),
@@ -2685,6 +2830,7 @@ export const PlasmicLaboratoryData = Object.assign(
     antibiogramData: makeNodeComponent("antibiogramData"),
     antibiogramPerDate: makeNodeComponent("antibiogramPerDate"),
     datetimename: makeNodeComponent("datetimename"),
+    antibiogramGroupName: makeNodeComponent("antibiogramGroupName"),
     datetime: makeNodeComponent("datetime"),
     antibiogram: makeNodeComponent("antibiogram"),
     antibioticName: makeNodeComponent("antibioticName"),
