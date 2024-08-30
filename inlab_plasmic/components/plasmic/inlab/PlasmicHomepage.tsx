@@ -2562,7 +2562,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     plasmic_plasmic_rich_components_css.plasmic_tokens
                                   ),
                                   hideFooter: true,
-                                  maskClosable: false,
+                                  maskClosable: true,
                                   modalContentClassName: classNames({
                                     [sty["pcls_kWuPUuhlM2_n"]]: true
                                   }),

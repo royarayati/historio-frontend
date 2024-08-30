@@ -1148,6 +1148,10 @@
   background: #ffffff;
   height: 266px;
 }
+.generalHealthStatus__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
 .modalContent {
   display: flex;
   flex-direction: column;
