@@ -129,7 +129,7 @@
     font-weight: 700;
   }
 }
-.deletecancel {
+.deleteCancel {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -139,7 +139,7 @@
   min-width: 0;
   padding: 0px;
 }
-.deletecancel > :global(.__wab_flex-container) {
+.deleteCancel > :global(.__wab_flex-container) {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
@@ -147,10 +147,10 @@
   margin-left: calc(0px - 12px);
   width: calc(100% + 12px);
 }
-.deletecancel > :global(.__wab_flex-container) > *,
-.deletecancel > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.deletecancel > :global(.__wab_flex-container) > picture > img,
-.deletecancel
+.deleteCancel > :global(.__wab_flex-container) > *,
+.deleteCancel > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.deleteCancel > :global(.__wab_flex-container) > picture > img,
+.deleteCancel
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
@@ -749,7 +749,7 @@
     margin-top: 2.5px;
   }
 }
-.buttonاردنهمهبومارها:global(.__wab_instance) {
+.buttonپاککردنهمهبوکمارکها:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   align-self: flex-start;
@@ -758,7 +758,7 @@
   margin-bottom: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .buttonاردنهمهبومارها:global(.__wab_instance) {
+  .buttonپاککردنهمهبوکمارکها:global(.__wab_instance) {
     height: auto;
     max-width: 100%;
     width: auto;
@@ -798,7 +798,7 @@
   width: auto;
   height: 1em;
 }
-.بمارافتنشد {
+.بیمارییافتنشد {
   position: relative;
   margin-top: 30px;
   font-size: var(--token-sOr3fJ5Up5fq);
@@ -821,7 +821,7 @@
   padding: 8px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .بمارافتنشد {
+  .بیمارییافتنشد {
     background: #e0ecff;
     box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
     margin-top: 15px;
@@ -921,7 +921,7 @@
     font-size: var(--token-sOr3fJ5Up5fq);
   }
 }
-.لطفامنتظربماند {
+.لطفامنتظربمانید {
   position: fixed;
   margin-top: 4px;
   font-size: var(--token-sOr3fJ5Up5fq);
@@ -949,7 +949,7 @@
   padding: 8px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .لطفامنتظربماند {
+  .لطفامنتظربمانید {
     top: 0;
     background: var(--token-Hd7stmcqwCJ-);
     box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
@@ -1034,13 +1034,14 @@
   position: relative;
   flex-direction: row;
   width: 100%;
-  height: auto;
   max-width: 100%;
   padding-left: 8px;
   padding-bottom: 0px;
   padding-top: 8px;
   align-self: center;
+  height: 60px;
   min-width: 0;
+  flex-shrink: 0;
 }
 .patientNameBookmarkIcon > :global(.__wab_flex-container) {
   flex-direction: row;
@@ -1142,13 +1143,13 @@
     max-width: 3.2%;
   }
 }
-.generalHealthStatus:global(.__wab_instance) {
+.modalGeneralHealthStatus:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   background: #ffffff;
   height: 266px;
 }
-.generalHealthStatus__modal :global(.ant-modal-content) {
+.modalGeneralHealthStatus__modal :global(.ant-modal-content) {
   background: #ffffff;
   outline: none;
 }
@@ -1276,46 +1277,50 @@
 .text__iziA8 {
   background: #ffffff;
 }
-.triggerToOpenModal:global(.__wab_instance) {
+.getMessageHealthStatus:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   background: #ffffff;
-  border-width: 1px;
-  border-style: none;
 }
-.text__i5JAh {
-  position: relative;
-  width: 100%;
+.generalHealthStatusAnnouncement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 40px;
   height: auto;
   max-width: 100%;
-  min-width: 0;
-  display: none;
-}
-.getMessagehealthStatus:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
   background: #ffffff;
 }
 .text__q9Pfi {
   position: relative;
-  width: 100px;
+  width: 35px;
   height: auto;
   max-width: 100%;
   background: #8bff61;
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 2px;
 }
 .text__cUnex {
   position: relative;
-  width: 100px;
+  width: 35px;
   height: auto;
   max-width: 100%;
   background: #ff6565;
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 2px;
 }
 .numberOfDoctorReporting {
   position: relative;
-  width: 100%;
+  width: 40px;
   height: auto;
   max-width: 100%;
-  min-width: 0;
+  font-size: 10px;
+  margin-top: 5px;
+  font-weight: 400;
+  transform: translateX(0px) translateY(0px) translateZ(0px);
 }
 .firstLastName {
   width: 100%;

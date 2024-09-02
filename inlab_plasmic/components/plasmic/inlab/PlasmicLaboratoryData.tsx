@@ -78,10 +78,10 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3wItkax/css
 
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
-import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
-import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 
 createPlasmicElementProxy;
 
@@ -109,7 +109,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   patientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
-  patientNameagegender?: Flex__<"div">;
+  patientNameAgeGender?: Flex__<"div">;
   saveAdmissionDatetime?: Flex__<typeof SideEffect>;
   normalRangeButton?: Flex__<"div">;
   normalRangeButtonCircle?: Flex__<"div">;
@@ -123,7 +123,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   svg?: Flex__<"svg">;
   antibiogramData?: Flex__<typeof ApiFetcherComponent>;
   antibiogramPerDate?: Flex__<"div">;
-  datetimename?: Flex__<"div">;
+  datetimeName?: Flex__<"div">;
   antibiogramGroupName?: Flex__<"div">;
   datetime?: Flex__<"div">;
   antibiogram?: Flex__<"div">;
@@ -138,7 +138,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   labPerDate?: Flex__<"div">;
   issuedDatetime?: Flex__<"div">;
   labLists?: Flex__<"div">;
-  factorNamevalue?: Flex__<"div">;
+  factorNameValue?: Flex__<"div">;
   normalFactorValue?: Flex__<"div">;
   abnormalFactorValue?: Flex__<"div">;
   normalRanged?: Flex__<"div">;
@@ -489,14 +489,14 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               {$ctx => (
                 <React.Fragment>
                   <div
-                    data-plasmic-name={"patientNameagegender"}
-                    data-plasmic-override={overrides.patientNameagegender}
+                    data-plasmic-name={"patientNameAgeGender"}
+                    data-plasmic-override={overrides.patientNameAgeGender}
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.patientNameagegender,
+                      sty.patientNameAgeGender,
                       {
-                        [sty.patientNameagegenderviewNormalRange]: hasVariant(
+                        [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
                           $state,
                           "viewNormalRange",
                           "viewNormalRange"
@@ -1008,7 +1008,7 @@ ${ageMonths} months ${
                       )}
                       endIcon={
                         $state.value !== "" ? (
-                          <Icons8ClosesvgIcon
+                          <Icons8CloseSvgIcon
                             data-plasmic-name={"svg"}
                             data-plasmic-override={overrides.svg}
                             className={classNames(projectcss.all, sty.svg)}
@@ -1162,13 +1162,13 @@ ${ageMonths} months ${
                                   key={currentIndex}
                                 >
                                   <div
-                                    data-plasmic-name={"datetimename"}
+                                    data-plasmic-name={"datetimeName"}
                                     data-plasmic-override={
-                                      overrides.datetimename
+                                      overrides.datetimeName
                                     }
                                     className={classNames(
                                       projectcss.all,
-                                      sty.datetimename
+                                      sty.datetimeName
                                     )}
                                   >
                                     <div
@@ -1668,16 +1668,16 @@ ${ageMonths} months ${
                                       >
                                         <Stack__
                                           as={"div"}
-                                          data-plasmic-name={"factorNamevalue"}
+                                          data-plasmic-name={"factorNameValue"}
                                           data-plasmic-override={
-                                            overrides.factorNamevalue
+                                            overrides.factorNameValue
                                           }
                                           hasGap={true}
                                           className={classNames(
                                             projectcss.all,
-                                            sty.factorNamevalue,
+                                            sty.factorNameValue,
                                             {
-                                              [sty.factorNamevalueviewNormalRange]:
+                                              [sty.factorNameValueviewNormalRange]:
                                                 hasVariant(
                                                   $state,
                                                   "viewNormalRange",
@@ -2438,7 +2438,7 @@ const PlasmicDescendants = {
     "redirectToNamespaceSelection",
     "header",
     "patientDataApiFetcher",
-    "patientNameagegender",
+    "patientNameAgeGender",
     "saveAdmissionDatetime",
     "normalRangeButton",
     "normalRangeButtonCircle",
@@ -2452,7 +2452,7 @@ const PlasmicDescendants = {
     "svg",
     "antibiogramData",
     "antibiogramPerDate",
-    "datetimename",
+    "datetimeName",
     "antibiogramGroupName",
     "datetime",
     "antibiogram",
@@ -2467,7 +2467,7 @@ const PlasmicDescendants = {
     "labPerDate",
     "issuedDatetime",
     "labLists",
-    "factorNamevalue",
+    "factorNameValue",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged",
@@ -2491,17 +2491,17 @@ const PlasmicDescendants = {
   header: [
     "header",
     "patientDataApiFetcher",
-    "patientNameagegender",
+    "patientNameAgeGender",
     "saveAdmissionDatetime",
     "normalRangeButton",
     "normalRangeButtonCircle"
   ],
   patientDataApiFetcher: [
     "patientDataApiFetcher",
-    "patientNameagegender",
+    "patientNameAgeGender",
     "saveAdmissionDatetime"
   ],
-  patientNameagegender: ["patientNameagegender"],
+  patientNameAgeGender: ["patientNameAgeGender"],
   saveAdmissionDatetime: ["saveAdmissionDatetime"],
   normalRangeButton: ["normalRangeButton", "normalRangeButtonCircle"],
   normalRangeButtonCircle: ["normalRangeButtonCircle"],
@@ -2522,7 +2522,7 @@ const PlasmicDescendants = {
     "svg",
     "antibiogramData",
     "antibiogramPerDate",
-    "datetimename",
+    "datetimeName",
     "antibiogramGroupName",
     "datetime",
     "antibiogram",
@@ -2537,7 +2537,7 @@ const PlasmicDescendants = {
     "labPerDate",
     "issuedDatetime",
     "labLists",
-    "factorNamevalue",
+    "factorNameValue",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged",
@@ -2548,7 +2548,7 @@ const PlasmicDescendants = {
   antibiogramData: [
     "antibiogramData",
     "antibiogramPerDate",
-    "datetimename",
+    "datetimeName",
     "antibiogramGroupName",
     "datetime",
     "antibiogram",
@@ -2557,14 +2557,14 @@ const PlasmicDescendants = {
   ],
   antibiogramPerDate: [
     "antibiogramPerDate",
-    "datetimename",
+    "datetimeName",
     "antibiogramGroupName",
     "datetime",
     "antibiogram",
     "antibioticName",
     "antibioticResult"
   ],
-  datetimename: ["datetimename", "antibiogramGroupName", "datetime"],
+  datetimeName: ["datetimeName", "antibiogramGroupName", "datetime"],
   antibiogramGroupName: ["antibiogramGroupName"],
   datetime: ["datetime"],
   antibiogram: ["antibiogram", "antibioticName", "antibioticResult"],
@@ -2580,7 +2580,7 @@ const PlasmicDescendants = {
     "labPerDate",
     "issuedDatetime",
     "labLists",
-    "factorNamevalue",
+    "factorNameValue",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged",
@@ -2595,7 +2595,7 @@ const PlasmicDescendants = {
     "labPerDate",
     "issuedDatetime",
     "labLists",
-    "factorNamevalue",
+    "factorNameValue",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged",
@@ -2609,7 +2609,7 @@ const PlasmicDescendants = {
     "labPerDate",
     "issuedDatetime",
     "labLists",
-    "factorNamevalue",
+    "factorNameValue",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged",
@@ -2619,7 +2619,7 @@ const PlasmicDescendants = {
     "labPerDate",
     "issuedDatetime",
     "labLists",
-    "factorNamevalue",
+    "factorNameValue",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged",
@@ -2628,13 +2628,13 @@ const PlasmicDescendants = {
   issuedDatetime: ["issuedDatetime"],
   labLists: [
     "labLists",
-    "factorNamevalue",
+    "factorNameValue",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged"
   ],
-  factorNamevalue: [
-    "factorNamevalue",
+  factorNameValue: [
+    "factorNameValue",
     "normalFactorValue",
     "abnormalFactorValue",
     "normalRanged"
@@ -2700,7 +2700,7 @@ type NodeDefaultElementType = {
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   patientDataApiFetcher: typeof ApiFetcherComponent;
-  patientNameagegender: "div";
+  patientNameAgeGender: "div";
   saveAdmissionDatetime: typeof SideEffect;
   normalRangeButton: "div";
   normalRangeButtonCircle: "div";
@@ -2714,7 +2714,7 @@ type NodeDefaultElementType = {
   svg: "svg";
   antibiogramData: typeof ApiFetcherComponent;
   antibiogramPerDate: "div";
-  datetimename: "div";
+  datetimeName: "div";
   antibiogramGroupName: "div";
   datetime: "div";
   antibiogram: "div";
@@ -2729,7 +2729,7 @@ type NodeDefaultElementType = {
   labPerDate: "div";
   issuedDatetime: "div";
   labLists: "div";
-  factorNamevalue: "div";
+  factorNameValue: "div";
   normalFactorValue: "div";
   abnormalFactorValue: "div";
   normalRanged: "div";
@@ -2815,7 +2815,7 @@ export const PlasmicLaboratoryData = Object.assign(
     ),
     header: makeNodeComponent("header"),
     patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
-    patientNameagegender: makeNodeComponent("patientNameagegender"),
+    patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
     saveAdmissionDatetime: makeNodeComponent("saveAdmissionDatetime"),
     normalRangeButton: makeNodeComponent("normalRangeButton"),
     normalRangeButtonCircle: makeNodeComponent("normalRangeButtonCircle"),
@@ -2829,7 +2829,7 @@ export const PlasmicLaboratoryData = Object.assign(
     svg: makeNodeComponent("svg"),
     antibiogramData: makeNodeComponent("antibiogramData"),
     antibiogramPerDate: makeNodeComponent("antibiogramPerDate"),
-    datetimename: makeNodeComponent("datetimename"),
+    datetimeName: makeNodeComponent("datetimeName"),
     antibiogramGroupName: makeNodeComponent("antibiogramGroupName"),
     datetime: makeNodeComponent("datetime"),
     antibiogram: makeNodeComponent("antibiogram"),
@@ -2844,7 +2844,7 @@ export const PlasmicLaboratoryData = Object.assign(
     labPerDate: makeNodeComponent("labPerDate"),
     issuedDatetime: makeNodeComponent("issuedDatetime"),
     labLists: makeNodeComponent("labLists"),
-    factorNamevalue: makeNodeComponent("factorNamevalue"),
+    factorNameValue: makeNodeComponent("factorNameValue"),
     normalFactorValue: makeNodeComponent("normalFactorValue"),
     abnormalFactorValue: makeNodeComponent("abnormalFactorValue"),
     normalRanged: makeNodeComponent("normalRanged"),

@@ -70,8 +70,8 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicTextInput.module.css"; // plasmic-import: WB4OwDxc51ck/css
 
-import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
-import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 
 createPlasmicElementProxy;
 
@@ -116,8 +116,6 @@ export type PlasmicTextInput__ArgsType = {
     | "email"
     | "tel";
   autoFocus?: boolean;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
 };
 type ArgPropType = keyof PlasmicTextInput__ArgsType;
 export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
@@ -131,9 +129,7 @@ export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
   "aria-labelledby",
   "onChange",
   "type",
-  "autoFocus",
-  "aria-label",
-  "aria-labelledby"
+  "autoFocus"
 );
 
 export type PlasmicTextInput__OverridesType = {
@@ -162,8 +158,6 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
     | "email"
     | "tel";
   autoFocus?: boolean;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
   error?: SingleBooleanChoiceArg<"error">;
 }
 
@@ -352,7 +346,7 @@ function PlasmicTextInput__RenderFunc(props: {
       >
         {renderPlasmicSlot({
           defaultContents: (
-            <SearchsvgIcon
+            <SearchSvgIcon
               className={classNames(projectcss.all, sty.svg__bNQq)}
               role={"img"}
             />
@@ -431,7 +425,7 @@ function PlasmicTextInput__RenderFunc(props: {
           {renderPlasmicSlot({
             defaultContents:
               $state.value !== "" ? (
-                <Icons8ClosesvgIcon
+                <Icons8CloseSvgIcon
                   className={classNames(projectcss.all, sty.svg__m0Xvn)}
                   role={"img"}
                 />

@@ -78,13 +78,13 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicUserSetting.module.css"; // plasmic-import: RHOuYiwuacpG/css
 
-import PersonCropSquareFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__PersonCropSquareFillSvgrepoComsvg"; // plasmic-import: KRqJj_I4xpne/icon
+import PersonCropSquareFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__PersonCropSquareFillSvgrepoComSvg"; // plasmic-import: KRqJj_I4xpne/icon
 import ProfileIcon from "./icons/PlasmicIcon__Profile"; // plasmic-import: -RBNimWBwZ_J/icon
 import Icon3Icon from "./icons/PlasmicIcon__Icon3"; // plasmic-import: Pji6nZZT_lpO/icon
 import Group1917Icon from "./icons/PlasmicIcon__Group1917"; // plasmic-import: ycuumst0kLdp/icon
-import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
+import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
@@ -454,7 +454,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                   </React.Fragment>
                 </div>
               </Stack__>
-              <PersonCropSquareFillSvgrepoComsvgIcon
+              <PersonCropSquareFillSvgrepoComSvgIcon
                 data-plasmic-name={"userPicture"}
                 data-plasmic-override={overrides.userPicture}
                 className={classNames(projectcss.all, sty.userPicture)}
@@ -923,7 +923,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                       className={classNames("__wab_instance", sty.password)}
                       endIcon={
                         $state.value !== "" ? (
-                          <Icons8ClosesvgIcon
+                          <Icons8CloseSvgIcon
                             className={classNames(
                               projectcss.all,
                               sty.svg__nsK2A
@@ -1009,7 +1009,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                       )}
                       endIcon={
                         $state.value !== "" ? (
-                          <Icons8ClosesvgIcon
+                          <Icons8CloseSvgIcon
                             className={classNames(
                               projectcss.all,
                               sty.svg__kHsuF
@@ -1382,7 +1382,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                           ];
                       }
 
-                      $steps["patchUserpassword"] =
+                      $steps["patchUserPassword"] =
                         $state.password.value == $state.repeatPassword.value
                           ? (() => {
                               const actionArgs = {
@@ -1414,16 +1414,16 @@ function PlasmicUserSetting__RenderFunc(props: {
                             })()
                           : undefined;
                       if (
-                        $steps["patchUserpassword"] != null &&
-                        typeof $steps["patchUserpassword"] === "object" &&
-                        typeof $steps["patchUserpassword"].then === "function"
+                        $steps["patchUserPassword"] != null &&
+                        typeof $steps["patchUserPassword"] === "object" &&
+                        typeof $steps["patchUserPassword"].then === "function"
                       ) {
-                        $steps["patchUserpassword"] = await $steps[
-                          "patchUserpassword"
+                        $steps["patchUserPassword"] = await $steps[
+                          "patchUserPassword"
                         ];
                       }
 
-                      $steps["consoleLogPatchUserspasswordStatus"] = true
+                      $steps["consoleLogPatchUsersPasswordStatus"] = true
                         ? (() => {
                             const actionArgs = {
                               customFunction: async () => {
@@ -1438,14 +1438,14 @@ function PlasmicUserSetting__RenderFunc(props: {
                           })()
                         : undefined;
                       if (
-                        $steps["consoleLogPatchUserspasswordStatus"] != null &&
-                        typeof $steps["consoleLogPatchUserspasswordStatus"] ===
+                        $steps["consoleLogPatchUsersPasswordStatus"] != null &&
+                        typeof $steps["consoleLogPatchUsersPasswordStatus"] ===
                           "object" &&
-                        typeof $steps["consoleLogPatchUserspasswordStatus"]
+                        typeof $steps["consoleLogPatchUsersPasswordStatus"]
                           .then === "function"
                       ) {
-                        $steps["consoleLogPatchUserspasswordStatus"] =
-                          await $steps["consoleLogPatchUserspasswordStatus"];
+                        $steps["consoleLogPatchUsersPasswordStatus"] =
+                          await $steps["consoleLogPatchUsersPasswordStatus"];
                       }
 
                       $steps["makeTrueSuccessfulChangePassword"] =
@@ -1765,7 +1765,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                 "sortSelected"
               ])}
               startIcon={
-                <ChecksvgIcon
+                <CheckSvgIcon
                   className={classNames(projectcss.all, sty.svg__fLi6W)}
                   role={"img"}
                 />

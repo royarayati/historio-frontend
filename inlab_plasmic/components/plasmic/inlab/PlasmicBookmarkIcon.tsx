@@ -68,9 +68,9 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicBookmarkIcon.module.css"; // plasmic-import: PK_hwsu90gKT/css
 
-import BookmarkPlusSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg"; // plasmic-import: laC4EyEnFr3s/icon
-import BookmarkDashFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg"; // plasmic-import: OXlS9uB7Ffdy/icon
-import LoadingLoaderSvgrepoComsvgIcon from "./icons/PlasmicIcon__LoadingLoaderSvgrepoComsvg"; // plasmic-import: FYp_b7bC4SRG/icon
+import BookmarkPlusSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComSvg"; // plasmic-import: laC4EyEnFr3s/icon
+import BookmarkDashFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComSvg"; // plasmic-import: OXlS9uB7Ffdy/icon
+import LoadingLoaderSvgrepoComSvgIcon from "./icons/PlasmicIcon__LoadingLoaderSvgrepoComSvg"; // plasmic-import: FYp_b7bC4SRG/icon
 
 createPlasmicElementProxy;
 
@@ -204,10 +204,10 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
       data-plasmic-for-node={forNode}
       PlasmicIconType={
         hasVariant($state, "loadingBookmark", "loadingBookmark")
-          ? LoadingLoaderSvgrepoComsvgIcon
+          ? LoadingLoaderSvgrepoComSvgIcon
           : hasVariant($state, "bookmarked", "bookmarked")
-          ? BookmarkDashFillSvgrepoComsvgIcon
-          : BookmarkPlusSvgrepoComsvgIcon
+          ? BookmarkDashFillSvgrepoComSvgIcon
+          : BookmarkPlusSvgrepoComSvgIcon
       }
       className={classNames(
         projectcss.all,

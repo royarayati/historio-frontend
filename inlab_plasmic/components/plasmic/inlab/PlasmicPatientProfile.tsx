@@ -75,7 +75,7 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicPatientProfile.module.css"; // plasmic-import: Ev8txsbuZl9W/css
 
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
@@ -103,20 +103,20 @@ export type PlasmicPatientProfile__OverridesType = {
   patientProfile?: Flex__<typeof ApiFetcherComponent>;
   patientData?: Flex__<"div">;
   patientProfileBox?: Flex__<"div">;
-  nationalIdadmissionTimeNopacs?: Flex__<"div">;
+  nationalIdAdmissionTimeNoPacs?: Flex__<"div">;
   nationalId?: Flex__<"div">;
   admissionDate?: Flex__<"div">;
   patientNo?: Flex__<"div">;
   pacsNumber?: Flex__<"div">;
   pacsNumber2?: Flex__<"div">;
-  nameservicewardbed?: Flex__<"div">;
+  nameServiceWardBed?: Flex__<"div">;
   patientName2?: Flex__<"div">;
   patientService?: Flex__<"div">;
   patientWard?: Flex__<"div">;
   patientRoomBed?: Flex__<"div">;
   freeBox?: Flex__<"div">;
   patientStatus?: Flex__<"div">;
-  وضعتبمار?: Flex__<"div">;
+  وضعیتبیمار?: Flex__<"div">;
   bioArcPrescription?: Flex__<typeof Button>;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
@@ -362,13 +362,13 @@ function PlasmicPatientProfile__RenderFunc(props: {
                         )}
                       >
                         <div
-                          data-plasmic-name={"nationalIdadmissionTimeNopacs"}
+                          data-plasmic-name={"nationalIdAdmissionTimeNoPacs"}
                           data-plasmic-override={
-                            overrides.nationalIdadmissionTimeNopacs
+                            overrides.nationalIdAdmissionTimeNoPacs
                           }
                           className={classNames(
                             projectcss.all,
-                            sty.nationalIdadmissionTimeNopacs
+                            sty.nationalIdAdmissionTimeNoPacs
                           )}
                         >
                           <div
@@ -508,11 +508,11 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           </div>
                         </div>
                         <div
-                          data-plasmic-name={"nameservicewardbed"}
-                          data-plasmic-override={overrides.nameservicewardbed}
+                          data-plasmic-name={"nameServiceWardBed"}
+                          data-plasmic-override={overrides.nameServiceWardBed}
                           className={classNames(
                             projectcss.all,
-                            sty.nameservicewardbed
+                            sty.nameServiceWardBed
                           )}
                         >
                           <div
@@ -678,13 +678,13 @@ function PlasmicPatientProfile__RenderFunc(props: {
                         </div>
                         <div
                           data-plasmic-name={
-                            "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+                            "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631"
                           }
-                          data-plasmic-override={overrides.وضعتبمار}
+                          data-plasmic-override={overrides.وضعیتبیمار}
                           className={classNames(
                             projectcss.all,
                             projectcss.__wab_text,
-                            sty.وضعتبمار
+                            sty.وضعیتبیمار
                           )}
                         >
                           {
@@ -1187,20 +1187,20 @@ const PlasmicDescendants = {
     "patientProfile",
     "patientData",
     "patientProfileBox",
-    "nationalIdadmissionTimeNopacs",
+    "nationalIdAdmissionTimeNoPacs",
     "nationalId",
     "admissionDate",
     "patientNo",
     "pacsNumber",
     "pacsNumber2",
-    "nameservicewardbed",
+    "nameServiceWardBed",
     "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed",
     "freeBox",
     "patientStatus",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
+    "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631",
     "bioArcPrescription",
     "switchingTabs",
     "switchingTab",
@@ -1217,57 +1217,57 @@ const PlasmicDescendants = {
     "patientProfile",
     "patientData",
     "patientProfileBox",
-    "nationalIdadmissionTimeNopacs",
+    "nationalIdAdmissionTimeNoPacs",
     "nationalId",
     "admissionDate",
     "patientNo",
     "pacsNumber",
     "pacsNumber2",
-    "nameservicewardbed",
+    "nameServiceWardBed",
     "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed",
     "freeBox",
     "patientStatus",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
+    "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631",
     "bioArcPrescription"
   ],
   patientData: [
     "patientData",
     "patientProfileBox",
-    "nationalIdadmissionTimeNopacs",
+    "nationalIdAdmissionTimeNoPacs",
     "nationalId",
     "admissionDate",
     "patientNo",
     "pacsNumber",
     "pacsNumber2",
-    "nameservicewardbed",
+    "nameServiceWardBed",
     "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed",
     "freeBox",
     "patientStatus",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631",
+    "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631",
     "bioArcPrescription"
   ],
   patientProfileBox: [
     "patientProfileBox",
-    "nationalIdadmissionTimeNopacs",
+    "nationalIdAdmissionTimeNoPacs",
     "nationalId",
     "admissionDate",
     "patientNo",
     "pacsNumber",
     "pacsNumber2",
-    "nameservicewardbed",
+    "nameServiceWardBed",
     "patientName2",
     "patientService",
     "patientWard",
     "patientRoomBed"
   ],
-  nationalIdadmissionTimeNopacs: [
-    "nationalIdadmissionTimeNopacs",
+  nationalIdAdmissionTimeNoPacs: [
+    "nationalIdAdmissionTimeNoPacs",
     "nationalId",
     "admissionDate",
     "patientNo",
@@ -1279,8 +1279,8 @@ const PlasmicDescendants = {
   patientNo: ["patientNo"],
   pacsNumber: ["pacsNumber"],
   pacsNumber2: ["pacsNumber2"],
-  nameservicewardbed: [
-    "nameservicewardbed",
+  nameServiceWardBed: [
+    "nameServiceWardBed",
     "patientName2",
     "patientService",
     "patientWard",
@@ -1293,10 +1293,10 @@ const PlasmicDescendants = {
   freeBox: [
     "freeBox",
     "patientStatus",
-    "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+    "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631"
   ],
   patientStatus: ["patientStatus"],
-  وضعتبمار: ["\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"],
+  وضعیتبیمار: ["\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631"],
   bioArcPrescription: ["bioArcPrescription"],
   switchingTabs: [
     "switchingTabs",
@@ -1332,20 +1332,20 @@ type NodeDefaultElementType = {
   patientProfile: typeof ApiFetcherComponent;
   patientData: "div";
   patientProfileBox: "div";
-  nationalIdadmissionTimeNopacs: "div";
+  nationalIdAdmissionTimeNoPacs: "div";
   nationalId: "div";
   admissionDate: "div";
   patientNo: "div";
   pacsNumber: "div";
   pacsNumber2: "div";
-  nameservicewardbed: "div";
+  nameServiceWardBed: "div";
   patientName2: "div";
   patientService: "div";
   patientWard: "div";
   patientRoomBed: "div";
   freeBox: "div";
   patientStatus: "div";
-  وضعتبمار: "div";
+  وضعیتبیمار: "div";
   bioArcPrescription: typeof Button;
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
@@ -1424,23 +1424,23 @@ export const PlasmicPatientProfile = Object.assign(
     patientProfile: makeNodeComponent("patientProfile"),
     patientData: makeNodeComponent("patientData"),
     patientProfileBox: makeNodeComponent("patientProfileBox"),
-    nationalIdadmissionTimeNopacs: makeNodeComponent(
-      "nationalIdadmissionTimeNopacs"
+    nationalIdAdmissionTimeNoPacs: makeNodeComponent(
+      "nationalIdAdmissionTimeNoPacs"
     ),
     nationalId: makeNodeComponent("nationalId"),
     admissionDate: makeNodeComponent("admissionDate"),
     patientNo: makeNodeComponent("patientNo"),
     pacsNumber: makeNodeComponent("pacsNumber"),
     pacsNumber2: makeNodeComponent("pacsNumber2"),
-    nameservicewardbed: makeNodeComponent("nameservicewardbed"),
+    nameServiceWardBed: makeNodeComponent("nameServiceWardBed"),
     patientName2: makeNodeComponent("patientName2"),
     patientService: makeNodeComponent("patientService"),
     patientWard: makeNodeComponent("patientWard"),
     patientRoomBed: makeNodeComponent("patientRoomBed"),
     freeBox: makeNodeComponent("freeBox"),
     patientStatus: makeNodeComponent("patientStatus"),
-    وضعتبمار: makeNodeComponent(
-      "\u0648\u0636\u0639\u062a\u0628\u0645\u0627\u0631"
+    وضعیتبیمار: makeNodeComponent(
+      "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631"
     ),
     bioArcPrescription: makeNodeComponent("bioArcPrescription"),
     switchingTabs: makeNodeComponent("switchingTabs"),

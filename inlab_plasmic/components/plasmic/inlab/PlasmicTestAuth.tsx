@@ -91,8 +91,8 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicTestAuth.module.css"; // plasmic-import: djw6BO6ESgiq/css
 
-import LoadingLoaderSvgrepoComsvgIcon from "./icons/PlasmicIcon__LoadingLoaderSvgrepoComsvg"; // plasmic-import: FYp_b7bC4SRG/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import LoadingLoaderSvgrepoComSvgIcon from "./icons/PlasmicIcon__LoadingLoaderSvgrepoComSvg"; // plasmic-import: FYp_b7bC4SRG/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
@@ -376,7 +376,7 @@ function PlasmicTestAuth__RenderFunc(props: {
                         })()}
                       </React.Fragment>
                     </div>
-                    <LoadingLoaderSvgrepoComsvgIcon
+                    <LoadingLoaderSvgrepoComSvgIcon
                       data-plasmic-name={"svg"}
                       data-plasmic-override={overrides.svg}
                       className={classNames(projectcss.all, sty.svg)}

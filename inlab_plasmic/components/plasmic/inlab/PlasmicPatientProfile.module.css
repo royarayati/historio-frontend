@@ -49,7 +49,7 @@
   height: 100%;
   max-width: 100%;
   background: #ffffff;
-  max-height: 35px;
+  max-height: 32px;
   left: auto;
   top: 0%;
   z-index: 1;
@@ -159,7 +159,7 @@
   > img {
   margin-left: 4px;
 }
-.nationalIdadmissionTimeNopacs {
+.nationalIdAdmissionTimeNoPacs {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -278,7 +278,7 @@
   min-width: 0;
   display: none;
 }
-.nameservicewardbed {
+.nameServiceWardBed {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -426,7 +426,7 @@
   padding: 0px;
   border: 0px none var(--token-pRs3-4jrQ4XQ);
 }
-.وضعتبمار {
+.وضعیتبیمار {
   position: relative;
   width: auto;
   height: auto;

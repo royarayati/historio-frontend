@@ -240,7 +240,7 @@
   position: relative;
   align-self: flex-end;
 }
-.نامخانواد:global(.__wab_instance) {
+.نامخانوادگی:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   width: 328px;
@@ -293,7 +293,7 @@
   position: relative;
   align-self: flex-end;
 }
-.امل:global(.__wab_instance) {
+.ایمیل:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   width: 328px;
@@ -312,7 +312,7 @@
   width: auto;
   height: 1em;
 }
-.عسروفال {
+.عکسپروفایل {
   width: auto;
   height: auto;
   display: flex;
@@ -322,17 +322,17 @@
   align-self: flex-start;
   margin-left: 7px;
 }
-.عسروفال > :global(.__wab_flex-container) {
+.عکسپروفایل > :global(.__wab_flex-container) {
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-start;
   margin-top: calc(0px - 4px);
   height: calc(100% + 4px);
 }
-.عسروفال > :global(.__wab_flex-container) > *,
-.عسروفال > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.عسروفال > :global(.__wab_flex-container) > picture > img,
-.عسروفال
+.عکسپروفایل > :global(.__wab_flex-container) > *,
+.عکسپروفایل > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.عکسپروفایل > :global(.__wab_flex-container) > picture > img,
+.عکسپروفایل
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
@@ -350,7 +350,7 @@
   position: relative;
   align-self: flex-end;
 }
-.عسروفال2:global(.__wab_instance) {
+.عکسپروفایل2:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   position: relative;
