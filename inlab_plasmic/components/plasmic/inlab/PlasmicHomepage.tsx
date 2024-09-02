@@ -67,7 +67,6 @@ import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/compone
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
-import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 import NewNoticeBanner from "../../NewNoticeBanner"; // plasmic-import: X347FgRZh6HH/component
@@ -81,14 +80,14 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicHomepage.module.css"; // plasmic-import: oQ9IYAdIiE5g/css
 
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 import MenuIcon from "./icons/PlasmicIcon__Menu"; // plasmic-import: YlP_1riCYk4W/icon
-import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
-import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: kYUnvWOY7oUw/icon
-import BookmarkPlusSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComsvg"; // plasmic-import: laC4EyEnFr3s/icon
-import BookmarkDashFillSvgrepoComsvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComsvg"; // plasmic-import: OXlS9uB7Ffdy/icon
+import BookmarkPlusSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComSvg"; // plasmic-import: laC4EyEnFr3s/icon
+import BookmarkDashFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComSvg"; // plasmic-import: OXlS9uB7Ffdy/icon
 import IndicatorIcon from "./icons/PlasmicIcon__Indicator"; // plasmic-import: B34gCeBlzVGZ/icon
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
@@ -105,13 +104,15 @@ export type PlasmicHomepage__ArgsType = {
   modalOpen2?: boolean;
   newVersionDatetime?: string;
   newNoticeDatetime?: string;
+  openModalGeneralHealthStatus?: boolean;
 };
 type ArgPropType = keyof PlasmicHomepage__ArgsType;
 export const PlasmicHomepage__ArgProps = new Array<ArgPropType>(
   "open",
   "modalOpen2",
   "newVersionDatetime",
-  "newNoticeDatetime"
+  "newNoticeDatetime",
+  "openModalGeneralHealthStatus"
 );
 
 export type PlasmicHomepage__OverridesType = {
@@ -120,7 +121,7 @@ export type PlasmicHomepage__OverridesType = {
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   pageContent?: Flex__<"div">;
   modalRemoveBookmarks?: Flex__<typeof AntdModal>;
-  deletecancel?: Flex__<"div">;
+  deleteCancel?: Flex__<"div">;
   cancelButton?: Flex__<typeof Button>;
   deleteAllBookmarks?: Flex__<typeof Button>;
   controlPanel?: Flex__<"div">;
@@ -138,24 +139,24 @@ export type PlasmicHomepage__OverridesType = {
   نتايحجستوجو?: Flex__<"div">;
   patients?: Flex__<typeof ApiFetcherComponent>;
   header2?: Flex__<"div">;
-  buttonاردنهمهبومارها?: Flex__<typeof Button>;
-  بمارافتنشد?: Flex__<"div">;
+  buttonپاککردنهمهبوکمارکها?: Flex__<typeof Button>;
+  بیمارییافتنشد?: Flex__<"div">;
   bookmarkGuide?: Flex__<"div">;
   bookmarkImage?: Flex__<"svg">;
   bookmarkedImage?: Flex__<"svg">;
-  لطفامنتظربماند?: Flex__<"div">;
+  لطفامنتظربمانید?: Flex__<"div">;
   patientCards?: Flex__<"div">;
   patientNameBookmarkIcon?: Flex__<"div">;
   dismision?: Flex__<"div">;
-  generalHealthStatus?: Flex__<typeof AntdModal>;
+  modalGeneralHealthStatus?: Flex__<typeof AntdModal>;
   modalContent?: Flex__<"div">;
   criticalCondition?: Flex__<typeof Button>;
   criticalDefinition?: Flex__<"div">;
   stableCondition?: Flex__<typeof Button>;
   criticalConditionAdd?: Flex__<typeof Alert>;
   stableConditionReset?: Flex__<typeof Alert>;
-  triggerToOpenModal?: Flex__<typeof AntdButton>;
-  getMessagehealthStatus?: Flex__<typeof ApiFetcherComponent>;
+  getMessageHealthStatus?: Flex__<typeof ApiFetcherComponent>;
+  generalHealthStatusAnnouncement?: Flex__<"div">;
   numberOfDoctorReporting?: Flex__<"div">;
   firstLastName?: Flex__<"div">;
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
@@ -389,19 +390,19 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "buttonاردنهمهبومارها.isDisabled",
+        path: "buttonپاککردنهمهبوکمارکها.isDisabled",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "buttonاردنهمهبومارها.selected",
+        path: "buttonپاککردنهمهبوکمارکها.selected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "buttonاردنهمهبومارها.deselected",
+        path: "buttonپاککردنهمهبوکمارکها.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -425,7 +426,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "buttonاردنهمهبومارها.sortDeselected",
+        path: "buttonپاککردنهمهبوکمارکها.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -449,7 +450,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "buttonاردنهمهبومارها.sortSelected",
+        path: "buttonپاککردنهمهبوکمارکها.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -731,7 +732,7 @@ function PlasmicHomepage__RenderFunc(props: {
           })()
       },
       {
-        path: "generalHealthStatus[].open",
+        path: "modalGeneralHealthStatus[].open",
         type: "private",
         variableType: "boolean"
       },
@@ -876,10 +877,10 @@ function PlasmicHomepage__RenderFunc(props: {
             footer={
               <Stack__
                 as={"div"}
-                data-plasmic-name={"deletecancel"}
-                data-plasmic-override={overrides.deletecancel}
+                data-plasmic-name={"deleteCancel"}
+                data-plasmic-override={overrides.deleteCancel}
                 hasGap={true}
-                className={classNames(projectcss.all, sty.deletecancel)}
+                className={classNames(projectcss.all, sty.deleteCancel)}
               >
                 <Button
                   data-plasmic-name={"cancelButton"}
@@ -1269,7 +1270,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 data-plasmic-override={overrides.searchbar}
                 className={classNames("__wab_instance", sty.searchbar)}
                 endIcon={
-                  <Icons8ClosesvgIcon
+                  <Icons8CloseSvgIcon
                     className={classNames(projectcss.all, sty.svg___2L1F5)}
                     onClick={async event => {
                       const $steps = {};
@@ -1330,7 +1331,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     : "\u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u0634\u0645\u0627\u0631\u0647 \u067e\u0631\u0648\u0646\u062f\u0647\u060c \u06a9\u062f \u0645\u0644\u06cc\u060c \u06a9\u062f \u067e\u06a9\u0633"
                 }
                 startIcon={
-                  <SearchsvgIcon
+                  <SearchSvgIcon
                     className={classNames(projectcss.all, sty.svg___2WfJc)}
                     role={"img"}
                   />
@@ -1367,7 +1368,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   hasGap={true}
                   className={classNames(projectcss.all, sty.wardButtonStack)}
                 >
-                  <Icons8ClosesvgIcon
+                  <Icons8CloseSvgIcon
                     className={classNames(projectcss.all, sty.svg__jbwB)}
                     role={"img"}
                   />
@@ -1709,7 +1710,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     sty.bookmarkedButtonStack
                   )}
                 >
-                  <Icons8ClosesvgIcon
+                  <Icons8CloseSvgIcon
                     className={classNames(projectcss.all, sty.svg__rave3)}
                     role={"img"}
                   />
@@ -2156,20 +2157,22 @@ function PlasmicHomepage__RenderFunc(props: {
                       })() ? (
                         <Button
                           data-plasmic-name={
-                            "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
+                            "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
                           }
-                          data-plasmic-override={overrides.buttonاردنهمهبومارها}
+                          data-plasmic-override={
+                            overrides.buttonپاککردنهمهبوکمارکها
+                          }
                           className={classNames(
                             "__wab_instance",
-                            sty.buttonاردنهمهبومارها
+                            sty.buttonپاککردنهمهبوکمارکها
                           )}
                           color={"red"}
                           deselected={generateStateValueProp($state, [
-                            "buttonاردنهمهبومارها",
+                            "buttonپاککردنهمهبوکمارکها",
                             "deselected"
                           ])}
                           isDisabled={generateStateValueProp($state, [
-                            "buttonاردنهمهبومارها",
+                            "buttonپاککردنهمهبوکمارکها",
                             "isDisabled"
                           ])}
                           onClick={async event => {
@@ -2219,44 +2222,44 @@ function PlasmicHomepage__RenderFunc(props: {
                           }}
                           onDeselectedChange={(...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "buttonاردنهمهبومارها",
+                              "buttonپاککردنهمهبوکمارکها",
                               "deselected"
                             ])(eventArgs[0]);
                           }}
                           onIsDisabledChange={(...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "buttonاردنهمهبومارها",
+                              "buttonپاککردنهمهبوکمارکها",
                               "isDisabled"
                             ])(eventArgs[0]);
                           }}
                           onSelectedChange={(...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "buttonاردنهمهبومارها",
+                              "buttonپاککردنهمهبوکمارکها",
                               "selected"
                             ])(eventArgs[0]);
                           }}
                           onSortDeselectedChange={(...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "buttonاردنهمهبومارها",
+                              "buttonپاککردنهمهبوکمارکها",
                               "sortDeselected"
                             ])(eventArgs[0]);
                           }}
                           onSortSelectedChange={(...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "buttonاردنهمهبومارها",
+                              "buttonپاککردنهمهبوکمارکها",
                               "sortSelected"
                             ])(eventArgs[0]);
                           }}
                           selected={generateStateValueProp($state, [
-                            "buttonاردنهمهبومارها",
+                            "buttonپاککردنهمهبوکمارکها",
                             "selected"
                           ])}
                           sortDeselected={generateStateValueProp($state, [
-                            "buttonاردنهمهبومارها",
+                            "buttonپاککردنهمهبوکمارکها",
                             "sortDeselected"
                           ])}
                           sortSelected={generateStateValueProp($state, [
-                            "buttonاردنهمهبومارها",
+                            "buttonپاککردنهمهبوکمارکها",
                             "sortSelected"
                           ])}
                         >
@@ -2294,13 +2297,13 @@ function PlasmicHomepage__RenderFunc(props: {
                   })() ? (
                     <div
                       data-plasmic-name={
-                        "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"
+                        "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
                       }
-                      data-plasmic-override={overrides.بمارافتنشد}
+                      data-plasmic-override={overrides.بیمارییافتنشد}
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.بمارافتنشد
+                        sty.بیمارییافتنشد
                       )}
                     >
                       {
@@ -2336,7 +2339,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           sty.freeBox__y0Cq
                         )}
                       >
-                        <BookmarkPlusSvgrepoComsvgIcon
+                        <BookmarkPlusSvgrepoComSvgIcon
                           data-plasmic-name={"bookmarkImage"}
                           data-plasmic-override={overrides.bookmarkImage}
                           className={classNames(
@@ -2346,7 +2349,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           role={"img"}
                         />
 
-                        <BookmarkDashFillSvgrepoComsvgIcon
+                        <BookmarkDashFillSvgrepoComSvgIcon
                           data-plasmic-name={"bookmarkedImage"}
                           data-plasmic-override={overrides.bookmarkedImage}
                           className={classNames(
@@ -2419,13 +2422,13 @@ function PlasmicHomepage__RenderFunc(props: {
                   ) ? (
                     <div
                       data-plasmic-name={
-                        "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f"
+                        "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f"
                       }
-                      data-plasmic-override={overrides.لطفامنتظربماند}
+                      data-plasmic-override={overrides.لطفامنتظربمانید}
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.لطفامنتظربماند
+                        sty.لطفامنتظربمانید
                       )}
                     >
                       {
@@ -2551,7 +2554,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 const child$Props = {
                                   className: classNames(
                                     "__wab_instance",
-                                    sty.generalHealthStatus
+                                    sty.modalGeneralHealthStatus
                                   ),
                                   defaultStylesClassName: classNames(
                                     projectcss.root_reset,
@@ -2567,17 +2570,17 @@ function PlasmicHomepage__RenderFunc(props: {
                                     [sty["pcls_kWuPUuhlM2_n"]]: true
                                   }),
                                   modalScopeClassName:
-                                    sty["generalHealthStatus__modal"],
+                                    sty["modalGeneralHealthStatus__modal"],
                                   onOpenChange: generateStateOnChangeProp(
                                     $state,
                                     [
-                                      "generalHealthStatus",
+                                      "modalGeneralHealthStatus",
                                       __plasmic_idx_0,
                                       "open"
                                     ]
                                   ),
                                   open: generateStateValueProp($state, [
-                                    "generalHealthStatus",
+                                    "modalGeneralHealthStatus",
                                     __plasmic_idx_0,
                                     "open"
                                   ]),
@@ -2595,271 +2598,259 @@ function PlasmicHomepage__RenderFunc(props: {
                                     </div>
                                   ),
                                   trigger: (
-                                    <AntdButton
-                                      data-plasmic-name={"triggerToOpenModal"}
+                                    <ApiFetcherComponent
+                                      data-plasmic-name={
+                                        "getMessageHealthStatus"
+                                      }
                                       data-plasmic-override={
-                                        overrides.triggerToOpenModal
+                                        overrides.getMessageHealthStatus
                                       }
                                       className={classNames(
                                         "__wab_instance",
-                                        sty.triggerToOpenModal
+                                        sty.getMessageHealthStatus
                                       )}
-                                      onClick={async () => {
-                                        const $steps = {};
-
-                                        $steps[
-                                          "makeFalseStableConditionResetAlertState"
-                                        ] = true
-                                          ? (() => {
-                                              const actionArgs = {
-                                                variable: {
-                                                  objRoot: $state,
-                                                  variablePath: [
-                                                    "stableConditionResetAlert"
-                                                  ]
-                                                },
-                                                operation: 0,
-                                                value: false
-                                              };
-                                              return (({
-                                                variable,
-                                                value,
-                                                startIndex,
-                                                deleteCount
-                                              }) => {
-                                                if (!variable) {
-                                                  return;
-                                                }
-                                                const {
-                                                  objRoot,
-                                                  variablePath
-                                                } = variable;
-
-                                                $stateSet(
-                                                  objRoot,
-                                                  variablePath,
-                                                  value
-                                                );
-                                                return value;
-                                              })?.apply(null, [actionArgs]);
-                                            })()
-                                          : undefined;
-                                        if (
-                                          $steps[
-                                            "makeFalseStableConditionResetAlertState"
-                                          ] != null &&
-                                          typeof $steps[
-                                            "makeFalseStableConditionResetAlertState"
-                                          ] === "object" &&
-                                          typeof $steps[
-                                            "makeFalseStableConditionResetAlertState"
-                                          ].then === "function"
-                                        ) {
-                                          $steps[
-                                            "makeFalseStableConditionResetAlertState"
-                                          ] = await $steps[
-                                            "makeFalseStableConditionResetAlertState"
-                                          ];
-                                        }
-
-                                        $steps[
-                                          "makeFalseCriticalConditionAddAlertState"
-                                        ] = true
-                                          ? (() => {
-                                              const actionArgs = {
-                                                variable: {
-                                                  objRoot: $state,
-                                                  variablePath: [
-                                                    "criticalConditionAddAlert"
-                                                  ]
-                                                },
-                                                operation: 0,
-                                                value: false
-                                              };
-                                              return (({
-                                                variable,
-                                                value,
-                                                startIndex,
-                                                deleteCount
-                                              }) => {
-                                                if (!variable) {
-                                                  return;
-                                                }
-                                                const {
-                                                  objRoot,
-                                                  variablePath
-                                                } = variable;
-
-                                                $stateSet(
-                                                  objRoot,
-                                                  variablePath,
-                                                  value
-                                                );
-                                                return value;
-                                              })?.apply(null, [actionArgs]);
-                                            })()
-                                          : undefined;
-                                        if (
-                                          $steps[
-                                            "makeFalseCriticalConditionAddAlertState"
-                                          ] != null &&
-                                          typeof $steps[
-                                            "makeFalseCriticalConditionAddAlertState"
-                                          ] === "object" &&
-                                          typeof $steps[
-                                            "makeFalseCriticalConditionAddAlertState"
-                                          ].then === "function"
-                                        ) {
-                                          $steps[
-                                            "makeFalseCriticalConditionAddAlertState"
-                                          ] = await $steps[
-                                            "makeFalseCriticalConditionAddAlertState"
-                                          ];
-                                        }
+                                      method={"GET"}
+                                      path={`/api/v3/messages/health-status?namespace_id=${localStorage.getItem(
+                                        "inlab_user_namespace_id"
+                                      )}&admission_id=${
+                                        currentItem.admission_id
+                                      }`}
+                                      ref={ref => {
+                                        $refs["getMessageHealthStatus"] = ref;
                                       }}
                                     >
-                                      <div
-                                        className={classNames(
-                                          projectcss.all,
-                                          projectcss.__wab_text,
-                                          sty.text__i5JAh
-                                        )}
-                                      >
-                                        {"Show modal"}
-                                      </div>
-                                      <ApiFetcherComponent
-                                        data-plasmic-name={
-                                          "getMessagehealthStatus"
-                                        }
-                                        data-plasmic-override={
-                                          overrides.getMessagehealthStatus
-                                        }
-                                        className={classNames(
-                                          "__wab_instance",
-                                          sty.getMessagehealthStatus
-                                        )}
-                                        method={"GET"}
-                                        path={`/api/v3/messages/health-status?namespace_id=${localStorage.getItem(
-                                          "inlab_user_namespace_id"
-                                        )}&admission_id=${
-                                          currentItem.admission_id
-                                        }`}
-                                        ref={ref => {
-                                          $refs["getMessagehealthStatus"] = ref;
-                                        }}
-                                      >
-                                        <DataCtxReader__>
-                                          {$ctx => (
-                                            <React.Fragment>
-                                              {(() => {
-                                                try {
-                                                  return (
-                                                    $ctx.fetched_data.data === 0
-                                                  );
-                                                } catch (e) {
-                                                  if (
-                                                    e instanceof TypeError ||
-                                                    e?.plasmicType ===
-                                                      "PlasmicUndefinedDataError"
-                                                  ) {
-                                                    return true;
-                                                  }
-                                                  throw e;
-                                                }
-                                              })() ? (
-                                                <div
-                                                  className={classNames(
-                                                    projectcss.all,
-                                                    projectcss.__wab_text,
-                                                    sty.text__q9Pfi
-                                                  )}
-                                                >
-                                                  {
-                                                    "\u067e\u0627\u06cc\u062f\u0627\u0631"
-                                                  }
-                                                </div>
-                                              ) : null}
-                                              {(() => {
-                                                try {
-                                                  return (
-                                                    $ctx.fetched_data.data !== 0
-                                                  );
-                                                } catch (e) {
-                                                  if (
-                                                    e instanceof TypeError ||
-                                                    e?.plasmicType ===
-                                                      "PlasmicUndefinedDataError"
-                                                  ) {
-                                                    return true;
-                                                  }
-                                                  throw e;
-                                                }
-                                              })() ? (
-                                                <div
-                                                  className={classNames(
-                                                    projectcss.all,
-                                                    projectcss.__wab_text,
-                                                    sty.text__cUnex
-                                                  )}
-                                                >
-                                                  {
-                                                    "\u0628\u062d\u0631\u0627\u0646\u06cc "
-                                                  }
-                                                </div>
-                                              ) : null}
-                                              {(() => {
-                                                try {
-                                                  return (
-                                                    $ctx.fetched_data.data !== 0
-                                                  );
-                                                } catch (e) {
-                                                  if (
-                                                    e instanceof TypeError ||
-                                                    e?.plasmicType ===
-                                                      "PlasmicUndefinedDataError"
-                                                  ) {
-                                                    return true;
-                                                  }
-                                                  throw e;
-                                                }
-                                              })() ? (
-                                                <div
-                                                  data-plasmic-name={
-                                                    "numberOfDoctorReporting"
-                                                  }
-                                                  data-plasmic-override={
-                                                    overrides.numberOfDoctorReporting
-                                                  }
-                                                  className={classNames(
-                                                    projectcss.all,
-                                                    projectcss.__wab_text,
-                                                    sty.numberOfDoctorReporting
-                                                  )}
-                                                >
-                                                  <React.Fragment>
-                                                    {(() => {
-                                                      try {
-                                                        return ` گزارش از ${$ctx.fetched_data.data} پزشک `;
-                                                      } catch (e) {
-                                                        if (
-                                                          e instanceof
-                                                            TypeError ||
-                                                          e?.plasmicType ===
-                                                            "PlasmicUndefinedDataError"
-                                                        ) {
-                                                          return "\u067e\u0627\u06cc\u062f\u0627\u0631";
-                                                        }
-                                                        throw e;
+                                      <DataCtxReader__>
+                                        {$ctx => (
+                                          <div
+                                            data-plasmic-name={
+                                              "generalHealthStatusAnnouncement"
+                                            }
+                                            data-plasmic-override={
+                                              overrides.generalHealthStatusAnnouncement
+                                            }
+                                            className={classNames(
+                                              projectcss.all,
+                                              sty.generalHealthStatusAnnouncement
+                                            )}
+                                            onClick={async event => {
+                                              const $steps = {};
+
+                                              $steps[
+                                                "makeFalseStableConditionResetAlert"
+                                              ] = true
+                                                ? (() => {
+                                                    const actionArgs = {
+                                                      variable: {
+                                                        objRoot: $state,
+                                                        variablePath: [
+                                                          "stableConditionResetAlert"
+                                                        ]
+                                                      },
+                                                      operation: 0,
+                                                      value: false
+                                                    };
+                                                    return (({
+                                                      variable,
+                                                      value,
+                                                      startIndex,
+                                                      deleteCount
+                                                    }) => {
+                                                      if (!variable) {
+                                                        return;
                                                       }
-                                                    })()}
-                                                  </React.Fragment>
-                                                </div>
-                                              ) : null}
-                                            </React.Fragment>
-                                          )}
-                                        </DataCtxReader__>
-                                      </ApiFetcherComponent>
-                                    </AntdButton>
+                                                      const {
+                                                        objRoot,
+                                                        variablePath
+                                                      } = variable;
+
+                                                      $stateSet(
+                                                        objRoot,
+                                                        variablePath,
+                                                        value
+                                                      );
+                                                      return value;
+                                                    })?.apply(null, [
+                                                      actionArgs
+                                                    ]);
+                                                  })()
+                                                : undefined;
+                                              if (
+                                                $steps[
+                                                  "makeFalseStableConditionResetAlert"
+                                                ] != null &&
+                                                typeof $steps[
+                                                  "makeFalseStableConditionResetAlert"
+                                                ] === "object" &&
+                                                typeof $steps[
+                                                  "makeFalseStableConditionResetAlert"
+                                                ].then === "function"
+                                              ) {
+                                                $steps[
+                                                  "makeFalseStableConditionResetAlert"
+                                                ] = await $steps[
+                                                  "makeFalseStableConditionResetAlert"
+                                                ];
+                                              }
+
+                                              $steps[
+                                                "makeFalseCriticalConditionAddAlert"
+                                              ] = true
+                                                ? (() => {
+                                                    const actionArgs = {
+                                                      variable: {
+                                                        objRoot: $state,
+                                                        variablePath: [
+                                                          "criticalConditionAddAlert"
+                                                        ]
+                                                      },
+                                                      operation: 0,
+                                                      value: false
+                                                    };
+                                                    return (({
+                                                      variable,
+                                                      value,
+                                                      startIndex,
+                                                      deleteCount
+                                                    }) => {
+                                                      if (!variable) {
+                                                        return;
+                                                      }
+                                                      const {
+                                                        objRoot,
+                                                        variablePath
+                                                      } = variable;
+
+                                                      $stateSet(
+                                                        objRoot,
+                                                        variablePath,
+                                                        value
+                                                      );
+                                                      return value;
+                                                    })?.apply(null, [
+                                                      actionArgs
+                                                    ]);
+                                                  })()
+                                                : undefined;
+                                              if (
+                                                $steps[
+                                                  "makeFalseCriticalConditionAddAlert"
+                                                ] != null &&
+                                                typeof $steps[
+                                                  "makeFalseCriticalConditionAddAlert"
+                                                ] === "object" &&
+                                                typeof $steps[
+                                                  "makeFalseCriticalConditionAddAlert"
+                                                ].then === "function"
+                                              ) {
+                                                $steps[
+                                                  "makeFalseCriticalConditionAddAlert"
+                                                ] = await $steps[
+                                                  "makeFalseCriticalConditionAddAlert"
+                                                ];
+                                              }
+                                            }}
+                                          >
+                                            {(() => {
+                                              try {
+                                                return (
+                                                  $ctx.fetched_data.loading ===
+                                                    false &&
+                                                  $ctx.fetched_data.data === 0
+                                                );
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return true;
+                                                }
+                                                throw e;
+                                              }
+                                            })() ? (
+                                              <div
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  projectcss.__wab_text,
+                                                  sty.text__q9Pfi
+                                                )}
+                                              >
+                                                {
+                                                  "\u067e\u0627\u06cc\u062f\u0627\u0631"
+                                                }
+                                              </div>
+                                            ) : null}
+                                            {(() => {
+                                              try {
+                                                return (
+                                                  $ctx.fetched_data.loading ===
+                                                    false &&
+                                                  $ctx.fetched_data.data !== 0
+                                                );
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return true;
+                                                }
+                                                throw e;
+                                              }
+                                            })() ? (
+                                              <div
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  projectcss.__wab_text,
+                                                  sty.text__cUnex
+                                                )}
+                                              >
+                                                {
+                                                  "\u0628\u062d\u0631\u0627\u0646\u06cc "
+                                                }
+                                              </div>
+                                            ) : null}
+                                            {(() => {
+                                              try {
+                                                return (
+                                                  $ctx.fetched_data.loading ===
+                                                    false &&
+                                                  $ctx.fetched_data.data !== 0
+                                                );
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return true;
+                                                }
+                                                throw e;
+                                              }
+                                            })() ? (
+                                              <div
+                                                data-plasmic-name={
+                                                  "numberOfDoctorReporting"
+                                                }
+                                                data-plasmic-override={
+                                                  overrides.numberOfDoctorReporting
+                                                }
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  projectcss.__wab_text,
+                                                  sty.numberOfDoctorReporting
+                                                )}
+                                                dir={"rtl"}
+                                              >
+                                                <React.Fragment>
+                                                  {`${$ctx.fetched_data.data} پزشک`}
+                                                </React.Fragment>
+                                              </div>
+                                            ) : null}
+                                          </div>
+                                        )}
+                                      </DataCtxReader__>
+                                    </ApiFetcherComponent>
                                   ),
                                   wrapClassName: classNames({
                                     [sty["pcls_GAr4R_cSdcgi"]]: true
@@ -2871,7 +2862,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     {
                                       name: "open",
                                       plasmicStateName:
-                                        "generalHealthStatus[].open"
+                                        "modalGeneralHealthStatus[].open"
                                     }
                                   ],
                                   [__plasmic_idx_0],
@@ -2882,7 +2873,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   $state,
                                   [
                                     {
-                                      name: "generalHealthStatus[].open",
+                                      name: "modalGeneralHealthStatus[].open",
                                       initFunc: ({
                                         $props,
                                         $state,
@@ -2894,9 +2885,11 @@ function PlasmicHomepage__RenderFunc(props: {
                                 );
                                 return (
                                   <AntdModal
-                                    data-plasmic-name={"generalHealthStatus"}
+                                    data-plasmic-name={
+                                      "modalGeneralHealthStatus"
+                                    }
                                     data-plasmic-override={
-                                      overrides.generalHealthStatus
+                                      overrides.modalGeneralHealthStatus
                                     }
                                     {...child$Props}
                                   >
@@ -3223,6 +3216,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               "selected"
                                             ]
                                           ),
+                                          shape: "rounded",
                                           sortDeselected:
                                             generateStateValueProp($state, [
                                               "criticalCondition",
@@ -3659,6 +3653,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               "selected"
                                             ]
                                           ),
+                                          shape: "rounded",
                                           sortDeselected:
                                             generateStateValueProp($state, [
                                               "stableCondition",
@@ -3773,7 +3768,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                             style={{ color: "#000000" }}
                                           >
                                             {
-                                              "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u0627\u0639\u0644\u0627\u0645\u060c \u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 \u0628\u0647 \u062d\u0627\u0644\u062a \u067e\u0627\u06cc\u062f\u0627\u0631 \u062f\u0631 \u0645\u06cc \u0622\u06cc\u062f"
+                                              "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u0627\u0639\u0644\u0627\u0645\u060c \u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 \u0628\u0647 \u062d\u0627\u0644\u062a \u067e\u06cc\u0634 \u0641\u0631\u0636 \u06cc\u0627 \u067e\u0627\u06cc\u062f\u0627\u0631 \u062f\u0631 \u0645\u06cc \u0622\u06cc\u062f"
                                             }
                                           </span>
                                         </React.Fragment>
@@ -4414,7 +4409,7 @@ function PlasmicHomepage__RenderFunc(props: {
               hasGap={true}
               className={classNames(projectcss.all, sty.freeBox__rmb7C)}
             >
-              <Icons8ClosesvgIcon
+              <Icons8CloseSvgIcon
                 className={classNames(projectcss.all, sty.svg__iTh9P)}
                 onClick={async event => {
                   const $steps = {};
@@ -4484,7 +4479,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 data-plasmic-override={overrides.searchbarWard}
                 className={classNames("__wab_instance", sty.searchbarWard)}
                 endIcon={
-                  <Icons8ClosesvgIcon
+                  <Icons8CloseSvgIcon
                     className={classNames(projectcss.all, sty.svg__zAnQd)}
                     onClick={async event => {
                       const $steps = {};
@@ -4541,7 +4536,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     : "\u0646\u0627\u0645 \u0628\u062e\u0634 \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
                 }
                 startIcon={
-                  <SearchsvgIcon
+                  <SearchSvgIcon
                     className={classNames(projectcss.all, sty.svg__pLnXy)}
                     role={"img"}
                   />
@@ -5475,7 +5470,7 @@ const PlasmicDescendants = {
     "redirectToNamespaceSelection",
     "pageContent",
     "modalRemoveBookmarks",
-    "deletecancel",
+    "deleteCancel",
     "cancelButton",
     "deleteAllBookmarks",
     "controlPanel",
@@ -5493,24 +5488,24 @@ const PlasmicDescendants = {
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
     "patients",
     "header2",
-    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
-    "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
+    "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
     "bookmarkImage",
     "bookmarkedImage",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
     "dismision",
-    "generalHealthStatus",
+    "modalGeneralHealthStatus",
     "modalContent",
     "criticalCondition",
     "criticalDefinition",
     "stableCondition",
     "criticalConditionAdd",
     "stableConditionReset",
-    "triggerToOpenModal",
-    "getMessagehealthStatus",
+    "getMessageHealthStatus",
+    "generalHealthStatusAnnouncement",
     "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon",
@@ -5539,7 +5534,7 @@ const PlasmicDescendants = {
   pageContent: [
     "pageContent",
     "modalRemoveBookmarks",
-    "deletecancel",
+    "deleteCancel",
     "cancelButton",
     "deleteAllBookmarks",
     "controlPanel",
@@ -5557,24 +5552,24 @@ const PlasmicDescendants = {
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
     "patients",
     "header2",
-    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
-    "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
+    "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
     "bookmarkImage",
     "bookmarkedImage",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
     "dismision",
-    "generalHealthStatus",
+    "modalGeneralHealthStatus",
     "modalContent",
     "criticalCondition",
     "criticalDefinition",
     "stableCondition",
     "criticalConditionAdd",
     "stableConditionReset",
-    "triggerToOpenModal",
-    "getMessagehealthStatus",
+    "getMessageHealthStatus",
+    "generalHealthStatusAnnouncement",
     "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon",
@@ -5588,11 +5583,11 @@ const PlasmicDescendants = {
   ],
   modalRemoveBookmarks: [
     "modalRemoveBookmarks",
-    "deletecancel",
+    "deleteCancel",
     "cancelButton",
     "deleteAllBookmarks"
   ],
-  deletecancel: ["deletecancel", "cancelButton", "deleteAllBookmarks"],
+  deleteCancel: ["deleteCancel", "cancelButton", "deleteAllBookmarks"],
   cancelButton: ["cancelButton"],
   deleteAllBookmarks: ["deleteAllBookmarks"],
   controlPanel: [
@@ -5639,24 +5634,24 @@ const PlasmicDescendants = {
   patients: [
     "patients",
     "header2",
-    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627",
-    "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f",
+    "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
     "bookmarkImage",
     "bookmarkedImage",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
     "dismision",
-    "generalHealthStatus",
+    "modalGeneralHealthStatus",
     "modalContent",
     "criticalCondition",
     "criticalDefinition",
     "stableCondition",
     "criticalConditionAdd",
     "stableConditionReset",
-    "triggerToOpenModal",
-    "getMessagehealthStatus",
+    "getMessageHealthStatus",
+    "generalHealthStatusAnnouncement",
     "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon",
@@ -5670,31 +5665,33 @@ const PlasmicDescendants = {
   ],
   header2: [
     "header2",
-    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
+    "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
   ],
-  buttonاردنهمهبومارها: [
-    "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
+  buttonپاککردنهمهبوکمارکها: [
+    "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
   ],
-  بمارافتنشد: ["\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"],
+  بیمارییافتنشد: [
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+  ],
   bookmarkGuide: ["bookmarkGuide", "bookmarkImage", "bookmarkedImage"],
   bookmarkImage: ["bookmarkImage"],
   bookmarkedImage: ["bookmarkedImage"],
-  لطفامنتظربماند: [
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f"
+  لطفامنتظربمانید: [
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f"
   ],
   patientCards: [
     "patientCards",
     "patientNameBookmarkIcon",
     "dismision",
-    "generalHealthStatus",
+    "modalGeneralHealthStatus",
     "modalContent",
     "criticalCondition",
     "criticalDefinition",
     "stableCondition",
     "criticalConditionAdd",
     "stableConditionReset",
-    "triggerToOpenModal",
-    "getMessagehealthStatus",
+    "getMessageHealthStatus",
+    "generalHealthStatusAnnouncement",
     "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon",
@@ -5709,30 +5706,30 @@ const PlasmicDescendants = {
   patientNameBookmarkIcon: [
     "patientNameBookmarkIcon",
     "dismision",
-    "generalHealthStatus",
+    "modalGeneralHealthStatus",
     "modalContent",
     "criticalCondition",
     "criticalDefinition",
     "stableCondition",
     "criticalConditionAdd",
     "stableConditionReset",
-    "triggerToOpenModal",
-    "getMessagehealthStatus",
+    "getMessageHealthStatus",
+    "generalHealthStatusAnnouncement",
     "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon"
   ],
   dismision: ["dismision"],
-  generalHealthStatus: [
-    "generalHealthStatus",
+  modalGeneralHealthStatus: [
+    "modalGeneralHealthStatus",
     "modalContent",
     "criticalCondition",
     "criticalDefinition",
     "stableCondition",
     "criticalConditionAdd",
     "stableConditionReset",
-    "triggerToOpenModal",
-    "getMessagehealthStatus",
+    "getMessageHealthStatus",
+    "generalHealthStatusAnnouncement",
     "numberOfDoctorReporting"
   ],
   modalContent: [
@@ -5748,12 +5745,15 @@ const PlasmicDescendants = {
   stableCondition: ["stableCondition"],
   criticalConditionAdd: ["criticalConditionAdd"],
   stableConditionReset: ["stableConditionReset"],
-  triggerToOpenModal: [
-    "triggerToOpenModal",
-    "getMessagehealthStatus",
+  getMessageHealthStatus: [
+    "getMessageHealthStatus",
+    "generalHealthStatusAnnouncement",
     "numberOfDoctorReporting"
   ],
-  getMessagehealthStatus: ["getMessagehealthStatus", "numberOfDoctorReporting"],
+  generalHealthStatusAnnouncement: [
+    "generalHealthStatusAnnouncement",
+    "numberOfDoctorReporting"
+  ],
   numberOfDoctorReporting: ["numberOfDoctorReporting"],
   firstLastName: ["firstLastName"],
   bookmarkIcon: ["bookmarkIcon"],
@@ -5799,7 +5799,7 @@ type NodeDefaultElementType = {
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   pageContent: "div";
   modalRemoveBookmarks: typeof AntdModal;
-  deletecancel: "div";
+  deleteCancel: "div";
   cancelButton: typeof Button;
   deleteAllBookmarks: typeof Button;
   controlPanel: "div";
@@ -5817,24 +5817,24 @@ type NodeDefaultElementType = {
   نتايحجستوجو: "div";
   patients: typeof ApiFetcherComponent;
   header2: "div";
-  buttonاردنهمهبومارها: typeof Button;
-  بمارافتنشد: "div";
+  buttonپاککردنهمهبوکمارکها: typeof Button;
+  بیمارییافتنشد: "div";
   bookmarkGuide: "div";
   bookmarkImage: "svg";
   bookmarkedImage: "svg";
-  لطفامنتظربماند: "div";
+  لطفامنتظربمانید: "div";
   patientCards: "div";
   patientNameBookmarkIcon: "div";
   dismision: "div";
-  generalHealthStatus: typeof AntdModal;
+  modalGeneralHealthStatus: typeof AntdModal;
   modalContent: "div";
   criticalCondition: typeof Button;
   criticalDefinition: "div";
   stableCondition: typeof Button;
   criticalConditionAdd: typeof Alert;
   stableConditionReset: typeof Alert;
-  triggerToOpenModal: typeof AntdButton;
-  getMessagehealthStatus: typeof ApiFetcherComponent;
+  getMessageHealthStatus: typeof ApiFetcherComponent;
+  generalHealthStatusAnnouncement: "div";
   numberOfDoctorReporting: "div";
   firstLastName: "div";
   bookmarkIcon: typeof BookmarkIcon;
@@ -5925,7 +5925,7 @@ export const PlasmicHomepage = Object.assign(
     ),
     pageContent: makeNodeComponent("pageContent"),
     modalRemoveBookmarks: makeNodeComponent("modalRemoveBookmarks"),
-    deletecancel: makeNodeComponent("deletecancel"),
+    deleteCancel: makeNodeComponent("deleteCancel"),
     cancelButton: makeNodeComponent("cancelButton"),
     deleteAllBookmarks: makeNodeComponent("deleteAllBookmarks"),
     controlPanel: makeNodeComponent("controlPanel"),
@@ -5945,30 +5945,32 @@ export const PlasmicHomepage = Object.assign(
     ),
     patients: makeNodeComponent("patients"),
     header2: makeNodeComponent("header2"),
-    buttonاردنهمهبومارها: makeNodeComponent(
-      "button\u0627\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u0645\u0627\u0631\u0647\u0627"
+    buttonپاککردنهمهبوکمارکها: makeNodeComponent(
+      "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
     ),
-    بمارافتنشد: makeNodeComponent(
-      "\u0628\u0645\u0627\u0631\u0627\u0641\u062a\u0646\u0634\u062f"
+    بیمارییافتنشد: makeNodeComponent(
+      "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
     ),
     bookmarkGuide: makeNodeComponent("bookmarkGuide"),
     bookmarkImage: makeNodeComponent("bookmarkImage"),
     bookmarkedImage: makeNodeComponent("bookmarkedImage"),
-    لطفامنتظربماند: makeNodeComponent(
-      "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u062f"
+    لطفامنتظربمانید: makeNodeComponent(
+      "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f"
     ),
     patientCards: makeNodeComponent("patientCards"),
     patientNameBookmarkIcon: makeNodeComponent("patientNameBookmarkIcon"),
     dismision: makeNodeComponent("dismision"),
-    generalHealthStatus: makeNodeComponent("generalHealthStatus"),
+    modalGeneralHealthStatus: makeNodeComponent("modalGeneralHealthStatus"),
     modalContent: makeNodeComponent("modalContent"),
     criticalCondition: makeNodeComponent("criticalCondition"),
     criticalDefinition: makeNodeComponent("criticalDefinition"),
     stableCondition: makeNodeComponent("stableCondition"),
     criticalConditionAdd: makeNodeComponent("criticalConditionAdd"),
     stableConditionReset: makeNodeComponent("stableConditionReset"),
-    triggerToOpenModal: makeNodeComponent("triggerToOpenModal"),
-    getMessagehealthStatus: makeNodeComponent("getMessagehealthStatus"),
+    getMessageHealthStatus: makeNodeComponent("getMessageHealthStatus"),
+    generalHealthStatusAnnouncement: makeNodeComponent(
+      "generalHealthStatusAnnouncement"
+    ),
     numberOfDoctorReporting: makeNodeComponent("numberOfDoctorReporting"),
     firstLastName: makeNodeComponent("firstLastName"),
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),

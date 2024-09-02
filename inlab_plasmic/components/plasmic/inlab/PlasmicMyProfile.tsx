@@ -75,9 +75,9 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicMyProfile.module.css"; // plasmic-import: 8o6xzPLlyVTQ/css
 
-import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: YIqBWKHX3AVs/icon
-import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
@@ -104,13 +104,13 @@ export type PlasmicMyProfile__OverridesType = {
   نام?: Flex__<typeof TextInput>;
   lastName?: Flex__<"div">;
   lastName2?: Flex__<"div">;
-  نامخانواد?: Flex__<typeof TextInput>;
+  نامخانوادگی?: Flex__<typeof TextInput>;
   email?: Flex__<"div">;
   email2?: Flex__<"div">;
-  امل?: Flex__<typeof TextInput>;
-  عسروفال?: Flex__<"div">;
+  ایمیل?: Flex__<typeof TextInput>;
+  عکسپروفایل?: Flex__<"div">;
   email4?: Flex__<"div">;
-  عسروفال2?: Flex__<typeof UploadWrapper>;
+  عکسپروفایل2?: Flex__<typeof UploadWrapper>;
   button?: Flex__<typeof AntdButton>;
   save?: Flex__<typeof Button>;
 };
@@ -170,7 +170,7 @@ function PlasmicMyProfile__RenderFunc(props: {
           })()
       },
       {
-        path: "نامخانواد.value",
+        path: "نامخانوادگی.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -189,7 +189,7 @@ function PlasmicMyProfile__RenderFunc(props: {
           })()
       },
       {
-        path: "امل.value",
+        path: "ایمیل.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -208,7 +208,7 @@ function PlasmicMyProfile__RenderFunc(props: {
           })()
       },
       {
-        path: "عسروفال2.files",
+        path: "عکسپروفایل2.files",
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
@@ -544,9 +544,9 @@ function PlasmicMyProfile__RenderFunc(props: {
               </div>
               {(() => {
                 const child$Props = {
-                  className: classNames("__wab_instance", sty.نامخانواد),
+                  className: classNames("__wab_instance", sty.نامخانوادگی),
                   onChange: (...eventArgs) => {
-                    generateStateOnChangeProp($state, ["نامخانواد", "value"])(
+                    generateStateOnChangeProp($state, ["نامخانوادگی", "value"])(
                       (e => e.target?.value).apply(null, eventArgs)
                     );
                   },
@@ -565,14 +565,15 @@ function PlasmicMyProfile__RenderFunc(props: {
                   })(),
                   type: "text",
                   value:
-                    generateStateValueProp($state, ["نامخانواد", "value"]) ?? ""
+                    generateStateValueProp($state, ["نامخانوادگی", "value"]) ??
+                    ""
                 };
 
                 initializePlasmicStates(
                   $state,
                   [
                     {
-                      name: "نامخانواد.value",
+                      name: "نامخانوادگی.value",
                       initFunc: ({ $props, $state, $queries }) =>
                         (() => {
                           try {
@@ -594,9 +595,9 @@ function PlasmicMyProfile__RenderFunc(props: {
                 return (
                   <TextInput
                     data-plasmic-name={
-                      "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f"
+                      "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc"
                     }
-                    data-plasmic-override={overrides.نامخانواد}
+                    data-plasmic-override={overrides.نامخانوادگی}
                     {...child$Props}
                   />
                 );
@@ -623,9 +624,9 @@ function PlasmicMyProfile__RenderFunc(props: {
               {(() => {
                 const child$Props = {
                   autoFocus: false,
-                  className: classNames("__wab_instance", sty.امل),
+                  className: classNames("__wab_instance", sty.ایمیل),
                   onChange: (...eventArgs) => {
-                    generateStateOnChangeProp($state, ["امل", "value"])(
+                    generateStateOnChangeProp($state, ["ایمیل", "value"])(
                       (e => e.target?.value).apply(null, eventArgs)
                     );
                   },
@@ -643,14 +644,15 @@ function PlasmicMyProfile__RenderFunc(props: {
                     }
                   })(),
                   type: "email",
-                  value: generateStateValueProp($state, ["امل", "value"]) ?? ""
+                  value:
+                    generateStateValueProp($state, ["ایمیل", "value"]) ?? ""
                 };
 
                 initializePlasmicStates(
                   $state,
                   [
                     {
-                      name: "امل.value",
+                      name: "ایمیل.value",
                       initFunc: ({ $props, $state, $queries }) =>
                         (() => {
                           try {
@@ -671,8 +673,8 @@ function PlasmicMyProfile__RenderFunc(props: {
                 );
                 return (
                   <TextInput
-                    data-plasmic-name={"\u0627\u0645\u0644"}
-                    data-plasmic-override={overrides.امل}
+                    data-plasmic-name={"\u0627\u06cc\u0645\u06cc\u0644"}
+                    data-plasmic-override={overrides.ایمیل}
                     {...child$Props}
                   />
                 );
@@ -680,10 +682,12 @@ function PlasmicMyProfile__RenderFunc(props: {
             </Stack__>
             <Stack__
               as={"div"}
-              data-plasmic-name={"\u0639\u0633\u0631\u0648\u0641\u0627\u0644"}
-              data-plasmic-override={overrides.عسروفال}
+              data-plasmic-name={
+                "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
+              }
+              data-plasmic-override={overrides.عکسپروفایل}
               hasGap={true}
-              className={classNames(projectcss.all, sty.عسروفال)}
+              className={classNames(projectcss.all, sty.عکسپروفایل)}
             >
               <div
                 data-plasmic-name={"email4"}
@@ -700,16 +704,16 @@ function PlasmicMyProfile__RenderFunc(props: {
               </div>
               <UploadWrapper
                 data-plasmic-name={
-                  "\u0639\u0633\u0631\u0648\u0641\u0627\u06442"
+                  "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u06442"
                 }
-                data-plasmic-override={overrides.عسروفال2}
+                data-plasmic-override={overrides.عکسپروفایل2}
                 accept={"image/*"}
-                className={classNames("__wab_instance", sty.عسروفال2)}
-                files={generateStateValueProp($state, ["عسروفال2", "files"])}
+                className={classNames("__wab_instance", sty.عکسپروفایل2)}
+                files={generateStateValueProp($state, ["عکسپروفایل2", "files"])}
                 listType={"picture"}
                 maxCount={1}
                 onFilesChange={generateStateOnChangeProp($state, [
-                  "عسروفال2",
+                  "عکسپروفایل2",
                   "files"
                 ])}
                 showUploadList={true}
@@ -854,13 +858,13 @@ const PlasmicDescendants = {
     "\u0646\u0627\u0645",
     "lastName",
     "lastName2",
-    "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f",
+    "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc",
     "email",
     "email2",
-    "\u0627\u0645\u0644",
-    "\u0639\u0633\u0631\u0648\u0641\u0627\u0644",
+    "\u0627\u06cc\u0645\u06cc\u0644",
+    "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u0644",
     "email4",
-    "\u0639\u0633\u0631\u0648\u0641\u0627\u06442",
+    "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u06442",
     "button",
     "save"
   ],
@@ -876,21 +880,26 @@ const PlasmicDescendants = {
   lastName: [
     "lastName",
     "lastName2",
-    "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f"
+    "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc"
   ],
   lastName2: ["lastName2"],
-  نامخانواد: ["\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f"],
-  email: ["email", "email2", "\u0627\u0645\u0644"],
+  نامخانوادگی: [
+    "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc"
+  ],
+  email: ["email", "email2", "\u0627\u06cc\u0645\u06cc\u0644"],
   email2: ["email2"],
-  امل: ["\u0627\u0645\u0644"],
-  عسروفال: [
-    "\u0639\u0633\u0631\u0648\u0641\u0627\u0644",
+  ایمیل: ["\u0627\u06cc\u0645\u06cc\u0644"],
+  عکسپروفایل: [
+    "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u0644",
     "email4",
-    "\u0639\u0633\u0631\u0648\u0641\u0627\u06442",
+    "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u06442",
     "button"
   ],
   email4: ["email4"],
-  عسروفال2: ["\u0639\u0633\u0631\u0648\u0641\u0627\u06442", "button"],
+  عکسپروفایل2: [
+    "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u06442",
+    "button"
+  ],
   button: ["button"],
   save: ["save"]
 } as const;
@@ -910,13 +919,13 @@ type NodeDefaultElementType = {
   نام: typeof TextInput;
   lastName: "div";
   lastName2: "div";
-  نامخانواد: typeof TextInput;
+  نامخانوادگی: typeof TextInput;
   email: "div";
   email2: "div";
-  امل: typeof TextInput;
-  عسروفال: "div";
+  ایمیل: typeof TextInput;
+  عکسپروفایل: "div";
   email4: "div";
-  عسروفال2: typeof UploadWrapper;
+  عکسپروفایل2: typeof UploadWrapper;
   button: typeof AntdButton;
   save: typeof Button;
 };
@@ -994,15 +1003,19 @@ export const PlasmicMyProfile = Object.assign(
     نام: makeNodeComponent("\u0646\u0627\u0645"),
     lastName: makeNodeComponent("lastName"),
     lastName2: makeNodeComponent("lastName2"),
-    نامخانواد: makeNodeComponent(
-      "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f"
+    نامخانوادگی: makeNodeComponent(
+      "\u0646\u0627\u0645\u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc"
     ),
     email: makeNodeComponent("email"),
     email2: makeNodeComponent("email2"),
-    امل: makeNodeComponent("\u0627\u0645\u0644"),
-    عسروفال: makeNodeComponent("\u0639\u0633\u0631\u0648\u0641\u0627\u0644"),
+    ایمیل: makeNodeComponent("\u0627\u06cc\u0645\u06cc\u0644"),
+    عکسپروفایل: makeNodeComponent(
+      "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
+    ),
     email4: makeNodeComponent("email4"),
-    عسروفال2: makeNodeComponent("\u0639\u0633\u0631\u0648\u0641\u0627\u06442"),
+    عکسپروفایل2: makeNodeComponent(
+      "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u06442"
+    ),
     button: makeNodeComponent("button"),
     save: makeNodeComponent("save"),
 

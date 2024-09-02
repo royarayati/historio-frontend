@@ -68,7 +68,7 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicShareTool.module.css"; // plasmic-import: B3T4IwC_PpNX/css
 
-import ShareSvgrepoComsvgIcon from "./icons/PlasmicIcon__ShareSvgrepoComsvg"; // plasmic-import: 5tIBWi0zESLM/icon
+import ShareSvgrepoComSvgIcon from "./icons/PlasmicIcon__ShareSvgrepoComSvg"; // plasmic-import: 5tIBWi0zESLM/icon
 
 import __lib_copyToClipboard from "copy-to-clipboard";
 
@@ -258,7 +258,7 @@ function PlasmicShareTool__RenderFunc(props: {
           ? "\u0644\u06cc\u0646\u06a9 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u06a9\u067e\u06cc \u0634\u062f"
           : "\u062f\u0639\u0648\u062a \u0627\u0632 \u0647\u0645\u06a9\u0627\u0631\u0627\u0646"}
       </div>
-      <ShareSvgrepoComsvgIcon
+      <ShareSvgrepoComSvgIcon
         data-plasmic-name={"inlabPlusLinkShare2"}
         data-plasmic-override={overrides.inlabPlusLinkShare2}
         className={classNames(projectcss.all, sty.inlabPlusLinkShare2)}

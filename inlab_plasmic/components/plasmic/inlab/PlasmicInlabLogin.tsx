@@ -76,10 +76,10 @@ import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFog
 import sty from "./PlasmicInlabLogin.module.css"; // plasmic-import: J2d--RhwPuEt/css
 
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
-import MdiaccountIcon from "./icons/PlasmicIcon__Mdiaccount"; // plasmic-import: mC78MSouMgiO/icon
-import Icons8ClosesvgIcon from "./icons/PlasmicIcon__Icons8Closesvg"; // plasmic-import: -xG_spDBispP/icon
-import LockPasswordSvgrepoComsvgIcon from "./icons/PlasmicIcon__LockPasswordSvgrepoComsvg"; // plasmic-import: 2bxvHhfddyLp/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import MdiAccountIcon from "./icons/PlasmicIcon__MdiAccount"; // plasmic-import: mC78MSouMgiO/icon
+import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
+import LockPasswordSvgrepoComSvgIcon from "./icons/PlasmicIcon__LockPasswordSvgrepoComSvg"; // plasmic-import: 2bxvHhfddyLp/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
@@ -439,7 +439,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
             })}
             endIcon={
               $state.username.value !== "" ? (
-                <Icons8ClosesvgIcon
+                <Icons8CloseSvgIcon
                   className={classNames(projectcss.all, sty.svg__sIovl)}
                   onClick={async event => {
                     const $steps = {};
@@ -509,7 +509,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
             required={false}
             showStartIcon={true}
             startIcon={
-              <MdiaccountIcon
+              <MdiAccountIcon
                 className={classNames(projectcss.all, sty.svg__falId)}
                 role={"img"}
               />
@@ -532,7 +532,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
             })}
             endIcon={
               $state.password.value !== "" ? (
-                <Icons8ClosesvgIcon
+                <Icons8CloseSvgIcon
                   className={classNames(projectcss.all, sty.svg__lOk9F)}
                   onClick={async event => {
                     const $steps = {};
@@ -599,7 +599,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
             required={false}
             showStartIcon={true}
             startIcon={
-              <LockPasswordSvgrepoComsvgIcon
+              <LockPasswordSvgrepoComSvgIcon
                 className={classNames(projectcss.all, sty.svg__fnFNb)}
                 role={"img"}
               />

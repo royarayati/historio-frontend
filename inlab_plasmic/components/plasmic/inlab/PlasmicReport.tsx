@@ -90,9 +90,9 @@ export const PlasmicReport__ArgProps = new Array<ArgPropType>(
 export type PlasmicReport__OverridesType = {
   reports?: Flex__<typeof ApiFetcherComponent>;
   freeBox?: Flex__<"div">;
-  imagingTitledatetime?: Flex__<"div">;
+  imagingTitleDatetime?: Flex__<"div">;
   imagingTitle?: Flex__<"div">;
-  imagingDatetime?: Flex__<"div">;
+  imagingDateTime?: Flex__<"div">;
   imagingType?: Flex__<"div">;
 };
 
@@ -326,11 +326,11 @@ function PlasmicReport__RenderFunc(props: {
                   }}
                 >
                   <div
-                    data-plasmic-name={"imagingTitledatetime"}
-                    data-plasmic-override={overrides.imagingTitledatetime}
+                    data-plasmic-name={"imagingTitleDatetime"}
+                    data-plasmic-override={overrides.imagingTitleDatetime}
                     className={classNames(
                       projectcss.all,
-                      sty.imagingTitledatetime
+                      sty.imagingTitleDatetime
                     )}
                     onClick={async event => {
                       const $steps = {};
@@ -402,12 +402,12 @@ function PlasmicReport__RenderFunc(props: {
                       </React.Fragment>
                     </div>
                     <div
-                      data-plasmic-name={"imagingDatetime"}
-                      data-plasmic-override={overrides.imagingDatetime}
+                      data-plasmic-name={"imagingDateTime"}
+                      data-plasmic-override={overrides.imagingDateTime}
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.imagingDatetime
+                        sty.imagingDateTime
                       )}
                     >
                       <React.Fragment>
@@ -488,25 +488,25 @@ const PlasmicDescendants = {
   reports: [
     "reports",
     "freeBox",
-    "imagingTitledatetime",
+    "imagingTitleDatetime",
     "imagingTitle",
-    "imagingDatetime",
+    "imagingDateTime",
     "imagingType"
   ],
   freeBox: [
     "freeBox",
-    "imagingTitledatetime",
+    "imagingTitleDatetime",
     "imagingTitle",
-    "imagingDatetime",
+    "imagingDateTime",
     "imagingType"
   ],
-  imagingTitledatetime: [
-    "imagingTitledatetime",
+  imagingTitleDatetime: [
+    "imagingTitleDatetime",
     "imagingTitle",
-    "imagingDatetime"
+    "imagingDateTime"
   ],
   imagingTitle: ["imagingTitle"],
-  imagingDatetime: ["imagingDatetime"],
+  imagingDateTime: ["imagingDateTime"],
   imagingType: ["imagingType"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -515,9 +515,9 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   reports: typeof ApiFetcherComponent;
   freeBox: "div";
-  imagingTitledatetime: "div";
+  imagingTitleDatetime: "div";
   imagingTitle: "div";
-  imagingDatetime: "div";
+  imagingDateTime: "div";
   imagingType: "div";
 };
 
@@ -582,9 +582,9 @@ export const PlasmicReport = Object.assign(
   {
     // Helper components rendering sub-elements
     freeBox: makeNodeComponent("freeBox"),
-    imagingTitledatetime: makeNodeComponent("imagingTitledatetime"),
+    imagingTitleDatetime: makeNodeComponent("imagingTitleDatetime"),
     imagingTitle: makeNodeComponent("imagingTitle"),
-    imagingDatetime: makeNodeComponent("imagingDatetime"),
+    imagingDateTime: makeNodeComponent("imagingDateTime"),
     imagingType: makeNodeComponent("imagingType"),
 
     // Metadata about props expected for PlasmicReport

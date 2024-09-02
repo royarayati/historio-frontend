@@ -76,7 +76,7 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicImagingReportList.module.css"; // plasmic-import: AFB-1jxjMqDb/css
 
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: I6pxicA96WJm/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
 createPlasmicElementProxy;
@@ -101,7 +101,7 @@ export type PlasmicImagingReportList__OverridesType = {
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   apiFetcherComponent?: Flex__<typeof ApiFetcherComponent>;
-  patientNameagegender?: Flex__<"div">;
+  patientNameAgeGender?: Flex__<"div">;
   saveAdmissionDatetime?: Flex__<typeof SideEffect>;
   tabButton?: Flex__<"div">;
   imagingModality?: Flex__<typeof Button>;
@@ -112,7 +112,7 @@ export type PlasmicImagingReportList__OverridesType = {
   imagingReportSection?: Flex__<"section">;
   imagingReportList2?: Flex__<"div">;
   imagingReportCard?: Flex__<"div">;
-  imagingTitledatetime?: Flex__<"div">;
+  imagingTitleDatetime?: Flex__<"div">;
   previousAdmission?: Flex__<typeof Button>;
   imagingTitle?: Flex__<"div">;
   imagingDatetime?: Flex__<"div">;
@@ -123,7 +123,7 @@ export type PlasmicImagingReportList__OverridesType = {
   imagingReportSection2?: Flex__<"section">;
   imagingReportList3?: Flex__<"div">;
   imagingReportCard2?: Flex__<"div">;
-  imagingTitledatetime2?: Flex__<"div">;
+  imagingTitleDatetime2?: Flex__<"div">;
   imagingDatetime3?: Flex__<"div">;
   imagingName?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
@@ -513,12 +513,12 @@ function PlasmicImagingReportList__RenderFunc(props: {
               {$ctx => (
                 <React.Fragment>
                   <div
-                    data-plasmic-name={"patientNameagegender"}
-                    data-plasmic-override={overrides.patientNameagegender}
+                    data-plasmic-name={"patientNameAgeGender"}
+                    data-plasmic-override={overrides.patientNameAgeGender}
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.patientNameagegender
+                      sty.patientNameAgeGender
                     )}
                   >
                     <React.Fragment>
@@ -1209,14 +1209,14 @@ ${ageMonths} months ${
                           >
                             <Stack__
                               as={"div"}
-                              data-plasmic-name={"imagingTitledatetime"}
+                              data-plasmic-name={"imagingTitleDatetime"}
                               data-plasmic-override={
-                                overrides.imagingTitledatetime
+                                overrides.imagingTitleDatetime
                               }
                               hasGap={true}
                               className={classNames(
                                 projectcss.all,
-                                sty.imagingTitledatetime
+                                sty.imagingTitleDatetime
                               )}
                             >
                               {new Date(currentItem.service_datetime) <
@@ -1741,14 +1741,14 @@ ${ageMonths} months ${
                             >
                               <Stack__
                                 as={"div"}
-                                data-plasmic-name={"imagingTitledatetime2"}
+                                data-plasmic-name={"imagingTitleDatetime2"}
                                 data-plasmic-override={
-                                  overrides.imagingTitledatetime2
+                                  overrides.imagingTitleDatetime2
                                 }
                                 hasGap={true}
                                 className={classNames(
                                   projectcss.all,
-                                  sty.imagingTitledatetime2
+                                  sty.imagingTitleDatetime2
                                 )}
                               >
                                 <div
@@ -2183,7 +2183,7 @@ const PlasmicDescendants = {
     "redirectToNamespaceSelection",
     "header",
     "apiFetcherComponent",
-    "patientNameagegender",
+    "patientNameAgeGender",
     "saveAdmissionDatetime",
     "tabButton",
     "imagingModality",
@@ -2194,7 +2194,7 @@ const PlasmicDescendants = {
     "imagingReportSection",
     "imagingReportList2",
     "imagingReportCard",
-    "imagingTitledatetime",
+    "imagingTitleDatetime",
     "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
@@ -2205,7 +2205,7 @@ const PlasmicDescendants = {
     "imagingReportSection2",
     "imagingReportList3",
     "imagingReportCard2",
-    "imagingTitledatetime2",
+    "imagingTitleDatetime2",
     "imagingDatetime3",
     "imagingName",
     "switchingTabs",
@@ -2221,15 +2221,15 @@ const PlasmicDescendants = {
   header: [
     "header",
     "apiFetcherComponent",
-    "patientNameagegender",
+    "patientNameAgeGender",
     "saveAdmissionDatetime"
   ],
   apiFetcherComponent: [
     "apiFetcherComponent",
-    "patientNameagegender",
+    "patientNameAgeGender",
     "saveAdmissionDatetime"
   ],
-  patientNameagegender: ["patientNameagegender"],
+  patientNameAgeGender: ["patientNameAgeGender"],
   saveAdmissionDatetime: ["saveAdmissionDatetime"],
   tabButton: ["tabButton", "imagingModality", "imagingReports"],
   imagingModality: ["imagingModality"],
@@ -2241,7 +2241,7 @@ const PlasmicDescendants = {
     "imagingReportSection",
     "imagingReportList2",
     "imagingReportCard",
-    "imagingTitledatetime",
+    "imagingTitleDatetime",
     "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
@@ -2253,7 +2253,7 @@ const PlasmicDescendants = {
     "imagingReportSection",
     "imagingReportList2",
     "imagingReportCard",
-    "imagingTitledatetime",
+    "imagingTitleDatetime",
     "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
@@ -2263,7 +2263,7 @@ const PlasmicDescendants = {
     "imagingReportSection",
     "imagingReportList2",
     "imagingReportCard",
-    "imagingTitledatetime",
+    "imagingTitleDatetime",
     "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
@@ -2272,7 +2272,7 @@ const PlasmicDescendants = {
   imagingReportList2: [
     "imagingReportList2",
     "imagingReportCard",
-    "imagingTitledatetime",
+    "imagingTitleDatetime",
     "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
@@ -2280,14 +2280,14 @@ const PlasmicDescendants = {
   ],
   imagingReportCard: [
     "imagingReportCard",
-    "imagingTitledatetime",
+    "imagingTitleDatetime",
     "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
     "imagingType"
   ],
-  imagingTitledatetime: [
-    "imagingTitledatetime",
+  imagingTitleDatetime: [
+    "imagingTitleDatetime",
     "previousAdmission",
     "imagingTitle",
     "imagingDatetime"
@@ -2303,7 +2303,7 @@ const PlasmicDescendants = {
     "imagingReportSection2",
     "imagingReportList3",
     "imagingReportCard2",
-    "imagingTitledatetime2",
+    "imagingTitleDatetime2",
     "imagingDatetime3",
     "imagingName"
   ],
@@ -2313,7 +2313,7 @@ const PlasmicDescendants = {
     "imagingReportSection2",
     "imagingReportList3",
     "imagingReportCard2",
-    "imagingTitledatetime2",
+    "imagingTitleDatetime2",
     "imagingDatetime3",
     "imagingName"
   ],
@@ -2321,25 +2321,25 @@ const PlasmicDescendants = {
     "imagingReportSection2",
     "imagingReportList3",
     "imagingReportCard2",
-    "imagingTitledatetime2",
+    "imagingTitleDatetime2",
     "imagingDatetime3",
     "imagingName"
   ],
   imagingReportList3: [
     "imagingReportList3",
     "imagingReportCard2",
-    "imagingTitledatetime2",
+    "imagingTitleDatetime2",
     "imagingDatetime3",
     "imagingName"
   ],
   imagingReportCard2: [
     "imagingReportCard2",
-    "imagingTitledatetime2",
+    "imagingTitleDatetime2",
     "imagingDatetime3",
     "imagingName"
   ],
-  imagingTitledatetime2: [
-    "imagingTitledatetime2",
+  imagingTitleDatetime2: [
+    "imagingTitleDatetime2",
     "imagingDatetime3",
     "imagingName"
   ],
@@ -2377,7 +2377,7 @@ type NodeDefaultElementType = {
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   apiFetcherComponent: typeof ApiFetcherComponent;
-  patientNameagegender: "div";
+  patientNameAgeGender: "div";
   saveAdmissionDatetime: typeof SideEffect;
   tabButton: "div";
   imagingModality: typeof Button;
@@ -2388,7 +2388,7 @@ type NodeDefaultElementType = {
   imagingReportSection: "section";
   imagingReportList2: "div";
   imagingReportCard: "div";
-  imagingTitledatetime: "div";
+  imagingTitleDatetime: "div";
   previousAdmission: typeof Button;
   imagingTitle: "div";
   imagingDatetime: "div";
@@ -2399,7 +2399,7 @@ type NodeDefaultElementType = {
   imagingReportSection2: "section";
   imagingReportList3: "div";
   imagingReportCard2: "div";
-  imagingTitledatetime2: "div";
+  imagingTitleDatetime2: "div";
   imagingDatetime3: "div";
   imagingName: "div";
   switchingTabs: "div";
@@ -2477,7 +2477,7 @@ export const PlasmicImagingReportList = Object.assign(
     ),
     header: makeNodeComponent("header"),
     apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
-    patientNameagegender: makeNodeComponent("patientNameagegender"),
+    patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
     saveAdmissionDatetime: makeNodeComponent("saveAdmissionDatetime"),
     tabButton: makeNodeComponent("tabButton"),
     imagingModality: makeNodeComponent("imagingModality"),
@@ -2488,7 +2488,7 @@ export const PlasmicImagingReportList = Object.assign(
     imagingReportSection: makeNodeComponent("imagingReportSection"),
     imagingReportList2: makeNodeComponent("imagingReportList2"),
     imagingReportCard: makeNodeComponent("imagingReportCard"),
-    imagingTitledatetime: makeNodeComponent("imagingTitledatetime"),
+    imagingTitleDatetime: makeNodeComponent("imagingTitleDatetime"),
     previousAdmission: makeNodeComponent("previousAdmission"),
     imagingTitle: makeNodeComponent("imagingTitle"),
     imagingDatetime: makeNodeComponent("imagingDatetime"),
@@ -2499,7 +2499,7 @@ export const PlasmicImagingReportList = Object.assign(
     imagingReportSection2: makeNodeComponent("imagingReportSection2"),
     imagingReportList3: makeNodeComponent("imagingReportList3"),
     imagingReportCard2: makeNodeComponent("imagingReportCard2"),
-    imagingTitledatetime2: makeNodeComponent("imagingTitledatetime2"),
+    imagingTitleDatetime2: makeNodeComponent("imagingTitleDatetime2"),
     imagingDatetime3: makeNodeComponent("imagingDatetime3"),
     imagingName: makeNodeComponent("imagingName"),
     switchingTabs: makeNodeComponent("switchingTabs"),
