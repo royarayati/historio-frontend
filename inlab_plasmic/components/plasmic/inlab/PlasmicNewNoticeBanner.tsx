@@ -119,7 +119,9 @@ function PlasmicNewNoticeBanner__RenderFunc(props: {
         {
           newNoticeDatetime: "22/05/1403"
         },
-        props.args
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
       ),
     [props.args]
   );
