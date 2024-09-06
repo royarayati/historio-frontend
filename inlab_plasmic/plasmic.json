@@ -89,14 +89,14 @@
       "components": [
         {
           "id": "5nirPCGmCnRD",
-          "name": "Button",
+          "name": "RadixUiButton",
           "type": "managed",
           "projectId": "sqPBLwEBBKHA2WDuGb17eV",
-          "renderModuleFilePath": "plasmic/radix_ui/PlasmicButton.tsx",
+          "renderModuleFilePath": "plasmic/radix_ui/PlasmicRadixUiButton.tsx",
           "importSpec": {
-            "modulePath": "Button.tsx"
+            "modulePath": "RadixUiButton.tsx"
           },
-          "cssFilePath": "plasmic/radix_ui/PlasmicButton.module.css",
+          "cssFilePath": "plasmic/radix_ui/PlasmicRadixUiButton.module.css",
           "scheme": "blackbox",
           "componentType": "component",
           "plumeType": "button"
@@ -1603,6 +1603,19 @@
           "cssFilePath": "plasmic/inlab/PlasmicNewNoticeBanner.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "mbv1OhQXEQf1",
+          "name": "HighlightIcon",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicHighlightIcon.tsx",
+          "importSpec": {
+            "modulePath": "HighlightIcon.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicHighlightIcon.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -2120,6 +2133,21 @@
           "id": "-kAkKYtWcc8f",
           "name": "LoaderSpinnerIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__LoaderSpinner.tsx"
+        },
+        {
+          "id": "_tKFUo6wUlQJ",
+          "name": "CheckCircleSvgrepoCom1SvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__CheckCircleSvgrepoCom1Svg.tsx"
+        },
+        {
+          "id": "VOwOyt5m5MKR",
+          "name": "CheckCircleSvgrepoCom2SvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__CheckCircleSvgrepoCom2Svg.tsx"
+        },
+        {
+          "id": "I_kHJfXhorHV",
+          "name": "EmptyCircleSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__EmptyCircleSvgrepoComSvg.tsx"
         }
       ],
       "images": [

@@ -23,7 +23,7 @@
     {
       "name": " Success Primary",
       "type": "color",
-      "value": "#52C41A",
+      "value": "#52C41A99",
       "category": "color",
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",
@@ -2203,7 +2203,7 @@
     {
       "name": "Warning Primary",
       "type": "color",
-      "value": "#FAAD14",
+      "value": "#FAAD1480",
       "category": "color",
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",
