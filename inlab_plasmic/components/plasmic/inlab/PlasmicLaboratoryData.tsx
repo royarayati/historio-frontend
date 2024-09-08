@@ -62,6 +62,7 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import HighlightIcon from "../../HighlightIcon"; // plasmic-import: mbv1OhQXEQf1/component
@@ -110,6 +111,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   header?: Flex__<"div">;
   patientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
+  conditionGuard?: Flex__<typeof ConditionGuard>;
   normalRangeButton?: Flex__<"div">;
   normalRangeButtonCircle?: Flex__<"div">;
   tabButtons?: Flex__<"div">;
@@ -502,54 +504,136 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           >
             <DataCtxReader__>
               {$ctx => (
-                <div
-                  data-plasmic-name={"patientNameAgeGender"}
-                  data-plasmic-override={overrides.patientNameAgeGender}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.patientNameAgeGender,
-                    {
-                      [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
-                        $state,
-                        "viewNormalRange",
-                        "viewNormalRange"
-                      )
-                    }
-                  )}
-                >
-                  <React.Fragment>
-                    {$ctx.fetched_data.loading == false &&
-                      (() => {
-                        const dob = new Date($ctx.fetched_data.data.dob);
-                        const ageDiffMs = Date.now() - dob.getTime();
-                        const ageDate = new Date(ageDiffMs);
-                        const ageYears = Math.abs(
-                          ageDate.getUTCFullYear() - 1970
-                        );
-                        const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
-                        if (ageYears < 1) {
-                          const ageMonths = ageDate.getUTCMonth();
-                          return `${fullName} 
+                <React.Fragment>
+                  <div
+                    data-plasmic-name={"patientNameAgeGender"}
+                    data-plasmic-override={overrides.patientNameAgeGender}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.patientNameAgeGender,
+                      {
+                        [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
+                          $state,
+                          "viewNormalRange",
+                          "viewNormalRange"
+                        )
+                      }
+                    )}
+                  >
+                    <React.Fragment>
+                      {$ctx.fetched_data.loading == false &&
+                        (() => {
+                          const dob = new Date($ctx.fetched_data.data.dob);
+                          const ageDiffMs = Date.now() - dob.getTime();
+                          const ageDate = new Date(ageDiffMs);
+                          const ageYears = Math.abs(
+                            ageDate.getUTCFullYear() - 1970
+                          );
+                          const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
+                          if (ageYears < 1) {
+                            const ageMonths = ageDate.getUTCMonth();
+                            return `${fullName} 
 ${ageMonths} months ${
-                            $ctx.fetched_data.data.gender === "F"
-                              ? " ♀️"
-                              : $ctx.fetched_data.data.gender === "M"
-                              ? " ♂️"
-                              : ""
-                          }`;
-                        } else {
-                          return `${fullName} ${ageYears}${
-                            $ctx.fetched_data.data.gender === "F"
-                              ? " ♀️"
-                              : $ctx.fetched_data.data.gender === "M"
-                              ? " ♂️"
-                              : ""
-                          }`;
-                        }
-                      })()}
-                  </React.Fragment>
-                </div>
+                              $ctx.fetched_data.data.gender === "F"
+                                ? " ♀️"
+                                : $ctx.fetched_data.data.gender === "M"
+                                ? " ♂️"
+                                : ""
+                            }`;
+                          } else {
+                            return `${fullName} ${ageYears}${
+                              $ctx.fetched_data.data.gender === "F"
+                                ? " ♀️"
+                                : $ctx.fetched_data.data.gender === "M"
+                                ? " ♂️"
+                                : ""
+                            }`;
+                          }
+                        })()}
+                    </React.Fragment>
+                  </div>
+                  <ConditionGuard
+                    data-plasmic-name={"conditionGuard"}
+                    data-plasmic-override={overrides.conditionGuard}
+                    className={classNames("__wab_instance", sty.conditionGuard)}
+                    condition={$ctx.fetched_data.loading}
+                    onNotSatisfied={async () => {
+                      const $steps = {};
+
+                      $steps["setLocalAdmissionDatetime"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "admission_datetime",
+                                    $ctx.fetched_data.data.admission_datetime
+                                  );
+                                  return console.log(
+                                    `admission_datetime: ${localStorage.getItem(
+                                      "admission_datetime"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setLocalAdmissionDatetime"] != null &&
+                        typeof $steps["setLocalAdmissionDatetime"] ===
+                          "object" &&
+                        typeof $steps["setLocalAdmissionDatetime"].then ===
+                          "function"
+                      ) {
+                        $steps["setLocalAdmissionDatetime"] = await $steps[
+                          "setLocalAdmissionDatetime"
+                        ];
+                      }
+
+                      $steps["updateAdmissionDatetime"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["admissionDatetime"]
+                              },
+                              operation: 0,
+                              value: localStorage.getItem("admission_datetime")
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateAdmissionDatetime"] != null &&
+                        typeof $steps["updateAdmissionDatetime"] === "object" &&
+                        typeof $steps["updateAdmissionDatetime"].then ===
+                          "function"
+                      ) {
+                        $steps["updateAdmissionDatetime"] = await $steps[
+                          "updateAdmissionDatetime"
+                        ];
+                      }
+                    }}
+                  />
+                </React.Fragment>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
@@ -1925,7 +2009,8 @@ ${ageMonths} months ${
                                       </Stack__>
                                     );
                                   })}
-                                  {false ? (
+                                  {new Date(currentItem.issued_datetime) <
+                                  new Date($state.admissionDatetime) ? (
                                     <div
                                       data-plasmic-name={"overlayLayer"}
                                       data-plasmic-override={
@@ -2581,6 +2666,7 @@ const PlasmicDescendants = {
     "header",
     "patientDataApiFetcher",
     "patientNameAgeGender",
+    "conditionGuard",
     "normalRangeButton",
     "normalRangeButtonCircle",
     "tabButtons",
@@ -2635,11 +2721,17 @@ const PlasmicDescendants = {
     "header",
     "patientDataApiFetcher",
     "patientNameAgeGender",
+    "conditionGuard",
     "normalRangeButton",
     "normalRangeButtonCircle"
   ],
-  patientDataApiFetcher: ["patientDataApiFetcher", "patientNameAgeGender"],
+  patientDataApiFetcher: [
+    "patientDataApiFetcher",
+    "patientNameAgeGender",
+    "conditionGuard"
+  ],
   patientNameAgeGender: ["patientNameAgeGender"],
+  conditionGuard: ["conditionGuard"],
   normalRangeButton: ["normalRangeButton", "normalRangeButtonCircle"],
   normalRangeButtonCircle: ["normalRangeButtonCircle"],
   tabButtons: ["tabButtons", "checkedFactor", "button", "laboratoryResult"],
@@ -2849,6 +2941,7 @@ type NodeDefaultElementType = {
   header: "div";
   patientDataApiFetcher: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
+  conditionGuard: typeof ConditionGuard;
   normalRangeButton: "div";
   normalRangeButtonCircle: "div";
   tabButtons: "div";
@@ -2965,6 +3058,7 @@ export const PlasmicLaboratoryData = Object.assign(
     header: makeNodeComponent("header"),
     patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
+    conditionGuard: makeNodeComponent("conditionGuard"),
     normalRangeButton: makeNodeComponent("normalRangeButton"),
     normalRangeButtonCircle: makeNodeComponent("normalRangeButtonCircle"),
     tabButtons: makeNodeComponent("tabButtons"),

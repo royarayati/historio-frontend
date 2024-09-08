@@ -1616,6 +1616,20 @@
           "cssFilePath": "plasmic/inlab/PlasmicHighlightIcon.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "zU-q0IBtVG_2",
+          "name": "Checkbox",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicCheckbox.tsx",
+          "importSpec": {
+            "modulePath": "Checkbox.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicCheckbox.module.css",
+          "scheme": "blackbox",
+          "componentType": "component",
+          "plumeType": "checkbox"
         }
       ],
       "icons": [

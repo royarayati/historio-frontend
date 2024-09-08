@@ -62,7 +62,7 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
+import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -102,7 +102,7 @@ export type PlasmicImagingReportList__OverridesType = {
   header?: Flex__<"div">;
   apiFetcherComponent?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
-  saveAdmissionDatetime?: Flex__<typeof SideEffect>;
+  conditionGuard?: Flex__<typeof ConditionGuard>;
   tabButton?: Flex__<"div">;
   imagingModality?: Flex__<typeof Button>;
   imagingReports?: Flex__<typeof Button>;
@@ -113,9 +113,10 @@ export type PlasmicImagingReportList__OverridesType = {
   imagingReportList2?: Flex__<"div">;
   imagingReportCard?: Flex__<"div">;
   imagingTitleDatetime?: Flex__<"div">;
-  previousAdmission?: Flex__<typeof Button>;
   imagingTitle?: Flex__<"div">;
   imagingDatetime?: Flex__<"div">;
+  freeBox?: Flex__<"div">;
+  previousAdmission?: Flex__<typeof Button>;
   imagingType?: Flex__<"div">;
   imagingModalities?: Flex__<typeof ApiFetcherComponent>;
   viewPacsButton2?: Flex__<typeof Button>;
@@ -209,31 +210,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
-        path: "previousAdmission[].isDisabled",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "previousAdmission[].selected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "previousAdmission[].deselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "previousAdmission[].sortDeselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "previousAdmission[].sortSelected",
-        type: "private",
-        variableType: "boolean"
       },
       {
         path: "viewPacsButton.isDisabled",
@@ -425,6 +401,31 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "previousAdmission[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "previousAdmission[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "previousAdmission[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "previousAdmission[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "previousAdmission[].sortSelected",
+        type: "private",
+        variableType: "boolean"
       }
     ],
     [$props, $ctx, $refs]
@@ -576,44 +577,74 @@ ${ageMonths} months ${
                       })()}
                     </React.Fragment>
                   </div>
-                  <SideEffect
-                    data-plasmic-name={"saveAdmissionDatetime"}
-                    data-plasmic-override={overrides.saveAdmissionDatetime}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.saveAdmissionDatetime
-                    )}
-                    onMount={async () => {
+                  <ConditionGuard
+                    data-plasmic-name={"conditionGuard"}
+                    data-plasmic-override={overrides.conditionGuard}
+                    className={classNames("__wab_instance", sty.conditionGuard)}
+                    condition={$ctx.fetched_data.loading}
+                    onNotSatisfied={async () => {
                       const $steps = {};
 
-                      $steps["updateAdmissionDatetime"] =
-                        $ctx.fetched_data.loading == false
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["admissionDatetime"]
-                                },
-                                operation: 0,
-                                value:
-                                  $ctx.fetched_data.data.dismission_datetime
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
+                      $steps["setLocalAdmissionDatetime"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "admission_datetime",
+                                    $ctx.fetched_data.data.admission_datetime
+                                  );
+                                  return console.log(
+                                    `admission_datetime: ${localStorage.getItem(
+                                      "admission_datetime"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setLocalAdmissionDatetime"] != null &&
+                        typeof $steps["setLocalAdmissionDatetime"] ===
+                          "object" &&
+                        typeof $steps["setLocalAdmissionDatetime"].then ===
+                          "function"
+                      ) {
+                        $steps["setLocalAdmissionDatetime"] = await $steps[
+                          "setLocalAdmissionDatetime"
+                        ];
+                      }
 
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
+                      $steps["updateAdmissionDatetime"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["admissionDatetime"]
+                              },
+                              operation: 0,
+                              value: localStorage.getItem("admission_datetime")
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
                       if (
                         $steps["updateAdmissionDatetime"] != null &&
                         typeof $steps["updateAdmissionDatetime"] === "object" &&
@@ -1228,6 +1259,70 @@ ${ageMonths} months ${
                                 sty.imagingTitleDatetime
                               )}
                             >
+                              <div
+                                data-plasmic-name={"imagingTitle"}
+                                data-plasmic-override={overrides.imagingTitle}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.imagingTitle
+                                )}
+                              >
+                                <React.Fragment>
+                                  {currentItem.service_name}
+                                </React.Fragment>
+                              </div>
+                              <div
+                                data-plasmic-name={"imagingDatetime"}
+                                data-plasmic-override={
+                                  overrides.imagingDatetime
+                                }
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.imagingDatetime
+                                )}
+                              >
+                                <React.Fragment>
+                                  {(() => {
+                                    const gregorianDate = new Date(
+                                      currentItem.service_datetime
+                                    );
+                                    const shamsiDate = new Intl.DateTimeFormat(
+                                      "fa-IR"
+                                    ).format(gregorianDate);
+                                    const shamsiTime =
+                                      gregorianDate.toLocaleTimeString(
+                                        "fa-IR",
+                                        { hour12: false }
+                                      );
+                                    const englishDate = shamsiDate.replace(
+                                      /[۰-۹]/g,
+                                      d =>
+                                        String.fromCharCode(
+                                          d.charCodeAt(0) - 1728
+                                        )
+                                    );
+                                    const englishTime = shamsiTime.replace(
+                                      /[۰-۹]/g,
+                                      d =>
+                                        String.fromCharCode(
+                                          d.charCodeAt(0) - 1728
+                                        )
+                                    );
+                                    return `${englishDate}  ${englishTime}`;
+                                  })()}
+                                </React.Fragment>
+                              </div>
+                            </Stack__>
+                            <div
+                              data-plasmic-name={"freeBox"}
+                              data-plasmic-override={overrides.freeBox}
+                              className={classNames(
+                                projectcss.all,
+                                sty.freeBox
+                              )}
+                            >
                               {new Date(currentItem.service_datetime) <
                               new Date($state.admissionDatetime)
                                 ? (() => {
@@ -1236,7 +1331,7 @@ ${ageMonths} months ${
                                         "__wab_instance",
                                         sty.previousAdmission
                                       ),
-                                      color: "blue",
+                                      color: "red",
                                       deselected: generateStateValueProp(
                                         $state,
                                         [
@@ -1295,7 +1390,6 @@ ${ageMonths} months ${
                                         __plasmic_idx_0,
                                         "selected"
                                       ]),
-                                      shape: "sharp",
                                       sortDeselected: generateStateValueProp(
                                         $state,
                                         [
@@ -1368,89 +1462,29 @@ ${ageMonths} months ${
                                         }
                                         {...child$Props}
                                       >
-                                        <div
-                                          className={classNames(
-                                            projectcss.all,
-                                            projectcss.__wab_text,
-                                            sty.text__a9Ld4
-                                          )}
-                                        >
-                                          {
-                                            "\u0628\u0633\u062a\u0631\u06cc \u0642\u0628\u0644\u06cc "
-                                          }
-                                        </div>
+                                        {
+                                          "\u0628\u0633\u062a\u0631\u06cc \u0642\u0628\u0644\u06cc "
+                                        }
                                       </Button>
                                     );
                                   })()
                                 : null}
                               <div
-                                data-plasmic-name={"imagingTitle"}
-                                data-plasmic-override={overrides.imagingTitle}
+                                data-plasmic-name={"imagingType"}
+                                data-plasmic-override={overrides.imagingType}
                                 className={classNames(
                                   projectcss.all,
                                   projectcss.__wab_text,
-                                  sty.imagingTitle
+                                  sty.imagingType
                                 )}
                               >
                                 <React.Fragment>
-                                  {currentItem.service_name}
+                                  {currentItem.title.replace(
+                                    /\(\s+#\s*\)/g,
+                                    ""
+                                  )}
                                 </React.Fragment>
                               </div>
-                              <div
-                                data-plasmic-name={"imagingDatetime"}
-                                data-plasmic-override={
-                                  overrides.imagingDatetime
-                                }
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.imagingDatetime
-                                )}
-                              >
-                                <React.Fragment>
-                                  {(() => {
-                                    const gregorianDate = new Date(
-                                      currentItem.service_datetime
-                                    );
-                                    const shamsiDate = new Intl.DateTimeFormat(
-                                      "fa-IR"
-                                    ).format(gregorianDate);
-                                    const shamsiTime =
-                                      gregorianDate.toLocaleTimeString(
-                                        "fa-IR",
-                                        { hour12: false }
-                                      );
-                                    const englishDate = shamsiDate.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
-                                        )
-                                    );
-                                    const englishTime = shamsiTime.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
-                                        )
-                                    );
-                                    return `${englishDate}  ${englishTime}`;
-                                  })()}
-                                </React.Fragment>
-                              </div>
-                            </Stack__>
-                            <div
-                              data-plasmic-name={"imagingType"}
-                              data-plasmic-override={overrides.imagingType}
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.imagingType
-                              )}
-                            >
-                              <React.Fragment>
-                                {currentItem.title.replace(/\(\s+#\s*\)/g, "")}
-                              </React.Fragment>
                             </div>
                           </Stack__>
                         </Stack__>
@@ -2193,7 +2227,7 @@ const PlasmicDescendants = {
     "header",
     "apiFetcherComponent",
     "patientNameAgeGender",
-    "saveAdmissionDatetime",
+    "conditionGuard",
     "tabButton",
     "imagingModality",
     "imagingReports",
@@ -2204,9 +2238,10 @@ const PlasmicDescendants = {
     "imagingReportList2",
     "imagingReportCard",
     "imagingTitleDatetime",
-    "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
+    "freeBox",
+    "previousAdmission",
     "imagingType",
     "imagingModalities",
     "viewPacsButton2",
@@ -2231,15 +2266,15 @@ const PlasmicDescendants = {
     "header",
     "apiFetcherComponent",
     "patientNameAgeGender",
-    "saveAdmissionDatetime"
+    "conditionGuard"
   ],
   apiFetcherComponent: [
     "apiFetcherComponent",
     "patientNameAgeGender",
-    "saveAdmissionDatetime"
+    "conditionGuard"
   ],
   patientNameAgeGender: ["patientNameAgeGender"],
-  saveAdmissionDatetime: ["saveAdmissionDatetime"],
+  conditionGuard: ["conditionGuard"],
   tabButton: ["tabButton", "imagingModality", "imagingReports"],
   imagingModality: ["imagingModality"],
   imagingReports: ["imagingReports"],
@@ -2251,9 +2286,10 @@ const PlasmicDescendants = {
     "imagingReportList2",
     "imagingReportCard",
     "imagingTitleDatetime",
-    "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
+    "freeBox",
+    "previousAdmission",
     "imagingType"
   ],
   viewPacsButton: ["viewPacsButton"],
@@ -2263,9 +2299,10 @@ const PlasmicDescendants = {
     "imagingReportList2",
     "imagingReportCard",
     "imagingTitleDatetime",
-    "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
+    "freeBox",
+    "previousAdmission",
     "imagingType"
   ],
   imagingReportSection: [
@@ -2273,37 +2310,40 @@ const PlasmicDescendants = {
     "imagingReportList2",
     "imagingReportCard",
     "imagingTitleDatetime",
-    "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
+    "freeBox",
+    "previousAdmission",
     "imagingType"
   ],
   imagingReportList2: [
     "imagingReportList2",
     "imagingReportCard",
     "imagingTitleDatetime",
-    "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
+    "freeBox",
+    "previousAdmission",
     "imagingType"
   ],
   imagingReportCard: [
     "imagingReportCard",
     "imagingTitleDatetime",
-    "previousAdmission",
     "imagingTitle",
     "imagingDatetime",
+    "freeBox",
+    "previousAdmission",
     "imagingType"
   ],
   imagingTitleDatetime: [
     "imagingTitleDatetime",
-    "previousAdmission",
     "imagingTitle",
     "imagingDatetime"
   ],
-  previousAdmission: ["previousAdmission"],
   imagingTitle: ["imagingTitle"],
   imagingDatetime: ["imagingDatetime"],
+  freeBox: ["freeBox", "previousAdmission", "imagingType"],
+  previousAdmission: ["previousAdmission"],
   imagingType: ["imagingType"],
   imagingModalities: [
     "imagingModalities",
@@ -2387,7 +2427,7 @@ type NodeDefaultElementType = {
   header: "div";
   apiFetcherComponent: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
-  saveAdmissionDatetime: typeof SideEffect;
+  conditionGuard: typeof ConditionGuard;
   tabButton: "div";
   imagingModality: typeof Button;
   imagingReports: typeof Button;
@@ -2398,9 +2438,10 @@ type NodeDefaultElementType = {
   imagingReportList2: "div";
   imagingReportCard: "div";
   imagingTitleDatetime: "div";
-  previousAdmission: typeof Button;
   imagingTitle: "div";
   imagingDatetime: "div";
+  freeBox: "div";
+  previousAdmission: typeof Button;
   imagingType: "div";
   imagingModalities: typeof ApiFetcherComponent;
   viewPacsButton2: typeof Button;
@@ -2487,7 +2528,7 @@ export const PlasmicImagingReportList = Object.assign(
     header: makeNodeComponent("header"),
     apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
-    saveAdmissionDatetime: makeNodeComponent("saveAdmissionDatetime"),
+    conditionGuard: makeNodeComponent("conditionGuard"),
     tabButton: makeNodeComponent("tabButton"),
     imagingModality: makeNodeComponent("imagingModality"),
     imagingReports: makeNodeComponent("imagingReports"),
@@ -2498,9 +2539,10 @@ export const PlasmicImagingReportList = Object.assign(
     imagingReportList2: makeNodeComponent("imagingReportList2"),
     imagingReportCard: makeNodeComponent("imagingReportCard"),
     imagingTitleDatetime: makeNodeComponent("imagingTitleDatetime"),
-    previousAdmission: makeNodeComponent("previousAdmission"),
     imagingTitle: makeNodeComponent("imagingTitle"),
     imagingDatetime: makeNodeComponent("imagingDatetime"),
+    freeBox: makeNodeComponent("freeBox"),
+    previousAdmission: makeNodeComponent("previousAdmission"),
     imagingType: makeNodeComponent("imagingType"),
     imagingModalities: makeNodeComponent("imagingModalities"),
     viewPacsButton2: makeNodeComponent("viewPacsButton2"),

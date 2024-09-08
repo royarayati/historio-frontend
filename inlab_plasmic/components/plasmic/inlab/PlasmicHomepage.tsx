@@ -205,7 +205,7 @@ function PlasmicHomepage__RenderFunc(props: {
       Object.assign(
         {
           open: false,
-          newVersionDatetime: "15/06/1403",
+          newVersionDatetime: "18/06/1403",
           newNoticeDatetime: "22/05/1403"
         },
         Object.fromEntries(
@@ -5027,6 +5027,18 @@ function PlasmicHomepage__RenderFunc(props: {
                           )}
                         >
                           {
+                            "\u062a\u0645\u0627\u06cc\u0632 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u0648 \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062f\u0631 \u0628\u0633\u062a\u0631\u06cc \u0641\u0639\u0644\u06cc \u0627\u0632 \u0628\u0633\u062a\u0631\u06cc \u0647\u0627\u06cc \u0642\u0628\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631 "
+                          }
+                        </li>
+                        <li
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.li,
+                            projectcss.__wab_text,
+                            sty.li__gwCgY
+                          )}
+                        >
+                          {
                             "\u0641\u0631\u0627\u0647\u0645 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0645\u0634\u062e\u0635 \u06a9\u0631\u062f\u0646 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0647\u0645 \u0628\u06cc\u0645\u0627\u0631 \u0628\u0631\u0627\u06cc \u062e\u0648\u062f \u0648 \u062f\u06cc\u06af\u0631 \u0647\u0645\u06a9\u0627\u0631\u0627\u0646 "
                           }
                         </li>
@@ -5337,276 +5349,286 @@ function PlasmicHomepage__RenderFunc(props: {
             </AntdModal>
           );
         })()}
-        {(() => {
-          const child$Props = {
-            className: classNames("__wab_instance", sty.modalNoticeBanner),
-            closeButtonClassName: classNames({
-              [sty["pcls_-p1PGff7sV5P"]]: true
-            }),
-            closeIcon: null,
-            defaultStylesClassName: classNames(
-              projectcss.root_reset,
-              projectcss.plasmic_default_styles,
-              projectcss.plasmic_mixins,
-              projectcss.plasmic_tokens,
-              plasmic_antd_5_hostless_css.plasmic_tokens,
-              plasmic_plasmic_rich_components_css.plasmic_tokens
-            ),
-            hideFooter: true,
-            maskClosable: false,
-            modalContentClassName: classNames({
-              [sty["pcls_meaj_737D3HF"]]: true
-            }),
-            modalScopeClassName: sty["modalNoticeBanner__modal"],
-            onOpenChange: generateStateOnChangeProp($state, [
-              "modalNoticeBanner",
-              "open"
-            ]),
-            open: generateStateValueProp($state, ["modalNoticeBanner", "open"]),
-            title: (
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__xga15
-                )}
-              >
-                {"\u0627\u0637\u0644\u0627\u0639\u06cc\u0647"}
-              </div>
-            ),
-            trigger: null,
-            wrapClassName: classNames({ [sty["pcls_TufeBRfdpEOi"]]: true })
-          };
-          initializeCodeComponentStates(
-            $state,
-            [
-              {
-                name: "open",
-                plasmicStateName: "modalNoticeBanner.open"
-              }
-            ],
-            [],
-            undefined ?? {},
-            child$Props
-          );
-          initializePlasmicStates(
-            $state,
-            [
-              {
-                name: "modalNoticeBanner.open",
-                initFunc: ({ $props, $state, $queries }) =>
-                  hasVariant(globalVariants, "screen", "mobileFirst")
-                    ? (() => {
-                        try {
-                          return (
-                            $props.newNoticeDatetime !==
-                            localStorage.getItem("new_notice_datetime")
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return false;
-                          }
-                          throw e;
-                        }
-                      })()
-                    : (() => {
-                        try {
-                          return (
-                            $props.newNoticeDatetime !==
-                            localStorage.getItem("new_notice_datetime")
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return false;
-                          }
-                          throw e;
-                        }
-                      })()
-              }
-            ],
-            []
-          );
-          return (
-            <AntdModal
-              data-plasmic-name={"modalNoticeBanner"}
-              data-plasmic-override={overrides.modalNoticeBanner}
-              {...child$Props}
-            >
-              <NewNoticeBanner
-                data-plasmic-name={"newNoticeBanner"}
-                data-plasmic-override={overrides.newNoticeBanner}
-                className={classNames("__wab_instance", sty.newNoticeBanner)}
-                newNoticeDatetime={args.newNoticeDatetime}
-              />
-
-              <Button
-                data-plasmic-name={
-                  "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
-                }
-                data-plasmic-override={overrides.متوجهشدم2}
-                className={classNames("__wab_instance", sty.متوجهشدم2)}
-                color={"blue"}
-                deselected={generateStateValueProp($state, [
-                  "متوجهشدم2",
-                  "deselected"
-                ])}
-                isDisabled={generateStateValueProp($state, [
-                  "متوجهشدم2",
-                  "isDisabled"
-                ])}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["setUpdateVersionLocalStorage"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return localStorage.setItem(
-                              "new_notice_datetime",
-                              $props.newNoticeDatetime
-                            );
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["setUpdateVersionLocalStorage"] != null &&
-                    typeof $steps["setUpdateVersionLocalStorage"] ===
-                      "object" &&
-                    typeof $steps["setUpdateVersionLocalStorage"].then ===
-                      "function"
-                  ) {
-                    $steps["setUpdateVersionLocalStorage"] = await $steps[
-                      "setUpdateVersionLocalStorage"
-                    ];
+        {false
+          ? (() => {
+              const child$Props = {
+                className: classNames("__wab_instance", sty.modalNoticeBanner),
+                closeButtonClassName: classNames({
+                  [sty["pcls_-p1PGff7sV5P"]]: true
+                }),
+                closeIcon: null,
+                defaultStylesClassName: classNames(
+                  projectcss.root_reset,
+                  projectcss.plasmic_default_styles,
+                  projectcss.plasmic_mixins,
+                  projectcss.plasmic_tokens,
+                  plasmic_antd_5_hostless_css.plasmic_tokens,
+                  plasmic_plasmic_rich_components_css.plasmic_tokens
+                ),
+                hideFooter: true,
+                maskClosable: false,
+                modalContentClassName: classNames({
+                  [sty["pcls_meaj_737D3HF"]]: true
+                }),
+                modalScopeClassName: sty["modalNoticeBanner__modal"],
+                onOpenChange: generateStateOnChangeProp($state, [
+                  "modalNoticeBanner",
+                  "open"
+                ]),
+                open: generateStateValueProp($state, [
+                  "modalNoticeBanner",
+                  "open"
+                ]),
+                title: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__xga15
+                    )}
+                  >
+                    {"\u0627\u0637\u0644\u0627\u0639\u06cc\u0647"}
+                  </div>
+                ),
+                trigger: null,
+                wrapClassName: classNames({ [sty["pcls_TufeBRfdpEOi"]]: true })
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "open",
+                    plasmicStateName: "modalNoticeBanner.open"
                   }
-
-                  $steps["updateModalNoticeBannerOpen"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["modalNoticeBanner", "open"]
-                          },
-                          operation: 0,
-                          value: false
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateModalNoticeBannerOpen"] != null &&
-                    typeof $steps["updateModalNoticeBannerOpen"] === "object" &&
-                    typeof $steps["updateModalNoticeBannerOpen"].then ===
-                      "function"
-                  ) {
-                    $steps["updateModalNoticeBannerOpen"] = await $steps[
-                      "updateModalNoticeBannerOpen"
-                    ];
+                ],
+                [],
+                undefined ?? {},
+                child$Props
+              );
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "modalNoticeBanner.open",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return (
+                                $props.newNoticeDatetime !==
+                                localStorage.getItem("new_notice_datetime")
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : (() => {
+                            try {
+                              return (
+                                $props.newNoticeDatetime !==
+                                localStorage.getItem("new_notice_datetime")
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
                   }
-
-                  $steps["runCode"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return console.log(
-                              `"new_notice_datetime": ${localStorage.getItem(
-                                "new_notice_datetime"
-                              )}`
-                            );
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["runCode"] != null &&
-                    typeof $steps["runCode"] === "object" &&
-                    typeof $steps["runCode"].then === "function"
-                  ) {
-                    $steps["runCode"] = await $steps["runCode"];
-                  }
-                }}
-                onDeselectedChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "متوجهشدم2",
-                    "deselected"
-                  ])(eventArgs[0]);
-                }}
-                onIsDisabledChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "متوجهشدم2",
-                    "isDisabled"
-                  ])(eventArgs[0]);
-                }}
-                onSelectedChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, ["متوجهشدم2", "selected"])(
-                    eventArgs[0]
-                  );
-                }}
-                onSortDeselectedChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "متوجهشدم2",
-                    "sortDeselected"
-                  ])(eventArgs[0]);
-                }}
-                onSortSelectedChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "متوجهشدم2",
-                    "sortSelected"
-                  ])(eventArgs[0]);
-                }}
-                selected={generateStateValueProp($state, [
-                  "متوجهشدم2",
-                  "selected"
-                ])}
-                shape={"sharp"}
-                sortDeselected={generateStateValueProp($state, [
-                  "متوجهشدم2",
-                  "sortDeselected"
-                ])}
-                sortSelected={generateStateValueProp($state, [
-                  "متوجهشدم2",
-                  "sortSelected"
-                ])}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text___3SwMh
-                  )}
+                ],
+                []
+              );
+              return (
+                <AntdModal
+                  data-plasmic-name={"modalNoticeBanner"}
+                  data-plasmic-override={overrides.modalNoticeBanner}
+                  {...child$Props}
                 >
-                  {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
-                </div>
-              </Button>
-            </AntdModal>
-          );
-        })()}
+                  <NewNoticeBanner
+                    data-plasmic-name={"newNoticeBanner"}
+                    data-plasmic-override={overrides.newNoticeBanner}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.newNoticeBanner
+                    )}
+                    newNoticeDatetime={args.newNoticeDatetime}
+                  />
+
+                  <Button
+                    data-plasmic-name={
+                      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
+                    }
+                    data-plasmic-override={overrides.متوجهشدم2}
+                    className={classNames("__wab_instance", sty.متوجهشدم2)}
+                    color={"blue"}
+                    deselected={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["setUpdateVersionLocalStorage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return localStorage.setItem(
+                                  "new_notice_datetime",
+                                  $props.newNoticeDatetime
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setUpdateVersionLocalStorage"] != null &&
+                        typeof $steps["setUpdateVersionLocalStorage"] ===
+                          "object" &&
+                        typeof $steps["setUpdateVersionLocalStorage"].then ===
+                          "function"
+                      ) {
+                        $steps["setUpdateVersionLocalStorage"] = await $steps[
+                          "setUpdateVersionLocalStorage"
+                        ];
+                      }
+
+                      $steps["updateModalNoticeBannerOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["modalNoticeBanner", "open"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateModalNoticeBannerOpen"] != null &&
+                        typeof $steps["updateModalNoticeBannerOpen"] ===
+                          "object" &&
+                        typeof $steps["updateModalNoticeBannerOpen"].then ===
+                          "function"
+                      ) {
+                        $steps["updateModalNoticeBannerOpen"] = await $steps[
+                          "updateModalNoticeBannerOpen"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return console.log(
+                                  `"new_notice_datetime": ${localStorage.getItem(
+                                    "new_notice_datetime"
+                                  )}`
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+                    }}
+                    onDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم2",
+                        "deselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onIsDisabledChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم2",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }}
+                    onSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم2",
+                        "selected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم2",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم2",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "selected"
+                    ])}
+                    shape={"sharp"}
+                    sortDeselected={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___3SwMh
+                      )}
+                    >
+                      {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
+                    </div>
+                  </Button>
+                </AntdModal>
+              );
+            })()
+          : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;

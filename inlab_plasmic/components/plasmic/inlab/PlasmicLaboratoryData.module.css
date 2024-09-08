@@ -114,6 +114,10 @@
   padding: 4px;
   margin: 0px 8px 0px 0px;
 }
+.conditionGuard:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
 .normalRangeButton {
   display: flex;
   position: relative;
@@ -1040,7 +1044,8 @@
   left: 0;
   top: 0;
   right: 0;
-  background: #bdbdbd80;
+  background: #bdbdbd40;
+  z-index: 0;
   min-height: 0;
 }
 .checkedFactorsApiFetcher:global(.__wab_instance) {
