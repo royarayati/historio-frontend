@@ -64,7 +64,6 @@ import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; /
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
-import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import HighlightIcon from "../../HighlightIcon"; // plasmic-import: mbv1OhQXEQf1/component
 import { AntdSingleCollapse } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { singleCollapseHelpers as AntdSingleCollapse_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
@@ -81,8 +80,6 @@ import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3w
 
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
-import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
-import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 
 createPlasmicElementProxy;
 
@@ -120,16 +117,16 @@ export type PlasmicLaboratoryData__OverridesType = {
   laboratoryResult?: Flex__<typeof Button>;
   labData?: Flex__<typeof ApiFetcherComponent>;
   newFeatureTag?: Flex__<"div">;
-  searchLabName?: Flex__<typeof TextInput>;
-  svg?: Flex__<"svg">;
-  antibiogramData?: Flex__<typeof ApiFetcherComponent>;
-  antibiogramPerDate?: Flex__<"div">;
+  antibiogramResult?: Flex__<"div">;
+  antibiogramList?: Flex__<"div">;
   datetimeName?: Flex__<"div">;
   antibiogramGroupName?: Flex__<"div">;
   datetime?: Flex__<"div">;
   antibiogram?: Flex__<"div">;
+  highlightAntibiogram?: Flex__<typeof HighlightIcon>;
   antibioticName?: Flex__<"div">;
   antibioticResult?: Flex__<"div">;
+  antibiogramHighlightOverlay?: Flex__<"div">;
   laboratoryLists?: Flex__<"div">;
   labResults?: Flex__<"div">;
   checkedFactors?: Flex__<"div">;
@@ -218,12 +215,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
       },
       {
         path: "admissionDatetime",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
-        path: "searchLabName.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
@@ -400,6 +391,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "highlightIcon[][][].highlight",
         type: "private",
         variableType: "boolean"
+      },
+      {
+        path: "highlightAntibiogram[][][].highlight",
+        type: "private",
+        variableType: "text"
       }
     ],
     [$props, $ctx, $refs]
@@ -1042,83 +1038,6 @@ ${ageMonths} months ${
                       }
                     </div>
                   </div>
-                  {false ? (
-                    <TextInput
-                      data-plasmic-name={"searchLabName"}
-                      data-plasmic-override={overrides.searchLabName}
-                      className={classNames(
-                        "__wab_instance",
-                        sty.searchLabName
-                      )}
-                      endIcon={
-                        $state.value !== "" ? (
-                          <Icons8CloseSvgIcon
-                            data-plasmic-name={"svg"}
-                            data-plasmic-override={overrides.svg}
-                            className={classNames(projectcss.all, sty.svg)}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["updateSearchLabNameValue"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      variable: {
-                                        objRoot: $state,
-                                        variablePath: ["searchLabName", "value"]
-                                      },
-                                      operation: 0,
-                                      value: ($state.searchLabName.value = "")
-                                    };
-                                    return (({
-                                      variable,
-                                      value,
-                                      startIndex,
-                                      deleteCount
-                                    }) => {
-                                      if (!variable) {
-                                        return;
-                                      }
-                                      const { objRoot, variablePath } =
-                                        variable;
-
-                                      $stateSet(objRoot, variablePath, value);
-                                      return value;
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["updateSearchLabNameValue"] != null &&
-                                typeof $steps["updateSearchLabNameValue"] ===
-                                  "object" &&
-                                typeof $steps["updateSearchLabNameValue"]
-                                  .then === "function"
-                              ) {
-                                $steps["updateSearchLabNameValue"] =
-                                  await $steps["updateSearchLabNameValue"];
-                              }
-                            }}
-                            role={"img"}
-                          />
-                        ) : null
-                      }
-                      onChange={(...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "searchLabName",
-                          "value"
-                        ])((e => e.target?.value).apply(null, eventArgs));
-                      }}
-                      placeholder={
-                        "\u0646\u0627\u0645 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0645\u0648\u0631\u062f \u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
-                      }
-                      showEndIcon={true}
-                      value={
-                        generateStateValueProp($state, [
-                          "searchLabName",
-                          "value"
-                        ]) ?? ""
-                      }
-                    />
-                  ) : null}
                   {$ctx.fetched_data.loading == false &&
                   $ctx.fetched_data.data.lab_test_groups == 0 ? (
                     <div
@@ -1133,116 +1052,332 @@ ${ageMonths} months ${
                       }
                     </div>
                   ) : null}
-                  <ApiFetcherComponent
-                    data-plasmic-name={"antibiogramData"}
-                    data-plasmic-override={overrides.antibiogramData}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.antibiogramData,
-                      {
-                        [sty.antibiogramDataviewNormalRange]: hasVariant(
-                          $state,
-                          "viewNormalRange",
-                          "viewNormalRange"
-                        )
-                      }
-                    )}
-                    delay={300}
-                    headers={(() => {
+                  {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                    (() => {
                       try {
-                        return {
-                          "X-Namespace": localStorage.getItem(
-                            "inlab_user_namespace_id"
-                          )
-                        };
+                        return $ctx.fetched_data.data.antibiogram_lab_data;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
                           e?.plasmicType === "PlasmicUndefinedDataError"
                         ) {
-                          return undefined;
+                          return [];
                         }
                         throw e;
                       }
-                    })()}
-                    method={"GET"}
-                    path={`/api/v3/patient/antibiogram/${$ctx.params.code}`}
-                    ref={ref => {
-                      $refs["antibiogramData"] = ref;
-                    }}
-                  >
-                    <DataCtxReader__>
-                      {$ctx =>
-                        $ctx.fetched_data.data !== 0
-                          ? (_par =>
-                              !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                              (() => {
-                                try {
-                                  return $ctx.fetched_data.data[0];
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return [];
-                                  }
-                                  throw e;
-                                }
-                              })()
-                            ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                              const currentItem = __plasmic_item_0;
-                              const currentIndex = __plasmic_idx_0;
-                              return (
+                    })()
+                  ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                    const currentItem = __plasmic_item_0;
+                    const currentIndex = __plasmic_idx_0;
+                    return (
+                      <div
+                        data-plasmic-name={"antibiogramResult"}
+                        data-plasmic-override={overrides.antibiogramResult}
+                        className={classNames(
+                          projectcss.all,
+                          sty.antibiogramResult
+                        )}
+                        key={currentIndex}
+                      >
+                        {(_par =>
+                          !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                          (() => {
+                            try {
+                              return currentItem[0];
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return [];
+                              }
+                              throw e;
+                            }
+                          })()
+                        ).map((__plasmic_item_1, __plasmic_idx_1) => {
+                          const currentItem = __plasmic_item_1;
+                          const currentIndex = __plasmic_idx_1;
+                          return (
+                            <div
+                              data-plasmic-name={"antibiogramList"}
+                              data-plasmic-override={overrides.antibiogramList}
+                              className={classNames(
+                                projectcss.all,
+                                sty.antibiogramList
+                              )}
+                              key={currentIndex}
+                            >
+                              <div
+                                data-plasmic-name={"datetimeName"}
+                                data-plasmic-override={overrides.datetimeName}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.datetimeName
+                                )}
+                              >
                                 <div
-                                  data-plasmic-name={"antibiogramPerDate"}
+                                  data-plasmic-name={"antibiogramGroupName"}
                                   data-plasmic-override={
-                                    overrides.antibiogramPerDate
+                                    overrides.antibiogramGroupName
                                   }
                                   className={classNames(
                                     projectcss.all,
-                                    sty.antibiogramPerDate
+                                    projectcss.__wab_text,
+                                    sty.antibiogramGroupName
                                   )}
-                                  key={currentIndex}
                                 >
-                                  <div
-                                    data-plasmic-name={"datetimeName"}
-                                    data-plasmic-override={
-                                      overrides.datetimeName
+                                  <React.Fragment>
+                                    {currentItem.gname}
+                                  </React.Fragment>
+                                </div>
+                                <div
+                                  data-plasmic-name={"datetime"}
+                                  data-plasmic-override={overrides.datetime}
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.datetime
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      try {
+                                        return currentItem.answer_datetime_jalali_str;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return "";
+                                        }
+                                        throw e;
+                                      }
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                              </div>
+                              {(_par =>
+                                !_par
+                                  ? []
+                                  : Array.isArray(_par)
+                                  ? _par
+                                  : [_par])(
+                                (() => {
+                                  try {
+                                    return currentItem.labgiveanti_set;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return [];
                                     }
+                                    throw e;
+                                  }
+                                })()
+                              ).map((__plasmic_item_2, __plasmic_idx_2) => {
+                                const currentItem = __plasmic_item_2;
+                                const currentIndex = __plasmic_idx_2;
+                                return (
+                                  <Stack__
+                                    as={"div"}
+                                    data-plasmic-name={"antibiogram"}
+                                    data-plasmic-override={
+                                      overrides.antibiogram
+                                    }
+                                    hasGap={true}
                                     className={classNames(
                                       projectcss.all,
-                                      sty.datetimeName
+                                      sty.antibiogram
                                     )}
+                                    key={currentIndex}
                                   >
+                                    {(() => {
+                                      const child$Props = {
+                                        admissionId: (() => {
+                                          try {
+                                            return $ctx.params.adm_id;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })(),
+                                        body: (() => {
+                                          try {
+                                            return JSON.stringify(
+                                              currentItem.id
+                                            );
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })(),
+                                        className: classNames(
+                                          "__wab_instance",
+                                          sty.highlightAntibiogram
+                                        ),
+                                        highlight: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "highlightAntibiogram",
+                                            __plasmic_idx_0,
+                                            __plasmic_idx_1,
+                                            __plasmic_idx_2,
+                                            "highlight"
+                                          ]
+                                        ),
+                                        highlighting: (() => {
+                                          try {
+                                            return (
+                                              currentItem.highlight == true
+                                            );
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return [];
+                                            }
+                                            throw e;
+                                          }
+                                        })(),
+                                        onHighlightChange:
+                                          generateStateOnChangeProp($state, [
+                                            "highlightAntibiogram",
+                                            __plasmic_idx_0,
+                                            __plasmic_idx_1,
+                                            __plasmic_idx_2,
+                                            "highlight"
+                                          ]),
+                                        patientId: $ctx.params.code,
+
+                                        trigerReload: async () => {
+                                          const $steps = {};
+
+                                          $steps["reloadLabDataComponent"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    tplRef: "labData",
+                                                    action: "reload"
+                                                  };
+                                                  return (({
+                                                    tplRef,
+                                                    action,
+                                                    args
+                                                  }) => {
+                                                    return $refs?.[tplRef]?.[
+                                                      action
+                                                    ]?.(...(args ?? []));
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps["reloadLabDataComponent"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "reloadLabDataComponent"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "reloadLabDataComponent"
+                                            ].then === "function"
+                                          ) {
+                                            $steps["reloadLabDataComponent"] =
+                                              await $steps[
+                                                "reloadLabDataComponent"
+                                              ];
+                                          }
+                                        },
+                                        type: (() => {
+                                          try {
+                                            return "laboratory";
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })()
+                                      };
+
+                                      initializePlasmicStates(
+                                        $state,
+                                        [
+                                          {
+                                            name: "highlightAntibiogram[][][].highlight",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) =>
+                                              (() => {
+                                                try {
+                                                  return currentItem.highlight;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return undefined;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()
+                                          }
+                                        ],
+                                        [
+                                          __plasmic_idx_0,
+                                          __plasmic_idx_1,
+                                          __plasmic_idx_2
+                                        ]
+                                      );
+                                      return (
+                                        <HighlightIcon
+                                          data-plasmic-name={
+                                            "highlightAntibiogram"
+                                          }
+                                          data-plasmic-override={
+                                            overrides.highlightAntibiogram
+                                          }
+                                          {...child$Props}
+                                        />
+                                      );
+                                    })()}
                                     <div
-                                      data-plasmic-name={"antibiogramGroupName"}
+                                      data-plasmic-name={"antibioticName"}
                                       data-plasmic-override={
-                                        overrides.antibiogramGroupName
+                                        overrides.antibioticName
                                       }
                                       className={classNames(
                                         projectcss.all,
                                         projectcss.__wab_text,
-                                        sty.antibiogramGroupName
-                                      )}
-                                    >
-                                      <React.Fragment>
-                                        {currentItem.gname}
-                                      </React.Fragment>
-                                    </div>
-                                    <div
-                                      data-plasmic-name={"datetime"}
-                                      data-plasmic-override={overrides.datetime}
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.__wab_text,
-                                        sty.datetime
+                                        sty.antibioticName
                                       )}
                                     >
                                       <React.Fragment>
                                         {(() => {
                                           try {
-                                            return currentItem.answer_datetime_jalali_str;
+                                            return currentItem.labgiveanti_name;
                                           } catch (e) {
                                             if (
                                               e instanceof TypeError ||
@@ -1256,108 +1391,70 @@ ${ageMonths} months ${
                                         })()}
                                       </React.Fragment>
                                     </div>
-                                  </div>
-                                  {(_par =>
-                                    !_par
-                                      ? []
-                                      : Array.isArray(_par)
-                                      ? _par
-                                      : [_par])(
-                                    (() => {
+                                    <div
+                                      data-plasmic-name={"antibioticResult"}
+                                      data-plasmic-override={
+                                        overrides.antibioticResult
+                                      }
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.antibioticResult
+                                      )}
+                                    >
+                                      <React.Fragment>
+                                        {(() => {
+                                          try {
+                                            return currentItem.labgiveanti_status;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return "";
+                                            }
+                                            throw e;
+                                          }
+                                        })()}
+                                      </React.Fragment>
+                                    </div>
+                                    {(() => {
                                       try {
-                                        return currentItem.labgiveanti_set;
+                                        return currentItem.highlight == true;
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
                                           e?.plasmicType ===
                                             "PlasmicUndefinedDataError"
                                         ) {
-                                          return [];
+                                          return true;
                                         }
                                         throw e;
                                       }
-                                    })()
-                                  ).map((__plasmic_item_1, __plasmic_idx_1) => {
-                                    const currentItem = __plasmic_item_1;
-                                    const currentIndex = __plasmic_idx_1;
-                                    return (
+                                    })() ? (
                                       <div
-                                        data-plasmic-name={"antibiogram"}
+                                        data-plasmic-name={
+                                          "antibiogramHighlightOverlay"
+                                        }
                                         data-plasmic-override={
-                                          overrides.antibiogram
+                                          overrides.antibiogramHighlightOverlay
                                         }
                                         className={classNames(
                                           projectcss.all,
-                                          sty.antibiogram
+                                          sty.antibiogramHighlightOverlay
                                         )}
-                                        key={currentIndex}
-                                      >
-                                        <div
-                                          data-plasmic-name={"antibioticName"}
-                                          data-plasmic-override={
-                                            overrides.antibioticName
-                                          }
-                                          className={classNames(
-                                            projectcss.all,
-                                            projectcss.__wab_text,
-                                            sty.antibioticName
-                                          )}
-                                        >
-                                          <React.Fragment>
-                                            {(() => {
-                                              try {
-                                                return currentItem.labgiveanti_name;
-                                              } catch (e) {
-                                                if (
-                                                  e instanceof TypeError ||
-                                                  e?.plasmicType ===
-                                                    "PlasmicUndefinedDataError"
-                                                ) {
-                                                  return "";
-                                                }
-                                                throw e;
-                                              }
-                                            })()}
-                                          </React.Fragment>
-                                        </div>
-                                        <div
-                                          data-plasmic-name={"antibioticResult"}
-                                          data-plasmic-override={
-                                            overrides.antibioticResult
-                                          }
-                                          className={classNames(
-                                            projectcss.all,
-                                            projectcss.__wab_text,
-                                            sty.antibioticResult
-                                          )}
-                                        >
-                                          <React.Fragment>
-                                            {(() => {
-                                              try {
-                                                return currentItem.labgiveanti_status;
-                                              } catch (e) {
-                                                if (
-                                                  e instanceof TypeError ||
-                                                  e?.plasmicType ===
-                                                    "PlasmicUndefinedDataError"
-                                                ) {
-                                                  return "";
-                                                }
-                                                throw e;
-                                              }
-                                            })()}
-                                          </React.Fragment>
-                                        </div>
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              );
-                            })
-                          : null
-                      }
-                    </DataCtxReader__>
-                  </ApiFetcherComponent>
+                                      />
+                                    ) : null}
+                                  </Stack__>
+                                );
+                              })}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
                   {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                     (() => {
                       try {
@@ -2675,16 +2772,16 @@ const PlasmicDescendants = {
     "laboratoryResult",
     "labData",
     "newFeatureTag",
-    "searchLabName",
-    "svg",
-    "antibiogramData",
-    "antibiogramPerDate",
+    "antibiogramResult",
+    "antibiogramList",
     "datetimeName",
     "antibiogramGroupName",
     "datetime",
     "antibiogram",
+    "highlightAntibiogram",
     "antibioticName",
     "antibioticResult",
+    "antibiogramHighlightOverlay",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -2741,16 +2838,16 @@ const PlasmicDescendants = {
   labData: [
     "labData",
     "newFeatureTag",
-    "searchLabName",
-    "svg",
-    "antibiogramData",
-    "antibiogramPerDate",
+    "antibiogramResult",
+    "antibiogramList",
     "datetimeName",
     "antibiogramGroupName",
     "datetime",
     "antibiogram",
+    "highlightAntibiogram",
     "antibioticName",
     "antibioticResult",
+    "antibiogramHighlightOverlay",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -2769,33 +2866,43 @@ const PlasmicDescendants = {
     "overlayLayer"
   ],
   newFeatureTag: ["newFeatureTag"],
-  searchLabName: ["searchLabName", "svg"],
-  svg: ["svg"],
-  antibiogramData: [
-    "antibiogramData",
-    "antibiogramPerDate",
+  antibiogramResult: [
+    "antibiogramResult",
+    "antibiogramList",
     "datetimeName",
     "antibiogramGroupName",
     "datetime",
     "antibiogram",
+    "highlightAntibiogram",
     "antibioticName",
-    "antibioticResult"
+    "antibioticResult",
+    "antibiogramHighlightOverlay"
   ],
-  antibiogramPerDate: [
-    "antibiogramPerDate",
+  antibiogramList: [
+    "antibiogramList",
     "datetimeName",
     "antibiogramGroupName",
     "datetime",
     "antibiogram",
+    "highlightAntibiogram",
     "antibioticName",
-    "antibioticResult"
+    "antibioticResult",
+    "antibiogramHighlightOverlay"
   ],
   datetimeName: ["datetimeName", "antibiogramGroupName", "datetime"],
   antibiogramGroupName: ["antibiogramGroupName"],
   datetime: ["datetime"],
-  antibiogram: ["antibiogram", "antibioticName", "antibioticResult"],
+  antibiogram: [
+    "antibiogram",
+    "highlightAntibiogram",
+    "antibioticName",
+    "antibioticResult",
+    "antibiogramHighlightOverlay"
+  ],
+  highlightAntibiogram: ["highlightAntibiogram"],
   antibioticName: ["antibioticName"],
   antibioticResult: ["antibioticResult"],
+  antibiogramHighlightOverlay: ["antibiogramHighlightOverlay"],
   laboratoryLists: [
     "laboratoryLists",
     "labResults",
@@ -2950,16 +3057,16 @@ type NodeDefaultElementType = {
   laboratoryResult: typeof Button;
   labData: typeof ApiFetcherComponent;
   newFeatureTag: "div";
-  searchLabName: typeof TextInput;
-  svg: "svg";
-  antibiogramData: typeof ApiFetcherComponent;
-  antibiogramPerDate: "div";
+  antibiogramResult: "div";
+  antibiogramList: "div";
   datetimeName: "div";
   antibiogramGroupName: "div";
   datetime: "div";
   antibiogram: "div";
+  highlightAntibiogram: typeof HighlightIcon;
   antibioticName: "div";
   antibioticResult: "div";
+  antibiogramHighlightOverlay: "div";
   laboratoryLists: "div";
   labResults: "div";
   checkedFactors: "div";
@@ -3067,16 +3174,18 @@ export const PlasmicLaboratoryData = Object.assign(
     laboratoryResult: makeNodeComponent("laboratoryResult"),
     labData: makeNodeComponent("labData"),
     newFeatureTag: makeNodeComponent("newFeatureTag"),
-    searchLabName: makeNodeComponent("searchLabName"),
-    svg: makeNodeComponent("svg"),
-    antibiogramData: makeNodeComponent("antibiogramData"),
-    antibiogramPerDate: makeNodeComponent("antibiogramPerDate"),
+    antibiogramResult: makeNodeComponent("antibiogramResult"),
+    antibiogramList: makeNodeComponent("antibiogramList"),
     datetimeName: makeNodeComponent("datetimeName"),
     antibiogramGroupName: makeNodeComponent("antibiogramGroupName"),
     datetime: makeNodeComponent("datetime"),
     antibiogram: makeNodeComponent("antibiogram"),
+    highlightAntibiogram: makeNodeComponent("highlightAntibiogram"),
     antibioticName: makeNodeComponent("antibioticName"),
     antibioticResult: makeNodeComponent("antibioticResult"),
+    antibiogramHighlightOverlay: makeNodeComponent(
+      "antibiogramHighlightOverlay"
+    ),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     labResults: makeNodeComponent("labResults"),
     checkedFactors: makeNodeComponent("checkedFactors"),
