@@ -90,10 +90,9 @@
   min-width: 0;
   padding: 4px;
 }
-.saveAdmissionDatetime:global(.__wab_instance) {
+.conditionGuard:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
-  position: relative;
 }
 .tabButton {
   display: flex;
@@ -502,26 +501,6 @@
     margin-left: 0px;
   }
 }
-.previousAdmission:global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
-  align-self: center;
-}
-.text__a9Ld4 {
-  width: auto;
-}
-.svg___0ZlXb {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__w4LGz {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
 .imagingTitle {
   position: relative;
   width: 100%;
@@ -546,6 +525,34 @@
   align-self: center;
   min-width: 0;
   border-left: 0px none var(--token-IYO13gyYJHXG);
+}
+.freeBox {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  min-width: 0;
+  padding: 0px;
+}
+.previousAdmission:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__zUnOu {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__vqGHw {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }
 .imagingType {
   position: relative;
