@@ -280,6 +280,7 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                       projectcss.__wab_text,
                       sty.text
                     )}
+                    dir={"rtl"}
                   >
                     <React.Fragment>
                       {(() => {
