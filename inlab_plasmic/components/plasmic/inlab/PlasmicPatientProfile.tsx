@@ -532,6 +532,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               projectcss.__wab_text,
                               sty.patientName2
                             )}
+                            dir={"rtl"}
                           >
                             <React.Fragment>
                               {(() => {

@@ -63,8 +63,8 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
-import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -83,9 +83,9 @@ import ProfileIcon from "./icons/PlasmicIcon__Profile"; // plasmic-import: -RBNi
 import Icon3Icon from "./icons/PlasmicIcon__Icon3"; // plasmic-import: Pji6nZZT_lpO/icon
 import Group1917Icon from "./icons/PlasmicIcon__Group1917"; // plasmic-import: ycuumst0kLdp/icon
 import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
-import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
+import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 
 createPlasmicElementProxy;
 
@@ -130,10 +130,10 @@ export type PlasmicUserSetting__OverridesType = {
   password?: Flex__<typeof TextInput>;
   repeatPasswordContent?: Flex__<"div">;
   repeatPassword?: Flex__<typeof TextInput>;
+  changePasswordButton?: Flex__<typeof Button>;
   passwordRepeatPasswordMismatch2?: Flex__<typeof Alert>;
   successfulChangePassword2?: Flex__<typeof Alert>;
   unsuccessfulChangePassword2?: Flex__<typeof Alert>;
-  changePasswordButton?: Flex__<typeof Button>;
   triggerToOpenModalButton?: Flex__<typeof AntdButton>;
   shareToolContent?: Flex__<"div">;
   shareTool?: Flex__<typeof ShareTool>;
@@ -1090,123 +1090,6 @@ function PlasmicUserSetting__RenderFunc(props: {
                       }
                     />
                   </div>
-                  {(() => {
-                    try {
-                      return $state.passwordRepeatPasswordMismatch;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return true;
-                      }
-                      throw e;
-                    }
-                  })() ? (
-                    <Alert
-                      data-plasmic-name={"passwordRepeatPasswordMismatch2"}
-                      data-plasmic-override={
-                        overrides.passwordRepeatPasswordMismatch2
-                      }
-                      className={classNames(
-                        "__wab_instance",
-                        sty.passwordRepeatPasswordMismatch2
-                      )}
-                      error={true}
-                      header={
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text___9IY1
-                          )}
-                        >
-                          {
-                            "\u062a\u06a9\u0631\u0627\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u06cc\u06a9\u0633\u0627\u0646 \u0646\u06cc\u0633\u062a"
-                          }
-                        </div>
-                      }
-                      noBody={true}
-                    />
-                  ) : null}
-                  {(() => {
-                    try {
-                      return $state.successfulChangePassword;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return true;
-                      }
-                      throw e;
-                    }
-                  })() ? (
-                    <Alert
-                      data-plasmic-name={"successfulChangePassword2"}
-                      data-plasmic-override={
-                        overrides.successfulChangePassword2
-                      }
-                      className={classNames(
-                        "__wab_instance",
-                        sty.successfulChangePassword2
-                      )}
-                      header={
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text___6O8Tn
-                          )}
-                        >
-                          {
-                            "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0627\u0646\u062c\u0627\u0645 \u0634\u062f"
-                          }
-                        </div>
-                      }
-                      noBody={true}
-                      success={true}
-                    />
-                  ) : null}
-                  {(() => {
-                    try {
-                      return $state.unsuccessfulChangePassword;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return true;
-                      }
-                      throw e;
-                    }
-                  })() ? (
-                    <Alert
-                      data-plasmic-name={"unsuccessfulChangePassword2"}
-                      data-plasmic-override={
-                        overrides.unsuccessfulChangePassword2
-                      }
-                      className={classNames(
-                        "__wab_instance",
-                        sty.unsuccessfulChangePassword2
-                      )}
-                      error={true}
-                      header={
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text___5HjGe
-                          )}
-                        >
-                          {
-                            "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u062e\u0637\u0627 \u0647\u0645\u0631\u0627\u0647 \u0634\u062f"
-                          }
-                        </div>
-                      }
-                      noBody={true}
-                    />
-                  ) : null}
                   <Button
                     data-plasmic-name={"changePasswordButton"}
                     data-plasmic-override={overrides.changePasswordButton}
@@ -1432,7 +1315,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                         ];
                       }
 
-                      $steps["consoleLogPatchUsersPasswordStatus"] = true
+                      $steps["consoleLogPatchUsersPasswordStatus"] = false
                         ? (() => {
                             const actionArgs = {
                               customFunction: async () => {
@@ -1458,7 +1341,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                       }
 
                       $steps["makeTrueSuccessfulChangePassword"] =
-                        $steps.patchUserpassword.status === 200
+                        $steps.patchUserpassword?.status === 200
                           ? (() => {
                               const actionArgs = {
                                 variable: {
@@ -1496,7 +1379,6 @@ function PlasmicUserSetting__RenderFunc(props: {
                       }
 
                       $steps["makeTrueUnsuccessfulChangePassword"] =
-                        $steps.patchUserpassword == undefined ||
                         $steps.patchUserpassword.status != 200
                           ? (() => {
                               const actionArgs = {
@@ -1589,6 +1471,123 @@ function PlasmicUserSetting__RenderFunc(props: {
                       }
                     </div>
                   </Button>
+                  {(() => {
+                    try {
+                      return $state.passwordRepeatPasswordMismatch;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <Alert
+                      data-plasmic-name={"passwordRepeatPasswordMismatch2"}
+                      data-plasmic-override={
+                        overrides.passwordRepeatPasswordMismatch2
+                      }
+                      className={classNames(
+                        "__wab_instance",
+                        sty.passwordRepeatPasswordMismatch2
+                      )}
+                      error={true}
+                      header={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text___9IY1
+                          )}
+                        >
+                          {
+                            "\u062a\u06a9\u0631\u0627\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u06cc\u06a9\u0633\u0627\u0646 \u0646\u06cc\u0633\u062a"
+                          }
+                        </div>
+                      }
+                      noBody={true}
+                    />
+                  ) : null}
+                  {(() => {
+                    try {
+                      return $state.successfulChangePassword;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <Alert
+                      data-plasmic-name={"successfulChangePassword2"}
+                      data-plasmic-override={
+                        overrides.successfulChangePassword2
+                      }
+                      className={classNames(
+                        "__wab_instance",
+                        sty.successfulChangePassword2
+                      )}
+                      header={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text___6O8Tn
+                          )}
+                        >
+                          {
+                            "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0627\u0646\u062c\u0627\u0645 \u0634\u062f"
+                          }
+                        </div>
+                      }
+                      noBody={true}
+                      success={true}
+                    />
+                  ) : null}
+                  {(() => {
+                    try {
+                      return $state.unsuccessfulChangePassword;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <Alert
+                      data-plasmic-name={"unsuccessfulChangePassword2"}
+                      data-plasmic-override={
+                        overrides.unsuccessfulChangePassword2
+                      }
+                      className={classNames(
+                        "__wab_instance",
+                        sty.unsuccessfulChangePassword2
+                      )}
+                      error={true}
+                      header={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text___5HjGe
+                          )}
+                        >
+                          {
+                            "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u062e\u0637\u0627 \u0647\u0645\u0631\u0627\u0647 \u0634\u062f"
+                          }
+                        </div>
+                      }
+                      noBody={true}
+                    />
+                  ) : null}
                 </div>
               </AntdModal>
             </Stack__>
@@ -2100,10 +2099,10 @@ const PlasmicDescendants = {
     "password",
     "repeatPasswordContent",
     "repeatPassword",
+    "changePasswordButton",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
     "unsuccessfulChangePassword2",
-    "changePasswordButton",
     "triggerToOpenModalButton",
     "shareToolContent",
     "shareTool",
@@ -2136,10 +2135,10 @@ const PlasmicDescendants = {
     "password",
     "repeatPasswordContent",
     "repeatPassword",
+    "changePasswordButton",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
     "unsuccessfulChangePassword2",
-    "changePasswordButton",
     "triggerToOpenModalButton",
     "shareToolContent",
     "shareTool",
@@ -2185,10 +2184,10 @@ const PlasmicDescendants = {
     "password",
     "repeatPasswordContent",
     "repeatPassword",
+    "changePasswordButton",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
     "unsuccessfulChangePassword2",
-    "changePasswordButton",
     "triggerToOpenModalButton"
   ],
   resetPasswordImage: ["resetPasswordImage"],
@@ -2199,10 +2198,10 @@ const PlasmicDescendants = {
     "password",
     "repeatPasswordContent",
     "repeatPassword",
+    "changePasswordButton",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
     "unsuccessfulChangePassword2",
-    "changePasswordButton",
     "triggerToOpenModalButton"
   ],
   modalContent: [
@@ -2211,19 +2210,19 @@ const PlasmicDescendants = {
     "password",
     "repeatPasswordContent",
     "repeatPassword",
+    "changePasswordButton",
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
-    "unsuccessfulChangePassword2",
-    "changePasswordButton"
+    "unsuccessfulChangePassword2"
   ],
   passwordContent: ["passwordContent", "password"],
   password: ["password"],
   repeatPasswordContent: ["repeatPasswordContent", "repeatPassword"],
   repeatPassword: ["repeatPassword"],
+  changePasswordButton: ["changePasswordButton"],
   passwordRepeatPasswordMismatch2: ["passwordRepeatPasswordMismatch2"],
   successfulChangePassword2: ["successfulChangePassword2"],
   unsuccessfulChangePassword2: ["unsuccessfulChangePassword2"],
-  changePasswordButton: ["changePasswordButton"],
   triggerToOpenModalButton: ["triggerToOpenModalButton"],
   shareToolContent: ["shareToolContent", "shareTool"],
   shareTool: ["shareTool"],
@@ -2260,10 +2259,10 @@ type NodeDefaultElementType = {
   password: typeof TextInput;
   repeatPasswordContent: "div";
   repeatPassword: typeof TextInput;
+  changePasswordButton: typeof Button;
   passwordRepeatPasswordMismatch2: typeof Alert;
   successfulChangePassword2: typeof Alert;
   unsuccessfulChangePassword2: typeof Alert;
-  changePasswordButton: typeof Button;
   triggerToOpenModalButton: typeof AntdButton;
   shareToolContent: "div";
   shareTool: typeof ShareTool;
@@ -2358,6 +2357,7 @@ export const PlasmicUserSetting = Object.assign(
     password: makeNodeComponent("password"),
     repeatPasswordContent: makeNodeComponent("repeatPasswordContent"),
     repeatPassword: makeNodeComponent("repeatPassword"),
+    changePasswordButton: makeNodeComponent("changePasswordButton"),
     passwordRepeatPasswordMismatch2: makeNodeComponent(
       "passwordRepeatPasswordMismatch2"
     ),
@@ -2365,7 +2365,6 @@ export const PlasmicUserSetting = Object.assign(
     unsuccessfulChangePassword2: makeNodeComponent(
       "unsuccessfulChangePassword2"
     ),
-    changePasswordButton: makeNodeComponent("changePasswordButton"),
     triggerToOpenModalButton: makeNodeComponent("triggerToOpenModalButton"),
     shareToolContent: makeNodeComponent("shareToolContent"),
     shareTool: makeNodeComponent("shareTool"),

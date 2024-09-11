@@ -516,6 +516,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         )
                       }
                     )}
+                    dir={"rtl"}
                   >
                     <React.Fragment>
                       {$ctx.fetched_data.loading == false &&

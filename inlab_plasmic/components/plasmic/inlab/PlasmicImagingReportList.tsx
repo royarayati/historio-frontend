@@ -119,14 +119,10 @@ export type PlasmicImagingReportList__OverridesType = {
   previousAdmission?: Flex__<typeof Button>;
   imagingType?: Flex__<"div">;
   imagingModalities?: Flex__<typeof ApiFetcherComponent>;
-  viewPacsButton2?: Flex__<typeof Button>;
-  imagingReportsSection2?: Flex__<"section">;
-  imagingReportSection2?: Flex__<"section">;
-  imagingReportList3?: Flex__<"div">;
-  imagingReportCard2?: Flex__<"div">;
-  imagingTitleDatetime2?: Flex__<"div">;
-  imagingDatetime3?: Flex__<"div">;
-  imagingName?: Flex__<"div">;
+  imagingModalitiesList?: Flex__<"div">;
+  imagingModaltyCards?: Flex__<"div">;
+  modalityName?: Flex__<"div">;
+  modalityDatetime?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   homepage?: Flex__<typeof PlasmicImg__>;
@@ -373,36 +369,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
           })()
       },
       {
-        path: "viewPacsButton2.isDisabled",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "viewPacsButton2.selected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "viewPacsButton2.deselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "viewPacsButton2.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "viewPacsButton2.sortSelected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "previousAdmission[].isDisabled",
         type: "private",
         variableType: "boolean"
@@ -530,6 +496,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       projectcss.__wab_text,
                       sty.patientNameAgeGender
                     )}
+                    dir={"rtl"}
                   >
                     <React.Fragment>
                       {(() => {
@@ -662,841 +629,828 @@ ${ageMonths} months ${
             </DataCtxReader__>
           </ApiFetcherComponent>
         </div>
-        {false ? (
-          <Stack__
-            as={"div"}
-            data-plasmic-name={"tabButton"}
-            data-plasmic-override={overrides.tabButton}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.tabButton)}
-          >
-            <Button
-              data-plasmic-name={"imagingModality"}
-              data-plasmic-override={overrides.imagingModality}
-              className={classNames("__wab_instance", sty.imagingModality)}
-              deselected={generateStateValueProp($state, [
-                "imagingModality",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "imagingModality",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateStateImagings"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["selectedTab"]
-                        },
-                        operation: 0,
-                        value: "Imagings"
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateStateImagings"] != null &&
-                  typeof $steps["updateStateImagings"] === "object" &&
-                  typeof $steps["updateStateImagings"].then === "function"
-                ) {
-                  $steps["updateStateImagings"] = await $steps[
-                    "updateStateImagings"
-                  ];
-                }
-              }}
-              onDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingModality",
-                  "deselected"
-                ])(eventArgs[0]);
-              }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingModality",
-                  "isDisabled"
-                ])(eventArgs[0]);
-              }}
-              onSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingModality",
-                  "selected"
-                ])(eventArgs[0]);
-              }}
-              onSortDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingModality",
-                  "sortDeselected"
-                ])(eventArgs[0]);
-              }}
-              onSortSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingModality",
-                  "sortSelected"
-                ])(eventArgs[0]);
-              }}
-              selected={generateStateValueProp($state, [
-                "imagingModality",
-                "selected"
-              ])}
-              sortDeselected={generateStateValueProp($state, [
-                "imagingModality",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "imagingModality",
-                "sortSelected"
-              ])}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__akAEr
-                )}
-              >
-                {
-                  "\u062a\u0635\u0648\u06cc\u0631\u0628\u0631\u062f\u0627\u0631\u06cc \u0647\u0627\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u062f\u0647"
-                }
-              </div>
-            </Button>
-            <Button
-              data-plasmic-name={"imagingReports"}
-              data-plasmic-override={overrides.imagingReports}
-              className={classNames("__wab_instance", sty.imagingReports)}
-              deselected={generateStateValueProp($state, [
-                "imagingReports",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "imagingReports",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateSelectedTab"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["selectedTab"]
-                        },
-                        operation: 0,
-                        value: "ImagingReports"
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateSelectedTab"] != null &&
-                  typeof $steps["updateSelectedTab"] === "object" &&
-                  typeof $steps["updateSelectedTab"].then === "function"
-                ) {
-                  $steps["updateSelectedTab"] = await $steps[
-                    "updateSelectedTab"
-                  ];
-                }
-              }}
-              onDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingReports",
-                  "deselected"
-                ])(eventArgs[0]);
-              }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingReports",
-                  "isDisabled"
-                ])(eventArgs[0]);
-              }}
-              onSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingReports",
-                  "selected"
-                ])(eventArgs[0]);
-              }}
-              onSortDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingReports",
-                  "sortDeselected"
-                ])(eventArgs[0]);
-              }}
-              onSortSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "imagingReports",
-                  "sortSelected"
-                ])(eventArgs[0]);
-              }}
-              selected={generateStateValueProp($state, [
-                "imagingReports",
-                "selected"
-              ])}
-              sortDeselected={generateStateValueProp($state, [
-                "imagingReports",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "imagingReports",
-                "sortSelected"
-              ])}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__b01Ci
-                )}
-              >
-                {
-                  "\u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u062a\u0635\u0648\u06cc\u0631\u0628\u0631\u062f\u0627\u0631\u06cc "
-                }
-              </div>
-            </Button>
-          </Stack__>
-        ) : null}
-        <ApiFetcherComponent
-          data-plasmic-name={"imagingReport"}
-          data-plasmic-override={overrides.imagingReport}
-          className={classNames("__wab_instance", sty.imagingReport)}
-          delay={100}
-          headers={(() => {
-            try {
-              return {
-                "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
-              };
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()}
-          method={"GET"}
-          path={`/api/v2/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
-          ref={ref => {
-            $refs["imagingReport"] = ref;
-          }}
+        <Stack__
+          as={"div"}
+          data-plasmic-name={"tabButton"}
+          data-plasmic-override={overrides.tabButton}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.tabButton)}
         >
-          <DataCtxReader__>
-            {$ctx => (
-              <React.Fragment>
-                <Button
-                  data-plasmic-name={"viewPacsButton"}
-                  data-plasmic-override={overrides.viewPacsButton}
-                  className={classNames("__wab_instance", sty.viewPacsButton)}
-                  color={(() => {
-                    try {
-                      return $ctx.fetched_data.data.pacs_url === null &&
-                        localStorage.getItem("namespace") !== "5"
-                        ? "clear"
-                        : "blue";
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return [];
+          <Button
+            data-plasmic-name={"imagingModality"}
+            data-plasmic-override={overrides.imagingModality}
+            className={classNames("__wab_instance", sty.imagingModality)}
+            deselected={generateStateValueProp($state, [
+              "imagingModality",
+              "deselected"
+            ])}
+            isDisabled={generateStateValueProp($state, [
+              "imagingModality",
+              "isDisabled"
+            ])}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["updateStateImagings"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["selectedTab"]
+                      },
+                      operation: 0,
+                      value: "Imagings"
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
                       }
-                      throw e;
-                    }
-                  })()}
-                  deselected={generateStateValueProp($state, [
-                    "viewPacsButton",
-                    "deselected"
-                  ])}
-                  isDisabled={generateStateValueProp($state, [
-                    "viewPacsButton",
-                    "isDisabled"
-                  ])}
-                  onClick={async event => {
-                    const $steps = {};
+                      const { objRoot, variablePath } = variable;
 
-                    $steps["goToPage"] =
-                      localStorage.getItem("namespace_id") !== "5"
-                        ? (() => {
-                            const actionArgs = {
-                              destination: (() => {
-                                try {
-                                  return $ctx.fetched_data.data.pacs_url;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
-                                  }
-                                  throw e;
-                                }
-                              })()
-                            };
-                            return (({ destination }) => {
-                              if (
-                                typeof destination === "string" &&
-                                destination.startsWith("#")
-                              ) {
-                                document
-                                  .getElementById(destination.substr(1))
-                                  .scrollIntoView({ behavior: "smooth" });
-                              } else {
-                                __nextRouter?.push(destination);
-                              }
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                    if (
-                      $steps["goToPage"] != null &&
-                      typeof $steps["goToPage"] === "object" &&
-                      typeof $steps["goToPage"].then === "function"
-                    ) {
-                      $steps["goToPage"] = await $steps["goToPage"];
-                    }
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateStateImagings"] != null &&
+                typeof $steps["updateStateImagings"] === "object" &&
+                typeof $steps["updateStateImagings"].then === "function"
+              ) {
+                $steps["updateStateImagings"] = await $steps[
+                  "updateStateImagings"
+                ];
+              }
+            }}
+            onDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "imagingModality",
+                "deselected"
+              ])(eventArgs[0]);
+            }}
+            onIsDisabledChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "imagingModality",
+                "isDisabled"
+              ])(eventArgs[0]);
+            }}
+            onSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "imagingModality",
+                "selected"
+              ])(eventArgs[0]);
+            }}
+            onSortDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "imagingModality",
+                "sortDeselected"
+              ])(eventArgs[0]);
+            }}
+            onSortSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "imagingModality",
+                "sortSelected"
+              ])(eventArgs[0]);
+            }}
+            selected={generateStateValueProp($state, [
+              "imagingModality",
+              "selected"
+            ])}
+            sortDeselected={generateStateValueProp($state, [
+              "imagingModality",
+              "sortDeselected"
+            ])}
+            sortSelected={generateStateValueProp($state, [
+              "imagingModality",
+              "sortSelected"
+            ])}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__akAEr
+              )}
+            >
+              {
+                "\u062a\u0635\u0648\u06cc\u0631\u0628\u0631\u062f\u0627\u0631\u06cc \u0647\u0627\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u062f\u0647"
+              }
+            </div>
+          </Button>
+          <Button
+            data-plasmic-name={"imagingReports"}
+            data-plasmic-override={overrides.imagingReports}
+            className={classNames("__wab_instance", sty.imagingReports)}
+            deselected={generateStateValueProp($state, [
+              "imagingReports",
+              "deselected"
+            ])}
+            isDisabled={generateStateValueProp($state, [
+              "imagingReports",
+              "isDisabled"
+            ])}
+            onClick={async event => {
+              const $steps = {};
 
-                    $steps["invokeGlobalAction"] =
-                      localStorage.getItem("namespace_id") === "5"
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "GET",
-                                `https://synapps.tums.ac.ir/n8n/webhook/PACS?patient_id=${$ctx.params.code}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                    if (
-                      $steps["invokeGlobalAction"] != null &&
-                      typeof $steps["invokeGlobalAction"] === "object" &&
-                      typeof $steps["invokeGlobalAction"].then === "function"
-                    ) {
-                      $steps["invokeGlobalAction"] = await $steps[
-                        "invokeGlobalAction"
-                      ];
-                    }
-                  }}
-                  onDeselectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
+              $steps["updateSelectedTab"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["selectedTab"]
+                      },
+                      operation: 0,
+                      value: "ImagingReports"
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateSelectedTab"] != null &&
+                typeof $steps["updateSelectedTab"] === "object" &&
+                typeof $steps["updateSelectedTab"].then === "function"
+              ) {
+                $steps["updateSelectedTab"] = await $steps["updateSelectedTab"];
+              }
+            }}
+            onDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "imagingReports",
+                "deselected"
+              ])(eventArgs[0]);
+            }}
+            onIsDisabledChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "imagingReports",
+                "isDisabled"
+              ])(eventArgs[0]);
+            }}
+            onSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, ["imagingReports", "selected"])(
+                eventArgs[0]
+              );
+            }}
+            onSortDeselectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "imagingReports",
+                "sortDeselected"
+              ])(eventArgs[0]);
+            }}
+            onSortSelectedChange={(...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "imagingReports",
+                "sortSelected"
+              ])(eventArgs[0]);
+            }}
+            selected={generateStateValueProp($state, [
+              "imagingReports",
+              "selected"
+            ])}
+            sortDeselected={generateStateValueProp($state, [
+              "imagingReports",
+              "sortDeselected"
+            ])}
+            sortSelected={generateStateValueProp($state, [
+              "imagingReports",
+              "sortSelected"
+            ])}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__b01Ci
+              )}
+            >
+              {
+                "\u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u062a\u0635\u0648\u06cc\u0631\u0628\u0631\u062f\u0627\u0631\u06cc "
+              }
+            </div>
+          </Button>
+        </Stack__>
+        {(() => {
+          try {
+            return $state.selectedTab == "ImagingReports";
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return false;
+            }
+            throw e;
+          }
+        })() ? (
+          <ApiFetcherComponent
+            data-plasmic-name={"imagingReport"}
+            data-plasmic-override={overrides.imagingReport}
+            className={classNames("__wab_instance", sty.imagingReport)}
+            delay={100}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v2/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
+            ref={ref => {
+              $refs["imagingReport"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <React.Fragment>
+                  <Button
+                    data-plasmic-name={"viewPacsButton"}
+                    data-plasmic-override={overrides.viewPacsButton}
+                    className={classNames("__wab_instance", sty.viewPacsButton)}
+                    color={(() => {
+                      try {
+                        return $ctx.fetched_data.data.pacs_url === null &&
+                          localStorage.getItem("namespace") !== "5"
+                          ? "clear"
+                          : "blue";
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
+                        }
+                        throw e;
+                      }
+                    })()}
+                    deselected={generateStateValueProp($state, [
                       "viewPacsButton",
                       "deselected"
-                    ])(eventArgs[0]);
-                  }}
-                  onIsDisabledChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
                       "viewPacsButton",
                       "isDisabled"
-                    ])(eventArgs[0]);
-                  }}
-                  onSelectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["goToPage"] =
+                        localStorage.getItem("namespace_id") !== "5"
+                          ? (() => {
+                              const actionArgs = {
+                                destination: (() => {
+                                  try {
+                                    return $ctx.fetched_data.data.pacs_url;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()
+                              };
+                              return (({ destination }) => {
+                                if (
+                                  typeof destination === "string" &&
+                                  destination.startsWith("#")
+                                ) {
+                                  document
+                                    .getElementById(destination.substr(1))
+                                    .scrollIntoView({ behavior: "smooth" });
+                                } else {
+                                  __nextRouter?.push(destination);
+                                }
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["goToPage"] != null &&
+                        typeof $steps["goToPage"] === "object" &&
+                        typeof $steps["goToPage"].then === "function"
+                      ) {
+                        $steps["goToPage"] = await $steps["goToPage"];
+                      }
+
+                      $steps["invokeGlobalAction"] =
+                        localStorage.getItem("namespace_id") === "5"
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  "GET",
+                                  `https://synapps.tums.ac.ir/n8n/webhook/PACS?patient_id=${$ctx.params.code}`
+                                ]
+                              };
+                              return $globalActions[
+                                "AuthGlobalContext.apiFetcher"
+                              ]?.apply(null, [...actionArgs.args]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["invokeGlobalAction"] != null &&
+                        typeof $steps["invokeGlobalAction"] === "object" &&
+                        typeof $steps["invokeGlobalAction"].then === "function"
+                      ) {
+                        $steps["invokeGlobalAction"] = await $steps[
+                          "invokeGlobalAction"
+                        ];
+                      }
+                    }}
+                    onDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "deselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onIsDisabledChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }}
+                    onSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "selected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }}
+                    selected={generateStateValueProp($state, [
                       "viewPacsButton",
                       "selected"
-                    ])(eventArgs[0]);
-                  }}
-                  onSortDeselectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
+                    ])}
+                    sortDeselected={generateStateValueProp($state, [
                       "viewPacsButton",
                       "sortDeselected"
-                    ])(eventArgs[0]);
-                  }}
-                  onSortSelectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
                       "viewPacsButton",
                       "sortSelected"
-                    ])(eventArgs[0]);
-                  }}
-                  selected={generateStateValueProp($state, [
-                    "viewPacsButton",
-                    "selected"
-                  ])}
-                  sortDeselected={generateStateValueProp($state, [
-                    "viewPacsButton",
-                    "sortDeselected"
-                  ])}
-                  sortSelected={generateStateValueProp($state, [
-                    "viewPacsButton",
-                    "sortSelected"
-                  ])}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___4Thhk
-                    )}
+                    ])}
                   >
-                    {"View PACS"}
-                  </div>
-                </Button>
-                {(
-                  hasVariant(globalVariants, "screen", "mobileFirst")
-                    ? (() => {
-                        try {
-                          return $ctx.fetched_data.loading === true;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })()
-                    : (() => {
-                        try {
-                          return $ctx.fetched_data.loading === true;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })()
-                ) ? (
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__pIosL
-                    )}
-                  >
-                    {
-                      "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                    }
-                  </div>
-                ) : null}
-                {$ctx.fetched_data.loading == false &&
-                $ctx.fetched_data.data.radiology_services == "" ? (
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__scVr8
-                    )}
-                  >
-                    {
-                      "\u06af\u0632\u0627\u0631\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a "
-                    }
-                  </div>
-                ) : null}
-                <section
-                  data-plasmic-name={"imagingReportsSection"}
-                  data-plasmic-override={overrides.imagingReportsSection}
-                  className={classNames(
-                    projectcss.all,
-                    sty.imagingReportsSection
-                  )}
-                >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___4Thhk
+                      )}
+                    >
+                      {"View PACS"}
+                    </div>
+                  </Button>
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? $ctx.fetched_data.loading == true
+                      : $ctx.fetched_data.loading == true
+                  ) ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__pIosL
+                      )}
+                    >
+                      {
+                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                      }
+                    </div>
+                  ) : null}
+                  {$ctx.fetched_data.loading == false &&
+                  $ctx.fetched_data.data.radiology_services == "" ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__scVr8
+                      )}
+                    >
+                      {
+                        "\u06af\u0632\u0627\u0631\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a "
+                      }
+                    </div>
+                  ) : null}
                   <section
-                    data-plasmic-name={"imagingReportSection"}
-                    data-plasmic-override={overrides.imagingReportSection}
+                    data-plasmic-name={"imagingReportsSection"}
+                    data-plasmic-override={overrides.imagingReportsSection}
                     className={classNames(
                       projectcss.all,
-                      sty.imagingReportSection
+                      sty.imagingReportsSection
                     )}
                   >
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return $ctx.fetched_data.data.radiology_services;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
+                    <section
+                      data-plasmic-name={"imagingReportSection"}
+                      data-plasmic-override={overrides.imagingReportSection}
+                      className={classNames(
+                        projectcss.all,
+                        sty.imagingReportSection
+                      )}
+                    >
+                      {(_par =>
+                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                        (() => {
+                          try {
+                            return $ctx.fetched_data.data.radiology_services;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
                           }
-                          throw e;
-                        }
-                      })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (
-                        <Stack__
-                          as={"div"}
-                          data-plasmic-name={"imagingReportList2"}
-                          data-plasmic-override={overrides.imagingReportList2}
-                          hasGap={true}
-                          className={classNames(
-                            projectcss.all,
-                            sty.imagingReportList2
-                          )}
-                          key={currentIndex}
-                        >
+                        })()
+                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                        const currentItem = __plasmic_item_0;
+                        const currentIndex = __plasmic_idx_0;
+                        return (
                           <Stack__
                             as={"div"}
-                            data-plasmic-name={"imagingReportCard"}
-                            data-plasmic-override={overrides.imagingReportCard}
+                            data-plasmic-name={"imagingReportList2"}
+                            data-plasmic-override={overrides.imagingReportList2}
                             hasGap={true}
                             className={classNames(
                               projectcss.all,
-                              sty.imagingReportCard
+                              sty.imagingReportList2
                             )}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["goToImagingReportDatail"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      destination: `/patient/${(() => {
-                                        try {
-                                          return $ctx.params.code;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return undefined;
-                                          }
-                                          throw e;
-                                        }
-                                      })()}/report/detail/${(() => {
-                                        try {
-                                          return currentItem.id;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return undefined;
-                                          }
-                                          throw e;
-                                        }
-                                      })()}/${(() => {
-                                        try {
-                                          return $ctx.params.adm_id;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return undefined;
-                                          }
-                                          throw e;
-                                        }
-                                      })()}`
-                                    };
-                                    return (({ destination }) => {
-                                      if (
-                                        typeof destination === "string" &&
-                                        destination.startsWith("#")
-                                      ) {
-                                        document
-                                          .getElementById(destination.substr(1))
-                                          .scrollIntoView({
-                                            behavior: "smooth"
-                                          });
-                                      } else {
-                                        __nextRouter?.push(destination);
-                                      }
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["goToImagingReportDatail"] != null &&
-                                typeof $steps["goToImagingReportDatail"] ===
-                                  "object" &&
-                                typeof $steps["goToImagingReportDatail"]
-                                  .then === "function"
-                              ) {
-                                $steps["goToImagingReportDatail"] =
-                                  await $steps["goToImagingReportDatail"];
-                              }
-                            }}
+                            key={currentIndex}
                           >
                             <Stack__
                               as={"div"}
-                              data-plasmic-name={"imagingTitleDatetime"}
+                              data-plasmic-name={"imagingReportCard"}
                               data-plasmic-override={
-                                overrides.imagingTitleDatetime
+                                overrides.imagingReportCard
                               }
                               hasGap={true}
                               className={classNames(
                                 projectcss.all,
-                                sty.imagingTitleDatetime
+                                sty.imagingReportCard
                               )}
-                            >
-                              <div
-                                data-plasmic-name={"imagingTitle"}
-                                data-plasmic-override={overrides.imagingTitle}
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.imagingTitle
-                                )}
-                              >
-                                <React.Fragment>
-                                  {currentItem.service_name}
-                                </React.Fragment>
-                              </div>
-                              <div
-                                data-plasmic-name={"imagingDatetime"}
-                                data-plasmic-override={
-                                  overrides.imagingDatetime
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["goToImagingReportDatail"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        destination: `/patient/${(() => {
+                                          try {
+                                            return $ctx.params.code;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })()}/report/detail/${(() => {
+                                          try {
+                                            return currentItem.id;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })()}/${(() => {
+                                          try {
+                                            return $ctx.params.adm_id;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })()}`
+                                      };
+                                      return (({ destination }) => {
+                                        if (
+                                          typeof destination === "string" &&
+                                          destination.startsWith("#")
+                                        ) {
+                                          document
+                                            .getElementById(
+                                              destination.substr(1)
+                                            )
+                                            .scrollIntoView({
+                                              behavior: "smooth"
+                                            });
+                                        } else {
+                                          __nextRouter?.push(destination);
+                                        }
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["goToImagingReportDatail"] != null &&
+                                  typeof $steps["goToImagingReportDatail"] ===
+                                    "object" &&
+                                  typeof $steps["goToImagingReportDatail"]
+                                    .then === "function"
+                                ) {
+                                  $steps["goToImagingReportDatail"] =
+                                    await $steps["goToImagingReportDatail"];
                                 }
+                              }}
+                            >
+                              <Stack__
+                                as={"div"}
+                                data-plasmic-name={"imagingTitleDatetime"}
+                                data-plasmic-override={
+                                  overrides.imagingTitleDatetime
+                                }
+                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.imagingDatetime
+                                  sty.imagingTitleDatetime
                                 )}
                               >
-                                <React.Fragment>
-                                  {(() => {
-                                    const gregorianDate = new Date(
-                                      currentItem.service_datetime
-                                    );
-                                    const shamsiDate = new Intl.DateTimeFormat(
-                                      "fa-IR"
-                                    ).format(gregorianDate);
-                                    const shamsiTime =
-                                      gregorianDate.toLocaleTimeString(
-                                        "fa-IR",
-                                        { hour12: false }
+                                <div
+                                  data-plasmic-name={"imagingTitle"}
+                                  data-plasmic-override={overrides.imagingTitle}
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.imagingTitle
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {currentItem.service_name}
+                                  </React.Fragment>
+                                </div>
+                                <div
+                                  data-plasmic-name={"imagingDatetime"}
+                                  data-plasmic-override={
+                                    overrides.imagingDatetime
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.imagingDatetime
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      const gregorianDate = new Date(
+                                        currentItem.service_datetime
                                       );
-                                    const englishDate = shamsiDate.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
+                                      const shamsiDate =
+                                        new Intl.DateTimeFormat("fa-IR").format(
+                                          gregorianDate
+                                        );
+                                      const shamsiTime =
+                                        gregorianDate.toLocaleTimeString(
+                                          "fa-IR",
+                                          { hour12: false }
+                                        );
+                                      const englishDate = shamsiDate.replace(
+                                        /[۰-۹]/g,
+                                        d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                      );
+                                      const englishTime = shamsiTime.replace(
+                                        /[۰-۹]/g,
+                                        d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                      );
+                                      return `${englishDate}  ${englishTime}`;
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                              </Stack__>
+                              <div
+                                data-plasmic-name={"freeBox"}
+                                data-plasmic-override={overrides.freeBox}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.freeBox
+                                )}
+                              >
+                                {new Date(currentItem.service_datetime) <
+                                new Date($state.admissionDatetime)
+                                  ? (() => {
+                                      const child$Props = {
+                                        className: classNames(
+                                          "__wab_instance",
+                                          sty.previousAdmission
+                                        ),
+                                        color: "red",
+                                        deselected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "deselected"
+                                          ]
+                                        ),
+                                        isDisabled: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "isDisabled"
+                                          ]
+                                        ),
+                                        onDeselectedChange: (...eventArgs) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "deselected"
+                                          ])(eventArgs[0]);
+                                        },
+                                        onIsDisabledChange: (...eventArgs) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "isDisabled"
+                                          ])(eventArgs[0]);
+                                        },
+                                        onSelectedChange: (...eventArgs) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "selected"
+                                          ])(eventArgs[0]);
+                                        },
+                                        onSortDeselectedChange: (
+                                          ...eventArgs
+                                        ) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "sortDeselected"
+                                          ])(eventArgs[0]);
+                                        },
+                                        onSortSelectedChange: (
+                                          ...eventArgs
+                                        ) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "sortSelected"
+                                          ])(eventArgs[0]);
+                                        },
+                                        selected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "selected"
+                                          ]
+                                        ),
+                                        sortDeselected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "sortDeselected"
+                                          ]
+                                        ),
+                                        sortSelected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission",
+                                            __plasmic_idx_0,
+                                            "sortSelected"
+                                          ]
                                         )
-                                    );
-                                    const englishTime = shamsiTime.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
-                                        )
-                                    );
-                                    return `${englishDate}  ${englishTime}`;
-                                  })()}
-                                </React.Fragment>
+                                      };
+
+                                      initializePlasmicStates(
+                                        $state,
+                                        [
+                                          {
+                                            name: "previousAdmission[].isDisabled",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "previousAdmission[].selected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "previousAdmission[].deselected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "previousAdmission[].sortDeselected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "previousAdmission[].sortSelected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          }
+                                        ],
+                                        [__plasmic_idx_0]
+                                      );
+                                      return (
+                                        <Button
+                                          data-plasmic-name={
+                                            "previousAdmission"
+                                          }
+                                          data-plasmic-override={
+                                            overrides.previousAdmission
+                                          }
+                                          {...child$Props}
+                                        >
+                                          {
+                                            "\u0628\u0633\u062a\u0631\u06cc \u0642\u0628\u0644\u06cc "
+                                          }
+                                        </Button>
+                                      );
+                                    })()
+                                  : null}
+                                <div
+                                  data-plasmic-name={"imagingType"}
+                                  data-plasmic-override={overrides.imagingType}
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.imagingType
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {currentItem.title.replace(
+                                      /\(\s+#\s*\)/g,
+                                      ""
+                                    )}
+                                  </React.Fragment>
+                                </div>
                               </div>
                             </Stack__>
-                            <div
-                              data-plasmic-name={"freeBox"}
-                              data-plasmic-override={overrides.freeBox}
-                              className={classNames(
-                                projectcss.all,
-                                sty.freeBox
-                              )}
-                            >
-                              {new Date(currentItem.service_datetime) <
-                              new Date($state.admissionDatetime)
-                                ? (() => {
-                                    const child$Props = {
-                                      className: classNames(
-                                        "__wab_instance",
-                                        sty.previousAdmission
-                                      ),
-                                      color: "red",
-                                      deselected: generateStateValueProp(
-                                        $state,
-                                        [
-                                          "previousAdmission",
-                                          __plasmic_idx_0,
-                                          "deselected"
-                                        ]
-                                      ),
-                                      isDisabled: generateStateValueProp(
-                                        $state,
-                                        [
-                                          "previousAdmission",
-                                          __plasmic_idx_0,
-                                          "isDisabled"
-                                        ]
-                                      ),
-                                      onDeselectedChange: (...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission",
-                                          __plasmic_idx_0,
-                                          "deselected"
-                                        ])(eventArgs[0]);
-                                      },
-                                      onIsDisabledChange: (...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission",
-                                          __plasmic_idx_0,
-                                          "isDisabled"
-                                        ])(eventArgs[0]);
-                                      },
-                                      onSelectedChange: (...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission",
-                                          __plasmic_idx_0,
-                                          "selected"
-                                        ])(eventArgs[0]);
-                                      },
-                                      onSortDeselectedChange: (
-                                        ...eventArgs
-                                      ) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission",
-                                          __plasmic_idx_0,
-                                          "sortDeselected"
-                                        ])(eventArgs[0]);
-                                      },
-                                      onSortSelectedChange: (...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission",
-                                          __plasmic_idx_0,
-                                          "sortSelected"
-                                        ])(eventArgs[0]);
-                                      },
-                                      selected: generateStateValueProp($state, [
-                                        "previousAdmission",
-                                        __plasmic_idx_0,
-                                        "selected"
-                                      ]),
-                                      sortDeselected: generateStateValueProp(
-                                        $state,
-                                        [
-                                          "previousAdmission",
-                                          __plasmic_idx_0,
-                                          "sortDeselected"
-                                        ]
-                                      ),
-                                      sortSelected: generateStateValueProp(
-                                        $state,
-                                        [
-                                          "previousAdmission",
-                                          __plasmic_idx_0,
-                                          "sortSelected"
-                                        ]
-                                      )
-                                    };
-
-                                    initializePlasmicStates(
-                                      $state,
-                                      [
-                                        {
-                                          name: "previousAdmission[].isDisabled",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        },
-                                        {
-                                          name: "previousAdmission[].selected",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        },
-                                        {
-                                          name: "previousAdmission[].deselected",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        },
-                                        {
-                                          name: "previousAdmission[].sortDeselected",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        },
-                                        {
-                                          name: "previousAdmission[].sortSelected",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        }
-                                      ],
-                                      [__plasmic_idx_0]
-                                    );
-                                    return (
-                                      <Button
-                                        data-plasmic-name={"previousAdmission"}
-                                        data-plasmic-override={
-                                          overrides.previousAdmission
-                                        }
-                                        {...child$Props}
-                                      >
-                                        {
-                                          "\u0628\u0633\u062a\u0631\u06cc \u0642\u0628\u0644\u06cc "
-                                        }
-                                      </Button>
-                                    );
-                                  })()
-                                : null}
-                              <div
-                                data-plasmic-name={"imagingType"}
-                                data-plasmic-override={overrides.imagingType}
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.imagingType
-                                )}
-                              >
-                                <React.Fragment>
-                                  {currentItem.title.replace(
-                                    /\(\s+#\s*\)/g,
-                                    ""
-                                  )}
-                                </React.Fragment>
-                              </div>
-                            </div>
                           </Stack__>
-                        </Stack__>
-                      );
-                    })}
+                        );
+                      })}
+                    </section>
                   </section>
-                </section>
-              </React.Fragment>
-            )}
-          </DataCtxReader__>
-        </ApiFetcherComponent>
-        {false ? (
+                </React.Fragment>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
+        ) : null}
+        {$state.selectedTab == "Imagings" ? (
           <ApiFetcherComponent
             data-plasmic-name={"imagingModalities"}
             data-plasmic-override={overrides.imagingModalities}
@@ -1518,7 +1472,7 @@ ${ageMonths} months ${
               }
             })()}
             method={"GET"}
-            path={`/api/v3/patient/radiology_modality/${$ctx.params.code}`}
+            path={`/api/v3/patient/imaging_modality/${$ctx.params.adm_id}`}
             ref={ref => {
               $refs["imagingModalities"] = ref;
             }}
@@ -1526,161 +1480,6 @@ ${ageMonths} months ${
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
-                  {false ? (
-                    <Button
-                      data-plasmic-name={"viewPacsButton2"}
-                      data-plasmic-override={overrides.viewPacsButton2}
-                      className={classNames(
-                        "__wab_instance",
-                        sty.viewPacsButton2
-                      )}
-                      color={(() => {
-                        try {
-                          return $ctx.fetched_data.data.pacs_url === null &&
-                            localStorage.getItem("namespace") !== "5"
-                            ? "clear"
-                            : "blue";
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return "clear";
-                          }
-                          throw e;
-                        }
-                      })()}
-                      deselected={generateStateValueProp($state, [
-                        "viewPacsButton2",
-                        "deselected"
-                      ])}
-                      isDisabled={generateStateValueProp($state, [
-                        "viewPacsButton2",
-                        "isDisabled"
-                      ])}
-                      onClick={async event => {
-                        const $steps = {};
-
-                        $steps["goToPage"] =
-                          localStorage.getItem("namespace_id") !== "5"
-                            ? (() => {
-                                const actionArgs = {
-                                  destination: (() => {
-                                    try {
-                                      return $ctx.fetched_data.data.pacs_url;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()
-                                };
-                                return (({ destination }) => {
-                                  if (
-                                    typeof destination === "string" &&
-                                    destination.startsWith("#")
-                                  ) {
-                                    document
-                                      .getElementById(destination.substr(1))
-                                      .scrollIntoView({ behavior: "smooth" });
-                                  } else {
-                                    __nextRouter?.push(destination);
-                                  }
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["goToPage"] != null &&
-                          typeof $steps["goToPage"] === "object" &&
-                          typeof $steps["goToPage"].then === "function"
-                        ) {
-                          $steps["goToPage"] = await $steps["goToPage"];
-                        }
-
-                        $steps["invokeGlobalAction"] =
-                          localStorage.getItem("namespace_id") === "5"
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "GET",
-                                    `https://synapps.tums.ac.ir/n8n/webhook/PACS?patient_id=${$ctx.params.code}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["invokeGlobalAction"] != null &&
-                          typeof $steps["invokeGlobalAction"] === "object" &&
-                          typeof $steps["invokeGlobalAction"].then ===
-                            "function"
-                        ) {
-                          $steps["invokeGlobalAction"] = await $steps[
-                            "invokeGlobalAction"
-                          ];
-                        }
-                      }}
-                      onDeselectedChange={(...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton2",
-                          "deselected"
-                        ])(eventArgs[0]);
-                      }}
-                      onIsDisabledChange={(...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton2",
-                          "isDisabled"
-                        ])(eventArgs[0]);
-                      }}
-                      onSelectedChange={(...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton2",
-                          "selected"
-                        ])(eventArgs[0]);
-                      }}
-                      onSortDeselectedChange={(...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton2",
-                          "sortDeselected"
-                        ])(eventArgs[0]);
-                      }}
-                      onSortSelectedChange={(...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton2",
-                          "sortSelected"
-                        ])(eventArgs[0]);
-                      }}
-                      selected={generateStateValueProp($state, [
-                        "viewPacsButton2",
-                        "selected"
-                      ])}
-                      sortDeselected={generateStateValueProp($state, [
-                        "viewPacsButton2",
-                        "sortDeselected"
-                      ])}
-                      sortSelected={generateStateValueProp($state, [
-                        "viewPacsButton2",
-                        "sortSelected"
-                      ])}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__pjWjO
-                        )}
-                      >
-                        {"View PACS"}
-                      </div>
-                    </Button>
-                  ) : null}
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? (() => {
@@ -1724,111 +1523,100 @@ ${ageMonths} months ${
                       }
                     </div>
                   ) : null}
-                  <section
-                    data-plasmic-name={"imagingReportsSection2"}
-                    data-plasmic-override={overrides.imagingReportsSection2}
+                  <Stack__
+                    as={"div"}
+                    data-plasmic-name={"imagingModalitiesList"}
+                    data-plasmic-override={overrides.imagingModalitiesList}
+                    hasGap={true}
                     className={classNames(
                       projectcss.all,
-                      sty.imagingReportsSection2
+                      sty.imagingModalitiesList
                     )}
                   >
-                    <section
-                      data-plasmic-name={"imagingReportSection2"}
-                      data-plasmic-override={overrides.imagingReportSection2}
-                      className={classNames(
-                        projectcss.all,
-                        sty.imagingReportSection2
-                      )}
-                    >
-                      {(_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
-                          try {
-                            return $ctx.fetched_data.data;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return [];
-                            }
-                            throw e;
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
                           }
-                        })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const currentItem = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
-                          <Stack__
-                            as={"div"}
-                            data-plasmic-name={"imagingReportList3"}
-                            data-plasmic-override={overrides.imagingReportList3}
-                            hasGap={true}
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          data-plasmic-name={"imagingModaltyCards"}
+                          data-plasmic-override={overrides.imagingModaltyCards}
+                          className={classNames(
+                            projectcss.all,
+                            sty.imagingModaltyCards
+                          )}
+                          key={currentIndex}
+                        >
+                          <div
+                            data-plasmic-name={"modalityName"}
+                            data-plasmic-override={overrides.modalityName}
                             className={classNames(
                               projectcss.all,
-                              sty.imagingReportList3
+                              projectcss.__wab_text,
+                              sty.modalityName
                             )}
-                            key={currentIndex}
                           >
-                            <Stack__
-                              as={"div"}
-                              data-plasmic-name={"imagingReportCard2"}
-                              data-plasmic-override={
-                                overrides.imagingReportCard2
-                              }
-                              hasGap={true}
-                              className={classNames(
-                                projectcss.all,
-                                sty.imagingReportCard2
-                              )}
-                            >
-                              <Stack__
-                                as={"div"}
-                                data-plasmic-name={"imagingTitleDatetime2"}
-                                data-plasmic-override={
-                                  overrides.imagingTitleDatetime2
-                                }
-                                hasGap={true}
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.imagingTitleDatetime2
-                                )}
-                              >
-                                <div
-                                  data-plasmic-name={"imagingDatetime3"}
-                                  data-plasmic-override={
-                                    overrides.imagingDatetime3
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return currentItem.name;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "";
                                   }
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.imagingDatetime3
-                                  )}
-                                >
-                                  <React.Fragment>
-                                    {currentItem.datetime}
-                                  </React.Fragment>
-                                </div>
-                                <div
-                                  data-plasmic-name={"imagingName"}
-                                  data-plasmic-override={overrides.imagingName}
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.imagingName
-                                  )}
-                                >
-                                  <React.Fragment>
-                                    {currentItem.name}
-                                  </React.Fragment>
-                                </div>
-                              </Stack__>
-                            </Stack__>
-                          </Stack__>
-                        );
-                      })}
-                    </section>
-                  </section>
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
+                          </div>
+                          <div
+                            data-plasmic-name={"modalityDatetime"}
+                            data-plasmic-override={overrides.modalityDatetime}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.modalityDatetime
+                            )}
+                          >
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return currentItem.datetime;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "";
+                                  }
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </Stack__>
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -2244,14 +2032,10 @@ const PlasmicDescendants = {
     "previousAdmission",
     "imagingType",
     "imagingModalities",
-    "viewPacsButton2",
-    "imagingReportsSection2",
-    "imagingReportSection2",
-    "imagingReportList3",
-    "imagingReportCard2",
-    "imagingTitleDatetime2",
-    "imagingDatetime3",
-    "imagingName",
+    "imagingModalitiesList",
+    "imagingModaltyCards",
+    "modalityName",
+    "modalityDatetime",
     "switchingTabs",
     "switchingTab",
     "homepage",
@@ -2347,53 +2131,24 @@ const PlasmicDescendants = {
   imagingType: ["imagingType"],
   imagingModalities: [
     "imagingModalities",
-    "viewPacsButton2",
-    "imagingReportsSection2",
-    "imagingReportSection2",
-    "imagingReportList3",
-    "imagingReportCard2",
-    "imagingTitleDatetime2",
-    "imagingDatetime3",
-    "imagingName"
+    "imagingModalitiesList",
+    "imagingModaltyCards",
+    "modalityName",
+    "modalityDatetime"
   ],
-  viewPacsButton2: ["viewPacsButton2"],
-  imagingReportsSection2: [
-    "imagingReportsSection2",
-    "imagingReportSection2",
-    "imagingReportList3",
-    "imagingReportCard2",
-    "imagingTitleDatetime2",
-    "imagingDatetime3",
-    "imagingName"
+  imagingModalitiesList: [
+    "imagingModalitiesList",
+    "imagingModaltyCards",
+    "modalityName",
+    "modalityDatetime"
   ],
-  imagingReportSection2: [
-    "imagingReportSection2",
-    "imagingReportList3",
-    "imagingReportCard2",
-    "imagingTitleDatetime2",
-    "imagingDatetime3",
-    "imagingName"
+  imagingModaltyCards: [
+    "imagingModaltyCards",
+    "modalityName",
+    "modalityDatetime"
   ],
-  imagingReportList3: [
-    "imagingReportList3",
-    "imagingReportCard2",
-    "imagingTitleDatetime2",
-    "imagingDatetime3",
-    "imagingName"
-  ],
-  imagingReportCard2: [
-    "imagingReportCard2",
-    "imagingTitleDatetime2",
-    "imagingDatetime3",
-    "imagingName"
-  ],
-  imagingTitleDatetime2: [
-    "imagingTitleDatetime2",
-    "imagingDatetime3",
-    "imagingName"
-  ],
-  imagingDatetime3: ["imagingDatetime3"],
-  imagingName: ["imagingName"],
+  modalityName: ["modalityName"],
+  modalityDatetime: ["modalityDatetime"],
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
@@ -2444,14 +2199,10 @@ type NodeDefaultElementType = {
   previousAdmission: typeof Button;
   imagingType: "div";
   imagingModalities: typeof ApiFetcherComponent;
-  viewPacsButton2: typeof Button;
-  imagingReportsSection2: "section";
-  imagingReportSection2: "section";
-  imagingReportList3: "div";
-  imagingReportCard2: "div";
-  imagingTitleDatetime2: "div";
-  imagingDatetime3: "div";
-  imagingName: "div";
+  imagingModalitiesList: "div";
+  imagingModaltyCards: "div";
+  modalityName: "div";
+  modalityDatetime: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   homepage: typeof PlasmicImg__;
@@ -2545,14 +2296,10 @@ export const PlasmicImagingReportList = Object.assign(
     previousAdmission: makeNodeComponent("previousAdmission"),
     imagingType: makeNodeComponent("imagingType"),
     imagingModalities: makeNodeComponent("imagingModalities"),
-    viewPacsButton2: makeNodeComponent("viewPacsButton2"),
-    imagingReportsSection2: makeNodeComponent("imagingReportsSection2"),
-    imagingReportSection2: makeNodeComponent("imagingReportSection2"),
-    imagingReportList3: makeNodeComponent("imagingReportList3"),
-    imagingReportCard2: makeNodeComponent("imagingReportCard2"),
-    imagingTitleDatetime2: makeNodeComponent("imagingTitleDatetime2"),
-    imagingDatetime3: makeNodeComponent("imagingDatetime3"),
-    imagingName: makeNodeComponent("imagingName"),
+    imagingModalitiesList: makeNodeComponent("imagingModalitiesList"),
+    imagingModaltyCards: makeNodeComponent("imagingModaltyCards"),
+    modalityName: makeNodeComponent("modalityName"),
+    modalityDatetime: makeNodeComponent("modalityDatetime"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),
