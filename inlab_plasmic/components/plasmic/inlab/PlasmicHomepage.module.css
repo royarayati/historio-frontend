@@ -1877,6 +1877,10 @@
   justify-self: center;
   font-size: 14px;
 }
+.modalNps__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
 @media (min-width: 0px) and (max-width: 760px) {
   .modalNps:global(.__wab_instance) {
     padding: 0px;
