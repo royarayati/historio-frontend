@@ -1616,6 +1616,20 @@
           "cssFilePath": "plasmic/inlab/PlasmicHighlightIcon.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "R9dokzeL8GJy",
+          "name": "ConsultList",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicConsultList.tsx",
+          "importSpec": {
+            "modulePath": "../pages/consult-list/[patient_id]/[adm_id].tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicConsultList.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/consult-list/[patient_id]/[adm_id]"
         }
       ],
       "icons": [
