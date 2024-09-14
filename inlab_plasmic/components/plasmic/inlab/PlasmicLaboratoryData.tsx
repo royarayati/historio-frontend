@@ -127,6 +127,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   antibioticName?: Flex__<"div">;
   antibioticResult?: Flex__<"div">;
   antibiogramHighlightOverlay?: Flex__<"div">;
+  previousAddmissionOverlay?: Flex__<"div">;
   laboratoryLists?: Flex__<"div">;
   labResults?: Flex__<"div">;
   checkedFactors?: Flex__<"div">;
@@ -1444,6 +1445,21 @@ ${ageMonths} months ${
                                         className={classNames(
                                           projectcss.all,
                                           sty.antibiogramHighlightOverlay
+                                        )}
+                                      />
+                                    ) : null}
+                                    {new Date(currentItem.issued_datetime) <
+                                    new Date($state.admissionDatetime) ? (
+                                      <div
+                                        data-plasmic-name={
+                                          "previousAddmissionOverlay"
+                                        }
+                                        data-plasmic-override={
+                                          overrides.previousAddmissionOverlay
+                                        }
+                                        className={classNames(
+                                          projectcss.all,
+                                          sty.previousAddmissionOverlay
                                         )}
                                       />
                                     ) : null}
@@ -2783,6 +2799,7 @@ const PlasmicDescendants = {
     "antibioticName",
     "antibioticResult",
     "antibiogramHighlightOverlay",
+    "previousAddmissionOverlay",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -2849,6 +2866,7 @@ const PlasmicDescendants = {
     "antibioticName",
     "antibioticResult",
     "antibiogramHighlightOverlay",
+    "previousAddmissionOverlay",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -2877,7 +2895,8 @@ const PlasmicDescendants = {
     "highlightAntibiogram",
     "antibioticName",
     "antibioticResult",
-    "antibiogramHighlightOverlay"
+    "antibiogramHighlightOverlay",
+    "previousAddmissionOverlay"
   ],
   antibiogramList: [
     "antibiogramList",
@@ -2888,7 +2907,8 @@ const PlasmicDescendants = {
     "highlightAntibiogram",
     "antibioticName",
     "antibioticResult",
-    "antibiogramHighlightOverlay"
+    "antibiogramHighlightOverlay",
+    "previousAddmissionOverlay"
   ],
   datetimeName: ["datetimeName", "antibiogramGroupName", "datetime"],
   antibiogramGroupName: ["antibiogramGroupName"],
@@ -2898,12 +2918,14 @@ const PlasmicDescendants = {
     "highlightAntibiogram",
     "antibioticName",
     "antibioticResult",
-    "antibiogramHighlightOverlay"
+    "antibiogramHighlightOverlay",
+    "previousAddmissionOverlay"
   ],
   highlightAntibiogram: ["highlightAntibiogram"],
   antibioticName: ["antibioticName"],
   antibioticResult: ["antibioticResult"],
   antibiogramHighlightOverlay: ["antibiogramHighlightOverlay"],
+  previousAddmissionOverlay: ["previousAddmissionOverlay"],
   laboratoryLists: [
     "laboratoryLists",
     "labResults",
@@ -3068,6 +3090,7 @@ type NodeDefaultElementType = {
   antibioticName: "div";
   antibioticResult: "div";
   antibiogramHighlightOverlay: "div";
+  previousAddmissionOverlay: "div";
   laboratoryLists: "div";
   labResults: "div";
   checkedFactors: "div";
@@ -3187,6 +3210,7 @@ export const PlasmicLaboratoryData = Object.assign(
     antibiogramHighlightOverlay: makeNodeComponent(
       "antibiogramHighlightOverlay"
     ),
+    previousAddmissionOverlay: makeNodeComponent("previousAddmissionOverlay"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     labResults: makeNodeComponent("labResults"),
     checkedFactors: makeNodeComponent("checkedFactors"),

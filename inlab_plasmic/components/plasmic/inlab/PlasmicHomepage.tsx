@@ -165,6 +165,7 @@ export type PlasmicHomepage__OverridesType = {
   ward?: Flex__<"div">;
   patientDataButtons?: Flex__<"div">;
   patientProfile?: Flex__<typeof PlasmicImg__>;
+  consultNotify?: Flex__<typeof PlasmicImg__>;
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratoryData?: Flex__<typeof PlasmicImg__>;
   commentButton?: Flex__<typeof Button>;
@@ -179,6 +180,8 @@ export type PlasmicHomepage__OverridesType = {
   modalNoticeBanner?: Flex__<typeof AntdModal>;
   newNoticeBanner?: Flex__<typeof NewNoticeBanner>;
   متوجهشدم2?: Flex__<typeof Button>;
+  modalNps?: Flex__<typeof AntdModal>;
+  columns?: Flex__<"div">;
 };
 
 export interface DefaultHomepageProps {}
@@ -799,6 +802,33 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "modalNps.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return (
+                localStorage.getItem("NPS_score") == (null || "" || undefined)
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "npsScore",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 0
       }
     ],
     [$props, $ctx, $refs]
@@ -2584,7 +2614,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       }
                                     </div>
                                   ),
-                                  trigger: (
+                                  trigger: false ? (
                                     <ApiFetcherComponent
                                       data-plasmic-name={
                                         "getMessageHealthStatus"
@@ -2838,7 +2868,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         )}
                                       </DataCtxReader__>
                                     </ApiFetcherComponent>
-                                  ),
+                                  ) : null,
                                   wrapClassName: classNames({
                                     [sty["pcls_GAr4R_cSdcgi"]]: true
                                   })
@@ -4113,6 +4143,93 @@ function PlasmicHomepage__RenderFunc(props: {
                                 }}
                               />
 
+                              {false ? (
+                                <PlasmicImg__
+                                  data-plasmic-name={"consultNotify"}
+                                  data-plasmic-override={
+                                    overrides.consultNotify
+                                  }
+                                  alt={""}
+                                  className={classNames(sty.consultNotify)}
+                                  displayHeight={"auto"}
+                                  displayMaxHeight={"none"}
+                                  displayMaxWidth={"100%"}
+                                  displayMinHeight={"0"}
+                                  displayMinWidth={"0"}
+                                  displayWidth={"22px"}
+                                  loading={"lazy"}
+                                  onClick={async event => {
+                                    const $steps = {};
+
+                                    $steps["goToConsultList"] = true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            destination: `/consult-list/${(() => {
+                                              try {
+                                                return currentItem.profile_number;
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return undefined;
+                                                }
+                                                throw e;
+                                              }
+                                            })()}/${(() => {
+                                              try {
+                                                return currentItem.admission_id;
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return undefined;
+                                                }
+                                                throw e;
+                                              }
+                                            })()}`
+                                          };
+                                          return (({ destination }) => {
+                                            if (
+                                              typeof destination === "string" &&
+                                              destination.startsWith("#")
+                                            ) {
+                                              document
+                                                .getElementById(
+                                                  destination.substr(1)
+                                                )
+                                                .scrollIntoView({
+                                                  behavior: "smooth"
+                                                });
+                                            } else {
+                                              __nextRouter?.push(destination);
+                                            }
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                    if (
+                                      $steps["goToConsultList"] != null &&
+                                      typeof $steps["goToConsultList"] ===
+                                        "object" &&
+                                      typeof $steps["goToConsultList"].then ===
+                                        "function"
+                                    ) {
+                                      $steps["goToConsultList"] = await $steps[
+                                        "goToConsultList"
+                                      ];
+                                    }
+                                  }}
+                                  src={{
+                                    src: "/new_inlab/plasmic/inlab/images/group381.svg",
+                                    fullWidth: 14.041,
+                                    fullHeight: 13.25,
+                                    aspectRatio: 1.066667
+                                  }}
+                                />
+                              ) : null}
                               <PlasmicImg__
                                 data-plasmic-name={"radiologyReport"}
                                 data-plasmic-override={
@@ -4888,467 +5005,475 @@ function PlasmicHomepage__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
         </AntdModal>
-        {(() => {
-          const child$Props = {
-            className: classNames("__wab_instance", sty.modalFeatureBanner),
-            closeButtonClassName: classNames({
-              [sty["pcls_LFU_8oG2APY4"]]: true
-            }),
-            closeIcon: null,
-            defaultStylesClassName: classNames(
-              projectcss.root_reset,
-              projectcss.plasmic_default_styles,
-              projectcss.plasmic_mixins,
-              projectcss.plasmic_tokens,
-              plasmic_antd_5_hostless_css.plasmic_tokens,
-              plasmic_plasmic_rich_components_css.plasmic_tokens
-            ),
-            hideFooter: true,
-            maskClosable: false,
-            modalContentClassName: classNames({
-              [sty["pcls_W8KQUTE3lWjO"]]: true
-            }),
-            modalScopeClassName: sty["modalFeatureBanner__modal"],
-            onOpenChange: generateStateOnChangeProp($state, [
-              "modalFeatureBanner",
-              "open"
-            ]),
-            open: generateStateValueProp($state, [
-              "modalFeatureBanner",
-              "open"
-            ]),
-            title: (
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__zLxjE
-                )}
-              >
-                {
-                  "\u0648\u06cc\u0698\u06af\u06cc \u0647\u0627\u06cc \u062c\u062f\u06cc\u062f"
-                }
-              </div>
-            ),
-            trigger: null,
-            wrapClassName: classNames({ [sty["pcls_SijkiB5x5hlZ"]]: true })
-          };
-          initializeCodeComponentStates(
-            $state,
-            [
-              {
-                name: "open",
-                plasmicStateName: "modalFeatureBanner.open"
-              }
-            ],
-            [],
-            undefined ?? {},
-            child$Props
-          );
-          initializePlasmicStates(
-            $state,
-            [
-              {
-                name: "modalFeatureBanner.open",
-                initFunc: ({ $props, $state, $queries }) =>
-                  hasVariant(globalVariants, "screen", "mobileFirst")
-                    ? (() => {
-                        try {
-                          return (
-                            $props.newVersionDatetime !==
-                            localStorage.getItem("new_version_datetime")
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return false;
-                          }
-                          throw e;
-                        }
-                      })()
-                    : (() => {
-                        try {
-                          return (
-                            $props.newVersionDatetime !==
-                            localStorage.getItem("new_version_datetime")
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return false;
-                          }
-                          throw e;
-                        }
-                      })()
-              }
-            ],
-            []
-          );
-          return (
-            <AntdModal
-              data-plasmic-name={"modalFeatureBanner"}
-              data-plasmic-override={overrides.modalFeatureBanner}
-              {...child$Props}
-            >
-              <NewFeatureBanner
-                data-plasmic-name={"newFeatureBanner"}
-                data-plasmic-override={overrides.newFeatureBanner}
-                className={classNames("__wab_instance", sty.newFeatureBanner)}
-                newVersionDatetime2={args.newVersionDatetime}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__o7FzR
-                  )}
-                  dir={"rtl"}
-                >
-                  <React.Fragment>
-                    <React.Fragment>{""}</React.Fragment>
+        {false
+          ? (() => {
+              const child$Props = {
+                className: classNames("__wab_instance", sty.modalFeatureBanner),
+                closeButtonClassName: classNames({
+                  [sty["pcls_LFU_8oG2APY4"]]: true
+                }),
+                closeIcon: null,
+                defaultStylesClassName: classNames(
+                  projectcss.root_reset,
+                  projectcss.plasmic_default_styles,
+                  projectcss.plasmic_mixins,
+                  projectcss.plasmic_tokens,
+                  plasmic_antd_5_hostless_css.plasmic_tokens,
+                  plasmic_plasmic_rich_components_css.plasmic_tokens
+                ),
+                hideFooter: true,
+                maskClosable: false,
+                modalContentClassName: classNames({
+                  [sty["pcls_W8KQUTE3lWjO"]]: true
+                }),
+                modalScopeClassName: sty["modalFeatureBanner__modal"],
+                onOpenChange: generateStateOnChangeProp($state, [
+                  "modalFeatureBanner",
+                  "open"
+                ]),
+                open: generateStateValueProp($state, [
+                  "modalFeatureBanner",
+                  "open"
+                ]),
+                title: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__zLxjE
+                    )}
+                  >
                     {
-                      <ul
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.ul,
-                          sty.ul__tVrkg
-                        )}
-                      >
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li___2GatI
-                          )}
-                        >
-                          {
-                            "\u062a\u0645\u0627\u06cc\u0632 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u0648 \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062f\u0631 \u0628\u0633\u062a\u0631\u06cc \u0641\u0639\u0644\u06cc \u0627\u0632 \u0628\u0633\u062a\u0631\u06cc \u0647\u0627\u06cc \u0642\u0628\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631 "
-                          }
-                        </li>
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__gwCgY
-                          )}
-                        >
-                          {
-                            "\u0641\u0631\u0627\u0647\u0645 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0645\u0634\u062e\u0635 \u06a9\u0631\u062f\u0646 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0647\u0645 \u0628\u06cc\u0645\u0627\u0631 \u0628\u0631\u0627\u06cc \u062e\u0648\u062f \u0648 \u062f\u06cc\u06af\u0631 \u0647\u0645\u06a9\u0627\u0631\u0627\u0646 "
-                          }
-                        </li>
-                      </ul>
+                      "\u0648\u06cc\u0698\u06af\u06cc \u0647\u0627\u06cc \u062c\u062f\u06cc\u062f"
                     }
-                    <React.Fragment>{""}</React.Fragment>
-                    {
-                      <ul
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.ul,
-                          sty.ul__vhe3O
-                        )}
-                      >
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__huxmq
-                          )}
-                        >
-                          {
-                            '\u0641\u0631\u0627\u0647\u0645 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0627\u0639\u0644\u0627\u0645 \u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 ("\u0628\u062d\u0631\u0627\u0646\u06cc" \u06cc\u0627 "\u067e\u0627\u06cc\u062f\u0627\u0631")\u060c \u062f\u0631 \u06a9\u0627\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u060c \u0628\u0647 \u0647\u062f\u0641 \u0645\u0637\u0644\u0639 \u0646\u0645\u0648\u062f\u0646 \u062f\u06cc\u06af\u0631 \u0647\u0645\u06a9\u0627\u0631\u0627\u0646'
-                          }
-                        </li>
-                      </ul>
-                    }
-                    <React.Fragment>{""}</React.Fragment>
-                    {
-                      <ul
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.ul,
-                          sty.ul___0Txdk
-                        )}
-                      >
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__x1Jmu
-                          )}
-                        >
-                          {
-                            "\u0646\u0645\u0627\u06cc\u0634 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 "
-                          }
-                        </li>
-                      </ul>
-                    }
-                    <React.Fragment>{""}</React.Fragment>
-                    {
-                      <ul
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.ul,
-                          sty.ul__tNiCb
-                        )}
-                      >
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__vwTnk
-                          )}
-                        >
-                          {
-                            "\u0627\u0645\u06a9\u0627\u0646 \u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0647 \u0635\u0648\u0631\u062a \u0645\u0633\u062a\u0642\u06cc\u0645 "
-                          }
-                        </li>
-                      </ul>
-                    }
-                    <React.Fragment>{""}</React.Fragment>
-                    {
-                      <ul
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.ul,
-                          sty.ul__j2Q7Y
-                        )}
-                      >
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__vol
-                          )}
-                        >
-                          {
-                            "\u0646\u0645\u0627\u06cc\u0634 \u062a\u0639\u062f\u0627\u062f \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0634\u062f\u0647"
-                          }
-                        </li>
-                      </ul>
-                    }
-                    <React.Fragment>{""}</React.Fragment>
-                    {
-                      <ul
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.ul,
-                          sty.ul__uLr3K
-                        )}
-                      >
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__xs4
-                          )}
-                        >
-                          {
-                            "\u0646\u0645\u0627\u06cc\u0634 \u0646\u062a\u06cc\u062c\u0647 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0622\u0646\u062a\u06cc \u0628\u06cc\u0648\u06af\u0631\u0627\u0645 \u0628\u06cc\u0645\u0627\u0631"
-                          }
-                        </li>
-                      </ul>
-                    }
-                    <React.Fragment>{""}</React.Fragment>
-                    {
-                      <ul
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.ul,
-                          sty.ul__ctBZ
-                        )}
-                      >
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__cXPbD
-                          )}
-                        >
-                          {
-                            "\u062f\u0631\u0635\u0648\u0631\u062a \u0639\u062f\u0645 \u0646\u0645\u0627\u06cc\u0634 \u0644\u06cc\u0633\u062a \u0628\u062e\u0634 \u0647\u0627\u060c \u0628\u0627 \u0632\u062f\u0646 \u06a9\u0646\u0627\u0631 \u0622\u062f\u0631\u0633 \u0645\u0631\u0648\u0631\u06af\u0631\u060c \u06a9\u064e\u0634 \u0645\u0631\u0648\u0631\u06af\u0631 \u0631\u0627 \u067e\u0627\u06a9 \u0646\u0645\u0627\u06cc\u06cc\u062f (Clear cache)"
-                          }
-                        </li>
-                      </ul>
-                    }
-                    <React.Fragment>{""}</React.Fragment>
-                  </React.Fragment>
-                </div>
-              </NewFeatureBanner>
-              <Button
-                data-plasmic-name={
-                  "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"
-                }
-                data-plasmic-override={overrides.متوجهشدم}
-                className={classNames("__wab_instance", sty.متوجهشدم)}
-                color={"blue"}
-                deselected={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "deselected"
-                ])}
-                isDisabled={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "isDisabled"
-                ])}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["setUpdateVersionLocalStorage"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return localStorage.setItem(
-                              "new_version_datetime",
-                              $props.newVersionDatetime
-                            );
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["setUpdateVersionLocalStorage"] != null &&
-                    typeof $steps["setUpdateVersionLocalStorage"] ===
-                      "object" &&
-                    typeof $steps["setUpdateVersionLocalStorage"].then ===
-                      "function"
-                  ) {
-                    $steps["setUpdateVersionLocalStorage"] = await $steps[
-                      "setUpdateVersionLocalStorage"
-                    ];
+                  </div>
+                ),
+                trigger: null,
+                wrapClassName: classNames({ [sty["pcls_SijkiB5x5hlZ"]]: true })
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "open",
+                    plasmicStateName: "modalFeatureBanner.open"
                   }
-
-                  $steps["updateModalFeatureBannerOpen"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["modalFeatureBanner", "open"]
-                          },
-                          operation: 0,
-                          value: false
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateModalFeatureBannerOpen"] != null &&
-                    typeof $steps["updateModalFeatureBannerOpen"] ===
-                      "object" &&
-                    typeof $steps["updateModalFeatureBannerOpen"].then ===
-                      "function"
-                  ) {
-                    $steps["updateModalFeatureBannerOpen"] = await $steps[
-                      "updateModalFeatureBannerOpen"
-                    ];
-                  }
-
-                  $steps["runCode"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return (() => {
-                              return console.log(
-                                `"new_version_datetime": ${localStorage.getItem(
-                                  "new_version_datetime"
-                                )}`
+                ],
+                [],
+                undefined ?? {},
+                child$Props
+              );
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "modalFeatureBanner.open",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return (
+                                $props.newVersionDatetime !==
+                                localStorage.getItem("new_version_datetime")
                               );
-                            })();
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["runCode"] != null &&
-                    typeof $steps["runCode"] === "object" &&
-                    typeof $steps["runCode"].then === "function"
-                  ) {
-                    $steps["runCode"] = await $steps["runCode"];
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : (() => {
+                            try {
+                              return (
+                                $props.newVersionDatetime !==
+                                localStorage.getItem("new_version_datetime")
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
                   }
-                }}
-                onDeselectedChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, ["متوجهشدم", "deselected"])(
-                    eventArgs[0]
-                  );
-                }}
-                onIsDisabledChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, ["متوجهشدم", "isDisabled"])(
-                    eventArgs[0]
-                  );
-                }}
-                onSelectedChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, ["متوجهشدم", "selected"])(
-                    eventArgs[0]
-                  );
-                }}
-                onSortDeselectedChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "متوجهشدم",
-                    "sortDeselected"
-                  ])(eventArgs[0]);
-                }}
-                onSortSelectedChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "متوجهشدم",
-                    "sortSelected"
-                  ])(eventArgs[0]);
-                }}
-                selected={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "selected"
-                ])}
-                shape={"sharp"}
-                sortDeselected={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "sortDeselected"
-                ])}
-                sortSelected={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "sortSelected"
-                ])}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text___0JqOy
-                  )}
+                ],
+                []
+              );
+              return (
+                <AntdModal
+                  data-plasmic-name={"modalFeatureBanner"}
+                  data-plasmic-override={overrides.modalFeatureBanner}
+                  {...child$Props}
                 >
-                  {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
-                </div>
-              </Button>
-            </AntdModal>
-          );
-        })()}
+                  <NewFeatureBanner
+                    data-plasmic-name={"newFeatureBanner"}
+                    data-plasmic-override={overrides.newFeatureBanner}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.newFeatureBanner
+                    )}
+                    newVersionDatetime2={args.newVersionDatetime}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__o7FzR
+                      )}
+                      dir={"rtl"}
+                    >
+                      <React.Fragment>
+                        <React.Fragment>{""}</React.Fragment>
+                        {
+                          <ul
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.ul,
+                              sty.ul__tVrkg
+                            )}
+                          >
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li___2GatI
+                              )}
+                            >
+                              {
+                                "\u062a\u0645\u0627\u06cc\u0632 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u0648 \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062f\u0631 \u0628\u0633\u062a\u0631\u06cc \u0641\u0639\u0644\u06cc \u0627\u0632 \u0628\u0633\u062a\u0631\u06cc \u0647\u0627\u06cc \u0642\u0628\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631 "
+                              }
+                            </li>
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__gwCgY
+                              )}
+                            >
+                              {
+                                "\u0641\u0631\u0627\u0647\u0645 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0645\u0634\u062e\u0635 \u06a9\u0631\u062f\u0646 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0647\u0645 \u0628\u06cc\u0645\u0627\u0631 \u0628\u0631\u0627\u06cc \u062e\u0648\u062f \u0648 \u062f\u06cc\u06af\u0631 \u0647\u0645\u06a9\u0627\u0631\u0627\u0646 "
+                              }
+                            </li>
+                          </ul>
+                        }
+                        <React.Fragment>{""}</React.Fragment>
+                        {
+                          <ul
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.ul,
+                              sty.ul__vhe3O
+                            )}
+                          >
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__huxmq
+                              )}
+                            >
+                              {
+                                '\u0641\u0631\u0627\u0647\u0645 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0627\u0639\u0644\u0627\u0645 \u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 ("\u0628\u062d\u0631\u0627\u0646\u06cc" \u06cc\u0627 "\u067e\u0627\u06cc\u062f\u0627\u0631")\u060c \u062f\u0631 \u06a9\u0627\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u060c \u0628\u0647 \u0647\u062f\u0641 \u0645\u0637\u0644\u0639 \u0646\u0645\u0648\u062f\u0646 \u062f\u06cc\u06af\u0631 \u0647\u0645\u06a9\u0627\u0631\u0627\u0646'
+                              }
+                            </li>
+                          </ul>
+                        }
+                        <React.Fragment>{""}</React.Fragment>
+                        {
+                          <ul
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.ul,
+                              sty.ul___0Txdk
+                            )}
+                          >
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__x1Jmu
+                              )}
+                            >
+                              {
+                                "\u0646\u0645\u0627\u06cc\u0634 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 "
+                              }
+                            </li>
+                          </ul>
+                        }
+                        <React.Fragment>{""}</React.Fragment>
+                        {
+                          <ul
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.ul,
+                              sty.ul__tNiCb
+                            )}
+                          >
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__vwTnk
+                              )}
+                            >
+                              {
+                                "\u0627\u0645\u06a9\u0627\u0646 \u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0647 \u0635\u0648\u0631\u062a \u0645\u0633\u062a\u0642\u06cc\u0645 "
+                              }
+                            </li>
+                          </ul>
+                        }
+                        <React.Fragment>{""}</React.Fragment>
+                        {
+                          <ul
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.ul,
+                              sty.ul__j2Q7Y
+                            )}
+                          >
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__vol
+                              )}
+                            >
+                              {
+                                "\u0646\u0645\u0627\u06cc\u0634 \u062a\u0639\u062f\u0627\u062f \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0634\u062f\u0647"
+                              }
+                            </li>
+                          </ul>
+                        }
+                        <React.Fragment>{""}</React.Fragment>
+                        {
+                          <ul
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.ul,
+                              sty.ul__uLr3K
+                            )}
+                          >
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__xs4
+                              )}
+                            >
+                              {
+                                "\u0646\u0645\u0627\u06cc\u0634 \u0646\u062a\u06cc\u062c\u0647 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0622\u0646\u062a\u06cc \u0628\u06cc\u0648\u06af\u0631\u0627\u0645 \u0628\u06cc\u0645\u0627\u0631"
+                              }
+                            </li>
+                          </ul>
+                        }
+                        <React.Fragment>{""}</React.Fragment>
+                        {
+                          <ul
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.ul,
+                              sty.ul__ctBZ
+                            )}
+                          >
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__cXPbD
+                              )}
+                            >
+                              {
+                                "\u062f\u0631\u0635\u0648\u0631\u062a \u0639\u062f\u0645 \u0646\u0645\u0627\u06cc\u0634 \u0644\u06cc\u0633\u062a \u0628\u062e\u0634 \u0647\u0627\u060c \u0628\u0627 \u0632\u062f\u0646 \u06a9\u0646\u0627\u0631 \u0622\u062f\u0631\u0633 \u0645\u0631\u0648\u0631\u06af\u0631\u060c \u06a9\u064e\u0634 \u0645\u0631\u0648\u0631\u06af\u0631 \u0631\u0627 \u067e\u0627\u06a9 \u0646\u0645\u0627\u06cc\u06cc\u062f (Clear cache)"
+                              }
+                            </li>
+                          </ul>
+                        }
+                        <React.Fragment>{""}</React.Fragment>
+                      </React.Fragment>
+                    </div>
+                  </NewFeatureBanner>
+                  <Button
+                    data-plasmic-name={
+                      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"
+                    }
+                    data-plasmic-override={overrides.متوجهشدم}
+                    className={classNames("__wab_instance", sty.متوجهشدم)}
+                    color={"blue"}
+                    deselected={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["setUpdateVersionLocalStorage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return localStorage.setItem(
+                                  "new_version_datetime",
+                                  $props.newVersionDatetime
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setUpdateVersionLocalStorage"] != null &&
+                        typeof $steps["setUpdateVersionLocalStorage"] ===
+                          "object" &&
+                        typeof $steps["setUpdateVersionLocalStorage"].then ===
+                          "function"
+                      ) {
+                        $steps["setUpdateVersionLocalStorage"] = await $steps[
+                          "setUpdateVersionLocalStorage"
+                        ];
+                      }
+
+                      $steps["updateModalFeatureBannerOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["modalFeatureBanner", "open"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateModalFeatureBannerOpen"] != null &&
+                        typeof $steps["updateModalFeatureBannerOpen"] ===
+                          "object" &&
+                        typeof $steps["updateModalFeatureBannerOpen"].then ===
+                          "function"
+                      ) {
+                        $steps["updateModalFeatureBannerOpen"] = await $steps[
+                          "updateModalFeatureBannerOpen"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  return console.log(
+                                    `"new_version_datetime": ${localStorage.getItem(
+                                      "new_version_datetime"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+                    }}
+                    onDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم",
+                        "deselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onIsDisabledChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }}
+                    onSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم",
+                        "selected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "متوجهشدم",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "selected"
+                    ])}
+                    shape={"sharp"}
+                    sortDeselected={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___0JqOy
+                      )}
+                    >
+                      {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
+                    </div>
+                  </Button>
+                </AntdModal>
+              );
+            })()
+          : null}
         {false
           ? (() => {
               const child$Props = {
@@ -5629,6 +5754,1703 @@ function PlasmicHomepage__RenderFunc(props: {
               );
             })()
           : null}
+        {(() => {
+          const child$Props = {
+            className: classNames("__wab_instance", sty.modalNps),
+            closeIcon: null,
+            defaultStylesClassName: classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              projectcss.plasmic_tokens,
+              plasmic_antd_5_hostless_css.plasmic_tokens,
+              plasmic_plasmic_rich_components_css.plasmic_tokens
+            ),
+            hideFooter: true,
+            maskClosable: false,
+            modalContentClassName: classNames({
+              [sty["pcls_O5s2E5s6CSo-"]]: true
+            }),
+            modalScopeClassName: sty["modalNps__modal"],
+            onOpenChange: generateStateOnChangeProp($state, [
+              "modalNps",
+              "open"
+            ]),
+            open: generateStateValueProp($state, ["modalNps", "open"]),
+            title: (
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__zOiDr
+                )}
+                dir={"rtl"}
+              >
+                {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                  <React.Fragment>
+                    <span
+                      className={"plasmic_default__all plasmic_default__span"}
+                      style={{ color: "#000000", fontWeight: 800 }}
+                    >
+                      {
+                        "\u0686\u0642\u062f\u0631 \u062d\u0627\u0636\u0631 \u0647\u0633\u062a\u06cc\u062f \u0627\u06cc\u0646\u0644\u0628\u200c\u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0647 \u0633\u0627\u06cc\u0631\u06cc\u0646 \u0645\u0639\u0631\u0641\u06cc \u06a9\u0646\u06cc\u062f\u061f "
+                      }
+                    </span>
+                    <React.Fragment>{"\n"}</React.Fragment>
+                    <span
+                      className={"plasmic_default__all plasmic_default__span"}
+                      style={{ color: "#000000", fontWeight: 800 }}
+                    >
+                      {
+                        "( 0 : \u0647\u0631\u06af\u0632    10 : \u062e\u06cc\u0644\u06cc \u0632\u06cc\u0627\u062f )"
+                      }
+                    </span>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <span
+                      className={"plasmic_default__all plasmic_default__span"}
+                      style={{ color: "#000000", fontWeight: 800 }}
+                    >
+                      {
+                        "\u0686\u0642\u062f\u0631 \u062d\u0627\u0636\u0631 \u0647\u0633\u062a\u06cc\u062f \u0627\u06cc\u0646\u0644\u0628\u200c\u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0647 \u0633\u0627\u06cc\u0631\u06cc\u0646 \u0645\u0639\u0631\u0641\u06cc \u06a9\u0646\u06cc\u062f\u061f ( 0 : \u0647\u0631\u06af\u0632     10 : \u062e\u06cc\u0644\u06cc \u0632\u06cc\u0627\u062f )"
+                      }
+                    </span>
+                  </React.Fragment>
+                )}
+              </div>
+            ),
+            trigger: null,
+            width: "85%"
+          };
+          initializeCodeComponentStates(
+            $state,
+            [
+              {
+                name: "open",
+                plasmicStateName: "modalNps.open"
+              }
+            ],
+            [],
+            undefined ?? {},
+            child$Props
+          );
+          initializePlasmicStates(
+            $state,
+            [
+              {
+                name: "modalNps.open",
+                initFunc: ({ $props, $state, $queries }) =>
+                  (() => {
+                    try {
+                      return (
+                        localStorage.getItem("NPS_score") ==
+                        (null || "" || undefined)
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return false;
+                      }
+                      throw e;
+                    }
+                  })()
+              }
+            ],
+            []
+          );
+          return (
+            <AntdModal
+              data-plasmic-name={"modalNps"}
+              data-plasmic-override={overrides.modalNps}
+              {...child$Props}
+            >
+              <Stack__
+                as={"div"}
+                data-plasmic-name={"columns"}
+                data-plasmic-override={overrides.columns}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.columns)}
+              >
+                <div className={classNames(projectcss.all, sty.column__jN2Lb)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__awXqP
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 0
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"0"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__vouX)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__m5Bdj
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 1
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"1"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__rH3P)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__glBnQ
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 2
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"2"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__u5JYs)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__jpf1G
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 3
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"3"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__qo37P)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___7D4XV
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"4"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__nTn8H)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__yfPmS
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 5
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"5"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__uMkJu)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__in5S
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 6
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"6"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__g9D50)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__axA4C
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 7
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"7"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__gEBse)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__jAhAx
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 8
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"\ufeff8"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__ghPy9)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__k5MHa
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 9
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"\ufeff9"}
+                  </div>
+                </div>
+                <div className={classNames(projectcss.all, sty.column__t0CWh)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___3DYqN
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateStateNpsScore"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["npsScore"]
+                              },
+                              operation: 0,
+                              value: 10
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateStateNpsScore"] != null &&
+                        typeof $steps["updateStateNpsScore"] === "object" &&
+                        typeof $steps["updateStateNpsScore"].then === "function"
+                      ) {
+                        $steps["updateStateNpsScore"] = await $steps[
+                          "updateStateNpsScore"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "NPS_score",
+                                    $state.npsScore
+                                  );
+                                  console.log(
+                                    `state_NPS_score: ${$state.npsScore}`
+                                  );
+                                  return console.log(
+                                    `local_NPS_score: ${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["postNps"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )}&score=${localStorage.getItem("NPS_score")}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["postNps"] != null &&
+                        typeof $steps["postNps"] === "object" &&
+                        typeof $steps["postNps"].then === "function"
+                      ) {
+                        $steps["postNps"] = await $steps["postNps"];
+                      }
+
+                      $steps["updateModalNpsOpen"] =
+                        $steps.postNps.status == 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["modalNps", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateModalNpsOpen"] != null &&
+                        typeof $steps["updateModalNpsOpen"] === "object" &&
+                        typeof $steps["updateModalNpsOpen"].then === "function"
+                      ) {
+                        $steps["updateModalNpsOpen"] = await $steps[
+                          "updateModalNpsOpen"
+                        ];
+                      }
+                    }}
+                  >
+                    {"10"}
+                  </div>
+                </div>
+              </Stack__>
+            </AntdModal>
+          );
+        })()}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -5685,6 +7507,7 @@ const PlasmicDescendants = {
     "ward",
     "patientDataButtons",
     "patientProfile",
+    "consultNotify",
     "radiologyReport",
     "laboratoryData",
     "commentButton",
@@ -5698,7 +7521,9 @@ const PlasmicDescendants = {
     "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645",
     "modalNoticeBanner",
     "newNoticeBanner",
-    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452",
+    "modalNps",
+    "columns"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -5749,6 +7574,7 @@ const PlasmicDescendants = {
     "ward",
     "patientDataButtons",
     "patientProfile",
+    "consultNotify",
     "radiologyReport",
     "laboratoryData"
   ],
@@ -5831,6 +7657,7 @@ const PlasmicDescendants = {
     "ward",
     "patientDataButtons",
     "patientProfile",
+    "consultNotify",
     "radiologyReport",
     "laboratoryData"
   ],
@@ -5871,6 +7698,7 @@ const PlasmicDescendants = {
     "ward",
     "patientDataButtons",
     "patientProfile",
+    "consultNotify",
     "radiologyReport",
     "laboratoryData"
   ],
@@ -5934,10 +7762,12 @@ const PlasmicDescendants = {
   patientDataButtons: [
     "patientDataButtons",
     "patientProfile",
+    "consultNotify",
     "radiologyReport",
     "laboratoryData"
   ],
   patientProfile: ["patientProfile"],
+  consultNotify: ["consultNotify"],
   radiologyReport: ["radiologyReport"],
   laboratoryData: ["laboratoryData"],
   commentButton: ["commentButton"],
@@ -5959,7 +7789,9 @@ const PlasmicDescendants = {
     "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
   ],
   newNoticeBanner: ["newNoticeBanner"],
-  متوجهشدم2: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"]
+  متوجهشدم2: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"],
+  modalNps: ["modalNps", "columns"],
+  columns: ["columns"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -6014,6 +7846,7 @@ type NodeDefaultElementType = {
   ward: "div";
   patientDataButtons: "div";
   patientProfile: typeof PlasmicImg__;
+  consultNotify: typeof PlasmicImg__;
   radiologyReport: typeof PlasmicImg__;
   laboratoryData: typeof PlasmicImg__;
   commentButton: typeof Button;
@@ -6028,6 +7861,8 @@ type NodeDefaultElementType = {
   modalNoticeBanner: typeof AntdModal;
   newNoticeBanner: typeof NewNoticeBanner;
   متوجهشدم2: typeof Button;
+  modalNps: typeof AntdModal;
+  columns: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -6150,6 +7985,7 @@ export const PlasmicHomepage = Object.assign(
     ward: makeNodeComponent("ward"),
     patientDataButtons: makeNodeComponent("patientDataButtons"),
     patientProfile: makeNodeComponent("patientProfile"),
+    consultNotify: makeNodeComponent("consultNotify"),
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratoryData: makeNodeComponent("laboratoryData"),
     commentButton: makeNodeComponent("commentButton"),
@@ -6168,6 +8004,8 @@ export const PlasmicHomepage = Object.assign(
     متوجهشدم2: makeNodeComponent(
       "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
     ),
+    modalNps: makeNodeComponent("modalNps"),
+    columns: makeNodeComponent("columns"),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,
