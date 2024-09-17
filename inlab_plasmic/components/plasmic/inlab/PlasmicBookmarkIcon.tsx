@@ -292,21 +292,21 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           $steps["toggleBookmark"] = await $steps["toggleBookmark"];
         }
 
-        $steps["runTrigerReload"] =
+        $steps["runInteractionProp"] =
           $steps.toggleBookmark.status === 200
             ? (() => {
-                const actionArgs = { eventRef: $props["trigerReload"] };
+                const actionArgs = {};
                 return (({ eventRef, args }) => {
                   return eventRef?.(...(args ?? []));
                 })?.apply(null, [actionArgs]);
               })()
             : undefined;
         if (
-          $steps["runTrigerReload"] != null &&
-          typeof $steps["runTrigerReload"] === "object" &&
-          typeof $steps["runTrigerReload"].then === "function"
+          $steps["runInteractionProp"] != null &&
+          typeof $steps["runInteractionProp"] === "object" &&
+          typeof $steps["runInteractionProp"].then === "function"
         ) {
-          $steps["runTrigerReload"] = await $steps["runTrigerReload"];
+          $steps["runInteractionProp"] = await $steps["runInteractionProp"];
         }
 
         $steps["deactivateLoadingBookmarkVariant"] =

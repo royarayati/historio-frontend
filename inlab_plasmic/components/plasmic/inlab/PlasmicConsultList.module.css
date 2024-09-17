@@ -447,53 +447,65 @@
 .switchingTab:global(.__wab_instance) {
   max-width: 100%;
 }
-.img__kNz2 {
+.homepage {
   position: relative;
   object-fit: fill;
   max-width: 100%;
-  width: 25%;
+  width: 20%;
   height: 25px;
   margin: 0;
   border-right: 1px none #aeaeae;
 }
-.img__kNz2 > picture > img {
+.homepage > picture > img {
   object-fit: fill;
 }
-.img__nSsle {
+.consultList2 {
   position: relative;
   object-fit: fill;
   max-width: 100%;
-  width: 25%;
+  width: 20%;
   height: 25px;
   margin: 0;
   border-left: 1px solid #00000045;
 }
-.img__nSsle > picture > img {
+.consultList2 > picture > img {
   object-fit: fill;
 }
-.img__yOogM {
+.patientProfile {
   position: relative;
   object-fit: fill;
   max-width: 100%;
-  width: 25%;
+  width: 20%;
+  height: 25px;
+  margin: 0;
+  border-left: 1px solid #00000045;
+}
+.patientProfile > picture > img {
+  object-fit: fill;
+}
+.imagingReportList {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
   height: 25px;
   margin: 1px;
   border-right: 1px solid #00000045;
   border-left: 1px solid #00000045;
 }
-.img__yOogM > picture > img {
+.imagingReportList > picture > img {
   object-fit: fill;
 }
-.img__zP8Hf {
+.laboratoryData {
   position: relative;
   object-fit: fill;
   max-width: 100%;
-  width: 25%;
+  width: 20%;
   border-right-style: none;
   border-right-width: 1px;
   height: 25px;
   margin: 0;
 }
-.img__zP8Hf > picture > img {
+.laboratoryData > picture > img {
   object-fit: fill;
 }

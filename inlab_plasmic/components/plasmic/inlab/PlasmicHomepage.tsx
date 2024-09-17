@@ -5649,7 +5649,20 @@ function PlasmicHomepage__RenderFunc(props: {
                                     $steps["goToConsultList"] = true
                                       ? (() => {
                                           const actionArgs = {
-                                            destination: `/consult-list/[code]/${(() => {
+                                            destination: `/consult-list/${(() => {
+                                              try {
+                                                return currentItem.profile_number;
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return undefined;
+                                                }
+                                                throw e;
+                                              }
+                                            })()}/${(() => {
                                               try {
                                                 return currentItem.admission_id;
                                               } catch (e) {
@@ -5695,10 +5708,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                     }
                                   }}
                                   src={{
-                                    src: "/new_inlab/plasmic/inlab/images/group381.svg",
-                                    fullWidth: 14.041,
-                                    fullHeight: 13.25,
-                                    aspectRatio: 1.066667
+                                    src: "/new_inlab/plasmic/inlab/images/consult0F4Cb101Svg.svg",
+                                    fullWidth: 24,
+                                    fullHeight: 24,
+                                    aspectRatio: 1
                                   }}
                                 />
 
@@ -6537,6 +6550,9 @@ function PlasmicHomepage__RenderFunc(props: {
                     )}
                     hideFooter={true}
                     maskClosable={false}
+                    modalContentClassName={classNames({
+                      [sty["pcls_THa7BUI8A7ZH"]]: true
+                    })}
                     modalScopeClassName={
                       sty["modalConsultSenderService__modal"]
                     }
@@ -6976,6 +6992,9 @@ function PlasmicHomepage__RenderFunc(props: {
                     )}
                     hideFooter={true}
                     maskClosable={false}
+                    modalContentClassName={classNames({
+                      [sty["pcls_oRgYWFPy3jBh"]]: true
+                    })}
                     modalScopeClassName={
                       sty["modalConsultReceiverService__modal"]
                     }
@@ -7438,6 +7457,9 @@ function PlasmicHomepage__RenderFunc(props: {
             )}
             hideFooter={true}
             maskClosable={true}
+            modalContentClassName={classNames({
+              [sty["pcls_TxpP0WANneR1"]]: true
+            })}
             modalScopeClassName={sty["modalConsultFilterType__modal"]}
             onOpenChange={generateStateOnChangeProp($state, [
               "modalConsultFilterType",

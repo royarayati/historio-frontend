@@ -225,7 +225,7 @@
   position: relative;
   object-fit: fill;
   max-width: 100%;
-  width: 25%;
+  width: 20%;
   height: 25px;
   margin: 0;
   border-right: 1px none #aeaeae;
@@ -233,11 +233,24 @@
 .homepagePage > picture > img {
   object-fit: fill;
 }
+.consult {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  height: 25px;
+  margin: 0;
+  border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
+  border-left: 0.5px solid var(--token-8PxxXPNrIohQ);
+}
+.consult > picture > img {
+  object-fit: fill;
+}
 .patientProfilePage {
   position: relative;
   object-fit: fill;
   max-width: 100%;
-  width: 25%;
+  width: 20%;
   height: 25px;
   margin: 0;
   border-left: 1px solid #00000045;
@@ -249,7 +262,7 @@
   position: relative;
   object-fit: fill;
   max-width: 100%;
-  width: 25%;
+  width: 20%;
   height: 25px;
   margin: 1px;
   border-right: 1px solid #00000045;
@@ -262,7 +275,7 @@
   position: relative;
   object-fit: fill;
   max-width: 100%;
-  width: 25%;
+  width: 20%;
   border-right-style: none;
   border-right-width: 1px;
   height: 25px;

@@ -2387,6 +2387,10 @@
   object-fit: cover;
   background: #ffffff;
 }
+.modalConsultSenderService__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
 .senderServiceList {
   display: flex;
   position: relative;
@@ -2477,6 +2481,10 @@
   max-width: 100%;
   object-fit: cover;
   background: #ffffff;
+}
+.modalConsultReceiverService__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
 }
 .receiverServiceList {
   display: flex;
@@ -2572,6 +2580,10 @@
   object-fit: cover;
   background: #ffffff;
   height: 163px;
+}
+.modalConsultFilterType__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
 }
 .filterTypes {
   display: flex;

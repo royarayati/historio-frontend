@@ -121,6 +121,7 @@ export type PlasmicPatientProfile__OverridesType = {
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   homepage?: Flex__<typeof PlasmicImg__>;
+  consult?: Flex__<typeof PlasmicImg__>;
   patientProfile5?: Flex__<typeof PlasmicImg__>;
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratory?: Flex__<typeof PlasmicImg__>;
@@ -819,7 +820,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
-                displayWidth={"25%"}
+                displayWidth={"20%"}
                 loading={"lazy"}
                 onClick={async event => {
                   const $steps = {};
@@ -858,6 +859,54 @@ function PlasmicPatientProfile__RenderFunc(props: {
               />
 
               <PlasmicImg__
+                data-plasmic-name={"consult"}
+                data-plasmic-override={overrides.consult}
+                alt={""}
+                className={classNames(sty.consult)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"20%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToHomepage"] = true
+                    ? (() => {
+                        const actionArgs = { destination: `/patients` };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToHomepage"] != null &&
+                    typeof $steps["goToHomepage"] === "object" &&
+                    typeof $steps["goToHomepage"].then === "function"
+                  ) {
+                    $steps["goToHomepage"] = await $steps["goToHomepage"];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/consult0F4Cb101Svg.svg",
+                  fullWidth: 24,
+                  fullHeight: 24,
+                  aspectRatio: 1
+                }}
+              />
+
+              <PlasmicImg__
                 data-plasmic-name={"patientProfile5"}
                 data-plasmic-override={overrides.patientProfile5}
                 alt={""}
@@ -867,7 +916,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
-                displayWidth={"25%"}
+                displayWidth={"20%"}
                 loading={"lazy"}
                 onClick={async event => {
                   const $steps = {};
@@ -943,7 +992,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
-                displayWidth={"25%"}
+                displayWidth={"20%"}
                 loading={"lazy"}
                 onClick={async event => {
                   const $steps = {};
@@ -1019,7 +1068,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
-                displayWidth={"25%"}
+                displayWidth={"20%"}
                 loading={"lazy"}
                 onClick={async event => {
                   const $steps = {};
@@ -1215,6 +1264,7 @@ const PlasmicDescendants = {
     "switchingTabs",
     "switchingTab",
     "homepage",
+    "consult",
     "patientProfile5",
     "radiologyReport",
     "laboratory",
@@ -1312,6 +1362,7 @@ const PlasmicDescendants = {
     "switchingTabs",
     "switchingTab",
     "homepage",
+    "consult",
     "patientProfile5",
     "radiologyReport",
     "laboratory",
@@ -1320,12 +1371,14 @@ const PlasmicDescendants = {
   switchingTab: [
     "switchingTab",
     "homepage",
+    "consult",
     "patientProfile5",
     "radiologyReport",
     "laboratory",
     "bookmarkIcon"
   ],
   homepage: ["homepage"],
+  consult: ["consult"],
   patientProfile5: ["patientProfile5"],
   radiologyReport: ["radiologyReport"],
   laboratory: ["laboratory"],
@@ -1360,6 +1413,7 @@ type NodeDefaultElementType = {
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   homepage: typeof PlasmicImg__;
+  consult: typeof PlasmicImg__;
   patientProfile5: typeof PlasmicImg__;
   radiologyReport: typeof PlasmicImg__;
   laboratory: typeof PlasmicImg__;
@@ -1456,6 +1510,7 @@ export const PlasmicPatientProfile = Object.assign(
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),
+    consult: makeNodeComponent("consult"),
     patientProfile5: makeNodeComponent("patientProfile5"),
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratory: makeNodeComponent("laboratory"),
