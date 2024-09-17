@@ -643,7 +643,10 @@ ${ageMonths} months ${
                 $state,
                 "viewNormalRange",
                 "viewNormalRange"
-              )
+              ),
+              [sty.normalRangeButtonviewNormalRange_bookmarkedPatient]:
+                hasVariant($state, "viewNormalRange", "viewNormalRange") &&
+                hasVariant($state, "bookmarkedPatient", "bookmarkedPatient")
             })}
             onClick={async event => {
               const $steps = {};
@@ -1668,6 +1671,17 @@ ${ageMonths} months ${
                                     $state,
                                     "viewNormalRange",
                                     "viewNormalRange"
+                                  ),
+                                [sty.laboratoryResultsPerTitleviewNormalRange_bookmarkedPatient]:
+                                  hasVariant(
+                                    $state,
+                                    "viewNormalRange",
+                                    "viewNormalRange"
+                                  ) &&
+                                  hasVariant(
+                                    $state,
+                                    "bookmarkedPatient",
+                                    "bookmarkedPatient"
                                   )
                               }
                             )}

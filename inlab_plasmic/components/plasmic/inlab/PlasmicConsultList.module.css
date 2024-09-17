@@ -54,38 +54,56 @@
   max-width: 100%;
   min-width: 0;
 }
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-self: flex-start;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+}
 .getConsult:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   width: 100%;
-  justify-self: flex-start;
   margin-top: 5%;
-  padding-right: 0.5%;
+  height: 2094px;
+  left: auto;
+  top: auto;
+  position: relative;
   padding-left: 0.5%;
-  grid-column-start: 1 !important;
-  grid-column-end: -1 !important;
+  padding-right: 0.5%;
+  min-width: 0;
+  flex-shrink: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .getConsult:global(.__wab_instance) {
     margin-top: 15%;
+    left: auto;
+    top: auto;
   }
 }
-.sentConsult {
+.sentConsultCard {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: auto;
   max-width: 100%;
+  padding-right: 8px;
   margin-bottom: 5px;
   background: #ffffff;
   box-shadow: 0px 4px 16px 0px #07060666;
   flex-grow: 1;
   min-width: 0;
   border-radius: 10px;
-  padding: 8px;
   border: 1px solid var(--token-8PxxXPNrIohQ);
 }
-.sentConsult > :global(.__wab_flex-container) {
+.sentConsultCard > :global(.__wab_flex-container) {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -95,15 +113,61 @@
   margin-top: calc(0px - 6px);
   height: calc(100% + 6px);
 }
-.sentConsult > :global(.__wab_flex-container) > *,
-.sentConsult > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.sentConsult > :global(.__wab_flex-container) > picture > img,
-.sentConsult
+.sentConsultCard > :global(.__wab_flex-container) > *,
+.sentConsultCard > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.sentConsultCard > :global(.__wab_flex-container) > picture > img,
+.sentConsultCard
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
   > img {
   margin-top: 6px;
+}
+.sentConsultEmergencyStatus {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.emergentSign {
+  display: block;
+  position: relative;
+  width: 10px;
+  max-width: 100%;
+  height: 105px;
+  background: var(--token--ypw6enySR1T);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  flex-shrink: 0;
+}
+.electiveSign {
+  display: block;
+  position: absolute;
+  width: 10px;
+  max-width: 100%;
+  left: 0px;
+  top: 0px;
+  height: 105px;
+  background: var(--token-sn6Zb6km7CqW);
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  flex-shrink: 0;
+}
+.sentConsultContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
 }
 .senderReceiver {
   display: flex;
@@ -154,6 +218,11 @@
   text-decoration-line: none;
   min-width: 0;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .receiverService {
+    font-size: 13px;
+  }
+}
 .arrow {
   object-fit: cover;
   max-width: 100%;
@@ -181,6 +250,11 @@
   text-decoration-line: none;
   min-width: 0;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .senderService {
+    font-size: 13px;
+  }
+}
 .senderReceiverDoctor {
   display: flex;
   flex-direction: row;
@@ -199,7 +273,6 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  font-size: var(--token-CdE1_0ZaCyT1);
   margin-right: 10px;
   font-family: var(--VazirmatnCustom);
   font-weight: 400;
@@ -212,14 +285,19 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none;
+  font-size: var(--token-CdE1_0ZaCyT1);
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .receiverDoctor {
+    font-size: 11px;
+  }
 }
 .senderDoctor {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
-  font-size: var(--token-CdE1_0ZaCyT1);
   margin-left: 10px;
   font-family: var(--VazirmatnCustom);
   font-weight: 400;
@@ -232,7 +310,13 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none;
+  font-size: var(--token-CdE1_0ZaCyT1);
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .senderDoctor {
+    font-size: 11px;
+  }
 }
 .consultSendDateRepliedStatus {
   display: flex;
@@ -260,7 +344,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .consultSendDate {
-    margin-right: 19%;
+    margin-right: 25%;
   }
 }
 .repliedStatus {
@@ -284,13 +368,47 @@
   border-radius: 7px;
   padding: 4px;
 }
+.لطفامنتطربمانید {
+  position: relative;
+  width: 12%;
+  height: auto;
+  margin-top: 50px;
+  background: var(--token-Hd7stmcqwCJ-);
+  box-shadow: 0px 4px 16px 0px var(--token-5OZEb1MGGCI4);
+  margin-left: 44%;
+  border-radius: 5px;
+  padding: 5px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .لطفامنتطربمانید {
+    margin-left: 25%;
+    width: 50%;
+  }
+}
+.مشاورهاییبرایبیمارثبتنشدهاست {
+  position: relative;
+  width: 20%;
+  height: auto;
+  margin-top: 50px;
+  background: var(--token-Hd7stmcqwCJ-);
+  box-shadow: 0px 4px 16px 0px var(--token-5OZEb1MGGCI4);
+  margin-left: 40%;
+  border-radius: 5px;
+  padding: 5px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .مشاورهاییبرایبیمارثبتنشدهاست {
+    width: 80%;
+    margin-left: 10%;
+  }
+}
 .newConsult:global(.__wab_instance) {
   max-width: 100%;
   left: auto;
   top: auto;
   z-index: 2;
   position: fixed;
-  bottom: 10%;
+  bottom: 11%;
   right: 3%;
 }
 .svg__myV {
@@ -329,7 +447,7 @@
 .switchingTab:global(.__wab_instance) {
   max-width: 100%;
 }
-.img__nWpgn {
+.img__kNz2 {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -338,10 +456,10 @@
   margin: 0;
   border-right: 1px none #aeaeae;
 }
-.img__nWpgn > picture > img {
+.img__kNz2 > picture > img {
   object-fit: fill;
 }
-.img__jBnJw {
+.img__nSsle {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -350,10 +468,10 @@
   margin: 0;
   border-left: 1px solid #00000045;
 }
-.img__jBnJw > picture > img {
+.img__nSsle > picture > img {
   object-fit: fill;
 }
-.img__skJyg {
+.img__yOogM {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -363,10 +481,10 @@
   border-right: 1px solid #00000045;
   border-left: 1px solid #00000045;
 }
-.img__skJyg > picture > img {
+.img__yOogM > picture > img {
   object-fit: fill;
 }
-.img___1BVnY {
+.img__zP8Hf {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -376,6 +494,6 @@
   height: 25px;
   margin: 0;
 }
-.img___1BVnY > picture > img {
+.img__zP8Hf > picture > img {
   object-fit: fill;
 }

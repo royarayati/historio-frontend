@@ -302,8 +302,20 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                           "filter_ward_name",
                                           ""
                                         );
-                                        return localStorage.setItem(
+                                        localStorage.setItem(
                                           "filter_ward_id",
+                                          ""
+                                        );
+                                        localStorage.setItem(
+                                          "physicians_list",
+                                          undefined
+                                        );
+                                        localStorage.setItem(
+                                          "filter_physician_name",
+                                          ""
+                                        );
+                                        return localStorage.setItem(
+                                          "filter_physician_id",
                                           ""
                                         );
                                       })();
@@ -350,9 +362,24 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                             "filter_ward_name"
                                           )}`
                                         );
-                                        return console.log(
+                                        console.log(
                                           `filter_ward_id: ${localStorage.getItem(
                                             "filter_ward_id"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `physicians_list: ${localStorage.getItem(
+                                            "physicians_list"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `filter_physician_name: ${localStorage.getItem(
+                                            "filter_physician_name"
+                                          )}`
+                                        );
+                                        return console.log(
+                                          `filter_physician_id: ${localStorage.getItem(
+                                            "filter_physician_id"
                                           )}`
                                         );
                                       })();

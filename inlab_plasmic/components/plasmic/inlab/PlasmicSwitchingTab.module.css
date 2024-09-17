@@ -16,7 +16,7 @@
   border-radius: 5px;
   padding: 8px;
 }
-.img__ljkDq {
+.img__fphy8 {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -25,10 +25,10 @@
   margin: 0;
   border-right: 1px none #aeaeae;
 }
-.img__ljkDq > picture > img {
+.img__fphy8 > picture > img {
   object-fit: fill;
 }
-.img__zxtub {
+.img__udy31 {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -37,10 +37,10 @@
   margin: 0;
   border-left: 1px solid #00000045;
 }
-.img__zxtub > picture > img {
+.img__udy31 > picture > img {
   object-fit: fill;
 }
-.img__t9RC {
+.img__q56Vi {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -50,10 +50,10 @@
   border-right: 1px solid #00000045;
   border-left: 1px solid #00000045;
 }
-.img__t9RC > picture > img {
+.img__q56Vi > picture > img {
   object-fit: fill;
 }
-.img___1E1E6 {
+.img__hvBjK {
   position: relative;
   object-fit: fill;
   max-width: 100%;
@@ -63,6 +63,6 @@
   height: 25px;
   margin: 0;
 }
-.img___1E1E6 > picture > img {
+.img__hvBjK > picture > img {
   object-fit: fill;
 }

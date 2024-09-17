@@ -1,15 +1,14 @@
 .bookmark {
   object-fit: cover;
-  max-width: 75%;
+  max-width: 100%;
   position: relative;
   color: var(--token-9iYGdL7i3GKE);
   max-height: 100%;
   min-height: none;
-  width: auto;
-  height: 100%;
+  width: 2em;
+  height: 2em;
   justify-self: flex-start;
   transform: none;
-  display: inline-block;
 }
 .bookmarkbookmarked {
   color: var(--token-9iYGdL7i3GKE);

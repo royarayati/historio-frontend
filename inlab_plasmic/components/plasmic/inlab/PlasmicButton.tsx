@@ -84,6 +84,8 @@ export type PlasmicButton__VariantMembers = {
   deselected: "deselected";
   sortDeselected: "sortDeselected";
   sortSelected: "sortSelected";
+  hoverSelected: "hoverSelected";
+  hoverDeselected: "hoverDeselected";
 };
 export type PlasmicButton__VariantsArgs = {
   isDisabled?: SingleBooleanChoiceArg<"isDisabled">;
@@ -94,6 +96,8 @@ export type PlasmicButton__VariantsArgs = {
   deselected?: SingleBooleanChoiceArg<"deselected">;
   sortDeselected?: SingleBooleanChoiceArg<"sortDeselected">;
   sortSelected?: SingleBooleanChoiceArg<"sortSelected">;
+  hoverSelected?: SingleBooleanChoiceArg<"hoverSelected">;
+  hoverDeselected?: SingleBooleanChoiceArg<"hoverDeselected">;
 };
 type VariantPropType = keyof PlasmicButton__VariantsArgs;
 export const PlasmicButton__VariantProps = new Array<VariantPropType>(
@@ -104,7 +108,9 @@ export const PlasmicButton__VariantProps = new Array<VariantPropType>(
   "selected",
   "deselected",
   "sortDeselected",
-  "sortSelected"
+  "sortSelected",
+  "hoverSelected",
+  "hoverDeselected"
 );
 
 export type PlasmicButton__ArgsType = {
@@ -157,6 +163,8 @@ export interface DefaultButtonProps extends pp.BaseButtonProps {
   deselected?: SingleBooleanChoiceArg<"deselected">;
   sortDeselected?: SingleBooleanChoiceArg<"sortDeselected">;
   sortSelected?: SingleBooleanChoiceArg<"sortSelected">;
+  hoverSelected?: SingleBooleanChoiceArg<"hoverSelected">;
+  hoverDeselected?: SingleBooleanChoiceArg<"hoverDeselected">;
 }
 
 const $$ = {};
@@ -256,6 +264,18 @@ function PlasmicButton__RenderFunc(props: {
 
         valueProp: "sortSelected",
         onChangeProp: "onSortSelectedChange"
+      },
+      {
+        path: "hoverSelected",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.hoverSelected
+      },
+      {
+        path: "hoverDeselected",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.hoverDeselected
       }
     ],
     [$props, $ctx, $refs]
@@ -294,6 +314,16 @@ function PlasmicButton__RenderFunc(props: {
           [sty.rootcolor_link]: hasVariant($state, "color", "link"),
           [sty.rootcolor_red]: hasVariant($state, "color", "red"),
           [sty.rootdeselected]: hasVariant($state, "deselected", "deselected"),
+          [sty.roothoverDeselected]: hasVariant(
+            $state,
+            "hoverDeselected",
+            "hoverDeselected"
+          ),
+          [sty.roothoverSelected]: hasVariant(
+            $state,
+            "hoverSelected",
+            "hoverSelected"
+          ),
           [sty.rootisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
           [sty.rootselected]: hasVariant($state, "selected", "selected"),
           [sty.rootselected_deselected]:
@@ -435,6 +465,11 @@ function PlasmicButton__RenderFunc(props: {
               $state,
               "deselected",
               "deselected"
+            ),
+            [sty.slotTargetChildrenhoverSelected]: hasVariant(
+              $state,
+              "hoverSelected",
+              "hoverSelected"
             ),
             [sty.slotTargetChildrenisDisabled]: hasVariant(
               $state,

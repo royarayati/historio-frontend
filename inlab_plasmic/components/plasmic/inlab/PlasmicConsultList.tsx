@@ -92,8 +92,13 @@ export type PlasmicConsultList__OverridesType = {
   header?: Flex__<"div">;
   patientDataForHeader?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
+  pageContent?: Flex__<"div">;
   getConsult?: Flex__<typeof ApiFetcherComponent>;
-  sentConsult?: Flex__<"div">;
+  sentConsultCard?: Flex__<"div">;
+  sentConsultEmergencyStatus?: Flex__<"div">;
+  emergentSign?: Flex__<"div">;
+  electiveSign?: Flex__<"div">;
+  sentConsultContent?: Flex__<"div">;
   senderReceiver?: Flex__<"div">;
   senderReceiverService?: Flex__<"div">;
   receiverService?: Flex__<"div">;
@@ -105,6 +110,8 @@ export type PlasmicConsultList__OverridesType = {
   consultSendDateRepliedStatus?: Flex__<"div">;
   consultSendDate?: Flex__<"div">;
   repliedStatus?: Flex__<"div">;
+  لطفامنتطربمانید?: Flex__<"div">;
+  مشاورهاییبرایبیمارثبتنشدهاست?: Flex__<"div">;
   newConsult?: Flex__<typeof Button>;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
@@ -250,7 +257,7 @@ function PlasmicConsultList__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v2/patient/${$ctx.params.patient_id}`}
+              path={`/api/v2/patient/${$ctx.params.code}`}
               ref={ref => {
                 $refs["patientDataForHeader"] = ref;
               }}
@@ -319,309 +326,475 @@ ${ageMonths} months ${
               </DataCtxReader__>
             </ApiFetcherComponent>
           </div>
-          <ApiFetcherComponent
-            data-plasmic-name={"getConsult"}
-            data-plasmic-override={overrides.getConsult}
-            className={classNames("__wab_instance", sty.getConsult)}
-            headers={(() => {
-              try {
-                return {
-                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
-                };
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
-              }
-            })()}
-            method={"GET"}
-            path={`/api/v2/patient/${$ctx.params.patient_id}/consult`}
-            ref={ref => {
-              $refs["getConsult"] = ref;
-            }}
+          <div
+            data-plasmic-name={"pageContent"}
+            data-plasmic-override={overrides.pageContent}
+            className={classNames(projectcss.all, sty.pageContent)}
           >
-            <DataCtxReader__>
-              {$ctx =>
-                (_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                  (() => {
-                    try {
-                      return $ctx.fetched_data.data.consults;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return [];
-                      }
-                      throw e;
-                    }
-                  })()
-                ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                  const currentItem = __plasmic_item_0;
-                  const currentIndex = __plasmic_idx_0;
-                  return (
-                    <Stack__
-                      as={"div"}
-                      data-plasmic-name={"sentConsult"}
-                      data-plasmic-override={overrides.sentConsult}
-                      hasGap={true}
-                      className={classNames(projectcss.all, sty.sentConsult)}
-                      key={currentIndex}
-                    >
-                      <div
-                        data-plasmic-name={"senderReceiver"}
-                        data-plasmic-override={overrides.senderReceiver}
-                        className={classNames(
-                          projectcss.all,
-                          sty.senderReceiver
-                        )}
-                      >
-                        <div
-                          data-plasmic-name={"senderReceiverService"}
-                          data-plasmic-override={
-                            overrides.senderReceiverService
+            <ApiFetcherComponent
+              data-plasmic-name={"getConsult"}
+              data-plasmic-override={overrides.getConsult}
+              className={classNames("__wab_instance", sty.getConsult)}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v2/patient/${$ctx.params.code}/consult`}
+              ref={ref => {
+                $refs["getConsult"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <React.Fragment>
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data.consults;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
                           }
-                          className={classNames(
-                            projectcss.all,
-                            sty.senderReceiverService
-                          )}
-                        >
-                          <div
-                            data-plasmic-name={"receiverService"}
-                            data-plasmic-override={overrides.receiverService}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.receiverService
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.consultant_service.name;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                          <EvaArrowBackFillIcon
-                            data-plasmic-name={"arrow"}
-                            data-plasmic-override={overrides.arrow}
-                            className={classNames(projectcss.all, sty.arrow)}
-                            role={"img"}
-                          />
-
-                          <div
-                            data-plasmic-name={"senderService"}
-                            data-plasmic-override={overrides.senderService}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.senderService
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.effective_patient_service
-                                    .name;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                        </div>
-                        <div
-                          data-plasmic-name={"senderReceiverDoctor"}
-                          data-plasmic-override={overrides.senderReceiverDoctor}
-                          className={classNames(
-                            projectcss.all,
-                            sty.senderReceiverDoctor
-                          )}
-                        >
-                          <div
-                            data-plasmic-name={"receiverDoctor"}
-                            data-plasmic-override={overrides.receiverDoctor}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.receiverDoctor
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return (
-                                    "دکتر" +
-                                    " " +
-                                    currentItem.suggested_consultant
-                                      .first_name +
-                                    " " +
-                                    currentItem.suggested_consultant.last_name
-                                  );
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                          <div
-                            data-plasmic-name={"senderDoctor"}
-                            data-plasmic-override={overrides.senderDoctor}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.senderDoctor
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return (
-                                    "دکتر" +
-                                    " " +
-                                    currentItem.requester.first_name +
-                                    " " +
-                                    currentItem.requester.last_name
-                                  );
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        data-plasmic-name={"consultSendDateRepliedStatus"}
-                        data-plasmic-override={
-                          overrides.consultSendDateRepliedStatus
+                          throw e;
                         }
-                        className={classNames(
-                          projectcss.all,
-                          sty.consultSendDateRepliedStatus
-                        )}
-                      >
-                        <div
-                          data-plasmic-name={"consultSendDate"}
-                          data-plasmic-override={overrides.consultSendDate}
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <Stack__
+                          as={"div"}
+                          data-plasmic-name={"sentConsultCard"}
+                          data-plasmic-override={overrides.sentConsultCard}
+                          hasGap={true}
                           className={classNames(
                             projectcss.all,
-                            projectcss.__wab_text,
-                            sty.consultSendDate
+                            sty.sentConsultCard
                           )}
-                          dir={"rtl"}
+                          key={currentIndex}
                         >
-                          <React.Fragment>
+                          <div
+                            data-plasmic-name={"sentConsultEmergencyStatus"}
+                            data-plasmic-override={
+                              overrides.sentConsultEmergencyStatus
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              sty.sentConsultEmergencyStatus
+                            )}
+                          >
                             {(() => {
                               try {
-                                return (() => {
-                                  const gregorianDate = new Date(
-                                    currentItem.effective_request_datetime
-                                  );
-                                  const shamsiDate = new Intl.DateTimeFormat(
-                                    "fa-IR"
-                                  ).format(gregorianDate);
-                                  const shamsiTime =
-                                    gregorianDate.toLocaleTimeString("fa-IR", {
-                                      hour12: false
-                                    });
-                                  const englishDate = shamsiDate.replace(
-                                    /[۰-۹]/g,
-                                    d =>
-                                      String.fromCharCode(
-                                        d.charCodeAt(0) - 1728
-                                      )
-                                  );
-                                  const englishTime = shamsiTime.replace(
-                                    /[۰-۹]/g,
-                                    d =>
-                                      String.fromCharCode(
-                                        d.charCodeAt(0) - 1728
-                                      )
-                                  );
-                                  return `${englishTime} ${englishDate} :ارسال`;
-                                })();
+                                return currentItem.priority === 1;
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||
                                   e?.plasmicType === "PlasmicUndefinedDataError"
                                 ) {
-                                  return "";
+                                  return true;
                                 }
                                 throw e;
                               }
-                            })()}
-                          </React.Fragment>
-                        </div>
-                        {(() => {
-                          try {
-                            return currentItem.paper_reply;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return true;
-                            }
-                            throw e;
-                          }
-                        })() ? (
-                          <div
-                            data-plasmic-name={"repliedStatus"}
-                            data-plasmic-override={overrides.repliedStatus}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.repliedStatus
-                            )}
-                          >
-                            {
-                              "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647"
-                            }
+                            })() ? (
+                              <div
+                                data-plasmic-name={"emergentSign"}
+                                data-plasmic-override={overrides.emergentSign}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.emergentSign
+                                )}
+                              />
+                            ) : null}
+                            {(() => {
+                              try {
+                                return currentItem.priority === 3;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return true;
+                                }
+                                throw e;
+                              }
+                            })() ? (
+                              <div
+                                data-plasmic-name={"electiveSign"}
+                                data-plasmic-override={overrides.electiveSign}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.electiveSign
+                                )}
+                              />
+                            ) : null}
+                            <div
+                              data-plasmic-name={"sentConsultContent"}
+                              data-plasmic-override={
+                                overrides.sentConsultContent
+                              }
+                              className={classNames(
+                                projectcss.all,
+                                sty.sentConsultContent
+                              )}
+                            >
+                              <div
+                                data-plasmic-name={"senderReceiver"}
+                                data-plasmic-override={overrides.senderReceiver}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.senderReceiver
+                                )}
+                              >
+                                <div
+                                  data-plasmic-name={"senderReceiverService"}
+                                  data-plasmic-override={
+                                    overrides.senderReceiverService
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.senderReceiverService
+                                  )}
+                                >
+                                  <div
+                                    data-plasmic-name={"receiverService"}
+                                    data-plasmic-override={
+                                      overrides.receiverService
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.receiverService
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return currentItem.consultant_service
+                                            .name;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                  <EvaArrowBackFillIcon
+                                    data-plasmic-name={"arrow"}
+                                    data-plasmic-override={overrides.arrow}
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.arrow
+                                    )}
+                                    role={"img"}
+                                  />
+
+                                  <div
+                                    data-plasmic-name={"senderService"}
+                                    data-plasmic-override={
+                                      overrides.senderService
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.senderService
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return currentItem
+                                            .effective_patient_service.name;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                </div>
+                                <div
+                                  data-plasmic-name={"senderReceiverDoctor"}
+                                  data-plasmic-override={
+                                    overrides.senderReceiverDoctor
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.senderReceiverDoctor
+                                  )}
+                                >
+                                  <div
+                                    data-plasmic-name={"receiverDoctor"}
+                                    data-plasmic-override={
+                                      overrides.receiverDoctor
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.receiverDoctor
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return (
+                                            "دکتر" +
+                                            " " +
+                                            currentItem.suggested_consultant
+                                              .first_name +
+                                            " " +
+                                            currentItem.suggested_consultant
+                                              .last_name
+                                          );
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                  <div
+                                    data-plasmic-name={"senderDoctor"}
+                                    data-plasmic-override={
+                                      overrides.senderDoctor
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.senderDoctor
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return (
+                                            "دکتر" +
+                                            " " +
+                                            currentItem.requester.first_name +
+                                            " " +
+                                            currentItem.requester.last_name
+                                          );
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                data-plasmic-name={
+                                  "consultSendDateRepliedStatus"
+                                }
+                                data-plasmic-override={
+                                  overrides.consultSendDateRepliedStatus
+                                }
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.consultSendDateRepliedStatus
+                                )}
+                              >
+                                <div
+                                  data-plasmic-name={"consultSendDate"}
+                                  data-plasmic-override={
+                                    overrides.consultSendDate
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.consultSendDate
+                                  )}
+                                  dir={"rtl"}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      try {
+                                        return (() => {
+                                          const gregorianDate = new Date(
+                                            currentItem.effective_request_datetime
+                                          );
+                                          const shamsiDate =
+                                            new Intl.DateTimeFormat(
+                                              "fa-IR"
+                                            ).format(gregorianDate);
+                                          const shamsiTime =
+                                            gregorianDate.toLocaleTimeString(
+                                              "fa-IR",
+                                              { hour12: false }
+                                            );
+                                          const englishDate =
+                                            shamsiDate.replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
+                                          const englishTime =
+                                            shamsiTime.replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
+                                          return `${englishTime} ${englishDate} :ارسال`;
+                                        })();
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return "";
+                                        }
+                                        throw e;
+                                      }
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                                {(() => {
+                                  try {
+                                    return currentItem.paper_reply;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return true;
+                                    }
+                                    throw e;
+                                  }
+                                })() ? (
+                                  <div
+                                    data-plasmic-name={"repliedStatus"}
+                                    data-plasmic-override={
+                                      overrides.repliedStatus
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.repliedStatus
+                                    )}
+                                  >
+                                    {
+                                      "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647"
+                                    }
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
                           </div>
-                        ) : null}
+                        </Stack__>
+                      );
+                    })}
+                    {(() => {
+                      try {
+                        return $ctx.fetched_data.loading;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={
+                          "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f"
+                        }
+                        data-plasmic-override={overrides.لطفامنتطربمانید}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.لطفامنتطربمانید
+                        )}
+                      >
+                        {
+                          "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0637\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                        }
                       </div>
-                    </Stack__>
-                  );
-                })
-              }
-            </DataCtxReader__>
-          </ApiFetcherComponent>
+                    ) : null}
+                    {(() => {
+                      try {
+                        return (
+                          $ctx.fetched_data.loading === false &&
+                          $ctx.fetched_data.data.consults == ""
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={
+                          "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
+                        }
+                        data-plasmic-override={
+                          overrides.مشاورهاییبرایبیمارثبتنشدهاست
+                        }
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.مشاورهاییبرایبیمارثبتنشدهاست
+                        )}
+                      >
+                        {
+                          "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u06cc\u06cc \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                        }
+                      </div>
+                    ) : null}
+                  </React.Fragment>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponent>
+          </div>
           <Button
             data-plasmic-name={"newConsult"}
             data-plasmic-override={overrides.newConsult}
@@ -635,6 +808,48 @@ ${ageMonths} months ${
               "newConsult",
               "isDisabled"
             ])}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["goToConsultSend"] = true
+                ? (() => {
+                    const actionArgs = {
+                      destination: `/consult-send/[code]/${(() => {
+                        try {
+                          return $ctx.params.adm_id;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}`
+                    };
+                    return (({ destination }) => {
+                      if (
+                        typeof destination === "string" &&
+                        destination.startsWith("#")
+                      ) {
+                        document
+                          .getElementById(destination.substr(1))
+                          .scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        __nextRouter?.push(destination);
+                      }
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["goToConsultSend"] != null &&
+                typeof $steps["goToConsultSend"] === "object" &&
+                typeof $steps["goToConsultSend"].then === "function"
+              ) {
+                $steps["goToConsultSend"] = await $steps["goToConsultSend"];
+              }
+            }}
             onDeselectedChange={(...eventArgs) => {
               generateStateOnChangeProp($state, ["newConsult", "deselected"])(
                 eventArgs[0]
@@ -702,8 +917,13 @@ const PlasmicDescendants = {
     "header",
     "patientDataForHeader",
     "patientNameAgeGender",
+    "pageContent",
     "getConsult",
-    "sentConsult",
+    "sentConsultCard",
+    "sentConsultEmergencyStatus",
+    "emergentSign",
+    "electiveSign",
+    "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
     "receiverService",
@@ -715,6 +935,8 @@ const PlasmicDescendants = {
     "consultSendDateRepliedStatus",
     "consultSendDate",
     "repliedStatus",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "newConsult",
     "switchingTabs",
     "switchingTab"
@@ -722,9 +944,55 @@ const PlasmicDescendants = {
   header: ["header", "patientDataForHeader", "patientNameAgeGender"],
   patientDataForHeader: ["patientDataForHeader", "patientNameAgeGender"],
   patientNameAgeGender: ["patientNameAgeGender"],
+  pageContent: [
+    "pageContent",
+    "getConsult",
+    "sentConsultCard",
+    "sentConsultEmergencyStatus",
+    "emergentSign",
+    "electiveSign",
+    "sentConsultContent",
+    "senderReceiver",
+    "senderReceiverService",
+    "receiverService",
+    "arrow",
+    "senderService",
+    "senderReceiverDoctor",
+    "receiverDoctor",
+    "senderDoctor",
+    "consultSendDateRepliedStatus",
+    "consultSendDate",
+    "repliedStatus",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
+  ],
   getConsult: [
     "getConsult",
-    "sentConsult",
+    "sentConsultCard",
+    "sentConsultEmergencyStatus",
+    "emergentSign",
+    "electiveSign",
+    "sentConsultContent",
+    "senderReceiver",
+    "senderReceiverService",
+    "receiverService",
+    "arrow",
+    "senderService",
+    "senderReceiverDoctor",
+    "receiverDoctor",
+    "senderDoctor",
+    "consultSendDateRepliedStatus",
+    "consultSendDate",
+    "repliedStatus",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
+  ],
+  sentConsultCard: [
+    "sentConsultCard",
+    "sentConsultEmergencyStatus",
+    "emergentSign",
+    "electiveSign",
+    "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
     "receiverService",
@@ -737,8 +1005,27 @@ const PlasmicDescendants = {
     "consultSendDate",
     "repliedStatus"
   ],
-  sentConsult: [
-    "sentConsult",
+  sentConsultEmergencyStatus: [
+    "sentConsultEmergencyStatus",
+    "emergentSign",
+    "electiveSign",
+    "sentConsultContent",
+    "senderReceiver",
+    "senderReceiverService",
+    "receiverService",
+    "arrow",
+    "senderService",
+    "senderReceiverDoctor",
+    "receiverDoctor",
+    "senderDoctor",
+    "consultSendDateRepliedStatus",
+    "consultSendDate",
+    "repliedStatus"
+  ],
+  emergentSign: ["emergentSign"],
+  electiveSign: ["electiveSign"],
+  sentConsultContent: [
+    "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
     "receiverService",
@@ -784,6 +1071,12 @@ const PlasmicDescendants = {
   ],
   consultSendDate: ["consultSendDate"],
   repliedStatus: ["repliedStatus"],
+  لطفامنتطربمانید: [
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f"
+  ],
+  مشاورهاییبرایبیمارثبتنشدهاست: [
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
+  ],
   newConsult: ["newConsult"],
   switchingTabs: ["switchingTabs", "switchingTab"],
   switchingTab: ["switchingTab"]
@@ -796,8 +1089,13 @@ type NodeDefaultElementType = {
   header: "div";
   patientDataForHeader: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
+  pageContent: "div";
   getConsult: typeof ApiFetcherComponent;
-  sentConsult: "div";
+  sentConsultCard: "div";
+  sentConsultEmergencyStatus: "div";
+  emergentSign: "div";
+  electiveSign: "div";
+  sentConsultContent: "div";
   senderReceiver: "div";
   senderReceiverService: "div";
   receiverService: "div";
@@ -809,6 +1107,8 @@ type NodeDefaultElementType = {
   consultSendDateRepliedStatus: "div";
   consultSendDate: "div";
   repliedStatus: "div";
+  لطفامنتطربمانید: "div";
+  مشاورهاییبرایبیمارثبتنشدهاست: "div";
   newConsult: typeof Button;
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
@@ -877,8 +1177,13 @@ export const PlasmicConsultList = Object.assign(
     header: makeNodeComponent("header"),
     patientDataForHeader: makeNodeComponent("patientDataForHeader"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
+    pageContent: makeNodeComponent("pageContent"),
     getConsult: makeNodeComponent("getConsult"),
-    sentConsult: makeNodeComponent("sentConsult"),
+    sentConsultCard: makeNodeComponent("sentConsultCard"),
+    sentConsultEmergencyStatus: makeNodeComponent("sentConsultEmergencyStatus"),
+    emergentSign: makeNodeComponent("emergentSign"),
+    electiveSign: makeNodeComponent("electiveSign"),
+    sentConsultContent: makeNodeComponent("sentConsultContent"),
     senderReceiver: makeNodeComponent("senderReceiver"),
     senderReceiverService: makeNodeComponent("senderReceiverService"),
     receiverService: makeNodeComponent("receiverService"),
@@ -892,6 +1197,12 @@ export const PlasmicConsultList = Object.assign(
     ),
     consultSendDate: makeNodeComponent("consultSendDate"),
     repliedStatus: makeNodeComponent("repliedStatus"),
+    لطفامنتطربمانید: makeNodeComponent(
+      "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f"
+    ),
+    مشاورهاییبرایبیمارثبتنشدهاست: makeNodeComponent(
+      "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
+    ),
     newConsult: makeNodeComponent("newConsult"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),

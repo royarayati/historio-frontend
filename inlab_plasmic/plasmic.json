@@ -1624,12 +1624,52 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicConsultList.tsx",
           "importSpec": {
-            "modulePath": "../pages/consult-list/[patient_id]/[adm_id].tsx"
+            "modulePath": "../pages/consult-list/[code]/[adm_id].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicConsultList.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/consult-list/[patient_id]/[adm_id]"
+          "path": "/consult-list/[code]/[adm_id]"
+        },
+        {
+          "id": "9PPRcrm0XFqF",
+          "name": "ConsultSend",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicConsultSend.tsx",
+          "importSpec": {
+            "modulePath": "../pages/consult-send/[code]/[adm_id].tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicConsultSend.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/consult-send/[code]/[adm_id]"
+        },
+        {
+          "id": "RABqkXkLRlle",
+          "name": "Alert",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicAlert.tsx",
+          "importSpec": {
+            "modulePath": "Alert.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicAlert.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "PguODopeTo5C",
+          "name": "SwitchingTab",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicSwitchingTab.tsx",
+          "importSpec": {
+            "modulePath": "SwitchingTab.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicSwitchingTab.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
