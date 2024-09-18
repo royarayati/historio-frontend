@@ -528,6 +528,7 @@
   max-width: 100%;
   justify-content: flex-start;
   align-items: center;
+  background: #ffffff;
   min-width: 0;
   padding: 8px;
 }
@@ -574,6 +575,7 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none !important;
+  background: #ffffff;
   min-width: 0;
 }
 .modalReceiverService:global(.__wab_instance) {
@@ -594,6 +596,7 @@
   max-width: 100%;
   justify-content: flex-start;
   align-items: center;
+  background: #ffffff;
   min-width: 0;
   padding: 8px;
 }
@@ -640,6 +643,7 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none !important;
+  background: #ffffff;
   min-width: 0;
 }
 .getUsers:global(.__wab_instance) {
@@ -664,6 +668,7 @@
   max-width: 100%;
   justify-content: flex-start;
   align-items: center;
+  background: #ffffff;
   min-width: 0;
   padding: 8px;
 }
@@ -757,4 +762,5 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none !important;
+  background: #ffffff;
 }

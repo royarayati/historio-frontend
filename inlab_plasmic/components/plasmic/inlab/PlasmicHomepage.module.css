@@ -1014,6 +1014,8 @@
   height: auto;
   max-width: 100%;
   margin-left: 5px;
+  border-left-width: 1px;
+  border-left-style: dashed;
   min-width: 0;
 }
 .text__k1M {
@@ -2086,7 +2088,7 @@
 .consultNotify {
   object-fit: contain;
   max-width: 100%;
-  width: 22px;
+  width: 25px;
   object-position: center center;
   flex-shrink: 0;
 }
@@ -2398,7 +2400,7 @@
   height: auto;
   max-width: 100%;
   overflow: auto;
-  background: none;
+  background: #ffffff;
   flex-direction: column;
   align-self: center;
   padding: 8px;
@@ -2475,6 +2477,7 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none !important;
+  background: #ffffff;
   min-width: 0;
 }
 .modalConsultReceiverService:global(.__wab_instance) {
@@ -2493,7 +2496,7 @@
   height: auto;
   max-width: 100%;
   overflow: auto;
-  background: none;
+  background: #ffffff;
   flex-direction: column;
   align-self: center;
   padding: 8px;
@@ -2573,6 +2576,7 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none !important;
+  background: #ffffff;
   min-width: 0;
 }
 .modalConsultFilterType:global(.__wab_instance) {
@@ -2592,7 +2596,7 @@
   height: auto;
   max-width: 100%;
   overflow: auto;
-  background: none;
+  background: #ffffff;
   flex-direction: column;
   align-self: center;
   padding: 8px;
@@ -2699,6 +2703,7 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none !important;
+  background: #ffffff;
   min-width: 0;
 }
 .modalFeatureBanner:global(.__wab_instance) {

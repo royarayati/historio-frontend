@@ -719,7 +719,9 @@ ${ageMonths} months ${
               <React.Fragment>
                 {(() => {
                   try {
-                    return localStorage.getItem("sender_service_name");
+                    return localStorage.getItem("sender_service_name") !== null
+                      ? localStorage.getItem("sender_service_name")
+                      : "-";
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -852,7 +854,10 @@ ${ageMonths} months ${
               <React.Fragment>
                 {(() => {
                   try {
-                    return localStorage.getItem("receiver_service_name");
+                    return localStorage.getItem("receiver_service_name") !==
+                      null
+                      ? localStorage.getItem("receiver_service_name")
+                      : "-";
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -1654,7 +1659,19 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/${""}`
+                          })()}/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (
@@ -1716,7 +1733,19 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/profile/[adm_id]`
+                          })()}/profile/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (
@@ -1780,7 +1809,19 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/report/list/[adm_id]`
+                          })()}/report/list/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (
@@ -1844,7 +1885,19 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/lab/[adm_id]`
+                          })()}/lab/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (
@@ -2283,7 +2336,7 @@ ${ageMonths} months ${
                         )}
                       >
                         {
-                          "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
+                          "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
                         }
                       </div>
                     }

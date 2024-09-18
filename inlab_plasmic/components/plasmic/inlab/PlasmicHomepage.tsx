@@ -5641,7 +5641,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   displayMaxWidth={"100%"}
                                   displayMinHeight={"0"}
                                   displayMinWidth={"0"}
-                                  displayWidth={"22px"}
+                                  displayWidth={"25px"}
                                   loading={"lazy"}
                                   onClick={async event => {
                                     const $steps = {};

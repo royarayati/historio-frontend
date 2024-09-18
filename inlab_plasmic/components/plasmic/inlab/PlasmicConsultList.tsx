@@ -819,7 +819,19 @@ ${ageMonths} months ${
               $steps["goToConsultSend"] = true
                 ? (() => {
                     const actionArgs = {
-                      destination: `/consult-send/[code]/${(() => {
+                      destination: `/consult-send/${(() => {
+                        try {
+                          return $ctx.params.code;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}/${(() => {
                         try {
                           return $ctx.params.adm_id;
                         } catch (e) {
