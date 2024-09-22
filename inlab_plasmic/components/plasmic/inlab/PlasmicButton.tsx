@@ -309,6 +309,9 @@ function PlasmicButton__RenderFunc(props: {
         sty.root,
         {
           [sty.rootcolor_blue]: hasVariant($state, "color", "blue"),
+          [sty.rootcolor_blue_shape_rounded]:
+            hasVariant($state, "shape", "rounded") &&
+            hasVariant($state, "color", "blue"),
           [sty.rootcolor_clear]: hasVariant($state, "color", "clear"),
           [sty.rootcolor_green]: hasVariant($state, "color", "green"),
           [sty.rootcolor_link]: hasVariant($state, "color", "link"),

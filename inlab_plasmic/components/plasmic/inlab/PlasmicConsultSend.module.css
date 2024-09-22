@@ -85,7 +85,7 @@
   box-shadow: none;
   background: #ffffff;
   left: auto;
-  top: 30%;
+  top: 28%;
   z-index: 1;
   max-width: 99%;
   grid-column-start: 1 !important;
@@ -125,6 +125,7 @@
   max-width: 100%;
   width: auto;
   margin-top: 5px;
+  display: none;
 }
 .text___0Nx0A {
   position: relative;
@@ -393,6 +394,15 @@
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.guide {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 11px;
+  color: #000000b3;
+  min-width: 0;
 }
 .sendConsultButton:global(.__wab_instance) {
   max-width: 100%;

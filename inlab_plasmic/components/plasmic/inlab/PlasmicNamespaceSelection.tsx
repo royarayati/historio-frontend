@@ -286,37 +286,25 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                   const actionArgs = {
                                     customFunction: async () => {
                                       return (() => {
-                                        localStorage.setItem(
-                                          "selected_tab",
-                                          "bookmark"
+                                        localStorage.removeItem("selected_tab");
+                                        localStorage.removeItem(
+                                          "bookmark_list"
                                         );
-                                        localStorage.setItem(
-                                          "bookmark_list",
-                                          undefined
+                                        localStorage.removeItem("ward_list");
+                                        localStorage.removeItem(
+                                          "filter_ward_name"
                                         );
-                                        localStorage.setItem(
-                                          "ward_list",
-                                          undefined
+                                        localStorage.removeItem(
+                                          "filter_ward_id"
                                         );
-                                        localStorage.setItem(
-                                          "filter_ward_name",
-                                          ""
+                                        localStorage.removeItem(
+                                          "physicians_list"
                                         );
-                                        localStorage.setItem(
-                                          "filter_ward_id",
-                                          ""
+                                        localStorage.removeItem(
+                                          "filter_physician_name"
                                         );
-                                        localStorage.setItem(
-                                          "physicians_list",
-                                          undefined
-                                        );
-                                        localStorage.setItem(
-                                          "filter_physician_name",
-                                          ""
-                                        );
-                                        return localStorage.setItem(
-                                          "filter_physician_id",
-                                          ""
+                                        return localStorage.removeItem(
+                                          "filter_physician_id"
                                         );
                                       })();
                                     }

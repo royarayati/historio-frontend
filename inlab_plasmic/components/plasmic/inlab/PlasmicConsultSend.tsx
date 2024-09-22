@@ -121,6 +121,7 @@ export type PlasmicConsultSend__OverridesType = {
   normalRangeButtonCircle2?: Flex__<"div">;
   emergentOff?: Flex__<"div">;
   emergentOn?: Flex__<"div">;
+  guide?: Flex__<"div">;
   sendConsultButton?: Flex__<typeof Button>;
   sendConsult2?: Flex__<"div">;
   switchingTab?: Flex__<"div">;
@@ -524,44 +525,31 @@ ${ageMonths} months ${
                 sty.sendConsultButtonContent
               )}
             >
-              {(() => {
-                try {
-                  return $state.sendConsultSuccessfullyAlert;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return true;
-                  }
-                  throw e;
+              <Alert
+                data-plasmic-name={"sendConsultSuccessfully"}
+                data-plasmic-override={overrides.sendConsultSuccessfully}
+                body={
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___1PXi9
+                    )}
+                  >
+                    {
+                      "\u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f"
+                    }
+                  </div>
                 }
-              })() ? (
-                <Alert
-                  data-plasmic-name={"sendConsultSuccessfully"}
-                  data-plasmic-override={overrides.sendConsultSuccessfully}
-                  body={
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text___1PXi9
-                      )}
-                    >
-                      {
-                        "\u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f"
-                      }
-                    </div>
-                  }
-                  className={classNames(
-                    "__wab_instance",
-                    sty.sendConsultSuccessfully
-                  )}
-                  noHeader={true}
-                  noIcon={true}
-                  success={true}
-                />
-              ) : null}
+                className={classNames(
+                  "__wab_instance",
+                  sty.sendConsultSuccessfully
+                )}
+                noHeader={true}
+                noIcon={true}
+                success={true}
+              />
+
               {(() => {
                 try {
                   return $state.sendConsultUnsuccessfullyAlert;
@@ -1306,6 +1294,19 @@ ${ageMonths} months ${
                 ) : null}
               </div>
             </Button>
+            <div
+              data-plasmic-name={"guide"}
+              data-plasmic-override={overrides.guide}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.guide
+              )}
+            >
+              {
+                "\u0628\u0639\u062f \u0627\u0631\u0633\u0627\u0644\u060c \u062f\u0631 \u0635\u0648\u0631\u062a \u062b\u0628\u062a \u0635\u062d\u06cc\u062d \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0647 \u0635\u0641\u062d\u0647 \u0644\u06cc\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0645\u0646\u062a\u0642\u0644 \u0645\u06cc \u0634\u0648\u06cc\u062f"
+              }
+            </div>
             <Button
               data-plasmic-name={"sendConsultButton"}
               data-plasmic-override={overrides.sendConsultButton}
@@ -3079,6 +3080,7 @@ const PlasmicDescendants = {
     "normalRangeButtonCircle2",
     "emergentOff",
     "emergentOn",
+    "guide",
     "sendConsultButton",
     "sendConsult2",
     "switchingTab",
@@ -3134,6 +3136,7 @@ const PlasmicDescendants = {
     "normalRangeButtonCircle2",
     "emergentOff",
     "emergentOn",
+    "guide",
     "sendConsultButton",
     "sendConsult2"
   ],
@@ -3166,6 +3169,7 @@ const PlasmicDescendants = {
   normalRangeButtonCircle2: ["normalRangeButtonCircle2"],
   emergentOff: ["emergentOff"],
   emergentOn: ["emergentOn"],
+  guide: ["guide"],
   sendConsultButton: ["sendConsultButton", "sendConsult2"],
   sendConsult2: ["sendConsult2"],
   switchingTab: [
@@ -3262,6 +3266,7 @@ type NodeDefaultElementType = {
   normalRangeButtonCircle2: "div";
   emergentOff: "div";
   emergentOn: "div";
+  guide: "div";
   sendConsultButton: typeof Button;
   sendConsult2: "div";
   switchingTab: "div";
@@ -3368,6 +3373,7 @@ export const PlasmicConsultSend = Object.assign(
     normalRangeButtonCircle2: makeNodeComponent("normalRangeButtonCircle2"),
     emergentOff: makeNodeComponent("emergentOff"),
     emergentOn: makeNodeComponent("emergentOn"),
+    guide: makeNodeComponent("guide"),
     sendConsultButton: makeNodeComponent("sendConsultButton"),
     sendConsult2: makeNodeComponent("sendConsult2"),
     switchingTab: makeNodeComponent("switchingTab"),

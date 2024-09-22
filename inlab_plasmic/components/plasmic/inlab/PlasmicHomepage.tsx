@@ -70,6 +70,7 @@ import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 import NewNoticeBanner from "../../NewNoticeBanner"; // plasmic-import: X347FgRZh6HH/component
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -144,13 +145,15 @@ export type PlasmicHomepage__OverridesType = {
   bookmarked?: Flex__<typeof Button>;
   bookmarkedPatientNumber?: Flex__<"div">;
   نتايحجستوجو?: Flex__<"div">;
-  consultContent?: Flex__<"div">;
+  consultInbox?: Flex__<"div">;
   filtersBar?: Flex__<"div">;
   filterContent?: Flex__<"div">;
   filterService?: Flex__<"div">;
   filterType?: Flex__<"div">;
   consults?: Flex__<typeof ApiFetcherComponent>;
-  sentConsultCard?: Flex__<"div">;
+  لطفامنتظربمانید2?: Flex__<"div">;
+  مشاورهایییافتنشد?: Flex__<"div">;
+  inboxConsultCard?: Flex__<"div">;
   sentConsultEmergencyStatus?: Flex__<"div">;
   emergentSign?: Flex__<"div">;
   electiveSign?: Flex__<"div">;
@@ -169,8 +172,12 @@ export type PlasmicHomepage__OverridesType = {
   consultSendDateRepliedStatus?: Flex__<"div">;
   consultSendDate?: Flex__<"div">;
   repliedStatus?: Flex__<"div">;
-  لطفامنتظربمانید2?: Flex__<"div">;
-  مشاورهایییافتنشد?: Flex__<"div">;
+  replyConsultButton?: Flex__<typeof Button>;
+  patientDataButtonsInConsultCard?: Flex__<"div">;
+  patientProfile2?: Flex__<typeof PlasmicImg__>;
+  consultNotify2?: Flex__<typeof PlasmicImg__>;
+  radiologyReport2?: Flex__<typeof PlasmicImg__>;
+  laboratoryData2?: Flex__<typeof PlasmicImg__>;
   patients?: Flex__<typeof ApiFetcherComponent>;
   header2?: Flex__<"div">;
   buttonپاککردنهمهبوکمارکها?: Flex__<typeof Button>;
@@ -208,6 +215,16 @@ export type PlasmicHomepage__OverridesType = {
   wardsList?: Flex__<"div">;
   wardsName?: Flex__<"div">;
   searchbarWard?: Flex__<typeof TextInput>;
+  modalPhysician?: Flex__<typeof AntdModal>;
+  physiciansList?: Flex__<typeof ApiFetcherComponent>;
+  physiciansList2?: Flex__<"div">;
+  physiciansName?: Flex__<"div">;
+  searchbarPhysicians?: Flex__<typeof TextInput>;
+  modalConsultFilterType?: Flex__<typeof AntdModal>;
+  filterTypes?: Flex__<"div">;
+  senderServiceType?: Flex__<"div">;
+  receiverServiceType?: Flex__<"div">;
+  deleteFilters?: Flex__<"div">;
   getServicesForConsult?: Flex__<typeof ApiFetcherComponent>;
   modalConsultSenderService?: Flex__<typeof AntdModal>;
   senderServiceList?: Flex__<"div">;
@@ -215,10 +232,14 @@ export type PlasmicHomepage__OverridesType = {
   modalConsultReceiverService?: Flex__<typeof AntdModal>;
   receiverServiceList?: Flex__<"div">;
   servicesName2?: Flex__<"div">;
-  modalConsultFilterType?: Flex__<typeof AntdModal>;
-  filterTypes?: Flex__<"div">;
-  senderServiceType?: Flex__<"div">;
-  receiverServiceType?: Flex__<"div">;
+  modalReplyConsultConfirmation?: Flex__<typeof AntdModal>;
+  confirmationContent?: Flex__<"div">;
+  confirmationYesNo?: Flex__<"div">;
+  noConfirm?: Flex__<typeof Button>;
+  confirm?: Flex__<typeof Button>;
+  unsuccessfulReplyConsult?: Flex__<typeof Alert>;
+  title?: Flex__<"div">;
+  guide?: Flex__<"div">;
   modalFeatureBanner?: Flex__<typeof AntdModal>;
   newFeatureBanner?: Flex__<typeof NewFeatureBanner>;
   متوجهشدم?: Flex__<typeof Button>;
@@ -227,11 +248,6 @@ export type PlasmicHomepage__OverridesType = {
   متوجهشدم2?: Flex__<typeof Button>;
   modalNps?: Flex__<typeof AntdModal>;
   columns?: Flex__<"div">;
-  modalPhysician?: Flex__<typeof AntdModal>;
-  physiciansList?: Flex__<typeof ApiFetcherComponent>;
-  physiciansList2?: Flex__<"div">;
-  physiciansName?: Flex__<"div">;
-  searchbarPhysicians?: Flex__<typeof TextInput>;
 };
 
 export interface DefaultHomepageProps {}
@@ -677,8 +693,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return localStorage.getItem("selected_tab") ===
-                (null || "" || "null" || "undefined" || undefined)
+              return !localStorage.getItem("selected_tab")
                 ? "bookmark"
                 : localStorage.getItem("selected_tab");
             } catch (e) {
@@ -860,9 +875,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return (
-                localStorage.getItem("NPS_score") == (null || "" || undefined)
-              );
+              return !localStorage.getItem("NPS_score");
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -1059,6 +1072,122 @@ function PlasmicHomepage__RenderFunc(props: {
                 e?.plasmicType === "PlasmicUndefinedDataError"
               ) {
                 return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "replyConsultButton[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "replyConsultButton[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "replyConsultButton[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "replyConsultButton[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "replyConsultButton[].sortSelected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "modalReplyConsultConfirmation.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "noConfirm.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "noConfirm.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "noConfirm.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "noConfirm.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "noConfirm.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "replyConsultUnsuccessfullyAlert",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "inboxConsultCardId",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return null;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return 0;
               }
               throw e;
             }
@@ -1807,14 +1936,9 @@ function PlasmicHomepage__RenderFunc(props: {
                       const $steps = {};
 
                       $steps["updateModalOpen"] =
-                        (!$state.filterWard &&
-                          (localStorage.getItem("filter_ward_id") ||
-                            localStorage.getItem("filter_ward_name")) ===
-                            (null || "")) ||
-                        ($state.filterWard &&
-                          (localStorage.getItem("filter_ward_id") ||
-                            localStorage.getItem("filter_ward_name")) !==
-                            (null || ""))
+                        $state.filterWard ||
+                        !localStorage.getItem("filter_ward_id") ||
+                        !localStorage.getItem("filter_ward_name")
                           ? (() => {
                               const actionArgs = {
                                 variable: {
@@ -1855,9 +1979,8 @@ function PlasmicHomepage__RenderFunc(props: {
 
                       $steps["setStateSelectedTab"] =
                         !$state.filterWard &&
-                        (localStorage.getItem("filter_ward_id") ||
-                          localStorage.getItem("filter_ward_name")) !==
-                          (null || "")
+                        localStorage.getItem("filter_ward_id") &&
+                        localStorage.getItem("filter_ward_name")
                           ? (() => {
                               const actionArgs = {
                                 variable: {
@@ -2082,7 +2205,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           try {
                             return (() => {
                               const filterWardName = $state.filterwardname;
-                              if (filterWardName !== ("" || null)) {
+                              if (filterWardName) {
                                 return filterWardName.includes("بخش")
                                   ? filterWardName
                                   : "بخش " + filterWardName;
@@ -2151,9 +2274,9 @@ function PlasmicHomepage__RenderFunc(props: {
                       const $steps = {};
 
                       $steps["updateModalOpen"] =
-                        (localStorage.getItem("filter_physician_id") ||
-                          localStorage.getItem("filter_physician_name")) ==
-                          (null || "") || $state.filterPhysician
+                        !localStorage.getItem("filter_physician_id") ||
+                        !localStorage.getItem("filter_physician_name") ||
+                        $state.filterPhysician
                           ? (() => {
                               const actionArgs = {
                                 variable: {
@@ -2191,9 +2314,8 @@ function PlasmicHomepage__RenderFunc(props: {
 
                       $steps["setStateSelectedTab"] =
                         !$state.filterPhysician &&
-                        (localStorage.getItem("filter_physician_id") ||
-                          localStorage.getItem("filter_physician_name")) !==
-                          null
+                        localStorage.getItem("filter_physician_id") &&
+                        localStorage.getItem("filter_physician_name")
                           ? (() => {
                               const actionArgs = {
                                 variable: {
@@ -2398,7 +2520,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             return (() => {
                               const filterphysicianName =
                                 $state.filterphysicianname;
-                              if (filterphysicianName !== ("" || null)) {
+                              if (filterphysicianName) {
                                 return "دکتر " + filterphysicianName;
                               } else {
                                 return "پزشک";
@@ -2693,89 +2815,166 @@ function PlasmicHomepage__RenderFunc(props: {
             }
           })() ? (
             <div
-              data-plasmic-name={"consultContent"}
-              data-plasmic-override={overrides.consultContent}
-              className={classNames(projectcss.all, sty.consultContent)}
+              data-plasmic-name={"consultInbox"}
+              data-plasmic-override={overrides.consultInbox}
+              className={classNames(projectcss.all, sty.consultInbox)}
             >
               <div
                 data-plasmic-name={"filtersBar"}
                 data-plasmic-override={overrides.filtersBar}
                 className={classNames(projectcss.all, sty.filtersBar)}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["updateModalConsultFilterTypeOpen"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["modalConsultFilterType", "open"]
-                          },
-                          operation: 4
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          const oldValue = $stateGet(objRoot, variablePath);
-                          $stateSet(objRoot, variablePath, !oldValue);
-                          return !oldValue;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateModalConsultFilterTypeOpen"] != null &&
-                    typeof $steps["updateModalConsultFilterTypeOpen"] ===
-                      "object" &&
-                    typeof $steps["updateModalConsultFilterTypeOpen"].then ===
-                      "function"
-                  ) {
-                    $steps["updateModalConsultFilterTypeOpen"] = await $steps[
-                      "updateModalConsultFilterTypeOpen"
-                    ];
-                  }
-                }}
               >
                 <div
                   data-plasmic-name={"filterContent"}
                   data-plasmic-override={overrides.filterContent}
                   className={classNames(projectcss.all, sty.filterContent)}
                 >
-                  <div
-                    data-plasmic-name={"filterService"}
-                    data-plasmic-override={overrides.filterService}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.filterService
-                    )}
-                  >
-                    <React.Fragment>
-                      {(() => {
-                        try {
-                          return localStorage.getItem("filter_service_name") !==
-                            null
-                            ? localStorage.getItem("filter_service_name")
-                            : "-";
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return "";
-                          }
-                          throw e;
+                  {(() => {
+                    try {
+                      return (
+                        localStorage.getItem("consult_filter_type") !==
+                        (null || undefined || "" || "null" || "undefined")
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      data-plasmic-name={"filterService"}
+                      data-plasmic-override={overrides.filterService}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.filterService
+                      )}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["updateModalConsultSenderServiceOpen"] =
+                          localStorage.getItem("consult_filter_type") ===
+                          "سرویس مبدا"
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: [
+                                      "modalConsultSenderService",
+                                      "open"
+                                    ]
+                                  },
+                                  operation: 4
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  const oldValue = $stateGet(
+                                    objRoot,
+                                    variablePath
+                                  );
+                                  $stateSet(objRoot, variablePath, !oldValue);
+                                  return !oldValue;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["updateModalConsultSenderServiceOpen"] !=
+                            null &&
+                          typeof $steps[
+                            "updateModalConsultSenderServiceOpen"
+                          ] === "object" &&
+                          typeof $steps["updateModalConsultSenderServiceOpen"]
+                            .then === "function"
+                        ) {
+                          $steps["updateModalConsultSenderServiceOpen"] =
+                            await $steps["updateModalConsultSenderServiceOpen"];
                         }
-                      })()}
-                    </React.Fragment>
-                  </div>
+
+                        $steps["updateModalConsultReceiverServiceOpen"] =
+                          localStorage.getItem("consult_filter_type") ===
+                          "سرویس مقصد"
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: [
+                                      "modalConsultReceiverService",
+                                      "open"
+                                    ]
+                                  },
+                                  operation: 4
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  const oldValue = $stateGet(
+                                    objRoot,
+                                    variablePath
+                                  );
+                                  $stateSet(objRoot, variablePath, !oldValue);
+                                  return !oldValue;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["updateModalConsultReceiverServiceOpen"] !=
+                            null &&
+                          typeof $steps[
+                            "updateModalConsultReceiverServiceOpen"
+                          ] === "object" &&
+                          typeof $steps["updateModalConsultReceiverServiceOpen"]
+                            .then === "function"
+                        ) {
+                          $steps["updateModalConsultReceiverServiceOpen"] =
+                            await $steps[
+                              "updateModalConsultReceiverServiceOpen"
+                            ];
+                        }
+                      }}
+                    >
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return localStorage.getItem(
+                              "filter_service_name"
+                            ) !==
+                              (null || undefined || "" || "null" || "undefined")
+                              ? localStorage.getItem("filter_service_name")
+                              : "-";
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
+                    </div>
+                  ) : null}
                   <div
                     data-plasmic-name={"filterType"}
                     data-plasmic-override={overrides.filterType}
@@ -2784,14 +2983,54 @@ function PlasmicHomepage__RenderFunc(props: {
                       projectcss.__wab_text,
                       sty.filterType
                     )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateModalConsultFilterTypeOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["modalConsultFilterType", "open"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateModalConsultFilterTypeOpen"] != null &&
+                        typeof $steps["updateModalConsultFilterTypeOpen"] ===
+                          "object" &&
+                        typeof $steps["updateModalConsultFilterTypeOpen"]
+                          .then === "function"
+                      ) {
+                        $steps["updateModalConsultFilterTypeOpen"] =
+                          await $steps["updateModalConsultFilterTypeOpen"];
+                      }
+                    }}
                   >
                     <React.Fragment>
                       {(() => {
                         try {
                           return localStorage.getItem("consult_filter_type") !==
-                            null
+                            (null || undefined || "" || "null" || "undefined")
                             ? localStorage.getItem("consult_filter_type")
-                            : "-";
+                            : "تعیین نشده";
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -2838,9 +3077,12 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 })()}
                 method={"GET"}
-                path={`/api/v2/consult?${localStorage.getItem(
-                  "GET_V2_consult_query_param"
-                )}`}
+                path={`/api/v2/consult?${
+                  localStorage.getItem("GET_V2_consult_query_param") !==
+                  (null || undefined || "" || "null" || "undefined")
+                    ? localStorage.getItem("GET_V2_consult_query_param")
+                    : "offset=0&limit=10"
+                }`}
                 ref={ref => {
                   $refs["consults"] = ref;
                 }}
@@ -2848,6 +3090,71 @@ function PlasmicHomepage__RenderFunc(props: {
                 <DataCtxReader__>
                   {$ctx => (
                     <React.Fragment>
+                      {(
+                        hasVariant(globalVariants, "screen", "mobileFirst")
+                          ? (() => {
+                              try {
+                                return $ctx.fetched_data.loading == true;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return true;
+                                }
+                                throw e;
+                              }
+                            })()
+                          : $ctx.fetched_data.loading
+                      ) ? (
+                        <div
+                          data-plasmic-name={
+                            "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
+                          }
+                          data-plasmic-override={overrides.لطفامنتظربمانید2}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.لطفامنتظربمانید2
+                          )}
+                        >
+                          {
+                            "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                          }
+                        </div>
+                      ) : null}
+                      {(() => {
+                        try {
+                          return (
+                            $ctx.fetched_data.loading === false &&
+                            $ctx.fetched_data.data.consults == ""
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <div
+                          data-plasmic-name={
+                            "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+                          }
+                          data-plasmic-override={overrides.مشاورهایییافتنشد}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.مشاورهایییافتنشد
+                          )}
+                        >
+                          {
+                            "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u06cc\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
+                          }
+                        </div>
+                      ) : null}
                       {(_par =>
                         !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                         (() => {
@@ -2869,12 +3176,12 @@ function PlasmicHomepage__RenderFunc(props: {
                         return (
                           <Stack__
                             as={"div"}
-                            data-plasmic-name={"sentConsultCard"}
-                            data-plasmic-override={overrides.sentConsultCard}
+                            data-plasmic-name={"inboxConsultCard"}
+                            data-plasmic-override={overrides.inboxConsultCard}
                             hasGap={true}
                             className={classNames(
                               projectcss.all,
-                              sty.sentConsultCard
+                              sty.inboxConsultCard
                             )}
                             key={currentIndex}
                           >
@@ -2890,7 +3197,10 @@ function PlasmicHomepage__RenderFunc(props: {
                             >
                               {(() => {
                                 try {
-                                  return currentItem.priority === 1;
+                                  return (
+                                    currentItem.priority === 1 ||
+                                    currentItem.priority === 2
+                                  );
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -3284,89 +3594,723 @@ function PlasmicHomepage__RenderFunc(props: {
                                       }
                                     </div>
                                   ) : null}
+                                  {(() => {
+                                    try {
+                                      return !currentItem.paper_reply;
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return true;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                    ? (() => {
+                                        const child$Props = {
+                                          className: classNames(
+                                            "__wab_instance",
+                                            sty.replyConsultButton
+                                          ),
+                                          color: "blue",
+                                          deselected: generateStateValueProp(
+                                            $state,
+                                            [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "deselected"
+                                            ]
+                                          ),
+                                          isDisabled: generateStateValueProp(
+                                            $state,
+                                            [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "isDisabled"
+                                            ]
+                                          ),
+                                          onClick: async event => {
+                                            const $steps = {};
+
+                                            $steps["updateInboxConsultCardId"] =
+                                              true
+                                                ? (() => {
+                                                    const actionArgs = {
+                                                      variable: {
+                                                        objRoot: $state,
+                                                        variablePath: [
+                                                          "inboxConsultCardId"
+                                                        ]
+                                                      },
+                                                      operation: 0,
+                                                      value: currentItem.id
+                                                    };
+                                                    return (({
+                                                      variable,
+                                                      value,
+                                                      startIndex,
+                                                      deleteCount
+                                                    }) => {
+                                                      if (!variable) {
+                                                        return;
+                                                      }
+                                                      const {
+                                                        objRoot,
+                                                        variablePath
+                                                      } = variable;
+
+                                                      $stateSet(
+                                                        objRoot,
+                                                        variablePath,
+                                                        value
+                                                      );
+                                                      return value;
+                                                    })?.apply(null, [
+                                                      actionArgs
+                                                    ]);
+                                                  })()
+                                                : undefined;
+                                            if (
+                                              $steps[
+                                                "updateInboxConsultCardId"
+                                              ] != null &&
+                                              typeof $steps[
+                                                "updateInboxConsultCardId"
+                                              ] === "object" &&
+                                              typeof $steps[
+                                                "updateInboxConsultCardId"
+                                              ].then === "function"
+                                            ) {
+                                              $steps[
+                                                "updateInboxConsultCardId"
+                                              ] = await $steps[
+                                                "updateInboxConsultCardId"
+                                              ];
+                                            }
+
+                                            $steps[
+                                              "makeFalseReplyConsultUnsuccessfullyAlert"
+                                            ] = true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "replyConsultUnsuccessfullyAlert"
+                                                      ]
+                                                    },
+                                                    operation: 0,
+                                                    value: false
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      value
+                                                    );
+                                                    return value;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                            if (
+                                              $steps[
+                                                "makeFalseReplyConsultUnsuccessfullyAlert"
+                                              ] != null &&
+                                              typeof $steps[
+                                                "makeFalseReplyConsultUnsuccessfullyAlert"
+                                              ] === "object" &&
+                                              typeof $steps[
+                                                "makeFalseReplyConsultUnsuccessfullyAlert"
+                                              ].then === "function"
+                                            ) {
+                                              $steps[
+                                                "makeFalseReplyConsultUnsuccessfullyAlert"
+                                              ] = await $steps[
+                                                "makeFalseReplyConsultUnsuccessfullyAlert"
+                                              ];
+                                            }
+
+                                            $steps[
+                                              "updateModalReplyConsultConfirmationOpen"
+                                            ] = true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "modalReplyConsultConfirmation",
+                                                        "open"
+                                                      ]
+                                                    },
+                                                    operation: 4
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    const oldValue = $stateGet(
+                                                      objRoot,
+                                                      variablePath
+                                                    );
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      !oldValue
+                                                    );
+                                                    return !oldValue;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                            if (
+                                              $steps[
+                                                "updateModalReplyConsultConfirmationOpen"
+                                              ] != null &&
+                                              typeof $steps[
+                                                "updateModalReplyConsultConfirmationOpen"
+                                              ] === "object" &&
+                                              typeof $steps[
+                                                "updateModalReplyConsultConfirmationOpen"
+                                              ].then === "function"
+                                            ) {
+                                              $steps[
+                                                "updateModalReplyConsultConfirmationOpen"
+                                              ] = await $steps[
+                                                "updateModalReplyConsultConfirmationOpen"
+                                              ];
+                                            }
+                                          },
+                                          onDeselectedChange: (
+                                            ...eventArgs
+                                          ) => {
+                                            generateStateOnChangeProp($state, [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "deselected"
+                                            ])(eventArgs[0]);
+                                          },
+                                          onIsDisabledChange: (
+                                            ...eventArgs
+                                          ) => {
+                                            generateStateOnChangeProp($state, [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "isDisabled"
+                                            ])(eventArgs[0]);
+                                          },
+                                          onSelectedChange: (...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "selected"
+                                            ])(eventArgs[0]);
+                                          },
+                                          onSortDeselectedChange: (
+                                            ...eventArgs
+                                          ) => {
+                                            generateStateOnChangeProp($state, [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "sortDeselected"
+                                            ])(eventArgs[0]);
+                                          },
+                                          onSortSelectedChange: (
+                                            ...eventArgs
+                                          ) => {
+                                            generateStateOnChangeProp($state, [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "sortSelected"
+                                            ])(eventArgs[0]);
+                                          },
+                                          selected: generateStateValueProp(
+                                            $state,
+                                            [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "selected"
+                                            ]
+                                          ),
+                                          shape: "rounded",
+                                          sortDeselected:
+                                            generateStateValueProp($state, [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "sortDeselected"
+                                            ]),
+                                          sortSelected: generateStateValueProp(
+                                            $state,
+                                            [
+                                              "replyConsultButton",
+                                              __plasmic_idx_0,
+                                              "sortSelected"
+                                            ]
+                                          )
+                                        };
+
+                                        initializePlasmicStates(
+                                          $state,
+                                          [
+                                            {
+                                              name: "replyConsultButton[].isDisabled",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            },
+                                            {
+                                              name: "replyConsultButton[].selected",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            },
+                                            {
+                                              name: "replyConsultButton[].deselected",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            },
+                                            {
+                                              name: "replyConsultButton[].sortDeselected",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            },
+                                            {
+                                              name: "replyConsultButton[].sortSelected",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            }
+                                          ],
+                                          [__plasmic_idx_0]
+                                        );
+                                        return (
+                                          <Button
+                                            data-plasmic-name={
+                                              "replyConsultButton"
+                                            }
+                                            data-plasmic-override={
+                                              overrides.replyConsultButton
+                                            }
+                                            {...child$Props}
+                                          >
+                                            <div
+                                              className={classNames(
+                                                projectcss.all,
+                                                projectcss.__wab_text,
+                                                sty.text__ahIvw
+                                              )}
+                                            >
+                                              {
+                                                "\u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e"
+                                              }
+                                            </div>
+                                          </Button>
+                                        );
+                                      })()
+                                    : null}
+                                </div>
+                                <div
+                                  data-plasmic-name={
+                                    "patientDataButtonsInConsultCard"
+                                  }
+                                  data-plasmic-override={
+                                    overrides.patientDataButtonsInConsultCard
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.patientDataButtonsInConsultCard
+                                  )}
+                                >
+                                  <PlasmicImg__
+                                    data-plasmic-name={"patientProfile2"}
+                                    data-plasmic-override={
+                                      overrides.patientProfile2
+                                    }
+                                    alt={""}
+                                    className={classNames(sty.patientProfile2)}
+                                    displayHeight={"auto"}
+                                    displayMaxHeight={"none"}
+                                    displayMaxWidth={"100%"}
+                                    displayMinHeight={"0"}
+                                    displayMinWidth={"0"}
+                                    displayWidth={"22px"}
+                                    onClick={async event => {
+                                      const $steps = {};
+
+                                      $steps["goToPatientProfile"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              destination: `/patient/${(() => {
+                                                try {
+                                                  return currentItem.patient
+                                                    .profile_id;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return undefined;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()}/profile/${(() => {
+                                                try {
+                                                  return currentItem.patient
+                                                    .admission_id;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return undefined;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()}`
+                                            };
+                                            return (({ destination }) => {
+                                              if (
+                                                typeof destination ===
+                                                  "string" &&
+                                                destination.startsWith("#")
+                                              ) {
+                                                document
+                                                  .getElementById(
+                                                    destination.substr(1)
+                                                  )
+                                                  .scrollIntoView({
+                                                    behavior: "smooth"
+                                                  });
+                                              } else {
+                                                __nextRouter?.push(destination);
+                                              }
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps["goToPatientProfile"] != null &&
+                                        typeof $steps["goToPatientProfile"] ===
+                                          "object" &&
+                                        typeof $steps["goToPatientProfile"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["goToPatientProfile"] =
+                                          await $steps["goToPatientProfile"];
+                                      }
+                                    }}
+                                    src={{
+                                      src: "/new_inlab/plasmic/inlab/images/group2063.svg",
+                                      fullWidth: 18.77,
+                                      fullHeight: 20.34,
+                                      aspectRatio: 0.904762
+                                    }}
+                                  />
+
+                                  <PlasmicImg__
+                                    data-plasmic-name={"consultNotify2"}
+                                    data-plasmic-override={
+                                      overrides.consultNotify2
+                                    }
+                                    alt={""}
+                                    className={classNames(sty.consultNotify2)}
+                                    displayHeight={"auto"}
+                                    displayMaxHeight={"none"}
+                                    displayMaxWidth={"100%"}
+                                    displayMinHeight={"0"}
+                                    displayMinWidth={"0"}
+                                    displayWidth={"25px"}
+                                    loading={"lazy"}
+                                    onClick={async event => {
+                                      const $steps = {};
+
+                                      $steps["goToConsultList"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              destination: `/consult-list/${(() => {
+                                                try {
+                                                  return currentItem.patient
+                                                    .profile_id;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return undefined;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()}/${(() => {
+                                                try {
+                                                  return currentItem.patient
+                                                    .admission_id;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return undefined;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()}`
+                                            };
+                                            return (({ destination }) => {
+                                              if (
+                                                typeof destination ===
+                                                  "string" &&
+                                                destination.startsWith("#")
+                                              ) {
+                                                document
+                                                  .getElementById(
+                                                    destination.substr(1)
+                                                  )
+                                                  .scrollIntoView({
+                                                    behavior: "smooth"
+                                                  });
+                                              } else {
+                                                __nextRouter?.push(destination);
+                                              }
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps["goToConsultList"] != null &&
+                                        typeof $steps["goToConsultList"] ===
+                                          "object" &&
+                                        typeof $steps["goToConsultList"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["goToConsultList"] =
+                                          await $steps["goToConsultList"];
+                                      }
+                                    }}
+                                    src={{
+                                      src: "/new_inlab/plasmic/inlab/images/consult0F4Cb101Svg.svg",
+                                      fullWidth: 24,
+                                      fullHeight: 24,
+                                      aspectRatio: 1
+                                    }}
+                                  />
+
+                                  <PlasmicImg__
+                                    data-plasmic-name={"radiologyReport2"}
+                                    data-plasmic-override={
+                                      overrides.radiologyReport2
+                                    }
+                                    alt={""}
+                                    className={classNames(sty.radiologyReport2)}
+                                    displayHeight={"auto"}
+                                    displayMaxHeight={"none"}
+                                    displayMaxWidth={"100%"}
+                                    displayMinHeight={"0"}
+                                    displayMinWidth={"0"}
+                                    displayWidth={"22px"}
+                                    onClick={async event => {
+                                      const $steps = {};
+
+                                      $steps["goToImagingReportList"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              destination: `/patient/${(() => {
+                                                try {
+                                                  return currentItem.patient
+                                                    .profile_id;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return undefined;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()}/report/list/${(() => {
+                                                try {
+                                                  return currentItem.admission_id;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return undefined;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()}`
+                                            };
+                                            return (({ destination }) => {
+                                              if (
+                                                typeof destination ===
+                                                  "string" &&
+                                                destination.startsWith("#")
+                                              ) {
+                                                document
+                                                  .getElementById(
+                                                    destination.substr(1)
+                                                  )
+                                                  .scrollIntoView({
+                                                    behavior: "smooth"
+                                                  });
+                                              } else {
+                                                __nextRouter?.push(destination);
+                                              }
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps["goToImagingReportList"] !=
+                                          null &&
+                                        typeof $steps[
+                                          "goToImagingReportList"
+                                        ] === "object" &&
+                                        typeof $steps["goToImagingReportList"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["goToImagingReportList"] =
+                                          await $steps["goToImagingReportList"];
+                                      }
+                                    }}
+                                    src={{
+                                      src: "/new_inlab/plasmic/inlab/images/group376.svg",
+                                      fullWidth: 19.424,
+                                      fullHeight: 19.98,
+                                      aspectRatio: 1
+                                    }}
+                                  />
+
+                                  <PlasmicImg__
+                                    data-plasmic-name={"laboratoryData2"}
+                                    data-plasmic-override={
+                                      overrides.laboratoryData2
+                                    }
+                                    alt={""}
+                                    className={classNames(sty.laboratoryData2)}
+                                    displayHeight={"auto"}
+                                    displayMaxHeight={"none"}
+                                    displayMaxWidth={"100%"}
+                                    displayMinHeight={"0"}
+                                    displayMinWidth={"0"}
+                                    displayWidth={"22px"}
+                                    onClick={async event => {
+                                      const $steps = {};
+
+                                      $steps["goToLaboratoryData"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              destination: `/patient/${(() => {
+                                                try {
+                                                  return currentItem.patient
+                                                    .profile_id;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return undefined;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()}/lab/${(() => {
+                                                try {
+                                                  return currentItem.patient
+                                                    .admission_id;
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return undefined;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()}`
+                                            };
+                                            return (({ destination }) => {
+                                              if (
+                                                typeof destination ===
+                                                  "string" &&
+                                                destination.startsWith("#")
+                                              ) {
+                                                document
+                                                  .getElementById(
+                                                    destination.substr(1)
+                                                  )
+                                                  .scrollIntoView({
+                                                    behavior: "smooth"
+                                                  });
+                                              } else {
+                                                __nextRouter?.push(destination);
+                                              }
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps["goToLaboratoryData"] != null &&
+                                        typeof $steps["goToLaboratoryData"] ===
+                                          "object" &&
+                                        typeof $steps["goToLaboratoryData"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["goToLaboratoryData"] =
+                                          await $steps["goToLaboratoryData"];
+                                      }
+                                    }}
+                                    src={{
+                                      src: "/new_inlab/plasmic/inlab/images/group384.svg",
+                                      fullWidth: 14.575,
+                                      fullHeight: 18.692,
+                                      aspectRatio: 0.789474
+                                    }}
+                                  />
                                 </div>
                               </div>
                             </div>
                           </Stack__>
                         );
                       })}
-                      {(
-                        hasVariant(globalVariants, "screen", "mobileFirst")
-                          ? (() => {
-                              try {
-                                return $ctx.fetched_data.loading == true;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })()
-                          : (() => {
-                              try {
-                                return $ctx.fetched_data.loading;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })()
-                      ) ? (
-                        <div
-                          data-plasmic-name={
-                            "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
-                          }
-                          data-plasmic-override={overrides.لطفامنتظربمانید2}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.لطفامنتظربمانید2
-                          )}
-                        >
-                          {
-                            "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                          }
-                        </div>
-                      ) : null}
-                      {(() => {
-                        try {
-                          return (
-                            $ctx.fetched_data.loading === false &&
-                            $ctx.fetched_data.data.consults == ""
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })() ? (
-                        <div
-                          data-plasmic-name={
-                            "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
-                          }
-                          data-plasmic-override={overrides.مشاورهایییافتنشد}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.مشاورهایییافتنشد
-                          )}
-                        >
-                          {
-                            "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u06cc\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
-                          }
-                        </div>
-                      ) : null}
                     </React.Fragment>
                   )}
                 </DataCtxReader__>
@@ -3483,7 +4427,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   operation: 0,
                                   value:
                                     $ctx.fetched_data.data !=
-                                    (null || undefined)
+                                    (null && undefined && "")
                                       ? $ctx.fetched_data.data.length
                                       : ""
                                 };
@@ -5651,7 +6595,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           const actionArgs = {
                                             destination: `/consult-list/${(() => {
                                               try {
-                                                return currentItem.profile_number;
+                                                return currentItem.profile_id;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
@@ -6227,8 +7171,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
                         try {
-                          return localStorage.getItem("ward_list") !==
-                            (null || undefined || "" || "undefined") &&
+                          return localStorage.getItem("ward_list") &&
                             $state.searchbarWard.value === ""
                             ? JSON.parse(localStorage.getItem("ward_list"))
                             : $ctx.fetched_data.data;
@@ -6492,23 +7435,193 @@ function PlasmicHomepage__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
         </AntdModal>
-        {(() => {
-          try {
-            return $state.selectedTab === "consult";
-          } catch (e) {
-            if (
-              e instanceof TypeError ||
-              e?.plasmicType === "PlasmicUndefinedDataError"
-            ) {
-              return true;
-            }
-            throw e;
+        <AntdModal
+          data-plasmic-name={"modalPhysician"}
+          data-plasmic-override={overrides.modalPhysician}
+          className={classNames("__wab_instance", sty.modalPhysician)}
+          closeButtonClassName={classNames({
+            [sty["pcls_hdcm5qbTGf-c"]]: true
+          })}
+          closeIcon={null}
+          defaultStylesClassName={classNames(
+            projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens
+          )}
+          hideFooter={true}
+          maskClosable={false}
+          modalContentClassName={classNames({
+            [sty["pcls_KLtjHhS7Dowx"]]: true
+          })}
+          modalScopeClassName={sty["modalPhysician__modal"]}
+          onOpenChange={generateStateOnChangeProp($state, [
+            "modalPhysician",
+            "open"
+          ])}
+          open={generateStateValueProp($state, ["modalPhysician", "open"])}
+          title={
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox__rkeNk)}
+            >
+              <Icons8CloseSvgIcon
+                className={classNames(projectcss.all, sty.svg___0Tmhc)}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateModalphysicianOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["modalPhysician", "open"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateModalphysicianOpen"] != null &&
+                    typeof $steps["updateModalphysicianOpen"] === "object" &&
+                    typeof $steps["updateModalphysicianOpen"].then ===
+                      "function"
+                  ) {
+                    $steps["updateModalphysicianOpen"] = await $steps[
+                      "updateModalphysicianOpen"
+                    ];
+                  }
+
+                  $steps["runActionOnPatients"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          tplRef: "patients",
+                          action: "reload"
+                        };
+                        return (({ tplRef, action, args }) => {
+                          return $refs?.[tplRef]?.[action]?.(...(args ?? []));
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["runActionOnPatients"] != null &&
+                    typeof $steps["runActionOnPatients"] === "object" &&
+                    typeof $steps["runActionOnPatients"].then === "function"
+                  ) {
+                    $steps["runActionOnPatients"] = await $steps[
+                      "runActionOnPatients"
+                    ];
+                  }
+                }}
+                role={"img"}
+              />
+
+              <TextInput
+                data-plasmic-name={"searchbarPhysicians"}
+                data-plasmic-override={overrides.searchbarPhysicians}
+                className={classNames(
+                  "__wab_instance",
+                  sty.searchbarPhysicians
+                )}
+                endIcon={
+                  <Icons8CloseSvgIcon
+                    className={classNames(projectcss.all, sty.svg__ebXu6)}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateSearchbarWardValue"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["searchbarPhysicians", "value"]
+                              },
+                              operation: 0,
+                              value: ""
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateSearchbarWardValue"] != null &&
+                        typeof $steps["updateSearchbarWardValue"] ===
+                          "object" &&
+                        typeof $steps["updateSearchbarWardValue"].then ===
+                          "function"
+                      ) {
+                        $steps["updateSearchbarWardValue"] = await $steps[
+                          "updateSearchbarWardValue"
+                        ];
+                      }
+                    }}
+                    role={"img"}
+                  />
+                }
+                onChange={(...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "searchbarPhysicians",
+                    "value"
+                  ])((e => e.target?.value).apply(null, eventArgs));
+                }}
+                placeholder={
+                  hasVariant(globalVariants, "screen", "mobileFirst")
+                    ? "\u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u0634\u0645\u0627\u0631\u0647 \u067e\u0631\u0648\u0646\u062f\u0647\u060c \u06a9\u062f \u0645\u0644\u06cc\u060c \u06a9\u062f \u067e\u06a9\u0633"
+                    : "\u0646\u0627\u0645 \u064a\u0627 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u064a \u0627\u0633\u062a\u0627\u062f \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
+                }
+                startIcon={
+                  <SearchSvgIcon
+                    className={classNames(projectcss.all, sty.svg__eefHg)}
+                    role={"img"}
+                  />
+                }
+                value={
+                  generateStateValueProp($state, [
+                    "searchbarPhysicians",
+                    "value"
+                  ]) ?? ""
+                }
+              />
+            </Stack__>
           }
-        })() ? (
+          trigger={null}
+          wrapClassName={classNames({ [sty["pcls_IF4RfoWSlpeq"]]: true })}
+        >
           <ApiFetcherComponent
-            data-plasmic-name={"getServicesForConsult"}
-            data-plasmic-override={overrides.getServicesForConsult}
-            className={classNames("__wab_instance", sty.getServicesForConsult)}
+            data-plasmic-name={"physiciansList"}
+            data-plasmic-override={overrides.physiciansList}
+            className={classNames("__wab_instance", sty.physiciansList)}
+            delay={300}
             headers={(() => {
               try {
                 return {
@@ -6525,107 +7638,331 @@ function PlasmicHomepage__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={"/api/v2/service"}
+            path={`/api/v3/patient/physician?physician_name=${$state.searchbarPhysicians.value}&patient_id=0`}
             ref={ref => {
-              $refs["getServicesForConsult"] = ref;
+              $refs["physiciansList"] = ref;
             }}
           >
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
-                  <AntdModal
-                    data-plasmic-name={"modalConsultSenderService"}
-                    data-plasmic-override={overrides.modalConsultSenderService}
+                  <ConditionGuard
+                    children={null}
                     className={classNames(
                       "__wab_instance",
-                      sty.modalConsultSenderService
+                      sty.conditionGuard__zAYx0
                     )}
-                    defaultStylesClassName={classNames(
-                      projectcss.root_reset,
-                      projectcss.plasmic_default_styles,
-                      projectcss.plasmic_mixins,
-                      projectcss.plasmic_tokens,
-                      plasmic_antd_5_hostless_css.plasmic_tokens,
-                      plasmic_plasmic_rich_components_css.plasmic_tokens
-                    )}
-                    hideFooter={true}
-                    maskClosable={false}
-                    modalContentClassName={classNames({
-                      [sty["pcls_THa7BUI8A7ZH"]]: true
-                    })}
-                    modalScopeClassName={
-                      sty["modalConsultSenderService__modal"]
-                    }
-                    onOpenChange={generateStateOnChangeProp($state, [
-                      "modalConsultSenderService",
-                      "open"
-                    ])}
-                    open={generateStateValueProp($state, [
-                      "modalConsultSenderService",
-                      "open"
-                    ])}
-                    title={
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__n6NNv
-                        )}
-                      >
-                        {
-                          "\u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627"
+                    condition={(() => {
+                      try {
+                        return $ctx.fetched_data.loading;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return false;
                         }
-                      </div>
-                    }
-                    trigger={null}
-                  >
-                    <Stack__
-                      as={"div"}
-                      data-plasmic-name={"senderServiceList"}
-                      data-plasmic-override={overrides.senderServiceList}
-                      hasGap={true}
-                      className={classNames(
-                        projectcss.all,
-                        sty.senderServiceList
-                      )}
-                    >
-                      <ConditionGuard
-                        children={null}
-                        className={classNames(
-                          "__wab_instance",
-                          sty.conditionGuard__pCbE
-                        )}
-                        condition={(() => {
-                          try {
-                            return $ctx.fetched_data.loading;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return false;
-                            }
-                            throw e;
-                          }
-                        })()}
-                        onNotSatisfied={async () => {
-                          const $steps = {};
+                        throw e;
+                      }
+                    })()}
+                    onNotSatisfied={async () => {
+                      const $steps = {};
 
-                          $steps["setLocalFilterConsultSenderServiceList"] =
-                            true
+                      $steps["setLocalPhysiciansList"] =
+                        $state.searchbarPhysicians.value == ""
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "physicians_list",
+                                      JSON.stringify($ctx.fetched_data.data)
+                                    );
+                                    return console.log(
+                                      `physicians_list: ${localStorage.getItem(
+                                        "physicians_list"
+                                      )}`
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["setLocalPhysiciansList"] != null &&
+                        typeof $steps["setLocalPhysiciansList"] === "object" &&
+                        typeof $steps["setLocalPhysiciansList"].then ===
+                          "function"
+                      ) {
+                        $steps["setLocalPhysiciansList"] = await $steps[
+                          "setLocalPhysiciansList"
+                        ];
+                      }
+                    }}
+                    skipPaths={[]}
+                  />
+
+                  <Stack__
+                    as={"div"}
+                    data-plasmic-name={"physiciansList2"}
+                    data-plasmic-override={overrides.physiciansList2}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.physiciansList2)}
+                  >
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return localStorage.getItem("physicians_list") &&
+                            $state.searchbarPhysicians.value === ""
+                            ? JSON.parse(
+                                localStorage.getItem("physicians_list")
+                              )
+                            : $ctx.fetched_data.data;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          data-plasmic-name={"physiciansName"}
+                          data-plasmic-override={overrides.physiciansName}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.physiciansName
+                          )}
+                          key={currentIndex}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["updateModalphysicianOpen"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalPhysician", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateModalphysicianOpen"] != null &&
+                              typeof $steps["updateModalphysicianOpen"] ===
+                                "object" &&
+                              typeof $steps["updateModalphysicianOpen"].then ===
+                                "function"
+                            ) {
+                              $steps["updateModalphysicianOpen"] = await $steps[
+                                "updateModalphysicianOpen"
+                              ];
+                            }
+
+                            $steps["setStateSelectedTab"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["selectedTab"]
+                                    },
+                                    operation: 0,
+                                    value: "physician"
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["setStateSelectedTab"] != null &&
+                              typeof $steps["setStateSelectedTab"] ===
+                                "object" &&
+                              typeof $steps["setStateSelectedTab"].then ===
+                                "function"
+                            ) {
+                              $steps["setStateSelectedTab"] = await $steps[
+                                "setStateSelectedTab"
+                              ];
+                            }
+
+                            $steps["setSelectedTabLocalStorage"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return localStorage.setItem(
+                                        "selected_tab",
+                                        $state.selectedTab.toString()
+                                      );
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["setSelectedTabLocalStorage"] != null &&
+                              typeof $steps["setSelectedTabLocalStorage"] ===
+                                "object" &&
+                              typeof $steps["setSelectedTabLocalStorage"]
+                                .then === "function"
+                            ) {
+                              $steps["setSelectedTabLocalStorage"] =
+                                await $steps["setSelectedTabLocalStorage"];
+                            }
+
+                            $steps["setStateFilterphysicianname"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["filterphysicianname"]
+                                    },
+                                    operation: 0,
+                                    value: currentItem.name
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["setStateFilterphysicianname"] != null &&
+                              typeof $steps["setStateFilterphysicianname"] ===
+                                "object" &&
+                              typeof $steps["setStateFilterphysicianname"]
+                                .then === "function"
+                            ) {
+                              $steps["setStateFilterphysicianname"] =
+                                await $steps["setStateFilterphysicianname"];
+                            }
+
+                            $steps["setPhysicianNamePhysicianIdLocalStorage"] =
+                              true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return (() => {
+                                          localStorage.setItem(
+                                            "filter_physician_name",
+                                            $state.filterphysicianname.toString()
+                                          );
+                                          return localStorage.setItem(
+                                            "filter_physician_id",
+                                            currentItem.code
+                                          );
+                                        })();
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                            if (
+                              $steps[
+                                "setPhysicianNamePhysicianIdLocalStorage"
+                              ] != null &&
+                              typeof $steps[
+                                "setPhysicianNamePhysicianIdLocalStorage"
+                              ] === "object" &&
+                              typeof $steps[
+                                "setPhysicianNamePhysicianIdLocalStorage"
+                              ].then === "function"
+                            ) {
+                              $steps[
+                                "setPhysicianNamePhysicianIdLocalStorage"
+                              ] = await $steps[
+                                "setPhysicianNamePhysicianIdLocalStorage"
+                              ];
+                            }
+
+                            $steps["logConsole"] = true
                               ? (() => {
                                   const actionArgs = {
                                     customFunction: async () => {
                                       return (() => {
-                                        localStorage.setItem(
-                                          "consult_sender_service_list_for_filter",
-                                          JSON.stringify(
-                                            $ctx.fetched_data.data.services
-                                          )
+                                        console.log(
+                                          `state_selected_tab: ${$state.selectedTab}`
+                                        );
+                                        console.log(
+                                          `state_filter_bookmarked: ${$state.bookmarked.selected}`
+                                        );
+                                        console.log(
+                                          `state_filter_ward: ${$state.ward2.selected}`
+                                        );
+                                        console.log(
+                                          `state_filter_ward_name: ${$state.filterwardname}`
+                                        );
+                                        console.log(
+                                          `state_filter_physician_name: ${$state.filterphysicianname}`
+                                        );
+                                        console.log(
+                                          `state_filter_physicians: ${$state.filterphysician}`
+                                        );
+                                        console.log(
+                                          `selected_tab: ${localStorage.getItem(
+                                            "selected_tab"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `filter_physician_name: ${localStorage.getItem(
+                                            "filter_physician_name"
+                                          )}`
                                         );
                                         return console.log(
-                                          `consult_sender_service_list_for_filter: ${localStorage.getItem(
-                                            "consult_sender_service_list_for_filter"
+                                          `filter_physician_id: ${localStorage.getItem(
+                                            "filter_physician_id"
                                           )}`
                                         );
                                       })();
@@ -6636,800 +7973,25 @@ function PlasmicHomepage__RenderFunc(props: {
                                   })?.apply(null, [actionArgs]);
                                 })()
                               : undefined;
-                          if (
-                            $steps["setLocalFilterConsultSenderServiceList"] !=
-                              null &&
-                            typeof $steps[
-                              "setLocalFilterConsultSenderServiceList"
-                            ] === "object" &&
-                            typeof $steps[
-                              "setLocalFilterConsultSenderServiceList"
-                            ].then === "function"
-                          ) {
-                            $steps["setLocalFilterConsultSenderServiceList"] =
-                              await $steps[
-                                "setLocalFilterConsultSenderServiceList"
-                              ];
-                          }
-                        }}
-                        skipPaths={[]}
-                      />
-
-                      {(_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
-                          try {
-                            return localStorage.getItem(
-                              "consult_sender_service_list_for_filter"
-                            ) !== (null || undefined || "" || "undefined")
-                              ? JSON.parse(
-                                  localStorage.getItem(
-                                    "consult_sender_service_list_for_filter"
-                                  )
-                                )
-                              : $ctx.fetched_data.data.services;
-                          } catch (e) {
                             if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
+                              $steps["logConsole"] != null &&
+                              typeof $steps["logConsole"] === "object" &&
+                              typeof $steps["logConsole"].then === "function"
                             ) {
-                              return [];
+                              $steps["logConsole"] = await $steps["logConsole"];
                             }
-                            throw e;
-                          }
-                        })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const currentItem = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
-                          <div
-                            data-plasmic-name={"servicesName"}
-                            data-plasmic-override={overrides.servicesName}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.servicesName
-                            )}
-                            key={currentIndex}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["localStorageSetFilterServiceId"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "filter_service_id",
-                                          currentItem.id
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["localStorageSetFilterServiceId"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceId"
-                                ] === "object" &&
-                                typeof $steps["localStorageSetFilterServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["localStorageSetFilterServiceId"] =
-                                  await $steps[
-                                    "localStorageSetFilterServiceId"
-                                  ];
-                              }
-
-                              $steps["localStorageSetFilterServiceName"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "filter_service_name",
-                                          currentItem.name
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["localStorageSetFilterServiceName"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceName"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceName"
-                                ].then === "function"
-                              ) {
-                                $steps["localStorageSetFilterServiceName"] =
-                                  await $steps[
-                                    "localStorageSetFilterServiceName"
-                                  ];
-                              }
-
-                              $steps["localStorageSetGetV2ConsultQueryParam"] =
-                                true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return localStorage.setItem(
-                                            "GET_V2_consult_query_param",
-                                            `effective_patient_service_id=${localStorage.getItem(
-                                              "filter_service_id"
-                                            )}`
-                                          );
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                              if (
-                                $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] != null &&
-                                typeof $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ].then === "function"
-                              ) {
-                                $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] = await $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ];
-                              }
-
-                              $steps["consoleLogFilterServiceId"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "filter_service_id: ",
-                                          localStorage.getItem(
-                                            "filter_service_id"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogFilterServiceId"] != null &&
-                                typeof $steps["consoleLogFilterServiceId"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogFilterServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogFilterServiceId"] =
-                                  await $steps["consoleLogFilterServiceId"];
-                              }
-
-                              $steps["consoleLogFilterServiceName"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "filter_service_name: ",
-                                          localStorage.getItem(
-                                            "filter_service_name"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogFilterServiceName"] != null &&
-                                typeof $steps["consoleLogFilterServiceName"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogFilterServiceName"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogFilterServiceName"] =
-                                  await $steps["consoleLogFilterServiceName"];
-                              }
-
-                              $steps["consoleLogGetV2ConsultQueryParam"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "GET_V2_consult_query_param:",
-                                          localStorage.getItem(
-                                            "GET_V2_consult_query_param"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogGetV2ConsultQueryParam"] !=
-                                  null &&
-                                typeof $steps[
-                                  "consoleLogGetV2ConsultQueryParam"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "consoleLogGetV2ConsultQueryParam"
-                                ].then === "function"
-                              ) {
-                                $steps["consoleLogGetV2ConsultQueryParam"] =
-                                  await $steps[
-                                    "consoleLogGetV2ConsultQueryParam"
-                                  ];
-                              }
-
-                              $steps["setStateSelectedTab"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      variable: {
-                                        objRoot: $state,
-                                        variablePath: ["selectedTab"]
-                                      },
-                                      operation: 0,
-                                      value: "consult"
-                                    };
-                                    return (({
-                                      variable,
-                                      value,
-                                      startIndex,
-                                      deleteCount
-                                    }) => {
-                                      if (!variable) {
-                                        return;
-                                      }
-                                      const { objRoot, variablePath } =
-                                        variable;
-
-                                      $stateSet(objRoot, variablePath, value);
-                                      return value;
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["setStateSelectedTab"] != null &&
-                                typeof $steps["setStateSelectedTab"] ===
-                                  "object" &&
-                                typeof $steps["setStateSelectedTab"].then ===
-                                  "function"
-                              ) {
-                                $steps["setStateSelectedTab"] = await $steps[
-                                  "setStateSelectedTab"
-                                ];
-                              }
-
-                              $steps["updateModalConsultSenderServiceOpen"] =
-                                true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        variable: {
-                                          objRoot: $state,
-                                          variablePath: [
-                                            "modalConsultSenderService",
-                                            "open"
-                                          ]
-                                        },
-                                        operation: 0,
-                                        value: false
-                                      };
-                                      return (({
-                                        variable,
-                                        value,
-                                        startIndex,
-                                        deleteCount
-                                      }) => {
-                                        if (!variable) {
-                                          return;
-                                        }
-                                        const { objRoot, variablePath } =
-                                          variable;
-
-                                        $stateSet(objRoot, variablePath, value);
-                                        return value;
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                              if (
-                                $steps["updateModalConsultSenderServiceOpen"] !=
-                                  null &&
-                                typeof $steps[
-                                  "updateModalConsultSenderServiceOpen"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "updateModalConsultSenderServiceOpen"
-                                ].then === "function"
-                              ) {
-                                $steps["updateModalConsultSenderServiceOpen"] =
-                                  await $steps[
-                                    "updateModalConsultSenderServiceOpen"
-                                  ];
-                              }
-                            }}
-                          >
-                            <React.Fragment>{currentItem.name}</React.Fragment>
-                          </div>
-                        );
-                      })}
-                    </Stack__>
-                  </AntdModal>
-                  <AntdModal
-                    data-plasmic-name={"modalConsultReceiverService"}
-                    data-plasmic-override={
-                      overrides.modalConsultReceiverService
-                    }
-                    className={classNames(
-                      "__wab_instance",
-                      sty.modalConsultReceiverService
-                    )}
-                    defaultStylesClassName={classNames(
-                      projectcss.root_reset,
-                      projectcss.plasmic_default_styles,
-                      projectcss.plasmic_mixins,
-                      projectcss.plasmic_tokens,
-                      plasmic_antd_5_hostless_css.plasmic_tokens,
-                      plasmic_plasmic_rich_components_css.plasmic_tokens
-                    )}
-                    hideFooter={true}
-                    maskClosable={false}
-                    modalContentClassName={classNames({
-                      [sty["pcls_oRgYWFPy3jBh"]]: true
+                          }}
+                        >
+                          <React.Fragment>{currentItem.name}</React.Fragment>
+                        </div>
+                      );
                     })}
-                    modalScopeClassName={
-                      sty["modalConsultReceiverService__modal"]
-                    }
-                    onOpenChange={generateStateOnChangeProp($state, [
-                      "modalConsultReceiverService",
-                      "open"
-                    ])}
-                    open={generateStateValueProp($state, [
-                      "modalConsultReceiverService",
-                      "open"
-                    ])}
-                    title={
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__cRpHl
-                        )}
-                      >
-                        {
-                          "\u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f"
-                        }
-                      </div>
-                    }
-                    trigger={null}
-                  >
-                    <Stack__
-                      as={"div"}
-                      data-plasmic-name={"receiverServiceList"}
-                      data-plasmic-override={overrides.receiverServiceList}
-                      hasGap={true}
-                      className={classNames(
-                        projectcss.all,
-                        sty.receiverServiceList
-                      )}
-                    >
-                      <ConditionGuard
-                        children={null}
-                        className={classNames(
-                          "__wab_instance",
-                          sty.conditionGuard___60Nkj
-                        )}
-                        condition={(() => {
-                          try {
-                            return $ctx.fetched_data.loading;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return false;
-                            }
-                            throw e;
-                          }
-                        })()}
-                        onNotSatisfied={async () => {
-                          const $steps = {};
-
-                          $steps["setLocalFilterConsultReceiverServiceList"] =
-                            true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return (() => {
-                                        localStorage.setItem(
-                                          "consult_receiver_service_list_for_filter",
-                                          JSON.stringify(
-                                            $ctx.fetched_data.data.services
-                                          )
-                                        );
-                                        return console.log(
-                                          `consult_receiver_service_list_for_filter: ${localStorage.getItem(
-                                            "consult_receiver_service_list_for_filter"
-                                          )}`
-                                        );
-                                      })();
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps[
-                              "setLocalFilterConsultReceiverServiceList"
-                            ] != null &&
-                            typeof $steps[
-                              "setLocalFilterConsultReceiverServiceList"
-                            ] === "object" &&
-                            typeof $steps[
-                              "setLocalFilterConsultReceiverServiceList"
-                            ].then === "function"
-                          ) {
-                            $steps["setLocalFilterConsultReceiverServiceList"] =
-                              await $steps[
-                                "setLocalFilterConsultReceiverServiceList"
-                              ];
-                          }
-                        }}
-                        skipPaths={[]}
-                      />
-
-                      {(_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
-                          try {
-                            return localStorage.getItem(
-                              "consult_receiver_service_list_for_filter"
-                            ) !== (null || undefined || "" || "undefined")
-                              ? JSON.parse(
-                                  localStorage.getItem(
-                                    "consult_receiver_service_list_for_filter"
-                                  )
-                                )
-                              : $ctx.fetched_data.data.services;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return [];
-                            }
-                            throw e;
-                          }
-                        })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const currentItem = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
-                          <div
-                            data-plasmic-name={"servicesName2"}
-                            data-plasmic-override={overrides.servicesName2}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.servicesName2
-                            )}
-                            key={currentIndex}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["localStorageSetFilterServiceId"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "filter_service_id",
-                                          currentItem.id
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["localStorageSetFilterServiceId"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceId"
-                                ] === "object" &&
-                                typeof $steps["localStorageSetFilterServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["localStorageSetFilterServiceId"] =
-                                  await $steps[
-                                    "localStorageSetFilterServiceId"
-                                  ];
-                              }
-
-                              $steps["localStorageSetFilterServiceName"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "filter_service_name",
-                                          currentItem.name
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["localStorageSetFilterServiceName"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceName"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceName"
-                                ].then === "function"
-                              ) {
-                                $steps["localStorageSetFilterServiceName"] =
-                                  await $steps[
-                                    "localStorageSetFilterServiceName"
-                                  ];
-                              }
-
-                              $steps["localStorageSetGetV2ConsultQueryParam"] =
-                                true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return localStorage.setItem(
-                                            "GET_V2_consult_query_param",
-                                            `consultant_service_id=${localStorage.getItem(
-                                              "filter_service_id"
-                                            )}`
-                                          );
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                              if (
-                                $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] != null &&
-                                typeof $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ].then === "function"
-                              ) {
-                                $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] = await $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ];
-                              }
-
-                              $steps["consoleLogFilterServiceId"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "filter_service_id: ",
-                                          localStorage.getItem(
-                                            "filter_service_id"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogFilterServiceId"] != null &&
-                                typeof $steps["consoleLogFilterServiceId"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogFilterServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogFilterServiceId"] =
-                                  await $steps["consoleLogFilterServiceId"];
-                              }
-
-                              $steps["consoleLogFilterServiceName"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "filter_service_name: ",
-                                          localStorage.getItem(
-                                            "filter_service_name"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogFilterServiceName"] != null &&
-                                typeof $steps["consoleLogFilterServiceName"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogFilterServiceName"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogFilterServiceName"] =
-                                  await $steps["consoleLogFilterServiceName"];
-                              }
-
-                              $steps["consoleLogGetV2ConsultQueryParam"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "GET_V2_consult_query_param:",
-                                          localStorage.getItem(
-                                            "GET_V2_consult_query_param"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogGetV2ConsultQueryParam"] !=
-                                  null &&
-                                typeof $steps[
-                                  "consoleLogGetV2ConsultQueryParam"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "consoleLogGetV2ConsultQueryParam"
-                                ].then === "function"
-                              ) {
-                                $steps["consoleLogGetV2ConsultQueryParam"] =
-                                  await $steps[
-                                    "consoleLogGetV2ConsultQueryParam"
-                                  ];
-                              }
-
-                              $steps["setStateSelectedTab"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      variable: {
-                                        objRoot: $state,
-                                        variablePath: ["selectedTab"]
-                                      },
-                                      operation: 0,
-                                      value: "consult"
-                                    };
-                                    return (({
-                                      variable,
-                                      value,
-                                      startIndex,
-                                      deleteCount
-                                    }) => {
-                                      if (!variable) {
-                                        return;
-                                      }
-                                      const { objRoot, variablePath } =
-                                        variable;
-
-                                      $stateSet(objRoot, variablePath, value);
-                                      return value;
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["setStateSelectedTab"] != null &&
-                                typeof $steps["setStateSelectedTab"] ===
-                                  "object" &&
-                                typeof $steps["setStateSelectedTab"].then ===
-                                  "function"
-                              ) {
-                                $steps["setStateSelectedTab"] = await $steps[
-                                  "setStateSelectedTab"
-                                ];
-                              }
-
-                              $steps["updateModalConsultReceiverServiceOpen"] =
-                                true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        variable: {
-                                          objRoot: $state,
-                                          variablePath: [
-                                            "modalConsultReceiverService",
-                                            "open"
-                                          ]
-                                        },
-                                        operation: 4
-                                      };
-                                      return (({
-                                        variable,
-                                        value,
-                                        startIndex,
-                                        deleteCount
-                                      }) => {
-                                        if (!variable) {
-                                          return;
-                                        }
-                                        const { objRoot, variablePath } =
-                                          variable;
-
-                                        const oldValue = $stateGet(
-                                          objRoot,
-                                          variablePath
-                                        );
-                                        $stateSet(
-                                          objRoot,
-                                          variablePath,
-                                          !oldValue
-                                        );
-                                        return !oldValue;
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                              if (
-                                $steps[
-                                  "updateModalConsultReceiverServiceOpen"
-                                ] != null &&
-                                typeof $steps[
-                                  "updateModalConsultReceiverServiceOpen"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "updateModalConsultReceiverServiceOpen"
-                                ].then === "function"
-                              ) {
-                                $steps[
-                                  "updateModalConsultReceiverServiceOpen"
-                                ] = await $steps[
-                                  "updateModalConsultReceiverServiceOpen"
-                                ];
-                              }
-                            }}
-                          >
-                            <React.Fragment>{currentItem.name}</React.Fragment>
-                          </div>
-                        );
-                      })}
-                    </Stack__>
-                  </AntdModal>
+                  </Stack__>
                 </React.Fragment>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
-        ) : null}
+        </AntdModal>
         {(() => {
           try {
             return $state.selectedTab === "consult";
@@ -7602,6 +8164,42 @@ function PlasmicHomepage__RenderFunc(props: {
                     $steps["updateModalConsultSenderServiceOpen"] =
                       await $steps["updateModalConsultSenderServiceOpen"];
                   }
+
+                  $steps["setStateSelectedTab"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["selectedTab"]
+                          },
+                          operation: 0,
+                          value: "consult"
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setStateSelectedTab"] != null &&
+                    typeof $steps["setStateSelectedTab"] === "object" &&
+                    typeof $steps["setStateSelectedTab"].then === "function"
+                  ) {
+                    $steps["setStateSelectedTab"] = await $steps[
+                      "setStateSelectedTab"
+                    ];
+                  }
                 }}
               >
                 {"\u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627"}
@@ -7720,11 +8318,1693 @@ function PlasmicHomepage__RenderFunc(props: {
                     $steps["updateModalConsultReceiverServiceOpen"] =
                       await $steps["updateModalConsultReceiverServiceOpen"];
                   }
+
+                  $steps["setStateSelectedTab"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["selectedTab"]
+                          },
+                          operation: 0,
+                          value: "consult"
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setStateSelectedTab"] != null &&
+                    typeof $steps["setStateSelectedTab"] === "object" &&
+                    typeof $steps["setStateSelectedTab"].then === "function"
+                  ) {
+                    $steps["setStateSelectedTab"] = await $steps[
+                      "setStateSelectedTab"
+                    ];
+                  }
                 }}
               >
                 {"\u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f"}
               </div>
+              <div
+                data-plasmic-name={"deleteFilters"}
+                data-plasmic-override={overrides.deleteFilters}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.deleteFilters
+                )}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["setLocalConsultFilterType"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem(
+                              "consult_filter_type",
+                              null
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setLocalConsultFilterType"] != null &&
+                    typeof $steps["setLocalConsultFilterType"] === "object" &&
+                    typeof $steps["setLocalConsultFilterType"].then ===
+                      "function"
+                  ) {
+                    $steps["setLocalConsultFilterType"] = await $steps[
+                      "setLocalConsultFilterType"
+                    ];
+                  }
+
+                  $steps["setLocalFilterServiceId"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem(
+                              "filter_service_id",
+                              null
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setLocalFilterServiceId"] != null &&
+                    typeof $steps["setLocalFilterServiceId"] === "object" &&
+                    typeof $steps["setLocalFilterServiceId"].then === "function"
+                  ) {
+                    $steps["setLocalFilterServiceId"] = await $steps[
+                      "setLocalFilterServiceId"
+                    ];
+                  }
+
+                  $steps["setLocalFilterServiceName"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem(
+                              "filter_service_name",
+                              null
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setLocalFilterServiceName"] != null &&
+                    typeof $steps["setLocalFilterServiceName"] === "object" &&
+                    typeof $steps["setLocalFilterServiceName"].then ===
+                      "function"
+                  ) {
+                    $steps["setLocalFilterServiceName"] = await $steps[
+                      "setLocalFilterServiceName"
+                    ];
+                  }
+
+                  $steps["setLocalGetV2ConsultQueryParam"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem(
+                              "GET_V2_consult_query_param",
+                              null
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setLocalGetV2ConsultQueryParam"] != null &&
+                    typeof $steps["setLocalGetV2ConsultQueryParam"] ===
+                      "object" &&
+                    typeof $steps["setLocalGetV2ConsultQueryParam"].then ===
+                      "function"
+                  ) {
+                    $steps["setLocalGetV2ConsultQueryParam"] = await $steps[
+                      "setLocalGetV2ConsultQueryParam"
+                    ];
+                  }
+
+                  $steps["updateModalConsultFilterTypeOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["modalConsultFilterType", "open"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateModalConsultFilterTypeOpen"] != null &&
+                    typeof $steps["updateModalConsultFilterTypeOpen"] ===
+                      "object" &&
+                    typeof $steps["updateModalConsultFilterTypeOpen"].then ===
+                      "function"
+                  ) {
+                    $steps["updateModalConsultFilterTypeOpen"] = await $steps[
+                      "updateModalConsultFilterTypeOpen"
+                    ];
+                  }
+
+                  $steps["setStateSelectedTab"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["selectedTab"]
+                          },
+                          operation: 0,
+                          value: "consult"
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setStateSelectedTab"] != null &&
+                    typeof $steps["setStateSelectedTab"] === "object" &&
+                    typeof $steps["setStateSelectedTab"].then === "function"
+                  ) {
+                    $steps["setStateSelectedTab"] = await $steps[
+                      "setStateSelectedTab"
+                    ];
+                  }
+                }}
+              >
+                {
+                  "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0641\u06cc\u0644\u062a\u0631 \u0647\u0627"
+                }
+              </div>
             </Stack__>
+          </AntdModal>
+        ) : null}
+        {(() => {
+          try {
+            return $state.selectedTab === "consult";
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })() ? (
+          <ApiFetcherComponent
+            data-plasmic-name={"getServicesForConsult"}
+            data-plasmic-override={overrides.getServicesForConsult}
+            className={classNames("__wab_instance", sty.getServicesForConsult)}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={"/api/v2/service"}
+            ref={ref => {
+              $refs["getServicesForConsult"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <React.Fragment>
+                  <AntdModal
+                    data-plasmic-name={"modalConsultSenderService"}
+                    data-plasmic-override={overrides.modalConsultSenderService}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.modalConsultSenderService
+                    )}
+                    defaultStylesClassName={classNames(
+                      projectcss.root_reset,
+                      projectcss.plasmic_default_styles,
+                      projectcss.plasmic_mixins,
+                      projectcss.plasmic_tokens,
+                      plasmic_antd_5_hostless_css.plasmic_tokens,
+                      plasmic_plasmic_rich_components_css.plasmic_tokens
+                    )}
+                    hideFooter={true}
+                    maskClosable={true}
+                    modalContentClassName={classNames({
+                      [sty["pcls_THa7BUI8A7ZH"]]: true
+                    })}
+                    modalScopeClassName={
+                      sty["modalConsultSenderService__modal"]
+                    }
+                    onOpenChange={generateStateOnChangeProp($state, [
+                      "modalConsultSenderService",
+                      "open"
+                    ])}
+                    open={generateStateValueProp($state, [
+                      "modalConsultSenderService",
+                      "open"
+                    ])}
+                    title={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__n6NNv
+                        )}
+                      >
+                        {
+                          "\u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627"
+                        }
+                      </div>
+                    }
+                    trigger={null}
+                  >
+                    <Stack__
+                      as={"div"}
+                      data-plasmic-name={"senderServiceList"}
+                      data-plasmic-override={overrides.senderServiceList}
+                      hasGap={true}
+                      className={classNames(
+                        projectcss.all,
+                        sty.senderServiceList
+                      )}
+                    >
+                      <ConditionGuard
+                        children={null}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.conditionGuard__pCbE
+                        )}
+                        condition={(() => {
+                          try {
+                            return $ctx.fetched_data.loading;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return false;
+                            }
+                            throw e;
+                          }
+                        })()}
+                        onNotSatisfied={async () => {
+                          const $steps = {};
+
+                          $steps["setLocalFilterConsultSenderServiceList"] =
+                            true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        localStorage.setItem(
+                                          "consult_sender_service_list_for_filter",
+                                          JSON.stringify(
+                                            $ctx.fetched_data.data.services
+                                          )
+                                        );
+                                        return console.log(
+                                          `consult_sender_service_list_for_filter: ${localStorage.getItem(
+                                            "consult_sender_service_list_for_filter"
+                                          )}`
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["setLocalFilterConsultSenderServiceList"] !=
+                              null &&
+                            typeof $steps[
+                              "setLocalFilterConsultSenderServiceList"
+                            ] === "object" &&
+                            typeof $steps[
+                              "setLocalFilterConsultSenderServiceList"
+                            ].then === "function"
+                          ) {
+                            $steps["setLocalFilterConsultSenderServiceList"] =
+                              await $steps[
+                                "setLocalFilterConsultSenderServiceList"
+                              ];
+                          }
+                        }}
+                        skipPaths={[]}
+                      />
+
+                      {(_par =>
+                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                        (() => {
+                          try {
+                            return localStorage.getItem(
+                              "consult_sender_service_list_for_filter"
+                            ) !==
+                              (null || undefined || "" || "null" || "undefined")
+                              ? JSON.parse(
+                                  localStorage.getItem(
+                                    "consult_sender_service_list_for_filter"
+                                  )
+                                )
+                              : $ctx.fetched_data.data.services;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
+                          }
+                        })()
+                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                        const currentItem = __plasmic_item_0;
+                        const currentIndex = __plasmic_idx_0;
+                        return (
+                          <div
+                            data-plasmic-name={"servicesName"}
+                            data-plasmic-override={overrides.servicesName}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.servicesName
+                            )}
+                            key={currentIndex}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["localStorageSetFilterServiceId"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return localStorage.setItem(
+                                          "filter_service_id",
+                                          currentItem.id
+                                        );
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["localStorageSetFilterServiceId"] !=
+                                  null &&
+                                typeof $steps[
+                                  "localStorageSetFilterServiceId"
+                                ] === "object" &&
+                                typeof $steps["localStorageSetFilterServiceId"]
+                                  .then === "function"
+                              ) {
+                                $steps["localStorageSetFilterServiceId"] =
+                                  await $steps[
+                                    "localStorageSetFilterServiceId"
+                                  ];
+                              }
+
+                              $steps["localStorageSetFilterServiceName"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return localStorage.setItem(
+                                          "filter_service_name",
+                                          currentItem.name
+                                        );
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["localStorageSetFilterServiceName"] !=
+                                  null &&
+                                typeof $steps[
+                                  "localStorageSetFilterServiceName"
+                                ] === "object" &&
+                                typeof $steps[
+                                  "localStorageSetFilterServiceName"
+                                ].then === "function"
+                              ) {
+                                $steps["localStorageSetFilterServiceName"] =
+                                  await $steps[
+                                    "localStorageSetFilterServiceName"
+                                  ];
+                              }
+
+                              $steps["localStorageSetGetV2ConsultQueryParam"] =
+                                true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        customFunction: async () => {
+                                          return localStorage.setItem(
+                                            "GET_V2_consult_query_param",
+                                            `offset=0&limit=10&effective_patient_service_id=${localStorage.getItem(
+                                              "filter_service_id"
+                                            )}`
+                                          );
+                                        }
+                                      };
+                                      return (({ customFunction }) => {
+                                        return customFunction();
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                              if (
+                                $steps[
+                                  "localStorageSetGetV2ConsultQueryParam"
+                                ] != null &&
+                                typeof $steps[
+                                  "localStorageSetGetV2ConsultQueryParam"
+                                ] === "object" &&
+                                typeof $steps[
+                                  "localStorageSetGetV2ConsultQueryParam"
+                                ].then === "function"
+                              ) {
+                                $steps[
+                                  "localStorageSetGetV2ConsultQueryParam"
+                                ] = await $steps[
+                                  "localStorageSetGetV2ConsultQueryParam"
+                                ];
+                              }
+
+                              $steps["consoleLogFilterServiceId"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return console.log(
+                                          "filter_service_id: ",
+                                          localStorage.getItem(
+                                            "filter_service_id"
+                                          )
+                                        );
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["consoleLogFilterServiceId"] != null &&
+                                typeof $steps["consoleLogFilterServiceId"] ===
+                                  "object" &&
+                                typeof $steps["consoleLogFilterServiceId"]
+                                  .then === "function"
+                              ) {
+                                $steps["consoleLogFilterServiceId"] =
+                                  await $steps["consoleLogFilterServiceId"];
+                              }
+
+                              $steps["consoleLogFilterServiceName"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return console.log(
+                                          "filter_service_name: ",
+                                          localStorage.getItem(
+                                            "filter_service_name"
+                                          )
+                                        );
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["consoleLogFilterServiceName"] != null &&
+                                typeof $steps["consoleLogFilterServiceName"] ===
+                                  "object" &&
+                                typeof $steps["consoleLogFilterServiceName"]
+                                  .then === "function"
+                              ) {
+                                $steps["consoleLogFilterServiceName"] =
+                                  await $steps["consoleLogFilterServiceName"];
+                              }
+
+                              $steps["consoleLogGetV2ConsultQueryParam"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return console.log(
+                                          "GET_V2_consult_query_param:",
+                                          localStorage.getItem(
+                                            "GET_V2_consult_query_param"
+                                          )
+                                        );
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["consoleLogGetV2ConsultQueryParam"] !=
+                                  null &&
+                                typeof $steps[
+                                  "consoleLogGetV2ConsultQueryParam"
+                                ] === "object" &&
+                                typeof $steps[
+                                  "consoleLogGetV2ConsultQueryParam"
+                                ].then === "function"
+                              ) {
+                                $steps["consoleLogGetV2ConsultQueryParam"] =
+                                  await $steps[
+                                    "consoleLogGetV2ConsultQueryParam"
+                                  ];
+                              }
+
+                              $steps["updateModalConsultSenderServiceOpen"] =
+                                true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "modalConsultSenderService",
+                                            "open"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: false
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                              if (
+                                $steps["updateModalConsultSenderServiceOpen"] !=
+                                  null &&
+                                typeof $steps[
+                                  "updateModalConsultSenderServiceOpen"
+                                ] === "object" &&
+                                typeof $steps[
+                                  "updateModalConsultSenderServiceOpen"
+                                ].then === "function"
+                              ) {
+                                $steps["updateModalConsultSenderServiceOpen"] =
+                                  await $steps[
+                                    "updateModalConsultSenderServiceOpen"
+                                  ];
+                              }
+
+                              $steps["setStateSelectedTab"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["selectedTab"]
+                                      },
+                                      operation: 0,
+                                      value: "consult"
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["setStateSelectedTab"] != null &&
+                                typeof $steps["setStateSelectedTab"] ===
+                                  "object" &&
+                                typeof $steps["setStateSelectedTab"].then ===
+                                  "function"
+                              ) {
+                                $steps["setStateSelectedTab"] = await $steps[
+                                  "setStateSelectedTab"
+                                ];
+                              }
+                            }}
+                          >
+                            <React.Fragment>{currentItem.name}</React.Fragment>
+                          </div>
+                        );
+                      })}
+                    </Stack__>
+                  </AntdModal>
+                  <AntdModal
+                    data-plasmic-name={"modalConsultReceiverService"}
+                    data-plasmic-override={
+                      overrides.modalConsultReceiverService
+                    }
+                    className={classNames(
+                      "__wab_instance",
+                      sty.modalConsultReceiverService
+                    )}
+                    defaultStylesClassName={classNames(
+                      projectcss.root_reset,
+                      projectcss.plasmic_default_styles,
+                      projectcss.plasmic_mixins,
+                      projectcss.plasmic_tokens,
+                      plasmic_antd_5_hostless_css.plasmic_tokens,
+                      plasmic_plasmic_rich_components_css.plasmic_tokens
+                    )}
+                    hideFooter={true}
+                    maskClosable={true}
+                    modalContentClassName={classNames({
+                      [sty["pcls_oRgYWFPy3jBh"]]: true
+                    })}
+                    modalScopeClassName={
+                      sty["modalConsultReceiverService__modal"]
+                    }
+                    onOpenChange={generateStateOnChangeProp($state, [
+                      "modalConsultReceiverService",
+                      "open"
+                    ])}
+                    open={generateStateValueProp($state, [
+                      "modalConsultReceiverService",
+                      "open"
+                    ])}
+                    title={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__cRpHl
+                        )}
+                      >
+                        {
+                          "\u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f"
+                        }
+                      </div>
+                    }
+                    trigger={null}
+                  >
+                    <Stack__
+                      as={"div"}
+                      data-plasmic-name={"receiverServiceList"}
+                      data-plasmic-override={overrides.receiverServiceList}
+                      hasGap={true}
+                      className={classNames(
+                        projectcss.all,
+                        sty.receiverServiceList
+                      )}
+                    >
+                      <ConditionGuard
+                        className={classNames(
+                          "__wab_instance",
+                          sty.conditionGuard___60Nkj
+                        )}
+                        condition={(() => {
+                          try {
+                            return $ctx.fetched_data.loading;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return false;
+                            }
+                            throw e;
+                          }
+                        })()}
+                        onNotSatisfied={async () => {
+                          const $steps = {};
+
+                          $steps["setLocalFilterConsultReceiverServiceList"] =
+                            true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        localStorage.setItem(
+                                          "consult_receiver_service_list_for_filter",
+                                          JSON.stringify(
+                                            $ctx.fetched_data.data.services
+                                          )
+                                        );
+                                        return console.log(
+                                          `consult_receiver_service_list_for_filter: ${localStorage.getItem(
+                                            "consult_receiver_service_list_for_filter"
+                                          )}`
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps[
+                              "setLocalFilterConsultReceiverServiceList"
+                            ] != null &&
+                            typeof $steps[
+                              "setLocalFilterConsultReceiverServiceList"
+                            ] === "object" &&
+                            typeof $steps[
+                              "setLocalFilterConsultReceiverServiceList"
+                            ].then === "function"
+                          ) {
+                            $steps["setLocalFilterConsultReceiverServiceList"] =
+                              await $steps[
+                                "setLocalFilterConsultReceiverServiceList"
+                              ];
+                          }
+                        }}
+                        skipPaths={[]}
+                      >
+                        {(_par =>
+                          !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                          (() => {
+                            try {
+                              return localStorage.getItem(
+                                "consult_receiver_service_list_for_filter"
+                              ) !==
+                                (null ||
+                                  undefined ||
+                                  "" ||
+                                  "null" ||
+                                  "undefined")
+                                ? JSON.parse(
+                                    localStorage.getItem(
+                                      "consult_receiver_service_list_for_filter"
+                                    )
+                                  )
+                                : $ctx.fetched_data.data.services;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return [];
+                              }
+                              throw e;
+                            }
+                          })()
+                        ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                          const currentItem = __plasmic_item_0;
+                          const currentIndex = __plasmic_idx_0;
+                          return (
+                            <div
+                              data-plasmic-name={"servicesName2"}
+                              data-plasmic-override={overrides.servicesName2}
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.servicesName2
+                              )}
+                              key={currentIndex}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["localStorageSetFilterServiceId"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        customFunction: async () => {
+                                          return localStorage.setItem(
+                                            "filter_service_id",
+                                            currentItem.id
+                                          );
+                                        }
+                                      };
+                                      return (({ customFunction }) => {
+                                        return customFunction();
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["localStorageSetFilterServiceId"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "localStorageSetFilterServiceId"
+                                  ] === "object" &&
+                                  typeof $steps[
+                                    "localStorageSetFilterServiceId"
+                                  ].then === "function"
+                                ) {
+                                  $steps["localStorageSetFilterServiceId"] =
+                                    await $steps[
+                                      "localStorageSetFilterServiceId"
+                                    ];
+                                }
+
+                                $steps["localStorageSetFilterServiceName"] =
+                                  true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return localStorage.setItem(
+                                              "filter_service_name",
+                                              currentItem.name
+                                            );
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                if (
+                                  $steps["localStorageSetFilterServiceName"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "localStorageSetFilterServiceName"
+                                  ] === "object" &&
+                                  typeof $steps[
+                                    "localStorageSetFilterServiceName"
+                                  ].then === "function"
+                                ) {
+                                  $steps["localStorageSetFilterServiceName"] =
+                                    await $steps[
+                                      "localStorageSetFilterServiceName"
+                                    ];
+                                }
+
+                                $steps[
+                                  "localStorageSetGetV2ConsultQueryParam"
+                                ] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        customFunction: async () => {
+                                          return localStorage.setItem(
+                                            "GET_V2_consult_query_param",
+                                            `offset=0&limit=10&consultant_service_id=${localStorage.getItem(
+                                              "filter_service_id"
+                                            )}`
+                                          );
+                                        }
+                                      };
+                                      return (({ customFunction }) => {
+                                        return customFunction();
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps[
+                                    "localStorageSetGetV2ConsultQueryParam"
+                                  ] != null &&
+                                  typeof $steps[
+                                    "localStorageSetGetV2ConsultQueryParam"
+                                  ] === "object" &&
+                                  typeof $steps[
+                                    "localStorageSetGetV2ConsultQueryParam"
+                                  ].then === "function"
+                                ) {
+                                  $steps[
+                                    "localStorageSetGetV2ConsultQueryParam"
+                                  ] = await $steps[
+                                    "localStorageSetGetV2ConsultQueryParam"
+                                  ];
+                                }
+
+                                $steps["consoleLogFilterServiceId"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        customFunction: async () => {
+                                          return console.log(
+                                            "filter_service_id: ",
+                                            localStorage.getItem(
+                                              "filter_service_id"
+                                            )
+                                          );
+                                        }
+                                      };
+                                      return (({ customFunction }) => {
+                                        return customFunction();
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["consoleLogFilterServiceId"] != null &&
+                                  typeof $steps["consoleLogFilterServiceId"] ===
+                                    "object" &&
+                                  typeof $steps["consoleLogFilterServiceId"]
+                                    .then === "function"
+                                ) {
+                                  $steps["consoleLogFilterServiceId"] =
+                                    await $steps["consoleLogFilterServiceId"];
+                                }
+
+                                $steps["consoleLogFilterServiceName"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        customFunction: async () => {
+                                          return console.log(
+                                            "filter_service_name: ",
+                                            localStorage.getItem(
+                                              "filter_service_name"
+                                            )
+                                          );
+                                        }
+                                      };
+                                      return (({ customFunction }) => {
+                                        return customFunction();
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["consoleLogFilterServiceName"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "consoleLogFilterServiceName"
+                                  ] === "object" &&
+                                  typeof $steps["consoleLogFilterServiceName"]
+                                    .then === "function"
+                                ) {
+                                  $steps["consoleLogFilterServiceName"] =
+                                    await $steps["consoleLogFilterServiceName"];
+                                }
+
+                                $steps["consoleLogGetV2ConsultQueryParam"] =
+                                  true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return console.log(
+                                              "GET_V2_consult_query_param:",
+                                              localStorage.getItem(
+                                                "GET_V2_consult_query_param"
+                                              )
+                                            );
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                if (
+                                  $steps["consoleLogGetV2ConsultQueryParam"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "consoleLogGetV2ConsultQueryParam"
+                                  ] === "object" &&
+                                  typeof $steps[
+                                    "consoleLogGetV2ConsultQueryParam"
+                                  ].then === "function"
+                                ) {
+                                  $steps["consoleLogGetV2ConsultQueryParam"] =
+                                    await $steps[
+                                      "consoleLogGetV2ConsultQueryParam"
+                                    ];
+                                }
+
+                                $steps[
+                                  "updateModalConsultReceiverServiceOpen"
+                                ] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "modalConsultReceiverService",
+                                            "open"
+                                          ]
+                                        },
+                                        operation: 4
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        const oldValue = $stateGet(
+                                          objRoot,
+                                          variablePath
+                                        );
+                                        $stateSet(
+                                          objRoot,
+                                          variablePath,
+                                          !oldValue
+                                        );
+                                        return !oldValue;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps[
+                                    "updateModalConsultReceiverServiceOpen"
+                                  ] != null &&
+                                  typeof $steps[
+                                    "updateModalConsultReceiverServiceOpen"
+                                  ] === "object" &&
+                                  typeof $steps[
+                                    "updateModalConsultReceiverServiceOpen"
+                                  ].then === "function"
+                                ) {
+                                  $steps[
+                                    "updateModalConsultReceiverServiceOpen"
+                                  ] = await $steps[
+                                    "updateModalConsultReceiverServiceOpen"
+                                  ];
+                                }
+
+                                $steps["setStateSelectedTab"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: ["selectedTab"]
+                                        },
+                                        operation: 0,
+                                        value: "consult"
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["setStateSelectedTab"] != null &&
+                                  typeof $steps["setStateSelectedTab"] ===
+                                    "object" &&
+                                  typeof $steps["setStateSelectedTab"].then ===
+                                    "function"
+                                ) {
+                                  $steps["setStateSelectedTab"] = await $steps[
+                                    "setStateSelectedTab"
+                                  ];
+                                }
+                              }}
+                            >
+                              <React.Fragment>
+                                {currentItem.name}
+                              </React.Fragment>
+                            </div>
+                          );
+                        })}
+                      </ConditionGuard>
+                    </Stack__>
+                  </AntdModal>
+                </React.Fragment>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
+        ) : null}
+        {(() => {
+          try {
+            return $state.selectedTab === "consult";
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })() ? (
+          <AntdModal
+            data-plasmic-name={"modalReplyConsultConfirmation"}
+            data-plasmic-override={overrides.modalReplyConsultConfirmation}
+            className={classNames(
+              "__wab_instance",
+              sty.modalReplyConsultConfirmation
+            )}
+            defaultStylesClassName={classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              projectcss.plasmic_tokens,
+              plasmic_antd_5_hostless_css.plasmic_tokens,
+              plasmic_plasmic_rich_components_css.plasmic_tokens
+            )}
+            hideFooter={true}
+            modalContentClassName={classNames({
+              [sty["pcls_OnbOf6iM02Q7"]]: true
+            })}
+            modalScopeClassName={sty["modalReplyConsultConfirmation__modal"]}
+            onOpenChange={generateStateOnChangeProp($state, [
+              "modalReplyConsultConfirmation",
+              "open"
+            ])}
+            open={generateStateValueProp($state, [
+              "modalReplyConsultConfirmation",
+              "open"
+            ])}
+            title={
+              <div
+                data-plasmic-name={"title"}
+                data-plasmic-override={overrides.title}
+                className={classNames(projectcss.all, sty.title)}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__lHSv
+                  )}
+                >
+                  {
+                    "\u0622\u06cc\u0627 \u0627\u0632 \u062b\u0628\u062a \u067e\u0627\u0633\u062e \u062f\u0631 \u0628\u0631\u06af\u0647 \u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u0637\u0645\u06cc\u0646\u0627\u0646 \u062f\u0627\u0631\u06cc\u062f\u061f"
+                  }
+                </div>
+                <div
+                  data-plasmic-name={"guide"}
+                  data-plasmic-override={overrides.guide}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.guide
+                  )}
+                >
+                  {
+                    '\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u062a\u0627\u06cc\u06cc\u062f\u060c \u0627\u06cc\u0646 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0631\u0686\u0633\u0628 "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647" \u062e\u0648\u0631\u062f\u0647 \u0648 \u0628\u0647 \u0627\u0646\u062a\u0647\u0627\u06cc \u0644\u06cc\u0633\u062a \u0645\u0646\u062a\u0642\u0644 \u0645\u06cc \u0634\u0648\u062f'
+                  }
+                </div>
+              </div>
+            }
+            trigger={null}
+          >
+            <div
+              data-plasmic-name={"confirmationContent"}
+              data-plasmic-override={overrides.confirmationContent}
+              className={classNames(projectcss.all, sty.confirmationContent)}
+            >
+              <div
+                data-plasmic-name={"confirmationYesNo"}
+                data-plasmic-override={overrides.confirmationYesNo}
+                className={classNames(projectcss.all, sty.confirmationYesNo)}
+              >
+                <Button
+                  data-plasmic-name={"noConfirm"}
+                  data-plasmic-override={overrides.noConfirm}
+                  className={classNames("__wab_instance", sty.noConfirm)}
+                  color={"red"}
+                  deselected={generateStateValueProp($state, [
+                    "noConfirm",
+                    "deselected"
+                  ])}
+                  isDisabled={generateStateValueProp($state, [
+                    "noConfirm",
+                    "isDisabled"
+                  ])}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateModalReplyConsultConfirmationOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: [
+                                "modalReplyConsultConfirmation",
+                                "open"
+                              ]
+                            },
+                            operation: 4
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            const oldValue = $stateGet(objRoot, variablePath);
+                            $stateSet(objRoot, variablePath, !oldValue);
+                            return !oldValue;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateModalReplyConsultConfirmationOpen"] !=
+                        null &&
+                      typeof $steps[
+                        "updateModalReplyConsultConfirmationOpen"
+                      ] === "object" &&
+                      typeof $steps["updateModalReplyConsultConfirmationOpen"]
+                        .then === "function"
+                    ) {
+                      $steps["updateModalReplyConsultConfirmationOpen"] =
+                        await $steps["updateModalReplyConsultConfirmationOpen"];
+                    }
+                  }}
+                  onDeselectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "noConfirm",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }}
+                  onIsDisabledChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "noConfirm",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }}
+                  onSelectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "noConfirm",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }}
+                  onSortDeselectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "noConfirm",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }}
+                  onSortSelectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "noConfirm",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }}
+                  selected={generateStateValueProp($state, [
+                    "noConfirm",
+                    "selected"
+                  ])}
+                  shape={"rounded"}
+                  sortDeselected={generateStateValueProp($state, [
+                    "noConfirm",
+                    "sortDeselected"
+                  ])}
+                  sortSelected={generateStateValueProp($state, [
+                    "noConfirm",
+                    "sortSelected"
+                  ])}
+                >
+                  {"\u0627\u0646\u0635\u0631\u0627\u0641"}
+                </Button>
+                <Button
+                  data-plasmic-name={"confirm"}
+                  data-plasmic-override={overrides.confirm}
+                  className={classNames("__wab_instance", sty.confirm)}
+                  color={"blue"}
+                  deselected={generateStateValueProp($state, [
+                    "confirm",
+                    "deselected"
+                  ])}
+                  isDisabled={generateStateValueProp($state, [
+                    "confirm",
+                    "isDisabled"
+                  ])}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["makeFalseReplyConsultUnsuccessfullyAlert"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["replyConsultUnsuccessfullyAlert"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["makeFalseReplyConsultUnsuccessfullyAlert"] !=
+                        null &&
+                      typeof $steps[
+                        "makeFalseReplyConsultUnsuccessfullyAlert"
+                      ] === "object" &&
+                      typeof $steps["makeFalseReplyConsultUnsuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeFalseReplyConsultUnsuccessfullyAlert"] =
+                        await $steps[
+                          "makeFalseReplyConsultUnsuccessfullyAlert"
+                        ];
+                    }
+
+                    $steps["postReplyConsult"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              "POST",
+                              `/api/v2/consult/${$state.inboxConsultCardId}/reply`,
+                              (() => {
+                                try {
+                                  return {
+                                    "X-Namespace": localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })(),
+                              (() => {
+                                try {
+                                  return {
+                                    paper_reply: true,
+                                    reply: ""
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            ]
+                          };
+                          return $globalActions[
+                            "AuthGlobalContext.apiFetcher"
+                          ]?.apply(null, [...actionArgs.args]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["postReplyConsult"] != null &&
+                      typeof $steps["postReplyConsult"] === "object" &&
+                      typeof $steps["postReplyConsult"].then === "function"
+                    ) {
+                      $steps["postReplyConsult"] = await $steps[
+                        "postReplyConsult"
+                      ];
+                    }
+
+                    $steps["makeTrueReplyConsultUnsuccessfullyAlert"] =
+                      $steps.postReplyConsult?.status != 200
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: [
+                                  "replyConsultUnsuccessfullyAlert"
+                                ]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["makeTrueReplyConsultUnsuccessfullyAlert"] !=
+                        null &&
+                      typeof $steps[
+                        "makeTrueReplyConsultUnsuccessfullyAlert"
+                      ] === "object" &&
+                      typeof $steps["makeTrueReplyConsultUnsuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeTrueReplyConsultUnsuccessfullyAlert"] =
+                        await $steps["makeTrueReplyConsultUnsuccessfullyAlert"];
+                    }
+
+                    $steps["runActionOnConsults"] =
+                      $steps.postReplyConsult?.status === 200
+                        ? (() => {
+                            const actionArgs = {
+                              tplRef: "consults",
+                              action: "reload"
+                            };
+                            return (({ tplRef, action, args }) => {
+                              return $refs?.[tplRef]?.[action]?.(
+                                ...(args ?? [])
+                              );
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["runActionOnConsults"] != null &&
+                      typeof $steps["runActionOnConsults"] === "object" &&
+                      typeof $steps["runActionOnConsults"].then === "function"
+                    ) {
+                      $steps["runActionOnConsults"] = await $steps[
+                        "runActionOnConsults"
+                      ];
+                    }
+
+                    $steps["updateModalReplyConsultConfirmationOpen"] =
+                      $steps.postReplyConsult?.status === 200
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: [
+                                  "modalReplyConsultConfirmation",
+                                  "open"
+                                ]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["updateModalReplyConsultConfirmationOpen"] !=
+                        null &&
+                      typeof $steps[
+                        "updateModalReplyConsultConfirmationOpen"
+                      ] === "object" &&
+                      typeof $steps["updateModalReplyConsultConfirmationOpen"]
+                        .then === "function"
+                    ) {
+                      $steps["updateModalReplyConsultConfirmationOpen"] =
+                        await $steps["updateModalReplyConsultConfirmationOpen"];
+                    }
+                  }}
+                  onDeselectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirm",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }}
+                  onIsDisabledChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirm",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }}
+                  onSelectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, ["confirm", "selected"])(
+                      eventArgs[0]
+                    );
+                  }}
+                  onSortDeselectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirm",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }}
+                  onSortSelectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirm",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }}
+                  selected={generateStateValueProp($state, [
+                    "confirm",
+                    "selected"
+                  ])}
+                  shape={"rounded"}
+                  sortDeselected={generateStateValueProp($state, [
+                    "confirm",
+                    "sortDeselected"
+                  ])}
+                  sortSelected={generateStateValueProp($state, [
+                    "confirm",
+                    "sortSelected"
+                  ])}
+                >
+                  {"\u062a\u0627\u06cc\u06cc\u062f"}
+                </Button>
+              </div>
+              {(() => {
+                try {
+                  return $state.replyConsultUnsuccessfullyAlert;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <Alert
+                  data-plasmic-name={"unsuccessfulReplyConsult"}
+                  data-plasmic-override={overrides.unsuccessfulReplyConsult}
+                  body={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___5UtyF
+                      )}
+                    >
+                      {
+                        "\u062b\u0628\u062a \u0627\u0639\u0644\u0627\u0645 \u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u062e\u0637\u0627 \u0647\u0645\u0631\u0627\u0647 \u0634\u062f"
+                      }
+                    </div>
+                  }
+                  className={classNames(
+                    "__wab_instance",
+                    sty.unsuccessfulReplyConsult
+                  )}
+                  error={true}
+                  noHeader={true}
+                  noIcon={true}
+                />
+              ) : null}
+            </div>
           </AntdModal>
         ) : null}
         {false
@@ -8476,2023 +10756,244 @@ function PlasmicHomepage__RenderFunc(props: {
               );
             })()
           : null}
-        {(() => {
-          const child$Props = {
-            className: classNames("__wab_instance", sty.modalNps),
-            closeIcon: null,
-            defaultStylesClassName: classNames(
-              projectcss.root_reset,
-              projectcss.plasmic_default_styles,
-              projectcss.plasmic_mixins,
-              projectcss.plasmic_tokens,
-              plasmic_antd_5_hostless_css.plasmic_tokens,
-              plasmic_plasmic_rich_components_css.plasmic_tokens
-            ),
-            hideFooter: true,
-            maskClosable: false,
-            modalContentClassName: classNames({
-              [sty["pcls_O5s2E5s6CSo-"]]: true
-            }),
-            modalScopeClassName: sty["modalNps__modal"],
-            onOpenChange: generateStateOnChangeProp($state, [
-              "modalNps",
-              "open"
-            ]),
-            open: generateStateValueProp($state, ["modalNps", "open"]),
-            title: (
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__zOiDr
-                )}
-                dir={"rtl"}
-              >
-                {hasVariant(globalVariants, "screen", "mobileFirst") ? (
-                  <React.Fragment>
-                    <span
-                      className={"plasmic_default__all plasmic_default__span"}
-                      style={{ color: "#000000", fontWeight: 800 }}
-                    >
-                      {
-                        "\u0686\u0642\u062f\u0631 \u062d\u0627\u0636\u0631 \u0647\u0633\u062a\u06cc\u062f \u0627\u06cc\u0646\u0644\u0628\u200c\u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0647 \u0633\u0627\u06cc\u0631\u06cc\u0646 \u0645\u0639\u0631\u0641\u06cc \u06a9\u0646\u06cc\u062f\u061f "
-                      }
-                    </span>
-                    <React.Fragment>{"\n"}</React.Fragment>
-                    <span
-                      className={"plasmic_default__all plasmic_default__span"}
-                      style={{ color: "#000000", fontWeight: 800 }}
-                    >
-                      {
-                        "( 0 : \u0647\u0631\u06af\u0632    10 : \u062e\u06cc\u0644\u06cc \u0632\u06cc\u0627\u062f )"
-                      }
-                    </span>
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    <span
-                      className={"plasmic_default__all plasmic_default__span"}
-                      style={{ color: "#000000", fontWeight: 800 }}
-                    >
-                      {
-                        "\u0686\u0642\u062f\u0631 \u062d\u0627\u0636\u0631 \u0647\u0633\u062a\u06cc\u062f \u0627\u06cc\u0646\u0644\u0628\u200c\u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0647 \u0633\u0627\u06cc\u0631\u06cc\u0646 \u0645\u0639\u0631\u0641\u06cc \u06a9\u0646\u06cc\u062f\u061f ( 0 : \u0647\u0631\u06af\u0632     10 : \u062e\u06cc\u0644\u06cc \u0632\u06cc\u0627\u062f )"
-                      }
-                    </span>
-                  </React.Fragment>
-                )}
-              </div>
-            ),
-            trigger: null,
-            width: "85%"
-          };
-          initializeCodeComponentStates(
-            $state,
-            [
-              {
-                name: "open",
-                plasmicStateName: "modalNps.open"
-              }
-            ],
-            [],
-            undefined ?? {},
-            child$Props
-          );
-          initializePlasmicStates(
-            $state,
-            [
-              {
-                name: "modalNps.open",
-                initFunc: ({ $props, $state, $queries }) =>
-                  (() => {
-                    try {
-                      return (
-                        localStorage.getItem("NPS_score") ==
-                        (null || "" || undefined)
-                      );
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return false;
-                      }
-                      throw e;
-                    }
-                  })()
-              }
-            ],
-            []
-          );
-          return (
-            <AntdModal
-              data-plasmic-name={"modalNps"}
-              data-plasmic-override={overrides.modalNps}
-              {...child$Props}
-            >
-              <Stack__
-                as={"div"}
-                data-plasmic-name={"columns"}
-                data-plasmic-override={overrides.columns}
-                hasGap={true}
-                className={classNames(projectcss.all, sty.columns)}
-              >
-                <div className={classNames(projectcss.all, sty.column__jN2Lb)}>
+        {false
+          ? (() => {
+              const child$Props = {
+                className: classNames("__wab_instance", sty.modalNps),
+                closeIcon: null,
+                defaultStylesClassName: classNames(
+                  projectcss.root_reset,
+                  projectcss.plasmic_default_styles,
+                  projectcss.plasmic_mixins,
+                  projectcss.plasmic_tokens,
+                  plasmic_antd_5_hostless_css.plasmic_tokens,
+                  plasmic_plasmic_rich_components_css.plasmic_tokens
+                ),
+                hideFooter: true,
+                maskClosable: false,
+                modalContentClassName: classNames({
+                  [sty["pcls_O5s2E5s6CSo-"]]: true
+                }),
+                modalScopeClassName: sty["modalNps__modal"],
+                onOpenChange: generateStateOnChangeProp($state, [
+                  "modalNps",
+                  "open"
+                ]),
+                open: generateStateValueProp($state, ["modalNps", "open"]),
+                title: (
                   <div
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.text__awXqP
+                      sty.text__zOiDr
                     )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 0
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
+                    dir={"rtl"}
                   >
-                    {"0"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__vouX)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__m5Bdj
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 1
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"1"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__rH3P)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__glBnQ
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 2
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"2"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__u5JYs)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__jpf1G
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 3
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"3"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__qo37P)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___7D4XV
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"4"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__nTn8H)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__yfPmS
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 5
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"5"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__uMkJu)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__in5S
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 6
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"6"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__g9D50)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__axA4C
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 7
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"7"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__gEBse)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__jAhAx
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 8
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"\ufeff8"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__ghPy9)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__k5MHa
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 9
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"\ufeff9"}
-                  </div>
-                </div>
-                <div className={classNames(projectcss.all, sty.column__t0CWh)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___3DYqN
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateStateNpsScore"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["npsScore"]
-                              },
-                              operation: 0,
-                              value: 10
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStateNpsScore"] != null &&
-                        typeof $steps["updateStateNpsScore"] === "object" &&
-                        typeof $steps["updateStateNpsScore"].then === "function"
-                      ) {
-                        $steps["updateStateNpsScore"] = await $steps[
-                          "updateStateNpsScore"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "NPS_score",
-                                    $state.npsScore
-                                  );
-                                  console.log(
-                                    `state_NPS_score: ${$state.npsScore}`
-                                  );
-                                  return console.log(
-                                    `local_NPS_score: ${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-
-                      $steps["postNps"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )}&score=${localStorage.getItem("NPS_score")}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["postNps"] != null &&
-                        typeof $steps["postNps"] === "object" &&
-                        typeof $steps["postNps"].then === "function"
-                      ) {
-                        $steps["postNps"] = await $steps["postNps"];
-                      }
-
-                      $steps["updateModalNpsOpen"] =
-                        $steps.postNps.status == 200
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["modalNps", "open"]
-                                },
-                                operation: 0,
-                                value: false
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateModalNpsOpen"] != null &&
-                        typeof $steps["updateModalNpsOpen"] === "object" &&
-                        typeof $steps["updateModalNpsOpen"].then === "function"
-                      ) {
-                        $steps["updateModalNpsOpen"] = await $steps[
-                          "updateModalNpsOpen"
-                        ];
-                      }
-                    }}
-                  >
-                    {"10"}
-                  </div>
-                </div>
-              </Stack__>
-            </AntdModal>
-          );
-        })()}
-        <AntdModal
-          data-plasmic-name={"modalPhysician"}
-          data-plasmic-override={overrides.modalPhysician}
-          className={classNames("__wab_instance", sty.modalPhysician)}
-          closeButtonClassName={classNames({
-            [sty["pcls_hdcm5qbTGf-c"]]: true
-          })}
-          closeIcon={null}
-          defaultStylesClassName={classNames(
-            projectcss.root_reset,
-            projectcss.plasmic_default_styles,
-            projectcss.plasmic_mixins,
-            projectcss.plasmic_tokens,
-            plasmic_antd_5_hostless_css.plasmic_tokens,
-            plasmic_plasmic_rich_components_css.plasmic_tokens
-          )}
-          hideFooter={true}
-          maskClosable={false}
-          modalContentClassName={classNames({
-            [sty["pcls_KLtjHhS7Dowx"]]: true
-          })}
-          modalScopeClassName={sty["modalPhysician__modal"]}
-          onOpenChange={generateStateOnChangeProp($state, [
-            "modalPhysician",
-            "open"
-          ])}
-          open={generateStateValueProp($state, ["modalPhysician", "open"])}
-          title={
-            <Stack__
-              as={"div"}
-              hasGap={true}
-              className={classNames(projectcss.all, sty.freeBox__rkeNk)}
-            >
-              <Icons8CloseSvgIcon
-                className={classNames(projectcss.all, sty.svg___0Tmhc)}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["updateModalphysicianOpen"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["modalPhysician", "open"]
-                          },
-                          operation: 4
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
+                    {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                      <React.Fragment>
+                        <span
+                          className={
+                            "plasmic_default__all plasmic_default__span"
                           }
-                          const { objRoot, variablePath } = variable;
-
-                          const oldValue = $stateGet(objRoot, variablePath);
-                          $stateSet(objRoot, variablePath, !oldValue);
-                          return !oldValue;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateModalphysicianOpen"] != null &&
-                    typeof $steps["updateModalphysicianOpen"] === "object" &&
-                    typeof $steps["updateModalphysicianOpen"].then ===
-                      "function"
-                  ) {
-                    $steps["updateModalphysicianOpen"] = await $steps[
-                      "updateModalphysicianOpen"
-                    ];
-                  }
-
-                  $steps["runActionOnPatients"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          tplRef: "patients",
-                          action: "reload"
-                        };
-                        return (({ tplRef, action, args }) => {
-                          return $refs?.[tplRef]?.[action]?.(...(args ?? []));
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["runActionOnPatients"] != null &&
-                    typeof $steps["runActionOnPatients"] === "object" &&
-                    typeof $steps["runActionOnPatients"].then === "function"
-                  ) {
-                    $steps["runActionOnPatients"] = await $steps[
-                      "runActionOnPatients"
-                    ];
-                  }
-                }}
-                role={"img"}
-              />
-
-              <TextInput
-                data-plasmic-name={"searchbarPhysicians"}
-                data-plasmic-override={overrides.searchbarPhysicians}
-                className={classNames(
-                  "__wab_instance",
-                  sty.searchbarPhysicians
-                )}
-                endIcon={
-                  <Icons8CloseSvgIcon
-                    className={classNames(projectcss.all, sty.svg__ebXu6)}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateSearchbarWardValue"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["searchbarPhysicians", "value"]
-                              },
-                              operation: 0,
-                              value: ""
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateSearchbarWardValue"] != null &&
-                        typeof $steps["updateSearchbarWardValue"] ===
-                          "object" &&
-                        typeof $steps["updateSearchbarWardValue"].then ===
-                          "function"
-                      ) {
-                        $steps["updateSearchbarWardValue"] = await $steps[
-                          "updateSearchbarWardValue"
-                        ];
-                      }
-                    }}
-                    role={"img"}
-                  />
-                }
-                onChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "searchbarPhysicians",
-                    "value"
-                  ])((e => e.target?.value).apply(null, eventArgs));
-                }}
-                placeholder={
-                  hasVariant(globalVariants, "screen", "mobileFirst")
-                    ? "\u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u0634\u0645\u0627\u0631\u0647 \u067e\u0631\u0648\u0646\u062f\u0647\u060c \u06a9\u062f \u0645\u0644\u06cc\u060c \u06a9\u062f \u067e\u06a9\u0633"
-                    : "\u0646\u0627\u0645 \u064a\u0627 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u064a \u0627\u0633\u062a\u0627\u062f \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
-                }
-                startIcon={
-                  <SearchSvgIcon
-                    className={classNames(projectcss.all, sty.svg__eefHg)}
-                    role={"img"}
-                  />
-                }
-                value={
-                  generateStateValueProp($state, [
-                    "searchbarPhysicians",
-                    "value"
-                  ]) ?? ""
-                }
-              />
-            </Stack__>
-          }
-          trigger={null}
-          wrapClassName={classNames({ [sty["pcls_IF4RfoWSlpeq"]]: true })}
-        >
-          <ApiFetcherComponent
-            data-plasmic-name={"physiciansList"}
-            data-plasmic-override={overrides.physiciansList}
-            className={classNames("__wab_instance", sty.physiciansList)}
-            delay={300}
-            headers={(() => {
-              try {
-                return {
-                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
-                };
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
-              }
-            })()}
-            method={"GET"}
-            path={`/api/v3/patient/physician?physician_name=${$state.searchbarPhysicians.value}&patient_id=0`}
-            ref={ref => {
-              $refs["physiciansList"] = ref;
-            }}
-          >
-            <DataCtxReader__>
-              {$ctx => (
-                <React.Fragment>
-                  <ConditionGuard
-                    children={null}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.conditionGuard__zAYx0
+                          style={{ color: "#000000", fontWeight: 800 }}
+                        >
+                          {
+                            "\u0686\u0642\u062f\u0631 \u062d\u0627\u0636\u0631 \u0647\u0633\u062a\u06cc\u062f \u0627\u06cc\u0646\u0644\u0628\u200c\u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0647 \u0633\u0627\u06cc\u0631\u06cc\u0646 \u0645\u0639\u0631\u0641\u06cc \u06a9\u0646\u06cc\u062f\u061f "
+                          }
+                        </span>
+                        <React.Fragment>{"\n"}</React.Fragment>
+                        <span
+                          className={
+                            "plasmic_default__all plasmic_default__span"
+                          }
+                          style={{ color: "#000000", fontWeight: 800 }}
+                        >
+                          {
+                            "( 0 : \u0647\u0631\u06af\u0632    10 : \u062e\u06cc\u0644\u06cc \u0632\u06cc\u0627\u062f )"
+                          }
+                        </span>
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <span
+                          className={
+                            "plasmic_default__all plasmic_default__span"
+                          }
+                          style={{ color: "#000000", fontWeight: 800 }}
+                        >
+                          {
+                            "\u0686\u0642\u062f\u0631 \u062d\u0627\u0636\u0631 \u0647\u0633\u062a\u06cc\u062f \u0627\u06cc\u0646\u0644\u0628\u200c\u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0647 \u0633\u0627\u06cc\u0631\u06cc\u0646 \u0645\u0639\u0631\u0641\u06cc \u06a9\u0646\u06cc\u062f\u061f ( 0 : \u0647\u0631\u06af\u0632     10 : \u062e\u06cc\u0644\u06cc \u0632\u06cc\u0627\u062f )"
+                          }
+                        </span>
+                      </React.Fragment>
                     )}
-                    condition={(() => {
-                      try {
-                        return $ctx.fetched_data.loading;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return false;
-                        }
-                        throw e;
-                      }
-                    })()}
-                    onNotSatisfied={async () => {
-                      const $steps = {};
-
-                      $steps["setLocalPhysiciansList"] =
-                        $state.searchbarPhysicians.value == ""
-                          ? (() => {
-                              const actionArgs = {
-                                customFunction: async () => {
-                                  return (() => {
-                                    localStorage.setItem(
-                                      "physicians_list",
-                                      JSON.stringify($ctx.fetched_data.data)
-                                    );
-                                    return console.log(
-                                      `physicians_list: ${localStorage.getItem(
-                                        "physicians_list"
-                                      )}`
-                                    );
-                                  })();
-                                }
-                              };
-                              return (({ customFunction }) => {
-                                return customFunction();
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["setLocalPhysiciansList"] != null &&
-                        typeof $steps["setLocalPhysiciansList"] === "object" &&
-                        typeof $steps["setLocalPhysiciansList"].then ===
-                          "function"
-                      ) {
-                        $steps["setLocalPhysiciansList"] = await $steps[
-                          "setLocalPhysiciansList"
-                        ];
-                      }
-                    }}
-                    skipPaths={[]}
-                  />
-
-                  <Stack__
-                    as={"div"}
-                    data-plasmic-name={"physiciansList2"}
-                    data-plasmic-override={overrides.physiciansList2}
-                    hasGap={true}
-                    className={classNames(projectcss.all, sty.physiciansList2)}
-                  >
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                  </div>
+                ),
+                trigger: null,
+                width: "85%"
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "open",
+                    plasmicStateName: "modalNps.open"
+                  }
+                ],
+                [],
+                undefined ?? {},
+                child$Props
+              );
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "modalNps.open",
+                    initFunc: ({ $props, $state, $queries }) =>
                       (() => {
                         try {
-                          return localStorage.getItem("physicians_list") !==
-                            (null || undefined || "" || "undefined") &&
-                            $state.searchbarPhysicians.value === ""
-                            ? JSON.parse(
-                                localStorage.getItem("physicians_list")
-                              )
-                            : $ctx.fetched_data.data;
+                          return !localStorage.getItem("NPS_score");
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
                             e?.plasmicType === "PlasmicUndefinedDataError"
                           ) {
-                            return [];
+                            return false;
                           }
                           throw e;
                         }
                       })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (
-                        <div
-                          data-plasmic-name={"physiciansName"}
-                          data-plasmic-override={overrides.physiciansName}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.physiciansName
-                          )}
-                          key={currentIndex}
-                          onClick={async event => {
-                            const $steps = {};
+                  }
+                ],
+                []
+              );
+              return (
+                <AntdModal
+                  data-plasmic-name={"modalNps"}
+                  data-plasmic-override={overrides.modalNps}
+                  {...child$Props}
+                >
+                  <Stack__
+                    as={"div"}
+                    data-plasmic-name={"columns"}
+                    data-plasmic-override={overrides.columns}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.columns)}
+                  >
+                    <div
+                      className={classNames(projectcss.all, sty.column__jN2Lb)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__awXqP
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
 
-                            $steps["updateModalphysicianOpen"] = true
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 0
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
                               ? (() => {
                                   const actionArgs = {
                                     variable: {
                                       objRoot: $state,
-                                      variablePath: ["modalPhysician", "open"]
+                                      variablePath: ["modalNps", "open"]
                                     },
                                     operation: 0,
                                     value: false
@@ -10513,91 +11014,138 @@ function PlasmicHomepage__RenderFunc(props: {
                                   })?.apply(null, [actionArgs]);
                                 })()
                               : undefined;
-                            if (
-                              $steps["updateModalphysicianOpen"] != null &&
-                              typeof $steps["updateModalphysicianOpen"] ===
-                                "object" &&
-                              typeof $steps["updateModalphysicianOpen"].then ===
-                                "function"
-                            ) {
-                              $steps["updateModalphysicianOpen"] = await $steps[
-                                "updateModalphysicianOpen"
-                              ];
-                            }
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"0"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__vouX)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__m5Bdj
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
 
-                            $steps["setStateSelectedTab"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["selectedTab"]
-                                    },
-                                    operation: 0,
-                                    value: "physician"
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 1
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
 
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["setStateSelectedTab"] != null &&
-                              typeof $steps["setStateSelectedTab"] ===
-                                "object" &&
-                              typeof $steps["setStateSelectedTab"].then ===
-                                "function"
-                            ) {
-                              $steps["setStateSelectedTab"] = await $steps[
-                                "setStateSelectedTab"
-                              ];
-                            }
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
 
-                            $steps["setSelectedTabLocalStorage"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return localStorage.setItem(
-                                        "selected_tab",
-                                        $state.selectedTab.toString()
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
                                       );
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["setSelectedTabLocalStorage"] != null &&
-                              typeof $steps["setSelectedTabLocalStorage"] ===
-                                "object" &&
-                              typeof $steps["setSelectedTabLocalStorage"]
-                                .then === "function"
-                            ) {
-                              $steps["setSelectedTabLocalStorage"] =
-                                await $steps["setSelectedTabLocalStorage"];
-                            }
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
 
-                            $steps["setStateFilterphysicianname"] = true
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
                               ? (() => {
                                   const actionArgs = {
                                     variable: {
                                       objRoot: $state,
-                                      variablePath: ["filterphysicianname"]
+                                      variablePath: ["modalNps", "open"]
                                     },
                                     operation: 0,
-                                    value: currentItem.name
+                                    value: false
                                   };
                                   return (({
                                     variable,
@@ -10615,122 +11163,1367 @@ function PlasmicHomepage__RenderFunc(props: {
                                   })?.apply(null, [actionArgs]);
                                 })()
                               : undefined;
-                            if (
-                              $steps["setStateFilterphysicianname"] != null &&
-                              typeof $steps["setStateFilterphysicianname"] ===
-                                "object" &&
-                              typeof $steps["setStateFilterphysicianname"]
-                                .then === "function"
-                            ) {
-                              $steps["setStateFilterphysicianname"] =
-                                await $steps["setStateFilterphysicianname"];
-                            }
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"1"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__rH3P)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__glBnQ
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
 
-                            $steps["setPhysicianNamePhysicianIdLocalStorage"] =
-                              true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return (() => {
-                                          localStorage.setItem(
-                                            "filter_physician_name",
-                                            $state.filterphysicianname.toString()
-                                          );
-                                          return localStorage.setItem(
-                                            "filter_physician_id",
-                                            currentItem.code
-                                          );
-                                        })();
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                            if (
-                              $steps[
-                                "setPhysicianNamePhysicianIdLocalStorage"
-                              ] != null &&
-                              typeof $steps[
-                                "setPhysicianNamePhysicianIdLocalStorage"
-                              ] === "object" &&
-                              typeof $steps[
-                                "setPhysicianNamePhysicianIdLocalStorage"
-                              ].then === "function"
-                            ) {
-                              $steps[
-                                "setPhysicianNamePhysicianIdLocalStorage"
-                              ] = await $steps[
-                                "setPhysicianNamePhysicianIdLocalStorage"
-                              ];
-                            }
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 2
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
 
-                            $steps["logConsole"] = true
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
                               ? (() => {
                                   const actionArgs = {
-                                    customFunction: async () => {
-                                      return (() => {
-                                        console.log(
-                                          `state_selected_tab: ${$state.selectedTab}`
-                                        );
-                                        console.log(
-                                          `state_filter_bookmarked: ${$state.bookmarked.selected}`
-                                        );
-                                        console.log(
-                                          `state_filter_ward: ${$state.ward2.selected}`
-                                        );
-                                        console.log(
-                                          `state_filter_ward_name: ${$state.filterwardname}`
-                                        );
-                                        console.log(
-                                          `state_filter_physician_name: ${$state.filterphysicianname}`
-                                        );
-                                        console.log(
-                                          `state_filter_physicians: ${$state.filterphysician}`
-                                        );
-                                        console.log(
-                                          `selected_tab: ${localStorage.getItem(
-                                            "selected_tab"
-                                          )}`
-                                        );
-                                        console.log(
-                                          `filter_physician_name: ${localStorage.getItem(
-                                            "filter_physician_name"
-                                          )}`
-                                        );
-                                        return console.log(
-                                          `filter_physician_id: ${localStorage.getItem(
-                                            "filter_physician_id"
-                                          )}`
-                                        );
-                                      })();
-                                    }
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalNps", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
                                   };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
                                   })?.apply(null, [actionArgs]);
                                 })()
                               : undefined;
-                            if (
-                              $steps["logConsole"] != null &&
-                              typeof $steps["logConsole"] === "object" &&
-                              typeof $steps["logConsole"].then === "function"
-                            ) {
-                              $steps["logConsole"] = await $steps["logConsole"];
-                            }
-                          }}
-                        >
-                          <React.Fragment>{currentItem.name}</React.Fragment>
-                        </div>
-                      );
-                    })}
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"2"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__u5JYs)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__jpf1G
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 3
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalNps", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"3"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__qo37P)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text___7D4XV
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 4
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalNps", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"4"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__nTn8H)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__yfPmS
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 5
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalNps", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"5"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__uMkJu)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__in5S
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 6
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalNps", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"6"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__g9D50)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__axA4C
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 7
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalNps", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"7"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__gEBse)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__jAhAx
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 8
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalNps", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"\ufeff8"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__ghPy9)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__k5MHa
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 9
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalNps", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"\ufeff9"}
+                      </div>
+                    </div>
+                    <div
+                      className={classNames(projectcss.all, sty.column__t0CWh)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text___3DYqN
+                        )}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateStateNpsScore"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["npsScore"]
+                                  },
+                                  operation: 0,
+                                  value: 10
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateNpsScore"] != null &&
+                            typeof $steps["updateStateNpsScore"] === "object" &&
+                            typeof $steps["updateStateNpsScore"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateNpsScore"] = await $steps[
+                              "updateStateNpsScore"
+                            ];
+                          }
+
+                          $steps["runCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "NPS_score",
+                                        $state.npsScore
+                                      );
+                                      console.log(
+                                        `state_NPS_score: ${$state.npsScore}`
+                                      );
+                                      return console.log(
+                                        `local_NPS_score: ${localStorage.getItem(
+                                          "NPS_score"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
+                          $steps["postNps"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )}&score=${localStorage.getItem(
+                                      "NPS_score"
+                                    )}`
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcher"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["postNps"] != null &&
+                            typeof $steps["postNps"] === "object" &&
+                            typeof $steps["postNps"].then === "function"
+                          ) {
+                            $steps["postNps"] = await $steps["postNps"];
+                          }
+
+                          $steps["updateModalNpsOpen"] =
+                            $steps.postNps.status == 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalNps", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateModalNpsOpen"] != null &&
+                            typeof $steps["updateModalNpsOpen"] === "object" &&
+                            typeof $steps["updateModalNpsOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateModalNpsOpen"] = await $steps[
+                              "updateModalNpsOpen"
+                            ];
+                          }
+                        }}
+                      >
+                        {"10"}
+                      </div>
+                    </div>
                   </Stack__>
-                </React.Fragment>
-              )}
-            </DataCtxReader__>
-          </ApiFetcherComponent>
-        </AntdModal>
+                </AntdModal>
+              );
+            })()
+          : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -10765,13 +12558,15 @@ const PlasmicDescendants = {
     "bookmarked",
     "bookmarkedPatientNumber",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
-    "consultContent",
+    "consultInbox",
     "filtersBar",
     "filterContent",
     "filterService",
     "filterType",
     "consults",
-    "sentConsultCard",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "inboxConsultCard",
     "sentConsultEmergencyStatus",
     "emergentSign",
     "electiveSign",
@@ -10790,8 +12585,12 @@ const PlasmicDescendants = {
     "consultSendDateRepliedStatus",
     "consultSendDate",
     "repliedStatus",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
-    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "replyConsultButton",
+    "patientDataButtonsInConsultCard",
+    "patientProfile2",
+    "consultNotify2",
+    "radiologyReport2",
+    "laboratoryData2",
     "patients",
     "header2",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
@@ -10829,6 +12628,16 @@ const PlasmicDescendants = {
     "wardsList",
     "wardsName",
     "searchbarWard",
+    "modalPhysician",
+    "physiciansList",
+    "physiciansList2",
+    "physiciansName",
+    "searchbarPhysicians",
+    "modalConsultFilterType",
+    "filterTypes",
+    "senderServiceType",
+    "receiverServiceType",
+    "deleteFilters",
     "getServicesForConsult",
     "modalConsultSenderService",
     "senderServiceList",
@@ -10836,10 +12645,14 @@ const PlasmicDescendants = {
     "modalConsultReceiverService",
     "receiverServiceList",
     "servicesName2",
-    "modalConsultFilterType",
-    "filterTypes",
-    "senderServiceType",
-    "receiverServiceType",
+    "modalReplyConsultConfirmation",
+    "confirmationContent",
+    "confirmationYesNo",
+    "noConfirm",
+    "confirm",
+    "unsuccessfulReplyConsult",
+    "title",
+    "guide",
     "modalFeatureBanner",
     "newFeatureBanner",
     "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645",
@@ -10847,12 +12660,7 @@ const PlasmicDescendants = {
     "newNoticeBanner",
     "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452",
     "modalNps",
-    "columns",
-    "modalPhysician",
-    "physiciansList",
-    "physiciansList2",
-    "physiciansName",
-    "searchbarPhysicians"
+    "columns"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -10881,13 +12689,15 @@ const PlasmicDescendants = {
     "bookmarked",
     "bookmarkedPatientNumber",
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648",
-    "consultContent",
+    "consultInbox",
     "filtersBar",
     "filterContent",
     "filterService",
     "filterType",
     "consults",
-    "sentConsultCard",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "inboxConsultCard",
     "sentConsultEmergencyStatus",
     "emergentSign",
     "electiveSign",
@@ -10906,8 +12716,12 @@ const PlasmicDescendants = {
     "consultSendDateRepliedStatus",
     "consultSendDate",
     "repliedStatus",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
-    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "replyConsultButton",
+    "patientDataButtonsInConsultCard",
+    "patientProfile2",
+    "consultNotify2",
+    "radiologyReport2",
+    "laboratoryData2",
     "patients",
     "header2",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
@@ -11016,14 +12830,16 @@ const PlasmicDescendants = {
   نتايحجستوجو: [
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648"
   ],
-  consultContent: [
-    "consultContent",
+  consultInbox: [
+    "consultInbox",
     "filtersBar",
     "filterContent",
     "filterService",
     "filterType",
     "consults",
-    "sentConsultCard",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "inboxConsultCard",
     "sentConsultEmergencyStatus",
     "emergentSign",
     "electiveSign",
@@ -11042,8 +12858,12 @@ const PlasmicDescendants = {
     "consultSendDateRepliedStatus",
     "consultSendDate",
     "repliedStatus",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
-    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+    "replyConsultButton",
+    "patientDataButtonsInConsultCard",
+    "patientProfile2",
+    "consultNotify2",
+    "radiologyReport2",
+    "laboratoryData2"
   ],
   filtersBar: ["filtersBar", "filterContent", "filterService", "filterType"],
   filterContent: ["filterContent", "filterService", "filterType"],
@@ -11051,7 +12871,9 @@ const PlasmicDescendants = {
   filterType: ["filterType"],
   consults: [
     "consults",
-    "sentConsultCard",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "inboxConsultCard",
     "sentConsultEmergencyStatus",
     "emergentSign",
     "electiveSign",
@@ -11070,11 +12892,21 @@ const PlasmicDescendants = {
     "consultSendDateRepliedStatus",
     "consultSendDate",
     "repliedStatus",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
+    "replyConsultButton",
+    "patientDataButtonsInConsultCard",
+    "patientProfile2",
+    "consultNotify2",
+    "radiologyReport2",
+    "laboratoryData2"
+  ],
+  لطفامنتظربمانید2: [
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
+  ],
+  مشاورهایییافتنشد: [
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
   ],
-  sentConsultCard: [
-    "sentConsultCard",
+  inboxConsultCard: [
+    "inboxConsultCard",
     "sentConsultEmergencyStatus",
     "emergentSign",
     "electiveSign",
@@ -11092,7 +12924,13 @@ const PlasmicDescendants = {
     "senderDoctor",
     "consultSendDateRepliedStatus",
     "consultSendDate",
-    "repliedStatus"
+    "repliedStatus",
+    "replyConsultButton",
+    "patientDataButtonsInConsultCard",
+    "patientProfile2",
+    "consultNotify2",
+    "radiologyReport2",
+    "laboratoryData2"
   ],
   sentConsultEmergencyStatus: [
     "sentConsultEmergencyStatus",
@@ -11112,7 +12950,13 @@ const PlasmicDescendants = {
     "senderDoctor",
     "consultSendDateRepliedStatus",
     "consultSendDate",
-    "repliedStatus"
+    "repliedStatus",
+    "replyConsultButton",
+    "patientDataButtonsInConsultCard",
+    "patientProfile2",
+    "consultNotify2",
+    "radiologyReport2",
+    "laboratoryData2"
   ],
   emergentSign: ["emergentSign"],
   electiveSign: ["electiveSign"],
@@ -11131,7 +12975,13 @@ const PlasmicDescendants = {
     "senderDoctor",
     "consultSendDateRepliedStatus",
     "consultSendDate",
-    "repliedStatus"
+    "repliedStatus",
+    "replyConsultButton",
+    "patientDataButtonsInConsultCard",
+    "patientProfile2",
+    "consultNotify2",
+    "radiologyReport2",
+    "laboratoryData2"
   ],
   patientSenderReceiver: [
     "patientSenderReceiver",
@@ -11168,16 +13018,23 @@ const PlasmicDescendants = {
   consultSendDateRepliedStatus: [
     "consultSendDateRepliedStatus",
     "consultSendDate",
-    "repliedStatus"
+    "repliedStatus",
+    "replyConsultButton"
   ],
   consultSendDate: ["consultSendDate"],
   repliedStatus: ["repliedStatus"],
-  لطفامنتظربمانید2: [
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
+  replyConsultButton: ["replyConsultButton"],
+  patientDataButtonsInConsultCard: [
+    "patientDataButtonsInConsultCard",
+    "patientProfile2",
+    "consultNotify2",
+    "radiologyReport2",
+    "laboratoryData2"
   ],
-  مشاورهایییافتنشد: [
-    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
-  ],
+  patientProfile2: ["patientProfile2"],
+  consultNotify2: ["consultNotify2"],
+  radiologyReport2: ["radiologyReport2"],
+  laboratoryData2: ["laboratoryData2"],
   patients: [
     "patients",
     "header2",
@@ -11326,6 +13183,33 @@ const PlasmicDescendants = {
   wardsList: ["wardsList", "wardsName"],
   wardsName: ["wardsName"],
   searchbarWard: ["searchbarWard"],
+  modalPhysician: [
+    "modalPhysician",
+    "physiciansList",
+    "physiciansList2",
+    "physiciansName",
+    "searchbarPhysicians"
+  ],
+  physiciansList: ["physiciansList", "physiciansList2", "physiciansName"],
+  physiciansList2: ["physiciansList2", "physiciansName"],
+  physiciansName: ["physiciansName"],
+  searchbarPhysicians: ["searchbarPhysicians"],
+  modalConsultFilterType: [
+    "modalConsultFilterType",
+    "filterTypes",
+    "senderServiceType",
+    "receiverServiceType",
+    "deleteFilters"
+  ],
+  filterTypes: [
+    "filterTypes",
+    "senderServiceType",
+    "receiverServiceType",
+    "deleteFilters"
+  ],
+  senderServiceType: ["senderServiceType"],
+  receiverServiceType: ["receiverServiceType"],
+  deleteFilters: ["deleteFilters"],
   getServicesForConsult: [
     "getServicesForConsult",
     "modalConsultSenderService",
@@ -11349,15 +13233,29 @@ const PlasmicDescendants = {
   ],
   receiverServiceList: ["receiverServiceList", "servicesName2"],
   servicesName2: ["servicesName2"],
-  modalConsultFilterType: [
-    "modalConsultFilterType",
-    "filterTypes",
-    "senderServiceType",
-    "receiverServiceType"
+  modalReplyConsultConfirmation: [
+    "modalReplyConsultConfirmation",
+    "confirmationContent",
+    "confirmationYesNo",
+    "noConfirm",
+    "confirm",
+    "unsuccessfulReplyConsult",
+    "title",
+    "guide"
   ],
-  filterTypes: ["filterTypes", "senderServiceType", "receiverServiceType"],
-  senderServiceType: ["senderServiceType"],
-  receiverServiceType: ["receiverServiceType"],
+  confirmationContent: [
+    "confirmationContent",
+    "confirmationYesNo",
+    "noConfirm",
+    "confirm",
+    "unsuccessfulReplyConsult"
+  ],
+  confirmationYesNo: ["confirmationYesNo", "noConfirm", "confirm"],
+  noConfirm: ["noConfirm"],
+  confirm: ["confirm"],
+  unsuccessfulReplyConsult: ["unsuccessfulReplyConsult"],
+  title: ["title", "guide"],
+  guide: ["guide"],
   modalFeatureBanner: [
     "modalFeatureBanner",
     "newFeatureBanner",
@@ -11373,18 +13271,7 @@ const PlasmicDescendants = {
   newNoticeBanner: ["newNoticeBanner"],
   متوجهشدم2: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"],
   modalNps: ["modalNps", "columns"],
-  columns: ["columns"],
-  modalPhysician: [
-    "modalPhysician",
-    "physiciansList",
-    "physiciansList2",
-    "physiciansName",
-    "searchbarPhysicians"
-  ],
-  physiciansList: ["physiciansList", "physiciansList2", "physiciansName"],
-  physiciansList2: ["physiciansList2", "physiciansName"],
-  physiciansName: ["physiciansName"],
-  searchbarPhysicians: ["searchbarPhysicians"]
+  columns: ["columns"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -11417,13 +13304,15 @@ type NodeDefaultElementType = {
   bookmarked: typeof Button;
   bookmarkedPatientNumber: "div";
   نتايحجستوجو: "div";
-  consultContent: "div";
+  consultInbox: "div";
   filtersBar: "div";
   filterContent: "div";
   filterService: "div";
   filterType: "div";
   consults: typeof ApiFetcherComponent;
-  sentConsultCard: "div";
+  لطفامنتظربمانید2: "div";
+  مشاورهایییافتنشد: "div";
+  inboxConsultCard: "div";
   sentConsultEmergencyStatus: "div";
   emergentSign: "div";
   electiveSign: "div";
@@ -11442,8 +13331,12 @@ type NodeDefaultElementType = {
   consultSendDateRepliedStatus: "div";
   consultSendDate: "div";
   repliedStatus: "div";
-  لطفامنتظربمانید2: "div";
-  مشاورهایییافتنشد: "div";
+  replyConsultButton: typeof Button;
+  patientDataButtonsInConsultCard: "div";
+  patientProfile2: typeof PlasmicImg__;
+  consultNotify2: typeof PlasmicImg__;
+  radiologyReport2: typeof PlasmicImg__;
+  laboratoryData2: typeof PlasmicImg__;
   patients: typeof ApiFetcherComponent;
   header2: "div";
   buttonپاککردنهمهبوکمارکها: typeof Button;
@@ -11481,6 +13374,16 @@ type NodeDefaultElementType = {
   wardsList: "div";
   wardsName: "div";
   searchbarWard: typeof TextInput;
+  modalPhysician: typeof AntdModal;
+  physiciansList: typeof ApiFetcherComponent;
+  physiciansList2: "div";
+  physiciansName: "div";
+  searchbarPhysicians: typeof TextInput;
+  modalConsultFilterType: typeof AntdModal;
+  filterTypes: "div";
+  senderServiceType: "div";
+  receiverServiceType: "div";
+  deleteFilters: "div";
   getServicesForConsult: typeof ApiFetcherComponent;
   modalConsultSenderService: typeof AntdModal;
   senderServiceList: "div";
@@ -11488,10 +13391,14 @@ type NodeDefaultElementType = {
   modalConsultReceiverService: typeof AntdModal;
   receiverServiceList: "div";
   servicesName2: "div";
-  modalConsultFilterType: typeof AntdModal;
-  filterTypes: "div";
-  senderServiceType: "div";
-  receiverServiceType: "div";
+  modalReplyConsultConfirmation: typeof AntdModal;
+  confirmationContent: "div";
+  confirmationYesNo: "div";
+  noConfirm: typeof Button;
+  confirm: typeof Button;
+  unsuccessfulReplyConsult: typeof Alert;
+  title: "div";
+  guide: "div";
   modalFeatureBanner: typeof AntdModal;
   newFeatureBanner: typeof NewFeatureBanner;
   متوجهشدم: typeof Button;
@@ -11500,11 +13407,6 @@ type NodeDefaultElementType = {
   متوجهشدم2: typeof Button;
   modalNps: typeof AntdModal;
   columns: "div";
-  modalPhysician: typeof AntdModal;
-  physiciansList: typeof ApiFetcherComponent;
-  physiciansList2: "div";
-  physiciansName: "div";
-  searchbarPhysicians: typeof TextInput;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -11597,13 +13499,19 @@ export const PlasmicHomepage = Object.assign(
     نتايحجستوجو: makeNodeComponent(
       "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648"
     ),
-    consultContent: makeNodeComponent("consultContent"),
+    consultInbox: makeNodeComponent("consultInbox"),
     filtersBar: makeNodeComponent("filtersBar"),
     filterContent: makeNodeComponent("filterContent"),
     filterService: makeNodeComponent("filterService"),
     filterType: makeNodeComponent("filterType"),
     consults: makeNodeComponent("consults"),
-    sentConsultCard: makeNodeComponent("sentConsultCard"),
+    لطفامنتظربمانید2: makeNodeComponent(
+      "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
+    ),
+    مشاورهایییافتنشد: makeNodeComponent(
+      "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+    ),
+    inboxConsultCard: makeNodeComponent("inboxConsultCard"),
     sentConsultEmergencyStatus: makeNodeComponent("sentConsultEmergencyStatus"),
     emergentSign: makeNodeComponent("emergentSign"),
     electiveSign: makeNodeComponent("electiveSign"),
@@ -11624,12 +13532,14 @@ export const PlasmicHomepage = Object.assign(
     ),
     consultSendDate: makeNodeComponent("consultSendDate"),
     repliedStatus: makeNodeComponent("repliedStatus"),
-    لطفامنتظربمانید2: makeNodeComponent(
-      "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
+    replyConsultButton: makeNodeComponent("replyConsultButton"),
+    patientDataButtonsInConsultCard: makeNodeComponent(
+      "patientDataButtonsInConsultCard"
     ),
-    مشاورهایییافتنشد: makeNodeComponent(
-      "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
-    ),
+    patientProfile2: makeNodeComponent("patientProfile2"),
+    consultNotify2: makeNodeComponent("consultNotify2"),
+    radiologyReport2: makeNodeComponent("radiologyReport2"),
+    laboratoryData2: makeNodeComponent("laboratoryData2"),
     patients: makeNodeComponent("patients"),
     header2: makeNodeComponent("header2"),
     buttonپاککردنهمهبوکمارکها: makeNodeComponent(
@@ -11675,6 +13585,16 @@ export const PlasmicHomepage = Object.assign(
     wardsList: makeNodeComponent("wardsList"),
     wardsName: makeNodeComponent("wardsName"),
     searchbarWard: makeNodeComponent("searchbarWard"),
+    modalPhysician: makeNodeComponent("modalPhysician"),
+    physiciansList: makeNodeComponent("physiciansList"),
+    physiciansList2: makeNodeComponent("physiciansList2"),
+    physiciansName: makeNodeComponent("physiciansName"),
+    searchbarPhysicians: makeNodeComponent("searchbarPhysicians"),
+    modalConsultFilterType: makeNodeComponent("modalConsultFilterType"),
+    filterTypes: makeNodeComponent("filterTypes"),
+    senderServiceType: makeNodeComponent("senderServiceType"),
+    receiverServiceType: makeNodeComponent("receiverServiceType"),
+    deleteFilters: makeNodeComponent("deleteFilters"),
     getServicesForConsult: makeNodeComponent("getServicesForConsult"),
     modalConsultSenderService: makeNodeComponent("modalConsultSenderService"),
     senderServiceList: makeNodeComponent("senderServiceList"),
@@ -11684,10 +13604,16 @@ export const PlasmicHomepage = Object.assign(
     ),
     receiverServiceList: makeNodeComponent("receiverServiceList"),
     servicesName2: makeNodeComponent("servicesName2"),
-    modalConsultFilterType: makeNodeComponent("modalConsultFilterType"),
-    filterTypes: makeNodeComponent("filterTypes"),
-    senderServiceType: makeNodeComponent("senderServiceType"),
-    receiverServiceType: makeNodeComponent("receiverServiceType"),
+    modalReplyConsultConfirmation: makeNodeComponent(
+      "modalReplyConsultConfirmation"
+    ),
+    confirmationContent: makeNodeComponent("confirmationContent"),
+    confirmationYesNo: makeNodeComponent("confirmationYesNo"),
+    noConfirm: makeNodeComponent("noConfirm"),
+    confirm: makeNodeComponent("confirm"),
+    unsuccessfulReplyConsult: makeNodeComponent("unsuccessfulReplyConsult"),
+    title: makeNodeComponent("title"),
+    guide: makeNodeComponent("guide"),
     modalFeatureBanner: makeNodeComponent("modalFeatureBanner"),
     newFeatureBanner: makeNodeComponent("newFeatureBanner"),
     متوجهشدم: makeNodeComponent(
@@ -11700,11 +13626,6 @@ export const PlasmicHomepage = Object.assign(
     ),
     modalNps: makeNodeComponent("modalNps"),
     columns: makeNodeComponent("columns"),
-    modalPhysician: makeNodeComponent("modalPhysician"),
-    physiciansList: makeNodeComponent("physiciansList"),
-    physiciansList2: makeNodeComponent("physiciansList2"),
-    physiciansName: makeNodeComponent("physiciansName"),
-    searchbarPhysicians: makeNodeComponent("searchbarPhysicians"),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,

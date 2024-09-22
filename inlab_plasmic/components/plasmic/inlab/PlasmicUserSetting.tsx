@@ -1341,7 +1341,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                       }
 
                       $steps["makeTrueSuccessfulChangePassword"] =
-                        $steps.patchUserpassword?.status === 200
+                        $steps.patchUserpassword.status === 200
                           ? (() => {
                               const actionArgs = {
                                 variable: {
@@ -1349,7 +1349,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                                   variablePath: ["successfulChangePassword"]
                                 },
                                 operation: 0,
-                                value: "True"
+                                value: true
                               };
                               return (({
                                 variable,
@@ -1387,7 +1387,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                                   variablePath: ["unsuccessfulChangePassword"]
                                 },
                                 operation: 0,
-                                value: "True"
+                                value: true
                               };
                               return (({
                                 variable,
