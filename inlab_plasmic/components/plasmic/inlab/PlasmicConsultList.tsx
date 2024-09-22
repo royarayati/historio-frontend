@@ -1473,7 +1473,19 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/${""}`
+                          })()}/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (
@@ -1535,7 +1547,19 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/profile/[adm_id]`
+                          })()}/profile/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (
@@ -1599,7 +1623,19 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/report/list/[adm_id]`
+                          })()}/report/list/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (
@@ -1663,7 +1699,19 @@ ${ageMonths} months ${
                               }
                               throw e;
                             }
-                          })()}/lab/[adm_id]`
+                          })()}/lab/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (

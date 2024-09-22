@@ -873,9 +873,35 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 onClick={async event => {
                   const $steps = {};
 
-                  $steps["goToHomepage"] = true
+                  $steps["goToConsultList"] = true
                     ? (() => {
-                        const actionArgs = { destination: `/patients` };
+                        const actionArgs = {
+                          destination: `/consult-list/${(() => {
+                            try {
+                              return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
+                        };
                         return (({ destination }) => {
                           if (
                             typeof destination === "string" &&
@@ -891,11 +917,11 @@ function PlasmicPatientProfile__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
-                    $steps["goToHomepage"] != null &&
-                    typeof $steps["goToHomepage"] === "object" &&
-                    typeof $steps["goToHomepage"].then === "function"
+                    $steps["goToConsultList"] != null &&
+                    typeof $steps["goToConsultList"] === "object" &&
+                    typeof $steps["goToConsultList"].then === "function"
                   ) {
-                    $steps["goToHomepage"] = await $steps["goToHomepage"];
+                    $steps["goToConsultList"] = await $steps["goToConsultList"];
                   }
                 }}
                 src={{
