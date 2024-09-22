@@ -126,6 +126,7 @@ export type PlasmicImagingReportList__OverridesType = {
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   homepage?: Flex__<typeof PlasmicImg__>;
+  consult?: Flex__<typeof PlasmicImg__>;
   patientProfile?: Flex__<typeof PlasmicImg__>;
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratory?: Flex__<typeof PlasmicImg__>;
@@ -1642,7 +1643,7 @@ ${ageMonths} months ${
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
               displayMinWidth={"0"}
-              displayWidth={"25%"}
+              displayWidth={"20%"}
               loading={"lazy"}
               onClick={async event => {
                 const $steps = {};
@@ -1681,6 +1682,80 @@ ${ageMonths} months ${
             />
 
             <PlasmicImg__
+              data-plasmic-name={"consult"}
+              data-plasmic-override={overrides.consult}
+              alt={""}
+              className={classNames(sty.consult)}
+              displayHeight={"25px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"20%"}
+              loading={"lazy"}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["goToConsultList"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/consult-list/${(() => {
+                          try {
+                            return $ctx.params.code;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/${(() => {
+                          try {
+                            return $ctx.params.adm_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToConsultList"] != null &&
+                  typeof $steps["goToConsultList"] === "object" &&
+                  typeof $steps["goToConsultList"].then === "function"
+                ) {
+                  $steps["goToConsultList"] = await $steps["goToConsultList"];
+                }
+              }}
+              src={{
+                src: "/new_inlab/plasmic/inlab/images/consult0F4Cb101Svg.svg",
+                fullWidth: 24,
+                fullHeight: 24,
+                aspectRatio: 1
+              }}
+            />
+
+            <PlasmicImg__
               data-plasmic-name={"patientProfile"}
               data-plasmic-override={overrides.patientProfile}
               alt={""}
@@ -1690,7 +1765,7 @@ ${ageMonths} months ${
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
               displayMinWidth={"0"}
-              displayWidth={"25%"}
+              displayWidth={"20%"}
               loading={"lazy"}
               onClick={async event => {
                 const $steps = {};
@@ -1766,7 +1841,7 @@ ${ageMonths} months ${
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
               displayMinWidth={"0"}
-              displayWidth={"25%"}
+              displayWidth={"20%"}
               loading={"lazy"}
               onClick={async event => {
                 const $steps = {};
@@ -1842,7 +1917,7 @@ ${ageMonths} months ${
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
               displayMinWidth={"0"}
-              displayWidth={"25%"}
+              displayWidth={"20%"}
               loading={"lazy"}
               onClick={async event => {
                 const $steps = {};
@@ -2039,6 +2114,7 @@ const PlasmicDescendants = {
     "switchingTabs",
     "switchingTab",
     "homepage",
+    "consult",
     "patientProfile",
     "radiologyReport",
     "laboratory",
@@ -2153,6 +2229,7 @@ const PlasmicDescendants = {
     "switchingTabs",
     "switchingTab",
     "homepage",
+    "consult",
     "patientProfile",
     "radiologyReport",
     "laboratory",
@@ -2161,12 +2238,14 @@ const PlasmicDescendants = {
   switchingTab: [
     "switchingTab",
     "homepage",
+    "consult",
     "patientProfile",
     "radiologyReport",
     "laboratory",
     "bookmarkIcon"
   ],
   homepage: ["homepage"],
+  consult: ["consult"],
   patientProfile: ["patientProfile"],
   radiologyReport: ["radiologyReport"],
   laboratory: ["laboratory"],
@@ -2206,6 +2285,7 @@ type NodeDefaultElementType = {
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   homepage: typeof PlasmicImg__;
+  consult: typeof PlasmicImg__;
   patientProfile: typeof PlasmicImg__;
   radiologyReport: typeof PlasmicImg__;
   laboratory: typeof PlasmicImg__;
@@ -2303,6 +2383,7 @@ export const PlasmicImagingReportList = Object.assign(
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),
+    consult: makeNodeComponent("consult"),
     patientProfile: makeNodeComponent("patientProfile"),
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratory: makeNodeComponent("laboratory"),

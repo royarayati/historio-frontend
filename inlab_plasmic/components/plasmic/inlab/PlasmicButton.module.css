@@ -82,6 +82,15 @@
   border-radius: 10px;
   border: 1px solid var(--token-zeOmhvqK1boB);
 }
+.roothoverSelected {
+  background: var(--token-b7Myz3RtiwPQ);
+  border-radius: 10px;
+}
+.roothoverDeselected {
+  background: none;
+  border-radius: 10px;
+  border: 1px solid #000000;
+}
 .rootshape_round_size4_compact {
   padding: 6px;
 }

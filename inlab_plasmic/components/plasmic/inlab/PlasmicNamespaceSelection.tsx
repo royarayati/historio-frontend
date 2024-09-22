@@ -286,25 +286,25 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                   const actionArgs = {
                                     customFunction: async () => {
                                       return (() => {
-                                        localStorage.setItem(
-                                          "selected_tab",
-                                          "bookmark"
+                                        localStorage.removeItem("selected_tab");
+                                        localStorage.removeItem(
+                                          "bookmark_list"
                                         );
-                                        localStorage.setItem(
-                                          "bookmark_list",
-                                          undefined
+                                        localStorage.removeItem("ward_list");
+                                        localStorage.removeItem(
+                                          "filter_ward_name"
                                         );
-                                        localStorage.setItem(
-                                          "ward_list",
-                                          undefined
+                                        localStorage.removeItem(
+                                          "filter_ward_id"
                                         );
-                                        localStorage.setItem(
-                                          "filter_ward_name",
-                                          ""
+                                        localStorage.removeItem(
+                                          "physicians_list"
                                         );
-                                        return localStorage.setItem(
-                                          "filter_ward_id",
-                                          ""
+                                        localStorage.removeItem(
+                                          "filter_physician_name"
+                                        );
+                                        return localStorage.removeItem(
+                                          "filter_physician_id"
                                         );
                                       })();
                                     }
@@ -350,9 +350,24 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                             "filter_ward_name"
                                           )}`
                                         );
-                                        return console.log(
+                                        console.log(
                                           `filter_ward_id: ${localStorage.getItem(
                                             "filter_ward_id"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `physicians_list: ${localStorage.getItem(
+                                            "physicians_list"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `filter_physician_name: ${localStorage.getItem(
+                                            "filter_physician_name"
+                                          )}`
+                                        );
+                                        return console.log(
+                                          `filter_physician_id: ${localStorage.getItem(
+                                            "filter_physician_id"
                                           )}`
                                         );
                                       })();

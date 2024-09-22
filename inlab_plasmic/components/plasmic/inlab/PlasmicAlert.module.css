@@ -10,7 +10,7 @@
   min-width: 0;
   border-radius: 5px;
 }
-.freeBox___714Pb {
+.freeBox__tAFvX {
   display: flex;
   position: relative;
   width: auto;
@@ -21,48 +21,48 @@
   padding: 5px;
   border: 1px solid #e7e7e7;
 }
-.freeBox___714Pb > :global(.__wab_flex-container) {
+.freeBox__tAFvX > :global(.__wab_flex-container) {
   align-items: stretch;
   justify-content: flex-start;
   flex-direction: row;
   margin-left: calc(0px - 12px);
   width: calc(100% + 12px);
 }
-.freeBox___714Pb > :global(.__wab_flex-container) > *,
-.freeBox___714Pb > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox___714Pb > :global(.__wab_flex-container) > picture > img,
-.freeBox___714Pb
+.freeBox__tAFvX > :global(.__wab_flex-container) > *,
+.freeBox__tAFvX > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__tAFvX > :global(.__wab_flex-container) > picture > img,
+.freeBox__tAFvX
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
   > img {
   margin-left: 12px;
 }
-.freeBoxinformation___714PbTl87Q {
+.freeBoxinformation__tAFvXdJnQj {
   background: var(--token-RR9zhGuZEkUi);
 }
-.freeBoxinformationNoDescription___714Pb2Zkny {
+.freeBoxinformationNoDescription__tAFvXr1XdH {
   background: var(--token-RR9zhGuZEkUi);
 }
-.freeBoxsuccess___714PbK6FQx {
+.freeBoxsuccess__tAFvXKz3Xm {
   background: var(--token-ogkHt7a8SbSi);
 }
-.freeBoxsuccessNoDescription___714PbcucpD {
+.freeBoxsuccessNoDescription__tAFvXcQkJw {
   background: var(--token-ogkHt7a8SbSi);
 }
-.freeBoxerror___714PbvqevA {
+.freeBoxerror__tAFvXjrU1E {
   background: var(--token-T4eoWzd-MxJC);
 }
-.freeBoxerrorNoDescription___714PbYlYx4 {
+.freeBoxerrorNoDescription__tAFvXlb0Bt {
   background: var(--token-T4eoWzd-MxJC);
 }
-.freeBoxwarning___714PbBcd6 {
+.freeBoxwarning__tAFvXgGUyN {
   background: var(--token-86XDInJC_qo3);
 }
-.freeBoxwarningNoDescription___714PbZ73B {
+.freeBoxwarningNoDescription__tAFvXhWBaY {
   background: var(--token-86XDInJC_qo3);
 }
-.freeBox__cUclm {
+.freeBox__jwYak {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -72,7 +72,7 @@
   min-width: 0;
   padding: 0px;
 }
-.freeBox__cUclm > :global(.__wab_flex-container) {
+.freeBox__jwYak > :global(.__wab_flex-container) {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -80,10 +80,10 @@
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
 }
-.freeBox__cUclm > :global(.__wab_flex-container) > *,
-.freeBox__cUclm > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__cUclm > :global(.__wab_flex-container) > picture > img,
-.freeBox__cUclm
+.freeBox__jwYak > :global(.__wab_flex-container) > *,
+.freeBox__jwYak > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__jwYak > :global(.__wab_flex-container) > picture > img,
+.freeBox__jwYak
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
@@ -101,14 +101,14 @@
 .h6noHeader {
   display: none;
 }
-.text__agUol {
+.text__tqQa {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-.freeBox__nYlk9 {
+.freeBox__xPgC {
   width: auto;
   height: auto;
   max-width: 100%;
@@ -116,37 +116,37 @@
   flex-direction: row;
   align-self: flex-end;
 }
-.freeBoxnoBody__nYlk9DxExi {
+.freeBoxnoBody__xPgCZiS6C {
   display: none;
 }
-.freeBoxinformationNoDescription__nYlk92Zkny {
+.freeBoxinformationNoDescription__xPgCR1XdH {
   display: none;
 }
-.freeBoxsuccessNoDescription__nYlk9CucpD {
+.freeBoxsuccessNoDescription__xPgCCQkJw {
   display: none;
 }
-.freeBoxerrorNoDescription__nYlk9YlYx4 {
+.freeBoxerrorNoDescription__xPgCLb0Bt {
   display: none;
 }
-.freeBoxwarningNoDescription__nYlk9Z73B {
+.freeBoxwarningNoDescription__xPgCHWBaY {
   display: none;
 }
-.text__kxRxU {
+.text___2CPJn {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-.freeBox__sca1K {
+.freeBox___0HdtD {
   display: flex;
   position: relative;
   align-self: flex-start;
 }
-.freeBoxnoIcon__sca1Kmkx82 {
+.freeBoxnoIcon___0HdtD3C73O {
   display: none;
 }
-.svg__oIKl0 {
+.svg__ywfhy {
   position: relative;
   object-fit: cover;
   max-width: 100%;
