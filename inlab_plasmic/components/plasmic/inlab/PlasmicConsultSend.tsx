@@ -59,6 +59,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Alert from "../../Alert"; // plasmic-import: RABqkXkLRlle/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
@@ -101,6 +103,8 @@ export const PlasmicConsultSend__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicConsultSend__OverridesType = {
   consultSend?: Flex__<"div">;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   patientDataForHeader?: Flex__<typeof ApiFetcherComponent>;
   freeBox?: Flex__<"div">;
@@ -377,6 +381,21 @@ function PlasmicConsultSend__RenderFunc(props: {
             }
           )}
         >
+          <RedirectToInlabLogin
+            data-plasmic-name={"redirectToInlabLogin"}
+            data-plasmic-override={overrides.redirectToInlabLogin}
+            className={classNames("__wab_instance", sty.redirectToInlabLogin)}
+          />
+
+          <RedirectToNamespaceSelection
+            data-plasmic-name={"redirectToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectToNamespaceSelection}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectToNamespaceSelection
+            )}
+          />
+
           <div
             data-plasmic-name={"header"}
             data-plasmic-override={overrides.header}
@@ -1323,6 +1342,80 @@ ${ageMonths} months ${
               onClick={async event => {
                 const $steps = {};
 
+                $steps["makeFalseSendConsultSuccessfullyAlert"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["sendConsultSuccessfullyAlert"]
+                        },
+                        operation: 0,
+                        value: false
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["makeFalseSendConsultSuccessfullyAlert"] != null &&
+                  typeof $steps["makeFalseSendConsultSuccessfullyAlert"] ===
+                    "object" &&
+                  typeof $steps["makeFalseSendConsultSuccessfullyAlert"]
+                    .then === "function"
+                ) {
+                  $steps["makeFalseSendConsultSuccessfullyAlert"] =
+                    await $steps["makeFalseSendConsultSuccessfullyAlert"];
+                }
+
+                $steps["makeFalseSendConsultUnsuccessfullyAlert"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["sendConsultUnsuccessfullyAlert"]
+                        },
+                        operation: 0,
+                        value: false
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["makeFalseSendConsultUnsuccessfullyAlert"] != null &&
+                  typeof $steps["makeFalseSendConsultUnsuccessfullyAlert"] ===
+                    "object" &&
+                  typeof $steps["makeFalseSendConsultUnsuccessfullyAlert"]
+                    .then === "function"
+                ) {
+                  $steps["makeFalseSendConsultUnsuccessfullyAlert"] =
+                    await $steps["makeFalseSendConsultUnsuccessfullyAlert"];
+                }
+
                 $steps["postConsult"] = true
                   ? (() => {
                       const actionArgs = {
@@ -1394,7 +1487,7 @@ ${ageMonths} months ${
                             variablePath: ["sendConsultSuccessfullyAlert"]
                           },
                           operation: 0,
-                          value: "True"
+                          value: true
                         };
                         return (({
                           variable,
@@ -1433,7 +1526,7 @@ ${ageMonths} months ${
                             variablePath: ["sendConsultUnsuccessfullyAlert"]
                           },
                           operation: 0,
-                          value: "True"
+                          value: true
                         };
                         return (({
                           variable,
@@ -3060,6 +3153,8 @@ ${ageMonths} months ${
 const PlasmicDescendants = {
   consultSend: [
     "consultSend",
+    "redirectToInlabLogin",
+    "redirectToNamespaceSelection",
     "header",
     "patientDataForHeader",
     "freeBox",
@@ -3104,6 +3199,8 @@ const PlasmicDescendants = {
     "clearContent",
     "doctorNames"
   ],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: [
     "header",
     "patientDataForHeader",
@@ -3246,6 +3343,8 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   consultSend: "div";
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   patientDataForHeader: typeof ApiFetcherComponent;
   freeBox: "div";
@@ -3351,6 +3450,10 @@ export const PlasmicConsultSend = Object.assign(
   makeNodeComponent("consultSend"),
   {
     // Helper components rendering sub-elements
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
     header: makeNodeComponent("header"),
     patientDataForHeader: makeNodeComponent("patientDataForHeader"),
     freeBox: makeNodeComponent("freeBox"),

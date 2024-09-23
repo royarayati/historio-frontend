@@ -59,6 +59,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -92,6 +94,8 @@ export const PlasmicConsultList__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicConsultList__OverridesType = {
   consultList?: Flex__<"div">;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   patientDataForHeader?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
@@ -365,6 +369,21 @@ function PlasmicConsultList__RenderFunc(props: {
             sty.consultList
           )}
         >
+          <RedirectToInlabLogin
+            data-plasmic-name={"redirectToInlabLogin"}
+            data-plasmic-override={overrides.redirectToInlabLogin}
+            className={classNames("__wab_instance", sty.redirectToInlabLogin)}
+          />
+
+          <RedirectToNamespaceSelection
+            data-plasmic-name={"redirectToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectToNamespaceSelection}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectToNamespaceSelection
+            )}
+          />
+
           <div
             data-plasmic-name={"header"}
             data-plasmic-override={overrides.header}
@@ -623,7 +642,10 @@ ${ageMonths} months ${
                             ) : null}
                             {(() => {
                               try {
-                                return currentItem.priority === 1;
+                                return (
+                                  currentItem.priority === 1 ||
+                                  currentItem.priority === 2
+                                );
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||
@@ -2241,6 +2263,8 @@ ${ageMonths} months ${
 const PlasmicDescendants = {
   consultList: [
     "consultList",
+    "redirectToInlabLogin",
+    "redirectToNamespaceSelection",
     "header",
     "patientDataForHeader",
     "patientNameAgeGender",
@@ -2282,6 +2306,8 @@ const PlasmicDescendants = {
     "title",
     "guide"
   ],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: ["header", "patientDataForHeader", "patientNameAgeGender"],
   patientDataForHeader: ["patientDataForHeader", "patientNameAgeGender"],
   patientNameAgeGender: ["patientNameAgeGender"],
@@ -2477,6 +2503,8 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   consultList: "div";
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   patientDataForHeader: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
@@ -2579,6 +2607,10 @@ export const PlasmicConsultList = Object.assign(
   makeNodeComponent("consultList"),
   {
     // Helper components rendering sub-elements
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
     header: makeNodeComponent("header"),
     patientDataForHeader: makeNodeComponent("patientDataForHeader"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
