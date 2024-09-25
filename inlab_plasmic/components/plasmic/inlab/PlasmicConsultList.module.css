@@ -168,6 +168,17 @@
   max-width: 100%;
   min-width: 0;
 }
+.emergentSign {
+  display: block;
+  position: relative;
+  width: 10px;
+  max-width: 100%;
+  height: 112px;
+  background: var(--token-b7Myz3RtiwPQ);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  flex-shrink: 0;
+}
 .electiveSign {
   display: block;
   position: absolute;
@@ -176,20 +187,9 @@
   left: 0px;
   top: 0px;
   height: 112px;
-  background: var(--token-sn6Zb6km7CqW);
+  background: var(--token-F0UhOcqDIzJI);
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
-  flex-shrink: 0;
-}
-.emergentSign {
-  display: block;
-  position: relative;
-  width: 10px;
-  max-width: 100%;
-  height: 112px;
-  background: var(--token--ypw6enySR1T);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
   flex-shrink: 0;
 }
 .sentConsultContent {

@@ -214,7 +214,7 @@ export type PlasmicHomepage__OverridesType = {
   laboratoryData?: Flex__<typeof PlasmicImg__>;
   commentButton?: Flex__<typeof Button>;
   modalWard?: Flex__<typeof AntdModal>;
-  ward3?: Flex__<typeof ApiFetcherComponent>;
+  wardList?: Flex__<typeof ApiFetcherComponent>;
   wardsList?: Flex__<"div">;
   wardsName?: Flex__<"div">;
   searchbarWard?: Flex__<typeof TextInput>;
@@ -696,9 +696,9 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return !localStorage.getItem("selected_tab")
+              return !localStorage.getItem("patients_selected_tab")
                 ? "bookmark"
-                : localStorage.getItem("selected_tab");
+                : localStorage.getItem("patients_selected_tab");
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -4027,7 +4027,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       const actionArgs = {
                                         customFunction: async () => {
                                           return localStorage.setItem(
-                                            "selected_tab",
+                                            "patients_selected_tab",
                                             $state.patientsSelectedTab.toString()
                                           );
                                         }
@@ -4056,7 +4056,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         customFunction: async () => {
                                           return (() => {
                                             console.log(
-                                              `state_selected_tab: ${$state.patientsSelectedTab}`
+                                              `state_patients_selected_tab: ${$state.patientsSelectedTab}`
                                             );
                                             console.log(
                                               `state_filter_bookmarked: ${$state.bookmarked.selected}`
@@ -4071,8 +4071,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                               `state_filter_professors: ${$state.filterProfessors}`
                                             );
                                             console.log(
-                                              `selected_tab: ${localStorage.getItem(
-                                                "selected_tab"
+                                              `patients_selected_tab: ${localStorage.getItem(
+                                                "patients_selected_tab"
                                               )}`
                                             );
                                             console.log(
@@ -4420,7 +4420,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       const actionArgs = {
                                         customFunction: async () => {
                                           return localStorage.setItem(
-                                            "selected_tab",
+                                            "patients_selected_tab",
                                             $state.patientsSelectedTab.toString()
                                           );
                                         }
@@ -4449,7 +4449,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         customFunction: async () => {
                                           return (() => {
                                             console.log(
-                                              `state_selected_tab: ${$state.patientsSelectedTab}`
+                                              `state_patients_selected_tab: ${$state.patientsSelectedTab}`
                                             );
                                             console.log(
                                               `state_filter_physician_name: ${$state.filterphysicianname}`
@@ -4458,8 +4458,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                               `state_filter_physician: ${$state.filterPhysician}`
                                             );
                                             console.log(
-                                              `selected_tab: ${localStorage.getItem(
-                                                "selected_tab"
+                                              `patients_selected_tab: ${localStorage.getItem(
+                                                "patients_selected_tab"
                                               )}`
                                             );
                                             console.log(
@@ -4703,7 +4703,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       const actionArgs = {
                                         customFunction: async () => {
                                           return localStorage.setItem(
-                                            "selected_tab",
+                                            "patients_selected_tab",
                                             $state.patientsSelectedTab.toString()
                                           );
                                         }
@@ -4732,14 +4732,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                         customFunction: async () => {
                                           return (() => {
                                             console.log(
-                                              `state_selected_tab: ${$state.patientsSelectedTab} `
+                                              `state_patients_selected_tab: ${$state.patientsSelectedTab} `
                                             );
                                             console.log(
                                               `state_filter_bookmarked: ${$state.filterBookmarked} `
                                             );
                                             return console.log(
-                                              `selected_tab: ${localStorage.getItem(
-                                                "selected_tab"
+                                              `patients_selected_tab: ${localStorage.getItem(
+                                                "patients_selected_tab"
                                               )}`
                                             );
                                           })();
@@ -7439,16 +7439,16 @@ function PlasmicHomepage__RenderFunc(props: {
           wrapClassName={classNames({ [sty["pcls_9pcykcaA_oRg"]]: true })}
         >
           <ApiFetcherComponent
-            data-plasmic-name={"ward3"}
-            data-plasmic-override={overrides.ward3}
-            className={classNames("__wab_instance", sty.ward3)}
+            data-plasmic-name={"wardList"}
+            data-plasmic-override={overrides.wardList}
+            className={classNames("__wab_instance", sty.wardList)}
             delay={300}
             method={"GET"}
             path={`/n8n/webhook/ward?namespace=${localStorage.getItem(
               "inlab_user_namespace_id"
             )}&search=${$state.searchbarWard.value}`}
             ref={ref => {
-              $refs["ward3"] = ref;
+              $refs["wardList"] = ref;
             }}
           >
             <DataCtxReader__>
@@ -7634,7 +7634,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   const actionArgs = {
                                     customFunction: async () => {
                                       return localStorage.setItem(
-                                        "selected_tab",
+                                        "patients_selected_tab",
                                         $state.patientsSelectedTab.toString()
                                       );
                                     }
@@ -7731,7 +7731,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     customFunction: async () => {
                                       return (() => {
                                         console.log(
-                                          `state_selected_tab: ${$state.patientsSelectedTab}`
+                                          `state_patients_selected_tab: ${$state.patientsSelectedTab}`
                                         );
                                         console.log(
                                           `state_filter_bookmarked: ${$state.bookmarked.selected}`
@@ -7743,11 +7743,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                           `state_filter_ward_name: ${$state.filterwardname}`
                                         );
                                         console.log(
-                                          `state_filter_professors: ${$state.filterProfessors}`
+                                          `state_filter_physician_name: ${$state.filterphysicianname}`
                                         );
                                         console.log(
-                                          `selected_tab: ${localStorage.getItem(
-                                            "selected_tab"
+                                          `state_filter_physicians: ${$state.filterphysician}`
+                                        );
+                                        console.log(
+                                          `patients_selected_tab: ${localStorage.getItem(
+                                            "patients_selected_tab"
                                           )}`
                                         );
                                         console.log(
@@ -7990,7 +7993,7 @@ function PlasmicHomepage__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v3/patient/physician?physician_name=${$state.searchbarPhysicians.value}&patient_id=0`}
+            path={`/api/v3/patient/physicians?physician_name=${$state.searchbarPhysicians.value}&patient_id=0`}
             ref={ref => {
               $refs["physiciansList"] = ref;
             }}
@@ -8181,7 +8184,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   const actionArgs = {
                                     customFunction: async () => {
                                       return localStorage.setItem(
-                                        "selected_tab",
+                                        "patients_selected_tab",
                                         $state.patientsSelectedTab.toString()
                                       );
                                     }
@@ -8285,7 +8288,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     customFunction: async () => {
                                       return (() => {
                                         console.log(
-                                          `state_selected_tab: ${$state.patientsSelectedTab}`
+                                          `state_patients_selected_tab: ${$state.patientsSelectedTab}`
                                         );
                                         console.log(
                                           `state_filter_bookmarked: ${$state.bookmarked.selected}`
@@ -8303,8 +8306,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                           `state_filter_physicians: ${$state.filterphysician}`
                                         );
                                         console.log(
-                                          `selected_tab: ${localStorage.getItem(
-                                            "selected_tab"
+                                          `patients_selected_tab: ${localStorage.getItem(
+                                            "patients_selected_tab"
                                           )}`
                                         );
                                         console.log(
@@ -12773,7 +12776,7 @@ const PlasmicDescendants = {
     "laboratoryData",
     "commentButton",
     "modalWard",
-    "ward3",
+    "wardList",
     "wardsList",
     "wardsName",
     "searchbarWard",
@@ -13350,8 +13353,14 @@ const PlasmicDescendants = {
   radiologyReport: ["radiologyReport"],
   laboratoryData: ["laboratoryData"],
   commentButton: ["commentButton"],
-  modalWard: ["modalWard", "ward3", "wardsList", "wardsName", "searchbarWard"],
-  ward3: ["ward3", "wardsList", "wardsName"],
+  modalWard: [
+    "modalWard",
+    "wardList",
+    "wardsList",
+    "wardsName",
+    "searchbarWard"
+  ],
+  wardList: ["wardList", "wardsList", "wardsName"],
   wardsList: ["wardsList", "wardsName"],
   wardsName: ["wardsName"],
   searchbarWard: ["searchbarWard"],
@@ -13545,7 +13554,7 @@ type NodeDefaultElementType = {
   laboratoryData: typeof PlasmicImg__;
   commentButton: typeof Button;
   modalWard: typeof AntdModal;
-  ward3: typeof ApiFetcherComponent;
+  wardList: typeof ApiFetcherComponent;
   wardsList: "div";
   wardsName: "div";
   searchbarWard: typeof TextInput;
@@ -13759,7 +13768,7 @@ export const PlasmicHomepage = Object.assign(
     laboratoryData: makeNodeComponent("laboratoryData"),
     commentButton: makeNodeComponent("commentButton"),
     modalWard: makeNodeComponent("modalWard"),
-    ward3: makeNodeComponent("ward3"),
+    wardList: makeNodeComponent("wardList"),
     wardsList: makeNodeComponent("wardsList"),
     wardsName: makeNodeComponent("wardsName"),
     searchbarWard: makeNodeComponent("searchbarWard"),

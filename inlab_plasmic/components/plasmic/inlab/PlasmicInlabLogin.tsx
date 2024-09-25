@@ -488,6 +488,32 @@ function PlasmicInlabLogin__RenderFunc(props: {
                         "updateUsernameValue"
                       ];
                     }
+
+                    $steps["updateUsernameValue2"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            vgroup: "wrongUser",
+                            operation: 6
+                          };
+                          return (({ vgroup, value }) => {
+                            if (typeof value === "string") {
+                              value = [value];
+                            }
+
+                            $stateSet($state, vgroup, false);
+                            return false;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateUsernameValue2"] != null &&
+                      typeof $steps["updateUsernameValue2"] === "object" &&
+                      typeof $steps["updateUsernameValue2"].then === "function"
+                    ) {
+                      $steps["updateUsernameValue2"] = await $steps[
+                        "updateUsernameValue2"
+                      ];
+                    }
                   }}
                   role={"img"}
                 />
@@ -579,6 +605,32 @@ function PlasmicInlabLogin__RenderFunc(props: {
                     ) {
                       $steps["updatePasswordValue"] = await $steps[
                         "updatePasswordValue"
+                      ];
+                    }
+
+                    $steps["updateWrongUser"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            vgroup: "wrongUser",
+                            operation: 6
+                          };
+                          return (({ vgroup, value }) => {
+                            if (typeof value === "string") {
+                              value = [value];
+                            }
+
+                            $stateSet($state, vgroup, false);
+                            return false;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateWrongUser"] != null &&
+                      typeof $steps["updateWrongUser"] === "object" &&
+                      typeof $steps["updateWrongUser"].then === "function"
+                    ) {
+                      $steps["updateWrongUser"] = await $steps[
+                        "updateWrongUser"
                       ];
                     }
                   }}

@@ -399,7 +399,7 @@
   flex-direction: row;
   width: 100%;
   height: auto;
-  max-width: 100%;
+  max-width: 500%;
   margin-top: calc(0px + 0px) !important;
   margin-bottom: -1px;
   overflow: auto;
@@ -1184,10 +1184,13 @@
 .patientsTabs {
   display: flex;
   flex-direction: row;
-  width: auto;
+  width: 100%;
   height: auto;
   background: var(--token-DbGdjBpQ6R_X);
   align-self: flex-end;
+  max-width: 500%;
+  overflow: auto;
+  min-width: 0;
   border-radius: 5px;
   padding: 0px;
   margin: 0px 0px 5px;
@@ -1195,7 +1198,8 @@
 .patientsTabs > :global(.__wab_flex-container) {
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  min-width: 0;
   margin-left: calc(0px - 45px);
   width: calc(100% + 45px);
 }
@@ -2334,7 +2338,7 @@
   background: #ffffff;
   outline: none;
 }
-.ward3:global(.__wab_instance) {
+.wardList:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   position: relative;
