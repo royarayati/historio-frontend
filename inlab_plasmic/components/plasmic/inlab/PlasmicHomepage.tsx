@@ -2364,7 +2364,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         try {
                           return localStorage.getItem("consult_filter_type")
                             ? localStorage.getItem("consult_filter_type")
-                            : "تعیین نشده";
+                            : "همه مشاوره‌ ها";
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -7418,9 +7418,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   );
                 }}
                 placeholder={
-                  hasVariant(globalVariants, "screen", "mobileFirst")
-                    ? "\u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u0634\u0645\u0627\u0631\u0647 \u067e\u0631\u0648\u0646\u062f\u0647\u060c \u06a9\u062f \u0645\u0644\u06cc\u060c \u06a9\u062f \u067e\u06a9\u0633"
-                    : "\u0646\u0627\u0645 \u0628\u062e\u0634 \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
+                  "\u0646\u0627\u0645 \u0628\u062e\u0634 \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
                 }
                 startIcon={
                   <SearchSvgIcon
@@ -7523,8 +7521,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
                         try {
-                          return localStorage.getItem("ward_list") &&
-                            $state.searchbarWard.value === ""
+                          return localStorage.getItem("ward_list") !==
+                            "undefined" && $state.searchbarWard.value === ""
                             ? JSON.parse(localStorage.getItem("ward_list"))
                             : $ctx.fetched_data.data;
                         } catch (e) {
@@ -7950,9 +7948,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   ])((e => e.target?.value).apply(null, eventArgs));
                 }}
                 placeholder={
-                  hasVariant(globalVariants, "screen", "mobileFirst")
-                    ? "\u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u0634\u0645\u0627\u0631\u0647 \u067e\u0631\u0648\u0646\u062f\u0647\u060c \u06a9\u062f \u0645\u0644\u06cc\u060c \u06a9\u062f \u067e\u06a9\u0633"
-                    : "\u0646\u0627\u0645 \u064a\u0627 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u064a \u0627\u0633\u062a\u0627\u062f \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
+                  "\u0646\u0627\u0645 \u064a\u0627 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u064a \u0627\u0633\u062a\u0627\u062f \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
                 }
                 startIcon={
                   <SearchSvgIcon
@@ -8071,7 +8067,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
                         try {
-                          return localStorage.getItem("physicians_list") &&
+                          return localStorage.getItem("physicians_list") !==
+                            "undefined" &&
                             $state.searchbarPhysicians.value === ""
                             ? JSON.parse(
                                 localStorage.getItem("physicians_list")

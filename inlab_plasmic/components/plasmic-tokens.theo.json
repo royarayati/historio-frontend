@@ -2213,7 +2213,7 @@
     {
       "name": "border color",
       "type": "color",
-      "value": "#BDBDBD",
+      "value": "#F5F5F5",
       "category": "color",
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",
@@ -2251,9 +2251,19 @@
       }
     },
     {
+      "name": "filter_tabs",
+      "type": "color",
+      "value": "#F5F5F5",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "ff9GOUR7Ev5Y"
+      }
+    },
+    {
       "name": "header color",
       "type": "color",
-      "value": "#FFFFFF",
+      "value": "#F5F5F5",
       "category": "color",
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",
