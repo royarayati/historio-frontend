@@ -7989,7 +7989,7 @@ function PlasmicHomepage__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v3/patient/physicians?physician_name=${$state.searchbarPhysicians.value}&patient_id=0`}
+            path={`/api/v3/patient/physician?physician_name=${$state.searchbarPhysicians.value}&patient_id=0`}
             ref={ref => {
               $refs["physiciansList"] = ref;
             }}
