@@ -3837,22 +3837,27 @@ function PlasmicHomepage__RenderFunc(props: {
                         sty.patientsControlpanel
                       )}
                     >
-                      {(() => {
-                        try {
-                          return (
-                            $state.mainSelectedTab === "patients" &&
+                      {(
+                        hasVariant(globalVariants, "screen", "mobileFirst")
+                          ? $state.mainSelectedTab === "patients" &&
                             $state.searchbar.value === ""
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })() ? (
+                          : (() => {
+                              try {
+                                return (
+                                  $state.mainSelectedTab === "patients" &&
+                                  $state.searchbar.value === ""
+                                );
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return true;
+                                }
+                                throw e;
+                              }
+                            })()
+                      ) ? (
                         <Stack__
                           as={"div"}
                           data-plasmic-name={"patientsTabs"}

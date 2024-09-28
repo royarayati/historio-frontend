@@ -1176,7 +1176,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .patientsControlpanel {
-    background: var(--token-DbGdjBpQ6R_X);
+    background: #ffffff;
     margin-bottom: 5px;
     border-radius: 5px;
     padding: 0px;
@@ -1187,7 +1187,7 @@
   flex-direction: row;
   width: 100%;
   height: auto;
-  background: var(--token-w6XJB4jo1qqO);
+  background: #ffffff;
   align-self: flex-end;
   max-width: 500%;
   overflow: auto;
@@ -1219,6 +1219,7 @@
     background: none;
     width: 100%;
     overflow: auto;
+    display: flex;
     padding: 0px;
     margin: 0px;
   }

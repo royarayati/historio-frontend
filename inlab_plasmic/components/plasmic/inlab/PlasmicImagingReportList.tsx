@@ -637,107 +637,114 @@ ${ageMonths} months ${
           hasGap={true}
           className={classNames(projectcss.all, sty.tabButton)}
         >
-          <Button
-            data-plasmic-name={"imagingModality"}
-            data-plasmic-override={overrides.imagingModality}
-            className={classNames("__wab_instance", sty.imagingModality)}
-            deselected={generateStateValueProp($state, [
-              "imagingModality",
-              "deselected"
-            ])}
-            isDisabled={generateStateValueProp($state, [
-              "imagingModality",
-              "isDisabled"
-            ])}
-            onClick={async event => {
-              const $steps = {};
-
-              $steps["updateStateImagings"] = true
-                ? (() => {
-                    const actionArgs = {
-                      variable: {
-                        objRoot: $state,
-                        variablePath: ["selectedTab"]
-                      },
-                      operation: 0,
-                      value: "Imagings"
-                    };
-                    return (({ variable, value, startIndex, deleteCount }) => {
-                      if (!variable) {
-                        return;
-                      }
-                      const { objRoot, variablePath } = variable;
-
-                      $stateSet(objRoot, variablePath, value);
-                      return value;
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["updateStateImagings"] != null &&
-                typeof $steps["updateStateImagings"] === "object" &&
-                typeof $steps["updateStateImagings"].then === "function"
-              ) {
-                $steps["updateStateImagings"] = await $steps[
-                  "updateStateImagings"
-                ];
-              }
-            }}
-            onDeselectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
+          {false ? (
+            <Button
+              data-plasmic-name={"imagingModality"}
+              data-plasmic-override={overrides.imagingModality}
+              className={classNames("__wab_instance", sty.imagingModality)}
+              deselected={generateStateValueProp($state, [
                 "imagingModality",
                 "deselected"
-              ])(eventArgs[0]);
-            }}
-            onIsDisabledChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
+              ])}
+              isDisabled={generateStateValueProp($state, [
                 "imagingModality",
                 "isDisabled"
-              ])(eventArgs[0]);
-            }}
-            onSelectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
+              ])}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["updateStateImagings"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["selectedTab"]
+                        },
+                        operation: 0,
+                        value: "Imagings"
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateStateImagings"] != null &&
+                  typeof $steps["updateStateImagings"] === "object" &&
+                  typeof $steps["updateStateImagings"].then === "function"
+                ) {
+                  $steps["updateStateImagings"] = await $steps[
+                    "updateStateImagings"
+                  ];
+                }
+              }}
+              onDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "imagingModality",
+                  "deselected"
+                ])(eventArgs[0]);
+              }}
+              onIsDisabledChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "imagingModality",
+                  "isDisabled"
+                ])(eventArgs[0]);
+              }}
+              onSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "imagingModality",
+                  "selected"
+                ])(eventArgs[0]);
+              }}
+              onSortDeselectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "imagingModality",
+                  "sortDeselected"
+                ])(eventArgs[0]);
+              }}
+              onSortSelectedChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "imagingModality",
+                  "sortSelected"
+                ])(eventArgs[0]);
+              }}
+              selected={generateStateValueProp($state, [
                 "imagingModality",
                 "selected"
-              ])(eventArgs[0]);
-            }}
-            onSortDeselectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
+              ])}
+              sortDeselected={generateStateValueProp($state, [
                 "imagingModality",
                 "sortDeselected"
-              ])(eventArgs[0]);
-            }}
-            onSortSelectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
+              ])}
+              sortSelected={generateStateValueProp($state, [
                 "imagingModality",
                 "sortSelected"
-              ])(eventArgs[0]);
-            }}
-            selected={generateStateValueProp($state, [
-              "imagingModality",
-              "selected"
-            ])}
-            sortDeselected={generateStateValueProp($state, [
-              "imagingModality",
-              "sortDeselected"
-            ])}
-            sortSelected={generateStateValueProp($state, [
-              "imagingModality",
-              "sortSelected"
-            ])}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__akAEr
-              )}
+              ])}
             >
-              {
-                "\u062a\u0635\u0648\u06cc\u0631\u0628\u0631\u062f\u0627\u0631\u06cc \u0647\u0627\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u062f\u0647"
-              }
-            </div>
-          </Button>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__akAEr
+                )}
+              >
+                {
+                  "\u062a\u0635\u0648\u06cc\u0631\u0628\u0631\u062f\u0627\u0631\u06cc \u0647\u0627\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u062f\u0647"
+                }
+              </div>
+            </Button>
+          ) : null}
           <Button
             data-plasmic-name={"imagingReports"}
             data-plasmic-override={overrides.imagingReports}
@@ -1451,7 +1458,7 @@ ${ageMonths} months ${
             </DataCtxReader__>
           </ApiFetcherComponent>
         ) : null}
-        {$state.selectedTab == "Imagings" ? (
+        {false ? (
           <ApiFetcherComponent
             data-plasmic-name={"imagingModalities"}
             data-plasmic-override={overrides.imagingModalities}
