@@ -59,6 +59,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
+import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -92,6 +94,8 @@ export const PlasmicConsultList__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicConsultList__OverridesType = {
   consultList?: Flex__<"div">;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
+  redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
   patientDataForHeader?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
@@ -101,8 +105,8 @@ export type PlasmicConsultList__OverridesType = {
   مشاورهاییبرایبیمارثبتنشدهاست?: Flex__<"div">;
   sentConsultCard?: Flex__<"div">;
   sentConsultEmergencyStatus?: Flex__<"div">;
-  electiveSign?: Flex__<"div">;
   emergentSign?: Flex__<"div">;
+  electiveSign?: Flex__<"div">;
   sentConsultContent?: Flex__<"div">;
   senderReceiver?: Flex__<"div">;
   senderReceiverService?: Flex__<"div">;
@@ -365,6 +369,21 @@ function PlasmicConsultList__RenderFunc(props: {
             sty.consultList
           )}
         >
+          <RedirectToInlabLogin
+            data-plasmic-name={"redirectToInlabLogin"}
+            data-plasmic-override={overrides.redirectToInlabLogin}
+            className={classNames("__wab_instance", sty.redirectToInlabLogin)}
+          />
+
+          <RedirectToNamespaceSelection
+            data-plasmic-name={"redirectToNamespaceSelection"}
+            data-plasmic-override={overrides.redirectToNamespaceSelection}
+            className={classNames(
+              "__wab_instance",
+              sty.redirectToNamespaceSelection
+            )}
+          />
+
           <div
             data-plasmic-name={"header"}
             data-plasmic-override={overrides.header}
@@ -601,6 +620,31 @@ ${ageMonths} months ${
                           >
                             {(() => {
                               try {
+                                return (
+                                  currentItem.priority === 1 ||
+                                  currentItem.priority === 2
+                                );
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return true;
+                                }
+                                throw e;
+                              }
+                            })() ? (
+                              <div
+                                data-plasmic-name={"emergentSign"}
+                                data-plasmic-override={overrides.emergentSign}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.emergentSign
+                                )}
+                              />
+                            ) : null}
+                            {(() => {
+                              try {
                                 return currentItem.priority === 3;
                               } catch (e) {
                                 if (
@@ -618,28 +662,6 @@ ${ageMonths} months ${
                                 className={classNames(
                                   projectcss.all,
                                   sty.electiveSign
-                                )}
-                              />
-                            ) : null}
-                            {(() => {
-                              try {
-                                return currentItem.priority === 1;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })() ? (
-                              <div
-                                data-plasmic-name={"emergentSign"}
-                                data-plasmic-override={overrides.emergentSign}
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.emergentSign
                                 )}
                               />
                             ) : null}
@@ -2241,6 +2263,8 @@ ${ageMonths} months ${
 const PlasmicDescendants = {
   consultList: [
     "consultList",
+    "redirectToInlabLogin",
+    "redirectToNamespaceSelection",
     "header",
     "patientDataForHeader",
     "patientNameAgeGender",
@@ -2250,8 +2274,8 @@ const PlasmicDescendants = {
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
-    "electiveSign",
     "emergentSign",
+    "electiveSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2282,6 +2306,8 @@ const PlasmicDescendants = {
     "title",
     "guide"
   ],
+  redirectToInlabLogin: ["redirectToInlabLogin"],
+  redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: ["header", "patientDataForHeader", "patientNameAgeGender"],
   patientDataForHeader: ["patientDataForHeader", "patientNameAgeGender"],
   patientNameAgeGender: ["patientNameAgeGender"],
@@ -2292,8 +2318,8 @@ const PlasmicDescendants = {
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
-    "electiveSign",
     "emergentSign",
+    "electiveSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2314,8 +2340,8 @@ const PlasmicDescendants = {
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
-    "electiveSign",
     "emergentSign",
+    "electiveSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2339,8 +2365,8 @@ const PlasmicDescendants = {
   sentConsultCard: [
     "sentConsultCard",
     "sentConsultEmergencyStatus",
-    "electiveSign",
     "emergentSign",
+    "electiveSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2357,8 +2383,8 @@ const PlasmicDescendants = {
   ],
   sentConsultEmergencyStatus: [
     "sentConsultEmergencyStatus",
-    "electiveSign",
     "emergentSign",
+    "electiveSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2373,8 +2399,8 @@ const PlasmicDescendants = {
     "repliedStatus",
     "replyConsultButton"
   ],
-  electiveSign: ["electiveSign"],
   emergentSign: ["emergentSign"],
+  electiveSign: ["electiveSign"],
   sentConsultContent: [
     "sentConsultContent",
     "senderReceiver",
@@ -2477,6 +2503,8 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   consultList: "div";
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
+  redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
   patientDataForHeader: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
@@ -2486,8 +2514,8 @@ type NodeDefaultElementType = {
   مشاورهاییبرایبیمارثبتنشدهاست: "div";
   sentConsultCard: "div";
   sentConsultEmergencyStatus: "div";
-  electiveSign: "div";
   emergentSign: "div";
+  electiveSign: "div";
   sentConsultContent: "div";
   senderReceiver: "div";
   senderReceiverService: "div";
@@ -2579,6 +2607,10 @@ export const PlasmicConsultList = Object.assign(
   makeNodeComponent("consultList"),
   {
     // Helper components rendering sub-elements
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
+    redirectToNamespaceSelection: makeNodeComponent(
+      "redirectToNamespaceSelection"
+    ),
     header: makeNodeComponent("header"),
     patientDataForHeader: makeNodeComponent("patientDataForHeader"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
@@ -2592,8 +2624,8 @@ export const PlasmicConsultList = Object.assign(
     ),
     sentConsultCard: makeNodeComponent("sentConsultCard"),
     sentConsultEmergencyStatus: makeNodeComponent("sentConsultEmergencyStatus"),
-    electiveSign: makeNodeComponent("electiveSign"),
     emergentSign: makeNodeComponent("emergentSign"),
+    electiveSign: makeNodeComponent("electiveSign"),
     sentConsultContent: makeNodeComponent("sentConsultContent"),
     senderReceiver: makeNodeComponent("senderReceiver"),
     senderReceiverService: makeNodeComponent("senderReceiverService"),

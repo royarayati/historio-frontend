@@ -136,7 +136,20 @@ function PlasmicRootpage__RenderFunc(props: {
 
   return (
     <React.Fragment>
-      <Head></Head>
+      <Head>
+        <meta name="twitter:card" content="summary_large_image" />
+
+        <meta
+          key="og:image"
+          property="og:image"
+          content={PlasmicRootpage.pageMetadata.ogImageSrc}
+        />
+        <meta
+          key="twitter:image"
+          name="twitter:image"
+          content={PlasmicRootpage.pageMetadata.ogImageSrc}
+        />
+      </Head>
 
       <style>{`
         body {
@@ -282,7 +295,8 @@ export const PlasmicRootpage = Object.assign(
     pageMetadata: {
       title: "",
       description: "",
-      ogImageSrc: "",
+      ogImageSrc:
+        "https://site-assets.plasmic.app/957a77907b71a1e7f098ff6c3ef9914b.jpg",
       canonical: ""
     }
   }
