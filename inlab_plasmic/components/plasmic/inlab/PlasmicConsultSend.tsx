@@ -1323,7 +1323,7 @@ ${ageMonths} months ${
               )}
             >
               {
-                "\u0628\u0639\u062f \u0627\u0631\u0633\u0627\u0644\u060c \u062f\u0631 \u0635\u0648\u0631\u062a \u062b\u0628\u062a \u0635\u062d\u06cc\u062d \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0647 \u0635\u0641\u062d\u0647 \u0644\u06cc\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0645\u0646\u062a\u0642\u0644 \u0645\u06cc \u0634\u0648\u06cc\u062f"
+                "\u062f\u0631 \u0635\u0648\u0631\u062a \u062b\u0628\u062a \u0635\u062d\u06cc\u062d \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0647 \u0635\u0641\u062d\u0647 \u0644\u06cc\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0645\u0646\u062a\u0642\u0644 \u0645\u06cc \u0634\u0648\u06cc\u062f\n\u0627\u0631\u0633\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647 \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u0648\u062f"
               }
             </div>
             <Button
@@ -2747,7 +2747,7 @@ ${ageMonths} months ${
             data-plasmic-override={overrides.getUsers}
             className={classNames("__wab_instance", sty.getUsers)}
             method={"GET"}
-            path={`/api/v3/users?doctor_name=${$state.doctorNameInput.value}`}
+            path={`/api/v3/user?doctor_name=${$state.doctorNameInput.value}`}
             ref={ref => {
               $refs["getUsers"] = ref;
             }}
@@ -2828,6 +2828,50 @@ ${ageMonths} months ${
                               projectcss.all,
                               sty.clearContent
                             )}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["updateDoctorNameInputValue"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: [
+                                          "doctorNameInput",
+                                          "value"
+                                        ]
+                                      },
+                                      operation: 0,
+                                      value: ""
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["updateDoctorNameInputValue"] != null &&
+                                typeof $steps["updateDoctorNameInputValue"] ===
+                                  "object" &&
+                                typeof $steps["updateDoctorNameInputValue"]
+                                  .then === "function"
+                              ) {
+                                $steps["updateDoctorNameInputValue"] =
+                                  await $steps["updateDoctorNameInputValue"];
+                              }
+                            }}
                             role={"img"}
                           />
                         }
