@@ -105,8 +105,8 @@ export type PlasmicConsultList__OverridesType = {
   مشاورهاییبرایبیمارثبتنشدهاست?: Flex__<"div">;
   sentConsultCard?: Flex__<"div">;
   sentConsultEmergencyStatus?: Flex__<"div">;
-  emergentSign?: Flex__<"div">;
   electiveSign?: Flex__<"div">;
+  emergentSign?: Flex__<"div">;
   sentConsultContent?: Flex__<"div">;
   senderReceiver?: Flex__<"div">;
   senderReceiverService?: Flex__<"div">;
@@ -620,6 +620,28 @@ ${ageMonths} months ${
                           >
                             {(() => {
                               try {
+                                return currentItem.priority === 3;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return true;
+                                }
+                                throw e;
+                              }
+                            })() ? (
+                              <div
+                                data-plasmic-name={"electiveSign"}
+                                data-plasmic-override={overrides.electiveSign}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.electiveSign
+                                )}
+                              />
+                            ) : null}
+                            {(() => {
+                              try {
                                 return (
                                   currentItem.priority === 1 ||
                                   currentItem.priority === 2
@@ -640,28 +662,6 @@ ${ageMonths} months ${
                                 className={classNames(
                                   projectcss.all,
                                   sty.emergentSign
-                                )}
-                              />
-                            ) : null}
-                            {(() => {
-                              try {
-                                return currentItem.priority === 3;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })() ? (
-                              <div
-                                data-plasmic-name={"electiveSign"}
-                                data-plasmic-override={overrides.electiveSign}
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.electiveSign
                                 )}
                               />
                             ) : null}
@@ -1823,7 +1823,7 @@ ${ageMonths} months ${
                   )}
                 >
                   {
-                    '\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u062a\u0627\u06cc\u06cc\u062f\u060c \u0627\u06cc\u0646 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0631\u0686\u0633\u0628 "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647" \u0645\u06cc \u062e\u0648\u0631\u062f'
+                    '\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u062a\u0627\u06cc\u06cc\u062f\u060c \u0627\u06cc\u0646 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0631\u0686\u0633\u0628 "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647" \u0645\u06cc \u062e\u0648\u0631\u062f\n\u062b\u0628\u062a \u062a\u0627\u06cc\u06cc\u062f \u067e\u0627\u0633\u062e \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u0648\u062f'
                   }
                 </div>
               </div>
@@ -2274,8 +2274,8 @@ const PlasmicDescendants = {
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
-    "emergentSign",
     "electiveSign",
+    "emergentSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2318,8 +2318,8 @@ const PlasmicDescendants = {
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
-    "emergentSign",
     "electiveSign",
+    "emergentSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2340,8 +2340,8 @@ const PlasmicDescendants = {
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
-    "emergentSign",
     "electiveSign",
+    "emergentSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2365,8 +2365,8 @@ const PlasmicDescendants = {
   sentConsultCard: [
     "sentConsultCard",
     "sentConsultEmergencyStatus",
-    "emergentSign",
     "electiveSign",
+    "emergentSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2383,8 +2383,8 @@ const PlasmicDescendants = {
   ],
   sentConsultEmergencyStatus: [
     "sentConsultEmergencyStatus",
-    "emergentSign",
     "electiveSign",
+    "emergentSign",
     "sentConsultContent",
     "senderReceiver",
     "senderReceiverService",
@@ -2399,8 +2399,8 @@ const PlasmicDescendants = {
     "repliedStatus",
     "replyConsultButton"
   ],
-  emergentSign: ["emergentSign"],
   electiveSign: ["electiveSign"],
+  emergentSign: ["emergentSign"],
   sentConsultContent: [
     "sentConsultContent",
     "senderReceiver",
@@ -2514,8 +2514,8 @@ type NodeDefaultElementType = {
   مشاورهاییبرایبیمارثبتنشدهاست: "div";
   sentConsultCard: "div";
   sentConsultEmergencyStatus: "div";
-  emergentSign: "div";
   electiveSign: "div";
+  emergentSign: "div";
   sentConsultContent: "div";
   senderReceiver: "div";
   senderReceiverService: "div";
@@ -2624,8 +2624,8 @@ export const PlasmicConsultList = Object.assign(
     ),
     sentConsultCard: makeNodeComponent("sentConsultCard"),
     sentConsultEmergencyStatus: makeNodeComponent("sentConsultEmergencyStatus"),
-    emergentSign: makeNodeComponent("emergentSign"),
     electiveSign: makeNodeComponent("electiveSign"),
+    emergentSign: makeNodeComponent("emergentSign"),
     sentConsultContent: makeNodeComponent("sentConsultContent"),
     senderReceiver: makeNodeComponent("senderReceiver"),
     senderReceiverService: makeNodeComponent("senderReceiverService"),

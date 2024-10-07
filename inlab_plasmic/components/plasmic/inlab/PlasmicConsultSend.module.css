@@ -215,7 +215,7 @@
   background: #ffffff;
   border-bottom-left-radius: 5px;
   font-weight: 700;
-  color: var(--token-8PxxXPNrIohQ);
+  color: #00000080;
   text-align: right;
   font-family: var(--VazirmatnCustom);
   font-size: var(--token-sOr3fJ5Up5fq);
@@ -265,7 +265,7 @@
   background: #ffffff;
   font-weight: 700;
   border-bottom-left-radius: 5px;
-  color: var(--token-8PxxXPNrIohQ);
+  color: #00000080;
   text-align: right;
   font-family: var(--VazirmatnCustom);
   font-size: var(--token-sOr3fJ5Up5fq);
@@ -314,7 +314,7 @@
   background: #ffffff;
   font-weight: 700;
   border-bottom-left-radius: 5px;
-  color: var(--token-8PxxXPNrIohQ);
+  color: #00000080;
   text-align: right;
   font-family: var(--VazirmatnCustom);
   font-size: var(--token-sOr3fJ5Up5fq);
@@ -410,7 +410,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  font-size: 11px;
+  font-size: 10px;
   color: #000000b3;
   min-width: 0;
 }

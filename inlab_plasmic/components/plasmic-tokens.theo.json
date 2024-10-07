@@ -2213,7 +2213,7 @@
     {
       "name": "border color",
       "type": "color",
-      "value": "#F5F5F5",
+      "value": "#BDBDBD",
       "category": "color",
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",
@@ -2263,7 +2263,7 @@
     {
       "name": "header color",
       "type": "color",
-      "value": "#F5F5F5",
+      "value": "#BDBDBD",
       "category": "color",
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",
