@@ -93,7 +93,7 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
           username,
           password,
           device_id: getDevicedId(),
-          force_logout_other_sessions: false
+          force_logout_other_sessions: true
         })
         .then(response => {
           if (response.status === 200) {
