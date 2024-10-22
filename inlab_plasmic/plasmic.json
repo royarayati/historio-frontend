@@ -1647,27 +1647,27 @@
         },
         {
           "id": "RABqkXkLRlle",
-          "name": "Alert",
+          "name": "Alert2",
           "type": "managed",
           "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicAlert.tsx",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicAlert2.tsx",
           "importSpec": {
-            "modulePath": "Alert.tsx"
+            "modulePath": "Alert2.tsx"
           },
-          "cssFilePath": "plasmic/inlab/PlasmicAlert.module.css",
+          "cssFilePath": "plasmic/inlab/PlasmicAlert2.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         },
         {
           "id": "PguODopeTo5C",
-          "name": "SwitchingTab",
+          "name": "SwitchingTab2",
           "type": "managed",
           "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicSwitchingTab.tsx",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicSwitchingTab2.tsx",
           "importSpec": {
-            "modulePath": "SwitchingTab.tsx"
+            "modulePath": "SwitchingTab2.tsx"
           },
-          "cssFilePath": "plasmic/inlab/PlasmicSwitchingTab.module.css",
+          "cssFilePath": "plasmic/inlab/PlasmicSwitchingTab2.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         }

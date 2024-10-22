@@ -63,17 +63,8 @@
 .textInput___focusVisibleWithin {
   box-shadow: 0px 0px 0px 2px #96c7f2;
   background: #ffffff;
-  outline: none;
   border-radius: 5px;
   border-width: 0.75px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .textInput___focusVisibleWithin {
-    outline: none;
-  }
-}
-.textInput___focusVisibleWithin_showStartIcon {
-  outline: none;
 }
 .startIconContainer {
   display: flex;
@@ -107,13 +98,12 @@
 .startIconContainererror {
   margin-left: calc(0px + 8px) !important;
 }
+.textInput .startIconContainer___focusVisibleWithin {
+  margin-left: calc(0px + 8px) !important;
+}
 .textInput:hover .startIconContainer {
   background: none;
   margin-left: calc(0px + 8px) !important;
-}
-.textInput .startIconContainer___focusVisibleWithin {
-  margin-left: calc(0px + 8px) !important;
-  outline: none;
 }
 .slotTargetStartIcon {
   font-size: var(--token-hYndcje43OGL);
@@ -121,40 +111,6 @@
 }
 .slotTargetStartIconshowStartIcon {
   color: #90908c;
-}
-.textInput .slotTargetStartIcon___focusVisibleWithin > *,
-.textInput .slotTargetStartIcon___focusVisibleWithin > :global(.__wab_slot) > *,
-.textInput
-  .slotTargetStartIcon___focusVisibleWithin
-  > :global(.__wab_slot)
-  > :global(.__wab_slot)
-  > *,
-.textInput
-  .slotTargetStartIcon___focusVisibleWithin
-  > :global(.__wab_slot)
-  > :global(.__wab_slot)
-  > :global(.__wab_slot)
-  > *,
-.textInput .slotTargetStartIcon___focusVisibleWithin > picture > img,
-.textInput
-  .slotTargetStartIcon___focusVisibleWithin
-  > :global(.__wab_slot)
-  > picture
-  > img,
-.textInput
-  .slotTargetStartIcon___focusVisibleWithin
-  > :global(.__wab_slot)
-  > :global(.__wab_slot)
-  > picture
-  > img,
-.textInput
-  .slotTargetStartIcon___focusVisibleWithin
-  > :global(.__wab_slot)
-  > :global(.__wab_slot)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  outline: none;
 }
 .svg__bNQq {
   position: relative;
@@ -225,16 +181,10 @@
 .textInput .input___focusVisibleWithin {
   background: none;
   margin-left: calc(4px + 8px) !important;
-  outline: none;
   border-style: none;
 }
 .textInput .input:focus {
   margin-left: calc(4px + 8px) !important;
-  outline: none;
-}
-.textInput .input___focusVisibleWithin:focus {
-  margin-left: calc(4px + 8px) !important;
-  outline: none;
 }
 .textInput .input::placeholder {
   background: var(--token-Yq556PvPjGii);
@@ -245,13 +195,15 @@
     margin-left: calc(0px + 8px) !important;
   }
 }
-.textInput:hover .input::placeholder {
-  margin-left: calc(4px + 8px) !important;
-}
 .textInput .input___focusVisibleWithin::placeholder {
   background: var(--token-Yq556PvPjGii);
   margin-left: calc(4px + 8px) !important;
-  outline: none;
+}
+.textInput .input___focusVisibleWithin:focus {
+  margin-left: calc(4px + 8px) !important;
+}
+.textInput:hover .input::placeholder {
+  margin-left: calc(4px + 8px) !important;
 }
 .endIconContainer {
   display: flex;

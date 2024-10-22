@@ -53,7 +53,7 @@ export async function refreshUser(
 
     const requestBody = { refresh: inlabUser.refresh };
     // we must await here and interpret the response
-    await axios.post(baseUrl + '/api/v2/user/reauth', requestBody)
+    await axios.post(baseUrl + '/api/v3/user/reauth', requestBody)
         .then(response => {
             if (response.status === 200) {
                 console.log("CommonUtils: refreshUser: success: 200");
@@ -135,7 +135,7 @@ export function refreshAccessIfNeeded(globalContext: GlobalContextType, inlabUse
             // Refresh the access token
             const requestBody = { refresh: inlabUser.refresh };
             // we must await here and interpret the response
-            axios.post(baseUrl + '/api/v2/user/reauth', requestBody)
+            axios.post(baseUrl + '/api/v3/user/reauth', requestBody)
                 .then(response => {
                     if (response.status === 200) {
                         // TODO: better naming for keys maybe?

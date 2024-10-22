@@ -398,6 +398,25 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "highlightAntibiogram[][][].highlight",
         type: "private",
         variableType: "text"
+      },
+      {
+        path: "allAdmissions",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -495,7 +514,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v2/patient/${$ctx.params.code}`}
+            path={`/api/v3/patient/${$ctx.params.code}`}
             ref={ref => {
               $refs["patientDataApiFetcher"] = ref;
             }}
@@ -992,12 +1011,23 @@ ${ageMonths} months ${
                 "viewNormalRange"
               )
             })}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             method={"GET"}
-            path={`/api/v3/patient/lab/${
-              $ctx.params.code
-            }?namespace_id=${localStorage.getItem(
-              "inlab_user_namespace_id"
-            )}&admission_id=${$ctx.params.adm_id}`}
+            path={`/api/v3/remote_his/labs?patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&all_admissions=${$state.allAdmissions}`}
             ref={ref => {
               $refs["labData"] = ref;
             }}
@@ -2191,7 +2221,7 @@ ${ageMonths} months ${
               }
             })()}
             method={"GET"}
-            path={`/api/v3/patient/lab_factors/${$ctx.params.adm_id}`}
+            path={`/api/v3/remote_his/lab_factors?admission_id=${$ctx.params.adm_id}`}
             ref={ref => {
               $refs["checkedFactorsApiFetcher"] = ref;
             }}

@@ -62,7 +62,7 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import Alert from "../../Alert"; // plasmic-import: RABqkXkLRlle/component
+import Alert2 from "../../Alert2"; // plasmic-import: RABqkXkLRlle/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
@@ -112,8 +112,8 @@ export type PlasmicConsultSend__OverridesType = {
   patientService?: Flex__<"div">;
   sendConsult?: Flex__<"div">;
   sendConsultButtonContent?: Flex__<"div">;
-  sendConsultSuccessfully?: Flex__<typeof Alert>;
-  sendConsultUnsuccessfully2?: Flex__<typeof Alert>;
+  sendConsultSuccessfully?: Flex__<typeof Alert2>;
+  sendConsultUnsuccessfully2?: Flex__<typeof Alert2>;
   senderService?: Flex__<"div">;
   selectedSenderService?: Flex__<"div">;
   receiverService?: Flex__<"div">;
@@ -423,7 +423,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v2/patient/${$ctx.params.code}`}
+              path={`/api/v3/patient/${$ctx.params.code}`}
               ref={ref => {
                 $refs["patientDataForHeader"] = ref;
               }}
@@ -544,7 +544,7 @@ ${ageMonths} months ${
                 sty.sendConsultButtonContent
               )}
             >
-              <Alert
+              <Alert2
                 data-plasmic-name={"sendConsultSuccessfully"}
                 data-plasmic-override={overrides.sendConsultSuccessfully}
                 body={
@@ -582,7 +582,7 @@ ${ageMonths} months ${
                   throw e;
                 }
               })() ? (
-                <Alert
+                <Alert2
                   data-plasmic-name={"sendConsultUnsuccessfully2"}
                   data-plasmic-override={overrides.sendConsultUnsuccessfully2}
                   body={
@@ -1421,7 +1421,7 @@ ${ageMonths} months ${
                       const actionArgs = {
                         args: [
                           "POST",
-                          `/api/v2/patient/${$ctx.params.code}/consult`,
+                          `/api/v3/patient/${$ctx.params.code}/consult`,
                           (() => {
                             try {
                               return {
@@ -2046,7 +2046,7 @@ ${ageMonths} months ${
               }
             })()}
             method={"GET"}
-            path={"/api/v2/service"}
+            path={"/api/v3/service"}
             ref={ref => {
               $refs["getServices"] = ref;
             }}
@@ -3396,8 +3396,8 @@ type NodeDefaultElementType = {
   patientService: "div";
   sendConsult: "div";
   sendConsultButtonContent: "div";
-  sendConsultSuccessfully: typeof Alert;
-  sendConsultUnsuccessfully2: typeof Alert;
+  sendConsultSuccessfully: typeof Alert2;
+  sendConsultUnsuccessfully2: typeof Alert2;
   senderService: "div";
   selectedSenderService: "div";
   receiverService: "div";
