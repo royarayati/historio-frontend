@@ -1280,7 +1280,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                               const actionArgs = {
                                 args: [
                                   "PATCH",
-                                  `/api/v3/users/password/${$ctx.inlab_user.user.id}`,
+                                  `/api/v3/user/password/${$ctx.inlab_user.user.id}`,
                                   undefined,
                                   (() => {
                                     try {
@@ -1320,7 +1320,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                             const actionArgs = {
                               customFunction: async () => {
                                 return console.log(
-                                  `PATCH user/password status: ${$steps.patchUserpassword?.status}`
+                                  `PATCH user/password status: ${$steps.patchUserpassword.status}`
                                 );
                               }
                             };

@@ -481,7 +481,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v2/patient/${$ctx.params.code}`}
+            path={`/api/v3/patient/${$ctx.params.code}`}
             ref={ref => {
               $refs["apiFetcherComponent"] = ref;
             }}
@@ -878,7 +878,7 @@ ${ageMonths} months ${
               }
             })()}
             method={"GET"}
-            path={`/api/v2/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
+            path={`/api/v3/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
             ref={ref => {
               $refs["imagingReport"] = ref;
             }}

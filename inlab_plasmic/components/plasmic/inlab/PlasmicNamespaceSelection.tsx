@@ -204,7 +204,7 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
               className={classNames("__wab_instance", sty.namespaces)}
               headers={{ "X-Namespace": "undefined " }}
               method={"GET"}
-              path={"/api/v2/user/user_namespaces"}
+              path={"/api/v3/user/user_namespaces"}
               ref={ref => {
                 $refs["namespaces"] = ref;
               }}

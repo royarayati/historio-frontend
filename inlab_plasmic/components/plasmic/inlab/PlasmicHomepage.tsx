@@ -2411,7 +2411,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 })()}
                 method={"GET"}
-                path={`/api/v2/consult?${
+                path={`/api/v3/consult?${
                   localStorage.getItem("GET_V2_consult_query_param")
                     ? localStorage.getItem("GET_V2_consult_query_param")
                     : "offset=0&limit=10"
@@ -7973,94 +7973,34 @@ function PlasmicHomepage__RenderFunc(props: {
           trigger={null}
           wrapClassName={classNames({ [sty["pcls_IF4RfoWSlpeq"]]: true })}
         >
-          <ApiFetcherComponent
-            data-plasmic-name={"physiciansList"}
-            data-plasmic-override={overrides.physiciansList}
-            className={classNames("__wab_instance", sty.physiciansList)}
-            delay={300}
-            headers={(() => {
-              try {
-                return {
-                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
-                };
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
+          {(() => {
+            try {
+              return $state.searchbarPhysicians.value != "";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
               }
-            })()}
-            method={"GET"}
-            path={`/api/v3/patient/physician?physician_name=${$state.searchbarPhysicians.value}&patient_id=0`}
-            ref={ref => {
-              $refs["physiciansList"] = ref;
-            }}
-          >
-            <DataCtxReader__>
-              {$ctx => (
-                <React.Fragment>
-                  <ConditionGuard
-                    children={null}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.conditionGuard__zAYx0
-                    )}
-                    condition={(() => {
-                      try {
-                        return $ctx.fetched_data.loading;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return false;
-                        }
-                        throw e;
-                      }
-                    })()}
-                    onNotSatisfied={async () => {
-                      const $steps = {};
-
-                      $steps["setLocalPhysiciansList"] =
-                        $state.searchbarPhysicians.value == ""
-                          ? (() => {
-                              const actionArgs = {
-                                customFunction: async () => {
-                                  return (() => {
-                                    localStorage.setItem(
-                                      "physicians_list",
-                                      JSON.stringify($ctx.fetched_data.data)
-                                    );
-                                    return console.log(
-                                      `physicians_list: ${localStorage.getItem(
-                                        "physicians_list"
-                                      )}`
-                                    );
-                                  })();
-                                }
-                              };
-                              return (({ customFunction }) => {
-                                return customFunction();
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["setLocalPhysiciansList"] != null &&
-                        typeof $steps["setLocalPhysiciansList"] === "object" &&
-                        typeof $steps["setLocalPhysiciansList"].then ===
-                          "function"
-                      ) {
-                        $steps["setLocalPhysiciansList"] = await $steps[
-                          "setLocalPhysiciansList"
-                        ];
-                      }
-                    }}
-                    skipPaths={[]}
-                  />
-
+              throw e;
+            }
+          })() ? (
+            <ApiFetcherComponent
+              data-plasmic-name={"physiciansList"}
+              data-plasmic-override={overrides.physiciansList}
+              className={classNames("__wab_instance", sty.physiciansList)}
+              delay={300}
+              method={"GET"}
+              path={`/n8n/webhook/physicians?namespace=${localStorage.getItem(
+                "inlab_user_namespace_id"
+              )}&search=${$state.searchbarPhysicians.value}`}
+              ref={ref => {
+                $refs["physiciansList"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
                   <Stack__
                     as={"div"}
                     data-plasmic-name={"physiciansList2"}
@@ -8072,13 +8012,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
                         try {
-                          return localStorage.getItem("physicians_list") !==
-                            "undefined" &&
-                            $state.searchbarPhysicians.value === ""
-                            ? JSON.parse(
-                                localStorage.getItem("physicians_list")
-                              )
-                            : $ctx.fetched_data.data;
+                          return $ctx.fetched_data.data;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -8215,7 +8149,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       variablePath: ["filterphysicianname"]
                                     },
                                     operation: 0,
-                                    value: currentItem.name
+                                    value: currentItem.last_name
                                   };
                                   return (({
                                     variable,
@@ -8256,7 +8190,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           );
                                           return localStorage.setItem(
                                             "filter_physician_id",
-                                            currentItem.code
+                                            currentItem.id
                                           );
                                         })();
                                       }
@@ -8339,15 +8273,19 @@ function PlasmicHomepage__RenderFunc(props: {
                             }
                           }}
                         >
-                          <React.Fragment>{currentItem.name}</React.Fragment>
+                          <React.Fragment>
+                            {currentItem.speciality +
+                              " | " +
+                              currentItem.last_name}
+                          </React.Fragment>
                         </div>
                       );
                     })}
                   </Stack__>
-                </React.Fragment>
-              )}
-            </DataCtxReader__>
-          </ApiFetcherComponent>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponent>
+          ) : null}
         </AntdModal>
         {(() => {
           try {
@@ -8831,7 +8769,7 @@ function PlasmicHomepage__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={"/api/v2/service"}
+            path={"/api/v3/service"}
             ref={ref => {
               $refs["getServicesForConsult"] = ref;
             }}
@@ -9909,7 +9847,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "POST",
-                              `/api/v2/consult/${$state.inboxConsultCardId}/reply`,
+                              `/api/v3/consult/${$state.inboxConsultCardId}/reply`,
                               (() => {
                                 try {
                                   return {
