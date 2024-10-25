@@ -88,7 +88,7 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
       password: string
     ): Promise<any> => {
       return await axios.post(
-        baseUrl + '/api/v3/user/login',
+        baseUrl + '/api/v2/user/login',
         {
           username,
           password,
@@ -112,7 +112,7 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
         changeUserCallback(null);
         return null;
       }
-      return await axios.post(baseUrl + '/api/v3/user/logout', { refresh: inlabUser.refresh })
+      return await axios.post(baseUrl + '/api/v2/user/logout', { refresh: inlabUser.refresh })
         .then(response => {
           if (response.status === 200) {
             changeUserCallback(null);

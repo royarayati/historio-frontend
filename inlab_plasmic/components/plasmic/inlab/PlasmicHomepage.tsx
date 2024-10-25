@@ -7973,19 +7973,7 @@ function PlasmicHomepage__RenderFunc(props: {
           trigger={null}
           wrapClassName={classNames({ [sty["pcls_IF4RfoWSlpeq"]]: true })}
         >
-          {(() => {
-            try {
-              return $state.searchbarPhysicians.value != "";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return true;
-              }
-              throw e;
-            }
-          })() ? (
+          {$state.searchbarPhysicians.value != "" ? (
             <ApiFetcherComponent
               data-plasmic-name={"physiciansList"}
               data-plasmic-override={overrides.physiciansList}
