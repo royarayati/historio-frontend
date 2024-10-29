@@ -411,7 +411,7 @@ function PlasmicConsultList__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/patient/${$ctx.params.code}`}
+              path={`/api/v2/patient/${$ctx.params.code}`}
               ref={ref => {
                 $refs["patientDataForHeader"] = ref;
               }}
@@ -507,7 +507,7 @@ ${ageMonths} months ${
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/patient/${$ctx.params.code}/consult`}
+              path={`/api/v2/patient/${$ctx.params.code}/consult`}
               ref={ref => {
                 $refs["getConsult"] = ref;
               }}
@@ -2006,7 +2006,7 @@ ${ageMonths} months ${
                           const actionArgs = {
                             args: [
                               "POST",
-                              `/api/v3/consult/${$state.inboxConsultCardId}/reply`,
+                              `/api/v2/consult/${$state.inboxConsultCardId}/reply`,
                               (() => {
                                 try {
                                   return {

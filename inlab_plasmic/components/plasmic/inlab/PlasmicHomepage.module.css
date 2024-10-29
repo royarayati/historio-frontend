@@ -294,13 +294,29 @@
   display: flex;
   position: relative;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
   padding: 8px 8px 0px 6px;
+}
+.searchSetting > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  margin-left: calc(0px - 10px);
+  width: calc(100% + 10px);
+}
+.searchSetting > :global(.__wab_flex-container) > *,
+.searchSetting > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.searchSetting > :global(.__wab_flex-container) > picture > img,
+.searchSetting
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 10px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .searchSetting {
@@ -308,8 +324,12 @@
     padding-left: 0px;
     padding-top: 2px;
     align-self: center;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .searchSetting > :global(.__wab_flex-container) {
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
 }
 .settingIcon {
@@ -346,7 +366,7 @@
     max-width: auto;
   }
 }
-.searchbar:global(.__wab_instance) {
+.searchbarLnameNcode:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   margin-top: 0px;
@@ -358,11 +378,11 @@
   bottom: auto;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .searchbar:global(.__wab_instance) {
+  .searchbarLnameNcode:global(.__wab_instance) {
     left: auto;
     top: auto;
     position: relative;
-    width: 269px;
+    width: 120px;
     right: auto;
     bottom: auto;
     height: 45px;
@@ -385,6 +405,53 @@
   }
 }
 .svg___2L1F5 {
+  position: relative;
+  object-fit: cover;
+  width: var(--token-UEz8jpx4ZeEk);
+  height: 1em;
+  color: var(--token-9iYGdL7i3GKE);
+  align-self: center;
+  margin-right: 5px;
+}
+.searchbarFname:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  margin-top: 0px;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  height: 60px;
+  right: auto;
+  bottom: auto;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .searchbarFname:global(.__wab_instance) {
+    left: auto;
+    top: auto;
+    position: relative;
+    width: 120px;
+    right: auto;
+    bottom: auto;
+    height: 45px;
+    align-self: center;
+    flex-shrink: 0;
+  }
+}
+.svg__cnc6J {
+  position: relative;
+  object-fit: cover;
+  height: 30px;
+  color: var(--token-9iYGdL7i3GKE);
+  width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .svg__cnc6J {
+    height: 20px;
+    transform: translateX(5px) translateY(0px) translateZ(0px);
+  }
+}
+.svg__yEqKt {
   position: relative;
   object-fit: cover;
   width: var(--token-UEz8jpx4ZeEk);

@@ -130,7 +130,8 @@ export type PlasmicHomepage__OverridesType = {
   namespaceTitle?: Flex__<"div">;
   searchSetting?: Flex__<"div">;
   settingIcon?: Flex__<"svg">;
-  searchbar?: Flex__<typeof TextInput>;
+  searchbarLnameNcode?: Flex__<typeof TextInput>;
+  searchbarFname?: Flex__<typeof TextInput>;
   mainTabs?: Flex__<"div">;
   consultButtonStack?: Flex__<"div">;
   consult?: Flex__<typeof Button>;
@@ -302,7 +303,7 @@ function PlasmicHomepage__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "searchbar.value",
+        path: "searchbarLnameNcode.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
@@ -1272,6 +1273,12 @@ function PlasmicHomepage__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "searchbarFname.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -1713,9 +1720,11 @@ function PlasmicHomepage__RenderFunc(props: {
                 })()}
               </React.Fragment>
             </div>
-            <div
+            <Stack__
+              as={"div"}
               data-plasmic-name={"searchSetting"}
               data-plasmic-override={overrides.searchSetting}
+              hasGap={true}
               className={classNames(projectcss.all, sty.searchSetting)}
             >
               <MenuIcon
@@ -1754,9 +1763,12 @@ function PlasmicHomepage__RenderFunc(props: {
               />
 
               <TextInput
-                data-plasmic-name={"searchbar"}
-                data-plasmic-override={overrides.searchbar}
-                className={classNames("__wab_instance", sty.searchbar)}
+                data-plasmic-name={"searchbarLnameNcode"}
+                data-plasmic-override={overrides.searchbarLnameNcode}
+                className={classNames(
+                  "__wab_instance",
+                  sty.searchbarLnameNcode
+                )}
                 endIcon={
                   <Icons8CloseSvgIcon
                     className={classNames(projectcss.all, sty.svg___2L1F5)}
@@ -1768,7 +1780,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             const actionArgs = {
                               variable: {
                                 objRoot: $state,
-                                variablePath: ["searchbar", "value"]
+                                variablePath: ["searchbarLnameNcode", "value"]
                               },
                               operation: 0,
                               value: ""
@@ -1805,18 +1817,38 @@ function PlasmicHomepage__RenderFunc(props: {
                 }
                 onChange={async (...eventArgs: any) => {
                   ((...eventArgs) => {
-                    generateStateOnChangeProp($state, ["searchbar", "value"])(
-                      (e => e.target?.value).apply(null, eventArgs)
-                    );
+                    generateStateOnChangeProp($state, [
+                      "searchbarLnameNcode",
+                      "value"
+                    ])((e => e.target?.value).apply(null, eventArgs));
                   }).apply(null, eventArgs);
                   (async event => {
                     const $steps = {};
+
+                    $steps["runActionOnPatients"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            tplRef: "patients",
+                            action: "reload"
+                          };
+                          return (({ tplRef, action, args }) => {
+                            return $refs?.[tplRef]?.[action]?.(...(args ?? []));
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["runActionOnPatients"] != null &&
+                      typeof $steps["runActionOnPatients"] === "object" &&
+                      typeof $steps["runActionOnPatients"].then === "function"
+                    ) {
+                      $steps["runActionOnPatients"] = await $steps[
+                        "runActionOnPatients"
+                      ];
+                    }
                   }).apply(null, eventArgs);
                 }}
                 placeholder={
-                  hasVariant(globalVariants, "screen", "mobileFirst")
-                    ? "\u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u0634\u0645\u0627\u0631\u0647 \u067e\u0631\u0648\u0646\u062f\u0647\u060c \u06a9\u062f \u0645\u0644\u06cc\u060c \u06a9\u062f \u067e\u06a9\u0633"
-                    : "\u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u0634\u0645\u0627\u0631\u0647 \u067e\u0631\u0648\u0646\u062f\u0647\u060c \u06a9\u062f \u0645\u0644\u06cc\u060c \u06a9\u062f \u067e\u06a9\u0633"
+                  "\u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u06a9\u062f\u0645\u0644\u06cc"
                 }
                 startIcon={
                   <SearchSvgIcon
@@ -1825,13 +1857,114 @@ function PlasmicHomepage__RenderFunc(props: {
                   />
                 }
                 value={
-                  generateStateValueProp($state, ["searchbar", "value"]) ?? ""
+                  generateStateValueProp($state, [
+                    "searchbarLnameNcode",
+                    "value"
+                  ]) ?? ""
                 }
               />
-            </div>
+
+              <TextInput
+                data-plasmic-name={"searchbarFname"}
+                data-plasmic-override={overrides.searchbarFname}
+                className={classNames("__wab_instance", sty.searchbarFname)}
+                endIcon={
+                  <Icons8CloseSvgIcon
+                    className={classNames(projectcss.all, sty.svg__yEqKt)}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateSearchbar2Value"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["searchbarFname", "value"]
+                              },
+                              operation: 0,
+                              value: ""
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateSearchbar2Value"] != null &&
+                        typeof $steps["updateSearchbar2Value"] === "object" &&
+                        typeof $steps["updateSearchbar2Value"].then ===
+                          "function"
+                      ) {
+                        $steps["updateSearchbar2Value"] = await $steps[
+                          "updateSearchbar2Value"
+                        ];
+                      }
+                    }}
+                    role={"img"}
+                  />
+                }
+                onChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "searchbarFname",
+                      "value"
+                    ])((e => e.target?.value).apply(null, eventArgs));
+                  }).apply(null, eventArgs);
+                  (async event => {
+                    const $steps = {};
+
+                    $steps["runActionOnPatients"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            tplRef: "patients",
+                            action: "reload"
+                          };
+                          return (({ tplRef, action, args }) => {
+                            return $refs?.[tplRef]?.[action]?.(...(args ?? []));
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["runActionOnPatients"] != null &&
+                      typeof $steps["runActionOnPatients"] === "object" &&
+                      typeof $steps["runActionOnPatients"].then === "function"
+                    ) {
+                      $steps["runActionOnPatients"] = await $steps[
+                        "runActionOnPatients"
+                      ];
+                    }
+                  }).apply(null, eventArgs);
+                }}
+                placeholder={"\u0646\u0627\u0645"}
+                startIcon={
+                  <SearchSvgIcon
+                    className={classNames(projectcss.all, sty.svg__cnc6J)}
+                    role={"img"}
+                  />
+                }
+                value={
+                  generateStateValueProp($state, ["searchbarFname", "value"]) ??
+                  ""
+                }
+              />
+            </Stack__>
             {(() => {
               try {
-                return $state.searchbar.value === "";
+                return (
+                  ($state.searchbarLnameNcode.value === "") &
+                  ($state.searchbarFname.value === "")
+                );
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -2113,7 +2246,7 @@ function PlasmicHomepage__RenderFunc(props: {
             ) : null}
             {(() => {
               try {
-                return $state.searchbar.value !== "";
+                return $state.searchbarLnameNcode.value !== "";
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -2143,7 +2276,7 @@ function PlasmicHomepage__RenderFunc(props: {
             try {
               return (
                 $state.mainSelectedTab === "consult" &&
-                $state.searchbar.value == ""
+                $state.searchbarLnameNcode.value == ""
               );
             } catch (e) {
               if (
@@ -2411,7 +2544,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 })()}
                 method={"GET"}
-                path={`/api/v3/consult?${
+                path={`/api/v2/consult?${
                   localStorage.getItem("GET_V2_consult_query_param")
                     ? localStorage.getItem("GET_V2_consult_query_param")
                     : "offset=0&limit=10"
@@ -3654,7 +3787,7 @@ function PlasmicHomepage__RenderFunc(props: {
             try {
               return (
                 $state.mainSelectedTab === "patients" ||
-                $state.searchbar.value !== ""
+                $state.searchbarLnameNcode.value !== ""
               );
             } catch (e) {
               if (
@@ -3672,8 +3805,8 @@ function PlasmicHomepage__RenderFunc(props: {
               className={classNames("__wab_instance", sty.patients)}
               delay={300}
               method={"GET"}
-              path={`/n8n/webhook/patient?search=${
-                $state.searchbar.value
+              path={`/n8n/webhook/patient?first_name=${
+                $state.searchbarFname.value
               }&namespace_id=${localStorage.getItem(
                 "inlab_user_namespace_id"
               )}&ward_id=${
@@ -3682,7 +3815,15 @@ function PlasmicHomepage__RenderFunc(props: {
                 $state.filterPhysician
                   ? localStorage.getItem("filter_physician_id")
                   : ""
-              }`}
+              }&national_code=${
+                parseInt($state.searchbarLnameNcode.value)
+                  ? $state.searchbarLnameNcode.value
+                  : ""
+              }&last_name=${
+                parseInt($state.searchbarLnameNcode.value)
+                  ? ""
+                  : $state.searchbarLnameNcode.value
+              }&dismissed=false`}
               ref={ref => {
                 $refs["patients"] = ref;
               }}
@@ -3714,7 +3855,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         const $steps = {};
 
                         $steps["setLocalBookmarkedList"] =
-                          $state.searchbar.value === "" &&
+                          $state.searchbarLnameNcode.value === "" &&
                           $state.filterBookmarked
                             ? (() => {
                                 const actionArgs = {
@@ -3750,7 +3891,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         }
 
                         $steps["updatePatientNumber"] =
-                          $state.searchbar.value == ""
+                          $state.searchbarLnameNcode.value == ""
                             ? (() => {
                                 const actionArgs = {
                                   variable: {
@@ -3792,7 +3933,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         }
 
                         $steps["setLocalPatientsNumber"] =
-                          $state.searchbar.value == ""
+                          $state.searchbarLnameNcode.value == ""
                             ? (() => {
                                 const actionArgs = {
                                   customFunction: async () => {
@@ -3840,12 +3981,12 @@ function PlasmicHomepage__RenderFunc(props: {
                       {(
                         hasVariant(globalVariants, "screen", "mobileFirst")
                           ? $state.mainSelectedTab === "patients" &&
-                            $state.searchbar.value === ""
+                            $state.searchbarLnameNcode.value === ""
                           : (() => {
                               try {
                                 return (
                                   $state.mainSelectedTab === "patients" &&
-                                  $state.searchbar.value === ""
+                                  $state.searchbarLnameNcode.value === ""
                                 );
                               } catch (e) {
                                 if (
@@ -4882,7 +5023,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             return (
                               $state.mainSelectedTab === "patients" &&
                               $state.filterBookmarked &&
-                              $state.searchbar.value == "" &&
+                              $state.searchbarLnameNcode.value == "" &&
                               $state.patientNumber !== ""
                             );
                           } catch (e) {
@@ -5026,7 +5167,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         return (
                           $ctx.fetched_data.loading === false &&
                           $ctx.fetched_data.data == "" &&
-                          $state.searchbar.value !== ""
+                          $state.searchbarLnameNcode.value !== ""
                         );
                       } catch (e) {
                         if (
@@ -5057,7 +5198,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     {(() => {
                       try {
                         return (
-                          $state.searchbar.value == "" && !$state.patientNumber
+                          $state.searchbarLnameNcode.value == "" &&
+                          !$state.patientNumber
                         );
                       } catch (e) {
                         if (
@@ -5201,7 +5343,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 (null || undefined || "" || "undefined") &&
                                 $ctx.fetched_data.loading &&
                                 $state.filterBookmarked &&
-                                $state.searchbar.value === ""
+                                $state.searchbarLnameNcode.value === ""
                                 ? JSON.parse(
                                     localStorage.getItem("bookmarked_list")
                                   )
@@ -6695,7 +6837,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     ),
                                     patientId: (() => {
                                       try {
-                                        return currentItem.profile_id;
+                                        return currentItem.patient_id;
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
@@ -6802,11 +6944,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                   )}
                                 >
                                   <React.Fragment>
-                                    {currentItem.bed === null
-                                      ? ""
-                                      : currentItem.bed.includes("تخت")
-                                      ? currentItem.bed
-                                      : "تخت " + currentItem.bed}
+                                    {currentItem.room +
+                                      " - " +
+                                      (currentItem.bed === null
+                                        ? ""
+                                        : currentItem.bed.includes("تخت")
+                                        ? currentItem.bed
+                                        : "تخت " + currentItem.bed)}
                                   </React.Fragment>
                                 </div>
                                 <div
@@ -6821,7 +6965,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   <React.Fragment>
                                     {(() => {
                                       try {
-                                        return currentItem.ward.name;
+                                        return currentItem.ward[0].name;
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
@@ -8757,7 +8901,7 @@ function PlasmicHomepage__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={"/api/v3/service"}
+            path={"/api/v2/service"}
             ref={ref => {
               $refs["getServicesForConsult"] = ref;
             }}
@@ -9835,7 +9979,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "POST",
-                              `/api/v3/consult/${$state.inboxConsultCardId}/reply`,
+                              `/api/v2/consult/${$state.inboxConsultCardId}/reply`,
                               (() => {
                                 try {
                                   return {
@@ -12485,7 +12629,8 @@ const PlasmicDescendants = {
     "namespaceTitle",
     "searchSetting",
     "settingIcon",
-    "searchbar",
+    "searchbarLnameNcode",
+    "searchbarFname",
     "mainTabs",
     "consultButtonStack",
     "consult",
@@ -12619,7 +12764,8 @@ const PlasmicDescendants = {
     "namespaceTitle",
     "searchSetting",
     "settingIcon",
-    "searchbar",
+    "searchbarLnameNcode",
+    "searchbarFname",
     "mainTabs",
     "consultButtonStack",
     "consult",
@@ -12716,7 +12862,8 @@ const PlasmicDescendants = {
     "namespaceTitle",
     "searchSetting",
     "settingIcon",
-    "searchbar",
+    "searchbarLnameNcode",
+    "searchbarFname",
     "mainTabs",
     "consultButtonStack",
     "consult",
@@ -12726,9 +12873,15 @@ const PlasmicDescendants = {
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648"
   ],
   namespaceTitle: ["namespaceTitle"],
-  searchSetting: ["searchSetting", "settingIcon", "searchbar"],
+  searchSetting: [
+    "searchSetting",
+    "settingIcon",
+    "searchbarLnameNcode",
+    "searchbarFname"
+  ],
   settingIcon: ["settingIcon"],
-  searchbar: ["searchbar"],
+  searchbarLnameNcode: ["searchbarLnameNcode"],
+  searchbarFname: ["searchbarFname"],
   mainTabs: [
     "mainTabs",
     "consultButtonStack",
@@ -13263,7 +13416,8 @@ type NodeDefaultElementType = {
   namespaceTitle: "div";
   searchSetting: "div";
   settingIcon: "svg";
-  searchbar: typeof TextInput;
+  searchbarLnameNcode: typeof TextInput;
+  searchbarFname: typeof TextInput;
   mainTabs: "div";
   consultButtonStack: "div";
   consult: typeof Button;
@@ -13459,7 +13613,8 @@ export const PlasmicHomepage = Object.assign(
     namespaceTitle: makeNodeComponent("namespaceTitle"),
     searchSetting: makeNodeComponent("searchSetting"),
     settingIcon: makeNodeComponent("settingIcon"),
-    searchbar: makeNodeComponent("searchbar"),
+    searchbarLnameNcode: makeNodeComponent("searchbarLnameNcode"),
+    searchbarFname: makeNodeComponent("searchbarFname"),
     mainTabs: makeNodeComponent("mainTabs"),
     consultButtonStack: makeNodeComponent("consultButtonStack"),
     consult: makeNodeComponent("consult"),

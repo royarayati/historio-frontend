@@ -388,7 +388,7 @@
   flex-direction: column;
   justify-content: flex-start;
   left: 0px;
-  top: 70px;
+  top: 75px;
   bottom: 58px;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
@@ -550,7 +550,7 @@
 .factorName {
   position: relative;
   width: 100%;
-  height: 48px;
+  height: 55px;
   max-width: 100%;
   white-space: pre-wrap;
   align-self: center;
@@ -724,7 +724,7 @@
   position: relative;
   flex-direction: row;
   width: 100%;
-  height: 48px;
+  height: 55px;
   max-width: 100%;
   background: none;
   margin-bottom: 0px;

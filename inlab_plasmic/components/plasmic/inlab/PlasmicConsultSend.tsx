@@ -423,7 +423,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/patient/${$ctx.params.code}`}
+              path={`/api/v2/patient/${$ctx.params.code}`}
               ref={ref => {
                 $refs["patientDataForHeader"] = ref;
               }}
@@ -1421,7 +1421,7 @@ ${ageMonths} months ${
                       const actionArgs = {
                         args: [
                           "POST",
-                          `/api/v3/patient/${$ctx.params.code}/consult`,
+                          `/api/v2/patient/${$ctx.params.code}/consult`,
                           (() => {
                             try {
                               return {
@@ -2046,7 +2046,7 @@ ${ageMonths} months ${
               }
             })()}
             method={"GET"}
-            path={"/api/v3/service"}
+            path={"/api/v2/service"}
             ref={ref => {
               $refs["getServices"] = ref;
             }}

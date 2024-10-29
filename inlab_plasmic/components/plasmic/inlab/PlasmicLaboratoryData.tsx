@@ -406,38 +406,18 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.viewNormalRangeVariant;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+          hasVariant($state, "viewNormalRange", "viewNormalRange")
+            ? "selected"
+            : undefined
       },
       {
         path: "normalRange.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return !$state.viewNormalRangeVariant;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+          hasVariant($state, "viewNormalRange", "viewNormalRange")
+            ? []
+            : "deselected"
       },
       {
         path: "normalRange.sortDeselected",
@@ -668,168 +648,180 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
-          <ApiFetcherComponent
-            data-plasmic-name={"patientDataApiFetcher"}
-            data-plasmic-override={overrides.patientDataApiFetcher}
-            className={classNames("__wab_instance", sty.patientDataApiFetcher)}
-            delay={50}
-            headers={(() => {
-              try {
-                return {
-                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
-                };
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
-              }
-            })()}
-            method={"GET"}
-            path={`/api/v3/patient/${$ctx.params.code}`}
-            ref={ref => {
-              $refs["patientDataApiFetcher"] = ref;
-            }}
-          >
-            <DataCtxReader__>
-              {$ctx => (
-                <React.Fragment>
-                  <div
-                    data-plasmic-name={"patientNameAgeGender"}
-                    data-plasmic-override={overrides.patientNameAgeGender}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.patientNameAgeGender,
-                      {
-                        [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
-                          $state,
-                          "viewNormalRange",
-                          "viewNormalRange"
-                        )
-                      }
-                    )}
-                    dir={"rtl"}
-                  >
-                    <React.Fragment>
-                      {$ctx.fetched_data.loading == false &&
-                        (() => {
-                          const dob = new Date($ctx.fetched_data.data.dob);
-                          const ageDiffMs = Date.now() - dob.getTime();
-                          const ageDate = new Date(ageDiffMs);
-                          const ageYears = Math.abs(
-                            ageDate.getUTCFullYear() - 1970
-                          );
-                          const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
-                          if (ageYears < 1) {
-                            const ageMonths = ageDate.getUTCMonth();
-                            return `${fullName} 
-${ageMonths} months ${
-                              $ctx.fetched_data.data.gender === "F"
-                                ? " ♀️"
-                                : $ctx.fetched_data.data.gender === "M"
-                                ? " ♂️"
-                                : ""
-                            }`;
-                          } else {
-                            return `${fullName} ${ageYears}${
-                              $ctx.fetched_data.data.gender === "F"
-                                ? " ♀️"
-                                : $ctx.fetched_data.data.gender === "M"
-                                ? " ♂️"
-                                : ""
-                            }`;
-                          }
-                        })()}
-                    </React.Fragment>
-                  </div>
-                  <ConditionGuard
-                    data-plasmic-name={"conditionGuard"}
-                    data-plasmic-override={overrides.conditionGuard}
-                    className={classNames("__wab_instance", sty.conditionGuard)}
-                    condition={$ctx.fetched_data.loading}
-                    onNotSatisfied={async () => {
-                      const $steps = {};
-
-                      $steps["setLocalAdmissionDatetime"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "admission_datetime",
-                                    $ctx.fetched_data.data.admission_datetime
-                                  );
-                                  return console.log(
-                                    `admission_datetime: ${localStorage.getItem(
-                                      "admission_datetime"
-                                    )}`
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["setLocalAdmissionDatetime"] != null &&
-                        typeof $steps["setLocalAdmissionDatetime"] ===
-                          "object" &&
-                        typeof $steps["setLocalAdmissionDatetime"].then ===
-                          "function"
-                      ) {
-                        $steps["setLocalAdmissionDatetime"] = await $steps[
-                          "setLocalAdmissionDatetime"
-                        ];
-                      }
-
-                      $steps["updateAdmissionDatetime"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["admissionDatetime"]
-                              },
-                              operation: 0,
-                              value: localStorage.getItem("admission_datetime")
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateAdmissionDatetime"] != null &&
-                        typeof $steps["updateAdmissionDatetime"] === "object" &&
-                        typeof $steps["updateAdmissionDatetime"].then ===
-                          "function"
-                      ) {
-                        $steps["updateAdmissionDatetime"] = await $steps[
-                          "updateAdmissionDatetime"
-                        ];
-                      }
-                    }}
-                  />
-                </React.Fragment>
+          {false ? (
+            <ApiFetcherComponent
+              data-plasmic-name={"patientDataApiFetcher"}
+              data-plasmic-override={overrides.patientDataApiFetcher}
+              className={classNames(
+                "__wab_instance",
+                sty.patientDataApiFetcher
               )}
-            </DataCtxReader__>
-          </ApiFetcherComponent>
+              delay={50}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/patient/${$ctx.params.code}`}
+              ref={ref => {
+                $refs["patientDataApiFetcher"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <React.Fragment>
+                    <div
+                      data-plasmic-name={"patientNameAgeGender"}
+                      data-plasmic-override={overrides.patientNameAgeGender}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.patientNameAgeGender,
+                        {
+                          [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
+                            $state,
+                            "viewNormalRange",
+                            "viewNormalRange"
+                          )
+                        }
+                      )}
+                      dir={"rtl"}
+                    >
+                      <React.Fragment>
+                        {$ctx.fetched_data.loading == false &&
+                          (() => {
+                            const dob = new Date($ctx.fetched_data.data.dob);
+                            const ageDiffMs = Date.now() - dob.getTime();
+                            const ageDate = new Date(ageDiffMs);
+                            const ageYears = Math.abs(
+                              ageDate.getUTCFullYear() - 1970
+                            );
+                            const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
+                            if (ageYears < 1) {
+                              const ageMonths = ageDate.getUTCMonth();
+                              return `${fullName} 
+${ageMonths} months ${
+                                $ctx.fetched_data.data.gender === "F"
+                                  ? " ♀️"
+                                  : $ctx.fetched_data.data.gender === "M"
+                                  ? " ♂️"
+                                  : ""
+                              }`;
+                            } else {
+                              return `${fullName} ${ageYears}${
+                                $ctx.fetched_data.data.gender === "F"
+                                  ? " ♀️"
+                                  : $ctx.fetched_data.data.gender === "M"
+                                  ? " ♂️"
+                                  : ""
+                              }`;
+                            }
+                          })()}
+                      </React.Fragment>
+                    </div>
+                    <ConditionGuard
+                      data-plasmic-name={"conditionGuard"}
+                      data-plasmic-override={overrides.conditionGuard}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.conditionGuard
+                      )}
+                      condition={$ctx.fetched_data.loading}
+                      onNotSatisfied={async () => {
+                        const $steps = {};
+
+                        $steps["setLocalAdmissionDatetime"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "admission_datetime",
+                                      $ctx.fetched_data.data.admission_datetime
+                                    );
+                                    return console.log(
+                                      `admission_datetime: ${localStorage.getItem(
+                                        "admission_datetime"
+                                      )}`
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["setLocalAdmissionDatetime"] != null &&
+                          typeof $steps["setLocalAdmissionDatetime"] ===
+                            "object" &&
+                          typeof $steps["setLocalAdmissionDatetime"].then ===
+                            "function"
+                        ) {
+                          $steps["setLocalAdmissionDatetime"] = await $steps[
+                            "setLocalAdmissionDatetime"
+                          ];
+                        }
+
+                        $steps["updateAdmissionDatetime"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["admissionDatetime"]
+                                },
+                                operation: 0,
+                                value:
+                                  localStorage.getItem("admission_datetime")
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateAdmissionDatetime"] != null &&
+                          typeof $steps["updateAdmissionDatetime"] ===
+                            "object" &&
+                          typeof $steps["updateAdmissionDatetime"].then ===
+                            "function"
+                        ) {
+                          $steps["updateAdmissionDatetime"] = await $steps[
+                            "updateAdmissionDatetime"
+                          ];
+                        }
+                      }}
+                    />
+                  </React.Fragment>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponent>
+          ) : null}
         </div>
         <Stack__
           as={"div"}
@@ -1108,7 +1100,13 @@ ${ageMonths} months ${
             <Button
               data-plasmic-name={"normalRange"}
               data-plasmic-override={overrides.normalRange}
-              className={classNames("__wab_instance", sty.normalRange)}
+              className={classNames("__wab_instance", sty.normalRange, {
+                [sty.normalRangeviewNormalRange]: hasVariant(
+                  $state,
+                  "viewNormalRange",
+                  "viewNormalRange"
+                )
+              })}
               deselected={generateStateValueProp($state, [
                 "normalRange",
                 "deselected"
