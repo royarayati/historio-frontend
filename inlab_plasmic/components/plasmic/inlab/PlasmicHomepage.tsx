@@ -1815,37 +1815,11 @@ function PlasmicHomepage__RenderFunc(props: {
                     role={"img"}
                   />
                 }
-                onChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "searchbarLnameNcode",
-                      "value"
-                    ])((e => e.target?.value).apply(null, eventArgs));
-                  }).apply(null, eventArgs);
-                  (async event => {
-                    const $steps = {};
-
-                    $steps["runActionOnPatients"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            tplRef: "patients",
-                            action: "reload"
-                          };
-                          return (({ tplRef, action, args }) => {
-                            return $refs?.[tplRef]?.[action]?.(...(args ?? []));
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["runActionOnPatients"] != null &&
-                      typeof $steps["runActionOnPatients"] === "object" &&
-                      typeof $steps["runActionOnPatients"].then === "function"
-                    ) {
-                      $steps["runActionOnPatients"] = await $steps[
-                        "runActionOnPatients"
-                      ];
-                    }
-                  }).apply(null, eventArgs);
+                onChange={(...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "searchbarLnameNcode",
+                    "value"
+                  ])((e => e.target?.value).apply(null, eventArgs));
                 }}
                 placeholder={
                   "\u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u06a9\u062f\u0645\u0644\u06cc"
@@ -1914,37 +1888,11 @@ function PlasmicHomepage__RenderFunc(props: {
                     role={"img"}
                   />
                 }
-                onChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "searchbarFname",
-                      "value"
-                    ])((e => e.target?.value).apply(null, eventArgs));
-                  }).apply(null, eventArgs);
-                  (async event => {
-                    const $steps = {};
-
-                    $steps["runActionOnPatients"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            tplRef: "patients",
-                            action: "reload"
-                          };
-                          return (({ tplRef, action, args }) => {
-                            return $refs?.[tplRef]?.[action]?.(...(args ?? []));
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["runActionOnPatients"] != null &&
-                      typeof $steps["runActionOnPatients"] === "object" &&
-                      typeof $steps["runActionOnPatients"].then === "function"
-                    ) {
-                      $steps["runActionOnPatients"] = await $steps[
-                        "runActionOnPatients"
-                      ];
-                    }
-                  }).apply(null, eventArgs);
+                onChange={(...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "searchbarFname",
+                    "value"
+                  ])((e => e.target?.value).apply(null, eventArgs));
                 }}
                 placeholder={"\u0646\u0627\u0645"}
                 startIcon={
@@ -3803,16 +3751,22 @@ function PlasmicHomepage__RenderFunc(props: {
               data-plasmic-name={"patients"}
               data-plasmic-override={overrides.patients}
               className={classNames("__wab_instance", sty.patients)}
-              delay={300}
+              delay={350}
               method={"GET"}
               path={`/n8n/webhook/patient?first_name=${
                 $state.searchbarFname.value
               }&namespace_id=${localStorage.getItem(
                 "inlab_user_namespace_id"
               )}&ward_id=${
-                $state.filterWard ? localStorage.getItem("filter_ward_id") : ""
+                $state.filterWard &
+                ($state.searchbarFname.value == "") &
+                ($state.searchbarLnameNcode.value == "")
+                  ? localStorage.getItem("filter_ward_id")
+                  : ""
               }&physician_id=${
-                $state.filterPhysician
+                $state.filterPhysician &
+                ($state.searchbarFname.value == "") &
+                ($state.searchbarLnameNcode.value == "")
                   ? localStorage.getItem("filter_physician_id")
                   : ""
               }&national_code=${
@@ -7011,7 +6965,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           const actionArgs = {
                                             destination: `/patient/${(() => {
                                               try {
-                                                return currentItem.profile_id;
+                                                return currentItem.patient_id;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
@@ -7024,7 +6978,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                             })()}/profile/${(() => {
                                               try {
-                                                return currentItem.admission_id;
+                                                return currentItem.id;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
@@ -7096,7 +7050,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           const actionArgs = {
                                             destination: `/consult-list/${(() => {
                                               try {
-                                                return currentItem.profile_id;
+                                                return currentItem.patient_id;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
@@ -7109,7 +7063,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                             })()}/${(() => {
                                               try {
-                                                return currentItem.admission_id;
+                                                return currentItem.id;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
@@ -7181,7 +7135,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           const actionArgs = {
                                             destination: `/patient/${(() => {
                                               try {
-                                                return currentItem.profile_id;
+                                                return currentItem.patient_id;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
@@ -7194,7 +7148,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                             })()}/report/list/${(() => {
                                               try {
-                                                return currentItem.admission_id;
+                                                return currentItem.id;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
@@ -7265,7 +7219,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           const actionArgs = {
                                             destination: `/patient/${(() => {
                                               try {
-                                                return currentItem.profile_id;
+                                                return currentItem.patient_id;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
@@ -7278,7 +7232,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                             })()}/lab/${(() => {
                                               try {
-                                                return currentItem.admission_id;
+                                                return currentItem.id;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
