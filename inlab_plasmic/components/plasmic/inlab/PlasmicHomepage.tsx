@@ -64,6 +64,7 @@ import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; /
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
+import { AntdSwitch } from "@plasmicpkgs/antd5/skinny/registerSwitch";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
@@ -128,10 +129,13 @@ export type PlasmicHomepage__OverridesType = {
   deleteAllBookmarks?: Flex__<typeof Button>;
   controlPanel?: Flex__<"div">;
   namespaceTitle?: Flex__<"div">;
-  searchSetting?: Flex__<"div">;
+  searchSetting2?: Flex__<"div">;
+  searchinputSetting?: Flex__<"div">;
   settingIcon?: Flex__<"svg">;
   searchbarLnameNcode?: Flex__<typeof TextInput>;
   searchbarFname?: Flex__<typeof TextInput>;
+  dismissed?: Flex__<"div">;
+  dismissedSwitch?: Flex__<typeof AntdSwitch>;
   mainTabs?: Flex__<"div">;
   consultButtonStack?: Flex__<"div">;
   consult?: Flex__<typeof Button>;
@@ -1279,6 +1283,44 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "dismissedSwitch.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.searchDismissed;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "searchDismissed",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -1720,70 +1762,248 @@ function PlasmicHomepage__RenderFunc(props: {
                 })()}
               </React.Fragment>
             </div>
-            <Stack__
-              as={"div"}
-              data-plasmic-name={"searchSetting"}
-              data-plasmic-override={overrides.searchSetting}
-              hasGap={true}
-              className={classNames(projectcss.all, sty.searchSetting)}
+            <div
+              data-plasmic-name={"searchSetting2"}
+              data-plasmic-override={overrides.searchSetting2}
+              className={classNames(projectcss.all, sty.searchSetting2)}
             >
-              <MenuIcon
-                data-plasmic-name={"settingIcon"}
-                data-plasmic-override={overrides.settingIcon}
-                className={classNames(projectcss.all, sty.settingIcon)}
-                onClick={async event => {
-                  const $steps = {};
+              <Stack__
+                as={"div"}
+                data-plasmic-name={"searchinputSetting"}
+                data-plasmic-override={overrides.searchinputSetting}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.searchinputSetting)}
+              >
+                <MenuIcon
+                  data-plasmic-name={"settingIcon"}
+                  data-plasmic-override={overrides.settingIcon}
+                  className={classNames(projectcss.all, sty.settingIcon)}
+                  onClick={async event => {
+                    const $steps = {};
 
-                  $steps["goToUserSetting"] = true
-                    ? (() => {
-                        const actionArgs = { destination: `/user/setting` };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["goToUserSetting"] != null &&
-                    typeof $steps["goToUserSetting"] === "object" &&
-                    typeof $steps["goToUserSetting"].then === "function"
-                  ) {
-                    $steps["goToUserSetting"] = await $steps["goToUserSetting"];
+                    $steps["goToUserSetting"] = true
+                      ? (() => {
+                          const actionArgs = { destination: `/user/setting` };
+                          return (({ destination }) => {
+                            if (
+                              typeof destination === "string" &&
+                              destination.startsWith("#")
+                            ) {
+                              document
+                                .getElementById(destination.substr(1))
+                                .scrollIntoView({ behavior: "smooth" });
+                            } else {
+                              __nextRouter?.push(destination);
+                            }
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["goToUserSetting"] != null &&
+                      typeof $steps["goToUserSetting"] === "object" &&
+                      typeof $steps["goToUserSetting"].then === "function"
+                    ) {
+                      $steps["goToUserSetting"] = await $steps[
+                        "goToUserSetting"
+                      ];
+                    }
+                  }}
+                  role={"img"}
+                />
+
+                <TextInput
+                  data-plasmic-name={"searchbarLnameNcode"}
+                  data-plasmic-override={overrides.searchbarLnameNcode}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.searchbarLnameNcode
+                  )}
+                  endIcon={
+                    <Icons8CloseSvgIcon
+                      className={classNames(projectcss.all, sty.svg___2L1F5)}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["updateSearchbar2Value"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["searchbarLnameNcode", "value"]
+                                },
+                                operation: 0,
+                                value: ""
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSearchbar2Value"] != null &&
+                          typeof $steps["updateSearchbar2Value"] === "object" &&
+                          typeof $steps["updateSearchbar2Value"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSearchbar2Value"] = await $steps[
+                            "updateSearchbar2Value"
+                          ];
+                        }
+                      }}
+                      role={"img"}
+                    />
                   }
-                }}
-                role={"img"}
-              />
+                  onChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "searchbarLnameNcode",
+                      "value"
+                    ])((e => e.target?.value).apply(null, eventArgs));
+                  }}
+                  placeholder={
+                    "\u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u06a9\u062f\u0645\u0644\u06cc"
+                  }
+                  startIcon={
+                    <SearchSvgIcon
+                      className={classNames(projectcss.all, sty.svg___2WfJc)}
+                      role={"img"}
+                    />
+                  }
+                  value={
+                    generateStateValueProp($state, [
+                      "searchbarLnameNcode",
+                      "value"
+                    ]) ?? ""
+                  }
+                />
 
-              <TextInput
-                data-plasmic-name={"searchbarLnameNcode"}
-                data-plasmic-override={overrides.searchbarLnameNcode}
-                className={classNames(
-                  "__wab_instance",
-                  sty.searchbarLnameNcode
-                )}
-                endIcon={
-                  <Icons8CloseSvgIcon
-                    className={classNames(projectcss.all, sty.svg___2L1F5)}
-                    onClick={async event => {
+                <TextInput
+                  data-plasmic-name={"searchbarFname"}
+                  data-plasmic-override={overrides.searchbarFname}
+                  className={classNames("__wab_instance", sty.searchbarFname)}
+                  endIcon={
+                    <Icons8CloseSvgIcon
+                      className={classNames(projectcss.all, sty.svg__yEqKt)}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["updateSearchbar2Value"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["searchbarFname", "value"]
+                                },
+                                operation: 0,
+                                value: ""
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSearchbar2Value"] != null &&
+                          typeof $steps["updateSearchbar2Value"] === "object" &&
+                          typeof $steps["updateSearchbar2Value"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSearchbar2Value"] = await $steps[
+                            "updateSearchbar2Value"
+                          ];
+                        }
+                      }}
+                      role={"img"}
+                    />
+                  }
+                  onChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "searchbarFname",
+                      "value"
+                    ])((e => e.target?.value).apply(null, eventArgs));
+                  }}
+                  placeholder={"\u0646\u0627\u0645"}
+                  startIcon={
+                    <SearchSvgIcon
+                      className={classNames(projectcss.all, sty.svg__cnc6J)}
+                      role={"img"}
+                    />
+                  }
+                  value={
+                    generateStateValueProp($state, [
+                      "searchbarFname",
+                      "value"
+                    ]) ?? ""
+                  }
+                />
+              </Stack__>
+              <Stack__
+                as={"div"}
+                data-plasmic-name={"dismissed"}
+                data-plasmic-override={overrides.dismissed}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.dismissed)}
+              >
+                <AntdSwitch
+                  data-plasmic-name={"dismissedSwitch"}
+                  data-plasmic-override={overrides.dismissedSwitch}
+                  checked={generateStateValueProp($state, [
+                    "dismissedSwitch",
+                    "checked"
+                  ])}
+                  className={classNames("__wab_instance", sty.dismissedSwitch)}
+                  defaultChecked={(() => {
+                    try {
+                      return $state.searchDismissed;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  disabled={false}
+                  onChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "dismissedSwitch",
+                      "checked"
+                    ]).apply(null, eventArgs);
+                    (async checked => {
                       const $steps = {};
 
-                      $steps["updateSearchbar2Value"] = true
+                      $steps["updateSearchDismissed"] = true
                         ? (() => {
                             const actionArgs = {
                               variable: {
                                 objRoot: $state,
-                                variablePath: ["searchbarLnameNcode", "value"]
+                                variablePath: ["searchDismissed"]
                               },
                               operation: 0,
-                              value: ""
+                              value: !$state.searchDismissed
                             };
                             return (({
                               variable,
@@ -1802,111 +2022,33 @@ function PlasmicHomepage__RenderFunc(props: {
                           })()
                         : undefined;
                       if (
-                        $steps["updateSearchbar2Value"] != null &&
-                        typeof $steps["updateSearchbar2Value"] === "object" &&
-                        typeof $steps["updateSearchbar2Value"].then ===
+                        $steps["updateSearchDismissed"] != null &&
+                        typeof $steps["updateSearchDismissed"] === "object" &&
+                        typeof $steps["updateSearchDismissed"].then ===
                           "function"
                       ) {
-                        $steps["updateSearchbar2Value"] = await $steps[
-                          "updateSearchbar2Value"
+                        $steps["updateSearchDismissed"] = await $steps[
+                          "updateSearchDismissed"
                         ];
                       }
-                    }}
-                    role={"img"}
-                  />
-                }
-                onChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "searchbarLnameNcode",
-                    "value"
-                  ])((e => e.target?.value).apply(null, eventArgs));
-                }}
-                placeholder={
-                  "\u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u06a9\u062f\u0645\u0644\u06cc"
-                }
-                startIcon={
-                  <SearchSvgIcon
-                    className={classNames(projectcss.all, sty.svg___2WfJc)}
-                    role={"img"}
-                  />
-                }
-                value={
-                  generateStateValueProp($state, [
-                    "searchbarLnameNcode",
-                    "value"
-                  ]) ?? ""
-                }
-              />
+                    }).apply(null, eventArgs);
+                  }}
+                />
 
-              <TextInput
-                data-plasmic-name={"searchbarFname"}
-                data-plasmic-override={overrides.searchbarFname}
-                className={classNames("__wab_instance", sty.searchbarFname)}
-                endIcon={
-                  <Icons8CloseSvgIcon
-                    className={classNames(projectcss.all, sty.svg__yEqKt)}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["updateSearchbar2Value"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["searchbarFname", "value"]
-                              },
-                              operation: 0,
-                              value: ""
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateSearchbar2Value"] != null &&
-                        typeof $steps["updateSearchbar2Value"] === "object" &&
-                        typeof $steps["updateSearchbar2Value"].then ===
-                          "function"
-                      ) {
-                        $steps["updateSearchbar2Value"] = await $steps[
-                          "updateSearchbar2Value"
-                        ];
-                      }
-                    }}
-                    role={"img"}
-                  />
-                }
-                onChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "searchbarFname",
-                    "value"
-                  ])((e => e.target?.value).apply(null, eventArgs));
-                }}
-                placeholder={"\u0646\u0627\u0645"}
-                startIcon={
-                  <SearchSvgIcon
-                    className={classNames(projectcss.all, sty.svg__cnc6J)}
-                    role={"img"}
-                  />
-                }
-                value={
-                  generateStateValueProp($state, ["searchbarFname", "value"]) ??
-                  ""
-                }
-              />
-            </Stack__>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__bdAjq
+                  )}
+                  dir={"rtl"}
+                >
+                  {
+                    "\u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647 \u0647\u0627 : "
+                  }
+                </div>
+              </Stack__>
+            </div>
             {(() => {
               try {
                 return (
@@ -3777,7 +3919,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 parseInt($state.searchbarLnameNcode.value)
                   ? ""
                   : $state.searchbarLnameNcode.value
-              }&dismissed=false`}
+              }&dismissed=${$state.searchDismissed}`}
               ref={ref => {
                 $refs["patients"] = ref;
               }}
@@ -12581,10 +12723,13 @@ const PlasmicDescendants = {
     "deleteAllBookmarks",
     "controlPanel",
     "namespaceTitle",
-    "searchSetting",
+    "searchSetting2",
+    "searchinputSetting",
     "settingIcon",
     "searchbarLnameNcode",
     "searchbarFname",
+    "dismissed",
+    "dismissedSwitch",
     "mainTabs",
     "consultButtonStack",
     "consult",
@@ -12716,10 +12861,13 @@ const PlasmicDescendants = {
     "deleteAllBookmarks",
     "controlPanel",
     "namespaceTitle",
-    "searchSetting",
+    "searchSetting2",
+    "searchinputSetting",
     "settingIcon",
     "searchbarLnameNcode",
     "searchbarFname",
+    "dismissed",
+    "dismissedSwitch",
     "mainTabs",
     "consultButtonStack",
     "consult",
@@ -12814,10 +12962,13 @@ const PlasmicDescendants = {
   controlPanel: [
     "controlPanel",
     "namespaceTitle",
-    "searchSetting",
+    "searchSetting2",
+    "searchinputSetting",
     "settingIcon",
     "searchbarLnameNcode",
     "searchbarFname",
+    "dismissed",
+    "dismissedSwitch",
     "mainTabs",
     "consultButtonStack",
     "consult",
@@ -12827,8 +12978,17 @@ const PlasmicDescendants = {
     "\u0646\u062a\u0627\u064a\u062d\u062c\u0633\u062a\u0648\u062c\u0648"
   ],
   namespaceTitle: ["namespaceTitle"],
-  searchSetting: [
-    "searchSetting",
+  searchSetting2: [
+    "searchSetting2",
+    "searchinputSetting",
+    "settingIcon",
+    "searchbarLnameNcode",
+    "searchbarFname",
+    "dismissed",
+    "dismissedSwitch"
+  ],
+  searchinputSetting: [
+    "searchinputSetting",
     "settingIcon",
     "searchbarLnameNcode",
     "searchbarFname"
@@ -12836,6 +12996,8 @@ const PlasmicDescendants = {
   settingIcon: ["settingIcon"],
   searchbarLnameNcode: ["searchbarLnameNcode"],
   searchbarFname: ["searchbarFname"],
+  dismissed: ["dismissed", "dismissedSwitch"],
+  dismissedSwitch: ["dismissedSwitch"],
   mainTabs: [
     "mainTabs",
     "consultButtonStack",
@@ -13368,10 +13530,13 @@ type NodeDefaultElementType = {
   deleteAllBookmarks: typeof Button;
   controlPanel: "div";
   namespaceTitle: "div";
-  searchSetting: "div";
+  searchSetting2: "div";
+  searchinputSetting: "div";
   settingIcon: "svg";
   searchbarLnameNcode: typeof TextInput;
   searchbarFname: typeof TextInput;
+  dismissed: "div";
+  dismissedSwitch: typeof AntdSwitch;
   mainTabs: "div";
   consultButtonStack: "div";
   consult: typeof Button;
@@ -13565,10 +13730,13 @@ export const PlasmicHomepage = Object.assign(
     deleteAllBookmarks: makeNodeComponent("deleteAllBookmarks"),
     controlPanel: makeNodeComponent("controlPanel"),
     namespaceTitle: makeNodeComponent("namespaceTitle"),
-    searchSetting: makeNodeComponent("searchSetting"),
+    searchSetting2: makeNodeComponent("searchSetting2"),
+    searchinputSetting: makeNodeComponent("searchinputSetting"),
     settingIcon: makeNodeComponent("settingIcon"),
     searchbarLnameNcode: makeNodeComponent("searchbarLnameNcode"),
     searchbarFname: makeNodeComponent("searchbarFname"),
+    dismissed: makeNodeComponent("dismissed"),
+    dismissedSwitch: makeNodeComponent("dismissedSwitch"),
     mainTabs: makeNodeComponent("mainTabs"),
     consultButtonStack: makeNodeComponent("consultButtonStack"),
     consult: makeNodeComponent("consult"),

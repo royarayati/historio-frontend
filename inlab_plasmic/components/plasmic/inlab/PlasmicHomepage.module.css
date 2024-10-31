@@ -290,7 +290,19 @@
     font-size: var(--token-CdE1_0ZaCyT1);
   }
 }
-.searchSetting {
+.searchSetting2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.searchinputSetting {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -300,7 +312,7 @@
   min-width: 0;
   padding: 8px 8px 0px 6px;
 }
-.searchSetting > :global(.__wab_flex-container) {
+.searchinputSetting > :global(.__wab_flex-container) {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -308,10 +320,10 @@
   margin-left: calc(0px - 10px);
   width: calc(100% + 10px);
 }
-.searchSetting > :global(.__wab_flex-container) > *,
-.searchSetting > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.searchSetting > :global(.__wab_flex-container) > picture > img,
-.searchSetting
+.searchinputSetting > :global(.__wab_flex-container) > *,
+.searchinputSetting > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.searchinputSetting > :global(.__wab_flex-container) > picture > img,
+.searchinputSetting
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
@@ -319,7 +331,7 @@
   margin-left: 10px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .searchSetting {
+  .searchinputSetting {
     padding-right: 0px;
     padding-left: 0px;
     padding-top: 2px;
@@ -327,7 +339,7 @@
   }
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .searchSetting > :global(.__wab_flex-container) {
+  .searchinputSetting > :global(.__wab_flex-container) {
     align-items: center;
     justify-content: space-between;
   }
@@ -459,6 +471,64 @@
   color: var(--token-9iYGdL7i3GKE);
   align-self: center;
   margin-right: 5px;
+}
+.dismissed {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 6px 0px;
+}
+.dismissed > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
+  min-width: 0;
+  margin-left: calc(0px - 5px);
+  width: calc(100% + 5px);
+}
+.dismissed > :global(.__wab_flex-container) > *,
+.dismissed > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.dismissed > :global(.__wab_flex-container) > picture > img,
+.dismissed
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 5px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .dismissed {
+    padding-top: 5px;
+  }
+}
+.dismissedSwitch:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 2.5em;
+  flex-shrink: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .dismissedSwitch:global(.__wab_instance) {
+    font-size: var(--token-CdE1_0ZaCyT1);
+    width: 1em;
+    flex-shrink: 0;
+  }
+}
+.text__bdAjq {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__bdAjq {
+    font-size: var(--token-CdE1_0ZaCyT1);
+    align-self: flex-end;
+  }
 }
 .mainTabs {
   display: flex;
@@ -1210,7 +1280,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 155px;
+  margin-top: 175px;
   margin-bottom: 0px;
   align-self: center;
   height: auto;
@@ -1221,7 +1291,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .patients:global(.__wab_instance) {
-    margin-top: 100px;
+    margin-top: 128px;
     padding-bottom: 150px;
     padding-top: 0%;
   }
