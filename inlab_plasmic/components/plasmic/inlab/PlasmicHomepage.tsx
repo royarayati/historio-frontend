@@ -65,6 +65,7 @@ import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { Switch } from "@plasmicpkgs/antd/skinny/registerSwitch";
+import { AntdSwitch } from "@plasmicpkgs/antd5/skinny/registerSwitch";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
@@ -136,6 +137,7 @@ export type PlasmicHomepage__OverridesType = {
   searchbarFname?: Flex__<typeof TextInput>;
   dismissed?: Flex__<"div">;
   dismissedSwitch?: Flex__<typeof Switch>;
+  _switch?: Flex__<typeof AntdSwitch>;
   mainTabs?: Flex__<"div">;
   consultButtonStack?: Flex__<"div">;
   consult?: Flex__<typeof Button>;
@@ -282,7 +284,7 @@ function PlasmicHomepage__RenderFunc(props: {
       Object.assign(
         {
           open: false,
-          newVersionDatetime: "12.8.1403",
+          newVersionDatetime: "13.8.1403",
           newNoticeDatetime: "22/05/1403"
         },
         Object.fromEntries(
@@ -1321,6 +1323,25 @@ function PlasmicHomepage__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "_switch.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.searchDismissed;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -1958,23 +1979,9 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 />
               </Stack__>
-              {(() => {
-                try {
-                  return (
-                    $state.mainSelectedTab === "patients" ||
-                    $state.searchbarLnameNcode.value !== "" ||
-                    $state.searchbarFname.value !== ""
-                  );
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return true;
-                  }
-                  throw e;
-                }
-              })() ? (
+              {$state.mainSelectedTab === "patients" ||
+              $state.searchbarLnameNcode.value !== "" ||
+              $state.searchbarFname.value !== "" ? (
                 <Stack__
                   as={"div"}
                   data-plasmic-name={"dismissed"}
@@ -2046,6 +2053,79 @@ function PlasmicHomepage__RenderFunc(props: {
                         : undefined
                     }
                     unCheckedChildren={null}
+                  />
+
+                  <AntdSwitch
+                    data-plasmic-name={"_switch"}
+                    data-plasmic-override={overrides._switch}
+                    checked={generateStateValueProp($state, [
+                      "_switch",
+                      "checked"
+                    ])}
+                    className={classNames("__wab_instance", sty._switch)}
+                    defaultChecked={(() => {
+                      try {
+                        return $state.searchDismissed;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
+                        }
+                        throw e;
+                      }
+                    })()}
+                    onChange={async (...eventArgs: any) => {
+                      generateStateOnChangeProp($state, [
+                        "_switch",
+                        "checked"
+                      ]).apply(null, eventArgs);
+                      (async checked => {
+                        const $steps = {};
+
+                        $steps["updateSearchDismissed"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["searchDismissed"]
+                                },
+                                operation: 4,
+                                value: !$state.dismissedSwitch
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSearchDismissed"] != null &&
+                          typeof $steps["updateSearchDismissed"] === "object" &&
+                          typeof $steps["updateSearchDismissed"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSearchDismissed"] = await $steps[
+                            "updateSearchDismissed"
+                          ];
+                        }
+                      }).apply(null, eventArgs);
+                    }}
                   />
 
                   <div
@@ -3975,12 +4055,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                   customFunction: async () => {
                                     return (() => {
                                       localStorage.setItem(
-                                        "bookmarked_list",
+                                        "bookmarked_list2",
                                         JSON.stringify($ctx.fetched_data.data)
                                       );
                                       return console.log(
                                         `bookmarked_list: ${localStorage.getItem(
-                                          "bookmarked_list"
+                                          "bookmarked_list2"
                                         )}`
                                       );
                                     })();
@@ -4440,7 +4520,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             $state.mainSelectedTab ===
                                               "patients" &&
                                             $state.filterWard &&
-                                            $state.patientNumber != ""
+                                            $state.patientNumber != "" &&
+                                            !$ctx.fetched_data.loading
                                           );
                                         } catch (e) {
                                           if (
@@ -4813,7 +4894,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     return (
                                       $state.mainSelectedTab === "patients" &&
                                       $state.filterPhysician &&
-                                      $state.patientNumber != ""
+                                      $state.patientNumber != "" &&
+                                      !$ctx.fetched_data.loading
                                     );
                                   } catch (e) {
                                     if (
@@ -5093,7 +5175,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     return (
                                       $state.mainSelectedTab === "patients" &&
                                       $state.filterBookmarked &&
-                                      $state.patientNumber != ""
+                                      $state.patientNumber != "" &&
+                                      !$ctx.fetched_data.loading
                                     );
                                   } catch (e) {
                                     if (
@@ -5481,14 +5564,15 @@ function PlasmicHomepage__RenderFunc(props: {
                           !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                           (() => {
                             try {
-                              return localStorage.getItem("bookmarked_list") !==
-                                (null || undefined || "" || "undefined") &&
+                              return localStorage.getItem(
+                                "bookmarked_list2"
+                              ) !== (null || undefined || "" || "undefined") &&
                                 $ctx.fetched_data.loading &&
                                 $state.filterBookmarked &&
                                 $state.searchbarLnameNcode.value === "" &&
                                 $state.searchbarFname.value === ""
                                 ? JSON.parse(
-                                    localStorage.getItem("bookmarked_list")
+                                    localStorage.getItem("bookmarked_list2")
                                   )
                                 : $ctx.fetched_data.data;
                             } catch (e) {
@@ -7733,10 +7817,23 @@ function PlasmicHomepage__RenderFunc(props: {
             data-plasmic-override={overrides.wardList}
             className={classNames("__wab_instance", sty.wardList)}
             delay={300}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             method={"GET"}
-            path={`/api/v3/remote_his/wards?namespace=${localStorage.getItem(
-              "inlab_user_namespace_id"
-            )}&search_input=${$state.searchbarWard.value}`}
+            path={`/api/v3/remote_his/wards?search_input=${$state.searchbarWard.value}`}
             ref={ref => {
               $refs["wardList"] = ref;
             }}
@@ -8267,10 +8364,25 @@ function PlasmicHomepage__RenderFunc(props: {
               data-plasmic-override={overrides.physiciansList}
               className={classNames("__wab_instance", sty.physiciansList)}
               delay={300}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
               method={"GET"}
-              path={`/n8n/webhook/physicians?namespace=${localStorage.getItem(
-                "inlab_user_namespace_id"
-              )}&search=${$state.searchbarPhysicians.value}`}
+              path={`/api/v3/remote_his/physicians?search_input=${$state.searchbarPhysicians.value}`}
               ref={ref => {
                 $refs["physiciansList"] = ref;
               }}
@@ -10510,18 +10622,8 @@ function PlasmicHomepage__RenderFunc(props: {
                             sty.li___2GatI
                           )}
                         >
-                          {""}
-                        </li>
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__cgFa
-                          )}
-                        >
                           {
-                            "\u0627\u0636\u0627\u0641\u0647 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0627 \u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0648 \u06cc\u0627 \u0634\u0645\u0627\u0631\u0647 \u0645\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646  "
+                            "\u0627\u0636\u0627\u0641\u0647 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0627 \u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0648 \u06cc\u0627 \u0634\u0645\u0627\u0631\u0647 \u0645\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
                           }
                         </li>
                         <li
@@ -12800,6 +12902,7 @@ const PlasmicDescendants = {
     "searchbarFname",
     "dismissed",
     "dismissedSwitch",
+    "_switch",
     "mainTabs",
     "consultButtonStack",
     "consult",
@@ -12938,6 +13041,7 @@ const PlasmicDescendants = {
     "searchbarFname",
     "dismissed",
     "dismissedSwitch",
+    "_switch",
     "mainTabs",
     "consultButtonStack",
     "consult",
@@ -13039,6 +13143,7 @@ const PlasmicDescendants = {
     "searchbarFname",
     "dismissed",
     "dismissedSwitch",
+    "_switch",
     "mainTabs",
     "consultButtonStack",
     "consult",
@@ -13055,7 +13160,8 @@ const PlasmicDescendants = {
     "searchbarLnameNcode",
     "searchbarFname",
     "dismissed",
-    "dismissedSwitch"
+    "dismissedSwitch",
+    "_switch"
   ],
   searchinputSetting: [
     "searchinputSetting",
@@ -13066,8 +13172,9 @@ const PlasmicDescendants = {
   settingIcon: ["settingIcon"],
   searchbarLnameNcode: ["searchbarLnameNcode"],
   searchbarFname: ["searchbarFname"],
-  dismissed: ["dismissed", "dismissedSwitch"],
+  dismissed: ["dismissed", "dismissedSwitch", "_switch"],
   dismissedSwitch: ["dismissedSwitch"],
+  _switch: ["_switch"],
   mainTabs: [
     "mainTabs",
     "consultButtonStack",
@@ -13607,6 +13714,7 @@ type NodeDefaultElementType = {
   searchbarFname: typeof TextInput;
   dismissed: "div";
   dismissedSwitch: typeof Switch;
+  _switch: typeof AntdSwitch;
   mainTabs: "div";
   consultButtonStack: "div";
   consult: typeof Button;
@@ -13807,6 +13915,7 @@ export const PlasmicHomepage = Object.assign(
     searchbarFname: makeNodeComponent("searchbarFname"),
     dismissed: makeNodeComponent("dismissed"),
     dismissedSwitch: makeNodeComponent("dismissedSwitch"),
+    _switch: makeNodeComponent("_switch"),
     mainTabs: makeNodeComponent("mainTabs"),
     consultButtonStack: makeNodeComponent("consultButtonStack"),
     consult: makeNodeComponent("consult"),

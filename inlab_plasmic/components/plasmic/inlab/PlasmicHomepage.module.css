@@ -508,6 +508,13 @@
 .dismissedSwitch:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
+  width: auto;
+  display: none;
+}
+._switch:global(.__wab_instance) {
+  max-width: 80%;
+  object-fit: cover;
+  width: auto;
 }
 .text__bdAjq {
   position: relative;
