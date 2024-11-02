@@ -508,15 +508,6 @@
 .dismissedSwitch:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
-  width: 2.5em;
-  flex-shrink: 0;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .dismissedSwitch:global(.__wab_instance) {
-    font-size: var(--token-CdE1_0ZaCyT1);
-    width: 1em;
-    flex-shrink: 0;
-  }
 }
 .text__bdAjq {
   position: relative;
@@ -1358,7 +1349,6 @@
     background: none;
     width: 100%;
     overflow: auto;
-    display: flex;
     padding: 0px;
     margin: 0px;
   }
@@ -3363,6 +3353,9 @@
 .ul__tVrkg {
   display: flex;
   flex-direction: column;
+}
+.li___2GatI {
+  padding-right: 0px;
 }
 .ul__ctBZ {
   display: flex;

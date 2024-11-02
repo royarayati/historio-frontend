@@ -64,7 +64,7 @@ import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; /
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
-import { AntdSwitch } from "@plasmicpkgs/antd5/skinny/registerSwitch";
+import { Switch } from "@plasmicpkgs/antd/skinny/registerSwitch";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
@@ -135,7 +135,7 @@ export type PlasmicHomepage__OverridesType = {
   searchbarLnameNcode?: Flex__<typeof TextInput>;
   searchbarFname?: Flex__<typeof TextInput>;
   dismissed?: Flex__<"div">;
-  dismissedSwitch?: Flex__<typeof AntdSwitch>;
+  dismissedSwitch?: Flex__<typeof Switch>;
   mainTabs?: Flex__<"div">;
   consultButtonStack?: Flex__<"div">;
   consult?: Flex__<typeof Button>;
@@ -282,7 +282,7 @@ function PlasmicHomepage__RenderFunc(props: {
       Object.assign(
         {
           open: false,
-          newVersionDatetime: "5.8.1403",
+          newVersionDatetime: "12.8.1403",
           newNoticeDatetime: "22/05/1403"
         },
         Object.fromEntries(
@@ -1285,25 +1285,6 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
       },
       {
-        path: "dismissedSwitch.checked",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.searchDismissed;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()
-      },
-      {
         path: "searchDismissed",
         type: "private",
         variableType: "boolean",
@@ -1311,6 +1292,25 @@ function PlasmicHomepage__RenderFunc(props: {
           (() => {
             try {
               return false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "dismissedSwitch.value",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.searchDismissed;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -1958,102 +1958,116 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 />
               </Stack__>
-              <Stack__
-                as={"div"}
-                data-plasmic-name={"dismissed"}
-                data-plasmic-override={overrides.dismissed}
-                hasGap={true}
-                className={classNames(projectcss.all, sty.dismissed)}
-              >
-                <AntdSwitch
-                  data-plasmic-name={"dismissedSwitch"}
-                  data-plasmic-override={overrides.dismissedSwitch}
-                  checked={generateStateValueProp($state, [
-                    "dismissedSwitch",
-                    "checked"
-                  ])}
-                  className={classNames("__wab_instance", sty.dismissedSwitch)}
-                  defaultChecked={(() => {
-                    try {
-                      return $state.searchDismissed;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}
-                  disabled={false}
-                  onChange={async (...eventArgs: any) => {
-                    generateStateOnChangeProp($state, [
-                      "dismissedSwitch",
-                      "checked"
-                    ]).apply(null, eventArgs);
-                    (async checked => {
-                      const $steps = {};
-
-                      $steps["updateSearchDismissed"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["searchDismissed"]
-                              },
-                              operation: 0,
-                              value: !$state.searchDismissed
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateSearchDismissed"] != null &&
-                        typeof $steps["updateSearchDismissed"] === "object" &&
-                        typeof $steps["updateSearchDismissed"].then ===
-                          "function"
-                      ) {
-                        $steps["updateSearchDismissed"] = await $steps[
-                          "updateSearchDismissed"
-                        ];
-                      }
-                    }).apply(null, eventArgs);
-                  }}
-                />
-
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__bdAjq
-                  )}
-                  dir={"rtl"}
-                >
-                  {
-                    "\u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647 \u0647\u0627 : "
+              {(() => {
+                try {
+                  return (
+                    $state.mainSelectedTab === "patients" ||
+                    $state.searchbarLnameNcode.value !== "" ||
+                    $state.searchbarFname.value !== ""
+                  );
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
                   }
-                </div>
-              </Stack__>
+                  throw e;
+                }
+              })() ? (
+                <Stack__
+                  as={"div"}
+                  data-plasmic-name={"dismissed"}
+                  data-plasmic-override={overrides.dismissed}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.dismissed)}
+                >
+                  <Switch
+                    data-plasmic-name={"dismissedSwitch"}
+                    data-plasmic-override={overrides.dismissedSwitch}
+                    checked={generateStateValueProp($state, [
+                      "dismissedSwitch",
+                      "value"
+                    ])}
+                    checkedChildren={null}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.dismissedSwitch
+                    )}
+                    onChange={async (...eventArgs: any) => {
+                      generateStateOnChangeProp($state, [
+                        "dismissedSwitch",
+                        "value"
+                      ]).apply(null, eventArgs);
+                      (async (checked, event) => {
+                        const $steps = {};
+
+                        $steps["updateSearchDismissed"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["searchDismissed"]
+                                },
+                                operation: 0,
+                                value: !$state.searchDismissed
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSearchDismissed"] != null &&
+                          typeof $steps["updateSearchDismissed"] === "object" &&
+                          typeof $steps["updateSearchDismissed"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSearchDismissed"] = await $steps[
+                            "updateSearchDismissed"
+                          ];
+                        }
+                      }).apply(null, eventArgs);
+                    }}
+                    size={
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? "small"
+                        : undefined
+                    }
+                    unCheckedChildren={null}
+                  />
+
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__bdAjq
+                    )}
+                    dir={"rtl"}
+                  >
+                    {
+                      "\u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647 \u0647\u0627 : "
+                    }
+                  </div>
+                </Stack__>
+              ) : null}
             </div>
             {(() => {
               try {
                 return (
-                  ($state.searchbarLnameNcode.value === "") &
-                  ($state.searchbarFname.value === "")
+                  $state.searchbarLnameNcode.value === "" &&
+                  $state.searchbarFname.value === ""
                 );
               } catch (e) {
                 if (
@@ -2366,7 +2380,8 @@ function PlasmicHomepage__RenderFunc(props: {
             try {
               return (
                 $state.mainSelectedTab === "consult" &&
-                $state.searchbarLnameNcode.value == ""
+                $state.searchbarLnameNcode.value == "" &&
+                $state.searchbarFname.value == ""
               );
             } catch (e) {
               if (
@@ -3877,7 +3892,8 @@ function PlasmicHomepage__RenderFunc(props: {
             try {
               return (
                 $state.mainSelectedTab === "patients" ||
-                $state.searchbarLnameNcode.value !== ""
+                $state.searchbarLnameNcode.value !== "" ||
+                $state.searchbarFname.value !== ""
               );
             } catch (e) {
               if (
@@ -3951,6 +3967,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         const $steps = {};
 
                         $steps["setLocalBookmarkedList"] =
+                          $state.searchbarFname.value === "" &&
                           $state.searchbarLnameNcode.value === "" &&
                           $state.filterBookmarked
                             ? (() => {
@@ -3987,7 +4004,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         }
 
                         $steps["updatePatientNumber"] =
-                          $state.searchbarLnameNcode.value == ""
+                          $state.searchbarLnameNcode.value === "" &&
+                          $state.searchbarFname.value === ""
                             ? (() => {
                                 const actionArgs = {
                                   variable: {
@@ -4029,7 +4047,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         }
 
                         $steps["setLocalPatientsNumber"] =
-                          $state.searchbarLnameNcode.value == ""
+                          $state.searchbarFname.value === "" &&
+                          $state.searchbarLnameNcode.value === ""
                             ? (() => {
                                 const actionArgs = {
                                   customFunction: async () => {
@@ -4066,553 +4085,858 @@ function PlasmicHomepage__RenderFunc(props: {
                       skipPaths={[]}
                     />
 
-                    <div
-                      data-plasmic-name={"patientsControlpanel"}
-                      data-plasmic-override={overrides.patientsControlpanel}
-                      className={classNames(
-                        projectcss.all,
-                        sty.patientsControlpanel
-                      )}
-                    >
-                      {(
-                        hasVariant(globalVariants, "screen", "mobileFirst")
-                          ? $state.mainSelectedTab === "patients" &&
-                            $state.searchbarLnameNcode.value === ""
-                          : (() => {
-                              try {
-                                return (
-                                  $state.mainSelectedTab === "patients" &&
-                                  $state.searchbarLnameNcode.value === ""
-                                );
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })()
-                      ) ? (
-                        <Stack__
-                          as={"div"}
-                          data-plasmic-name={"patientsTabs"}
-                          data-plasmic-override={overrides.patientsTabs}
-                          hasGap={true}
-                          className={classNames(
-                            projectcss.all,
-                            sty.patientsTabs
-                          )}
-                        >
+                    {(() => {
+                      try {
+                        return (
+                          $state.mainSelectedTab === "patients" &&
+                          $state.searchbarLnameNcode.value === "" &&
+                          $state.searchbarFname.value === ""
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={"patientsControlpanel"}
+                        data-plasmic-override={overrides.patientsControlpanel}
+                        className={classNames(
+                          projectcss.all,
+                          sty.patientsControlpanel
+                        )}
+                      >
+                        {(
+                          hasVariant(globalVariants, "screen", "mobileFirst")
+                            ? $state.mainSelectedTab === "patients" &&
+                              $state.searchbarLnameNcode.value === ""
+                            : true
+                        ) ? (
                           <Stack__
                             as={"div"}
-                            data-plasmic-name={"wardButtonStack"}
-                            data-plasmic-override={overrides.wardButtonStack}
+                            data-plasmic-name={"patientsTabs"}
+                            data-plasmic-override={overrides.patientsTabs}
                             hasGap={true}
                             className={classNames(
                               projectcss.all,
-                              sty.wardButtonStack
+                              sty.patientsTabs
                             )}
                           >
-                            <Icons8CloseSvgIcon
+                            <Stack__
+                              as={"div"}
+                              data-plasmic-name={"wardButtonStack"}
+                              data-plasmic-override={overrides.wardButtonStack}
+                              hasGap={true}
                               className={classNames(
                                 projectcss.all,
-                                sty.svg__jbwB
+                                sty.wardButtonStack
                               )}
-                              role={"img"}
-                            />
-
-                            {(
-                              hasVariant(
-                                globalVariants,
-                                "screen",
-                                "mobileFirst"
-                              )
-                                ? false
-                                : false
-                            ) ? (
-                              <Icon4Icon
+                            >
+                              <Icons8CloseSvgIcon
                                 className={classNames(
                                   projectcss.all,
-                                  sty.svg__fskx3
+                                  sty.svg__jbwB
                                 )}
                                 role={"img"}
                               />
-                            ) : null}
-                            <Button
-                              data-plasmic-name={"ward2"}
-                              data-plasmic-override={overrides.ward2}
-                              className={classNames(
-                                "__wab_instance",
-                                sty.ward2
-                              )}
-                              deselected={generateStateValueProp($state, [
-                                "ward2",
-                                "deselected"
-                              ])}
-                              endIcon={
-                                <IconIcon
-                                  className={classNames(
-                                    projectcss.all,
-                                    sty.svg__uruAv
-                                  )}
-                                  role={"img"}
-                                />
-                              }
-                              isDisabled={generateStateValueProp($state, [
-                                "ward2",
-                                "isDisabled"
-                              ])}
-                              onClick={async event => {
-                                const $steps = {};
 
-                                $steps["updateModalOpen"] =
-                                  $state.filterWard ||
-                                  !localStorage.getItem("filter_ward_id") ||
-                                  !localStorage.getItem("filter_ward_name")
-                                    ? (() => {
-                                        const actionArgs = {
-                                          variable: {
-                                            objRoot: $state,
-                                            variablePath: ["modalWard", "open"]
-                                          },
-                                          operation: 4
-                                        };
-                                        return (({
-                                          variable,
-                                          value,
-                                          startIndex,
-                                          deleteCount
-                                        }) => {
-                                          if (!variable) {
-                                            return;
-                                          }
-                                          const { objRoot, variablePath } =
-                                            variable;
-
-                                          const oldValue = $stateGet(
-                                            objRoot,
-                                            variablePath
-                                          );
-                                          $stateSet(
-                                            objRoot,
-                                            variablePath,
-                                            !oldValue
-                                          );
-                                          return !oldValue;
-                                        })?.apply(null, [actionArgs]);
-                                      })()
-                                    : undefined;
-                                if (
-                                  $steps["updateModalOpen"] != null &&
-                                  typeof $steps["updateModalOpen"] ===
-                                    "object" &&
-                                  typeof $steps["updateModalOpen"].then ===
-                                    "function"
-                                ) {
-                                  $steps["updateModalOpen"] = await $steps[
-                                    "updateModalOpen"
-                                  ];
-                                }
-
-                                $steps["setStateSelectedTab"] =
-                                  !$state.filterWard &&
-                                  localStorage.getItem("filter_ward_id") &&
-                                  localStorage.getItem("filter_ward_name")
-                                    ? (() => {
-                                        const actionArgs = {
-                                          variable: {
-                                            objRoot: $state,
-                                            variablePath: [
-                                              "patientsSelectedTab"
-                                            ]
-                                          },
-                                          operation: 0,
-                                          value: "ward"
-                                        };
-                                        return (({
-                                          variable,
-                                          value,
-                                          startIndex,
-                                          deleteCount
-                                        }) => {
-                                          if (!variable) {
-                                            return;
-                                          }
-                                          const { objRoot, variablePath } =
-                                            variable;
-
-                                          $stateSet(
-                                            objRoot,
-                                            variablePath,
-                                            value
-                                          );
-                                          return value;
-                                        })?.apply(null, [actionArgs]);
-                                      })()
-                                    : undefined;
-                                if (
-                                  $steps["setStateSelectedTab"] != null &&
-                                  typeof $steps["setStateSelectedTab"] ===
-                                    "object" &&
-                                  typeof $steps["setStateSelectedTab"].then ===
-                                    "function"
-                                ) {
-                                  $steps["setStateSelectedTab"] = await $steps[
-                                    "setStateSelectedTab"
-                                  ];
-                                }
-
-                                $steps["setSelectedTabLocalStorage"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return localStorage.setItem(
-                                            "patients_selected_tab",
-                                            $state.patientsSelectedTab.toString()
-                                          );
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["setSelectedTabLocalStorage"] !=
-                                    null &&
-                                  typeof $steps[
-                                    "setSelectedTabLocalStorage"
-                                  ] === "object" &&
-                                  typeof $steps["setSelectedTabLocalStorage"]
-                                    .then === "function"
-                                ) {
-                                  $steps["setSelectedTabLocalStorage"] =
-                                    await $steps["setSelectedTabLocalStorage"];
-                                }
-
-                                $steps["logConsole"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return (() => {
-                                            console.log(
-                                              `state_patients_selected_tab: ${$state.patientsSelectedTab}`
-                                            );
-                                            console.log(
-                                              `state_filter_bookmarked: ${$state.bookmarked.selected}`
-                                            );
-                                            console.log(
-                                              `state_filter_ward: ${$state.ward2.selected}`
-                                            );
-                                            console.log(
-                                              `state_filter_ward_name: ${$state.filterwardname}`
-                                            );
-                                            console.log(
-                                              `state_filter_professors: ${$state.filterProfessors}`
-                                            );
-                                            console.log(
-                                              `patients_selected_tab: ${localStorage.getItem(
-                                                "patients_selected_tab"
-                                              )}`
-                                            );
-                                            console.log(
-                                              `filter_ward_name: ${localStorage.getItem(
-                                                "filter_ward_name"
-                                              )}`
-                                            );
-                                            return console.log(
-                                              `filter_ward_id: ${localStorage.getItem(
-                                                "filter_ward_id"
-                                              )}`
-                                            );
-                                          })();
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["logConsole"] != null &&
-                                  typeof $steps["logConsole"] === "object" &&
-                                  typeof $steps["logConsole"].then ===
-                                    "function"
-                                ) {
-                                  $steps["logConsole"] = await $steps[
-                                    "logConsole"
-                                  ];
-                                }
-                              }}
-                              onDeselectedChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "ward2",
-                                  "deselected"
-                                ])(eventArgs[0]);
-                              }}
-                              onIsDisabledChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "ward2",
-                                  "isDisabled"
-                                ])(eventArgs[0]);
-                              }}
-                              onSelectedChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "ward2",
-                                  "selected"
-                                ])(eventArgs[0]);
-                              }}
-                              onSortDeselectedChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "ward2",
-                                  "sortDeselected"
-                                ])(eventArgs[0]);
-                              }}
-                              onSortSelectedChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "ward2",
-                                  "sortSelected"
-                                ])(eventArgs[0]);
-                              }}
-                              selected={generateStateValueProp($state, [
-                                "ward2",
-                                "selected"
-                              ])}
-                              sortDeselected={generateStateValueProp($state, [
-                                "ward2",
-                                "sortDeselected"
-                              ])}
-                              sortSelected={generateStateValueProp($state, [
-                                "ward2",
-                                "sortSelected"
-                              ])}
-                            >
                               {(
                                 hasVariant(
                                   globalVariants,
                                   "screen",
                                   "mobileFirst"
                                 )
-                                  ? (() => {
-                                      try {
-                                        return $state.filterWard;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return false;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                  : (() => {
-                                      try {
-                                        return (
-                                          $state.mainSelectedTab ===
-                                            "patients" &&
-                                          $state.filterWard &&
-                                          $state.patientNumber != ""
-                                        );
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return true;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
+                                  ? false
+                                  : false
                               ) ? (
-                                <div
-                                  data-plasmic-name={"wardPatientNumber"}
-                                  data-plasmic-override={
-                                    overrides.wardPatientNumber
+                                <Icon4Icon
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.svg__fskx3
+                                  )}
+                                  role={"img"}
+                                />
+                              ) : null}
+                              <Button
+                                data-plasmic-name={"ward2"}
+                                data-plasmic-override={overrides.ward2}
+                                className={classNames(
+                                  "__wab_instance",
+                                  sty.ward2
+                                )}
+                                deselected={generateStateValueProp($state, [
+                                  "ward2",
+                                  "deselected"
+                                ])}
+                                endIcon={
+                                  <IconIcon
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.svg__uruAv
+                                    )}
+                                    role={"img"}
+                                  />
+                                }
+                                isDisabled={generateStateValueProp($state, [
+                                  "ward2",
+                                  "isDisabled"
+                                ])}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["updateModalOpen"] =
+                                    $state.filterWard ||
+                                    !localStorage.getItem("filter_ward_id") ||
+                                    !localStorage.getItem("filter_ward_name")
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "modalWard",
+                                                "open"
+                                              ]
+                                            },
+                                            operation: 4
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            const oldValue = $stateGet(
+                                              objRoot,
+                                              variablePath
+                                            );
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              !oldValue
+                                            );
+                                            return !oldValue;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["updateModalOpen"] != null &&
+                                    typeof $steps["updateModalOpen"] ===
+                                      "object" &&
+                                    typeof $steps["updateModalOpen"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateModalOpen"] = await $steps[
+                                      "updateModalOpen"
+                                    ];
                                   }
+
+                                  $steps["setStateSelectedTab"] =
+                                    !$state.filterWard &&
+                                    localStorage.getItem("filter_ward_id") &&
+                                    localStorage.getItem("filter_ward_name")
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "patientsSelectedTab"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: "ward"
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["setStateSelectedTab"] != null &&
+                                    typeof $steps["setStateSelectedTab"] ===
+                                      "object" &&
+                                    typeof $steps["setStateSelectedTab"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setStateSelectedTab"] =
+                                      await $steps["setStateSelectedTab"];
+                                  }
+
+                                  $steps["setSelectedTabLocalStorage"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return localStorage.setItem(
+                                              "patients_selected_tab",
+                                              $state.patientsSelectedTab.toString()
+                                            );
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["setSelectedTabLocalStorage"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "setSelectedTabLocalStorage"
+                                    ] === "object" &&
+                                    typeof $steps["setSelectedTabLocalStorage"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setSelectedTabLocalStorage"] =
+                                      await $steps[
+                                        "setSelectedTabLocalStorage"
+                                      ];
+                                  }
+
+                                  $steps["logConsole"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return (() => {
+                                              console.log(
+                                                `state_patients_selected_tab: ${$state.patientsSelectedTab}`
+                                              );
+                                              console.log(
+                                                `state_filter_bookmarked: ${$state.bookmarked.selected}`
+                                              );
+                                              console.log(
+                                                `state_filter_ward: ${$state.ward2.selected}`
+                                              );
+                                              console.log(
+                                                `state_filter_ward_name: ${$state.filterwardname}`
+                                              );
+                                              console.log(
+                                                `state_filter_professors: ${$state.filterProfessors}`
+                                              );
+                                              console.log(
+                                                `patients_selected_tab: ${localStorage.getItem(
+                                                  "patients_selected_tab"
+                                                )}`
+                                              );
+                                              console.log(
+                                                `filter_ward_name: ${localStorage.getItem(
+                                                  "filter_ward_name"
+                                                )}`
+                                              );
+                                              return console.log(
+                                                `filter_ward_id: ${localStorage.getItem(
+                                                  "filter_ward_id"
+                                                )}`
+                                              );
+                                            })();
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["logConsole"] != null &&
+                                    typeof $steps["logConsole"] === "object" &&
+                                    typeof $steps["logConsole"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["logConsole"] = await $steps[
+                                      "logConsole"
+                                    ];
+                                  }
+                                }}
+                                onDeselectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "ward2",
+                                    "deselected"
+                                  ])(eventArgs[0]);
+                                }}
+                                onIsDisabledChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "ward2",
+                                    "isDisabled"
+                                  ])(eventArgs[0]);
+                                }}
+                                onSelectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "ward2",
+                                    "selected"
+                                  ])(eventArgs[0]);
+                                }}
+                                onSortDeselectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "ward2",
+                                    "sortDeselected"
+                                  ])(eventArgs[0]);
+                                }}
+                                onSortSelectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "ward2",
+                                    "sortSelected"
+                                  ])(eventArgs[0]);
+                                }}
+                                selected={generateStateValueProp($state, [
+                                  "ward2",
+                                  "selected"
+                                ])}
+                                sortDeselected={generateStateValueProp($state, [
+                                  "ward2",
+                                  "sortDeselected"
+                                ])}
+                                sortSelected={generateStateValueProp($state, [
+                                  "ward2",
+                                  "sortSelected"
+                                ])}
+                              >
+                                {(
+                                  hasVariant(
+                                    globalVariants,
+                                    "screen",
+                                    "mobileFirst"
+                                  )
+                                    ? (() => {
+                                        try {
+                                          return $state.filterWard;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return false;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                    : (() => {
+                                        try {
+                                          return (
+                                            $state.mainSelectedTab ===
+                                              "patients" &&
+                                            $state.filterWard &&
+                                            $state.patientNumber != ""
+                                          );
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return true;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                ) ? (
+                                  <div
+                                    data-plasmic-name={"wardPatientNumber"}
+                                    data-plasmic-override={
+                                      overrides.wardPatientNumber
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.wardPatientNumber
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return $state.patientNumber;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                ) : null}
+                                <div
                                   className={classNames(
                                     projectcss.all,
                                     projectcss.__wab_text,
-                                    sty.wardPatientNumber
+                                    sty.text___69F6Z
                                   )}
                                 >
                                   <React.Fragment>
                                     {(() => {
                                       try {
-                                        return $state.patientNumber;
+                                        return (() => {
+                                          const filterWardName =
+                                            $state.filterwardname;
+                                          if (filterWardName) {
+                                            return filterWardName.includes(
+                                              "بخش"
+                                            )
+                                              ? filterWardName
+                                              : "بخش " + filterWardName;
+                                          } else {
+                                            return "بخش";
+                                          }
+                                        })();
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
                                           e?.plasmicType ===
                                             "PlasmicUndefinedDataError"
                                         ) {
-                                          return "";
+                                          return "Button";
                                         }
                                         throw e;
                                       }
                                     })()}
                                   </React.Fragment>
                                 </div>
-                              ) : null}
-                              <div
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text___69F6Z
-                                )}
-                              >
-                                <React.Fragment>
-                                  {(() => {
-                                    try {
-                                      return (() => {
-                                        const filterWardName =
-                                          $state.filterwardname;
-                                        if (filterWardName) {
-                                          return filterWardName.includes("بخش")
-                                            ? filterWardName
-                                            : "بخش " + filterWardName;
-                                        } else {
-                                          return "بخش";
-                                        }
-                                      })();
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return "Button";
-                                      }
-                                      throw e;
-                                    }
-                                  })()}
-                                </React.Fragment>
-                              </div>
-                            </Button>
-                          </Stack__>
-                          <div
-                            data-plasmic-name={"physicianButtonStack"}
-                            data-plasmic-override={
-                              overrides.physicianButtonStack
-                            }
-                            className={classNames(
-                              projectcss.all,
-                              sty.physicianButtonStack
-                            )}
-                          >
-                            <Icons8CloseSvgIcon
+                              </Button>
+                            </Stack__>
+                            <div
+                              data-plasmic-name={"physicianButtonStack"}
+                              data-plasmic-override={
+                                overrides.physicianButtonStack
+                              }
                               className={classNames(
                                 projectcss.all,
-                                sty.svg__o0I05
+                                sty.physicianButtonStack
                               )}
-                              role={"img"}
-                            />
-
-                            {(
-                              hasVariant(
-                                globalVariants,
-                                "screen",
-                                "mobileFirst"
-                              )
-                                ? false
-                                : false
-                            ) ? (
-                              <Icon4Icon
+                            >
+                              <Icons8CloseSvgIcon
                                 className={classNames(
                                   projectcss.all,
-                                  sty.svg__uYOsu
+                                  sty.svg__o0I05
                                 )}
                                 role={"img"}
                               />
-                            ) : null}
-                            <Button
-                              data-plasmic-name={"physician"}
-                              data-plasmic-override={overrides.physician}
-                              className={classNames(
-                                "__wab_instance",
-                                sty.physician
-                              )}
-                              deselected={generateStateValueProp($state, [
-                                "physician",
-                                "deselected"
-                              ])}
-                              endIcon={
-                                <IconIcon
+
+                              {(
+                                hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? false
+                                  : false
+                              ) ? (
+                                <Icon4Icon
                                   className={classNames(
                                     projectcss.all,
-                                    sty.svg__cIycI
+                                    sty.svg__uYOsu
                                   )}
                                   role={"img"}
                                 />
-                              }
-                              isDisabled={generateStateValueProp($state, [
-                                "physician",
-                                "isDisabled"
-                              ])}
-                              onClick={async event => {
-                                const $steps = {};
+                              ) : null}
+                              <Button
+                                data-plasmic-name={"physician"}
+                                data-plasmic-override={overrides.physician}
+                                className={classNames(
+                                  "__wab_instance",
+                                  sty.physician
+                                )}
+                                deselected={generateStateValueProp($state, [
+                                  "physician",
+                                  "deselected"
+                                ])}
+                                endIcon={
+                                  <IconIcon
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.svg__cIycI
+                                    )}
+                                    role={"img"}
+                                  />
+                                }
+                                isDisabled={generateStateValueProp($state, [
+                                  "physician",
+                                  "isDisabled"
+                                ])}
+                                onClick={async event => {
+                                  const $steps = {};
 
-                                $steps["updateModalOpen"] =
-                                  !localStorage.getItem(
-                                    "filter_physician_id"
-                                  ) ||
-                                  !localStorage.getItem(
-                                    "filter_physician_name"
-                                  ) ||
-                                  $state.filterPhysician
+                                  $steps["updateModalOpen"] =
+                                    !localStorage.getItem(
+                                      "filter_physician_id"
+                                    ) ||
+                                    !localStorage.getItem(
+                                      "filter_physician_name"
+                                    ) ||
+                                    $state.filterPhysician
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "modalPhysician",
+                                                "open"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: true
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["updateModalOpen"] != null &&
+                                    typeof $steps["updateModalOpen"] ===
+                                      "object" &&
+                                    typeof $steps["updateModalOpen"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateModalOpen"] = await $steps[
+                                      "updateModalOpen"
+                                    ];
+                                  }
+
+                                  $steps["setStateSelectedTab"] =
+                                    !$state.filterPhysician &&
+                                    localStorage.getItem(
+                                      "filter_physician_id"
+                                    ) &&
+                                    localStorage.getItem(
+                                      "filter_physician_name"
+                                    )
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "patientsSelectedTab"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: "physician"
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["setStateSelectedTab"] != null &&
+                                    typeof $steps["setStateSelectedTab"] ===
+                                      "object" &&
+                                    typeof $steps["setStateSelectedTab"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setStateSelectedTab"] =
+                                      await $steps["setStateSelectedTab"];
+                                  }
+
+                                  $steps["setSelectedTabLocalStorage"] = true
                                     ? (() => {
                                         const actionArgs = {
-                                          variable: {
-                                            objRoot: $state,
-                                            variablePath: [
-                                              "modalPhysician",
-                                              "open"
-                                            ]
-                                          },
-                                          operation: 0,
-                                          value: true
-                                        };
-                                        return (({
-                                          variable,
-                                          value,
-                                          startIndex,
-                                          deleteCount
-                                        }) => {
-                                          if (!variable) {
-                                            return;
+                                          customFunction: async () => {
+                                            return localStorage.setItem(
+                                              "patients_selected_tab",
+                                              $state.patientsSelectedTab.toString()
+                                            );
                                           }
-                                          const { objRoot, variablePath } =
-                                            variable;
-
-                                          $stateSet(
-                                            objRoot,
-                                            variablePath,
-                                            value
-                                          );
-                                          return value;
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
                                         })?.apply(null, [actionArgs]);
                                       })()
                                     : undefined;
-                                if (
-                                  $steps["updateModalOpen"] != null &&
-                                  typeof $steps["updateModalOpen"] ===
-                                    "object" &&
-                                  typeof $steps["updateModalOpen"].then ===
-                                    "function"
-                                ) {
-                                  $steps["updateModalOpen"] = await $steps[
-                                    "updateModalOpen"
-                                  ];
-                                }
+                                  if (
+                                    $steps["setSelectedTabLocalStorage"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "setSelectedTabLocalStorage"
+                                    ] === "object" &&
+                                    typeof $steps["setSelectedTabLocalStorage"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setSelectedTabLocalStorage"] =
+                                      await $steps[
+                                        "setSelectedTabLocalStorage"
+                                      ];
+                                  }
 
-                                $steps["setStateSelectedTab"] =
-                                  !$state.filterPhysician &&
-                                  localStorage.getItem("filter_physician_id") &&
-                                  localStorage.getItem("filter_physician_name")
+                                  $steps["logConsole"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return (() => {
+                                              console.log(
+                                                `state_patients_selected_tab: ${$state.patientsSelectedTab}`
+                                              );
+                                              console.log(
+                                                `state_filter_physician_name: ${$state.filterphysicianname}`
+                                              );
+                                              console.log(
+                                                `state_filter_physician: ${$state.filterPhysician}`
+                                              );
+                                              console.log(
+                                                `patients_selected_tab: ${localStorage.getItem(
+                                                  "patients_selected_tab"
+                                                )}`
+                                              );
+                                              console.log(
+                                                `filter_physician_name: ${localStorage.getItem(
+                                                  "filter_physician_name"
+                                                )}`
+                                              );
+                                              return console.log(
+                                                `filter_physician_id: ${localStorage.getItem(
+                                                  "filter_physician_id"
+                                                )}`
+                                              );
+                                            })();
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["logConsole"] != null &&
+                                    typeof $steps["logConsole"] === "object" &&
+                                    typeof $steps["logConsole"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["logConsole"] = await $steps[
+                                      "logConsole"
+                                    ];
+                                  }
+                                }}
+                                onDeselectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "physician",
+                                    "deselected"
+                                  ])(eventArgs[0]);
+                                }}
+                                onIsDisabledChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "physician",
+                                    "isDisabled"
+                                  ])(eventArgs[0]);
+                                }}
+                                onSelectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "physician",
+                                    "selected"
+                                  ])(eventArgs[0]);
+                                }}
+                                onSortDeselectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "physician",
+                                    "sortDeselected"
+                                  ])(eventArgs[0]);
+                                }}
+                                onSortSelectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "physician",
+                                    "sortSelected"
+                                  ])(eventArgs[0]);
+                                }}
+                                selected={generateStateValueProp($state, [
+                                  "physician",
+                                  "selected"
+                                ])}
+                                sortDeselected={generateStateValueProp($state, [
+                                  "physician",
+                                  "sortDeselected"
+                                ])}
+                                sortSelected={generateStateValueProp($state, [
+                                  "physician",
+                                  "sortSelected"
+                                ])}
+                              >
+                                {(() => {
+                                  try {
+                                    return (
+                                      $state.mainSelectedTab === "patients" &&
+                                      $state.filterPhysician &&
+                                      $state.patientNumber != ""
+                                    );
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return true;
+                                    }
+                                    throw e;
+                                  }
+                                })() ? (
+                                  <div
+                                    data-plasmic-name={"physicianPatientNumber"}
+                                    data-plasmic-override={
+                                      overrides.physicianPatientNumber
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.physicianPatientNumber
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return $state.patientNumber;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                ) : null}
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text__jTn6L
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      try {
+                                        return (() => {
+                                          const filterphysicianName =
+                                            $state.filterphysicianname;
+                                          if (filterphysicianName) {
+                                            return (
+                                              "دکتر " + filterphysicianName
+                                            );
+                                          } else {
+                                            return "پزشک";
+                                          }
+                                        })();
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return "Button";
+                                        }
+                                        throw e;
+                                      }
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                              </Button>
+                            </div>
+                            <div
+                              data-plasmic-name={"bookmarkedButtonStack"}
+                              data-plasmic-override={
+                                overrides.bookmarkedButtonStack
+                              }
+                              className={classNames(
+                                projectcss.all,
+                                sty.bookmarkedButtonStack
+                              )}
+                            >
+                              <Icons8CloseSvgIcon
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.svg__rave3
+                                )}
+                                role={"img"}
+                              />
+
+                              <Button
+                                data-plasmic-name={"bookmarked"}
+                                data-plasmic-override={overrides.bookmarked}
+                                className={classNames(
+                                  "__wab_instance",
+                                  sty.bookmarked
+                                )}
+                                deselected={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "deselected"
+                                ])}
+                                endIcon={
+                                  <IconIcon
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.svg__eNkB
+                                    )}
+                                    role={"img"}
+                                  />
+                                }
+                                isDisabled={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "isDisabled"
+                                ])}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["setBookmarkSelectedTab"] = true
                                     ? (() => {
                                         const actionArgs = {
                                           variable: {
@@ -4622,7 +4946,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                             ]
                                           },
                                           operation: 0,
-                                          value: "physician"
+                                          value: "bookmark"
                                         };
                                         return (({
                                           variable,
@@ -4645,272 +4969,248 @@ function PlasmicHomepage__RenderFunc(props: {
                                         })?.apply(null, [actionArgs]);
                                       })()
                                     : undefined;
-                                if (
-                                  $steps["setStateSelectedTab"] != null &&
-                                  typeof $steps["setStateSelectedTab"] ===
-                                    "object" &&
-                                  typeof $steps["setStateSelectedTab"].then ===
-                                    "function"
-                                ) {
-                                  $steps["setStateSelectedTab"] = await $steps[
-                                    "setStateSelectedTab"
-                                  ];
-                                }
-
-                                $steps["setSelectedTabLocalStorage"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return localStorage.setItem(
-                                            "patients_selected_tab",
-                                            $state.patientsSelectedTab.toString()
-                                          );
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["setSelectedTabLocalStorage"] !=
-                                    null &&
-                                  typeof $steps[
-                                    "setSelectedTabLocalStorage"
-                                  ] === "object" &&
-                                  typeof $steps["setSelectedTabLocalStorage"]
-                                    .then === "function"
-                                ) {
-                                  $steps["setSelectedTabLocalStorage"] =
-                                    await $steps["setSelectedTabLocalStorage"];
-                                }
-
-                                $steps["logConsole"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return (() => {
-                                            console.log(
-                                              `state_patients_selected_tab: ${$state.patientsSelectedTab}`
-                                            );
-                                            console.log(
-                                              `state_filter_physician_name: ${$state.filterphysicianname}`
-                                            );
-                                            console.log(
-                                              `state_filter_physician: ${$state.filterPhysician}`
-                                            );
-                                            console.log(
-                                              `patients_selected_tab: ${localStorage.getItem(
-                                                "patients_selected_tab"
-                                              )}`
-                                            );
-                                            console.log(
-                                              `filter_physician_name: ${localStorage.getItem(
-                                                "filter_physician_name"
-                                              )}`
-                                            );
-                                            return console.log(
-                                              `filter_physician_id: ${localStorage.getItem(
-                                                "filter_physician_id"
-                                              )}`
-                                            );
-                                          })();
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["logConsole"] != null &&
-                                  typeof $steps["logConsole"] === "object" &&
-                                  typeof $steps["logConsole"].then ===
-                                    "function"
-                                ) {
-                                  $steps["logConsole"] = await $steps[
-                                    "logConsole"
-                                  ];
-                                }
-                              }}
-                              onDeselectedChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "physician",
-                                  "deselected"
-                                ])(eventArgs[0]);
-                              }}
-                              onIsDisabledChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "physician",
-                                  "isDisabled"
-                                ])(eventArgs[0]);
-                              }}
-                              onSelectedChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "physician",
-                                  "selected"
-                                ])(eventArgs[0]);
-                              }}
-                              onSortDeselectedChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "physician",
-                                  "sortDeselected"
-                                ])(eventArgs[0]);
-                              }}
-                              onSortSelectedChange={(...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "physician",
-                                  "sortSelected"
-                                ])(eventArgs[0]);
-                              }}
-                              selected={generateStateValueProp($state, [
-                                "physician",
-                                "selected"
-                              ])}
-                              sortDeselected={generateStateValueProp($state, [
-                                "physician",
-                                "sortDeselected"
-                              ])}
-                              sortSelected={generateStateValueProp($state, [
-                                "physician",
-                                "sortSelected"
-                              ])}
-                            >
-                              {(() => {
-                                try {
-                                  return (
-                                    $state.mainSelectedTab === "patients" &&
-                                    $state.filterPhysician &&
-                                    $state.patientNumber != ""
-                                  );
-                                } catch (e) {
                                   if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
+                                    $steps["setBookmarkSelectedTab"] != null &&
+                                    typeof $steps["setBookmarkSelectedTab"] ===
+                                      "object" &&
+                                    typeof $steps["setBookmarkSelectedTab"]
+                                      .then === "function"
                                   ) {
-                                    return true;
+                                    $steps["setBookmarkSelectedTab"] =
+                                      await $steps["setBookmarkSelectedTab"];
                                   }
-                                  throw e;
-                                }
-                              })() ? (
+
+                                  $steps["setSelectedTabLocalStorage"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return localStorage.setItem(
+                                              "patients_selected_tab",
+                                              $state.patientsSelectedTab.toString()
+                                            );
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["setSelectedTabLocalStorage"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "setSelectedTabLocalStorage"
+                                    ] === "object" &&
+                                    typeof $steps["setSelectedTabLocalStorage"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setSelectedTabLocalStorage"] =
+                                      await $steps[
+                                        "setSelectedTabLocalStorage"
+                                      ];
+                                  }
+
+                                  $steps["consoleLog"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return (() => {
+                                              console.log(
+                                                `state_patients_selected_tab: ${$state.patientsSelectedTab} `
+                                              );
+                                              console.log(
+                                                `state_filter_bookmarked: ${$state.filterBookmarked} `
+                                              );
+                                              return console.log(
+                                                `patients_selected_tab: ${localStorage.getItem(
+                                                  "patients_selected_tab"
+                                                )}`
+                                              );
+                                            })();
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["consoleLog"] != null &&
+                                    typeof $steps["consoleLog"] === "object" &&
+                                    typeof $steps["consoleLog"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["consoleLog"] = await $steps[
+                                      "consoleLog"
+                                    ];
+                                  }
+                                }}
+                                onDeselectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "bookmarked",
+                                    "deselected"
+                                  ])(eventArgs[0]);
+                                }}
+                                onIsDisabledChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "bookmarked",
+                                    "isDisabled"
+                                  ])(eventArgs[0]);
+                                }}
+                                onSelectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "bookmarked",
+                                    "selected"
+                                  ])(eventArgs[0]);
+                                }}
+                                onSortDeselectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "bookmarked",
+                                    "sortDeselected"
+                                  ])(eventArgs[0]);
+                                }}
+                                onSortSelectedChange={(...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "bookmarked",
+                                    "sortSelected"
+                                  ])(eventArgs[0]);
+                                }}
+                                selected={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "selected"
+                                ])}
+                                sortDeselected={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "sortDeselected"
+                                ])}
+                                sortSelected={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "sortSelected"
+                                ])}
+                              >
+                                {(() => {
+                                  try {
+                                    return (
+                                      $state.mainSelectedTab === "patients" &&
+                                      $state.filterBookmarked &&
+                                      $state.patientNumber != ""
+                                    );
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return true;
+                                    }
+                                    throw e;
+                                  }
+                                })() ? (
+                                  <div
+                                    data-plasmic-name={
+                                      "bookmarkedPatientNumber"
+                                    }
+                                    data-plasmic-override={
+                                      overrides.bookmarkedPatientNumber
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.bookmarkedPatientNumber
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return $state.patientNumber;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                ) : null}
                                 <div
-                                  data-plasmic-name={"physicianPatientNumber"}
-                                  data-plasmic-override={
-                                    overrides.physicianPatientNumber
-                                  }
                                   className={classNames(
                                     projectcss.all,
                                     projectcss.__wab_text,
-                                    sty.physicianPatientNumber
+                                    sty.text___5DmEl
                                   )}
                                 >
-                                  <React.Fragment>
-                                    {(() => {
-                                      try {
-                                        return $state.patientNumber;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return "";
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                  </React.Fragment>
+                                  {
+                                    "\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"
+                                  }
                                 </div>
-                              ) : null}
-                              <div
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text__jTn6L
-                                )}
-                              >
-                                <React.Fragment>
-                                  {(() => {
-                                    try {
-                                      return (() => {
-                                        const filterphysicianName =
-                                          $state.filterphysicianname;
-                                        if (filterphysicianName) {
-                                          return "دکتر " + filterphysicianName;
-                                        } else {
-                                          return "پزشک";
-                                        }
-                                      })();
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return "Button";
-                                      }
-                                      throw e;
-                                    }
-                                  })()}
-                                </React.Fragment>
-                              </div>
-                            </Button>
-                          </div>
-                          <div
-                            data-plasmic-name={"bookmarkedButtonStack"}
-                            data-plasmic-override={
-                              overrides.bookmarkedButtonStack
+                              </Button>
+                            </div>
+                          </Stack__>
+                        ) : null}
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            sty.freeBox__dgyAh
+                          )}
+                        >
+                          {(() => {
+                            try {
+                              return (
+                                $state.mainSelectedTab === "patients" &&
+                                $state.filterBookmarked &&
+                                $state.searchbarLnameNcode.value == "" &&
+                                $state.patientNumber !== ""
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return true;
+                              }
+                              throw e;
                             }
-                            className={classNames(
-                              projectcss.all,
-                              sty.bookmarkedButtonStack
-                            )}
-                          >
-                            <Icons8CloseSvgIcon
-                              className={classNames(
-                                projectcss.all,
-                                sty.svg__rave3
-                              )}
-                              role={"img"}
-                            />
-
+                          })() ? (
                             <Button
-                              data-plasmic-name={"bookmarked"}
-                              data-plasmic-override={overrides.bookmarked}
+                              data-plasmic-name={
+                                "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
+                              }
+                              data-plasmic-override={
+                                overrides.buttonپاککردنهمهبوکمارکها
+                              }
                               className={classNames(
                                 "__wab_instance",
-                                sty.bookmarked
+                                sty.buttonپاککردنهمهبوکمارکها
                               )}
+                              color={"red"}
                               deselected={generateStateValueProp($state, [
-                                "bookmarked",
+                                "buttonپاککردنهمهبوکمارکها",
                                 "deselected"
                               ])}
-                              endIcon={
-                                <IconIcon
-                                  className={classNames(
-                                    projectcss.all,
-                                    sty.svg__eNkB
-                                  )}
-                                  role={"img"}
-                                />
-                              }
                               isDisabled={generateStateValueProp($state, [
-                                "bookmarked",
+                                "buttonپاککردنهمهبوکمارکها",
                                 "isDisabled"
                               ])}
                               onClick={async event => {
                                 const $steps = {};
 
-                                $steps["setBookmarkSelectedTab"] = true
+                                $steps["updateModalRemoveBookmarksOpen"] = true
                                   ? (() => {
                                       const actionArgs = {
                                         variable: {
                                           objRoot: $state,
-                                          variablePath: ["patientsSelectedTab"]
+                                          variablePath: [
+                                            "modalRemoveBookmarks",
+                                            "open"
+                                          ]
                                         },
                                         operation: 0,
-                                        value: "bookmark"
+                                        value: true
                                       };
                                       return (({
                                         variable,
@@ -4930,334 +5230,80 @@ function PlasmicHomepage__RenderFunc(props: {
                                     })()
                                   : undefined;
                                 if (
-                                  $steps["setBookmarkSelectedTab"] != null &&
-                                  typeof $steps["setBookmarkSelectedTab"] ===
-                                    "object" &&
-                                  typeof $steps["setBookmarkSelectedTab"]
-                                    .then === "function"
-                                ) {
-                                  $steps["setBookmarkSelectedTab"] =
-                                    await $steps["setBookmarkSelectedTab"];
-                                }
-
-                                $steps["setSelectedTabLocalStorage"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return localStorage.setItem(
-                                            "patients_selected_tab",
-                                            $state.patientsSelectedTab.toString()
-                                          );
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["setSelectedTabLocalStorage"] !=
+                                  $steps["updateModalRemoveBookmarksOpen"] !=
                                     null &&
                                   typeof $steps[
-                                    "setSelectedTabLocalStorage"
+                                    "updateModalRemoveBookmarksOpen"
                                   ] === "object" &&
-                                  typeof $steps["setSelectedTabLocalStorage"]
-                                    .then === "function"
+                                  typeof $steps[
+                                    "updateModalRemoveBookmarksOpen"
+                                  ].then === "function"
                                 ) {
-                                  $steps["setSelectedTabLocalStorage"] =
-                                    await $steps["setSelectedTabLocalStorage"];
-                                }
-
-                                $steps["consoleLog"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return (() => {
-                                            console.log(
-                                              `state_patients_selected_tab: ${$state.patientsSelectedTab} `
-                                            );
-                                            console.log(
-                                              `state_filter_bookmarked: ${$state.filterBookmarked} `
-                                            );
-                                            return console.log(
-                                              `patients_selected_tab: ${localStorage.getItem(
-                                                "patients_selected_tab"
-                                              )}`
-                                            );
-                                          })();
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["consoleLog"] != null &&
-                                  typeof $steps["consoleLog"] === "object" &&
-                                  typeof $steps["consoleLog"].then ===
-                                    "function"
-                                ) {
-                                  $steps["consoleLog"] = await $steps[
-                                    "consoleLog"
-                                  ];
+                                  $steps["updateModalRemoveBookmarksOpen"] =
+                                    await $steps[
+                                      "updateModalRemoveBookmarksOpen"
+                                    ];
                                 }
                               }}
                               onDeselectedChange={(...eventArgs) => {
                                 generateStateOnChangeProp($state, [
-                                  "bookmarked",
+                                  "buttonپاککردنهمهبوکمارکها",
                                   "deselected"
                                 ])(eventArgs[0]);
                               }}
                               onIsDisabledChange={(...eventArgs) => {
                                 generateStateOnChangeProp($state, [
-                                  "bookmarked",
+                                  "buttonپاککردنهمهبوکمارکها",
                                   "isDisabled"
                                 ])(eventArgs[0]);
                               }}
                               onSelectedChange={(...eventArgs) => {
                                 generateStateOnChangeProp($state, [
-                                  "bookmarked",
+                                  "buttonپاککردنهمهبوکمارکها",
                                   "selected"
                                 ])(eventArgs[0]);
                               }}
                               onSortDeselectedChange={(...eventArgs) => {
                                 generateStateOnChangeProp($state, [
-                                  "bookmarked",
+                                  "buttonپاککردنهمهبوکمارکها",
                                   "sortDeselected"
                                 ])(eventArgs[0]);
                               }}
                               onSortSelectedChange={(...eventArgs) => {
                                 generateStateOnChangeProp($state, [
-                                  "bookmarked",
+                                  "buttonپاککردنهمهبوکمارکها",
                                   "sortSelected"
                                 ])(eventArgs[0]);
                               }}
                               selected={generateStateValueProp($state, [
-                                "bookmarked",
+                                "buttonپاککردنهمهبوکمارکها",
                                 "selected"
                               ])}
                               sortDeselected={generateStateValueProp($state, [
-                                "bookmarked",
+                                "buttonپاککردنهمهبوکمارکها",
                                 "sortDeselected"
                               ])}
                               sortSelected={generateStateValueProp($state, [
-                                "bookmarked",
+                                "buttonپاککردنهمهبوکمارکها",
                                 "sortSelected"
                               ])}
                             >
-                              {(() => {
-                                try {
-                                  return (
-                                    $state.mainSelectedTab === "patients" &&
-                                    $state.filterBookmarked &&
-                                    $state.patientNumber != ""
-                                  );
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return true;
-                                  }
-                                  throw e;
-                                }
-                              })() ? (
-                                <div
-                                  data-plasmic-name={"bookmarkedPatientNumber"}
-                                  data-plasmic-override={
-                                    overrides.bookmarkedPatientNumber
-                                  }
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.bookmarkedPatientNumber
-                                  )}
-                                >
-                                  <React.Fragment>
-                                    {(() => {
-                                      try {
-                                        return $state.patientNumber;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return "";
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                  </React.Fragment>
-                                </div>
-                              ) : null}
                               <div
                                 className={classNames(
                                   projectcss.all,
                                   projectcss.__wab_text,
-                                  sty.text___5DmEl
+                                  sty.text__ze1An
                                 )}
                               >
                                 {
-                                  "\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"
+                                  "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
                                 }
                               </div>
                             </Button>
-                          </div>
-                        </Stack__>
-                      ) : null}
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          sty.freeBox__dgyAh
-                        )}
-                      >
-                        {(() => {
-                          try {
-                            return (
-                              $state.mainSelectedTab === "patients" &&
-                              $state.filterBookmarked &&
-                              $state.searchbarLnameNcode.value == "" &&
-                              $state.patientNumber !== ""
-                            );
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return true;
-                            }
-                            throw e;
-                          }
-                        })() ? (
-                          <Button
-                            data-plasmic-name={
-                              "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
-                            }
-                            data-plasmic-override={
-                              overrides.buttonپاککردنهمهبوکمارکها
-                            }
-                            className={classNames(
-                              "__wab_instance",
-                              sty.buttonپاککردنهمهبوکمارکها
-                            )}
-                            color={"red"}
-                            deselected={generateStateValueProp($state, [
-                              "buttonپاککردنهمهبوکمارکها",
-                              "deselected"
-                            ])}
-                            isDisabled={generateStateValueProp($state, [
-                              "buttonپاککردنهمهبوکمارکها",
-                              "isDisabled"
-                            ])}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["updateModalRemoveBookmarksOpen"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      variable: {
-                                        objRoot: $state,
-                                        variablePath: [
-                                          "modalRemoveBookmarks",
-                                          "open"
-                                        ]
-                                      },
-                                      operation: 0,
-                                      value: true
-                                    };
-                                    return (({
-                                      variable,
-                                      value,
-                                      startIndex,
-                                      deleteCount
-                                    }) => {
-                                      if (!variable) {
-                                        return;
-                                      }
-                                      const { objRoot, variablePath } =
-                                        variable;
-
-                                      $stateSet(objRoot, variablePath, value);
-                                      return value;
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["updateModalRemoveBookmarksOpen"] !=
-                                  null &&
-                                typeof $steps[
-                                  "updateModalRemoveBookmarksOpen"
-                                ] === "object" &&
-                                typeof $steps["updateModalRemoveBookmarksOpen"]
-                                  .then === "function"
-                              ) {
-                                $steps["updateModalRemoveBookmarksOpen"] =
-                                  await $steps[
-                                    "updateModalRemoveBookmarksOpen"
-                                  ];
-                              }
-                            }}
-                            onDeselectedChange={(...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "deselected"
-                              ])(eventArgs[0]);
-                            }}
-                            onIsDisabledChange={(...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "isDisabled"
-                              ])(eventArgs[0]);
-                            }}
-                            onSelectedChange={(...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "selected"
-                              ])(eventArgs[0]);
-                            }}
-                            onSortDeselectedChange={(...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "sortDeselected"
-                              ])(eventArgs[0]);
-                            }}
-                            onSortSelectedChange={(...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "sortSelected"
-                              ])(eventArgs[0]);
-                            }}
-                            selected={generateStateValueProp($state, [
-                              "buttonپاککردنهمهبوکمارکها",
-                              "selected"
-                            ])}
-                            sortDeselected={generateStateValueProp($state, [
-                              "buttonپاککردنهمهبوکمارکها",
-                              "sortDeselected"
-                            ])}
-                            sortSelected={generateStateValueProp($state, [
-                              "buttonپاککردنهمهبوکمارکها",
-                              "sortSelected"
-                            ])}
-                          >
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__ze1An
-                              )}
-                            >
-                              {
-                                "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
-                              }
-                            </div>
-                          </Button>
-                        ) : null}
+                          ) : null}
+                        </div>
                       </div>
-                    </div>
+                    ) : null}
                     {(() => {
                       try {
                         return (
@@ -5439,7 +5485,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                 (null || undefined || "" || "undefined") &&
                                 $ctx.fetched_data.loading &&
                                 $state.filterBookmarked &&
-                                $state.searchbarLnameNcode.value === ""
+                                $state.searchbarLnameNcode.value === "" &&
+                                $state.searchbarFname.value === ""
                                 ? JSON.parse(
                                     localStorage.getItem("bookmarked_list")
                                   )
@@ -7687,9 +7734,9 @@ function PlasmicHomepage__RenderFunc(props: {
             className={classNames("__wab_instance", sty.wardList)}
             delay={300}
             method={"GET"}
-            path={`/n8n/webhook/ward?namespace=${localStorage.getItem(
+            path={`/api/v3/remote_his/wards?namespace=${localStorage.getItem(
               "inlab_user_namespace_id"
-            )}&search=${$state.searchbarWard.value}`}
+            )}&search_input=${$state.searchbarWard.value}`}
             ref={ref => {
               $refs["wardList"] = ref;
             }}
@@ -7766,8 +7813,9 @@ function PlasmicHomepage__RenderFunc(props: {
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
                         try {
-                          return localStorage.getItem("ward_list") !==
-                            "undefined" && $state.searchbarWard.value === ""
+                          return $ctx.fetched_data.loading &
+                            (localStorage.getItem("ward_list") !==
+                              "undefined") && $state.searchbarWard.value === ""
                             ? JSON.parse(localStorage.getItem("ward_list"))
                             : $ctx.fetched_data.data;
                         } catch (e) {
@@ -10462,8 +10510,30 @@ function PlasmicHomepage__RenderFunc(props: {
                             sty.li___2GatI
                           )}
                         >
+                          {""}
+                        </li>
+                        <li
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.li,
+                            projectcss.__wab_text,
+                            sty.li__cgFa
+                          )}
+                        >
                           {
-                            " \u063a\u06cc\u0631\u0641\u0639\u0627\u0644 \u0634\u062f\u0646 \u0645\u0648\u0642\u062a\u06cc \u0627\u0645\u06a9\u0627\u0646 \u0647\u0627\u06cc\u0644\u0627\u06cc\u062a \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u062c\u0647\u062a \u062a\u0633\u0631\u06cc\u0639 \u0646\u0645\u0627\u06cc\u0634 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u0648 \u062a\u0645\u0627\u06cc\u0632 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u06cc \u0628\u0633\u062a\u0631\u06cc \u0627\u062e\u06cc\u0631 \u0628\u0627 \u062a\u0645\u0627\u0645 \u0628\u0633\u062a\u0631\u06cc \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631"
+                            "\u0627\u0636\u0627\u0641\u0647 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0627 \u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0648 \u06cc\u0627 \u0634\u0645\u0627\u0631\u0647 \u0645\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646  "
+                          }
+                        </li>
+                        <li
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.li,
+                            projectcss.__wab_text,
+                            sty.li__m1W6N
+                          )}
+                        >
+                          {
+                            "\u063a\u06cc\u0631\u0641\u0639\u0627\u0644 \u0634\u062f\u0646 \u0645\u0648\u0642\u062a\u06cc \u0627\u0645\u06a9\u0627\u0646 \u0647\u0627\u06cc\u0644\u0627\u06cc\u062a \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u062c\u0647\u062a \u062a\u0633\u0631\u06cc\u0639 \u0646\u0645\u0627\u06cc\u0634 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u0648 \u062a\u0645\u0627\u06cc\u0632 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u06cc \u0628\u0633\u062a\u0631\u06cc \u0627\u062e\u06cc\u0631 \u0628\u0627 \u062a\u0645\u0627\u0645 \u0628\u0633\u062a\u0631\u06cc \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631"
                           }
                         </li>
                       </ul>
@@ -13536,7 +13606,7 @@ type NodeDefaultElementType = {
   searchbarLnameNcode: typeof TextInput;
   searchbarFname: typeof TextInput;
   dismissed: "div";
-  dismissedSwitch: typeof AntdSwitch;
+  dismissedSwitch: typeof Switch;
   mainTabs: "div";
   consultButtonStack: "div";
   consult: typeof Button;

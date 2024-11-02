@@ -81,7 +81,7 @@
   }
 }
 .patientDataApiFetcher:global(.__wab_instance) {
-  max-width: 85%;
+  max-width: 100%;
   object-fit: cover;
   position: relative;
   width: 100%;
@@ -564,7 +564,7 @@
   border-bottom: 1px solid #e7e7e780;
 }
 .factorNameviewNormalRange {
-  height: 110px;
+  height: 115px;
   flex-grow: 1;
   flex-shrink: 0;
 }
@@ -769,7 +769,7 @@
 .factorNameValueviewNormalRange {
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  height: 110px;
+  height: 115px;
   border-right-color: #e7e7e780;
   margin-top: calc(0px + 0px) !important;
   flex-shrink: 0;
@@ -817,7 +817,6 @@
   background: #bdbdbd40;
   z-index: 0;
   min-height: 0;
-  display: none;
 }
 .checkedFactorsApiFetcher:global(.__wab_instance) {
   object-fit: cover;
