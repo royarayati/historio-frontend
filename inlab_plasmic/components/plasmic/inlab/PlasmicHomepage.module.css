@@ -290,26 +290,58 @@
     font-size: var(--token-CdE1_0ZaCyT1);
   }
 }
-.searchSetting {
+.searchSetting2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.searchinputSetting {
   display: flex;
   position: relative;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
   padding: 8px 8px 0px 6px;
 }
+.searchinputSetting > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  margin-left: calc(0px - 10px);
+  width: calc(100% + 10px);
+}
+.searchinputSetting > :global(.__wab_flex-container) > *,
+.searchinputSetting > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.searchinputSetting > :global(.__wab_flex-container) > picture > img,
+.searchinputSetting
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 10px;
+}
 @media (min-width: 0px) and (max-width: 760px) {
-  .searchSetting {
+  .searchinputSetting {
     padding-right: 0px;
     padding-left: 0px;
     padding-top: 2px;
     align-self: center;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .searchinputSetting > :global(.__wab_flex-container) {
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
 }
 .settingIcon {
@@ -346,7 +378,7 @@
     max-width: auto;
   }
 }
-.searchbar:global(.__wab_instance) {
+.searchbarLnameNcode:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   margin-top: 0px;
@@ -358,11 +390,11 @@
   bottom: auto;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .searchbar:global(.__wab_instance) {
+  .searchbarLnameNcode:global(.__wab_instance) {
     left: auto;
     top: auto;
     position: relative;
-    width: 269px;
+    width: 120px;
     right: auto;
     bottom: auto;
     height: 45px;
@@ -392,6 +424,110 @@
   color: var(--token-9iYGdL7i3GKE);
   align-self: center;
   margin-right: 5px;
+}
+.searchbarFname:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  margin-top: 0px;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  height: 60px;
+  right: auto;
+  bottom: auto;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .searchbarFname:global(.__wab_instance) {
+    left: auto;
+    top: auto;
+    position: relative;
+    width: 120px;
+    right: auto;
+    bottom: auto;
+    height: 45px;
+    align-self: center;
+    flex-shrink: 0;
+  }
+}
+.svg__cnc6J {
+  position: relative;
+  object-fit: cover;
+  height: 30px;
+  color: var(--token-9iYGdL7i3GKE);
+  width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .svg__cnc6J {
+    height: 20px;
+    transform: translateX(5px) translateY(0px) translateZ(0px);
+  }
+}
+.svg__yEqKt {
+  position: relative;
+  object-fit: cover;
+  width: var(--token-UEz8jpx4ZeEk);
+  height: 1em;
+  color: var(--token-9iYGdL7i3GKE);
+  align-self: center;
+  margin-right: 5px;
+}
+.dismissed {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 6px 0px;
+}
+.dismissed > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
+  min-width: 0;
+  margin-left: calc(0px - 5px);
+  width: calc(100% + 5px);
+}
+.dismissed > :global(.__wab_flex-container) > *,
+.dismissed > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.dismissed > :global(.__wab_flex-container) > picture > img,
+.dismissed
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 5px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .dismissed {
+    padding-top: 5px;
+  }
+}
+.dismissedSwitch:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: auto;
+  display: none;
+}
+._switch:global(.__wab_instance) {
+  max-width: 80%;
+  object-fit: cover;
+  width: 2em;
+  flex-shrink: 0;
+}
+.text__bdAjq {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__bdAjq {
+    font-size: var(--token-CdE1_0ZaCyT1);
+    align-self: flex-end;
+  }
 }
 .mainTabs {
   display: flex;
@@ -1143,7 +1279,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 155px;
+  margin-top: 175px;
   margin-bottom: 0px;
   align-self: center;
   height: auto;
@@ -1154,7 +1290,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .patients:global(.__wab_instance) {
-    margin-top: 100px;
+    margin-top: 128px;
     padding-bottom: 150px;
     padding-top: 0%;
   }
@@ -1221,7 +1357,6 @@
     background: none;
     width: 100%;
     overflow: auto;
-    display: flex;
     padding: 0px;
     margin: 0px;
   }
@@ -1952,185 +2087,6 @@
     max-width: 3.2%;
   }
 }
-.modalGeneralHealthStatus:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  background: #ffffff;
-  height: 266px;
-}
-.modalGeneralHealthStatus__modal :global(.ant-modal-content) {
-  background: #ffffff;
-  outline: none;
-}
-.modalContent {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  background: #ffffff;
-  min-width: 0;
-  padding: 8px;
-}
-.criticalCondition:global(.__wab_instance) {
-  max-width: 100%;
-  margin-bottom: 5px;
-  width: 200px;
-  height: 40px;
-  flex-shrink: 0;
-}
-.text__cecl4 {
-  color: #ffffff;
-  font-size: 18px;
-}
-.svg__peiGc {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg___5ZoG {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.criticalDefinition {
-  font-weight: 400;
-  font-size: var(--token-sOr3fJ5Up5fq);
-  margin-bottom: 20px;
-}
-.stableCondition:global(.__wab_instance) {
-  max-width: 100%;
-  margin-bottom: 5px;
-  width: 200px;
-  height: 40px;
-  flex-shrink: 0;
-}
-.text___6MHn {
-  color: #ffffff;
-  font-size: 18px;
-}
-.svg__b4UEz {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg___2A343 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.text___3F4LM {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-size: var(--token-sOr3fJ5Up5fq);
-  margin-bottom: 20px;
-  min-width: 0;
-}
-.criticalConditionAdd:global(.__wab_instance) {
-  max-width: 100%;
-}
-.text__nfrg2 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.text__jvZv {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.svg__ubmKc {
-  position: relative;
-  object-fit: cover;
-  max-width: 100%;
-  height: 24px;
-  align-self: auto;
-}
-.stableConditionReset:global(.__wab_instance) {
-  max-width: 100%;
-}
-.text__aXf30 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.text__fJ1Ms {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.svg__rc3PZ {
-  position: relative;
-  object-fit: cover;
-  max-width: 100%;
-  height: 24px;
-  align-self: auto;
-}
-.text__iziA8 {
-  background: #ffffff;
-}
-.getMessageHealthStatus:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  background: #ffffff;
-}
-.generalHealthStatusAnnouncement {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 40px;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-}
-.text__q9Pfi {
-  position: relative;
-  width: 35px;
-  height: auto;
-  max-width: 100%;
-  background: #8bff61;
-  font-size: 12px;
-  border-radius: 5px;
-  padding: 2px;
-}
-.text__cUnex {
-  position: relative;
-  width: 35px;
-  height: auto;
-  max-width: 100%;
-  background: #ff6565;
-  font-size: 12px;
-  border-radius: 5px;
-  padding: 2px;
-}
-.numberOfDoctorReporting {
-  position: relative;
-  width: 40px;
-  height: auto;
-  max-width: 100%;
-  font-size: 10px;
-  margin-top: 5px;
-  font-weight: 400;
-  transform: translateX(0px) translateY(0px) translateZ(0px);
-}
 .firstLastName {
   width: 100%;
   height: auto;
@@ -2613,6 +2569,36 @@
 @media (min-width: 0px) and (max-width: 760px) {
   .physiciansName {
     margin-top: calc(0px + 6px) !important;
+  }
+}
+.پزشکیافتنشد {
+  position: relative;
+  margin-top: calc(30px + 6px) !important;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  background: none;
+  width: auto;
+  text-align: center;
+  align-self: center;
+  font-weight: 700;
+  white-space: pre-wrap;
+  font-family: var(--VazirmatnCustom);
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  user-select: none;
+  text-decoration-line: none;
+  box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
+  border-radius: 5px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .پزشکیافتنشد {
+    background: #e0ecff;
+    box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
+    margin-top: calc(15px + 6px) !important;
+    border-radius: 5px;
   }
 }
 .freeBox__rkeNk {
@@ -3226,6 +3212,9 @@
 .ul__tVrkg {
   display: flex;
   flex-direction: column;
+}
+.li___2GatI {
+  padding-right: 0px;
 }
 .ul__ctBZ {
   display: flex;

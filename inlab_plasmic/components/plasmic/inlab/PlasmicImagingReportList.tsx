@@ -481,7 +481,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v3/patient/${$ctx.params.code}`}
+            path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
             ref={ref => {
               $refs["apiFetcherComponent"] = ref;
             }}
@@ -502,37 +502,102 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     <React.Fragment>
                       {(() => {
                         try {
-                          return (
-                            $ctx.fetched_data.loading == false &&
-                            (() => {
-                              const dob = new Date($ctx.fetched_data.data.dob);
-                              const ageDiffMs = Date.now() - dob.getTime();
-                              const ageDate = new Date(ageDiffMs);
-                              const ageYears = Math.abs(
-                                ageDate.getUTCFullYear() - 1970
-                              );
-                              const fullName = `${$ctx.fetched_data.data.first_name} ${$ctx.fetched_data.data.last_name}`;
-                              if (ageYears < 1) {
-                                const ageMonths = ageDate.getUTCMonth();
-                                return `${fullName} 
-${ageMonths} months ${
-                                  $ctx.fetched_data.data.gender === "F"
-                                    ? " ♀️"
-                                    : $ctx.fetched_data.data.gender === "M"
-                                    ? " ♂️"
-                                    : ""
-                                }`;
-                              } else {
-                                return `${fullName} ${ageYears}${
-                                  $ctx.fetched_data.data.gender === "F"
-                                    ? " ♀️"
-                                    : $ctx.fetched_data.data.gender === "M"
-                                    ? " ♂️"
-                                    : ""
-                                }`;
+                          return (() => {
+                            const jalali_to_gregorian = (jy, jm, jd) => {
+                              jy += 1595;
+                              var days =
+                                -355668 +
+                                365 * jy +
+                                Math.floor(jy / 33) * 8 +
+                                Math.floor((jy % 33) + 3) / 4 +
+                                jd +
+                                (jm < 7 ? (jm - 1) * 31 : (jm - 7) * 30 + 186);
+                              var gy = 400 * Math.floor(days / 146097);
+                              days %= 146097;
+                              if (days > 36524) {
+                                gy += 100 * Math.floor(--days / 36524);
+                                days %= 36524;
+                                if (days >= 365) days++;
                               }
-                            })()
-                          );
+                              gy += 4 * Math.floor(days / 1461);
+                              days %= 1461;
+                              if (days > 365) {
+                                gy += Math.floor((days - 1) / 365);
+                                days = (days - 1) % 365;
+                              }
+                              var gd = days + 1;
+                              var sal_a = [
+                                0,
+                                31,
+                                (gy % 4 === 0 && gy % 100 !== 0) ||
+                                gy % 400 === 0
+                                  ? 29
+                                  : 28,
+                                31,
+                                30,
+                                31,
+                                30,
+                                31,
+                                31,
+                                30,
+                                31,
+                                30,
+                                31
+                              ];
+
+                              var gm = 0;
+                              for (gm; gm < 13; gm++) {
+                                var v = sal_a[gm];
+                                if (gd <= v) break;
+                                gd -= v;
+                              }
+                              return [gy, gm, gd];
+                            };
+                            return (
+                              $ctx.fetched_data.loading == false &&
+                              (() => {
+                                const [jy, jm, jd] =
+                                  $ctx.fetched_data.data.items[0].date_of_birth
+                                    .split(" ")[0]
+                                    .split("/")
+                                    .map(Number);
+                                const [gy, gm, gd] = jalali_to_gregorian(
+                                  jy,
+                                  jm,
+                                  jd
+                                );
+                                const dob = new Date(gy, gm - 1, gd);
+                                const ageDiffMs = Date.now() - dob.getTime();
+                                const ageDate = new Date(ageDiffMs);
+                                const ageYears = Math.abs(
+                                  ageDate.getUTCFullYear() - 1970
+                                );
+                                const fullName = `${$ctx.fetched_data.data.items[0].first_name} ${$ctx.fetched_data.data.items[0].last_name}`;
+                                if (ageYears < 1) {
+                                  const ageMonths = ageDate.getUTCMonth();
+                                  return `${fullName} ${ageMonths} months ${
+                                    $ctx.fetched_data.data.items[0].gender ===
+                                    "F"
+                                      ? " \u2640️"
+                                      : $ctx.fetched_data.data.items[0]
+                                          .gender === "M"
+                                      ? " \u2642️"
+                                      : ""
+                                  }`;
+                                } else {
+                                  return `${fullName} ${ageYears}${
+                                    $ctx.fetched_data.data.items[0].gender ===
+                                    "F"
+                                      ? " \u2640️"
+                                      : $ctx.fetched_data.data.items[0]
+                                          .gender === "M"
+                                      ? " \u2642️"
+                                      : ""
+                                  }`;
+                                }
+                              })()
+                            );
+                          })();
                         } catch (e) {
                           if (
                             e instanceof TypeError ||

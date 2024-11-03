@@ -372,7 +372,23 @@ function PlasmicTextInput__RenderFunc(props: {
         className={classNames(projectcss.all, projectcss.input, sty.input, {
           [sty.input___focusVisibleWithin]:
             triggers.focusVisibleWithin_textInput,
+          [sty.input___focusVisibleWithin_showEndIcon]:
+            hasVariant($state, "showEndIcon", "showEndIcon") &&
+            triggers.focusVisibleWithin_textInput,
+          [sty.input___focusVisibleWithin_showEndIcon_showStartIcon]:
+            hasVariant($state, "showStartIcon", "showStartIcon") &&
+            hasVariant($state, "showEndIcon", "showEndIcon") &&
+            triggers.focusVisibleWithin_textInput,
+          [sty.input___focusVisibleWithin_showStartIcon]:
+            hasVariant($state, "showStartIcon", "showStartIcon") &&
+            triggers.focusVisibleWithin_textInput,
+          [sty.inputerror]: hasVariant($state, "error", "error"),
           [sty.inputisDisabled]: hasVariant($state, "isDisabled", "isDisabled"),
+          [sty.inputshowEndIcon]: hasVariant(
+            $state,
+            "showEndIcon",
+            "showEndIcon"
+          ),
           [sty.inputshowStartIcon]: hasVariant(
             $state,
             "showStartIcon",
@@ -407,6 +423,8 @@ function PlasmicTextInput__RenderFunc(props: {
           data-plasmic-name={"endIconContainer"}
           data-plasmic-override={overrides.endIconContainer}
           className={classNames(projectcss.all, sty.endIconContainer, {
+            [sty.endIconContainer___focusVisibleWithin]:
+              triggers.focusVisibleWithin_textInput,
             [sty.endIconContainerisDisabled]: hasVariant(
               $state,
               "isDisabled",
@@ -434,6 +452,8 @@ function PlasmicTextInput__RenderFunc(props: {
               ) : null,
             value: args.endIcon,
             className: classNames(sty.slotTargetEndIcon, {
+              [sty.slotTargetEndIcon___focusVisibleWithin]:
+                triggers.focusVisibleWithin_textInput,
               [sty.slotTargetEndIconshowEndIcon]: hasVariant(
                 $state,
                 "showEndIcon",

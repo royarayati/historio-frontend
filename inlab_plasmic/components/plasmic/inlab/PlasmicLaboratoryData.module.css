@@ -81,7 +81,7 @@
   }
 }
 .patientDataApiFetcher:global(.__wab_instance) {
-  max-width: 85%;
+  max-width: 100%;
   object-fit: cover;
   position: relative;
   width: 100%;
@@ -388,7 +388,7 @@
   flex-direction: column;
   justify-content: flex-start;
   left: 0px;
-  top: 70px;
+  top: 75px;
   bottom: 58px;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
@@ -550,7 +550,7 @@
 .factorName {
   position: relative;
   width: 100%;
-  height: 48px;
+  height: 55px;
   max-width: 100%;
   white-space: pre-wrap;
   align-self: center;
@@ -564,7 +564,7 @@
   border-bottom: 1px solid #e7e7e780;
 }
 .factorNameviewNormalRange {
-  height: 110px;
+  height: 115px;
   flex-grow: 1;
   flex-shrink: 0;
 }
@@ -724,7 +724,7 @@
   position: relative;
   flex-direction: row;
   width: 100%;
-  height: 48px;
+  height: 55px;
   max-width: 100%;
   background: none;
   margin-bottom: 0px;
@@ -769,7 +769,7 @@
 .factorNameValueviewNormalRange {
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  height: 110px;
+  height: 115px;
   border-right-color: #e7e7e780;
   margin-top: calc(0px + 0px) !important;
   flex-shrink: 0;
@@ -817,7 +817,6 @@
   background: #bdbdbd40;
   z-index: 0;
   min-height: 0;
-  display: none;
 }
 .checkedFactorsApiFetcher:global(.__wab_instance) {
   object-fit: cover;

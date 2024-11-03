@@ -4,6 +4,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  reactStrictMode: false,
   trailingSlash: true,
   output: "standalone",
   // sync basePasth with images.publicUrlPrefix in plasmic.json

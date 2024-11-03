@@ -204,7 +204,7 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
               className={classNames("__wab_instance", sty.namespaces)}
               headers={{ "X-Namespace": "undefined " }}
               method={"GET"}
-              path={"/api/v3/user/user_namespaces"}
+              path={"/api/v2/user/user_namespaces"}
               ref={ref => {
                 $refs["namespaces"] = ref;
               }}
@@ -286,9 +286,14 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                   const actionArgs = {
                                     customFunction: async () => {
                                       return (() => {
-                                        localStorage.removeItem("selected_tab");
                                         localStorage.removeItem(
-                                          "bookmark_list"
+                                          "patients_selected_tab"
+                                        );
+                                        localStorage.removeItem(
+                                          "main_selected_tab"
+                                        );
+                                        localStorage.removeItem(
+                                          "bookmarked_list2"
                                         );
                                         localStorage.removeItem("ward_list");
                                         localStorage.removeItem(
