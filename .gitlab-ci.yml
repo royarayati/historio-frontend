@@ -23,4 +23,4 @@ include:
   - local: inlab_plasmic/.gitlab-ci.yml
     rules:
       - changes:
-        - inlab_plasmic/**/*
+          - inlab_plasmic/**/*
