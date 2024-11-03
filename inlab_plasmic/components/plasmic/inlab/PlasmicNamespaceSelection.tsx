@@ -286,7 +286,12 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                   const actionArgs = {
                                     customFunction: async () => {
                                       return (() => {
-                                        localStorage.removeItem("selected_tab");
+                                        localStorage.removeItem(
+                                          "patients_selected_tab"
+                                        );
+                                        localStorage.removeItem(
+                                          "main_selected_tab"
+                                        );
                                         localStorage.removeItem(
                                           "bookmarked_list2"
                                         );

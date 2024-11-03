@@ -68,8 +68,8 @@ import { Switch } from "@plasmicpkgs/antd/skinny/registerSwitch";
 import { AntdSwitch } from "@plasmicpkgs/antd5/skinny/registerSwitch";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
-import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
+import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 import NewNoticeBanner from "../../NewNoticeBanner"; // plasmic-import: X347FgRZh6HH/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
@@ -93,8 +93,8 @@ import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: kYUnvWOY7
 import BookmarkPlusSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComSvg"; // plasmic-import: laC4EyEnFr3s/icon
 import BookmarkDashFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComSvg"; // plasmic-import: OXlS9uB7Ffdy/icon
 import IndicatorIcon from "./icons/PlasmicIcon__Indicator"; // plasmic-import: B34gCeBlzVGZ/icon
-import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
+import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 
 createPlasmicElementProxy;
 
@@ -199,16 +199,6 @@ export type PlasmicHomepage__OverridesType = {
   patientCards?: Flex__<"div">;
   patientNameBookmarkIcon?: Flex__<"div">;
   dismision?: Flex__<"div">;
-  modalGeneralHealthStatus?: Flex__<typeof AntdModal>;
-  modalContent?: Flex__<"div">;
-  criticalCondition?: Flex__<typeof Button>;
-  criticalDefinition?: Flex__<"div">;
-  stableCondition?: Flex__<typeof Button>;
-  criticalConditionAdd?: Flex__<typeof Alert>;
-  stableConditionReset?: Flex__<typeof Alert>;
-  getMessageHealthStatus?: Flex__<typeof ApiFetcherComponent>;
-  generalHealthStatusAnnouncement?: Flex__<"div">;
-  numberOfDoctorReporting?: Flex__<"div">;
   firstLastName?: Flex__<"div">;
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
   wardRoom?: Flex__<"div">;
@@ -229,6 +219,7 @@ export type PlasmicHomepage__OverridesType = {
   physiciansList?: Flex__<typeof ApiFetcherComponent>;
   physiciansList2?: Flex__<"div">;
   physiciansName?: Flex__<"div">;
+  پزشکیافتنشد?: Flex__<"div">;
   searchbarPhysicians?: Flex__<typeof TextInput>;
   modalConsultFilterType?: Flex__<typeof AntdModal>;
   filterTypes?: Flex__<"div">;
@@ -810,61 +801,6 @@ function PlasmicHomepage__RenderFunc(props: {
               throw e;
             }
           })()
-      },
-      {
-        path: "modalGeneralHealthStatus[].open",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "criticalCondition[].isDisabled",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "criticalCondition[].selected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "criticalCondition[].deselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "criticalCondition[].sortDeselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "criticalCondition[].sortSelected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "stableCondition[].isDisabled",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "stableCondition[].selected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "stableCondition[].deselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "stableCondition[].sortDeselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "stableCondition[].sortSelected",
-        type: "private",
-        variableType: "boolean"
       },
       {
         path: "criticalConditionAddAlert",
@@ -4519,8 +4455,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           return (
                                             $state.mainSelectedTab ===
                                               "patients" &&
-                                            $state.filterWard &&
-                                            $state.patientNumber != "" &&
+                                            $state.patientsSelectedTab ===
+                                              "ward" &&
+                                            $state.patientNumber !=
+                                              ("" | "0") &&
                                             !$ctx.fetched_data.loading
                                           );
                                         } catch (e) {
@@ -4893,8 +4831,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                   try {
                                     return (
                                       $state.mainSelectedTab === "patients" &&
-                                      $state.filterPhysician &&
-                                      $state.patientNumber != "" &&
+                                      $state.patientsSelectedTab ===
+                                        "physician" &&
+                                      $state.patientNumber != ("" | "0") &&
                                       !$ctx.fetched_data.loading
                                     );
                                   } catch (e) {
@@ -5174,8 +5113,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                   try {
                                     return (
                                       $state.mainSelectedTab === "patients" &&
-                                      $state.filterBookmarked &&
-                                      $state.patientNumber != "" &&
+                                      $state.patientsSelectedTab ===
+                                        "bookmark" &&
+                                      $state.patientNumber != ("" | "0") &&
                                       !$ctx.fetched_data.loading
                                     );
                                   } catch (e) {
@@ -5392,7 +5332,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         return (
                           $ctx.fetched_data.loading === false &&
                           $ctx.fetched_data.data == "" &&
-                          $state.searchbarLnameNcode.value !== ""
+                          $state.searchbarLnameNcode.value !== "" &&
+                          $state.searchbarFname.value !== ""
                         );
                       } catch (e) {
                         if (
@@ -5424,6 +5365,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       try {
                         return (
                           $state.searchbarLnameNcode.value == "" &&
+                          $state.searchbarFname.value == "" &&
                           !$state.patientNumber
                         );
                       } catch (e) {
@@ -5648,1389 +5590,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                     />
                                   </Stack__>
                                 ) : null}
-                                {false
-                                  ? (() => {
-                                      const child$Props = {
-                                        className: classNames(
-                                          "__wab_instance",
-                                          sty.modalGeneralHealthStatus
-                                        ),
-                                        defaultStylesClassName: classNames(
-                                          projectcss.root_reset,
-                                          projectcss.plasmic_default_styles,
-                                          projectcss.plasmic_mixins,
-                                          projectcss.plasmic_tokens,
-                                          plasmic_antd_5_hostless_css.plasmic_tokens,
-                                          plasmic_plasmic_rich_components_css.plasmic_tokens
-                                        ),
-                                        hideFooter: true,
-                                        maskClosable: true,
-                                        modalContentClassName: classNames({
-                                          [sty["pcls_kWuPUuhlM2_n"]]: true
-                                        }),
-                                        modalScopeClassName:
-                                          sty[
-                                            "modalGeneralHealthStatus__modal"
-                                          ],
-                                        onOpenChange: generateStateOnChangeProp(
-                                          $state,
-                                          [
-                                            "modalGeneralHealthStatus",
-                                            __plasmic_idx_0,
-                                            "open"
-                                          ]
-                                        ),
-                                        open: generateStateValueProp($state, [
-                                          "modalGeneralHealthStatus",
-                                          __plasmic_idx_0,
-                                          "open"
-                                        ]),
-                                        title: (
-                                          <div
-                                            className={classNames(
-                                              projectcss.all,
-                                              projectcss.__wab_text,
-                                              sty.text__iziA8
-                                            )}
-                                          >
-                                            {
-                                              "\u0627\u0639\u0644\u0627\u0645 \u0648\u0636\u0639\u06cc\u062a \u06a9\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631"
-                                            }
-                                          </div>
-                                        ),
-                                        trigger: false ? (
-                                          <ApiFetcherComponent
-                                            data-plasmic-name={
-                                              "getMessageHealthStatus"
-                                            }
-                                            data-plasmic-override={
-                                              overrides.getMessageHealthStatus
-                                            }
-                                            className={classNames(
-                                              "__wab_instance",
-                                              sty.getMessageHealthStatus
-                                            )}
-                                            method={"GET"}
-                                            path={`/api/v3/messages/health-status?namespace_id=${localStorage.getItem(
-                                              "inlab_user_namespace_id"
-                                            )}&admission_id=${
-                                              currentItem.admission_id
-                                            }`}
-                                            ref={ref => {
-                                              $refs["getMessageHealthStatus"] =
-                                                ref;
-                                            }}
-                                          >
-                                            <DataCtxReader__>
-                                              {$ctx => (
-                                                <div
-                                                  data-plasmic-name={
-                                                    "generalHealthStatusAnnouncement"
-                                                  }
-                                                  data-plasmic-override={
-                                                    overrides.generalHealthStatusAnnouncement
-                                                  }
-                                                  className={classNames(
-                                                    projectcss.all,
-                                                    sty.generalHealthStatusAnnouncement
-                                                  )}
-                                                  onClick={async event => {
-                                                    const $steps = {};
-
-                                                    $steps[
-                                                      "makeFalseStableConditionResetAlert"
-                                                    ] = true
-                                                      ? (() => {
-                                                          const actionArgs = {
-                                                            variable: {
-                                                              objRoot: $state,
-                                                              variablePath: [
-                                                                "stableConditionResetAlert"
-                                                              ]
-                                                            },
-                                                            operation: 0,
-                                                            value: false
-                                                          };
-                                                          return (({
-                                                            variable,
-                                                            value,
-                                                            startIndex,
-                                                            deleteCount
-                                                          }) => {
-                                                            if (!variable) {
-                                                              return;
-                                                            }
-                                                            const {
-                                                              objRoot,
-                                                              variablePath
-                                                            } = variable;
-
-                                                            $stateSet(
-                                                              objRoot,
-                                                              variablePath,
-                                                              value
-                                                            );
-                                                            return value;
-                                                          })?.apply(null, [
-                                                            actionArgs
-                                                          ]);
-                                                        })()
-                                                      : undefined;
-                                                    if (
-                                                      $steps[
-                                                        "makeFalseStableConditionResetAlert"
-                                                      ] != null &&
-                                                      typeof $steps[
-                                                        "makeFalseStableConditionResetAlert"
-                                                      ] === "object" &&
-                                                      typeof $steps[
-                                                        "makeFalseStableConditionResetAlert"
-                                                      ].then === "function"
-                                                    ) {
-                                                      $steps[
-                                                        "makeFalseStableConditionResetAlert"
-                                                      ] = await $steps[
-                                                        "makeFalseStableConditionResetAlert"
-                                                      ];
-                                                    }
-
-                                                    $steps[
-                                                      "makeFalseCriticalConditionAddAlert"
-                                                    ] = true
-                                                      ? (() => {
-                                                          const actionArgs = {
-                                                            variable: {
-                                                              objRoot: $state,
-                                                              variablePath: [
-                                                                "criticalConditionAddAlert"
-                                                              ]
-                                                            },
-                                                            operation: 0,
-                                                            value: false
-                                                          };
-                                                          return (({
-                                                            variable,
-                                                            value,
-                                                            startIndex,
-                                                            deleteCount
-                                                          }) => {
-                                                            if (!variable) {
-                                                              return;
-                                                            }
-                                                            const {
-                                                              objRoot,
-                                                              variablePath
-                                                            } = variable;
-
-                                                            $stateSet(
-                                                              objRoot,
-                                                              variablePath,
-                                                              value
-                                                            );
-                                                            return value;
-                                                          })?.apply(null, [
-                                                            actionArgs
-                                                          ]);
-                                                        })()
-                                                      : undefined;
-                                                    if (
-                                                      $steps[
-                                                        "makeFalseCriticalConditionAddAlert"
-                                                      ] != null &&
-                                                      typeof $steps[
-                                                        "makeFalseCriticalConditionAddAlert"
-                                                      ] === "object" &&
-                                                      typeof $steps[
-                                                        "makeFalseCriticalConditionAddAlert"
-                                                      ].then === "function"
-                                                    ) {
-                                                      $steps[
-                                                        "makeFalseCriticalConditionAddAlert"
-                                                      ] = await $steps[
-                                                        "makeFalseCriticalConditionAddAlert"
-                                                      ];
-                                                    }
-                                                  }}
-                                                >
-                                                  {(() => {
-                                                    try {
-                                                      return (
-                                                        $ctx.fetched_data
-                                                          .loading === false &&
-                                                        $ctx.fetched_data
-                                                          .data === 0
-                                                      );
-                                                    } catch (e) {
-                                                      if (
-                                                        e instanceof
-                                                          TypeError ||
-                                                        e?.plasmicType ===
-                                                          "PlasmicUndefinedDataError"
-                                                      ) {
-                                                        return true;
-                                                      }
-                                                      throw e;
-                                                    }
-                                                  })() ? (
-                                                    <div
-                                                      className={classNames(
-                                                        projectcss.all,
-                                                        projectcss.__wab_text,
-                                                        sty.text__q9Pfi
-                                                      )}
-                                                    >
-                                                      {
-                                                        "\u067e\u0627\u06cc\u062f\u0627\u0631"
-                                                      }
-                                                    </div>
-                                                  ) : null}
-                                                  {(() => {
-                                                    try {
-                                                      return (
-                                                        $ctx.fetched_data
-                                                          .loading === false &&
-                                                        $ctx.fetched_data
-                                                          .data !== 0
-                                                      );
-                                                    } catch (e) {
-                                                      if (
-                                                        e instanceof
-                                                          TypeError ||
-                                                        e?.plasmicType ===
-                                                          "PlasmicUndefinedDataError"
-                                                      ) {
-                                                        return true;
-                                                      }
-                                                      throw e;
-                                                    }
-                                                  })() ? (
-                                                    <div
-                                                      className={classNames(
-                                                        projectcss.all,
-                                                        projectcss.__wab_text,
-                                                        sty.text__cUnex
-                                                      )}
-                                                    >
-                                                      {
-                                                        "\u0628\u062d\u0631\u0627\u0646\u06cc "
-                                                      }
-                                                    </div>
-                                                  ) : null}
-                                                  {(() => {
-                                                    try {
-                                                      return (
-                                                        $ctx.fetched_data
-                                                          .loading === false &&
-                                                        $ctx.fetched_data
-                                                          .data !== 0
-                                                      );
-                                                    } catch (e) {
-                                                      if (
-                                                        e instanceof
-                                                          TypeError ||
-                                                        e?.plasmicType ===
-                                                          "PlasmicUndefinedDataError"
-                                                      ) {
-                                                        return true;
-                                                      }
-                                                      throw e;
-                                                    }
-                                                  })() ? (
-                                                    <div
-                                                      data-plasmic-name={
-                                                        "numberOfDoctorReporting"
-                                                      }
-                                                      data-plasmic-override={
-                                                        overrides.numberOfDoctorReporting
-                                                      }
-                                                      className={classNames(
-                                                        projectcss.all,
-                                                        projectcss.__wab_text,
-                                                        sty.numberOfDoctorReporting
-                                                      )}
-                                                      dir={"rtl"}
-                                                    >
-                                                      <React.Fragment>
-                                                        {`${$ctx.fetched_data.data} پزشک`}
-                                                      </React.Fragment>
-                                                    </div>
-                                                  ) : null}
-                                                </div>
-                                              )}
-                                            </DataCtxReader__>
-                                          </ApiFetcherComponent>
-                                        ) : null,
-                                        wrapClassName: classNames({
-                                          [sty["pcls_GAr4R_cSdcgi"]]: true
-                                        })
-                                      };
-                                      initializeCodeComponentStates(
-                                        $state,
-                                        [
-                                          {
-                                            name: "open",
-                                            plasmicStateName:
-                                              "modalGeneralHealthStatus[].open"
-                                          }
-                                        ],
-                                        [__plasmic_idx_0],
-                                        undefined ?? {},
-                                        child$Props
-                                      );
-                                      initializePlasmicStates(
-                                        $state,
-                                        [
-                                          {
-                                            name: "modalGeneralHealthStatus[].open",
-                                            initFunc: ({
-                                              $props,
-                                              $state,
-                                              $queries
-                                            }) => false
-                                          }
-                                        ],
-                                        [__plasmic_idx_0]
-                                      );
-                                      return (
-                                        <AntdModal
-                                          data-plasmic-name={
-                                            "modalGeneralHealthStatus"
-                                          }
-                                          data-plasmic-override={
-                                            overrides.modalGeneralHealthStatus
-                                          }
-                                          {...child$Props}
-                                        >
-                                          <div
-                                            data-plasmic-name={"modalContent"}
-                                            data-plasmic-override={
-                                              overrides.modalContent
-                                            }
-                                            className={classNames(
-                                              projectcss.all,
-                                              sty.modalContent
-                                            )}
-                                          >
-                                            {(() => {
-                                              const child$Props = {
-                                                className: classNames(
-                                                  "__wab_instance",
-                                                  sty.criticalCondition
-                                                ),
-                                                color: "red",
-                                                deselected:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "deselected"
-                                                    ]
-                                                  ),
-                                                isDisabled:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "isDisabled"
-                                                    ]
-                                                  ),
-                                                onClick: async event => {
-                                                  const $steps = {};
-
-                                                  $steps[
-                                                    "makeFalseCriticalConditionAddAlertState"
-                                                  ] = true
-                                                    ? (() => {
-                                                        const actionArgs = {
-                                                          variable: {
-                                                            objRoot: $state,
-                                                            variablePath: [
-                                                              "criticalConditionAddAlert"
-                                                            ]
-                                                          },
-                                                          operation: 0,
-                                                          value: false
-                                                        };
-                                                        return (({
-                                                          variable,
-                                                          value,
-                                                          startIndex,
-                                                          deleteCount
-                                                        }) => {
-                                                          if (!variable) {
-                                                            return;
-                                                          }
-                                                          const {
-                                                            objRoot,
-                                                            variablePath
-                                                          } = variable;
-
-                                                          $stateSet(
-                                                            objRoot,
-                                                            variablePath,
-                                                            value
-                                                          );
-                                                          return value;
-                                                        })?.apply(null, [
-                                                          actionArgs
-                                                        ]);
-                                                      })()
-                                                    : undefined;
-                                                  if (
-                                                    $steps[
-                                                      "makeFalseCriticalConditionAddAlertState"
-                                                    ] != null &&
-                                                    typeof $steps[
-                                                      "makeFalseCriticalConditionAddAlertState"
-                                                    ] === "object" &&
-                                                    typeof $steps[
-                                                      "makeFalseCriticalConditionAddAlertState"
-                                                    ].then === "function"
-                                                  ) {
-                                                    $steps[
-                                                      "makeFalseCriticalConditionAddAlertState"
-                                                    ] = await $steps[
-                                                      "makeFalseCriticalConditionAddAlertState"
-                                                    ];
-                                                  }
-
-                                                  $steps[
-                                                    "makeFalseStableConditionResetAlertState"
-                                                  ] = true
-                                                    ? (() => {
-                                                        const actionArgs = {
-                                                          variable: {
-                                                            objRoot: $state,
-                                                            variablePath: [
-                                                              "stableConditionResetAlert"
-                                                            ]
-                                                          },
-                                                          operation: 0,
-                                                          value: false
-                                                        };
-                                                        return (({
-                                                          variable,
-                                                          value,
-                                                          startIndex,
-                                                          deleteCount
-                                                        }) => {
-                                                          if (!variable) {
-                                                            return;
-                                                          }
-                                                          const {
-                                                            objRoot,
-                                                            variablePath
-                                                          } = variable;
-
-                                                          $stateSet(
-                                                            objRoot,
-                                                            variablePath,
-                                                            value
-                                                          );
-                                                          return value;
-                                                        })?.apply(null, [
-                                                          actionArgs
-                                                        ]);
-                                                      })()
-                                                    : undefined;
-                                                  if (
-                                                    $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ] != null &&
-                                                    typeof $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ] === "object" &&
-                                                    typeof $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ].then === "function"
-                                                  ) {
-                                                    $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ] = await $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ];
-                                                  }
-
-                                                  $steps[
-                                                    "postMessageCriticalCondition"
-                                                  ] = true
-                                                    ? (() => {
-                                                        const actionArgs = {
-                                                          args: [
-                                                            "POST",
-                                                            "/api/v3/messages",
-                                                            undefined,
-                                                            (() => {
-                                                              try {
-                                                                return {
-                                                                  sender_id:
-                                                                    $ctx
-                                                                      .inlab_user
-                                                                      .user.id,
-                                                                  admission_id:
-                                                                    currentItem.admission_id,
-                                                                  namespace_id:
-                                                                    localStorage.getItem(
-                                                                      "inlab_user_namespace_id"
-                                                                    ),
-                                                                  namespace_title:
-                                                                    localStorage.getItem(
-                                                                      "inlab_user_namespace_title"
-                                                                    ),
-                                                                  body: "بحرانی"
-                                                                };
-                                                              } catch (e) {
-                                                                if (
-                                                                  e instanceof
-                                                                    TypeError ||
-                                                                  e?.plasmicType ===
-                                                                    "PlasmicUndefinedDataError"
-                                                                ) {
-                                                                  return undefined;
-                                                                }
-                                                                throw e;
-                                                              }
-                                                            })()
-                                                          ]
-                                                        };
-                                                        return $globalActions[
-                                                          "AuthGlobalContext.apiFetcher"
-                                                        ]?.apply(null, [
-                                                          ...actionArgs.args
-                                                        ]);
-                                                      })()
-                                                    : undefined;
-                                                  if (
-                                                    $steps[
-                                                      "postMessageCriticalCondition"
-                                                    ] != null &&
-                                                    typeof $steps[
-                                                      "postMessageCriticalCondition"
-                                                    ] === "object" &&
-                                                    typeof $steps[
-                                                      "postMessageCriticalCondition"
-                                                    ].then === "function"
-                                                  ) {
-                                                    $steps[
-                                                      "postMessageCriticalCondition"
-                                                    ] = await $steps[
-                                                      "postMessageCriticalCondition"
-                                                    ];
-                                                  }
-
-                                                  $steps[
-                                                    "makeTrueCriticalConditionAddAlertState"
-                                                  ] =
-                                                    $steps
-                                                      .postMessageCriticalCondition
-                                                      .status === 200
-                                                      ? (() => {
-                                                          const actionArgs = {
-                                                            variable: {
-                                                              objRoot: $state,
-                                                              variablePath: [
-                                                                "criticalConditionAddAlert"
-                                                              ]
-                                                            },
-                                                            operation: 0,
-                                                            value: "True"
-                                                          };
-                                                          return (({
-                                                            variable,
-                                                            value,
-                                                            startIndex,
-                                                            deleteCount
-                                                          }) => {
-                                                            if (!variable) {
-                                                              return;
-                                                            }
-                                                            const {
-                                                              objRoot,
-                                                              variablePath
-                                                            } = variable;
-
-                                                            $stateSet(
-                                                              objRoot,
-                                                              variablePath,
-                                                              value
-                                                            );
-                                                            return value;
-                                                          })?.apply(null, [
-                                                            actionArgs
-                                                          ]);
-                                                        })()
-                                                      : undefined;
-                                                  if (
-                                                    $steps[
-                                                      "makeTrueCriticalConditionAddAlertState"
-                                                    ] != null &&
-                                                    typeof $steps[
-                                                      "makeTrueCriticalConditionAddAlertState"
-                                                    ] === "object" &&
-                                                    typeof $steps[
-                                                      "makeTrueCriticalConditionAddAlertState"
-                                                    ].then === "function"
-                                                  ) {
-                                                    $steps[
-                                                      "makeTrueCriticalConditionAddAlertState"
-                                                    ] = await $steps[
-                                                      "makeTrueCriticalConditionAddAlertState"
-                                                    ];
-                                                  }
-                                                },
-                                                onDeselectedChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "deselected"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                onIsDisabledChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "isDisabled"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                onSelectedChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "selected"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                onSortDeselectedChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "sortDeselected"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                onSortSelectedChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "sortSelected"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                selected:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "selected"
-                                                    ]
-                                                  ),
-                                                shape: "rounded",
-                                                sortDeselected:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "sortDeselected"
-                                                    ]
-                                                  ),
-                                                sortSelected:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "criticalCondition",
-                                                      __plasmic_idx_0,
-                                                      "sortSelected"
-                                                    ]
-                                                  )
-                                              };
-
-                                              initializePlasmicStates(
-                                                $state,
-                                                [
-                                                  {
-                                                    name: "criticalCondition[].isDisabled",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  },
-                                                  {
-                                                    name: "criticalCondition[].selected",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  },
-                                                  {
-                                                    name: "criticalCondition[].deselected",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  },
-                                                  {
-                                                    name: "criticalCondition[].sortDeselected",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  },
-                                                  {
-                                                    name: "criticalCondition[].sortSelected",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  }
-                                                ],
-                                                [__plasmic_idx_0]
-                                              );
-                                              return (
-                                                <Button
-                                                  data-plasmic-name={
-                                                    "criticalCondition"
-                                                  }
-                                                  data-plasmic-override={
-                                                    overrides.criticalCondition
-                                                  }
-                                                  {...child$Props}
-                                                >
-                                                  <div
-                                                    className={classNames(
-                                                      projectcss.all,
-                                                      projectcss.__wab_text,
-                                                      sty.text__cecl4
-                                                    )}
-                                                  >
-                                                    {
-                                                      "\u0648\u0636\u0639\u06cc\u062a \u0628\u062d\u0631\u0627\u0646\u06cc"
-                                                    }
-                                                  </div>
-                                                </Button>
-                                              );
-                                            })()}
-                                            <div
-                                              data-plasmic-name={
-                                                "criticalDefinition"
-                                              }
-                                              data-plasmic-override={
-                                                overrides.criticalDefinition
-                                              }
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.__wab_text,
-                                                sty.criticalDefinition
-                                              )}
-                                              dir={"rtl"}
-                                            >
-                                              <React.Fragment>
-                                                <span
-                                                  className={
-                                                    "plasmic_default__all plasmic_default__span"
-                                                  }
-                                                  style={{ color: "#000000" }}
-                                                >
-                                                  {
-                                                    "\u0628\u0647 \u0645\u0639\u0646\u0627\u06cc \u0639\u0644\u0627\u0626\u0645 \u062d\u06cc\u0627\u062a\u06cc \u0646\u0627\u067e\u0627\u06cc\u062f\u0627\u0631 \u06cc\u0627 \u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u062e\u062a ICU \u06cc\u0627 \u0628\u0633\u062a\u0631\u06cc \u062f\u0631 ICU"
-                                                  }
-                                                </span>
-                                                <React.Fragment>
-                                                  {"\n"}
-                                                </React.Fragment>
-                                                <span
-                                                  className={
-                                                    "plasmic_default__all plasmic_default__span"
-                                                  }
-                                                  style={{ color: "#000000" }}
-                                                >
-                                                  {
-                                                    "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u0647\u0631 \u0628\u0627\u0631 \u06a9\u0644\u06cc\u06a9\u060c \u06cc\u06a9 \u0646\u0641\u0631 \u0628\u0647 \u062a\u0639\u062f\u0627\u062f \u06af\u0632\u0627\u0631\u0634 \u062f\u0647\u0646\u062f\u06af\u0627\u0646 \u0627\u06cc\u0646 \u0648\u0636\u0639\u06cc\u062a \u0627\u0636\u0627\u0641\u0647 \u0645\u06cc \u0634\u0648\u062f"
-                                                  }
-                                                </span>
-                                              </React.Fragment>
-                                            </div>
-                                            {(() => {
-                                              const child$Props = {
-                                                className: classNames(
-                                                  "__wab_instance",
-                                                  sty.stableCondition
-                                                ),
-                                                color: "green",
-                                                deselected:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "deselected"
-                                                    ]
-                                                  ),
-                                                isDisabled:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "isDisabled"
-                                                    ]
-                                                  ),
-                                                onClick: async event => {
-                                                  const $steps = {};
-
-                                                  $steps[
-                                                    "makeFalseStableConditionResetAlertState"
-                                                  ] = true
-                                                    ? (() => {
-                                                        const actionArgs = {
-                                                          variable: {
-                                                            objRoot: $state,
-                                                            variablePath: [
-                                                              "stableConditionResetAlert"
-                                                            ]
-                                                          },
-                                                          operation: 0,
-                                                          value: false
-                                                        };
-                                                        return (({
-                                                          variable,
-                                                          value,
-                                                          startIndex,
-                                                          deleteCount
-                                                        }) => {
-                                                          if (!variable) {
-                                                            return;
-                                                          }
-                                                          const {
-                                                            objRoot,
-                                                            variablePath
-                                                          } = variable;
-
-                                                          $stateSet(
-                                                            objRoot,
-                                                            variablePath,
-                                                            value
-                                                          );
-                                                          return value;
-                                                        })?.apply(null, [
-                                                          actionArgs
-                                                        ]);
-                                                      })()
-                                                    : undefined;
-                                                  if (
-                                                    $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ] != null &&
-                                                    typeof $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ] === "object" &&
-                                                    typeof $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ].then === "function"
-                                                  ) {
-                                                    $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ] = await $steps[
-                                                      "makeFalseStableConditionResetAlertState"
-                                                    ];
-                                                  }
-
-                                                  $steps[
-                                                    "makeFalseCriticalConditionAddAlert"
-                                                  ] = true
-                                                    ? (() => {
-                                                        const actionArgs = {
-                                                          variable: {
-                                                            objRoot: $state,
-                                                            variablePath: [
-                                                              "criticalConditionAddAlert"
-                                                            ]
-                                                          },
-                                                          operation: 0,
-                                                          value: false
-                                                        };
-                                                        return (({
-                                                          variable,
-                                                          value,
-                                                          startIndex,
-                                                          deleteCount
-                                                        }) => {
-                                                          if (!variable) {
-                                                            return;
-                                                          }
-                                                          const {
-                                                            objRoot,
-                                                            variablePath
-                                                          } = variable;
-
-                                                          $stateSet(
-                                                            objRoot,
-                                                            variablePath,
-                                                            value
-                                                          );
-                                                          return value;
-                                                        })?.apply(null, [
-                                                          actionArgs
-                                                        ]);
-                                                      })()
-                                                    : undefined;
-                                                  if (
-                                                    $steps[
-                                                      "makeFalseCriticalConditionAddAlert"
-                                                    ] != null &&
-                                                    typeof $steps[
-                                                      "makeFalseCriticalConditionAddAlert"
-                                                    ] === "object" &&
-                                                    typeof $steps[
-                                                      "makeFalseCriticalConditionAddAlert"
-                                                    ].then === "function"
-                                                  ) {
-                                                    $steps[
-                                                      "makeFalseCriticalConditionAddAlert"
-                                                    ] = await $steps[
-                                                      "makeFalseCriticalConditionAddAlert"
-                                                    ];
-                                                  }
-
-                                                  $steps[
-                                                    "postMessageStableCondition"
-                                                  ] = true
-                                                    ? (() => {
-                                                        const actionArgs = {
-                                                          args: [
-                                                            "POST",
-                                                            "/api/v3/messages",
-                                                            undefined,
-                                                            (() => {
-                                                              try {
-                                                                return {
-                                                                  sender_id:
-                                                                    $ctx
-                                                                      .inlab_user
-                                                                      .user.id,
-                                                                  admission_id:
-                                                                    currentItem.admission_id,
-                                                                  namespace_id:
-                                                                    localStorage.getItem(
-                                                                      "inlab_user_namespace_id"
-                                                                    ),
-                                                                  namespace_title:
-                                                                    localStorage.getItem(
-                                                                      "inlab_user_namespace_title"
-                                                                    ),
-                                                                  body: "پایدار"
-                                                                };
-                                                              } catch (e) {
-                                                                if (
-                                                                  e instanceof
-                                                                    TypeError ||
-                                                                  e?.plasmicType ===
-                                                                    "PlasmicUndefinedDataError"
-                                                                ) {
-                                                                  return undefined;
-                                                                }
-                                                                throw e;
-                                                              }
-                                                            })()
-                                                          ]
-                                                        };
-                                                        return $globalActions[
-                                                          "AuthGlobalContext.apiFetcher"
-                                                        ]?.apply(null, [
-                                                          ...actionArgs.args
-                                                        ]);
-                                                      })()
-                                                    : undefined;
-                                                  if (
-                                                    $steps[
-                                                      "postMessageStableCondition"
-                                                    ] != null &&
-                                                    typeof $steps[
-                                                      "postMessageStableCondition"
-                                                    ] === "object" &&
-                                                    typeof $steps[
-                                                      "postMessageStableCondition"
-                                                    ].then === "function"
-                                                  ) {
-                                                    $steps[
-                                                      "postMessageStableCondition"
-                                                    ] = await $steps[
-                                                      "postMessageStableCondition"
-                                                    ];
-                                                  }
-
-                                                  $steps[
-                                                    "makeTrueStableConditionResetAlertState"
-                                                  ] =
-                                                    $steps
-                                                      .postMessageStableCondition
-                                                      .status === 200
-                                                      ? (() => {
-                                                          const actionArgs = {
-                                                            variable: {
-                                                              objRoot: $state,
-                                                              variablePath: [
-                                                                "stableConditionResetAlert"
-                                                              ]
-                                                            },
-                                                            operation: 0,
-                                                            value: "True"
-                                                          };
-                                                          return (({
-                                                            variable,
-                                                            value,
-                                                            startIndex,
-                                                            deleteCount
-                                                          }) => {
-                                                            if (!variable) {
-                                                              return;
-                                                            }
-                                                            const {
-                                                              objRoot,
-                                                              variablePath
-                                                            } = variable;
-
-                                                            $stateSet(
-                                                              objRoot,
-                                                              variablePath,
-                                                              value
-                                                            );
-                                                            return value;
-                                                          })?.apply(null, [
-                                                            actionArgs
-                                                          ]);
-                                                        })()
-                                                      : undefined;
-                                                  if (
-                                                    $steps[
-                                                      "makeTrueStableConditionResetAlertState"
-                                                    ] != null &&
-                                                    typeof $steps[
-                                                      "makeTrueStableConditionResetAlertState"
-                                                    ] === "object" &&
-                                                    typeof $steps[
-                                                      "makeTrueStableConditionResetAlertState"
-                                                    ].then === "function"
-                                                  ) {
-                                                    $steps[
-                                                      "makeTrueStableConditionResetAlertState"
-                                                    ] = await $steps[
-                                                      "makeTrueStableConditionResetAlertState"
-                                                    ];
-                                                  }
-                                                },
-                                                onDeselectedChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "deselected"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                onIsDisabledChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "isDisabled"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                onSelectedChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "selected"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                onSortDeselectedChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "sortDeselected"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                onSortSelectedChange: (
-                                                  ...eventArgs
-                                                ) => {
-                                                  generateStateOnChangeProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "sortSelected"
-                                                    ]
-                                                  )(eventArgs[0]);
-                                                },
-                                                selected:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "selected"
-                                                    ]
-                                                  ),
-                                                shape: "rounded",
-                                                sortDeselected:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "sortDeselected"
-                                                    ]
-                                                  ),
-                                                sortSelected:
-                                                  generateStateValueProp(
-                                                    $state,
-                                                    [
-                                                      "stableCondition",
-                                                      __plasmic_idx_0,
-                                                      "sortSelected"
-                                                    ]
-                                                  )
-                                              };
-
-                                              initializePlasmicStates(
-                                                $state,
-                                                [
-                                                  {
-                                                    name: "stableCondition[].isDisabled",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  },
-                                                  {
-                                                    name: "stableCondition[].selected",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  },
-                                                  {
-                                                    name: "stableCondition[].deselected",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  },
-                                                  {
-                                                    name: "stableCondition[].sortDeselected",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  },
-                                                  {
-                                                    name: "stableCondition[].sortSelected",
-                                                    initFunc: ({
-                                                      $props,
-                                                      $state,
-                                                      $queries
-                                                    }) => undefined
-                                                  }
-                                                ],
-                                                [__plasmic_idx_0]
-                                              );
-                                              return (
-                                                <Button
-                                                  data-plasmic-name={
-                                                    "stableCondition"
-                                                  }
-                                                  data-plasmic-override={
-                                                    overrides.stableCondition
-                                                  }
-                                                  {...child$Props}
-                                                >
-                                                  <div
-                                                    className={classNames(
-                                                      projectcss.all,
-                                                      projectcss.__wab_text,
-                                                      sty.text___6MHn
-                                                    )}
-                                                  >
-                                                    {
-                                                      "\u0648\u0636\u0639\u06cc\u062a \u067e\u0627\u06cc\u062f\u0627\u0631"
-                                                    }
-                                                  </div>
-                                                </Button>
-                                              );
-                                            })()}
-                                            <div
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.__wab_text,
-                                                sty.text___3F4LM
-                                              )}
-                                            >
-                                              <React.Fragment>
-                                                <span
-                                                  className={
-                                                    "plasmic_default__all plasmic_default__span"
-                                                  }
-                                                  style={{ color: "#000000" }}
-                                                >
-                                                  {
-                                                    "\u0628\u0647 \u0645\u0639\u0646\u0627\u06cc \u062e\u0631\u0648\u062c \u0628\u06cc\u0645\u0627\u0631 \u0627\u0632 \u0648\u0636\u0639\u06cc\u062a \u0628\u062d\u0631\u0627\u0646\u06cc"
-                                                  }
-                                                </span>
-                                                <React.Fragment>
-                                                  {"\n"}
-                                                </React.Fragment>
-                                                <span
-                                                  className={
-                                                    "plasmic_default__all plasmic_default__span"
-                                                  }
-                                                  style={{ color: "#000000" }}
-                                                >
-                                                  {
-                                                    "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u0627\u0639\u0644\u0627\u0645\u060c \u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 \u0628\u0647 \u062d\u0627\u0644\u062a \u067e\u06cc\u0634 \u0641\u0631\u0636 \u06cc\u0627 \u067e\u0627\u06cc\u062f\u0627\u0631 \u062f\u0631 \u0645\u06cc \u0622\u06cc\u062f"
-                                                  }
-                                                </span>
-                                              </React.Fragment>
-                                            </div>
-                                            {(() => {
-                                              try {
-                                                return $state.criticalConditionAddAlert;
-                                              } catch (e) {
-                                                if (
-                                                  e instanceof TypeError ||
-                                                  e?.plasmicType ===
-                                                    "PlasmicUndefinedDataError"
-                                                ) {
-                                                  return true;
-                                                }
-                                                throw e;
-                                              }
-                                            })() ? (
-                                              <Alert
-                                                data-plasmic-name={
-                                                  "criticalConditionAdd"
-                                                }
-                                                data-plasmic-override={
-                                                  overrides.criticalConditionAdd
-                                                }
-                                                body={
-                                                  <div
-                                                    className={classNames(
-                                                      projectcss.all,
-                                                      projectcss.__wab_text,
-                                                      sty.text__jvZv
-                                                    )}
-                                                  >
-                                                    {
-                                                      "\u0628\u0647 \u062a\u0639\u062f\u0627\u062f \u067e\u0632\u0634\u06a9\u0627\u0646 \u0627\u0639\u0644\u0627\u0645 \u06a9\u0646\u0646\u062f\u0647 \u0648\u0636\u0639\u06cc\u062a \u0628\u062d\u0631\u0627\u0646\u06cc \u0628\u06cc\u0645\u0627\u0631 \u06cc\u06a9 \u0646\u0641\u0631 \u0627\u0641\u0632\u0648\u062f\u0647 \u0634\u062f"
-                                                    }
-                                                  </div>
-                                                }
-                                                className={classNames(
-                                                  "__wab_instance",
-                                                  sty.criticalConditionAdd
-                                                )}
-                                                error={true}
-                                                noHeader={true}
-                                              />
-                                            ) : null}
-                                            {(() => {
-                                              try {
-                                                return $state.stableConditionResetAlert;
-                                              } catch (e) {
-                                                if (
-                                                  e instanceof TypeError ||
-                                                  e?.plasmicType ===
-                                                    "PlasmicUndefinedDataError"
-                                                ) {
-                                                  return true;
-                                                }
-                                                throw e;
-                                              }
-                                            })() ? (
-                                              <Alert
-                                                data-plasmic-name={
-                                                  "stableConditionReset"
-                                                }
-                                                data-plasmic-override={
-                                                  overrides.stableConditionReset
-                                                }
-                                                body={
-                                                  <div
-                                                    className={classNames(
-                                                      projectcss.all,
-                                                      projectcss.__wab_text,
-                                                      sty.text__fJ1Ms
-                                                    )}
-                                                  >
-                                                    {
-                                                      "\u0648\u0636\u0639\u06cc\u062a \u067e\u0627\u06cc\u062f\u0627\u0631 \u0628\u06cc\u0645\u0627\u0631 \u062b\u0628\u062a \u0634\u062f"
-                                                    }
-                                                  </div>
-                                                }
-                                                className={classNames(
-                                                  "__wab_instance",
-                                                  sty.stableConditionReset
-                                                )}
-                                                noHeader={true}
-                                                success={true}
-                                              />
-                                            ) : null}
-                                          </div>
-                                        </AntdModal>
-                                      );
-                                    })()
-                                  : null}
                                 <div
                                   data-plasmic-name={"firstLastName"}
                                   data-plasmic-override={
@@ -8669,6 +7228,39 @@ function PlasmicHomepage__RenderFunc(props: {
                         </div>
                       );
                     })}
+                    {(() => {
+                      try {
+                        return (
+                          $ctx.fetched_data.loading === false &&
+                          $ctx.fetched_data.data == "" &&
+                          $state.searchbarPhysicians.value !== ""
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return false;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={
+                          "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+                        }
+                        data-plasmic-override={overrides.پزشکیافتنشد}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.پزشکیافتنشد
+                        )}
+                      >
+                        {
+                          "\u067e\u0632\u0634\u06a9 \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
+                        }
+                      </div>
+                    ) : null}
                   </Stack__>
                 )}
               </DataCtxReader__>
@@ -12964,16 +11556,6 @@ const PlasmicDescendants = {
     "patientCards",
     "patientNameBookmarkIcon",
     "dismision",
-    "modalGeneralHealthStatus",
-    "modalContent",
-    "criticalCondition",
-    "criticalDefinition",
-    "stableCondition",
-    "criticalConditionAdd",
-    "stableConditionReset",
-    "getMessageHealthStatus",
-    "generalHealthStatusAnnouncement",
-    "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -12994,6 +11576,7 @@ const PlasmicDescendants = {
     "physiciansList",
     "physiciansList2",
     "physiciansName",
+    "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "searchbarPhysicians",
     "modalConsultFilterType",
     "filterTypes",
@@ -13103,16 +11686,6 @@ const PlasmicDescendants = {
     "patientCards",
     "patientNameBookmarkIcon",
     "dismision",
-    "modalGeneralHealthStatus",
-    "modalContent",
-    "criticalCondition",
-    "criticalDefinition",
-    "stableCondition",
-    "criticalConditionAdd",
-    "stableConditionReset",
-    "getMessageHealthStatus",
-    "generalHealthStatusAnnouncement",
-    "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -13422,16 +11995,6 @@ const PlasmicDescendants = {
     "patientCards",
     "patientNameBookmarkIcon",
     "dismision",
-    "modalGeneralHealthStatus",
-    "modalContent",
-    "criticalCondition",
-    "criticalDefinition",
-    "stableCondition",
-    "criticalConditionAdd",
-    "stableConditionReset",
-    "getMessageHealthStatus",
-    "generalHealthStatusAnnouncement",
-    "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -13502,16 +12065,6 @@ const PlasmicDescendants = {
     "patientCards",
     "patientNameBookmarkIcon",
     "dismision",
-    "modalGeneralHealthStatus",
-    "modalContent",
-    "criticalCondition",
-    "criticalDefinition",
-    "stableCondition",
-    "criticalConditionAdd",
-    "stableConditionReset",
-    "getMessageHealthStatus",
-    "generalHealthStatusAnnouncement",
-    "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -13526,55 +12079,10 @@ const PlasmicDescendants = {
   patientNameBookmarkIcon: [
     "patientNameBookmarkIcon",
     "dismision",
-    "modalGeneralHealthStatus",
-    "modalContent",
-    "criticalCondition",
-    "criticalDefinition",
-    "stableCondition",
-    "criticalConditionAdd",
-    "stableConditionReset",
-    "getMessageHealthStatus",
-    "generalHealthStatusAnnouncement",
-    "numberOfDoctorReporting",
     "firstLastName",
     "bookmarkIcon"
   ],
   dismision: ["dismision"],
-  modalGeneralHealthStatus: [
-    "modalGeneralHealthStatus",
-    "modalContent",
-    "criticalCondition",
-    "criticalDefinition",
-    "stableCondition",
-    "criticalConditionAdd",
-    "stableConditionReset",
-    "getMessageHealthStatus",
-    "generalHealthStatusAnnouncement",
-    "numberOfDoctorReporting"
-  ],
-  modalContent: [
-    "modalContent",
-    "criticalCondition",
-    "criticalDefinition",
-    "stableCondition",
-    "criticalConditionAdd",
-    "stableConditionReset"
-  ],
-  criticalCondition: ["criticalCondition"],
-  criticalDefinition: ["criticalDefinition"],
-  stableCondition: ["stableCondition"],
-  criticalConditionAdd: ["criticalConditionAdd"],
-  stableConditionReset: ["stableConditionReset"],
-  getMessageHealthStatus: [
-    "getMessageHealthStatus",
-    "generalHealthStatusAnnouncement",
-    "numberOfDoctorReporting"
-  ],
-  generalHealthStatusAnnouncement: [
-    "generalHealthStatusAnnouncement",
-    "numberOfDoctorReporting"
-  ],
-  numberOfDoctorReporting: ["numberOfDoctorReporting"],
   firstLastName: ["firstLastName"],
   bookmarkIcon: ["bookmarkIcon"],
   wardRoom: ["wardRoom", "roomBed", "ward"],
@@ -13608,11 +12116,24 @@ const PlasmicDescendants = {
     "physiciansList",
     "physiciansList2",
     "physiciansName",
+    "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "searchbarPhysicians"
   ],
-  physiciansList: ["physiciansList", "physiciansList2", "physiciansName"],
-  physiciansList2: ["physiciansList2", "physiciansName"],
+  physiciansList: [
+    "physiciansList",
+    "physiciansList2",
+    "physiciansName",
+    "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+  ],
+  physiciansList2: [
+    "physiciansList2",
+    "physiciansName",
+    "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+  ],
   physiciansName: ["physiciansName"],
+  پزشکیافتنشد: [
+    "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+  ],
   searchbarPhysicians: ["searchbarPhysicians"],
   modalConsultFilterType: [
     "modalConsultFilterType",
@@ -13776,16 +12297,6 @@ type NodeDefaultElementType = {
   patientCards: "div";
   patientNameBookmarkIcon: "div";
   dismision: "div";
-  modalGeneralHealthStatus: typeof AntdModal;
-  modalContent: "div";
-  criticalCondition: typeof Button;
-  criticalDefinition: "div";
-  stableCondition: typeof Button;
-  criticalConditionAdd: typeof Alert;
-  stableConditionReset: typeof Alert;
-  getMessageHealthStatus: typeof ApiFetcherComponent;
-  generalHealthStatusAnnouncement: "div";
-  numberOfDoctorReporting: "div";
   firstLastName: "div";
   bookmarkIcon: typeof BookmarkIcon;
   wardRoom: "div";
@@ -13806,6 +12317,7 @@ type NodeDefaultElementType = {
   physiciansList: typeof ApiFetcherComponent;
   physiciansList2: "div";
   physiciansName: "div";
+  پزشکیافتنشد: "div";
   searchbarPhysicians: typeof TextInput;
   modalConsultFilterType: typeof AntdModal;
   filterTypes: "div";
@@ -13993,18 +12505,6 @@ export const PlasmicHomepage = Object.assign(
     patientCards: makeNodeComponent("patientCards"),
     patientNameBookmarkIcon: makeNodeComponent("patientNameBookmarkIcon"),
     dismision: makeNodeComponent("dismision"),
-    modalGeneralHealthStatus: makeNodeComponent("modalGeneralHealthStatus"),
-    modalContent: makeNodeComponent("modalContent"),
-    criticalCondition: makeNodeComponent("criticalCondition"),
-    criticalDefinition: makeNodeComponent("criticalDefinition"),
-    stableCondition: makeNodeComponent("stableCondition"),
-    criticalConditionAdd: makeNodeComponent("criticalConditionAdd"),
-    stableConditionReset: makeNodeComponent("stableConditionReset"),
-    getMessageHealthStatus: makeNodeComponent("getMessageHealthStatus"),
-    generalHealthStatusAnnouncement: makeNodeComponent(
-      "generalHealthStatusAnnouncement"
-    ),
-    numberOfDoctorReporting: makeNodeComponent("numberOfDoctorReporting"),
     firstLastName: makeNodeComponent("firstLastName"),
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
     wardRoom: makeNodeComponent("wardRoom"),
@@ -14025,6 +12525,9 @@ export const PlasmicHomepage = Object.assign(
     physiciansList: makeNodeComponent("physiciansList"),
     physiciansList2: makeNodeComponent("physiciansList2"),
     physiciansName: makeNodeComponent("physiciansName"),
+    پزشکیافتنشد: makeNodeComponent(
+      "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+    ),
     searchbarPhysicians: makeNodeComponent("searchbarPhysicians"),
     modalConsultFilterType: makeNodeComponent("modalConsultFilterType"),
     filterTypes: makeNodeComponent("filterTypes"),

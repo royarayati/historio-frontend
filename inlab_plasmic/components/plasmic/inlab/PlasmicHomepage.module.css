@@ -514,7 +514,8 @@
 ._switch:global(.__wab_instance) {
   max-width: 80%;
   object-fit: cover;
-  width: auto;
+  width: 2em;
+  flex-shrink: 0;
 }
 .text__bdAjq {
   position: relative;
@@ -2086,185 +2087,6 @@
     max-width: 3.2%;
   }
 }
-.modalGeneralHealthStatus:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  background: #ffffff;
-  height: 266px;
-}
-.modalGeneralHealthStatus__modal :global(.ant-modal-content) {
-  background: #ffffff;
-  outline: none;
-}
-.modalContent {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  background: #ffffff;
-  min-width: 0;
-  padding: 8px;
-}
-.criticalCondition:global(.__wab_instance) {
-  max-width: 100%;
-  margin-bottom: 5px;
-  width: 200px;
-  height: 40px;
-  flex-shrink: 0;
-}
-.text__cecl4 {
-  color: #ffffff;
-  font-size: 18px;
-}
-.svg__peiGc {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg___5ZoG {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.criticalDefinition {
-  font-weight: 400;
-  font-size: var(--token-sOr3fJ5Up5fq);
-  margin-bottom: 20px;
-}
-.stableCondition:global(.__wab_instance) {
-  max-width: 100%;
-  margin-bottom: 5px;
-  width: 200px;
-  height: 40px;
-  flex-shrink: 0;
-}
-.text___6MHn {
-  color: #ffffff;
-  font-size: 18px;
-}
-.svg__b4UEz {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg___2A343 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.text___3F4LM {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-size: var(--token-sOr3fJ5Up5fq);
-  margin-bottom: 20px;
-  min-width: 0;
-}
-.criticalConditionAdd:global(.__wab_instance) {
-  max-width: 100%;
-}
-.text__nfrg2 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.text__jvZv {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.svg__ubmKc {
-  position: relative;
-  object-fit: cover;
-  max-width: 100%;
-  height: 24px;
-  align-self: auto;
-}
-.stableConditionReset:global(.__wab_instance) {
-  max-width: 100%;
-}
-.text__aXf30 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.text__fJ1Ms {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.svg__rc3PZ {
-  position: relative;
-  object-fit: cover;
-  max-width: 100%;
-  height: 24px;
-  align-self: auto;
-}
-.text__iziA8 {
-  background: #ffffff;
-}
-.getMessageHealthStatus:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  background: #ffffff;
-}
-.generalHealthStatusAnnouncement {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 40px;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-}
-.text__q9Pfi {
-  position: relative;
-  width: 35px;
-  height: auto;
-  max-width: 100%;
-  background: #8bff61;
-  font-size: 12px;
-  border-radius: 5px;
-  padding: 2px;
-}
-.text__cUnex {
-  position: relative;
-  width: 35px;
-  height: auto;
-  max-width: 100%;
-  background: #ff6565;
-  font-size: 12px;
-  border-radius: 5px;
-  padding: 2px;
-}
-.numberOfDoctorReporting {
-  position: relative;
-  width: 40px;
-  height: auto;
-  max-width: 100%;
-  font-size: 10px;
-  margin-top: 5px;
-  font-weight: 400;
-  transform: translateX(0px) translateY(0px) translateZ(0px);
-}
 .firstLastName {
   width: 100%;
   height: auto;
@@ -2747,6 +2569,36 @@
 @media (min-width: 0px) and (max-width: 760px) {
   .physiciansName {
     margin-top: calc(0px + 6px) !important;
+  }
+}
+.پزشکیافتنشد {
+  position: relative;
+  margin-top: calc(30px + 6px) !important;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  background: none;
+  width: auto;
+  text-align: center;
+  align-self: center;
+  font-weight: 700;
+  white-space: pre-wrap;
+  font-family: var(--VazirmatnCustom);
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  user-select: none;
+  text-decoration-line: none;
+  box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
+  border-radius: 5px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .پزشکیافتنشد {
+    background: #e0ecff;
+    box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
+    margin-top: calc(15px + 6px) !important;
+    border-radius: 5px;
   }
 }
 .freeBox__rkeNk {
