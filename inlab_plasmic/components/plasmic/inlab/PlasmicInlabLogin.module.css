@@ -57,62 +57,12 @@
   max-width: 100%;
   position: relative;
 }
-.inlabInlabPlusAccountSimilarityAnnouncement {
-  position: fixed;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  left: auto;
-  top: 5%;
-  z-index: 1;
-  background: #ffffff;
-  font-size: 15px;
-  box-shadow: 0px 0px 10px 0px var(--token-IYO13gyYJHXG);
-  justify-self: flex-start;
-  color: var(--token-IYO13gyYJHXG);
-  font-weight: 700;
-  flex-grow: 1;
-  right: 35%;
-  display: none;
-  border-radius: 5px;
-  padding: 12px;
-  border: 0.5px dashed var(--token-9iYGdL7i3GKE);
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .inlabInlabPlusAccountSimilarityAnnouncement {
-    width: auto;
-    font-size: 14px;
-    margin-right: 0px;
-    max-width: 100%;
-    text-align: center;
-    right: 5%;
-    border-color: var(--token-9iYGdL7i3GKE);
-  }
-}
-.inlabInlabPlusAccountSimilarityAnnouncementwrongUser {
-  width: auto;
-  left: auto;
-  display: none;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .inlabInlabPlusAccountSimilarityAnnouncementwrongUser {
-    top: 20px;
-    right: 0px;
-    left: 140px;
-    width: auto;
-    font-size: 16px;
-    height: auto;
-    bottom: auto;
-    border-style: dashed;
-    border-color: var(--token-9iYGdL7i3GKE);
-  }
-}
 .alert:global(.__wab_instance) {
   max-width: 100%;
   left: auto;
   top: 4em;
   position: fixed;
-  width: 26.9%;
+  width: 30%;
   z-index: 1;
   right: 35.75%;
 }
@@ -129,6 +79,9 @@
 }
 .text__hvY3 {
   height: auto;
+  max-width: 376px;
+  width: 100%;
+  min-width: 0;
 }
 .text__uYuU {
   position: relative;
