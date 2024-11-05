@@ -106,7 +106,6 @@ export type PlasmicInlabLogin__OverridesType = {
   inlabLogin?: Flex__<"div">;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   redirectToHomepage?: Flex__<typeof RedirectToHomepage>;
-  inlabInlabPlusAccountSimilarityAnnouncement?: Flex__<"div">;
   alert?: Flex__<typeof Alert>;
   pageContent?: Flex__<"div">;
   username?: Flex__<typeof TextInput>;
@@ -350,37 +349,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
           className={classNames("__wab_instance", sty.redirectToHomepage)}
         />
 
-        <div
-          data-plasmic-name={"inlabInlabPlusAccountSimilarityAnnouncement"}
-          data-plasmic-override={
-            overrides.inlabInlabPlusAccountSimilarityAnnouncement
-          }
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.inlabInlabPlusAccountSimilarityAnnouncement,
-            {
-              [sty.inlabInlabPlusAccountSimilarityAnnouncementdisabledLoginButton]:
-                hasVariant(
-                  $state,
-                  "disabledLoginButton",
-                  "disabledLoginButton"
-                ),
-              [sty.inlabInlabPlusAccountSimilarityAnnouncementwrongUser]:
-                hasVariant($state, "wrongUser", "wrongUser"),
-              [sty.inlabInlabPlusAccountSimilarityAnnouncementwrongUser_disabledLoginButton]:
-                hasVariant(
-                  $state,
-                  "disabledLoginButton",
-                  "disabledLoginButton"
-                ) && hasVariant($state, "wrongUser", "wrongUser")
-            }
-          )}
-        >
-          {
-            "\u062d\u0633\u0627\u0628 \u06a9\u0627\u0631\u0628\u0631\u06cc \u0634\u0645\u0627 \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u0628\u0627 \u0627\u06cc\u0646\u0644\u0628 \u06cc\u06a9\u0633\u0627\u0646 \u0627\u0633\u062a"
-          }
-        </div>
         <Alert
           data-plasmic-name={"alert"}
           data-plasmic-override={overrides.alert}
@@ -392,9 +360,10 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 projectcss.__wab_text,
                 sty.text__hvY3
               )}
+              dir={"rtl"}
             >
               {
-                "\u062d\u0633\u0627\u0628 \u06a9\u0627\u0631\u0628\u0631\u06cc \u0634\u0645\u0627 \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u0628\u0627 \u0627\u06cc\u0646\u0644\u0628 \u06cc\u06a9\u0633\u0627\u0646 \u0627\u0633\u062a"
+                "\u0628\u0627 \u0648\u0631\u0648\u062f \u0628\u0647 \u0627\u06cc\u0646\u0644\u0628\u060c \u0627\u0632 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 log out \u0645\u06cc \u0634\u0648\u06cc\u062f \u0648 \u0628\u0631\u0639\u06a9\u0633"
               }
             </div>
           }
@@ -1175,7 +1144,6 @@ const PlasmicDescendants = {
     "inlabLogin",
     "redirectToNamespaceSelection",
     "redirectToHomepage",
-    "inlabInlabPlusAccountSimilarityAnnouncement",
     "alert",
     "pageContent",
     "username",
@@ -1188,9 +1156,6 @@ const PlasmicDescendants = {
   ],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   redirectToHomepage: ["redirectToHomepage"],
-  inlabInlabPlusAccountSimilarityAnnouncement: [
-    "inlabInlabPlusAccountSimilarityAnnouncement"
-  ],
   alert: ["alert"],
   pageContent: [
     "pageContent",
@@ -1221,7 +1186,6 @@ type NodeDefaultElementType = {
   inlabLogin: "div";
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   redirectToHomepage: typeof RedirectToHomepage;
-  inlabInlabPlusAccountSimilarityAnnouncement: "div";
   alert: typeof Alert;
   pageContent: "div";
   username: typeof TextInput;
@@ -1297,9 +1261,6 @@ export const PlasmicInlabLogin = Object.assign(
       "redirectToNamespaceSelection"
     ),
     redirectToHomepage: makeNodeComponent("redirectToHomepage"),
-    inlabInlabPlusAccountSimilarityAnnouncement: makeNodeComponent(
-      "inlabInlabPlusAccountSimilarityAnnouncement"
-    ),
     alert: makeNodeComponent("alert"),
     pageContent: makeNodeComponent("pageContent"),
     username: makeNodeComponent("username"),

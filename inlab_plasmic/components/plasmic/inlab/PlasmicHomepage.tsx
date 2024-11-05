@@ -6941,7 +6941,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/remote_his/physicians?search_input=${$state.searchbarPhysicians.value}`}
+              path={`/api/v3/remote_his/physicians?search_input=${$state.searchbarPhysicians.value}&limit=20&offset=0`}
               ref={ref => {
                 $refs["physiciansList"] = ref;
               }}
@@ -6959,7 +6959,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
                         try {
-                          return $ctx.fetched_data.data;
+                          return $ctx.fetched_data.data.items;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -7221,9 +7221,9 @@ function PlasmicHomepage__RenderFunc(props: {
                           }}
                         >
                           <React.Fragment>
-                            {currentItem.speciality +
-                              " | " +
-                              currentItem.last_name}
+                            {(currentItem.speciality
+                              ? currentItem.speciality + " | "
+                              : "") + currentItem.last_name}
                           </React.Fragment>
                         </div>
                       );
