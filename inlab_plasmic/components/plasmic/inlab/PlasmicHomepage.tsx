@@ -5330,10 +5330,10 @@ function PlasmicHomepage__RenderFunc(props: {
                     {(() => {
                       try {
                         return (
-                          $ctx.fetched_data.loading === false &&
                           $ctx.fetched_data.data == "" &&
-                          $state.searchbarLnameNcode.value !== "" &&
-                          $state.searchbarFname.value !== ""
+                          $ctx.fetched_data.loading === false &&
+                          ($state.searchbarLnameNcode.value !== "") |
+                            ($state.searchbarFname.value !== "")
                         );
                       } catch (e) {
                         if (
@@ -5364,9 +5364,10 @@ function PlasmicHomepage__RenderFunc(props: {
                     {(() => {
                       try {
                         return (
+                          $state.mainSelectedTab == "patients" &&
+                          $ctx.fetched_data.data == "" &&
                           $state.searchbarLnameNcode.value == "" &&
-                          $state.searchbarFname.value == "" &&
-                          !$state.patientNumber
+                          $state.searchbarFname.value == ""
                         );
                       } catch (e) {
                         if (
@@ -7232,7 +7233,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       try {
                         return (
                           $ctx.fetched_data.loading === false &&
-                          $ctx.fetched_data.data == "" &&
+                          $ctx.fetched_data.data.count == 0 &&
                           $state.searchbarPhysicians.value !== ""
                         );
                       } catch (e) {
