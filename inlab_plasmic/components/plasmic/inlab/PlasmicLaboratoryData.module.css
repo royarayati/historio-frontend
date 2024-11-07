@@ -825,7 +825,7 @@
   z-index: 1;
   position: fixed;
   right: 12px;
-  background: none;
+  background: #ffffff;
   bottom: 65px;
   overflow: auto;
   padding: 0px;
@@ -937,7 +937,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .freeBox__iNm8J {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 4px;
   }
 }
