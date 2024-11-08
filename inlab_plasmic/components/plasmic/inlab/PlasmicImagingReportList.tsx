@@ -430,6 +430,12 @@ function PlasmicImagingReportList__RenderFunc(props: {
         path: "radiologyReport3[].open",
         type: "private",
         variableType: "boolean"
+      },
+      {
+        path: "variable",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -1228,64 +1234,42 @@ function PlasmicImagingReportList__RenderFunc(props: {
                               onClick={async event => {
                                 const $steps = {};
 
-                                $steps["goToImagingReportList"] = true
+                                $steps["updateVariable"] = true
                                   ? (() => {
                                       const actionArgs = {
-                                        destination: `/patient/${(() => {
-                                          try {
-                                            return $ctx.params.code;
-                                          } catch (e) {
-                                            if (
-                                              e instanceof TypeError ||
-                                              e?.plasmicType ===
-                                                "PlasmicUndefinedDataError"
-                                            ) {
-                                              return undefined;
-                                            }
-                                            throw e;
-                                          }
-                                        })()}/report/list/${(() => {
-                                          try {
-                                            return $ctx.params.adm_id;
-                                          } catch (e) {
-                                            if (
-                                              e instanceof TypeError ||
-                                              e?.plasmicType ===
-                                                "PlasmicUndefinedDataError"
-                                            ) {
-                                              return undefined;
-                                            }
-                                            throw e;
-                                          }
-                                        })()}`
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: ["variable"]
+                                        },
+                                        operation: 0
                                       };
-                                      return (({ destination }) => {
-                                        if (
-                                          typeof destination === "string" &&
-                                          destination.startsWith("#")
-                                        ) {
-                                          document
-                                            .getElementById(
-                                              destination.substr(1)
-                                            )
-                                            .scrollIntoView({
-                                              behavior: "smooth"
-                                            });
-                                        } else {
-                                          __nextRouter?.push(destination);
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
                                         }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
                                       })?.apply(null, [actionArgs]);
                                     })()
                                   : undefined;
                                 if (
-                                  $steps["goToImagingReportList"] != null &&
-                                  typeof $steps["goToImagingReportList"] ===
+                                  $steps["updateVariable"] != null &&
+                                  typeof $steps["updateVariable"] ===
                                     "object" &&
-                                  typeof $steps["goToImagingReportList"]
-                                    .then === "function"
+                                  typeof $steps["updateVariable"].then ===
+                                    "function"
                                 ) {
-                                  $steps["goToImagingReportList"] =
-                                    await $steps["goToImagingReportList"];
+                                  $steps["updateVariable"] = await $steps[
+                                    "updateVariable"
+                                  ];
                                 }
                               }}
                             >
@@ -1533,300 +1517,347 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   </React.Fragment>
                                 </div>
                               </div>
-                              {false ? (
-                                <div
-                                  data-plasmic-name={"reportPreviousAdmission"}
-                                  data-plasmic-override={
-                                    overrides.reportPreviousAdmission
+                              <div
+                                data-plasmic-name={"reportPreviousAdmission"}
+                                data-plasmic-override={
+                                  overrides.reportPreviousAdmission
+                                }
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.reportPreviousAdmission
+                                )}
+                              >
+                                {(() => {
+                                  try {
+                                    return (
+                                      new Date(currentItem.service_datetime) <
+                                      new Date($state.admissionDatetime)
+                                    );
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return true;
+                                    }
+                                    throw e;
                                   }
-                                  className={classNames(
-                                    projectcss.all,
-                                    sty.reportPreviousAdmission
-                                  )}
-                                >
-                                  {(() => {
-                                    const child$Props = {
-                                      className: classNames(
-                                        "__wab_instance",
-                                        sty.previousAdmission2
-                                      ),
-                                      color: "red",
-                                      deselected: generateStateValueProp(
-                                        $state,
-                                        [
-                                          "previousAdmission2",
-                                          __plasmic_idx_0,
-                                          "deselected"
-                                        ]
-                                      ),
-                                      isDisabled: generateStateValueProp(
-                                        $state,
-                                        [
-                                          "previousAdmission2",
-                                          __plasmic_idx_0,
-                                          "isDisabled"
-                                        ]
-                                      ),
-                                      onDeselectedChange: (...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission2",
-                                          __plasmic_idx_0,
-                                          "deselected"
-                                        ])(eventArgs[0]);
-                                      },
-                                      onIsDisabledChange: (...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission2",
-                                          __plasmic_idx_0,
-                                          "isDisabled"
-                                        ])(eventArgs[0]);
-                                      },
-                                      onSelectedChange: (...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission2",
-                                          __plasmic_idx_0,
-                                          "selected"
-                                        ])(eventArgs[0]);
-                                      },
-                                      onSortDeselectedChange: (
-                                        ...eventArgs
-                                      ) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission2",
-                                          __plasmic_idx_0,
-                                          "sortDeselected"
-                                        ])(eventArgs[0]);
-                                      },
-                                      onSortSelectedChange: (...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "previousAdmission2",
-                                          __plasmic_idx_0,
-                                          "sortSelected"
-                                        ])(eventArgs[0]);
-                                      },
-                                      selected: generateStateValueProp($state, [
-                                        "previousAdmission2",
-                                        __plasmic_idx_0,
-                                        "selected"
-                                      ]),
-                                      sortDeselected: generateStateValueProp(
-                                        $state,
-                                        [
-                                          "previousAdmission2",
-                                          __plasmic_idx_0,
-                                          "sortDeselected"
-                                        ]
-                                      ),
-                                      sortSelected: generateStateValueProp(
-                                        $state,
-                                        [
-                                          "previousAdmission2",
-                                          __plasmic_idx_0,
-                                          "sortSelected"
-                                        ]
-                                      )
-                                    };
+                                })()
+                                  ? (() => {
+                                      const child$Props = {
+                                        className: classNames(
+                                          "__wab_instance",
+                                          sty.previousAdmission2
+                                        ),
+                                        color: "red",
+                                        deselected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "deselected"
+                                          ]
+                                        ),
+                                        isDisabled: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "isDisabled"
+                                          ]
+                                        ),
+                                        onDeselectedChange: (...eventArgs) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "deselected"
+                                          ])(eventArgs[0]);
+                                        },
+                                        onIsDisabledChange: (...eventArgs) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "isDisabled"
+                                          ])(eventArgs[0]);
+                                        },
+                                        onSelectedChange: (...eventArgs) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "selected"
+                                          ])(eventArgs[0]);
+                                        },
+                                        onSortDeselectedChange: (
+                                          ...eventArgs
+                                        ) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "sortDeselected"
+                                          ])(eventArgs[0]);
+                                        },
+                                        onSortSelectedChange: (
+                                          ...eventArgs
+                                        ) => {
+                                          generateStateOnChangeProp($state, [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "sortSelected"
+                                          ])(eventArgs[0]);
+                                        },
+                                        selected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "selected"
+                                          ]
+                                        ),
+                                        sortDeselected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "sortDeselected"
+                                          ]
+                                        ),
+                                        sortSelected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "previousAdmission2",
+                                            __plasmic_idx_0,
+                                            "sortSelected"
+                                          ]
+                                        )
+                                      };
 
-                                    initializePlasmicStates(
+                                      initializePlasmicStates(
+                                        $state,
+                                        [
+                                          {
+                                            name: "previousAdmission2[].isDisabled",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "previousAdmission2[].selected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "previousAdmission2[].deselected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "previousAdmission2[].sortDeselected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "previousAdmission2[].sortSelected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          }
+                                        ],
+                                        [__plasmic_idx_0]
+                                      );
+                                      return (
+                                        <Button
+                                          data-plasmic-name={
+                                            "previousAdmission2"
+                                          }
+                                          data-plasmic-override={
+                                            overrides.previousAdmission2
+                                          }
+                                          {...child$Props}
+                                        >
+                                          {
+                                            "\u0628\u0633\u062a\u0631\u06cc \u0642\u0628\u0644\u06cc "
+                                          }
+                                        </Button>
+                                      );
+                                    })()
+                                  : null}
+                                {(() => {
+                                  const child$Props = {
+                                    className: classNames(
+                                      "__wab_instance",
+                                      sty.radiologyReport3
+                                    ),
+                                    defaultStylesClassName: classNames(
+                                      projectcss.root_reset,
+                                      projectcss.plasmic_default_styles,
+                                      projectcss.plasmic_mixins,
+                                      projectcss.plasmic_tokens,
+                                      plasmic_antd_5_hostless_css.plasmic_tokens,
+                                      plasmic_plasmic_rich_components_css.plasmic_tokens
+                                    ),
+                                    hideFooter: true,
+                                    maskClosable: true,
+                                    modalContentClassName: classNames({
+                                      [sty["pcls_ZG-GDZIr36rt"]]: true
+                                    }),
+                                    modalScopeClassName:
+                                      sty["radiologyReport3__modal"],
+                                    onOpenChange: generateStateOnChangeProp(
                                       $state,
                                       [
-                                        {
-                                          name: "previousAdmission2[].isDisabled",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        },
-                                        {
-                                          name: "previousAdmission2[].selected",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        },
-                                        {
-                                          name: "previousAdmission2[].deselected",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        },
-                                        {
-                                          name: "previousAdmission2[].sortDeselected",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        },
-                                        {
-                                          name: "previousAdmission2[].sortSelected",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        }
-                                      ],
-                                      [__plasmic_idx_0]
-                                    );
-                                    return (
-                                      <Button
-                                        data-plasmic-name={"previousAdmission2"}
-                                        data-plasmic-override={
-                                          overrides.previousAdmission2
-                                        }
-                                        {...child$Props}
-                                      >
-                                        {
-                                          "\u0628\u0633\u062a\u0631\u06cc \u0642\u0628\u0644\u06cc "
-                                        }
-                                      </Button>
-                                    );
-                                  })()}
-                                  {(() => {
-                                    const child$Props = {
-                                      className: classNames(
-                                        "__wab_instance",
-                                        sty.radiologyReport3
-                                      ),
-                                      defaultStylesClassName: classNames(
-                                        projectcss.root_reset,
-                                        projectcss.plasmic_default_styles,
-                                        projectcss.plasmic_mixins,
-                                        projectcss.plasmic_tokens,
-                                        plasmic_antd_5_hostless_css.plasmic_tokens,
-                                        plasmic_plasmic_rich_components_css.plasmic_tokens
-                                      ),
-                                      modalContentClassName: classNames({
-                                        [sty["pcls_ZG-GDZIr36rt"]]: true
-                                      }),
-                                      modalScopeClassName:
-                                        sty["radiologyReport3__modal"],
-                                      onOpenChange: generateStateOnChangeProp(
-                                        $state,
-                                        [
-                                          "radiologyReport3",
-                                          __plasmic_idx_0,
-                                          "open"
-                                        ]
-                                      ),
-                                      open: generateStateValueProp($state, [
                                         "radiologyReport3",
                                         __plasmic_idx_0,
                                         "open"
-                                      ]),
-                                      title: (
+                                      ]
+                                    ),
+                                    open: generateStateValueProp($state, [
+                                      "radiologyReport3",
+                                      __plasmic_idx_0,
+                                      "open"
+                                    ]),
+                                    title: (
+                                      <div
+                                        data-plasmic-name={"reportDatetime"}
+                                        data-plasmic-override={
+                                          overrides.reportDatetime
+                                        }
+                                        className={classNames(
+                                          projectcss.all,
+                                          projectcss.__wab_text,
+                                          sty.reportDatetime
+                                        )}
+                                      >
+                                        <React.Fragment>
+                                          {(() => {
+                                            const gregorianDate = new Date(
+                                              currentItem.service_datetime
+                                            );
+                                            const shamsiDate =
+                                              new Intl.DateTimeFormat(
+                                                "fa-IR"
+                                              ).format(gregorianDate);
+                                            const shamsiTime =
+                                              gregorianDate.toLocaleTimeString(
+                                                "fa-IR",
+                                                { hour12: false }
+                                              );
+                                            const englishDate =
+                                              shamsiDate.replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              );
+                                            const englishTime =
+                                              shamsiTime.replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              );
+                                            return `${englishDate} - ${englishTime}`;
+                                          })()}
+                                        </React.Fragment>
+                                      </div>
+                                    ),
+                                    trigger: (
+                                      <AntdButton
+                                        data-plasmic-name={"button"}
+                                        data-plasmic-override={overrides.button}
+                                        className={classNames(
+                                          "__wab_instance",
+                                          sty.button
+                                        )}
+                                      >
                                         <div
-                                          data-plasmic-name={"reportDatetime"}
+                                          className={classNames(
+                                            projectcss.all,
+                                            projectcss.__wab_text,
+                                            sty.text__l1JsI
+                                          )}
+                                        >
+                                          {
+                                            "\u0645\u0634\u0627\u0647\u062f\u0647 \u06af\u0632\u0627\u0631\u0634"
+                                          }
+                                        </div>
+                                      </AntdButton>
+                                    ),
+                                    width: "85%"
+                                  };
+                                  initializeCodeComponentStates(
+                                    $state,
+                                    [
+                                      {
+                                        name: "open",
+                                        plasmicStateName:
+                                          "radiologyReport3[].open"
+                                      }
+                                    ],
+                                    [__plasmic_idx_0],
+                                    undefined ?? {},
+                                    child$Props
+                                  );
+                                  initializePlasmicStates(
+                                    $state,
+                                    [
+                                      {
+                                        name: "radiologyReport3[].open",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      }
+                                    ],
+                                    [__plasmic_idx_0]
+                                  );
+                                  return (
+                                    <AntdModal
+                                      data-plasmic-name={"radiologyReport3"}
+                                      data-plasmic-override={
+                                        overrides.radiologyReport3
+                                      }
+                                      {...child$Props}
+                                    >
+                                      <div
+                                        className={classNames(
+                                          projectcss.all,
+                                          sty.freeBox__nwr7J
+                                        )}
+                                      >
+                                        <div
+                                          data-plasmic-name={"radiologyReport2"}
                                           data-plasmic-override={
-                                            overrides.reportDatetime
+                                            overrides.radiologyReport2
                                           }
                                           className={classNames(
                                             projectcss.all,
                                             projectcss.__wab_text,
-                                            sty.reportDatetime
+                                            sty.radiologyReport2
                                           )}
+                                          dir={"rtl"}
                                         >
                                           <React.Fragment>
-                                            {currentItem.service_datetime}
+                                            {currentItem.report}
                                           </React.Fragment>
                                         </div>
-                                      ),
-                                      trigger: (
-                                        <AntdButton
-                                          data-plasmic-name={"button"}
-                                          data-plasmic-override={
-                                            overrides.button
-                                          }
-                                          className={classNames(
-                                            "__wab_instance",
-                                            sty.button
-                                          )}
-                                        >
-                                          <div
-                                            className={classNames(
-                                              projectcss.all,
-                                              projectcss.__wab_text,
-                                              sty.text__l1JsI
-                                            )}
-                                          >
-                                            {
-                                              "\u0645\u0634\u0627\u0647\u062f\u0647 \u06af\u0632\u0627\u0631\u0634"
-                                            }
-                                          </div>
-                                        </AntdButton>
-                                      ),
-                                      width: "85%"
-                                    };
-                                    initializeCodeComponentStates(
-                                      $state,
-                                      [
-                                        {
-                                          name: "open",
-                                          plasmicStateName:
-                                            "radiologyReport3[].open"
-                                        }
-                                      ],
-                                      [__plasmic_idx_0],
-                                      undefined ?? {},
-                                      child$Props
-                                    );
-                                    initializePlasmicStates(
-                                      $state,
-                                      [
-                                        {
-                                          name: "radiologyReport3[].open",
-                                          initFunc: ({
-                                            $props,
-                                            $state,
-                                            $queries
-                                          }) => undefined
-                                        }
-                                      ],
-                                      [__plasmic_idx_0]
-                                    );
-                                    return (
-                                      <AntdModal
-                                        data-plasmic-name={"radiologyReport3"}
-                                        data-plasmic-override={
-                                          overrides.radiologyReport3
-                                        }
-                                        {...child$Props}
-                                      >
-                                        <div
-                                          className={classNames(
-                                            projectcss.all,
-                                            sty.freeBox__nwr7J
-                                          )}
-                                        >
-                                          <div
-                                            data-plasmic-name={
-                                              "radiologyReport2"
-                                            }
-                                            data-plasmic-override={
-                                              overrides.radiologyReport2
-                                            }
-                                            className={classNames(
-                                              projectcss.all,
-                                              projectcss.__wab_text,
-                                              sty.radiologyReport2
-                                            )}
-                                            dir={"rtl"}
-                                          >
-                                            <React.Fragment>
-                                              {currentItem.report}
-                                            </React.Fragment>
-                                          </div>
-                                        </div>
-                                      </AntdModal>
-                                    );
-                                  })()}
-                                </div>
-                              ) : null}
+                                      </div>
+                                    </AntdModal>
+                                  );
+                                })()}
+                              </div>
                             </Stack__>
                           </Stack__>
                         );
