@@ -754,6 +754,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               ageDate.getUTCFullYear() - 1970
                             );
                             const fullName = `${$ctx.fetched_data.data.items[0].first_name} ${$ctx.fetched_data.data.items[0].last_name}`;
+                            const patientService =
+                              $ctx.fetched_data.data.items[0].service;
                             if (ageYears < 1) {
                               const ageMonths = ageDate.getUTCMonth();
                               return `${fullName} ${ageMonths} months ${
@@ -2169,20 +2171,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               )}
                             >
                               <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.group_title;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
-                                    }
-                                    throw e;
-                                  }
-                                })()}
+                                {currentItem.group_title}
                               </React.Fragment>
                             </div>
                             <div
@@ -2199,7 +2188,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                   : [_par])(
                                 (() => {
                                   try {
-                                    return currentItem.results;
+                                    return currentItem.factors;
                                   } catch (e) {
                                     if (
                                       e instanceof TypeError ||
@@ -2224,20 +2213,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     key={currentIndex}
                                   >
                                     <React.Fragment>
-                                      {(() => {
-                                        try {
-                                          return currentItem.factor_name;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return "";
-                                          }
-                                          throw e;
-                                        }
-                                      })()}
+                                      {currentItem.factor_name}
                                     </React.Fragment>
                                   </div>
                                 );

@@ -2495,6 +2495,33 @@
   background: #ffffff;
   outline: none;
 }
+.راهنمایسرچپزشک {
+  position: relative;
+  margin-top: 30px;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  background: var(--token-6Lhw5mK6wolF);
+  width: auto;
+  text-align: center;
+  align-self: center;
+  font-weight: 700;
+  white-space: pre-wrap;
+  font-family: var(--VazirmatnCustom);
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  user-select: none;
+  text-decoration-line: none !important;
+  box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
+  border-radius: 5px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .راهنمایسرچپزشک {
+    margin-top: 15px;
+  }
+}
 .physiciansList:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;

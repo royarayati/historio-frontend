@@ -65,7 +65,6 @@ import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // pla
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
-import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 
@@ -121,15 +120,14 @@ export type PlasmicImagingReportList__OverridesType = {
   imagingType?: Flex__<"div">;
   reportPreviousAdmission?: Flex__<"div">;
   previousAdmission2?: Flex__<typeof Button>;
-  radiologyReport3?: Flex__<typeof AntdModal>;
-  radiologyReport2?: Flex__<"div">;
-  reportDatetime?: Flex__<"div">;
-  button?: Flex__<typeof AntdButton>;
   imagingModalities?: Flex__<typeof ApiFetcherComponent>;
   imagingModalitiesList?: Flex__<"div">;
   imagingModaltyCards?: Flex__<"div">;
   modalityName?: Flex__<"div">;
   modalityDatetime?: Flex__<"div">;
+  radiologyReportModal?: Flex__<typeof AntdModal>;
+  radiologyReportText2?: Flex__<"div">;
+  radiologyReportDatetime2?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   homepage?: Flex__<typeof PlasmicImg__>;
@@ -427,12 +425,25 @@ function PlasmicImagingReportList__RenderFunc(props: {
         variableType: "boolean"
       },
       {
-        path: "radiologyReport3[].open",
+        path: "radiologyReportModal.open",
         type: "private",
-        variableType: "boolean"
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "variable",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "radiologyReportText",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "radiologyReportDatetime",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
@@ -1234,14 +1245,15 @@ function PlasmicImagingReportList__RenderFunc(props: {
                               onClick={async event => {
                                 const $steps = {};
 
-                                $steps["updateVariable"] = true
+                                $steps["updateRadiologyReport3"] = true
                                   ? (() => {
                                       const actionArgs = {
                                         variable: {
                                           objRoot: $state,
-                                          variablePath: ["variable"]
+                                          variablePath: ["radiologyReportText"]
                                         },
-                                        operation: 0
+                                        operation: 0,
+                                        value: currentItem.report
                                       };
                                       return (({
                                         variable,
@@ -1261,15 +1273,111 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                     })()
                                   : undefined;
                                 if (
-                                  $steps["updateVariable"] != null &&
-                                  typeof $steps["updateVariable"] ===
+                                  $steps["updateRadiologyReport3"] != null &&
+                                  typeof $steps["updateRadiologyReport3"] ===
                                     "object" &&
-                                  typeof $steps["updateVariable"].then ===
-                                    "function"
+                                  typeof $steps["updateRadiologyReport3"]
+                                    .then === "function"
                                 ) {
-                                  $steps["updateVariable"] = await $steps[
-                                    "updateVariable"
-                                  ];
+                                  $steps["updateRadiologyReport3"] =
+                                    await $steps["updateRadiologyReport3"];
+                                }
+
+                                $steps["updateRadiologyReportModalOpen"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "radiologyReportModal",
+                                            "open"
+                                          ]
+                                        },
+                                        operation: 4
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        const oldValue = $stateGet(
+                                          objRoot,
+                                          variablePath
+                                        );
+                                        $stateSet(
+                                          objRoot,
+                                          variablePath,
+                                          !oldValue
+                                        );
+                                        return !oldValue;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateRadiologyReportModalOpen"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "updateRadiologyReportModalOpen"
+                                  ] === "object" &&
+                                  typeof $steps[
+                                    "updateRadiologyReportModalOpen"
+                                  ].then === "function"
+                                ) {
+                                  $steps["updateRadiologyReportModalOpen"] =
+                                    await $steps[
+                                      "updateRadiologyReportModalOpen"
+                                    ];
+                                }
+
+                                $steps["updateRadiologyReportDatetime"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "radiologyReportDatetime"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: currentItem.service_datetime
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateRadiologyReportDatetime"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "updateRadiologyReportDatetime"
+                                  ] === "object" &&
+                                  typeof $steps["updateRadiologyReportDatetime"]
+                                    .then === "function"
+                                ) {
+                                  $steps["updateRadiologyReportDatetime"] =
+                                    await $steps[
+                                      "updateRadiologyReportDatetime"
+                                    ];
                                 }
                               }}
                             >
@@ -1527,23 +1635,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   sty.reportPreviousAdmission
                                 )}
                               >
-                                {(() => {
-                                  try {
-                                    return (
-                                      new Date(currentItem.service_datetime) <
-                                      new Date($state.admissionDatetime)
-                                    );
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return true;
-                                    }
-                                    throw e;
-                                  }
-                                })()
+                                {new Date(currentItem.service_datetime) <
+                                new Date($state.admissionDatetime)
                                   ? (() => {
                                       const child$Props = {
                                         className: classNames(
@@ -1695,168 +1788,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                       );
                                     })()
                                   : null}
-                                {(() => {
-                                  const child$Props = {
-                                    className: classNames(
-                                      "__wab_instance",
-                                      sty.radiologyReport3
-                                    ),
-                                    defaultStylesClassName: classNames(
-                                      projectcss.root_reset,
-                                      projectcss.plasmic_default_styles,
-                                      projectcss.plasmic_mixins,
-                                      projectcss.plasmic_tokens,
-                                      plasmic_antd_5_hostless_css.plasmic_tokens,
-                                      plasmic_plasmic_rich_components_css.plasmic_tokens
-                                    ),
-                                    hideFooter: true,
-                                    maskClosable: true,
-                                    modalContentClassName: classNames({
-                                      [sty["pcls_ZG-GDZIr36rt"]]: true
-                                    }),
-                                    modalScopeClassName:
-                                      sty["radiologyReport3__modal"],
-                                    onOpenChange: generateStateOnChangeProp(
-                                      $state,
-                                      [
-                                        "radiologyReport3",
-                                        __plasmic_idx_0,
-                                        "open"
-                                      ]
-                                    ),
-                                    open: generateStateValueProp($state, [
-                                      "radiologyReport3",
-                                      __plasmic_idx_0,
-                                      "open"
-                                    ]),
-                                    title: (
-                                      <div
-                                        data-plasmic-name={"reportDatetime"}
-                                        data-plasmic-override={
-                                          overrides.reportDatetime
-                                        }
-                                        className={classNames(
-                                          projectcss.all,
-                                          projectcss.__wab_text,
-                                          sty.reportDatetime
-                                        )}
-                                      >
-                                        <React.Fragment>
-                                          {(() => {
-                                            const gregorianDate = new Date(
-                                              currentItem.service_datetime
-                                            );
-                                            const shamsiDate =
-                                              new Intl.DateTimeFormat(
-                                                "fa-IR"
-                                              ).format(gregorianDate);
-                                            const shamsiTime =
-                                              gregorianDate.toLocaleTimeString(
-                                                "fa-IR",
-                                                { hour12: false }
-                                              );
-                                            const englishDate =
-                                              shamsiDate.replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
-                                            const englishTime =
-                                              shamsiTime.replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
-                                            return `${englishDate} - ${englishTime}`;
-                                          })()}
-                                        </React.Fragment>
-                                      </div>
-                                    ),
-                                    trigger: (
-                                      <AntdButton
-                                        data-plasmic-name={"button"}
-                                        data-plasmic-override={overrides.button}
-                                        className={classNames(
-                                          "__wab_instance",
-                                          sty.button
-                                        )}
-                                      >
-                                        <div
-                                          className={classNames(
-                                            projectcss.all,
-                                            projectcss.__wab_text,
-                                            sty.text__l1JsI
-                                          )}
-                                        >
-                                          {
-                                            "\u0645\u0634\u0627\u0647\u062f\u0647 \u06af\u0632\u0627\u0631\u0634"
-                                          }
-                                        </div>
-                                      </AntdButton>
-                                    ),
-                                    width: "85%"
-                                  };
-                                  initializeCodeComponentStates(
-                                    $state,
-                                    [
-                                      {
-                                        name: "open",
-                                        plasmicStateName:
-                                          "radiologyReport3[].open"
-                                      }
-                                    ],
-                                    [__plasmic_idx_0],
-                                    undefined ?? {},
-                                    child$Props
-                                  );
-                                  initializePlasmicStates(
-                                    $state,
-                                    [
-                                      {
-                                        name: "radiologyReport3[].open",
-                                        initFunc: ({
-                                          $props,
-                                          $state,
-                                          $queries
-                                        }) => undefined
-                                      }
-                                    ],
-                                    [__plasmic_idx_0]
-                                  );
-                                  return (
-                                    <AntdModal
-                                      data-plasmic-name={"radiologyReport3"}
-                                      data-plasmic-override={
-                                        overrides.radiologyReport3
-                                      }
-                                      {...child$Props}
-                                    >
-                                      <div
-                                        className={classNames(
-                                          projectcss.all,
-                                          sty.freeBox__nwr7J
-                                        )}
-                                      >
-                                        <div
-                                          data-plasmic-name={"radiologyReport2"}
-                                          data-plasmic-override={
-                                            overrides.radiologyReport2
-                                          }
-                                          className={classNames(
-                                            projectcss.all,
-                                            projectcss.__wab_text,
-                                            sty.radiologyReport2
-                                          )}
-                                          dir={"rtl"}
-                                        >
-                                          <React.Fragment>
-                                            {currentItem.report}
-                                          </React.Fragment>
-                                        </div>
-                                      </div>
-                                    </AntdModal>
-                                  );
-                                })()}
                               </div>
                             </Stack__>
                           </Stack__>
@@ -2041,6 +1972,86 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
         ) : null}
+        <AntdModal
+          data-plasmic-name={"radiologyReportModal"}
+          data-plasmic-override={overrides.radiologyReportModal}
+          className={classNames("__wab_instance", sty.radiologyReportModal)}
+          closeButtonClassName={classNames({
+            [sty["pcls_CVnrmOQHDSyg"]]: true
+          })}
+          defaultStylesClassName={classNames(
+            projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens
+          )}
+          hideFooter={true}
+          maskClosable={true}
+          modalContentClassName={classNames({
+            [sty["pcls_ZG-GDZIr36rt"]]: true
+          })}
+          modalScopeClassName={sty["radiologyReportModal__modal"]}
+          onOpenChange={generateStateOnChangeProp($state, [
+            "radiologyReportModal",
+            "open"
+          ])}
+          open={generateStateValueProp($state, [
+            "radiologyReportModal",
+            "open"
+          ])}
+          title={
+            <div
+              data-plasmic-name={"radiologyReportDatetime2"}
+              data-plasmic-override={overrides.radiologyReportDatetime2}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.radiologyReportDatetime2
+              )}
+            >
+              <React.Fragment>
+                {(() => {
+                  const gregorianDate = new Date(
+                    $state.radiologyReportDatetime
+                  );
+                  const shamsiDate = new Intl.DateTimeFormat("fa-IR").format(
+                    gregorianDate
+                  );
+                  const shamsiTime = gregorianDate.toLocaleTimeString("fa-IR", {
+                    hour12: false
+                  });
+                  const englishDate = shamsiDate.replace(/[۰-۹]/g, d =>
+                    String.fromCharCode(d.charCodeAt(0) - 1728)
+                  );
+                  const englishTime = shamsiTime.replace(/[۰-۹]/g, d =>
+                    String.fromCharCode(d.charCodeAt(0) - 1728)
+                  );
+                  return `${englishDate} - ${englishTime}`;
+                })()}
+              </React.Fragment>
+            </div>
+          }
+          trigger={null}
+          width={"85%"}
+          wrapClassName={classNames({ [sty["pcls_nVYN7IUeA_o9"]]: true })}
+        >
+          <div className={classNames(projectcss.all, sty.freeBox__nwr7J)}>
+            <div
+              data-plasmic-name={"radiologyReportText2"}
+              data-plasmic-override={overrides.radiologyReportText2}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.radiologyReportText2
+              )}
+              dir={"rtl"}
+            >
+              <React.Fragment>{$state.radiologyReportText}</React.Fragment>
+            </div>
+          </div>
+        </AntdModal>
         <div
           data-plasmic-name={"switchingTabs"}
           data-plasmic-override={overrides.switchingTabs}
@@ -2525,15 +2536,14 @@ const PlasmicDescendants = {
     "imagingType",
     "reportPreviousAdmission",
     "previousAdmission2",
-    "radiologyReport3",
-    "radiologyReport2",
-    "reportDatetime",
-    "button",
     "imagingModalities",
     "imagingModalitiesList",
     "imagingModaltyCards",
     "modalityName",
     "modalityDatetime",
+    "radiologyReportModal",
+    "radiologyReportText2",
+    "radiologyReportDatetime2",
     "switchingTabs",
     "switchingTab",
     "homepage",
@@ -2574,11 +2584,7 @@ const PlasmicDescendants = {
     "previousAdmission",
     "imagingType",
     "reportPreviousAdmission",
-    "previousAdmission2",
-    "radiologyReport3",
-    "radiologyReport2",
-    "reportDatetime",
-    "button"
+    "previousAdmission2"
   ],
   viewPacsButton: ["viewPacsButton"],
   imagingReportsSection: [
@@ -2592,11 +2598,7 @@ const PlasmicDescendants = {
     "previousAdmission",
     "imagingType",
     "reportPreviousAdmission",
-    "previousAdmission2",
-    "radiologyReport3",
-    "radiologyReport2",
-    "reportDatetime",
-    "button"
+    "previousAdmission2"
   ],
   imagingReportSection: [
     "imagingReportSection",
@@ -2608,11 +2610,7 @@ const PlasmicDescendants = {
     "previousAdmission",
     "imagingType",
     "reportPreviousAdmission",
-    "previousAdmission2",
-    "radiologyReport3",
-    "radiologyReport2",
-    "reportDatetime",
-    "button"
+    "previousAdmission2"
   ],
   imagingReportList2: [
     "imagingReportList2",
@@ -2623,11 +2621,7 @@ const PlasmicDescendants = {
     "previousAdmission",
     "imagingType",
     "reportPreviousAdmission",
-    "previousAdmission2",
-    "radiologyReport3",
-    "radiologyReport2",
-    "reportDatetime",
-    "button"
+    "previousAdmission2"
   ],
   imagingReportCard: [
     "imagingReportCard",
@@ -2637,11 +2631,7 @@ const PlasmicDescendants = {
     "previousAdmission",
     "imagingType",
     "reportPreviousAdmission",
-    "previousAdmission2",
-    "radiologyReport3",
-    "radiologyReport2",
-    "reportDatetime",
-    "button"
+    "previousAdmission2"
   ],
   imagingTitleDatetime: [
     "imagingTitleDatetime",
@@ -2652,24 +2642,8 @@ const PlasmicDescendants = {
   imagingDatetime: ["imagingDatetime"],
   previousAdmission: ["previousAdmission"],
   imagingType: ["imagingType"],
-  reportPreviousAdmission: [
-    "reportPreviousAdmission",
-    "previousAdmission2",
-    "radiologyReport3",
-    "radiologyReport2",
-    "reportDatetime",
-    "button"
-  ],
+  reportPreviousAdmission: ["reportPreviousAdmission", "previousAdmission2"],
   previousAdmission2: ["previousAdmission2"],
-  radiologyReport3: [
-    "radiologyReport3",
-    "radiologyReport2",
-    "reportDatetime",
-    "button"
-  ],
-  radiologyReport2: ["radiologyReport2"],
-  reportDatetime: ["reportDatetime"],
-  button: ["button"],
   imagingModalities: [
     "imagingModalities",
     "imagingModalitiesList",
@@ -2690,6 +2664,13 @@ const PlasmicDescendants = {
   ],
   modalityName: ["modalityName"],
   modalityDatetime: ["modalityDatetime"],
+  radiologyReportModal: [
+    "radiologyReportModal",
+    "radiologyReportText2",
+    "radiologyReportDatetime2"
+  ],
+  radiologyReportText2: ["radiologyReportText2"],
+  radiologyReportDatetime2: ["radiologyReportDatetime2"],
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
@@ -2743,15 +2724,14 @@ type NodeDefaultElementType = {
   imagingType: "div";
   reportPreviousAdmission: "div";
   previousAdmission2: typeof Button;
-  radiologyReport3: typeof AntdModal;
-  radiologyReport2: "div";
-  reportDatetime: "div";
-  button: typeof AntdButton;
   imagingModalities: typeof ApiFetcherComponent;
   imagingModalitiesList: "div";
   imagingModaltyCards: "div";
   modalityName: "div";
   modalityDatetime: "div";
+  radiologyReportModal: typeof AntdModal;
+  radiologyReportText2: "div";
+  radiologyReportDatetime2: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   homepage: typeof PlasmicImg__;
@@ -2846,15 +2826,14 @@ export const PlasmicImagingReportList = Object.assign(
     imagingType: makeNodeComponent("imagingType"),
     reportPreviousAdmission: makeNodeComponent("reportPreviousAdmission"),
     previousAdmission2: makeNodeComponent("previousAdmission2"),
-    radiologyReport3: makeNodeComponent("radiologyReport3"),
-    radiologyReport2: makeNodeComponent("radiologyReport2"),
-    reportDatetime: makeNodeComponent("reportDatetime"),
-    button: makeNodeComponent("button"),
     imagingModalities: makeNodeComponent("imagingModalities"),
     imagingModalitiesList: makeNodeComponent("imagingModalitiesList"),
     imagingModaltyCards: makeNodeComponent("imagingModaltyCards"),
     modalityName: makeNodeComponent("modalityName"),
     modalityDatetime: makeNodeComponent("modalityDatetime"),
+    radiologyReportModal: makeNodeComponent("radiologyReportModal"),
+    radiologyReportText2: makeNodeComponent("radiologyReportText2"),
+    radiologyReportDatetime2: makeNodeComponent("radiologyReportDatetime2"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),

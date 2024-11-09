@@ -446,7 +446,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               sty.text___17Gib
                             )}
                           >
-                            {"No"}
+                            {"Patient ID"}
                           </div>
                           <div
                             data-plasmic-name={"patientNo"}
@@ -458,7 +458,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data.items[0].id}
+                              {$ctx.fetched_data.data.items[0].patient_id}
                             </React.Fragment>
                           </div>
                           <div
@@ -468,7 +468,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               sty.text__zzbJi
                             )}
                           >
-                            {"PACS"}
+                            {"PACS - Admission ID"}
                           </div>
                           <div
                             data-plasmic-name={"pacsNumber"}
@@ -661,11 +661,12 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               projectcss.__wab_text,
                               sty.patientService
                             )}
+                            dir={"rtl"}
                           >
                             <React.Fragment>
                               {$ctx.fetched_data.data.items[0].service
                                 ? $ctx.fetched_data.data.items[0].service
-                                : ""}
+                                : "مشخص نشده"}
                             </React.Fragment>
                           </div>
                           <div
@@ -685,6 +686,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               projectcss.__wab_text,
                               sty.patientWard
                             )}
+                            dir={"rtl"}
                           >
                             <React.Fragment>
                               {$ctx.fetched_data.data.items[0].ward[0].name}
@@ -707,6 +709,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               projectcss.__wab_text,
                               sty.patientRoomBed
                             )}
+                            dir={"rtl"}
                           >
                             <React.Fragment>
                               {$ctx.fetched_data.data.items[0].room +

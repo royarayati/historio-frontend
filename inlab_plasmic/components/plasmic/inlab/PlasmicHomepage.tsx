@@ -216,6 +216,7 @@ export type PlasmicHomepage__OverridesType = {
   wardsName?: Flex__<"div">;
   searchbarWard?: Flex__<typeof TextInput>;
   modalPhysician?: Flex__<typeof AntdModal>;
+  راهنمایسرچپزشک?: Flex__<"div">;
   physiciansList?: Flex__<typeof ApiFetcherComponent>;
   physiciansList2?: Flex__<"div">;
   physiciansName?: Flex__<"div">;
@@ -6918,6 +6919,36 @@ function PlasmicHomepage__RenderFunc(props: {
           trigger={null}
           wrapClassName={classNames({ [sty["pcls_IF4RfoWSlpeq"]]: true })}
         >
+          {(() => {
+            try {
+              return $state.searchbarPhysicians.value === "";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
+            <div
+              data-plasmic-name={
+                "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9"
+              }
+              data-plasmic-override={overrides.راهنمایسرچپزشک}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.راهنمایسرچپزشک
+              )}
+              dir={"rtl"}
+            >
+              {
+                "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0627\u0633\u062a\u0627\u062f \u0645\u0648\u0631\u062f \u0646\u0638\u0631 \u062e\u0648\u062f \u0631\u0627 \u0648\u0627\u0631\u062f \u0646\u0645\u0627\u06cc\u06cc\u062f \ud83d\udc46\ud83d\udc46"
+              }
+            </div>
+          ) : null}
           {$state.searchbarPhysicians.value != "" ? (
             <ApiFetcherComponent
               data-plasmic-name={"physiciansList"}
@@ -6983,6 +7014,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             projectcss.__wab_text,
                             sty.physiciansName
                           )}
+                          dir={"rtl"}
                           key={currentIndex}
                           onClick={async event => {
                             const $steps = {};
@@ -7222,9 +7254,12 @@ function PlasmicHomepage__RenderFunc(props: {
                           }}
                         >
                           <React.Fragment>
-                            {(currentItem.speciality
-                              ? currentItem.speciality + " | "
-                              : "") + currentItem.last_name}
+                            {currentItem.first_name +
+                              " " +
+                              currentItem.last_name +
+                              (currentItem.speciality
+                                ? " | " + currentItem.speciality
+                                : "")}
                           </React.Fragment>
                         </div>
                       );
@@ -11574,6 +11609,7 @@ const PlasmicDescendants = {
     "wardsName",
     "searchbarWard",
     "modalPhysician",
+    "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9",
     "physiciansList",
     "physiciansList2",
     "physiciansName",
@@ -12114,11 +12150,15 @@ const PlasmicDescendants = {
   searchbarWard: ["searchbarWard"],
   modalPhysician: [
     "modalPhysician",
+    "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9",
     "physiciansList",
     "physiciansList2",
     "physiciansName",
     "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "searchbarPhysicians"
+  ],
+  راهنمایسرچپزشک: [
+    "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9"
   ],
   physiciansList: [
     "physiciansList",
@@ -12315,6 +12355,7 @@ type NodeDefaultElementType = {
   wardsName: "div";
   searchbarWard: typeof TextInput;
   modalPhysician: typeof AntdModal;
+  راهنمایسرچپزشک: "div";
   physiciansList: typeof ApiFetcherComponent;
   physiciansList2: "div";
   physiciansName: "div";
@@ -12523,6 +12564,9 @@ export const PlasmicHomepage = Object.assign(
     wardsName: makeNodeComponent("wardsName"),
     searchbarWard: makeNodeComponent("searchbarWard"),
     modalPhysician: makeNodeComponent("modalPhysician"),
+    راهنمایسرچپزشک: makeNodeComponent(
+      "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9"
+    ),
     physiciansList: makeNodeComponent("physiciansList"),
     physiciansList2: makeNodeComponent("physiciansList2"),
     physiciansName: makeNodeComponent("physiciansName"),
