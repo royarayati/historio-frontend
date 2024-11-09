@@ -2012,24 +2012,27 @@ function PlasmicImagingReportList__RenderFunc(props: {
               )}
             >
               <React.Fragment>
-                {(() => {
-                  const gregorianDate = new Date(
-                    $state.radiologyReportDatetime
-                  );
-                  const shamsiDate = new Intl.DateTimeFormat("fa-IR").format(
-                    gregorianDate
-                  );
-                  const shamsiTime = gregorianDate.toLocaleTimeString("fa-IR", {
-                    hour12: false
-                  });
-                  const englishDate = shamsiDate.replace(/[۰-۹]/g, d =>
-                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                  );
-                  const englishTime = shamsiTime.replace(/[۰-۹]/g, d =>
-                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                  );
-                  return `${englishDate} - ${englishTime}`;
-                })()}
+                {$state.radiologyReportDatetime
+                  ? (() => {
+                      const gregorianDate = new Date(
+                        $state.radiologyReportDatetime
+                      );
+                      const shamsiDate = new Intl.DateTimeFormat(
+                        "fa-IR"
+                      ).format(gregorianDate);
+                      const shamsiTime = gregorianDate.toLocaleTimeString(
+                        "fa-IR",
+                        { hour12: false }
+                      );
+                      const englishDate = shamsiDate.replace(/[۰-۹]/g, d =>
+                        String.fromCharCode(d.charCodeAt(0) - 1728)
+                      );
+                      const englishTime = shamsiTime.replace(/[۰-۹]/g, d =>
+                        String.fromCharCode(d.charCodeAt(0) - 1728)
+                      );
+                      return `${englishDate} - ${englishTime}`;
+                    })()
+                  : ""}
               </React.Fragment>
             </div>
           }

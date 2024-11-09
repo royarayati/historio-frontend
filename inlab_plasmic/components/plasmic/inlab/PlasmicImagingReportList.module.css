@@ -792,11 +792,12 @@
 }
 .radiologyReportText2 {
   text-align: right;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  line-height: 1;
+  font-size: var(--token-sOr3fJ5Up5fq);
+  line-height: 1.5;
   user-select: none;
   white-space: pre-wrap;
   width: 100%;
+  letter-spacing: normal;
   min-width: 0;
 }
 .radiologyReportDatetime2 {

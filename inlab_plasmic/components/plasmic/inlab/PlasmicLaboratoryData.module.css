@@ -931,7 +931,7 @@
   grid-column-gap: 4px;
   grid-auto-rows: auto;
   grid-auto-columns: 1fr;
-  background: #ffffff;
+  background: none;
   min-width: 0;
   padding: 4px;
 }
@@ -952,6 +952,17 @@
   .text__r2NQs {
     font-size: var(--token-CdE1_0ZaCyT1);
   }
+}
+.text__xoyT {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  margin-top: 32px;
+  white-space: pre-wrap;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
 }
 .switchingTabs {
   display: flex;

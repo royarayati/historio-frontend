@@ -2224,6 +2224,20 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       );
                     })}
                   </Stack__>
+                  {$ctx.fetched_data.loading == false &&
+                  $ctx.fetched_data.data.lab_test_groups == 0 ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__xoyT
+                      )}
+                    >
+                      {
+                        "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                      }
+                    </div>
+                  ) : null}
                 </React.Fragment>
               )}
             </DataCtxReader__>
