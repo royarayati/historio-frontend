@@ -446,7 +446,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
         path: "radiologyReportDatetime",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+        initFunc: ({ $props, $state, $queries, $ctx }) => ``
       }
     ],
     [$props, $ctx, $refs]
@@ -1283,6 +1283,50 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                     await $steps["updateRadiologyReport3"];
                                 }
 
+                                $steps["updateRadiologyReportDatetime"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "radiologyReportDatetime"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: currentItem.service_datetime
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateRadiologyReportDatetime"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "updateRadiologyReportDatetime"
+                                  ] === "object" &&
+                                  typeof $steps["updateRadiologyReportDatetime"]
+                                    .then === "function"
+                                ) {
+                                  $steps["updateRadiologyReportDatetime"] =
+                                    await $steps[
+                                      "updateRadiologyReportDatetime"
+                                    ];
+                                }
+
                                 $steps["updateRadiologyReportModalOpen"] = true
                                   ? (() => {
                                       const actionArgs = {
@@ -1333,50 +1377,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   $steps["updateRadiologyReportModalOpen"] =
                                     await $steps[
                                       "updateRadiologyReportModalOpen"
-                                    ];
-                                }
-
-                                $steps["updateRadiologyReportDatetime"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        variable: {
-                                          objRoot: $state,
-                                          variablePath: [
-                                            "radiologyReportDatetime"
-                                          ]
-                                        },
-                                        operation: 0,
-                                        value: currentItem.service_datetime
-                                      };
-                                      return (({
-                                        variable,
-                                        value,
-                                        startIndex,
-                                        deleteCount
-                                      }) => {
-                                        if (!variable) {
-                                          return;
-                                        }
-                                        const { objRoot, variablePath } =
-                                          variable;
-
-                                        $stateSet(objRoot, variablePath, value);
-                                        return value;
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["updateRadiologyReportDatetime"] !=
-                                    null &&
-                                  typeof $steps[
-                                    "updateRadiologyReportDatetime"
-                                  ] === "object" &&
-                                  typeof $steps["updateRadiologyReportDatetime"]
-                                    .then === "function"
-                                ) {
-                                  $steps["updateRadiologyReportDatetime"] =
-                                    await $steps[
-                                      "updateRadiologyReportDatetime"
                                     ];
                                 }
                               }}

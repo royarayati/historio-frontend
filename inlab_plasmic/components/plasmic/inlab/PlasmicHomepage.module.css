@@ -1304,11 +1304,13 @@
   position: relative;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
+  width: auto;
   height: auto;
   max-width: 100%;
   background: none;
-  min-width: 0;
+  left: auto;
+  top: auto;
+  z-index: 1;
   padding: 5px 5px 8px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -2499,7 +2501,7 @@
   position: relative;
   margin-top: 30px;
   font-size: var(--token-CdE1_0ZaCyT1);
-  background: var(--token-6Lhw5mK6wolF);
+  background: #418dff33;
   width: auto;
   text-align: center;
   align-self: center;
