@@ -1473,7 +1473,7 @@
   font-weight: 300;
   text-align: center;
   background: var(--token-4VVKgsFPDvBb);
-  color: var(--token-zy6xhYnWF8Y7);
+  color: #ffffff;
   padding-right: 0.1rem;
   padding-left: 0.1rem;
   align-self: center;
@@ -1583,7 +1583,7 @@
   font-weight: 300;
   text-align: center;
   background: var(--token-4VVKgsFPDvBb);
-  color: var(--token-zy6xhYnWF8Y7);
+  color: #ffffff;
   padding-right: 0.1rem;
   padding-left: 0.1rem;
   align-self: center;
@@ -1669,7 +1669,7 @@
   font-weight: 300;
   text-align: center;
   background: var(--token-4VVKgsFPDvBb);
-  color: var(--token-zy6xhYnWF8Y7);
+  color: #ffffff;
   padding-right: 0.1rem;
   padding-left: 0.1rem;
   align-self: center;
@@ -2073,20 +2073,6 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none;
-}
-.svg__anjLh {
-  position: relative;
-  object-fit: cover;
-  max-width: 1%;
-  color: var(--token-Bo2_tT25lwh4);
-  align-self: center;
-  height: 1em;
-  display: none;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .svg__anjLh {
-    max-width: 3.2%;
-  }
 }
 .firstLastName {
   width: 100%;

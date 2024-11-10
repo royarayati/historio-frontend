@@ -92,7 +92,6 @@ import EvaArrowBackFillIcon from "./icons/PlasmicIcon__EvaArrowBackFill"; // pla
 import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: kYUnvWOY7oUw/icon
 import BookmarkPlusSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComSvg"; // plasmic-import: laC4EyEnFr3s/icon
 import BookmarkDashFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComSvg"; // plasmic-import: OXlS9uB7Ffdy/icon
-import IndicatorIcon from "./icons/PlasmicIcon__Indicator"; // plasmic-import: B34gCeBlzVGZ/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 
@@ -5554,7 +5553,20 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.patientNameBookmarkIcon
                                 )}
                               >
-                                {false ? (
+                                {(() => {
+                                  try {
+                                    return currentItem.dismissed;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return false;
+                                    }
+                                    throw e;
+                                  }
+                                })() ? (
                                   <Stack__
                                     as={"div"}
                                     data-plasmic-name={"dismision"}
@@ -5583,13 +5595,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                         </span>
                                       </React.Fragment>
                                     </div>
-                                    <IndicatorIcon
-                                      className={classNames(
-                                        projectcss.all,
-                                        sty.svg__anjLh
-                                      )}
-                                      role={"img"}
-                                    />
                                   </Stack__>
                                 ) : null}
                                 <div
