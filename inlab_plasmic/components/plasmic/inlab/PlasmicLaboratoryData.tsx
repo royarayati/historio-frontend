@@ -64,8 +64,6 @@ import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; /
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
-import { AntdSingleCollapse } from "@plasmicpkgs/antd5/skinny/registerCollapse";
-import { singleCollapseHelpers as AntdSingleCollapse_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -135,9 +133,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   labFactorList?: Flex__<"div">;
   labFactorPerDate?: Flex__<"div">;
   labFactorDatetime?: Flex__<"div">;
-  factorsList?: Flex__<"div">;
-  factor?: Flex__<typeof AntdSingleCollapse>;
-  factorName2?: Flex__<"div">;
+  labGroupFactorName?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   homepage?: Flex__<typeof PlasmicImg__>;
@@ -338,13 +334,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               throw e;
             }
           })()
-      },
-      {
-        path: "factor[][].open",
-        type: "private",
-        variableType: "boolean",
-
-        onMutate: generateOnMutateForSpec("open", AntdSingleCollapse_Helpers)
       },
       {
         path: "button.isDisabled",
@@ -765,6 +754,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               ageDate.getUTCFullYear() - 1970
                             );
                             const fullName = `${$ctx.fetched_data.data.items[0].first_name} ${$ctx.fetched_data.data.items[0].last_name}`;
+                            const patientService =
+                              $ctx.fetched_data.data.items[0].service;
                             if (ageYears < 1) {
                               const ageMonths = ageDate.getUTCMonth();
                               return `${fullName} ${ageMonths} months ${
@@ -2093,7 +2084,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v3/patient/lab_factors/${$ctx.params.adm_id}`}
+            path={`/api/v3/remote_his/lab_factors?admission_id=${$ctx.params.adm_id}`}
             ref={ref => {
               $refs["checkedFactorsApiFetcher"] = ref;
             }}
@@ -2159,239 +2150,94 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.issued_datetime;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
+                              {currentItem.issued_datetime}
                             </React.Fragment>
                           </div>
                           <div
-                            data-plasmic-name={"factorsList"}
-                            data-plasmic-override={overrides.factorsList}
                             className={classNames(
                               projectcss.all,
-                              sty.factorsList
+                              sty.freeBox___1NlKt
                             )}
                           >
-                            {(_par =>
-                              !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                              (() => {
-                                try {
-                                  return currentItem.lab_groups;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return [];
+                            <div
+                              data-plasmic-name={"labGroupFactorName"}
+                              data-plasmic-override={
+                                overrides.labGroupFactorName
+                              }
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.labGroupFactorName
+                              )}
+                            >
+                              <React.Fragment>
+                                {currentItem.group_title}
+                              </React.Fragment>
+                            </div>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                sty.freeBox__iNm8J
+                              )}
+                            >
+                              {(_par =>
+                                !_par
+                                  ? []
+                                  : Array.isArray(_par)
+                                  ? _par
+                                  : [_par])(
+                                (() => {
+                                  try {
+                                    return currentItem.factors;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return [];
+                                    }
+                                    throw e;
                                   }
-                                  throw e;
-                                }
-                              })()
-                            ).map((__plasmic_item_1, __plasmic_idx_1) => {
-                              const currentItem = __plasmic_item_1;
-                              const currentIndex = __plasmic_idx_1;
-                              return (
-                                <div
-                                  className={classNames(
-                                    projectcss.all,
-                                    sty.freeBox___1NlKt
-                                  )}
-                                  key={currentIndex}
-                                >
+                                })()
+                              ).map((__plasmic_item_1, __plasmic_idx_1) => {
+                                const currentItem = __plasmic_item_1;
+                                const currentIndex = __plasmic_idx_1;
+                                return (
                                   <div
                                     className={classNames(
                                       projectcss.all,
-                                      sty.freeBox__irl0O
+                                      projectcss.__wab_text,
+                                      sty.text__r2NQs
                                     )}
+                                    key={currentIndex}
                                   >
-                                    <div
-                                      className={classNames(
-                                        projectcss.all,
-                                        sty.freeBox__xC6Cb
-                                      )}
-                                    >
-                                      {(() => {
-                                        const child$Props = {
-                                          bordered: true,
-                                          className: classNames(
-                                            "__wab_instance",
-                                            sty.factor
-                                          ),
-                                          defaultOpen: false,
-                                          ghost: true,
-                                          headerClass: classNames({
-                                            [sty["pcls_q2lYXHR-r9ME"]]: true
-                                          }),
-                                          label2: (
-                                            <React.Fragment>
-                                              {(() => {
-                                                try {
-                                                  return currentItem.gname;
-                                                } catch (e) {
-                                                  if (
-                                                    e instanceof TypeError ||
-                                                    e?.plasmicType ===
-                                                      "PlasmicUndefinedDataError"
-                                                  ) {
-                                                    return "Collapse Header";
-                                                  }
-                                                  throw e;
-                                                }
-                                              })()}
-                                            </React.Fragment>
-                                          ),
-                                          onChange:
-                                            generateStateOnChangePropForCodeComponents(
-                                              $state,
-                                              "open",
-                                              [
-                                                "factor",
-                                                __plasmic_idx_0,
-                                                __plasmic_idx_1,
-                                                "open"
-                                              ],
-                                              AntdSingleCollapse_Helpers
-                                            ),
-                                          open: generateStateValueProp($state, [
-                                            "factor",
-                                            __plasmic_idx_0,
-                                            __plasmic_idx_1,
-                                            "open"
-                                          ]),
-                                          showArrow: true
-                                        };
-                                        initializeCodeComponentStates(
-                                          $state,
-                                          [
-                                            {
-                                              name: "open",
-                                              plasmicStateName:
-                                                "factor[][].open"
-                                            }
-                                          ],
-                                          [__plasmic_idx_0, __plasmic_idx_1],
-                                          AntdSingleCollapse_Helpers ?? {},
-                                          child$Props
-                                        );
-                                        initializePlasmicStates(
-                                          $state,
-                                          [
-                                            {
-                                              name: "factor[][].open",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => false
-                                            }
-                                          ],
-                                          [__plasmic_idx_0, __plasmic_idx_1]
-                                        );
-                                        return (
-                                          <AntdSingleCollapse
-                                            data-plasmic-name={"factor"}
-                                            data-plasmic-override={
-                                              overrides.factor
-                                            }
-                                            {...child$Props}
-                                          >
-                                            {(_par =>
-                                              !_par
-                                                ? []
-                                                : Array.isArray(_par)
-                                                ? _par
-                                                : [_par])(
-                                              (() => {
-                                                try {
-                                                  return currentItem.lab_results;
-                                                } catch (e) {
-                                                  if (
-                                                    e instanceof TypeError ||
-                                                    e?.plasmicType ===
-                                                      "PlasmicUndefinedDataError"
-                                                  ) {
-                                                    return [];
-                                                  }
-                                                  throw e;
-                                                }
-                                              })()
-                                            ).map(
-                                              (
-                                                __plasmic_item_2,
-                                                __plasmic_idx_2
-                                              ) => {
-                                                const currentItem =
-                                                  __plasmic_item_2;
-                                                const currentIndex =
-                                                  __plasmic_idx_2;
-                                                return (
-                                                  <div
-                                                    className={classNames(
-                                                      projectcss.all,
-                                                      sty.freeBox__fxDb6
-                                                    )}
-                                                    key={currentIndex}
-                                                  >
-                                                    <div
-                                                      data-plasmic-name={
-                                                        "factorName2"
-                                                      }
-                                                      data-plasmic-override={
-                                                        overrides.factorName2
-                                                      }
-                                                      className={classNames(
-                                                        projectcss.all,
-                                                        projectcss.__wab_text,
-                                                        sty.factorName2
-                                                      )}
-                                                    >
-                                                      <React.Fragment>
-                                                        {(() => {
-                                                          try {
-                                                            return currentItem.tname;
-                                                          } catch (e) {
-                                                            if (
-                                                              e instanceof
-                                                                TypeError ||
-                                                              e?.plasmicType ===
-                                                                "PlasmicUndefinedDataError"
-                                                            ) {
-                                                              return "Collapsible text...";
-                                                            }
-                                                            throw e;
-                                                          }
-                                                        })()}
-                                                      </React.Fragment>
-                                                    </div>
-                                                  </div>
-                                                );
-                                              }
-                                            )}
-                                          </AntdSingleCollapse>
-                                        );
-                                      })()}
-                                    </div>
+                                    <React.Fragment>
+                                      {currentItem.factor_name}
+                                    </React.Fragment>
                                   </div>
-                                </div>
-                              );
-                            })}
+                                );
+                              })}
+                            </div>
                           </div>
                         </div>
                       );
                     })}
                   </Stack__>
+                  {$ctx.fetched_data.loading == false &&
+                  $ctx.fetched_data.data.lab_test_groups == 0 ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__xoyT
+                      )}
+                    >
+                      {
+                        "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                      }
+                    </div>
+                  ) : null}
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -2798,9 +2644,7 @@ const PlasmicDescendants = {
     "labFactorList",
     "labFactorPerDate",
     "labFactorDatetime",
-    "factorsList",
-    "factor",
-    "factorName2",
+    "labGroupFactorName",
     "switchingTabs",
     "switchingTab",
     "homepage",
@@ -2917,29 +2761,21 @@ const PlasmicDescendants = {
     "labFactorList",
     "labFactorPerDate",
     "labFactorDatetime",
-    "factorsList",
-    "factor",
-    "factorName2"
+    "labGroupFactorName"
   ],
   labFactorList: [
     "labFactorList",
     "labFactorPerDate",
     "labFactorDatetime",
-    "factorsList",
-    "factor",
-    "factorName2"
+    "labGroupFactorName"
   ],
   labFactorPerDate: [
     "labFactorPerDate",
     "labFactorDatetime",
-    "factorsList",
-    "factor",
-    "factorName2"
+    "labGroupFactorName"
   ],
   labFactorDatetime: ["labFactorDatetime"],
-  factorsList: ["factorsList", "factor", "factorName2"],
-  factor: ["factor", "factorName2"],
-  factorName2: ["factorName2"],
+  labGroupFactorName: ["labGroupFactorName"],
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
@@ -3001,9 +2837,7 @@ type NodeDefaultElementType = {
   labFactorList: "div";
   labFactorPerDate: "div";
   labFactorDatetime: "div";
-  factorsList: "div";
-  factor: typeof AntdSingleCollapse;
-  factorName2: "div";
+  labGroupFactorName: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   homepage: typeof PlasmicImg__;
@@ -3108,9 +2942,7 @@ export const PlasmicLaboratoryData = Object.assign(
     labFactorList: makeNodeComponent("labFactorList"),
     labFactorPerDate: makeNodeComponent("labFactorPerDate"),
     labFactorDatetime: makeNodeComponent("labFactorDatetime"),
-    factorsList: makeNodeComponent("factorsList"),
-    factor: makeNodeComponent("factor"),
-    factorName2: makeNodeComponent("factorName2"),
+    labGroupFactorName: makeNodeComponent("labGroupFactorName"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),

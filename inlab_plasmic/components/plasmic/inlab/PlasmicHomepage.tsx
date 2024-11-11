@@ -92,7 +92,6 @@ import EvaArrowBackFillIcon from "./icons/PlasmicIcon__EvaArrowBackFill"; // pla
 import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: kYUnvWOY7oUw/icon
 import BookmarkPlusSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComSvg"; // plasmic-import: laC4EyEnFr3s/icon
 import BookmarkDashFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComSvg"; // plasmic-import: OXlS9uB7Ffdy/icon
-import IndicatorIcon from "./icons/PlasmicIcon__Indicator"; // plasmic-import: B34gCeBlzVGZ/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 
@@ -216,6 +215,7 @@ export type PlasmicHomepage__OverridesType = {
   wardsName?: Flex__<"div">;
   searchbarWard?: Flex__<typeof TextInput>;
   modalPhysician?: Flex__<typeof AntdModal>;
+  راهنمایسرچپزشک?: Flex__<"div">;
   physiciansList?: Flex__<typeof ApiFetcherComponent>;
   physiciansList2?: Flex__<"div">;
   physiciansName?: Flex__<"div">;
@@ -5330,10 +5330,10 @@ function PlasmicHomepage__RenderFunc(props: {
                     {(() => {
                       try {
                         return (
-                          $ctx.fetched_data.loading === false &&
                           $ctx.fetched_data.data == "" &&
-                          $state.searchbarLnameNcode.value !== "" &&
-                          $state.searchbarFname.value !== ""
+                          $ctx.fetched_data.loading === false &&
+                          ($state.searchbarLnameNcode.value !== "") |
+                            ($state.searchbarFname.value !== "")
                         );
                       } catch (e) {
                         if (
@@ -5364,9 +5364,10 @@ function PlasmicHomepage__RenderFunc(props: {
                     {(() => {
                       try {
                         return (
+                          $state.mainSelectedTab == "patients" &&
+                          $ctx.fetched_data.data == "" &&
                           $state.searchbarLnameNcode.value == "" &&
-                          $state.searchbarFname.value == "" &&
-                          !$state.patientNumber
+                          $state.searchbarFname.value == ""
                         );
                       } catch (e) {
                         if (
@@ -5552,7 +5553,20 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.patientNameBookmarkIcon
                                 )}
                               >
-                                {false ? (
+                                {(() => {
+                                  try {
+                                    return currentItem.dismissed;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return false;
+                                    }
+                                    throw e;
+                                  }
+                                })() ? (
                                   <Stack__
                                     as={"div"}
                                     data-plasmic-name={"dismision"}
@@ -5581,13 +5595,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                         </span>
                                       </React.Fragment>
                                     </div>
-                                    <IndicatorIcon
-                                      className={classNames(
-                                        projectcss.all,
-                                        sty.svg__anjLh
-                                      )}
-                                      role={"img"}
-                                    />
                                   </Stack__>
                                 ) : null}
                                 <div
@@ -6917,6 +6924,36 @@ function PlasmicHomepage__RenderFunc(props: {
           trigger={null}
           wrapClassName={classNames({ [sty["pcls_IF4RfoWSlpeq"]]: true })}
         >
+          {(() => {
+            try {
+              return $state.searchbarPhysicians.value === "";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
+            <div
+              data-plasmic-name={
+                "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9"
+              }
+              data-plasmic-override={overrides.راهنمایسرچپزشک}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.راهنمایسرچپزشک
+              )}
+              dir={"rtl"}
+            >
+              {
+                "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0627\u0633\u062a\u0627\u062f \u0645\u0648\u0631\u062f \u0646\u0638\u0631 \u062e\u0648\u062f \u0631\u0627 \u0648\u0627\u0631\u062f \u0646\u0645\u0627\u06cc\u06cc\u062f \ud83d\udc46\ud83d\udc46"
+              }
+            </div>
+          ) : null}
           {$state.searchbarPhysicians.value != "" ? (
             <ApiFetcherComponent
               data-plasmic-name={"physiciansList"}
@@ -6982,6 +7019,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             projectcss.__wab_text,
                             sty.physiciansName
                           )}
+                          dir={"rtl"}
                           key={currentIndex}
                           onClick={async event => {
                             const $steps = {};
@@ -7221,9 +7259,12 @@ function PlasmicHomepage__RenderFunc(props: {
                           }}
                         >
                           <React.Fragment>
-                            {(currentItem.speciality
-                              ? currentItem.speciality + " | "
-                              : "") + currentItem.last_name}
+                            {currentItem.first_name +
+                              " " +
+                              currentItem.last_name +
+                              (currentItem.speciality
+                                ? " | " + currentItem.speciality
+                                : "")}
                           </React.Fragment>
                         </div>
                       );
@@ -7232,7 +7273,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       try {
                         return (
                           $ctx.fetched_data.loading === false &&
-                          $ctx.fetched_data.data == "" &&
+                          $ctx.fetched_data.data.count == 0 &&
                           $state.searchbarPhysicians.value !== ""
                         );
                       } catch (e) {
@@ -11573,6 +11614,7 @@ const PlasmicDescendants = {
     "wardsName",
     "searchbarWard",
     "modalPhysician",
+    "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9",
     "physiciansList",
     "physiciansList2",
     "physiciansName",
@@ -12113,11 +12155,15 @@ const PlasmicDescendants = {
   searchbarWard: ["searchbarWard"],
   modalPhysician: [
     "modalPhysician",
+    "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9",
     "physiciansList",
     "physiciansList2",
     "physiciansName",
     "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "searchbarPhysicians"
+  ],
+  راهنمایسرچپزشک: [
+    "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9"
   ],
   physiciansList: [
     "physiciansList",
@@ -12314,6 +12360,7 @@ type NodeDefaultElementType = {
   wardsName: "div";
   searchbarWard: typeof TextInput;
   modalPhysician: typeof AntdModal;
+  راهنمایسرچپزشک: "div";
   physiciansList: typeof ApiFetcherComponent;
   physiciansList2: "div";
   physiciansName: "div";
@@ -12522,6 +12569,9 @@ export const PlasmicHomepage = Object.assign(
     wardsName: makeNodeComponent("wardsName"),
     searchbarWard: makeNodeComponent("searchbarWard"),
     modalPhysician: makeNodeComponent("modalPhysician"),
+    راهنمایسرچپزشک: makeNodeComponent(
+      "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9"
+    ),
     physiciansList: makeNodeComponent("physiciansList"),
     physiciansList2: makeNodeComponent("physiciansList2"),
     physiciansName: makeNodeComponent("physiciansName"),

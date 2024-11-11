@@ -883,31 +883,21 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
   min-width: 0;
-  padding: 0px;
   border-bottom: 1px solid #e7e7e7;
 }
 .labFactorDatetime {
   position: relative;
-  width: 100%;
+  width: auto;
   height: auto;
   max-width: 100%;
   text-align: center;
-  align-self: center;
-  min-width: 0;
-}
-.factorsList {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-  border-left: 1px solid #e7e7e7;
+  align-self: flex-start;
+  background: #f5f5f5;
+  white-space: pre;
 }
 .freeBox___1NlKt {
   display: flex;
@@ -921,57 +911,58 @@
   min-width: 0;
   padding: 0px;
 }
-.freeBox__irl0O {
-  display: flex;
-  flex-direction: row;
+.labGroupFactorName {
   position: relative;
-  align-items: stretch;
-  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
+  background: #f5f5f5;
   min-width: 0;
-  padding: 0px;
 }
-.freeBox__xC6Cb {
-  display: flex;
-  flex-direction: column;
+.freeBox__iNm8J {
+  display: grid;
   position: relative;
-  align-items: center;
-  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
+  grid-template-rows: auto auto;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-row-gap: 4px;
+  grid-column-gap: 4px;
+  grid-auto-rows: auto;
+  grid-auto-columns: 1fr;
   background: none;
   min-width: 0;
   padding: 4px;
 }
-.factor:global(.__wab_instance) {
+@media (min-width: 0px) and (max-width: 760px) {
+  .freeBox__iNm8J {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 4px;
+  }
+}
+.text__r2NQs {
+  position: relative;
   width: 100%;
+  height: auto;
   max-width: 100%;
-  object-fit: cover;
-  background: #ffffff;
   min-width: 0;
 }
-.pcls_q2lYXHR-r9ME {
-  background: #ffffff;
-  font-family: "Vazirmatn", sans-serif;
-  outline: none;
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__r2NQs {
+    font-size: var(--token-CdE1_0ZaCyT1);
+  }
 }
-.freeBox__fxDb6 {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: flex-start;
+.text__xoyT {
   width: 100%;
   height: auto;
   max-width: 100%;
   background: #ffffff;
+  margin-top: 32px;
+  white-space: pre-wrap;
   min-width: 0;
-  padding: 0px;
-}
-.factorName2 {
-  background: #ffffff;
+  border-radius: 5px;
+  padding: 8px;
 }
 .switchingTabs {
   display: flex;
