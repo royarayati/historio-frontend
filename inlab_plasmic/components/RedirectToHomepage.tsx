@@ -38,7 +38,7 @@ function RedirectToHomepage(props: RedirectToHomepageProps) {
   // By default, we are just piping all RedirectToHomepageProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToHomepage  />;
+  return <PlasmicRedirectToHomepage />;
 }
 
 export default RedirectToHomepage;

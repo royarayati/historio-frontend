@@ -127,6 +127,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   labLists?: Flex__<"div">;
   factorNameValue?: Flex__<"div">;
   factorResultUnit?: Flex__<"div">;
+  abnormalFactorName?: Flex__<"div">;
   normalRange2?: Flex__<"div">;
   overlayLayer?: Flex__<"div">;
   checkedFactorsApiFetcher?: Flex__<typeof ApiFetcherComponent>;
@@ -1826,7 +1827,36 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     <React.Fragment>
                                       {(() => {
                                         try {
-                                          return currentItem.issued_datetime;
+                                          return (() => {
+                                            const gregorianDate = new Date(
+                                              currentItem.issued_datetime
+                                            );
+                                            const shamsiDate =
+                                              new Intl.DateTimeFormat(
+                                                "fa-IR"
+                                              ).format(gregorianDate);
+                                            const shamsiTime =
+                                              gregorianDate.toLocaleTimeString(
+                                                "fa-IR",
+                                                { hour12: false }
+                                              );
+                                            const englishDate =
+                                              shamsiDate.replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              );
+                                            const englishTime = shamsiTime
+                                              .replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              )
+                                              .split(":")
+                                              .slice(0, 2)
+                                              .join(":");
+                                            return `${englishDate}  ${englishTime}`;
+                                          })();
                                         } catch (e) {
                                           if (
                                             e instanceof TypeError ||
@@ -1911,55 +1941,94 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                               sty.freeBox__awQQv
                                             )}
                                           >
-                                            <div
-                                              data-plasmic-name={
-                                                "factorResultUnit"
-                                              }
-                                              data-plasmic-override={
-                                                overrides.factorResultUnit
-                                              }
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.__wab_text,
-                                                sty.factorResultUnit,
-                                                {
-                                                  [sty.factorResultUnitviewNormalRange]:
-                                                    hasVariant(
-                                                      $state,
-                                                      "viewNormalRange",
-                                                      "viewNormalRange"
-                                                    )
+                                            {currentItem.abnormal != 1 ? (
+                                              <div
+                                                data-plasmic-name={
+                                                  "factorResultUnit"
                                                 }
-                                              )}
-                                            >
-                                              {hasVariant(
-                                                $state,
-                                                "viewNormalRange",
-                                                "viewNormalRange"
-                                              ) ? (
-                                                <React.Fragment>
-                                                  {currentItem.value}
-                                                </React.Fragment>
-                                              ) : (
-                                                <React.Fragment>
-                                                  {(() => {
-                                                    try {
-                                                      return currentItem.value;
-                                                    } catch (e) {
-                                                      if (
-                                                        e instanceof
-                                                          TypeError ||
-                                                        e?.plasmicType ===
-                                                          "PlasmicUndefinedDataError"
-                                                      ) {
-                                                        return "";
+                                                data-plasmic-override={
+                                                  overrides.factorResultUnit
+                                                }
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  projectcss.__wab_text,
+                                                  sty.factorResultUnit,
+                                                  {
+                                                    [sty.factorResultUnitviewNormalRange]:
+                                                      hasVariant(
+                                                        $state,
+                                                        "viewNormalRange",
+                                                        "viewNormalRange"
+                                                      )
+                                                  }
+                                                )}
+                                              >
+                                                {hasVariant(
+                                                  $state,
+                                                  "viewNormalRange",
+                                                  "viewNormalRange"
+                                                ) ? (
+                                                  <React.Fragment>
+                                                    {currentItem.value}
+                                                  </React.Fragment>
+                                                ) : (
+                                                  <React.Fragment>
+                                                    {(() => {
+                                                      try {
+                                                        return currentItem.value;
+                                                      } catch (e) {
+                                                        if (
+                                                          e instanceof
+                                                            TypeError ||
+                                                          e?.plasmicType ===
+                                                            "PlasmicUndefinedDataError"
+                                                        ) {
+                                                          return "";
+                                                        }
+                                                        throw e;
                                                       }
-                                                      throw e;
-                                                    }
-                                                  })()}
-                                                </React.Fragment>
-                                              )}
-                                            </div>
+                                                    })()}
+                                                  </React.Fragment>
+                                                )}
+                                              </div>
+                                            ) : null}
+                                            {currentItem.abnormal == 1 ? (
+                                              <div
+                                                data-plasmic-name={
+                                                  "abnormalFactorName"
+                                                }
+                                                data-plasmic-override={
+                                                  overrides.abnormalFactorName
+                                                }
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  projectcss.__wab_text,
+                                                  sty.abnormalFactorName,
+                                                  {
+                                                    [sty.abnormalFactorNameviewNormalRange]:
+                                                      hasVariant(
+                                                        $state,
+                                                        "viewNormalRange",
+                                                        "viewNormalRange"
+                                                      )
+                                                  }
+                                                )}
+                                              >
+                                                {hasVariant(
+                                                  $state,
+                                                  "viewNormalRange",
+                                                  "viewNormalRange"
+                                                ) ? (
+                                                  <React.Fragment>
+                                                    {currentItem.value}
+                                                  </React.Fragment>
+                                                ) : (
+                                                  <React.Fragment>
+                                                    {currentItem.value}
+                                                  </React.Fragment>
+                                                )}
+                                              </div>
+                                            ) : null}
                                             {(
                                               hasVariant(
                                                 $state,
@@ -2150,7 +2219,29 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {currentItem.issued_datetime}
+                              {(() => {
+                                const gregorianDate = new Date(
+                                  currentItem.issued_datetime
+                                );
+                                const shamsiDate = new Intl.DateTimeFormat(
+                                  "fa-IR"
+                                ).format(gregorianDate);
+                                const shamsiTime =
+                                  gregorianDate.toLocaleTimeString("fa-IR", {
+                                    hour12: false
+                                  });
+                                const englishDate = shamsiDate.replace(
+                                  /[۰-۹]/g,
+                                  d =>
+                                    String.fromCharCode(d.charCodeAt(0) - 1728)
+                                );
+                                const englishTime = shamsiTime.replace(
+                                  /[۰-۹]/g,
+                                  d =>
+                                    String.fromCharCode(d.charCodeAt(0) - 1728)
+                                );
+                                return `${englishDate}  ${englishTime}`;
+                              })()}
                             </React.Fragment>
                           </div>
                           <div
@@ -2638,6 +2729,7 @@ const PlasmicDescendants = {
     "labLists",
     "factorNameValue",
     "factorResultUnit",
+    "abnormalFactorName",
     "normalRange2",
     "overlayLayer",
     "checkedFactorsApiFetcher",
@@ -2696,6 +2788,7 @@ const PlasmicDescendants = {
     "labLists",
     "factorNameValue",
     "factorResultUnit",
+    "abnormalFactorName",
     "normalRange2",
     "overlayLayer"
   ],
@@ -2711,6 +2804,7 @@ const PlasmicDescendants = {
     "labLists",
     "factorNameValue",
     "factorResultUnit",
+    "abnormalFactorName",
     "normalRange2",
     "overlayLayer"
   ],
@@ -2725,6 +2819,7 @@ const PlasmicDescendants = {
     "labLists",
     "factorNameValue",
     "factorResultUnit",
+    "abnormalFactorName",
     "normalRange2",
     "overlayLayer"
   ],
@@ -2738,6 +2833,7 @@ const PlasmicDescendants = {
     "labLists",
     "factorNameValue",
     "factorResultUnit",
+    "abnormalFactorName",
     "normalRange2",
     "overlayLayer"
   ],
@@ -2747,13 +2843,26 @@ const PlasmicDescendants = {
     "labLists",
     "factorNameValue",
     "factorResultUnit",
+    "abnormalFactorName",
     "normalRange2",
     "overlayLayer"
   ],
   issuedDatetime: ["issuedDatetime"],
-  labLists: ["labLists", "factorNameValue", "factorResultUnit", "normalRange2"],
-  factorNameValue: ["factorNameValue", "factorResultUnit", "normalRange2"],
+  labLists: [
+    "labLists",
+    "factorNameValue",
+    "factorResultUnit",
+    "abnormalFactorName",
+    "normalRange2"
+  ],
+  factorNameValue: [
+    "factorNameValue",
+    "factorResultUnit",
+    "abnormalFactorName",
+    "normalRange2"
+  ],
   factorResultUnit: ["factorResultUnit"],
+  abnormalFactorName: ["abnormalFactorName"],
   normalRange2: ["normalRange2"],
   overlayLayer: ["overlayLayer"],
   checkedFactorsApiFetcher: [
@@ -2831,6 +2940,7 @@ type NodeDefaultElementType = {
   labLists: "div";
   factorNameValue: "div";
   factorResultUnit: "div";
+  abnormalFactorName: "div";
   normalRange2: "div";
   overlayLayer: "div";
   checkedFactorsApiFetcher: typeof ApiFetcherComponent;
@@ -2936,6 +3046,7 @@ export const PlasmicLaboratoryData = Object.assign(
     labLists: makeNodeComponent("labLists"),
     factorNameValue: makeNodeComponent("factorNameValue"),
     factorResultUnit: makeNodeComponent("factorResultUnit"),
+    abnormalFactorName: makeNodeComponent("abnormalFactorName"),
     normalRange2: makeNodeComponent("normalRange2"),
     overlayLayer: makeNodeComponent("overlayLayer"),
     checkedFactorsApiFetcher: makeNodeComponent("checkedFactorsApiFetcher"),
