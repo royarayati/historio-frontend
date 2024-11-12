@@ -794,6 +794,14 @@
   max-width: 100%;
   min-width: 0;
 }
+.abnormalFactorName {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: #ff0000;
+  min-width: 0;
+}
 .normalRange2 {
   position: relative;
   width: 100%;

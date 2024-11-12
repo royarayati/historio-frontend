@@ -118,8 +118,6 @@ export type PlasmicImagingReportList__OverridesType = {
   imagingDatetime?: Flex__<"div">;
   previousAdmission?: Flex__<typeof Button>;
   imagingType?: Flex__<"div">;
-  reportPreviousAdmission?: Flex__<"div">;
-  previousAdmission2?: Flex__<typeof Button>;
   imagingModalities?: Flex__<typeof ApiFetcherComponent>;
   imagingModalitiesList?: Flex__<"div">;
   imagingModaltyCards?: Flex__<"div">;
@@ -396,31 +394,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
       },
       {
         path: "previousAdmission[].sortSelected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "previousAdmission2[].isDisabled",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "previousAdmission2[].selected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "previousAdmission2[].deselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "previousAdmission2[].sortDeselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "previousAdmission2[].sortSelected",
         type: "private",
         variableType: "boolean"
       },
@@ -1456,7 +1429,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   sty.freeBox___02DGl
                                 )}
                               >
-                                {false
+                                {new Date(currentItem.service_datetime) <
+                                new Date($state.admissionDatetime)
                                   ? (() => {
                                       const child$Props = {
                                         className: classNames(
@@ -1624,170 +1598,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                     )}
                                   </React.Fragment>
                                 </div>
-                              </div>
-                              <div
-                                data-plasmic-name={"reportPreviousAdmission"}
-                                data-plasmic-override={
-                                  overrides.reportPreviousAdmission
-                                }
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.reportPreviousAdmission
-                                )}
-                              >
-                                {new Date(currentItem.service_datetime) <
-                                new Date($state.admissionDatetime)
-                                  ? (() => {
-                                      const child$Props = {
-                                        className: classNames(
-                                          "__wab_instance",
-                                          sty.previousAdmission2
-                                        ),
-                                        color: "red",
-                                        deselected: generateStateValueProp(
-                                          $state,
-                                          [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "deselected"
-                                          ]
-                                        ),
-                                        isDisabled: generateStateValueProp(
-                                          $state,
-                                          [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "isDisabled"
-                                          ]
-                                        ),
-                                        onDeselectedChange: (...eventArgs) => {
-                                          generateStateOnChangeProp($state, [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "deselected"
-                                          ])(eventArgs[0]);
-                                        },
-                                        onIsDisabledChange: (...eventArgs) => {
-                                          generateStateOnChangeProp($state, [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "isDisabled"
-                                          ])(eventArgs[0]);
-                                        },
-                                        onSelectedChange: (...eventArgs) => {
-                                          generateStateOnChangeProp($state, [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "selected"
-                                          ])(eventArgs[0]);
-                                        },
-                                        onSortDeselectedChange: (
-                                          ...eventArgs
-                                        ) => {
-                                          generateStateOnChangeProp($state, [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "sortDeselected"
-                                          ])(eventArgs[0]);
-                                        },
-                                        onSortSelectedChange: (
-                                          ...eventArgs
-                                        ) => {
-                                          generateStateOnChangeProp($state, [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "sortSelected"
-                                          ])(eventArgs[0]);
-                                        },
-                                        selected: generateStateValueProp(
-                                          $state,
-                                          [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "selected"
-                                          ]
-                                        ),
-                                        sortDeselected: generateStateValueProp(
-                                          $state,
-                                          [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "sortDeselected"
-                                          ]
-                                        ),
-                                        sortSelected: generateStateValueProp(
-                                          $state,
-                                          [
-                                            "previousAdmission2",
-                                            __plasmic_idx_0,
-                                            "sortSelected"
-                                          ]
-                                        )
-                                      };
-
-                                      initializePlasmicStates(
-                                        $state,
-                                        [
-                                          {
-                                            name: "previousAdmission2[].isDisabled",
-                                            initFunc: ({
-                                              $props,
-                                              $state,
-                                              $queries
-                                            }) => undefined
-                                          },
-                                          {
-                                            name: "previousAdmission2[].selected",
-                                            initFunc: ({
-                                              $props,
-                                              $state,
-                                              $queries
-                                            }) => undefined
-                                          },
-                                          {
-                                            name: "previousAdmission2[].deselected",
-                                            initFunc: ({
-                                              $props,
-                                              $state,
-                                              $queries
-                                            }) => undefined
-                                          },
-                                          {
-                                            name: "previousAdmission2[].sortDeselected",
-                                            initFunc: ({
-                                              $props,
-                                              $state,
-                                              $queries
-                                            }) => undefined
-                                          },
-                                          {
-                                            name: "previousAdmission2[].sortSelected",
-                                            initFunc: ({
-                                              $props,
-                                              $state,
-                                              $queries
-                                            }) => undefined
-                                          }
-                                        ],
-                                        [__plasmic_idx_0]
-                                      );
-                                      return (
-                                        <Button
-                                          data-plasmic-name={
-                                            "previousAdmission2"
-                                          }
-                                          data-plasmic-override={
-                                            overrides.previousAdmission2
-                                          }
-                                          {...child$Props}
-                                        >
-                                          {
-                                            "\u0628\u0633\u062a\u0631\u06cc \u0642\u0628\u0644\u06cc "
-                                          }
-                                        </Button>
-                                      );
-                                    })()
-                                  : null}
                               </div>
                             </Stack__>
                           </Stack__>
@@ -2537,8 +2347,6 @@ const PlasmicDescendants = {
     "imagingDatetime",
     "previousAdmission",
     "imagingType",
-    "reportPreviousAdmission",
-    "previousAdmission2",
     "imagingModalities",
     "imagingModalitiesList",
     "imagingModaltyCards",
@@ -2585,9 +2393,7 @@ const PlasmicDescendants = {
     "imagingTitle",
     "imagingDatetime",
     "previousAdmission",
-    "imagingType",
-    "reportPreviousAdmission",
-    "previousAdmission2"
+    "imagingType"
   ],
   viewPacsButton: ["viewPacsButton"],
   imagingReportsSection: [
@@ -2599,9 +2405,7 @@ const PlasmicDescendants = {
     "imagingTitle",
     "imagingDatetime",
     "previousAdmission",
-    "imagingType",
-    "reportPreviousAdmission",
-    "previousAdmission2"
+    "imagingType"
   ],
   imagingReportSection: [
     "imagingReportSection",
@@ -2611,9 +2415,7 @@ const PlasmicDescendants = {
     "imagingTitle",
     "imagingDatetime",
     "previousAdmission",
-    "imagingType",
-    "reportPreviousAdmission",
-    "previousAdmission2"
+    "imagingType"
   ],
   imagingReportList2: [
     "imagingReportList2",
@@ -2622,9 +2424,7 @@ const PlasmicDescendants = {
     "imagingTitle",
     "imagingDatetime",
     "previousAdmission",
-    "imagingType",
-    "reportPreviousAdmission",
-    "previousAdmission2"
+    "imagingType"
   ],
   imagingReportCard: [
     "imagingReportCard",
@@ -2632,9 +2432,7 @@ const PlasmicDescendants = {
     "imagingTitle",
     "imagingDatetime",
     "previousAdmission",
-    "imagingType",
-    "reportPreviousAdmission",
-    "previousAdmission2"
+    "imagingType"
   ],
   imagingTitleDatetime: [
     "imagingTitleDatetime",
@@ -2645,8 +2443,6 @@ const PlasmicDescendants = {
   imagingDatetime: ["imagingDatetime"],
   previousAdmission: ["previousAdmission"],
   imagingType: ["imagingType"],
-  reportPreviousAdmission: ["reportPreviousAdmission", "previousAdmission2"],
-  previousAdmission2: ["previousAdmission2"],
   imagingModalities: [
     "imagingModalities",
     "imagingModalitiesList",
@@ -2725,8 +2521,6 @@ type NodeDefaultElementType = {
   imagingDatetime: "div";
   previousAdmission: typeof Button;
   imagingType: "div";
-  reportPreviousAdmission: "div";
-  previousAdmission2: typeof Button;
   imagingModalities: typeof ApiFetcherComponent;
   imagingModalitiesList: "div";
   imagingModaltyCards: "div";
@@ -2827,8 +2621,6 @@ export const PlasmicImagingReportList = Object.assign(
     imagingDatetime: makeNodeComponent("imagingDatetime"),
     previousAdmission: makeNodeComponent("previousAdmission"),
     imagingType: makeNodeComponent("imagingType"),
-    reportPreviousAdmission: makeNodeComponent("reportPreviousAdmission"),
-    previousAdmission2: makeNodeComponent("previousAdmission2"),
     imagingModalities: makeNodeComponent("imagingModalities"),
     imagingModalitiesList: makeNodeComponent("imagingModalitiesList"),
     imagingModaltyCards: makeNodeComponent("imagingModaltyCards"),
