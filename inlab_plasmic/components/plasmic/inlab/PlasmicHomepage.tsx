@@ -220,7 +220,9 @@ export type PlasmicHomepage__OverridesType = {
   physiciansList2?: Flex__<"div">;
   physiciansName?: Flex__<"div">;
   پزشکیافتنشد?: Flex__<"div">;
-  searchbarPhysicians?: Flex__<typeof TextInput>;
+  searchbars?: Flex__<"div">;
+  searchbarLnamePhysicians?: Flex__<typeof TextInput>;
+  searchbarFnamePhysicians?: Flex__<typeof TextInput>;
   modalConsultFilterType?: Flex__<typeof AntdModal>;
   filterTypes?: Flex__<"div">;
   senderServiceType?: Flex__<"div">;
@@ -980,7 +982,7 @@ function PlasmicHomepage__RenderFunc(props: {
           hasVariant(globalVariants, "screen", "mobileFirst") ? false : false
       },
       {
-        path: "searchbarPhysicians.value",
+        path: "searchbarLnamePhysicians.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
@@ -1278,6 +1280,12 @@ function PlasmicHomepage__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "searchbarFnamePhysicians.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -6843,82 +6851,173 @@ function PlasmicHomepage__RenderFunc(props: {
                 role={"img"}
               />
 
-              <TextInput
-                data-plasmic-name={"searchbarPhysicians"}
-                data-plasmic-override={overrides.searchbarPhysicians}
-                className={classNames(
-                  "__wab_instance",
-                  sty.searchbarPhysicians
-                )}
-                endIcon={
-                  <Icons8CloseSvgIcon
-                    className={classNames(projectcss.all, sty.svg__ebXu6)}
-                    onClick={async event => {
-                      const $steps = {};
+              <Stack__
+                as={"div"}
+                data-plasmic-name={"searchbars"}
+                data-plasmic-override={overrides.searchbars}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.searchbars)}
+              >
+                <TextInput
+                  data-plasmic-name={"searchbarLnamePhysicians"}
+                  data-plasmic-override={overrides.searchbarLnamePhysicians}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.searchbarLnamePhysicians
+                  )}
+                  endIcon={
+                    <Icons8CloseSvgIcon
+                      className={classNames(projectcss.all, sty.svg__ebXu6)}
+                      onClick={async event => {
+                        const $steps = {};
 
-                      $steps["updateSearchbarWardValue"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["searchbarPhysicians", "value"]
-                              },
-                              operation: 0,
-                              value: ""
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
+                        $steps["updateSearchbarWardValue"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "searchbarLnamePhysicians",
+                                    "value"
+                                  ]
+                                },
+                                operation: 0,
+                                value: ""
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
 
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateSearchbarWardValue"] != null &&
-                        typeof $steps["updateSearchbarWardValue"] ===
-                          "object" &&
-                        typeof $steps["updateSearchbarWardValue"].then ===
-                          "function"
-                      ) {
-                        $steps["updateSearchbarWardValue"] = await $steps[
-                          "updateSearchbarWardValue"
-                        ];
-                      }
-                    }}
-                    role={"img"}
-                  />
-                }
-                onChange={(...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "searchbarPhysicians",
-                    "value"
-                  ])((e => e.target?.value).apply(null, eventArgs));
-                }}
-                placeholder={
-                  "\u0646\u0627\u0645 \u064a\u0627 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u064a \u0627\u0633\u062a\u0627\u062f \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
-                }
-                startIcon={
-                  <SearchSvgIcon
-                    className={classNames(projectcss.all, sty.svg__eefHg)}
-                    role={"img"}
-                  />
-                }
-                value={
-                  generateStateValueProp($state, [
-                    "searchbarPhysicians",
-                    "value"
-                  ]) ?? ""
-                }
-              />
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSearchbarWardValue"] != null &&
+                          typeof $steps["updateSearchbarWardValue"] ===
+                            "object" &&
+                          typeof $steps["updateSearchbarWardValue"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSearchbarWardValue"] = await $steps[
+                            "updateSearchbarWardValue"
+                          ];
+                        }
+                      }}
+                      role={"img"}
+                    />
+                  }
+                  onChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "searchbarLnamePhysicians",
+                      "value"
+                    ])((e => e.target?.value).apply(null, eventArgs));
+                  }}
+                  placeholder={
+                    "\u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0627\u0633\u062a\u0627\u062f"
+                  }
+                  startIcon={
+                    <SearchSvgIcon
+                      className={classNames(projectcss.all, sty.svg__eefHg)}
+                      role={"img"}
+                    />
+                  }
+                  value={
+                    generateStateValueProp($state, [
+                      "searchbarLnamePhysicians",
+                      "value"
+                    ]) ?? ""
+                  }
+                />
+
+                <TextInput
+                  data-plasmic-name={"searchbarFnamePhysicians"}
+                  data-plasmic-override={overrides.searchbarFnamePhysicians}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.searchbarFnamePhysicians
+                  )}
+                  endIcon={
+                    <Icons8CloseSvgIcon
+                      className={classNames(projectcss.all, sty.svg__pDhE4)}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["updateSearchbarWardValue"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "searchbarFnamePhysicians",
+                                    "value"
+                                  ]
+                                },
+                                operation: 0,
+                                value: ""
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSearchbarWardValue"] != null &&
+                          typeof $steps["updateSearchbarWardValue"] ===
+                            "object" &&
+                          typeof $steps["updateSearchbarWardValue"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSearchbarWardValue"] = await $steps[
+                            "updateSearchbarWardValue"
+                          ];
+                        }
+                      }}
+                      role={"img"}
+                    />
+                  }
+                  onChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "searchbarFnamePhysicians",
+                      "value"
+                    ])((e => e.target?.value).apply(null, eventArgs));
+                  }}
+                  placeholder={
+                    "\u0646\u0627\u0645 \u0627\u0633\u062a\u0627\u062f"
+                  }
+                  startIcon={
+                    <SearchSvgIcon
+                      className={classNames(projectcss.all, sty.svg__dx794)}
+                      role={"img"}
+                    />
+                  }
+                  value={
+                    generateStateValueProp($state, [
+                      "searchbarFnamePhysicians",
+                      "value"
+                    ]) ?? ""
+                  }
+                />
+              </Stack__>
             </Stack__>
           }
           trigger={null}
@@ -6926,7 +7025,7 @@ function PlasmicHomepage__RenderFunc(props: {
         >
           {(() => {
             try {
-              return $state.searchbarPhysicians.value === "";
+              return $state.searchbarLnamePhysicians.value === "";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -6954,7 +7053,8 @@ function PlasmicHomepage__RenderFunc(props: {
               }
             </div>
           ) : null}
-          {$state.searchbarPhysicians.value != "" ? (
+          {($state.searchbarLnamePhysicians.value ||
+            $state.searchbarFnamePhysicians.value) != "" ? (
             <ApiFetcherComponent
               data-plasmic-name={"physiciansList"}
               data-plasmic-override={overrides.physiciansList}
@@ -6978,7 +7078,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/remote_his/physicians?search_input=${$state.searchbarPhysicians.value}&limit=20&offset=0`}
+              path={`/api/v3/remote_his/physicians?last_name=${$state.searchbarLnamePhysicians.value}&first_name=${$state.searchbarFnamePhysicians.value}&limit=20&offset=0`}
               ref={ref => {
                 $refs["physiciansList"] = ref;
               }}
@@ -7256,6 +7356,91 @@ function PlasmicHomepage__RenderFunc(props: {
                             ) {
                               $steps["logConsole"] = await $steps["logConsole"];
                             }
+
+                            $steps["clearSearchbarLnameNcodeValue"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "searchbarLnamePhysicians",
+                                        "value"
+                                      ]
+                                    },
+                                    operation: 0,
+                                    value: ""
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["clearSearchbarLnameNcodeValue"] != null &&
+                              typeof $steps["clearSearchbarLnameNcodeValue"] ===
+                                "object" &&
+                              typeof $steps["clearSearchbarLnameNcodeValue"]
+                                .then === "function"
+                            ) {
+                              $steps["clearSearchbarLnameNcodeValue"] =
+                                await $steps["clearSearchbarLnameNcodeValue"];
+                            }
+
+                            $steps["clearSearchbarFnamePhysiciansValue"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "searchbarFnamePhysicians",
+                                        "value"
+                                      ]
+                                    },
+                                    operation: 0,
+                                    value: ""
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["clearSearchbarFnamePhysiciansValue"] !=
+                                null &&
+                              typeof $steps[
+                                "clearSearchbarFnamePhysiciansValue"
+                              ] === "object" &&
+                              typeof $steps[
+                                "clearSearchbarFnamePhysiciansValue"
+                              ].then === "function"
+                            ) {
+                              $steps["clearSearchbarFnamePhysiciansValue"] =
+                                await $steps[
+                                  "clearSearchbarFnamePhysiciansValue"
+                                ];
+                            }
                           }}
                         >
                           <React.Fragment>
@@ -7274,7 +7459,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         return (
                           $ctx.fetched_data.loading === false &&
                           $ctx.fetched_data.data.count == 0 &&
-                          $state.searchbarPhysicians.value !== ""
+                          $state.searchbarLnamePhysicians.value !== ""
                         );
                       } catch (e) {
                         if (
@@ -11619,7 +11804,9 @@ const PlasmicDescendants = {
     "physiciansList2",
     "physiciansName",
     "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
-    "searchbarPhysicians",
+    "searchbars",
+    "searchbarLnamePhysicians",
+    "searchbarFnamePhysicians",
     "modalConsultFilterType",
     "filterTypes",
     "senderServiceType",
@@ -12160,7 +12347,9 @@ const PlasmicDescendants = {
     "physiciansList2",
     "physiciansName",
     "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
-    "searchbarPhysicians"
+    "searchbars",
+    "searchbarLnamePhysicians",
+    "searchbarFnamePhysicians"
   ],
   راهنمایسرچپزشک: [
     "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9"
@@ -12180,7 +12369,13 @@ const PlasmicDescendants = {
   پزشکیافتنشد: [
     "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
   ],
-  searchbarPhysicians: ["searchbarPhysicians"],
+  searchbars: [
+    "searchbars",
+    "searchbarLnamePhysicians",
+    "searchbarFnamePhysicians"
+  ],
+  searchbarLnamePhysicians: ["searchbarLnamePhysicians"],
+  searchbarFnamePhysicians: ["searchbarFnamePhysicians"],
   modalConsultFilterType: [
     "modalConsultFilterType",
     "filterTypes",
@@ -12365,7 +12560,9 @@ type NodeDefaultElementType = {
   physiciansList2: "div";
   physiciansName: "div";
   پزشکیافتنشد: "div";
-  searchbarPhysicians: typeof TextInput;
+  searchbars: "div";
+  searchbarLnamePhysicians: typeof TextInput;
+  searchbarFnamePhysicians: typeof TextInput;
   modalConsultFilterType: typeof AntdModal;
   filterTypes: "div";
   senderServiceType: "div";
@@ -12578,7 +12775,9 @@ export const PlasmicHomepage = Object.assign(
     پزشکیافتنشد: makeNodeComponent(
       "\u067e\u0632\u0634\u06a9\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
     ),
-    searchbarPhysicians: makeNodeComponent("searchbarPhysicians"),
+    searchbars: makeNodeComponent("searchbars"),
+    searchbarLnamePhysicians: makeNodeComponent("searchbarLnamePhysicians"),
+    searchbarFnamePhysicians: makeNodeComponent("searchbarFnamePhysicians"),
     modalConsultFilterType: makeNodeComponent("modalConsultFilterType"),
     filterTypes: makeNodeComponent("filterTypes"),
     senderServiceType: makeNodeComponent("senderServiceType"),
