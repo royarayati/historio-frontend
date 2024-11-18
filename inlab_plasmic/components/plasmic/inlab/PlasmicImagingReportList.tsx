@@ -122,6 +122,7 @@ export type PlasmicImagingReportList__OverridesType = {
   paraclinics?: Flex__<typeof ApiFetcherComponent>;
   paraclinicsList?: Flex__<"div">;
   paraclinicNameDatetime?: Flex__<"div">;
+  button?: Flex__<typeof Button>;
   paraclinicName?: Flex__<"div">;
   paraclinicDatetime?: Flex__<"div">;
   paraclinicReportModal?: Flex__<typeof AntdModal>;
@@ -413,6 +414,31 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ``
+      },
+      {
+        path: "button[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].sortSelected",
+        type: "private",
+        variableType: "boolean"
       }
     ],
     [$props, $ctx, $refs]
@@ -521,112 +547,97 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   >
                     <React.Fragment>
                       {(() => {
-                        try {
-                          return (() => {
-                            const jalali_to_gregorian = (jy, jm, jd) => {
-                              jy += 1595;
-                              var days =
-                                -355668 +
-                                365 * jy +
-                                Math.floor(jy / 33) * 8 +
-                                Math.floor((jy % 33) + 3) / 4 +
-                                jd +
-                                (jm < 7 ? (jm - 1) * 31 : (jm - 7) * 30 + 186);
-                              var gy = 400 * Math.floor(days / 146097);
-                              days %= 146097;
-                              if (days > 36524) {
-                                gy += 100 * Math.floor(--days / 36524);
-                                days %= 36524;
-                                if (days >= 365) days++;
-                              }
-                              gy += 4 * Math.floor(days / 1461);
-                              days %= 1461;
-                              if (days > 365) {
-                                gy += Math.floor((days - 1) / 365);
-                                days = (days - 1) % 365;
-                              }
-                              var gd = days + 1;
-                              var sal_a = [
-                                0,
-                                31,
-                                (gy % 4 === 0 && gy % 100 !== 0) ||
-                                gy % 400 === 0
-                                  ? 29
-                                  : 28,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31
-                              ];
-
-                              var gm = 0;
-                              for (gm; gm < 13; gm++) {
-                                var v = sal_a[gm];
-                                if (gd <= v) break;
-                                gd -= v;
-                              }
-                              return [gy, gm, gd];
-                            };
-                            return (
-                              $ctx.fetched_data.loading == false &&
-                              (() => {
-                                const [jy, jm, jd] =
-                                  $ctx.fetched_data.data.items[0].date_of_birth
-                                    .split(" ")[0]
-                                    .split("/")
-                                    .map(Number);
-                                const [gy, gm, gd] = jalali_to_gregorian(
-                                  jy,
-                                  jm,
-                                  jd
-                                );
-                                const dob = new Date(gy, gm - 1, gd);
-                                const ageDiffMs = Date.now() - dob.getTime();
-                                const ageDate = new Date(ageDiffMs);
-                                const ageYears = Math.abs(
-                                  ageDate.getUTCFullYear() - 1970
-                                );
-                                const fullName = `${$ctx.fetched_data.data.items[0].first_name} ${$ctx.fetched_data.data.items[0].last_name}`;
-                                if (ageYears < 1) {
-                                  const ageMonths = ageDate.getUTCMonth();
-                                  return `${fullName} ${ageMonths} months ${
-                                    $ctx.fetched_data.data.items[0].gender ===
-                                    "F"
-                                      ? " \u2640️"
-                                      : $ctx.fetched_data.data.items[0]
-                                          .gender === "M"
-                                      ? " \u2642️"
-                                      : ""
-                                  }`;
-                                } else {
-                                  return `${fullName} ${ageYears}${
-                                    $ctx.fetched_data.data.items[0].gender ===
-                                    "F"
-                                      ? " \u2640️"
-                                      : $ctx.fetched_data.data.items[0]
-                                          .gender === "M"
-                                      ? " \u2642️"
-                                      : ""
-                                  }`;
-                                }
-                              })()
-                            );
-                          })();
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return "";
+                        const jalali_to_gregorian = (jy, jm, jd) => {
+                          jy += 1595;
+                          var days =
+                            -355668 +
+                            365 * jy +
+                            Math.floor(jy / 33) * 8 +
+                            Math.floor((jy % 33) + 3) / 4 +
+                            jd +
+                            (jm < 7 ? (jm - 1) * 31 : (jm - 7) * 30 + 186);
+                          var gy = 400 * Math.floor(days / 146097);
+                          days %= 146097;
+                          if (days > 36524) {
+                            gy += 100 * Math.floor(--days / 36524);
+                            days %= 36524;
+                            if (days >= 365) days++;
                           }
-                          throw e;
-                        }
+                          gy += 4 * Math.floor(days / 1461);
+                          days %= 1461;
+                          if (days > 365) {
+                            gy += Math.floor((days - 1) / 365);
+                            days = (days - 1) % 365;
+                          }
+                          var gd = days + 1;
+                          var sal_a = [
+                            0,
+                            31,
+                            (gy % 4 === 0 && gy % 100 !== 0) || gy % 400 === 0
+                              ? 29
+                              : 28,
+                            31,
+                            30,
+                            31,
+                            30,
+                            31,
+                            31,
+                            30,
+                            31,
+                            30,
+                            31
+                          ];
+
+                          var gm = 0;
+                          for (gm; gm < 13; gm++) {
+                            var v = sal_a[gm];
+                            if (gd <= v) break;
+                            gd -= v;
+                          }
+                          return [gy, gm, gd];
+                        };
+                        return (
+                          $ctx.fetched_data.loading == false &&
+                          (() => {
+                            const [jy, jm, jd] =
+                              $ctx.fetched_data.data.items[0].date_of_birth
+                                .split(" ")[0]
+                                .split("/")
+                                .map(Number);
+                            const [gy, gm, gd] = jalali_to_gregorian(
+                              jy,
+                              jm,
+                              jd
+                            );
+                            const dob = new Date(gy, gm - 1, gd);
+                            const ageDiffMs = Date.now() - dob.getTime();
+                            const ageDate = new Date(ageDiffMs);
+                            const ageYears = Math.abs(
+                              ageDate.getUTCFullYear() - 1970
+                            );
+                            const fullName = `${$ctx.fetched_data.data.items[0].first_name} ${$ctx.fetched_data.data.items[0].last_name}`;
+                            if (ageYears < 1) {
+                              const ageMonths = ageDate.getUTCMonth();
+                              return `${fullName} ${ageMonths} months ${
+                                $ctx.fetched_data.data.items[0].gender === "F"
+                                  ? " \u2640️"
+                                  : $ctx.fetched_data.data.items[0].gender ===
+                                    "M"
+                                  ? " \u2642️"
+                                  : ""
+                              }`;
+                            } else {
+                              return `${fullName} ${ageYears}${
+                                $ctx.fetched_data.data.items[0].gender === "F"
+                                  ? " \u2640️"
+                                  : $ctx.fetched_data.data.items[0].gender ===
+                                    "M"
+                                  ? " \u2642️"
+                                  : ""
+                              }`;
+                            }
+                          })()
+                        );
                       })()}
                     </React.Fragment>
                   </div>
@@ -646,14 +657,10 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             const actionArgs = {
                               customFunction: async () => {
                                 return (() => {
-                                  localStorage.setItem(
+                                  return localStorage.setItem(
                                     "admission_datetime",
-                                    $ctx.fetched_data.data.admission_datetime
-                                  );
-                                  return console.log(
-                                    `admission_datetime: ${localStorage.getItem(
-                                      "admission_datetime"
-                                    )}`
+                                    $ctx.fetched_data.data.items[0]
+                                      .admission_datetime
                                   );
                                 })();
                               }
@@ -956,171 +963,166 @@ function PlasmicImagingReportList__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
-                  <ApiFetcherComponent
-                    data-plasmic-name={"apiFetcherComponent"}
-                    data-plasmic-override={overrides.apiFetcherComponent}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.apiFetcherComponent
-                    )}
-                    headers={(() => {
+                  {false ? (
+                    <ApiFetcherComponent
+                      data-plasmic-name={"apiFetcherComponent"}
+                      data-plasmic-override={overrides.apiFetcherComponent}
+                      children={null}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.apiFetcherComponent
+                      )}
+                      headers={(() => {
+                        try {
+                          return {
+                            "X-Namespace": localStorage.getItem(
+                              "inlab_user_namespace_id"
+                            )
+                          };
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}
+                      method={"GET"}
+                      path={`/api/v3/patient/pacs_url?admission_id=${
+                        $ctx.params.adm_id
+                      }&user_id=${localStorage.getItem(
+                        "inlab_user_namespace_id"
+                      )}`}
+                      ref={ref => {
+                        $refs["apiFetcherComponent"] = ref;
+                      }}
+                    />
+                  ) : null}
+                  <Button
+                    data-plasmic-name={"viewPacsButton"}
+                    data-plasmic-override={overrides.viewPacsButton}
+                    className={classNames("__wab_instance", sty.viewPacsButton)}
+                    color={(() => {
                       try {
-                        return {
-                          "X-Namespace": localStorage.getItem(
-                            "inlab_user_namespace_id"
-                          )
-                        };
+                        return $ctx.fetched_data.loading === true
+                          ? "clear"
+                          : "blue";
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
                           e?.plasmicType === "PlasmicUndefinedDataError"
                         ) {
-                          return undefined;
+                          return "blue";
                         }
                         throw e;
                       }
                     })()}
-                    method={"GET"}
-                    path={`/api/v3/patient/pacs_url?admission_id=${
-                      $ctx.params.adm_id
-                    }&user_id=${localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )}`}
-                    ref={ref => {
-                      $refs["apiFetcherComponent"] = ref;
-                    }}
-                  >
-                    <DataCtxReader__>
-                      {$ctx => (
-                        <Button
-                          data-plasmic-name={"viewPacsButton"}
-                          data-plasmic-override={overrides.viewPacsButton}
-                          className={classNames(
-                            "__wab_instance",
-                            sty.viewPacsButton
-                          )}
-                          color={(() => {
-                            try {
-                              return $ctx.fetched_data.loading === true
-                                ? "clear"
-                                : "blue";
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return "blue";
-                              }
-                              throw e;
-                            }
-                          })()}
-                          deselected={generateStateValueProp($state, [
-                            "viewPacsButton",
-                            "deselected"
-                          ])}
-                          isDisabled={generateStateValueProp($state, [
-                            "viewPacsButton",
-                            "isDisabled"
-                          ])}
-                          onClick={async event => {
-                            const $steps = {};
+                    deselected={generateStateValueProp($state, [
+                      "viewPacsButton",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "viewPacsButton",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
 
-                            $steps["goToPage"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    destination: (() => {
-                                      try {
-                                        return $ctx.fetched_data.data;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                  };
-                                  return (({ destination }) => {
-                                    if (
-                                      typeof destination === "string" &&
-                                      destination.startsWith("#")
-                                    ) {
-                                      document
-                                        .getElementById(destination.substr(1))
-                                        .scrollIntoView({ behavior: "smooth" });
-                                    } else {
-                                      __nextRouter?.push(destination);
-                                    }
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["goToPage"] != null &&
-                              typeof $steps["goToPage"] === "object" &&
-                              typeof $steps["goToPage"].then === "function"
-                            ) {
-                              $steps["goToPage"] = await $steps["goToPage"];
-                            }
-                          }}
-                          onDeselectedChange={(...eventArgs) => {
-                            generateStateOnChangeProp($state, [
-                              "viewPacsButton",
-                              "deselected"
-                            ])(eventArgs[0]);
-                          }}
-                          onIsDisabledChange={(...eventArgs) => {
-                            generateStateOnChangeProp($state, [
-                              "viewPacsButton",
-                              "isDisabled"
-                            ])(eventArgs[0]);
-                          }}
-                          onSelectedChange={(...eventArgs) => {
-                            generateStateOnChangeProp($state, [
-                              "viewPacsButton",
-                              "selected"
-                            ])(eventArgs[0]);
-                          }}
-                          onSortDeselectedChange={(...eventArgs) => {
-                            generateStateOnChangeProp($state, [
-                              "viewPacsButton",
-                              "sortDeselected"
-                            ])(eventArgs[0]);
-                          }}
-                          onSortSelectedChange={(...eventArgs) => {
-                            generateStateOnChangeProp($state, [
-                              "viewPacsButton",
-                              "sortSelected"
-                            ])(eventArgs[0]);
-                          }}
-                          selected={generateStateValueProp($state, [
-                            "viewPacsButton",
-                            "selected"
-                          ])}
-                          sortDeselected={generateStateValueProp($state, [
-                            "viewPacsButton",
-                            "sortDeselected"
-                          ])}
-                          sortSelected={generateStateValueProp($state, [
-                            "viewPacsButton",
-                            "sortSelected"
-                          ])}
-                        >
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text___4Thhk
-                            )}
-                          >
-                            {"View PACS"}
-                          </div>
-                        </Button>
+                      $steps["goToPage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              destination: (() => {
+                                try {
+                                  return $ctx.fetched_data.data.pacs_url;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            };
+                            return (({ destination }) => {
+                              if (
+                                typeof destination === "string" &&
+                                destination.startsWith("#")
+                              ) {
+                                document
+                                  .getElementById(destination.substr(1))
+                                  .scrollIntoView({ behavior: "smooth" });
+                              } else {
+                                __nextRouter?.push(destination);
+                              }
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["goToPage"] != null &&
+                        typeof $steps["goToPage"] === "object" &&
+                        typeof $steps["goToPage"].then === "function"
+                      ) {
+                        $steps["goToPage"] = await $steps["goToPage"];
+                      }
+                    }}
+                    onDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "deselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onIsDisabledChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }}
+                    onSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "selected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortDeselectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }}
+                    onSortSelectedChange={(...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "viewPacsButton",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "viewPacsButton",
+                      "selected"
+                    ])}
+                    sortDeselected={generateStateValueProp($state, [
+                      "viewPacsButton",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "viewPacsButton",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___4Thhk
                       )}
-                    </DataCtxReader__>
-                  </ApiFetcherComponent>
+                    >
+                      {"View PACS"}
+                    </div>
+                  </Button>
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? $ctx.fetched_data.loading == true
@@ -1433,6 +1435,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                         const gregorianDate = new Date(
                                           currentItem.service_datetime
                                         );
+                                        gregorianDate.setSeconds(0);
                                         const shamsiDate =
                                           new Intl.DateTimeFormat(
                                             "fa-IR"
@@ -1456,7 +1459,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                               d.charCodeAt(0) - 1728
                                             )
                                         );
-                                        return `${englishDate}  ${englishTime}`;
+                                        const timeWithoutSeconds = englishTime
+                                          .split(":")
+                                          .slice(0, 2)
+                                          .join(":");
+                                        return `${englishDate}  ${timeWithoutSeconds}`;
                                       })()}
                                     </React.Fragment>
                                   )}
@@ -1468,8 +1475,43 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   sty.freeBox___02DGl
                                 )}
                               >
-                                {new Date(currentItem.service_datetime) <
-                                new Date($state.admissionDatetime)
+                                {(() => {
+                                  return (() => {
+                                    const formattedServiceDateTime = (() => {
+                                      const gregorianDate = new Date(
+                                        currentItem.service_datetime
+                                      );
+                                      const shamsiDate =
+                                        new Intl.DateTimeFormat("fa-IR").format(
+                                          gregorianDate
+                                        );
+                                      const shamsiTime =
+                                        gregorianDate.toLocaleTimeString(
+                                          "fa-IR",
+                                          { hour12: false }
+                                        );
+                                      const englishDate = shamsiDate.replace(
+                                        /[۰-۹]/g,
+                                        d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                      );
+                                      const englishTime = shamsiTime.replace(
+                                        /[۰-۹]/g,
+                                        d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                      );
+                                      return `${englishDate}  ${englishTime}`;
+                                    })();
+                                    return (
+                                      new Date(formattedServiceDateTime) <
+                                      new Date($state.admissionDatetime)
+                                    );
+                                  })();
+                                })()
                                   ? (() => {
                                       const child$Props = {
                                         className: classNames(
@@ -1763,6 +1805,190 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           )}
                           key={currentIndex}
                         >
+                          {(() => {
+                            try {
+                              return (() => {
+                                const formattedServiceDateTime = (() => {
+                                  const gregorianDate = new Date(
+                                    currentItem.issued_datetime
+                                  );
+                                  const shamsiDate = new Intl.DateTimeFormat(
+                                    "fa-IR"
+                                  ).format(gregorianDate);
+                                  const shamsiTime =
+                                    gregorianDate.toLocaleTimeString("fa-IR", {
+                                      hour12: false
+                                    });
+                                  const englishDate = shamsiDate.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  const englishTime = shamsiTime.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  return `${englishDate}  ${englishTime}`;
+                                })();
+                                return (
+                                  new Date(formattedServiceDateTime) <
+                                  new Date($state.admissionDatetime)
+                                );
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return true;
+                              }
+                              throw e;
+                            }
+                          })()
+                            ? (() => {
+                                const child$Props = {
+                                  className: classNames(
+                                    "__wab_instance",
+                                    sty.button
+                                  ),
+                                  color: "red",
+                                  deselected: generateStateValueProp($state, [
+                                    "button",
+                                    __plasmic_idx_0,
+                                    "deselected"
+                                  ]),
+                                  isDisabled: generateStateValueProp($state, [
+                                    "button",
+                                    __plasmic_idx_0,
+                                    "isDisabled"
+                                  ]),
+                                  onDeselectedChange: (...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "button",
+                                      __plasmic_idx_0,
+                                      "deselected"
+                                    ])(eventArgs[0]);
+                                  },
+                                  onIsDisabledChange: (...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "button",
+                                      __plasmic_idx_0,
+                                      "isDisabled"
+                                    ])(eventArgs[0]);
+                                  },
+                                  onSelectedChange: (...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "button",
+                                      __plasmic_idx_0,
+                                      "selected"
+                                    ])(eventArgs[0]);
+                                  },
+                                  onSortDeselectedChange: (...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "button",
+                                      __plasmic_idx_0,
+                                      "sortDeselected"
+                                    ])(eventArgs[0]);
+                                  },
+                                  onSortSelectedChange: (...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "button",
+                                      __plasmic_idx_0,
+                                      "sortSelected"
+                                    ])(eventArgs[0]);
+                                  },
+                                  selected: generateStateValueProp($state, [
+                                    "button",
+                                    __plasmic_idx_0,
+                                    "selected"
+                                  ]),
+                                  sortDeselected: generateStateValueProp(
+                                    $state,
+                                    [
+                                      "button",
+                                      __plasmic_idx_0,
+                                      "sortDeselected"
+                                    ]
+                                  ),
+                                  sortSelected: generateStateValueProp($state, [
+                                    "button",
+                                    __plasmic_idx_0,
+                                    "sortSelected"
+                                  ])
+                                };
+
+                                initializePlasmicStates(
+                                  $state,
+                                  [
+                                    {
+                                      name: "button[].isDisabled",
+                                      initFunc: ({
+                                        $props,
+                                        $state,
+                                        $queries
+                                      }) => undefined
+                                    },
+                                    {
+                                      name: "button[].selected",
+                                      initFunc: ({
+                                        $props,
+                                        $state,
+                                        $queries
+                                      }) => undefined
+                                    },
+                                    {
+                                      name: "button[].deselected",
+                                      initFunc: ({
+                                        $props,
+                                        $state,
+                                        $queries
+                                      }) => undefined
+                                    },
+                                    {
+                                      name: "button[].sortDeselected",
+                                      initFunc: ({
+                                        $props,
+                                        $state,
+                                        $queries
+                                      }) => undefined
+                                    },
+                                    {
+                                      name: "button[].sortSelected",
+                                      initFunc: ({
+                                        $props,
+                                        $state,
+                                        $queries
+                                      }) => undefined
+                                    }
+                                  ],
+                                  [__plasmic_idx_0]
+                                );
+                                return (
+                                  <Button
+                                    data-plasmic-name={"button"}
+                                    data-plasmic-override={overrides.button}
+                                    {...child$Props}
+                                  >
+                                    <div
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.text__c2Flb
+                                      )}
+                                    >
+                                      {
+                                        "\u0628\u0633\u062a\u0631\u06cc \u0642\u0628\u0644\u06cc "
+                                      }
+                                    </div>
+                                  </Button>
+                                );
+                              })()
+                            : null}
                           <div
                             data-plasmic-name={"paraclinicName"}
                             data-plasmic-override={overrides.paraclinicName}
@@ -1813,7 +2039,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                           d.charCodeAt(0) - 1728
                                         )
                                     );
-                                    return `${englishDate}  ${englishTime}`;
+                                    const timeWithoutSeconds = englishTime
+                                      .split(":")
+                                      .slice(0, 2)
+                                      .join(":");
+                                    return `${englishDate}  ${timeWithoutSeconds}`;
                                   })();
                                 } catch (e) {
                                   if (
@@ -2406,6 +2636,7 @@ const PlasmicDescendants = {
     "paraclinics",
     "paraclinicsList",
     "paraclinicNameDatetime",
+    "button",
     "paraclinicName",
     "paraclinicDatetime",
     "paraclinicReportModal",
@@ -2448,7 +2679,7 @@ const PlasmicDescendants = {
     "previousAdmission",
     "paraclinicType"
   ],
-  apiFetcherComponent: ["apiFetcherComponent", "viewPacsButton"],
+  apiFetcherComponent: ["apiFetcherComponent"],
   viewPacsButton: ["viewPacsButton"],
   paraclinicReportsSection: [
     "paraclinicReportsSection",
@@ -2501,20 +2732,24 @@ const PlasmicDescendants = {
     "paraclinics",
     "paraclinicsList",
     "paraclinicNameDatetime",
+    "button",
     "paraclinicName",
     "paraclinicDatetime"
   ],
   paraclinicsList: [
     "paraclinicsList",
     "paraclinicNameDatetime",
+    "button",
     "paraclinicName",
     "paraclinicDatetime"
   ],
   paraclinicNameDatetime: [
     "paraclinicNameDatetime",
+    "button",
     "paraclinicName",
     "paraclinicDatetime"
   ],
+  button: ["button"],
   paraclinicName: ["paraclinicName"],
   paraclinicDatetime: ["paraclinicDatetime"],
   paraclinicReportModal: [
@@ -2579,6 +2814,7 @@ type NodeDefaultElementType = {
   paraclinics: typeof ApiFetcherComponent;
   paraclinicsList: "div";
   paraclinicNameDatetime: "div";
+  button: typeof Button;
   paraclinicName: "div";
   paraclinicDatetime: "div";
   paraclinicReportModal: typeof AntdModal;
@@ -2680,6 +2916,7 @@ export const PlasmicImagingReportList = Object.assign(
     paraclinics: makeNodeComponent("paraclinics"),
     paraclinicsList: makeNodeComponent("paraclinicsList"),
     paraclinicNameDatetime: makeNodeComponent("paraclinicNameDatetime"),
+    button: makeNodeComponent("button"),
     paraclinicName: makeNodeComponent("paraclinicName"),
     paraclinicDatetime: makeNodeComponent("paraclinicDatetime"),
     paraclinicReportModal: makeNodeComponent("paraclinicReportModal"),

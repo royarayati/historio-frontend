@@ -7025,7 +7025,10 @@ function PlasmicHomepage__RenderFunc(props: {
         >
           {(() => {
             try {
-              return $state.searchbarLnamePhysicians.value === "";
+              return (
+                $state.searchbarLnamePhysicians.value === "" &&
+                $state.searchbarFnamePhysicians.value === ""
+              );
             } catch (e) {
               if (
                 e instanceof TypeError ||
