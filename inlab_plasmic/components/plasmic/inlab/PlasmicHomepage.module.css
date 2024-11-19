@@ -2673,7 +2673,35 @@
     margin-top: calc(0px + 5px) !important;
   }
 }
-.searchbarPhysicians:global(.__wab_instance) {
+.searchbars {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.searchbars > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  min-width: 0;
+  margin-left: calc(0px - 5px);
+  width: calc(100% + 5px);
+}
+.searchbars > :global(.__wab_flex-container) > *,
+.searchbars > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.searchbars > :global(.__wab_flex-container) > picture > img,
+.searchbars
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 5px;
+}
+.searchbarLnamePhysicians:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   left: auto;
@@ -2683,13 +2711,13 @@
   width: 100%;
   align-self: auto;
   margin-bottom: 0px;
-  margin-top: calc(0px + 5px) !important;
+  margin-top: 0px;
   margin-right: 0px;
-  margin-left: 0px;
+  margin-left: calc(0px + 5px) !important;
   min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .searchbarPhysicians:global(.__wab_instance) {
+  .searchbarLnamePhysicians:global(.__wab_instance) {
     left: auto;
     top: auto;
     position: relative;
@@ -2698,7 +2726,7 @@
     bottom: auto;
     height: 45px;
     align-self: center;
-    margin-top: calc(0px + 5px) !important;
+    margin-left: calc(0px + 5px) !important;
     flex-shrink: 0;
   }
 }
@@ -2717,6 +2745,58 @@
   }
 }
 .svg__ebXu6 {
+  position: relative;
+  object-fit: cover;
+  width: var(--token-UEz8jpx4ZeEk);
+  height: 1em;
+  color: var(--token-9iYGdL7i3GKE);
+  align-self: center;
+  margin-right: 5px;
+}
+.searchbarFnamePhysicians:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  height: auto;
+  width: 100%;
+  align-self: auto;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: calc(0px + 5px) !important;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .searchbarFnamePhysicians:global(.__wab_instance) {
+    left: auto;
+    top: auto;
+    position: relative;
+    width: 269px;
+    right: auto;
+    bottom: auto;
+    height: 45px;
+    align-self: center;
+    margin-left: calc(0px + 5px) !important;
+    flex-shrink: 0;
+  }
+}
+.svg__dx794 {
+  position: relative;
+  object-fit: cover;
+  height: 30px;
+  color: var(--token-9iYGdL7i3GKE);
+  width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .svg__dx794 {
+    height: 20px;
+    transform: translateX(5px) translateY(0px) translateZ(0px);
+  }
+}
+.svg__pDhE4 {
   position: relative;
   object-fit: cover;
   width: var(--token-UEz8jpx4ZeEk);
