@@ -339,9 +339,6 @@ function PlasmicTestAuth__RenderFunc(props: {
               className={classNames("__wab_instance", sty.test)}
               method={"GET"}
               path={`/api/v2/user/info?user=${$ctx.inlab_user.user.id}`}
-              ref={ref => {
-                $refs["test"] = ref;
-              }}
             >
               <DataCtxReader__>
                 {$ctx => (

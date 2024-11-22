@@ -1670,6 +1670,34 @@
           "cssFilePath": "plasmic/inlab/PlasmicSwitchingTab2.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "ZHE7N-0S_BIq",
+          "name": "ConsultSendDraft",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicConsultSendDraft.tsx",
+          "importSpec": {
+            "modulePath": "../pages/consult/send/draft/[code]/[adm_id]/[consult_id].tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicConsultSendDraft.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/consult/send/draft/[code]/[adm_id]/[consult_id]"
+        },
+        {
+          "id": "AGOvPrI_p90T",
+          "name": "ConsultSendReply",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicConsultSendReply.tsx",
+          "importSpec": {
+            "modulePath": "../pages/consult/send/reply/[code]/[adm_id]/[consult_id].tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicConsultSendReply.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/consult/send/reply/[code]/[adm_id]/[consult_id]"
         }
       ],
       "icons": [

@@ -528,9 +528,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
             })()}
             method={"GET"}
             path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
-            ref={ref => {
-              $refs["getPatient"] = ref;
-            }}
           >
             <DataCtxReader__>
               {$ctx => (
@@ -652,24 +649,25 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     onNotSatisfied={async () => {
                       const $steps = {};
 
-                      $steps["setLocalAdmissionDatetime"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  return localStorage.setItem(
-                                    "admission_datetime",
-                                    $ctx.fetched_data.data.items[0]
-                                      .admission_datetime
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
+                      $steps["setLocalAdmissionDatetime"] =
+                        $ctx.fetched_data.loading == false
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    return localStorage.setItem(
+                                      "admission_datetime",
+                                      $ctx.fetched_data.data.items[0]
+                                        .admission_datetime
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
                       if (
                         $steps["setLocalAdmissionDatetime"] != null &&
                         typeof $steps["setLocalAdmissionDatetime"] ===
@@ -682,32 +680,34 @@ function PlasmicImagingReportList__RenderFunc(props: {
                         ];
                       }
 
-                      $steps["updateAdmissionDatetime"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["admissionDatetime"]
-                              },
-                              operation: 0,
-                              value: localStorage.getItem("admission_datetime")
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
+                      $steps["updateAdmissionDatetime"] =
+                        $steps.setLocalAdmissionDatetime
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["admissionDatetime"]
+                                },
+                                operation: 0,
+                                value:
+                                  localStorage.getItem("admission_datetime")
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
 
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
                       if (
                         $steps["updateAdmissionDatetime"] != null &&
                         typeof $steps["updateAdmissionDatetime"] === "object" &&
@@ -956,9 +956,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
             })()}
             method={"GET"}
             path={`/api/v3/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
-            ref={ref => {
-              $refs["paraclinicsReport"] = ref;
-            }}
           >
             <DataCtxReader__>
               {$ctx => (
@@ -995,9 +992,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       }&user_id=${localStorage.getItem(
                         "inlab_user_namespace_id"
                       )}`}
-                      ref={ref => {
-                        $refs["apiFetcherComponent"] = ref;
-                      }}
                     />
                   ) : null}
                   <Button
@@ -1693,7 +1687,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
         ) : null}
-        {$state.selectedTab == "Paraclinics" ? (
+        {false ? (
           <ApiFetcherComponent
             data-plasmic-name={"paraclinics"}
             data-plasmic-override={overrides.paraclinics}
@@ -1716,9 +1710,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
             })()}
             method={"GET"}
             path={`/api/v3/remote_his/paraclinics?patient_id=${$ctx.params.code}`}
-            ref={ref => {
-              $refs["paraclinics"] = ref;
-            }}
           >
             <DataCtxReader__>
               {$ctx => (

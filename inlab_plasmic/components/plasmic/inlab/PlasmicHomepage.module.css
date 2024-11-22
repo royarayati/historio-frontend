@@ -1015,16 +1015,29 @@
   min-width: 0;
   padding: 8px;
 }
+.senderRecieverTags {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: space-between;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+  padding: 4px;
+}
 .patientSenderReceiver {
   display: flex;
   flex-direction: column;
   position: relative;
   align-items: center;
   justify-content: flex-start;
-  width: 800px;
+  width: 100%;
   height: auto;
   max-width: 100%;
   align-self: flex-end;
+  min-width: 0;
 }
 .patientWard {
   display: flex;
@@ -1035,35 +1048,25 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  padding-bottom: 8px;
-  padding-top: 4px;
   border-bottom-style: dashed;
   border-bottom-width: 1px;
-  padding-right: 130px;
   min-width: 0;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .patientWard {
-    padding-right: 20px;
-  }
+  padding: 4px;
 }
 .patientName {
   width: auto;
   height: auto;
   max-width: 100%;
   font-size: var(--token-sOr3fJ5Up5fq);
-  margin-bottom: 5px;
   font-weight: 700;
-  align-self: flex-end;
+  padding-bottom: 4px;
 }
 .patientWard2 {
   position: relative;
   width: auto;
   height: auto;
   max-width: 100%;
-  margin-right: 10px;
   font-size: var(--token-CdE1_0ZaCyT1);
-  align-self: flex-end;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .patientWard2 {
@@ -1079,9 +1082,8 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  padding-bottom: 4px;
-  padding-top: 8px;
   min-width: 0;
+  padding: 4px;
 }
 .receiverService {
   position: relative;
@@ -1125,9 +1127,8 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  padding-bottom: 8px;
-  padding-top: 4px;
   min-width: 0;
+  padding: 4px;
 }
 .receiverDoctor {
   position: relative;
@@ -1155,16 +1156,44 @@
     font-size: 11px;
   }
 }
+.repliedStatus {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-start;
+  font-weight: 700;
+  background: #ffffff;
+  color: var(--token-F0UhOcqDIzJI);
+  padding-top: 4px;
+  font-size: 10px;
+  white-space: pre;
+}
+.empty {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-start;
+  font-weight: 700;
+  background: #ffffff;
+  color: #ffffff;
+  padding-top: 4px;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  white-space: pre;
+}
 .consultSendDateRepliedStatus {
   display: flex;
   flex-direction: row;
   position: relative;
   align-items: stretch;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   height: auto;
   max-width: 100%;
-  margin-bottom: 5px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
   min-width: 0;
 }
 .consultSendDate {
@@ -1173,26 +1202,12 @@
   height: auto;
   max-width: 100%;
   align-self: center;
-  margin-right: 74%;
   font-weight: 700;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .consultSendDate {
-    margin-right: 7%;
     font-size: var(--token-CdE1_0ZaCyT1);
   }
-}
-.repliedStatus {
-  position: relative;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  align-self: center;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  font-weight: 700;
-  background: var(--token-F0UhOcqDIzJI);
-  border-radius: 999px;
-  padding: 7.5px 14px;
 }
 .replyConsultButton:global(.__wab_instance) {
   max-width: 100%;
@@ -1207,6 +1222,24 @@
   height: 1em;
 }
 .svg__x7QrW {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.consultDetailButton:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__akD4J {
+  font-size: var(--token-CdE1_0ZaCyT1);
+}
+.svg__lcKmd {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__vBxBd {
   position: relative;
   object-fit: cover;
   width: auto;
@@ -3166,124 +3199,6 @@
   user-select: none;
   text-decoration-line: none !important;
   background: #ffffff;
-  min-width: 0;
-}
-.modalReplyConsultConfirmation:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-}
-.modalReplyConsultConfirmation__modal :global(.ant-modal-content) {
-  background: #ffffff;
-  outline: none;
-}
-.confirmationContent {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  background: #ffffff;
-  min-width: 0;
-  padding: 8px;
-}
-.confirmationYesNo {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  align-items: stretch;
-  justify-content: center;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-bottom: 8px;
-  min-width: 0;
-}
-.noConfirm:global(.__wab_instance) {
-  max-width: 100%;
-}
-.svg___11Ji3 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__bqSjk {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.confirm:global(.__wab_instance) {
-  max-width: 100%;
-  margin-left: 30px;
-}
-.svg__urwaj {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__yh7F2 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.unsuccessfulReplyConsult:global(.__wab_instance) {
-  max-width: 100%;
-  width: 236px;
-}
-.text__a1LMq {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.text___5UtyF {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.svg___2WrHt {
-  position: relative;
-  object-fit: cover;
-  max-width: 100%;
-  height: 24px;
-  align-self: auto;
-}
-.title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 8px;
-  background: #ffffff;
-  min-width: 0;
-}
-.text__lHSv {
-  background: none;
-  margin-bottom: 10px;
-}
-.guide {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-size: 10px;
-  color: #000000b3;
   min-width: 0;
 }
 .modalFeatureBanner:global(.__wab_instance) {

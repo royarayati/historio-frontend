@@ -197,9 +197,6 @@ function PlasmicReport__RenderFunc(props: {
       })()}
       method={"GET"}
       path={`/api/v2/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
-      ref={ref => {
-        $refs["reports"] = ref;
-      }}
     >
       <DataCtxReader__>
         {$ctx => (
