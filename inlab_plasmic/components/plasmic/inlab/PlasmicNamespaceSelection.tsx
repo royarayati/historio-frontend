@@ -205,6 +205,9 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
               headers={{ "X-Namespace": "undefined " }}
               method={"GET"}
               path={"/api/v2/user/user_namespaces"}
+              ref={ref => {
+                $refs["namespaces"] = ref;
+              }}
             >
               <DataCtxReader__>
                 {$ctx => (

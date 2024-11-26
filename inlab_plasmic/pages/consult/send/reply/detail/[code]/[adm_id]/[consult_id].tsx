@@ -2,25 +2,25 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import { PageParamsProvider as PageParamsProvider__ } from "@plasmicapp/react-web/lib/host";
-import GlobalContextsProvider from "../../../../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
+import GlobalContextsProvider from "../../../../../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
 
-import { PlasmicConsultSendReply } from "../../../../../../components/plasmic/inlab/PlasmicConsultSendReply";
+import { PlasmicConsultSendReplyAndDetail } from "../../../../../../../components/plasmic/inlab/PlasmicConsultSendReplyAndDetail";
 import { useRouter } from "next/router";
 
-function ConsultSendReply() {
-  // Use PlasmicConsultSendReply to render this component as it was
+function ConsultSendReplyAndDetail() {
+  // Use PlasmicConsultSendReplyAndDetail to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicConsultSendReply are:
+  // Props you can pass into PlasmicConsultSendReplyAndDetail are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, PlasmicConsultSendReply is wrapped by your project's global
+  // By default, PlasmicConsultSendReplyAndDetail is wrapped by your project's global
   // variant context providers. These wrappers may be moved to
   // Next.js Custom App component
   // (https://nextjs.org/docs/advanced-features/custom-app).
@@ -31,10 +31,10 @@ function ConsultSendReply() {
         params={useRouter()?.query}
         query={useRouter()?.query}
       >
-        <PlasmicConsultSendReply />
+        <PlasmicConsultSendReplyAndDetail />
       </PageParamsProvider__>
     </GlobalContextsProvider>
   );
 }
 
-export default ConsultSendReply;
+export default ConsultSendReplyAndDetail;

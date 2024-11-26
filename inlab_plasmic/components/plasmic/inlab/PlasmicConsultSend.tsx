@@ -125,8 +125,7 @@ export type PlasmicConsultSend__OverridesType = {
   previousPresentIllness?: Flex__<"div">;
   patientPresentIllness?: Flex__<"textarea">;
   consultEmergencyStatusButton?: Flex__<typeof Button>;
-  consultEmergencyStatus3?: Flex__<"div">;
-  normalRangeButtonCircle2?: Flex__<"div">;
+  consultEmergencyStatus?: Flex__<"div">;
   emergentOff?: Flex__<"div">;
   emergentOn?: Flex__<"div">;
   guide?: Flex__<"div">;
@@ -159,6 +158,9 @@ export type PlasmicConsultSend__OverridesType = {
   modalPatientPresentIlness?: Flex__<typeof AntdModal>;
   patientPresentIlness?: Flex__<"div">;
   presentIllness?: Flex__<"div">;
+  noPresentIllness?: Flex__<"div">;
+  titleContent?: Flex__<"div">;
+  svg?: Flex__<"svg">;
 };
 
 export interface DefaultConsultSendProps {}
@@ -465,6 +467,9 @@ function PlasmicConsultSend__RenderFunc(props: {
               })()}
               method={"GET"}
               path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}`}
+              ref={ref => {
+                $refs["patientDataForHeader"] = ref;
+              }}
             >
               <DataCtxReader__>
                 {$ctx => (
@@ -1051,7 +1056,9 @@ function PlasmicConsultSend__RenderFunc(props: {
                     }
                   }}
                 >
-                  {"\u067e\u0632\u0634\u06a9 \u0645\u0642\u0635\u062f"}
+                  {
+                    "\u067e\u0632\u0634\u06a9 \u0645\u0642\u0635\u062f \u067e\u06cc\u0634\u0646\u0647\u0627\u062f\u06cc"
+                  }
                 </div>
                 <div
                   data-plasmic-name={"selectedReceiverDoctor"}
@@ -1251,7 +1258,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                       e instanceof TypeError ||
                       e?.plasmicType === "PlasmicUndefinedDataError"
                     ) {
-                      return "hoverDeselected";
+                      return [];
                     }
                     throw e;
                   }
@@ -1264,7 +1271,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                       e instanceof TypeError ||
                       e?.plasmicType === "PlasmicUndefinedDataError"
                     ) {
-                      return "hoverSelected";
+                      return [];
                     }
                     throw e;
                   }
@@ -1463,22 +1470,13 @@ function PlasmicConsultSend__RenderFunc(props: {
                 ])}
               >
                 <div
-                  data-plasmic-name={"consultEmergencyStatus3"}
-                  data-plasmic-override={overrides.consultEmergencyStatus3}
+                  data-plasmic-name={"consultEmergencyStatus"}
+                  data-plasmic-override={overrides.consultEmergencyStatus}
                   className={classNames(
                     projectcss.all,
-                    sty.consultEmergencyStatus3
+                    sty.consultEmergencyStatus
                   )}
                 >
-                  <div
-                    data-plasmic-name={"normalRangeButtonCircle2"}
-                    data-plasmic-override={overrides.normalRangeButtonCircle2}
-                    className={classNames(
-                      projectcss.all,
-                      sty.normalRangeButtonCircle2
-                    )}
-                  />
-
                   {(() => {
                     try {
                       return !$state.emergencyButtonStatusState;
@@ -2639,6 +2637,9 @@ function PlasmicConsultSend__RenderFunc(props: {
             })()}
             method={"GET"}
             path={"/api/v2/service"}
+            ref={ref => {
+              $refs["getServices"] = ref;
+            }}
           >
             <DataCtxReader__>
               {$ctx => (
@@ -3337,6 +3338,9 @@ function PlasmicConsultSend__RenderFunc(props: {
             className={classNames("__wab_instance", sty.getUsers)}
             method={"GET"}
             path={`/api/v3/user?doctor_name=${$state.doctorNameInput.value}`}
+            ref={ref => {
+              $refs["getUsers"] = ref;
+            }}
           >
             <DataCtxReader__>
               {$ctx => (
@@ -3795,6 +3799,9 @@ function PlasmicConsultSend__RenderFunc(props: {
             })()}
             method={"GET"}
             path={`/api/v2/patient/${$ctx.params.code}/consult/illness`}
+            ref={ref => {
+              $refs["getPresentIlness"] = ref;
+            }}
           >
             <DataCtxReader__>
               {$ctx => (
@@ -3828,15 +3835,77 @@ function PlasmicConsultSend__RenderFunc(props: {
                   ])}
                   title={
                     <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__cl2Eh
-                      )}
+                      data-plasmic-name={"titleContent"}
+                      data-plasmic-override={overrides.titleContent}
+                      className={classNames(projectcss.all, sty.titleContent)}
                     >
-                      {
-                        "\u0644\u06cc\u0633\u062a \u0634\u0631\u062d \u062d\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0642\u0628\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631"
-                      }
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__cl2Eh
+                        )}
+                      >
+                        {
+                          "\u0644\u06cc\u0633\u062a \u0634\u0631\u062d \u062d\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0642\u0628\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631"
+                        }
+                      </div>
+                      <Icons8CloseSvgIcon
+                        data-plasmic-name={"svg"}
+                        data-plasmic-override={overrides.svg}
+                        className={classNames(projectcss.all, sty.svg)}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateModalPatientPresentIlnessOpen"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: [
+                                      "modalPatientPresentIlness",
+                                      "open"
+                                    ]
+                                  },
+                                  operation: 4
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  const oldValue = $stateGet(
+                                    objRoot,
+                                    variablePath
+                                  );
+                                  $stateSet(objRoot, variablePath, !oldValue);
+                                  return !oldValue;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateModalPatientPresentIlnessOpen"] !=
+                              null &&
+                            typeof $steps[
+                              "updateModalPatientPresentIlnessOpen"
+                            ] === "object" &&
+                            typeof $steps["updateModalPatientPresentIlnessOpen"]
+                              .then === "function"
+                          ) {
+                            $steps["updateModalPatientPresentIlnessOpen"] =
+                              await $steps[
+                                "updateModalPatientPresentIlnessOpen"
+                              ];
+                          }
+                        }}
+                        role={"img"}
+                      />
                     </div>
                   }
                   trigger={null}
@@ -3998,6 +4067,33 @@ function PlasmicConsultSend__RenderFunc(props: {
                         </div>
                       );
                     })}
+                    {(() => {
+                      try {
+                        return $ctx.fetched_data.data.illnesses == 0;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={"noPresentIllness"}
+                        data-plasmic-override={overrides.noPresentIllness}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.noPresentIllness
+                        )}
+                      >
+                        {
+                          "\u0634\u0631\u062d \u062d\u0627\u0644 \u0642\u0628\u0644\u06cc \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                        }
+                      </div>
+                    ) : null}
                   </div>
                 </AntdModal>
               )}
@@ -4040,8 +4136,7 @@ const PlasmicDescendants = {
     "previousPresentIllness",
     "patientPresentIllness",
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus3",
-    "normalRangeButtonCircle2",
+    "consultEmergencyStatus",
     "emergentOff",
     "emergentOn",
     "guide",
@@ -4073,7 +4168,10 @@ const PlasmicDescendants = {
     "getPresentIlness",
     "modalPatientPresentIlness",
     "patientPresentIlness",
-    "presentIllness"
+    "presentIllness",
+    "noPresentIllness",
+    "titleContent",
+    "svg"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -4115,8 +4213,7 @@ const PlasmicDescendants = {
     "previousPresentIllness",
     "patientPresentIllness",
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus3",
-    "normalRangeButtonCircle2",
+    "consultEmergencyStatus",
     "emergentOff",
     "emergentOn",
     "guide",
@@ -4147,8 +4244,7 @@ const PlasmicDescendants = {
     "previousPresentIllness",
     "patientPresentIllness",
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus3",
-    "normalRangeButtonCircle2",
+    "consultEmergencyStatus",
     "emergentOff",
     "emergentOn",
     "guide",
@@ -4204,18 +4300,15 @@ const PlasmicDescendants = {
   patientPresentIllness: ["patientPresentIllness"],
   consultEmergencyStatusButton: [
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus3",
-    "normalRangeButtonCircle2",
+    "consultEmergencyStatus",
     "emergentOff",
     "emergentOn"
   ],
-  consultEmergencyStatus3: [
-    "consultEmergencyStatus3",
-    "normalRangeButtonCircle2",
+  consultEmergencyStatus: [
+    "consultEmergencyStatus",
     "emergentOff",
     "emergentOn"
   ],
-  normalRangeButtonCircle2: ["normalRangeButtonCircle2"],
   emergentOff: ["emergentOff"],
   emergentOn: ["emergentOn"],
   guide: ["guide"],
@@ -4302,15 +4395,28 @@ const PlasmicDescendants = {
     "getPresentIlness",
     "modalPatientPresentIlness",
     "patientPresentIlness",
-    "presentIllness"
+    "presentIllness",
+    "noPresentIllness",
+    "titleContent",
+    "svg"
   ],
   modalPatientPresentIlness: [
     "modalPatientPresentIlness",
     "patientPresentIlness",
-    "presentIllness"
+    "presentIllness",
+    "noPresentIllness",
+    "titleContent",
+    "svg"
   ],
-  patientPresentIlness: ["patientPresentIlness", "presentIllness"],
-  presentIllness: ["presentIllness"]
+  patientPresentIlness: [
+    "patientPresentIlness",
+    "presentIllness",
+    "noPresentIllness"
+  ],
+  presentIllness: ["presentIllness"],
+  noPresentIllness: ["noPresentIllness"],
+  titleContent: ["titleContent", "svg"],
+  svg: ["svg"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -4345,8 +4451,7 @@ type NodeDefaultElementType = {
   previousPresentIllness: "div";
   patientPresentIllness: "textarea";
   consultEmergencyStatusButton: typeof Button;
-  consultEmergencyStatus3: "div";
-  normalRangeButtonCircle2: "div";
+  consultEmergencyStatus: "div";
   emergentOff: "div";
   emergentOn: "div";
   guide: "div";
@@ -4379,6 +4484,9 @@ type NodeDefaultElementType = {
   modalPatientPresentIlness: typeof AntdModal;
   patientPresentIlness: "div";
   presentIllness: "div";
+  noPresentIllness: "div";
+  titleContent: "div";
+  svg: "svg";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -4475,8 +4583,7 @@ export const PlasmicConsultSend = Object.assign(
     consultEmergencyStatusButton: makeNodeComponent(
       "consultEmergencyStatusButton"
     ),
-    consultEmergencyStatus3: makeNodeComponent("consultEmergencyStatus3"),
-    normalRangeButtonCircle2: makeNodeComponent("normalRangeButtonCircle2"),
+    consultEmergencyStatus: makeNodeComponent("consultEmergencyStatus"),
     emergentOff: makeNodeComponent("emergentOff"),
     emergentOn: makeNodeComponent("emergentOn"),
     guide: makeNodeComponent("guide"),
@@ -4509,6 +4616,9 @@ export const PlasmicConsultSend = Object.assign(
     modalPatientPresentIlness: makeNodeComponent("modalPatientPresentIlness"),
     patientPresentIlness: makeNodeComponent("patientPresentIlness"),
     presentIllness: makeNodeComponent("presentIllness"),
+    noPresentIllness: makeNodeComponent("noPresentIllness"),
+    titleContent: makeNodeComponent("titleContent"),
+    svg: makeNodeComponent("svg"),
 
     // Metadata about props expected for PlasmicConsultSend
     internalVariantProps: PlasmicConsultSend__VariantProps,

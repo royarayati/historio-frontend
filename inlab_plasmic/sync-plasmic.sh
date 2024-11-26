@@ -14,7 +14,7 @@ echo -e "\n----------Syncing Plasmic----------"
 echo -e "\n----------Deleting Plasmic files----------"
 
 rm -r components || true
-rm -r pages/patient pages/user pages/consult-list pages/consult-send || true
+rm -r pages/patient pages/user pages/consult-list pages/consult-send pages/consult || true
 rm -r \
     pages/guide_make_new_page.tsx \
     pages/index.tsx \

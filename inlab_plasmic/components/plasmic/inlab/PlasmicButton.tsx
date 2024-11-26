@@ -367,6 +367,11 @@ function PlasmicButton__RenderFunc(props: {
               "color",
               "clear"
             ),
+            [sty.texthoverSelected___0K9KhlbYsC]: hasVariant(
+              $state,
+              "hoverSelected",
+              "hoverSelected"
+            ),
             [sty.textselected___0K9KhBtTsH]: hasVariant(
               $state,
               "selected",
@@ -387,6 +392,11 @@ function PlasmicButton__RenderFunc(props: {
               $state,
               "color",
               "clear"
+            ),
+            [sty.texthoverSelected__cOxxNlbYsC]: hasVariant(
+              $state,
+              "hoverSelected",
+              "hoverSelected"
             ),
             [sty.textselected__cOxxNBtTsH]: hasVariant(
               $state,
@@ -412,6 +422,16 @@ function PlasmicButton__RenderFunc(props: {
             $state,
             "deselected",
             "deselected"
+          ),
+          [sty.contentContainerhoverDeselected]: hasVariant(
+            $state,
+            "hoverDeselected",
+            "hoverDeselected"
+          ),
+          [sty.contentContainerhoverSelected]: hasVariant(
+            $state,
+            "hoverSelected",
+            "hoverSelected"
           ),
           [sty.contentContainerisDisabled]: hasVariant(
             $state,

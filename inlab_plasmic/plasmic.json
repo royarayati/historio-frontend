@@ -1686,18 +1686,44 @@
           "path": "/consult/send/draft/[code]/[adm_id]/[consult_id]"
         },
         {
-          "id": "AGOvPrI_p90T",
-          "name": "ConsultSendReply",
+          "id": "EFrzqPluJe9j",
+          "name": "Alert3",
           "type": "managed",
           "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicConsultSendReply.tsx",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicAlert3.tsx",
           "importSpec": {
-            "modulePath": "../pages/consult/send/reply/[code]/[adm_id]/[consult_id].tsx"
+            "modulePath": "Alert3.tsx"
           },
-          "cssFilePath": "plasmic/inlab/PlasmicConsultSendReply.module.css",
+          "cssFilePath": "plasmic/inlab/PlasmicAlert3.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "UwudfLdMiFho",
+          "name": "ConsultSendReplyAndDetail",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicConsultSendReplyAndDetail.tsx",
+          "importSpec": {
+            "modulePath": "../pages/consult/send/reply/detail/[code]/[adm_id]/[consult_id].tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicConsultSendReplyAndDetail.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/consult/send/reply/[code]/[adm_id]/[consult_id]"
+          "path": "/consult/send/reply/detail/[code]/[adm_id]/[consult_id]"
+        },
+        {
+          "id": "sWsqjPSVIYww",
+          "name": "Bullet",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicBullet.tsx",
+          "importSpec": {
+            "modulePath": "Bullet.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicBullet.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -2230,6 +2256,11 @@
           "id": "I_kHJfXhorHV",
           "name": "EmptyCircleSvgrepoComSvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__EmptyCircleSvgrepoComSvg.tsx"
+        },
+        {
+          "id": "4fW54JbpNQ-Y",
+          "name": "RubbishBinSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__RubbishBinSvgrepoComSvg.tsx"
         }
       ],
       "images": [

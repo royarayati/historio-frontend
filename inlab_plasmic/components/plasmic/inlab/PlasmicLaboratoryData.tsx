@@ -677,6 +677,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             })()}
             method={"GET"}
             path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+            ref={ref => {
+              $refs["patientDataApiFetcher"] = ref;
+            }}
           >
             <DataCtxReader__>
               {$ctx => (
@@ -1470,6 +1473,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             }}
             method={"GET"}
             path={`/api/v3/remote_his/labs?patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&all_admissions=${$state.allAdmissions}`}
+            ref={ref => {
+              $refs["labData"] = ref;
+            }}
           >
             <DataCtxReader__>
               {$ctx => (
@@ -2316,6 +2322,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             })()}
             method={"GET"}
             path={`/api/v3/remote_his/lab_factors?admission_id=${$ctx.params.adm_id}`}
+            ref={ref => {
+              $refs["checkedFactorsApiFetcher"] = ref;
+            }}
           >
             <DataCtxReader__>
               {$ctx => (

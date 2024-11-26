@@ -93,18 +93,29 @@
   overflow: auto;
   padding: 8px;
 }
+.getUniqueConsult:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
 .sendConsult {
   display: flex;
-  position: absolute;
+  position: relative;
   width: 100%;
   height: auto;
   box-shadow: none;
   background: #ffffff;
-  left: 0px;
-  top: 0px;
-  max-width: 99%;
+  left: auto;
+  top: auto;
   flex-direction: column;
   overflow: auto;
+  max-width: 100%;
   min-width: 0;
   border-radius: 5px;
   border: 1px solid var(--token-8PxxXPNrIohQ);
@@ -129,8 +140,21 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .sendConsult {
-    top: 22%;
+    top: auto;
+    left: auto;
   }
+}
+.consultHeader {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
 }
 .pageFunctionTopic {
   position: relative;
@@ -152,7 +176,36 @@
   min-width: 0;
   padding: 10px;
 }
-.sendConsultButtonContent {
+.pageFunctionTopicOfDatail {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-weight: 700;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+  padding: 10px;
+}
+.deleteConsult {
+  object-fit: cover;
+  max-width: 100%;
+  color: var(--token-b7Myz3RtiwPQ);
+  width: 25px;
+  height: 25px;
+  align-self: center;
+  flex-shrink: 0;
+}
+.sendConsultReplyAlertContent {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -163,20 +216,20 @@
   max-width: 100%;
   padding: 8px;
 }
-.sendConsultSuccessfully:global(.__wab_instance) {
+.sendConsultReplySuccessfully:global(.__wab_instance) {
   max-width: 100%;
   width: auto;
   margin-top: 5px;
   display: none;
 }
-.text__hHw4Q {
+.text__sRnCt {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-.text__rIvCp {
+.text___1BKnX {
   position: relative;
   width: 100%;
   height: auto;
@@ -195,26 +248,26 @@
   text-decoration-line: none !important;
   min-width: 0;
 }
-.svg__rshBa {
+.svg__imP1P {
   position: relative;
   object-fit: cover;
   max-width: 100%;
   height: 24px;
   align-self: auto;
 }
-.sendConsultUnsuccessfully2:global(.__wab_instance) {
+.sendConsultReplyUnsuccessfully:global(.__wab_instance) {
   max-width: 100%;
   width: auto;
   margin-top: 5px;
 }
-.text__oefty {
+.text__aP {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-.text__etz0O {
+.text__kn7L {
   position: relative;
   width: 100%;
   height: auto;
@@ -233,7 +286,7 @@
   text-decoration-line: none !important;
   min-width: 0;
 }
-.svg__wfoCv {
+.svg__pA82N {
   position: relative;
   object-fit: cover;
   max-width: 100%;
@@ -353,7 +406,7 @@
   min-height: 0;
   padding: 5px;
 }
-.receiverDoctorContent {
+.suggestedReceiverDoctorContent {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -365,7 +418,7 @@
   min-width: 0;
   padding: 8px;
 }
-.receiverDoctor {
+.suggestedReceiverDoctor {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -386,7 +439,7 @@
   padding: 5px 10px 5px 5px;
   border: 1px none #000000;
 }
-.selectedReceiverDoctor {
+.selectedSuggestedReceiverDoctor {
   position: relative;
   width: 100%;
   height: auto;
@@ -408,25 +461,11 @@
   min-width: 0;
   padding: 8px;
 }
-.presentIlnessTitleContent {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  align-items: stretch;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
 .presentIllnessTitle {
   width: 100%;
   height: auto;
   max-width: 100%;
   background: #ffffff;
-  padding-top: 5px;
-  padding-bottom: 5px;
   font-weight: 700;
   color: #00000080;
   text-align: right;
@@ -439,22 +478,21 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none;
-  padding-right: 2px;
   align-self: center;
   min-width: 0;
+  padding: 5px 10px 5px 5px;
   border: 1px none #000000;
 }
-.previousPresentIllness {
+.patientPresentIllness {
   width: 100%;
   height: auto;
   max-width: 100%;
   background: #ffffff;
-  padding-bottom: 5px;
-  font-weight: 700;
-  color: #00000080;
-  text-align: center;
+  font-weight: 400;
+  color: #000000;
+  text-align: right;
   font-family: var(--VazirmatnCustom);
-  font-size: var(--token-CdE1_0ZaCyT1);
+  font-size: var(--token-sOr3fJ5Up5fq);
   font-style: normal;
   text-transform: none;
   line-height: 1.5;
@@ -462,96 +500,121 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none;
-  padding-top: 5px;
   align-self: center;
   min-width: 0;
-  border-radius: 5px;
-  border: 1px dashed #000000;
+  padding: 10px 10px 10px 5px;
+  border: 1px none #000000;
 }
-.patientPresentIllness {
+.emergencyStatusSendDoctorAndDate {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: space-between;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
-  padding: 10px;
+  padding: 8px 8px 8px 15px;
 }
-.consultEmergencyStatusButton:global(.__wab_instance) {
+.emergent {
+  position: relative;
+  width: auto;
+  height: auto;
   max-width: 100%;
-  width: 70px;
-  height: 30px;
-  margin-right: 4%;
-  margin-bottom: 5px;
-  align-self: flex-end;
-  flex-shrink: 0;
+  font-weight: 400;
+  background: var(--token-b7Myz3RtiwPQ);
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  color: #000000;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  align-self: center;
+  border-radius: 10px;
+  padding: 5px;
 }
-.consultEmergencyStatus3 {
+.elective {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  font-weight: 400;
+  background: #ffffff;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  color: #000000;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  align-self: center;
+  border-radius: 10px;
+  padding: 5px;
+  border-width: 1px;
+  border-style: solid;
+}
+.senderDoctorAndTime {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.normalRangeButtonCircle2 {
-  position: relative;
-  background: var(--token-9iYGdL7i3GKE);
-  max-width: 100%;
-  height: 20px;
-  width: 20px;
-  flex-shrink: 0;
-  display: none;
-  border-radius: 100px;
-  padding: 8px;
-}
-.emergentOff {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  color: #000000;
-  padding-right: 8px;
-  padding-left: 8px;
-  margin-bottom: 0px;
-  min-width: 0;
-}
-.emergentOn {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  color: #ffffff;
-  padding-right: 8px;
-  padding-left: 8px;
-  margin-bottom: 0px;
-  min-width: 0;
-}
-.svg__muu0B {
-  position: relative;
-  object-fit: cover;
+  justify-content: flex-start;
   width: auto;
-  height: 1em;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  z-index: 1;
 }
-.svg__xWcyC {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.guide {
-  position: relative;
+.senderAndSendDateTitle {
   width: 100%;
   height: auto;
   max-width: 100%;
-  font-size: 10px;
-  color: #000000b3;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  text-align: right;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  align-self: center;
   min-width: 0;
+  padding: 5px 10px 5px 5px;
+  border: 1px none #000000;
 }
-.sendOrDraftButton {
+.consultSender {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  padding: 5px;
+}
+.consultSendDate {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  align-self: center;
+  padding-right: 5px;
+}
+.consultSendReplyContent {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   align-items: center;
   justify-content: flex-start;
@@ -560,44 +623,86 @@
   max-width: 100%;
   min-width: 0;
   padding: 8px;
+  border-top: 10px solid var(--token-8PxxXPNrIohQ);
 }
-.draftConsultButton:global(.__wab_instance) {
-  max-width: 100%;
+.consultReplyTitle {
   width: 100%;
-  min-width: 0;
-  margin: 5px;
-}
-.saveDraftConsult {
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  text-align: right;
   font-family: var(--VazirmatnCustom);
   font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 500;
   font-style: normal;
-  color: #000000;
-  text-align: center;
   text-transform: none;
   line-height: 1.5;
   letter-spacing: normal;
-  white-space: pre;
+  white-space: pre-wrap;
   user-select: none;
-  text-decoration-line: none !important;
+  text-decoration-line: none;
+  align-self: center;
+  min-width: 0;
+  padding: 5px 10px 5px 5px;
+  border: 1px none #000000;
 }
-.svg__r3ToH {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
+.consultReplyInput {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 10px;
 }
-.svg__rfs6U {
+.paperReply {
+  display: flex;
+  flex-direction: row;
   position: relative;
-  object-fit: cover;
+  align-items: stretch;
+  justify-content: flex-end;
   width: auto;
-  height: 1em;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+  padding: 8px 15px 8px 8px;
+}
+.paperReplyBullet:global(.__wab_instance) {
+  align-self: center;
+  flex-shrink: 0;
+}
+.paperReplyTitle {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  align-self: center;
+  margin-right: 5px;
+  min-width: 0;
+  padding: 4px;
+}
+.sendReplyGuide {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 9px;
+  color: #000000b3;
+  min-width: 0;
 }
 .sendConsultButton:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
+  margin-left: 5px;
+  margin-top: calc(5px + 4px) !important;
+  margin-right: 5px;
+  margin-bottom: 5px;
   min-width: 0;
-  margin: 5px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .sendConsultButton:global(.__wab_instance) {
+    margin-top: calc(5px + 4px) !important;
+  }
 }
 .sendConsult2 {
   font-family: var(--VazirmatnCustom);
@@ -613,17 +718,207 @@
   user-select: none;
   text-decoration-line: none !important;
 }
-.svg__pFdT {
+.svg__ye3E {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
 }
-.svg__pOcZt {
+.svg___3XpZa {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.repliedConsultContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.finalConsultReplyTitle {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  text-align: right;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  align-self: center;
+  min-width: 0;
+  padding: 5px 10px 5px 5px;
+  border: 1px none #000000;
+}
+.finalConsultReply {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 400;
+  color: #000000;
+  text-align: right;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  align-self: center;
+  min-width: 0;
+  padding: 10px 10px 10px 5px;
+  border: 1px none #000000;
+}
+.repliedPaperReplyStatus {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-end;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+  padding: 8px 15px 8px 8px;
+}
+.paperReplyBullet2:global(.__wab_instance) {
+  align-self: center;
+  flex-shrink: 0;
+}
+.paperReplyTitle2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  align-self: center;
+  margin-right: 5px;
+  min-width: 0;
+  padding: 4px;
+}
+.repliedConsultDoctorAndTimeAndConfirmer {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.repliedConsultConfirmerContent {
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  min-width: 0;
+  display: none;
+}
+.repliedConsultConfirmerTitle {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  text-align: right;
+  min-width: 0;
+  padding: 5px 10px 5px 5px;
+  border: 1px none #000000;
+}
+.repliedConsultConfirmer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  min-width: 0;
+  padding: 5px 10px 5px 5px;
+}
+.repliedConsultDoctorAndTime {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  z-index: 1;
+}
+.repliedConsultDoctorAndTimeTitle {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+  padding: 5px 10px 5px 5px;
+  border: 1px none #000000;
+}
+.repliedConsultDoctor {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 5px;
+}
+.repliedConsultTime {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  min-width: 0;
 }
 .switchingTab {
   display: flex;
@@ -641,7 +936,7 @@
   bottom: 10px;
   padding: 0px 40px 5px;
 }
-.switchingTab__gw:global(.__wab_instance) {
+.switchingTab__zTopp:global(.__wab_instance) {
   max-width: 100%;
 }
 .homepage {
@@ -706,20 +1001,15 @@
 .laboratoryData > picture > img {
   object-fit: fill;
 }
-.getServices:global(.__wab_instance) {
+.modalDeleteConsultConfirmation:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
 }
-.modalSenderService:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  height: 76px;
-}
-.modalSenderService__modal :global(.ant-modal-content) {
+.modalDeleteConsultConfirmation__modal :global(.ant-modal-content) {
   background: #ffffff;
   outline: none;
 }
-.senderServicesList {
+.confirmationContent {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -730,226 +1020,96 @@
   align-items: center;
   background: #ffffff;
   min-width: 0;
-  padding: 8px;
 }
-.conditionGuard__dW2Zr:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-}
-.servicesName {
-  height: auto;
-  text-align: center;
-  background: #ffffff;
-  width: 270px;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  text-decoration-line: none;
-  font-style: normal;
-  box-shadow: 0px 4px 16px 0px #07060666;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  font-family: var(--VazirmatnCustom);
-  font-weight: 400;
-  color: var(--token-IYO13gyYJHXG);
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  border-radius: 5px;
-  padding: 8px;
-  border: 1px solid var(--token-9iYGdL7i3GKE);
-}
-.text__hHxRv {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-family: var(--VazirmatnCustom);
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 400;
-  font-style: normal;
-  color: var(--token-IYO13gyYJHXG);
-  text-align: center;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  text-decoration-line: none !important;
-  background: #ffffff;
-  min-width: 0;
-}
-.modalReceiverService:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  height: 76px;
-}
-.modalReceiverService__modal :global(.ant-modal-content) {
-  background: #ffffff;
-  outline: none;
-}
-.receiverServicesList {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  background: #ffffff;
-  min-width: 0;
-  padding: 8px;
-}
-.conditionGuard__x2U:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-}
-.servicesName2 {
-  height: auto;
-  text-align: center;
-  background: #ffffff;
-  width: 270px;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  text-decoration-line: none;
-  font-style: normal;
-  box-shadow: 0px 4px 16px 0px #07060666;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  font-family: var(--VazirmatnCustom);
-  font-weight: 400;
-  color: var(--token-IYO13gyYJHXG);
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  border-radius: 5px;
-  padding: 8px;
-  border: 1px solid var(--token-9iYGdL7i3GKE);
-}
-.text__pgr9Q {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-family: var(--VazirmatnCustom);
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 400;
-  font-style: normal;
-  color: var(--token-IYO13gyYJHXG);
-  text-align: center;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  text-decoration-line: none !important;
-  background: #ffffff;
-  min-width: 0;
-}
-.getUsers:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-}
-.modalReceiverDoctor:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  height: 76px;
-}
-.modalReceiverDoctor__modal :global(.ant-modal-content) {
-  background: #ffffff;
-  outline: none;
-}
-.receiverDoctorList {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  background: #ffffff;
-  min-width: 0;
-  padding: 8px;
-}
-.doctorNameInputContent {
+.confirmationYesNo {
   display: flex;
   flex-direction: row;
   position: relative;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   width: 100%;
   height: auto;
   max-width: 100%;
-  margin-bottom: 10px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
   min-width: 0;
-  padding: 8px;
 }
-.doctorNameInput:global(.__wab_instance) {
+.noConfirm:global(.__wab_instance) {
   max-width: 100%;
-  width: 270px;
-  height: 36px;
-  flex-shrink: 0;
 }
-.svg__bz1A1 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-  color: var(--token-9iYGdL7i3GKE);
-}
-.clearContent {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.doctorNames {
-  height: auto;
-  text-align: center;
-  background: #ffffff;
-  width: 270px;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  text-decoration-line: none;
-  font-style: normal;
-  box-shadow: 0px 4px 16px 0px #07060666;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  font-family: var(--VazirmatnCustom);
-  font-weight: 400;
-  color: var(--token-IYO13gyYJHXG);
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  border-radius: 5px;
-  padding: 8px;
-  border: 1px solid var(--token-9iYGdL7i3GKE);
-}
-.text__vrPu6 {
-  position: relative;
-  width: 270px;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-  box-shadow: 0px 4px 16px 0px #07060666;
+.text__oj3D9 {
   font-family: var(--VazirmatnCustom);
   font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
-  color: var(--token-IYO13gyYJHXG);
+  color: #ffffff;
   text-align: center;
   text-transform: none;
   line-height: 1.5;
   letter-spacing: normal;
-  white-space: pre-wrap;
+  white-space: pre;
   user-select: none;
-  text-decoration-line: none;
-  border-radius: 5px;
-  border: 1px solid var(--token-9iYGdL7i3GKE);
+  text-decoration-line: none !important;
 }
-.text__jne2O {
+.svg__wMcz4 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__mwxL {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.confirm:global(.__wab_instance) {
+  max-width: 100%;
+  margin-left: 30px;
+}
+.text__atNu {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__x2Eka {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg___2Sk3V {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.unsuccessfulDeleteConsult:global(.__wab_instance) {
+  max-width: 100%;
+  width: 236px;
+}
+.text__xEzRu {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__pUpbj {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
   font-family: var(--VazirmatnCustom);
   font-size: var(--token-sOr3fJ5Up5fq);
   font-weight: 400;
@@ -962,61 +1122,32 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none !important;
-  background: #ffffff;
+  min-width: 0;
 }
-.getPresentIlness:global(.__wab_instance) {
-  max-width: 100%;
+.svg__xuFhi {
+  position: relative;
   object-fit: cover;
-}
-.modalPatientPresentIlness:global(.__wab_instance) {
   max-width: 100%;
-  object-fit: cover;
-  height: 76px;
+  height: 24px;
+  align-self: auto;
 }
-.modalPatientPresentIlness__modal :global(.ant-modal-content) {
-  background: #ffffff;
-  outline: none;
-}
-.patientPresentIlness {
+.title {
   display: flex;
   flex-direction: column;
-  position: relative;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
   background: #ffffff;
   min-width: 0;
-  padding: 8px;
 }
-.presentIllness {
-  height: auto;
-  text-align: center;
-  background: #ffffff;
-  width: 270px;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  text-decoration-line: none;
-  font-style: normal;
-  box-shadow: 0px 4px 16px 0px #07060666;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  font-family: var(--VazirmatnCustom);
-  font-weight: 400;
-  color: var(--token-IYO13gyYJHXG);
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  border-radius: 5px;
-  padding: 8px;
-  border: 1px solid var(--token-9iYGdL7i3GKE);
-}
-.text__rCd2G {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
+.text__pro0 {
+  background: none;
+  margin-bottom: 10px;
   font-family: var(--VazirmatnCustom);
   font-size: var(--token-sOr3fJ5Up5fq);
   font-weight: 400;
@@ -1028,7 +1159,24 @@
   letter-spacing: normal;
   white-space: pre-wrap;
   user-select: none;
-  text-decoration-line: none !important;
-  background: #ffffff;
+  text-decoration-line: none;
+}
+.guide2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 10px;
+  color: #000000b3;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
   min-width: 0;
 }

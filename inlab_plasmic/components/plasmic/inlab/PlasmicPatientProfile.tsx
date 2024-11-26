@@ -321,6 +321,9 @@ function PlasmicPatientProfile__RenderFunc(props: {
             })()}
             method={"GET"}
             path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+            ref={ref => {
+              $refs["patientProfile"] = ref;
+            }}
           >
             <DataCtxReader__>
               {$ctx => (

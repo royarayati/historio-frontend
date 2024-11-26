@@ -267,6 +267,9 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
               })()}
               method={"GET"}
               path={`/api/v3/remote_his/admissions?dismissed=true &patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+              ref={ref => {
+                $refs["patientName"] = ref;
+              }}
             >
               <DataCtxReader__>
                 {$ctx => (
@@ -416,6 +419,9 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
             })()}
             method={"GET"}
             path={`/api/v3/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
+            ref={ref => {
+              $refs["reportDetail"] = ref;
+            }}
           >
             <DataCtxReader__>
               {$ctx => (
