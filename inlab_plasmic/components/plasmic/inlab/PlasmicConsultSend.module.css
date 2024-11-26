@@ -99,11 +99,11 @@
   height: auto;
   box-shadow: none;
   background: #ffffff;
-  left: 0px;
-  top: 0px;
   max-width: 99%;
   flex-direction: column;
   overflow: auto;
+  left: 0px;
+  top: 0px;
   min-width: 0;
   border-radius: 5px;
   border: 1px solid var(--token-8PxxXPNrIohQ);
@@ -128,7 +128,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .sendConsult {
-    top: 22%;
+    position: relative;
   }
 }
 .pageFunctionTopic {
@@ -1003,7 +1003,7 @@
 .noPresentIllness {
   height: auto;
   text-align: center;
-  background: var(--token-KdlBqVo3oFfa);
+  background: #ff4d4f;
   width: 270px;
   font-size: var(--token-CdE1_0ZaCyT1);
   text-decoration-line: none;
@@ -1027,10 +1027,11 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
   height: auto;
   max-width: 100%;
+  background: #ffffff;
   min-width: 0;
   padding: 8px;
 }

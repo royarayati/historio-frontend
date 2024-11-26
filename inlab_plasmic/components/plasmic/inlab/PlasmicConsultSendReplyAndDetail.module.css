@@ -140,8 +140,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .sendConsult {
-    top: auto;
-    left: auto;
+    position: relative;
   }
 }
 .consultHeader {
@@ -1096,7 +1095,7 @@
 }
 .unsuccessfulDeleteConsult:global(.__wab_instance) {
   max-width: 100%;
-  width: 236px;
+  width: 180px;
 }
 .text__xEzRu {
   position: relative;

@@ -95,14 +95,11 @@
   left: 0px;
   top: 0px;
   position: absolute;
-  padding-left: 0.5%;
-  padding-right: 0.5%;
   min-width: 0;
   min-height: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .getConsult:global(.__wab_instance) {
-    margin-top: 15%;
     left: 0px;
     top: 0px;
   }
@@ -394,7 +391,7 @@
   align-self: flex-start;
   background: #ffffff;
   font-family: var(--VazirmatnCustom);
-  color: var(--token-KdlBqVo3oFfa);
+  color: #ff4d4f;
   text-align: center;
   text-transform: none;
   line-height: 1.5;
@@ -750,7 +747,7 @@
 }
 .unsuccessfulDeleteConsult:global(.__wab_instance) {
   max-width: 100%;
-  width: 236px;
+  width: 184px;
 }
 .text__xy77V {
   position: relative;
