@@ -928,9 +928,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "resetPassword",
                 "isDisabled"
               ])}
-              link={
-                "https://docs.google.com/forms/d/e/1FAIpQLSe4wNlYlhx_5dvlGE28gca-nJLO_zxGxiMsvPXEjuDz5Xb1_w/viewform"
-              }
               onDeselectedChange={(...eventArgs) => {
                 generateStateOnChangeProp($state, [
                   "resetPassword",
@@ -1037,9 +1034,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "createAccount",
                 "isDisabled"
               ])}
-              link={
-                "https://docs.google.com/forms/d/e/1FAIpQLSe4wNlYlhx_5dvlGE28gca-nJLO_zxGxiMsvPXEjuDz5Xb1_w/viewform"
-              }
               onDeselectedChange={(...eventArgs) => {
                 generateStateOnChangeProp($state, [
                   "createAccount",

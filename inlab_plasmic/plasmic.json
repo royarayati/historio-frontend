@@ -1624,12 +1624,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicConsultList.tsx",
           "importSpec": {
-            "modulePath": "../pages/consult-list/[code]/[adm_id].tsx"
+            "modulePath": "../pages/consult/list/[code]/[adm_id].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicConsultList.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/consult-list/[code]/[adm_id]"
+          "path": "/consult/list/[code]/[adm_id]"
         },
         {
           "id": "9PPRcrm0XFqF",
@@ -1638,12 +1638,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicConsultSend.tsx",
           "importSpec": {
-            "modulePath": "../pages/consult-send/[code]/[adm_id].tsx"
+            "modulePath": "../pages/consult/send/[code]/[adm_id].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicConsultSend.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/consult-send/[code]/[adm_id]"
+          "path": "/consult/send/[code]/[adm_id]"
         },
         {
           "id": "RABqkXkLRlle",
@@ -1668,6 +1668,60 @@
             "modulePath": "SwitchingTab2.tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicSwitchingTab2.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "ZHE7N-0S_BIq",
+          "name": "ConsultSendDraft",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicConsultSendDraft.tsx",
+          "importSpec": {
+            "modulePath": "../pages/consult/send/draft/[code]/[adm_id]/[consult_id].tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicConsultSendDraft.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/consult/send/draft/[code]/[adm_id]/[consult_id]"
+        },
+        {
+          "id": "EFrzqPluJe9j",
+          "name": "Alert3",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicAlert3.tsx",
+          "importSpec": {
+            "modulePath": "Alert3.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicAlert3.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "UwudfLdMiFho",
+          "name": "ConsultSendReplyAndDetail",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicConsultSendReplyAndDetail.tsx",
+          "importSpec": {
+            "modulePath": "../pages/consult/send/reply/detail/[code]/[adm_id]/[consult_id].tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicConsultSendReplyAndDetail.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/consult/send/reply/detail/[code]/[adm_id]/[consult_id]"
+        },
+        {
+          "id": "sWsqjPSVIYww",
+          "name": "Bullet",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicBullet.tsx",
+          "importSpec": {
+            "modulePath": "Bullet.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicBullet.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         }
@@ -2202,6 +2256,11 @@
           "id": "I_kHJfXhorHV",
           "name": "EmptyCircleSvgrepoComSvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__EmptyCircleSvgrepoComSvg.tsx"
+        },
+        {
+          "id": "4fW54JbpNQ-Y",
+          "name": "RubbishBinSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__RubbishBinSvgrepoComSvg.tsx"
         }
       ],
       "images": [

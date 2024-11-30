@@ -86,16 +86,10 @@ import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic
 
 createPlasmicElementProxy;
 
-export type PlasmicConsultSend__VariantMembers = {
-  emergentConsult: "emergentConsult";
-};
-export type PlasmicConsultSend__VariantsArgs = {
-  emergentConsult?: SingleBooleanChoiceArg<"emergentConsult">;
-};
+export type PlasmicConsultSend__VariantMembers = {};
+export type PlasmicConsultSend__VariantsArgs = {};
 type VariantPropType = keyof PlasmicConsultSend__VariantsArgs;
-export const PlasmicConsultSend__VariantProps = new Array<VariantPropType>(
-  "emergentConsult"
-);
+export const PlasmicConsultSend__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicConsultSend__ArgsType = {};
 type ArgPropType = keyof PlasmicConsultSend__ArgsType;
@@ -110,22 +104,34 @@ export type PlasmicConsultSend__OverridesType = {
   freeBox?: Flex__<"div">;
   patientNameAgeGender?: Flex__<"div">;
   patientService?: Flex__<"div">;
+  sendConsultContent?: Flex__<"div">;
   sendConsult?: Flex__<"div">;
+  pageFunctionTopic?: Flex__<"div">;
   sendConsultButtonContent?: Flex__<"div">;
   sendConsultSuccessfully?: Flex__<typeof Alert2>;
   sendConsultUnsuccessfully2?: Flex__<typeof Alert2>;
+  senderServiceContent?: Flex__<"div">;
   senderService?: Flex__<"div">;
   selectedSenderService?: Flex__<"div">;
+  receiverServiceContent?: Flex__<"div">;
   receiverService?: Flex__<"div">;
   selectedReceiverService?: Flex__<"div">;
+  receiverDoctorContent?: Flex__<"div">;
   receiverDoctor?: Flex__<"div">;
   selectedReceiverDoctor?: Flex__<"div">;
+  patientPresentIllnessContent?: Flex__<"div">;
+  presentIlnessTitleContent?: Flex__<"div">;
+  presentIllnessTitle?: Flex__<"div">;
+  previousPresentIllness?: Flex__<"div">;
+  patientPresentIllness?: Flex__<"textarea">;
   consultEmergencyStatusButton?: Flex__<typeof Button>;
-  consultEmergencyStatus3?: Flex__<"div">;
-  normalRangeButtonCircle2?: Flex__<"div">;
+  consultEmergencyStatus?: Flex__<"div">;
   emergentOff?: Flex__<"div">;
   emergentOn?: Flex__<"div">;
   guide?: Flex__<"div">;
+  sendOrDraftButton?: Flex__<"div">;
+  draftConsultButton?: Flex__<typeof Button>;
+  saveDraftConsult?: Flex__<"div">;
   sendConsultButton?: Flex__<typeof Button>;
   sendConsult2?: Flex__<"div">;
   switchingTab?: Flex__<"div">;
@@ -148,6 +154,13 @@ export type PlasmicConsultSend__OverridesType = {
   doctorNameInput?: Flex__<typeof TextInput>;
   clearContent?: Flex__<"svg">;
   doctorNames?: Flex__<"div">;
+  getPresentIlness?: Flex__<typeof ApiFetcherComponent>;
+  modalPatientPresentIlness?: Flex__<typeof AntdModal>;
+  patientPresentIlness?: Flex__<"div">;
+  presentIllness?: Flex__<"div">;
+  noPresentIllness?: Flex__<"div">;
+  titleContent?: Flex__<"div">;
+  svg?: Flex__<"svg">;
 };
 
 export interface DefaultConsultSendProps {}
@@ -286,12 +299,6 @@ function PlasmicConsultSend__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => "-"
       },
       {
-        path: "emergentConsult",
-        type: "private",
-        variableType: "variant",
-        initFunc: ({ $props, $state, $queries, $ctx }) => $props.emergentConsult
-      },
-      {
         path: "emergencyButtonStatusState",
         type: "private",
         variableType: "boolean",
@@ -332,6 +339,49 @@ function PlasmicConsultSend__RenderFunc(props: {
         type: "private",
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => 3
+      },
+      {
+        path: "patientPresentIllness.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          "\u0628\u0627 \u0633\u0644\u0627\u0645 \u0648 \u0627\u062d\u062a\u0631\u0627\u0645"
+      },
+      {
+        path: "modalPatientPresentIlness.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "draftConsultButton.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "draftConsultButton.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "draftConsultButton.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "draftConsultButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "draftConsultButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -371,14 +421,7 @@ function PlasmicConsultSend__RenderFunc(props: {
             projectcss.plasmic_tokens,
             plasmic_antd_5_hostless_css.plasmic_tokens,
             plasmic_plasmic_rich_components_css.plasmic_tokens,
-            sty.consultSend,
-            {
-              [sty.consultSendemergentConsult]: hasVariant(
-                $state,
-                "emergentConsult",
-                "emergentConsult"
-              )
-            }
+            sty.consultSend
           )}
         >
           <RedirectToInlabLogin
@@ -595,725 +638,619 @@ function PlasmicConsultSend__RenderFunc(props: {
               </DataCtxReader__>
             </ApiFetcherComponent>
           </div>
-          <Stack__
-            as={"div"}
-            data-plasmic-name={"sendConsult"}
-            data-plasmic-override={overrides.sendConsult}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.sendConsult)}
+          <div
+            data-plasmic-name={"sendConsultContent"}
+            data-plasmic-override={overrides.sendConsultContent}
+            className={classNames(projectcss.all, sty.sendConsultContent)}
           >
-            <div
-              data-plasmic-name={"sendConsultButtonContent"}
-              data-plasmic-override={overrides.sendConsultButtonContent}
-              className={classNames(
-                projectcss.all,
-                sty.sendConsultButtonContent
-              )}
+            <Stack__
+              as={"div"}
+              data-plasmic-name={"sendConsult"}
+              data-plasmic-override={overrides.sendConsult}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.sendConsult)}
             >
-              <Alert2
-                data-plasmic-name={"sendConsultSuccessfully"}
-                data-plasmic-override={overrides.sendConsultSuccessfully}
-                body={
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___1PXi9
-                    )}
-                  >
-                    {
-                      "\u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f"
-                    }
-                  </div>
-                }
+              <div
+                data-plasmic-name={"pageFunctionTopic"}
+                data-plasmic-override={overrides.pageFunctionTopic}
                 className={classNames(
-                  "__wab_instance",
-                  sty.sendConsultSuccessfully
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.pageFunctionTopic
                 )}
-                noHeader={true}
-                noIcon={true}
-                success={true}
-              />
-
-              {(() => {
-                try {
-                  return $state.sendConsultUnsuccessfullyAlert;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return true;
-                  }
-                  throw e;
+              >
+                {
+                  "\u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0647 \u062c\u062f\u06cc\u062f"
                 }
-              })() ? (
+              </div>
+              <div
+                data-plasmic-name={"sendConsultButtonContent"}
+                data-plasmic-override={overrides.sendConsultButtonContent}
+                className={classNames(
+                  projectcss.all,
+                  sty.sendConsultButtonContent
+                )}
+              >
                 <Alert2
-                  data-plasmic-name={"sendConsultUnsuccessfully2"}
-                  data-plasmic-override={overrides.sendConsultUnsuccessfully2}
+                  data-plasmic-name={"sendConsultSuccessfully"}
+                  data-plasmic-override={overrides.sendConsultSuccessfully}
                   body={
                     <div
                       className={classNames(
                         projectcss.all,
                         projectcss.__wab_text,
-                        sty.text__rqJCi
+                        sty.text___1PXi9
                       )}
                     >
                       {
-                        "\u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f"
+                        "\u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f"
                       }
                     </div>
                   }
                   className={classNames(
                     "__wab_instance",
-                    sty.sendConsultUnsuccessfully2
+                    sty.sendConsultSuccessfully
                   )}
-                  error={true}
                   noHeader={true}
                   noIcon={true}
+                  success={true}
                 />
-              ) : null}
-            </div>
-            <div
-              data-plasmic-name={"senderService"}
-              data-plasmic-override={overrides.senderService}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.senderService
-              )}
-              dir={"rtl"}
-              onClick={async event => {
-                const $steps = {};
 
-                $steps["updateModalSenderServiceOpen"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["modalSenderService", "open"]
-                        },
-                        operation: 4
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        const oldValue = $stateGet(objRoot, variablePath);
-                        $stateSet(objRoot, variablePath, !oldValue);
-                        return !oldValue;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateModalSenderServiceOpen"] != null &&
-                  typeof $steps["updateModalSenderServiceOpen"] === "object" &&
-                  typeof $steps["updateModalSenderServiceOpen"].then ===
-                    "function"
-                ) {
-                  $steps["updateModalSenderServiceOpen"] = await $steps[
-                    "updateModalSenderServiceOpen"
-                  ];
-                }
-              }}
-            >
-              <React.Fragment>
                 {(() => {
                   try {
-                    return "سرویس مبدا" + " " + "*";
+                    return $state.sendConsultUnsuccessfullyAlert;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
                       e?.plasmicType === "PlasmicUndefinedDataError"
                     ) {
-                      return "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627";
+                      return true;
                     }
                     throw e;
                   }
-                })()}
-              </React.Fragment>
-            </div>
-            <div
-              data-plasmic-name={"selectedSenderService"}
-              data-plasmic-override={overrides.selectedSenderService}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.selectedSenderService
-              )}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateModalSenderServiceOpen"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["modalSenderService", "open"]
-                        },
-                        operation: 4
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
+                })() ? (
+                  <Alert2
+                    data-plasmic-name={"sendConsultUnsuccessfully2"}
+                    data-plasmic-override={overrides.sendConsultUnsuccessfully2}
+                    body={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__rqJCi
+                        )}
+                      >
+                        {
+                          "\u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f"
                         }
-                        const { objRoot, variablePath } = variable;
-
-                        const oldValue = $stateGet(objRoot, variablePath);
-                        $stateSet(objRoot, variablePath, !oldValue);
-                        return !oldValue;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateModalSenderServiceOpen"] != null &&
-                  typeof $steps["updateModalSenderServiceOpen"] === "object" &&
-                  typeof $steps["updateModalSenderServiceOpen"].then ===
-                    "function"
-                ) {
-                  $steps["updateModalSenderServiceOpen"] = await $steps[
-                    "updateModalSenderServiceOpen"
-                  ];
-                }
-              }}
-            >
-              <React.Fragment>
-                {(() => {
-                  try {
-                    return localStorage.getItem("sender_service_name") !== null
-                      ? localStorage.getItem("sender_service_name")
-                      : "-";
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return "";
+                      </div>
                     }
-                    throw e;
-                  }
-                })()}
-              </React.Fragment>
-            </div>
-            <div
-              data-plasmic-name={"receiverService"}
-              data-plasmic-override={overrides.receiverService}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.receiverService
-              )}
-              dir={"rtl"}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateModalReceiverServiceOpen"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["modalReceiverService", "open"]
-                        },
-                        operation: 4
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        const oldValue = $stateGet(objRoot, variablePath);
-                        $stateSet(objRoot, variablePath, !oldValue);
-                        return !oldValue;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateModalReceiverServiceOpen"] != null &&
-                  typeof $steps["updateModalReceiverServiceOpen"] ===
-                    "object" &&
-                  typeof $steps["updateModalReceiverServiceOpen"].then ===
-                    "function"
-                ) {
-                  $steps["updateModalReceiverServiceOpen"] = await $steps[
-                    "updateModalReceiverServiceOpen"
-                  ];
-                }
-              }}
-            >
-              <React.Fragment>
-                {(() => {
-                  try {
-                    return "سرویس مقصد" + " " + "*";
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return "";
-                    }
-                    throw e;
-                  }
-                })()}
-              </React.Fragment>
-            </div>
-            <div
-              data-plasmic-name={"selectedReceiverService"}
-              data-plasmic-override={overrides.selectedReceiverService}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.selectedReceiverService
-              )}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateModalReceiverServiceOpen"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["modalReceiverService", "open"]
-                        },
-                        operation: 4
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        const oldValue = $stateGet(objRoot, variablePath);
-                        $stateSet(objRoot, variablePath, !oldValue);
-                        return !oldValue;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateModalReceiverServiceOpen"] != null &&
-                  typeof $steps["updateModalReceiverServiceOpen"] ===
-                    "object" &&
-                  typeof $steps["updateModalReceiverServiceOpen"].then ===
-                    "function"
-                ) {
-                  $steps["updateModalReceiverServiceOpen"] = await $steps[
-                    "updateModalReceiverServiceOpen"
-                  ];
-                }
-              }}
-            >
-              <React.Fragment>
-                {(() => {
-                  try {
-                    return localStorage.getItem("receiver_service_name") !==
-                      null
-                      ? localStorage.getItem("receiver_service_name")
-                      : "-";
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return "";
-                    }
-                    throw e;
-                  }
-                })()}
-              </React.Fragment>
-            </div>
-            <div
-              data-plasmic-name={"receiverDoctor"}
-              data-plasmic-override={overrides.receiverDoctor}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.receiverDoctor
-              )}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateModalReceiverDoctorOpen"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["modalReceiverDoctor", "open"]
-                        },
-                        operation: 4
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        const oldValue = $stateGet(objRoot, variablePath);
-                        $stateSet(objRoot, variablePath, !oldValue);
-                        return !oldValue;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateModalReceiverDoctorOpen"] != null &&
-                  typeof $steps["updateModalReceiverDoctorOpen"] === "object" &&
-                  typeof $steps["updateModalReceiverDoctorOpen"].then ===
-                    "function"
-                ) {
-                  $steps["updateModalReceiverDoctorOpen"] = await $steps[
-                    "updateModalReceiverDoctorOpen"
-                  ];
-                }
-              }}
-            >
-              {"\u067e\u0632\u0634\u06a9 \u0645\u0642\u0635\u062f"}
-            </div>
-            <div
-              data-plasmic-name={"selectedReceiverDoctor"}
-              data-plasmic-override={overrides.selectedReceiverDoctor}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.selectedReceiverDoctor
-              )}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateModalReceiverDoctorOpen"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["modalReceiverDoctor", "open"]
-                        },
-                        operation: 4
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        const oldValue = $stateGet(objRoot, variablePath);
-                        $stateSet(objRoot, variablePath, !oldValue);
-                        return !oldValue;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateModalReceiverDoctorOpen"] != null &&
-                  typeof $steps["updateModalReceiverDoctorOpen"] === "object" &&
-                  typeof $steps["updateModalReceiverDoctorOpen"].then ===
-                    "function"
-                ) {
-                  $steps["updateModalReceiverDoctorOpen"] = await $steps[
-                    "updateModalReceiverDoctorOpen"
-                  ];
-                }
-              }}
-            >
-              <React.Fragment>
-                {(() => {
-                  try {
-                    return $state.receiverDoctorName;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return "";
-                    }
-                    throw e;
-                  }
-                })()}
-              </React.Fragment>
-            </div>
-            <Button
-              data-plasmic-name={"consultEmergencyStatusButton"}
-              data-plasmic-override={overrides.consultEmergencyStatusButton}
-              className={classNames(
-                "__wab_instance",
-                sty.consultEmergencyStatusButton
-              )}
-              deselected={generateStateValueProp($state, [
-                "consultEmergencyStatusButton",
-                "deselected"
-              ])}
-              hoverDeselected={(() => {
-                try {
-                  return !$state.emergencyButtonStatusState;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return "hoverDeselected";
-                  }
-                  throw e;
-                }
-              })()}
-              hoverSelected={(() => {
-                try {
-                  return $state.emergencyButtonStatusState;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return "hoverSelected";
-                  }
-                  throw e;
-                }
-              })()}
-              isDisabled={generateStateValueProp($state, [
-                "consultEmergencyStatusButton",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateEmergencyButtonStatusState"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["emergencyButtonStatusState"]
-                        },
-                        operation: 4
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        const oldValue = $stateGet(objRoot, variablePath);
-                        $stateSet(objRoot, variablePath, !oldValue);
-                        return !oldValue;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateEmergencyButtonStatusState"] != null &&
-                  typeof $steps["updateEmergencyButtonStatusState"] ===
-                    "object" &&
-                  typeof $steps["updateEmergencyButtonStatusState"].then ===
-                    "function"
-                ) {
-                  $steps["updateEmergencyButtonStatusState"] = await $steps[
-                    "updateEmergencyButtonStatusState"
-                  ];
-                }
-
-                $steps["updateConsultEmergencyStatusState"] =
-                  !$state.emergencyButtonStatusState
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["consultEmergencyStatusState"]
-                          },
-                          operation: 0,
-                          value: 3
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                if (
-                  $steps["updateConsultEmergencyStatusState"] != null &&
-                  typeof $steps["updateConsultEmergencyStatusState"] ===
-                    "object" &&
-                  typeof $steps["updateConsultEmergencyStatusState"].then ===
-                    "function"
-                ) {
-                  $steps["updateConsultEmergencyStatusState"] = await $steps[
-                    "updateConsultEmergencyStatusState"
-                  ];
-                }
-
-                $steps["updateConsultEmergencyStatusState2"] =
-                  $state.emergencyButtonStatusState
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["consultEmergencyStatusState"]
-                          },
-                          operation: 0,
-                          value: 1
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                if (
-                  $steps["updateConsultEmergencyStatusState2"] != null &&
-                  typeof $steps["updateConsultEmergencyStatusState2"] ===
-                    "object" &&
-                  typeof $steps["updateConsultEmergencyStatusState2"].then ===
-                    "function"
-                ) {
-                  $steps["updateConsultEmergencyStatusState2"] = await $steps[
-                    "updateConsultEmergencyStatusState2"
-                  ];
-                }
-
-                $steps["consoleLogConsultEmergencyStatusState"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        customFunction: async () => {
-                          return console.log(
-                            "consult_emergency_status_state:",
-                            $state.consultEmergencyStatusState
-                          );
-                        }
-                      };
-                      return (({ customFunction }) => {
-                        return customFunction();
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["consoleLogConsultEmergencyStatusState"] != null &&
-                  typeof $steps["consoleLogConsultEmergencyStatusState"] ===
-                    "object" &&
-                  typeof $steps["consoleLogConsultEmergencyStatusState"]
-                    .then === "function"
-                ) {
-                  $steps["consoleLogConsultEmergencyStatusState"] =
-                    await $steps["consoleLogConsultEmergencyStatusState"];
-                }
-              }}
-              onDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "consultEmergencyStatusButton",
-                  "deselected"
-                ])(eventArgs[0]);
-              }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "consultEmergencyStatusButton",
-                  "isDisabled"
-                ])(eventArgs[0]);
-              }}
-              onSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "consultEmergencyStatusButton",
-                  "selected"
-                ])(eventArgs[0]);
-              }}
-              onSortDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "consultEmergencyStatusButton",
-                  "sortDeselected"
-                ])(eventArgs[0]);
-              }}
-              onSortSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "consultEmergencyStatusButton",
-                  "sortSelected"
-                ])(eventArgs[0]);
-              }}
-              selected={generateStateValueProp($state, [
-                "consultEmergencyStatusButton",
-                "selected"
-              ])}
-              shape={"sharp"}
-              sortDeselected={generateStateValueProp($state, [
-                "consultEmergencyStatusButton",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "consultEmergencyStatusButton",
-                "sortSelected"
-              ])}
-            >
+                    className={classNames(
+                      "__wab_instance",
+                      sty.sendConsultUnsuccessfully2
+                    )}
+                    error={true}
+                    noHeader={true}
+                    noIcon={true}
+                  />
+                ) : null}
+              </div>
               <div
-                data-plasmic-name={"consultEmergencyStatus3"}
-                data-plasmic-override={overrides.consultEmergencyStatus3}
+                data-plasmic-name={"senderServiceContent"}
+                data-plasmic-override={overrides.senderServiceContent}
+                className={classNames(projectcss.all, sty.senderServiceContent)}
+              >
+                <div
+                  data-plasmic-name={"senderService"}
+                  data-plasmic-override={overrides.senderService}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.senderService
+                  )}
+                  dir={"rtl"}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateModalSenderServiceOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["modalSenderService", "open"]
+                            },
+                            operation: 4
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            const oldValue = $stateGet(objRoot, variablePath);
+                            $stateSet(objRoot, variablePath, !oldValue);
+                            return !oldValue;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateModalSenderServiceOpen"] != null &&
+                      typeof $steps["updateModalSenderServiceOpen"] ===
+                        "object" &&
+                      typeof $steps["updateModalSenderServiceOpen"].then ===
+                        "function"
+                    ) {
+                      $steps["updateModalSenderServiceOpen"] = await $steps[
+                        "updateModalSenderServiceOpen"
+                      ];
+                    }
+                  }}
+                >
+                  {
+                    "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627 (\u0627\u062c\u0628\u0627\u0631\u06cc)"
+                  }
+                </div>
+                <div
+                  data-plasmic-name={"selectedSenderService"}
+                  data-plasmic-override={overrides.selectedSenderService}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.selectedSenderService
+                  )}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateModalSenderServiceOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["modalSenderService", "open"]
+                            },
+                            operation: 4
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            const oldValue = $stateGet(objRoot, variablePath);
+                            $stateSet(objRoot, variablePath, !oldValue);
+                            return !oldValue;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateModalSenderServiceOpen"] != null &&
+                      typeof $steps["updateModalSenderServiceOpen"] ===
+                        "object" &&
+                      typeof $steps["updateModalSenderServiceOpen"].then ===
+                        "function"
+                    ) {
+                      $steps["updateModalSenderServiceOpen"] = await $steps[
+                        "updateModalSenderServiceOpen"
+                      ];
+                    }
+                  }}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return localStorage.getItem("sender_service_name") !==
+                          null
+                          ? localStorage.getItem("sender_service_name")
+                          : "-";
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
+              </div>
+              <div
+                data-plasmic-name={"receiverServiceContent"}
+                data-plasmic-override={overrides.receiverServiceContent}
                 className={classNames(
                   projectcss.all,
-                  sty.consultEmergencyStatus3
+                  sty.receiverServiceContent
                 )}
               >
                 <div
-                  data-plasmic-name={"normalRangeButtonCircle2"}
-                  data-plasmic-override={overrides.normalRangeButtonCircle2}
+                  data-plasmic-name={"receiverService"}
+                  data-plasmic-override={overrides.receiverService}
                   className={classNames(
                     projectcss.all,
-                    sty.normalRangeButtonCircle2,
-                    {
-                      [sty.normalRangeButtonCircle2emergentConsult]: hasVariant(
-                        $state,
-                        "emergentConsult",
-                        "emergentConsult"
-                      )
-                    }
+                    projectcss.__wab_text,
+                    sty.receiverService
                   )}
-                />
+                  dir={"rtl"}
+                  onClick={async event => {
+                    const $steps = {};
 
-                {(() => {
+                    $steps["updateModalReceiverServiceOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["modalReceiverService", "open"]
+                            },
+                            operation: 4
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            const oldValue = $stateGet(objRoot, variablePath);
+                            $stateSet(objRoot, variablePath, !oldValue);
+                            return !oldValue;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateModalReceiverServiceOpen"] != null &&
+                      typeof $steps["updateModalReceiverServiceOpen"] ===
+                        "object" &&
+                      typeof $steps["updateModalReceiverServiceOpen"].then ===
+                        "function"
+                    ) {
+                      $steps["updateModalReceiverServiceOpen"] = await $steps[
+                        "updateModalReceiverServiceOpen"
+                      ];
+                    }
+                  }}
+                >
+                  {
+                    "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f (\u0627\u062c\u0628\u0627\u0631\u06cc)"
+                  }
+                </div>
+                <div
+                  data-plasmic-name={"selectedReceiverService"}
+                  data-plasmic-override={overrides.selectedReceiverService}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.selectedReceiverService
+                  )}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateModalReceiverServiceOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["modalReceiverService", "open"]
+                            },
+                            operation: 4
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            const oldValue = $stateGet(objRoot, variablePath);
+                            $stateSet(objRoot, variablePath, !oldValue);
+                            return !oldValue;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateModalReceiverServiceOpen"] != null &&
+                      typeof $steps["updateModalReceiverServiceOpen"] ===
+                        "object" &&
+                      typeof $steps["updateModalReceiverServiceOpen"].then ===
+                        "function"
+                    ) {
+                      $steps["updateModalReceiverServiceOpen"] = await $steps[
+                        "updateModalReceiverServiceOpen"
+                      ];
+                    }
+                  }}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return localStorage.getItem("receiver_service_name") !==
+                          null
+                          ? localStorage.getItem("receiver_service_name")
+                          : "-";
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
+              </div>
+              <div
+                data-plasmic-name={"receiverDoctorContent"}
+                data-plasmic-override={overrides.receiverDoctorContent}
+                className={classNames(
+                  projectcss.all,
+                  sty.receiverDoctorContent
+                )}
+              >
+                <div
+                  data-plasmic-name={"receiverDoctor"}
+                  data-plasmic-override={overrides.receiverDoctor}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.receiverDoctor
+                  )}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateModalReceiverDoctorOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["modalReceiverDoctor", "open"]
+                            },
+                            operation: 4
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            const oldValue = $stateGet(objRoot, variablePath);
+                            $stateSet(objRoot, variablePath, !oldValue);
+                            return !oldValue;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateModalReceiverDoctorOpen"] != null &&
+                      typeof $steps["updateModalReceiverDoctorOpen"] ===
+                        "object" &&
+                      typeof $steps["updateModalReceiverDoctorOpen"].then ===
+                        "function"
+                    ) {
+                      $steps["updateModalReceiverDoctorOpen"] = await $steps[
+                        "updateModalReceiverDoctorOpen"
+                      ];
+                    }
+                  }}
+                >
+                  {
+                    "\u067e\u0632\u0634\u06a9 \u0645\u0642\u0635\u062f \u067e\u06cc\u0634\u0646\u0647\u0627\u062f\u06cc"
+                  }
+                </div>
+                <div
+                  data-plasmic-name={"selectedReceiverDoctor"}
+                  data-plasmic-override={overrides.selectedReceiverDoctor}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.selectedReceiverDoctor
+                  )}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateModalReceiverDoctorOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["modalReceiverDoctor", "open"]
+                            },
+                            operation: 4
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            const oldValue = $stateGet(objRoot, variablePath);
+                            $stateSet(objRoot, variablePath, !oldValue);
+                            return !oldValue;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateModalReceiverDoctorOpen"] != null &&
+                      typeof $steps["updateModalReceiverDoctorOpen"] ===
+                        "object" &&
+                      typeof $steps["updateModalReceiverDoctorOpen"].then ===
+                        "function"
+                    ) {
+                      $steps["updateModalReceiverDoctorOpen"] = await $steps[
+                        "updateModalReceiverDoctorOpen"
+                      ];
+                    }
+                  }}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return $state.receiverDoctorName;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
+              </div>
+              <div
+                data-plasmic-name={"patientPresentIllnessContent"}
+                data-plasmic-override={overrides.patientPresentIllnessContent}
+                className={classNames(
+                  projectcss.all,
+                  sty.patientPresentIllnessContent
+                )}
+                dir={"rtl"}
+              >
+                <div
+                  data-plasmic-name={"presentIlnessTitleContent"}
+                  data-plasmic-override={overrides.presentIlnessTitleContent}
+                  className={classNames(
+                    projectcss.all,
+                    sty.presentIlnessTitleContent
+                  )}
+                >
+                  <div
+                    data-plasmic-name={"presentIllnessTitle"}
+                    data-plasmic-override={overrides.presentIllnessTitle}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.presentIllnessTitle
+                    )}
+                  >
+                    {
+                      "\u0645\u062a\u0646 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647"
+                    }
+                  </div>
+                  <div
+                    data-plasmic-name={"previousPresentIllness"}
+                    data-plasmic-override={overrides.previousPresentIllness}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.previousPresentIllness
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateModalPatientPresentIlnessOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: [
+                                  "modalPatientPresentIlness",
+                                  "open"
+                                ]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateModalPatientPresentIlnessOpen"] != null &&
+                        typeof $steps["updateModalPatientPresentIlnessOpen"] ===
+                          "object" &&
+                        typeof $steps["updateModalPatientPresentIlnessOpen"]
+                          .then === "function"
+                      ) {
+                        $steps["updateModalPatientPresentIlnessOpen"] =
+                          await $steps["updateModalPatientPresentIlnessOpen"];
+                      }
+                    }}
+                  >
+                    {
+                      "\u0634\u0631\u062d\u200c\u062d\u0627\u0644\u200c\u0647\u0627\u06cc \u0642\u0628\u0644\u06cc"
+                    }
+                  </div>
+                </div>
+                <textarea
+                  data-plasmic-name={"patientPresentIllness"}
+                  data-plasmic-override={overrides.patientPresentIllness}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.textarea,
+                    sty.patientPresentIllness
+                  )}
+                  onChange={e => {
+                    generateStateOnChangeProp($state, [
+                      "patientPresentIllness",
+                      "value"
+                    ])(e.target.value);
+                  }}
+                  ref={ref => {
+                    $refs["patientPresentIllness"] = ref;
+                  }}
+                  value={
+                    generateStateValueProp($state, [
+                      "patientPresentIllness",
+                      "value"
+                    ]) ?? ""
+                  }
+                />
+              </div>
+              <Button
+                data-plasmic-name={"consultEmergencyStatusButton"}
+                data-plasmic-override={overrides.consultEmergencyStatusButton}
+                className={classNames(
+                  "__wab_instance",
+                  sty.consultEmergencyStatusButton
+                )}
+                deselected={generateStateValueProp($state, [
+                  "consultEmergencyStatusButton",
+                  "deselected"
+                ])}
+                hoverDeselected={(() => {
                   try {
                     return !$state.emergencyButtonStatusState;
                   } catch (e) {
@@ -1321,31 +1258,12 @@ function PlasmicConsultSend__RenderFunc(props: {
                       e instanceof TypeError ||
                       e?.plasmicType === "PlasmicUndefinedDataError"
                     ) {
-                      return true;
+                      return [];
                     }
                     throw e;
                   }
-                })() ? (
-                  <div
-                    data-plasmic-name={"emergentOff"}
-                    data-plasmic-override={overrides.emergentOff}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.emergentOff,
-                      {
-                        [sty.emergentOffemergentConsult]: hasVariant(
-                          $state,
-                          "emergentConsult",
-                          "emergentConsult"
-                        )
-                      }
-                    )}
-                  >
-                    {" \u0627\u0648\u0631\u0698\u0627\u0646\u0633\u06cc"}
-                  </div>
-                ) : null}
-                {(() => {
+                })()}
+                hoverSelected={(() => {
                   try {
                     return $state.emergencyButtonStatusState;
                   } catch (e) {
@@ -1353,386 +1271,992 @@ function PlasmicConsultSend__RenderFunc(props: {
                       e instanceof TypeError ||
                       e?.plasmicType === "PlasmicUndefinedDataError"
                     ) {
-                      return true;
+                      return [];
                     }
                     throw e;
                   }
-                })() ? (
-                  <div
-                    data-plasmic-name={"emergentOn"}
-                    data-plasmic-override={overrides.emergentOn}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.emergentOn,
-                      {
-                        [sty.emergentOnemergentConsult]: hasVariant(
-                          $state,
-                          "emergentConsult",
-                          "emergentConsult"
-                        )
-                      }
-                    )}
-                  >
-                    {" \u0627\u0648\u0631\u0698\u0627\u0646\u0633\u06cc"}
-                  </div>
-                ) : null}
-              </div>
-            </Button>
-            <div
-              data-plasmic-name={"guide"}
-              data-plasmic-override={overrides.guide}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.guide
-              )}
-            >
-              {
-                "\u062f\u0631 \u0635\u0648\u0631\u062a \u062b\u0628\u062a \u0635\u062d\u06cc\u062d \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0647 \u0635\u0641\u062d\u0647 \u0644\u06cc\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0645\u0646\u062a\u0642\u0644 \u0645\u06cc \u0634\u0648\u06cc\u062f\n\u0627\u0631\u0633\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647 \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u0648\u062f"
-              }
-            </div>
-            <Button
-              data-plasmic-name={"sendConsultButton"}
-              data-plasmic-override={overrides.sendConsultButton}
-              className={classNames("__wab_instance", sty.sendConsultButton)}
-              color={"blue"}
-              deselected={generateStateValueProp($state, [
-                "sendConsultButton",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "sendConsultButton",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["makeFalseSendConsultSuccessfullyAlert"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["sendConsultSuccessfullyAlert"]
-                        },
-                        operation: 0,
-                        value: false
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["makeFalseSendConsultSuccessfullyAlert"] != null &&
-                  typeof $steps["makeFalseSendConsultSuccessfullyAlert"] ===
-                    "object" &&
-                  typeof $steps["makeFalseSendConsultSuccessfullyAlert"]
-                    .then === "function"
-                ) {
-                  $steps["makeFalseSendConsultSuccessfullyAlert"] =
-                    await $steps["makeFalseSendConsultSuccessfullyAlert"];
-                }
-
-                $steps["makeFalseSendConsultUnsuccessfullyAlert"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["sendConsultUnsuccessfullyAlert"]
-                        },
-                        operation: 0,
-                        value: false
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["makeFalseSendConsultUnsuccessfullyAlert"] != null &&
-                  typeof $steps["makeFalseSendConsultUnsuccessfullyAlert"] ===
-                    "object" &&
-                  typeof $steps["makeFalseSendConsultUnsuccessfullyAlert"]
-                    .then === "function"
-                ) {
-                  $steps["makeFalseSendConsultUnsuccessfullyAlert"] =
-                    await $steps["makeFalseSendConsultUnsuccessfullyAlert"];
-                }
-
-                $steps["postConsult"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        args: [
-                          "POST",
-                          `/api/v2/patient/${$ctx.params.code}/consult`,
-                          (() => {
-                            try {
-                              return {
-                                "X-Namespace": localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )
-                              };
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })(),
-                          (() => {
-                            try {
-                              return {
-                                cause_of_consult: "",
-                                consultant_service_id: localStorage.getItem(
-                                  "receiver_service_id"
-                                ),
-                                effective_patient_service_id:
-                                  localStorage.getItem("sender_service_id"),
-                                illness: "",
-                                priority: $state.consultEmergencyStatusState,
-                                problem_list: [],
-                                suggested_consultant_id: $state.receiverDoctorId
-                              };
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()
-                        ]
-                      };
-                      return $globalActions[
-                        "AuthGlobalContext.apiFetcher"
-                      ]?.apply(null, [...actionArgs.args]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["postConsult"] != null &&
-                  typeof $steps["postConsult"] === "object" &&
-                  typeof $steps["postConsult"].then === "function"
-                ) {
-                  $steps["postConsult"] = await $steps["postConsult"];
-                }
-
-                $steps["makeTrueSendConsultSuccessfullyAlert"] =
-                  $steps.postConsult?.status === 200
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["sendConsultSuccessfullyAlert"]
-                          },
-                          operation: 0,
-                          value: true
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                if (
-                  $steps["makeTrueSendConsultSuccessfullyAlert"] != null &&
-                  typeof $steps["makeTrueSendConsultSuccessfullyAlert"] ===
-                    "object" &&
-                  typeof $steps["makeTrueSendConsultSuccessfullyAlert"].then ===
-                    "function"
-                ) {
-                  $steps["makeTrueSendConsultSuccessfullyAlert"] = await $steps[
-                    "makeTrueSendConsultSuccessfullyAlert"
-                  ];
-                }
-
-                $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
-                  $steps.postConsult?.status != 200
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["sendConsultUnsuccessfullyAlert"]
-                          },
-                          operation: 0,
-                          value: true
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                if (
-                  $steps["makeTrueSendConsultUnsuccessfullyAlert"] != null &&
-                  typeof $steps["makeTrueSendConsultUnsuccessfullyAlert"] ===
-                    "object" &&
-                  typeof $steps["makeTrueSendConsultUnsuccessfullyAlert"]
-                    .then === "function"
-                ) {
-                  $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
-                    await $steps["makeTrueSendConsultUnsuccessfullyAlert"];
-                }
-
-                $steps["goToConsultListPage"] =
-                  $steps.postConsult?.status === 200
-                    ? (() => {
-                        const actionArgs = {
-                          destination: `/consult-list/${(() => {
-                            try {
-                              return $ctx.params.code;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()}/${(() => {
-                            try {
-                              return $ctx.params.adm_id;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()}`
-                        };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                if (
-                  $steps["goToConsultListPage"] != null &&
-                  typeof $steps["goToConsultListPage"] === "object" &&
-                  typeof $steps["goToConsultListPage"].then === "function"
-                ) {
-                  $steps["goToConsultListPage"] = await $steps[
-                    "goToConsultListPage"
-                  ];
-                }
-              }}
-              onDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "sendConsultButton",
-                  "deselected"
-                ])(eventArgs[0]);
-              }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "sendConsultButton",
+                })()}
+                isDisabled={generateStateValueProp($state, [
+                  "consultEmergencyStatusButton",
                   "isDisabled"
-                ])(eventArgs[0]);
-              }}
-              onSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "sendConsultButton",
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateEmergencyButtonStatusState"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["emergencyButtonStatusState"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateEmergencyButtonStatusState"] != null &&
+                    typeof $steps["updateEmergencyButtonStatusState"] ===
+                      "object" &&
+                    typeof $steps["updateEmergencyButtonStatusState"].then ===
+                      "function"
+                  ) {
+                    $steps["updateEmergencyButtonStatusState"] = await $steps[
+                      "updateEmergencyButtonStatusState"
+                    ];
+                  }
+
+                  $steps["updateConsultEmergencyStatusState"] =
+                    !$state.emergencyButtonStatusState
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["consultEmergencyStatusState"]
+                            },
+                            operation: 0,
+                            value: 3
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updateConsultEmergencyStatusState"] != null &&
+                    typeof $steps["updateConsultEmergencyStatusState"] ===
+                      "object" &&
+                    typeof $steps["updateConsultEmergencyStatusState"].then ===
+                      "function"
+                  ) {
+                    $steps["updateConsultEmergencyStatusState"] = await $steps[
+                      "updateConsultEmergencyStatusState"
+                    ];
+                  }
+
+                  $steps["updateConsultEmergencyStatusState2"] =
+                    $state.emergencyButtonStatusState
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["consultEmergencyStatusState"]
+                            },
+                            operation: 0,
+                            value: 1
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updateConsultEmergencyStatusState2"] != null &&
+                    typeof $steps["updateConsultEmergencyStatusState2"] ===
+                      "object" &&
+                    typeof $steps["updateConsultEmergencyStatusState2"].then ===
+                      "function"
+                  ) {
+                    $steps["updateConsultEmergencyStatusState2"] = await $steps[
+                      "updateConsultEmergencyStatusState2"
+                    ];
+                  }
+
+                  $steps["consoleLogConsultEmergencyStatusState"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return console.log(
+                              "consult_emergency_status_state:",
+                              $state.consultEmergencyStatusState
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["consoleLogConsultEmergencyStatusState"] != null &&
+                    typeof $steps["consoleLogConsultEmergencyStatusState"] ===
+                      "object" &&
+                    typeof $steps["consoleLogConsultEmergencyStatusState"]
+                      .then === "function"
+                  ) {
+                    $steps["consoleLogConsultEmergencyStatusState"] =
+                      await $steps["consoleLogConsultEmergencyStatusState"];
+                  }
+                }}
+                onDeselectedChange={(...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "consultEmergencyStatusButton",
+                    "deselected"
+                  ])(eventArgs[0]);
+                }}
+                onIsDisabledChange={(...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "consultEmergencyStatusButton",
+                    "isDisabled"
+                  ])(eventArgs[0]);
+                }}
+                onSelectedChange={(...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "consultEmergencyStatusButton",
+                    "selected"
+                  ])(eventArgs[0]);
+                }}
+                onSortDeselectedChange={(...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "consultEmergencyStatusButton",
+                    "sortDeselected"
+                  ])(eventArgs[0]);
+                }}
+                onSortSelectedChange={(...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "consultEmergencyStatusButton",
+                    "sortSelected"
+                  ])(eventArgs[0]);
+                }}
+                selected={generateStateValueProp($state, [
+                  "consultEmergencyStatusButton",
                   "selected"
-                ])(eventArgs[0]);
-              }}
-              onSortDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "sendConsultButton",
+                ])}
+                shape={"sharp"}
+                sortDeselected={generateStateValueProp($state, [
+                  "consultEmergencyStatusButton",
                   "sortDeselected"
-                ])(eventArgs[0]);
-              }}
-              onSortSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "sendConsultButton",
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "consultEmergencyStatusButton",
                   "sortSelected"
-                ])(eventArgs[0]);
-              }}
-              selected={generateStateValueProp($state, [
-                "sendConsultButton",
-                "selected"
-              ])}
-              sortDeselected={generateStateValueProp($state, [
-                "sendConsultButton",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "sendConsultButton",
-                "sortSelected"
-              ])}
-            >
+                ])}
+              >
+                <div
+                  data-plasmic-name={"consultEmergencyStatus"}
+                  data-plasmic-override={overrides.consultEmergencyStatus}
+                  className={classNames(
+                    projectcss.all,
+                    sty.consultEmergencyStatus
+                  )}
+                >
+                  {(() => {
+                    try {
+                      return !$state.emergencyButtonStatusState;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      data-plasmic-name={"emergentOff"}
+                      data-plasmic-override={overrides.emergentOff}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.emergentOff
+                      )}
+                    >
+                      {" \u0627\u0648\u0631\u0698\u0627\u0646\u0633\u06cc"}
+                    </div>
+                  ) : null}
+                  {(() => {
+                    try {
+                      return $state.emergencyButtonStatusState;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      data-plasmic-name={"emergentOn"}
+                      data-plasmic-override={overrides.emergentOn}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.emergentOn
+                      )}
+                    >
+                      {" \u0627\u0648\u0631\u0698\u0627\u0646\u0633\u06cc"}
+                    </div>
+                  ) : null}
+                </div>
+              </Button>
               <div
-                data-plasmic-name={"sendConsult2"}
-                data-plasmic-override={overrides.sendConsult2}
+                data-plasmic-name={"guide"}
+                data-plasmic-override={overrides.guide}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.sendConsult2
+                  sty.guide
                 )}
+                dir={"rtl"}
               >
                 {
-                  "\u0627\u0631\u0633\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647"
+                  "\u062f\u0631 \u0635\u0648\u0631\u062a \u062b\u0628\u062a \u0635\u062d\u06cc\u062d \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0647 \u0635\u0641\u062d\u0647 \u0644\u06cc\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0645\u0646\u062a\u0642\u0644 \u0645\u06cc \u0634\u0648\u06cc\u062f.\n\u0627\u06cc\u0646\u062a\u0631\u0646 \u0647\u0627 \u0648 \u062f\u0627\u0646\u0634\u062c\u0648\u06cc\u0627\u0646\u06cc \u06a9\u0647 \u0634\u0645\u0627\u0631\u0647 \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0646\u062f\u0627\u0631\u0646\u062f\u060c \u0627\u0645\u06a9\u0627\u0646 \u0627\u0631\u0633\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647 \u0646\u062f\u0627\u0631\u0646\u062f\n\u0648 \u0635\u0631\u0641\u0627 \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u0646\u062f \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0631\u0627 \u0628\u0647 \u0635\u0648\u0631\u062a \u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u0630\u062e\u06cc\u0631\u0647 \u06a9\u0646\u0646\u062f."
                 }
               </div>
-            </Button>
-          </Stack__>
+              <div
+                data-plasmic-name={"sendOrDraftButton"}
+                data-plasmic-override={overrides.sendOrDraftButton}
+                className={classNames(projectcss.all, sty.sendOrDraftButton)}
+              >
+                <Button
+                  data-plasmic-name={"draftConsultButton"}
+                  data-plasmic-override={overrides.draftConsultButton}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.draftConsultButton
+                  )}
+                  color={"clear"}
+                  deselected={generateStateValueProp($state, [
+                    "draftConsultButton",
+                    "deselected"
+                  ])}
+                  isDisabled={generateStateValueProp($state, [
+                    "draftConsultButton",
+                    "isDisabled"
+                  ])}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["makeFalseSendConsultSuccessfullyAlert"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["sendConsultSuccessfullyAlert"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["makeFalseSendConsultSuccessfullyAlert"] != null &&
+                      typeof $steps["makeFalseSendConsultSuccessfullyAlert"] ===
+                        "object" &&
+                      typeof $steps["makeFalseSendConsultSuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeFalseSendConsultSuccessfullyAlert"] =
+                        await $steps["makeFalseSendConsultSuccessfullyAlert"];
+                    }
+
+                    $steps["makeFalseSendConsultUnsuccessfullyAlert"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["sendConsultUnsuccessfullyAlert"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["makeFalseSendConsultUnsuccessfullyAlert"] !=
+                        null &&
+                      typeof $steps[
+                        "makeFalseSendConsultUnsuccessfullyAlert"
+                      ] === "object" &&
+                      typeof $steps["makeFalseSendConsultUnsuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeFalseSendConsultUnsuccessfullyAlert"] =
+                        await $steps["makeFalseSendConsultUnsuccessfullyAlert"];
+                    }
+
+                    $steps["postDraftConsult"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              "POST",
+                              `/api/v2/patient/${$ctx.params.code}/consult/draft`,
+                              (() => {
+                                try {
+                                  return {
+                                    "X-Namespace": localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })(),
+                              (() => {
+                                try {
+                                  return {
+                                    cause_of_consult: "",
+                                    consultant_service_id: localStorage.getItem(
+                                      "receiver_service_id"
+                                    ),
+                                    effective_patient_service_id:
+                                      localStorage.getItem("sender_service_id"),
+                                    illness: $state.patientPresentIllness.value,
+                                    priority:
+                                      $state.consultEmergencyStatusState,
+                                    problem_list: [],
+                                    suggested_consultant_id:
+                                      $state.receiverDoctorId
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            ]
+                          };
+                          return $globalActions[
+                            "AuthGlobalContext.apiFetcher"
+                          ]?.apply(null, [...actionArgs.args]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["postDraftConsult"] != null &&
+                      typeof $steps["postDraftConsult"] === "object" &&
+                      typeof $steps["postDraftConsult"].then === "function"
+                    ) {
+                      $steps["postDraftConsult"] = await $steps[
+                        "postDraftConsult"
+                      ];
+                    }
+
+                    $steps["makeTrueSendConsultSuccessfullyAlert"] =
+                      $steps.postDraftConsult?.status === 200
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["sendConsultSuccessfullyAlert"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["makeTrueSendConsultSuccessfullyAlert"] != null &&
+                      typeof $steps["makeTrueSendConsultSuccessfullyAlert"] ===
+                        "object" &&
+                      typeof $steps["makeTrueSendConsultSuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeTrueSendConsultSuccessfullyAlert"] =
+                        await $steps["makeTrueSendConsultSuccessfullyAlert"];
+                    }
+
+                    $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
+                      $steps.postDraftConsult?.status != 200
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["sendConsultUnsuccessfullyAlert"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["makeTrueSendConsultUnsuccessfullyAlert"] !=
+                        null &&
+                      typeof $steps[
+                        "makeTrueSendConsultUnsuccessfullyAlert"
+                      ] === "object" &&
+                      typeof $steps["makeTrueSendConsultUnsuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
+                        await $steps["makeTrueSendConsultUnsuccessfullyAlert"];
+                    }
+
+                    $steps["goToConsultListPage"] =
+                      $steps.postDraftConsult?.status === 200
+                        ? (() => {
+                            const actionArgs = {
+                              destination: `/consult/list/${(() => {
+                                try {
+                                  return $ctx.params.code;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()}/${(() => {
+                                try {
+                                  return $ctx.params.adm_id;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()}`
+                            };
+                            return (({ destination }) => {
+                              if (
+                                typeof destination === "string" &&
+                                destination.startsWith("#")
+                              ) {
+                                document
+                                  .getElementById(destination.substr(1))
+                                  .scrollIntoView({ behavior: "smooth" });
+                              } else {
+                                __nextRouter?.push(destination);
+                              }
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["goToConsultListPage"] != null &&
+                      typeof $steps["goToConsultListPage"] === "object" &&
+                      typeof $steps["goToConsultListPage"].then === "function"
+                    ) {
+                      $steps["goToConsultListPage"] = await $steps[
+                        "goToConsultListPage"
+                      ];
+                    }
+                  }}
+                  onDeselectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "draftConsultButton",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }}
+                  onIsDisabledChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "draftConsultButton",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }}
+                  onSelectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "draftConsultButton",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }}
+                  onSortDeselectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "draftConsultButton",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }}
+                  onSortSelectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "draftConsultButton",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }}
+                  selected={generateStateValueProp($state, [
+                    "draftConsultButton",
+                    "selected"
+                  ])}
+                  sortDeselected={generateStateValueProp($state, [
+                    "draftConsultButton",
+                    "sortDeselected"
+                  ])}
+                  sortSelected={generateStateValueProp($state, [
+                    "draftConsultButton",
+                    "sortSelected"
+                  ])}
+                >
+                  <div
+                    data-plasmic-name={"saveDraftConsult"}
+                    data-plasmic-override={overrides.saveDraftConsult}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.saveDraftConsult
+                    )}
+                  >
+                    {
+                      "\u062b\u0628\u062a \u067e\u06cc\u0634 \u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647"
+                    }
+                  </div>
+                </Button>
+                <Button
+                  data-plasmic-name={"sendConsultButton"}
+                  data-plasmic-override={overrides.sendConsultButton}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.sendConsultButton
+                  )}
+                  color={"blue"}
+                  deselected={generateStateValueProp($state, [
+                    "sendConsultButton",
+                    "deselected"
+                  ])}
+                  isDisabled={generateStateValueProp($state, [
+                    "sendConsultButton",
+                    "isDisabled"
+                  ])}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["makeFalseSendConsultSuccessfullyAlert"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["sendConsultSuccessfullyAlert"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["makeFalseSendConsultSuccessfullyAlert"] != null &&
+                      typeof $steps["makeFalseSendConsultSuccessfullyAlert"] ===
+                        "object" &&
+                      typeof $steps["makeFalseSendConsultSuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeFalseSendConsultSuccessfullyAlert"] =
+                        await $steps["makeFalseSendConsultSuccessfullyAlert"];
+                    }
+
+                    $steps["makeFalseSendConsultUnsuccessfullyAlert"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["sendConsultUnsuccessfullyAlert"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["makeFalseSendConsultUnsuccessfullyAlert"] !=
+                        null &&
+                      typeof $steps[
+                        "makeFalseSendConsultUnsuccessfullyAlert"
+                      ] === "object" &&
+                      typeof $steps["makeFalseSendConsultUnsuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeFalseSendConsultUnsuccessfullyAlert"] =
+                        await $steps["makeFalseSendConsultUnsuccessfullyAlert"];
+                    }
+
+                    $steps["postConsult"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              "POST",
+                              `/api/v2/patient/${$ctx.params.code}/consult`,
+                              (() => {
+                                try {
+                                  return {
+                                    "X-Namespace": localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })(),
+                              (() => {
+                                try {
+                                  return {
+                                    cause_of_consult: "",
+                                    consultant_service_id: localStorage.getItem(
+                                      "receiver_service_id"
+                                    ),
+                                    effective_patient_service_id:
+                                      localStorage.getItem("sender_service_id"),
+                                    illness: $state.patientPresentIllness.value,
+                                    priority:
+                                      $state.consultEmergencyStatusState,
+                                    problem_list: [],
+                                    suggested_consultant_id:
+                                      $state.receiverDoctorId
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            ]
+                          };
+                          return $globalActions[
+                            "AuthGlobalContext.apiFetcher"
+                          ]?.apply(null, [...actionArgs.args]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["postConsult"] != null &&
+                      typeof $steps["postConsult"] === "object" &&
+                      typeof $steps["postConsult"].then === "function"
+                    ) {
+                      $steps["postConsult"] = await $steps["postConsult"];
+                    }
+
+                    $steps["makeTrueSendConsultSuccessfullyAlert"] =
+                      $steps.postConsult?.status === 200
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["sendConsultSuccessfullyAlert"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["makeTrueSendConsultSuccessfullyAlert"] != null &&
+                      typeof $steps["makeTrueSendConsultSuccessfullyAlert"] ===
+                        "object" &&
+                      typeof $steps["makeTrueSendConsultSuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeTrueSendConsultSuccessfullyAlert"] =
+                        await $steps["makeTrueSendConsultSuccessfullyAlert"];
+                    }
+
+                    $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
+                      $steps.postConsult?.status != 200
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["sendConsultUnsuccessfullyAlert"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["makeTrueSendConsultUnsuccessfullyAlert"] !=
+                        null &&
+                      typeof $steps[
+                        "makeTrueSendConsultUnsuccessfullyAlert"
+                      ] === "object" &&
+                      typeof $steps["makeTrueSendConsultUnsuccessfullyAlert"]
+                        .then === "function"
+                    ) {
+                      $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
+                        await $steps["makeTrueSendConsultUnsuccessfullyAlert"];
+                    }
+
+                    $steps["goToConsultListPage"] =
+                      $steps.postConsult?.status === 200
+                        ? (() => {
+                            const actionArgs = {
+                              destination: `/consult/list/${(() => {
+                                try {
+                                  return $ctx.params.code;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()}/${(() => {
+                                try {
+                                  return $ctx.params.adm_id;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()}`
+                            };
+                            return (({ destination }) => {
+                              if (
+                                typeof destination === "string" &&
+                                destination.startsWith("#")
+                              ) {
+                                document
+                                  .getElementById(destination.substr(1))
+                                  .scrollIntoView({ behavior: "smooth" });
+                              } else {
+                                __nextRouter?.push(destination);
+                              }
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["goToConsultListPage"] != null &&
+                      typeof $steps["goToConsultListPage"] === "object" &&
+                      typeof $steps["goToConsultListPage"].then === "function"
+                    ) {
+                      $steps["goToConsultListPage"] = await $steps[
+                        "goToConsultListPage"
+                      ];
+                    }
+                  }}
+                  onDeselectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendConsultButton",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }}
+                  onIsDisabledChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendConsultButton",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }}
+                  onSelectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendConsultButton",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }}
+                  onSortDeselectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendConsultButton",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }}
+                  onSortSelectedChange={(...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendConsultButton",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }}
+                  selected={generateStateValueProp($state, [
+                    "sendConsultButton",
+                    "selected"
+                  ])}
+                  sortDeselected={generateStateValueProp($state, [
+                    "sendConsultButton",
+                    "sortDeselected"
+                  ])}
+                  sortSelected={generateStateValueProp($state, [
+                    "sendConsultButton",
+                    "sortSelected"
+                  ])}
+                >
+                  <div
+                    data-plasmic-name={"sendConsult2"}
+                    data-plasmic-override={overrides.sendConsult2}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.sendConsult2
+                    )}
+                  >
+                    {
+                      "\u0627\u0631\u0633\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647"
+                    }
+                  </div>
+                </Button>
+              </div>
+            </Stack__>
+          </div>
           <div
             data-plasmic-name={"switchingTab"}
             data-plasmic-override={overrides.switchingTab}
@@ -1807,7 +2331,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                   $steps["goToConsultList"] = true
                     ? (() => {
                         const actionArgs = {
-                          destination: `/consult-list/${(() => {
+                          destination: `/consult/list/${(() => {
                             try {
                               return $ctx.params.code;
                             } catch (e) {
@@ -2237,7 +2761,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                           try {
                             return localStorage.getItem(
                               "consult_sender_service_list"
-                            ) !== (null || undefined || "" || "undefined")
+                            )
                               ? JSON.parse(
                                   localStorage.getItem(
                                     "consult_sender_service_list"
@@ -2578,7 +3102,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                           try {
                             return localStorage.getItem(
                               "consult_receiver_service_list"
-                            ) !== (null || undefined || "" || "undefined")
+                            )
                               ? JSON.parse(
                                   localStorage.getItem(
                                     "consult_receiver_service_list"
@@ -3254,6 +3778,327 @@ function PlasmicConsultSend__RenderFunc(props: {
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
+          <ApiFetcherComponent
+            data-plasmic-name={"getPresentIlness"}
+            data-plasmic-override={overrides.getPresentIlness}
+            className={classNames("__wab_instance", sty.getPresentIlness)}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v2/patient/${$ctx.params.code}/consult/illness`}
+            ref={ref => {
+              $refs["getPresentIlness"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <AntdModal
+                  data-plasmic-name={"modalPatientPresentIlness"}
+                  data-plasmic-override={overrides.modalPatientPresentIlness}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.modalPatientPresentIlness
+                  )}
+                  defaultStylesClassName={classNames(
+                    projectcss.root_reset,
+                    projectcss.plasmic_default_styles,
+                    projectcss.plasmic_mixins,
+                    projectcss.plasmic_tokens,
+                    plasmic_antd_5_hostless_css.plasmic_tokens,
+                    plasmic_plasmic_rich_components_css.plasmic_tokens
+                  )}
+                  hideFooter={true}
+                  modalContentClassName={classNames({
+                    [sty["pcls_DoNQ6Xf_8Omx"]]: true
+                  })}
+                  modalScopeClassName={sty["modalPatientPresentIlness__modal"]}
+                  onOpenChange={generateStateOnChangeProp($state, [
+                    "modalPatientPresentIlness",
+                    "open"
+                  ])}
+                  open={generateStateValueProp($state, [
+                    "modalPatientPresentIlness",
+                    "open"
+                  ])}
+                  title={
+                    <div
+                      data-plasmic-name={"titleContent"}
+                      data-plasmic-override={overrides.titleContent}
+                      className={classNames(projectcss.all, sty.titleContent)}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__cl2Eh
+                        )}
+                      >
+                        {
+                          "\u0644\u06cc\u0633\u062a \u0634\u0631\u062d \u062d\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0642\u0628\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631"
+                        }
+                      </div>
+                      <Icons8CloseSvgIcon
+                        data-plasmic-name={"svg"}
+                        data-plasmic-override={overrides.svg}
+                        className={classNames(projectcss.all, sty.svg)}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["updateModalPatientPresentIlnessOpen"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: [
+                                      "modalPatientPresentIlness",
+                                      "open"
+                                    ]
+                                  },
+                                  operation: 4
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  const oldValue = $stateGet(
+                                    objRoot,
+                                    variablePath
+                                  );
+                                  $stateSet(objRoot, variablePath, !oldValue);
+                                  return !oldValue;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateModalPatientPresentIlnessOpen"] !=
+                              null &&
+                            typeof $steps[
+                              "updateModalPatientPresentIlnessOpen"
+                            ] === "object" &&
+                            typeof $steps["updateModalPatientPresentIlnessOpen"]
+                              .then === "function"
+                          ) {
+                            $steps["updateModalPatientPresentIlnessOpen"] =
+                              await $steps[
+                                "updateModalPatientPresentIlnessOpen"
+                              ];
+                          }
+                        }}
+                        role={"img"}
+                      />
+                    </div>
+                  }
+                  trigger={null}
+                >
+                  <div
+                    data-plasmic-name={"patientPresentIlness"}
+                    data-plasmic-override={overrides.patientPresentIlness}
+                    className={classNames(
+                      projectcss.all,
+                      sty.patientPresentIlness
+                    )}
+                  >
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return (() => {
+                            const nonEmptyData =
+                              $ctx.fetched_data.data.illnesses.filter(
+                                item => item !== ""
+                              );
+                            const uniqueData = [...new Set(nonEmptyData)];
+                            return uniqueData;
+                          })();
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          data-plasmic-name={"presentIllness"}
+                          data-plasmic-override={overrides.presentIllness}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.presentIllness
+                          )}
+                          key={currentIndex}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["updatePatientPresentIllnessValue"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "patientPresentIllness",
+                                        "value"
+                                      ]
+                                    },
+                                    operation: 0,
+                                    value: currentItem
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updatePatientPresentIllnessValue"] !=
+                                null &&
+                              typeof $steps[
+                                "updatePatientPresentIllnessValue"
+                              ] === "object" &&
+                              typeof $steps["updatePatientPresentIllnessValue"]
+                                .then === "function"
+                            ) {
+                              $steps["updatePatientPresentIllnessValue"] =
+                                await $steps[
+                                  "updatePatientPresentIllnessValue"
+                                ];
+                            }
+
+                            $steps["updateModalPatientPresentIlnessOpen"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "modalPatientPresentIlness",
+                                        "open"
+                                      ]
+                                    },
+                                    operation: 4
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    const oldValue = $stateGet(
+                                      objRoot,
+                                      variablePath
+                                    );
+                                    $stateSet(objRoot, variablePath, !oldValue);
+                                    return !oldValue;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateModalPatientPresentIlnessOpen"] !=
+                                null &&
+                              typeof $steps[
+                                "updateModalPatientPresentIlnessOpen"
+                              ] === "object" &&
+                              typeof $steps[
+                                "updateModalPatientPresentIlnessOpen"
+                              ].then === "function"
+                            ) {
+                              $steps["updateModalPatientPresentIlnessOpen"] =
+                                await $steps[
+                                  "updateModalPatientPresentIlnessOpen"
+                                ];
+                            }
+                          }}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return currentItem;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                      );
+                    })}
+                    {(() => {
+                      try {
+                        return $ctx.fetched_data.data.illnesses == 0;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={"noPresentIllness"}
+                        data-plasmic-override={overrides.noPresentIllness}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.noPresentIllness
+                        )}
+                      >
+                        {
+                          "\u0634\u0631\u062d \u062d\u0627\u0644 \u0642\u0628\u0644\u06cc \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                        }
+                      </div>
+                    ) : null}
+                  </div>
+                </AntdModal>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
         </div>
       </div>
     </React.Fragment>
@@ -3270,22 +4115,34 @@ const PlasmicDescendants = {
     "freeBox",
     "patientNameAgeGender",
     "patientService",
+    "sendConsultContent",
     "sendConsult",
+    "pageFunctionTopic",
     "sendConsultButtonContent",
     "sendConsultSuccessfully",
     "sendConsultUnsuccessfully2",
+    "senderServiceContent",
     "senderService",
     "selectedSenderService",
+    "receiverServiceContent",
     "receiverService",
     "selectedReceiverService",
+    "receiverDoctorContent",
     "receiverDoctor",
     "selectedReceiverDoctor",
+    "patientPresentIllnessContent",
+    "presentIlnessTitleContent",
+    "presentIllnessTitle",
+    "previousPresentIllness",
+    "patientPresentIllness",
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus3",
-    "normalRangeButtonCircle2",
+    "consultEmergencyStatus",
     "emergentOff",
     "emergentOn",
     "guide",
+    "sendOrDraftButton",
+    "draftConsultButton",
+    "saveDraftConsult",
     "sendConsultButton",
     "sendConsult2",
     "switchingTab",
@@ -3307,7 +4164,14 @@ const PlasmicDescendants = {
     "doctorNameInputContent",
     "doctorNameInput",
     "clearContent",
-    "doctorNames"
+    "doctorNames",
+    "getPresentIlness",
+    "modalPatientPresentIlness",
+    "patientPresentIlness",
+    "presentIllness",
+    "noPresentIllness",
+    "titleContent",
+    "svg"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -3327,26 +4191,70 @@ const PlasmicDescendants = {
   freeBox: ["freeBox", "patientNameAgeGender", "patientService"],
   patientNameAgeGender: ["patientNameAgeGender"],
   patientService: ["patientService"],
-  sendConsult: [
+  sendConsultContent: [
+    "sendConsultContent",
     "sendConsult",
+    "pageFunctionTopic",
     "sendConsultButtonContent",
     "sendConsultSuccessfully",
     "sendConsultUnsuccessfully2",
+    "senderServiceContent",
     "senderService",
     "selectedSenderService",
+    "receiverServiceContent",
     "receiverService",
     "selectedReceiverService",
+    "receiverDoctorContent",
     "receiverDoctor",
     "selectedReceiverDoctor",
+    "patientPresentIllnessContent",
+    "presentIlnessTitleContent",
+    "presentIllnessTitle",
+    "previousPresentIllness",
+    "patientPresentIllness",
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus3",
-    "normalRangeButtonCircle2",
+    "consultEmergencyStatus",
     "emergentOff",
     "emergentOn",
     "guide",
+    "sendOrDraftButton",
+    "draftConsultButton",
+    "saveDraftConsult",
     "sendConsultButton",
     "sendConsult2"
   ],
+  sendConsult: [
+    "sendConsult",
+    "pageFunctionTopic",
+    "sendConsultButtonContent",
+    "sendConsultSuccessfully",
+    "sendConsultUnsuccessfully2",
+    "senderServiceContent",
+    "senderService",
+    "selectedSenderService",
+    "receiverServiceContent",
+    "receiverService",
+    "selectedReceiverService",
+    "receiverDoctorContent",
+    "receiverDoctor",
+    "selectedReceiverDoctor",
+    "patientPresentIllnessContent",
+    "presentIlnessTitleContent",
+    "presentIllnessTitle",
+    "previousPresentIllness",
+    "patientPresentIllness",
+    "consultEmergencyStatusButton",
+    "consultEmergencyStatus",
+    "emergentOff",
+    "emergentOn",
+    "guide",
+    "sendOrDraftButton",
+    "draftConsultButton",
+    "saveDraftConsult",
+    "sendConsultButton",
+    "sendConsult2"
+  ],
+  pageFunctionTopic: ["pageFunctionTopic"],
   sendConsultButtonContent: [
     "sendConsultButtonContent",
     "sendConsultSuccessfully",
@@ -3354,29 +4262,65 @@ const PlasmicDescendants = {
   ],
   sendConsultSuccessfully: ["sendConsultSuccessfully"],
   sendConsultUnsuccessfully2: ["sendConsultUnsuccessfully2"],
+  senderServiceContent: [
+    "senderServiceContent",
+    "senderService",
+    "selectedSenderService"
+  ],
   senderService: ["senderService"],
   selectedSenderService: ["selectedSenderService"],
+  receiverServiceContent: [
+    "receiverServiceContent",
+    "receiverService",
+    "selectedReceiverService"
+  ],
   receiverService: ["receiverService"],
   selectedReceiverService: ["selectedReceiverService"],
+  receiverDoctorContent: [
+    "receiverDoctorContent",
+    "receiverDoctor",
+    "selectedReceiverDoctor"
+  ],
   receiverDoctor: ["receiverDoctor"],
   selectedReceiverDoctor: ["selectedReceiverDoctor"],
+  patientPresentIllnessContent: [
+    "patientPresentIllnessContent",
+    "presentIlnessTitleContent",
+    "presentIllnessTitle",
+    "previousPresentIllness",
+    "patientPresentIllness"
+  ],
+  presentIlnessTitleContent: [
+    "presentIlnessTitleContent",
+    "presentIllnessTitle",
+    "previousPresentIllness"
+  ],
+  presentIllnessTitle: ["presentIllnessTitle"],
+  previousPresentIllness: ["previousPresentIllness"],
+  patientPresentIllness: ["patientPresentIllness"],
   consultEmergencyStatusButton: [
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus3",
-    "normalRangeButtonCircle2",
+    "consultEmergencyStatus",
     "emergentOff",
     "emergentOn"
   ],
-  consultEmergencyStatus3: [
-    "consultEmergencyStatus3",
-    "normalRangeButtonCircle2",
+  consultEmergencyStatus: [
+    "consultEmergencyStatus",
     "emergentOff",
     "emergentOn"
   ],
-  normalRangeButtonCircle2: ["normalRangeButtonCircle2"],
   emergentOff: ["emergentOff"],
   emergentOn: ["emergentOn"],
   guide: ["guide"],
+  sendOrDraftButton: [
+    "sendOrDraftButton",
+    "draftConsultButton",
+    "saveDraftConsult",
+    "sendConsultButton",
+    "sendConsult2"
+  ],
+  draftConsultButton: ["draftConsultButton", "saveDraftConsult"],
+  saveDraftConsult: ["saveDraftConsult"],
   sendConsultButton: ["sendConsultButton", "sendConsult2"],
   sendConsult2: ["sendConsult2"],
   switchingTab: [
@@ -3446,7 +4390,33 @@ const PlasmicDescendants = {
   ],
   doctorNameInput: ["doctorNameInput", "clearContent"],
   clearContent: ["clearContent"],
-  doctorNames: ["doctorNames"]
+  doctorNames: ["doctorNames"],
+  getPresentIlness: [
+    "getPresentIlness",
+    "modalPatientPresentIlness",
+    "patientPresentIlness",
+    "presentIllness",
+    "noPresentIllness",
+    "titleContent",
+    "svg"
+  ],
+  modalPatientPresentIlness: [
+    "modalPatientPresentIlness",
+    "patientPresentIlness",
+    "presentIllness",
+    "noPresentIllness",
+    "titleContent",
+    "svg"
+  ],
+  patientPresentIlness: [
+    "patientPresentIlness",
+    "presentIllness",
+    "noPresentIllness"
+  ],
+  presentIllness: ["presentIllness"],
+  noPresentIllness: ["noPresentIllness"],
+  titleContent: ["titleContent", "svg"],
+  svg: ["svg"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -3460,22 +4430,34 @@ type NodeDefaultElementType = {
   freeBox: "div";
   patientNameAgeGender: "div";
   patientService: "div";
+  sendConsultContent: "div";
   sendConsult: "div";
+  pageFunctionTopic: "div";
   sendConsultButtonContent: "div";
   sendConsultSuccessfully: typeof Alert2;
   sendConsultUnsuccessfully2: typeof Alert2;
+  senderServiceContent: "div";
   senderService: "div";
   selectedSenderService: "div";
+  receiverServiceContent: "div";
   receiverService: "div";
   selectedReceiverService: "div";
+  receiverDoctorContent: "div";
   receiverDoctor: "div";
   selectedReceiverDoctor: "div";
+  patientPresentIllnessContent: "div";
+  presentIlnessTitleContent: "div";
+  presentIllnessTitle: "div";
+  previousPresentIllness: "div";
+  patientPresentIllness: "textarea";
   consultEmergencyStatusButton: typeof Button;
-  consultEmergencyStatus3: "div";
-  normalRangeButtonCircle2: "div";
+  consultEmergencyStatus: "div";
   emergentOff: "div";
   emergentOn: "div";
   guide: "div";
+  sendOrDraftButton: "div";
+  draftConsultButton: typeof Button;
+  saveDraftConsult: "div";
   sendConsultButton: typeof Button;
   sendConsult2: "div";
   switchingTab: "div";
@@ -3498,6 +4480,13 @@ type NodeDefaultElementType = {
   doctorNameInput: typeof TextInput;
   clearContent: "svg";
   doctorNames: "div";
+  getPresentIlness: typeof ApiFetcherComponent;
+  modalPatientPresentIlness: typeof AntdModal;
+  patientPresentIlness: "div";
+  presentIllness: "div";
+  noPresentIllness: "div";
+  titleContent: "div";
+  svg: "svg";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -3569,24 +4558,38 @@ export const PlasmicConsultSend = Object.assign(
     freeBox: makeNodeComponent("freeBox"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
     patientService: makeNodeComponent("patientService"),
+    sendConsultContent: makeNodeComponent("sendConsultContent"),
     sendConsult: makeNodeComponent("sendConsult"),
+    pageFunctionTopic: makeNodeComponent("pageFunctionTopic"),
     sendConsultButtonContent: makeNodeComponent("sendConsultButtonContent"),
     sendConsultSuccessfully: makeNodeComponent("sendConsultSuccessfully"),
     sendConsultUnsuccessfully2: makeNodeComponent("sendConsultUnsuccessfully2"),
+    senderServiceContent: makeNodeComponent("senderServiceContent"),
     senderService: makeNodeComponent("senderService"),
     selectedSenderService: makeNodeComponent("selectedSenderService"),
+    receiverServiceContent: makeNodeComponent("receiverServiceContent"),
     receiverService: makeNodeComponent("receiverService"),
     selectedReceiverService: makeNodeComponent("selectedReceiverService"),
+    receiverDoctorContent: makeNodeComponent("receiverDoctorContent"),
     receiverDoctor: makeNodeComponent("receiverDoctor"),
     selectedReceiverDoctor: makeNodeComponent("selectedReceiverDoctor"),
+    patientPresentIllnessContent: makeNodeComponent(
+      "patientPresentIllnessContent"
+    ),
+    presentIlnessTitleContent: makeNodeComponent("presentIlnessTitleContent"),
+    presentIllnessTitle: makeNodeComponent("presentIllnessTitle"),
+    previousPresentIllness: makeNodeComponent("previousPresentIllness"),
+    patientPresentIllness: makeNodeComponent("patientPresentIllness"),
     consultEmergencyStatusButton: makeNodeComponent(
       "consultEmergencyStatusButton"
     ),
-    consultEmergencyStatus3: makeNodeComponent("consultEmergencyStatus3"),
-    normalRangeButtonCircle2: makeNodeComponent("normalRangeButtonCircle2"),
+    consultEmergencyStatus: makeNodeComponent("consultEmergencyStatus"),
     emergentOff: makeNodeComponent("emergentOff"),
     emergentOn: makeNodeComponent("emergentOn"),
     guide: makeNodeComponent("guide"),
+    sendOrDraftButton: makeNodeComponent("sendOrDraftButton"),
+    draftConsultButton: makeNodeComponent("draftConsultButton"),
+    saveDraftConsult: makeNodeComponent("saveDraftConsult"),
     sendConsultButton: makeNodeComponent("sendConsultButton"),
     sendConsult2: makeNodeComponent("sendConsult2"),
     switchingTab: makeNodeComponent("switchingTab"),
@@ -3609,6 +4612,13 @@ export const PlasmicConsultSend = Object.assign(
     doctorNameInput: makeNodeComponent("doctorNameInput"),
     clearContent: makeNodeComponent("clearContent"),
     doctorNames: makeNodeComponent("doctorNames"),
+    getPresentIlness: makeNodeComponent("getPresentIlness"),
+    modalPatientPresentIlness: makeNodeComponent("modalPatientPresentIlness"),
+    patientPresentIlness: makeNodeComponent("patientPresentIlness"),
+    presentIllness: makeNodeComponent("presentIllness"),
+    noPresentIllness: makeNodeComponent("noPresentIllness"),
+    titleContent: makeNodeComponent("titleContent"),
+    svg: makeNodeComponent("svg"),
 
     // Metadata about props expected for PlasmicConsultSend
     internalVariantProps: PlasmicConsultSend__VariantProps,

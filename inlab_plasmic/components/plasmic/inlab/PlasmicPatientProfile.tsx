@@ -942,7 +942,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                   $steps["goToConsultList"] = true
                     ? (() => {
                         const actionArgs = {
-                          destination: `/consult-list/${(() => {
+                          destination: `/consult/list/${(() => {
                             try {
                               return $ctx.params.code;
                             } catch (e) {

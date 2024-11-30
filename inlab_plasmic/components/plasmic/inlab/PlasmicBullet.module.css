@@ -1,0 +1,14 @@
+.bullet {
+  object-fit: cover;
+  max-width: 100%;
+  color: #ffffff;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  border-radius: 999px;
+  border: 0.5px solid #000000;
+}
+.bulletbulletOn {
+  color: #000e7a;
+  border-style: none;
+}

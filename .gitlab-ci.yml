@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy
 
 variables:
   FF_NETWORK_PER_BUILD: "true"
@@ -24,3 +25,15 @@ include:
     rules:
       - changes:
           - inlab_plasmic/**/*
+
+bridge-deploy:
+  stage: deploy
+  allow_failure: true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev"'
+  inherit:
+    variables: false
+  trigger: 
+    project: synappsgroup/inlab
+    branch: dev
+    strategy: depend

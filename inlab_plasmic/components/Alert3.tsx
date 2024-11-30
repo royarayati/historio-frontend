@@ -2,9 +2,10 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import {
-  PlasmicRedirectToNamespaceSelection,
-  DefaultRedirectToNamespaceSelectionProps
-} from "./plasmic/inlab/PlasmicRedirectToNamespaceSelection";
+  PlasmicAlert3,
+  DefaultAlert3Props
+} from "./plasmic/inlab/PlasmicAlert3";
+import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -13,34 +14,32 @@ import {
 // If you don't want to expose certain variants or slots as a prop, you can use
 // Omit to hide them:
 //
-// interface RedirectToNamespaceSelectionProps extends Omit<DefaultRedirectToNamespaceSelectionProps, "hideProps1"|"hideProp2"> {
+// interface Alert3Props extends Omit<DefaultAlert3Props, "hideProps1"|"hideProp2"> {
 //   // etc.
 // }
 //
-// You can also stop extending from DefaultRedirectToNamespaceSelectionProps altogether and have
+// You can also stop extending from DefaultAlert3Props altogether and have
 // total control over the props for your component.
-export interface RedirectToNamespaceSelectionProps
-  extends DefaultRedirectToNamespaceSelectionProps {}
+export interface Alert3Props extends DefaultAlert3Props {}
 
-function RedirectToNamespaceSelection(
-  props: RedirectToNamespaceSelectionProps
-) {
-  // Use PlasmicRedirectToNamespaceSelection to render this component as it was
+function Alert3_(props: Alert3Props, ref: HTMLElementRefOf<"div">) {
+  // Use PlasmicAlert3 to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicRedirectToNamespaceSelection are:
+  // Props you can pass into PlasmicAlert3 are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, we are just piping all RedirectToNamespaceSelectionProps here, but feel free
+  // By default, we are just piping all Alert3Props here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToNamespaceSelection />;
+  return <PlasmicAlert3 root={{ ref }} {...props} />;
 }
 
-export default RedirectToNamespaceSelection;
+const Alert3 = React.forwardRef(Alert3_);
+export default Alert3;
