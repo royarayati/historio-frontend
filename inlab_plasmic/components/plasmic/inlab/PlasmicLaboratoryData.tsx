@@ -116,6 +116,9 @@ export type PlasmicLaboratoryData__OverridesType = {
   allAdmissionsLab?: Flex__<typeof Button>;
   currentAdmissionLab?: Flex__<typeof Button>;
   labData?: Flex__<typeof ApiFetcherComponent>;
+  labGroupTitles?: Flex__<"div">;
+  labGroupTitle?: Flex__<"div">;
+  button3?: Flex__<typeof Button>;
   laboratoryLists?: Flex__<"div">;
   labResults?: Flex__<"div">;
   checkedFactors?: Flex__<"div">;
@@ -579,6 +582,31 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "button3[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button3[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button3[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button3[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button3[].sortSelected",
+        type: "private",
+        variableType: "boolean"
       }
     ],
     [$props, $ctx, $refs]
@@ -1480,7 +1508,23 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
-                  {$ctx.fetched_data.loading == true ? (
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? (() => {
+                          try {
+                            return $ctx.fetched_data.loading == true;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })()
+                      : $ctx.fetched_data.loading == true
+                  ) ? (
                     <div
                       className={classNames(
                         projectcss.all,
@@ -1507,6 +1551,217 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
+                  <div
+                    data-plasmic-name={"labGroupTitles"}
+                    data-plasmic-override={overrides.labGroupTitles}
+                    className={classNames(projectcss.all, sty.labGroupTitles)}
+                  >
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data.lab_test_groups;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          data-plasmic-name={"labGroupTitle"}
+                          data-plasmic-override={overrides.labGroupTitle}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.labGroupTitle
+                          )}
+                          key={currentIndex}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["runCode"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        const element = document.getElementById(
+                                          currentItem.title
+                                        );
+                                        if (element)
+                                          return element.scrollIntoView({
+                                            behavior: "smooth"
+                                          });
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["runCode"] != null &&
+                              typeof $steps["runCode"] === "object" &&
+                              typeof $steps["runCode"].then === "function"
+                            ) {
+                              $steps["runCode"] = await $steps["runCode"];
+                            }
+                          }}
+                        >
+                          <React.Fragment>{currentItem.title}</React.Fragment>
+                        </div>
+                      );
+                    })}
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data.lab_test_groups;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (() => {
+                        const child$Props = {
+                          className: classNames("__wab_instance", sty.button3),
+                          deselected: generateStateValueProp($state, [
+                            "button3",
+                            __plasmic_idx_0,
+                            "deselected"
+                          ]),
+                          isDisabled: generateStateValueProp($state, [
+                            "button3",
+                            __plasmic_idx_0,
+                            "isDisabled"
+                          ]),
+                          key: currentIndex,
+                          onDeselectedChange: (...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "button3",
+                              __plasmic_idx_0,
+                              "deselected"
+                            ])(eventArgs[0]);
+                          },
+                          onIsDisabledChange: (...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "button3",
+                              __plasmic_idx_0,
+                              "isDisabled"
+                            ])(eventArgs[0]);
+                          },
+                          onSelectedChange: (...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "button3",
+                              __plasmic_idx_0,
+                              "selected"
+                            ])(eventArgs[0]);
+                          },
+                          onSortDeselectedChange: (...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "button3",
+                              __plasmic_idx_0,
+                              "sortDeselected"
+                            ])(eventArgs[0]);
+                          },
+                          onSortSelectedChange: (...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "button3",
+                              __plasmic_idx_0,
+                              "sortSelected"
+                            ])(eventArgs[0]);
+                          },
+                          selected: generateStateValueProp($state, [
+                            "button3",
+                            __plasmic_idx_0,
+                            "selected"
+                          ]),
+                          sortDeselected: generateStateValueProp($state, [
+                            "button3",
+                            __plasmic_idx_0,
+                            "sortDeselected"
+                          ]),
+                          sortSelected: generateStateValueProp($state, [
+                            "button3",
+                            __plasmic_idx_0,
+                            "sortSelected"
+                          ])
+                        };
+
+                        initializePlasmicStates(
+                          $state,
+                          [
+                            {
+                              name: "button3[].isDisabled",
+                              initFunc: ({ $props, $state, $queries }) =>
+                                undefined
+                            },
+                            {
+                              name: "button3[].selected",
+                              initFunc: ({ $props, $state, $queries }) =>
+                                undefined
+                            },
+                            {
+                              name: "button3[].deselected",
+                              initFunc: ({ $props, $state, $queries }) =>
+                                undefined
+                            },
+                            {
+                              name: "button3[].sortDeselected",
+                              initFunc: ({ $props, $state, $queries }) =>
+                                undefined
+                            },
+                            {
+                              name: "button3[].sortSelected",
+                              initFunc: ({ $props, $state, $queries }) =>
+                                undefined
+                            }
+                          ],
+                          [__plasmic_idx_0]
+                        );
+                        return (
+                          <Button
+                            data-plasmic-name={"button3"}
+                            data-plasmic-override={overrides.button3}
+                            {...child$Props}
+                          >
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return currentItem.title;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "Button";
+                                  }
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
+                          </Button>
+                        );
+                      })();
+                    })}
+                  </div>
                   {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                     (() => {
                       try {
@@ -1590,6 +1845,20 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                       )
                                   }
                                 )}
+                                id={(() => {
+                                  try {
+                                    return currentItem.title;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()}
                               >
                                 <React.Fragment>
                                   {(() => {
@@ -1759,47 +2028,35 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                   >
                                     <React.Fragment>
                                       {(() => {
-                                        try {
-                                          return (() => {
-                                            const gregorianDate = new Date(
-                                              currentItem.issued_datetime
-                                            );
-                                            const shamsiDate =
-                                              new Intl.DateTimeFormat(
-                                                "fa-IR"
-                                              ).format(gregorianDate);
-                                            const shamsiTime =
-                                              gregorianDate.toLocaleTimeString(
-                                                "fa-IR",
-                                                { hour12: false }
-                                              );
-                                            const englishDate =
-                                              shamsiDate.replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
-                                            const englishTime = shamsiTime
-                                              .replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              )
-                                              .split(":")
-                                              .slice(0, 2)
-                                              .join(":");
-                                            return `${englishDate}  ${englishTime}`;
-                                          })();
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return "";
-                                          }
-                                          throw e;
-                                        }
+                                        const gregorianDate = new Date(
+                                          currentItem.issued_datetime
+                                        );
+                                        const shamsiDate =
+                                          new Intl.DateTimeFormat(
+                                            "fa-IR"
+                                          ).format(gregorianDate);
+                                        const shamsiTime =
+                                          gregorianDate.toLocaleTimeString(
+                                            "fa-IR",
+                                            { hour12: false }
+                                          );
+                                        const englishDate = shamsiDate.replace(
+                                          /[۰-۹]/g,
+                                          d =>
+                                            String.fromCharCode(
+                                              d.charCodeAt(0) - 1728
+                                            )
+                                        );
+                                        const englishTime = shamsiTime
+                                          .replace(/[۰-۹]/g, d =>
+                                            String.fromCharCode(
+                                              d.charCodeAt(0) - 1728
+                                            )
+                                          )
+                                          .split(":")
+                                          .slice(0, 2)
+                                          .join(":");
+                                        return `${englishDate}  ${englishTime}`;
                                       })()}
                                     </React.Fragment>
                                   </div>
@@ -1867,6 +2124,122 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                                 )
                                             }
                                           )}
+                                          onClick={async event => {
+                                            const $steps = {};
+
+                                            $steps["updateLabResultObject"] =
+                                              currentItem.normal_range != ""
+                                                ? (() => {
+                                                    const actionArgs = {
+                                                      variable: {
+                                                        objRoot: $state,
+                                                        variablePath: [
+                                                          "labResultObject"
+                                                        ]
+                                                      },
+                                                      operation: 0,
+                                                      value: currentItem
+                                                    };
+                                                    return (({
+                                                      variable,
+                                                      value,
+                                                      startIndex,
+                                                      deleteCount
+                                                    }) => {
+                                                      if (!variable) {
+                                                        return;
+                                                      }
+                                                      const {
+                                                        objRoot,
+                                                        variablePath
+                                                      } = variable;
+
+                                                      $stateSet(
+                                                        objRoot,
+                                                        variablePath,
+                                                        value
+                                                      );
+                                                      return value;
+                                                    })?.apply(null, [
+                                                      actionArgs
+                                                    ]);
+                                                  })()
+                                                : undefined;
+                                            if (
+                                              $steps["updateLabResultObject"] !=
+                                                null &&
+                                              typeof $steps[
+                                                "updateLabResultObject"
+                                              ] === "object" &&
+                                              typeof $steps[
+                                                "updateLabResultObject"
+                                              ].then === "function"
+                                            ) {
+                                              $steps["updateLabResultObject"] =
+                                                await $steps[
+                                                  "updateLabResultObject"
+                                                ];
+                                            }
+
+                                            $steps[
+                                              "updateLaboratoryResultNormalRangeOpen"
+                                            ] = true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "laboratoryResultNormalRange",
+                                                        "open"
+                                                      ]
+                                                    },
+                                                    operation: 4
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    const oldValue = $stateGet(
+                                                      objRoot,
+                                                      variablePath
+                                                    );
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      !oldValue
+                                                    );
+                                                    return !oldValue;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                            if (
+                                              $steps[
+                                                "updateLaboratoryResultNormalRangeOpen"
+                                              ] != null &&
+                                              typeof $steps[
+                                                "updateLaboratoryResultNormalRangeOpen"
+                                              ] === "object" &&
+                                              typeof $steps[
+                                                "updateLaboratoryResultNormalRangeOpen"
+                                              ].then === "function"
+                                            ) {
+                                              $steps[
+                                                "updateLaboratoryResultNormalRangeOpen"
+                                              ] = await $steps[
+                                                "updateLaboratoryResultNormalRangeOpen"
+                                              ];
+                                            }
+                                          }}
                                         >
                                           <div
                                             className={classNames(
@@ -2039,124 +2412,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                                 projectcss.all,
                                                 sty.svg
                                               )}
-                                              onClick={async event => {
-                                                const $steps = {};
-
-                                                $steps[
-                                                  "updateLabResultObject"
-                                                ] = true
-                                                  ? (() => {
-                                                      const actionArgs = {
-                                                        variable: {
-                                                          objRoot: $state,
-                                                          variablePath: [
-                                                            "labResultObject"
-                                                          ]
-                                                        },
-                                                        operation: 0,
-                                                        value: currentItem
-                                                      };
-                                                      return (({
-                                                        variable,
-                                                        value,
-                                                        startIndex,
-                                                        deleteCount
-                                                      }) => {
-                                                        if (!variable) {
-                                                          return;
-                                                        }
-                                                        const {
-                                                          objRoot,
-                                                          variablePath
-                                                        } = variable;
-
-                                                        $stateSet(
-                                                          objRoot,
-                                                          variablePath,
-                                                          value
-                                                        );
-                                                        return value;
-                                                      })?.apply(null, [
-                                                        actionArgs
-                                                      ]);
-                                                    })()
-                                                  : undefined;
-                                                if (
-                                                  $steps[
-                                                    "updateLabResultObject"
-                                                  ] != null &&
-                                                  typeof $steps[
-                                                    "updateLabResultObject"
-                                                  ] === "object" &&
-                                                  typeof $steps[
-                                                    "updateLabResultObject"
-                                                  ].then === "function"
-                                                ) {
-                                                  $steps[
-                                                    "updateLabResultObject"
-                                                  ] = await $steps[
-                                                    "updateLabResultObject"
-                                                  ];
-                                                }
-
-                                                $steps["updateModalOpen"] = true
-                                                  ? (() => {
-                                                      const actionArgs = {
-                                                        variable: {
-                                                          objRoot: $state,
-                                                          variablePath: [
-                                                            "laboratoryResultNormalRange",
-                                                            "open"
-                                                          ]
-                                                        },
-                                                        operation: 4
-                                                      };
-                                                      return (({
-                                                        variable,
-                                                        value,
-                                                        startIndex,
-                                                        deleteCount
-                                                      }) => {
-                                                        if (!variable) {
-                                                          return;
-                                                        }
-                                                        const {
-                                                          objRoot,
-                                                          variablePath
-                                                        } = variable;
-
-                                                        const oldValue =
-                                                          $stateGet(
-                                                            objRoot,
-                                                            variablePath
-                                                          );
-                                                        $stateSet(
-                                                          objRoot,
-                                                          variablePath,
-                                                          !oldValue
-                                                        );
-                                                        return !oldValue;
-                                                      })?.apply(null, [
-                                                        actionArgs
-                                                      ]);
-                                                    })()
-                                                  : undefined;
-                                                if (
-                                                  $steps["updateModalOpen"] !=
-                                                    null &&
-                                                  typeof $steps[
-                                                    "updateModalOpen"
-                                                  ] === "object" &&
-                                                  typeof $steps[
-                                                    "updateModalOpen"
-                                                  ].then === "function"
-                                                ) {
-                                                  $steps["updateModalOpen"] =
-                                                    await $steps[
-                                                      "updateModalOpen"
-                                                    ];
-                                                }
-                                              }}
                                               role={"img"}
                                             />
                                           ) : null}
@@ -2578,7 +2833,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 $steps["goToConsultList"] = true
                   ? (() => {
                       const actionArgs = {
-                        destination: `/consult-list/${(() => {
+                        destination: `/consult/list/${(() => {
                           try {
                             return $ctx.params.code;
                           } catch (e) {
@@ -2885,6 +3140,9 @@ const PlasmicDescendants = {
     "allAdmissionsLab",
     "currentAdmissionLab",
     "labData",
+    "labGroupTitles",
+    "labGroupTitle",
+    "button3",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -2939,6 +3197,9 @@ const PlasmicDescendants = {
   currentAdmissionLab: ["currentAdmissionLab"],
   labData: [
     "labData",
+    "labGroupTitles",
+    "labGroupTitle",
+    "button3",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -2955,6 +3216,9 @@ const PlasmicDescendants = {
     "svg",
     "overlayLayer"
   ],
+  labGroupTitles: ["labGroupTitles", "labGroupTitle", "button3"],
+  labGroupTitle: ["labGroupTitle"],
+  button3: ["button3"],
   laboratoryLists: [
     "laboratoryLists",
     "labResults",
@@ -3107,6 +3371,9 @@ type NodeDefaultElementType = {
   allAdmissionsLab: typeof Button;
   currentAdmissionLab: typeof Button;
   labData: typeof ApiFetcherComponent;
+  labGroupTitles: "div";
+  labGroupTitle: "div";
+  button3: typeof Button;
   laboratoryLists: "div";
   labResults: "div";
   checkedFactors: "div";
@@ -3217,6 +3484,9 @@ export const PlasmicLaboratoryData = Object.assign(
     allAdmissionsLab: makeNodeComponent("allAdmissionsLab"),
     currentAdmissionLab: makeNodeComponent("currentAdmissionLab"),
     labData: makeNodeComponent("labData"),
+    labGroupTitles: makeNodeComponent("labGroupTitles"),
+    labGroupTitle: makeNodeComponent("labGroupTitle"),
+    button3: makeNodeComponent("button3"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     labResults: makeNodeComponent("labResults"),
     checkedFactors: makeNodeComponent("checkedFactors"),

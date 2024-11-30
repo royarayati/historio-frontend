@@ -1624,12 +1624,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicConsultList.tsx",
           "importSpec": {
-            "modulePath": "../pages/consult-list/[code]/[adm_id].tsx"
+            "modulePath": "../pages/consult/list/[code]/[adm_id].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicConsultList.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/consult-list/[code]/[adm_id]"
+          "path": "/consult/list/[code]/[adm_id]"
         },
         {
           "id": "9PPRcrm0XFqF",
@@ -1638,12 +1638,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicConsultSend.tsx",
           "importSpec": {
-            "modulePath": "../pages/consult-send/[code]/[adm_id].tsx"
+            "modulePath": "../pages/consult/send/[code]/[adm_id].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicConsultSend.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/consult-send/[code]/[adm_id]"
+          "path": "/consult/send/[code]/[adm_id]"
         },
         {
           "id": "RABqkXkLRlle",

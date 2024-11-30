@@ -1820,7 +1820,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             $steps.postConsultReply?.status === 200
                               ? (() => {
                                   const actionArgs = {
-                                    destination: `/consult-list/${(() => {
+                                    destination: `/consult/list/${(() => {
                                       try {
                                         return $ctx.params.code;
                                       } catch (e) {
@@ -2343,7 +2343,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                   $steps["goToConsultList"] = true
                     ? (() => {
                         const actionArgs = {
-                          destination: `/consult-list/${(() => {
+                          destination: `/consult/list/${(() => {
                             try {
                               return $ctx.params.code;
                             } catch (e) {
@@ -2913,7 +2913,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       $steps.deleteCondult?.status === 200
                         ? (() => {
                             const actionArgs = {
-                              destination: `/consult-list/${(() => {
+                              destination: `/consult/list/${(() => {
                                 try {
                                   return $ctx.params.code;
                                 } catch (e) {

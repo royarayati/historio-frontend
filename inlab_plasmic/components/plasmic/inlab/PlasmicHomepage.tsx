@@ -4135,7 +4135,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       $steps["goToConsultList"] = true
                                         ? (() => {
                                             const actionArgs = {
-                                              destination: `/consult-list/${(() => {
+                                              destination: `/consult/list/${(() => {
                                                 try {
                                                   return currentItem.patient
                                                     .profile_id;
@@ -6414,7 +6414,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     $steps["goToConsultList"] = true
                                       ? (() => {
                                           const actionArgs = {
-                                            destination: `/consult-list/${(() => {
+                                            destination: `/consult/list/${(() => {
                                               try {
                                                 return currentItem.patient_id;
                                               } catch (e) {

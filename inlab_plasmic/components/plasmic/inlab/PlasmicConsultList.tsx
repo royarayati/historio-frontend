@@ -2227,7 +2227,7 @@ function PlasmicConsultList__RenderFunc(props: {
               $steps["goToConsultSend"] = true
                 ? (() => {
                     const actionArgs = {
-                      destination: `/consult-send/${(() => {
+                      destination: `/consult/send/${(() => {
                         try {
                           return $ctx.params.code;
                         } catch (e) {
@@ -2395,7 +2395,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   $steps["goToConsultList"] = true
                     ? (() => {
                         const actionArgs = {
-                          destination: `/consult-list/${(() => {
+                          destination: `/consult/list/${(() => {
                             try {
                               return $ctx.params.code;
                             } catch (e) {
