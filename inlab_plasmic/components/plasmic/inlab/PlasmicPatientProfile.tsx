@@ -423,19 +423,65 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           >
                             <React.Fragment>
                               {(() => {
-                                try {
-                                  return $ctx.fetched_data.data.items[0]
-                                    .admission_datetime;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
+                                function persianToEnglishNumber(persianNumber) {
+                                  const persianNumerals = [
+                                    "۰",
+                                    "۱",
+                                    "۲",
+                                    "۳",
+                                    "۴",
+                                    "۵",
+                                    "۶",
+                                    "۷",
+                                    "۸",
+                                    "۹"
+                                  ];
+
+                                  const englishNumerals = [
+                                    "0",
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "4",
+                                    "5",
+                                    "6",
+                                    "7",
+                                    "8",
+                                    "9"
+                                  ];
+
+                                  return persianNumber.replace(
+                                    /[۰-۹]/g,
+                                    match =>
+                                      englishNumerals[
+                                        persianNumerals.indexOf(match)
+                                      ]
+                                  );
                                 }
+                                return (() => {
+                                  const admissionDatetime =
+                                    $ctx.fetched_data.data.items[0]
+                                      .admission_datetime;
+                                  const [date, time] =
+                                    admissionDatetime.split("T");
+                                  const [year, month, day] = date
+                                    .split("-")
+                                    .map(Number);
+                                  const [hour, minute] = time
+                                    .split(":")
+                                    .map(Number);
+                                  const gregorianDate = new Date(
+                                    year,
+                                    month - 1,
+                                    day
+                                  );
+                                  const jalaliDate = new Date(
+                                    gregorianDate
+                                  ).toLocaleDateString("fa-IR");
+                                  const jalaliDateInEnglish =
+                                    persianToEnglishNumber(jalaliDate);
+                                  return `${jalaliDateInEnglish}, ${hour}:${minute}`;
+                                })();
                               })()}
                             </React.Fragment>
                           </div>
@@ -528,108 +574,57 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               {(() => {
                                 try {
                                   return (() => {
-                                    const jalali_to_gregorian = (
-                                      jy,
-                                      jm,
-                                      jd
-                                    ) => {
-                                      jy += 1595;
-                                      var days =
-                                        -355668 +
-                                        365 * jy +
-                                        Math.floor(jy / 33) * 8 +
-                                        Math.floor((jy % 33) + 3) / 4 +
-                                        jd +
-                                        (jm < 7
-                                          ? (jm - 1) * 31
-                                          : (jm - 7) * 30 + 186);
-                                      var gy = 400 * Math.floor(days / 146097);
-                                      days %= 146097;
-                                      if (days > 36524) {
-                                        gy += 100 * Math.floor(--days / 36524);
-                                        days %= 36524;
-                                        if (days >= 365) days++;
-                                      }
-                                      gy += 4 * Math.floor(days / 1461);
-                                      days %= 1461;
-                                      if (days > 365) {
-                                        gy += Math.floor((days - 1) / 365);
-                                        days = (days - 1) % 365;
-                                      }
-                                      var gd = days + 1;
-                                      var sal_a = [
-                                        0,
-                                        31,
-                                        (gy % 4 === 0 && gy % 100 !== 0) ||
-                                        gy % 400 === 0
-                                          ? 29
-                                          : 28,
-                                        31,
-                                        30,
-                                        31,
-                                        30,
-                                        31,
-                                        31,
-                                        30,
-                                        31,
-                                        30,
-                                        31
-                                      ];
-
-                                      var gm = 0;
-                                      for (gm; gm < 13; gm++) {
-                                        var v = sal_a[gm];
-                                        if (gd <= v) break;
-                                        gd -= v;
-                                      }
-                                      return [gy, gm, gd];
-                                    };
-                                    return (
-                                      $ctx.fetched_data.loading == false &&
-                                      (() => {
-                                        const [jy, jm, jd] =
-                                          $ctx.fetched_data.data.items[0].date_of_birth
-                                            .split(" ")[0]
-                                            .split("/")
-                                            .map(Number);
-                                        const [gy, gm, gd] =
-                                          jalali_to_gregorian(jy, jm, jd);
-                                        const dob = new Date(gy, gm - 1, gd);
-                                        const ageDiffMs =
-                                          Date.now() - dob.getTime();
-                                        const ageDate = new Date(ageDiffMs);
-                                        const ageYears = Math.abs(
-                                          ageDate.getUTCFullYear() - 1970
+                                    if (!$ctx.fetched_data.loading) {
+                                      const item =
+                                        $ctx.fetched_data.data.items[0];
+                                      if (item.date_of_birth) {
+                                        const dob = new Date(
+                                          item.date_of_birth
                                         );
-                                        const fullName = `${$ctx.fetched_data.data.items[0].first_name} ${$ctx.fetched_data.data.items[0].last_name}`;
-                                        const patientService =
-                                          $ctx.fetched_data.data.items[0]
-                                            .service;
-                                        if (ageYears < 1) {
-                                          const ageMonths =
-                                            ageDate.getUTCMonth();
-                                          return `${fullName} ${ageMonths} months ${
-                                            $ctx.fetched_data.data.items[0]
-                                              .gender === "F"
-                                              ? " \u2640️"
-                                              : $ctx.fetched_data.data.items[0]
-                                                  .gender === "M"
-                                              ? " \u2642️"
-                                              : ""
-                                          }`;
-                                        } else {
-                                          return `${fullName} ${ageYears}${
-                                            $ctx.fetched_data.data.items[0]
-                                              .gender === "F"
-                                              ? " \u2640️"
-                                              : $ctx.fetched_data.data.items[0]
-                                                  .gender === "M"
-                                              ? " \u2642️"
-                                              : ""
-                                          }`;
+                                        const now = new Date();
+                                        let ageYears =
+                                          now.getFullYear() - dob.getFullYear();
+                                        const monthDifference =
+                                          now.getMonth() - dob.getMonth();
+                                        const dayDifference =
+                                          now.getDate() - dob.getDate();
+                                        if (
+                                          monthDifference < 0 ||
+                                          (monthDifference === 0 &&
+                                            now.getDate() < dob.getDate())
+                                        ) {
+                                          ageYears--;
                                         }
-                                      })()
-                                    );
+                                        const fullName = `${item.first_name} ${item.last_name}`;
+                                        const genderSymbol =
+                                          item.gender === "F"
+                                            ? " \u2640️"
+                                            : item.gender === "M"
+                                            ? " \u2642️"
+                                            : "";
+                                        if (ageYears < 1) {
+                                          if (
+                                            ageYears === 0 &&
+                                            monthDifference === 0
+                                          ) {
+                                            return `${fullName} ${dayDifference}D${genderSymbol}`;
+                                          } else {
+                                            const ageMonths =
+                                              Math.abs(monthDifference) +
+                                              (now.getDate() < dob.getDate()
+                                                ? -1
+                                                : 0);
+                                            return `${fullName} ${ageMonths}M${
+                                              ageMonths !== 1 ? "s" : ""
+                                            }${genderSymbol}`;
+                                          }
+                                        } else {
+                                          return `${fullName} ${ageYears}Y${genderSymbol}`;
+                                        }
+                                      } else {
+                                        return "Date of birth not available.";
+                                      }
+                                    }
                                   })();
                                 } catch (e) {
                                   if (
