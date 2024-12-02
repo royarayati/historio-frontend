@@ -4411,56 +4411,32 @@ function PlasmicHomepage__RenderFunc(props: {
               data-plasmic-override={overrides.patients}
               className={classNames("__wab_instance", sty.patients)}
               delay={350}
-              headers={(() => {
-                try {
-                  return {
-                    "X-Namespace": localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )
-                  };
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
-                }
-              })()}
               method={"GET"}
-              path={`/api/v3/remote_his/admissions?first_name=${
-                $state.searchbarFname.value !== ""
-                  ? $state.searchbarFname.value
-                  : ""
-              }&ward_id=${
+              path={`/n8n/webhook/patient?first_name=${
+                $state.searchbarFname.value
+              }&namespace_id=${localStorage.getItem(
+                "inlab_user_namespace_id"
+              )}&ward_id=${
                 $state.filterWard &
                 ($state.searchbarFname.value == "") &
                 ($state.searchbarLnameNcode.value == "")
                   ? localStorage.getItem("filter_ward_id")
-                  : 0
+                  : ""
               }&physician_id=${
                 $state.filterPhysician &
                 ($state.searchbarFname.value == "") &
                 ($state.searchbarLnameNcode.value == "")
                   ? localStorage.getItem("filter_physician_id")
-                  : 0
+                  : ""
               }&national_code=${
                 parseInt($state.searchbarLnameNcode.value)
                   ? $state.searchbarLnameNcode.value
                   : ""
               }&last_name=${
-                parseInt($state.searchbarLnameNcode.value) ||
-                $state.searchbarLnameNcode.value == ""
+                parseInt($state.searchbarLnameNcode.value)
                   ? ""
                   : $state.searchbarLnameNcode.value
-              }&dismissed=${$state.searchDismissed}&limit=${
-                ($state.searchbarFname.value ||
-                  $state.searchbarLnameNcode.value) !== "" &&
-                $state.searchDismissed
-                  ? 8
-                  : 100
-              }&offset=0`}
+              }&dismissed=${$state.searchDismissed}`}
               ref={ref => {
                 $refs["patients"] = ref;
               }}
@@ -4500,14 +4476,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                   customFunction: async () => {
                                     return (() => {
                                       localStorage.setItem(
-                                        "bookmarked_list2",
+                                        "bookmarked_list",
                                         JSON.stringify(
                                           $ctx.fetched_data.data.items
                                         )
                                       );
                                       return console.log(
                                         `bookmarked_list: ${localStorage.getItem(
-                                          "bookmarked_list2"
+                                          "bookmarked_list"
                                         )}`
                                       );
                                     })();
@@ -5900,62 +5876,89 @@ function PlasmicHomepage__RenderFunc(props: {
                           sty.bookmarkGuide
                         )}
                       >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__y0Cq
-                          )}
-                        >
-                          <BookmarkPlusSvgrepoComSvgIcon
-                            data-plasmic-name={"bookmarkImage"}
-                            data-plasmic-override={overrides.bookmarkImage}
+                        {$ctx.fetched_data.loading == false &&
+                        $ctx.fetched_data.data == "" ? (
+                          <div
                             className={classNames(
                               projectcss.all,
-                              sty.bookmarkImage
+                              sty.freeBox__y0Cq
                             )}
-                            role={"img"}
-                          />
-
-                          <BookmarkDashFillSvgrepoComSvgIcon
-                            data-plasmic-name={"bookmarkedImage"}
-                            data-plasmic-override={overrides.bookmarkedImage}
+                          >
+                            {$ctx.fetched_data.loading == false &&
+                            $ctx.fetched_data.data == "" ? (
+                              <BookmarkPlusSvgrepoComSvgIcon
+                                data-plasmic-name={"bookmarkImage"}
+                                data-plasmic-override={overrides.bookmarkImage}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.bookmarkImage
+                                )}
+                                role={"img"}
+                              />
+                            ) : null}
+                            {$ctx.fetched_data.loading == false &&
+                            $ctx.fetched_data.data == "" ? (
+                              <BookmarkDashFillSvgrepoComSvgIcon
+                                data-plasmic-name={"bookmarkedImage"}
+                                data-plasmic-override={
+                                  overrides.bookmarkedImage
+                                }
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.bookmarkedImage
+                                )}
+                                role={"img"}
+                              />
+                            ) : null}
+                          </div>
+                        ) : null}
+                        {(() => {
+                          try {
+                            return (
+                              $ctx.fetched_data.loading == false &&
+                              $ctx.fetched_data.data == ""
+                            );
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return false;
+                            }
+                            throw e;
+                          }
+                        })() ? (
+                          <div
                             className={classNames(
                               projectcss.all,
-                              sty.bookmarkedImage
+                              projectcss.__wab_text,
+                              sty.text__jzEz
                             )}
-                            role={"img"}
-                          />
-                        </div>
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__jzEz
-                          )}
-                        >
-                          <React.Fragment>
+                          >
                             <React.Fragment>
-                              {
-                                '\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 "\u0622\u06cc\u06a9\u0648\u0646 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9" \u0628\u06cc\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \n\u0644\u06cc\u0633\u062a '
-                              }
+                              <React.Fragment>
+                                {
+                                  '\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 "\u0622\u06cc\u06a9\u0648\u0646 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9" \u0628\u06cc\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \n\u0644\u06cc\u0633\u062a '
+                                }
+                              </React.Fragment>
+                              <span
+                                className={
+                                  "plasmic_default__all plasmic_default__span"
+                                }
+                                style={{ fontWeight: 700 }}
+                              >
+                                {
+                                  '"\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"'
+                                }
+                              </span>
+                              <React.Fragment>
+                                {
+                                  " \u0627\u0636\u0627\u0641\u0647 \u06cc\u0627 \u062d\u0630\u0641 \u06a9\u0646\u06cc\u062f"
+                                }
+                              </React.Fragment>
                             </React.Fragment>
-                            <span
-                              className={
-                                "plasmic_default__all plasmic_default__span"
-                              }
-                              style={{ fontWeight: 700 }}
-                            >
-                              {
-                                '"\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"'
-                              }
-                            </span>
-                            <React.Fragment>
-                              {
-                                " \u0627\u0636\u0627\u0641\u0647 \u06cc\u0627 \u062d\u0630\u0641 \u06a9\u0646\u06cc\u062f"
-                              }
-                            </React.Fragment>
-                          </React.Fragment>
-                        </div>
+                          </div>
+                        ) : null}
                       </div>
                     ) : null}
                     {(
@@ -6020,17 +6023,16 @@ function PlasmicHomepage__RenderFunc(props: {
                           !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                           (() => {
                             try {
-                              return localStorage.getItem(
-                                "bookmarked_list2"
-                              ) !== (null || undefined || "" || "undefined") &&
+                              return localStorage.getItem("bookmarked_list") !==
+                                (null || undefined || "" || "undefined") &&
                                 $ctx.fetched_data.loading &&
                                 $state.filterBookmarked &&
                                 $state.searchbarLnameNcode.value === "" &&
                                 $state.searchbarFname.value === ""
                                 ? JSON.parse(
-                                    localStorage.getItem("bookmarked_list2")
+                                    localStorage.getItem("bookmarked_list")
                                   )
-                                : $ctx.fetched_data.data.items;
+                                : $ctx.fetched_data.data;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -6133,20 +6135,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                       "__wab_instance",
                                       sty.bookmarkIcon
                                     ),
-                                    item: (() => {
-                                      try {
-                                        return currentItem;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })(),
                                     onSelectedChange: generateStateOnChangeProp(
                                       $state,
                                       [

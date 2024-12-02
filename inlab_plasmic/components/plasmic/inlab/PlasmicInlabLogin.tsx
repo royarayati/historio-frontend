@@ -978,37 +978,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
                   projectcss.__wab_text,
                   sty.text__o1JqL
                 )}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["resetPassword"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          destination:
-                            "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform?usp=sf_link"
-                        };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["resetPassword"] != null &&
-                    typeof $steps["resetPassword"] === "object" &&
-                    typeof $steps["resetPassword"].then === "function"
-                  ) {
-                    $steps["resetPassword"] = await $steps["resetPassword"];
-                  }
-                }}
               >
                 {
                   "\u0628\u0627\u0632\u06cc\u0627\u0628\u06cc \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
@@ -1084,37 +1053,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
                   projectcss.__wab_text,
                   sty.text__j140
                 )}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["createAccount"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          destination:
-                            "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform?usp=sf_link"
-                        };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["createAccount"] != null &&
-                    typeof $steps["createAccount"] === "object" &&
-                    typeof $steps["createAccount"].then === "function"
-                  ) {
-                    $steps["createAccount"] = await $steps["createAccount"];
-                  }
-                }}
               >
                 {
                   "\u0633\u0627\u062e\u062a \u062d\u0633\u0627\u0628 \u06a9\u0627\u0631\u0628\u0631\u06cc"

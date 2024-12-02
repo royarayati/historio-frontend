@@ -93,15 +93,13 @@ export type PlasmicBookmarkIcon__ArgsType = {
   onSelectedChange?: (val: string) => void;
   patientId?: number;
   trigerReload?: () => void;
-  item?: any;
 };
 type ArgPropType = keyof PlasmicBookmarkIcon__ArgsType;
 export const PlasmicBookmarkIcon__ArgProps = new Array<ArgPropType>(
   "selected",
   "onSelectedChange",
   "patientId",
-  "trigerReload",
-  "item"
+  "trigerReload"
 );
 
 export type PlasmicBookmarkIcon__OverridesType = {
@@ -113,7 +111,6 @@ export interface DefaultBookmarkIconProps {
   onSelectedChange?: (val: string) => void;
   patientId?: number;
   trigerReload?: () => void;
-  item?: any;
   bookmarked?: SingleBooleanChoiceArg<"bookmarked">;
   loadingBookmark?: SingleBooleanChoiceArg<"loadingBookmark">;
   className?: string;
@@ -273,38 +270,14 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           ? (() => {
               const actionArgs = {
                 args: [
-                  "POST",
-                  `/api/v3/bookmark?q_bookmark=${!$state.selected}`,
-                  (() => {
-                    try {
-                      return {
-                        "X-Namespace": localStorage.getItem(
-                          "inlab_user_namespace_id"
-                        )
-                      };
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })(),
-                  (() => {
-                    try {
-                      return $props.item;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()
+                  "PATCH",
+                  `/n8n/webhook/bookmark_patientcard?patient_id=${
+                    $props.patientId
+                  }&namespace_id=${localStorage.getItem(
+                    "inlab_user_namespace_id"
+                  )}&bookmark=${!$state.selected}`,
+                  undefined,
+                  undefined
                 ]
               };
               return $globalActions["AuthGlobalContext.apiFetcher"]?.apply(
