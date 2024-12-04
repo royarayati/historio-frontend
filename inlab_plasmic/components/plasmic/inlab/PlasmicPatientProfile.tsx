@@ -422,67 +422,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {(() => {
-                                function persianToEnglishNumber(persianNumber) {
-                                  const persianNumerals = [
-                                    "۰",
-                                    "۱",
-                                    "۲",
-                                    "۳",
-                                    "۴",
-                                    "۵",
-                                    "۶",
-                                    "۷",
-                                    "۸",
-                                    "۹"
-                                  ];
-
-                                  const englishNumerals = [
-                                    "0",
-                                    "1",
-                                    "2",
-                                    "3",
-                                    "4",
-                                    "5",
-                                    "6",
-                                    "7",
-                                    "8",
-                                    "9"
-                                  ];
-
-                                  return persianNumber.replace(
-                                    /[۰-۹]/g,
-                                    match =>
-                                      englishNumerals[
-                                        persianNumerals.indexOf(match)
-                                      ]
-                                  );
-                                }
-                                return (() => {
-                                  const admissionDatetime =
-                                    $ctx.fetched_data.data.items[0]
-                                      .admission_datetime;
-                                  const [date, time] =
-                                    admissionDatetime.split("T");
-                                  const [year, month, day] = date
-                                    .split("-")
-                                    .map(Number);
-                                  const [hour, minute] = time
-                                    .split(":")
-                                    .map(Number);
-                                  const gregorianDate = new Date(
-                                    year,
-                                    month - 1,
-                                    day
-                                  );
-                                  const jalaliDate = new Date(
-                                    gregorianDate
-                                  ).toLocaleDateString("fa-IR");
-                                  const jalaliDateInEnglish =
-                                    persianToEnglishNumber(jalaliDate);
-                                  return `${jalaliDateInEnglish}, ${hour}:${minute}`;
-                                })();
-                              })()}
+                              {
+                                $ctx.fetched_data.data.items[0]
+                                  .admission_datetime
+                              }
                             </React.Fragment>
                           </div>
                           <div
@@ -572,69 +515,53 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           >
                             <React.Fragment>
                               {(() => {
-                                try {
-                                  return (() => {
-                                    if (!$ctx.fetched_data.loading) {
-                                      const item =
-                                        $ctx.fetched_data.data.items[0];
-                                      if (item.date_of_birth) {
-                                        const dob = new Date(
-                                          item.date_of_birth
-                                        );
-                                        const now = new Date();
-                                        let ageYears =
-                                          now.getFullYear() - dob.getFullYear();
-                                        const monthDifference =
-                                          now.getMonth() - dob.getMonth();
-                                        const dayDifference =
-                                          now.getDate() - dob.getDate();
-                                        if (
-                                          monthDifference < 0 ||
-                                          (monthDifference === 0 &&
-                                            now.getDate() < dob.getDate())
-                                        ) {
-                                          ageYears--;
-                                        }
-                                        const fullName = `${item.first_name} ${item.last_name}`;
-                                        const genderSymbol =
-                                          item.gender === "F"
-                                            ? " \u2640️"
-                                            : item.gender === "M"
-                                            ? " \u2642️"
-                                            : "";
-                                        if (ageYears < 1) {
-                                          if (
-                                            ageYears === 0 &&
-                                            monthDifference === 0
-                                          ) {
-                                            return `${fullName} ${dayDifference}D${genderSymbol}`;
-                                          } else {
-                                            const ageMonths =
-                                              Math.abs(monthDifference) +
-                                              (now.getDate() < dob.getDate()
-                                                ? -1
-                                                : 0);
-                                            return `${fullName} ${ageMonths}M${
-                                              ageMonths !== 1 ? "s" : ""
-                                            }${genderSymbol}`;
-                                          }
-                                        } else {
-                                          return `${fullName} ${ageYears}Y${genderSymbol}`;
-                                        }
-                                      } else {
-                                        return "Date of birth not available.";
-                                      }
+                                if (!$ctx.fetched_data.loading) {
+                                  const item = $ctx.fetched_data.data.items[0];
+                                  if (item.date_of_birth) {
+                                    const dob = new Date(item.date_of_birth);
+                                    const now = new Date();
+                                    let ageYears =
+                                      now.getFullYear() - dob.getFullYear();
+                                    const monthDifference =
+                                      now.getMonth() - dob.getMonth();
+                                    const dayDifference =
+                                      now.getDate() - dob.getDate();
+                                    if (
+                                      monthDifference < 0 ||
+                                      (monthDifference === 0 &&
+                                        now.getDate() < dob.getDate())
+                                    ) {
+                                      ageYears--;
                                     }
-                                  })();
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
+                                    const fullName = `${item.first_name} ${item.last_name}`;
+                                    const genderSymbol =
+                                      item.gender === "F"
+                                        ? " \u2640️"
+                                        : item.gender === "M"
+                                        ? " \u2642️"
+                                        : "";
+                                    if (ageYears < 1) {
+                                      if (
+                                        ageYears === 0 &&
+                                        monthDifference === 0
+                                      ) {
+                                        return `${fullName} ${dayDifference}D${genderSymbol}`;
+                                      } else {
+                                        const ageMonths =
+                                          Math.abs(monthDifference) +
+                                          (now.getDate() < dob.getDate()
+                                            ? -1
+                                            : 0);
+                                        return `${fullName} ${ageMonths}M${
+                                          ageMonths !== 1 ? "s" : ""
+                                        }${genderSymbol}`;
+                                      }
+                                    } else {
+                                      return `${fullName} ${ageYears}Y${genderSymbol}`;
+                                    }
+                                  } else {
+                                    return "Date of birth not available.";
                                   }
-                                  throw e;
                                 }
                               })()}
                             </React.Fragment>
