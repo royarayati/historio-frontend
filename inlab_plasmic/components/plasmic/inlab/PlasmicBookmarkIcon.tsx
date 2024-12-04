@@ -93,15 +93,13 @@ export type PlasmicBookmarkIcon__ArgsType = {
   onSelectedChange?: (val: string) => void;
   patientId?: number;
   trigerReload?: () => void;
-  item?: any;
 };
 type ArgPropType = keyof PlasmicBookmarkIcon__ArgsType;
 export const PlasmicBookmarkIcon__ArgProps = new Array<ArgPropType>(
   "selected",
   "onSelectedChange",
   "patientId",
-  "trigerReload",
-  "item"
+  "trigerReload"
 );
 
 export type PlasmicBookmarkIcon__OverridesType = {
@@ -113,7 +111,6 @@ export interface DefaultBookmarkIconProps {
   onSelectedChange?: (val: string) => void;
   patientId?: number;
   trigerReload?: () => void;
-  item?: any;
   bookmarked?: SingleBooleanChoiceArg<"bookmarked">;
   loadingBookmark?: SingleBooleanChoiceArg<"loadingBookmark">;
   className?: string;
@@ -273,38 +270,14 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           ? (() => {
               const actionArgs = {
                 args: [
-                  "POST",
-                  `/api/v3/bookmark?q_bookmark=${!$state.selected}`,
-                  (() => {
-                    try {
-                      return {
-                        "X-Namespace": localStorage.getItem(
-                          "inlab_user_namespace_id"
-                        )
-                      };
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })(),
-                  (() => {
-                    try {
-                      return $props.item;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()
+                  "PATCH",
+                  `/n8n/webhook/bookmark_patientcard?patient_id=${
+                    $props.patientId
+                  }&namespace_id=${localStorage.getItem(
+                    "inlab_user_namespace_id"
+                  )}&bookmark=${!$state.selected}`,
+                  undefined,
+                  undefined
                 ]
               };
               return $globalActions["AuthGlobalContext.apiFetcher"]?.apply(
@@ -321,21 +294,21 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           $steps["toggleBookmark"] = await $steps["toggleBookmark"];
         }
 
-        $steps["runInteractionProp"] =
+        $steps["runTrigerReload"] =
           $steps.toggleBookmark.status === 200
             ? (() => {
-                const actionArgs = {};
+                const actionArgs = { eventRef: $props["trigerReload"] };
                 return (({ eventRef, args }) => {
                   return eventRef?.(...(args ?? []));
                 })?.apply(null, [actionArgs]);
               })()
             : undefined;
         if (
-          $steps["runInteractionProp"] != null &&
-          typeof $steps["runInteractionProp"] === "object" &&
-          typeof $steps["runInteractionProp"].then === "function"
+          $steps["runTrigerReload"] != null &&
+          typeof $steps["runTrigerReload"] === "object" &&
+          typeof $steps["runTrigerReload"].then === "function"
         ) {
-          $steps["runInteractionProp"] = await $steps["runInteractionProp"];
+          $steps["runTrigerReload"] = await $steps["runTrigerReload"];
         }
 
         $steps["deactivateLoadingBookmarkVariant"] =
