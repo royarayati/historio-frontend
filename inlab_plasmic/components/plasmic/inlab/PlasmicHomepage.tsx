@@ -4451,19 +4451,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         "__wab_instance",
                         sty.conditionGuard__lytQs
                       )}
-                      condition={(() => {
-                        try {
-                          return $ctx.fetched_data.loading;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return false;
-                          }
-                          throw e;
-                        }
-                      })()}
+                      condition={$ctx.fetched_data.loading}
                       onNotSatisfied={async () => {
                         const $steps = {};
 
@@ -4937,28 +4925,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           throw e;
                                         }
                                       })()
-                                    : (() => {
-                                        try {
-                                          return (
-                                            $state.mainSelectedTab ===
-                                              "patients" &&
-                                            $state.patientsSelectedTab ===
-                                              "ward" &&
-                                            $state.patientNumber !=
-                                              ("" | "0") &&
-                                            !$ctx.fetched_data.loading
-                                          );
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return true;
-                                          }
-                                          throw e;
-                                        }
-                                      })()
+                                    : $state.mainSelectedTab === "patients" &&
+                                      $state.patientsSelectedTab === "ward" &&
+                                      $state.patientNumber != ("" | "0") &&
+                                      !$ctx.fetched_data.loading
                                 ) ? (
                                   <div
                                     data-plasmic-name={"wardPatientNumber"}
@@ -4972,20 +4942,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     )}
                                   >
                                     <React.Fragment>
-                                      {(() => {
-                                        try {
-                                          return $state.patientNumber;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return "";
-                                          }
-                                          throw e;
-                                        }
-                                      })()}
+                                      {$state.patientNumber}
                                     </React.Fragment>
                                   </div>
                                 ) : null}
@@ -5668,24 +5625,10 @@ function PlasmicHomepage__RenderFunc(props: {
                             sty.freeBox__dgyAh
                           )}
                         >
-                          {(() => {
-                            try {
-                              return (
-                                $state.mainSelectedTab === "patients" &&
-                                $state.filterBookmarked &&
-                                $state.searchbarLnameNcode.value == "" &&
-                                $state.patientNumber !== ""
-                              );
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return true;
-                              }
-                              throw e;
-                            }
-                          })() ? (
+                          {$state.mainSelectedTab === "patients" &&
+                          $state.filterBookmarked &&
+                          $state.searchbarLnameNcode.value == "" &&
+                          $state.patientNumber !== "" ? (
                             <Button
                               data-plasmic-name={
                                 "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
@@ -5814,25 +5757,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         </div>
                       </div>
                     ) : null}
-                    {(() => {
-                      try {
-                        return (
-                          ($state.searchbarLnameNcode.value !== "" ||
-                            $state.searchbarFname.value !== "") &&
-                          $ctx.fetched_data.response.status == 200 &&
-                          $ctx.fetched_data.data.items == "" &&
-                          !$ctx.fetched_data.loading
-                        );
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })() ? (
+                    {$ctx.fetched_data.loading == false &&
+                    $ctx.fetched_data.data == "" ? (
                       <div
                         data-plasmic-name={
                           "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
@@ -5849,25 +5775,10 @@ function PlasmicHomepage__RenderFunc(props: {
                         }
                       </div>
                     ) : null}
-                    {(() => {
-                      try {
-                        return (
-                          $state.mainSelectedTab == "patients" &&
-                          $ctx.fetched_data.data.items == "" &&
-                          $state.searchbarLnameNcode.value == "" &&
-                          $state.searchbarFname.value == "" &&
-                          !$ctx.fetched_data.loading
-                        );
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })() ? (
+                    {$state.mainSelectedTab == "patients" &&
+                    $state.patientsSelectedTab == "bookmark" &&
+                    $ctx.fetched_data.loading == false &&
+                    $ctx.fetched_data.data == "" ? (
                       <div
                         data-plasmic-name={"bookmarkGuide"}
                         data-plasmic-override={overrides.bookmarkGuide}
@@ -5876,89 +5787,67 @@ function PlasmicHomepage__RenderFunc(props: {
                           sty.bookmarkGuide
                         )}
                       >
-                        {$ctx.fetched_data.loading == false &&
-                        $ctx.fetched_data.data == "" ? (
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              sty.freeBox__y0Cq
-                            )}
-                          >
-                            {$ctx.fetched_data.loading == false &&
-                            $ctx.fetched_data.data == "" ? (
-                              <BookmarkPlusSvgrepoComSvgIcon
-                                data-plasmic-name={"bookmarkImage"}
-                                data-plasmic-override={overrides.bookmarkImage}
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.bookmarkImage
-                                )}
-                                role={"img"}
-                              />
-                            ) : null}
-                            {$ctx.fetched_data.loading == false &&
-                            $ctx.fetched_data.data == "" ? (
-                              <BookmarkDashFillSvgrepoComSvgIcon
-                                data-plasmic-name={"bookmarkedImage"}
-                                data-plasmic-override={
-                                  overrides.bookmarkedImage
-                                }
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.bookmarkedImage
-                                )}
-                                role={"img"}
-                              />
-                            ) : null}
-                          </div>
-                        ) : null}
-                        {(() => {
-                          try {
-                            return (
-                              $ctx.fetched_data.loading == false &&
-                              $ctx.fetched_data.data == ""
-                            );
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return false;
-                            }
-                            throw e;
-                          }
-                        })() ? (
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__jzEz
-                            )}
-                          >
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            sty.freeBox__y0Cq
+                          )}
+                        >
+                          {$ctx.fetched_data.loading == false &&
+                          $ctx.fetched_data.data == "" ? (
+                            <BookmarkPlusSvgrepoComSvgIcon
+                              data-plasmic-name={"bookmarkImage"}
+                              data-plasmic-override={overrides.bookmarkImage}
+                              className={classNames(
+                                projectcss.all,
+                                sty.bookmarkImage
+                              )}
+                              role={"img"}
+                            />
+                          ) : null}
+                          {$ctx.fetched_data.loading == false &&
+                          $ctx.fetched_data.data == "" ? (
+                            <BookmarkDashFillSvgrepoComSvgIcon
+                              data-plasmic-name={"bookmarkedImage"}
+                              data-plasmic-override={overrides.bookmarkedImage}
+                              className={classNames(
+                                projectcss.all,
+                                sty.bookmarkedImage
+                              )}
+                              role={"img"}
+                            />
+                          ) : null}
+                        </div>
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__jzEz
+                          )}
+                        >
+                          <React.Fragment>
                             <React.Fragment>
-                              <React.Fragment>
-                                {
-                                  '\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 "\u0622\u06cc\u06a9\u0648\u0646 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9" \u0628\u06cc\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \n\u0644\u06cc\u0633\u062a '
-                                }
-                              </React.Fragment>
-                              <span
-                                className={
-                                  "plasmic_default__all plasmic_default__span"
-                                }
-                                style={{ fontWeight: 700 }}
-                              >
-                                {
-                                  '"\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"'
-                                }
-                              </span>
-                              <React.Fragment>
-                                {
-                                  " \u0627\u0636\u0627\u0641\u0647 \u06cc\u0627 \u062d\u0630\u0641 \u06a9\u0646\u06cc\u062f"
-                                }
-                              </React.Fragment>
+                              {
+                                '\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 "\u0622\u06cc\u06a9\u0648\u0646 \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9" \u0628\u06cc\u0645\u0627\u0631 \u062e\u0648\u062f \u0631\u0627 \u0628\u0647 \n\u0644\u06cc\u0633\u062a '
+                              }
                             </React.Fragment>
-                          </div>
-                        ) : null}
+                            <span
+                              className={
+                                "plasmic_default__all plasmic_default__span"
+                              }
+                              style={{ fontWeight: 700 }}
+                            >
+                              {
+                                '"\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"'
+                              }
+                            </span>
+                            <React.Fragment>
+                              {
+                                " \u0627\u0636\u0627\u0641\u0647 \u06cc\u0627 \u062d\u0630\u0641 \u06a9\u0646\u06cc\u062f"
+                              }
+                            </React.Fragment>
+                          </React.Fragment>
+                        </div>
                       </div>
                     ) : null}
                     {(
@@ -5976,19 +5865,7 @@ function PlasmicHomepage__RenderFunc(props: {
                               throw e;
                             }
                           })()
-                        : (() => {
-                            try {
-                              return $ctx.fetched_data.loading;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return true;
-                              }
-                              throw e;
-                            }
-                          })()
+                        : true
                     ) ? (
                       <div
                         data-plasmic-name={
