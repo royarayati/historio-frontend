@@ -493,7 +493,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                           try {
                             return (() => {
                               if (!$ctx.fetched_data.loading) {
-                                const item = $ctx.fetched_data.data.items[0];
+                                const item = $ctx.fetched_data.data[0];
                                 if (item.date_of_birth) {
                                   const dob = new Date(item.date_of_birth);
                                   const now = new Date();
@@ -554,11 +554,10 @@ function PlasmicConsultSend__RenderFunc(props: {
                       <React.Fragment>
                         {(() => {
                           try {
-                            return $ctx.fetched_data.data.items[0].service ==
-                              "null"
+                            return $ctx.fetched_data.data[0].service == "null"
                               ? "سرویس" +
                                   " " +
-                                  $ctx.fetched_data.data.items[0].service
+                                  $ctx.fetched_data.data[0].service
                               : "سرویس نامشخص";
                           } catch (e) {
                             if (

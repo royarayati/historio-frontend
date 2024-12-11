@@ -678,106 +678,109 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           )}
         />
 
-        <div
-          data-plasmic-name={"header"}
-          data-plasmic-override={overrides.header}
-          className={classNames(projectcss.all, sty.header)}
-        >
-          <ApiFetcherComponent
-            data-plasmic-name={"patientDataApiFetcher"}
-            data-plasmic-override={overrides.patientDataApiFetcher}
-            className={classNames("__wab_instance", sty.patientDataApiFetcher)}
-            delay={50}
-            headers={(() => {
-              try {
-                return {
-                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
-                };
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
-              }
-            })()}
-            method={"GET"}
-            path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
-            ref={ref => {
-              $refs["patientDataApiFetcher"] = ref;
-            }}
+        {false ? (
+          <div
+            data-plasmic-name={"header"}
+            data-plasmic-override={overrides.header}
+            className={classNames(projectcss.all, sty.header)}
           >
-            <DataCtxReader__>
-              {$ctx => (
-                <div
-                  data-plasmic-name={"patientNameAgeGender"}
-                  data-plasmic-override={overrides.patientNameAgeGender}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.patientNameAgeGender,
-                    {
-                      [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
-                        $state,
-                        "viewNormalRange",
-                        "viewNormalRange"
-                      )
-                    }
-                  )}
-                  dir={"rtl"}
-                >
-                  <React.Fragment>
-                    {(() => {
-                      if (!$ctx.fetched_data.loading) {
-                        const item = $ctx.fetched_data.data.items[0];
-                        if (item.date_of_birth) {
-                          const dob = new Date(item.date_of_birth);
-                          const now = new Date();
-                          let ageYears = now.getFullYear() - dob.getFullYear();
-                          const monthDifference =
-                            now.getMonth() - dob.getMonth();
-                          const dayDifference = now.getDate() - dob.getDate();
-                          if (
-                            monthDifference < 0 ||
-                            (monthDifference === 0 &&
-                              now.getDate() < dob.getDate())
-                          ) {
-                            ageYears--;
-                          }
-                          const fullName = `${item.first_name} ${item.last_name}`;
-                          const genderSymbol =
-                            item.gender === "F"
-                              ? " \u2640️"
-                              : item.gender === "M"
-                              ? " \u2642️"
-                              : "";
-                          if (ageYears < 1) {
-                            if (ageYears === 0 && monthDifference === 0) {
-                              return `${fullName} ${dayDifference}D${genderSymbol}`;
-                            } else {
+            <ApiFetcherComponent
+              data-plasmic-name={"patientDataApiFetcher"}
+              data-plasmic-override={overrides.patientDataApiFetcher}
+              className={classNames(
+                "__wab_instance",
+                sty.patientDataApiFetcher
+              )}
+              delay={50}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+              ref={ref => {
+                $refs["patientDataApiFetcher"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <div
+                    data-plasmic-name={"patientNameAgeGender"}
+                    data-plasmic-override={overrides.patientNameAgeGender}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.patientNameAgeGender,
+                      {
+                        [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
+                          $state,
+                          "viewNormalRange",
+                          "viewNormalRange"
+                        )
+                      }
+                    )}
+                    dir={"rtl"}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        if (!$ctx.fetched_data.loading) {
+                          const item = $ctx.fetched_data.data[0];
+                          if (item.date_of_birth) {
+                            const dob = new Date(item.date_of_birth);
+                            const now = new Date();
+                            let ageYears =
+                              now.getFullYear() - dob.getFullYear();
+                            const monthDifference =
+                              now.getMonth() - dob.getMonth();
+                            if (
+                              monthDifference < 0 ||
+                              (monthDifference === 0 &&
+                                now.getDate() < dob.getDate())
+                            ) {
+                              ageYears--;
+                            }
+                            const fullName = `${item.first_name} ${item.last_name}`;
+                            const genderSymbol =
+                              item.gender === "F"
+                                ? " \u2640️"
+                                : item.gender === "M"
+                                ? " \u2642️"
+                                : "";
+                            if (ageYears < 1) {
                               const ageMonths =
                                 Math.abs(monthDifference) +
                                 (now.getDate() < dob.getDate() ? -1 : 0);
-                              return `${fullName} ${ageMonths}M${
+                              return `${fullName} ${ageMonths} month ${
                                 ageMonths !== 1 ? "s" : ""
                               }${genderSymbol}`;
+                            } else {
+                              return `${fullName} ${ageYears} ${genderSymbol}`;
                             }
                           } else {
-                            return `${fullName} ${ageYears}Y${genderSymbol}`;
+                            return "Date of birth not available.";
                           }
-                        } else {
-                          return "Date of birth not available.";
                         }
-                      }
-                    })()}
-                  </React.Fragment>
-                </div>
-              )}
-            </DataCtxReader__>
-          </ApiFetcherComponent>
-        </div>
+                      })()}
+                    </React.Fragment>
+                  </div>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponent>
+          </div>
+        ) : null}
         <Stack__
           as={"div"}
           data-plasmic-name={"tabButtons"}
