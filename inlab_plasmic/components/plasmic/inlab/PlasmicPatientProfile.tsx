@@ -422,36 +422,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data[0].admission_datetime
-                                ? (() => {
-                                    const gregorianDate = new Date(
-                                      $ctx.fetched_data.data[0].admission_datetime
-                                    );
-                                    const shamsiDate = new Intl.DateTimeFormat(
-                                      "fa-IR"
-                                    ).format(gregorianDate);
-                                    const shamsiTime =
-                                      gregorianDate.toLocaleTimeString(
-                                        "fa-IR",
-                                        { hour12: false }
-                                      );
-                                    const englishDate = shamsiDate.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
-                                        )
-                                    );
-                                    const englishTime = shamsiTime.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
-                                        )
-                                    );
-                                    return `${englishDate} - ${englishTime}`;
-                                  })()
-                                : ""}
+                              {$ctx.fetched_data.data[0].admission_datetime}
                             </React.Fragment>
                           </div>
                           <div

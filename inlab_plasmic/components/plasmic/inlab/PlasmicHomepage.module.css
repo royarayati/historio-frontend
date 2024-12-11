@@ -1982,6 +1982,7 @@
     left: 20%;
     position: fixed;
     right: 0;
+    display: block;
     padding: 2px;
     margin: 0px;
     border-style: none;
