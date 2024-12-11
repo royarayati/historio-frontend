@@ -548,7 +548,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     <React.Fragment>
                       {(() => {
                         if (!$ctx.fetched_data.loading) {
-                          const item = $ctx.fetched_data.data.items[0];
+                          const item = $ctx.fetched_data.data[0];
                           if (item.date_of_birth) {
                             const dob = new Date(item.date_of_birth);
                             const now = new Date();
@@ -556,7 +556,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                               now.getFullYear() - dob.getFullYear();
                             const monthDifference =
                               now.getMonth() - dob.getMonth();
-                            const dayDifference = now.getDate() - dob.getDate();
                             if (
                               monthDifference < 0 ||
                               (monthDifference === 0 &&
@@ -572,18 +571,14 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                 ? " \u2642️"
                                 : "";
                             if (ageYears < 1) {
-                              if (ageYears === 0 && monthDifference === 0) {
-                                return `${fullName} ${dayDifference}D${genderSymbol}`;
-                              } else {
-                                const ageMonths =
-                                  Math.abs(monthDifference) +
-                                  (now.getDate() < dob.getDate() ? -1 : 0);
-                                return `${fullName} ${ageMonths}M${
-                                  ageMonths !== 1 ? "s" : ""
-                                }${genderSymbol}`;
-                              }
+                              const ageMonths =
+                                Math.abs(monthDifference) +
+                                (now.getDate() < dob.getDate() ? -1 : 0);
+                              return `${fullName} ${ageMonths} month ${
+                                ageMonths !== 1 ? "s" : ""
+                              }${genderSymbol}`;
                             } else {
-                              return `${fullName} ${ageYears}Y${genderSymbol}`;
+                              return `${fullName} ${ageYears} ${genderSymbol}`;
                             }
                           } else {
                             return "Date of birth not available.";
@@ -611,7 +606,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   return (() => {
                                     return localStorage.setItem(
                                       "admission_datetime",
-                                      $ctx.fetched_data.data.items[0]
+                                      $ctx.fetched_data.data[0]
                                         .admission_datetime
                                     );
                                   })();

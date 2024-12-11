@@ -104,7 +104,7 @@ export type PlasmicConsultList__OverridesType = {
   consultListContent?: Flex__<"div">;
   getConsult?: Flex__<typeof ApiFetcherComponent>;
   لطفامنتطربمانید?: Flex__<"div">;
-  مشاورهاییبرایبیمارثبتنشدهاست?: Flex__<"div">;
+  مشاورهایبرایبیمارثبتنشدهاست?: Flex__<"div">;
   sentConsultCard?: Flex__<"div">;
   sentConsultEmergencyStatus?: Flex__<"div">;
   electiveSign?: Flex__<"div">;
@@ -125,9 +125,9 @@ export type PlasmicConsultList__OverridesType = {
   empty?: Flex__<"div">;
   deleteConsult?: Flex__<"svg">;
   consultSendDateRepliedStatus?: Flex__<"div">;
-  sendDraftedConsultButton?: Flex__<typeof Button>;
-  replyConsultButton?: Flex__<typeof Button>;
-  consultDetailButton?: Flex__<typeof Button>;
+  replyConsultButton?: Flex__<"div">;
+  consultDetailButton?: Flex__<"div">;
+  consultDraftSendButton?: Flex__<"div">;
   consultSendDate?: Flex__<"div">;
   newConsult?: Flex__<typeof Button>;
   switchingTabs?: Flex__<"div">;
@@ -220,81 +220,6 @@ function PlasmicConsultList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "replyConsultButton[].isDisabled",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "replyConsultButton[].selected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "replyConsultButton[].deselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "replyConsultButton[].sortDeselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "replyConsultButton[].sortSelected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "sendDraftedConsultButton[].isDisabled",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "sendDraftedConsultButton[].selected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "sendDraftedConsultButton[].deselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "sendDraftedConsultButton[].sortDeselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "sendDraftedConsultButton[].sortSelected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "consultDetailButton[].isDisabled",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "consultDetailButton[].selected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "consultDetailButton[].deselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "consultDetailButton[].sortDeselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "consultDetailButton[].sortSelected",
-        type: "private",
-        variableType: "boolean"
       },
       {
         path: "modalDeleteConsultConfirmation.open",
@@ -492,7 +417,7 @@ function PlasmicConsultList__RenderFunc(props: {
                         try {
                           return (() => {
                             if (!$ctx.fetched_data.loading) {
-                              const item = $ctx.fetched_data.data.items[0];
+                              const item = $ctx.fetched_data.data[0];
                               if (item.date_of_birth) {
                                 const dob = new Date(item.date_of_birth);
                                 const now = new Date();
@@ -632,19 +557,19 @@ function PlasmicConsultList__RenderFunc(props: {
                       })() ? (
                         <div
                           data-plasmic-name={
-                            "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
+                            "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
                           }
                           data-plasmic-override={
-                            overrides.مشاورهاییبرایبیمارثبتنشدهاست
+                            overrides.مشاورهایبرایبیمارثبتنشدهاست
                           }
                           className={classNames(
                             projectcss.all,
                             projectcss.__wab_text,
-                            sty.مشاورهاییبرایبیمارثبتنشدهاست
+                            sty.مشاورهایبرایبیمارثبتنشدهاست
                           )}
                         >
                           {
-                            "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u06cc\u06cc \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                            "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u06cc \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
                           }
                         </div>
                       ) : null}
@@ -1239,280 +1164,6 @@ function PlasmicConsultList__RenderFunc(props: {
                                 >
                                   {(() => {
                                     try {
-                                      return currentItem.state === 0;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return true;
-                                      }
-                                      throw e;
-                                    }
-                                  })()
-                                    ? (() => {
-                                        const child$Props = {
-                                          className: classNames(
-                                            "__wab_instance",
-                                            sty.sendDraftedConsultButton
-                                          ),
-                                          color: "blue",
-                                          deselected: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "deselected"
-                                            ]
-                                          ),
-                                          isDisabled: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "isDisabled"
-                                            ]
-                                          ),
-                                          onClick: async event => {
-                                            const $steps = {};
-
-                                            $steps["goToConsultSendDraft"] =
-                                              true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      destination: `/consult/send/draft/${(() => {
-                                                        try {
-                                                          return $ctx.params
-                                                            .code;
-                                                        } catch (e) {
-                                                          if (
-                                                            e instanceof
-                                                              TypeError ||
-                                                            e?.plasmicType ===
-                                                              "PlasmicUndefinedDataError"
-                                                          ) {
-                                                            return undefined;
-                                                          }
-                                                          throw e;
-                                                        }
-                                                      })()}/${(() => {
-                                                        try {
-                                                          return $ctx.params
-                                                            .adm_id;
-                                                        } catch (e) {
-                                                          if (
-                                                            e instanceof
-                                                              TypeError ||
-                                                            e?.plasmicType ===
-                                                              "PlasmicUndefinedDataError"
-                                                          ) {
-                                                            return undefined;
-                                                          }
-                                                          throw e;
-                                                        }
-                                                      })()}/${(() => {
-                                                        try {
-                                                          return currentItem.id;
-                                                        } catch (e) {
-                                                          if (
-                                                            e instanceof
-                                                              TypeError ||
-                                                            e?.plasmicType ===
-                                                              "PlasmicUndefinedDataError"
-                                                          ) {
-                                                            return undefined;
-                                                          }
-                                                          throw e;
-                                                        }
-                                                      })()}`
-                                                    };
-                                                    return (({
-                                                      destination
-                                                    }) => {
-                                                      if (
-                                                        typeof destination ===
-                                                          "string" &&
-                                                        destination.startsWith(
-                                                          "#"
-                                                        )
-                                                      ) {
-                                                        document
-                                                          .getElementById(
-                                                            destination.substr(
-                                                              1
-                                                            )
-                                                          )
-                                                          .scrollIntoView({
-                                                            behavior: "smooth"
-                                                          });
-                                                      } else {
-                                                        __nextRouter?.push(
-                                                          destination
-                                                        );
-                                                      }
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                            if (
-                                              $steps["goToConsultSendDraft"] !=
-                                                null &&
-                                              typeof $steps[
-                                                "goToConsultSendDraft"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "goToConsultSendDraft"
-                                              ].then === "function"
-                                            ) {
-                                              $steps["goToConsultSendDraft"] =
-                                                await $steps[
-                                                  "goToConsultSendDraft"
-                                                ];
-                                            }
-                                          },
-                                          onDeselectedChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "deselected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onIsDisabledChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "isDisabled"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onSelectedChange: (...eventArgs) => {
-                                            generateStateOnChangeProp($state, [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "selected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onSortDeselectedChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "sortDeselected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onSortSelectedChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "sortSelected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          selected: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "selected"
-                                            ]
-                                          ),
-                                          shape: "rounded",
-                                          sortDeselected:
-                                            generateStateValueProp($state, [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "sortDeselected"
-                                            ]),
-                                          sortSelected: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "sendDraftedConsultButton",
-                                              __plasmic_idx_0,
-                                              "sortSelected"
-                                            ]
-                                          )
-                                        };
-
-                                        initializePlasmicStates(
-                                          $state,
-                                          [
-                                            {
-                                              name: "sendDraftedConsultButton[].isDisabled",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "sendDraftedConsultButton[].selected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "sendDraftedConsultButton[].deselected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "sendDraftedConsultButton[].sortDeselected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "sendDraftedConsultButton[].sortSelected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            }
-                                          ],
-                                          [__plasmic_idx_0]
-                                        );
-                                        return (
-                                          <Button
-                                            data-plasmic-name={
-                                              "sendDraftedConsultButton"
-                                            }
-                                            data-plasmic-override={
-                                              overrides.sendDraftedConsultButton
-                                            }
-                                            {...child$Props}
-                                          >
-                                            <div
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.__wab_text,
-                                                sty.text___4GPqp
-                                              )}
-                                            >
-                                              {
-                                                "\u0627\u0631\u0633\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647"
-                                              }
-                                            </div>
-                                          </Button>
-                                        );
-                                      })()
-                                    : null}
-                                  {(() => {
-                                    try {
                                       return (
                                         currentItem.state === 1 ||
                                         currentItem.state === 2 ||
@@ -1528,267 +1179,111 @@ function PlasmicConsultList__RenderFunc(props: {
                                       }
                                       throw e;
                                     }
-                                  })()
-                                    ? (() => {
-                                        const child$Props = {
-                                          className: classNames(
-                                            "__wab_instance",
-                                            sty.replyConsultButton
-                                          ),
-                                          color: "blue",
-                                          deselected: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "deselected"
-                                            ]
-                                          ),
-                                          isDisabled: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "isDisabled"
-                                            ]
-                                          ),
-                                          onClick: async event => {
-                                            const $steps = {};
+                                  })() ? (
+                                    <div
+                                      data-plasmic-name={"replyConsultButton"}
+                                      data-plasmic-override={
+                                        overrides.replyConsultButton
+                                      }
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.replyConsultButton
+                                      )}
+                                      onClick={async event => {
+                                        const $steps = {};
 
-                                            $steps["goToConsultSendReply"] =
-                                              true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      destination: `/consult/send/reply/detail/${(() => {
-                                                        try {
-                                                          return $ctx.params
-                                                            .code;
-                                                        } catch (e) {
-                                                          if (
-                                                            e instanceof
-                                                              TypeError ||
-                                                            e?.plasmicType ===
-                                                              "PlasmicUndefinedDataError"
-                                                          ) {
-                                                            return undefined;
-                                                          }
-                                                          throw e;
-                                                        }
-                                                      })()}/${(() => {
-                                                        try {
-                                                          return $ctx.params
-                                                            .adm_id;
-                                                        } catch (e) {
-                                                          if (
-                                                            e instanceof
-                                                              TypeError ||
-                                                            e?.plasmicType ===
-                                                              "PlasmicUndefinedDataError"
-                                                          ) {
-                                                            return undefined;
-                                                          }
-                                                          throw e;
-                                                        }
-                                                      })()}/${(() => {
-                                                        try {
-                                                          return currentItem.id;
-                                                        } catch (e) {
-                                                          if (
-                                                            e instanceof
-                                                              TypeError ||
-                                                            e?.plasmicType ===
-                                                              "PlasmicUndefinedDataError"
-                                                          ) {
-                                                            return undefined;
-                                                          }
-                                                          throw e;
-                                                        }
-                                                      })()}`
-                                                    };
-                                                    return (({
-                                                      destination
-                                                    }) => {
-                                                      if (
-                                                        typeof destination ===
-                                                          "string" &&
-                                                        destination.startsWith(
-                                                          "#"
-                                                        )
-                                                      ) {
-                                                        document
-                                                          .getElementById(
-                                                            destination.substr(
-                                                              1
-                                                            )
-                                                          )
-                                                          .scrollIntoView({
-                                                            behavior: "smooth"
-                                                          });
-                                                      } else {
-                                                        __nextRouter?.push(
-                                                          destination
-                                                        );
-                                                      }
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                            if (
-                                              $steps["goToConsultSendReply"] !=
-                                                null &&
-                                              typeof $steps[
-                                                "goToConsultSendReply"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "goToConsultSendReply"
-                                              ].then === "function"
-                                            ) {
-                                              $steps["goToConsultSendReply"] =
-                                                await $steps[
-                                                  "goToConsultSendReply"
-                                                ];
-                                            }
-                                          },
-                                          onDeselectedChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "deselected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onIsDisabledChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "isDisabled"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onSelectedChange: (...eventArgs) => {
-                                            generateStateOnChangeProp($state, [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "selected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onSortDeselectedChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "sortDeselected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onSortSelectedChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "sortSelected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          selected: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "selected"
-                                            ]
-                                          ),
-                                          shape: "rounded",
-                                          sortDeselected:
-                                            generateStateValueProp($state, [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "sortDeselected"
-                                            ]),
-                                          sortSelected: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "replyConsultButton",
-                                              __plasmic_idx_0,
-                                              "sortSelected"
-                                            ]
-                                          )
-                                        };
-
-                                        initializePlasmicStates(
-                                          $state,
-                                          [
-                                            {
-                                              name: "replyConsultButton[].isDisabled",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "replyConsultButton[].selected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "replyConsultButton[].deselected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "replyConsultButton[].sortDeselected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "replyConsultButton[].sortSelected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            }
-                                          ],
-                                          [__plasmic_idx_0]
-                                        );
-                                        return (
-                                          <Button
-                                            data-plasmic-name={
-                                              "replyConsultButton"
-                                            }
-                                            data-plasmic-override={
-                                              overrides.replyConsultButton
-                                            }
-                                            {...child$Props}
-                                          >
-                                            <div
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.__wab_text,
-                                                sty.text__saiVa
-                                              )}
-                                            >
-                                              {
-                                                "\u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e"
-                                              }
-                                            </div>
-                                          </Button>
-                                        );
-                                      })()
-                                    : null}
+                                        $steps[
+                                          "goToConsultSendReplyAndDetail"
+                                        ] = true
+                                          ? (() => {
+                                              const actionArgs = {
+                                                destination: `/consult/send/reply/detail/${(() => {
+                                                  try {
+                                                    return $ctx.params.code;
+                                                  } catch (e) {
+                                                    if (
+                                                      e instanceof TypeError ||
+                                                      e?.plasmicType ===
+                                                        "PlasmicUndefinedDataError"
+                                                    ) {
+                                                      return undefined;
+                                                    }
+                                                    throw e;
+                                                  }
+                                                })()}/${(() => {
+                                                  try {
+                                                    return $ctx.params.adm_id;
+                                                  } catch (e) {
+                                                    if (
+                                                      e instanceof TypeError ||
+                                                      e?.plasmicType ===
+                                                        "PlasmicUndefinedDataError"
+                                                    ) {
+                                                      return undefined;
+                                                    }
+                                                    throw e;
+                                                  }
+                                                })()}/${(() => {
+                                                  try {
+                                                    return currentItem.id;
+                                                  } catch (e) {
+                                                    if (
+                                                      e instanceof TypeError ||
+                                                      e?.plasmicType ===
+                                                        "PlasmicUndefinedDataError"
+                                                    ) {
+                                                      return undefined;
+                                                    }
+                                                    throw e;
+                                                  }
+                                                })()}`
+                                              };
+                                              return (({ destination }) => {
+                                                if (
+                                                  typeof destination ===
+                                                    "string" &&
+                                                  destination.startsWith("#")
+                                                ) {
+                                                  document
+                                                    .getElementById(
+                                                      destination.substr(1)
+                                                    )
+                                                    .scrollIntoView({
+                                                      behavior: "smooth"
+                                                    });
+                                                } else {
+                                                  __nextRouter?.push(
+                                                    destination
+                                                  );
+                                                }
+                                              })?.apply(null, [actionArgs]);
+                                            })()
+                                          : undefined;
+                                        if (
+                                          $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ] != null &&
+                                          typeof $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ] === "object" &&
+                                          typeof $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ].then === "function"
+                                        ) {
+                                          $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ] = await $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ];
+                                        }
+                                      }}
+                                    >
+                                      {
+                                        "\u062c\u0632\u0626\u06cc\u0627\u062a/\u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e"
+                                      }
+                                    </div>
+                                  ) : null}
                                   {(() => {
                                     try {
                                       return currentItem.state === 4;
@@ -1802,267 +1297,224 @@ function PlasmicConsultList__RenderFunc(props: {
                                       }
                                       throw e;
                                     }
-                                  })()
-                                    ? (() => {
-                                        const child$Props = {
-                                          className: classNames(
-                                            "__wab_instance",
-                                            sty.consultDetailButton
-                                          ),
-                                          color: "blue",
-                                          deselected: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "deselected"
-                                            ]
-                                          ),
-                                          isDisabled: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "isDisabled"
-                                            ]
-                                          ),
-                                          onClick: async event => {
-                                            const $steps = {};
+                                  })() ? (
+                                    <div
+                                      data-plasmic-name={"consultDetailButton"}
+                                      data-plasmic-override={
+                                        overrides.consultDetailButton
+                                      }
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.consultDetailButton
+                                      )}
+                                      onClick={async event => {
+                                        const $steps = {};
 
-                                            $steps["goToConsultSendReply"] =
-                                              true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      destination: `/consult/send/reply/detail/${(() => {
-                                                        try {
-                                                          return $ctx.params
-                                                            .code;
-                                                        } catch (e) {
-                                                          if (
-                                                            e instanceof
-                                                              TypeError ||
-                                                            e?.plasmicType ===
-                                                              "PlasmicUndefinedDataError"
-                                                          ) {
-                                                            return undefined;
-                                                          }
-                                                          throw e;
-                                                        }
-                                                      })()}/${(() => {
-                                                        try {
-                                                          return $ctx.params
-                                                            .adm_id;
-                                                        } catch (e) {
-                                                          if (
-                                                            e instanceof
-                                                              TypeError ||
-                                                            e?.plasmicType ===
-                                                              "PlasmicUndefinedDataError"
-                                                          ) {
-                                                            return undefined;
-                                                          }
-                                                          throw e;
-                                                        }
-                                                      })()}/${(() => {
-                                                        try {
-                                                          return currentItem.id;
-                                                        } catch (e) {
-                                                          if (
-                                                            e instanceof
-                                                              TypeError ||
-                                                            e?.plasmicType ===
-                                                              "PlasmicUndefinedDataError"
-                                                          ) {
-                                                            return undefined;
-                                                          }
-                                                          throw e;
-                                                        }
-                                                      })()}`
-                                                    };
-                                                    return (({
-                                                      destination
-                                                    }) => {
-                                                      if (
-                                                        typeof destination ===
-                                                          "string" &&
-                                                        destination.startsWith(
-                                                          "#"
-                                                        )
-                                                      ) {
-                                                        document
-                                                          .getElementById(
-                                                            destination.substr(
-                                                              1
-                                                            )
-                                                          )
-                                                          .scrollIntoView({
-                                                            behavior: "smooth"
-                                                          });
-                                                      } else {
-                                                        __nextRouter?.push(
-                                                          destination
-                                                        );
-                                                      }
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                            if (
-                                              $steps["goToConsultSendReply"] !=
-                                                null &&
-                                              typeof $steps[
-                                                "goToConsultSendReply"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "goToConsultSendReply"
-                                              ].then === "function"
-                                            ) {
-                                              $steps["goToConsultSendReply"] =
-                                                await $steps[
-                                                  "goToConsultSendReply"
-                                                ];
-                                            }
-                                          },
-                                          onDeselectedChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "deselected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onIsDisabledChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "isDisabled"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onSelectedChange: (...eventArgs) => {
-                                            generateStateOnChangeProp($state, [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "selected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onSortDeselectedChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "sortDeselected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          onSortSelectedChange: (
-                                            ...eventArgs
-                                          ) => {
-                                            generateStateOnChangeProp($state, [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "sortSelected"
-                                            ])(eventArgs[0]);
-                                          },
-                                          selected: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "selected"
-                                            ]
-                                          ),
-                                          shape: "rounded",
-                                          sortDeselected:
-                                            generateStateValueProp($state, [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "sortDeselected"
-                                            ]),
-                                          sortSelected: generateStateValueProp(
-                                            $state,
-                                            [
-                                              "consultDetailButton",
-                                              __plasmic_idx_0,
-                                              "sortSelected"
-                                            ]
-                                          )
-                                        };
+                                        $steps[
+                                          "goToConsultSendReplyAndDetail"
+                                        ] = true
+                                          ? (() => {
+                                              const actionArgs = {
+                                                destination: `/consult/send/reply/detail/${(() => {
+                                                  try {
+                                                    return $ctx.params.code;
+                                                  } catch (e) {
+                                                    if (
+                                                      e instanceof TypeError ||
+                                                      e?.plasmicType ===
+                                                        "PlasmicUndefinedDataError"
+                                                    ) {
+                                                      return undefined;
+                                                    }
+                                                    throw e;
+                                                  }
+                                                })()}/${(() => {
+                                                  try {
+                                                    return $ctx.params.adm_id;
+                                                  } catch (e) {
+                                                    if (
+                                                      e instanceof TypeError ||
+                                                      e?.plasmicType ===
+                                                        "PlasmicUndefinedDataError"
+                                                    ) {
+                                                      return undefined;
+                                                    }
+                                                    throw e;
+                                                  }
+                                                })()}/${(() => {
+                                                  try {
+                                                    return currentItem.id;
+                                                  } catch (e) {
+                                                    if (
+                                                      e instanceof TypeError ||
+                                                      e?.plasmicType ===
+                                                        "PlasmicUndefinedDataError"
+                                                    ) {
+                                                      return undefined;
+                                                    }
+                                                    throw e;
+                                                  }
+                                                })()}`
+                                              };
+                                              return (({ destination }) => {
+                                                if (
+                                                  typeof destination ===
+                                                    "string" &&
+                                                  destination.startsWith("#")
+                                                ) {
+                                                  document
+                                                    .getElementById(
+                                                      destination.substr(1)
+                                                    )
+                                                    .scrollIntoView({
+                                                      behavior: "smooth"
+                                                    });
+                                                } else {
+                                                  __nextRouter?.push(
+                                                    destination
+                                                  );
+                                                }
+                                              })?.apply(null, [actionArgs]);
+                                            })()
+                                          : undefined;
+                                        if (
+                                          $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ] != null &&
+                                          typeof $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ] === "object" &&
+                                          typeof $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ].then === "function"
+                                        ) {
+                                          $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ] = await $steps[
+                                            "goToConsultSendReplyAndDetail"
+                                          ];
+                                        }
+                                      }}
+                                    >
+                                      {"\u062c\u0632\u0626\u06cc\u0627\u062a"}
+                                    </div>
+                                  ) : null}
+                                  {(() => {
+                                    try {
+                                      return currentItem.state === 0;
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return true;
+                                      }
+                                      throw e;
+                                    }
+                                  })() ? (
+                                    <div
+                                      data-plasmic-name={
+                                        "consultDraftSendButton"
+                                      }
+                                      data-plasmic-override={
+                                        overrides.consultDraftSendButton
+                                      }
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.consultDraftSendButton
+                                      )}
+                                      onClick={async event => {
+                                        const $steps = {};
 
-                                        initializePlasmicStates(
-                                          $state,
-                                          [
-                                            {
-                                              name: "consultDetailButton[].isDisabled",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "consultDetailButton[].selected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "consultDetailButton[].deselected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "consultDetailButton[].sortDeselected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            },
-                                            {
-                                              name: "consultDetailButton[].sortSelected",
-                                              initFunc: ({
-                                                $props,
-                                                $state,
-                                                $queries
-                                              }) => undefined
-                                            }
-                                          ],
-                                          [__plasmic_idx_0]
-                                        );
-                                        return (
-                                          <Button
-                                            data-plasmic-name={
-                                              "consultDetailButton"
-                                            }
-                                            data-plasmic-override={
-                                              overrides.consultDetailButton
-                                            }
-                                            {...child$Props}
-                                          >
-                                            <div
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.__wab_text,
-                                                sty.text__l4Tv1
-                                              )}
-                                            >
-                                              {
-                                                "\u062c\u0632\u0626\u06cc\u0627\u062a"
-                                              }
-                                            </div>
-                                          </Button>
-                                        );
-                                      })()
-                                    : null}
+                                        $steps["goToConsultSendDraft"] = true
+                                          ? (() => {
+                                              const actionArgs = {
+                                                destination: `/consult/send/draft/${(() => {
+                                                  try {
+                                                    return $ctx.params.code;
+                                                  } catch (e) {
+                                                    if (
+                                                      e instanceof TypeError ||
+                                                      e?.plasmicType ===
+                                                        "PlasmicUndefinedDataError"
+                                                    ) {
+                                                      return undefined;
+                                                    }
+                                                    throw e;
+                                                  }
+                                                })()}/${(() => {
+                                                  try {
+                                                    return $ctx.params.adm_id;
+                                                  } catch (e) {
+                                                    if (
+                                                      e instanceof TypeError ||
+                                                      e?.plasmicType ===
+                                                        "PlasmicUndefinedDataError"
+                                                    ) {
+                                                      return undefined;
+                                                    }
+                                                    throw e;
+                                                  }
+                                                })()}/${(() => {
+                                                  try {
+                                                    return currentItem.id;
+                                                  } catch (e) {
+                                                    if (
+                                                      e instanceof TypeError ||
+                                                      e?.plasmicType ===
+                                                        "PlasmicUndefinedDataError"
+                                                    ) {
+                                                      return undefined;
+                                                    }
+                                                    throw e;
+                                                  }
+                                                })()}`
+                                              };
+                                              return (({ destination }) => {
+                                                if (
+                                                  typeof destination ===
+                                                    "string" &&
+                                                  destination.startsWith("#")
+                                                ) {
+                                                  document
+                                                    .getElementById(
+                                                      destination.substr(1)
+                                                    )
+                                                    .scrollIntoView({
+                                                      behavior: "smooth"
+                                                    });
+                                                } else {
+                                                  __nextRouter?.push(
+                                                    destination
+                                                  );
+                                                }
+                                              })?.apply(null, [actionArgs]);
+                                            })()
+                                          : undefined;
+                                        if (
+                                          $steps["goToConsultSendDraft"] !=
+                                            null &&
+                                          typeof $steps[
+                                            "goToConsultSendDraft"
+                                          ] === "object" &&
+                                          typeof $steps["goToConsultSendDraft"]
+                                            .then === "function"
+                                        ) {
+                                          $steps["goToConsultSendDraft"] =
+                                            await $steps[
+                                              "goToConsultSendDraft"
+                                            ];
+                                        }
+                                      }}
+                                    >
+                                      {
+                                        "\u062c\u0632\u0626\u06cc\u0627\u062a/\u0627\u0631\u0633\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647"
+                                      }
+                                    </div>
+                                  ) : null}
                                   {(() => {
                                     try {
                                       return currentItem.state != 0;
@@ -3125,7 +2577,7 @@ const PlasmicDescendants = {
     "consultListContent",
     "getConsult",
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
-    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
     "electiveSign",
@@ -3146,9 +2598,9 @@ const PlasmicDescendants = {
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
-    "sendDraftedConsultButton",
     "replyConsultButton",
     "consultDetailButton",
+    "consultDraftSendButton",
     "consultSendDate",
     "newConsult",
     "switchingTabs",
@@ -3177,7 +2629,7 @@ const PlasmicDescendants = {
     "consultListContent",
     "getConsult",
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
-    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
     "electiveSign",
@@ -3198,16 +2650,16 @@ const PlasmicDescendants = {
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
-    "sendDraftedConsultButton",
     "replyConsultButton",
     "consultDetailButton",
+    "consultDraftSendButton",
     "consultSendDate"
   ],
   consultListContent: [
     "consultListContent",
     "getConsult",
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
-    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
     "electiveSign",
@@ -3228,15 +2680,15 @@ const PlasmicDescendants = {
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
-    "sendDraftedConsultButton",
     "replyConsultButton",
     "consultDetailButton",
+    "consultDraftSendButton",
     "consultSendDate"
   ],
   getConsult: [
     "getConsult",
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
-    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a",
     "sentConsultCard",
     "sentConsultEmergencyStatus",
     "electiveSign",
@@ -3257,16 +2709,16 @@ const PlasmicDescendants = {
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
-    "sendDraftedConsultButton",
     "replyConsultButton",
     "consultDetailButton",
+    "consultDraftSendButton",
     "consultSendDate"
   ],
   لطفامنتطربمانید: [
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f"
   ],
-  مشاورهاییبرایبیمارثبتنشدهاست: [
-    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
+  مشاورهایبرایبیمارثبتنشدهاست: [
+    "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
   ],
   sentConsultCard: [
     "sentConsultCard",
@@ -3289,9 +2741,9 @@ const PlasmicDescendants = {
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
-    "sendDraftedConsultButton",
     "replyConsultButton",
     "consultDetailButton",
+    "consultDraftSendButton",
     "consultSendDate"
   ],
   sentConsultEmergencyStatus: [
@@ -3314,9 +2766,9 @@ const PlasmicDescendants = {
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
-    "sendDraftedConsultButton",
     "replyConsultButton",
     "consultDetailButton",
+    "consultDraftSendButton",
     "consultSendDate"
   ],
   electiveSign: ["electiveSign"],
@@ -3338,9 +2790,9 @@ const PlasmicDescendants = {
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
-    "sendDraftedConsultButton",
     "replyConsultButton",
     "consultDetailButton",
+    "consultDraftSendButton",
     "consultSendDate"
   ],
   senderRecieverTags: [
@@ -3398,14 +2850,14 @@ const PlasmicDescendants = {
   deleteConsult: ["deleteConsult"],
   consultSendDateRepliedStatus: [
     "consultSendDateRepliedStatus",
-    "sendDraftedConsultButton",
     "replyConsultButton",
     "consultDetailButton",
+    "consultDraftSendButton",
     "consultSendDate"
   ],
-  sendDraftedConsultButton: ["sendDraftedConsultButton"],
   replyConsultButton: ["replyConsultButton"],
   consultDetailButton: ["consultDetailButton"],
+  consultDraftSendButton: ["consultDraftSendButton"],
   consultSendDate: ["consultSendDate"],
   newConsult: ["newConsult"],
   switchingTabs: [
@@ -3468,7 +2920,7 @@ type NodeDefaultElementType = {
   consultListContent: "div";
   getConsult: typeof ApiFetcherComponent;
   لطفامنتطربمانید: "div";
-  مشاورهاییبرایبیمارثبتنشدهاست: "div";
+  مشاورهایبرایبیمارثبتنشدهاست: "div";
   sentConsultCard: "div";
   sentConsultEmergencyStatus: "div";
   electiveSign: "div";
@@ -3489,9 +2941,9 @@ type NodeDefaultElementType = {
   empty: "div";
   deleteConsult: "svg";
   consultSendDateRepliedStatus: "div";
-  sendDraftedConsultButton: typeof Button;
-  replyConsultButton: typeof Button;
-  consultDetailButton: typeof Button;
+  replyConsultButton: "div";
+  consultDetailButton: "div";
+  consultDraftSendButton: "div";
   consultSendDate: "div";
   newConsult: typeof Button;
   switchingTabs: "div";
@@ -3584,8 +3036,8 @@ export const PlasmicConsultList = Object.assign(
     لطفامنتطربمانید: makeNodeComponent(
       "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0637\u0631\u0628\u0645\u0627\u0646\u06cc\u062f"
     ),
-    مشاورهاییبرایبیمارثبتنشدهاست: makeNodeComponent(
-      "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
+    مشاورهایبرایبیمارثبتنشدهاست: makeNodeComponent(
+      "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u0628\u0631\u0627\u06cc\u0628\u06cc\u0645\u0627\u0631\u062b\u0628\u062a\u0646\u0634\u062f\u0647\u0627\u0633\u062a"
     ),
     sentConsultCard: makeNodeComponent("sentConsultCard"),
     sentConsultEmergencyStatus: makeNodeComponent("sentConsultEmergencyStatus"),
@@ -3609,9 +3061,9 @@ export const PlasmicConsultList = Object.assign(
     consultSendDateRepliedStatus: makeNodeComponent(
       "consultSendDateRepliedStatus"
     ),
-    sendDraftedConsultButton: makeNodeComponent("sendDraftedConsultButton"),
     replyConsultButton: makeNodeComponent("replyConsultButton"),
     consultDetailButton: makeNodeComponent("consultDetailButton"),
+    consultDraftSendButton: makeNodeComponent("consultDraftSendButton"),
     consultSendDate: makeNodeComponent("consultSendDate"),
     newConsult: makeNodeComponent("newConsult"),
     switchingTabs: makeNodeComponent("switchingTabs"),

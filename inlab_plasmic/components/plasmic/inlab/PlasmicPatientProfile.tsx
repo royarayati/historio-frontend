@@ -400,7 +400,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data.items[0].national_code}
+                              {$ctx.fetched_data.data[0].national_code}
                             </React.Fragment>
                           </div>
                           <div
@@ -422,10 +422,36 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {
-                                $ctx.fetched_data.data.items[0]
-                                  .admission_datetime
-                              }
+                              {$ctx.fetched_data.data[0].admission_datetime
+                                ? (() => {
+                                    const gregorianDate = new Date(
+                                      $ctx.fetched_data.data[0].admission_datetime
+                                    );
+                                    const shamsiDate = new Intl.DateTimeFormat(
+                                      "fa-IR"
+                                    ).format(gregorianDate);
+                                    const shamsiTime =
+                                      gregorianDate.toLocaleTimeString(
+                                        "fa-IR",
+                                        { hour12: false }
+                                      );
+                                    const englishDate = shamsiDate.replace(
+                                      /[۰-۹]/g,
+                                      d =>
+                                        String.fromCharCode(
+                                          d.charCodeAt(0) - 1728
+                                        )
+                                    );
+                                    const englishTime = shamsiTime.replace(
+                                      /[۰-۹]/g,
+                                      d =>
+                                        String.fromCharCode(
+                                          d.charCodeAt(0) - 1728
+                                        )
+                                    );
+                                    return `${englishDate} - ${englishTime}`;
+                                  })()
+                                : ""}
                             </React.Fragment>
                           </div>
                           <div
@@ -447,7 +473,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data.items[0].patient_id}
+                              {$ctx.fetched_data.data[0].patient_id}
                             </React.Fragment>
                           </div>
                           <div
@@ -469,7 +495,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data.items[0].id}
+                              {$ctx.fetched_data.data[0].id}
                             </React.Fragment>
                           </div>
                           <div
@@ -514,56 +540,9 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             dir={"rtl"}
                           >
                             <React.Fragment>
-                              {(() => {
-                                if (!$ctx.fetched_data.loading) {
-                                  const item = $ctx.fetched_data.data.items[0];
-                                  if (item.date_of_birth) {
-                                    const dob = new Date(item.date_of_birth);
-                                    const now = new Date();
-                                    let ageYears =
-                                      now.getFullYear() - dob.getFullYear();
-                                    const monthDifference =
-                                      now.getMonth() - dob.getMonth();
-                                    const dayDifference =
-                                      now.getDate() - dob.getDate();
-                                    if (
-                                      monthDifference < 0 ||
-                                      (monthDifference === 0 &&
-                                        now.getDate() < dob.getDate())
-                                    ) {
-                                      ageYears--;
-                                    }
-                                    const fullName = `${item.first_name} ${item.last_name}`;
-                                    const genderSymbol =
-                                      item.gender === "F"
-                                        ? " \u2640️"
-                                        : item.gender === "M"
-                                        ? " \u2642️"
-                                        : "";
-                                    if (ageYears < 1) {
-                                      if (
-                                        ageYears === 0 &&
-                                        monthDifference === 0
-                                      ) {
-                                        return `${fullName} ${dayDifference}D${genderSymbol}`;
-                                      } else {
-                                        const ageMonths =
-                                          Math.abs(monthDifference) +
-                                          (now.getDate() < dob.getDate()
-                                            ? -1
-                                            : 0);
-                                        return `${fullName} ${ageMonths}M${
-                                          ageMonths !== 1 ? "s" : ""
-                                        }${genderSymbol}`;
-                                      }
-                                    } else {
-                                      return `${fullName} ${ageYears}Y${genderSymbol}`;
-                                    }
-                                  } else {
-                                    return "Date of birth not available.";
-                                  }
-                                }
-                              })()}
+                              {$ctx.fetched_data.data[0].first_name +
+                                " " +
+                                $ctx.fetched_data.data[0].last_name}
                             </React.Fragment>
                           </div>
                           <div
@@ -586,8 +565,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             dir={"rtl"}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data.items[0].service
-                                ? $ctx.fetched_data.data.items[0].service
+                              {$ctx.fetched_data.data[0].service
+                                ? $ctx.fetched_data.data[0].service
                                 : "مشخص نشده"}
                             </React.Fragment>
                           </div>
@@ -611,7 +590,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             dir={"rtl"}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data.items[0].ward[0].name}
+                              {$ctx.fetched_data.data[0].ward[0].name}
                             </React.Fragment>
                           </div>
                           <div
@@ -634,9 +613,9 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             dir={"rtl"}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data.items[0].room +
+                              {$ctx.fetched_data.data[0].room +
                                 " - " +
-                                $ctx.fetched_data.data.items[0].bed}
+                                $ctx.fetched_data.data[0].bed}
                             </React.Fragment>
                           </div>
                         </div>
@@ -660,7 +639,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           <React.Fragment>
                             {(() => {
                               try {
-                                return $ctx.fetched_data.data.items[0].dismissed
+                                return $ctx.fetched_data.data[0].dismissed
                                   ? "ترخیص"
                                   : "بستری";
                               } catch (e) {
