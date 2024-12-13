@@ -4050,32 +4050,44 @@ function PlasmicHomepage__RenderFunc(props: {
               data-plasmic-override={overrides.patients}
               className={classNames("__wab_instance", sty.patients)}
               delay={350}
+              headers={{
+                "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+              }}
               method={"GET"}
-              path={`/n8n/webhook/patient?first_name=${
-                $state.searchbarFname.value
-              }&namespace_id=${localStorage.getItem(
-                "inlab_user_namespace_id"
-              )}&ward_id=${
+              path={`/api/v3/bookmark/admissions?first_name=${
+                $state.searchbarFname.value !== ""
+                  ? $state.searchbarFname.value
+                  : ""
+              }&ward_id=${
                 $state.filterWard &
                 ($state.searchbarFname.value == "") &
                 ($state.searchbarLnameNcode.value == "")
                   ? localStorage.getItem("filter_ward_id")
-                  : ""
+                  : 0
               }&physician_id=${
                 $state.filterPhysician &
                 ($state.searchbarFname.value == "") &
                 ($state.searchbarLnameNcode.value == "")
                   ? localStorage.getItem("filter_physician_id")
-                  : ""
+                  : 0
               }&national_code=${
                 parseInt($state.searchbarLnameNcode.value)
                   ? $state.searchbarLnameNcode.value
                   : ""
               }&last_name=${
-                parseInt($state.searchbarLnameNcode.value)
+                parseInt($state.searchbarLnameNcode.value) ||
+                $state.searchbarLnameNcode.value == ""
                   ? ""
                   : $state.searchbarLnameNcode.value
-              }&dismissed=${$state.searchDismissed}`}
+              }&dismissed=${$state.searchDismissed}&bookmarked=${
+                $state.patientsSelectedTab === "bookmark"
+              }&offset=0&limit=${
+                ($state.searchbarFname.value ||
+                  $state.searchbarLnameNcode.value) !== "" &&
+                $state.searchDismissed
+                  ? 8
+                  : 15
+              }`}
               ref={ref => {
                 $refs["patients"] = ref;
               }}
@@ -5659,6 +5671,20 @@ function PlasmicHomepage__RenderFunc(props: {
                                 </div>
                                 {(() => {
                                   const child$Props = {
+                                    admissionId: (() => {
+                                      try {
+                                        return currentItem.id;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })(),
                                     className: classNames(
                                       "__wab_instance",
                                       sty.bookmarkIcon
