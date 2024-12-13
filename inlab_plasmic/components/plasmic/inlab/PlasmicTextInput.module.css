@@ -63,8 +63,17 @@
 .textInput___focusVisibleWithin {
   box-shadow: 0px 0px 0px 2px #96c7f2;
   background: #ffffff;
+  outline: none;
   border-radius: 5px;
   border-width: 0.75px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .textInput___focusVisibleWithin {
+    outline: none;
+  }
+}
+.textInput___focusVisibleWithin_showStartIcon {
+  outline: none;
 }
 .startIconContainer {
   display: flex;
@@ -100,6 +109,7 @@
 }
 .textInput .startIconContainer___focusVisibleWithin {
   margin-left: calc(0px + 8px) !important;
+  outline: none;
 }
 .textInput:hover .startIconContainer {
   background: none;
@@ -111,6 +121,40 @@
 }
 .slotTargetStartIconshowStartIcon {
   color: #90908c;
+}
+.textInput .slotTargetStartIcon___focusVisibleWithin > *,
+.textInput .slotTargetStartIcon___focusVisibleWithin > :global(.__wab_slot) > *,
+.textInput
+  .slotTargetStartIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > *,
+.textInput
+  .slotTargetStartIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > *,
+.textInput .slotTargetStartIcon___focusVisibleWithin > picture > img,
+.textInput
+  .slotTargetStartIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > picture
+  > img,
+.textInput
+  .slotTargetStartIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img,
+.textInput
+  .slotTargetStartIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  outline: none;
 }
 .svg__bNQq {
   position: relative;
@@ -183,19 +227,24 @@
 }
 .textInput .input___focusVisibleWithin {
   margin-left: calc(4px + 8px) !important;
+  outline: none;
 }
 .textInputshowStartIcon .input___focusVisibleWithin_showStartIcon {
   margin-left: calc(4px + 8px) !important;
+  outline: none;
 }
 .textInputshowEndIcon .input___focusVisibleWithin_showEndIcon {
   margin-left: calc(4px + 8px) !important;
+  outline: none;
 }
 .textInputshowEndIcon_showStartIcon
   .input___focusVisibleWithin_showEndIcon_showStartIcon {
   margin-left: calc(4px + 8px) !important;
+  outline: none;
 }
 .textInput .input:focus {
   margin-left: calc(4px + 8px) !important;
+  outline: none;
 }
 .textInput .input::placeholder {
   margin-left: calc(4px + 8px) !important;
@@ -208,9 +257,11 @@
 .textInput .input___focusVisibleWithin::placeholder {
   background: var(--token-Yq556PvPjGii);
   margin-left: calc(4px + 8px) !important;
+  outline: none;
 }
 .textInput .input___focusVisibleWithin:focus {
   margin-left: calc(4px + 8px) !important;
+  outline: none;
 }
 .textInput:hover .input::placeholder {
   margin-left: calc(4px + 8px) !important;
@@ -252,9 +303,44 @@
 }
 .textInput .endIconContainer___focusVisibleWithin {
   margin-left: calc(8px + 8px) !important;
+  outline: none;
 }
 .slotTargetEndIconshowEndIcon {
   color: #90908c;
+}
+.textInput .slotTargetEndIcon___focusVisibleWithin > *,
+.textInput .slotTargetEndIcon___focusVisibleWithin > :global(.__wab_slot) > *,
+.textInput
+  .slotTargetEndIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > *,
+.textInput
+  .slotTargetEndIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > *,
+.textInput .slotTargetEndIcon___focusVisibleWithin > picture > img,
+.textInput
+  .slotTargetEndIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > picture
+  > img,
+.textInput
+  .slotTargetEndIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img,
+.textInput
+  .slotTargetEndIcon___focusVisibleWithin
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  outline: none;
 }
 .svg__m0Xvn {
   position: relative;

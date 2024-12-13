@@ -422,7 +422,21 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             )}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data[0].admission_datetime}
+                              {(() => {
+                                try {
+                                  return $ctx.fetched_data.data[0]
+                                    .admission_datetime;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "";
+                                  }
+                                  throw e;
+                                }
+                              })()}
                             </React.Fragment>
                           </div>
                           <div
