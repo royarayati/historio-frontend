@@ -4028,23 +4028,9 @@ function PlasmicHomepage__RenderFunc(props: {
               </ApiFetcherComponent>
             </div>
           ) : null}
-          {(() => {
-            try {
-              return (
-                $state.mainSelectedTab === "patients" ||
-                $state.searchbarLnameNcode.value !== "" ||
-                $state.searchbarFname.value !== ""
-              );
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return true;
-              }
-              throw e;
-            }
-          })() ? (
+          {$state.mainSelectedTab === "patients" ||
+          $state.searchbarLnameNcode.value !== "" ||
+          $state.searchbarFname.value !== "" ? (
             <ApiFetcherComponent
               data-plasmic-name={"patients"}
               data-plasmic-override={overrides.patients}
@@ -4080,7 +4066,11 @@ function PlasmicHomepage__RenderFunc(props: {
                   ? ""
                   : $state.searchbarLnameNcode.value
               }&dismissed=${$state.searchDismissed}&bookmarked=${
+                $state.searchbarFname.value === "" &&
+                $state.searchbarLnameNcode.value === "" &&
                 $state.patientsSelectedTab === "bookmark"
+                  ? true
+                  : false
               }&offset=0&limit=${
                 ($state.searchbarFname.value ||
                   $state.searchbarLnameNcode.value) !== "" &&

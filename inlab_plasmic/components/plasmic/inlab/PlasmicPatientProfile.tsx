@@ -114,6 +114,7 @@ export type PlasmicPatientProfile__OverridesType = {
   patientService?: Flex__<"div">;
   patientWard?: Flex__<"div">;
   patientRoomBed?: Flex__<"div">;
+  physicianFirstLastName?: Flex__<"div">;
   freeBox?: Flex__<"div">;
   patientStatus?: Flex__<"div">;
   وضعیتبیمار?: Flex__<"div">;
@@ -424,8 +425,36 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             <React.Fragment>
                               {(() => {
                                 try {
-                                  return $ctx.fetched_data.data[0]
-                                    .admission_datetime;
+                                  return (() => {
+                                    const gregorianDate = new Date(
+                                      $ctx.fetched_data.data[0].admission_datetime
+                                    );
+                                    const shamsiDate = new Intl.DateTimeFormat(
+                                      "fa-IR"
+                                    ).format(gregorianDate);
+                                    const shamsiTime =
+                                      gregorianDate.toLocaleTimeString(
+                                        "fa-IR",
+                                        { hour12: false }
+                                      );
+                                    const englishDate = shamsiDate.replace(
+                                      /[۰-۹]/g,
+                                      d =>
+                                        String.fromCharCode(
+                                          d.charCodeAt(0) - 1728
+                                        )
+                                    );
+                                    const englishTime = shamsiTime
+                                      .replace(/[۰-۹]/g, d =>
+                                        String.fromCharCode(
+                                          d.charCodeAt(0) - 1728
+                                        )
+                                      )
+                                      .split(":")
+                                      .slice(0, 2)
+                                      .join(":");
+                                    return `${englishDate}  ${englishTime}`;
+                                  })();
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -525,9 +554,47 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             dir={"rtl"}
                           >
                             <React.Fragment>
-                              {$ctx.fetched_data.data[0].first_name +
-                                " " +
-                                $ctx.fetched_data.data[0].last_name}
+                              {(() => {
+                                if (!$ctx.fetched_data.loading) {
+                                  const item = $ctx.fetched_data.data[0];
+                                  if (item.date_of_birth) {
+                                    const dob = new Date(item.date_of_birth);
+                                    const now = new Date();
+                                    let ageYears =
+                                      now.getFullYear() - dob.getFullYear();
+                                    const monthDifference =
+                                      now.getMonth() - dob.getMonth();
+                                    if (
+                                      monthDifference < 0 ||
+                                      (monthDifference === 0 &&
+                                        now.getDate() < dob.getDate())
+                                    ) {
+                                      ageYears--;
+                                    }
+                                    const fullName = `${item.first_name} ${item.last_name}`;
+                                    const genderSymbol =
+                                      item.gender === "F"
+                                        ? " \u2640️"
+                                        : item.gender === "M"
+                                        ? " \u2642️"
+                                        : "";
+                                    if (ageYears < 1) {
+                                      const ageMonths =
+                                        Math.abs(monthDifference) +
+                                        (now.getDate() < dob.getDate()
+                                          ? -1
+                                          : 0);
+                                      return `${fullName} ${ageMonths} month ${
+                                        ageMonths !== 1 ? "s" : ""
+                                      }${genderSymbol}`;
+                                    } else {
+                                      return `${fullName} ${ageYears} ${genderSymbol}`;
+                                    }
+                                  } else {
+                                    return "Date of birth not available.";
+                                  }
+                                }
+                              })()}
                             </React.Fragment>
                           </div>
                           <div
@@ -601,6 +668,33 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               {$ctx.fetched_data.data[0].room +
                                 " - " +
                                 $ctx.fetched_data.data[0].bed}
+                            </React.Fragment>
+                          </div>
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text___4WHjD
+                            )}
+                          >
+                            {"physician"}
+                          </div>
+                          <div
+                            data-plasmic-name={"physicianFirstLastName"}
+                            data-plasmic-override={
+                              overrides.physicianFirstLastName
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.physicianFirstLastName
+                            )}
+                            dir={"rtl"}
+                          >
+                            <React.Fragment>
+                              {"دکتر " +
+                                $ctx.fetched_data.data[0].physician[0]
+                                  .last_name}
                             </React.Fragment>
                           </div>
                         </div>
@@ -1235,6 +1329,7 @@ const PlasmicDescendants = {
     "patientService",
     "patientWard",
     "patientRoomBed",
+    "physicianFirstLastName",
     "freeBox",
     "patientStatus",
     "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631",
@@ -1266,6 +1361,7 @@ const PlasmicDescendants = {
     "patientService",
     "patientWard",
     "patientRoomBed",
+    "physicianFirstLastName",
     "freeBox",
     "patientStatus",
     "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631",
@@ -1285,6 +1381,7 @@ const PlasmicDescendants = {
     "patientService",
     "patientWard",
     "patientRoomBed",
+    "physicianFirstLastName",
     "freeBox",
     "patientStatus",
     "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631",
@@ -1302,7 +1399,8 @@ const PlasmicDescendants = {
     "patientName2",
     "patientService",
     "patientWard",
-    "patientRoomBed"
+    "patientRoomBed",
+    "physicianFirstLastName"
   ],
   nationalIdAdmissionTimeNoPacs: [
     "nationalIdAdmissionTimeNoPacs",
@@ -1322,12 +1420,14 @@ const PlasmicDescendants = {
     "patientName2",
     "patientService",
     "patientWard",
-    "patientRoomBed"
+    "patientRoomBed",
+    "physicianFirstLastName"
   ],
   patientName2: ["patientName2"],
   patientService: ["patientService"],
   patientWard: ["patientWard"],
   patientRoomBed: ["patientRoomBed"],
+  physicianFirstLastName: ["physicianFirstLastName"],
   freeBox: [
     "freeBox",
     "patientStatus",
@@ -1384,6 +1484,7 @@ type NodeDefaultElementType = {
   patientService: "div";
   patientWard: "div";
   patientRoomBed: "div";
+  physicianFirstLastName: "div";
   freeBox: "div";
   patientStatus: "div";
   وضعیتبیمار: "div";
@@ -1479,6 +1580,7 @@ export const PlasmicPatientProfile = Object.assign(
     patientService: makeNodeComponent("patientService"),
     patientWard: makeNodeComponent("patientWard"),
     patientRoomBed: makeNodeComponent("patientRoomBed"),
+    physicianFirstLastName: makeNodeComponent("physicianFirstLastName"),
     freeBox: makeNodeComponent("freeBox"),
     patientStatus: makeNodeComponent("patientStatus"),
     وضعیتبیمار: makeNodeComponent(
