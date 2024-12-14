@@ -377,6 +377,28 @@
   text-align: right;
   white-space: pre-wrap;
   min-width: 0;
+  padding: 0px 0px 8px;
+}
+.text___4WHjD {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: var(--token-8PxxXPNrIohQ);
+  white-space: pre-wrap;
+  text-transform: capitalize;
+  min-width: 0;
+}
+.physicianFirstLastName {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  white-space: pre-wrap;
+  min-width: 0;
   padding: 0px;
 }
 .freeBox {

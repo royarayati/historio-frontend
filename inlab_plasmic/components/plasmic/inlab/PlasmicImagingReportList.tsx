@@ -502,183 +502,178 @@ function PlasmicImagingReportList__RenderFunc(props: {
           )}
         />
 
-        {false ? (
-          <div
-            data-plasmic-name={"header"}
-            data-plasmic-override={overrides.header}
-            className={classNames(projectcss.all, sty.header)}
-          >
-            <ApiFetcherComponent
-              data-plasmic-name={"getPatient"}
-              data-plasmic-override={overrides.getPatient}
-              className={classNames("__wab_instance", sty.getPatient)}
-              headers={(() => {
-                try {
-                  return {
-                    "X-Namespace": localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )
-                  };
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
+        <div
+          data-plasmic-name={"header"}
+          data-plasmic-override={overrides.header}
+          className={classNames(projectcss.all, sty.header)}
+        >
+          <ApiFetcherComponent
+            data-plasmic-name={"getPatient"}
+            data-plasmic-override={overrides.getPatient}
+            className={classNames("__wab_instance", sty.getPatient)}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
                 }
-              })()}
-              method={"GET"}
-              path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
-              ref={ref => {
-                $refs["getPatient"] = ref;
-              }}
-            >
-              <DataCtxReader__>
-                {$ctx => (
-                  <React.Fragment>
-                    <div
-                      data-plasmic-name={"patientNameAgeGender"}
-                      data-plasmic-override={overrides.patientNameAgeGender}
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.patientNameAgeGender
-                      )}
-                      dir={"rtl"}
-                    >
-                      <React.Fragment>
-                        {(() => {
-                          if (!$ctx.fetched_data.loading) {
-                            const item = $ctx.fetched_data.data[0];
-                            if (item.date_of_birth) {
-                              const dob = new Date(item.date_of_birth);
-                              const now = new Date();
-                              let ageYears =
-                                now.getFullYear() - dob.getFullYear();
-                              const monthDifference =
-                                now.getMonth() - dob.getMonth();
-                              if (
-                                monthDifference < 0 ||
-                                (monthDifference === 0 &&
-                                  now.getDate() < dob.getDate())
-                              ) {
-                                ageYears--;
-                              }
-                              const fullName = `${item.first_name} ${item.last_name}`;
-                              const genderSymbol =
-                                item.gender === "F"
-                                  ? " \u2640️"
-                                  : item.gender === "M"
-                                  ? " \u2642️"
-                                  : "";
-                              if (ageYears < 1) {
-                                const ageMonths =
-                                  Math.abs(monthDifference) +
-                                  (now.getDate() < dob.getDate() ? -1 : 0);
-                                return `${fullName} ${ageMonths} month ${
-                                  ageMonths !== 1 ? "s" : ""
-                                }${genderSymbol}`;
-                              } else {
-                                return `${fullName} ${ageYears} ${genderSymbol}`;
-                              }
-                            } else {
-                              return "Date of birth not available.";
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+            ref={ref => {
+              $refs["getPatient"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <React.Fragment>
+                  <div
+                    data-plasmic-name={"patientNameAgeGender"}
+                    data-plasmic-override={overrides.patientNameAgeGender}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.patientNameAgeGender
+                    )}
+                    dir={"rtl"}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        if (!$ctx.fetched_data.loading) {
+                          const item = $ctx.fetched_data.data[0];
+                          if (item.date_of_birth) {
+                            const dob = new Date(item.date_of_birth);
+                            const now = new Date();
+                            let ageYears =
+                              now.getFullYear() - dob.getFullYear();
+                            const monthDifference =
+                              now.getMonth() - dob.getMonth();
+                            if (
+                              monthDifference < 0 ||
+                              (monthDifference === 0 &&
+                                now.getDate() < dob.getDate())
+                            ) {
+                              ageYears--;
                             }
+                            const fullName = `${item.first_name} ${item.last_name}`;
+                            const genderSymbol =
+                              item.gender === "F"
+                                ? " \u2640️"
+                                : item.gender === "M"
+                                ? " \u2642️"
+                                : "";
+                            if (ageYears < 1) {
+                              const ageMonths =
+                                Math.abs(monthDifference) +
+                                (now.getDate() < dob.getDate() ? -1 : 0);
+                              return `${fullName} ${ageMonths} month ${
+                                ageMonths !== 1 ? "s" : ""
+                              }${genderSymbol}`;
+                            } else {
+                              return `${fullName} ${ageYears} ${genderSymbol}`;
+                            }
+                          } else {
+                            return "Date of birth not available.";
                           }
-                        })()}
-                      </React.Fragment>
-                    </div>
-                    <ConditionGuard
-                      data-plasmic-name={"updateAdmissiondatetime"}
-                      data-plasmic-override={overrides.updateAdmissiondatetime}
-                      className={classNames(
-                        "__wab_instance",
-                        sty.updateAdmissiondatetime
-                      )}
-                      condition={$ctx.fetched_data.loading}
-                      onNotSatisfied={async () => {
-                        const $steps = {};
-
-                        $steps["setLocalAdmissionDatetime"] =
-                          $ctx.fetched_data.loading == false
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      return localStorage.setItem(
-                                        "admission_datetime",
-                                        $ctx.fetched_data.data[0]
-                                          .admission_datetime
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["setLocalAdmissionDatetime"] != null &&
-                          typeof $steps["setLocalAdmissionDatetime"] ===
-                            "object" &&
-                          typeof $steps["setLocalAdmissionDatetime"].then ===
-                            "function"
-                        ) {
-                          $steps["setLocalAdmissionDatetime"] = await $steps[
-                            "setLocalAdmissionDatetime"
-                          ];
                         }
+                      })()}
+                    </React.Fragment>
+                  </div>
+                  <ConditionGuard
+                    data-plasmic-name={"updateAdmissiondatetime"}
+                    data-plasmic-override={overrides.updateAdmissiondatetime}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.updateAdmissiondatetime
+                    )}
+                    condition={$ctx.fetched_data.loading}
+                    onNotSatisfied={async () => {
+                      const $steps = {};
 
-                        $steps["updateAdmissionDatetime"] =
-                          $steps.setLocalAdmissionDatetime
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["admissionDatetime"]
-                                  },
-                                  operation: 0,
-                                  value:
-                                    localStorage.getItem("admission_datetime")
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
+                      $steps["setLocalAdmissionDatetime"] =
+                        $ctx.fetched_data.loading == false
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    return localStorage.setItem(
+                                      "admission_datetime",
+                                      $ctx.fetched_data.data[0]
+                                        .admission_datetime
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["setLocalAdmissionDatetime"] != null &&
+                        typeof $steps["setLocalAdmissionDatetime"] ===
+                          "object" &&
+                        typeof $steps["setLocalAdmissionDatetime"].then ===
+                          "function"
+                      ) {
+                        $steps["setLocalAdmissionDatetime"] = await $steps[
+                          "setLocalAdmissionDatetime"
+                        ];
+                      }
 
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["updateAdmissionDatetime"] != null &&
-                          typeof $steps["updateAdmissionDatetime"] ===
-                            "object" &&
-                          typeof $steps["updateAdmissionDatetime"].then ===
-                            "function"
-                        ) {
-                          $steps["updateAdmissionDatetime"] = await $steps[
-                            "updateAdmissionDatetime"
-                          ];
-                        }
-                      }}
-                    />
-                  </React.Fragment>
-                )}
-              </DataCtxReader__>
-            </ApiFetcherComponent>
-          </div>
-        ) : null}
+                      $steps["updateAdmissionDatetime"] =
+                        $steps.setLocalAdmissionDatetime
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["admissionDatetime"]
+                                },
+                                operation: 0,
+                                value:
+                                  localStorage.getItem("admission_datetime")
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateAdmissionDatetime"] != null &&
+                        typeof $steps["updateAdmissionDatetime"] === "object" &&
+                        typeof $steps["updateAdmissionDatetime"].then ===
+                          "function"
+                      ) {
+                        $steps["updateAdmissionDatetime"] = await $steps[
+                          "updateAdmissionDatetime"
+                        ];
+                      }
+                    }}
+                  />
+                </React.Fragment>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
+        </div>
         <Stack__
           as={"div"}
           data-plasmic-name={"tabButtons"}
