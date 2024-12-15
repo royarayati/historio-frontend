@@ -2546,149 +2546,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  <Stack__
-                    as={"div"}
-                    data-plasmic-name={"labFactorList"}
-                    data-plasmic-override={overrides.labFactorList}
-                    hasGap={true}
-                    className={classNames(projectcss.all, sty.labFactorList)}
-                  >
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return $ctx.fetched_data.data;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
-                          }
-                          throw e;
-                        }
-                      })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (
-                        <div
-                          data-plasmic-name={"labFactorPerDate"}
-                          data-plasmic-override={overrides.labFactorPerDate}
-                          className={classNames(
-                            projectcss.all,
-                            sty.labFactorPerDate
-                          )}
-                          key={currentIndex}
-                        >
-                          <div
-                            data-plasmic-name={"labFactorDatetime"}
-                            data-plasmic-override={overrides.labFactorDatetime}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.labFactorDatetime
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                const gregorianDate = new Date(
-                                  currentItem.issued_datetime
-                                );
-                                const shamsiDate = new Intl.DateTimeFormat(
-                                  "fa-IR"
-                                ).format(gregorianDate);
-                                const shamsiTime =
-                                  gregorianDate.toLocaleTimeString("fa-IR", {
-                                    hour12: false
-                                  });
-                                const englishDate = shamsiDate.replace(
-                                  /[۰-۹]/g,
-                                  d =>
-                                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                                );
-                                const englishTime = shamsiTime.replace(
-                                  /[۰-۹]/g,
-                                  d =>
-                                    String.fromCharCode(d.charCodeAt(0) - 1728)
-                                );
-                                return `${englishDate}  ${englishTime}`;
-                              })()}
-                            </React.Fragment>
-                          </div>
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              sty.freeBox___1NlKt
-                            )}
-                          >
-                            <div
-                              data-plasmic-name={"labGroupFactorName"}
-                              data-plasmic-override={
-                                overrides.labGroupFactorName
-                              }
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.labGroupFactorName
-                              )}
-                            >
-                              <React.Fragment>
-                                {currentItem.group_title}
-                              </React.Fragment>
-                            </div>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                sty.freeBox__iNm8J
-                              )}
-                            >
-                              {(_par =>
-                                !_par
-                                  ? []
-                                  : Array.isArray(_par)
-                                  ? _par
-                                  : [_par])(
-                                (() => {
-                                  try {
-                                    return currentItem.factors;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return [];
-                                    }
-                                    throw e;
-                                  }
-                                })()
-                              ).map((__plasmic_item_1, __plasmic_idx_1) => {
-                                const currentItem = __plasmic_item_1;
-                                const currentIndex = __plasmic_idx_1;
-                                return (
-                                  <div
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.__wab_text,
-                                      sty.text__r2NQs
-                                    )}
-                                    key={currentIndex}
-                                  >
-                                    <React.Fragment>
-                                      {currentItem.factor_name}
-                                    </React.Fragment>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </Stack__>
                   {$ctx.fetched_data.loading == false &&
-                  $ctx.fetched_data.data.lab_test_groups == 0 ? (
+                  $ctx.fetched_data.data == "" ? (
                     <div
                       className={classNames(
                         projectcss.all,
@@ -2697,9 +2556,170 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       )}
                     >
                       {
-                        "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                        "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a "
                       }
                     </div>
+                  ) : null}
+                  {(() => {
+                    try {
+                      return true;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <Stack__
+                      as={"div"}
+                      data-plasmic-name={"labFactorList"}
+                      data-plasmic-override={overrides.labFactorList}
+                      hasGap={true}
+                      className={classNames(projectcss.all, sty.labFactorList)}
+                    >
+                      {(_par =>
+                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                        (() => {
+                          try {
+                            return $ctx.fetched_data.data;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
+                          }
+                        })()
+                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                        const currentItem = __plasmic_item_0;
+                        const currentIndex = __plasmic_idx_0;
+                        return (
+                          <div
+                            data-plasmic-name={"labFactorPerDate"}
+                            data-plasmic-override={overrides.labFactorPerDate}
+                            className={classNames(
+                              projectcss.all,
+                              sty.labFactorPerDate
+                            )}
+                            key={currentIndex}
+                          >
+                            <div
+                              data-plasmic-name={"labFactorDatetime"}
+                              data-plasmic-override={
+                                overrides.labFactorDatetime
+                              }
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.labFactorDatetime
+                              )}
+                            >
+                              <React.Fragment>
+                                {(() => {
+                                  const gregorianDate = new Date(
+                                    currentItem.issued_datetime
+                                  );
+                                  const shamsiDate = new Intl.DateTimeFormat(
+                                    "fa-IR"
+                                  ).format(gregorianDate);
+                                  const shamsiTime =
+                                    gregorianDate.toLocaleTimeString("fa-IR", {
+                                      hour12: false
+                                    });
+                                  const englishDate = shamsiDate.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  const englishTime = shamsiTime.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  return `${englishDate}  ${englishTime}`;
+                                })()}
+                              </React.Fragment>
+                            </div>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                sty.freeBox___1NlKt
+                              )}
+                            >
+                              <div
+                                data-plasmic-name={"labGroupFactorName"}
+                                data-plasmic-override={
+                                  overrides.labGroupFactorName
+                                }
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.labGroupFactorName
+                                )}
+                              >
+                                <React.Fragment>
+                                  {currentItem.group_title}
+                                </React.Fragment>
+                              </div>
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.freeBox__iNm8J
+                                )}
+                              >
+                                {(_par =>
+                                  !_par
+                                    ? []
+                                    : Array.isArray(_par)
+                                    ? _par
+                                    : [_par])(
+                                  (() => {
+                                    try {
+                                      return currentItem.factors;
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return [];
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                ).map((__plasmic_item_1, __plasmic_idx_1) => {
+                                  const currentItem = __plasmic_item_1;
+                                  const currentIndex = __plasmic_idx_1;
+                                  return (
+                                    <div
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.text__r2NQs
+                                      )}
+                                      key={currentIndex}
+                                    >
+                                      <React.Fragment>
+                                        {currentItem.factor_name}
+                                      </React.Fragment>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </Stack__>
                   ) : null}
                 </React.Fragment>
               )}

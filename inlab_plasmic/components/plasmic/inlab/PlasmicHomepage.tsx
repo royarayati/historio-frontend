@@ -5380,9 +5380,10 @@ function PlasmicHomepage__RenderFunc(props: {
                         ) : null}
                         {(
                           hasVariant(globalVariants, "screen", "mobileFirst")
-                            ? $state.mainSelectedTab === "patients" &&
-                              $state.searchbarLnameNcode.value === ""
-                            : $state.patientsSelectedTab === "ward"
+                            ? localStorage.getItem("patients_selected_tab") ===
+                              "ward"
+                            : localStorage.getItem("patients_selected_tab") ===
+                              "ward"
                         ) ? (
                           <Stack__
                             as={"div"}
@@ -5506,7 +5507,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )}
                               >
                                 {
-                                  "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u062a\u0627\u0631\u06cc\u062e \u067e\u0630\u06cc\u0631\u0634"
+                                  "\u062a\u0627\u0631\u06cc\u062e \u067e\u0630\u06cc\u0631\u0634"
                                 }
                               </div>
                             </Button>
@@ -5618,10 +5619,21 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )}
                               >
                                 {
-                                  "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u0634\u0645\u0627\u0631\u0647 \u062a\u062e\u062a"
+                                  "\u0634\u0645\u0627\u0631\u0647 \u062a\u062e\u062a"
                                 }
                               </div>
                             </Button>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text___0HDW
+                              )}
+                            >
+                              {
+                                "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633 : "
+                              }
+                            </div>
                           </Stack__>
                         ) : null}
                         <div

@@ -444,11 +444,13 @@
   grid-column-gap: 4px;
   grid-auto-rows: auto;
   grid-auto-columns: 1fr;
-  background: none;
+  background: #ffffff;
   align-self: center;
   border-top-style: none;
   border-top-width: 1px;
-  z-index: 1;
+  z-index: 2;
+  left: auto;
+  top: auto;
   min-width: 0;
   padding: 4px;
   margin: 0px;
@@ -466,12 +468,13 @@
   max-width: 100%;
   left: auto;
   top: auto;
-  background: #ffffff;
+  background: none;
   font-size: var(--token-CdE1_0ZaCyT1);
   text-align: center;
   font-weight: 500;
   min-width: 0;
   border-radius: 5px;
+  border: 1px solid var(--token-8PxxXPNrIohQ);
 }
 .button3:global(.__wab_instance) {
   max-width: 100%;
@@ -957,7 +960,7 @@
   z-index: 1;
   position: fixed;
   right: 12px;
-  background: #ffffff;
+  background: none;
   bottom: 65px;
   overflow: auto;
   padding: 0px;
@@ -978,6 +981,19 @@
   padding: 2px;
   margin: 0px;
 }
+.text__xoyT {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  margin-top: 32px;
+  white-space: pre-wrap;
+  align-self: flex-start;
+  z-index: 1;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
+}
 .labFactorList {
   display: flex;
   flex-direction: column;
@@ -985,6 +1001,8 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  align-self: flex-start;
+  background: #ffffff;
   min-width: 0;
   padding: 0px;
 }
@@ -1084,17 +1102,6 @@
   .text__r2NQs {
     font-size: var(--token-CdE1_0ZaCyT1);
   }
-}
-.text__xoyT {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-  margin-top: 32px;
-  white-space: pre-wrap;
-  min-width: 0;
-  border-radius: 5px;
-  padding: 8px;
 }
 .switchingTabs {
   display: flex;
