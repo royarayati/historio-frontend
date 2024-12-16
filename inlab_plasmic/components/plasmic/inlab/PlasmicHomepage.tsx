@@ -72,7 +72,6 @@ import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/c
 import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 import NewNoticeBanner from "../../NewNoticeBanner"; // plasmic-import: X347FgRZh6HH/component
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -195,6 +194,9 @@ export type PlasmicHomepage__OverridesType = {
   bookmarkedButtonStack?: Flex__<"div">;
   bookmarked?: Flex__<typeof Button>;
   bookmarkedPatientNumber?: Flex__<"div">;
+  sortingTabWardFilter?: Flex__<"div">;
+  sortByAdmissionDatetime?: Flex__<typeof Button>;
+  sortByBed?: Flex__<typeof Button>;
   buttonپاککردنهمهبوکمارکها?: Flex__<typeof Button>;
   بیمارییافتنشد?: Flex__<"div">;
   bookmarkGuide?: Flex__<"div">;
@@ -1267,6 +1269,124 @@ function PlasmicHomepage__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "sortByAdmissionDatetime.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByAdmissionDatetime.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.sortingByBed == false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "sortByAdmissionDatetime.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.sortingByBed == true;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "sortByAdmissionDatetime.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByAdmissionDatetime.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByBed.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByBed.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.sortingByBed == true;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "sortByBed.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.sortingByBed == false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "sortByBed.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByBed.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortingByBed",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -4076,8 +4196,8 @@ function PlasmicHomepage__RenderFunc(props: {
                   $state.searchbarLnameNcode.value) !== "" &&
                 $state.searchDismissed
                   ? 8
-                  : 15
-              }`}
+                  : 30
+              }&sort_by_bed=${$state.sortingByBed}`}
               ref={ref => {
                 $refs["patients"] = ref;
               }}
@@ -5258,6 +5378,273 @@ function PlasmicHomepage__RenderFunc(props: {
                             </div>
                           </Stack__>
                         ) : null}
+                        {(
+                          hasVariant(globalVariants, "screen", "mobileFirst")
+                            ? localStorage.getItem("patients_selected_tab") ===
+                              "ward"
+                            : localStorage.getItem("patients_selected_tab") ===
+                              "ward"
+                        ) ? (
+                          <Stack__
+                            as={"div"}
+                            data-plasmic-name={"sortingTabWardFilter"}
+                            data-plasmic-override={
+                              overrides.sortingTabWardFilter
+                            }
+                            hasGap={true}
+                            className={classNames(
+                              projectcss.all,
+                              sty.sortingTabWardFilter
+                            )}
+                          >
+                            <Button
+                              data-plasmic-name={"sortByAdmissionDatetime"}
+                              data-plasmic-override={
+                                overrides.sortByAdmissionDatetime
+                              }
+                              className={classNames(
+                                "__wab_instance",
+                                sty.sortByAdmissionDatetime
+                              )}
+                              deselected={generateStateValueProp($state, [
+                                "sortByAdmissionDatetime",
+                                "deselected"
+                              ])}
+                              isDisabled={generateStateValueProp($state, [
+                                "sortByAdmissionDatetime",
+                                "isDisabled"
+                              ])}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updateSortingByBed"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: ["sortingByBed"]
+                                        },
+                                        operation: 0,
+                                        value: false
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateSortingByBed"] != null &&
+                                  typeof $steps["updateSortingByBed"] ===
+                                    "object" &&
+                                  typeof $steps["updateSortingByBed"].then ===
+                                    "function"
+                                ) {
+                                  $steps["updateSortingByBed"] = await $steps[
+                                    "updateSortingByBed"
+                                  ];
+                                }
+                              }}
+                              onDeselectedChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByAdmissionDatetime",
+                                  "deselected"
+                                ])(eventArgs[0]);
+                              }}
+                              onIsDisabledChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByAdmissionDatetime",
+                                  "isDisabled"
+                                ])(eventArgs[0]);
+                              }}
+                              onSelectedChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByAdmissionDatetime",
+                                  "selected"
+                                ])(eventArgs[0]);
+                              }}
+                              onSortDeselectedChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByAdmissionDatetime",
+                                  "sortDeselected"
+                                ])(eventArgs[0]);
+                              }}
+                              onSortSelectedChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByAdmissionDatetime",
+                                  "sortSelected"
+                                ])(eventArgs[0]);
+                              }}
+                              selected={generateStateValueProp($state, [
+                                "sortByAdmissionDatetime",
+                                "selected"
+                              ])}
+                              sortDeselected={generateStateValueProp($state, [
+                                "sortByAdmissionDatetime",
+                                "sortDeselected"
+                              ])}
+                              sortSelected={generateStateValueProp($state, [
+                                "sortByAdmissionDatetime",
+                                "sortSelected"
+                              ])}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__vAgV
+                                )}
+                              >
+                                {
+                                  "\u062a\u0627\u0631\u06cc\u062e \u067e\u0630\u06cc\u0631\u0634"
+                                }
+                              </div>
+                            </Button>
+                            <Button
+                              data-plasmic-name={"sortByBed"}
+                              data-plasmic-override={overrides.sortByBed}
+                              className={classNames(
+                                "__wab_instance",
+                                sty.sortByBed
+                              )}
+                              deselected={generateStateValueProp($state, [
+                                "sortByBed",
+                                "deselected"
+                              ])}
+                              isDisabled={generateStateValueProp($state, [
+                                "sortByBed",
+                                "isDisabled"
+                              ])}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updateSortingByBed"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: ["sortingByBed"]
+                                        },
+                                        operation: 0,
+                                        value: true
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateSortingByBed"] != null &&
+                                  typeof $steps["updateSortingByBed"] ===
+                                    "object" &&
+                                  typeof $steps["updateSortingByBed"].then ===
+                                    "function"
+                                ) {
+                                  $steps["updateSortingByBed"] = await $steps[
+                                    "updateSortingByBed"
+                                  ];
+                                }
+                              }}
+                              onDeselectedChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByBed",
+                                  "deselected"
+                                ])(eventArgs[0]);
+                              }}
+                              onIsDisabledChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByBed",
+                                  "isDisabled"
+                                ])(eventArgs[0]);
+                              }}
+                              onSelectedChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByBed",
+                                  "selected"
+                                ])(eventArgs[0]);
+                              }}
+                              onSortDeselectedChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByBed",
+                                  "sortDeselected"
+                                ])(eventArgs[0]);
+                              }}
+                              onSortSelectedChange={(...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "sortByBed",
+                                  "sortSelected"
+                                ])(eventArgs[0]);
+                              }}
+                              selected={generateStateValueProp($state, [
+                                "sortByBed",
+                                "selected"
+                              ])}
+                              sortDeselected={generateStateValueProp($state, [
+                                "sortByBed",
+                                "sortDeselected"
+                              ])}
+                              sortSelected={generateStateValueProp($state, [
+                                "sortByBed",
+                                "sortSelected"
+                              ])}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__eq5Mc
+                                )}
+                              >
+                                {
+                                  "\u0634\u0645\u0627\u0631\u0647 \u062a\u062e\u062a"
+                                }
+                              </div>
+                            </Button>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text___0HDW
+                              )}
+                              dr={
+                                hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? "rtl"
+                                  : undefined
+                              }
+                            >
+                              {
+                                "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633 "
+                              }
+                            </div>
+                          </Stack__>
+                        ) : null}
                         <div
                           className={classNames(
                             projectcss.all,
@@ -5397,9 +5784,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       </div>
                     ) : null}
                     {$ctx.fetched_data.loading == false &&
-                    $ctx.fetched_data.data == "" &&
-                    ($state.searchbarFname.value != "" ||
-                      $state.searchbarLnameNcode.value != "") ? (
+                    $ctx.fetched_data.data == "" ? (
                       <div
                         data-plasmic-name={
                           "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
@@ -11832,6 +12217,9 @@ const PlasmicDescendants = {
     "bookmarkedButtonStack",
     "bookmarked",
     "bookmarkedPatientNumber",
+    "sortingTabWardFilter",
+    "sortByAdmissionDatetime",
+    "sortByBed",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
@@ -11970,6 +12358,9 @@ const PlasmicDescendants = {
     "bookmarkedButtonStack",
     "bookmarked",
     "bookmarkedPatientNumber",
+    "sortingTabWardFilter",
+    "sortByAdmissionDatetime",
+    "sortByBed",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
@@ -12326,6 +12717,9 @@ const PlasmicDescendants = {
     "bookmarkedButtonStack",
     "bookmarked",
     "bookmarkedPatientNumber",
+    "sortingTabWardFilter",
+    "sortByAdmissionDatetime",
+    "sortByBed",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
@@ -12358,6 +12752,9 @@ const PlasmicDescendants = {
     "bookmarkedButtonStack",
     "bookmarked",
     "bookmarkedPatientNumber",
+    "sortingTabWardFilter",
+    "sortByAdmissionDatetime",
+    "sortByBed",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
   ],
   patientsTabs: [
@@ -12389,6 +12786,13 @@ const PlasmicDescendants = {
   ],
   bookmarked: ["bookmarked", "bookmarkedPatientNumber"],
   bookmarkedPatientNumber: ["bookmarkedPatientNumber"],
+  sortingTabWardFilter: [
+    "sortingTabWardFilter",
+    "sortByAdmissionDatetime",
+    "sortByBed"
+  ],
+  sortByAdmissionDatetime: ["sortByAdmissionDatetime"],
+  sortByBed: ["sortByBed"],
   buttonپاککردنهمهبوکمارکها: [
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
   ],
@@ -12645,6 +13049,9 @@ type NodeDefaultElementType = {
   bookmarkedButtonStack: "div";
   bookmarked: typeof Button;
   bookmarkedPatientNumber: "div";
+  sortingTabWardFilter: "div";
+  sortByAdmissionDatetime: typeof Button;
+  sortByBed: typeof Button;
   buttonپاککردنهمهبوکمارکها: typeof Button;
   بیمارییافتنشد: "div";
   bookmarkGuide: "div";
@@ -12855,6 +13262,9 @@ export const PlasmicHomepage = Object.assign(
     bookmarkedButtonStack: makeNodeComponent("bookmarkedButtonStack"),
     bookmarked: makeNodeComponent("bookmarked"),
     bookmarkedPatientNumber: makeNodeComponent("bookmarkedPatientNumber"),
+    sortingTabWardFilter: makeNodeComponent("sortingTabWardFilter"),
+    sortByAdmissionDatetime: makeNodeComponent("sortByAdmissionDatetime"),
+    sortByBed: makeNodeComponent("sortByBed"),
     buttonپاککردنهمهبوکمارکها: makeNodeComponent(
       "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
     ),

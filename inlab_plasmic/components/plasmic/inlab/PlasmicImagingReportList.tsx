@@ -1642,7 +1642,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
         ) : null}
-        {false ? (
+        {$state.selectedTab === "Paraclinics" ? (
           <ApiFetcherComponent
             data-plasmic-name={"paraclinics"}
             data-plasmic-override={overrides.paraclinics}
@@ -1687,7 +1687,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             throw e;
                           }
                         })()
-                      : $ctx.fetched_data.loading == true
+                      : $ctx.fetched_data && $ctx.fetched_data.loading === true
                   ) ? (
                     <div
                       className={classNames(
@@ -1701,8 +1701,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {$ctx.fetched_data.loading == false &&
-                  $ctx.fetched_data.data == "" ? (
+                  {$ctx.fetched_data &&
+                  $ctx.fetched_data.loading === false &&
+                  $ctx.fetched_data.data === "" ? (
                     <div
                       className={classNames(
                         projectcss.all,
