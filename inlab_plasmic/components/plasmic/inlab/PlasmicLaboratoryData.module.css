@@ -482,6 +482,11 @@
   min-width: 0;
   display: none;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .button3:global(.__wab_instance) {
+    display: none;
+  }
+}
 .svg__vP94 {
   position: relative;
   object-fit: cover;
@@ -506,7 +511,7 @@
   z-index: 1;
   min-width: 0;
   padding: 0px;
-  margin: 4px 0px 0px;
+  margin: 0px;
   border: 1px solid #ccccd200;
 }
 .laboratoryLists > :global(.__wab_flex-container) {
@@ -528,7 +533,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .laboratoryLists {
-    margin-top: 4px;
+    margin-top: 0px;
   }
 }
 .labResults {

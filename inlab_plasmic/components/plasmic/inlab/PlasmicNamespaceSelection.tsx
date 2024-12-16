@@ -391,9 +391,7 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                               $steps["logConsole"] = await $steps["logConsole"];
                             }
 
-                            $steps["goToHomepage"] = !(
-                              currentItem.id === 14 || currentItem.id === 3
-                            )
+                            $steps["goToHomepage"] = true
                               ? (() => {
                                   const actionArgs = {
                                     destination: `/patients`

@@ -4196,7 +4196,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   $state.searchbarLnameNcode.value) !== "" &&
                 $state.searchDismissed
                   ? 8
-                  : 15
+                  : 30
               }&sort_by_bed=${$state.sortingByBed}`}
               ref={ref => {
                 $refs["patients"] = ref;
@@ -5629,9 +5629,18 @@ function PlasmicHomepage__RenderFunc(props: {
                                 projectcss.__wab_text,
                                 sty.text___0HDW
                               )}
+                              dr={
+                                hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? "rtl"
+                                  : undefined
+                              }
                             >
                               {
-                                "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633 : "
+                                "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633 "
                               }
                             </div>
                           </Stack__>
