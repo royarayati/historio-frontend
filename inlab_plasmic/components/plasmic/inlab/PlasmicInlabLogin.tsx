@@ -502,10 +502,20 @@ function PlasmicInlabLogin__RenderFunc(props: {
               }
             })()}
             name={``}
-            onChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, ["username", "value"])(
-                (e => e.target?.value).apply(null, eventArgs)
-              );
+            onChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, ["username", "value"])(
+                  (e => e.target?.value).apply(null, eventArgs)
+                );
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
             placeholder={
               "\u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc"
@@ -620,10 +630,20 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 throw e;
               }
             })()}
-            onChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, ["password", "value"])(
-                (e => e.target?.value).apply(null, eventArgs)
-              );
+            onChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, ["password", "value"])(
+                  (e => e.target?.value).apply(null, eventArgs)
+                );
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
             placeholder={"\u0631\u0645\u0632 \u0639\u0628\u0648\u0631"}
             required={false}
@@ -840,32 +860,84 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 ];
               }
             }}
-            onDeselectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, ["loginButton", "deselected"])(
-                eventArgs[0]
-              );
+            onDeselectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "loginButton",
+                  "deselected"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
-            onIsDisabledChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, ["loginButton", "isDisabled"])(
-                eventArgs[0]
-              );
+            onIsDisabledChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "loginButton",
+                  "isDisabled"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
-            onSelectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, ["loginButton", "selected"])(
-                eventArgs[0]
-              );
+            onSelectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, ["loginButton", "selected"])(
+                  eventArgs[0]
+                );
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
-            onSortDeselectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
-                "loginButton",
-                "sortDeselected"
-              ])(eventArgs[0]);
+            onSortDeselectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "loginButton",
+                  "sortDeselected"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
-            onSortSelectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
-                "loginButton",
-                "sortSelected"
-              ])(eventArgs[0]);
+            onSortSelectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "loginButton",
+                  "sortSelected"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
             selected={generateStateValueProp($state, [
               "loginButton",
@@ -928,35 +1000,85 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "resetPassword",
                 "isDisabled"
               ])}
-              onDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "resetPassword",
-                  "deselected"
-                ])(eventArgs[0]);
+              onDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "resetPassword",
+                    "deselected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "resetPassword",
-                  "isDisabled"
-                ])(eventArgs[0]);
+              onIsDisabledChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "resetPassword",
+                    "isDisabled"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "resetPassword",
-                  "selected"
-                ])(eventArgs[0]);
+              onSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "resetPassword",
+                    "selected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onSortDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "resetPassword",
-                  "sortDeselected"
-                ])(eventArgs[0]);
+              onSortDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "resetPassword",
+                    "sortDeselected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onSortSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "resetPassword",
-                  "sortSelected"
-                ])(eventArgs[0]);
+              onSortSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "resetPassword",
+                    "sortSelected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
               selected={generateStateValueProp($state, [
                 "resetPassword",
@@ -1003,35 +1125,85 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "createAccount",
                 "isDisabled"
               ])}
-              onDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "createAccount",
-                  "deselected"
-                ])(eventArgs[0]);
+              onDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "createAccount",
+                    "deselected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "createAccount",
-                  "isDisabled"
-                ])(eventArgs[0]);
+              onIsDisabledChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "createAccount",
+                    "isDisabled"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "createAccount",
-                  "selected"
-                ])(eventArgs[0]);
+              onSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "createAccount",
+                    "selected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onSortDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "createAccount",
-                  "sortDeselected"
-                ])(eventArgs[0]);
+              onSortDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "createAccount",
+                    "sortDeselected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onSortSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, [
-                  "createAccount",
-                  "sortSelected"
-                ])(eventArgs[0]);
+              onSortSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "createAccount",
+                    "sortSelected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
               selected={generateStateValueProp($state, [
                 "createAccount",

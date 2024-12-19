@@ -291,30 +291,80 @@ function PlasmicFilterIcon__RenderFunc(props: {
             $steps["runCode"] = await $steps["runCode"];
           }
         }}
-        onDeselectedChange={(...eventArgs) => {
-          generateStateOnChangeProp($state, ["filterIcon", "deselected"])(
-            eventArgs[0]
-          );
+        onDeselectedChange={async (...eventArgs: any) => {
+          ((...eventArgs) => {
+            generateStateOnChangeProp($state, ["filterIcon", "deselected"])(
+              eventArgs[0]
+            );
+          }).apply(null, eventArgs);
+
+          if (
+            eventArgs.length > 1 &&
+            eventArgs[1] &&
+            eventArgs[1]._plasmic_state_init_
+          ) {
+            return;
+          }
         }}
-        onIsDisabledChange={(...eventArgs) => {
-          generateStateOnChangeProp($state, ["filterIcon", "isDisabled"])(
-            eventArgs[0]
-          );
+        onIsDisabledChange={async (...eventArgs: any) => {
+          ((...eventArgs) => {
+            generateStateOnChangeProp($state, ["filterIcon", "isDisabled"])(
+              eventArgs[0]
+            );
+          }).apply(null, eventArgs);
+
+          if (
+            eventArgs.length > 1 &&
+            eventArgs[1] &&
+            eventArgs[1]._plasmic_state_init_
+          ) {
+            return;
+          }
         }}
-        onSelectedChange={(...eventArgs) => {
-          generateStateOnChangeProp($state, ["filterIcon", "selected"])(
-            eventArgs[0]
-          );
+        onSelectedChange={async (...eventArgs: any) => {
+          ((...eventArgs) => {
+            generateStateOnChangeProp($state, ["filterIcon", "selected"])(
+              eventArgs[0]
+            );
+          }).apply(null, eventArgs);
+
+          if (
+            eventArgs.length > 1 &&
+            eventArgs[1] &&
+            eventArgs[1]._plasmic_state_init_
+          ) {
+            return;
+          }
         }}
-        onSortDeselectedChange={(...eventArgs) => {
-          generateStateOnChangeProp($state, ["filterIcon", "sortDeselected"])(
-            eventArgs[0]
-          );
+        onSortDeselectedChange={async (...eventArgs: any) => {
+          ((...eventArgs) => {
+            generateStateOnChangeProp($state, ["filterIcon", "sortDeselected"])(
+              eventArgs[0]
+            );
+          }).apply(null, eventArgs);
+
+          if (
+            eventArgs.length > 1 &&
+            eventArgs[1] &&
+            eventArgs[1]._plasmic_state_init_
+          ) {
+            return;
+          }
         }}
-        onSortSelectedChange={(...eventArgs) => {
-          generateStateOnChangeProp($state, ["filterIcon", "sortSelected"])(
-            eventArgs[0]
-          );
+        onSortSelectedChange={async (...eventArgs: any) => {
+          ((...eventArgs) => {
+            generateStateOnChangeProp($state, ["filterIcon", "sortSelected"])(
+              eventArgs[0]
+            );
+          }).apply(null, eventArgs);
+
+          if (
+            eventArgs.length > 1 &&
+            eventArgs[1] &&
+            eventArgs[1]._plasmic_state_init_
+          ) {
+            return;
+          }
         }}
         selected={generateStateValueProp($state, ["filterIcon", "selected"])}
         shape={"rounded"}

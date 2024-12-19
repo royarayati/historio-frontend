@@ -1668,31 +1668,82 @@ function PlasmicConsultList__RenderFunc(props: {
                 $steps["goToConsultSend"] = await $steps["goToConsultSend"];
               }
             }}
-            onDeselectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, ["newConsult", "deselected"])(
-                eventArgs[0]
-              );
+            onDeselectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, ["newConsult", "deselected"])(
+                  eventArgs[0]
+                );
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
-            onIsDisabledChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, ["newConsult", "isDisabled"])(
-                eventArgs[0]
-              );
+            onIsDisabledChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, ["newConsult", "isDisabled"])(
+                  eventArgs[0]
+                );
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
-            onSelectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, ["newConsult", "selected"])(
-                eventArgs[0]
-              );
+            onSelectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, ["newConsult", "selected"])(
+                  eventArgs[0]
+                );
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
-            onSortDeselectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, [
-                "newConsult",
-                "sortDeselected"
-              ])(eventArgs[0]);
+            onSortDeselectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "newConsult",
+                  "sortDeselected"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
-            onSortSelectedChange={(...eventArgs) => {
-              generateStateOnChangeProp($state, ["newConsult", "sortSelected"])(
-                eventArgs[0]
-              );
+            onSortSelectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "newConsult",
+                  "sortSelected"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
             }}
             selected={generateStateValueProp($state, [
               "newConsult",
@@ -2094,10 +2145,12 @@ function PlasmicConsultList__RenderFunc(props: {
               [sty["pcls_t0IwdKpYM44X"]]: true
             })}
             modalScopeClassName={sty["modalDeleteConsultConfirmation__modal"]}
-            onOpenChange={generateStateOnChangeProp($state, [
-              "modalDeleteConsultConfirmation",
-              "open"
-            ])}
+            onOpenChange={async (...eventArgs: any) => {
+              generateStateOnChangeProp($state, [
+                "modalDeleteConsultConfirmation",
+                "open"
+              ]).apply(null, eventArgs);
+            }}
             open={generateStateValueProp($state, [
               "modalDeleteConsultConfirmation",
               "open"
@@ -2206,35 +2259,85 @@ function PlasmicConsultList__RenderFunc(props: {
                         ];
                     }
                   }}
-                  onDeselectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "noConfirm",
-                      "deselected"
-                    ])(eventArgs[0]);
+                  onDeselectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "noConfirm",
+                        "deselected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
-                  onIsDisabledChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "noConfirm",
-                      "isDisabled"
-                    ])(eventArgs[0]);
+                  onIsDisabledChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "noConfirm",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
-                  onSelectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "noConfirm",
-                      "selected"
-                    ])(eventArgs[0]);
+                  onSelectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "noConfirm",
+                        "selected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
-                  onSortDeselectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "noConfirm",
-                      "sortDeselected"
-                    ])(eventArgs[0]);
+                  onSortDeselectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "noConfirm",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
-                  onSortSelectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "noConfirm",
-                      "sortSelected"
-                    ])(eventArgs[0]);
+                  onSortSelectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "noConfirm",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
                   selected={generateStateValueProp($state, [
                     "noConfirm",
@@ -2465,34 +2568,85 @@ function PlasmicConsultList__RenderFunc(props: {
                         await $steps["updateDeleteConsultUnsuccessfullyAlert2"];
                     }
                   }}
-                  onDeselectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "confirm",
-                      "deselected"
-                    ])(eventArgs[0]);
+                  onDeselectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "confirm",
+                        "deselected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
-                  onIsDisabledChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "confirm",
-                      "isDisabled"
-                    ])(eventArgs[0]);
+                  onIsDisabledChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "confirm",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
-                  onSelectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, ["confirm", "selected"])(
-                      eventArgs[0]
-                    );
+                  onSelectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "confirm",
+                        "selected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
-                  onSortDeselectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "confirm",
-                      "sortDeselected"
-                    ])(eventArgs[0]);
+                  onSortDeselectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "confirm",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
-                  onSortSelectedChange={(...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "confirm",
-                      "sortSelected"
-                    ])(eventArgs[0]);
+                  onSortSelectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "confirm",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   }}
                   selected={generateStateValueProp($state, [
                     "confirm",
