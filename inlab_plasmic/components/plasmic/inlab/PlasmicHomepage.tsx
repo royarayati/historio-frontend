@@ -6616,20 +6616,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                         return;
                                       }
                                     },
-                                    patientId: (() => {
-                                      try {
-                                        return currentItem.patient_id;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })(),
+                                    patientId: currentItem.patient_id,
+
                                     selected: generateStateValueProp($state, [
                                       "bookmarkIcon",
                                       __plasmic_idx_0,
@@ -6677,21 +6665,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           $props,
                                           $state,
                                           $queries
-                                        }) =>
-                                          (() => {
-                                            try {
-                                              return currentItem.bookmarked;
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return false;
-                                              }
-                                              throw e;
-                                            }
-                                          })()
+                                        }) => currentItem.bookmarked
                                       }
                                     ],
                                     [__plasmic_idx_0]
