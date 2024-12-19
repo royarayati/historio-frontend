@@ -793,35 +793,85 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             $steps["goToPage"] = await $steps["goToPage"];
                           }
                         }}
-                        onDeselectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bioArcPrescription",
-                            "deselected"
-                          ])(eventArgs[0]);
+                        onDeselectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "bioArcPrescription",
+                              "deselected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
                         }}
-                        onIsDisabledChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bioArcPrescription",
-                            "isDisabled"
-                          ])(eventArgs[0]);
+                        onIsDisabledChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "bioArcPrescription",
+                              "isDisabled"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
                         }}
-                        onSelectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bioArcPrescription",
-                            "selected"
-                          ])(eventArgs[0]);
+                        onSelectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "bioArcPrescription",
+                              "selected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
                         }}
-                        onSortDeselectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bioArcPrescription",
-                            "sortDeselected"
-                          ])(eventArgs[0]);
+                        onSortDeselectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "bioArcPrescription",
+                              "sortDeselected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
                         }}
-                        onSortSelectedChange={(...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "bioArcPrescription",
-                            "sortSelected"
-                          ])(eventArgs[0]);
+                        onSortSelectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "bioArcPrescription",
+                              "sortSelected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
                         }}
                         selected={generateStateValueProp($state, [
                           "bioArcPrescription",
@@ -1211,10 +1261,20 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     const child$Props = {
                       bookmarked: undefined,
                       className: classNames("__wab_instance", sty.bookmarkIcon),
-                      onSelectedChange: generateStateOnChangeProp($state, [
-                        "bookmarkIcon",
-                        "selected"
-                      ]),
+                      onSelectedChange: async (...eventArgs: any) => {
+                        generateStateOnChangeProp($state, [
+                          "bookmarkIcon",
+                          "selected"
+                        ]).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      },
                       patientId: (() => {
                         try {
                           return $ctx.params.code;

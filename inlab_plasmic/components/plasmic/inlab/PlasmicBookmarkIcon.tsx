@@ -246,7 +246,7 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
       onClick={async event => {
         const $steps = {};
 
-        $steps["activateLoadingBookmarkVariant"] = true
+        $steps["activateLoadingBookmarkVariant"] = false
           ? (() => {
               const actionArgs = { vgroup: "loadingBookmark", operation: 4 };
               return (({ vgroup, value }) => {
@@ -269,7 +269,7 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           ];
         }
 
-        $steps["toggleBookmark"] = true
+        $steps["postBookmark"] = true
           ? (() => {
               const actionArgs = {
                 args: [
@@ -317,15 +317,44 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
             })()
           : undefined;
         if (
-          $steps["toggleBookmark"] != null &&
-          typeof $steps["toggleBookmark"] === "object" &&
-          typeof $steps["toggleBookmark"].then === "function"
+          $steps["postBookmark"] != null &&
+          typeof $steps["postBookmark"] === "object" &&
+          typeof $steps["postBookmark"].then === "function"
         ) {
-          $steps["toggleBookmark"] = await $steps["toggleBookmark"];
+          $steps["postBookmark"] = await $steps["postBookmark"];
+        }
+
+        $steps["updateBookmarkState"] = true
+          ? (() => {
+              const actionArgs = {
+                variable: {
+                  objRoot: $state,
+                  variablePath: ["selected"]
+                },
+                operation: 4
+              };
+              return (({ variable, value, startIndex, deleteCount }) => {
+                if (!variable) {
+                  return;
+                }
+                const { objRoot, variablePath } = variable;
+
+                const oldValue = $stateGet(objRoot, variablePath);
+                $stateSet(objRoot, variablePath, !oldValue);
+                return !oldValue;
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
+        if (
+          $steps["updateBookmarkState"] != null &&
+          typeof $steps["updateBookmarkState"] === "object" &&
+          typeof $steps["updateBookmarkState"].then === "function"
+        ) {
+          $steps["updateBookmarkState"] = await $steps["updateBookmarkState"];
         }
 
         $steps["runTrigerReload"] =
-          $steps.toggleBookmark.status === 200
+          $steps.postBookmark.status === 200
             ? (() => {
                 const actionArgs = { eventRef: $props["trigerReload"] };
                 return (({ eventRef, args }) => {
@@ -341,20 +370,19 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           $steps["runTrigerReload"] = await $steps["runTrigerReload"];
         }
 
-        $steps["deactivateLoadingBookmarkVariant"] =
-          $steps.toggleBookmark.status === 200
-            ? (() => {
-                const actionArgs = { vgroup: "loadingBookmark", operation: 6 };
-                return (({ vgroup, value }) => {
-                  if (typeof value === "string") {
-                    value = [value];
-                  }
+        $steps["deactivateLoadingBookmarkVariant"] = false
+          ? (() => {
+              const actionArgs = { vgroup: "loadingBookmark", operation: 6 };
+              return (({ vgroup, value }) => {
+                if (typeof value === "string") {
+                  value = [value];
+                }
 
-                  $stateSet($state, vgroup, false);
-                  return false;
-                })?.apply(null, [actionArgs]);
-              })()
-            : undefined;
+                $stateSet($state, vgroup, false);
+                return false;
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
         if (
           $steps["deactivateLoadingBookmarkVariant"] != null &&
           typeof $steps["deactivateLoadingBookmarkVariant"] === "object" &&
@@ -363,6 +391,28 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           $steps["deactivateLoadingBookmarkVariant"] = await $steps[
             "deactivateLoadingBookmarkVariant"
           ];
+        }
+
+        $steps["showNotification"] =
+          event.error && $steps.postBookmark.status !== 200
+            ? (() => {
+                const actionArgs = {
+                  args: [
+                    "info",
+                    "\u0641\u0631\u0627\u06cc\u0646\u062f \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631 \u0628\u0627 \u0645\u0634\u06a9\u0644 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f\u060c \u0644\u0637\u0641\u0627 \u0645\u062c\u062f\u062f \u062a\u0644\u0627\u0634 \u06a9\u0646\u06cc\u062f"
+                  ]
+                };
+                return $globalActions[
+                  "plasmic-antd5-config-provider.showNotification"
+                ]?.apply(null, [...actionArgs.args]);
+              })()
+            : undefined;
+        if (
+          $steps["showNotification"] != null &&
+          typeof $steps["showNotification"] === "object" &&
+          typeof $steps["showNotification"].then === "function"
+        ) {
+          $steps["showNotification"] = await $steps["showNotification"];
         }
       }}
       role={"img"}

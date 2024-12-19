@@ -399,8 +399,12 @@ function PlasmicTextInput__RenderFunc(props: {
         disabled={
           hasVariant($state, "isDisabled", "isDisabled") ? true : undefined
         }
-        onChange={e => {
-          generateStateOnChangeProp($state, ["input", "value"])(e.target.value);
+        onChange={async (...eventArgs: any) => {
+          (e => {
+            generateStateOnChangeProp($state, ["input", "value"])(
+              e.target.value
+            );
+          }).apply(null, eventArgs);
         }}
         onClick={async event => {
           const $steps = {};

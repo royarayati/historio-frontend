@@ -1349,13 +1349,14 @@
   position: relative;
   align-items: center;
   justify-content: flex-start;
-  width: auto;
+  width: 100%;
   height: auto;
   max-width: 100%;
   background: none;
   left: auto;
   top: auto;
   z-index: 1;
+  min-width: 0;
   padding: 5px 5px 8px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -1869,6 +1870,7 @@
   width: auto;
   height: auto;
   max-width: 100%;
+  padding-right: 5px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .text___0HDW {

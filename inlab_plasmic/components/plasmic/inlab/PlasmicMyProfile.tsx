@@ -465,10 +465,20 @@ function PlasmicMyProfile__RenderFunc(props: {
               {(() => {
                 const child$Props = {
                   className: classNames("__wab_instance", sty.نام),
-                  onChange: (...eventArgs) => {
-                    generateStateOnChangeProp($state, ["نام", "value"])(
-                      (e => e.target?.value).apply(null, eventArgs)
-                    );
+                  onChange: async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, ["نام", "value"])(
+                        (e => e.target?.value).apply(null, eventArgs)
+                      );
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   },
                   placeholder: (() => {
                     try {
@@ -554,10 +564,21 @@ function PlasmicMyProfile__RenderFunc(props: {
               {(() => {
                 const child$Props = {
                   className: classNames("__wab_instance", sty.نامخانوادگی),
-                  onChange: (...eventArgs) => {
-                    generateStateOnChangeProp($state, ["نامخانوادگی", "value"])(
-                      (e => e.target?.value).apply(null, eventArgs)
-                    );
+                  onChange: async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "نامخانوادگی",
+                        "value"
+                      ])((e => e.target?.value).apply(null, eventArgs));
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   },
                   placeholder: (() => {
                     try {
@@ -634,10 +655,20 @@ function PlasmicMyProfile__RenderFunc(props: {
                 const child$Props = {
                   autoFocus: false,
                   className: classNames("__wab_instance", sty.ایمیل),
-                  onChange: (...eventArgs) => {
-                    generateStateOnChangeProp($state, ["ایمیل", "value"])(
-                      (e => e.target?.value).apply(null, eventArgs)
-                    );
+                  onChange: async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, ["ایمیل", "value"])(
+                        (e => e.target?.value).apply(null, eventArgs)
+                      );
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
                   },
                   placeholder: (() => {
                     try {
@@ -721,10 +752,12 @@ function PlasmicMyProfile__RenderFunc(props: {
                 files={generateStateValueProp($state, ["عکسپروفایل2", "files"])}
                 listType={"picture"}
                 maxCount={1}
-                onFilesChange={generateStateOnChangeProp($state, [
-                  "عکسپروفایل2",
-                  "files"
-                ])}
+                onFilesChange={async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
+                    "عکسپروفایل2",
+                    "files"
+                  ]).apply(null, eventArgs);
+                }}
                 showUploadList={true}
               >
                 <AntdButton
@@ -800,30 +833,80 @@ function PlasmicMyProfile__RenderFunc(props: {
                   ];
                 }
               }}
-              onDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, ["save", "deselected"])(
-                  eventArgs[0]
-                );
+              onDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["save", "deselected"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onIsDisabledChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, ["save", "isDisabled"])(
-                  eventArgs[0]
-                );
+              onIsDisabledChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["save", "isDisabled"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, ["save", "selected"])(
-                  eventArgs[0]
-                );
+              onSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["save", "selected"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onSortDeselectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, ["save", "sortDeselected"])(
-                  eventArgs[0]
-                );
+              onSortDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["save", "sortDeselected"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
-              onSortSelectedChange={(...eventArgs) => {
-                generateStateOnChangeProp($state, ["save", "sortSelected"])(
-                  eventArgs[0]
-                );
+              onSortSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["save", "sortSelected"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
               }}
               selected={generateStateValueProp($state, ["save", "selected"])}
               sortDeselected={generateStateValueProp($state, [
