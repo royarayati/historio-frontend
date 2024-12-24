@@ -4431,28 +4431,31 @@ function PlasmicHomepage__RenderFunc(props: {
                       onNotSatisfied={async () => {
                         const $steps = {};
 
-                        $steps["setLocalBookmarkedList"] = false
-                          ? (() => {
-                              const actionArgs = {
-                                customFunction: async () => {
-                                  return (() => {
-                                    localStorage.setItem(
-                                      "bookmarked_list",
-                                      JSON.stringify($ctx.fetched_data.data)
-                                    );
-                                    return console.log(
-                                      `bookmarked_list: ${localStorage.getItem(
-                                        "bookmarked_list"
-                                      )}`
-                                    );
-                                  })();
-                                }
-                              };
-                              return (({ customFunction }) => {
-                                return customFunction();
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
+                        $steps["setLocalBookmarkedList"] =
+                          $state.searchbarFname.value === "" &&
+                          $state.searchbarLnameNcode.value === "" &&
+                          $state.filterBookmarked
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "bookmarked_list",
+                                        JSON.stringify($ctx.fetched_data.data)
+                                      );
+                                      return console.log(
+                                        `bookmarked_list: ${localStorage.getItem(
+                                          "bookmarked_list"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
                         if (
                           $steps["setLocalBookmarkedList"] != null &&
                           typeof $steps["setLocalBookmarkedList"] ===
@@ -4474,10 +4477,23 @@ function PlasmicHomepage__RenderFunc(props: {
                                       "patient_list",
                                       JSON.stringify($ctx.fetched_data.data)
                                     );
-                                    return console.log(
+                                    console.log(
                                       `patient_list: ${localStorage.getItem(
                                         "patient_list"
                                       )}`
+                                    );
+                                    const updatedBookmarkIdList = (
+                                      $ctx.fetched_data?.data || []
+                                    )
+                                      .filter(item => item.bookmarked)
+                                      .map(item => item.id);
+                                    localStorage.setItem(
+                                      "bookmark_id_list",
+                                      JSON.stringify(updatedBookmarkIdList)
+                                    );
+                                    return console.log(
+                                      "Updated Bookmark ID List:",
+                                      updatedBookmarkIdList
                                     );
                                   })();
                                 }
@@ -4498,7 +4514,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           ];
                         }
 
-                        $steps["setLocalBookmarkId"] = true
+                        $steps["setLocalBookmarkId"] = false
                           ? (() => {
                               const actionArgs = {
                                 customFunction: async () => {
@@ -6541,35 +6557,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                           (() => {
                             try {
-                              return (() => {
-                                function loadPatientList() {
-                                  let patientList = [];
-                                  const localStorageData =
-                                    localStorage.getItem("patient_list");
-                                  if (localStorageData !== null) {
-                                    try {
-                                      patientList =
-                                        JSON.parse(localStorageData);
-                                    } catch (error) {
-                                      console.error(
-                                        "Error parsing localStorage data:",
-                                        error
-                                      );
-                                      patientList = [];
-                                    }
-                                  } else {
-                                    console.log("No data in localStorage.");
-                                    if (!$ctx.fetched_data.loading) {
-                                      patientList = $ctx.fetched_data.data;
-                                    } else {
-                                      console.log("Data is still loading.");
-                                    }
-                                  }
-                                  return patientList;
-                                }
-                                const patients = loadPatientList();
-                                return patients;
-                              })();
+                              return $ctx.fetched_data.data;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
