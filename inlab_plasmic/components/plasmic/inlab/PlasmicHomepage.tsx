@@ -6753,9 +6753,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                           $state,
                                           $queries
                                         }) =>
-                                          localStorage
-                                            .getItem("bookmark_id_list")
-                                            .includes(currentItem.id)
+                                          localStorage.getItem(
+                                            "bookmark_id_list"
+                                          )
+                                            ? localStorage
+                                                .getItem("bookmark_id_list")
+                                                .includes(currentItem.id)
+                                            : false
                                       }
                                     ],
                                     [__plasmic_idx_0]

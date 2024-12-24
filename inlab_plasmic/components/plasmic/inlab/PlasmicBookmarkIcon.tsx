@@ -378,9 +378,7 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           $steps["postBookmark"] = await $steps["postBookmark"];
         }
 
-        $steps["updateSelectedState"] = localStorage
-          .getItem("bookmark_id_list")
-          .includes($props.admissionId)
+        $steps["updateSelectedState"] = true
           ? (() => {
               const actionArgs = {
                 variable: {
@@ -388,7 +386,11 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
                   variablePath: ["selected"]
                 },
                 operation: 0,
-                value: "selected"
+                value: localStorage
+                  .getItem("bookmark_id_list")
+                  .includes($props.admissionId)
+                  ? "selected"
+                  : ""
               };
               return (({ variable, value, startIndex, deleteCount }) => {
                 if (!variable) {
@@ -409,37 +411,7 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           $steps["updateSelectedState"] = await $steps["updateSelectedState"];
         }
 
-        $steps["updateSelected"] = !localStorage
-          .getItem("bookmark_id_list")
-          .includes($props.admissionId)
-          ? (() => {
-              const actionArgs = {
-                variable: {
-                  objRoot: $state,
-                  variablePath: ["selected"]
-                },
-                operation: 1
-              };
-              return (({ variable, value, startIndex, deleteCount }) => {
-                if (!variable) {
-                  return;
-                }
-                const { objRoot, variablePath } = variable;
-
-                $stateSet(objRoot, variablePath, undefined);
-                return undefined;
-              })?.apply(null, [actionArgs]);
-            })()
-          : undefined;
-        if (
-          $steps["updateSelected"] != null &&
-          typeof $steps["updateSelected"] === "object" &&
-          typeof $steps["updateSelected"].then === "function"
-        ) {
-          $steps["updateSelected"] = await $steps["updateSelected"];
-        }
-
-        $steps["trigerReload"] = true
+        $steps["trigerReload"] = false
           ? (() => {
               const actionArgs = { eventRef: $props["trigerReload"] };
               return (({ eventRef, args }) => {
