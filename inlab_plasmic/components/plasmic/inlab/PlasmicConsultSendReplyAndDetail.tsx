@@ -79,6 +79,7 @@ import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFog
 import sty from "./PlasmicConsultSendReplyAndDetail.module.css"; // plasmic-import: UwudfLdMiFho/css
 
 import RubbishBinSvgrepoComSvgIcon from "./icons/PlasmicIcon__RubbishBinSvgrepoComSvg"; // plasmic-import: 4fW54JbpNQ-Y/icon
+import PrinterSvgrepoComSvgIcon from "./icons/PlasmicIcon__PrinterSvgrepoComSvg"; // plasmic-import: GJomw2qswBQy/icon
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
@@ -109,9 +110,10 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   getUniqueConsult?: Flex__<typeof ApiFetcherComponent>;
   sendConsult?: Flex__<"div">;
   consultHeader?: Flex__<"div">;
-  pageFunctionTopic?: Flex__<"div">;
-  pageFunctionTopicOfDatail?: Flex__<"div">;
   deleteConsult?: Flex__<"svg">;
+  pageFunctionTopicOfSendReply?: Flex__<"div">;
+  pageFunctionTopicOfDatail?: Flex__<"div">;
+  printConsult?: Flex__<"svg">;
   sendConsultReplyAlertContent?: Flex__<"div">;
   sendConsultReplySuccessfully?: Flex__<typeof Alert2>;
   sendConsultReplyUnsuccessfully?: Flex__<typeof Alert2>;
@@ -599,68 +601,6 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           throw e;
                         }
                       })() ? (
-                        <div
-                          data-plasmic-name={"pageFunctionTopic"}
-                          data-plasmic-override={overrides.pageFunctionTopic}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.pageFunctionTopic
-                          )}
-                        >
-                          {
-                            "\u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647"
-                          }
-                        </div>
-                      ) : null}
-                      {(() => {
-                        try {
-                          return (
-                            !$ctx.fetched_data.loading &&
-                            $ctx.fetched_data.data.state === 4
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })() ? (
-                        <div
-                          data-plasmic-name={"pageFunctionTopicOfDatail"}
-                          data-plasmic-override={
-                            overrides.pageFunctionTopicOfDatail
-                          }
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.pageFunctionTopicOfDatail
-                          )}
-                        >
-                          {
-                            "\u062c\u0632\u0626\u06cc\u0627\u062a \u0645\u0634\u0627\u0648\u0631\u0647"
-                          }
-                        </div>
-                      ) : null}
-                      {(() => {
-                        try {
-                          return (
-                            !$ctx.fetched_data.loading &&
-                            $ctx.fetched_data.data.state != 4
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })() ? (
                         <RubbishBinSvgrepoComSvgIcon
                           data-plasmic-name={"deleteConsult"}
                           data-plasmic-override={overrides.deleteConsult}
@@ -772,6 +712,125 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               ] = await $steps[
                                 "updateModalDeleteConsultConfirmationOpen"
                               ];
+                            }
+                          }}
+                          role={"img"}
+                        />
+                      ) : null}
+                      {(() => {
+                        try {
+                          return (
+                            !$ctx.fetched_data.loading &&
+                            $ctx.fetched_data.data.state != 4
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <div
+                          data-plasmic-name={"pageFunctionTopicOfSendReply"}
+                          data-plasmic-override={
+                            overrides.pageFunctionTopicOfSendReply
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.pageFunctionTopicOfSendReply
+                          )}
+                        >
+                          {
+                            "\u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647"
+                          }
+                        </div>
+                      ) : null}
+                      {(() => {
+                        try {
+                          return (
+                            !$ctx.fetched_data.loading &&
+                            $ctx.fetched_data.data.state === 4
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <div
+                          data-plasmic-name={"pageFunctionTopicOfDatail"}
+                          data-plasmic-override={
+                            overrides.pageFunctionTopicOfDatail
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.pageFunctionTopicOfDatail
+                          )}
+                        >
+                          {
+                            "\u062c\u0632\u0626\u06cc\u0627\u062a \u0645\u0634\u0627\u0648\u0631\u0647"
+                          }
+                        </div>
+                      ) : null}
+                      {(() => {
+                        try {
+                          return !$ctx.fetched_data.loading;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <PrinterSvgrepoComSvgIcon
+                          data-plasmic-name={"printConsult"}
+                          data-plasmic-override={overrides.printConsult}
+                          className={classNames(
+                            projectcss.all,
+                            sty.printConsult
+                          )}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["openGetConsultTemplateInNewWindow"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return window.open(
+                                        `/api/v3/consults/template?consult_id=${$ctx.fetched_data.data.id}&first_name=${$ctx.fetched_data.data.patient.first_name}&last_name=${$ctx.fetched_data.data.patient.last_name}&date_of_birth=${$ctx.fetched_data.data.patient.birth_date}&admission_date=${$ctx.fetched_data.data.patient.admission_datetime}&patient_ward=${$ctx.fetched_data.data.effective_ward.name}&sender_service=${$ctx.fetched_data.data.effective_patient_service.name}&receiver_service=${$ctx.fetched_data.data.consultant_service.name}`
+                                      );
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["openGetConsultTemplateInNewWindow"] !=
+                                null &&
+                              typeof $steps[
+                                "openGetConsultTemplateInNewWindow"
+                              ] === "object" &&
+                              typeof $steps["openGetConsultTemplateInNewWindow"]
+                                .then === "function"
+                            ) {
+                              $steps["openGetConsultTemplateInNewWindow"] =
+                                await $steps[
+                                  "openGetConsultTemplateInNewWindow"
+                                ];
                             }
                           }}
                           role={"img"}
@@ -3214,9 +3273,10 @@ const PlasmicDescendants = {
     "getUniqueConsult",
     "sendConsult",
     "consultHeader",
-    "pageFunctionTopic",
-    "pageFunctionTopicOfDatail",
     "deleteConsult",
+    "pageFunctionTopicOfSendReply",
+    "pageFunctionTopicOfDatail",
+    "printConsult",
     "sendConsultReplyAlertContent",
     "sendConsultReplySuccessfully",
     "sendConsultReplyUnsuccessfully",
@@ -3300,9 +3360,10 @@ const PlasmicDescendants = {
     "getUniqueConsult",
     "sendConsult",
     "consultHeader",
-    "pageFunctionTopic",
-    "pageFunctionTopicOfDatail",
     "deleteConsult",
+    "pageFunctionTopicOfSendReply",
+    "pageFunctionTopicOfDatail",
+    "printConsult",
     "sendConsultReplyAlertContent",
     "sendConsultReplySuccessfully",
     "sendConsultReplyUnsuccessfully",
@@ -3353,9 +3414,10 @@ const PlasmicDescendants = {
     "getUniqueConsult",
     "sendConsult",
     "consultHeader",
-    "pageFunctionTopic",
-    "pageFunctionTopicOfDatail",
     "deleteConsult",
+    "pageFunctionTopicOfSendReply",
+    "pageFunctionTopicOfDatail",
+    "printConsult",
     "sendConsultReplyAlertContent",
     "sendConsultReplySuccessfully",
     "sendConsultReplyUnsuccessfully",
@@ -3405,9 +3467,10 @@ const PlasmicDescendants = {
   sendConsult: [
     "sendConsult",
     "consultHeader",
-    "pageFunctionTopic",
-    "pageFunctionTopicOfDatail",
     "deleteConsult",
+    "pageFunctionTopicOfSendReply",
+    "pageFunctionTopicOfDatail",
+    "printConsult",
     "sendConsultReplyAlertContent",
     "sendConsultReplySuccessfully",
     "sendConsultReplyUnsuccessfully",
@@ -3456,13 +3519,15 @@ const PlasmicDescendants = {
   ],
   consultHeader: [
     "consultHeader",
-    "pageFunctionTopic",
+    "deleteConsult",
+    "pageFunctionTopicOfSendReply",
     "pageFunctionTopicOfDatail",
-    "deleteConsult"
+    "printConsult"
   ],
-  pageFunctionTopic: ["pageFunctionTopic"],
-  pageFunctionTopicOfDatail: ["pageFunctionTopicOfDatail"],
   deleteConsult: ["deleteConsult"],
+  pageFunctionTopicOfSendReply: ["pageFunctionTopicOfSendReply"],
+  pageFunctionTopicOfDatail: ["pageFunctionTopicOfDatail"],
+  printConsult: ["printConsult"],
   sendConsultReplyAlertContent: [
     "sendConsultReplyAlertContent",
     "sendConsultReplySuccessfully",
@@ -3624,9 +3689,10 @@ type NodeDefaultElementType = {
   getUniqueConsult: typeof ApiFetcherComponent;
   sendConsult: "div";
   consultHeader: "div";
-  pageFunctionTopic: "div";
-  pageFunctionTopicOfDatail: "div";
   deleteConsult: "svg";
+  pageFunctionTopicOfSendReply: "div";
+  pageFunctionTopicOfDatail: "div";
+  printConsult: "svg";
   sendConsultReplyAlertContent: "div";
   sendConsultReplySuccessfully: typeof Alert2;
   sendConsultReplyUnsuccessfully: typeof Alert2;
@@ -3762,9 +3828,12 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     getUniqueConsult: makeNodeComponent("getUniqueConsult"),
     sendConsult: makeNodeComponent("sendConsult"),
     consultHeader: makeNodeComponent("consultHeader"),
-    pageFunctionTopic: makeNodeComponent("pageFunctionTopic"),
-    pageFunctionTopicOfDatail: makeNodeComponent("pageFunctionTopicOfDatail"),
     deleteConsult: makeNodeComponent("deleteConsult"),
+    pageFunctionTopicOfSendReply: makeNodeComponent(
+      "pageFunctionTopicOfSendReply"
+    ),
+    pageFunctionTopicOfDatail: makeNodeComponent("pageFunctionTopicOfDatail"),
+    printConsult: makeNodeComponent("printConsult"),
     sendConsultReplyAlertContent: makeNodeComponent(
       "sendConsultReplyAlertContent"
     ),
