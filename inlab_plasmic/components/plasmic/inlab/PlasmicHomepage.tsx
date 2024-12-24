@@ -4431,31 +4431,28 @@ function PlasmicHomepage__RenderFunc(props: {
                       onNotSatisfied={async () => {
                         const $steps = {};
 
-                        $steps["setLocalBookmarkedList"] =
-                          $state.searchbarFname.value === "" &&
-                          $state.searchbarLnameNcode.value === "" &&
-                          $state.filterBookmarked
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "bookmarked_list",
-                                        JSON.stringify($ctx.fetched_data.data)
-                                      );
-                                      return console.log(
-                                        `bookmarked_list: ${localStorage.getItem(
-                                          "bookmarked_list"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
+                        $steps["setLocalBookmarkedList"] = false
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "bookmarked_list",
+                                      JSON.stringify($ctx.fetched_data.data)
+                                    );
+                                    return console.log(
+                                      `bookmarked_list: ${localStorage.getItem(
+                                        "bookmarked_list"
+                                      )}`
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
                         if (
                           $steps["setLocalBookmarkedList"] != null &&
                           typeof $steps["setLocalBookmarkedList"] ===
@@ -4465,6 +4462,76 @@ function PlasmicHomepage__RenderFunc(props: {
                         ) {
                           $steps["setLocalBookmarkedList"] = await $steps[
                             "setLocalBookmarkedList"
+                          ];
+                        }
+
+                        $steps["setLocalPatientList"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "patient_list",
+                                      JSON.stringify($ctx.fetched_data.data)
+                                    );
+                                    return console.log(
+                                      `patient_list: ${localStorage.getItem(
+                                        "patient_list"
+                                      )}`
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["setLocalPatientList"] != null &&
+                          typeof $steps["setLocalPatientList"] === "object" &&
+                          typeof $steps["setLocalPatientList"].then ===
+                            "function"
+                        ) {
+                          $steps["setLocalPatientList"] = await $steps[
+                            "setLocalPatientList"
+                          ];
+                        }
+
+                        $steps["setLocalBookmarkId"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    const updatedBookmarkIdList = (
+                                      $ctx.fetched_data?.data || []
+                                    )
+                                      .filter(item => item.bookmarked)
+                                      .map(item => item.id);
+                                    localStorage.setItem(
+                                      "bookmark_id_list",
+                                      JSON.stringify(updatedBookmarkIdList)
+                                    );
+                                    return console.log(
+                                      "Updated Bookmark ID List:",
+                                      updatedBookmarkIdList
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["setLocalBookmarkId"] != null &&
+                          typeof $steps["setLocalBookmarkId"] === "object" &&
+                          typeof $steps["setLocalBookmarkId"].then ===
+                            "function"
+                        ) {
+                          $steps["setLocalBookmarkId"] = await $steps[
+                            "setLocalBookmarkId"
                           ];
                         }
 
@@ -6319,7 +6386,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       </div>
                     ) : null}
                     {$ctx.fetched_data.loading == false &&
-                    $ctx.fetched_data.data == 0 ? (
+                    $ctx.fetched_data.data == 0 &&
+                    $state.patientsSelectedTab !== "bookmark" ? (
                       <div
                         data-plasmic-name={
                           "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
@@ -6473,16 +6541,35 @@ function PlasmicHomepage__RenderFunc(props: {
                           !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                           (() => {
                             try {
-                              return localStorage.getItem("bookmarked_list") !==
-                                (null || undefined || "" || "undefined") &&
-                                $ctx.fetched_data.loading &&
-                                $state.filterBookmarked &&
-                                $state.searchbarLnameNcode.value === "" &&
-                                $state.searchbarFname.value === ""
-                                ? JSON.parse(
-                                    localStorage.getItem("bookmarked_list")
-                                  )
-                                : $ctx.fetched_data.data;
+                              return (() => {
+                                function loadPatientList() {
+                                  let patientList = [];
+                                  const localStorageData =
+                                    localStorage.getItem("patient_list");
+                                  if (localStorageData !== null) {
+                                    try {
+                                      patientList =
+                                        JSON.parse(localStorageData);
+                                    } catch (error) {
+                                      console.error(
+                                        "Error parsing localStorage data:",
+                                        error
+                                      );
+                                      patientList = [];
+                                    }
+                                  } else {
+                                    console.log("No data in localStorage.");
+                                    if (!$ctx.fetched_data.loading) {
+                                      patientList = $ctx.fetched_data.data;
+                                    } else {
+                                      console.log("Data is still loading.");
+                                    }
+                                  }
+                                  return patientList;
+                                }
+                                const patients = loadPatientList();
+                                return patients;
+                              })();
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -6665,7 +6752,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           $props,
                                           $state,
                                           $queries
-                                        }) => currentItem.bookmarked
+                                        }) =>
+                                          localStorage
+                                            .getItem("bookmark_id_list")
+                                            .includes(currentItem.id)
                                       }
                                     ],
                                     [__plasmic_idx_0]

@@ -246,26 +246,80 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
       onClick={async event => {
         const $steps = {};
 
-        $steps["activateLoadingBookmarkVariant"] = false
+        $steps["updateBookmarkState"] = true
           ? (() => {
-              const actionArgs = { vgroup: "loadingBookmark", operation: 4 };
+              const actionArgs = { vgroup: "bookmarked", operation: 2 };
               return (({ vgroup, value }) => {
                 if (typeof value === "string") {
                   value = [value];
                 }
 
-                $stateSet($state, vgroup, true);
-                return true;
+                const oldValue = $stateGet($state, vgroup);
+                $stateSet($state, vgroup, !oldValue);
+                return !oldValue;
               })?.apply(null, [actionArgs]);
             })()
           : undefined;
         if (
-          $steps["activateLoadingBookmarkVariant"] != null &&
-          typeof $steps["activateLoadingBookmarkVariant"] === "object" &&
-          typeof $steps["activateLoadingBookmarkVariant"].then === "function"
+          $steps["updateBookmarkState"] != null &&
+          typeof $steps["updateBookmarkState"] === "object" &&
+          typeof $steps["updateBookmarkState"].then === "function"
         ) {
-          $steps["activateLoadingBookmarkVariant"] = await $steps[
-            "activateLoadingBookmarkVariant"
+          $steps["updateBookmarkState"] = await $steps["updateBookmarkState"];
+        }
+
+        $steps["runTrigerReload"] = true
+          ? (() => {
+              const actionArgs = { eventRef: $props["trigerReload"] };
+              return (({ eventRef, args }) => {
+                return eventRef?.(...(args ?? []));
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
+        if (
+          $steps["runTrigerReload"] != null &&
+          typeof $steps["runTrigerReload"] === "object" &&
+          typeof $steps["runTrigerReload"].then === "function"
+        ) {
+          $steps["runTrigerReload"] = await $steps["runTrigerReload"];
+        }
+
+        $steps["updateOrDeleteBookmarkIdList"] = true
+          ? (() => {
+              const actionArgs = {
+                customFunction: async () => {
+                  return (() => {
+                    const admissionId = $props.admissionId;
+                    let bookmarkIdList =
+                      JSON.parse(localStorage.getItem("bookmark_id_list")) ||
+                      [];
+                    if (bookmarkIdList.includes(admissionId)) {
+                      bookmarkIdList = bookmarkIdList.filter(
+                        id => id !== admissionId
+                      );
+                    } else {
+                      bookmarkIdList.push(admissionId);
+                    }
+                    localStorage.setItem(
+                      "bookmark_id_list",
+                      JSON.stringify(bookmarkIdList)
+                    );
+                    console.log("Bookmark ID list updated:", bookmarkIdList);
+                  })();
+                }
+              };
+              return (({ customFunction }) => {
+                return customFunction();
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
+        if (
+          $steps["updateOrDeleteBookmarkIdList"] != null &&
+          typeof $steps["updateOrDeleteBookmarkIdList"] === "object" &&
+          typeof $steps["updateOrDeleteBookmarkIdList"].then === "function"
+        ) {
+          $steps["updateOrDeleteBookmarkIdList"] = await $steps[
+            "updateOrDeleteBookmarkIdList"
           ];
         }
 
@@ -324,14 +378,17 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
           $steps["postBookmark"] = await $steps["postBookmark"];
         }
 
-        $steps["updateBookmarkState"] = true
+        $steps["updateSelectedState"] = localStorage
+          .getItem("bookmark_id_list")
+          .includes($props.admissionId)
           ? (() => {
               const actionArgs = {
                 variable: {
                   objRoot: $state,
                   variablePath: ["selected"]
                 },
-                operation: 4
+                operation: 0,
+                value: "selected"
               };
               return (({ variable, value, startIndex, deleteCount }) => {
                 if (!variable) {
@@ -339,80 +396,63 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
                 }
                 const { objRoot, variablePath } = variable;
 
-                const oldValue = $stateGet(objRoot, variablePath);
-                $stateSet(objRoot, variablePath, !oldValue);
-                return !oldValue;
+                $stateSet(objRoot, variablePath, value);
+                return value;
               })?.apply(null, [actionArgs]);
             })()
           : undefined;
         if (
-          $steps["updateBookmarkState"] != null &&
-          typeof $steps["updateBookmarkState"] === "object" &&
-          typeof $steps["updateBookmarkState"].then === "function"
+          $steps["updateSelectedState"] != null &&
+          typeof $steps["updateSelectedState"] === "object" &&
+          typeof $steps["updateSelectedState"].then === "function"
         ) {
-          $steps["updateBookmarkState"] = await $steps["updateBookmarkState"];
+          $steps["updateSelectedState"] = await $steps["updateSelectedState"];
         }
 
-        $steps["runTrigerReload"] =
-          $steps.postBookmark.status === 200
-            ? (() => {
-                const actionArgs = { eventRef: $props["trigerReload"] };
-                return (({ eventRef, args }) => {
-                  return eventRef?.(...(args ?? []));
-                })?.apply(null, [actionArgs]);
-              })()
-            : undefined;
-        if (
-          $steps["runTrigerReload"] != null &&
-          typeof $steps["runTrigerReload"] === "object" &&
-          typeof $steps["runTrigerReload"].then === "function"
-        ) {
-          $steps["runTrigerReload"] = await $steps["runTrigerReload"];
-        }
-
-        $steps["deactivateLoadingBookmarkVariant"] = false
+        $steps["updateSelected"] = !localStorage
+          .getItem("bookmark_id_list")
+          .includes($props.admissionId)
           ? (() => {
-              const actionArgs = { vgroup: "loadingBookmark", operation: 6 };
-              return (({ vgroup, value }) => {
-                if (typeof value === "string") {
-                  value = [value];
+              const actionArgs = {
+                variable: {
+                  objRoot: $state,
+                  variablePath: ["selected"]
+                },
+                operation: 1
+              };
+              return (({ variable, value, startIndex, deleteCount }) => {
+                if (!variable) {
+                  return;
                 }
+                const { objRoot, variablePath } = variable;
 
-                $stateSet($state, vgroup, false);
-                return false;
+                $stateSet(objRoot, variablePath, undefined);
+                return undefined;
               })?.apply(null, [actionArgs]);
             })()
           : undefined;
         if (
-          $steps["deactivateLoadingBookmarkVariant"] != null &&
-          typeof $steps["deactivateLoadingBookmarkVariant"] === "object" &&
-          typeof $steps["deactivateLoadingBookmarkVariant"].then === "function"
+          $steps["updateSelected"] != null &&
+          typeof $steps["updateSelected"] === "object" &&
+          typeof $steps["updateSelected"].then === "function"
         ) {
-          $steps["deactivateLoadingBookmarkVariant"] = await $steps[
-            "deactivateLoadingBookmarkVariant"
-          ];
+          $steps["updateSelected"] = await $steps["updateSelected"];
         }
 
-        $steps["showNotification"] =
-          event.error && $steps.postBookmark.status !== 200
-            ? (() => {
-                const actionArgs = {
-                  args: [
-                    "info",
-                    "\u0641\u0631\u0627\u06cc\u0646\u062f \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631 \u0628\u0627 \u0645\u0634\u06a9\u0644 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f\u060c \u0644\u0637\u0641\u0627 \u0645\u062c\u062f\u062f \u062a\u0644\u0627\u0634 \u06a9\u0646\u06cc\u062f"
-                  ]
-                };
-                return $globalActions[
-                  "plasmic-antd5-config-provider.showNotification"
-                ]?.apply(null, [...actionArgs.args]);
-              })()
-            : undefined;
+        $steps["trigerReload"] = true
+          ? (() => {
+              const actionArgs = { eventRef: $props["trigerReload"] };
+              return (({ eventRef, args }) => {
+                return eventRef?.(...(args ?? []));
+              })?.apply(null, [actionArgs]);
+            })()
+          : undefined;
         if (
-          $steps["showNotification"] != null &&
-          typeof $steps["showNotification"] === "object" &&
-          typeof $steps["showNotification"].then === "function"
+          $steps["trigerReload"] != null &&
+          typeof $steps["trigerReload"] === "object" &&
+          typeof $steps["trigerReload"].then === "function"
         ) {
-          $steps["showNotification"] = await $steps["showNotification"];
+          $steps["trigerReload"] = await $steps["trigerReload"];
         }
       }}
       role={"img"}

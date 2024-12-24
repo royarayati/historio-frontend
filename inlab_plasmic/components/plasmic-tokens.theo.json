@@ -2319,6 +2319,16 @@
         "projectId": "wjafXWEvDytFogT7SiMy2v",
         "id": "sOr3fJ5Up5fq"
       }
+    },
+    {
+      "name": "white color",
+      "type": "color",
+      "value": "#FFFFFF",
+      "category": "color",
+      "meta": {
+        "projectId": "wjafXWEvDytFogT7SiMy2v",
+        "id": "9FP8Zn8H8LBL"
+      }
     }
   ],
   "global": {
