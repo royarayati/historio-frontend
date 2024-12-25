@@ -6697,38 +6697,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       "bookmarkIcon",
                                       __plasmic_idx_0,
                                       "selected"
-                                    ]),
-                                    trigerReload: async () => {
-                                      const $steps = {};
-
-                                      $steps["runActionOnPatients"] = true
-                                        ? (() => {
-                                            const actionArgs = {
-                                              tplRef: "patients",
-                                              action: "reload"
-                                            };
-                                            return (({
-                                              tplRef,
-                                              action,
-                                              args
-                                            }) => {
-                                              return $refs?.[tplRef]?.[
-                                                action
-                                              ]?.(...(args ?? []));
-                                            })?.apply(null, [actionArgs]);
-                                          })()
-                                        : undefined;
-                                      if (
-                                        $steps["runActionOnPatients"] != null &&
-                                        typeof $steps["runActionOnPatients"] ===
-                                          "object" &&
-                                        typeof $steps["runActionOnPatients"]
-                                          .then === "function"
-                                      ) {
-                                        $steps["runActionOnPatients"] =
-                                          await $steps["runActionOnPatients"];
-                                      }
-                                    }
+                                    ])
                                   };
 
                                   initializePlasmicStates(
