@@ -106,7 +106,7 @@ export type PlasmicInlabLogin__OverridesType = {
   inlabLogin?: Flex__<"div">;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   redirectToHomepage?: Flex__<typeof RedirectToHomepage>;
-  alert?: Flex__<typeof Alert>;
+  announcementAlert?: Flex__<typeof Alert>;
   pageContent?: Flex__<"div">;
   username?: Flex__<typeof TextInput>;
   password?: Flex__<typeof TextInput>;
@@ -350,9 +350,9 @@ function PlasmicInlabLogin__RenderFunc(props: {
         />
 
         <Alert
-          data-plasmic-name={"alert"}
-          data-plasmic-override={overrides.alert}
-          className={classNames("__wab_instance", sty.alert)}
+          data-plasmic-name={"announcementAlert"}
+          data-plasmic-override={overrides.announcementAlert}
+          className={classNames("__wab_instance", sty.announcementAlert)}
           header={
             <div
               className={classNames(
@@ -677,6 +677,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 projectcss.__wab_text,
                 sty.text__rvtSi
               )}
+              dir={"rtl"}
             >
               {
                 "\u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc \u0648 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0627\u0634\u062a\u0628\u0627\u0647 \u0627\u0633\u062a."
@@ -709,6 +710,29 @@ function PlasmicInlabLogin__RenderFunc(props: {
             ])}
             onClick={async event => {
               const $steps = {};
+
+              $steps["deactiveteWrongUser"] = true
+                ? (() => {
+                    const actionArgs = { vgroup: "wrongUser", operation: 6 };
+                    return (({ vgroup, value }) => {
+                      if (typeof value === "string") {
+                        value = [value];
+                      }
+
+                      $stateSet($state, vgroup, false);
+                      return false;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["deactiveteWrongUser"] != null &&
+                typeof $steps["deactiveteWrongUser"] === "object" &&
+                typeof $steps["deactiveteWrongUser"].then === "function"
+              ) {
+                $steps["deactiveteWrongUser"] = await $steps[
+                  "deactiveteWrongUser"
+                ];
+              }
 
               $steps["disablerLoginButton"] = true
                 ? (() => {
@@ -812,7 +836,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 ];
               }
 
-              $steps["wrongUser"] =
+              $steps["activeteWrongUser"] =
                 $steps.loginAction.status !== 200
                   ? (() => {
                       const actionArgs = { vgroup: "wrongUser", operation: 4 };
@@ -827,11 +851,11 @@ function PlasmicInlabLogin__RenderFunc(props: {
                     })()
                   : undefined;
               if (
-                $steps["wrongUser"] != null &&
-                typeof $steps["wrongUser"] === "object" &&
-                typeof $steps["wrongUser"].then === "function"
+                $steps["activeteWrongUser"] != null &&
+                typeof $steps["activeteWrongUser"] === "object" &&
+                typeof $steps["activeteWrongUser"].then === "function"
               ) {
-                $steps["wrongUser"] = await $steps["wrongUser"];
+                $steps["activeteWrongUser"] = await $steps["activeteWrongUser"];
               }
 
               $steps["enablerLoginButton"] = true
@@ -1248,7 +1272,7 @@ const PlasmicDescendants = {
     "inlabLogin",
     "redirectToNamespaceSelection",
     "redirectToHomepage",
-    "alert",
+    "announcementAlert",
     "pageContent",
     "username",
     "password",
@@ -1260,7 +1284,7 @@ const PlasmicDescendants = {
   ],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   redirectToHomepage: ["redirectToHomepage"],
-  alert: ["alert"],
+  announcementAlert: ["announcementAlert"],
   pageContent: [
     "pageContent",
     "username",
@@ -1290,7 +1314,7 @@ type NodeDefaultElementType = {
   inlabLogin: "div";
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   redirectToHomepage: typeof RedirectToHomepage;
-  alert: typeof Alert;
+  announcementAlert: typeof Alert;
   pageContent: "div";
   username: typeof TextInput;
   password: typeof TextInput;
@@ -1365,7 +1389,7 @@ export const PlasmicInlabLogin = Object.assign(
       "redirectToNamespaceSelection"
     ),
     redirectToHomepage: makeNodeComponent("redirectToHomepage"),
-    alert: makeNodeComponent("alert"),
+    announcementAlert: makeNodeComponent("announcementAlert"),
     pageContent: makeNodeComponent("pageContent"),
     username: makeNodeComponent("username"),
     password: makeNodeComponent("password"),

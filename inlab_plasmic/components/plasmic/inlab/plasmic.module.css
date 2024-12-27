@@ -57,6 +57,8 @@
   --plasmic-token-background-warning: var(--token-86XDInJC_qo3);
   --token-w6XJB4jo1qqO: #f5f5f5;
   --plasmic-token-filter-tab: var(--token-w6XJB4jo1qqO);
+  --token-9FP8Zn8H8LBL: #ffffff;
+  --plasmic-token-white-color: var(--token-9FP8Zn8H8LBL);
 }
 
 @media (min-width: 0px) and (max-width: 760px) {

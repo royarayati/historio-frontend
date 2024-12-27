@@ -155,6 +155,15 @@
   min-width: 0;
   padding: 8px;
 }
+.deleteConsult {
+  object-fit: cover;
+  max-width: 100%;
+  color: var(--token-b7Myz3RtiwPQ);
+  width: 30px;
+  height: 30px;
+  align-self: center;
+  flex-shrink: 0;
+}
 .pageFunctionTopic {
   position: relative;
   width: 100%;
@@ -174,15 +183,6 @@
   text-decoration-line: none;
   min-width: 0;
   padding: 10px;
-}
-.deleteConsult {
-  object-fit: cover;
-  max-width: 100%;
-  color: var(--token-b7Myz3RtiwPQ);
-  width: 25px;
-  height: 25px;
-  align-self: center;
-  flex-shrink: 0;
 }
 .sendConsultAlertContent {
   display: flex;

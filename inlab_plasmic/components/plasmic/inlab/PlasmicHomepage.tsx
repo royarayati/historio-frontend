@@ -4468,6 +4468,89 @@ function PlasmicHomepage__RenderFunc(props: {
                           ];
                         }
 
+                        $steps["setLocalPatientList"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "patient_list",
+                                      JSON.stringify($ctx.fetched_data.data)
+                                    );
+                                    console.log(
+                                      `patient_list: ${localStorage.getItem(
+                                        "patient_list"
+                                      )}`
+                                    );
+                                    const updatedBookmarkIdList = (
+                                      $ctx.fetched_data?.data || []
+                                    )
+                                      .filter(item => item.bookmarked)
+                                      .map(item => item.id);
+                                    localStorage.setItem(
+                                      "bookmark_id_list",
+                                      JSON.stringify(updatedBookmarkIdList)
+                                    );
+                                    return console.log(
+                                      "Updated Bookmark ID List:",
+                                      updatedBookmarkIdList
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["setLocalPatientList"] != null &&
+                          typeof $steps["setLocalPatientList"] === "object" &&
+                          typeof $steps["setLocalPatientList"].then ===
+                            "function"
+                        ) {
+                          $steps["setLocalPatientList"] = await $steps[
+                            "setLocalPatientList"
+                          ];
+                        }
+
+                        $steps["setLocalBookmarkId"] = false
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    const updatedBookmarkIdList = (
+                                      $ctx.fetched_data?.data || []
+                                    )
+                                      .filter(item => item.bookmarked)
+                                      .map(item => item.id);
+                                    localStorage.setItem(
+                                      "bookmark_id_list",
+                                      JSON.stringify(updatedBookmarkIdList)
+                                    );
+                                    return console.log(
+                                      "Updated Bookmark ID List:",
+                                      updatedBookmarkIdList
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["setLocalBookmarkId"] != null &&
+                          typeof $steps["setLocalBookmarkId"] === "object" &&
+                          typeof $steps["setLocalBookmarkId"].then ===
+                            "function"
+                        ) {
+                          $steps["setLocalBookmarkId"] = await $steps[
+                            "setLocalBookmarkId"
+                          ];
+                        }
+
                         $steps["updatePatientNumber"] =
                           $state.searchbarLnameNcode.value === "" &&
                           $state.searchbarFname.value === ""
@@ -6319,7 +6402,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       </div>
                     ) : null}
                     {$ctx.fetched_data.loading == false &&
-                    $ctx.fetched_data.data == 0 ? (
+                    $ctx.fetched_data.data == 0 &&
+                    $state.patientsSelectedTab !== "bookmark" ? (
                       <div
                         data-plasmic-name={
                           "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
@@ -6473,16 +6557,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                           (() => {
                             try {
-                              return localStorage.getItem("bookmarked_list") !==
-                                (null || undefined || "" || "undefined") &&
-                                $ctx.fetched_data.loading &&
-                                $state.filterBookmarked &&
-                                $state.searchbarLnameNcode.value === "" &&
-                                $state.searchbarFname.value === ""
-                                ? JSON.parse(
-                                    localStorage.getItem("bookmarked_list")
-                                  )
-                                : $ctx.fetched_data.data;
+                              return $ctx.fetched_data.data;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -6622,38 +6697,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       "bookmarkIcon",
                                       __plasmic_idx_0,
                                       "selected"
-                                    ]),
-                                    trigerReload: async () => {
-                                      const $steps = {};
-
-                                      $steps["runActionOnPatients"] = true
-                                        ? (() => {
-                                            const actionArgs = {
-                                              tplRef: "patients",
-                                              action: "reload"
-                                            };
-                                            return (({
-                                              tplRef,
-                                              action,
-                                              args
-                                            }) => {
-                                              return $refs?.[tplRef]?.[
-                                                action
-                                              ]?.(...(args ?? []));
-                                            })?.apply(null, [actionArgs]);
-                                          })()
-                                        : undefined;
-                                      if (
-                                        $steps["runActionOnPatients"] != null &&
-                                        typeof $steps["runActionOnPatients"] ===
-                                          "object" &&
-                                        typeof $steps["runActionOnPatients"]
-                                          .then === "function"
-                                      ) {
-                                        $steps["runActionOnPatients"] =
-                                          await $steps["runActionOnPatients"];
-                                      }
-                                    }
+                                    ])
                                   };
 
                                   initializePlasmicStates(
@@ -6665,7 +6709,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                           $props,
                                           $state,
                                           $queries
-                                        }) => currentItem.bookmarked
+                                        }) =>
+                                          localStorage.getItem(
+                                            "bookmark_id_list"
+                                          )
+                                            ? localStorage
+                                                .getItem("bookmark_id_list")
+                                                .includes(currentItem.id)
+                                            : false
                                       }
                                     ],
                                     [__plasmic_idx_0]

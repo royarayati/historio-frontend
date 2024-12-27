@@ -155,7 +155,16 @@
   min-width: 0;
   padding: 8px;
 }
-.pageFunctionTopic {
+.deleteConsult {
+  object-fit: cover;
+  max-width: 100%;
+  color: var(--token-b7Myz3RtiwPQ);
+  width: 30px;
+  height: 30px;
+  align-self: center;
+  flex-shrink: 0;
+}
+.pageFunctionTopicOfSendReply {
   position: relative;
   width: 100%;
   height: auto;
@@ -195,13 +204,13 @@
   min-width: 0;
   padding: 10px;
 }
-.deleteConsult {
+.printConsult {
   object-fit: cover;
   max-width: 100%;
-  color: var(--token-b7Myz3RtiwPQ);
-  width: 25px;
-  height: 25px;
   align-self: center;
+  color: var(--token-9iYGdL7i3GKE);
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
 }
 .sendConsultReplyAlertContent {

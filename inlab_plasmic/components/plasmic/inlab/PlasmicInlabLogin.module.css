@@ -57,7 +57,7 @@
   max-width: 100%;
   position: relative;
 }
-.alert:global(.__wab_instance) {
+.announcementAlert:global(.__wab_instance) {
   max-width: 100%;
   left: auto;
   top: 4em;
@@ -67,7 +67,7 @@
   right: 35.75%;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .alert:global(.__wab_instance) {
+  .announcementAlert:global(.__wab_instance) {
     left: auto;
     top: 2em;
     z-index: 1;
