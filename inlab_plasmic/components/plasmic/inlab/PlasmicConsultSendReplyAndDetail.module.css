@@ -212,6 +212,7 @@
   width: 30px;
   height: 30px;
   flex-shrink: 0;
+  display: none;
 }
 .sendConsultReplyAlertContent {
   display: flex;
