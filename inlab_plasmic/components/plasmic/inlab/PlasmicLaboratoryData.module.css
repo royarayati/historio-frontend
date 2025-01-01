@@ -476,29 +476,6 @@
   border-radius: 5px;
   border: 1px solid var(--token-8PxxXPNrIohQ);
 }
-.button3:global(.__wab_instance) {
-  max-width: 100%;
-  width: 100%;
-  min-width: 0;
-  display: none;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .button3:global(.__wab_instance) {
-    display: none;
-  }
-}
-.svg__vP94 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__nIt85 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
 .laboratoryLists {
   display: flex;
   position: relative;
@@ -890,18 +867,6 @@
   color: var(--token-8PxxXPNrIohQ);
   align-self: flex-end;
   height: 1em;
-}
-.overlayLayer {
-  position: absolute;
-  width: auto;
-  height: 100%;
-  max-width: 100%;
-  left: 0;
-  top: 0;
-  right: 0;
-  background: #bdbdbd40;
-  z-index: 0;
-  min-height: 0;
 }
 .laboratoryResultNormalRange:global(.__wab_instance) {
   max-width: 100%;

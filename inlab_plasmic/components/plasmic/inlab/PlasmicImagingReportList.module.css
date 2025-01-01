@@ -90,10 +90,6 @@
   min-width: 0;
   padding: 4px;
 }
-.updateAdmissiondatetime:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-}
 .tabButtons {
   display: flex;
   position: fixed;
@@ -335,6 +331,7 @@
   .paraclinicReportsSection {
     overflow: auto;
     padding-top: 6px;
+    display: grid;
   }
 }
 @media (min-width: 0px) and (max-width: 760px) {
