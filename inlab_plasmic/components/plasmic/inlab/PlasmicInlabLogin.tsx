@@ -398,13 +398,39 @@ function PlasmicInlabLogin__RenderFunc(props: {
             className={classNames(
               projectcss.all,
               projectcss.__wab_text,
-              sty.text__zvBgx
+              sty.text__eAtKc
             )}
           >
             {
               "\u0628\u0647 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u062e\u0648\u0634 \u0622\u0645\u062f\u06cc\u062f "
             }
           </div>
+          {(() => {
+            try {
+              return window.location.origin === "https://thcsynapps.tums.ac.ir";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__zvBgx
+              )}
+              dir={"rtl"}
+            >
+              {
+                "\u0628\u0627 \u0647\u0645\u06a9\u0627\u0631\u06cc HIS \u0631\u0627\u06cc\u0627\u0648\u0631\u0627\u0646"
+              }
+            </div>
+          ) : null}
           <TextInput
             data-plasmic-name={"username"}
             data-plasmic-override={overrides.username}

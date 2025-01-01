@@ -59,22 +59,12 @@
 }
 .announcementAlert:global(.__wab_instance) {
   max-width: 100%;
-  left: auto;
-  top: 4em;
-  position: fixed;
-  width: 30%;
-  z-index: 1;
-  right: 35.75%;
+  position: relative;
+  display: none;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .announcementAlert:global(.__wab_instance) {
-    left: auto;
-    top: 2em;
-    z-index: 1;
-    position: fixed;
-    right: 10%;
-    margin-right: 0px;
-    width: 80%;
+    position: relative;
   }
 }
 .text__hvY3 {
@@ -134,7 +124,7 @@
     top: auto;
   }
 }
-.text__zvBgx {
+.text__eAtKc {
   position: relative;
   width: 60vh;
   height: auto;
@@ -144,6 +134,17 @@
   font-weight: 700;
   text-decoration-line: none;
   font-size: 16px;
+}
+.text__zvBgx {
+  position: relative;
+  width: 60vh;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  white-space: pre-wrap;
+  font-weight: 700;
+  text-decoration-line: none;
+  font-size: 14px;
 }
 .username:global(.__wab_instance) {
   position: relative;

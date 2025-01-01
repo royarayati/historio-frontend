@@ -549,126 +549,103 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       {(() => {
                         if (!$ctx.fetched_data.loading) {
                           const item = $ctx.fetched_data.data[0];
-                          if (item.date_of_birth) {
-                            const dob = new Date(item.date_of_birth);
-                            const now = new Date();
-                            let ageYears =
-                              now.getFullYear() - dob.getFullYear();
-                            const monthDifference =
-                              now.getMonth() - dob.getMonth();
-                            if (
-                              monthDifference < 0 ||
-                              (monthDifference === 0 &&
-                                now.getDate() < dob.getDate())
-                            ) {
-                              ageYears--;
-                            }
-                            const fullName = `${item.first_name} ${item.last_name}`;
-                            const genderSymbol =
-                              item.gender === "F"
-                                ? " \u2640️"
-                                : item.gender === "M"
-                                ? " \u2642️"
-                                : "";
-                            if (ageYears < 1) {
-                              const ageMonths =
-                                Math.abs(monthDifference) +
-                                (now.getDate() < dob.getDate() ? -1 : 0);
-                              return `${fullName} ${ageMonths} month ${
-                                ageMonths !== 1 ? "s" : ""
-                              }${genderSymbol}`;
-                            } else {
-                              return `${fullName} ${ageYears} ${genderSymbol}`;
-                            }
-                          } else {
-                            return "Date of birth not available.";
-                          }
+                          const fullName = `${item.first_name} ${item.last_name}`;
+                          const genderSymbol =
+                            item.gender === "F"
+                              ? " \u2640️"
+                              : item.gender === "M"
+                              ? " \u2642️"
+                              : "";
+                          return `${fullName} ${genderSymbol}`;
                         }
                       })()}
                     </React.Fragment>
                   </div>
-                  <ConditionGuard
-                    data-plasmic-name={"updateAdmissiondatetime"}
-                    data-plasmic-override={overrides.updateAdmissiondatetime}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.updateAdmissiondatetime
-                    )}
-                    condition={$ctx.fetched_data.loading}
-                    onNotSatisfied={async () => {
-                      const $steps = {};
+                  {false ? (
+                    <ConditionGuard
+                      data-plasmic-name={"updateAdmissiondatetime"}
+                      data-plasmic-override={overrides.updateAdmissiondatetime}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.updateAdmissiondatetime
+                      )}
+                      condition={$ctx.fetched_data.loading}
+                      onNotSatisfied={async () => {
+                        const $steps = {};
 
-                      $steps["setLocalAdmissionDatetime"] =
-                        $ctx.fetched_data.loading == false
-                          ? (() => {
-                              const actionArgs = {
-                                customFunction: async () => {
-                                  return (() => {
-                                    return localStorage.setItem(
-                                      "admission_datetime",
-                                      $ctx.fetched_data.data[0]
-                                        .admission_datetime
-                                    );
-                                  })();
-                                }
-                              };
-                              return (({ customFunction }) => {
-                                return customFunction();
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["setLocalAdmissionDatetime"] != null &&
-                        typeof $steps["setLocalAdmissionDatetime"] ===
-                          "object" &&
-                        typeof $steps["setLocalAdmissionDatetime"].then ===
-                          "function"
-                      ) {
-                        $steps["setLocalAdmissionDatetime"] = await $steps[
-                          "setLocalAdmissionDatetime"
-                        ];
-                      }
+                        $steps["setLocalAdmissionDatetime"] =
+                          $ctx.fetched_data.loading == false
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      return localStorage.setItem(
+                                        "admission_datetime",
+                                        $ctx.fetched_data.data[0]
+                                          .admission_datetime
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["setLocalAdmissionDatetime"] != null &&
+                          typeof $steps["setLocalAdmissionDatetime"] ===
+                            "object" &&
+                          typeof $steps["setLocalAdmissionDatetime"].then ===
+                            "function"
+                        ) {
+                          $steps["setLocalAdmissionDatetime"] = await $steps[
+                            "setLocalAdmissionDatetime"
+                          ];
+                        }
 
-                      $steps["updateAdmissionDatetime"] =
-                        $steps.setLocalAdmissionDatetime
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["admissionDatetime"]
-                                },
-                                operation: 0,
-                                value:
-                                  localStorage.getItem("admission_datetime")
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
+                        $steps["updateAdmissionDatetime"] =
+                          $steps.setLocalAdmissionDatetime
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["admissionDatetime"]
+                                  },
+                                  operation: 0,
+                                  value:
+                                    localStorage.getItem("admission_datetime")
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
 
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateAdmissionDatetime"] != null &&
-                        typeof $steps["updateAdmissionDatetime"] === "object" &&
-                        typeof $steps["updateAdmissionDatetime"].then ===
-                          "function"
-                      ) {
-                        $steps["updateAdmissionDatetime"] = await $steps[
-                          "updateAdmissionDatetime"
-                        ];
-                      }
-                    }}
-                  />
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["updateAdmissionDatetime"] != null &&
+                          typeof $steps["updateAdmissionDatetime"] ===
+                            "object" &&
+                          typeof $steps["updateAdmissionDatetime"].then ===
+                            "function"
+                        ) {
+                          $steps["updateAdmissionDatetime"] = await $steps[
+                            "updateAdmissionDatetime"
+                          ];
+                        }
+                      }}
+                    />
+                  ) : null}
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -1578,43 +1555,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   sty.freeBox___02DGl
                                 )}
                               >
-                                {(() => {
-                                  return (() => {
-                                    const formattedServiceDateTime = (() => {
-                                      const gregorianDate = new Date(
-                                        currentItem.service_datetime
-                                      );
-                                      const shamsiDate =
-                                        new Intl.DateTimeFormat("fa-IR").format(
-                                          gregorianDate
-                                        );
-                                      const shamsiTime =
-                                        gregorianDate.toLocaleTimeString(
-                                          "fa-IR",
-                                          { hour12: false }
-                                        );
-                                      const englishDate = shamsiDate.replace(
-                                        /[۰-۹]/g,
-                                        d =>
-                                          String.fromCharCode(
-                                            d.charCodeAt(0) - 1728
-                                          )
-                                      );
-                                      const englishTime = shamsiTime.replace(
-                                        /[۰-۹]/g,
-                                        d =>
-                                          String.fromCharCode(
-                                            d.charCodeAt(0) - 1728
-                                          )
-                                      );
-                                      return `${englishDate}  ${englishTime}`;
-                                    })();
-                                    return (
-                                      new Date(formattedServiceDateTime) <
-                                      new Date($state.admissionDatetime)
-                                    );
-                                  })();
-                                })()
+                                {false
                                   ? (() => {
                                       const child$Props = {
                                         className: classNames(
