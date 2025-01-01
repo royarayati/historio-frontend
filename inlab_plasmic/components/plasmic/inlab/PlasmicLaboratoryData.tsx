@@ -118,7 +118,6 @@ export type PlasmicLaboratoryData__OverridesType = {
   labData?: Flex__<typeof ApiFetcherComponent>;
   labGroupTitles?: Flex__<"div">;
   labGroupTitle?: Flex__<"div">;
-  button3?: Flex__<typeof Button>;
   laboratoryLists?: Flex__<"div">;
   labResults?: Flex__<"div">;
   checkedFactors?: Flex__<"div">;
@@ -133,7 +132,6 @@ export type PlasmicLaboratoryData__OverridesType = {
   abnormalFactorName?: Flex__<"div">;
   normalRange2?: Flex__<"div">;
   svg?: Flex__<"svg">;
-  overlayLayer?: Flex__<"div">;
   laboratoryResultNormalRange?: Flex__<typeof AntdModal>;
   factorname?: Flex__<"div">;
   labFactorNameUnit?: Flex__<"div">;
@@ -582,31 +580,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
-      },
-      {
-        path: "button3[].isDisabled",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "button3[].selected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "button3[].deselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "button3[].sortDeselected",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
-        path: "button3[].sortSelected",
-        type: "private",
-        variableType: "boolean"
       }
     ],
     [$props, $ctx, $refs]
@@ -1828,271 +1801,98 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  <div
-                    data-plasmic-name={"labGroupTitles"}
-                    data-plasmic-override={overrides.labGroupTitles}
-                    className={classNames(projectcss.all, sty.labGroupTitles)}
-                  >
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return $ctx.fetched_data.data.lab_test_groups;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
+                  {(() => {
+                    try {
+                      return $ctx.fetched_data.loading === false;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      data-plasmic-name={"labGroupTitles"}
+                      data-plasmic-override={overrides.labGroupTitles}
+                      className={classNames(projectcss.all, sty.labGroupTitles)}
+                    >
+                      {(_par =>
+                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                        (() => {
+                          try {
+                            return $ctx.fetched_data.data.lab_test_groups;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
                           }
-                          throw e;
-                        }
-                      })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (
-                        <div
-                          data-plasmic-name={"labGroupTitle"}
-                          data-plasmic-override={overrides.labGroupTitle}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.labGroupTitle
-                          )}
-                          key={currentIndex}
-                          onClick={async event => {
-                            const $steps = {};
-
-                            $steps["runCode"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return (() => {
-                                        const element = document.getElementById(
-                                          currentItem.title
-                                        );
-                                        if (element)
-                                          return element.scrollIntoView({
-                                            behavior: "smooth"
-                                          });
-                                      })();
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["runCode"] != null &&
-                              typeof $steps["runCode"] === "object" &&
-                              typeof $steps["runCode"].then === "function"
-                            ) {
-                              $steps["runCode"] = await $steps["runCode"];
-                            }
-                          }}
-                        >
-                          <React.Fragment>{currentItem.title}</React.Fragment>
-                        </div>
-                      );
-                    })}
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return $ctx.fetched_data.data.lab_test_groups;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
-                          }
-                          throw e;
-                        }
-                      })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (() => {
-                        const child$Props = {
-                          className: classNames("__wab_instance", sty.button3),
-                          deselected: generateStateValueProp($state, [
-                            "button3",
-                            __plasmic_idx_0,
-                            "deselected"
-                          ]),
-                          isDisabled: generateStateValueProp($state, [
-                            "button3",
-                            __plasmic_idx_0,
-                            "isDisabled"
-                          ]),
-                          key: currentIndex,
-                          onDeselectedChange: async (...eventArgs: any) => {
-                            ((...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "button3",
-                                __plasmic_idx_0,
-                                "deselected"
-                              ])(eventArgs[0]);
-                            }).apply(null, eventArgs);
-
-                            if (
-                              eventArgs.length > 1 &&
-                              eventArgs[1] &&
-                              eventArgs[1]._plasmic_state_init_
-                            ) {
-                              return;
-                            }
-                          },
-                          onIsDisabledChange: async (...eventArgs: any) => {
-                            ((...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "button3",
-                                __plasmic_idx_0,
-                                "isDisabled"
-                              ])(eventArgs[0]);
-                            }).apply(null, eventArgs);
-
-                            if (
-                              eventArgs.length > 1 &&
-                              eventArgs[1] &&
-                              eventArgs[1]._plasmic_state_init_
-                            ) {
-                              return;
-                            }
-                          },
-                          onSelectedChange: async (...eventArgs: any) => {
-                            ((...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "button3",
-                                __plasmic_idx_0,
-                                "selected"
-                              ])(eventArgs[0]);
-                            }).apply(null, eventArgs);
-
-                            if (
-                              eventArgs.length > 1 &&
-                              eventArgs[1] &&
-                              eventArgs[1]._plasmic_state_init_
-                            ) {
-                              return;
-                            }
-                          },
-                          onSortDeselectedChange: async (...eventArgs: any) => {
-                            ((...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "button3",
-                                __plasmic_idx_0,
-                                "sortDeselected"
-                              ])(eventArgs[0]);
-                            }).apply(null, eventArgs);
-
-                            if (
-                              eventArgs.length > 1 &&
-                              eventArgs[1] &&
-                              eventArgs[1]._plasmic_state_init_
-                            ) {
-                              return;
-                            }
-                          },
-                          onSortSelectedChange: async (...eventArgs: any) => {
-                            ((...eventArgs) => {
-                              generateStateOnChangeProp($state, [
-                                "button3",
-                                __plasmic_idx_0,
-                                "sortSelected"
-                              ])(eventArgs[0]);
-                            }).apply(null, eventArgs);
-
-                            if (
-                              eventArgs.length > 1 &&
-                              eventArgs[1] &&
-                              eventArgs[1]._plasmic_state_init_
-                            ) {
-                              return;
-                            }
-                          },
-                          selected: generateStateValueProp($state, [
-                            "button3",
-                            __plasmic_idx_0,
-                            "selected"
-                          ]),
-                          sortDeselected: generateStateValueProp($state, [
-                            "button3",
-                            __plasmic_idx_0,
-                            "sortDeselected"
-                          ]),
-                          sortSelected: generateStateValueProp($state, [
-                            "button3",
-                            __plasmic_idx_0,
-                            "sortSelected"
-                          ])
-                        };
-
-                        initializePlasmicStates(
-                          $state,
-                          [
-                            {
-                              name: "button3[].isDisabled",
-                              initFunc: ({ $props, $state, $queries }) =>
-                                undefined
-                            },
-                            {
-                              name: "button3[].selected",
-                              initFunc: ({ $props, $state, $queries }) =>
-                                undefined
-                            },
-                            {
-                              name: "button3[].deselected",
-                              initFunc: ({ $props, $state, $queries }) =>
-                                undefined
-                            },
-                            {
-                              name: "button3[].sortDeselected",
-                              initFunc: ({ $props, $state, $queries }) =>
-                                undefined
-                            },
-                            {
-                              name: "button3[].sortSelected",
-                              initFunc: ({ $props, $state, $queries }) =>
-                                undefined
-                            }
-                          ],
-                          [__plasmic_idx_0]
-                        );
+                        })()
+                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                        const currentItem = __plasmic_item_0;
+                        const currentIndex = __plasmic_idx_0;
                         return (
-                          <Button
-                            data-plasmic-name={"button3"}
-                            data-plasmic-override={overrides.button3}
-                            {...child$Props}
+                          <div
+                            data-plasmic-name={"labGroupTitle"}
+                            data-plasmic-override={overrides.labGroupTitle}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.labGroupTitle
+                            )}
+                            key={currentIndex}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["runCode"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return (() => {
+                                          const element =
+                                            document.getElementById(
+                                              currentItem.title
+                                            );
+                                          if (element)
+                                            return element.scrollIntoView({
+                                              behavior: "smooth"
+                                            });
+                                        })();
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["runCode"] != null &&
+                                typeof $steps["runCode"] === "object" &&
+                                typeof $steps["runCode"].then === "function"
+                              ) {
+                                $steps["runCode"] = await $steps["runCode"];
+                              }
+                            }}
                           >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.title;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "Button";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </Button>
+                            <React.Fragment>{currentItem.title}</React.Fragment>
+                          </div>
                         );
-                      })();
-                    })}
-                  </div>
+                      })}
+                    </div>
+                  ) : null}
                   {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                     (() => {
                       try {
-                        return $ctx.fetched_data.data.lab_test_groups;
+                        return (
+                          $ctx.fetched_data.loading === false &&
+                          $ctx.fetched_data.data.lab_test_groups
+                        );
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
@@ -2746,22 +2546,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                       </Stack__>
                                     );
                                   })}
-                                  {new Date(currentItem.issued_datetime) <
-                                  new Date($state.admissionDatetime) ? (
-                                    <div
-                                      data-plasmic-name={"overlayLayer"}
-                                      data-plasmic-override={
-                                        overrides.overlayLayer
-                                      }
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.__wab_text,
-                                        sty.overlayLayer
-                                      )}
-                                    >
-                                      {""}
-                                    </div>
-                                  ) : null}
                                 </Stack__>
                               );
                             })}
@@ -3491,7 +3275,6 @@ const PlasmicDescendants = {
     "labData",
     "labGroupTitles",
     "labGroupTitle",
-    "button3",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -3506,7 +3289,6 @@ const PlasmicDescendants = {
     "abnormalFactorName",
     "normalRange2",
     "svg",
-    "overlayLayer",
     "laboratoryResultNormalRange",
     "factorname",
     "labFactorNameUnit",
@@ -3548,7 +3330,6 @@ const PlasmicDescendants = {
     "labData",
     "labGroupTitles",
     "labGroupTitle",
-    "button3",
     "laboratoryLists",
     "labResults",
     "checkedFactors",
@@ -3562,12 +3343,10 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg",
-    "overlayLayer"
+    "svg"
   ],
-  labGroupTitles: ["labGroupTitles", "labGroupTitle", "button3"],
+  labGroupTitles: ["labGroupTitles", "labGroupTitle"],
   labGroupTitle: ["labGroupTitle"],
-  button3: ["button3"],
   laboratoryLists: [
     "laboratoryLists",
     "labResults",
@@ -3582,8 +3361,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg",
-    "overlayLayer"
+    "svg"
   ],
   labResults: [
     "labResults",
@@ -3598,8 +3376,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg",
-    "overlayLayer"
+    "svg"
   ],
   checkedFactors: ["checkedFactors", "labGroupName", "factorName"],
   labGroupName: ["labGroupName"],
@@ -3613,8 +3390,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg",
-    "overlayLayer"
+    "svg"
   ],
   labPerDate: [
     "labPerDate",
@@ -3624,8 +3400,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg",
-    "overlayLayer"
+    "svg"
   ],
   issuedDatetime: ["issuedDatetime"],
   labLists: [
@@ -3647,7 +3422,6 @@ const PlasmicDescendants = {
   abnormalFactorName: ["abnormalFactorName"],
   normalRange2: ["normalRange2"],
   svg: ["svg"],
-  overlayLayer: ["overlayLayer"],
   laboratoryResultNormalRange: [
     "laboratoryResultNormalRange",
     "factorname",
@@ -3722,7 +3496,6 @@ type NodeDefaultElementType = {
   labData: typeof ApiFetcherComponent;
   labGroupTitles: "div";
   labGroupTitle: "div";
-  button3: typeof Button;
   laboratoryLists: "div";
   labResults: "div";
   checkedFactors: "div";
@@ -3737,7 +3510,6 @@ type NodeDefaultElementType = {
   abnormalFactorName: "div";
   normalRange2: "div";
   svg: "svg";
-  overlayLayer: "div";
   laboratoryResultNormalRange: typeof AntdModal;
   factorname: "div";
   labFactorNameUnit: "div";
@@ -3835,7 +3607,6 @@ export const PlasmicLaboratoryData = Object.assign(
     labData: makeNodeComponent("labData"),
     labGroupTitles: makeNodeComponent("labGroupTitles"),
     labGroupTitle: makeNodeComponent("labGroupTitle"),
-    button3: makeNodeComponent("button3"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
     labResults: makeNodeComponent("labResults"),
     checkedFactors: makeNodeComponent("checkedFactors"),
@@ -3850,7 +3621,6 @@ export const PlasmicLaboratoryData = Object.assign(
     abnormalFactorName: makeNodeComponent("abnormalFactorName"),
     normalRange2: makeNodeComponent("normalRange2"),
     svg: makeNodeComponent("svg"),
-    overlayLayer: makeNodeComponent("overlayLayer"),
     laboratoryResultNormalRange: makeNodeComponent(
       "laboratoryResultNormalRange"
     ),
