@@ -546,14 +546,39 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     {(() => {
                       if (!$ctx.fetched_data.loading) {
                         const item = $ctx.fetched_data.data[0];
-                        const fullName = `${item.first_name} ${item.last_name}`;
-                        const genderSymbol =
-                          item.gender === "F"
-                            ? " \u2640️"
-                            : item.gender === "M"
-                            ? " \u2642️"
-                            : "";
-                        return `${fullName} ${genderSymbol}`;
+                        if (item.date_of_birth) {
+                          const dob = new Date(item.date_of_birth);
+                          const now = new Date();
+                          let ageYears = now.getFullYear() - dob.getFullYear();
+                          const monthDifference =
+                            now.getMonth() - dob.getMonth();
+                          if (
+                            monthDifference < 0 ||
+                            (monthDifference === 0 &&
+                              now.getDate() < dob.getDate())
+                          ) {
+                            ageYears--;
+                          }
+                          const fullName = `${item.first_name} ${item.last_name}`;
+                          const genderSymbol =
+                            item.gender === "F"
+                              ? " \u2640️"
+                              : item.gender === "M"
+                              ? " \u2642️"
+                              : "";
+                          if (ageYears < 1) {
+                            const ageMonths =
+                              Math.abs(monthDifference) +
+                              (now.getDate() < dob.getDate() ? -1 : 0);
+                            return `${fullName} ${ageMonths} month ${
+                              ageMonths !== 1 ? "s" : ""
+                            }${genderSymbol}`;
+                          } else {
+                            return `${fullName} ${ageYears} ${genderSymbol}`;
+                          }
+                        } else {
+                          return "Date of birth not available.";
+                        }
                       }
                     })()}
                   </React.Fragment>
