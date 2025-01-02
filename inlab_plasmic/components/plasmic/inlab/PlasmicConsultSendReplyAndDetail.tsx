@@ -781,42 +781,61 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           }
                         </div>
                       ) : null}
-                      <PrinterSvgrepoComSvgIcon
-                        data-plasmic-name={"printConsult"}
-                        data-plasmic-override={overrides.printConsult}
-                        className={classNames(projectcss.all, sty.printConsult)}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["openGetConsultTemplateInNewWindow"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return window.open(
-                                      `/api/v3/consults/template?consult_id=${$ctx.fetched_data.data.id}&first_name=${$ctx.fetched_data.data.patient.first_name}&last_name=${$ctx.fetched_data.data.patient.last_name}&date_of_birth=${$ctx.fetched_data.data.patient.birth_date}&admission_date=${$ctx.fetched_data.data.patient.admission_datetime}&patient_ward=${$ctx.fetched_data.data.effective_ward.name}&sender_service=${$ctx.fetched_data.data.effective_patient_service.name}&receiver_service=${$ctx.fetched_data.data.consultant_service.name}`
-                                    );
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
+                      {(() => {
+                        try {
+                          return !$ctx.fetched_data.loading;
+                        } catch (e) {
                           if (
-                            $steps["openGetConsultTemplateInNewWindow"] !=
-                              null &&
-                            typeof $steps[
-                              "openGetConsultTemplateInNewWindow"
-                            ] === "object" &&
-                            typeof $steps["openGetConsultTemplateInNewWindow"]
-                              .then === "function"
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
                           ) {
-                            $steps["openGetConsultTemplateInNewWindow"] =
-                              await $steps["openGetConsultTemplateInNewWindow"];
+                            return true;
                           }
-                        }}
-                        role={"img"}
-                      />
+                          throw e;
+                        }
+                      })() ? (
+                        <PrinterSvgrepoComSvgIcon
+                          data-plasmic-name={"printConsult"}
+                          data-plasmic-override={overrides.printConsult}
+                          className={classNames(
+                            projectcss.all,
+                            sty.printConsult
+                          )}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["openGetConsultTemplateInNewWindow"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return window.open(
+                                        `/api/v3/consults/template?consult_id=${$ctx.fetched_data.data.id}&first_name=${$ctx.fetched_data.data.patient.first_name}&last_name=${$ctx.fetched_data.data.patient.last_name}&date_of_birth=${$ctx.fetched_data.data.patient.birth_date}&admission_date=${$ctx.fetched_data.data.patient.admission_datetime}&patient_ward=${$ctx.fetched_data.data.effective_ward.name}&sender_service=${$ctx.fetched_data.data.effective_patient_service.name}&receiver_service=${$ctx.fetched_data.data.consultant_service.name}`
+                                      );
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["openGetConsultTemplateInNewWindow"] !=
+                                null &&
+                              typeof $steps[
+                                "openGetConsultTemplateInNewWindow"
+                              ] === "object" &&
+                              typeof $steps["openGetConsultTemplateInNewWindow"]
+                                .then === "function"
+                            ) {
+                              $steps["openGetConsultTemplateInNewWindow"] =
+                                await $steps[
+                                  "openGetConsultTemplateInNewWindow"
+                                ];
+                            }
+                          }}
+                          role={"img"}
+                        />
+                      ) : null}
                     </div>
                     <div
                       data-plasmic-name={"sendConsultReplyAlertContent"}
