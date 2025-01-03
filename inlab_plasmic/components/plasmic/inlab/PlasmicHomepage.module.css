@@ -1378,7 +1378,7 @@
   overflow: auto;
   min-width: 0;
   border-radius: 5px;
-  padding: 8px;
+  padding: 4px;
   margin: 0px;
 }
 .patientsTabs > :global(.__wab_flex-container) {
@@ -1437,16 +1437,14 @@
   flex-direction: row;
   max-width: 100%;
   align-self: center;
-  width: 100%;
+  width: auto;
   height: auto;
-  min-width: 0;
   padding: 0px;
 }
 .wardButtonStack > :global(.__wab_flex-container) {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .wardButtonStack > :global(.__wab_flex-container) {
@@ -1571,9 +1569,8 @@
   justify-content: center;
   max-width: 100%;
   align-self: center;
-  width: 100%;
+  width: auto;
   height: auto;
-  min-width: 0;
   padding: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -1681,9 +1678,8 @@
   justify-content: center;
   max-width: 100%;
   align-self: flex-end;
-  width: 100%;
+  width: auto;
   height: auto;
-  min-width: 0;
   padding: 0px;
 }
 .svg__rave3 {
