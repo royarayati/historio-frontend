@@ -387,39 +387,13 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "ward2.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab === "ward";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "bookmarked.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab === "bookmark";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "commentButton.selected",
@@ -431,39 +405,13 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "ward2.deselected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab !== "ward";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "bookmarked.deselected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab !== "bookmark";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "commentButton.deselected",
@@ -499,13 +447,39 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "ward2.sortDeselected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab !== "ward";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "bookmarked.sortDeselected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab !== "bookmark";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "buttonپاککردنهمهبوکمارکها.sortDeselected",
@@ -523,13 +497,39 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "ward2.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab === "ward";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "bookmarked.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab === "bookmark";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "buttonپاککردنهمهبوکمارکها.sortSelected",
@@ -936,23 +936,16 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "physician.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab === "physician";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "physician.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "physician.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -971,16 +964,23 @@ function PlasmicHomepage__RenderFunc(props: {
           })()
       },
       {
-        path: "physician.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "physician.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab === "physician";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "modalPhysician.open",
@@ -1280,23 +1280,16 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "sortByAdmissionDatetime.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.sortingByBed == false;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "sortByAdmissionDatetime.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "sortByAdmissionDatetime.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -1315,16 +1308,23 @@ function PlasmicHomepage__RenderFunc(props: {
           })()
       },
       {
-        path: "sortByAdmissionDatetime.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "sortByAdmissionDatetime.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.sortingByBed == false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "sortByBed.isDisabled",
@@ -1336,23 +1336,16 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "sortByBed.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.sortingByBed == true;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "sortByBed.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByBed.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -1371,16 +1364,37 @@ function PlasmicHomepage__RenderFunc(props: {
           })()
       },
       {
-        path: "sortByBed.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "sortByBed.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant(globalVariants, "screen", "mobileFirst")
+            ? (() => {
+                try {
+                  return $state.sortingByBed == true;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
+            : (() => {
+                try {
+                  return $state.sortingByBed == true;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
       },
       {
         path: "sortingByBed",
@@ -5837,7 +5851,24 @@ function PlasmicHomepage__RenderFunc(props: {
                           hasVariant(globalVariants, "screen", "mobileFirst")
                             ? localStorage.getItem("patients_selected_tab") ===
                               "ward"
-                            : true
+                            : (() => {
+                                try {
+                                  return (
+                                    localStorage.getItem(
+                                      "patients_selected_tab"
+                                    ) === "ward"
+                                  );
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return true;
+                                  }
+                                  throw e;
+                                }
+                              })()
                         ) ? (
                           <Stack__
                             as={"div"}
@@ -6014,9 +6045,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.text__vAgV
                                 )}
                               >
-                                {
-                                  "\u062a\u0627\u0631\u06cc\u062e \u067e\u0630\u06cc\u0631\u0634"
-                                }
+                                {hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u062a\u0627\u0631\u06cc\u062e \u067e\u0630\u06cc\u0631\u0634"
+                                  : "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u062a\u0627\u0631\u06cc\u062e \u067e\u0630\u06cc\u0631\u0634"}
                               </div>
                             </Button>
                             <Button
@@ -6180,32 +6215,46 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.text__eq5Mc
                                 )}
                               >
-                                {
-                                  "\u0634\u0645\u0627\u0631\u0647 \u062a\u062e\u062a"
-                                }
-                              </div>
-                            </Button>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___0HDW
-                              )}
-                              dir={"rtl"}
-                              dr={
-                                hasVariant(
+                                {hasVariant(
                                   globalVariants,
                                   "screen",
                                   "mobileFirst"
                                 )
-                                  ? "rtl"
-                                  : undefined
-                              }
-                            >
-                              {
-                                "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633:"
-                              }
-                            </div>
+                                  ? "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u0634\u0645\u0627\u0631\u0647 \u062a\u062e\u062a"
+                                  : "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u0634\u0645\u0627\u0631\u0647 \u062a\u062e\u062a"}
+                              </div>
+                            </Button>
+                            {(
+                              hasVariant(
+                                globalVariants,
+                                "screen",
+                                "mobileFirst"
+                              )
+                                ? false
+                                : false
+                            ) ? (
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text___0HDW
+                                )}
+                                dir={"rtl"}
+                                dr={
+                                  hasVariant(
+                                    globalVariants,
+                                    "screen",
+                                    "mobileFirst"
+                                  )
+                                    ? "rtl"
+                                    : undefined
+                                }
+                              >
+                                {
+                                  "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633:"
+                                }
+                              </div>
+                            ) : null}
                           </Stack__>
                         ) : null}
                         {(

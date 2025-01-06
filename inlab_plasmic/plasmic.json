@@ -2266,6 +2266,11 @@
           "id": "GJomw2qswBQy",
           "name": "PrinterSvgrepoComSvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__PrinterSvgrepoComSvg.tsx"
+        },
+        {
+          "id": "yZlSltYGA1GR",
+          "name": "UpArrowSvgrepoCom1SvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__UpArrowSvgrepoCom1Svg.tsx"
         }
       ],
       "images": [
