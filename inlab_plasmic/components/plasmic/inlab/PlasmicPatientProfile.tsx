@@ -717,8 +717,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                         >
                           <React.Fragment>
                             {$ctx.fetched_data.data[0].dismissed
-                              ? "ترخیص"
-                              : "بستری"}
+                              ? $ctx.fetched_data.data[0].dismission_datetime
+                              : ""}
                           </React.Fragment>
                         </div>
                         <div

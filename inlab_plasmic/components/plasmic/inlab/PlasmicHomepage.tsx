@@ -5837,8 +5837,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           hasVariant(globalVariants, "screen", "mobileFirst")
                             ? localStorage.getItem("patients_selected_tab") ===
                               "ward"
-                            : localStorage.getItem("patients_selected_tab") ===
-                              "ward"
+                            : true
                         ) ? (
                           <Stack__
                             as={"div"}
@@ -6209,196 +6208,211 @@ function PlasmicHomepage__RenderFunc(props: {
                             </div>
                           </Stack__>
                         ) : null}
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__dgyAh
-                          )}
-                        >
-                          {$state.mainSelectedTab === "patients" &&
-                          $state.filterBookmarked &&
-                          $state.searchbarLnameNcode.value == "" &&
-                          $state.patientNumber !== "" ? (
-                            <Button
-                              data-plasmic-name={
-                                "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
-                              }
-                              data-plasmic-override={
-                                overrides.buttonپاککردنهمهبوکمارکها
-                              }
-                              className={classNames(
-                                "__wab_instance",
-                                sty.buttonپاککردنهمهبوکمارکها
-                              )}
-                              color={"red"}
-                              deselected={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "deselected"
-                              ])}
-                              isDisabled={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "isDisabled"
-                              ])}
-                              onClick={async event => {
-                                const $steps = {};
-
-                                $steps["updateModalRemoveBookmarksOpen"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        variable: {
-                                          objRoot: $state,
-                                          variablePath: [
-                                            "modalRemoveBookmarks",
-                                            "open"
-                                          ]
-                                        },
-                                        operation: 0,
-                                        value: true
-                                      };
-                                      return (({
-                                        variable,
-                                        value,
-                                        startIndex,
-                                        deleteCount
-                                      }) => {
-                                        if (!variable) {
-                                          return;
-                                        }
-                                        const { objRoot, variablePath } =
-                                          variable;
-
-                                        $stateSet(objRoot, variablePath, value);
-                                        return value;
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["updateModalRemoveBookmarksOpen"] !=
-                                    null &&
-                                  typeof $steps[
-                                    "updateModalRemoveBookmarksOpen"
-                                  ] === "object" &&
-                                  typeof $steps[
-                                    "updateModalRemoveBookmarksOpen"
-                                  ].then === "function"
-                                ) {
-                                  $steps["updateModalRemoveBookmarksOpen"] =
-                                    await $steps[
-                                      "updateModalRemoveBookmarksOpen"
-                                    ];
+                        {(
+                          hasVariant(globalVariants, "screen", "mobileFirst")
+                            ? true
+                            : false
+                        ) ? (
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              sty.freeBox__dgyAh
+                            )}
+                          >
+                            {$state.mainSelectedTab === "patients" &&
+                            $state.filterBookmarked &&
+                            $state.searchbarLnameNcode.value == "" &&
+                            $state.patientNumber !== "" ? (
+                              <Button
+                                data-plasmic-name={
+                                  "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
                                 }
-                              }}
-                              onDeselectedChange={async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "deselected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
+                                data-plasmic-override={
+                                  overrides.buttonپاککردنهمهبوکمارکها
                                 }
-                              }}
-                              onIsDisabledChange={async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "isDisabled"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onSelectedChange={async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "selected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onSortDeselectedChange={async (
-                                ...eventArgs: any
-                              ) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "sortDeselected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onSortSelectedChange={async (
-                                ...eventArgs: any
-                              ) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "sortSelected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              selected={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "selected"
-                              ])}
-                              sortDeselected={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "sortDeselected"
-                              ])}
-                              sortSelected={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "sortSelected"
-                              ])}
-                            >
-                              <div
                                 className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text__ze1An
+                                  "__wab_instance",
+                                  sty.buttonپاککردنهمهبوکمارکها
                                 )}
+                                color={"red"}
+                                deselected={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "deselected"
+                                ])}
+                                isDisabled={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "isDisabled"
+                                ])}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["updateModalRemoveBookmarksOpen"] =
+                                    true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "modalRemoveBookmarks",
+                                                "open"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: true
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["updateModalRemoveBookmarksOpen"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateModalRemoveBookmarksOpen"
+                                    ] === "object" &&
+                                    typeof $steps[
+                                      "updateModalRemoveBookmarksOpen"
+                                    ].then === "function"
+                                  ) {
+                                    $steps["updateModalRemoveBookmarksOpen"] =
+                                      await $steps[
+                                        "updateModalRemoveBookmarksOpen"
+                                      ];
+                                  }
+                                }}
+                                onDeselectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "deselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onIsDisabledChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "isDisabled"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSelectedChange={async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "selected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSortDeselectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "sortDeselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSortSelectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "sortSelected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                selected={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "selected"
+                                ])}
+                                sortDeselected={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "sortDeselected"
+                                ])}
+                                sortSelected={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "sortSelected"
+                                ])}
                               >
-                                {
-                                  "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
-                                }
-                              </div>
-                            </Button>
-                          ) : null}
-                        </div>
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text__ze1An
+                                  )}
+                                >
+                                  {
+                                    "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
+                                  }
+                                </div>
+                              </Button>
+                            ) : null}
+                          </div>
+                        ) : null}
                       </div>
                     ) : null}
                     {$ctx.fetched_data.loading == false &&

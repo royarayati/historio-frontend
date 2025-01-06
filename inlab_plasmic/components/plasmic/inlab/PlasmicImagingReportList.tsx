@@ -997,11 +997,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             const actionArgs = {
                               destination: (() => {
                                 try {
-                                  return (() => {
-                                    return window.open(
-                                      $ctx.fetched_data.data.pacs_url
-                                    );
-                                  })();
+                                  return $ctx.fetched_data.data.pacs_url;
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
