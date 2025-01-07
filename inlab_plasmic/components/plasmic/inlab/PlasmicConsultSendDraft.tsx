@@ -361,7 +361,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $ctx.fetched_data.data.illness != ""
+              return $ctx.fetched_data.data.illness
                 ? $ctx.fetched_data.data.illness
                 : "با سلام و احترام";
             } catch (e) {
@@ -1559,6 +1559,25 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           ref: ref => {
                             $refs["patientPresentIllness"] = ref;
                           },
+                          rows: (() => {
+                            try {
+                              return $state.patientPresentIllness.value.split(
+                                "\n"
+                              ).length < 2
+                                ? $state.patientPresentIllness.value.split("\n")
+                                    .length + 1
+                                : $state.patientPresentIllness.value.split("\n")
+                                    .length;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })(),
                           value:
                             generateStateValueProp($state, [
                               "patientPresentIllness",
@@ -1574,7 +1593,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                               initFunc: ({ $props, $state, $queries }) =>
                                 (() => {
                                   try {
-                                    return $ctx.fetched_data.data.illness != ""
+                                    return $ctx.fetched_data.data.illness
                                       ? $ctx.fetched_data.data.illness
                                       : "با سلام و احترام";
                                   } catch (e) {

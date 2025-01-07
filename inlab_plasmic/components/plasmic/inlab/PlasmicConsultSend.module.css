@@ -468,11 +468,17 @@
 .patientPresentIllness {
   width: 100%;
   max-width: 100%;
-  height: auto;
+  height: 100%;
   flex-shrink: 1;
   flex-grow: 0;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: solid;
+  border-left-style: none;
   min-width: 0;
+  min-height: 0;
   padding: 10px;
+  border-width: 3px;
 }
 .consultEmergencyStatusButton:global(.__wab_instance) {
   max-width: 100%;

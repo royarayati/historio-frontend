@@ -88,7 +88,8 @@ export type PlasmicNamespaceSelection__OverridesType = {
   namespaceSelection?: Flex__<"div">;
   redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToHomepage?: Flex__<typeof RedirectToHomepage>;
-  namespaces2?: Flex__<"div">;
+  namespacesContentStructure?: Flex__<"div">;
+  namespacesContent?: Flex__<"div">;
   text?: Flex__<"div">;
   namespaces?: Flex__<typeof ApiFetcherComponent>;
   namespacesList?: Flex__<"div">;
@@ -178,258 +179,276 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
             className={classNames("__wab_instance", sty.redirectToHomepage)}
           />
 
-          <Stack__
-            as={"div"}
-            data-plasmic-name={"namespaces2"}
-            data-plasmic-override={overrides.namespaces2}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.namespaces2)}
+          <div
+            data-plasmic-name={"namespacesContentStructure"}
+            data-plasmic-override={overrides.namespacesContentStructure}
+            className={classNames(
+              projectcss.all,
+              sty.namespacesContentStructure
+            )}
           >
-            <div
-              data-plasmic-name={"text"}
-              data-plasmic-override={overrides.text}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text
-              )}
+            <Stack__
+              as={"div"}
+              data-plasmic-name={"namespacesContent"}
+              data-plasmic-override={overrides.namespacesContent}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.namespacesContent)}
             >
-              {
-                "\u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 \u062e\u0648\u062f \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
-              }
-            </div>
-            <ApiFetcherComponent
-              data-plasmic-name={"namespaces"}
-              data-plasmic-override={overrides.namespaces}
-              className={classNames("__wab_instance", sty.namespaces)}
-              headers={{ "X-Namespace": "undefined " }}
-              method={"GET"}
-              path={"/api/v2/user/user_namespaces"}
-              ref={ref => {
-                $refs["namespaces"] = ref;
-              }}
-            >
-              <DataCtxReader__>
-                {$ctx => (
-                  <Stack__
-                    as={"div"}
-                    data-plasmic-name={"namespacesList"}
-                    data-plasmic-override={overrides.namespacesList}
-                    hasGap={true}
-                    className={classNames(projectcss.all, sty.namespacesList)}
-                  >
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return $ctx.fetched_data.data;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
-                          }
-                          throw e;
-                        }
-                      })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (
-                        <div
-                          data-plasmic-name={"namespaceName"}
-                          data-plasmic-override={overrides.namespaceName}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.namespaceName
-                          )}
-                          key={currentIndex}
-                          onClick={async event => {
-                            const $steps = {};
-
-                            $steps["namespaceIdTitleLocalStorage"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return (() => {
-                                        localStorage.setItem(
-                                          "inlab_user_namespace_id",
-                                          currentItem.id
-                                        );
-                                        return localStorage.setItem(
-                                          "inlab_user_namespace_title",
-                                          currentItem.title
-                                        );
-                                      })();
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["namespaceIdTitleLocalStorage"] != null &&
-                              typeof $steps["namespaceIdTitleLocalStorage"] ===
-                                "object" &&
-                              typeof $steps["namespaceIdTitleLocalStorage"]
-                                .then === "function"
-                            ) {
-                              $steps["namespaceIdTitleLocalStorage"] =
-                                await $steps["namespaceIdTitleLocalStorage"];
-                            }
-
-                            $steps["resetFilterWardWardNameWardId"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return (() => {
-                                        localStorage.removeItem(
-                                          "patients_selected_tab"
-                                        );
-                                        localStorage.removeItem(
-                                          "main_selected_tab"
-                                        );
-                                        localStorage.removeItem(
-                                          "bookmarked_list2"
-                                        );
-                                        localStorage.removeItem("ward_list");
-                                        localStorage.removeItem(
-                                          "filter_ward_name"
-                                        );
-                                        localStorage.removeItem(
-                                          "filter_ward_id"
-                                        );
-                                        localStorage.removeItem(
-                                          "physicians_list"
-                                        );
-                                        localStorage.removeItem(
-                                          "filter_physician_name"
-                                        );
-                                        return localStorage.removeItem(
-                                          "filter_physician_id"
-                                        );
-                                      })();
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["resetFilterWardWardNameWardId"] != null &&
-                              typeof $steps["resetFilterWardWardNameWardId"] ===
-                                "object" &&
-                              typeof $steps["resetFilterWardWardNameWardId"]
-                                .then === "function"
-                            ) {
-                              $steps["resetFilterWardWardNameWardId"] =
-                                await $steps["resetFilterWardWardNameWardId"];
-                            }
-
-                            $steps["logConsole"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return (() => {
-                                        console.log(
-                                          `selected_tab: ${localStorage.getItem(
-                                            "selected_tab"
-                                          )}`
-                                        );
-                                        console.log(
-                                          `bookmark_list: ${localStorage.getItem(
-                                            "bookmark_list"
-                                          )}`
-                                        );
-                                        console.log(
-                                          `ward_list: ${localStorage.getItem(
-                                            "ward_list"
-                                          )}`
-                                        );
-                                        console.log(
-                                          `filter_ward_name: ${localStorage.getItem(
-                                            "filter_ward_name"
-                                          )}`
-                                        );
-                                        console.log(
-                                          `filter_ward_id: ${localStorage.getItem(
-                                            "filter_ward_id"
-                                          )}`
-                                        );
-                                        console.log(
-                                          `physicians_list: ${localStorage.getItem(
-                                            "physicians_list"
-                                          )}`
-                                        );
-                                        console.log(
-                                          `filter_physician_name: ${localStorage.getItem(
-                                            "filter_physician_name"
-                                          )}`
-                                        );
-                                        return console.log(
-                                          `filter_physician_id: ${localStorage.getItem(
-                                            "filter_physician_id"
-                                          )}`
-                                        );
-                                      })();
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["logConsole"] != null &&
-                              typeof $steps["logConsole"] === "object" &&
-                              typeof $steps["logConsole"].then === "function"
-                            ) {
-                              $steps["logConsole"] = await $steps["logConsole"];
-                            }
-
-                            $steps["goToHomepage"] = true
-                              ? (() => {
-                                  const actionArgs = {
-                                    destination: `/patients`
-                                  };
-                                  return (({ destination }) => {
-                                    if (
-                                      typeof destination === "string" &&
-                                      destination.startsWith("#")
-                                    ) {
-                                      document
-                                        .getElementById(destination.substr(1))
-                                        .scrollIntoView({ behavior: "smooth" });
-                                    } else {
-                                      __nextRouter?.push(destination);
-                                    }
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                            if (
-                              $steps["goToHomepage"] != null &&
-                              typeof $steps["goToHomepage"] === "object" &&
-                              typeof $steps["goToHomepage"].then === "function"
-                            ) {
-                              $steps["goToHomepage"] = await $steps[
-                                "goToHomepage"
-                              ];
-                            }
-                          }}
-                        >
-                          <React.Fragment>{currentItem.title}</React.Fragment>
-                        </div>
-                      );
-                    })}
-                  </Stack__>
+              <div
+                data-plasmic-name={"text"}
+                data-plasmic-override={overrides.text}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text
                 )}
-              </DataCtxReader__>
-            </ApiFetcherComponent>
-          </Stack__>
+              >
+                {
+                  "\u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 \u062e\u0648\u062f \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
+                }
+              </div>
+              <ApiFetcherComponent
+                data-plasmic-name={"namespaces"}
+                data-plasmic-override={overrides.namespaces}
+                className={classNames("__wab_instance", sty.namespaces)}
+                headers={{ "X-Namespace": "undefined " }}
+                method={"GET"}
+                path={"/api/v2/user/user_namespaces"}
+                ref={ref => {
+                  $refs["namespaces"] = ref;
+                }}
+              >
+                <DataCtxReader__>
+                  {$ctx => (
+                    <Stack__
+                      as={"div"}
+                      data-plasmic-name={"namespacesList"}
+                      data-plasmic-override={overrides.namespacesList}
+                      hasGap={true}
+                      className={classNames(projectcss.all, sty.namespacesList)}
+                    >
+                      {(_par =>
+                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                        (() => {
+                          try {
+                            return $ctx.fetched_data.data;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
+                          }
+                        })()
+                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                        const currentItem = __plasmic_item_0;
+                        const currentIndex = __plasmic_idx_0;
+                        return (
+                          <div
+                            data-plasmic-name={"namespaceName"}
+                            data-plasmic-override={overrides.namespaceName}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.namespaceName
+                            )}
+                            key={currentIndex}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["namespaceIdTitleLocalStorage"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return (() => {
+                                          localStorage.setItem(
+                                            "inlab_user_namespace_id",
+                                            currentItem.id
+                                          );
+                                          return localStorage.setItem(
+                                            "inlab_user_namespace_title",
+                                            currentItem.title
+                                          );
+                                        })();
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["namespaceIdTitleLocalStorage"] !=
+                                  null &&
+                                typeof $steps[
+                                  "namespaceIdTitleLocalStorage"
+                                ] === "object" &&
+                                typeof $steps["namespaceIdTitleLocalStorage"]
+                                  .then === "function"
+                              ) {
+                                $steps["namespaceIdTitleLocalStorage"] =
+                                  await $steps["namespaceIdTitleLocalStorage"];
+                              }
+
+                              $steps["resetFilterWardWardNameWardId"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return (() => {
+                                          localStorage.removeItem(
+                                            "patients_selected_tab"
+                                          );
+                                          localStorage.removeItem(
+                                            "main_selected_tab"
+                                          );
+                                          localStorage.removeItem(
+                                            "bookmarked_list2"
+                                          );
+                                          localStorage.removeItem("ward_list");
+                                          localStorage.removeItem(
+                                            "filter_ward_name"
+                                          );
+                                          localStorage.removeItem(
+                                            "filter_ward_id"
+                                          );
+                                          localStorage.removeItem(
+                                            "physicians_list"
+                                          );
+                                          localStorage.removeItem(
+                                            "filter_physician_name"
+                                          );
+                                          return localStorage.removeItem(
+                                            "filter_physician_id"
+                                          );
+                                        })();
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["resetFilterWardWardNameWardId"] !=
+                                  null &&
+                                typeof $steps[
+                                  "resetFilterWardWardNameWardId"
+                                ] === "object" &&
+                                typeof $steps["resetFilterWardWardNameWardId"]
+                                  .then === "function"
+                              ) {
+                                $steps["resetFilterWardWardNameWardId"] =
+                                  await $steps["resetFilterWardWardNameWardId"];
+                              }
+
+                              $steps["logConsole"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return (() => {
+                                          console.log(
+                                            `selected_tab: ${localStorage.getItem(
+                                              "selected_tab"
+                                            )}`
+                                          );
+                                          console.log(
+                                            `bookmark_list: ${localStorage.getItem(
+                                              "bookmark_list"
+                                            )}`
+                                          );
+                                          console.log(
+                                            `ward_list: ${localStorage.getItem(
+                                              "ward_list"
+                                            )}`
+                                          );
+                                          console.log(
+                                            `filter_ward_name: ${localStorage.getItem(
+                                              "filter_ward_name"
+                                            )}`
+                                          );
+                                          console.log(
+                                            `filter_ward_id: ${localStorage.getItem(
+                                              "filter_ward_id"
+                                            )}`
+                                          );
+                                          console.log(
+                                            `physicians_list: ${localStorage.getItem(
+                                              "physicians_list"
+                                            )}`
+                                          );
+                                          console.log(
+                                            `filter_physician_name: ${localStorage.getItem(
+                                              "filter_physician_name"
+                                            )}`
+                                          );
+                                          return console.log(
+                                            `filter_physician_id: ${localStorage.getItem(
+                                              "filter_physician_id"
+                                            )}`
+                                          );
+                                        })();
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["logConsole"] != null &&
+                                typeof $steps["logConsole"] === "object" &&
+                                typeof $steps["logConsole"].then === "function"
+                              ) {
+                                $steps["logConsole"] = await $steps[
+                                  "logConsole"
+                                ];
+                              }
+
+                              $steps["goToHomepage"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      destination: `/patients`
+                                    };
+                                    return (({ destination }) => {
+                                      if (
+                                        typeof destination === "string" &&
+                                        destination.startsWith("#")
+                                      ) {
+                                        document
+                                          .getElementById(destination.substr(1))
+                                          .scrollIntoView({
+                                            behavior: "smooth"
+                                          });
+                                      } else {
+                                        __nextRouter?.push(destination);
+                                      }
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["goToHomepage"] != null &&
+                                typeof $steps["goToHomepage"] === "object" &&
+                                typeof $steps["goToHomepage"].then ===
+                                  "function"
+                              ) {
+                                $steps["goToHomepage"] = await $steps[
+                                  "goToHomepage"
+                                ];
+                              }
+                            }}
+                          >
+                            <React.Fragment>{currentItem.title}</React.Fragment>
+                          </div>
+                        );
+                      })}
+                    </Stack__>
+                  )}
+                </DataCtxReader__>
+              </ApiFetcherComponent>
+            </Stack__>
+          </div>
         </div>
       </div>
     </React.Fragment>
@@ -441,7 +460,8 @@ const PlasmicDescendants = {
     "namespaceSelection",
     "redirectToInlabLogin",
     "redirectToHomepage",
-    "namespaces2",
+    "namespacesContentStructure",
+    "namespacesContent",
     "text",
     "namespaces",
     "namespacesList",
@@ -449,8 +469,16 @@ const PlasmicDescendants = {
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToHomepage: ["redirectToHomepage"],
-  namespaces2: [
-    "namespaces2",
+  namespacesContentStructure: [
+    "namespacesContentStructure",
+    "namespacesContent",
+    "text",
+    "namespaces",
+    "namespacesList",
+    "namespaceName"
+  ],
+  namespacesContent: [
+    "namespacesContent",
     "text",
     "namespaces",
     "namespacesList",
@@ -468,7 +496,8 @@ type NodeDefaultElementType = {
   namespaceSelection: "div";
   redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToHomepage: typeof RedirectToHomepage;
-  namespaces2: "div";
+  namespacesContentStructure: "div";
+  namespacesContent: "div";
   text: "div";
   namespaces: typeof ApiFetcherComponent;
   namespacesList: "div";
@@ -537,7 +566,8 @@ export const PlasmicNamespaceSelection = Object.assign(
     // Helper components rendering sub-elements
     redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
     redirectToHomepage: makeNodeComponent("redirectToHomepage"),
-    namespaces2: makeNodeComponent("namespaces2"),
+    namespacesContentStructure: makeNodeComponent("namespacesContentStructure"),
+    namespacesContent: makeNodeComponent("namespacesContent"),
     text: makeNodeComponent("text"),
     namespaces: makeNodeComponent("namespaces"),
     namespacesList: makeNodeComponent("namespacesList"),

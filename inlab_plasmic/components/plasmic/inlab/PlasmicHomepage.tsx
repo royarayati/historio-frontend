@@ -6483,10 +6483,31 @@ function PlasmicHomepage__RenderFunc(props: {
                         }
                       </div>
                     ) : null}
-                    {$state.mainSelectedTab == "patients" &&
-                    $state.patientsSelectedTab == "bookmark" &&
-                    $ctx.fetched_data.loading == false &&
-                    $ctx.fetched_data.data == 0 ? (
+                    {(
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return (
+                                $state.mainSelectedTab == "patients" &&
+                                $state.patientsSelectedTab == "bookmark" &&
+                                $ctx.fetched_data.loading == false &&
+                                $ctx.fetched_data.data.length === 0
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : $state.mainSelectedTab == "patients" &&
+                          $state.patientsSelectedTab == "bookmark" &&
+                          $ctx.fetched_data.loading == false &&
+                          $ctx.fetched_data.data.length === 0
+                    ) ? (
                       <div
                         data-plasmic-name={"bookmarkGuide"}
                         data-plasmic-override={overrides.bookmarkGuide}
@@ -6501,30 +6522,25 @@ function PlasmicHomepage__RenderFunc(props: {
                             sty.freeBox__y0Cq
                           )}
                         >
-                          {$ctx.fetched_data.loading == false &&
-                          $ctx.fetched_data.data == "" ? (
-                            <BookmarkPlusSvgrepoComSvgIcon
-                              data-plasmic-name={"bookmarkImage"}
-                              data-plasmic-override={overrides.bookmarkImage}
-                              className={classNames(
-                                projectcss.all,
-                                sty.bookmarkImage
-                              )}
-                              role={"img"}
-                            />
-                          ) : null}
-                          {$ctx.fetched_data.loading == false &&
-                          $ctx.fetched_data.data == "" ? (
-                            <BookmarkDashFillSvgrepoComSvgIcon
-                              data-plasmic-name={"bookmarkedImage"}
-                              data-plasmic-override={overrides.bookmarkedImage}
-                              className={classNames(
-                                projectcss.all,
-                                sty.bookmarkedImage
-                              )}
-                              role={"img"}
-                            />
-                          ) : null}
+                          <BookmarkPlusSvgrepoComSvgIcon
+                            data-plasmic-name={"bookmarkImage"}
+                            data-plasmic-override={overrides.bookmarkImage}
+                            className={classNames(
+                              projectcss.all,
+                              sty.bookmarkImage
+                            )}
+                            role={"img"}
+                          />
+
+                          <BookmarkDashFillSvgrepoComSvgIcon
+                            data-plasmic-name={"bookmarkedImage"}
+                            data-plasmic-override={overrides.bookmarkedImage}
+                            className={classNames(
+                              projectcss.all,
+                              sty.bookmarkedImage
+                            )}
+                            role={"img"}
+                          />
                         </div>
                         <div
                           className={classNames(

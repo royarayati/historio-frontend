@@ -1828,7 +1828,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     </div>
                   ) : null}
                   {$ctx.fetched_data.loading === false &&
-                  $ctx.fetched_data.data === 0 ? (
+                  $ctx.fetched_data.data.length === 0 ? (
                     <div
                       className={classNames(
                         projectcss.all,

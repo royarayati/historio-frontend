@@ -1113,7 +1113,9 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         <React.Fragment>
                           {(() => {
                             try {
-                              return $ctx.fetched_data.data.illness;
+                              return $ctx.fetched_data.data.illness != ""
+                                ? $ctx.fetched_data.data.illness
+                                : "-";
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -1384,6 +1386,24 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           ref={ref => {
                             $refs["consultReplyInput"] = ref;
                           }}
+                          rows={(() => {
+                            try {
+                              return $state.consultReplyInput.value.split("\n")
+                                .length < 2
+                                ? $state.consultReplyInput.value.split("\n")
+                                    .length + 1
+                                : $state.consultReplyInput.value.split("\n")
+                                    .length;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}
                           value={
                             generateStateValueProp($state, [
                               "consultReplyInput",
