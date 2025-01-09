@@ -387,39 +387,13 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "ward2.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab === "ward";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "bookmarked.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab === "bookmark";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "commentButton.selected",
@@ -431,39 +405,13 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "ward2.deselected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab !== "ward";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "bookmarked.deselected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab !== "bookmark";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "commentButton.deselected",
@@ -499,13 +447,39 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "ward2.sortDeselected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab !== "ward";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "bookmarked.sortDeselected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab !== "bookmark";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "buttonپاککردنهمهبوکمارکها.sortDeselected",
@@ -523,13 +497,39 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "ward2.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab === "ward";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "bookmarked.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab === "bookmark";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "buttonپاککردنهمهبوکمارکها.sortSelected",
@@ -936,23 +936,16 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "physician.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.patientsSelectedTab === "physician";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "physician.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "physician.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -971,16 +964,23 @@ function PlasmicHomepage__RenderFunc(props: {
           })()
       },
       {
-        path: "physician.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "physician.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab === "physician";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "modalPhysician.open",
@@ -1280,23 +1280,16 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "sortByAdmissionDatetime.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.sortingByBed == false;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
         path: "sortByAdmissionDatetime.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "sortByAdmissionDatetime.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -1315,16 +1308,23 @@ function PlasmicHomepage__RenderFunc(props: {
           })()
       },
       {
-        path: "sortByAdmissionDatetime.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "sortByAdmissionDatetime.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.sortingByBed == false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "sortByBed.isDisabled",
@@ -1336,23 +1336,16 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "sortByBed.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.sortingByBed == true;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "sortByBed.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByBed.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -1371,16 +1364,37 @@ function PlasmicHomepage__RenderFunc(props: {
           })()
       },
       {
-        path: "sortByBed.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "sortByBed.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant(globalVariants, "screen", "mobileFirst")
+            ? (() => {
+                try {
+                  return $state.sortingByBed == true;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
+            : (() => {
+                try {
+                  return $state.sortingByBed == true;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
       },
       {
         path: "sortingByBed",
@@ -4633,7 +4647,9 @@ function PlasmicHomepage__RenderFunc(props: {
                       skipPaths={[]}
                     />
 
-                    {$state.mainSelectedTab === "patients" ? (
+                    {$state.mainSelectedTab === "patients" &&
+                    $state.searchbarLnameNcode.value === "" &&
+                    $state.searchbarFname.value === "" ? (
                       <div
                         data-plasmic-name={"patientsControlpanel"}
                         data-plasmic-override={overrides.patientsControlpanel}
@@ -5837,8 +5853,24 @@ function PlasmicHomepage__RenderFunc(props: {
                           hasVariant(globalVariants, "screen", "mobileFirst")
                             ? localStorage.getItem("patients_selected_tab") ===
                               "ward"
-                            : localStorage.getItem("patients_selected_tab") ===
-                              "ward"
+                            : (() => {
+                                try {
+                                  return (
+                                    localStorage.getItem(
+                                      "patients_selected_tab"
+                                    ) === "ward"
+                                  );
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return true;
+                                  }
+                                  throw e;
+                                }
+                              })()
                         ) ? (
                           <Stack__
                             as={"div"}
@@ -6015,9 +6047,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.text__vAgV
                                 )}
                               >
-                                {
-                                  "\u062a\u0627\u0631\u06cc\u062e \u067e\u0630\u06cc\u0631\u0634"
-                                }
+                                {hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u062a\u0627\u0631\u06cc\u062e \u067e\u0630\u06cc\u0631\u0634"
+                                  : "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u062a\u0627\u0631\u06cc\u062e \u067e\u0630\u06cc\u0631\u0634"}
                               </div>
                             </Button>
                             <Button
@@ -6181,224 +6217,253 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.text__eq5Mc
                                 )}
                               >
-                                {
-                                  "\u0634\u0645\u0627\u0631\u0647 \u062a\u062e\u062a"
-                                }
-                              </div>
-                            </Button>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___0HDW
-                              )}
-                              dir={"rtl"}
-                              dr={
-                                hasVariant(
+                                {hasVariant(
                                   globalVariants,
                                   "screen",
                                   "mobileFirst"
                                 )
-                                  ? "rtl"
-                                  : undefined
-                              }
-                            >
-                              {
-                                "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633:"
-                              }
-                            </div>
-                          </Stack__>
-                        ) : null}
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__dgyAh
-                          )}
-                        >
-                          {$state.mainSelectedTab === "patients" &&
-                          $state.filterBookmarked &&
-                          $state.searchbarLnameNcode.value == "" &&
-                          $state.patientNumber !== "" ? (
-                            <Button
-                              data-plasmic-name={
-                                "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
-                              }
-                              data-plasmic-override={
-                                overrides.buttonپاککردنهمهبوکمارکها
-                              }
-                              className={classNames(
-                                "__wab_instance",
-                                sty.buttonپاککردنهمهبوکمارکها
-                              )}
-                              color={"red"}
-                              deselected={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "deselected"
-                              ])}
-                              isDisabled={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "isDisabled"
-                              ])}
-                              onClick={async event => {
-                                const $steps = {};
-
-                                $steps["updateModalRemoveBookmarksOpen"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        variable: {
-                                          objRoot: $state,
-                                          variablePath: [
-                                            "modalRemoveBookmarks",
-                                            "open"
-                                          ]
-                                        },
-                                        operation: 0,
-                                        value: true
-                                      };
-                                      return (({
-                                        variable,
-                                        value,
-                                        startIndex,
-                                        deleteCount
-                                      }) => {
-                                        if (!variable) {
-                                          return;
-                                        }
-                                        const { objRoot, variablePath } =
-                                          variable;
-
-                                        $stateSet(objRoot, variablePath, value);
-                                        return value;
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["updateModalRemoveBookmarksOpen"] !=
-                                    null &&
-                                  typeof $steps[
-                                    "updateModalRemoveBookmarksOpen"
-                                  ] === "object" &&
-                                  typeof $steps[
-                                    "updateModalRemoveBookmarksOpen"
-                                  ].then === "function"
-                                ) {
-                                  $steps["updateModalRemoveBookmarksOpen"] =
-                                    await $steps[
-                                      "updateModalRemoveBookmarksOpen"
-                                    ];
-                                }
-                              }}
-                              onDeselectedChange={async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "deselected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onIsDisabledChange={async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "isDisabled"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onSelectedChange={async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "selected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onSortDeselectedChange={async (
-                                ...eventArgs: any
-                              ) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "sortDeselected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onSortSelectedChange={async (
-                                ...eventArgs: any
-                              ) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "buttonپاککردنهمهبوکمارکها",
-                                    "sortSelected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              selected={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "selected"
-                              ])}
-                              sortDeselected={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "sortDeselected"
-                              ])}
-                              sortSelected={generateStateValueProp($state, [
-                                "buttonپاککردنهمهبوکمارکها",
-                                "sortSelected"
-                              ])}
-                            >
+                                  ? "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u0634\u0645\u0627\u0631\u0647 \u062a\u062e\u062a"
+                                  : "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0627 \u0634\u0645\u0627\u0631\u0647 \u062a\u062e\u062a"}
+                              </div>
+                            </Button>
+                            {(
+                              hasVariant(
+                                globalVariants,
+                                "screen",
+                                "mobileFirst"
+                              )
+                                ? false
+                                : false
+                            ) ? (
                               <div
                                 className={classNames(
                                   projectcss.all,
                                   projectcss.__wab_text,
-                                  sty.text__ze1An
+                                  sty.text___0HDW
                                 )}
+                                dir={"rtl"}
+                                dr={
+                                  hasVariant(
+                                    globalVariants,
+                                    "screen",
+                                    "mobileFirst"
+                                  )
+                                    ? "rtl"
+                                    : undefined
+                                }
                               >
                                 {
-                                  "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
+                                  "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633:"
                                 }
                               </div>
-                            </Button>
-                          ) : null}
-                        </div>
+                            ) : null}
+                          </Stack__>
+                        ) : null}
+                        {(
+                          hasVariant(globalVariants, "screen", "mobileFirst")
+                            ? true
+                            : false
+                        ) ? (
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              sty.freeBox__dgyAh
+                            )}
+                          >
+                            {$state.mainSelectedTab === "patients" &&
+                            $state.filterBookmarked &&
+                            $state.searchbarLnameNcode.value == "" &&
+                            $state.patientNumber !== "" ? (
+                              <Button
+                                data-plasmic-name={
+                                  "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
+                                }
+                                data-plasmic-override={
+                                  overrides.buttonپاککردنهمهبوکمارکها
+                                }
+                                className={classNames(
+                                  "__wab_instance",
+                                  sty.buttonپاککردنهمهبوکمارکها
+                                )}
+                                color={"red"}
+                                deselected={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "deselected"
+                                ])}
+                                isDisabled={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "isDisabled"
+                                ])}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["updateModalRemoveBookmarksOpen"] =
+                                    true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "modalRemoveBookmarks",
+                                                "open"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: true
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["updateModalRemoveBookmarksOpen"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateModalRemoveBookmarksOpen"
+                                    ] === "object" &&
+                                    typeof $steps[
+                                      "updateModalRemoveBookmarksOpen"
+                                    ].then === "function"
+                                  ) {
+                                    $steps["updateModalRemoveBookmarksOpen"] =
+                                      await $steps[
+                                        "updateModalRemoveBookmarksOpen"
+                                      ];
+                                  }
+                                }}
+                                onDeselectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "deselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onIsDisabledChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "isDisabled"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSelectedChange={async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "selected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSortDeselectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "sortDeselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSortSelectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "buttonپاککردنهمهبوکمارکها",
+                                      "sortSelected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                selected={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "selected"
+                                ])}
+                                sortDeselected={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "sortDeselected"
+                                ])}
+                                sortSelected={generateStateValueProp($state, [
+                                  "buttonپاککردنهمهبوکمارکها",
+                                  "sortSelected"
+                                ])}
+                              >
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text__ze1An
+                                  )}
+                                >
+                                  {
+                                    "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0647\u0645\u0647"
+                                  }
+                                </div>
+                              </Button>
+                            ) : null}
+                          </div>
+                        ) : null}
                       </div>
                     ) : null}
                     {$ctx.fetched_data.loading == false &&
@@ -6420,10 +6485,31 @@ function PlasmicHomepage__RenderFunc(props: {
                         }
                       </div>
                     ) : null}
-                    {$state.mainSelectedTab == "patients" &&
-                    $state.patientsSelectedTab == "bookmark" &&
-                    $ctx.fetched_data.loading == false &&
-                    $ctx.fetched_data.data == 0 ? (
+                    {(
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return (
+                                $state.mainSelectedTab == "patients" &&
+                                $state.patientsSelectedTab == "bookmark" &&
+                                $ctx.fetched_data.loading == false &&
+                                $ctx.fetched_data.data.length === 0
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : $state.mainSelectedTab == "patients" &&
+                          $state.patientsSelectedTab == "bookmark" &&
+                          $ctx.fetched_data.loading == false &&
+                          $ctx.fetched_data.data.length === 0
+                    ) ? (
                       <div
                         data-plasmic-name={"bookmarkGuide"}
                         data-plasmic-override={overrides.bookmarkGuide}
@@ -6438,30 +6524,25 @@ function PlasmicHomepage__RenderFunc(props: {
                             sty.freeBox__y0Cq
                           )}
                         >
-                          {$ctx.fetched_data.loading == false &&
-                          $ctx.fetched_data.data == "" ? (
-                            <BookmarkPlusSvgrepoComSvgIcon
-                              data-plasmic-name={"bookmarkImage"}
-                              data-plasmic-override={overrides.bookmarkImage}
-                              className={classNames(
-                                projectcss.all,
-                                sty.bookmarkImage
-                              )}
-                              role={"img"}
-                            />
-                          ) : null}
-                          {$ctx.fetched_data.loading == false &&
-                          $ctx.fetched_data.data == "" ? (
-                            <BookmarkDashFillSvgrepoComSvgIcon
-                              data-plasmic-name={"bookmarkedImage"}
-                              data-plasmic-override={overrides.bookmarkedImage}
-                              className={classNames(
-                                projectcss.all,
-                                sty.bookmarkedImage
-                              )}
-                              role={"img"}
-                            />
-                          ) : null}
+                          <BookmarkPlusSvgrepoComSvgIcon
+                            data-plasmic-name={"bookmarkImage"}
+                            data-plasmic-override={overrides.bookmarkImage}
+                            className={classNames(
+                              projectcss.all,
+                              sty.bookmarkImage
+                            )}
+                            role={"img"}
+                          />
+
+                          <BookmarkDashFillSvgrepoComSvgIcon
+                            data-plasmic-name={"bookmarkedImage"}
+                            data-plasmic-override={overrides.bookmarkedImage}
+                            className={classNames(
+                              projectcss.all,
+                              sty.bookmarkedImage
+                            )}
+                            role={"img"}
+                          />
                         </div>
                         <div
                           className={classNames(

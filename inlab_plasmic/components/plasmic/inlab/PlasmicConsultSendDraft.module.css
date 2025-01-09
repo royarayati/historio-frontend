@@ -502,6 +502,14 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  border-top-style: none;
+  border-top-width: 1px;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-left-style: none;
+  border-left-width: 1px;
   min-width: 0;
   padding: 10px;
 }

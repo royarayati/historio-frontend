@@ -717,7 +717,35 @@ function PlasmicPatientProfile__RenderFunc(props: {
                         >
                           <React.Fragment>
                             {$ctx.fetched_data.data[0].dismissed
-                              ? "ترخیص"
+                              ? (() => {
+                                  const gregorianDate = new Date(
+                                    $ctx.fetched_data.data[0].dismission_datetime
+                                  );
+                                  const shamsiDate = new Intl.DateTimeFormat(
+                                    "fa-IR"
+                                  ).format(gregorianDate);
+                                  const shamsiTime =
+                                    gregorianDate.toLocaleTimeString("fa-IR", {
+                                      hour12: false
+                                    });
+                                  const englishDate = shamsiDate.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  const englishTime = shamsiTime
+                                    .replace(/[۰-۹]/g, d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                    )
+                                    .split(":")
+                                    .slice(0, 2)
+                                    .join(":");
+                                  return `${"ترخیص"} ${englishDate} ${englishTime}`;
+                                })()
                               : "بستری"}
                           </React.Fragment>
                         </div>

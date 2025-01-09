@@ -2915,9 +2915,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
         ) : null}
-        <div
+        <Stack__
+          as={"div"}
           data-plasmic-name={"switchingTabs"}
           data-plasmic-override={overrides.switchingTabs}
+          hasGap={true}
           className={classNames(projectcss.all, sty.switchingTabs)}
         >
           <SwitchingTab
@@ -3274,7 +3276,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               }}
             />
           </SwitchingTab>
-        </div>
+        </Stack__>
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;

@@ -997,11 +997,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             const actionArgs = {
                               destination: (() => {
                                 try {
-                                  return (() => {
-                                    return window.open(
-                                      $ctx.fetched_data.data.pacs_url
-                                    );
-                                  })();
+                                  return $ctx.fetched_data.data.pacs_url;
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -1832,7 +1828,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     </div>
                   ) : null}
                   {$ctx.fetched_data.loading === false &&
-                  $ctx.fetched_data.data === 0 ? (
+                  $ctx.fetched_data.data.length === 0 ? (
                     <div
                       className={classNames(
                         projectcss.all,
