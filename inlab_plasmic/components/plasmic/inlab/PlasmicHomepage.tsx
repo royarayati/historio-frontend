@@ -4647,7 +4647,9 @@ function PlasmicHomepage__RenderFunc(props: {
                       skipPaths={[]}
                     />
 
-                    {$state.mainSelectedTab === "patients" ? (
+                    {$state.mainSelectedTab === "patients" &&
+                    $state.searchbarLnameNcode.value === "" &&
+                    $state.searchbarFname.value === "" ? (
                       <div
                         data-plasmic-name={"patientsControlpanel"}
                         data-plasmic-override={overrides.patientsControlpanel}
