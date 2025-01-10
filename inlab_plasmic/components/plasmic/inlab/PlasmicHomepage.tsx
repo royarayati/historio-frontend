@@ -7147,6 +7147,44 @@ function PlasmicHomepage__RenderFunc(props: {
                                   onClick={async event => {
                                     const $steps = {};
 
+                                    $steps["deleteLabDataFromTheLocalStorage"] =
+                                      true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              customFunction: async () => {
+                                                return (() => {
+                                                  localStorage.removeItem(
+                                                    "laboratory_data"
+                                                  );
+                                                  return console.log(
+                                                    "laboratory_data"
+                                                  );
+                                                })();
+                                              }
+                                            };
+                                            return (({ customFunction }) => {
+                                              return customFunction();
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                    if (
+                                      $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ] != null &&
+                                      typeof $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ] === "object" &&
+                                      typeof $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ].then === "function"
+                                    ) {
+                                      $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ] = await $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ];
+                                    }
+
                                     $steps["goToLaboratoryData"] = true
                                       ? (() => {
                                           const actionArgs = {

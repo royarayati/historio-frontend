@@ -63,6 +63,7 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 
@@ -132,6 +133,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   abnormalFactorName?: Flex__<"div">;
   normalRange2?: Flex__<"div">;
   svg?: Flex__<"svg">;
+  conditionGuard?: Flex__<typeof ConditionGuard>;
   laboratoryResultNormalRange?: Flex__<typeof AntdModal>;
   factorname?: Flex__<"div">;
   labFactorNameUnit?: Flex__<"div">;
@@ -1914,9 +1916,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                     (() => {
                       try {
-                        return (
-                          $ctx.fetched_data.loading === false &&
-                          $ctx.fetched_data.data.lab_test_groups
+                        return JSON.parse(
+                          localStorage.getItem("laboratory_data")
                         );
                       } catch (e) {
                         if (
@@ -2579,6 +2580,64 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       </Stack__>
                     );
                   })}
+                  <ConditionGuard
+                    data-plasmic-name={"conditionGuard"}
+                    data-plasmic-override={overrides.conditionGuard}
+                    className={classNames("__wab_instance", sty.conditionGuard)}
+                    condition={(() => {
+                      try {
+                        return $ctx.fetched_data.loading;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return false;
+                        }
+                        throw e;
+                      }
+                    })()}
+                    onNotSatisfied={async () => {
+                      const $steps = {};
+
+                      $steps["setTheLaboratoryDataToTheLocalStorage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "laboratory_data",
+                                    JSON.stringify(
+                                      $ctx.fetched_data.data.lab_test_groups
+                                    )
+                                  );
+                                  return console.log(
+                                    JSON.parse(
+                                      localStorage.getItem("laboratory_data")
+                                    )
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setTheLaboratoryDataToTheLocalStorage"] !=
+                          null &&
+                        typeof $steps[
+                          "setTheLaboratoryDataToTheLocalStorage"
+                        ] === "object" &&
+                        typeof $steps["setTheLaboratoryDataToTheLocalStorage"]
+                          .then === "function"
+                      ) {
+                        $steps["setTheLaboratoryDataToTheLocalStorage"] =
+                          await $steps["setTheLaboratoryDataToTheLocalStorage"];
+                      }
+                    }}
+                  />
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -3215,7 +3274,34 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
-                $steps["goToImagingReport1"] = true
+                $steps["deleteTheLabDataFromLocalStorage"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (() => {
+                            localStorage.removeItem("laboratory_data");
+                            return console.log("laboratory_data");
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["deleteTheLabDataFromLocalStorage"] != null &&
+                  typeof $steps["deleteTheLabDataFromLocalStorage"] ===
+                    "object" &&
+                  typeof $steps["deleteTheLabDataFromLocalStorage"].then ===
+                    "function"
+                ) {
+                  $steps["deleteTheLabDataFromLocalStorage"] = await $steps[
+                    "deleteTheLabDataFromLocalStorage"
+                  ];
+                }
+
+                $steps["goToLaboratoryPage"] = true
                   ? (() => {
                       const actionArgs = {
                         destination: `/patient/${(() => {
@@ -3259,12 +3345,12 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["goToImagingReport1"] != null &&
-                  typeof $steps["goToImagingReport1"] === "object" &&
-                  typeof $steps["goToImagingReport1"].then === "function"
+                  $steps["goToLaboratoryPage"] != null &&
+                  typeof $steps["goToLaboratoryPage"] === "object" &&
+                  typeof $steps["goToLaboratoryPage"].then === "function"
                 ) {
-                  $steps["goToImagingReport1"] = await $steps[
-                    "goToImagingReport1"
+                  $steps["goToLaboratoryPage"] = await $steps[
+                    "goToLaboratoryPage"
                   ];
                 }
               }}
@@ -3316,6 +3402,7 @@ const PlasmicDescendants = {
     "abnormalFactorName",
     "normalRange2",
     "svg",
+    "conditionGuard",
     "laboratoryResultNormalRange",
     "factorname",
     "labFactorNameUnit",
@@ -3370,7 +3457,8 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg"
+    "svg",
+    "conditionGuard"
   ],
   labGroupTitles: ["labGroupTitles", "labGroupTitle"],
   labGroupTitle: ["labGroupTitle"],
@@ -3449,6 +3537,7 @@ const PlasmicDescendants = {
   abnormalFactorName: ["abnormalFactorName"],
   normalRange2: ["normalRange2"],
   svg: ["svg"],
+  conditionGuard: ["conditionGuard"],
   laboratoryResultNormalRange: [
     "laboratoryResultNormalRange",
     "factorname",
@@ -3537,6 +3626,7 @@ type NodeDefaultElementType = {
   abnormalFactorName: "div";
   normalRange2: "div";
   svg: "svg";
+  conditionGuard: typeof ConditionGuard;
   laboratoryResultNormalRange: typeof AntdModal;
   factorname: "div";
   labFactorNameUnit: "div";
@@ -3648,6 +3738,7 @@ export const PlasmicLaboratoryData = Object.assign(
     abnormalFactorName: makeNodeComponent("abnormalFactorName"),
     normalRange2: makeNodeComponent("normalRange2"),
     svg: makeNodeComponent("svg"),
+    conditionGuard: makeNodeComponent("conditionGuard"),
     laboratoryResultNormalRange: makeNodeComponent(
       "laboratoryResultNormalRange"
     ),
