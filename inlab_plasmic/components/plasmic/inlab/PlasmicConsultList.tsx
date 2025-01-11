@@ -377,6 +377,7 @@ function PlasmicConsultList__RenderFunc(props: {
               data-plasmic-name={"patientDataForHeader"}
               data-plasmic-override={overrides.patientDataForHeader}
               className={classNames("__wab_instance", sty.patientDataForHeader)}
+              delay={50}
               headers={(() => {
                 try {
                   return {
@@ -395,7 +396,7 @@ function PlasmicConsultList__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}`}
+              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
               ref={ref => {
                 $refs["patientDataForHeader"] = ref;
               }}
@@ -2062,6 +2063,30 @@ function PlasmicConsultList__RenderFunc(props: {
                 onClick={async event => {
                   const $steps = {};
 
+                  $steps["deleteLabDataFromTheLocalStorage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem("laboratory_data", "");
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["deleteLabDataFromTheLocalStorage"] != null &&
+                    typeof $steps["deleteLabDataFromTheLocalStorage"] ===
+                      "object" &&
+                    typeof $steps["deleteLabDataFromTheLocalStorage"].then ===
+                      "function"
+                  ) {
+                    $steps["deleteLabDataFromTheLocalStorage"] = await $steps[
+                      "deleteLabDataFromTheLocalStorage"
+                    ];
+                  }
+
                   $steps["goToLaboratoryData"] = true
                     ? (() => {
                         const actionArgs = {
@@ -2182,7 +2207,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   )}
                 >
                   {
-                    "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u062a\u0627\u06cc\u06cc\u062f\u060c \u0627\u06cc\u0646 \u0645\u0634\u0627\u0648\u0631\u0647 \u062d\u0630\u0641 \u0634\u062f\u0647 \u0648 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647 \u0628\u0633\u062a\u0647 \u0645\u06cc \u0634\u0648\u062f\n\u062d\u0630\u0641 \u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647 \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u0648\u062f"
+                    "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u0631\u0633\u0627\u0644 \u0634\u062f\u0647 \u062a\u0627 \u067e\u06cc\u0634 \u0627\u0632 \u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0646\u060c \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u0627\u0631\u0633\u0627\u0644 \u06a9\u0646\u0646\u062f\u0647 \u0645\u0634\u0627\u0648\u0631\u0647 \u062d\u0630\u0641 \u0634\u0648\u062f\n\u062f\u0631 \u063a\u06cc\u0631 \u0627\u06cc\u0646 \u0635\u0648\u0631\u062a \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0645\u06cc \u0634\u0648\u06cc\u062f\n\u067e\u06cc\u0634 \u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647 \u0646\u06cc\u0632 \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062d\u0630\u0641 \u0634\u0648\u062f"
                   }
                 </div>
               </div>

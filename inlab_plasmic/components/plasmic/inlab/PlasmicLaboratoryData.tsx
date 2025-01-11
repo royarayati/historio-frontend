@@ -117,6 +117,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   allAdmissionsLab?: Flex__<typeof Button>;
   currentAdmissionLab?: Flex__<typeof Button>;
   labData?: Flex__<typeof ApiFetcherComponent>;
+  conditionGuard?: Flex__<typeof ConditionGuard>;
   labGroupTitles?: Flex__<"div">;
   labGroupTitle?: Flex__<"div">;
   laboratoryLists?: Flex__<"div">;
@@ -133,7 +134,6 @@ export type PlasmicLaboratoryData__OverridesType = {
   abnormalFactorName?: Flex__<"div">;
   normalRange2?: Flex__<"div">;
   svg?: Flex__<"svg">;
-  conditionGuard?: Flex__<typeof ConditionGuard>;
   laboratoryResultNormalRange?: Flex__<typeof AntdModal>;
   factorname?: Flex__<"div">;
   labFactorNameUnit?: Flex__<"div">;
@@ -582,6 +582,25 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "dataLoaded",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -1785,6 +1804,101 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <React.Fragment>
+                  <ConditionGuard
+                    data-plasmic-name={"conditionGuard"}
+                    data-plasmic-override={overrides.conditionGuard}
+                    className={classNames("__wab_instance", sty.conditionGuard)}
+                    condition={(() => {
+                      try {
+                        return $ctx.fetched_data.loading;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return false;
+                        }
+                        throw e;
+                      }
+                    })()}
+                    onNotSatisfied={async () => {
+                      const $steps = {};
+
+                      $steps["setTheLaboratoryDataToTheLocalStorage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "laboratory_data",
+                                    JSON.stringify(
+                                      $ctx.fetched_data.data.lab_test_groups
+                                    )
+                                  );
+                                  return console.log(
+                                    JSON.parse(
+                                      localStorage.getItem("laboratory_data")
+                                    )
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setTheLaboratoryDataToTheLocalStorage"] !=
+                          null &&
+                        typeof $steps[
+                          "setTheLaboratoryDataToTheLocalStorage"
+                        ] === "object" &&
+                        typeof $steps["setTheLaboratoryDataToTheLocalStorage"]
+                          .then === "function"
+                      ) {
+                        $steps["setTheLaboratoryDataToTheLocalStorage"] =
+                          await $steps["setTheLaboratoryDataToTheLocalStorage"];
+                      }
+
+                      $steps["updateDataLoaded"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["dataLoaded"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateDataLoaded"] != null &&
+                        typeof $steps["updateDataLoaded"] === "object" &&
+                        typeof $steps["updateDataLoaded"].then === "function"
+                      ) {
+                        $steps["updateDataLoaded"] = await $steps[
+                          "updateDataLoaded"
+                        ];
+                      }
+                    }}
+                  />
+
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? (() => {
@@ -1916,9 +2030,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                     (() => {
                       try {
-                        return JSON.parse(
+                        return $state.dataLoaded == true &&
                           localStorage.getItem("laboratory_data")
-                        );
+                          ? JSON.parse(localStorage.getItem("laboratory_data"))
+                          : [];
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
@@ -2580,64 +2695,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       </Stack__>
                     );
                   })}
-                  <ConditionGuard
-                    data-plasmic-name={"conditionGuard"}
-                    data-plasmic-override={overrides.conditionGuard}
-                    className={classNames("__wab_instance", sty.conditionGuard)}
-                    condition={(() => {
-                      try {
-                        return $ctx.fetched_data.loading;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return false;
-                        }
-                        throw e;
-                      }
-                    })()}
-                    onNotSatisfied={async () => {
-                      const $steps = {};
-
-                      $steps["setTheLaboratoryDataToTheLocalStorage"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "laboratory_data",
-                                    JSON.stringify(
-                                      $ctx.fetched_data.data.lab_test_groups
-                                    )
-                                  );
-                                  return console.log(
-                                    JSON.parse(
-                                      localStorage.getItem("laboratory_data")
-                                    )
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["setTheLaboratoryDataToTheLocalStorage"] !=
-                          null &&
-                        typeof $steps[
-                          "setTheLaboratoryDataToTheLocalStorage"
-                        ] === "object" &&
-                        typeof $steps["setTheLaboratoryDataToTheLocalStorage"]
-                          .then === "function"
-                      ) {
-                        $steps["setTheLaboratoryDataToTheLocalStorage"] =
-                          await $steps["setTheLaboratoryDataToTheLocalStorage"];
-                      }
-                    }}
-                  />
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -3279,8 +3336,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       const actionArgs = {
                         customFunction: async () => {
                           return (() => {
-                            localStorage.removeItem("laboratory_data");
-                            return console.log("laboratory_data");
+                            localStorage.setItem("laboratory_data", "");
+                            return console.log(
+                              "laboratory_data",
+                              localStorage.getItem("laboratory_data")
+                            );
                           })();
                         }
                       };
@@ -3386,6 +3446,7 @@ const PlasmicDescendants = {
     "allAdmissionsLab",
     "currentAdmissionLab",
     "labData",
+    "conditionGuard",
     "labGroupTitles",
     "labGroupTitle",
     "laboratoryLists",
@@ -3402,7 +3463,6 @@ const PlasmicDescendants = {
     "abnormalFactorName",
     "normalRange2",
     "svg",
-    "conditionGuard",
     "laboratoryResultNormalRange",
     "factorname",
     "labFactorNameUnit",
@@ -3442,6 +3502,7 @@ const PlasmicDescendants = {
   currentAdmissionLab: ["currentAdmissionLab"],
   labData: [
     "labData",
+    "conditionGuard",
     "labGroupTitles",
     "labGroupTitle",
     "laboratoryLists",
@@ -3457,9 +3518,9 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg",
-    "conditionGuard"
+    "svg"
   ],
+  conditionGuard: ["conditionGuard"],
   labGroupTitles: ["labGroupTitles", "labGroupTitle"],
   labGroupTitle: ["labGroupTitle"],
   laboratoryLists: [
@@ -3537,7 +3598,6 @@ const PlasmicDescendants = {
   abnormalFactorName: ["abnormalFactorName"],
   normalRange2: ["normalRange2"],
   svg: ["svg"],
-  conditionGuard: ["conditionGuard"],
   laboratoryResultNormalRange: [
     "laboratoryResultNormalRange",
     "factorname",
@@ -3610,6 +3670,7 @@ type NodeDefaultElementType = {
   allAdmissionsLab: typeof Button;
   currentAdmissionLab: typeof Button;
   labData: typeof ApiFetcherComponent;
+  conditionGuard: typeof ConditionGuard;
   labGroupTitles: "div";
   labGroupTitle: "div";
   laboratoryLists: "div";
@@ -3626,7 +3687,6 @@ type NodeDefaultElementType = {
   abnormalFactorName: "div";
   normalRange2: "div";
   svg: "svg";
-  conditionGuard: typeof ConditionGuard;
   laboratoryResultNormalRange: typeof AntdModal;
   factorname: "div";
   labFactorNameUnit: "div";
@@ -3722,6 +3782,7 @@ export const PlasmicLaboratoryData = Object.assign(
     allAdmissionsLab: makeNodeComponent("allAdmissionsLab"),
     currentAdmissionLab: makeNodeComponent("currentAdmissionLab"),
     labData: makeNodeComponent("labData"),
+    conditionGuard: makeNodeComponent("conditionGuard"),
     labGroupTitles: makeNodeComponent("labGroupTitles"),
     labGroupTitle: makeNodeComponent("labGroupTitle"),
     laboratoryLists: makeNodeComponent("laboratoryLists"),
@@ -3738,7 +3799,6 @@ export const PlasmicLaboratoryData = Object.assign(
     abnormalFactorName: makeNodeComponent("abnormalFactorName"),
     normalRange2: makeNodeComponent("normalRange2"),
     svg: makeNodeComponent("svg"),
-    conditionGuard: makeNodeComponent("conditionGuard"),
     laboratoryResultNormalRange: makeNodeComponent(
       "laboratoryResultNormalRange"
     ),

@@ -1263,6 +1263,30 @@ function PlasmicPatientProfile__RenderFunc(props: {
                       "goToLaboratoryData"
                     ];
                   }
+
+                  $steps["daleteLabDataFromLocalStorage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem("laboratory_data", "");
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["daleteLabDataFromLocalStorage"] != null &&
+                    typeof $steps["daleteLabDataFromLocalStorage"] ===
+                      "object" &&
+                    typeof $steps["daleteLabDataFromLocalStorage"].then ===
+                      "function"
+                  ) {
+                    $steps["daleteLabDataFromLocalStorage"] = await $steps[
+                      "daleteLabDataFromLocalStorage"
+                    ];
+                  }
                 }}
                 src={{
                   src: "/new_inlab/plasmic/inlab/images/group384.svg",
