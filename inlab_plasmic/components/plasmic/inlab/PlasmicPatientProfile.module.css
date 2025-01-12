@@ -559,7 +559,7 @@
   width: 20%;
   height: 25px;
   margin: 0;
-  border-right: 0px none #aeaeae;
+  border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
 }
 .laboratory > picture > img {
   object-fit: fill;

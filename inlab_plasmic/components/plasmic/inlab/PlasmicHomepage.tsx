@@ -3006,7 +3006,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 path={`/api/v2/consult?${
                   localStorage.getItem("GET_V2_consult_query_param")
                     ? localStorage.getItem("GET_V2_consult_query_param")
-                    : "offset=0&limit=10"
+                    : "offset=0&limit=20"
                 }`}
                 ref={ref => {
                   $refs["consults"] = ref;
@@ -9434,7 +9434,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         customFunction: async () => {
                                           return localStorage.setItem(
                                             "GET_V2_consult_query_param",
-                                            `offset=0&limit=10&effective_patient_service_id=${localStorage.getItem(
+                                            `offset=0&limit=20&effective_patient_service_id=${localStorage.getItem(
                                               "filter_service_id"
                                             )}`
                                           );
@@ -9840,7 +9840,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         customFunction: async () => {
                                           return localStorage.setItem(
                                             "GET_V2_consult_query_param",
-                                            `offset=0&limit=10&consultant_service_id=${localStorage.getItem(
+                                            `offset=0&limit=20&consultant_service_id=${localStorage.getItem(
                                               "filter_service_id"
                                             )}`
                                           );

@@ -66,6 +66,7 @@ import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
+import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -133,7 +134,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   factorResultUnit?: Flex__<"div">;
   abnormalFactorName?: Flex__<"div">;
   normalRange2?: Flex__<"div">;
-  svg?: Flex__<"svg">;
+  normalRangeIcon?: Flex__<"svg">;
   laboratoryResultNormalRange?: Flex__<typeof AntdModal>;
   factorname?: Flex__<"div">;
   labFactorNameUnit?: Flex__<"div">;
@@ -150,6 +151,7 @@ export type PlasmicLaboratoryData__OverridesType = {
   patientProfile?: Flex__<typeof PlasmicImg__>;
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratoryPage2?: Flex__<typeof PlasmicImg__>;
+  bookmarkIcon?: Flex__<typeof BookmarkIcon>;
 };
 
 export interface DefaultLaboratoryDataProps {}
@@ -591,6 +593,29 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           (() => {
             try {
               return false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "bookmarkIcon.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return localStorage.getItem("bookmark_id_list")
+                ? localStorage
+                    .getItem("bookmark_id_list")
+                    .includes($ctx.params.adm_id)
+                : false;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -2670,15 +2695,17 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                               </div>
                                             ) : null}
                                           </div>
-                                          {currentItem.normal_range != "" ? (
+                                          {currentItem.normal_range !== null ? (
                                             <InformationIcon
-                                              data-plasmic-name={"svg"}
+                                              data-plasmic-name={
+                                                "normalRangeIcon"
+                                              }
                                               data-plasmic-override={
-                                                overrides.svg
+                                                overrides.normalRangeIcon
                                               }
                                               className={classNames(
                                                 projectcss.all,
-                                                sty.svg
+                                                sty.normalRangeIcon
                                               )}
                                               role={"img"}
                                             />
@@ -3316,111 +3343,197 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               }}
             />
 
-            <PlasmicImg__
-              data-plasmic-name={"laboratoryPage2"}
-              data-plasmic-override={overrides.laboratoryPage2}
-              alt={""}
-              className={classNames(sty.laboratoryPage2)}
-              displayHeight={"25px"}
-              displayMaxHeight={"none"}
-              displayMaxWidth={"100%"}
-              displayMinHeight={"0"}
-              displayMinWidth={"0"}
-              displayWidth={"20%"}
-              loading={"lazy"}
-              onClick={async event => {
-                const $steps = {};
+            {false ? (
+              <PlasmicImg__
+                data-plasmic-name={"laboratoryPage2"}
+                data-plasmic-override={overrides.laboratoryPage2}
+                alt={""}
+                className={classNames(sty.laboratoryPage2)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"20%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
 
-                $steps["deleteTheLabDataFromLocalStorage"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        customFunction: async () => {
-                          return (() => {
-                            localStorage.setItem("laboratory_data", "");
-                            return console.log(
-                              "laboratory_data",
-                              localStorage.getItem("laboratory_data")
-                            );
-                          })();
-                        }
-                      };
-                      return (({ customFunction }) => {
-                        return customFunction();
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["deleteTheLabDataFromLocalStorage"] != null &&
-                  typeof $steps["deleteTheLabDataFromLocalStorage"] ===
-                    "object" &&
-                  typeof $steps["deleteTheLabDataFromLocalStorage"].then ===
-                    "function"
-                ) {
-                  $steps["deleteTheLabDataFromLocalStorage"] = await $steps[
-                    "deleteTheLabDataFromLocalStorage"
-                  ];
-                }
+                  $steps["deleteTheLabDataFromLocalStorage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (() => {
+                              localStorage.setItem("laboratory_data", "");
+                              return console.log(
+                                "laboratory_data",
+                                localStorage.getItem("laboratory_data")
+                              );
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["deleteTheLabDataFromLocalStorage"] != null &&
+                    typeof $steps["deleteTheLabDataFromLocalStorage"] ===
+                      "object" &&
+                    typeof $steps["deleteTheLabDataFromLocalStorage"].then ===
+                      "function"
+                  ) {
+                    $steps["deleteTheLabDataFromLocalStorage"] = await $steps[
+                      "deleteTheLabDataFromLocalStorage"
+                    ];
+                  }
 
-                $steps["goToLaboratoryPage"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: `/patient/${(() => {
-                          try {
-                            return $ctx.params.code;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
+                  $steps["goToLaboratoryPage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
                             }
-                            throw e;
-                          }
-                        })()}/lab/${(() => {
-                          try {
-                            return $ctx.params.adm_id;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
+                          })()}/lab/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
                             }
-                            throw e;
+                          })()}`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
                           }
-                        })()}`
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToLaboratoryPage"] != null &&
+                    typeof $steps["goToLaboratoryPage"] === "object" &&
+                    typeof $steps["goToLaboratoryPage"].then === "function"
+                  ) {
+                    $steps["goToLaboratoryPage"] = await $steps[
+                      "goToLaboratoryPage"
+                    ];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/group384.svg",
+                  fullWidth: 14.575,
+                  fullHeight: 18.692,
+                  aspectRatio: 0.789474
+                }}
+              />
+            ) : null}
+            {(() => {
+              const child$Props = {
+                admissionId: (() => {
+                  try {
+                    return parseInt($ctx.params.adm_id);
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })(),
+                className: classNames("__wab_instance", sty.bookmarkIcon),
+                onSelectedChange: async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
+                    "bookmarkIcon",
+                    "selected"
+                  ]).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                },
+                patientId: (() => {
+                  try {
+                    return parseInt($ctx.params.code);
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })(),
+                selected: generateStateValueProp($state, [
+                  "bookmarkIcon",
+                  "selected"
+                ])
+              };
+
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "bookmarkIcon.selected",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      (() => {
+                        try {
+                          return localStorage.getItem("bookmark_id_list")
+                            ? localStorage
+                                .getItem("bookmark_id_list")
+                                .includes($ctx.params.adm_id)
+                            : false;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return false;
+                          }
+                          throw e;
                         }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToLaboratoryPage"] != null &&
-                  typeof $steps["goToLaboratoryPage"] === "object" &&
-                  typeof $steps["goToLaboratoryPage"].then === "function"
-                ) {
-                  $steps["goToLaboratoryPage"] = await $steps[
-                    "goToLaboratoryPage"
-                  ];
-                }
-              }}
-              src={{
-                src: "/new_inlab/plasmic/inlab/images/group384.svg",
-                fullWidth: 14.575,
-                fullHeight: 18.692,
-                aspectRatio: 0.789474
-              }}
-            />
+                      })()
+                  }
+                ],
+                []
+              );
+              return (
+                <BookmarkIcon
+                  data-plasmic-name={"bookmarkIcon"}
+                  data-plasmic-override={overrides.bookmarkIcon}
+                  {...child$Props}
+                />
+              );
+            })()}
           </SwitchingTab>
         </Stack__>
       </div>
@@ -3462,7 +3575,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg",
+    "normalRangeIcon",
     "laboratoryResultNormalRange",
     "factorname",
     "labFactorNameUnit",
@@ -3478,7 +3591,8 @@ const PlasmicDescendants = {
     "consult",
     "patientProfile",
     "radiologyReport",
-    "laboratoryPage2"
+    "laboratoryPage2",
+    "bookmarkIcon"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -3518,7 +3632,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg"
+    "normalRangeIcon"
   ],
   conditionGuard: ["conditionGuard"],
   labGroupTitles: ["labGroupTitles", "labGroupTitle"],
@@ -3537,7 +3651,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg"
+    "normalRangeIcon"
   ],
   labResults: [
     "labResults",
@@ -3552,7 +3666,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg"
+    "normalRangeIcon"
   ],
   checkedFactors: ["checkedFactors", "labGroupName", "factorName"],
   labGroupName: ["labGroupName"],
@@ -3566,7 +3680,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg"
+    "normalRangeIcon"
   ],
   labPerDate: [
     "labPerDate",
@@ -3576,7 +3690,7 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg"
+    "normalRangeIcon"
   ],
   issuedDatetime: ["issuedDatetime"],
   labLists: [
@@ -3585,19 +3699,19 @@ const PlasmicDescendants = {
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg"
+    "normalRangeIcon"
   ],
   factorNameValue: [
     "factorNameValue",
     "factorResultUnit",
     "abnormalFactorName",
     "normalRange2",
-    "svg"
+    "normalRangeIcon"
   ],
   factorResultUnit: ["factorResultUnit"],
   abnormalFactorName: ["abnormalFactorName"],
   normalRange2: ["normalRange2"],
-  svg: ["svg"],
+  normalRangeIcon: ["normalRangeIcon"],
   laboratoryResultNormalRange: [
     "laboratoryResultNormalRange",
     "factorname",
@@ -3634,7 +3748,8 @@ const PlasmicDescendants = {
     "consult",
     "patientProfile",
     "radiologyReport",
-    "laboratoryPage2"
+    "laboratoryPage2",
+    "bookmarkIcon"
   ],
   switchingTab: [
     "switchingTab",
@@ -3642,13 +3757,15 @@ const PlasmicDescendants = {
     "consult",
     "patientProfile",
     "radiologyReport",
-    "laboratoryPage2"
+    "laboratoryPage2",
+    "bookmarkIcon"
   ],
   homepage: ["homepage"],
   consult: ["consult"],
   patientProfile: ["patientProfile"],
   radiologyReport: ["radiologyReport"],
-  laboratoryPage2: ["laboratoryPage2"]
+  laboratoryPage2: ["laboratoryPage2"],
+  bookmarkIcon: ["bookmarkIcon"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -3686,7 +3803,7 @@ type NodeDefaultElementType = {
   factorResultUnit: "div";
   abnormalFactorName: "div";
   normalRange2: "div";
-  svg: "svg";
+  normalRangeIcon: "svg";
   laboratoryResultNormalRange: typeof AntdModal;
   factorname: "div";
   labFactorNameUnit: "div";
@@ -3703,6 +3820,7 @@ type NodeDefaultElementType = {
   patientProfile: typeof PlasmicImg__;
   radiologyReport: typeof PlasmicImg__;
   laboratoryPage2: typeof PlasmicImg__;
+  bookmarkIcon: typeof BookmarkIcon;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -3798,7 +3916,7 @@ export const PlasmicLaboratoryData = Object.assign(
     factorResultUnit: makeNodeComponent("factorResultUnit"),
     abnormalFactorName: makeNodeComponent("abnormalFactorName"),
     normalRange2: makeNodeComponent("normalRange2"),
-    svg: makeNodeComponent("svg"),
+    normalRangeIcon: makeNodeComponent("normalRangeIcon"),
     laboratoryResultNormalRange: makeNodeComponent(
       "laboratoryResultNormalRange"
     ),
@@ -3817,6 +3935,7 @@ export const PlasmicLaboratoryData = Object.assign(
     patientProfile: makeNodeComponent("patientProfile"),
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratoryPage2: makeNodeComponent("laboratoryPage2"),
+    bookmarkIcon: makeNodeComponent("bookmarkIcon"),
 
     // Metadata about props expected for PlasmicLaboratoryData
     internalVariantProps: PlasmicLaboratoryData__VariantProps,

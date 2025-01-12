@@ -866,7 +866,7 @@
 .normalRange2viewNormalRange {
   display: block;
 }
-.svg {
+.normalRangeIcon {
   object-fit: cover;
   max-width: 100%;
   color: var(--token-8PxxXPNrIohQ);
@@ -1177,4 +1177,9 @@
 }
 .laboratoryPage2 > picture > img {
   object-fit: fill;
+}
+.bookmarkIcon:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
 }
