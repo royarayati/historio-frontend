@@ -629,13 +629,17 @@
   object-fit: fill;
   max-width: 100%;
   width: 20%;
-  border-right-style: none;
-  border-right-width: 1px;
   height: 25px;
   margin: 0;
+  border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
 }
 .laboratoryData > picture > img {
   object-fit: fill;
+}
+.bookmarkIcon:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
 }
 .modalDeleteConsultConfirmation:global(.__wab_instance) {
   max-width: 100%;

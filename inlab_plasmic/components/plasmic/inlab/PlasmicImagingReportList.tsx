@@ -191,7 +191,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $ctx.params.bookmarked === "true" ? true : false;
+              return localStorage.getItem("bookmark_id_list")
+                ? localStorage
+                    .getItem("bookmark_id_list")
+                    .includes($ctx.params.adm_id)
+                : false;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -2499,82 +2503,83 @@ function PlasmicImagingReportList__RenderFunc(props: {
               }}
             />
 
-            <PlasmicImg__
-              data-plasmic-name={"radiologyReport"}
-              data-plasmic-override={overrides.radiologyReport}
-              alt={""}
-              className={classNames(sty.radiologyReport)}
-              displayHeight={"25px"}
-              displayMaxHeight={"none"}
-              displayMaxWidth={"100%"}
-              displayMinHeight={"0"}
-              displayMinWidth={"0"}
-              displayWidth={"20%"}
-              loading={"lazy"}
-              onClick={async event => {
-                const $steps = {};
+            {false ? (
+              <PlasmicImg__
+                data-plasmic-name={"radiologyReport"}
+                data-plasmic-override={overrides.radiologyReport}
+                alt={""}
+                className={classNames(sty.radiologyReport)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"20%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
 
-                $steps["goToImagingReportList"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: `/patient/${(() => {
-                          try {
-                            return $ctx.params.code;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
+                  $steps["goToImagingReportList"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
                             }
-                            throw e;
-                          }
-                        })()}/report/list/${(() => {
-                          try {
-                            return $ctx.params.adm_id;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
+                          })()}/report/list/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
                             }
-                            throw e;
+                          })()}`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
                           }
-                        })()}`
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToImagingReportList"] != null &&
-                  typeof $steps["goToImagingReportList"] === "object" &&
-                  typeof $steps["goToImagingReportList"].then === "function"
-                ) {
-                  $steps["goToImagingReportList"] = await $steps[
-                    "goToImagingReportList"
-                  ];
-                }
-              }}
-              src={{
-                src: "/new_inlab/plasmic/inlab/images/group376.svg",
-                fullWidth: 19.424,
-                fullHeight: 19.98,
-                aspectRatio: 1
-              }}
-            />
-
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToImagingReportList"] != null &&
+                    typeof $steps["goToImagingReportList"] === "object" &&
+                    typeof $steps["goToImagingReportList"].then === "function"
+                  ) {
+                    $steps["goToImagingReportList"] = await $steps[
+                      "goToImagingReportList"
+                    ];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/group376.svg",
+                  fullWidth: 19.424,
+                  fullHeight: 19.98,
+                  aspectRatio: 1
+                }}
+              />
+            ) : null}
             <PlasmicImg__
               data-plasmic-name={"laboratory"}
               data-plasmic-override={overrides.laboratory}
@@ -2589,6 +2594,29 @@ function PlasmicImagingReportList__RenderFunc(props: {
               loading={"lazy"}
               onClick={async event => {
                 const $steps = {};
+
+                $steps["daleteLabDataFromLocalStorage"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return localStorage.setItem("laboratory_data", "");
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["daleteLabDataFromLocalStorage"] != null &&
+                  typeof $steps["daleteLabDataFromLocalStorage"] === "object" &&
+                  typeof $steps["daleteLabDataFromLocalStorage"].then ===
+                    "function"
+                ) {
+                  $steps["daleteLabDataFromLocalStorage"] = await $steps[
+                    "daleteLabDataFromLocalStorage"
+                  ];
+                }
 
                 $steps["goToLaboratoryData"] = true
                   ? (() => {
@@ -2651,108 +2679,121 @@ function PlasmicImagingReportList__RenderFunc(props: {
               }}
             />
 
-            {false
-              ? (() => {
-                  const child$Props = {
-                    className: classNames("__wab_instance", sty.bookmarkIcon),
-                    onSelectedChange: async (...eventArgs: any) => {
-                      generateStateOnChangeProp($state, [
-                        "bookmarkIcon",
-                        "selected"
-                      ]).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    },
-                    patientId: (() => {
-                      try {
-                        return $ctx.params.code;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return undefined;
-                        }
-                        throw e;
-                      }
-                    })(),
-                    selected: generateStateValueProp($state, [
-                      "bookmarkIcon",
-                      "selected"
-                    ]),
-                    trigerReload: async () => {
-                      const $steps = {};
-
-                      $steps["updateBookmarked"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              vgroup: "bookmarked",
-                              operation: 2,
-                              value: "bookmarked"
-                            };
-                            return (({ vgroup, value }) => {
-                              if (typeof value === "string") {
-                                value = [value];
-                              }
-
-                              const oldValue = $stateGet($state, vgroup);
-                              $stateSet($state, vgroup, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateBookmarked"] != null &&
-                        typeof $steps["updateBookmarked"] === "object" &&
-                        typeof $steps["updateBookmarked"].then === "function"
-                      ) {
-                        $steps["updateBookmarked"] = await $steps[
-                          "updateBookmarked"
-                        ];
-                      }
+            {(() => {
+              const child$Props = {
+                admissionId: (() => {
+                  try {
+                    return parseInt($ctx.params.adm_id);
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
                     }
-                  };
+                    throw e;
+                  }
+                })(),
+                className: classNames("__wab_instance", sty.bookmarkIcon),
+                onSelectedChange: async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
+                    "bookmarkIcon",
+                    "selected"
+                  ]).apply(null, eventArgs);
 
-                  initializePlasmicStates(
-                    $state,
-                    [
-                      {
-                        name: "bookmarkIcon.selected",
-                        initFunc: ({ $props, $state, $queries }) =>
-                          (() => {
-                            try {
-                              return $ctx.params.bookmarked === "true"
-                                ? true
-                                : false;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return false;
-                              }
-                              throw e;
-                            }
-                          })()
-                      }
-                    ],
-                    []
-                  );
-                  return (
-                    <BookmarkIcon
-                      data-plasmic-name={"bookmarkIcon"}
-                      data-plasmic-override={overrides.bookmarkIcon}
-                      {...child$Props}
-                    />
-                  );
-                })()
-              : null}
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                },
+                patientId: (() => {
+                  try {
+                    return parseInt($ctx.params.code);
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })(),
+                selected: generateStateValueProp($state, [
+                  "bookmarkIcon",
+                  "selected"
+                ]),
+                trigerReload: async () => {
+                  const $steps = {};
+
+                  $steps["updateBookmarked"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          vgroup: "bookmarked",
+                          operation: 2,
+                          value: "bookmarked"
+                        };
+                        return (({ vgroup, value }) => {
+                          if (typeof value === "string") {
+                            value = [value];
+                          }
+
+                          const oldValue = $stateGet($state, vgroup);
+                          $stateSet($state, vgroup, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateBookmarked"] != null &&
+                    typeof $steps["updateBookmarked"] === "object" &&
+                    typeof $steps["updateBookmarked"].then === "function"
+                  ) {
+                    $steps["updateBookmarked"] = await $steps[
+                      "updateBookmarked"
+                    ];
+                  }
+                }
+              };
+
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "bookmarkIcon.selected",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      (() => {
+                        try {
+                          return localStorage.getItem("bookmark_id_list")
+                            ? localStorage
+                                .getItem("bookmark_id_list")
+                                .includes($ctx.params.adm_id)
+                            : false;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return false;
+                          }
+                          throw e;
+                        }
+                      })()
+                  }
+                ],
+                []
+              );
+              return (
+                <BookmarkIcon
+                  data-plasmic-name={"bookmarkIcon"}
+                  data-plasmic-override={overrides.bookmarkIcon}
+                  {...child$Props}
+                />
+              );
+            })()}
           </SwitchingTab>
         </div>
       </div>

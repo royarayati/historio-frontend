@@ -135,7 +135,9 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   senderDoctorAndTime?: Flex__<"div">;
   senderAndSendDateTitle?: Flex__<"div">;
   consultSender?: Flex__<"div">;
-  consultSendDate?: Flex__<"div">;
+  consultSendDatetime?: Flex__<"div">;
+  lastEditDatetimeTitle?: Flex__<"div">;
+  lastEditDatetime?: Flex__<"div">;
   consultSendReplyContent?: Flex__<"div">;
   consultReplyTitle?: Flex__<"div">;
   consultReplyInput?: Flex__<"textarea">;
@@ -411,6 +413,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
               data-plasmic-name={"patientDataForHeader"}
               data-plasmic-override={overrides.patientDataForHeader}
               className={classNames("__wab_instance", sty.patientDataForHeader)}
+              delay={50}
               headers={(() => {
                 try {
                   return {
@@ -429,7 +432,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}`}
+              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
               ref={ref => {
                 $refs["patientDataForHeader"] = ref;
               }}
@@ -1269,12 +1272,14 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             </React.Fragment>
                           </div>
                           <div
-                            data-plasmic-name={"consultSendDate"}
-                            data-plasmic-override={overrides.consultSendDate}
+                            data-plasmic-name={"consultSendDatetime"}
+                            data-plasmic-override={
+                              overrides.consultSendDatetime
+                            }
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.consultSendDate
+                              sty.consultSendDatetime
                             )}
                             dir={"rtl"}
                           >
@@ -1309,6 +1314,79 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                     );
                                     return `${englishTime} ${englishDate}`;
                                   })();
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "";
+                                  }
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
+                          </div>
+                          <div
+                            data-plasmic-name={"lastEditDatetimeTitle"}
+                            data-plasmic-override={
+                              overrides.lastEditDatetimeTitle
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.lastEditDatetimeTitle
+                            )}
+                          >
+                            {
+                              "\u0622\u062e\u0631\u06cc\u0646 \u0632\u0645\u0627\u0646 \u0648\u06cc\u0631\u0627\u06cc\u0634 \u0645\u0634\u0627\u0648\u0631\u0647"
+                            }
+                          </div>
+                          <div
+                            data-plasmic-name={"lastEditDatetime"}
+                            data-plasmic-override={overrides.lastEditDatetime}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.lastEditDatetime
+                            )}
+                            dir={"rtl"}
+                          >
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return $ctx.fetched_data.data
+                                    .last_edited_request_datetime
+                                    ? (() => {
+                                        const gregorianDate = new Date(
+                                          $ctx.fetched_data.data.last_edited_request_datetime
+                                        );
+                                        const shamsiDate =
+                                          new Intl.DateTimeFormat(
+                                            "fa-IR"
+                                          ).format(gregorianDate);
+                                        const shamsiTime =
+                                          gregorianDate.toLocaleTimeString(
+                                            "fa-IR",
+                                            { hour12: false }
+                                          );
+                                        const englishDate = shamsiDate.replace(
+                                          /[۰-۹]/g,
+                                          d =>
+                                            String.fromCharCode(
+                                              d.charCodeAt(0) - 1728
+                                            )
+                                        );
+                                        const englishTime = shamsiTime.replace(
+                                          /[۰-۹]/g,
+                                          d =>
+                                            String.fromCharCode(
+                                              d.charCodeAt(0) - 1728
+                                            )
+                                        );
+                                        return `${englishTime} ${englishDate}`;
+                                      })()
+                                    : "-";
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -2635,6 +2713,36 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                 onClick={async event => {
                   const $steps = {};
 
+                  $steps["deleteLabDataFromTheLocalStorage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (() => {
+                              localStorage.setItem("laboratory_data", "");
+                              return console.log(
+                                "laboratory_data",
+                                localStorage.getItem("laboratory_data")
+                              );
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["deleteLabDataFromTheLocalStorage"] != null &&
+                    typeof $steps["deleteLabDataFromTheLocalStorage"] ===
+                      "object" &&
+                    typeof $steps["deleteLabDataFromTheLocalStorage"].then ===
+                      "function"
+                  ) {
+                    $steps["deleteLabDataFromTheLocalStorage"] = await $steps[
+                      "deleteLabDataFromTheLocalStorage"
+                    ];
+                  }
+
                   $steps["goToLaboratoryData"] = true
                     ? (() => {
                         const actionArgs = {
@@ -2755,7 +2863,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                   )}
                 >
                   {
-                    "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u062a\u0627\u06cc\u06cc\u062f\u060c \u0627\u06cc\u0646 \u0645\u0634\u0627\u0648\u0631\u0647 \u062d\u0630\u0641 \u0634\u062f\u0647 \u0648 \u0628\u0647 \u0635\u0641\u062d\u0647 \u0644\u06cc\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0645\u0646\u062a\u0642\u0644 \u0645\u06cc \u0634\u0648\u06cc\u062f\n\u062d\u0630\u0641 \u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647 \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u0648\u062f"
+                    "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u0631\u0633\u0627\u0644 \u0634\u062f\u0647 \u062a\u0627 \u067e\u06cc\u0634 \u0627\u0632 \u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0646\u060c \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u0627\u0631\u0633\u0627\u0644 \u06a9\u0646\u0646\u062f\u0647 \u0645\u0634\u0627\u0648\u0631\u0647 \u062d\u0630\u0641 \u0634\u0648\u062f\n\u062f\u0631 \u063a\u06cc\u0631 \u0627\u06cc\u0646 \u0635\u0648\u0631\u062a \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0645\u06cc \u0634\u0648\u06cc\u062f"
                   }
                 </div>
               </div>
@@ -3318,7 +3426,9 @@ const PlasmicDescendants = {
     "senderDoctorAndTime",
     "senderAndSendDateTitle",
     "consultSender",
-    "consultSendDate",
+    "consultSendDatetime",
+    "lastEditDatetimeTitle",
+    "lastEditDatetime",
     "consultSendReplyContent",
     "consultReplyTitle",
     "consultReplyInput",
@@ -3405,7 +3515,9 @@ const PlasmicDescendants = {
     "senderDoctorAndTime",
     "senderAndSendDateTitle",
     "consultSender",
-    "consultSendDate",
+    "consultSendDatetime",
+    "lastEditDatetimeTitle",
+    "lastEditDatetime",
     "consultSendReplyContent",
     "consultReplyTitle",
     "consultReplyInput",
@@ -3459,7 +3571,9 @@ const PlasmicDescendants = {
     "senderDoctorAndTime",
     "senderAndSendDateTitle",
     "consultSender",
-    "consultSendDate",
+    "consultSendDatetime",
+    "lastEditDatetimeTitle",
+    "lastEditDatetime",
     "consultSendReplyContent",
     "consultReplyTitle",
     "consultReplyInput",
@@ -3512,7 +3626,9 @@ const PlasmicDescendants = {
     "senderDoctorAndTime",
     "senderAndSendDateTitle",
     "consultSender",
-    "consultSendDate",
+    "consultSendDatetime",
+    "lastEditDatetimeTitle",
+    "lastEditDatetime",
     "consultSendReplyContent",
     "consultReplyTitle",
     "consultReplyInput",
@@ -3590,7 +3706,9 @@ const PlasmicDescendants = {
     "senderDoctorAndTime",
     "senderAndSendDateTitle",
     "consultSender",
-    "consultSendDate"
+    "consultSendDatetime",
+    "lastEditDatetimeTitle",
+    "lastEditDatetime"
   ],
   emergent: ["emergent"],
   elective: ["elective"],
@@ -3598,11 +3716,15 @@ const PlasmicDescendants = {
     "senderDoctorAndTime",
     "senderAndSendDateTitle",
     "consultSender",
-    "consultSendDate"
+    "consultSendDatetime",
+    "lastEditDatetimeTitle",
+    "lastEditDatetime"
   ],
   senderAndSendDateTitle: ["senderAndSendDateTitle"],
   consultSender: ["consultSender"],
-  consultSendDate: ["consultSendDate"],
+  consultSendDatetime: ["consultSendDatetime"],
+  lastEditDatetimeTitle: ["lastEditDatetimeTitle"],
+  lastEditDatetime: ["lastEditDatetime"],
   consultSendReplyContent: [
     "consultSendReplyContent",
     "consultReplyTitle",
@@ -3734,7 +3856,9 @@ type NodeDefaultElementType = {
   senderDoctorAndTime: "div";
   senderAndSendDateTitle: "div";
   consultSender: "div";
-  consultSendDate: "div";
+  consultSendDatetime: "div";
+  lastEditDatetimeTitle: "div";
+  lastEditDatetime: "div";
   consultSendReplyContent: "div";
   consultReplyTitle: "div";
   consultReplyInput: "textarea";
@@ -3889,7 +4013,9 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     senderDoctorAndTime: makeNodeComponent("senderDoctorAndTime"),
     senderAndSendDateTitle: makeNodeComponent("senderAndSendDateTitle"),
     consultSender: makeNodeComponent("consultSender"),
-    consultSendDate: makeNodeComponent("consultSendDate"),
+    consultSendDatetime: makeNodeComponent("consultSendDatetime"),
+    lastEditDatetimeTitle: makeNodeComponent("lastEditDatetimeTitle"),
+    lastEditDatetime: makeNodeComponent("lastEditDatetime"),
     consultSendReplyContent: makeNodeComponent("consultSendReplyContent"),
     consultReplyTitle: makeNodeComponent("consultReplyTitle"),
     consultReplyInput: makeNodeComponent("consultReplyInput"),

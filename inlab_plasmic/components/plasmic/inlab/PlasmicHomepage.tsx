@@ -3006,7 +3006,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 path={`/api/v2/consult?${
                   localStorage.getItem("GET_V2_consult_query_param")
                     ? localStorage.getItem("GET_V2_consult_query_param")
-                    : "offset=0&limit=10"
+                    : "offset=0&limit=20"
                 }`}
                 ref={ref => {
                   $refs["consults"] = ref;
@@ -7147,6 +7147,48 @@ function PlasmicHomepage__RenderFunc(props: {
                                   onClick={async event => {
                                     const $steps = {};
 
+                                    $steps["deleteLabDataFromTheLocalStorage"] =
+                                      true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              customFunction: async () => {
+                                                return (() => {
+                                                  localStorage.setItem(
+                                                    "laboratory_data",
+                                                    ""
+                                                  );
+                                                  return console.log(
+                                                    "laboratory_data",
+                                                    localStorage.getItem(
+                                                      "laboratory_data"
+                                                    )
+                                                  );
+                                                })();
+                                              }
+                                            };
+                                            return (({ customFunction }) => {
+                                              return customFunction();
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                    if (
+                                      $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ] != null &&
+                                      typeof $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ] === "object" &&
+                                      typeof $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ].then === "function"
+                                    ) {
+                                      $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ] = await $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ];
+                                    }
+
                                     $steps["goToLaboratoryData"] = true
                                       ? (() => {
                                           const actionArgs = {
@@ -9392,7 +9434,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         customFunction: async () => {
                                           return localStorage.setItem(
                                             "GET_V2_consult_query_param",
-                                            `offset=0&limit=10&effective_patient_service_id=${localStorage.getItem(
+                                            `offset=0&limit=20&effective_patient_service_id=${localStorage.getItem(
                                               "filter_service_id"
                                             )}`
                                           );
@@ -9798,7 +9840,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         customFunction: async () => {
                                           return localStorage.setItem(
                                             "GET_V2_consult_query_param",
-                                            `offset=0&limit=10&consultant_service_id=${localStorage.getItem(
+                                            `offset=0&limit=20&consultant_service_id=${localStorage.getItem(
                                               "filter_service_id"
                                             )}`
                                           );
@@ -12557,7 +12599,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   )}
                 >
                   {
-                    "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u062a\u0627\u06cc\u06cc\u062f\u060c \u0627\u06cc\u0646 \u0645\u0634\u0627\u0648\u0631\u0647 \u062d\u0630\u0641 \u0634\u062f\u0647 \u0648 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647 \u0628\u0633\u062a\u0647 \u0645\u06cc \u0634\u0648\u062f\n\u062d\u0630\u0641 \u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647 \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u0648\u062f"
+                    "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u0631\u0633\u0627\u0644 \u0634\u062f\u0647 \u062a\u0627 \u067e\u06cc\u0634 \u0627\u0632 \u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0646\u060c \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u0627\u0631\u0633\u0627\u0644 \u06a9\u0646\u0646\u062f\u0647 \u0645\u0634\u0627\u0648\u0631\u0647 \u062d\u0630\u0641 \u0634\u0648\u062f\n\u062f\u0631 \u063a\u06cc\u0631 \u0627\u06cc\u0646 \u0635\u0648\u0631\u062a \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0645\u06cc \u0634\u0648\u06cc\u062f"
                   }
                 </div>
               </div>

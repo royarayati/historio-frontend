@@ -64,6 +64,7 @@ import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; /
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
+import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
 
@@ -137,6 +138,7 @@ export type PlasmicConsultList__OverridesType = {
   patientProfile?: Flex__<typeof PlasmicImg__>;
   imagingReportList?: Flex__<typeof PlasmicImg__>;
   laboratoryData?: Flex__<typeof PlasmicImg__>;
+  bookmarkIcon?: Flex__<typeof BookmarkIcon>;
   modalDeleteConsultConfirmation?: Flex__<typeof AntdModal>;
   confirmationContent?: Flex__<"div">;
   confirmationYesNo?: Flex__<"div">;
@@ -311,6 +313,29 @@ function PlasmicConsultList__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "bookmarkIcon.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return localStorage.getItem("bookmark_id_list")
+                ? localStorage
+                    .getItem("bookmark_id_list")
+                    .includes($ctx.params.adm_id)
+                : false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -377,6 +402,7 @@ function PlasmicConsultList__RenderFunc(props: {
               data-plasmic-name={"patientDataForHeader"}
               data-plasmic-override={overrides.patientDataForHeader}
               className={classNames("__wab_instance", sty.patientDataForHeader)}
+              delay={50}
               headers={(() => {
                 try {
                   return {
@@ -395,7 +421,7 @@ function PlasmicConsultList__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/remote_his/admissions?dismissed=true&patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}`}
+              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
               ref={ref => {
                 $refs["patientDataForHeader"] = ref;
               }}
@@ -1821,80 +1847,83 @@ function PlasmicConsultList__RenderFunc(props: {
                 }}
               />
 
-              <PlasmicImg__
-                data-plasmic-name={"consultList2"}
-                data-plasmic-override={overrides.consultList2}
-                alt={""}
-                className={classNames(sty.consultList2)}
-                displayHeight={"25px"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"20%"}
-                loading={"lazy"}
-                onClick={async event => {
-                  const $steps = {};
+              {false ? (
+                <PlasmicImg__
+                  data-plasmic-name={"consultList2"}
+                  data-plasmic-override={overrides.consultList2}
+                  alt={""}
+                  className={classNames(sty.consultList2)}
+                  displayHeight={"25px"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"100%"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"20%"}
+                  loading={"lazy"}
+                  onClick={async event => {
+                    const $steps = {};
 
-                  $steps["goToConsultList"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          destination: `/consult/list/${(() => {
-                            try {
-                              return $ctx.params.code;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
+                    $steps["goToConsultList"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            destination: `/consult/list/${(() => {
+                              try {
+                                return $ctx.params.code;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
                               }
-                              throw e;
-                            }
-                          })()}/${(() => {
-                            try {
-                              return $ctx.params.adm_id;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
+                            })()}/${(() => {
+                              try {
+                                return $ctx.params.adm_id;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
                               }
-                              throw e;
+                            })()}`
+                          };
+                          return (({ destination }) => {
+                            if (
+                              typeof destination === "string" &&
+                              destination.startsWith("#")
+                            ) {
+                              document
+                                .getElementById(destination.substr(1))
+                                .scrollIntoView({ behavior: "smooth" });
+                            } else {
+                              __nextRouter?.push(destination);
                             }
-                          })()}`
-                        };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["goToConsultList"] != null &&
-                    typeof $steps["goToConsultList"] === "object" &&
-                    typeof $steps["goToConsultList"].then === "function"
-                  ) {
-                    $steps["goToConsultList"] = await $steps["goToConsultList"];
-                  }
-                }}
-                src={{
-                  src: "/new_inlab/plasmic/inlab/images/consult0F4Cb101Svg.svg",
-                  fullWidth: 24,
-                  fullHeight: 24,
-                  aspectRatio: 1
-                }}
-              />
-
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["goToConsultList"] != null &&
+                      typeof $steps["goToConsultList"] === "object" &&
+                      typeof $steps["goToConsultList"].then === "function"
+                    ) {
+                      $steps["goToConsultList"] = await $steps[
+                        "goToConsultList"
+                      ];
+                    }
+                  }}
+                  src={{
+                    src: "/new_inlab/plasmic/inlab/images/consult0F4Cb101Svg.svg",
+                    fullWidth: 24,
+                    fullHeight: 24,
+                    aspectRatio: 1
+                  }}
+                />
+              ) : null}
               <PlasmicImg__
                 data-plasmic-name={"patientProfile"}
                 data-plasmic-override={overrides.patientProfile}
@@ -2062,6 +2091,30 @@ function PlasmicConsultList__RenderFunc(props: {
                 onClick={async event => {
                   const $steps = {};
 
+                  $steps["deleteLabDataFromTheLocalStorage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem("laboratory_data", "");
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["deleteLabDataFromTheLocalStorage"] != null &&
+                    typeof $steps["deleteLabDataFromTheLocalStorage"] ===
+                      "object" &&
+                    typeof $steps["deleteLabDataFromTheLocalStorage"].then ===
+                      "function"
+                  ) {
+                    $steps["deleteLabDataFromTheLocalStorage"] = await $steps[
+                      "deleteLabDataFromTheLocalStorage"
+                    ];
+                  }
+
                   $steps["goToLaboratoryData"] = true
                     ? (() => {
                         const actionArgs = {
@@ -2122,6 +2175,91 @@ function PlasmicConsultList__RenderFunc(props: {
                   aspectRatio: 0.789474
                 }}
               />
+
+              {(() => {
+                const child$Props = {
+                  admissionId: (() => {
+                    try {
+                      return parseInt($ctx.params.adm_id);
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })(),
+                  className: classNames("__wab_instance", sty.bookmarkIcon),
+                  onSelectedChange: async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "bookmarkIcon",
+                      "selected"
+                    ]).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  },
+                  patientId: (() => {
+                    try {
+                      return parseInt($ctx.params.code);
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })(),
+                  selected: generateStateValueProp($state, [
+                    "bookmarkIcon",
+                    "selected"
+                  ])
+                };
+
+                initializePlasmicStates(
+                  $state,
+                  [
+                    {
+                      name: "bookmarkIcon.selected",
+                      initFunc: ({ $props, $state, $queries }) =>
+                        (() => {
+                          try {
+                            return localStorage.getItem("bookmark_id_list")
+                              ? localStorage
+                                  .getItem("bookmark_id_list")
+                                  .includes($ctx.params.adm_id)
+                              : false;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return false;
+                            }
+                            throw e;
+                          }
+                        })()
+                    }
+                  ],
+                  []
+                );
+                return (
+                  <BookmarkIcon
+                    data-plasmic-name={"bookmarkIcon"}
+                    data-plasmic-override={overrides.bookmarkIcon}
+                    {...child$Props}
+                  />
+                );
+              })()}
             </SwitchingTab>
           </div>
           <AntdModal
@@ -2182,7 +2320,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   )}
                 >
                   {
-                    "\u0628\u0647 \u062f\u0646\u0628\u0627\u0644 \u062a\u0627\u06cc\u06cc\u062f\u060c \u0627\u06cc\u0646 \u0645\u0634\u0627\u0648\u0631\u0647 \u062d\u0630\u0641 \u0634\u062f\u0647 \u0648 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647 \u0628\u0633\u062a\u0647 \u0645\u06cc \u0634\u0648\u062f\n\u062d\u0630\u0641 \u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647 \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u0648\u062f"
+                    "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u0631\u0633\u0627\u0644 \u0634\u062f\u0647 \u062a\u0627 \u067e\u06cc\u0634 \u0627\u0632 \u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0646\u060c \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u0627\u0631\u0633\u0627\u0644 \u06a9\u0646\u0646\u062f\u0647 \u0645\u0634\u0627\u0648\u0631\u0647 \u062d\u0630\u0641 \u0634\u0648\u062f\n\u062f\u0631 \u063a\u06cc\u0631 \u0627\u06cc\u0646 \u0635\u0648\u0631\u062a \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0645\u06cc \u0634\u0648\u06cc\u062f\n\u067e\u06cc\u0634 \u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647 \u0646\u06cc\u0632 \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062d\u0630\u0641 \u0634\u0648\u062f"
                   }
                 </div>
               </div>
@@ -2764,6 +2902,7 @@ const PlasmicDescendants = {
     "patientProfile",
     "imagingReportList",
     "laboratoryData",
+    "bookmarkIcon",
     "modalDeleteConsultConfirmation",
     "confirmationContent",
     "confirmationYesNo",
@@ -3021,7 +3160,8 @@ const PlasmicDescendants = {
     "consultList2",
     "patientProfile",
     "imagingReportList",
-    "laboratoryData"
+    "laboratoryData",
+    "bookmarkIcon"
   ],
   switchingTab: [
     "switchingTab",
@@ -3029,13 +3169,15 @@ const PlasmicDescendants = {
     "consultList2",
     "patientProfile",
     "imagingReportList",
-    "laboratoryData"
+    "laboratoryData",
+    "bookmarkIcon"
   ],
   homepage: ["homepage"],
   consultList2: ["consultList2"],
   patientProfile: ["patientProfile"],
   imagingReportList: ["imagingReportList"],
   laboratoryData: ["laboratoryData"],
+  bookmarkIcon: ["bookmarkIcon"],
   modalDeleteConsultConfirmation: [
     "modalDeleteConsultConfirmation",
     "confirmationContent",
@@ -3107,6 +3249,7 @@ type NodeDefaultElementType = {
   patientProfile: typeof PlasmicImg__;
   imagingReportList: typeof PlasmicImg__;
   laboratoryData: typeof PlasmicImg__;
+  bookmarkIcon: typeof BookmarkIcon;
   modalDeleteConsultConfirmation: typeof AntdModal;
   confirmationContent: "div";
   confirmationYesNo: "div";
@@ -3227,6 +3370,7 @@ export const PlasmicConsultList = Object.assign(
     patientProfile: makeNodeComponent("patientProfile"),
     imagingReportList: makeNodeComponent("imagingReportList"),
     laboratoryData: makeNodeComponent("laboratoryData"),
+    bookmarkIcon: makeNodeComponent("bookmarkIcon"),
     modalDeleteConsultConfirmation: makeNodeComponent(
       "modalDeleteConsultConfirmation"
     ),
