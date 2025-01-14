@@ -921,7 +921,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v3/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
+            path={`/api/v3/patient/${localStorage.getItem(
+              "patient_id"
+            )}/radiology_services/recent?offset=0&limit=20`}
             ref={ref => {
               $refs["paraclinicsReport"] = ref;
             }}

@@ -861,76 +861,22 @@
   min-width: 0;
   padding: 4px;
 }
-.repliedConsultDoctorAndTimeAndConfirmer {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  align-items: stretch;
-  justify-content: space-between;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.repliedConsultConfirmerContent {
-  flex-direction: column;
-  position: relative;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  min-width: 0;
-  display: none;
-}
-.repliedConsultConfirmerTitle {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-  font-weight: 700;
-  color: #00000080;
-  font-family: var(--VazirmatnCustom);
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-style: normal;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  text-decoration-line: none;
-  text-align: right;
-  min-width: 0;
-  padding: 5px 10px 5px 5px;
-  border: 1px none #000000;
-}
-.repliedConsultConfirmer {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  text-align: right;
-  min-width: 0;
-  padding: 5px 10px 5px 5px;
-}
-.repliedConsultDoctorAndTime {
+.respondentConsultDoctorAndTimeAndConfirmer {
   display: flex;
   flex-direction: column;
   position: relative;
   align-items: center;
   justify-content: center;
-  width: auto;
+  width: 100%;
   height: auto;
   max-width: 100%;
   left: auto;
   top: auto;
   z-index: 1;
+  min-width: 0;
+  padding: 8px;
 }
-.repliedConsultDoctorAndTimeTitle {
+.respondentConsultDoctorAndTimeTitle {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -946,27 +892,60 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none;
+  text-align: right;
   min-width: 0;
   padding: 5px 10px 5px 5px;
   border: 1px none #000000;
 }
-.repliedConsultDoctor {
+.respondentConsultDoctor {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
+  text-align: right;
   min-width: 0;
-  padding: 5px;
+  padding: 5px 10px 5px 5px;
 }
-.repliedConsultTime {
+.respondentConsultTime {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   padding-bottom: 5px;
   padding-left: 5px;
-  padding-right: 5px;
+  padding-right: 10px;
+  text-align: right;
   min-width: 0;
+}
+.confirmerConsultConfirmerTitle {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  text-align: right;
+  min-width: 0;
+  padding: 5px 10px 5px 5px;
+  border: 1px none #000000;
+}
+.confirmerConsultConfirmer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  min-width: 0;
+  padding: 5px 10px 5px 5px;
 }
 .switchingTab {
   display: flex;

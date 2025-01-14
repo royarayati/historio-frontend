@@ -825,7 +825,8 @@ function PlasmicConsultList__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                "دکتر" +
+                                                currentItem.requester.rank
+                                                  .role +
                                                 " " +
                                                 currentItem.requester
                                                   .first_name +
@@ -860,7 +861,8 @@ function PlasmicConsultList__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                "دکتر" +
+                                                currentItem.suggested_consultant
+                                                  .rank.role +
                                                 " " +
                                                 currentItem.suggested_consultant
                                                   .first_name +
