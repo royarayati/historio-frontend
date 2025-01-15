@@ -533,9 +533,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${localStorage.getItem(
-              "admission_id"
-            )}&limit=1&offset=0`}
+            path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
             ref={ref => {
               $refs["getPatient"] = ref;
             }}
@@ -927,9 +925,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v3/patient/${localStorage.getItem(
-              "patient_id"
-            )}/radiology_services/recent?offset=0&limit=20`}
+            path={`/api/v3/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
             ref={ref => {
               $refs["paraclinicsReport"] = ref;
             }}
@@ -1010,9 +1006,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                               const actionArgs = {
                                 destination: (() => {
                                   try {
-                                    return window.open(
-                                      $ctx.fetched_data.data.pacs_url
-                                    );
+                                    return $ctx.fetched_data.data.pacs_url;
                                   } catch (e) {
                                     if (
                                       e instanceof TypeError ||
@@ -1932,9 +1926,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v3/remote_his/paraclinics?patient_id=${localStorage.getItem(
-              "patient_id"
-            )}`}
+            path={`/api/v3/remote_his/paraclinics?patient_id=${$ctx.params.code}`}
             ref={ref => {
               $refs["paraclinics"] = ref;
             }}
@@ -2509,7 +2501,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       const actionArgs = {
                         destination: `/consult/list/${(() => {
                           try {
-                            return localStorage.getItem("patient_id");
+                            return $ctx.params.code;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -2521,7 +2513,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           }
                         })()}/${(() => {
                           try {
-                            return localStorage.getItem("admission_id");
+                            return $ctx.params.adm_id;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -2582,7 +2574,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       const actionArgs = {
                         destination: `/patient/${(() => {
                           try {
-                            return localStorage.getItem("patient_id");
+                            return $ctx.params.code;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -2594,7 +2586,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           }
                         })()}/profile/${(() => {
                           try {
-                            return localStorage.getItem("admission_id");
+                            return $ctx.params.adm_id;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -2758,7 +2750,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       const actionArgs = {
                         destination: `/patient/${(() => {
                           try {
-                            return localStorage.getItem("patient_id");
+                            return $ctx.params.code;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -2770,7 +2762,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           }
                         })()}/lab/${(() => {
                           try {
-                            return localStorage.getItem("admission_id");
+                            return $ctx.params.adm_id;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
