@@ -63,6 +63,7 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -117,6 +118,7 @@ export type PlasmicImagingReportList__OverridesType = {
   paraclinicDatetime2?: Flex__<"div">;
   previousAdmission?: Flex__<typeof Button>;
   paraclinicType?: Flex__<"div">;
+  conditionGuard?: Flex__<typeof ConditionGuard>;
   paraclinics?: Flex__<typeof ApiFetcherComponent>;
   paraclinicsList?: Flex__<"div">;
   paraclinicNameDatetime?: Flex__<"div">;
@@ -175,6 +177,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+
+  const $globalActions = useGlobalActions?.();
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -996,48 +1000,91 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     onClick={async event => {
                       const $steps = {};
 
-                      $steps["goToPage"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              destination: (() => {
-                                try {
-                                  return (() => {
-                                    return window.open(
-                                      $ctx.fetched_data.data.pacs_url
-                                    );
-                                  })();
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
+                      $steps["goToPage"] =
+                        localStorage.getItem("namespace_id") !== "5"
+                          ? (() => {
+                              const actionArgs = {
+                                destination: (() => {
+                                  try {
+                                    return $ctx.fetched_data.data.pacs_url;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
                                   }
-                                  throw e;
+                                })()
+                              };
+                              return (({ destination }) => {
+                                if (
+                                  typeof destination === "string" &&
+                                  destination.startsWith("#")
+                                ) {
+                                  document
+                                    .getElementById(destination.substr(1))
+                                    .scrollIntoView({ behavior: "smooth" });
+                                } else {
+                                  __nextRouter?.push(destination);
                                 }
-                              })()
-                            };
-                            return (({ destination }) => {
-                              if (
-                                typeof destination === "string" &&
-                                destination.startsWith("#")
-                              ) {
-                                document
-                                  .getElementById(destination.substr(1))
-                                  .scrollIntoView({ behavior: "smooth" });
-                              } else {
-                                __nextRouter?.push(destination);
-                              }
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
                       if (
                         $steps["goToPage"] != null &&
                         typeof $steps["goToPage"] === "object" &&
                         typeof $steps["goToPage"].then === "function"
                       ) {
                         $steps["goToPage"] = await $steps["goToPage"];
+                      }
+
+                      $steps["goToPage2"] =
+                        localStorage.getItem("namespace_id") === "5" &&
+                        window.location.origin === "https://synapps.tums.ac.ir"
+                          ? (() => {
+                              const actionArgs = {
+                                destination: (() => {
+                                  try {
+                                    return (() => {
+                                      return localStorage.getItem(
+                                        "ikhc_pacs_url"
+                                      );
+                                    })();
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()
+                              };
+                              return (({ destination }) => {
+                                if (
+                                  typeof destination === "string" &&
+                                  destination.startsWith("#")
+                                ) {
+                                  document
+                                    .getElementById(destination.substr(1))
+                                    .scrollIntoView({ behavior: "smooth" });
+                                } else {
+                                  __nextRouter?.push(destination);
+                                }
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["goToPage2"] != null &&
+                        typeof $steps["goToPage2"] === "object" &&
+                        typeof $steps["goToPage2"].then === "function"
+                      ) {
+                        $steps["goToPage2"] = await $steps["goToPage2"];
                       }
                     }}
                     onDeselectedChange={async (...eventArgs: any) => {
@@ -1771,6 +1818,87 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       </section>
                     </section>
                   ) : null}
+                  <ConditionGuard
+                    data-plasmic-name={"conditionGuard"}
+                    data-plasmic-override={overrides.conditionGuard}
+                    className={classNames("__wab_instance", sty.conditionGuard)}
+                    condition={(() => {
+                      try {
+                        return (
+                          localStorage.getItem("user_namespace_if") === "5" &&
+                          window.location.origin ===
+                            "https://synapps.tums.ac.ir"
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return false;
+                        }
+                        throw e;
+                      }
+                    })()}
+                    onNotSatisfied={async () => {
+                      const $steps = {};
+
+                      $steps["getTheIkhcPacsUrl"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "GET",
+                                `/n8n/webhook/PACS?admission_id=${localStorage.getItem(
+                                  "admission_id"
+                                )}`
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcher"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["getTheIkhcPacsUrl"] != null &&
+                        typeof $steps["getTheIkhcPacsUrl"] === "object" &&
+                        typeof $steps["getTheIkhcPacsUrl"].then === "function"
+                      ) {
+                        $steps["getTheIkhcPacsUrl"] = await $steps[
+                          "getTheIkhcPacsUrl"
+                        ];
+                      }
+
+                      $steps["setTheIkhcPacsUrlToTheLocalStorage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "ikhc_pacs_url",
+                                    $steps.getTheIkhcPacsUrl
+                                  );
+                                  return console.log(
+                                    localStorage.getItem("ikhc_pacs_url")
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setTheIkhcPacsUrlToTheLocalStorage"] != null &&
+                        typeof $steps["setTheIkhcPacsUrlToTheLocalStorage"] ===
+                          "object" &&
+                        typeof $steps["setTheIkhcPacsUrlToTheLocalStorage"]
+                          .then === "function"
+                      ) {
+                        $steps["setTheIkhcPacsUrlToTheLocalStorage"] =
+                          await $steps["setTheIkhcPacsUrlToTheLocalStorage"];
+                      }
+                    }}
+                  />
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -2438,7 +2566,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
               displayMinHeight={"0"}
               displayMinWidth={"0"}
               displayWidth={"20%"}
-              loading={"lazy"}
               onClick={async event => {
                 const $steps = {};
 
@@ -2824,6 +2951,7 @@ const PlasmicDescendants = {
     "paraclinicDatetime2",
     "previousAdmission",
     "paraclinicType",
+    "conditionGuard",
     "paraclinics",
     "paraclinicsList",
     "paraclinicNameDatetime",
@@ -2862,7 +2990,8 @@ const PlasmicDescendants = {
     "paraclinicTitle",
     "paraclinicDatetime2",
     "previousAdmission",
-    "paraclinicType"
+    "paraclinicType",
+    "conditionGuard"
   ],
   apiFetcherComponent: ["apiFetcherComponent"],
   viewPacsButton: ["viewPacsButton"],
@@ -2913,6 +3042,7 @@ const PlasmicDescendants = {
   paraclinicDatetime2: ["paraclinicDatetime2"],
   previousAdmission: ["previousAdmission"],
   paraclinicType: ["paraclinicType"],
+  conditionGuard: ["conditionGuard"],
   paraclinics: [
     "paraclinics",
     "paraclinicsList",
@@ -2995,6 +3125,7 @@ type NodeDefaultElementType = {
   paraclinicDatetime2: "div";
   previousAdmission: typeof Button;
   paraclinicType: "div";
+  conditionGuard: typeof ConditionGuard;
   paraclinics: typeof ApiFetcherComponent;
   paraclinicsList: "div";
   paraclinicNameDatetime: "div";
@@ -3096,6 +3227,7 @@ export const PlasmicImagingReportList = Object.assign(
     paraclinicDatetime2: makeNodeComponent("paraclinicDatetime2"),
     previousAdmission: makeNodeComponent("previousAdmission"),
     paraclinicType: makeNodeComponent("paraclinicType"),
+    conditionGuard: makeNodeComponent("conditionGuard"),
     paraclinics: makeNodeComponent("paraclinics"),
     paraclinicsList: makeNodeComponent("paraclinicsList"),
     paraclinicNameDatetime: makeNodeComponent("paraclinicNameDatetime"),

@@ -68,6 +68,7 @@ import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -153,14 +154,12 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   repliedPaperReplyStatus?: Flex__<"div">;
   paperReplyBullet2?: Flex__<typeof Bullet>;
   paperReplyTitle2?: Flex__<"div">;
-  repliedConsultDoctorAndTimeAndConfirmer?: Flex__<"div">;
-  repliedConsultConfirmerContent?: Flex__<"div">;
-  repliedConsultConfirmerTitle?: Flex__<"div">;
-  repliedConsultConfirmer?: Flex__<"div">;
-  repliedConsultDoctorAndTime?: Flex__<"div">;
-  repliedConsultDoctorAndTimeTitle?: Flex__<"div">;
-  repliedConsultDoctor?: Flex__<"div">;
-  repliedConsultTime?: Flex__<"div">;
+  respondentConsultDoctorAndTimeAndConfirmer?: Flex__<"div">;
+  respondentConsultDoctorAndTimeTitle?: Flex__<"div">;
+  respondentConsultDoctor?: Flex__<"div">;
+  respondentConsultTime?: Flex__<"div">;
+  confirmerConsultConfirmerTitle?: Flex__<"div">;
+  confirmerConsultConfirmer?: Flex__<"div">;
   switchingTab?: Flex__<"div">;
   homepage?: Flex__<typeof PlasmicImg__>;
   consultList?: Flex__<typeof PlasmicImg__>;
@@ -811,9 +810,46 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               ? (() => {
                                   const actionArgs = {
                                     customFunction: async () => {
-                                      return window.open(
-                                        `/api/v3/consults/template?consult_id=${$ctx.fetched_data.data.id}&first_name=${$ctx.fetched_data.data.patient.first_name}&last_name=${$ctx.fetched_data.data.patient.last_name}&date_of_birth=${$ctx.fetched_data.data.patient.birth_date}&admission_date=${$ctx.fetched_data.data.patient.admission_datetime}&patient_ward=${$ctx.fetched_data.data.effective_ward.name}&sender_service=${$ctx.fetched_data.data.effective_patient_service.name}&receiver_service=${$ctx.fetched_data.data.consultant_service.name}`
-                                      );
+                                      return window.open(`/api/v3/consults/template?consult_id=${
+                                        $ctx.fetched_data.data.id
+                                      }
+&first_name=${$ctx.fetched_data.data.patient.first_name}
+&last_name=${$ctx.fetched_data.data.patient.last_name}
+&date_of_birth=${$ctx.fetched_data.data.patient.birth_date}
+&admission_date=${$ctx.fetched_data.data.patient.admission_datetime}
+&patient_ward=${$ctx.fetched_data.data.effective_ward.name}
+&sender=${
+                                        $ctx.fetched_data.data.requester.rank
+                                          .role +
+                                        " " +
+                                        $ctx.fetched_data.data.requester
+                                          .first_name +
+                                        " " +
+                                        $ctx.fetched_data.data.requester
+                                          .last_name
+                                      }
+&respondent=${
+                                        $ctx.fetched_data.data.consultant.rank
+                                          .role +
+                                        " " +
+                                        $ctx.fetched_data.data.consultant
+                                          .first_name +
+                                        " " +
+                                        $ctx.fetched_data.data.consultant
+                                          .last_name
+                                      }
+&signer=${$ctx.fetched_data.data.confirm_entries
+                                        .map(
+                                          entry =>
+                                            entry.confirmer.rank.role +
+                                            " " +
+                                            entry.confirmer.first_name +
+                                            " " +
+                                            entry.confirmer.last_name
+                                        )
+                                        .join("، ")}
+&sender_service=${$ctx.fetched_data.data.effective_patient_service.name}
+&receiver_service=${$ctx.fetched_data.data.consultant_service.name}`);
                                     }
                                   };
                                   return (({ customFunction }) => {
@@ -1251,7 +1287,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               {(() => {
                                 try {
                                   return (
-                                    "دکتر" +
+                                    $ctx.fetched_data.data.requester.rank.role +
                                     " " +
                                     $ctx.fetched_data.data.requester
                                       .first_name +
@@ -2217,197 +2253,177 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                     })() ? (
                       <div
                         data-plasmic-name={
-                          "repliedConsultDoctorAndTimeAndConfirmer"
+                          "respondentConsultDoctorAndTimeAndConfirmer"
                         }
                         data-plasmic-override={
-                          overrides.repliedConsultDoctorAndTimeAndConfirmer
+                          overrides.respondentConsultDoctorAndTimeAndConfirmer
                         }
                         className={classNames(
                           projectcss.all,
-                          sty.repliedConsultDoctorAndTimeAndConfirmer
+                          sty.respondentConsultDoctorAndTimeAndConfirmer
                         )}
-                        dir={"rtl"}
                       >
                         <div
-                          data-plasmic-name={"repliedConsultConfirmerContent"}
+                          data-plasmic-name={
+                            "respondentConsultDoctorAndTimeTitle"
+                          }
                           data-plasmic-override={
-                            overrides.repliedConsultConfirmerContent
+                            overrides.respondentConsultDoctorAndTimeTitle
                           }
                           className={classNames(
                             projectcss.all,
-                            sty.repliedConsultConfirmerContent
+                            projectcss.__wab_text,
+                            sty.respondentConsultDoctorAndTimeTitle
                           )}
                         >
-                          <div
-                            data-plasmic-name={"repliedConsultConfirmerTitle"}
-                            data-plasmic-override={
-                              overrides.repliedConsultConfirmerTitle
-                            }
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.repliedConsultConfirmerTitle
-                            )}
-                          >
-                            {
-                              "\u062a\u0627\u06cc\u06cc\u062f \u06a9\u0646\u0646\u062f\u0647 \u067e\u0627\u0633\u062e"
-                            }
-                          </div>
-                          <div
-                            data-plasmic-name={"repliedConsultConfirmer"}
-                            data-plasmic-override={
-                              overrides.repliedConsultConfirmer
-                            }
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.repliedConsultConfirmer
-                            )}
-                            dir={"rtl"}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return (
-                                    "دکتر" +
-                                    " " +
-                                    $ctx.fetched_data.data.confirm_entries[0]
-                                      .confirmer.first_name +
-                                    " " +
-                                    $ctx.fetched_data.data.confirm_entries[0]
-                                      .confirmer.last_name
-                                  );
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
+                          {
+                            "\u067e\u0627\u0633\u062e \u062f\u0647\u0646\u062f\u0647 \u0648 \u0632\u0645\u0627\u0646 \u067e\u0627\u0633\u062e"
+                          }
                         </div>
                         <div
-                          data-plasmic-name={"repliedConsultDoctorAndTime"}
+                          data-plasmic-name={"respondentConsultDoctor"}
                           data-plasmic-override={
-                            overrides.repliedConsultDoctorAndTime
+                            overrides.respondentConsultDoctor
                           }
                           className={classNames(
                             projectcss.all,
-                            sty.repliedConsultDoctorAndTime
+                            projectcss.__wab_text,
+                            sty.respondentConsultDoctor
+                          )}
+                          dir={"rtl"}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return $ctx.fetched_data.data.consultant
+                                  ? $ctx.fetched_data.data.consultant.rank
+                                      .role +
+                                      " " +
+                                      $ctx.fetched_data.data.consultant
+                                        .first_name +
+                                      " " +
+                                      $ctx.fetched_data.data.consultant
+                                        .last_name
+                                  : "-";
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                        <div
+                          data-plasmic-name={"respondentConsultTime"}
+                          data-plasmic-override={
+                            overrides.respondentConsultTime
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.respondentConsultTime
+                          )}
+                          dir={"rtl"}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return (() => {
+                                  const gregorianDate = new Date(
+                                    $ctx.fetched_data.data.replied_datetime
+                                  );
+                                  const shamsiDate = new Intl.DateTimeFormat(
+                                    "fa-IR"
+                                  ).format(gregorianDate);
+                                  const shamsiTime =
+                                    gregorianDate.toLocaleTimeString("fa-IR", {
+                                      hour12: false
+                                    });
+                                  const englishDate = shamsiDate.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  const englishTime = shamsiTime.replace(
+                                    /[۰-۹]/g,
+                                    d =>
+                                      String.fromCharCode(
+                                        d.charCodeAt(0) - 1728
+                                      )
+                                  );
+                                  return `${englishTime} ${englishDate}`;
+                                })();
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                        <div
+                          data-plasmic-name={"confirmerConsultConfirmerTitle"}
+                          data-plasmic-override={
+                            overrides.confirmerConsultConfirmerTitle
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.confirmerConsultConfirmerTitle
                           )}
                         >
-                          <div
-                            data-plasmic-name={
-                              "repliedConsultDoctorAndTimeTitle"
-                            }
-                            data-plasmic-override={
-                              overrides.repliedConsultDoctorAndTimeTitle
-                            }
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.repliedConsultDoctorAndTimeTitle
-                            )}
-                          >
-                            {
-                              "\u067e\u0627\u0633\u062e \u062f\u0647\u0646\u062f\u0647 \u0648 \u0632\u0645\u0627\u0646 \u067e\u0627\u0633\u062e"
-                            }
-                          </div>
-                          <div
-                            data-plasmic-name={"repliedConsultDoctor"}
-                            data-plasmic-override={
-                              overrides.repliedConsultDoctor
-                            }
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.repliedConsultDoctor
-                            )}
-                            dir={"rtl"}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return (
-                                    "دکتر" +
-                                    " " +
-                                    $ctx.fetched_data.data.consultant
-                                      .first_name +
-                                    " " +
-                                    $ctx.fetched_data.data.consultant.last_name
-                                  );
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
+                          {
+                            " \u0627\u0645\u0636\u0627 \u06a9\u0646\u0646\u062f\u0647 \u067e\u0627\u0633\u062e"
+                          }
+                        </div>
+                        <div
+                          data-plasmic-name={"confirmerConsultConfirmer"}
+                          data-plasmic-override={
+                            overrides.confirmerConsultConfirmer
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.confirmerConsultConfirmer
+                          )}
+                          dir={"rtl"}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return $ctx.fetched_data.data.confirm_entries
+                                  ? $ctx.fetched_data.data.confirm_entries
+                                      .map(
+                                        entry =>
+                                          entry.confirmer.rank.role +
+                                          " " +
+                                          entry.confirmer.first_name +
+                                          " " +
+                                          entry.confirmer.last_name
+                                      )
+                                      .join("، ")
+                                  : "-";
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
                                 }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                          <div
-                            data-plasmic-name={"repliedConsultTime"}
-                            data-plasmic-override={overrides.repliedConsultTime}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.repliedConsultTime
-                            )}
-                            dir={"rtl"}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return (() => {
-                                    const gregorianDate = new Date(
-                                      $ctx.fetched_data.data.replied_datetime
-                                    );
-                                    const shamsiDate = new Intl.DateTimeFormat(
-                                      "fa-IR"
-                                    ).format(gregorianDate);
-                                    const shamsiTime =
-                                      gregorianDate.toLocaleTimeString(
-                                        "fa-IR",
-                                        { hour12: false }
-                                      );
-                                    const englishDate = shamsiDate.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
-                                        )
-                                    );
-                                    const englishTime = shamsiTime.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
-                                        )
-                                    );
-                                    return `${englishTime} ${englishDate}`;
-                                  })();
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
                         </div>
                       </div>
                     ) : null}
@@ -3444,14 +3460,12 @@ const PlasmicDescendants = {
     "repliedPaperReplyStatus",
     "paperReplyBullet2",
     "paperReplyTitle2",
-    "repliedConsultDoctorAndTimeAndConfirmer",
-    "repliedConsultConfirmerContent",
-    "repliedConsultConfirmerTitle",
-    "repliedConsultConfirmer",
-    "repliedConsultDoctorAndTime",
-    "repliedConsultDoctorAndTimeTitle",
-    "repliedConsultDoctor",
-    "repliedConsultTime",
+    "respondentConsultDoctorAndTimeAndConfirmer",
+    "respondentConsultDoctorAndTimeTitle",
+    "respondentConsultDoctor",
+    "respondentConsultTime",
+    "confirmerConsultConfirmerTitle",
+    "confirmerConsultConfirmer",
     "switchingTab",
     "homepage",
     "consultList",
@@ -3533,14 +3547,12 @@ const PlasmicDescendants = {
     "repliedPaperReplyStatus",
     "paperReplyBullet2",
     "paperReplyTitle2",
-    "repliedConsultDoctorAndTimeAndConfirmer",
-    "repliedConsultConfirmerContent",
-    "repliedConsultConfirmerTitle",
-    "repliedConsultConfirmer",
-    "repliedConsultDoctorAndTime",
-    "repliedConsultDoctorAndTimeTitle",
-    "repliedConsultDoctor",
-    "repliedConsultTime"
+    "respondentConsultDoctorAndTimeAndConfirmer",
+    "respondentConsultDoctorAndTimeTitle",
+    "respondentConsultDoctor",
+    "respondentConsultTime",
+    "confirmerConsultConfirmerTitle",
+    "confirmerConsultConfirmer"
   ],
   getUniqueConsult: [
     "getUniqueConsult",
@@ -3589,14 +3601,12 @@ const PlasmicDescendants = {
     "repliedPaperReplyStatus",
     "paperReplyBullet2",
     "paperReplyTitle2",
-    "repliedConsultDoctorAndTimeAndConfirmer",
-    "repliedConsultConfirmerContent",
-    "repliedConsultConfirmerTitle",
-    "repliedConsultConfirmer",
-    "repliedConsultDoctorAndTime",
-    "repliedConsultDoctorAndTimeTitle",
-    "repliedConsultDoctor",
-    "repliedConsultTime"
+    "respondentConsultDoctorAndTimeAndConfirmer",
+    "respondentConsultDoctorAndTimeTitle",
+    "respondentConsultDoctor",
+    "respondentConsultTime",
+    "confirmerConsultConfirmerTitle",
+    "confirmerConsultConfirmer"
   ],
   sendConsult: [
     "sendConsult",
@@ -3644,14 +3654,12 @@ const PlasmicDescendants = {
     "repliedPaperReplyStatus",
     "paperReplyBullet2",
     "paperReplyTitle2",
-    "repliedConsultDoctorAndTimeAndConfirmer",
-    "repliedConsultConfirmerContent",
-    "repliedConsultConfirmerTitle",
-    "repliedConsultConfirmer",
-    "repliedConsultDoctorAndTime",
-    "repliedConsultDoctorAndTimeTitle",
-    "repliedConsultDoctor",
-    "repliedConsultTime"
+    "respondentConsultDoctorAndTimeAndConfirmer",
+    "respondentConsultDoctorAndTimeTitle",
+    "respondentConsultDoctor",
+    "respondentConsultTime",
+    "confirmerConsultConfirmerTitle",
+    "confirmerConsultConfirmer"
   ],
   consultHeader: [
     "consultHeader",
@@ -3752,32 +3760,19 @@ const PlasmicDescendants = {
   ],
   paperReplyBullet2: ["paperReplyBullet2"],
   paperReplyTitle2: ["paperReplyTitle2"],
-  repliedConsultDoctorAndTimeAndConfirmer: [
-    "repliedConsultDoctorAndTimeAndConfirmer",
-    "repliedConsultConfirmerContent",
-    "repliedConsultConfirmerTitle",
-    "repliedConsultConfirmer",
-    "repliedConsultDoctorAndTime",
-    "repliedConsultDoctorAndTimeTitle",
-    "repliedConsultDoctor",
-    "repliedConsultTime"
+  respondentConsultDoctorAndTimeAndConfirmer: [
+    "respondentConsultDoctorAndTimeAndConfirmer",
+    "respondentConsultDoctorAndTimeTitle",
+    "respondentConsultDoctor",
+    "respondentConsultTime",
+    "confirmerConsultConfirmerTitle",
+    "confirmerConsultConfirmer"
   ],
-  repliedConsultConfirmerContent: [
-    "repliedConsultConfirmerContent",
-    "repliedConsultConfirmerTitle",
-    "repliedConsultConfirmer"
-  ],
-  repliedConsultConfirmerTitle: ["repliedConsultConfirmerTitle"],
-  repliedConsultConfirmer: ["repliedConsultConfirmer"],
-  repliedConsultDoctorAndTime: [
-    "repliedConsultDoctorAndTime",
-    "repliedConsultDoctorAndTimeTitle",
-    "repliedConsultDoctor",
-    "repliedConsultTime"
-  ],
-  repliedConsultDoctorAndTimeTitle: ["repliedConsultDoctorAndTimeTitle"],
-  repliedConsultDoctor: ["repliedConsultDoctor"],
-  repliedConsultTime: ["repliedConsultTime"],
+  respondentConsultDoctorAndTimeTitle: ["respondentConsultDoctorAndTimeTitle"],
+  respondentConsultDoctor: ["respondentConsultDoctor"],
+  respondentConsultTime: ["respondentConsultTime"],
+  confirmerConsultConfirmerTitle: ["confirmerConsultConfirmerTitle"],
+  confirmerConsultConfirmer: ["confirmerConsultConfirmer"],
   switchingTab: [
     "switchingTab",
     "homepage",
@@ -3874,14 +3869,12 @@ type NodeDefaultElementType = {
   repliedPaperReplyStatus: "div";
   paperReplyBullet2: typeof Bullet;
   paperReplyTitle2: "div";
-  repliedConsultDoctorAndTimeAndConfirmer: "div";
-  repliedConsultConfirmerContent: "div";
-  repliedConsultConfirmerTitle: "div";
-  repliedConsultConfirmer: "div";
-  repliedConsultDoctorAndTime: "div";
-  repliedConsultDoctorAndTimeTitle: "div";
-  repliedConsultDoctor: "div";
-  repliedConsultTime: "div";
+  respondentConsultDoctorAndTimeAndConfirmer: "div";
+  respondentConsultDoctorAndTimeTitle: "div";
+  respondentConsultDoctor: "div";
+  respondentConsultTime: "div";
+  confirmerConsultConfirmerTitle: "div";
+  confirmerConsultConfirmer: "div";
   switchingTab: "div";
   homepage: typeof PlasmicImg__;
   consultList: typeof PlasmicImg__;
@@ -4031,24 +4024,18 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     repliedPaperReplyStatus: makeNodeComponent("repliedPaperReplyStatus"),
     paperReplyBullet2: makeNodeComponent("paperReplyBullet2"),
     paperReplyTitle2: makeNodeComponent("paperReplyTitle2"),
-    repliedConsultDoctorAndTimeAndConfirmer: makeNodeComponent(
-      "repliedConsultDoctorAndTimeAndConfirmer"
+    respondentConsultDoctorAndTimeAndConfirmer: makeNodeComponent(
+      "respondentConsultDoctorAndTimeAndConfirmer"
     ),
-    repliedConsultConfirmerContent: makeNodeComponent(
-      "repliedConsultConfirmerContent"
+    respondentConsultDoctorAndTimeTitle: makeNodeComponent(
+      "respondentConsultDoctorAndTimeTitle"
     ),
-    repliedConsultConfirmerTitle: makeNodeComponent(
-      "repliedConsultConfirmerTitle"
+    respondentConsultDoctor: makeNodeComponent("respondentConsultDoctor"),
+    respondentConsultTime: makeNodeComponent("respondentConsultTime"),
+    confirmerConsultConfirmerTitle: makeNodeComponent(
+      "confirmerConsultConfirmerTitle"
     ),
-    repliedConsultConfirmer: makeNodeComponent("repliedConsultConfirmer"),
-    repliedConsultDoctorAndTime: makeNodeComponent(
-      "repliedConsultDoctorAndTime"
-    ),
-    repliedConsultDoctorAndTimeTitle: makeNodeComponent(
-      "repliedConsultDoctorAndTimeTitle"
-    ),
-    repliedConsultDoctor: makeNodeComponent("repliedConsultDoctor"),
-    repliedConsultTime: makeNodeComponent("repliedConsultTime"),
+    confirmerConsultConfirmer: makeNodeComponent("confirmerConsultConfirmer"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),
     consultList: makeNodeComponent("consultList"),

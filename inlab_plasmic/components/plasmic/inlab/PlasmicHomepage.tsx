@@ -3006,7 +3006,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 path={`/api/v2/consult?${
                   localStorage.getItem("GET_V2_consult_query_param")
                     ? localStorage.getItem("GET_V2_consult_query_param")
-                    : "offset=0&limit=20"
+                    : "offset=0&limit=100"
                 }`}
                 ref={ref => {
                   $refs["consults"] = ref;
@@ -3378,7 +3378,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                "دکتر" +
+                                                currentItem.requester.rank
+                                                  .role +
                                                 " " +
                                                 currentItem.requester
                                                   .first_name +
@@ -3413,7 +3414,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                "دکتر" +
+                                                currentItem.suggested_consultant
+                                                  .rank.role +
                                                 " " +
                                                 currentItem.suggested_consultant
                                                   .first_name +
@@ -4031,6 +4033,57 @@ function PlasmicHomepage__RenderFunc(props: {
                                     onClick={async event => {
                                       const $steps = {};
 
+                                      $steps[
+                                        "setThePatientIdAdmissionIdToLocalStorage"
+                                      ] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              customFunction: async () => {
+                                                return (() => {
+                                                  localStorage.setItem(
+                                                    "patient_id",
+                                                    currentItem.patient
+                                                      .profile_id
+                                                  );
+                                                  localStorage.setItem(
+                                                    "admission_id",
+                                                    currentItem.patient
+                                                      .admission_id
+                                                  );
+                                                  return console.log(
+                                                    localStorage.getItem(
+                                                      "patient_id"
+                                                    ),
+                                                    localStorage.getItem(
+                                                      "admission_id"
+                                                    )
+                                                  );
+                                                })();
+                                              }
+                                            };
+                                            return (({ customFunction }) => {
+                                              return customFunction();
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] != null &&
+                                        typeof $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] === "object" &&
+                                        typeof $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ].then === "function"
+                                      ) {
+                                        $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] = await $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ];
+                                      }
+
                                       $steps["goToPatientProfile"] = true
                                         ? (() => {
                                             const actionArgs = {
@@ -4119,6 +4172,57 @@ function PlasmicHomepage__RenderFunc(props: {
                                     onClick={async event => {
                                       const $steps = {};
 
+                                      $steps[
+                                        "setThePatientIdAdmissionIdToLocalStorage"
+                                      ] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              customFunction: async () => {
+                                                return (() => {
+                                                  localStorage.setItem(
+                                                    "patient_id",
+                                                    currentItem.patient
+                                                      .profile_id
+                                                  );
+                                                  localStorage.setItem(
+                                                    "admission_id",
+                                                    currentItem.patient
+                                                      .admission_id
+                                                  );
+                                                  return console.log(
+                                                    localStorage.getItem(
+                                                      "patient_id"
+                                                    ),
+                                                    localStorage.getItem(
+                                                      "admission_id"
+                                                    )
+                                                  );
+                                                })();
+                                              }
+                                            };
+                                            return (({ customFunction }) => {
+                                              return customFunction();
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] != null &&
+                                        typeof $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] === "object" &&
+                                        typeof $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ].then === "function"
+                                      ) {
+                                        $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] = await $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ];
+                                      }
+
                                       $steps["goToConsultList"] = true
                                         ? (() => {
                                             const actionArgs = {
@@ -4205,6 +4309,57 @@ function PlasmicHomepage__RenderFunc(props: {
                                     displayWidth={"22px"}
                                     onClick={async event => {
                                       const $steps = {};
+
+                                      $steps[
+                                        "setThePatientIdAdmissionIdToLocalStorage"
+                                      ] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              customFunction: async () => {
+                                                return (() => {
+                                                  localStorage.setItem(
+                                                    "patient_id",
+                                                    currentItem.patient
+                                                      .profile_id
+                                                  );
+                                                  localStorage.setItem(
+                                                    "admission_id",
+                                                    currentItem.patient
+                                                      .admission_id
+                                                  );
+                                                  return console.log(
+                                                    localStorage.getItem(
+                                                      "patient_id"
+                                                    ),
+                                                    localStorage.getItem(
+                                                      "admission_id"
+                                                    )
+                                                  );
+                                                })();
+                                              }
+                                            };
+                                            return (({ customFunction }) => {
+                                              return customFunction();
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] != null &&
+                                        typeof $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] === "object" &&
+                                        typeof $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ].then === "function"
+                                      ) {
+                                        $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] = await $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ];
+                                      }
 
                                       $steps["goToImagingReportList"] = true
                                         ? (() => {
@@ -4294,6 +4449,100 @@ function PlasmicHomepage__RenderFunc(props: {
                                     displayWidth={"22px"}
                                     onClick={async event => {
                                       const $steps = {};
+
+                                      $steps[
+                                        "setThePatientIdAdmissionIdToLocalStorage"
+                                      ] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              customFunction: async () => {
+                                                return (() => {
+                                                  localStorage.setItem(
+                                                    "patient_id",
+                                                    currentItem.patient
+                                                      .profile_id
+                                                  );
+                                                  localStorage.setItem(
+                                                    "admission_id",
+                                                    currentItem.patient
+                                                      .admission_id
+                                                  );
+                                                  return console.log(
+                                                    localStorage.getItem(
+                                                      "patient_id"
+                                                    ),
+                                                    localStorage.getItem(
+                                                      "admission_id"
+                                                    )
+                                                  );
+                                                })();
+                                              }
+                                            };
+                                            return (({ customFunction }) => {
+                                              return customFunction();
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] != null &&
+                                        typeof $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] === "object" &&
+                                        typeof $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ].then === "function"
+                                      ) {
+                                        $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ] = await $steps[
+                                          "setThePatientIdAdmissionIdToLocalStorage"
+                                        ];
+                                      }
+
+                                      $steps[
+                                        "deleteLabDataFromTheLocalStorage"
+                                      ] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              customFunction: async () => {
+                                                return (() => {
+                                                  localStorage.setItem(
+                                                    "laboratory_data",
+                                                    ""
+                                                  );
+                                                  return console.log(
+                                                    "laboratory_data",
+                                                    localStorage.getItem(
+                                                      "laboratory_data"
+                                                    )
+                                                  );
+                                                })();
+                                              }
+                                            };
+                                            return (({ customFunction }) => {
+                                              return customFunction();
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps[
+                                          "deleteLabDataFromTheLocalStorage"
+                                        ] != null &&
+                                        typeof $steps[
+                                          "deleteLabDataFromTheLocalStorage"
+                                        ] === "object" &&
+                                        typeof $steps[
+                                          "deleteLabDataFromTheLocalStorage"
+                                        ].then === "function"
+                                      ) {
+                                        $steps[
+                                          "deleteLabDataFromTheLocalStorage"
+                                        ] = await $steps[
+                                          "deleteLabDataFromTheLocalStorage"
+                                        ];
+                                      }
 
                                       $steps["goToLaboratoryData"] = true
                                         ? (() => {
@@ -6893,6 +7142,46 @@ function PlasmicHomepage__RenderFunc(props: {
                                   onClick={async event => {
                                     const $steps = {};
 
+                                    $steps["runCode"] = true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            customFunction: async () => {
+                                              return (() => {
+                                                localStorage.setItem(
+                                                  "patient_id",
+                                                  currentItem.patient_id
+                                                );
+                                                localStorage.setItem(
+                                                  "admission_id",
+                                                  currentItem.id
+                                                );
+                                                return console.log(
+                                                  localStorage.getItem(
+                                                    "patient_id"
+                                                  ),
+                                                  localStorage.getItem(
+                                                    "admission_id"
+                                                  )
+                                                );
+                                              })();
+                                            }
+                                          };
+                                          return (({ customFunction }) => {
+                                            return customFunction();
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                    if (
+                                      $steps["runCode"] != null &&
+                                      typeof $steps["runCode"] === "object" &&
+                                      typeof $steps["runCode"].then ===
+                                        "function"
+                                    ) {
+                                      $steps["runCode"] = await $steps[
+                                        "runCode"
+                                      ];
+                                    }
+
                                     $steps["goToPatientProfile"] = true
                                       ? (() => {
                                           const actionArgs = {
@@ -6977,6 +7266,46 @@ function PlasmicHomepage__RenderFunc(props: {
                                   loading={"lazy"}
                                   onClick={async event => {
                                     const $steps = {};
+
+                                    $steps["runCode"] = true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            customFunction: async () => {
+                                              return (() => {
+                                                localStorage.setItem(
+                                                  "patient_id",
+                                                  currentItem.patient_id
+                                                );
+                                                localStorage.setItem(
+                                                  "admission_id",
+                                                  currentItem.id
+                                                );
+                                                return console.log(
+                                                  localStorage.getItem(
+                                                    "patient_id"
+                                                  ),
+                                                  localStorage.getItem(
+                                                    "admission_id"
+                                                  )
+                                                );
+                                              })();
+                                            }
+                                          };
+                                          return (({ customFunction }) => {
+                                            return customFunction();
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                    if (
+                                      $steps["runCode"] != null &&
+                                      typeof $steps["runCode"] === "object" &&
+                                      typeof $steps["runCode"].then ===
+                                        "function"
+                                    ) {
+                                      $steps["runCode"] = await $steps[
+                                        "runCode"
+                                      ];
+                                    }
 
                                     $steps["goToConsultList"] = true
                                       ? (() => {
@@ -7063,6 +7392,55 @@ function PlasmicHomepage__RenderFunc(props: {
                                   onClick={async event => {
                                     const $steps = {};
 
+                                    $steps[
+                                      "setThePatientIdAdmissionIdToLocalStorage"
+                                    ] = true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            customFunction: async () => {
+                                              return (() => {
+                                                localStorage.setItem(
+                                                  "patient_id",
+                                                  currentItem.patient_id
+                                                );
+                                                localStorage.setItem(
+                                                  "admission_id",
+                                                  currentItem.id
+                                                );
+                                                return console.log(
+                                                  localStorage.getItem(
+                                                    "patient_id"
+                                                  ),
+                                                  localStorage.getItem(
+                                                    "admission_id"
+                                                  )
+                                                );
+                                              })();
+                                            }
+                                          };
+                                          return (({ customFunction }) => {
+                                            return customFunction();
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                    if (
+                                      $steps[
+                                        "setThePatientIdAdmissionIdToLocalStorage"
+                                      ] != null &&
+                                      typeof $steps[
+                                        "setThePatientIdAdmissionIdToLocalStorage"
+                                      ] === "object" &&
+                                      typeof $steps[
+                                        "setThePatientIdAdmissionIdToLocalStorage"
+                                      ].then === "function"
+                                    ) {
+                                      $steps[
+                                        "setThePatientIdAdmissionIdToLocalStorage"
+                                      ] = await $steps[
+                                        "setThePatientIdAdmissionIdToLocalStorage"
+                                      ];
+                                    }
+
                                     $steps["goToImagingReportList"] = true
                                       ? (() => {
                                           const actionArgs = {
@@ -7146,6 +7524,46 @@ function PlasmicHomepage__RenderFunc(props: {
                                   displayWidth={"20px"}
                                   onClick={async event => {
                                     const $steps = {};
+
+                                    $steps["runCode"] = true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            customFunction: async () => {
+                                              return (() => {
+                                                localStorage.setItem(
+                                                  "patient_id",
+                                                  currentItem.patient_id
+                                                );
+                                                localStorage.setItem(
+                                                  "admission_id",
+                                                  currentItem.id
+                                                );
+                                                return console.log(
+                                                  localStorage.getItem(
+                                                    "patient_id"
+                                                  ),
+                                                  localStorage.getItem(
+                                                    "admission_id"
+                                                  )
+                                                );
+                                              })();
+                                            }
+                                          };
+                                          return (({ customFunction }) => {
+                                            return customFunction();
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                    if (
+                                      $steps["runCode"] != null &&
+                                      typeof $steps["runCode"] === "object" &&
+                                      typeof $steps["runCode"].then ===
+                                        "function"
+                                    ) {
+                                      $steps["runCode"] = await $steps[
+                                        "runCode"
+                                      ];
+                                    }
 
                                     $steps["deleteLabDataFromTheLocalStorage"] =
                                       true
@@ -9434,7 +9852,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         customFunction: async () => {
                                           return localStorage.setItem(
                                             "GET_V2_consult_query_param",
-                                            `offset=0&limit=20&effective_patient_service_id=${localStorage.getItem(
+                                            `offset=0&limit=100&effective_patient_service_id=${localStorage.getItem(
                                               "filter_service_id"
                                             )}`
                                           );
@@ -9840,7 +10258,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         customFunction: async () => {
                                           return localStorage.setItem(
                                             "GET_V2_consult_query_param",
-                                            `offset=0&limit=20&consultant_service_id=${localStorage.getItem(
+                                            `offset=0&limit=100&consultant_service_id=${localStorage.getItem(
                                               "filter_service_id"
                                             )}`
                                           );

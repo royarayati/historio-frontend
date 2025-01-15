@@ -2695,7 +2695,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                               </div>
                                             ) : null}
                                           </div>
-                                          {currentItem.normal_range !== null ? (
+                                          {currentItem.normal_range !== "" ? (
                                             <InformationIcon
                                               data-plasmic-name={
                                                 "normalRangeIcon"
