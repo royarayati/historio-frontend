@@ -1842,7 +1842,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     onNotSatisfied={async () => {
                       const $steps = {};
 
-                      $steps["getTheIkhcPacsUrl"] = true
+                      $steps["getTheIkhcPacsUrl"] = false
                         ? (() => {
                             const actionArgs = {
                               args: [
@@ -1867,7 +1867,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                         ];
                       }
 
-                      $steps["setTheIkhcPacsUrlToTheLocalStorage"] = true
+                      $steps["setTheIkhcPacsUrlToTheLocalStorage"] = false
                         ? (() => {
                             const actionArgs = {
                               customFunction: async () => {
@@ -1896,6 +1896,40 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       ) {
                         $steps["setTheIkhcPacsUrlToTheLocalStorage"] =
                           await $steps["setTheIkhcPacsUrlToTheLocalStorage"];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  return fetch(
+                                    `https://synapps.tums.ac.ir/n8n/webhook/PACS?admission_id=${$ctx.params.adm_id}`
+                                  )
+                                    .then(response => response.json())
+                                    .then(data => {
+                                      localStorage.setItem(
+                                        "ikhc_pacs_url",
+                                        data
+                                      );
+                                      console.log(
+                                        localStorage.getItem("ikhc_pacs_url")
+                                      );
+                                    });
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
                       }
                     }}
                   />
