@@ -2335,11 +2335,6 @@
           "filePath": "../public/plasmic/inlab/images/image2.png"
         },
         {
-          "id": "zpJLxWuoAByJ",
-          "name": "Frame 3",
-          "filePath": "../public/plasmic/inlab/images/frame3.png"
-        },
-        {
           "id": "qHw4OPO3LMkY",
           "name": "download 1",
           "filePath": "../public/plasmic/inlab/images/download1.jpg"
@@ -2403,6 +2398,41 @@
           "id": "xLP1ZriKAc99",
           "name": "لوگوی سیناپس.jpg",
           "filePath": "../public/plasmic/inlab/images/لوگویسیناپسJpg.jpg"
+        },
+        {
+          "id": "afn8m8QzY2ax",
+          "name": "Icon-36x36.svg",
+          "filePath": "../public/plasmic/inlab/images/icon36X36Svg.svg"
+        },
+        {
+          "id": "Jf3fOWLXzG3Y",
+          "name": "Icon-48x48.svg",
+          "filePath": "../public/plasmic/inlab/images/icon48X48Svg.svg"
+        },
+        {
+          "id": "BomjbE26EFtc",
+          "name": "Icon-72x72.svg",
+          "filePath": "../public/plasmic/inlab/images/icon72X72Svg.svg"
+        },
+        {
+          "id": "SY5ayFjmehfv",
+          "name": "Icon-96x96.svg",
+          "filePath": "../public/plasmic/inlab/images/icon96X96Svg.svg"
+        },
+        {
+          "id": "pW1Z4LJIG9nO",
+          "name": "Icon-144x144.svg",
+          "filePath": "../public/plasmic/inlab/images/icon144X144Svg.svg"
+        },
+        {
+          "id": "nGH7SrikIegG",
+          "name": "Icon-192x192.svg",
+          "filePath": "../public/plasmic/inlab/images/icon192X192Svg.svg"
+        },
+        {
+          "id": "NRlPSYCqZqPt",
+          "name": "Icon-512x512.svg",
+          "filePath": "../public/plasmic/inlab/images/icon512X512Svg.svg"
         }
       ],
       "indirect": false,

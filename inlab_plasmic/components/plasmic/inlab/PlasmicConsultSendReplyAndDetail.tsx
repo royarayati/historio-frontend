@@ -838,19 +838,16 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                         $ctx.fetched_data.data.consultant
                                           .last_name
                                       }
-&signer=${
-                                        $ctx.fetched_data.data
-                                          .confirm_entries[0].confirmer.rank
-                                          .role +
-                                        " " +
-                                        $ctx.fetched_data.data
-                                          .confirm_entries[0].confirmer
-                                          .first_name +
-                                        " " +
-                                        $ctx.fetched_data.data
-                                          .confirm_entries[0].confirmer
-                                          .last_name
-                                      }
+&signer=${$ctx.fetched_data.data.confirm_entries
+                                        .map(
+                                          entry =>
+                                            entry.confirmer.rank.role +
+                                            " " +
+                                            entry.confirmer.first_name +
+                                            " " +
+                                            entry.confirmer.last_name
+                                        )
+                                        .join("، ")}
 &sender_service=${$ctx.fetched_data.data.effective_patient_service.name}
 &receiver_service=${$ctx.fetched_data.data.consultant_service.name}`);
                                     }
@@ -2298,13 +2295,16 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           <React.Fragment>
                             {(() => {
                               try {
-                                return (
-                                  $ctx.fetched_data.data.consultant.rank.role +
-                                  " " +
-                                  $ctx.fetched_data.data.consultant.first_name +
-                                  " " +
-                                  $ctx.fetched_data.data.consultant.last_name
-                                );
+                                return $ctx.fetched_data.data.consultant
+                                  ? $ctx.fetched_data.data.consultant.rank
+                                      .role +
+                                      " " +
+                                      $ctx.fetched_data.data.consultant
+                                        .first_name +
+                                      " " +
+                                      $ctx.fetched_data.data.consultant
+                                        .last_name
+                                  : "-";
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||
@@ -2401,20 +2401,18 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           <React.Fragment>
                             {(() => {
                               try {
-                                return (() => {
-                                  {
-                                    return (
-                                      $ctx.fetched_data.data.confirm_entries[0]
-                                        .confirmer.rank.role +
-                                      " " +
-                                      $ctx.fetched_data.data.confirm_entries[0]
-                                        .confirmer.first_name +
-                                      " " +
-                                      $ctx.fetched_data.data.confirm_entries[0]
-                                        .confirmer.last_name
-                                    );
-                                  }
-                                })();
+                                return $ctx.fetched_data.data.confirm_entries
+                                  ? $ctx.fetched_data.data.confirm_entries
+                                      .map(
+                                        entry =>
+                                          entry.confirmer.rank.role +
+                                          " " +
+                                          entry.confirmer.first_name +
+                                          " " +
+                                          entry.confirmer.last_name
+                                      )
+                                      .join("، ")
+                                  : "-";
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||
