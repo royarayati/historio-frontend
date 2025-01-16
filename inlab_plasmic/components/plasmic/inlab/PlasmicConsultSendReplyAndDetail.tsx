@@ -813,43 +813,88 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                       return window.open(`/api/v3/consults/template?consult_id=${
                                         $ctx.fetched_data.data.id
                                       }
-&first_name=${$ctx.fetched_data.data.patient.first_name}
-&last_name=${$ctx.fetched_data.data.patient.last_name}
-&date_of_birth=${$ctx.fetched_data.data.patient.birth_date}
-&admission_date=${$ctx.fetched_data.data.patient.admission_datetime}
-&patient_ward=${$ctx.fetched_data.data.effective_ward.name}
+&first_name=${
+                                        $ctx.fetched_data.data.patient
+                                          ? $ctx.fetched_data.data.patient
+                                              .first_name
+                                          : ""
+                                      }
+&last_name=${
+                                        $ctx.fetched_data.data.patient
+                                          ? $ctx.fetched_data.data.patient
+                                              .last_name
+                                          : ""
+                                      }
+&date_of_birth=${
+                                        $ctx.fetched_data.data.patient
+                                          ? $ctx.fetched_data.data.patient
+                                              .birth_date
+                                          : ""
+                                      }
+&admission_date=${
+                                        $ctx.fetched_data.data.patient
+                                          ? $ctx.fetched_data.data.patient
+                                              .admission_datetime
+                                          : ""
+                                      }
+&patient_ward=${
+                                        $ctx.fetched_data.data.effective_ward
+                                          ? $ctx.fetched_data.data
+                                              .effective_ward.name
+                                          : ""
+                                      }
 &sender=${
-                                        $ctx.fetched_data.data.requester.rank
-                                          .role +
-                                        " " +
                                         $ctx.fetched_data.data.requester
-                                          .first_name +
-                                        " " +
-                                        $ctx.fetched_data.data.requester
-                                          .last_name
+                                          ? $ctx.fetched_data.data.requester
+                                              .rank.role +
+                                            " " +
+                                            $ctx.fetched_data.data.requester
+                                              .first_name +
+                                            " " +
+                                            $ctx.fetched_data.data.requester
+                                              .last_name
+                                          : ""
                                       }
 &respondent=${
-                                        $ctx.fetched_data.data.consultant.rank
-                                          .role +
-                                        " " +
                                         $ctx.fetched_data.data.consultant
-                                          .first_name +
-                                        " " +
-                                        $ctx.fetched_data.data.consultant
-                                          .last_name
+                                          ? $ctx.fetched_data.data.consultant
+                                              .rank.role +
+                                            " " +
+                                            $ctx.fetched_data.data.consultant
+                                              .first_name +
+                                            " " +
+                                            $ctx.fetched_data.data.consultant
+                                              .last_name
+                                          : ""
                                       }
-&signer=${$ctx.fetched_data.data.confirm_entries
-                                        .map(
-                                          entry =>
-                                            entry.confirmer.rank.role +
-                                            " " +
-                                            entry.confirmer.first_name +
-                                            " " +
-                                            entry.confirmer.last_name
-                                        )
-                                        .join("، ")}
-&sender_service=${$ctx.fetched_data.data.effective_patient_service.name}
-&receiver_service=${$ctx.fetched_data.data.consultant_service.name}`);
+&signer=${
+                                        $ctx.fetched_data.data.confirm_entries
+                                          ? $ctx.fetched_data.data.confirm_entries
+                                              .map(
+                                                entry =>
+                                                  entry.confirmer.rank.role +
+                                                  " " +
+                                                  entry.confirmer.first_name +
+                                                  " " +
+                                                  entry.confirmer.last_name
+                                              )
+                                              .join("، ")
+                                          : ""
+                                      }
+&sender_service=${
+                                        $ctx.fetched_data.data
+                                          .effective_patient_service
+                                          ? $ctx.fetched_data.data
+                                              .effective_patient_service.name
+                                          : ""
+                                      }
+&receiver_service=${
+                                        $ctx.fetched_data.data
+                                          .consultant_service
+                                          ? $ctx.fetched_data.data
+                                              .consultant_service.name
+                                          : ""
+                                      }`);
                                     }
                                   };
                                   return (({ customFunction }) => {
@@ -2383,7 +2428,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           )}
                         >
                           {
-                            " \u0627\u0645\u0636\u0627 \u06a9\u0646\u0646\u062f\u0647 \u067e\u0627\u0633\u062e"
+                            " \u0627\u0645\u0636\u0627 \u06a9\u0646\u0646\u062f\u06af\u0627\u0646 \u067e\u0627\u0633\u062e"
                           }
                         </div>
                         <div
