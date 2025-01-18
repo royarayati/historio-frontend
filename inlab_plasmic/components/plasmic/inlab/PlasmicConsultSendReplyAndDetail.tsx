@@ -2446,7 +2446,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           <React.Fragment>
                             {(() => {
                               try {
-                                return $ctx.fetched_data.data.confirm_entries
+                                return $ctx.fetched_data.data.confirm_entries !=
+                                  []
                                   ? $ctx.fetched_data.data.confirm_entries
                                       .map(
                                         entry =>

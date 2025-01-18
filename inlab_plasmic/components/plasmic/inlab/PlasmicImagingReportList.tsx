@@ -63,7 +63,6 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
-import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -107,7 +106,6 @@ export type PlasmicImagingReportList__OverridesType = {
   paraclinicsButton?: Flex__<typeof Button>;
   paraclinicReports?: Flex__<typeof Button>;
   paraclinicsReport?: Flex__<typeof ApiFetcherComponent>;
-  apiFetcherComponent?: Flex__<typeof ApiFetcherComponent>;
   viewPacsButton?: Flex__<typeof Button>;
   paraclinicReportsSection?: Flex__<"section">;
   paraclinicReportSection?: Flex__<"section">;
@@ -118,7 +116,6 @@ export type PlasmicImagingReportList__OverridesType = {
   paraclinicDatetime2?: Flex__<"div">;
   previousAdmission?: Flex__<typeof Button>;
   paraclinicType?: Flex__<"div">;
-  conditionGuard?: Flex__<typeof ConditionGuard>;
   paraclinics?: Flex__<typeof ApiFetcherComponent>;
   paraclinicsList?: Flex__<"div">;
   paraclinicNameDatetime?: Flex__<"div">;
@@ -136,6 +133,8 @@ export type PlasmicImagingReportList__OverridesType = {
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratory?: Flex__<typeof PlasmicImg__>;
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
+  getPacsUrl?: Flex__<typeof ApiFetcherComponent>;
+  pacsButton?: Flex__<typeof Button>;
 };
 
 export interface DefaultImagingReportListProps {}
@@ -177,8 +176,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
-
-  const $globalActions = useGlobalActions?.();
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -445,6 +442,36 @@ function PlasmicImagingReportList__RenderFunc(props: {
         path: "button[].sortSelected",
         type: "private",
         variableType: "boolean"
+      },
+      {
+        path: "pacsButton.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "pacsButton.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "pacsButton.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "pacsButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "pacsButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -934,262 +961,231 @@ function PlasmicImagingReportList__RenderFunc(props: {
               {$ctx => (
                 <React.Fragment>
                   {false ? (
-                    <ApiFetcherComponent
-                      data-plasmic-name={"apiFetcherComponent"}
-                      data-plasmic-override={overrides.apiFetcherComponent}
-                      children={null}
+                    <Button
+                      data-plasmic-name={"viewPacsButton"}
+                      data-plasmic-override={overrides.viewPacsButton}
                       className={classNames(
                         "__wab_instance",
-                        sty.apiFetcherComponent
+                        sty.viewPacsButton
                       )}
-                      headers={(() => {
+                      color={(() => {
                         try {
-                          return {
-                            "X-Namespace": localStorage.getItem(
-                              "inlab_user_namespace_id"
-                            )
-                          };
+                          return $ctx.fetched_data.loading === true
+                            ? "clear"
+                            : "blue";
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
                             e?.plasmicType === "PlasmicUndefinedDataError"
                           ) {
-                            return undefined;
+                            return "blue";
                           }
                           throw e;
                         }
                       })()}
-                      method={"GET"}
-                      path={`/api/v3/patient/pacs_url?admission_id=${
-                        $ctx.params.adm_id
-                      }&user_id=${localStorage.getItem(
-                        "inlab_user_namespace_id"
-                      )}`}
-                      ref={ref => {
-                        $refs["apiFetcherComponent"] = ref;
-                      }}
-                    />
-                  ) : null}
-                  <Button
-                    data-plasmic-name={"viewPacsButton"}
-                    data-plasmic-override={overrides.viewPacsButton}
-                    className={classNames("__wab_instance", sty.viewPacsButton)}
-                    color={(() => {
-                      try {
-                        return $ctx.fetched_data.loading === true
-                          ? "clear"
-                          : "blue";
-                      } catch (e) {
+                      deselected={generateStateValueProp($state, [
+                        "viewPacsButton",
+                        "deselected"
+                      ])}
+                      isDisabled={generateStateValueProp($state, [
+                        "viewPacsButton",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["goToPage"] =
+                          localStorage.getItem("namespace_id") !== "5"
+                            ? (() => {
+                                const actionArgs = {
+                                  destination: (() => {
+                                    try {
+                                      return $ctx.fetched_data.data.pacs_url;
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                };
+                                return (({ destination }) => {
+                                  if (
+                                    typeof destination === "string" &&
+                                    destination.startsWith("#")
+                                  ) {
+                                    document
+                                      .getElementById(destination.substr(1))
+                                      .scrollIntoView({ behavior: "smooth" });
+                                  } else {
+                                    __nextRouter?.push(destination);
+                                  }
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
                         if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
+                          $steps["goToPage"] != null &&
+                          typeof $steps["goToPage"] === "object" &&
+                          typeof $steps["goToPage"].then === "function"
                         ) {
-                          return "blue";
+                          $steps["goToPage"] = await $steps["goToPage"];
                         }
-                        throw e;
-                      }
-                    })()}
-                    deselected={generateStateValueProp($state, [
-                      "viewPacsButton",
-                      "deselected"
-                    ])}
-                    isDisabled={generateStateValueProp($state, [
-                      "viewPacsButton",
-                      "isDisabled"
-                    ])}
-                    onClick={async event => {
-                      const $steps = {};
 
-                      $steps["goToPage"] =
-                        localStorage.getItem("namespace_id") !== "5"
-                          ? (() => {
-                              const actionArgs = {
-                                destination: (() => {
-                                  try {
-                                    return $ctx.fetched_data.data.pacs_url;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return undefined;
+                        $steps["goToPage2"] =
+                          localStorage.getItem("namespace_id") === "5" &&
+                          window.location.origin ===
+                            "https://synapps.tums.ac.ir"
+                            ? (() => {
+                                const actionArgs = {
+                                  destination: (() => {
+                                    try {
+                                      return (() => {
+                                        return localStorage.getItem(
+                                          "ikhc_pacs_url"
+                                        );
+                                      })();
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
                                     }
-                                    throw e;
+                                  })()
+                                };
+                                return (({ destination }) => {
+                                  if (
+                                    typeof destination === "string" &&
+                                    destination.startsWith("#")
+                                  ) {
+                                    document
+                                      .getElementById(destination.substr(1))
+                                      .scrollIntoView({ behavior: "smooth" });
+                                  } else {
+                                    __nextRouter?.push(destination);
                                   }
-                                })()
-                              };
-                              return (({ destination }) => {
-                                if (
-                                  typeof destination === "string" &&
-                                  destination.startsWith("#")
-                                ) {
-                                  document
-                                    .getElementById(destination.substr(1))
-                                    .scrollIntoView({ behavior: "smooth" });
-                                } else {
-                                  __nextRouter?.push(destination);
-                                }
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["goToPage"] != null &&
-                        typeof $steps["goToPage"] === "object" &&
-                        typeof $steps["goToPage"].then === "function"
-                      ) {
-                        $steps["goToPage"] = await $steps["goToPage"];
-                      }
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["goToPage2"] != null &&
+                          typeof $steps["goToPage2"] === "object" &&
+                          typeof $steps["goToPage2"].then === "function"
+                        ) {
+                          $steps["goToPage2"] = await $steps["goToPage2"];
+                        }
+                      }}
+                      onDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      $steps["goToPage2"] =
-                        localStorage.getItem("namespace_id") === "5" &&
-                        window.location.origin === "https://synapps.tums.ac.ir"
-                          ? (() => {
-                              const actionArgs = {
-                                destination: (() => {
-                                  try {
-                                    return (() => {
-                                      return localStorage.getItem(
-                                        "ikhc_pacs_url"
-                                      );
-                                    })();
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return undefined;
-                                    }
-                                    throw e;
-                                  }
-                                })()
-                              };
-                              return (({ destination }) => {
-                                if (
-                                  typeof destination === "string" &&
-                                  destination.startsWith("#")
-                                ) {
-                                  document
-                                    .getElementById(destination.substr(1))
-                                    .scrollIntoView({ behavior: "smooth" });
-                                } else {
-                                  __nextRouter?.push(destination);
-                                }
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["goToPage2"] != null &&
-                        typeof $steps["goToPage2"] === "object" &&
-                        typeof $steps["goToPage2"].then === "function"
-                      ) {
-                        $steps["goToPage2"] = await $steps["goToPage2"];
-                      }
-                    }}
-                    onDeselectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton",
-                          "deselected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onIsDisabledChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton",
+                            "isDisabled"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onIsDisabledChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton",
-                          "isDisabled"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSelectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton",
-                          "selected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSortDeselectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton",
-                          "sortDeselected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSortSelectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "viewPacsButton",
-                          "sortSelected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    selected={generateStateValueProp($state, [
-                      "viewPacsButton",
-                      "selected"
-                    ])}
-                    sortDeselected={generateStateValueProp($state, [
-                      "viewPacsButton",
-                      "sortDeselected"
-                    ])}
-                    sortSelected={generateStateValueProp($state, [
-                      "viewPacsButton",
-                      "sortSelected"
-                    ])}
-                  >
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text___4Thhk
-                      )}
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      selected={generateStateValueProp($state, [
+                        "viewPacsButton",
+                        "selected"
+                      ])}
+                      sortDeselected={generateStateValueProp($state, [
+                        "viewPacsButton",
+                        "sortDeselected"
+                      ])}
+                      sortSelected={generateStateValueProp($state, [
+                        "viewPacsButton",
+                        "sortSelected"
+                      ])}
                     >
-                      {"View PACS"}
-                    </div>
-                  </Button>
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text___4Thhk
+                        )}
+                      >
+                        {"View PACS"}
+                      </div>
+                    </Button>
+                  ) : null}
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? $ctx.fetched_data.loading == true
@@ -1818,121 +1814,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       </section>
                     </section>
                   ) : null}
-                  <ConditionGuard
-                    data-plasmic-name={"conditionGuard"}
-                    data-plasmic-override={overrides.conditionGuard}
-                    className={classNames("__wab_instance", sty.conditionGuard)}
-                    condition={(() => {
-                      try {
-                        return (
-                          localStorage.getItem("user_namespace_if") === "5" &&
-                          window.location.origin ===
-                            "https://synapps.tums.ac.ir"
-                        );
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return false;
-                        }
-                        throw e;
-                      }
-                    })()}
-                    onNotSatisfied={async () => {
-                      const $steps = {};
-
-                      $steps["getTheIkhcPacsUrl"] = false
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "GET",
-                                `/n8n/webhook/PACS?admission_id=${localStorage.getItem(
-                                  "admission_id"
-                                )}`
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcher"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["getTheIkhcPacsUrl"] != null &&
-                        typeof $steps["getTheIkhcPacsUrl"] === "object" &&
-                        typeof $steps["getTheIkhcPacsUrl"].then === "function"
-                      ) {
-                        $steps["getTheIkhcPacsUrl"] = await $steps[
-                          "getTheIkhcPacsUrl"
-                        ];
-                      }
-
-                      $steps["setTheIkhcPacsUrlToTheLocalStorage"] = false
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "ikhc_pacs_url",
-                                    $steps.getTheIkhcPacsUrl
-                                  );
-                                  return console.log(
-                                    localStorage.getItem("ikhc_pacs_url")
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["setTheIkhcPacsUrlToTheLocalStorage"] != null &&
-                        typeof $steps["setTheIkhcPacsUrlToTheLocalStorage"] ===
-                          "object" &&
-                        typeof $steps["setTheIkhcPacsUrlToTheLocalStorage"]
-                          .then === "function"
-                      ) {
-                        $steps["setTheIkhcPacsUrlToTheLocalStorage"] =
-                          await $steps["setTheIkhcPacsUrlToTheLocalStorage"];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  return fetch(
-                                    `https://synapps.tums.ac.ir/n8n/webhook/PACS?admission_id=${$ctx.params.adm_id}`
-                                  )
-                                    .then(response => response.json())
-                                    .then(data => {
-                                      localStorage.setItem(
-                                        "ikhc_pacs_url",
-                                        data
-                                      );
-                                      console.log(
-                                        localStorage.getItem("ikhc_pacs_url")
-                                      );
-                                    });
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-                    }}
-                  />
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -2957,6 +2838,184 @@ function PlasmicImagingReportList__RenderFunc(props: {
             })()}
           </SwitchingTab>
         </div>
+        <ApiFetcherComponent
+          data-plasmic-name={"getPacsUrl"}
+          data-plasmic-override={overrides.getPacsUrl}
+          className={classNames("__wab_instance", sty.getPacsUrl)}
+          headers={{
+            "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+          }}
+          method={"GET"}
+          path={`/api/v3/patient/pacs_url?admission_id=${
+            $ctx.params.adm_id
+          }&user_id=${localStorage.getItem("inlab_user_namespace_id")}`}
+          ref={ref => {
+            $refs["getPacsUrl"] = ref;
+          }}
+        >
+          <DataCtxReader__>
+            {$ctx => (
+              <Button
+                data-plasmic-name={"pacsButton"}
+                data-plasmic-override={overrides.pacsButton}
+                className={classNames("__wab_instance", sty.pacsButton)}
+                color={"blue"}
+                deselected={generateStateValueProp($state, [
+                  "pacsButton",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "pacsButton",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToPage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: (() => {
+                            try {
+                              return $ctx.fetched_data.data;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToPage"] != null &&
+                    typeof $steps["goToPage"] === "object" &&
+                    typeof $steps["goToPage"].then === "function"
+                  ) {
+                    $steps["goToPage"] = await $steps["goToPage"];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "pacsButton",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "pacsButton",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "pacsButton",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "pacsButton",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "pacsButton",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "pacsButton",
+                  "selected"
+                ])}
+                sortDeselected={generateStateValueProp($state, [
+                  "pacsButton",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "pacsButton",
+                  "sortSelected"
+                ])}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__et1R
+                  )}
+                >
+                  {"View PACS"}
+                </div>
+              </Button>
+            )}
+          </DataCtxReader__>
+        </ApiFetcherComponent>
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -2974,7 +3033,6 @@ const PlasmicDescendants = {
     "paraclinicsButton",
     "paraclinicReports",
     "paraclinicsReport",
-    "apiFetcherComponent",
     "viewPacsButton",
     "paraclinicReportsSection",
     "paraclinicReportSection",
@@ -2985,7 +3043,6 @@ const PlasmicDescendants = {
     "paraclinicDatetime2",
     "previousAdmission",
     "paraclinicType",
-    "conditionGuard",
     "paraclinics",
     "paraclinicsList",
     "paraclinicNameDatetime",
@@ -3002,7 +3059,9 @@ const PlasmicDescendants = {
     "patientProfile",
     "radiologyReport",
     "laboratory",
-    "bookmarkIcon"
+    "bookmarkIcon",
+    "getPacsUrl",
+    "pacsButton"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -3014,7 +3073,6 @@ const PlasmicDescendants = {
   paraclinicReports: ["paraclinicReports"],
   paraclinicsReport: [
     "paraclinicsReport",
-    "apiFetcherComponent",
     "viewPacsButton",
     "paraclinicReportsSection",
     "paraclinicReportSection",
@@ -3024,10 +3082,8 @@ const PlasmicDescendants = {
     "paraclinicTitle",
     "paraclinicDatetime2",
     "previousAdmission",
-    "paraclinicType",
-    "conditionGuard"
+    "paraclinicType"
   ],
-  apiFetcherComponent: ["apiFetcherComponent"],
   viewPacsButton: ["viewPacsButton"],
   paraclinicReportsSection: [
     "paraclinicReportsSection",
@@ -3076,7 +3132,6 @@ const PlasmicDescendants = {
   paraclinicDatetime2: ["paraclinicDatetime2"],
   previousAdmission: ["previousAdmission"],
   paraclinicType: ["paraclinicType"],
-  conditionGuard: ["conditionGuard"],
   paraclinics: [
     "paraclinics",
     "paraclinicsList",
@@ -3132,7 +3187,9 @@ const PlasmicDescendants = {
   patientProfile: ["patientProfile"],
   radiologyReport: ["radiologyReport"],
   laboratory: ["laboratory"],
-  bookmarkIcon: ["bookmarkIcon"]
+  bookmarkIcon: ["bookmarkIcon"],
+  getPacsUrl: ["getPacsUrl", "pacsButton"],
+  pacsButton: ["pacsButton"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -3148,7 +3205,6 @@ type NodeDefaultElementType = {
   paraclinicsButton: typeof Button;
   paraclinicReports: typeof Button;
   paraclinicsReport: typeof ApiFetcherComponent;
-  apiFetcherComponent: typeof ApiFetcherComponent;
   viewPacsButton: typeof Button;
   paraclinicReportsSection: "section";
   paraclinicReportSection: "section";
@@ -3159,7 +3215,6 @@ type NodeDefaultElementType = {
   paraclinicDatetime2: "div";
   previousAdmission: typeof Button;
   paraclinicType: "div";
-  conditionGuard: typeof ConditionGuard;
   paraclinics: typeof ApiFetcherComponent;
   paraclinicsList: "div";
   paraclinicNameDatetime: "div";
@@ -3177,6 +3232,8 @@ type NodeDefaultElementType = {
   radiologyReport: typeof PlasmicImg__;
   laboratory: typeof PlasmicImg__;
   bookmarkIcon: typeof BookmarkIcon;
+  getPacsUrl: typeof ApiFetcherComponent;
+  pacsButton: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -3250,7 +3307,6 @@ export const PlasmicImagingReportList = Object.assign(
     paraclinicsButton: makeNodeComponent("paraclinicsButton"),
     paraclinicReports: makeNodeComponent("paraclinicReports"),
     paraclinicsReport: makeNodeComponent("paraclinicsReport"),
-    apiFetcherComponent: makeNodeComponent("apiFetcherComponent"),
     viewPacsButton: makeNodeComponent("viewPacsButton"),
     paraclinicReportsSection: makeNodeComponent("paraclinicReportsSection"),
     paraclinicReportSection: makeNodeComponent("paraclinicReportSection"),
@@ -3261,7 +3317,6 @@ export const PlasmicImagingReportList = Object.assign(
     paraclinicDatetime2: makeNodeComponent("paraclinicDatetime2"),
     previousAdmission: makeNodeComponent("previousAdmission"),
     paraclinicType: makeNodeComponent("paraclinicType"),
-    conditionGuard: makeNodeComponent("conditionGuard"),
     paraclinics: makeNodeComponent("paraclinics"),
     paraclinicsList: makeNodeComponent("paraclinicsList"),
     paraclinicNameDatetime: makeNodeComponent("paraclinicNameDatetime"),
@@ -3279,6 +3334,8 @@ export const PlasmicImagingReportList = Object.assign(
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratory: makeNodeComponent("laboratory"),
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
+    getPacsUrl: makeNodeComponent("getPacsUrl"),
+    pacsButton: makeNodeComponent("pacsButton"),
 
     // Metadata about props expected for PlasmicImagingReportList
     internalVariantProps: PlasmicImagingReportList__VariantProps,
