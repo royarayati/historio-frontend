@@ -14,7 +14,7 @@ const firebaseConfig = {
   storageBucket: 'new-inlab.appspot.com',
   messagingSenderId: '1093327307637',
   appId: '1:1093327307637:web:96591eb9a34573ae9b493c',
-  measurementId: 'G-QLDY8FQWH2',
+  measurementId: "G-1LE1TVDX35"
 };
 
 // Initialize Firebase
