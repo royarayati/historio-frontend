@@ -1,0 +1,53 @@
+{
+  "short_name": "InLab",
+  "name": "Intelligent-Laboratory",
+  "icons": [
+    {
+      "src": "plasmic/inlab/images/Icon-36x36.png",
+      "type": "image/png",
+      "sizes": "36x36"
+    },
+    {
+      "src": "plasmic/inlab/images/Icon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "plasmic/inlab/images/Icon-72x72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "plasmic/inlab/images/Icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "plasmic/inlab/images/Icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "plasmic/inlab/images/Icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "plasmic/inlab/images/Icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/new_inlab",
+  "display": "standalone",
+  "theme_color": "#386fff",
+  "background_color": "#EDEDEDD9",
+  "screenshots": [
+    {
+      "src": "plasmic/inlab/images/Icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}
