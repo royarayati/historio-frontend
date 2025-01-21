@@ -122,7 +122,8 @@ export type PlasmicConsultList__OverridesType = {
   receiverDoctor?: Flex__<"div">;
   tagsAndDelete?: Flex__<"div">;
   draftTag?: Flex__<"div">;
-  repliedStatus?: Flex__<"div">;
+  paperRepliedStatus?: Flex__<"div">;
+  inAppRepliedStatus?: Flex__<"div">;
   empty?: Flex__<"div">;
   deleteConsult?: Flex__<"svg">;
   consultSendDateRepliedStatus?: Flex__<"div">;
@@ -928,7 +929,10 @@ function PlasmicConsultList__RenderFunc(props: {
                                     ) : null}
                                     {(() => {
                                       try {
-                                        return currentItem.state === 4;
+                                        return (
+                                          currentItem.state === 4 &&
+                                          currentItem.paper_reply
+                                        );
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
@@ -941,18 +945,51 @@ function PlasmicConsultList__RenderFunc(props: {
                                       }
                                     })() ? (
                                       <div
-                                        data-plasmic-name={"repliedStatus"}
+                                        data-plasmic-name={"paperRepliedStatus"}
                                         data-plasmic-override={
-                                          overrides.repliedStatus
+                                          overrides.paperRepliedStatus
                                         }
                                         className={classNames(
                                           projectcss.all,
                                           projectcss.__wab_text,
-                                          sty.repliedStatus
+                                          sty.paperRepliedStatus
                                         )}
                                       >
                                         {
-                                          "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647"
+                                          "\u067e\u0627\u0633\u062e \u06a9\u0627\u063a\u0630\u06cc"
+                                        }
+                                      </div>
+                                    ) : null}
+                                    {(() => {
+                                      try {
+                                        return (
+                                          currentItem.state === 4 &&
+                                          !currentItem.paper_reply
+                                        );
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return true;
+                                        }
+                                        throw e;
+                                      }
+                                    })() ? (
+                                      <div
+                                        data-plasmic-name={"inAppRepliedStatus"}
+                                        data-plasmic-override={
+                                          overrides.inAppRepliedStatus
+                                        }
+                                        className={classNames(
+                                          projectcss.all,
+                                          projectcss.__wab_text,
+                                          sty.inAppRepliedStatus
+                                        )}
+                                      >
+                                        {
+                                          "\u067e\u0627\u0633\u062e \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628"
                                         }
                                       </div>
                                     ) : null}
@@ -984,7 +1021,7 @@ function PlasmicConsultList__RenderFunc(props: {
                                         )}
                                       >
                                         {
-                                          "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647"
+                                          "\u067e\u0627\u0633\u062e \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628"
                                         }
                                       </div>
                                     ) : null}
@@ -2888,7 +2925,8 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "draftTag",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -2941,7 +2979,8 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "draftTag",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -2971,7 +3010,8 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "draftTag",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -3000,7 +3040,8 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "draftTag",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -3032,7 +3073,8 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "draftTag",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -3057,7 +3099,8 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "draftTag",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -3081,7 +3124,8 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "draftTag",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -3102,7 +3146,8 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "draftTag",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult"
   ],
@@ -3135,12 +3180,14 @@ const PlasmicDescendants = {
   tagsAndDelete: [
     "tagsAndDelete",
     "draftTag",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult"
   ],
   draftTag: ["draftTag"],
-  repliedStatus: ["repliedStatus"],
+  paperRepliedStatus: ["paperRepliedStatus"],
+  inAppRepliedStatus: ["inAppRepliedStatus"],
   empty: ["empty"],
   deleteConsult: ["deleteConsult"],
   consultSendDateRepliedStatus: [
@@ -3235,7 +3282,8 @@ type NodeDefaultElementType = {
   receiverDoctor: "div";
   tagsAndDelete: "div";
   draftTag: "div";
-  repliedStatus: "div";
+  paperRepliedStatus: "div";
+  inAppRepliedStatus: "div";
   empty: "div";
   deleteConsult: "svg";
   consultSendDateRepliedStatus: "div";
@@ -3354,7 +3402,8 @@ export const PlasmicConsultList = Object.assign(
     receiverDoctor: makeNodeComponent("receiverDoctor"),
     tagsAndDelete: makeNodeComponent("tagsAndDelete"),
     draftTag: makeNodeComponent("draftTag"),
-    repliedStatus: makeNodeComponent("repliedStatus"),
+    paperRepliedStatus: makeNodeComponent("paperRepliedStatus"),
+    inAppRepliedStatus: makeNodeComponent("inAppRepliedStatus"),
     empty: makeNodeComponent("empty"),
     deleteConsult: makeNodeComponent("deleteConsult"),
     consultSendDateRepliedStatus: makeNodeComponent(
