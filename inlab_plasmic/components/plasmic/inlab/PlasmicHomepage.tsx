@@ -286,7 +286,7 @@ function PlasmicHomepage__RenderFunc(props: {
       Object.assign(
         {
           open: false,
-          newVersionDatetime: "02.11.1403",
+          newVersionDatetime: "04.11.1403",
           newNoticeDatetime: "22/05/1403"
         },
         Object.fromEntries(
