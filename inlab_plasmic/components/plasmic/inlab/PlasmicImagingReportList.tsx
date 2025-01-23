@@ -62,8 +62,8 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
+import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 
@@ -103,6 +103,7 @@ export type PlasmicImagingReportList__OverridesType = {
   getPatient?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
   tabButtons?: Flex__<"div">;
+  uploadData?: Flex__<typeof AntdModal>;
   paraclinicsButton?: Flex__<typeof Button>;
   paraclinicReports?: Flex__<typeof Button>;
   paraclinicsReport?: Flex__<typeof ApiFetcherComponent>;
@@ -472,6 +473,12 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "uploadData.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -629,6 +636,63 @@ function PlasmicImagingReportList__RenderFunc(props: {
           hasGap={true}
           className={classNames(projectcss.all, sty.tabButtons)}
         >
+          <AntdModal
+            data-plasmic-name={"uploadData"}
+            data-plasmic-override={overrides.uploadData}
+            cancelText={"\u062e\u06cc\u0631"}
+            className={classNames("__wab_instance", sty.uploadData)}
+            defaultStylesClassName={classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              projectcss.plasmic_tokens,
+              plasmic_antd_5_hostless_css.plasmic_tokens,
+              plasmic_plasmic_rich_components_css.plasmic_tokens
+            )}
+            hideFooter={false}
+            modalContentClassName={classNames({
+              [sty["pcls_qp9FjkAzsOA8"]]: true
+            })}
+            modalScopeClassName={sty["uploadData__modal"]}
+            okText={"\u0628\u0644\u0647 "}
+            onOk={async () => {
+              const $steps = {};
+            }}
+            onOpenChange={async (...eventArgs: any) => {
+              generateStateOnChangeProp($state, ["uploadData", "open"]).apply(
+                null,
+                eventArgs
+              );
+            }}
+            open={generateStateValueProp($state, ["uploadData", "open"])}
+            title={null}
+            trigger={
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__ouI0
+                )}
+              >
+                {
+                  "\u0622\u067e\u0644\u0648\u062f \u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631"
+                }
+              </div>
+            }
+            wrapClassName={classNames({ [sty["pcls_x1AcoSjDnE5v"]]: true })}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__oDw2N
+              )}
+            >
+              {
+                "\u0622\u06cc\u0627 \u062f\u0648\u0633\u062a \u062f\u0627\u0631\u06cc\u062f \u0627\u0645\u06a9\u0627\u0646 \u0622\u067e\u0644\u0648\u062f \u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631 \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628 \u0641\u0631\u0627\u0647\u0645 \u0634\u0648\u062f\u061f"
+              }
+            </div>
+          </AntdModal>
           <Button
             data-plasmic-name={"paraclinicsButton"}
             data-plasmic-override={overrides.paraclinicsButton}
@@ -3031,6 +3095,7 @@ const PlasmicDescendants = {
     "getPatient",
     "patientNameAgeGender",
     "tabButtons",
+    "uploadData",
     "paraclinicsButton",
     "paraclinicReports",
     "paraclinicsReport",
@@ -3069,7 +3134,13 @@ const PlasmicDescendants = {
   header: ["header", "getPatient", "patientNameAgeGender"],
   getPatient: ["getPatient", "patientNameAgeGender"],
   patientNameAgeGender: ["patientNameAgeGender"],
-  tabButtons: ["tabButtons", "paraclinicsButton", "paraclinicReports"],
+  tabButtons: [
+    "tabButtons",
+    "uploadData",
+    "paraclinicsButton",
+    "paraclinicReports"
+  ],
+  uploadData: ["uploadData"],
   paraclinicsButton: ["paraclinicsButton"],
   paraclinicReports: ["paraclinicReports"],
   paraclinicsReport: [
@@ -3203,6 +3274,7 @@ type NodeDefaultElementType = {
   getPatient: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
   tabButtons: "div";
+  uploadData: typeof AntdModal;
   paraclinicsButton: typeof Button;
   paraclinicReports: typeof Button;
   paraclinicsReport: typeof ApiFetcherComponent;
@@ -3305,6 +3377,7 @@ export const PlasmicImagingReportList = Object.assign(
     getPatient: makeNodeComponent("getPatient"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
     tabButtons: makeNodeComponent("tabButtons"),
+    uploadData: makeNodeComponent("uploadData"),
     paraclinicsButton: makeNodeComponent("paraclinicsButton"),
     paraclinicReports: makeNodeComponent("paraclinicReports"),
     paraclinicsReport: makeNodeComponent("paraclinicsReport"),

@@ -2334,7 +2334,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     dir={"rtl"}
                   >
                     {
-                      "\u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647 \u0647\u0627 : "
+                      "\u062c\u0633\u062a \u0648 \u062c\u0648 \u062f\u0631 \u0645\u06cc\u0627\u0646 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647 : "
                     }
                   </div>
                 </Stack__>
