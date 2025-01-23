@@ -1172,12 +1172,25 @@
   max-width: 100%;
   padding-top: 8px;
 }
-.repliedStatus {
+.paperRepliedStatus {
+  position: relative;
+  width: 66px;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  font-weight: 700;
+  background: #ffffff;
+  color: var(--token-F0UhOcqDIzJI);
+  padding-top: 4px;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  white-space: pre;
+}
+.inAppRepliedStatus {
   position: relative;
   width: auto;
   height: auto;
   max-width: 100%;
-  align-self: flex-start;
+  align-self: center;
   font-weight: 700;
   background: #ffffff;
   color: var(--token-F0UhOcqDIzJI);
@@ -1190,7 +1203,7 @@
   width: auto;
   height: auto;
   max-width: 100%;
-  align-self: flex-start;
+  align-self: center;
   font-weight: 700;
   background: #ffffff;
   color: #ffffff;
@@ -3152,6 +3165,25 @@
   max-width: 100%;
   font-family: var(--VazirmatnCustom);
   font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  background: #ffffff;
+  min-width: 0;
+}
+.text__ms6U1 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
   font-weight: 400;
   font-style: normal;
   color: var(--token-IYO13gyYJHXG);
@@ -3163,6 +3195,7 @@
   user-select: none;
   text-decoration-line: none !important;
   background: #ffffff;
+  padding-top: 10px;
   min-width: 0;
 }
 .getServicesForConsult:global(.__wab_instance) {
@@ -3393,6 +3426,9 @@
 .ul__ctBZ {
   display: flex;
   flex-direction: column;
+}
+.li__cXPbD {
+  padding-top: 0px;
 }
 .متوجهشدم:global(.__wab_instance) {
   max-width: 100%;

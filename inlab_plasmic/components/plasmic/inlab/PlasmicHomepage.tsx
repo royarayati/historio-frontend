@@ -170,7 +170,8 @@ export type PlasmicHomepage__OverridesType = {
   senderDoctor?: Flex__<"div">;
   receiverDoctor?: Flex__<"div">;
   tagsAndDelete?: Flex__<"div">;
-  repliedStatus?: Flex__<"div">;
+  paperRepliedStatus?: Flex__<"div">;
+  inAppRepliedStatus?: Flex__<"div">;
   empty?: Flex__<"div">;
   deleteConsult?: Flex__<"svg">;
   consultSendDateRepliedStatus?: Flex__<"div">;
@@ -285,7 +286,7 @@ function PlasmicHomepage__RenderFunc(props: {
       Object.assign(
         {
           open: false,
-          newVersionDatetime: "13.8.1403",
+          newVersionDatetime: "04.11.1403",
           newNoticeDatetime: "22/05/1403"
         },
         Object.fromEntries(
@@ -3450,7 +3451,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                   >
                                     {(() => {
                                       try {
-                                        return currentItem.state === 4;
+                                        return (
+                                          currentItem.state === 4 &&
+                                          currentItem.paper_reply
+                                        );
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
@@ -3463,18 +3467,51 @@ function PlasmicHomepage__RenderFunc(props: {
                                       }
                                     })() ? (
                                       <div
-                                        data-plasmic-name={"repliedStatus"}
+                                        data-plasmic-name={"paperRepliedStatus"}
                                         data-plasmic-override={
-                                          overrides.repliedStatus
+                                          overrides.paperRepliedStatus
                                         }
                                         className={classNames(
                                           projectcss.all,
                                           projectcss.__wab_text,
-                                          sty.repliedStatus
+                                          sty.paperRepliedStatus
                                         )}
                                       >
                                         {
-                                          "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647"
+                                          "\u067e\u0627\u0633\u062e \u06a9\u0627\u063a\u0630\u06cc"
+                                        }
+                                      </div>
+                                    ) : null}
+                                    {(() => {
+                                      try {
+                                        return (
+                                          currentItem.state === 4 &&
+                                          !currentItem.paper_reply
+                                        );
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return true;
+                                        }
+                                        throw e;
+                                      }
+                                    })() ? (
+                                      <div
+                                        data-plasmic-name={"inAppRepliedStatus"}
+                                        data-plasmic-override={
+                                          overrides.inAppRepliedStatus
+                                        }
+                                        className={classNames(
+                                          projectcss.all,
+                                          projectcss.__wab_text,
+                                          sty.inAppRepliedStatus
+                                        )}
+                                      >
+                                        {
+                                          "\u067e\u0627\u0633\u062e \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628"
                                         }
                                       </div>
                                     ) : null}
@@ -3502,7 +3539,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         )}
                                       >
                                         {
-                                          "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647"
+                                          "\u067e\u0627\u0633\u062e \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628"
                                         }
                                       </div>
                                     ) : null}
@@ -9171,17 +9208,30 @@ function PlasmicHomepage__RenderFunc(props: {
               "open"
             ])}
             title={
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__sja3A
-                )}
-              >
-                {
-                  "\u0627\u0646\u062a\u062e\u0627\u0628 \u0646\u0648\u0639 \u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647"
-                }
-              </div>
+              <React.Fragment>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__sja3A
+                  )}
+                >
+                  {
+                    "\u0627\u0646\u062a\u062e\u0627\u0628 \u0646\u0648\u0639 \u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647"
+                  }
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__ms6U1
+                  )}
+                >
+                  {
+                    "\u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647 \u0641\u0642\u0637 \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0627\u0631\u0633\u0627\u0644 \u0634\u062f\u0647 \u0648 \u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647 \u0646\u0645\u0627\u06cc\u0634 \u062f\u0627\u062f\u0647 \u0645\u06cc \u0634\u0648\u062f\n\u067e\u06cc\u0634 \u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627 \u0642\u0627\u0628\u0644 \u0631\u0648\u06cc\u062a \u0646\u06cc\u0633\u062a"
+                  }
+                </div>
+              </React.Fragment>
             }
             trigger={null}
           >
@@ -10585,7 +10635,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           )}
                         >
                           {
-                            "\u0627\u0636\u0627\u0641\u0647 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0627 \u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0648 \u06cc\u0627 \u0634\u0645\u0627\u0631\u0647 \u0645\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
+                            "\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u062f\u06a9\u0645\u0647 add to homescreen \u062f\u0631 \u0645\u0631\u0648\u0631\u06af\u0631 \u062e\u0648\u062f \u0645\u06cc \u062a\u0648\u0627\u0646\u06cc\u062f \u0646\u0633\u062e\u0647 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0631 \u0631\u0648\u06cc \u06af\u0648\u0634\u06cc \u062e\u0648\u062f \u0646\u0635\u0628 \u06a9\u0646\u06cc\u062f"
                           }
                         </li>
                         <li
@@ -10593,11 +10643,11 @@ function PlasmicHomepage__RenderFunc(props: {
                             projectcss.all,
                             projectcss.li,
                             projectcss.__wab_text,
-                            sty.li__m1W6N
+                            sty.li__aPzlf
                           )}
                         >
                           {
-                            "\u063a\u06cc\u0631\u0641\u0639\u0627\u0644 \u0634\u062f\u0646 \u0645\u0648\u0642\u062a\u06cc \u0627\u0645\u06a9\u0627\u0646 \u0647\u0627\u06cc\u0644\u0627\u06cc\u062a \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u062c\u0647\u062a \u062a\u0633\u0631\u06cc\u0639 \u0646\u0645\u0627\u06cc\u0634 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u0648 \u062a\u0645\u0627\u06cc\u0632 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627 \u06cc \u0628\u0633\u062a\u0631\u06cc \u0627\u062e\u06cc\u0631 \u0628\u0627 \u062a\u0645\u0627\u0645 \u0628\u0633\u062a\u0631\u06cc \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631"
+                            "\u0627\u0636\u0627\u0641\u0647 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0627 \u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0648 \u06cc\u0627 \u0634\u0645\u0627\u0631\u0647 \u0645\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
                           }
                         </li>
                       </ul>
@@ -13607,7 +13657,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -13748,7 +13799,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -13893,7 +13945,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -13932,7 +13985,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -13970,7 +14024,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -14001,7 +14056,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -14031,7 +14087,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult",
     "consultSendDateRepliedStatus",
@@ -14058,7 +14115,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "repliedStatus",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
     "empty",
     "deleteConsult"
   ],
@@ -14094,8 +14152,15 @@ const PlasmicDescendants = {
   ],
   senderDoctor: ["senderDoctor"],
   receiverDoctor: ["receiverDoctor"],
-  tagsAndDelete: ["tagsAndDelete", "repliedStatus", "empty", "deleteConsult"],
-  repliedStatus: ["repliedStatus"],
+  tagsAndDelete: [
+    "tagsAndDelete",
+    "paperRepliedStatus",
+    "inAppRepliedStatus",
+    "empty",
+    "deleteConsult"
+  ],
+  paperRepliedStatus: ["paperRepliedStatus"],
+  inAppRepliedStatus: ["inAppRepliedStatus"],
   empty: ["empty"],
   deleteConsult: ["deleteConsult"],
   consultSendDateRepliedStatus: [
@@ -14439,7 +14504,8 @@ type NodeDefaultElementType = {
   senderDoctor: "div";
   receiverDoctor: "div";
   tagsAndDelete: "div";
-  repliedStatus: "div";
+  paperRepliedStatus: "div";
+  inAppRepliedStatus: "div";
   empty: "div";
   deleteConsult: "svg";
   consultSendDateRepliedStatus: "div";
@@ -14648,7 +14714,8 @@ export const PlasmicHomepage = Object.assign(
     senderDoctor: makeNodeComponent("senderDoctor"),
     receiverDoctor: makeNodeComponent("receiverDoctor"),
     tagsAndDelete: makeNodeComponent("tagsAndDelete"),
-    repliedStatus: makeNodeComponent("repliedStatus"),
+    paperRepliedStatus: makeNodeComponent("paperRepliedStatus"),
+    inAppRepliedStatus: makeNodeComponent("inAppRepliedStatus"),
     empty: makeNodeComponent("empty"),
     deleteConsult: makeNodeComponent("deleteConsult"),
     consultSendDateRepliedStatus: makeNodeComponent(

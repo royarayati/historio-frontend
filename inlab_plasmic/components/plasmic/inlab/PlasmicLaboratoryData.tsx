@@ -194,6 +194,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = useGlobalActions?.();
+
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -1542,6 +1544,80 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   $steps["updateAllAdmissions"] = await $steps[
                     "updateAllAdmissions"
                   ];
+                }
+
+                $steps["invokeGlobalAction"] = false
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "GET",
+                          `/api/v3/remote_his/labs?patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&all_admissions=${$state.allAdmissions}`,
+                          (() => {
+                            try {
+                              return {
+                                "X-Namespace": localStorage.getItem(
+                                  "inlab_user_namespace_id"
+                                )
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions[
+                        "AuthGlobalContext.apiFetcher"
+                      ]?.apply(null, [...actionArgs.args]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["invokeGlobalAction"] != null &&
+                  typeof $steps["invokeGlobalAction"] === "object" &&
+                  typeof $steps["invokeGlobalAction"].then === "function"
+                ) {
+                  $steps["invokeGlobalAction"] = await $steps[
+                    "invokeGlobalAction"
+                  ];
+                }
+
+                $steps["updateDataLoaded"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["dataLoaded"]
+                        },
+                        operation: 0,
+                        value: "false"
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateDataLoaded"] != null &&
+                  typeof $steps["updateDataLoaded"] === "object" &&
+                  typeof $steps["updateDataLoaded"].then === "function"
+                ) {
+                  $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {

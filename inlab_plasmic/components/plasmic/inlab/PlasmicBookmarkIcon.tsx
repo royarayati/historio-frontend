@@ -350,7 +350,10 @@ function PlasmicBookmarkIcon__RenderFunc(props: {
                     try {
                       return {
                         item_key: "admission_id",
-                        item_content: $props.admissionId
+                        item_content: $props.admissionId,
+                        datetime: new Date().toLocaleString("en-US", {
+                          timeZone: "Asia/Tehran"
+                        })
                       };
                     } catch (e) {
                       if (

@@ -404,7 +404,7 @@
   margin-bottom: 5px;
   padding: 4px;
 }
-.repliedStatus {
+.paperRepliedStatus {
   position: relative;
   height: auto;
   max-width: 100%;
@@ -426,7 +426,34 @@
   padding: 4px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .repliedStatus {
+  .paperRepliedStatus {
+    left: auto;
+    top: auto;
+  }
+}
+.inAppRepliedStatus {
+  position: relative;
+  height: auto;
+  max-width: 100%;
+  font-weight: 700;
+  background: #ffffff;
+  left: auto;
+  top: auto;
+  width: 81px;
+  font-family: var(--VazirmatnCustom);
+  color: var(--token-F0UhOcqDIzJI);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  align-self: flex-start;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  padding: 4px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .inAppRepliedStatus {
     left: auto;
     top: auto;
   }
