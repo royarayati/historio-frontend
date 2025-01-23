@@ -63,6 +63,7 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 
@@ -119,6 +120,9 @@ export type PlasmicPatientProfile__OverridesType = {
   patientStatus?: Flex__<"div">;
   وضعیتبیمار?: Flex__<"div">;
   bioArcPrescription?: Flex__<typeof Button>;
+  uploadData?: Flex__<typeof AntdModal>;
+  no?: Flex__<typeof Button>;
+  yes?: Flex__<typeof Button>;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   homepage?: Flex__<typeof PlasmicImg__>;
@@ -230,6 +234,72 @@ function PlasmicPatientProfile__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "uploadData.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "yes.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "yes.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "yes.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "yes.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "yes.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "no.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "no.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "no.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "no.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "no.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -912,6 +982,392 @@ function PlasmicPatientProfile__RenderFunc(props: {
                       </Button>
                     </Stack__>
                   ) : null}
+                  <AntdModal
+                    data-plasmic-name={"uploadData"}
+                    data-plasmic-override={overrides.uploadData}
+                    cancelText={"\u062e\u06cc\u0631"}
+                    className={classNames("__wab_instance", sty.uploadData)}
+                    defaultStylesClassName={classNames(
+                      projectcss.root_reset,
+                      projectcss.plasmic_default_styles,
+                      projectcss.plasmic_mixins,
+                      projectcss.plasmic_tokens,
+                      plasmic_antd_5_hostless_css.plasmic_tokens,
+                      plasmic_plasmic_rich_components_css.plasmic_tokens
+                    )}
+                    hideFooter={true}
+                    modalContentClassName={classNames({
+                      [sty["pcls_V90wEQFAL7c2"]]: true
+                    })}
+                    modalScopeClassName={sty["uploadData__modal"]}
+                    okText={"\u0628\u0644\u0647 "}
+                    onOk={async () => {
+                      const $steps = {};
+                    }}
+                    onOpenChange={async (...eventArgs: any) => {
+                      generateStateOnChangeProp($state, [
+                        "uploadData",
+                        "open"
+                      ]).apply(null, eventArgs);
+                    }}
+                    open={generateStateValueProp($state, [
+                      "uploadData",
+                      "open"
+                    ])}
+                    title={null}
+                    trigger={
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.loading === false;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__tz5Nx
+                          )}
+                        >
+                          {
+                            "\u0622\u067e\u0644\u0648\u062f \u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631"
+                          }
+                        </div>
+                      ) : null
+                    }
+                    wrapClassName={classNames({
+                      [sty["pcls_jAnHWGoVHOJz"]]: true
+                    })}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__h95Ga
+                      )}
+                    >
+                      {
+                        "\u0622\u06cc\u0627 \u062f\u0648\u0633\u062a \u062f\u0627\u0631\u06cc\u062f \u0627\u0645\u06a9\u0627\u0646 \u0622\u067e\u0644\u0648\u062f \u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631 \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628 \u0641\u0631\u0627\u0647\u0645 \u0634\u0648\u062f\u061f"
+                      }
+                    </div>
+                    <Button
+                      data-plasmic-name={"no"}
+                      data-plasmic-override={overrides.no}
+                      className={classNames("__wab_instance", sty.no)}
+                      color={"red"}
+                      deselected={generateStateValueProp($state, [
+                        "no",
+                        "deselected"
+                      ])}
+                      isDisabled={generateStateValueProp($state, [
+                        "no",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["updateUploadDataOpen"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["uploadData", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateUploadDataOpen"] != null &&
+                          typeof $steps["updateUploadDataOpen"] === "object" &&
+                          typeof $steps["updateUploadDataOpen"].then ===
+                            "function"
+                        ) {
+                          $steps["updateUploadDataOpen"] = await $steps[
+                            "updateUploadDataOpen"
+                          ];
+                        }
+                      }}
+                      onDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "no",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onIsDisabledChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "no",
+                            "isDisabled"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, ["no", "selected"])(
+                            eventArgs[0]
+                          );
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "no",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "no",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      selected={generateStateValueProp($state, [
+                        "no",
+                        "selected"
+                      ])}
+                      sortDeselected={generateStateValueProp($state, [
+                        "no",
+                        "sortDeselected"
+                      ])}
+                      sortSelected={generateStateValueProp($state, [
+                        "no",
+                        "sortSelected"
+                      ])}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__vIQi
+                        )}
+                      >
+                        {"\u062e\u06cc\u0631"}
+                      </div>
+                    </Button>
+                    <Button
+                      data-plasmic-name={"yes"}
+                      data-plasmic-override={overrides.yes}
+                      className={classNames("__wab_instance", sty.yes)}
+                      deselected={generateStateValueProp($state, [
+                        "yes",
+                        "deselected"
+                      ])}
+                      isDisabled={generateStateValueProp($state, [
+                        "yes",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["updateUploadDataOpen"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["uploadData", "open"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateUploadDataOpen"] != null &&
+                          typeof $steps["updateUploadDataOpen"] === "object" &&
+                          typeof $steps["updateUploadDataOpen"].then ===
+                            "function"
+                        ) {
+                          $steps["updateUploadDataOpen"] = await $steps[
+                            "updateUploadDataOpen"
+                          ];
+                        }
+                      }}
+                      onDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "yes",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onIsDisabledChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "yes",
+                            "isDisabled"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "yes",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "yes",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "yes",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      selected={generateStateValueProp($state, [
+                        "yes",
+                        "selected"
+                      ])}
+                      sortDeselected={generateStateValueProp($state, [
+                        "yes",
+                        "sortDeselected"
+                      ])}
+                      sortSelected={generateStateValueProp($state, [
+                        "yes",
+                        "sortSelected"
+                      ])}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__aWmDr
+                        )}
+                      >
+                        {"\u0628\u0644\u0647"}
+                      </div>
+                    </Button>
+                  </AntdModal>
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -1450,6 +1906,9 @@ const PlasmicDescendants = {
     "patientStatus",
     "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631",
     "bioArcPrescription",
+    "uploadData",
+    "no",
+    "yes",
     "switchingTabs",
     "switchingTab",
     "homepage",
@@ -1481,7 +1940,10 @@ const PlasmicDescendants = {
     "freeBox",
     "patientStatus",
     "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631",
-    "bioArcPrescription"
+    "bioArcPrescription",
+    "uploadData",
+    "no",
+    "yes"
   ],
   patientData: [
     "patientData",
@@ -1552,6 +2014,9 @@ const PlasmicDescendants = {
   patientStatus: ["patientStatus"],
   وضعیتبیمار: ["\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631"],
   bioArcPrescription: ["bioArcPrescription"],
+  uploadData: ["uploadData", "no", "yes"],
+  no: ["no"],
+  yes: ["yes"],
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
@@ -1605,6 +2070,9 @@ type NodeDefaultElementType = {
   patientStatus: "div";
   وضعیتبیمار: "div";
   bioArcPrescription: typeof Button;
+  uploadData: typeof AntdModal;
+  no: typeof Button;
+  yes: typeof Button;
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   homepage: typeof PlasmicImg__;
@@ -1703,6 +2171,9 @@ export const PlasmicPatientProfile = Object.assign(
       "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u0631"
     ),
     bioArcPrescription: makeNodeComponent("bioArcPrescription"),
+    uploadData: makeNodeComponent("uploadData"),
+    no: makeNodeComponent("no"),
+    yes: makeNodeComponent("yes"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),
