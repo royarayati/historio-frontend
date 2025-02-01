@@ -7,7 +7,7 @@ set -Ee
 
 # plasmic.auth file is required in root directory
 
-PLASMIC_PROJECT_ID='pDVctTiQaLAwARu4kxRew3'
+PLASMIC_PROJECT_ID='wjafXWEvDytFogT7SiMy2v'
 
 echo -e "\n----------Syncing Plasmic----------"
 
