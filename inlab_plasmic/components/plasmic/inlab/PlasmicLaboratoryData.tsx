@@ -1917,13 +1917,49 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                           e instanceof TypeError ||
                           e?.plasmicType === "PlasmicUndefinedDataError"
                         ) {
-                          return false;
+                          return true;
                         }
                         throw e;
                       }
                     })()}
                     onNotSatisfied={async () => {
                       const $steps = {};
+
+                      $steps["setDataLoadedFalse"] = false
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["dataLoaded"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setDataLoadedFalse"] != null &&
+                        typeof $steps["setDataLoadedFalse"] === "object" &&
+                        typeof $steps["setDataLoadedFalse"].then === "function"
+                      ) {
+                        $steps["setDataLoadedFalse"] = await $steps[
+                          "setDataLoadedFalse"
+                        ];
+                      }
 
                       $steps["setTheLaboratoryDataToTheLocalStorage"] = true
                         ? (() => {
@@ -1962,7 +1998,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                           await $steps["setTheLaboratoryDataToTheLocalStorage"];
                       }
 
-                      $steps["updateDataLoaded"] = true
+                      $steps["updateDataLoaded"] = localStorage.getItem(
+                        "laboratory_data"
+                      )
                         ? (() => {
                             const actionArgs = {
                               variable: {
@@ -2015,7 +2053,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                             throw e;
                           }
                         })()
-                      : $ctx.fetched_data.loading == true
+                      : ($ctx.fetched_data.loading = false)
                   ) ? (
                     <div
                       className={classNames(
@@ -2131,7 +2169,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                     (() => {
                       try {
-                        return $state.dataLoaded == true &&
+                        return $state.dataLoaded === true &&
                           localStorage.getItem("laboratory_data")
                           ? JSON.parse(localStorage.getItem("laboratory_data"))
                           : [];

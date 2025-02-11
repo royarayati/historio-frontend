@@ -72,6 +72,7 @@ import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/c
 import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 import NewNoticeBanner from "../../NewNoticeBanner"; // plasmic-import: X347FgRZh6HH/component
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -238,12 +239,13 @@ export type PlasmicHomepage__OverridesType = {
   receiverServiceType?: Flex__<"div">;
   deleteFilters?: Flex__<"div">;
   getServicesForConsult?: Flex__<typeof ApiFetcherComponent>;
-  modalConsultSenderService?: Flex__<typeof AntdModal>;
-  senderServiceList?: Flex__<"div">;
+  modalConsultServiceList?: Flex__<typeof AntdModal>;
+  serviceListContent?: Flex__<"div">;
+  searchBarServicesContent?: Flex__<"div">;
+  searchBarServices?: Flex__<typeof TextInput>;
+  clearContent?: Flex__<"svg">;
+  noServices?: Flex__<"div">;
   servicesName?: Flex__<"div">;
-  modalConsultReceiverService?: Flex__<typeof AntdModal>;
-  receiverServiceList?: Flex__<"div">;
-  servicesName2?: Flex__<"div">;
   modalFeatureBanner?: Flex__<typeof AntdModal>;
   newFeatureBanner?: Flex__<typeof NewFeatureBanner>;
   متوجهشدم?: Flex__<typeof Button>;
@@ -907,7 +909,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "modalConsultSenderService.open",
+        path: "modalConsultServiceList.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -915,13 +917,6 @@ function PlasmicHomepage__RenderFunc(props: {
       },
       {
         path: "modalConsultFilterType.open",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          hasVariant(globalVariants, "screen", "mobileFirst") ? false : false
-      },
-      {
-        path: "modalConsultReceiverService.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -1415,6 +1410,12 @@ function PlasmicHomepage__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "searchBarServices.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -2787,100 +2788,47 @@ function PlasmicHomepage__RenderFunc(props: {
                       onClick={async event => {
                         const $steps = {};
 
-                        $steps["updateModalConsultSenderServiceOpen"] =
-                          localStorage.getItem("consult_filter_type") ===
-                          "سرویس مبدا"
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: [
-                                      "modalConsultSenderService",
-                                      "open"
-                                    ]
-                                  },
-                                  operation: 4
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
+                        $steps["updateModalConsultServiceListOpen"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "modalConsultServiceList",
+                                    "open"
+                                  ]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
 
-                                  const oldValue = $stateGet(
-                                    objRoot,
-                                    variablePath
-                                  );
-                                  $stateSet(objRoot, variablePath, !oldValue);
-                                  return !oldValue;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
                         if (
-                          $steps["updateModalConsultSenderServiceOpen"] !=
-                            null &&
-                          typeof $steps[
-                            "updateModalConsultSenderServiceOpen"
-                          ] === "object" &&
-                          typeof $steps["updateModalConsultSenderServiceOpen"]
+                          $steps["updateModalConsultServiceListOpen"] != null &&
+                          typeof $steps["updateModalConsultServiceListOpen"] ===
+                            "object" &&
+                          typeof $steps["updateModalConsultServiceListOpen"]
                             .then === "function"
                         ) {
-                          $steps["updateModalConsultSenderServiceOpen"] =
-                            await $steps["updateModalConsultSenderServiceOpen"];
-                        }
-
-                        $steps["updateModalConsultReceiverServiceOpen"] =
-                          localStorage.getItem("consult_filter_type") ===
-                          "سرویس مقصد"
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: [
-                                      "modalConsultReceiverService",
-                                      "open"
-                                    ]
-                                  },
-                                  operation: 4
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  const oldValue = $stateGet(
-                                    objRoot,
-                                    variablePath
-                                  );
-                                  $stateSet(objRoot, variablePath, !oldValue);
-                                  return !oldValue;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["updateModalConsultReceiverServiceOpen"] !=
-                            null &&
-                          typeof $steps[
-                            "updateModalConsultReceiverServiceOpen"
-                          ] === "object" &&
-                          typeof $steps["updateModalConsultReceiverServiceOpen"]
-                            .then === "function"
-                        ) {
-                          $steps["updateModalConsultReceiverServiceOpen"] =
-                            await $steps[
-                              "updateModalConsultReceiverServiceOpen"
-                            ];
+                          $steps["updateModalConsultServiceListOpen"] =
+                            await $steps["updateModalConsultServiceListOpen"];
                         }
                       }}
                     >
@@ -9253,6 +9201,45 @@ function PlasmicHomepage__RenderFunc(props: {
                 onClick={async event => {
                   const $steps = {};
 
+                  $steps["updateSearchBarServicesValue"] =
+                    localStorage.getItem("consult_filter_type") === "سرویس مقصد"
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["searchBarServices", "value"]
+                            },
+                            operation: 0,
+                            value: ""
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updateSearchBarServicesValue"] != null &&
+                    typeof $steps["updateSearchBarServicesValue"] ===
+                      "object" &&
+                    typeof $steps["updateSearchBarServicesValue"].then ===
+                      "function"
+                  ) {
+                    $steps["updateSearchBarServicesValue"] = await $steps[
+                      "updateSearchBarServicesValue"
+                    ];
+                  }
+
                   $steps["setLocalConsultFilterType"] = true
                     ? (() => {
                         const actionArgs = {
@@ -9322,7 +9309,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         const actionArgs = {
                           variable: {
                             objRoot: $state,
-                            variablePath: ["modalConsultSenderService", "open"]
+                            variablePath: ["modalConsultServiceList", "open"]
                           },
                           operation: 4
                         };
@@ -9367,6 +9354,45 @@ function PlasmicHomepage__RenderFunc(props: {
                 )}
                 onClick={async event => {
                   const $steps = {};
+
+                  $steps["updateSearchBarServicesValue"] =
+                    localStorage.getItem("consult_filter_type") === "سرویس مبدا"
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["searchBarServices", "value"]
+                            },
+                            operation: 0,
+                            value: ""
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updateSearchBarServicesValue"] != null &&
+                    typeof $steps["updateSearchBarServicesValue"] ===
+                      "object" &&
+                    typeof $steps["updateSearchBarServicesValue"].then ===
+                      "function"
+                  ) {
+                    $steps["updateSearchBarServicesValue"] = await $steps[
+                      "updateSearchBarServicesValue"
+                    ];
+                  }
 
                   $steps["setLocalConsultFilterType"] = true
                     ? (() => {
@@ -9432,15 +9458,12 @@ function PlasmicHomepage__RenderFunc(props: {
                     ];
                   }
 
-                  $steps["updateModalConsultReceiverServiceOpen"] = true
+                  $steps["updateModalConsultServiceListOpen"] = true
                     ? (() => {
                         const actionArgs = {
                           variable: {
                             objRoot: $state,
-                            variablePath: [
-                              "modalConsultReceiverService",
-                              "open"
-                            ]
+                            variablePath: ["modalConsultServiceList", "open"]
                           },
                           operation: 4
                         };
@@ -9462,14 +9485,15 @@ function PlasmicHomepage__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
-                    $steps["updateModalConsultReceiverServiceOpen"] != null &&
-                    typeof $steps["updateModalConsultReceiverServiceOpen"] ===
+                    $steps["updateModalConsultServiceListOpen"] != null &&
+                    typeof $steps["updateModalConsultServiceListOpen"] ===
                       "object" &&
-                    typeof $steps["updateModalConsultReceiverServiceOpen"]
-                      .then === "function"
+                    typeof $steps["updateModalConsultServiceListOpen"].then ===
+                      "function"
                   ) {
-                    $steps["updateModalConsultReceiverServiceOpen"] =
-                      await $steps["updateModalConsultReceiverServiceOpen"];
+                    $steps["updateModalConsultServiceListOpen"] = await $steps[
+                      "updateModalConsultServiceListOpen"
+                    ];
                   }
                 }}
               >
@@ -9647,6 +9671,7 @@ function PlasmicHomepage__RenderFunc(props: {
             data-plasmic-name={"getServicesForConsult"}
             data-plasmic-override={overrides.getServicesForConsult}
             className={classNames("__wab_instance", sty.getServicesForConsult)}
+            delay={300}
             headers={(() => {
               try {
                 return {
@@ -9663,376 +9688,216 @@ function PlasmicHomepage__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={"/api/v2/service"}
+            path={`/api/v3/remote_his/services?search_input=${$state.searchBarServices.value}`}
             ref={ref => {
               $refs["getServicesForConsult"] = ref;
             }}
           >
             <DataCtxReader__>
               {$ctx => (
-                <React.Fragment>
-                  <AntdModal
-                    data-plasmic-name={"modalConsultSenderService"}
-                    data-plasmic-override={overrides.modalConsultSenderService}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.modalConsultSenderService
-                    )}
-                    defaultStylesClassName={classNames(
-                      projectcss.root_reset,
-                      projectcss.plasmic_default_styles,
-                      projectcss.plasmic_mixins,
-                      projectcss.plasmic_tokens,
-                      plasmic_antd_5_hostless_css.plasmic_tokens,
-                      plasmic_plasmic_rich_components_css.plasmic_tokens
-                    )}
-                    hideFooter={true}
-                    maskClosable={true}
-                    modalContentClassName={classNames({
-                      [sty["pcls_THa7BUI8A7ZH"]]: true
-                    })}
-                    modalScopeClassName={
-                      sty["modalConsultSenderService__modal"]
-                    }
-                    onOpenChange={async (...eventArgs: any) => {
-                      generateStateOnChangeProp($state, [
-                        "modalConsultSenderService",
-                        "open"
-                      ]).apply(null, eventArgs);
-                    }}
-                    open={generateStateValueProp($state, [
-                      "modalConsultSenderService",
+                <AntdModal
+                  data-plasmic-name={"modalConsultServiceList"}
+                  data-plasmic-override={overrides.modalConsultServiceList}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.modalConsultServiceList
+                  )}
+                  defaultStylesClassName={classNames(
+                    projectcss.root_reset,
+                    projectcss.plasmic_default_styles,
+                    projectcss.plasmic_mixins,
+                    projectcss.plasmic_tokens,
+                    plasmic_antd_5_hostless_css.plasmic_tokens,
+                    plasmic_plasmic_rich_components_css.plasmic_tokens
+                  )}
+                  hideFooter={true}
+                  maskClosable={true}
+                  modalContentClassName={classNames({
+                    [sty["pcls_THa7BUI8A7ZH"]]: true
+                  })}
+                  modalScopeClassName={sty["modalConsultServiceList__modal"]}
+                  onOpenChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "modalConsultServiceList",
                       "open"
-                    ])}
-                    title={
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__n6NNv
-                        )}
-                      >
-                        {
-                          "\u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627"
+                    ]).apply(null, eventArgs);
+                  }}
+                  open={generateStateValueProp($state, [
+                    "modalConsultServiceList",
+                    "open"
+                  ])}
+                  title={
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return (
+                            !$ctx.fetched_data.loading &&
+                            localStorage.getItem("consult_filter_type") ===
+                              "سرویس مبدا"
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
                         }
-                      </div>
-                    }
-                    trigger={null}
+                      })() ? (
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__n6NNv
+                          )}
+                        >
+                          {
+                            "\u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627"
+                          }
+                        </div>
+                      ) : null}
+                      {(() => {
+                        try {
+                          return (
+                            !$ctx.fetched_data.loading &&
+                            localStorage.getItem("consult_filter_type") ===
+                              "سرویس مقصد"
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__zHyd2
+                          )}
+                        >
+                          {
+                            "\u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f"
+                          }
+                        </div>
+                      ) : null}
+                    </React.Fragment>
+                  }
+                  trigger={null}
+                >
+                  <Stack__
+                    as={"div"}
+                    data-plasmic-name={"serviceListContent"}
+                    data-plasmic-override={overrides.serviceListContent}
+                    hasGap={true}
+                    className={classNames(
+                      projectcss.all,
+                      sty.serviceListContent
+                    )}
                   >
-                    <Stack__
-                      as={"div"}
-                      data-plasmic-name={"senderServiceList"}
-                      data-plasmic-override={overrides.senderServiceList}
-                      hasGap={true}
+                    <ConditionGuard
+                      children={null}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.conditionGuard__pCbE
+                      )}
+                      condition={(() => {
+                        try {
+                          return $ctx.fetched_data.loading;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return false;
+                          }
+                          throw e;
+                        }
+                      })()}
+                      onNotSatisfied={async () => {
+                        const $steps = {};
+
+                        $steps["setLocalConsultServiceList"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "consult_service_list_for_filter",
+                                      JSON.stringify($ctx.fetched_data.data)
+                                    );
+                                    return console.log(
+                                      `consult_service_list_for_filter: ${localStorage.getItem(
+                                        "consult_service_list_for_filter"
+                                      )}`
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["setLocalConsultServiceList"] != null &&
+                          typeof $steps["setLocalConsultServiceList"] ===
+                            "object" &&
+                          typeof $steps["setLocalConsultServiceList"].then ===
+                            "function"
+                        ) {
+                          $steps["setLocalConsultServiceList"] = await $steps[
+                            "setLocalConsultServiceList"
+                          ];
+                        }
+                      }}
+                      skipPaths={[]}
+                    />
+
+                    <div
+                      data-plasmic-name={"searchBarServicesContent"}
+                      data-plasmic-override={overrides.searchBarServicesContent}
                       className={classNames(
                         projectcss.all,
-                        sty.senderServiceList
+                        sty.searchBarServicesContent
                       )}
                     >
-                      <ConditionGuard
-                        children={null}
+                      <TextInput
+                        data-plasmic-name={"searchBarServices"}
+                        data-plasmic-override={overrides.searchBarServices}
                         className={classNames(
                           "__wab_instance",
-                          sty.conditionGuard__pCbE
+                          sty.searchBarServices
                         )}
-                        condition={(() => {
-                          try {
-                            return $ctx.fetched_data.loading;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return false;
-                            }
-                            throw e;
-                          }
-                        })()}
-                        onNotSatisfied={async () => {
-                          const $steps = {};
+                        endIcon={
+                          $state.searchBarServices.value !== "" ? (
+                            <Icons8CloseSvgIcon
+                              data-plasmic-name={"clearContent"}
+                              data-plasmic-override={overrides.clearContent}
+                              className={classNames(
+                                projectcss.all,
+                                sty.clearContent
+                              )}
+                              onClick={async event => {
+                                const $steps = {};
 
-                          $steps["setLocalFilterConsultSenderServiceList"] =
-                            true
-                              ? (() => {
-                                  const actionArgs = {
-                                    customFunction: async () => {
-                                      return (() => {
-                                        localStorage.setItem(
-                                          "consult_sender_service_list_for_filter",
-                                          JSON.stringify(
-                                            $ctx.fetched_data.data.services
-                                          )
-                                        );
-                                        return console.log(
-                                          `consult_sender_service_list_for_filter: ${localStorage.getItem(
-                                            "consult_sender_service_list_for_filter"
-                                          )}`
-                                        );
-                                      })();
-                                    }
-                                  };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["setLocalFilterConsultSenderServiceList"] !=
-                              null &&
-                            typeof $steps[
-                              "setLocalFilterConsultSenderServiceList"
-                            ] === "object" &&
-                            typeof $steps[
-                              "setLocalFilterConsultSenderServiceList"
-                            ].then === "function"
-                          ) {
-                            $steps["setLocalFilterConsultSenderServiceList"] =
-                              await $steps[
-                                "setLocalFilterConsultSenderServiceList"
-                              ];
-                          }
-                        }}
-                        skipPaths={[]}
-                      />
-
-                      {(_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
-                          try {
-                            return localStorage.getItem(
-                              "consult_sender_service_list_for_filter"
-                            )
-                              ? JSON.parse(
-                                  localStorage.getItem(
-                                    "consult_sender_service_list_for_filter"
-                                  )
-                                )
-                              : $ctx.fetched_data.data.services;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return [];
-                            }
-                            throw e;
-                          }
-                        })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const currentItem = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
-                          <div
-                            data-plasmic-name={"servicesName"}
-                            data-plasmic-override={overrides.servicesName}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.servicesName
-                            )}
-                            key={currentIndex}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["localStorageSetFilterServiceId"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "filter_service_id",
-                                          currentItem.id
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["localStorageSetFilterServiceId"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceId"
-                                ] === "object" &&
-                                typeof $steps["localStorageSetFilterServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["localStorageSetFilterServiceId"] =
-                                  await $steps[
-                                    "localStorageSetFilterServiceId"
-                                  ];
-                              }
-
-                              $steps["localStorageSetFilterServiceName"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "filter_service_name",
-                                          currentItem.name
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["localStorageSetFilterServiceName"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceName"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceName"
-                                ].then === "function"
-                              ) {
-                                $steps["localStorageSetFilterServiceName"] =
-                                  await $steps[
-                                    "localStorageSetFilterServiceName"
-                                  ];
-                              }
-
-                              $steps["localStorageSetGetV2ConsultQueryParam"] =
-                                true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return localStorage.setItem(
-                                            "GET_V2_consult_query_param",
-                                            `offset=0&limit=100&effective_patient_service_id=${localStorage.getItem(
-                                              "filter_service_id"
-                                            )}`
-                                          );
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                              if (
-                                $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] != null &&
-                                typeof $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ].then === "function"
-                              ) {
-                                $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] = await $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ];
-                              }
-
-                              $steps["consoleLogFilterServiceId"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "filter_service_id: ",
-                                          localStorage.getItem(
-                                            "filter_service_id"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogFilterServiceId"] != null &&
-                                typeof $steps["consoleLogFilterServiceId"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogFilterServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogFilterServiceId"] =
-                                  await $steps["consoleLogFilterServiceId"];
-                              }
-
-                              $steps["consoleLogFilterServiceName"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "filter_service_name: ",
-                                          localStorage.getItem(
-                                            "filter_service_name"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogFilterServiceName"] != null &&
-                                typeof $steps["consoleLogFilterServiceName"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogFilterServiceName"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogFilterServiceName"] =
-                                  await $steps["consoleLogFilterServiceName"];
-                              }
-
-                              $steps["consoleLogGetV2ConsultQueryParam"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "GET_V2_consult_query_param:",
-                                          localStorage.getItem(
-                                            "GET_V2_consult_query_param"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogGetV2ConsultQueryParam"] !=
-                                  null &&
-                                typeof $steps[
-                                  "consoleLogGetV2ConsultQueryParam"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "consoleLogGetV2ConsultQueryParam"
-                                ].then === "function"
-                              ) {
-                                $steps["consoleLogGetV2ConsultQueryParam"] =
-                                  await $steps[
-                                    "consoleLogGetV2ConsultQueryParam"
-                                  ];
-                              }
-
-                              $steps["updateModalConsultSenderServiceOpen"] =
-                                true
+                                $steps["updateSearchBarServicesValue"] = true
                                   ? (() => {
                                       const actionArgs = {
                                         variable: {
                                           objRoot: $state,
                                           variablePath: [
-                                            "modalConsultSenderService",
-                                            "open"
+                                            "searchBarServices",
+                                            "value"
                                           ]
                                         },
                                         operation: 0,
-                                        value: false
+                                        value: ""
                                       };
                                       return (({
                                         variable,
@@ -10051,129 +9916,131 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })?.apply(null, [actionArgs]);
                                     })()
                                   : undefined;
-                              if (
-                                $steps["updateModalConsultSenderServiceOpen"] !=
-                                  null &&
-                                typeof $steps[
-                                  "updateModalConsultSenderServiceOpen"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "updateModalConsultSenderServiceOpen"
-                                ].then === "function"
-                              ) {
-                                $steps["updateModalConsultSenderServiceOpen"] =
-                                  await $steps[
-                                    "updateModalConsultSenderServiceOpen"
-                                  ];
-                              }
-                            }}
-                          >
-                            <React.Fragment>{currentItem.name}</React.Fragment>
-                          </div>
+                                if (
+                                  $steps["updateSearchBarServicesValue"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "updateSearchBarServicesValue"
+                                  ] === "object" &&
+                                  typeof $steps["updateSearchBarServicesValue"]
+                                    .then === "function"
+                                ) {
+                                  $steps["updateSearchBarServicesValue"] =
+                                    await $steps[
+                                      "updateSearchBarServicesValue"
+                                    ];
+                                }
+                              }}
+                              role={"img"}
+                            />
+                          ) : null
+                        }
+                        onChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "searchBarServices",
+                              "value"
+                            ])((e => e.target?.value).apply(null, eventArgs));
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        placeholder={
+                          "\u0646\u0627\u0645 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0648\u0631\u062f \u0646\u0638\u0631 \u062e\u0648\u062f \u0631\u0627 \u062c\u0633\u062a \u0648 \u062c\u0648 \u06a9\u0646\u06cc\u062f"
+                        }
+                        value={
+                          generateStateValueProp($state, [
+                            "searchBarServices",
+                            "value"
+                          ]) ?? ""
+                        }
+                      />
+                    </div>
+                    {(() => {
+                      try {
+                        return (
+                          !$ctx.fetched_data.loading &&
+                          $ctx.fetched_data.data.length === 0
                         );
-                      })}
-                    </Stack__>
-                  </AntdModal>
-                  <AntdModal
-                    data-plasmic-name={"modalConsultReceiverService"}
-                    data-plasmic-override={
-                      overrides.modalConsultReceiverService
-                    }
-                    className={classNames(
-                      "__wab_instance",
-                      sty.modalConsultReceiverService
-                    )}
-                    defaultStylesClassName={classNames(
-                      projectcss.root_reset,
-                      projectcss.plasmic_default_styles,
-                      projectcss.plasmic_mixins,
-                      projectcss.plasmic_tokens,
-                      plasmic_antd_5_hostless_css.plasmic_tokens,
-                      plasmic_plasmic_rich_components_css.plasmic_tokens
-                    )}
-                    hideFooter={true}
-                    maskClosable={true}
-                    modalContentClassName={classNames({
-                      [sty["pcls_oRgYWFPy3jBh"]]: true
-                    })}
-                    modalScopeClassName={
-                      sty["modalConsultReceiverService__modal"]
-                    }
-                    onOpenChange={async (...eventArgs: any) => {
-                      generateStateOnChangeProp($state, [
-                        "modalConsultReceiverService",
-                        "open"
-                      ]).apply(null, eventArgs);
-                    }}
-                    open={generateStateValueProp($state, [
-                      "modalConsultReceiverService",
-                      "open"
-                    ])}
-                    title={
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
                       <div
+                        data-plasmic-name={"noServices"}
+                        data-plasmic-override={overrides.noServices}
                         className={classNames(
                           projectcss.all,
                           projectcss.__wab_text,
-                          sty.text__cRpHl
+                          sty.noServices
                         )}
                       >
                         {
-                          "\u0641\u06cc\u0644\u062a\u0631 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f"
+                          " \u0645\u062a\u0627\u0633\u0641\u0627\u0646\u0647 \u0633\u0631\u0648\u06cc\u0633\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
                         }
                       </div>
-                    }
-                    trigger={null}
-                  >
-                    <Stack__
-                      as={"div"}
-                      data-plasmic-name={"receiverServiceList"}
-                      data-plasmic-override={overrides.receiverServiceList}
-                      hasGap={true}
-                      className={classNames(
-                        projectcss.all,
-                        sty.receiverServiceList
-                      )}
-                    >
-                      <ConditionGuard
-                        children={null}
-                        className={classNames(
-                          "__wab_instance",
-                          sty.conditionGuard___60Nkj
-                        )}
-                        condition={(() => {
-                          try {
-                            return $ctx.fetched_data.loading;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return false;
-                            }
-                            throw e;
+                    ) : null}
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.loading &&
+                            localStorage.getItem(
+                              "consult_service_list_for_filter"
+                            ) &&
+                            $state.searchBarServices.value == ""
+                            ? JSON.parse(
+                                localStorage.getItem(
+                                  "consult_service_list_for_filter"
+                                )
+                              )
+                            : $ctx.fetched_data.data;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
                           }
-                        })()}
-                        onNotSatisfied={async () => {
-                          const $steps = {};
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          data-plasmic-name={"servicesName"}
+                          data-plasmic-override={overrides.servicesName}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.servicesName
+                          )}
+                          key={currentIndex}
+                          onClick={async event => {
+                            const $steps = {};
 
-                          $steps["setLocalFilterConsultReceiverServiceList"] =
-                            true
+                            $steps["localStorageSetFilterServiceId"] = true
                               ? (() => {
                                   const actionArgs = {
                                     customFunction: async () => {
-                                      return (() => {
-                                        localStorage.setItem(
-                                          "consult_receiver_service_list_for_filter",
-                                          JSON.stringify(
-                                            $ctx.fetched_data.data.services
-                                          )
-                                        );
-                                        return console.log(
-                                          `consult_receiver_service_list_for_filter: ${localStorage.getItem(
-                                            "consult_receiver_service_list_for_filter"
-                                          )}`
-                                        );
-                                      })();
+                                      return localStorage.setItem(
+                                        "filter_service_id",
+                                        currentItem.id
+                                      );
                                     }
                                   };
                                   return (({ customFunction }) => {
@@ -10181,171 +10048,62 @@ function PlasmicHomepage__RenderFunc(props: {
                                   })?.apply(null, [actionArgs]);
                                 })()
                               : undefined;
-                          if (
-                            $steps[
-                              "setLocalFilterConsultReceiverServiceList"
-                            ] != null &&
-                            typeof $steps[
-                              "setLocalFilterConsultReceiverServiceList"
-                            ] === "object" &&
-                            typeof $steps[
-                              "setLocalFilterConsultReceiverServiceList"
-                            ].then === "function"
-                          ) {
-                            $steps["setLocalFilterConsultReceiverServiceList"] =
-                              await $steps[
-                                "setLocalFilterConsultReceiverServiceList"
-                              ];
-                          }
-                        }}
-                        skipPaths={[]}
-                      />
-
-                      {(_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
-                          try {
-                            return localStorage.getItem(
-                              "consult_receiver_service_list_for_filter"
-                            )
-                              ? JSON.parse(
-                                  localStorage.getItem(
-                                    "consult_receiver_service_list_for_filter"
-                                  )
-                                )
-                              : $ctx.fetched_data.data.services;
-                          } catch (e) {
                             if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
+                              $steps["localStorageSetFilterServiceId"] !=
+                                null &&
+                              typeof $steps[
+                                "localStorageSetFilterServiceId"
+                              ] === "object" &&
+                              typeof $steps["localStorageSetFilterServiceId"]
+                                .then === "function"
                             ) {
-                              return [];
+                              $steps["localStorageSetFilterServiceId"] =
+                                await $steps["localStorageSetFilterServiceId"];
                             }
-                            throw e;
-                          }
-                        })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const currentItem = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
-                          <div
-                            data-plasmic-name={"servicesName2"}
-                            data-plasmic-override={overrides.servicesName2}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.servicesName2
-                            )}
-                            key={currentIndex}
-                            onClick={async event => {
-                              const $steps = {};
 
-                              $steps["localStorageSetFilterServiceId"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "filter_service_id",
-                                          currentItem.id
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["localStorageSetFilterServiceId"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceId"
-                                ] === "object" &&
-                                typeof $steps["localStorageSetFilterServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["localStorageSetFilterServiceId"] =
-                                  await $steps[
-                                    "localStorageSetFilterServiceId"
-                                  ];
-                              }
-
-                              $steps["localStorageSetFilterServiceName"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "filter_service_name",
-                                          currentItem.name
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["localStorageSetFilterServiceName"] !=
-                                  null &&
-                                typeof $steps[
+                            $steps["localStorageSetFilterServiceName"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return localStorage.setItem(
+                                        "filter_service_name",
+                                        currentItem.name
+                                      );
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["localStorageSetFilterServiceName"] !=
+                                null &&
+                              typeof $steps[
+                                "localStorageSetFilterServiceName"
+                              ] === "object" &&
+                              typeof $steps["localStorageSetFilterServiceName"]
+                                .then === "function"
+                            ) {
+                              $steps["localStorageSetFilterServiceName"] =
+                                await $steps[
                                   "localStorageSetFilterServiceName"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetFilterServiceName"
-                                ].then === "function"
-                              ) {
-                                $steps["localStorageSetFilterServiceName"] =
-                                  await $steps[
-                                    "localStorageSetFilterServiceName"
-                                  ];
-                              }
-
-                              $steps["localStorageSetGetV2ConsultQueryParam"] =
-                                true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return localStorage.setItem(
-                                            "GET_V2_consult_query_param",
-                                            `offset=0&limit=100&consultant_service_id=${localStorage.getItem(
-                                              "filter_service_id"
-                                            )}`
-                                          );
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                              if (
-                                $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] != null &&
-                                typeof $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ].then === "function"
-                              ) {
-                                $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
-                                ] = await $steps[
-                                  "localStorageSetGetV2ConsultQueryParam"
                                 ];
-                              }
+                            }
 
-                              $steps["consoleLogFilterServiceId"] = true
+                            $steps[
+                              "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                            ] =
+                              localStorage.getItem("consult_filter_type") ===
+                              "سرویس مبدا"
                                 ? (() => {
                                     const actionArgs = {
                                       customFunction: async () => {
-                                        return console.log(
-                                          "filter_service_id: ",
-                                          localStorage.getItem(
+                                        return localStorage.setItem(
+                                          "GET_V2_consult_query_param",
+                                          `offset=0&limit=100&effective_patient_service_id=${localStorage.getItem(
                                             "filter_service_id"
-                                          )
+                                          )}`
                                         );
                                       }
                                     };
@@ -10354,26 +10112,37 @@ function PlasmicHomepage__RenderFunc(props: {
                                     })?.apply(null, [actionArgs]);
                                   })()
                                 : undefined;
-                              if (
-                                $steps["consoleLogFilterServiceId"] != null &&
-                                typeof $steps["consoleLogFilterServiceId"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogFilterServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogFilterServiceId"] =
-                                  await $steps["consoleLogFilterServiceId"];
-                              }
+                            if (
+                              $steps[
+                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                              ] != null &&
+                              typeof $steps[
+                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                              ] === "object" &&
+                              typeof $steps[
+                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                              ].then === "function"
+                            ) {
+                              $steps[
+                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                              ] = await $steps[
+                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                              ];
+                            }
 
-                              $steps["consoleLogFilterServiceName"] = true
+                            $steps[
+                              "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                            ] =
+                              localStorage.getItem("consult_filter_type") ===
+                              "سرویس مقصد"
                                 ? (() => {
                                     const actionArgs = {
                                       customFunction: async () => {
-                                        return console.log(
-                                          "filter_service_name: ",
-                                          localStorage.getItem(
-                                            "filter_service_name"
-                                          )
+                                        return localStorage.setItem(
+                                          "GET_V2_consult_query_param",
+                                          `offset=0&limit=100&consultant_service_id=${localStorage.getItem(
+                                            "filter_service_id"
+                                          )}`
                                         );
                                       }
                                     };
@@ -10382,114 +10151,164 @@ function PlasmicHomepage__RenderFunc(props: {
                                     })?.apply(null, [actionArgs]);
                                   })()
                                 : undefined;
-                              if (
-                                $steps["consoleLogFilterServiceName"] != null &&
-                                typeof $steps["consoleLogFilterServiceName"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogFilterServiceName"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogFilterServiceName"] =
-                                  await $steps["consoleLogFilterServiceName"];
-                              }
+                            if (
+                              $steps[
+                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                              ] != null &&
+                              typeof $steps[
+                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                              ] === "object" &&
+                              typeof $steps[
+                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                              ].then === "function"
+                            ) {
+                              $steps[
+                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                              ] = await $steps[
+                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                              ];
+                            }
 
-                              $steps["consoleLogGetV2ConsultQueryParam"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return console.log(
-                                          "GET_V2_consult_query_param:",
-                                          localStorage.getItem(
-                                            "GET_V2_consult_query_param"
-                                          )
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["consoleLogGetV2ConsultQueryParam"] !=
-                                  null &&
-                                typeof $steps[
+                            $steps["consoleLogFilterServiceId"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return console.log(
+                                        "filter_service_id: ",
+                                        localStorage.getItem(
+                                          "filter_service_id"
+                                        )
+                                      );
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["consoleLogFilterServiceId"] != null &&
+                              typeof $steps["consoleLogFilterServiceId"] ===
+                                "object" &&
+                              typeof $steps["consoleLogFilterServiceId"]
+                                .then === "function"
+                            ) {
+                              $steps["consoleLogFilterServiceId"] =
+                                await $steps["consoleLogFilterServiceId"];
+                            }
+
+                            $steps["consoleLogFilterServiceName"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return console.log(
+                                        "filter_service_name: ",
+                                        localStorage.getItem(
+                                          "filter_service_name"
+                                        )
+                                      );
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["consoleLogFilterServiceName"] != null &&
+                              typeof $steps["consoleLogFilterServiceName"] ===
+                                "object" &&
+                              typeof $steps["consoleLogFilterServiceName"]
+                                .then === "function"
+                            ) {
+                              $steps["consoleLogFilterServiceName"] =
+                                await $steps["consoleLogFilterServiceName"];
+                            }
+
+                            $steps["consoleLogGetV2ConsultQueryParam"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return console.log(
+                                        "GET_V2_consult_query_param:",
+                                        localStorage.getItem(
+                                          "GET_V2_consult_query_param"
+                                        )
+                                      );
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["consoleLogGetV2ConsultQueryParam"] !=
+                                null &&
+                              typeof $steps[
+                                "consoleLogGetV2ConsultQueryParam"
+                              ] === "object" &&
+                              typeof $steps["consoleLogGetV2ConsultQueryParam"]
+                                .then === "function"
+                            ) {
+                              $steps["consoleLogGetV2ConsultQueryParam"] =
+                                await $steps[
                                   "consoleLogGetV2ConsultQueryParam"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "consoleLogGetV2ConsultQueryParam"
-                                ].then === "function"
-                              ) {
-                                $steps["consoleLogGetV2ConsultQueryParam"] =
-                                  await $steps[
-                                    "consoleLogGetV2ConsultQueryParam"
-                                  ];
-                              }
-
-                              $steps["updateModalConsultReceiverServiceOpen"] =
-                                true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        variable: {
-                                          objRoot: $state,
-                                          variablePath: [
-                                            "modalConsultReceiverService",
-                                            "open"
-                                          ]
-                                        },
-                                        operation: 4
-                                      };
-                                      return (({
-                                        variable,
-                                        value,
-                                        startIndex,
-                                        deleteCount
-                                      }) => {
-                                        if (!variable) {
-                                          return;
-                                        }
-                                        const { objRoot, variablePath } =
-                                          variable;
-
-                                        const oldValue = $stateGet(
-                                          objRoot,
-                                          variablePath
-                                        );
-                                        $stateSet(
-                                          objRoot,
-                                          variablePath,
-                                          !oldValue
-                                        );
-                                        return !oldValue;
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                              if (
-                                $steps[
-                                  "updateModalConsultReceiverServiceOpen"
-                                ] != null &&
-                                typeof $steps[
-                                  "updateModalConsultReceiverServiceOpen"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "updateModalConsultReceiverServiceOpen"
-                                ].then === "function"
-                              ) {
-                                $steps[
-                                  "updateModalConsultReceiverServiceOpen"
-                                ] = await $steps[
-                                  "updateModalConsultReceiverServiceOpen"
                                 ];
-                              }
-                            }}
-                          >
-                            <React.Fragment>{currentItem.name}</React.Fragment>
-                          </div>
-                        );
-                      })}
-                    </Stack__>
-                  </AntdModal>
-                </React.Fragment>
+                            }
+
+                            $steps["updateModalConsultSenderServiceOpen"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "modalConsultServiceList",
+                                        "open"
+                                      ]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateModalConsultSenderServiceOpen"] !=
+                                null &&
+                              typeof $steps[
+                                "updateModalConsultSenderServiceOpen"
+                              ] === "object" &&
+                              typeof $steps[
+                                "updateModalConsultSenderServiceOpen"
+                              ].then === "function"
+                            ) {
+                              $steps["updateModalConsultSenderServiceOpen"] =
+                                await $steps[
+                                  "updateModalConsultSenderServiceOpen"
+                                ];
+                            }
+                          }}
+                        >
+                          <React.Fragment>{currentItem.name}</React.Fragment>
+                        </div>
+                      );
+                    })}
+                  </Stack__>
+                </AntdModal>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
@@ -13725,12 +13544,13 @@ const PlasmicDescendants = {
     "receiverServiceType",
     "deleteFilters",
     "getServicesForConsult",
-    "modalConsultSenderService",
-    "senderServiceList",
+    "modalConsultServiceList",
+    "serviceListContent",
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent",
+    "noServices",
     "servicesName",
-    "modalConsultReceiverService",
-    "receiverServiceList",
-    "servicesName2",
     "modalFeatureBanner",
     "newFeatureBanner",
     "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645",
@@ -14388,27 +14208,40 @@ const PlasmicDescendants = {
   deleteFilters: ["deleteFilters"],
   getServicesForConsult: [
     "getServicesForConsult",
-    "modalConsultSenderService",
-    "senderServiceList",
-    "servicesName",
-    "modalConsultReceiverService",
-    "receiverServiceList",
-    "servicesName2"
-  ],
-  modalConsultSenderService: [
-    "modalConsultSenderService",
-    "senderServiceList",
+    "modalConsultServiceList",
+    "serviceListContent",
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent",
+    "noServices",
     "servicesName"
   ],
-  senderServiceList: ["senderServiceList", "servicesName"],
-  servicesName: ["servicesName"],
-  modalConsultReceiverService: [
-    "modalConsultReceiverService",
-    "receiverServiceList",
-    "servicesName2"
+  modalConsultServiceList: [
+    "modalConsultServiceList",
+    "serviceListContent",
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent",
+    "noServices",
+    "servicesName"
   ],
-  receiverServiceList: ["receiverServiceList", "servicesName2"],
-  servicesName2: ["servicesName2"],
+  serviceListContent: [
+    "serviceListContent",
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent",
+    "noServices",
+    "servicesName"
+  ],
+  searchBarServicesContent: [
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent"
+  ],
+  searchBarServices: ["searchBarServices", "clearContent"],
+  clearContent: ["clearContent"],
+  noServices: ["noServices"],
+  servicesName: ["servicesName"],
   modalFeatureBanner: [
     "modalFeatureBanner",
     "newFeatureBanner",
@@ -14572,12 +14405,13 @@ type NodeDefaultElementType = {
   receiverServiceType: "div";
   deleteFilters: "div";
   getServicesForConsult: typeof ApiFetcherComponent;
-  modalConsultSenderService: typeof AntdModal;
-  senderServiceList: "div";
+  modalConsultServiceList: typeof AntdModal;
+  serviceListContent: "div";
+  searchBarServicesContent: "div";
+  searchBarServices: typeof TextInput;
+  clearContent: "svg";
+  noServices: "div";
   servicesName: "div";
-  modalConsultReceiverService: typeof AntdModal;
-  receiverServiceList: "div";
-  servicesName2: "div";
   modalFeatureBanner: typeof AntdModal;
   newFeatureBanner: typeof NewFeatureBanner;
   متوجهشدم: typeof Button;
@@ -14796,14 +14630,13 @@ export const PlasmicHomepage = Object.assign(
     receiverServiceType: makeNodeComponent("receiverServiceType"),
     deleteFilters: makeNodeComponent("deleteFilters"),
     getServicesForConsult: makeNodeComponent("getServicesForConsult"),
-    modalConsultSenderService: makeNodeComponent("modalConsultSenderService"),
-    senderServiceList: makeNodeComponent("senderServiceList"),
+    modalConsultServiceList: makeNodeComponent("modalConsultServiceList"),
+    serviceListContent: makeNodeComponent("serviceListContent"),
+    searchBarServicesContent: makeNodeComponent("searchBarServicesContent"),
+    searchBarServices: makeNodeComponent("searchBarServices"),
+    clearContent: makeNodeComponent("clearContent"),
+    noServices: makeNodeComponent("noServices"),
     servicesName: makeNodeComponent("servicesName"),
-    modalConsultReceiverService: makeNodeComponent(
-      "modalConsultReceiverService"
-    ),
-    receiverServiceList: makeNodeComponent("receiverServiceList"),
-    servicesName2: makeNodeComponent("servicesName2"),
     modalFeatureBanner: makeNodeComponent("modalFeatureBanner"),
     newFeatureBanner: makeNodeComponent("newFeatureBanner"),
     متوجهشدم: makeNodeComponent(
