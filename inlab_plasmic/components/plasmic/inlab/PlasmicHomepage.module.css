@@ -3183,8 +3183,8 @@
   height: auto;
   max-width: 100%;
   font-family: var(--VazirmatnCustom);
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 400;
+  font-size: 11px;
+  font-weight: 700;
   font-style: normal;
   color: var(--token-IYO13gyYJHXG);
   text-align: center;
@@ -3202,16 +3202,16 @@
   max-width: 100%;
   object-fit: cover;
 }
-.modalConsultSenderService:global(.__wab_instance) {
+.modalConsultServiceList:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   background: #ffffff;
 }
-.modalConsultSenderService__modal :global(.ant-modal-content) {
+.modalConsultServiceList__modal :global(.ant-modal-content) {
   background: #ffffff;
   outline: none;
 }
-.senderServiceList {
+.serviceListContent {
   display: flex;
   position: relative;
   width: auto;
@@ -3224,17 +3224,17 @@
   padding: 8px;
   border: 0px none var(--token-9iYGdL7i3GKE);
 }
-.senderServiceList > :global(.__wab_flex-container) {
+.serviceListContent > :global(.__wab_flex-container) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: calc(0px - 6px);
   height: calc(100% + 6px);
 }
-.senderServiceList > :global(.__wab_flex-container) > *,
-.senderServiceList > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.senderServiceList > :global(.__wab_flex-container) > picture > img,
-.senderServiceList
+.serviceListContent > :global(.__wab_flex-container) > *,
+.serviceListContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.serviceListContent > :global(.__wab_flex-container) > picture > img,
+.serviceListContent
   > :global(.__wab_flex-container)
   > :global(.__wab_slot)
   > picture
@@ -3244,6 +3244,70 @@
 .conditionGuard__pCbE:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
+}
+.searchBarServicesContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.searchBarServices:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__s5NF4 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+  color: var(--token-9iYGdL7i3GKE);
+}
+.clearContent {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.noServices {
+  position: relative;
+  width: 270px;
+  height: auto;
+  max-width: 100%;
+  margin-top: calc(0px + 6px) !important;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  text-align: center;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  box-shadow: 0px 4px 16px 0px #0706066b;
+  background: #ffffff;
+  white-space: pre-wrap;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  user-select: none;
+  text-decoration-line: none;
+  left: auto;
+  top: auto;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid var(--token-9iYGdL7i3GKE);
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .noServices {
+    left: auto;
+    top: auto;
+    margin-top: calc(0px + 6px) !important;
+  }
 }
 .servicesName {
   position: relative;
@@ -3298,89 +3362,7 @@
   background: #ffffff;
   min-width: 0;
 }
-.modalConsultReceiverService:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  background: #ffffff;
-}
-.modalConsultReceiverService__modal :global(.ant-modal-content) {
-  background: #ffffff;
-  outline: none;
-}
-.receiverServiceList {
-  display: flex;
-  position: relative;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  overflow: auto;
-  background: #ffffff;
-  flex-direction: column;
-  align-self: center;
-  padding: 8px;
-  border: 0px none var(--token-9iYGdL7i3GKE);
-}
-.receiverServiceList > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: calc(0px - 6px);
-  height: calc(100% + 6px);
-}
-.receiverServiceList > :global(.__wab_flex-container) > *,
-.receiverServiceList
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.receiverServiceList > :global(.__wab_flex-container) > picture > img,
-.receiverServiceList
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 6px;
-}
-.conditionGuard___60Nkj:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-}
-.servicesName2 {
-  position: relative;
-  width: 270px;
-  height: auto;
-  max-width: 100%;
-  margin-top: calc(0px + 6px) !important;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  text-align: center;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  box-shadow: 0px 4px 16px 0px #0706066b;
-  background: #ffffff;
-  white-space: pre-wrap;
-  font-family: var(--VazirmatnCustom);
-  font-weight: 400;
-  font-style: normal;
-  color: var(--token-IYO13gyYJHXG);
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  user-select: none;
-  text-decoration-line: none;
-  left: auto;
-  top: auto;
-  border-radius: 5px;
-  padding: 8px;
-  border: 1px solid var(--token-9iYGdL7i3GKE);
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .servicesName2 {
-    left: auto;
-    top: auto;
-    margin-top: calc(0px + 6px) !important;
-  }
-}
-.text__cRpHl {
+.text__zHyd2 {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -4269,7 +4251,7 @@
   margin-bottom: 10px;
   font-family: var(--VazirmatnCustom);
   font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   color: var(--token-IYO13gyYJHXG);
   text-align: center;
@@ -4285,10 +4267,10 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  font-size: 10px;
+  font-size: 11px;
   color: #000000b3;
   font-family: var(--VazirmatnCustom);
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   text-align: center;
   text-transform: none;

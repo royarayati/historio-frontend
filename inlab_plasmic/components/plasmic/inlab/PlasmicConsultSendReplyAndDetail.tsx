@@ -146,7 +146,7 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   paperReplyBullet?: Flex__<typeof Bullet>;
   paperReplyTitle?: Flex__<"div">;
   sendReplyGuide?: Flex__<"div">;
-  sendConsultButton?: Flex__<typeof Button>;
+  sendConsultReplyButton?: Flex__<typeof Button>;
   sendConsult2?: Flex__<"div">;
   repliedConsultContent?: Flex__<"div">;
   finalConsultReplyTitle?: Flex__<"div">;
@@ -174,6 +174,9 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   unsuccessfulDeleteConsult?: Flex__<typeof Alert3>;
   title?: Flex__<"div">;
   guide2?: Flex__<"div">;
+  modalConsultPaperReplyNecessity?: Flex__<typeof AntdModal>;
+  modalContent?: Flex__<"div">;
+  confirmUnderstanding?: Flex__<typeof Button>;
 };
 
 export interface DefaultConsultSendReplyAndDetailProps {}
@@ -221,31 +224,31 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "sendConsultButton.isDisabled",
+        path: "sendConsultReplyButton.isDisabled",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "sendConsultButton.selected",
+        path: "sendConsultReplyButton.selected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "sendConsultButton.deselected",
+        path: "sendConsultReplyButton.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "sendConsultButton.sortDeselected",
+        path: "sendConsultReplyButton.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "sendConsultButton.sortSelected",
+        path: "sendConsultReplyButton.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -346,6 +349,42 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           "\u0628\u0627 \u0633\u0644\u0627\u0645 \u0648 \u062a\u0634\u06a9\u0631 \u0627\u0632 \u0645\u0634\u0627\u0648\u0631\u0647"
+      },
+      {
+        path: "modalConsultPaperReplyNecessity.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "confirmUnderstanding.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirmUnderstanding.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirmUnderstanding.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirmUnderstanding.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirmUnderstanding.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -878,7 +917,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                                   " " +
                                                   entry.confirmer.last_name
                                               )
-                                              .join("، ")
+                                              .join("\u060C ")
                                           : ""
                                       }
 &sender_service=${
@@ -915,6 +954,58 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                 await $steps[
                                   "openGetConsultTemplateInNewWindow"
                                 ];
+                            }
+
+                            $steps[
+                              "updateModalConsultPaperReplyNecessityOpen"
+                            ] = false
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "modalConsultPaperReplyNecessity",
+                                        "open"
+                                      ]
+                                    },
+                                    operation: 4
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    const oldValue = $stateGet(
+                                      objRoot,
+                                      variablePath
+                                    );
+                                    $stateSet(objRoot, variablePath, !oldValue);
+                                    return !oldValue;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps[
+                                "updateModalConsultPaperReplyNecessityOpen"
+                              ] != null &&
+                              typeof $steps[
+                                "updateModalConsultPaperReplyNecessityOpen"
+                              ] === "object" &&
+                              typeof $steps[
+                                "updateModalConsultPaperReplyNecessityOpen"
+                              ].then === "function"
+                            ) {
+                              $steps[
+                                "updateModalConsultPaperReplyNecessityOpen"
+                              ] = await $steps[
+                                "updateModalConsultPaperReplyNecessityOpen"
+                              ];
                             }
                           }}
                           role={"img"}
@@ -1725,19 +1816,19 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       }
                     })() ? (
                       <Button
-                        data-plasmic-name={"sendConsultButton"}
-                        data-plasmic-override={overrides.sendConsultButton}
+                        data-plasmic-name={"sendConsultReplyButton"}
+                        data-plasmic-override={overrides.sendConsultReplyButton}
                         className={classNames(
                           "__wab_instance",
-                          sty.sendConsultButton
+                          sty.sendConsultReplyButton
                         )}
                         color={"blue"}
                         deselected={generateStateValueProp($state, [
-                          "sendConsultButton",
+                          "sendConsultReplyButton",
                           "deselected"
                         ])}
                         isDisabled={generateStateValueProp($state, [
-                          "sendConsultButton",
+                          "sendConsultReplyButton",
                           "isDisabled"
                         ])}
                         onClick={async event => {
@@ -2054,7 +2145,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         onDeselectedChange={async (...eventArgs: any) => {
                           ((...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "sendConsultButton",
+                              "sendConsultReplyButton",
                               "deselected"
                             ])(eventArgs[0]);
                           }).apply(null, eventArgs);
@@ -2070,7 +2161,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         onIsDisabledChange={async (...eventArgs: any) => {
                           ((...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "sendConsultButton",
+                              "sendConsultReplyButton",
                               "isDisabled"
                             ])(eventArgs[0]);
                           }).apply(null, eventArgs);
@@ -2086,7 +2177,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         onSelectedChange={async (...eventArgs: any) => {
                           ((...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "sendConsultButton",
+                              "sendConsultReplyButton",
                               "selected"
                             ])(eventArgs[0]);
                           }).apply(null, eventArgs);
@@ -2102,7 +2193,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         onSortDeselectedChange={async (...eventArgs: any) => {
                           ((...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "sendConsultButton",
+                              "sendConsultReplyButton",
                               "sortDeselected"
                             ])(eventArgs[0]);
                           }).apply(null, eventArgs);
@@ -2118,7 +2209,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         onSortSelectedChange={async (...eventArgs: any) => {
                           ((...eventArgs) => {
                             generateStateOnChangeProp($state, [
-                              "sendConsultButton",
+                              "sendConsultReplyButton",
                               "sortSelected"
                             ])(eventArgs[0]);
                           }).apply(null, eventArgs);
@@ -2132,15 +2223,15 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           }
                         }}
                         selected={generateStateValueProp($state, [
-                          "sendConsultButton",
+                          "sendConsultReplyButton",
                           "selected"
                         ])}
                         sortDeselected={generateStateValueProp($state, [
-                          "sendConsultButton",
+                          "sendConsultReplyButton",
                           "sortDeselected"
                         ])}
                         sortSelected={generateStateValueProp($state, [
-                          "sendConsultButton",
+                          "sendConsultReplyButton",
                           "sortSelected"
                         ])}
                       >
@@ -3443,6 +3534,210 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
               ) : null}
             </div>
           </AntdModal>
+          <AntdModal
+            data-plasmic-name={"modalConsultPaperReplyNecessity"}
+            data-plasmic-override={overrides.modalConsultPaperReplyNecessity}
+            className={classNames(
+              "__wab_instance",
+              sty.modalConsultPaperReplyNecessity
+            )}
+            defaultStylesClassName={classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              projectcss.plasmic_tokens,
+              plasmic_antd_5_hostless_css.plasmic_tokens,
+              plasmic_plasmic_rich_components_css.plasmic_tokens
+            )}
+            hideFooter={true}
+            maskClosable={true}
+            modalContentClassName={classNames({
+              [sty["pcls_mV6D2zaQMRqs"]]: true
+            })}
+            modalScopeClassName={sty["modalConsultPaperReplyNecessity__modal"]}
+            onOpenChange={async (...eventArgs: any) => {
+              generateStateOnChangeProp($state, [
+                "modalConsultPaperReplyNecessity",
+                "open"
+              ]).apply(null, eventArgs);
+            }}
+            open={generateStateValueProp($state, [
+              "modalConsultPaperReplyNecessity",
+              "open"
+            ])}
+            title={null}
+            trigger={null}
+          >
+            <div
+              data-plasmic-name={"modalContent"}
+              data-plasmic-override={overrides.modalContent}
+              className={classNames(projectcss.all, sty.modalContent)}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__hZk1X
+                )}
+              >
+                {
+                  '\u0644\u0637\u0641\u0627 \u0642\u0628\u0644 \u0627\u0632 \u062f\u0631\u06cc\u0627\u0641\u062a \u067e\u0631\u06cc\u0646\u062a \u0627\u0632 \u0645\u0634\u0627\u0648\u0631\u0647 \u0648 \u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e \u0628\u0647 \u0635\u0648\u0631\u062a \u06a9\u0627\u063a\u0630\u06cc\u060c \u067e\u0632\u0634\u06a9 \u067e\u0627\u0633\u062e \u062f\u0647\u0646\u062f\u0647\u060c \u06af\u0632\u06cc\u0646\u0647 "\u06a9\u0627\u063a\u0630\u06cc \u067e\u0627\u0633\u062e \u0645\u06cc \u062f\u0647\u0645" \u0631\u0627 \u0641\u0639\u0627\u0644 \u06a9\u0631\u062f\u0647 \u0648 \u062f\u06a9\u0645\u0647 "\u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e" \u0631\u0627 \u062b\u0628\u062a \u0646\u0645\u0627\u06cc\u062f'
+                }
+              </div>
+              <Button
+                data-plasmic-name={"confirmUnderstanding"}
+                data-plasmic-override={overrides.confirmUnderstanding}
+                color={"blue"}
+                deselected={generateStateValueProp($state, [
+                  "confirmUnderstanding",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "confirmUnderstanding",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateModalConsultPaperReplyNecessityOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: [
+                              "modalConsultPaperReplyNecessity",
+                              "open"
+                            ]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateModalConsultPaperReplyNecessityOpen"] !=
+                      null &&
+                    typeof $steps[
+                      "updateModalConsultPaperReplyNecessityOpen"
+                    ] === "object" &&
+                    typeof $steps["updateModalConsultPaperReplyNecessityOpen"]
+                      .then === "function"
+                  ) {
+                    $steps["updateModalConsultPaperReplyNecessityOpen"] =
+                      await $steps["updateModalConsultPaperReplyNecessityOpen"];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirmUnderstanding",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirmUnderstanding",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirmUnderstanding",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirmUnderstanding",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirmUnderstanding",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "confirmUnderstanding",
+                  "selected"
+                ])}
+                sortDeselected={generateStateValueProp($state, [
+                  "confirmUnderstanding",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "confirmUnderstanding",
+                  "sortSelected"
+                ])}
+              >
+                {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
+              </Button>
+            </div>
+          </AntdModal>
         </div>
       </div>
     </React.Fragment>
@@ -3498,7 +3793,7 @@ const PlasmicDescendants = {
     "paperReplyBullet",
     "paperReplyTitle",
     "sendReplyGuide",
-    "sendConsultButton",
+    "sendConsultReplyButton",
     "sendConsult2",
     "repliedConsultContent",
     "finalConsultReplyTitle",
@@ -3525,7 +3820,10 @@ const PlasmicDescendants = {
     "confirm",
     "unsuccessfulDeleteConsult",
     "title",
-    "guide2"
+    "guide2",
+    "modalConsultPaperReplyNecessity",
+    "modalContent",
+    "confirmUnderstanding"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -3585,7 +3883,7 @@ const PlasmicDescendants = {
     "paperReplyBullet",
     "paperReplyTitle",
     "sendReplyGuide",
-    "sendConsultButton",
+    "sendConsultReplyButton",
     "sendConsult2",
     "repliedConsultContent",
     "finalConsultReplyTitle",
@@ -3639,7 +3937,7 @@ const PlasmicDescendants = {
     "paperReplyBullet",
     "paperReplyTitle",
     "sendReplyGuide",
-    "sendConsultButton",
+    "sendConsultReplyButton",
     "sendConsult2",
     "repliedConsultContent",
     "finalConsultReplyTitle",
@@ -3692,7 +3990,7 @@ const PlasmicDescendants = {
     "paperReplyBullet",
     "paperReplyTitle",
     "sendReplyGuide",
-    "sendConsultButton",
+    "sendConsultReplyButton",
     "sendConsult2",
     "repliedConsultContent",
     "finalConsultReplyTitle",
@@ -3790,7 +4088,7 @@ const PlasmicDescendants = {
   paperReplyBullet: ["paperReplyBullet"],
   paperReplyTitle: ["paperReplyTitle"],
   sendReplyGuide: ["sendReplyGuide"],
-  sendConsultButton: ["sendConsultButton", "sendConsult2"],
+  sendConsultReplyButton: ["sendConsultReplyButton", "sendConsult2"],
   sendConsult2: ["sendConsult2"],
   repliedConsultContent: [
     "repliedConsultContent",
@@ -3854,7 +4152,14 @@ const PlasmicDescendants = {
   confirm: ["confirm"],
   unsuccessfulDeleteConsult: ["unsuccessfulDeleteConsult"],
   title: ["title", "guide2"],
-  guide2: ["guide2"]
+  guide2: ["guide2"],
+  modalConsultPaperReplyNecessity: [
+    "modalConsultPaperReplyNecessity",
+    "modalContent",
+    "confirmUnderstanding"
+  ],
+  modalContent: ["modalContent", "confirmUnderstanding"],
+  confirmUnderstanding: ["confirmUnderstanding"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -3907,7 +4212,7 @@ type NodeDefaultElementType = {
   paperReplyBullet: typeof Bullet;
   paperReplyTitle: "div";
   sendReplyGuide: "div";
-  sendConsultButton: typeof Button;
+  sendConsultReplyButton: typeof Button;
   sendConsult2: "div";
   repliedConsultContent: "div";
   finalConsultReplyTitle: "div";
@@ -3935,6 +4240,9 @@ type NodeDefaultElementType = {
   unsuccessfulDeleteConsult: typeof Alert3;
   title: "div";
   guide2: "div";
+  modalConsultPaperReplyNecessity: typeof AntdModal;
+  modalContent: "div";
+  confirmUnderstanding: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -4062,7 +4370,7 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     paperReplyBullet: makeNodeComponent("paperReplyBullet"),
     paperReplyTitle: makeNodeComponent("paperReplyTitle"),
     sendReplyGuide: makeNodeComponent("sendReplyGuide"),
-    sendConsultButton: makeNodeComponent("sendConsultButton"),
+    sendConsultReplyButton: makeNodeComponent("sendConsultReplyButton"),
     sendConsult2: makeNodeComponent("sendConsult2"),
     repliedConsultContent: makeNodeComponent("repliedConsultContent"),
     finalConsultReplyTitle: makeNodeComponent("finalConsultReplyTitle"),
@@ -4098,6 +4406,11 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     unsuccessfulDeleteConsult: makeNodeComponent("unsuccessfulDeleteConsult"),
     title: makeNodeComponent("title"),
     guide2: makeNodeComponent("guide2"),
+    modalConsultPaperReplyNecessity: makeNodeComponent(
+      "modalConsultPaperReplyNecessity"
+    ),
+    modalContent: makeNodeComponent("modalContent"),
+    confirmUnderstanding: makeNodeComponent("confirmUnderstanding"),
 
     // Metadata about props expected for PlasmicConsultSendReplyAndDetail
     internalVariantProps: PlasmicConsultSendReplyAndDetail__VariantProps,

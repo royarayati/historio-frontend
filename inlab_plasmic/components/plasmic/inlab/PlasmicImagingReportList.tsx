@@ -62,6 +62,7 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -102,6 +103,7 @@ export type PlasmicImagingReportList__OverridesType = {
   header?: Flex__<"div">;
   getPatient?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
+  saveAdmissionDatetime?: Flex__<typeof ConditionGuard>;
   tabButtons?: Flex__<"div">;
   uploadData?: Flex__<typeof AntdModal>;
   no?: Flex__<typeof Button>;
@@ -115,8 +117,9 @@ export type PlasmicImagingReportList__OverridesType = {
   paraclinicReportList2?: Flex__<"div">;
   paraclinicReportCard?: Flex__<"div">;
   paraclinicTitleDatetime?: Flex__<"div">;
-  paraclinicTitle?: Flex__<"div">;
+  paraclinicName2?: Flex__<"div">;
   paraclinicDatetime2?: Flex__<"div">;
+  paraclinicTitle?: Flex__<"div">;
   previousAdmission?: Flex__<typeof Button>;
   paraclinicType?: Flex__<"div">;
   paraclinics?: Flex__<typeof ApiFetcherComponent>;
@@ -126,6 +129,7 @@ export type PlasmicImagingReportList__OverridesType = {
   paraclinicName?: Flex__<"div">;
   paraclinicDatetime?: Flex__<"div">;
   paraclinicReportModal?: Flex__<typeof AntdModal>;
+  freeBox?: Flex__<"div">;
   radiologyReportText2?: Flex__<"div">;
   radiologyReportDatetime2?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
@@ -636,57 +640,119 @@ function PlasmicImagingReportList__RenderFunc(props: {
           >
             <DataCtxReader__>
               {$ctx => (
-                <div
-                  data-plasmic-name={"patientNameAgeGender"}
-                  data-plasmic-override={overrides.patientNameAgeGender}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.patientNameAgeGender
-                  )}
-                  dir={"rtl"}
-                >
-                  <React.Fragment>
-                    {(() => {
-                      if (!$ctx.fetched_data.loading) {
-                        const item = $ctx.fetched_data.data[0];
-                        if (item.date_of_birth) {
-                          const dob = new Date(item.date_of_birth);
-                          const now = new Date();
-                          let ageYears = now.getFullYear() - dob.getFullYear();
-                          const monthDifference =
-                            now.getMonth() - dob.getMonth();
-                          if (
-                            monthDifference < 0 ||
-                            (monthDifference === 0 &&
-                              now.getDate() < dob.getDate())
-                          ) {
-                            ageYears--;
-                          }
-                          const fullName = `${item.first_name} ${item.last_name}`;
-                          const genderSymbol =
-                            item.gender === "F"
-                              ? " \u2640️"
-                              : item.gender === "M"
-                              ? " \u2642️"
-                              : "";
-                          if (ageYears < 1) {
-                            const ageMonths =
-                              Math.abs(monthDifference) +
-                              (now.getDate() < dob.getDate() ? -1 : 0);
-                            return `${fullName} ${ageMonths} month ${
-                              ageMonths !== 1 ? "s" : ""
-                            }${genderSymbol}`;
+                <React.Fragment>
+                  <div
+                    data-plasmic-name={"patientNameAgeGender"}
+                    data-plasmic-override={overrides.patientNameAgeGender}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.patientNameAgeGender
+                    )}
+                    dir={"rtl"}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        if (!$ctx.fetched_data.loading) {
+                          const item = $ctx.fetched_data.data[0];
+                          if (item.date_of_birth) {
+                            const dob = new Date(item.date_of_birth);
+                            const now = new Date();
+                            let ageYears =
+                              now.getFullYear() - dob.getFullYear();
+                            const monthDifference =
+                              now.getMonth() - dob.getMonth();
+                            if (
+                              monthDifference < 0 ||
+                              (monthDifference === 0 &&
+                                now.getDate() < dob.getDate())
+                            ) {
+                              ageYears--;
+                            }
+                            const fullName = `${item.first_name} ${item.last_name}`;
+                            const genderSymbol =
+                              item.gender === "F"
+                                ? " \u2640️"
+                                : item.gender === "M"
+                                ? " \u2642️"
+                                : "";
+                            if (ageYears < 1) {
+                              const ageMonths =
+                                Math.abs(monthDifference) +
+                                (now.getDate() < dob.getDate() ? -1 : 0);
+                              return `${fullName} ${ageMonths} month ${
+                                ageMonths !== 1 ? "s" : ""
+                              }${genderSymbol}`;
+                            } else {
+                              return `${fullName} ${ageYears} ${genderSymbol}`;
+                            }
                           } else {
-                            return `${fullName} ${ageYears} ${genderSymbol}`;
+                            return "Date of birth not available.";
                           }
-                        } else {
-                          return "Date of birth not available.";
                         }
+                      })()}
+                    </React.Fragment>
+                  </div>
+                  {false ? (
+                    <ConditionGuard
+                      data-plasmic-name={"saveAdmissionDatetime"}
+                      data-plasmic-override={overrides.saveAdmissionDatetime}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.saveAdmissionDatetime
+                      )}
+                      condition={
+                        $ctx.fetched_data.loading === false &&
+                        $ctx.fetched_data.data &&
+                        $ctx.fetched_data.data.length > 0
                       }
-                    })()}
-                  </React.Fragment>
-                </div>
+                      onNotSatisfied={async () => {
+                        const $steps = {};
+
+                        $steps["updateAdmissionDatetime"] =
+                          $ctx.fetched_data.loading === false &&
+                          $ctx.fetched_data.data.length > 0
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["admissionDatetime"]
+                                  },
+                                  operation: 0,
+                                  value:
+                                    $ctx.fetched_data.data[0].admission_datetime
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["updateAdmissionDatetime"] != null &&
+                          typeof $steps["updateAdmissionDatetime"] ===
+                            "object" &&
+                          typeof $steps["updateAdmissionDatetime"].then ===
+                            "function"
+                        ) {
+                          $steps["updateAdmissionDatetime"] = await $steps[
+                            "updateAdmissionDatetime"
+                          ];
+                        }
+                      }}
+                    />
+                  ) : null}
+                </React.Fragment>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
@@ -1871,14 +1937,14 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   )}
                                 >
                                   <div
-                                    data-plasmic-name={"paraclinicTitle"}
+                                    data-plasmic-name={"paraclinicName2"}
                                     data-plasmic-override={
-                                      overrides.paraclinicTitle
+                                      overrides.paraclinicName2
                                     }
                                     className={classNames(
                                       projectcss.all,
                                       projectcss.__wab_text,
-                                      sty.paraclinicTitle
+                                      sty.paraclinicName2
                                     )}
                                   >
                                     <React.Fragment>
@@ -1969,9 +2035,13 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   </div>
                                 </Stack__>
                                 <div
+                                  data-plasmic-name={"paraclinicTitle"}
+                                  data-plasmic-override={
+                                    overrides.paraclinicTitle
+                                  }
                                   className={classNames(
                                     projectcss.all,
-                                    sty.freeBox___02DGl
+                                    sty.paraclinicTitle
                                   )}
                                 >
                                   {false
@@ -2730,7 +2800,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
           width={"85%"}
           wrapClassName={classNames({ [sty["pcls_nVYN7IUeA_o9"]]: true })}
         >
-          <div className={classNames(projectcss.all, sty.freeBox__nwr7J)}>
+          <div
+            data-plasmic-name={"freeBox"}
+            data-plasmic-override={overrides.freeBox}
+            className={classNames(projectcss.all, sty.freeBox)}
+          >
             <div
               data-plasmic-name={"radiologyReportText2"}
               data-plasmic-override={overrides.radiologyReportText2}
@@ -3437,6 +3511,7 @@ const PlasmicDescendants = {
     "header",
     "getPatient",
     "patientNameAgeGender",
+    "saveAdmissionDatetime",
     "tabButtons",
     "uploadData",
     "no",
@@ -3450,8 +3525,9 @@ const PlasmicDescendants = {
     "paraclinicReportList2",
     "paraclinicReportCard",
     "paraclinicTitleDatetime",
-    "paraclinicTitle",
+    "paraclinicName2",
     "paraclinicDatetime2",
+    "paraclinicTitle",
     "previousAdmission",
     "paraclinicType",
     "paraclinics",
@@ -3461,6 +3537,7 @@ const PlasmicDescendants = {
     "paraclinicName",
     "paraclinicDatetime",
     "paraclinicReportModal",
+    "freeBox",
     "radiologyReportText2",
     "radiologyReportDatetime2",
     "switchingTabs",
@@ -3476,9 +3553,15 @@ const PlasmicDescendants = {
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
-  header: ["header", "getPatient", "patientNameAgeGender"],
-  getPatient: ["getPatient", "patientNameAgeGender"],
+  header: [
+    "header",
+    "getPatient",
+    "patientNameAgeGender",
+    "saveAdmissionDatetime"
+  ],
+  getPatient: ["getPatient", "patientNameAgeGender", "saveAdmissionDatetime"],
   patientNameAgeGender: ["patientNameAgeGender"],
+  saveAdmissionDatetime: ["saveAdmissionDatetime"],
   tabButtons: [
     "tabButtons",
     "uploadData",
@@ -3500,8 +3583,9 @@ const PlasmicDescendants = {
     "paraclinicReportList2",
     "paraclinicReportCard",
     "paraclinicTitleDatetime",
-    "paraclinicTitle",
+    "paraclinicName2",
     "paraclinicDatetime2",
+    "paraclinicTitle",
     "previousAdmission",
     "paraclinicType"
   ],
@@ -3512,8 +3596,9 @@ const PlasmicDescendants = {
     "paraclinicReportList2",
     "paraclinicReportCard",
     "paraclinicTitleDatetime",
-    "paraclinicTitle",
+    "paraclinicName2",
     "paraclinicDatetime2",
+    "paraclinicTitle",
     "previousAdmission",
     "paraclinicType"
   ],
@@ -3522,8 +3607,9 @@ const PlasmicDescendants = {
     "paraclinicReportList2",
     "paraclinicReportCard",
     "paraclinicTitleDatetime",
-    "paraclinicTitle",
+    "paraclinicName2",
     "paraclinicDatetime2",
+    "paraclinicTitle",
     "previousAdmission",
     "paraclinicType"
   ],
@@ -3531,26 +3617,29 @@ const PlasmicDescendants = {
     "paraclinicReportList2",
     "paraclinicReportCard",
     "paraclinicTitleDatetime",
-    "paraclinicTitle",
+    "paraclinicName2",
     "paraclinicDatetime2",
+    "paraclinicTitle",
     "previousAdmission",
     "paraclinicType"
   ],
   paraclinicReportCard: [
     "paraclinicReportCard",
     "paraclinicTitleDatetime",
-    "paraclinicTitle",
+    "paraclinicName2",
     "paraclinicDatetime2",
+    "paraclinicTitle",
     "previousAdmission",
     "paraclinicType"
   ],
   paraclinicTitleDatetime: [
     "paraclinicTitleDatetime",
-    "paraclinicTitle",
+    "paraclinicName2",
     "paraclinicDatetime2"
   ],
-  paraclinicTitle: ["paraclinicTitle"],
+  paraclinicName2: ["paraclinicName2"],
   paraclinicDatetime2: ["paraclinicDatetime2"],
+  paraclinicTitle: ["paraclinicTitle", "previousAdmission", "paraclinicType"],
   previousAdmission: ["previousAdmission"],
   paraclinicType: ["paraclinicType"],
   paraclinics: [
@@ -3579,9 +3668,11 @@ const PlasmicDescendants = {
   paraclinicDatetime: ["paraclinicDatetime"],
   paraclinicReportModal: [
     "paraclinicReportModal",
+    "freeBox",
     "radiologyReportText2",
     "radiologyReportDatetime2"
   ],
+  freeBox: ["freeBox", "radiologyReportText2"],
   radiologyReportText2: ["radiologyReportText2"],
   radiologyReportDatetime2: ["radiologyReportDatetime2"],
   switchingTabs: [
@@ -3622,6 +3713,7 @@ type NodeDefaultElementType = {
   header: "div";
   getPatient: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
+  saveAdmissionDatetime: typeof ConditionGuard;
   tabButtons: "div";
   uploadData: typeof AntdModal;
   no: typeof Button;
@@ -3635,8 +3727,9 @@ type NodeDefaultElementType = {
   paraclinicReportList2: "div";
   paraclinicReportCard: "div";
   paraclinicTitleDatetime: "div";
-  paraclinicTitle: "div";
+  paraclinicName2: "div";
   paraclinicDatetime2: "div";
+  paraclinicTitle: "div";
   previousAdmission: typeof Button;
   paraclinicType: "div";
   paraclinics: typeof ApiFetcherComponent;
@@ -3646,6 +3739,7 @@ type NodeDefaultElementType = {
   paraclinicName: "div";
   paraclinicDatetime: "div";
   paraclinicReportModal: typeof AntdModal;
+  freeBox: "div";
   radiologyReportText2: "div";
   radiologyReportDatetime2: "div";
   switchingTabs: "div";
@@ -3727,6 +3821,7 @@ export const PlasmicImagingReportList = Object.assign(
     header: makeNodeComponent("header"),
     getPatient: makeNodeComponent("getPatient"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
+    saveAdmissionDatetime: makeNodeComponent("saveAdmissionDatetime"),
     tabButtons: makeNodeComponent("tabButtons"),
     uploadData: makeNodeComponent("uploadData"),
     no: makeNodeComponent("no"),
@@ -3740,8 +3835,9 @@ export const PlasmicImagingReportList = Object.assign(
     paraclinicReportList2: makeNodeComponent("paraclinicReportList2"),
     paraclinicReportCard: makeNodeComponent("paraclinicReportCard"),
     paraclinicTitleDatetime: makeNodeComponent("paraclinicTitleDatetime"),
-    paraclinicTitle: makeNodeComponent("paraclinicTitle"),
+    paraclinicName2: makeNodeComponent("paraclinicName2"),
     paraclinicDatetime2: makeNodeComponent("paraclinicDatetime2"),
+    paraclinicTitle: makeNodeComponent("paraclinicTitle"),
     previousAdmission: makeNodeComponent("previousAdmission"),
     paraclinicType: makeNodeComponent("paraclinicType"),
     paraclinics: makeNodeComponent("paraclinics"),
@@ -3751,6 +3847,7 @@ export const PlasmicImagingReportList = Object.assign(
     paraclinicName: makeNodeComponent("paraclinicName"),
     paraclinicDatetime: makeNodeComponent("paraclinicDatetime"),
     paraclinicReportModal: makeNodeComponent("paraclinicReportModal"),
+    freeBox: makeNodeComponent("freeBox"),
     radiologyReportText2: makeNodeComponent("radiologyReportText2"),
     radiologyReportDatetime2: makeNodeComponent("radiologyReportDatetime2"),
     switchingTabs: makeNodeComponent("switchingTabs"),

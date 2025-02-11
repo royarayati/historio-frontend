@@ -690,11 +690,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                             )}
                             dir={"rtl"}
                           >
-                            <React.Fragment>
-                              {$ctx.fetched_data.data[0].service
-                                ? $ctx.fetched_data.data[0].service
-                                : "مشخص نشده"}
-                            </React.Fragment>
+                            <React.Fragment>{"مشخص نشده"}</React.Fragment>
                           </div>
                           <div
                             className={classNames(

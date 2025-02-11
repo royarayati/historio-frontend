@@ -141,18 +141,21 @@ export type PlasmicConsultSend__OverridesType = {
   imagingReportList?: Flex__<typeof PlasmicImg__>;
   laboratoryData?: Flex__<typeof PlasmicImg__>;
   getServices?: Flex__<typeof ApiFetcherComponent>;
-  modalSenderService?: Flex__<typeof AntdModal>;
-  senderServicesList?: Flex__<"div">;
-  servicesName?: Flex__<"div">;
-  modalReceiverService?: Flex__<typeof AntdModal>;
-  receiverServicesList?: Flex__<"div">;
+  modalServiceList?: Flex__<typeof AntdModal>;
+  servicesList?: Flex__<"div">;
+  conditionGuard?: Flex__<typeof ConditionGuard>;
+  searchBarServicesContent?: Flex__<"div">;
+  searchBarServices?: Flex__<typeof TextInput>;
+  clearContent2?: Flex__<"svg">;
   servicesName2?: Flex__<"div">;
+  servicesName?: Flex__<"div">;
   getUsers?: Flex__<typeof ApiFetcherComponent>;
   modalReceiverDoctor?: Flex__<typeof AntdModal>;
   receiverDoctorList?: Flex__<"div">;
   doctorNameInputContent?: Flex__<"div">;
   doctorNameInput?: Flex__<typeof TextInput>;
   clearContent?: Flex__<"svg">;
+  noDoctors?: Flex__<"div">;
   doctorNames?: Flex__<"div">;
   getPresentIlness?: Flex__<typeof ApiFetcherComponent>;
   modalPatientPresentIlness?: Flex__<typeof AntdModal>;
@@ -238,13 +241,7 @@ function PlasmicConsultSend__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "modalSenderService.open",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
-      },
-      {
-        path: "modalReceiverService.open",
+        path: "modalServiceList.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -382,6 +379,12 @@ function PlasmicConsultSend__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "searchBarServices.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -678,27 +681,19 @@ function PlasmicConsultSend__RenderFunc(props: {
                 data-plasmic-name={"senderServiceContent"}
                 data-plasmic-override={overrides.senderServiceContent}
                 className={classNames(projectcss.all, sty.senderServiceContent)}
-              >
-                <div
-                  data-plasmic-name={"senderService"}
-                  data-plasmic-override={overrides.senderService}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.senderService
-                  )}
-                  dir={"rtl"}
-                  onClick={async event => {
-                    const $steps = {};
+                onClick={async event => {
+                  const $steps = {};
 
-                    $steps["updateModalSenderServiceOpen"] = true
+                  $steps["updateSearchBarServicesValue"] =
+                    localStorage.getItem("service_type") == "receiver"
                       ? (() => {
                           const actionArgs = {
                             variable: {
                               objRoot: $state,
-                              variablePath: ["modalSenderService", "open"]
+                              variablePath: ["searchBarServices", "value"]
                             },
-                            operation: 4
+                            operation: 0,
+                            value: ""
                           };
                           return (({
                             variable,
@@ -711,24 +706,120 @@ function PlasmicConsultSend__RenderFunc(props: {
                             }
                             const { objRoot, variablePath } = variable;
 
-                            const oldValue = $stateGet(objRoot, variablePath);
-                            $stateSet(objRoot, variablePath, !oldValue);
-                            return !oldValue;
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
                           })?.apply(null, [actionArgs]);
                         })()
                       : undefined;
-                    if (
-                      $steps["updateModalSenderServiceOpen"] != null &&
-                      typeof $steps["updateModalSenderServiceOpen"] ===
-                        "object" &&
-                      typeof $steps["updateModalSenderServiceOpen"].then ===
-                        "function"
-                    ) {
-                      $steps["updateModalSenderServiceOpen"] = await $steps[
-                        "updateModalSenderServiceOpen"
-                      ];
-                    }
-                  }}
+                  if (
+                    $steps["updateSearchBarServicesValue"] != null &&
+                    typeof $steps["updateSearchBarServicesValue"] ===
+                      "object" &&
+                    typeof $steps["updateSearchBarServicesValue"].then ===
+                      "function"
+                  ) {
+                    $steps["updateSearchBarServicesValue"] = await $steps[
+                      "updateSearchBarServicesValue"
+                    ];
+                  }
+
+                  $steps["setLocalServiceType"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem(
+                              "service_type",
+                              "sender"
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setLocalServiceType"] != null &&
+                    typeof $steps["setLocalServiceType"] === "object" &&
+                    typeof $steps["setLocalServiceType"].then === "function"
+                  ) {
+                    $steps["setLocalServiceType"] = await $steps[
+                      "setLocalServiceType"
+                    ];
+                  }
+
+                  $steps["consoleLogServiceType"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return console.log(
+                              "service type: ",
+                              localStorage.getItem("service_type")
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["consoleLogServiceType"] != null &&
+                    typeof $steps["consoleLogServiceType"] === "object" &&
+                    typeof $steps["consoleLogServiceType"].then === "function"
+                  ) {
+                    $steps["consoleLogServiceType"] = await $steps[
+                      "consoleLogServiceType"
+                    ];
+                  }
+
+                  $steps["updateModalServiceListOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["modalServiceList", "open"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateModalServiceListOpen"] != null &&
+                    typeof $steps["updateModalServiceListOpen"] === "object" &&
+                    typeof $steps["updateModalServiceListOpen"].then ===
+                      "function"
+                  ) {
+                    $steps["updateModalServiceListOpen"] = await $steps[
+                      "updateModalServiceListOpen"
+                    ];
+                  }
+                }}
+              >
+                <div
+                  data-plasmic-name={"senderService"}
+                  data-plasmic-override={overrides.senderService}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.senderService
+                  )}
+                  dir={"rtl"}
                 >
                   {
                     "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627 (\u0627\u062c\u0628\u0627\u0631\u06cc)"
@@ -742,47 +833,6 @@ function PlasmicConsultSend__RenderFunc(props: {
                     projectcss.__wab_text,
                     sty.selectedSenderService
                   )}
-                  onClick={async event => {
-                    const $steps = {};
-
-                    $steps["updateModalSenderServiceOpen"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            variable: {
-                              objRoot: $state,
-                              variablePath: ["modalSenderService", "open"]
-                            },
-                            operation: 4
-                          };
-                          return (({
-                            variable,
-                            value,
-                            startIndex,
-                            deleteCount
-                          }) => {
-                            if (!variable) {
-                              return;
-                            }
-                            const { objRoot, variablePath } = variable;
-
-                            const oldValue = $stateGet(objRoot, variablePath);
-                            $stateSet(objRoot, variablePath, !oldValue);
-                            return !oldValue;
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["updateModalSenderServiceOpen"] != null &&
-                      typeof $steps["updateModalSenderServiceOpen"] ===
-                        "object" &&
-                      typeof $steps["updateModalSenderServiceOpen"].then ===
-                        "function"
-                    ) {
-                      $steps["updateModalSenderServiceOpen"] = await $steps[
-                        "updateModalSenderServiceOpen"
-                      ];
-                    }
-                  }}
                 >
                   <React.Fragment>
                     {(() => {
@@ -811,27 +861,19 @@ function PlasmicConsultSend__RenderFunc(props: {
                   projectcss.all,
                   sty.receiverServiceContent
                 )}
-              >
-                <div
-                  data-plasmic-name={"receiverService"}
-                  data-plasmic-override={overrides.receiverService}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.receiverService
-                  )}
-                  dir={"rtl"}
-                  onClick={async event => {
-                    const $steps = {};
+                onClick={async event => {
+                  const $steps = {};
 
-                    $steps["updateModalReceiverServiceOpen"] = true
+                  $steps["updateSearchBarServicesValue"] =
+                    localStorage.getItem("service_type") == "sender"
                       ? (() => {
                           const actionArgs = {
                             variable: {
                               objRoot: $state,
-                              variablePath: ["modalReceiverService", "open"]
+                              variablePath: ["searchBarServices", "value"]
                             },
-                            operation: 4
+                            operation: 0,
+                            value: ""
                           };
                           return (({
                             variable,
@@ -844,24 +886,120 @@ function PlasmicConsultSend__RenderFunc(props: {
                             }
                             const { objRoot, variablePath } = variable;
 
-                            const oldValue = $stateGet(objRoot, variablePath);
-                            $stateSet(objRoot, variablePath, !oldValue);
-                            return !oldValue;
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
                           })?.apply(null, [actionArgs]);
                         })()
                       : undefined;
-                    if (
-                      $steps["updateModalReceiverServiceOpen"] != null &&
-                      typeof $steps["updateModalReceiverServiceOpen"] ===
-                        "object" &&
-                      typeof $steps["updateModalReceiverServiceOpen"].then ===
-                        "function"
-                    ) {
-                      $steps["updateModalReceiverServiceOpen"] = await $steps[
-                        "updateModalReceiverServiceOpen"
-                      ];
-                    }
-                  }}
+                  if (
+                    $steps["updateSearchBarServicesValue"] != null &&
+                    typeof $steps["updateSearchBarServicesValue"] ===
+                      "object" &&
+                    typeof $steps["updateSearchBarServicesValue"].then ===
+                      "function"
+                  ) {
+                    $steps["updateSearchBarServicesValue"] = await $steps[
+                      "updateSearchBarServicesValue"
+                    ];
+                  }
+
+                  $steps["setLocalServiceType"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem(
+                              "service_type",
+                              "receiver"
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setLocalServiceType"] != null &&
+                    typeof $steps["setLocalServiceType"] === "object" &&
+                    typeof $steps["setLocalServiceType"].then === "function"
+                  ) {
+                    $steps["setLocalServiceType"] = await $steps[
+                      "setLocalServiceType"
+                    ];
+                  }
+
+                  $steps["consoleLogServiceType"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return console.log(
+                              "service type: ",
+                              localStorage.getItem("service_type")
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["consoleLogServiceType"] != null &&
+                    typeof $steps["consoleLogServiceType"] === "object" &&
+                    typeof $steps["consoleLogServiceType"].then === "function"
+                  ) {
+                    $steps["consoleLogServiceType"] = await $steps[
+                      "consoleLogServiceType"
+                    ];
+                  }
+
+                  $steps["updateModalServiceListOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["modalServiceList", "open"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateModalServiceListOpen"] != null &&
+                    typeof $steps["updateModalServiceListOpen"] === "object" &&
+                    typeof $steps["updateModalServiceListOpen"].then ===
+                      "function"
+                  ) {
+                    $steps["updateModalServiceListOpen"] = await $steps[
+                      "updateModalServiceListOpen"
+                    ];
+                  }
+                }}
+              >
+                <div
+                  data-plasmic-name={"receiverService"}
+                  data-plasmic-override={overrides.receiverService}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.receiverService
+                  )}
+                  dir={"rtl"}
                 >
                   {
                     "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f (\u0627\u062c\u0628\u0627\u0631\u06cc)"
@@ -875,47 +1013,6 @@ function PlasmicConsultSend__RenderFunc(props: {
                     projectcss.__wab_text,
                     sty.selectedReceiverService
                   )}
-                  onClick={async event => {
-                    const $steps = {};
-
-                    $steps["updateModalReceiverServiceOpen"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            variable: {
-                              objRoot: $state,
-                              variablePath: ["modalReceiverService", "open"]
-                            },
-                            operation: 4
-                          };
-                          return (({
-                            variable,
-                            value,
-                            startIndex,
-                            deleteCount
-                          }) => {
-                            if (!variable) {
-                              return;
-                            }
-                            const { objRoot, variablePath } = variable;
-
-                            const oldValue = $stateGet(objRoot, variablePath);
-                            $stateSet(objRoot, variablePath, !oldValue);
-                            return !oldValue;
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["updateModalReceiverServiceOpen"] != null &&
-                      typeof $steps["updateModalReceiverServiceOpen"] ===
-                        "object" &&
-                      typeof $steps["updateModalReceiverServiceOpen"].then ===
-                        "function"
-                    ) {
-                      $steps["updateModalReceiverServiceOpen"] = await $steps[
-                        "updateModalReceiverServiceOpen"
-                      ];
-                    }
-                  }}
                 >
                   <React.Fragment>
                     {(() => {
@@ -944,6 +1041,47 @@ function PlasmicConsultSend__RenderFunc(props: {
                   projectcss.all,
                   sty.receiverDoctorContent
                 )}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateModalReceiverDoctorOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["modalReceiverDoctor", "open"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateModalReceiverDoctorOpen"] != null &&
+                    typeof $steps["updateModalReceiverDoctorOpen"] ===
+                      "object" &&
+                    typeof $steps["updateModalReceiverDoctorOpen"].then ===
+                      "function"
+                  ) {
+                    $steps["updateModalReceiverDoctorOpen"] = await $steps[
+                      "updateModalReceiverDoctorOpen"
+                    ];
+                  }
+                }}
               >
                 <div
                   data-plasmic-name={"receiverDoctor"}
@@ -953,47 +1091,6 @@ function PlasmicConsultSend__RenderFunc(props: {
                     projectcss.__wab_text,
                     sty.receiverDoctor
                   )}
-                  onClick={async event => {
-                    const $steps = {};
-
-                    $steps["updateModalReceiverDoctorOpen"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            variable: {
-                              objRoot: $state,
-                              variablePath: ["modalReceiverDoctor", "open"]
-                            },
-                            operation: 4
-                          };
-                          return (({
-                            variable,
-                            value,
-                            startIndex,
-                            deleteCount
-                          }) => {
-                            if (!variable) {
-                              return;
-                            }
-                            const { objRoot, variablePath } = variable;
-
-                            const oldValue = $stateGet(objRoot, variablePath);
-                            $stateSet(objRoot, variablePath, !oldValue);
-                            return !oldValue;
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["updateModalReceiverDoctorOpen"] != null &&
-                      typeof $steps["updateModalReceiverDoctorOpen"] ===
-                        "object" &&
-                      typeof $steps["updateModalReceiverDoctorOpen"].then ===
-                        "function"
-                    ) {
-                      $steps["updateModalReceiverDoctorOpen"] = await $steps[
-                        "updateModalReceiverDoctorOpen"
-                      ];
-                    }
-                  }}
                 >
                   {
                     "\u067e\u0632\u0634\u06a9 \u0645\u0642\u0635\u062f \u067e\u06cc\u0634\u0646\u0647\u0627\u062f\u06cc"
@@ -1007,47 +1104,6 @@ function PlasmicConsultSend__RenderFunc(props: {
                     projectcss.__wab_text,
                     sty.selectedReceiverDoctor
                   )}
-                  onClick={async event => {
-                    const $steps = {};
-
-                    $steps["updateModalReceiverDoctorOpen"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            variable: {
-                              objRoot: $state,
-                              variablePath: ["modalReceiverDoctor", "open"]
-                            },
-                            operation: 4
-                          };
-                          return (({
-                            variable,
-                            value,
-                            startIndex,
-                            deleteCount
-                          }) => {
-                            if (!variable) {
-                              return;
-                            }
-                            const { objRoot, variablePath } = variable;
-
-                            const oldValue = $stateGet(objRoot, variablePath);
-                            $stateSet(objRoot, variablePath, !oldValue);
-                            return !oldValue;
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["updateModalReceiverDoctorOpen"] != null &&
-                      typeof $steps["updateModalReceiverDoctorOpen"] ===
-                        "object" &&
-                      typeof $steps["updateModalReceiverDoctorOpen"].then ===
-                        "function"
-                    ) {
-                      $steps["updateModalReceiverDoctorOpen"] = await $steps[
-                        "updateModalReceiverDoctorOpen"
-                      ];
-                    }
-                  }}
                 >
                   <React.Fragment>
                     {(() => {
@@ -2758,6 +2814,7 @@ function PlasmicConsultSend__RenderFunc(props: {
             data-plasmic-name={"getServices"}
             data-plasmic-override={overrides.getServices}
             className={classNames("__wab_instance", sty.getServices)}
+            delay={300}
             headers={(() => {
               try {
                 return {
@@ -2774,167 +2831,337 @@ function PlasmicConsultSend__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={"/api/v2/service"}
+            path={`/api/v3/remote_his/services?search_input=${$state.searchBarServices.value}`}
             ref={ref => {
               $refs["getServices"] = ref;
             }}
           >
             <DataCtxReader__>
               {$ctx => (
-                <React.Fragment>
-                  <AntdModal
-                    data-plasmic-name={"modalSenderService"}
-                    data-plasmic-override={overrides.modalSenderService}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.modalSenderService
-                    )}
-                    defaultStylesClassName={classNames(
-                      projectcss.root_reset,
-                      projectcss.plasmic_default_styles,
-                      projectcss.plasmic_mixins,
-                      projectcss.plasmic_tokens,
-                      plasmic_antd_5_hostless_css.plasmic_tokens,
-                      plasmic_plasmic_rich_components_css.plasmic_tokens
-                    )}
-                    hideFooter={true}
-                    modalContentClassName={classNames({
-                      [sty["pcls_22r_E4gv58NS"]]: true
-                    })}
-                    modalScopeClassName={sty["modalSenderService__modal"]}
-                    onOpenChange={async (...eventArgs: any) => {
-                      generateStateOnChangeProp($state, [
-                        "modalSenderService",
-                        "open"
-                      ]).apply(null, eventArgs);
-                    }}
-                    open={generateStateValueProp($state, [
-                      "modalSenderService",
+                <AntdModal
+                  data-plasmic-name={"modalServiceList"}
+                  data-plasmic-override={overrides.modalServiceList}
+                  className={classNames("__wab_instance", sty.modalServiceList)}
+                  defaultStylesClassName={classNames(
+                    projectcss.root_reset,
+                    projectcss.plasmic_default_styles,
+                    projectcss.plasmic_mixins,
+                    projectcss.plasmic_tokens,
+                    plasmic_antd_5_hostless_css.plasmic_tokens,
+                    plasmic_plasmic_rich_components_css.plasmic_tokens
+                  )}
+                  hideFooter={true}
+                  modalContentClassName={classNames({
+                    [sty["pcls_22r_E4gv58NS"]]: true
+                  })}
+                  modalScopeClassName={sty["modalServiceList__modal"]}
+                  onOpenChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "modalServiceList",
                       "open"
-                    ])}
-                    title={
+                    ]).apply(null, eventArgs);
+                  }}
+                  open={generateStateValueProp($state, [
+                    "modalServiceList",
+                    "open"
+                  ])}
+                  title={
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return (
+                            localStorage.getItem("service_type") == "sender"
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__oTUpz
+                          )}
+                        >
+                          {
+                            "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
+                          }
+                        </div>
+                      ) : null}
+                      {(() => {
+                        try {
+                          return (
+                            localStorage.getItem("service_type") == "receiver"
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__gsAc4
+                          )}
+                        >
+                          {
+                            "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
+                          }
+                        </div>
+                      ) : null}
+                    </React.Fragment>
+                  }
+                  trigger={null}
+                >
+                  <div
+                    data-plasmic-name={"servicesList"}
+                    data-plasmic-override={overrides.servicesList}
+                    className={classNames(projectcss.all, sty.servicesList)}
+                  >
+                    <ConditionGuard
+                      data-plasmic-name={"conditionGuard"}
+                      data-plasmic-override={overrides.conditionGuard}
+                      children={null}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.conditionGuard
+                      )}
+                      condition={(() => {
+                        try {
+                          return $ctx.fetched_data.loading;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return false;
+                          }
+                          throw e;
+                        }
+                      })()}
+                      onNotSatisfied={async () => {
+                        const $steps = {};
+
+                        $steps["setLocalConsultServiceList"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "consult_service_list",
+                                      JSON.stringify($ctx.fetched_data.data)
+                                    );
+                                    return console.log(
+                                      `consult_service_list: ${localStorage.getItem(
+                                        "consult_service_list"
+                                      )}`
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["setLocalConsultServiceList"] != null &&
+                          typeof $steps["setLocalConsultServiceList"] ===
+                            "object" &&
+                          typeof $steps["setLocalConsultServiceList"].then ===
+                            "function"
+                        ) {
+                          $steps["setLocalConsultServiceList"] = await $steps[
+                            "setLocalConsultServiceList"
+                          ];
+                        }
+                      }}
+                    />
+
+                    <div
+                      data-plasmic-name={"searchBarServicesContent"}
+                      data-plasmic-override={overrides.searchBarServicesContent}
+                      className={classNames(
+                        projectcss.all,
+                        sty.searchBarServicesContent
+                      )}
+                    >
+                      <TextInput
+                        data-plasmic-name={"searchBarServices"}
+                        data-plasmic-override={overrides.searchBarServices}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.searchBarServices
+                        )}
+                        endIcon={
+                          $state.searchBarServices.value !== "" ? (
+                            <Icons8CloseSvgIcon
+                              data-plasmic-name={"clearContent2"}
+                              data-plasmic-override={overrides.clearContent2}
+                              className={classNames(
+                                projectcss.all,
+                                sty.clearContent2
+                              )}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updateSearchBarServicesValue"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "searchBarServices",
+                                            "value"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: ""
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateSearchBarServicesValue"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "updateSearchBarServicesValue"
+                                  ] === "object" &&
+                                  typeof $steps["updateSearchBarServicesValue"]
+                                    .then === "function"
+                                ) {
+                                  $steps["updateSearchBarServicesValue"] =
+                                    await $steps[
+                                      "updateSearchBarServicesValue"
+                                    ];
+                                }
+                              }}
+                              role={"img"}
+                            />
+                          ) : null
+                        }
+                        onChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "searchBarServices",
+                              "value"
+                            ])((e => e.target?.value).apply(null, eventArgs));
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        placeholder={
+                          "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0648\u0631\u062f \u0646\u0638\u0631 \u062e\u0648\u062f \u0631\u0627 \u062c\u0633\u062a \u0648 \u062c\u0648 \u06a9\u0646\u06cc\u062f"
+                        }
+                        value={
+                          generateStateValueProp($state, [
+                            "searchBarServices",
+                            "value"
+                          ]) ?? ""
+                        }
+                      />
+                    </div>
+                    {(() => {
+                      try {
+                        return (
+                          !$ctx.fetched_data.loading &&
+                          $ctx.fetched_data.data.length === 0
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
                       <div
+                        data-plasmic-name={"servicesName2"}
+                        data-plasmic-override={overrides.servicesName2}
                         className={classNames(
                           projectcss.all,
                           projectcss.__wab_text,
-                          sty.text__oTUpz
+                          sty.servicesName2
                         )}
                       >
                         {
-                          "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0628\u062f\u0627 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
+                          " \u0645\u062a\u0627\u0633\u0641\u0627\u0646\u0647 \u0633\u0631\u0648\u06cc\u0633\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
                         }
                       </div>
-                    }
-                    trigger={null}
-                  >
-                    <div
-                      data-plasmic-name={"senderServicesList"}
-                      data-plasmic-override={overrides.senderServicesList}
-                      className={classNames(
-                        projectcss.all,
-                        sty.senderServicesList
-                      )}
-                    >
-                      <ConditionGuard
-                        className={classNames(
-                          "__wab_instance",
-                          sty.conditionGuard__rmyfR
-                        )}
-                        condition={(() => {
-                          try {
-                            return $ctx.fetched_data.loading;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return false;
-                            }
-                            throw e;
-                          }
-                        })()}
-                        onNotSatisfied={async () => {
-                          const $steps = {};
-
-                          $steps["setLocalConsultSenderServiceList"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "consult_sender_service_list",
-                                        JSON.stringify(
-                                          $ctx.fetched_data.data.services
-                                        )
-                                      );
-                                      return console.log(
-                                        `consult_sender_service_list: ${localStorage.getItem(
-                                          "consult_sender_service_list"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
+                    ) : null}
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.loading &&
+                            localStorage.getItem("consult_service_list") &&
+                            $state.searchBarServices.value == ""
+                            ? JSON.parse(
+                                localStorage.getItem("consult_service_list")
+                              )
+                            : $ctx.fetched_data.data;
+                        } catch (e) {
                           if (
-                            $steps["setLocalConsultSenderServiceList"] !=
-                              null &&
-                            typeof $steps[
-                              "setLocalConsultSenderServiceList"
-                            ] === "object" &&
-                            typeof $steps["setLocalConsultSenderServiceList"]
-                              .then === "function"
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
                           ) {
-                            $steps["setLocalConsultSenderServiceList"] =
-                              await $steps["setLocalConsultSenderServiceList"];
+                            return [];
                           }
-                        }}
-                      />
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          data-plasmic-name={"servicesName"}
+                          data-plasmic-override={overrides.servicesName}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.servicesName
+                          )}
+                          key={currentIndex}
+                          onClick={async event => {
+                            const $steps = {};
 
-                      {(_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
-                          try {
-                            return localStorage.getItem(
-                              "consult_sender_service_list"
-                            )
-                              ? JSON.parse(
-                                  localStorage.getItem(
-                                    "consult_sender_service_list"
-                                  )
-                                )
-                              : $ctx.fetched_data.data.services;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return [];
-                            }
-                            throw e;
-                          }
-                        })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const currentItem = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
-                          <div
-                            data-plasmic-name={"servicesName"}
-                            data-plasmic-override={overrides.servicesName}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.servicesName
-                            )}
-                            key={currentIndex}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["localStorageSetSenderServiceId"] = true
+                            $steps["localStorageSetSenderServiceId"] =
+                              localStorage.getItem("service_type") == "sender"
                                 ? (() => {
                                     const actionArgs = {
                                       customFunction: async () => {
@@ -2949,22 +3176,21 @@ function PlasmicConsultSend__RenderFunc(props: {
                                     })?.apply(null, [actionArgs]);
                                   })()
                                 : undefined;
-                              if (
-                                $steps["localStorageSetSenderServiceId"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetSenderServiceId"
-                                ] === "object" &&
-                                typeof $steps["localStorageSetSenderServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["localStorageSetSenderServiceId"] =
-                                  await $steps[
-                                    "localStorageSetSenderServiceId"
-                                  ];
-                              }
+                            if (
+                              $steps["localStorageSetSenderServiceId"] !=
+                                null &&
+                              typeof $steps[
+                                "localStorageSetSenderServiceId"
+                              ] === "object" &&
+                              typeof $steps["localStorageSetSenderServiceId"]
+                                .then === "function"
+                            ) {
+                              $steps["localStorageSetSenderServiceId"] =
+                                await $steps["localStorageSetSenderServiceId"];
+                            }
 
-                              $steps["localStorageSetSenderServiceName"] = true
+                            $steps["localStorageSetSenderServiceName"] =
+                              localStorage.getItem("service_type") == "sender"
                                 ? (() => {
                                     const actionArgs = {
                                       customFunction: async () => {
@@ -2979,23 +3205,86 @@ function PlasmicConsultSend__RenderFunc(props: {
                                     })?.apply(null, [actionArgs]);
                                   })()
                                 : undefined;
-                              if (
-                                $steps["localStorageSetSenderServiceName"] !=
-                                  null &&
-                                typeof $steps[
+                            if (
+                              $steps["localStorageSetSenderServiceName"] !=
+                                null &&
+                              typeof $steps[
+                                "localStorageSetSenderServiceName"
+                              ] === "object" &&
+                              typeof $steps["localStorageSetSenderServiceName"]
+                                .then === "function"
+                            ) {
+                              $steps["localStorageSetSenderServiceName"] =
+                                await $steps[
                                   "localStorageSetSenderServiceName"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetSenderServiceName"
-                                ].then === "function"
-                              ) {
-                                $steps["localStorageSetSenderServiceName"] =
-                                  await $steps[
-                                    "localStorageSetSenderServiceName"
-                                  ];
-                              }
+                                ];
+                            }
 
-                              $steps["consoleLogSenderServiceId"] = true
+                            $steps["localStorageSetReceiverServiceId"] =
+                              localStorage.getItem("service_type") == "receiver"
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return localStorage.setItem(
+                                          "receiver_service_id",
+                                          currentItem.id
+                                        );
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                            if (
+                              $steps["localStorageSetReceiverServiceId"] !=
+                                null &&
+                              typeof $steps[
+                                "localStorageSetReceiverServiceId"
+                              ] === "object" &&
+                              typeof $steps["localStorageSetReceiverServiceId"]
+                                .then === "function"
+                            ) {
+                              $steps["localStorageSetReceiverServiceId"] =
+                                await $steps[
+                                  "localStorageSetReceiverServiceId"
+                                ];
+                            }
+
+                            $steps["localStorageSetReceiverServiceName"] =
+                              localStorage.getItem("service_type") == "receiver"
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return localStorage.setItem(
+                                          "receiver_service_name",
+                                          currentItem.name
+                                        );
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                            if (
+                              $steps["localStorageSetReceiverServiceName"] !=
+                                null &&
+                              typeof $steps[
+                                "localStorageSetReceiverServiceName"
+                              ] === "object" &&
+                              typeof $steps[
+                                "localStorageSetReceiverServiceName"
+                              ].then === "function"
+                            ) {
+                              $steps["localStorageSetReceiverServiceName"] =
+                                await $steps[
+                                  "localStorageSetReceiverServiceName"
+                                ];
+                            }
+
+                            $steps["consoleLogSenderServiceId"] =
+                              localStorage.getItem("service_type") == "sender"
                                 ? (() => {
                                     const actionArgs = {
                                       customFunction: async () => {
@@ -3012,18 +3301,19 @@ function PlasmicConsultSend__RenderFunc(props: {
                                     })?.apply(null, [actionArgs]);
                                   })()
                                 : undefined;
-                              if (
-                                $steps["consoleLogSenderServiceId"] != null &&
-                                typeof $steps["consoleLogSenderServiceId"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogSenderServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogSenderServiceId"] =
-                                  await $steps["consoleLogSenderServiceId"];
-                              }
+                            if (
+                              $steps["consoleLogSenderServiceId"] != null &&
+                              typeof $steps["consoleLogSenderServiceId"] ===
+                                "object" &&
+                              typeof $steps["consoleLogSenderServiceId"]
+                                .then === "function"
+                            ) {
+                              $steps["consoleLogSenderServiceId"] =
+                                await $steps["consoleLogSenderServiceId"];
+                            }
 
-                              $steps["consoleLogSenderServiceName"] = true
+                            $steps["consoleLogSenderServiceName"] =
+                              localStorage.getItem("service_type") == "sender"
                                 ? (() => {
                                     const actionArgs = {
                                       customFunction: async () => {
@@ -3040,307 +3330,19 @@ function PlasmicConsultSend__RenderFunc(props: {
                                     })?.apply(null, [actionArgs]);
                                   })()
                                 : undefined;
-                              if (
-                                $steps["consoleLogSenderServiceName"] != null &&
-                                typeof $steps["consoleLogSenderServiceName"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogSenderServiceName"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogSenderServiceName"] =
-                                  await $steps["consoleLogSenderServiceName"];
-                              }
-
-                              $steps["updateModalSenderServiceOpen"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      variable: {
-                                        objRoot: $state,
-                                        variablePath: [
-                                          "modalSenderService",
-                                          "open"
-                                        ]
-                                      },
-                                      operation: 4
-                                    };
-                                    return (({
-                                      variable,
-                                      value,
-                                      startIndex,
-                                      deleteCount
-                                    }) => {
-                                      if (!variable) {
-                                        return;
-                                      }
-                                      const { objRoot, variablePath } =
-                                        variable;
-
-                                      const oldValue = $stateGet(
-                                        objRoot,
-                                        variablePath
-                                      );
-                                      $stateSet(
-                                        objRoot,
-                                        variablePath,
-                                        !oldValue
-                                      );
-                                      return !oldValue;
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["updateModalSenderServiceOpen"] !=
-                                  null &&
-                                typeof $steps[
-                                  "updateModalSenderServiceOpen"
-                                ] === "object" &&
-                                typeof $steps["updateModalSenderServiceOpen"]
-                                  .then === "function"
-                              ) {
-                                $steps["updateModalSenderServiceOpen"] =
-                                  await $steps["updateModalSenderServiceOpen"];
-                              }
-                            }}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.name;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </AntdModal>
-                  <AntdModal
-                    data-plasmic-name={"modalReceiverService"}
-                    data-plasmic-override={overrides.modalReceiverService}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.modalReceiverService
-                    )}
-                    defaultStylesClassName={classNames(
-                      projectcss.root_reset,
-                      projectcss.plasmic_default_styles,
-                      projectcss.plasmic_mixins,
-                      projectcss.plasmic_tokens,
-                      plasmic_antd_5_hostless_css.plasmic_tokens,
-                      plasmic_plasmic_rich_components_css.plasmic_tokens
-                    )}
-                    hideFooter={true}
-                    modalContentClassName={classNames({
-                      [sty["pcls_rnpSvegt7BQd"]]: true
-                    })}
-                    modalScopeClassName={sty["modalReceiverService__modal"]}
-                    onOpenChange={async (...eventArgs: any) => {
-                      generateStateOnChangeProp($state, [
-                        "modalReceiverService",
-                        "open"
-                      ]).apply(null, eventArgs);
-                    }}
-                    open={generateStateValueProp($state, [
-                      "modalReceiverService",
-                      "open"
-                    ])}
-                    title={
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__q7Kc5
-                        )}
-                      >
-                        {
-                          "\u0633\u0631\u0648\u06cc\u0633 \u0645\u0642\u0635\u062f \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
-                        }
-                      </div>
-                    }
-                    trigger={null}
-                  >
-                    <div
-                      data-plasmic-name={"receiverServicesList"}
-                      data-plasmic-override={overrides.receiverServicesList}
-                      className={classNames(
-                        projectcss.all,
-                        sty.receiverServicesList
-                      )}
-                    >
-                      <ConditionGuard
-                        className={classNames(
-                          "__wab_instance",
-                          sty.conditionGuard__gaYfz
-                        )}
-                        condition={(() => {
-                          try {
-                            return $ctx.fetched_data.loading;
-                          } catch (e) {
                             if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
+                              $steps["consoleLogSenderServiceName"] != null &&
+                              typeof $steps["consoleLogSenderServiceName"] ===
+                                "object" &&
+                              typeof $steps["consoleLogSenderServiceName"]
+                                .then === "function"
                             ) {
-                              return false;
+                              $steps["consoleLogSenderServiceName"] =
+                                await $steps["consoleLogSenderServiceName"];
                             }
-                            throw e;
-                          }
-                        })()}
-                        onNotSatisfied={async () => {
-                          const $steps = {};
 
-                          $steps["setLocalConsultReceiverServiceList"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "consult_receiver_service_list",
-                                        JSON.stringify(
-                                          $ctx.fetched_data.data.services
-                                        )
-                                      );
-                                      return console.log(
-                                        `consult_receiver_service_list: ${localStorage.getItem(
-                                          "consult_receiver_service_list"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["setLocalConsultReceiverServiceList"] !=
-                              null &&
-                            typeof $steps[
-                              "setLocalConsultReceiverServiceList"
-                            ] === "object" &&
-                            typeof $steps["setLocalConsultReceiverServiceList"]
-                              .then === "function"
-                          ) {
-                            $steps["setLocalConsultReceiverServiceList"] =
-                              await $steps[
-                                "setLocalConsultReceiverServiceList"
-                              ];
-                          }
-                        }}
-                      />
-
-                      {(_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
-                          try {
-                            return localStorage.getItem(
-                              "consult_receiver_service_list"
-                            )
-                              ? JSON.parse(
-                                  localStorage.getItem(
-                                    "consult_receiver_service_list"
-                                  )
-                                )
-                              : $ctx.fetched_data.data.services;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return [];
-                            }
-                            throw e;
-                          }
-                        })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const currentItem = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
-                          <div
-                            data-plasmic-name={"servicesName2"}
-                            data-plasmic-override={overrides.servicesName2}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.servicesName2
-                            )}
-                            key={currentIndex}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["localStorageSetReceiverServiceId"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return localStorage.setItem(
-                                          "receiver_service_id",
-                                          currentItem.id
-                                        );
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["localStorageSetReceiverServiceId"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetReceiverServiceId"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetReceiverServiceId"
-                                ].then === "function"
-                              ) {
-                                $steps["localStorageSetReceiverServiceId"] =
-                                  await $steps[
-                                    "localStorageSetReceiverServiceId"
-                                  ];
-                              }
-
-                              $steps["localStorageSetReceiverServiceName"] =
-                                true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        customFunction: async () => {
-                                          return localStorage.setItem(
-                                            "receiver_service_name",
-                                            currentItem.name
-                                          );
-                                        }
-                                      };
-                                      return (({ customFunction }) => {
-                                        return customFunction();
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                              if (
-                                $steps["localStorageSetReceiverServiceName"] !=
-                                  null &&
-                                typeof $steps[
-                                  "localStorageSetReceiverServiceName"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "localStorageSetReceiverServiceName"
-                                ].then === "function"
-                              ) {
-                                $steps["localStorageSetReceiverServiceName"] =
-                                  await $steps[
-                                    "localStorageSetReceiverServiceName"
-                                  ];
-                              }
-
-                              $steps["consoleLogReceiverServiceId"] = true
+                            $steps["consoleLogReceiverServiceId"] =
+                              localStorage.getItem("service_type") == "receiver"
                                 ? (() => {
                                     const actionArgs = {
                                       customFunction: async () => {
@@ -3357,18 +3359,19 @@ function PlasmicConsultSend__RenderFunc(props: {
                                     })?.apply(null, [actionArgs]);
                                   })()
                                 : undefined;
-                              if (
-                                $steps["consoleLogReceiverServiceId"] != null &&
-                                typeof $steps["consoleLogReceiverServiceId"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogReceiverServiceId"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogReceiverServiceId"] =
-                                  await $steps["consoleLogReceiverServiceId"];
-                              }
+                            if (
+                              $steps["consoleLogReceiverServiceId"] != null &&
+                              typeof $steps["consoleLogReceiverServiceId"] ===
+                                "object" &&
+                              typeof $steps["consoleLogReceiverServiceId"]
+                                .then === "function"
+                            ) {
+                              $steps["consoleLogReceiverServiceId"] =
+                                await $steps["consoleLogReceiverServiceId"];
+                            }
 
-                              $steps["consoleLogSenderServiceName"] = true
+                            $steps["consoleLogReceiverServiceName"] =
+                              localStorage.getItem("service_type") == "receiver"
                                 ? (() => {
                                     const actionArgs = {
                                       customFunction: async () => {
@@ -3385,92 +3388,78 @@ function PlasmicConsultSend__RenderFunc(props: {
                                     })?.apply(null, [actionArgs]);
                                   })()
                                 : undefined;
-                              if (
-                                $steps["consoleLogSenderServiceName"] != null &&
-                                typeof $steps["consoleLogSenderServiceName"] ===
-                                  "object" &&
-                                typeof $steps["consoleLogSenderServiceName"]
-                                  .then === "function"
-                              ) {
-                                $steps["consoleLogSenderServiceName"] =
-                                  await $steps["consoleLogSenderServiceName"];
-                              }
+                            if (
+                              $steps["consoleLogReceiverServiceName"] != null &&
+                              typeof $steps["consoleLogReceiverServiceName"] ===
+                                "object" &&
+                              typeof $steps["consoleLogReceiverServiceName"]
+                                .then === "function"
+                            ) {
+                              $steps["consoleLogReceiverServiceName"] =
+                                await $steps["consoleLogReceiverServiceName"];
+                            }
 
-                              $steps["updateModalReceiverServiceOpen"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      variable: {
-                                        objRoot: $state,
-                                        variablePath: [
-                                          "modalReceiverService",
-                                          "open"
-                                        ]
-                                      },
-                                      operation: 4
-                                    };
-                                    return (({
-                                      variable,
-                                      value,
-                                      startIndex,
-                                      deleteCount
-                                    }) => {
-                                      if (!variable) {
-                                        return;
-                                      }
-                                      const { objRoot, variablePath } =
-                                        variable;
+                            $steps["updateModalSenderServiceOpen"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["modalServiceList", "open"]
+                                    },
+                                    operation: 4
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
 
-                                      const oldValue = $stateGet(
-                                        objRoot,
-                                        variablePath
-                                      );
-                                      $stateSet(
-                                        objRoot,
-                                        variablePath,
-                                        !oldValue
-                                      );
-                                      return !oldValue;
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["updateModalReceiverServiceOpen"] !=
-                                  null &&
-                                typeof $steps[
-                                  "updateModalReceiverServiceOpen"
-                                ] === "object" &&
-                                typeof $steps["updateModalReceiverServiceOpen"]
-                                  .then === "function"
-                              ) {
-                                $steps["updateModalReceiverServiceOpen"] =
-                                  await $steps[
-                                    "updateModalReceiverServiceOpen"
-                                  ];
-                              }
-                            }}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.name;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
+                                    const oldValue = $stateGet(
+                                      objRoot,
+                                      variablePath
+                                    );
+                                    $stateSet(objRoot, variablePath, !oldValue);
+                                    return !oldValue;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateModalSenderServiceOpen"] != null &&
+                              typeof $steps["updateModalSenderServiceOpen"] ===
+                                "object" &&
+                              typeof $steps["updateModalSenderServiceOpen"]
+                                .then === "function"
+                            ) {
+                              $steps["updateModalSenderServiceOpen"] =
+                                await $steps["updateModalSenderServiceOpen"];
+                            }
+                          }}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return currentItem.name;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
                                 }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </AntdModal>
-                </React.Fragment>
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </AntdModal>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
@@ -3555,59 +3544,75 @@ function PlasmicConsultSend__RenderFunc(props: {
                           sty.doctorNameInput
                         )}
                         endIcon={
-                          <Icons8CloseSvgIcon
-                            data-plasmic-name={"clearContent"}
-                            data-plasmic-override={overrides.clearContent}
-                            className={classNames(
-                              projectcss.all,
-                              sty.clearContent
-                            )}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["updateDoctorNameInputValue"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      variable: {
-                                        objRoot: $state,
-                                        variablePath: [
-                                          "doctorNameInput",
-                                          "value"
-                                        ]
-                                      },
-                                      operation: 0,
-                                      value: ""
-                                    };
-                                    return (({
-                                      variable,
-                                      value,
-                                      startIndex,
-                                      deleteCount
-                                    }) => {
-                                      if (!variable) {
-                                        return;
-                                      }
-                                      const { objRoot, variablePath } =
-                                        variable;
-
-                                      $stateSet(objRoot, variablePath, value);
-                                      return value;
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
+                          (() => {
+                            try {
+                              return $state.doctorNameInput.value !== "";
+                            } catch (e) {
                               if (
-                                $steps["updateDoctorNameInputValue"] != null &&
-                                typeof $steps["updateDoctorNameInputValue"] ===
-                                  "object" &&
-                                typeof $steps["updateDoctorNameInputValue"]
-                                  .then === "function"
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
                               ) {
-                                $steps["updateDoctorNameInputValue"] =
-                                  await $steps["updateDoctorNameInputValue"];
+                                return true;
                               }
-                            }}
-                            role={"img"}
-                          />
+                              throw e;
+                            }
+                          })() ? (
+                            <Icons8CloseSvgIcon
+                              data-plasmic-name={"clearContent"}
+                              data-plasmic-override={overrides.clearContent}
+                              className={classNames(
+                                projectcss.all,
+                                sty.clearContent
+                              )}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updateDoctorNameInputValue"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "doctorNameInput",
+                                            "value"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: ""
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateDoctorNameInputValue"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "updateDoctorNameInputValue"
+                                  ] === "object" &&
+                                  typeof $steps["updateDoctorNameInputValue"]
+                                    .then === "function"
+                                ) {
+                                  $steps["updateDoctorNameInputValue"] =
+                                    await $steps["updateDoctorNameInputValue"];
+                                }
+                              }}
+                              role={"img"}
+                            />
+                          ) : null
                         }
                         onChange={async (...eventArgs: any) => {
                           ((...eventArgs) => {
@@ -3626,7 +3631,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                           }
                         }}
                         placeholder={
-                          "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u067e\u0632\u0634\u06a9"
+                          "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u067e\u0632\u0634\u06a9 \u0631\u0627 \u062c\u0633\u062a \u0648 \u062c\u0648 \u06a9\u0646\u06cc\u062f"
                         }
                         value={
                           generateStateValueProp($state, [
@@ -3639,7 +3644,38 @@ function PlasmicConsultSend__RenderFunc(props: {
                     {(() => {
                       try {
                         return (
-                          $ctx.fetched_data.loading == false &&
+                          !$ctx.fetched_data.loading &&
+                          $ctx.fetched_data.data.count == 0
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={"noDoctors"}
+                        data-plasmic-override={overrides.noDoctors}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.noDoctors
+                        )}
+                        dir={"rtl"}
+                      >
+                        {
+                          " \u0645\u062a\u0627\u0633\u0641\u0627\u0646\u0647 \u067e\u0632\u0634\u06a9\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
+                        }
+                      </div>
+                    ) : null}
+                    {(() => {
+                      try {
+                        return (
+                          !$ctx.fetched_data.loading &&
                           $state.doctorNameInput.value != ""
                         );
                       } catch (e) {
@@ -3902,31 +3938,6 @@ function PlasmicConsultSend__RenderFunc(props: {
                           );
                         })
                       : null}
-                    {(() => {
-                      try {
-                        return $ctx.fetched_data.data.count == 0;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })() ? (
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__gNAya
-                        )}
-                      >
-                        {
-                          "\u0645\u062a\u0627\u0633\u0641\u0627\u0646\u0647 \u067e\u0632\u0634\u06a9\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
-                        }
-                      </div>
-                    ) : null}
                   </div>
                 </AntdModal>
               )}
@@ -4308,18 +4319,21 @@ const PlasmicDescendants = {
     "imagingReportList",
     "laboratoryData",
     "getServices",
-    "modalSenderService",
-    "senderServicesList",
-    "servicesName",
-    "modalReceiverService",
-    "receiverServicesList",
+    "modalServiceList",
+    "servicesList",
+    "conditionGuard",
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent2",
     "servicesName2",
+    "servicesName",
     "getUsers",
     "modalReceiverDoctor",
     "receiverDoctorList",
     "doctorNameInputContent",
     "doctorNameInput",
     "clearContent",
+    "noDoctors",
     "doctorNames",
     "getPresentIlness",
     "modalPatientPresentIlness",
@@ -4494,27 +4508,44 @@ const PlasmicDescendants = {
   laboratoryData: ["laboratoryData"],
   getServices: [
     "getServices",
-    "modalSenderService",
-    "senderServicesList",
-    "servicesName",
-    "modalReceiverService",
-    "receiverServicesList",
-    "servicesName2"
-  ],
-  modalSenderService: [
-    "modalSenderService",
-    "senderServicesList",
+    "modalServiceList",
+    "servicesList",
+    "conditionGuard",
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent2",
+    "servicesName2",
     "servicesName"
   ],
-  senderServicesList: ["senderServicesList", "servicesName"],
-  servicesName: ["servicesName"],
-  modalReceiverService: [
-    "modalReceiverService",
-    "receiverServicesList",
-    "servicesName2"
+  modalServiceList: [
+    "modalServiceList",
+    "servicesList",
+    "conditionGuard",
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent2",
+    "servicesName2",
+    "servicesName"
   ],
-  receiverServicesList: ["receiverServicesList", "servicesName2"],
+  servicesList: [
+    "servicesList",
+    "conditionGuard",
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent2",
+    "servicesName2",
+    "servicesName"
+  ],
+  conditionGuard: ["conditionGuard"],
+  searchBarServicesContent: [
+    "searchBarServicesContent",
+    "searchBarServices",
+    "clearContent2"
+  ],
+  searchBarServices: ["searchBarServices", "clearContent2"],
+  clearContent2: ["clearContent2"],
   servicesName2: ["servicesName2"],
+  servicesName: ["servicesName"],
   getUsers: [
     "getUsers",
     "modalReceiverDoctor",
@@ -4522,6 +4553,7 @@ const PlasmicDescendants = {
     "doctorNameInputContent",
     "doctorNameInput",
     "clearContent",
+    "noDoctors",
     "doctorNames"
   ],
   modalReceiverDoctor: [
@@ -4530,6 +4562,7 @@ const PlasmicDescendants = {
     "doctorNameInputContent",
     "doctorNameInput",
     "clearContent",
+    "noDoctors",
     "doctorNames"
   ],
   receiverDoctorList: [
@@ -4537,6 +4570,7 @@ const PlasmicDescendants = {
     "doctorNameInputContent",
     "doctorNameInput",
     "clearContent",
+    "noDoctors",
     "doctorNames"
   ],
   doctorNameInputContent: [
@@ -4546,6 +4580,7 @@ const PlasmicDescendants = {
   ],
   doctorNameInput: ["doctorNameInput", "clearContent"],
   clearContent: ["clearContent"],
+  noDoctors: ["noDoctors"],
   doctorNames: ["doctorNames"],
   getPresentIlness: [
     "getPresentIlness",
@@ -4623,18 +4658,21 @@ type NodeDefaultElementType = {
   imagingReportList: typeof PlasmicImg__;
   laboratoryData: typeof PlasmicImg__;
   getServices: typeof ApiFetcherComponent;
-  modalSenderService: typeof AntdModal;
-  senderServicesList: "div";
-  servicesName: "div";
-  modalReceiverService: typeof AntdModal;
-  receiverServicesList: "div";
+  modalServiceList: typeof AntdModal;
+  servicesList: "div";
+  conditionGuard: typeof ConditionGuard;
+  searchBarServicesContent: "div";
+  searchBarServices: typeof TextInput;
+  clearContent2: "svg";
   servicesName2: "div";
+  servicesName: "div";
   getUsers: typeof ApiFetcherComponent;
   modalReceiverDoctor: typeof AntdModal;
   receiverDoctorList: "div";
   doctorNameInputContent: "div";
   doctorNameInput: typeof TextInput;
   clearContent: "svg";
+  noDoctors: "div";
   doctorNames: "div";
   getPresentIlness: typeof ApiFetcherComponent;
   modalPatientPresentIlness: typeof AntdModal;
@@ -4755,18 +4793,21 @@ export const PlasmicConsultSend = Object.assign(
     imagingReportList: makeNodeComponent("imagingReportList"),
     laboratoryData: makeNodeComponent("laboratoryData"),
     getServices: makeNodeComponent("getServices"),
-    modalSenderService: makeNodeComponent("modalSenderService"),
-    senderServicesList: makeNodeComponent("senderServicesList"),
-    servicesName: makeNodeComponent("servicesName"),
-    modalReceiverService: makeNodeComponent("modalReceiverService"),
-    receiverServicesList: makeNodeComponent("receiverServicesList"),
+    modalServiceList: makeNodeComponent("modalServiceList"),
+    servicesList: makeNodeComponent("servicesList"),
+    conditionGuard: makeNodeComponent("conditionGuard"),
+    searchBarServicesContent: makeNodeComponent("searchBarServicesContent"),
+    searchBarServices: makeNodeComponent("searchBarServices"),
+    clearContent2: makeNodeComponent("clearContent2"),
     servicesName2: makeNodeComponent("servicesName2"),
+    servicesName: makeNodeComponent("servicesName"),
     getUsers: makeNodeComponent("getUsers"),
     modalReceiverDoctor: makeNodeComponent("modalReceiverDoctor"),
     receiverDoctorList: makeNodeComponent("receiverDoctorList"),
     doctorNameInputContent: makeNodeComponent("doctorNameInputContent"),
     doctorNameInput: makeNodeComponent("doctorNameInput"),
     clearContent: makeNodeComponent("clearContent"),
+    noDoctors: makeNodeComponent("noDoctors"),
     doctorNames: makeNodeComponent("doctorNames"),
     getPresentIlness: makeNodeComponent("getPresentIlness"),
     modalPatientPresentIlness: makeNodeComponent("modalPatientPresentIlness"),
