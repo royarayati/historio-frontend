@@ -10713,7 +10713,19 @@ function PlasmicHomepage__RenderFunc(props: {
             </AntdModal>
           );
         })()}
-        {false
+        {(() => {
+          try {
+            return window.location.origin === "https://thcsynapps.tums.ac.ir";
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })()
           ? (() => {
               const child$Props = {
                 className: classNames("__wab_instance", sty.modalNoticeBanner),

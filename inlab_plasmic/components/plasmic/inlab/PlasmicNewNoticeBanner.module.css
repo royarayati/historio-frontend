@@ -1,8 +1,10 @@
 .root:global(.__wab_instance) {
+  width: auto;
   height: 100%;
   position: relative;
   min-height: 0;
 }
 .text {
   line-height: 1.8;
+  text-align: center;
 }
