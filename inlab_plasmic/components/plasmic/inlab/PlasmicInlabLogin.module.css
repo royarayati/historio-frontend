@@ -146,18 +146,6 @@
   text-decoration-line: none;
   font-size: 14px;
 }
-.text__kBsk9 {
-  position: relative;
-  width: 60vh;
-  height: auto;
-  max-width: 100%;
-  text-align: center;
-  white-space: pre-wrap;
-  font-weight: 800;
-  text-decoration-line: none;
-  font-size: 14px;
-  color: #ff0000;
-}
 .username:global(.__wab_instance) {
   position: relative;
   width: 350px;
