@@ -752,8 +752,7 @@ function PlasmicHomepage__RenderFunc(props: {
             : (() => {
                 try {
                   return (
-                    $props.newNoticeDatetime !==
-                    localStorage.getItem("new_notice_datetime")
+                    window.location.origin === "https://thcsynapps.tums.ac.ir"
                   );
                 } catch (e) {
                   if (
@@ -10713,19 +10712,7 @@ function PlasmicHomepage__RenderFunc(props: {
             </AntdModal>
           );
         })()}
-        {(() => {
-          try {
-            return window.location.origin === "https://thcsynapps.tums.ac.ir";
-          } catch (e) {
-            if (
-              e instanceof TypeError ||
-              e?.plasmicType === "PlasmicUndefinedDataError"
-            ) {
-              return true;
-            }
-            throw e;
-          }
-        })()
+        {window.location.origin === "https://thcsynapps.tums.ac.ir"
           ? (() => {
               const child$Props = {
                 className: classNames("__wab_instance", sty.modalNoticeBanner),
@@ -10809,8 +10796,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         : (() => {
                             try {
                               return (
-                                $props.newNoticeDatetime !==
-                                localStorage.getItem("new_notice_datetime")
+                                window.location.origin ===
+                                "https://thcsynapps.tums.ac.ir"
                               );
                             } catch (e) {
                               if (

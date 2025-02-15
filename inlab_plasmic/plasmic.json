@@ -2271,6 +2271,11 @@
           "id": "yZlSltYGA1GR",
           "name": "UpArrowSvgrepoCom1SvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__UpArrowSvgrepoCom1Svg.tsx"
+        },
+        {
+          "id": "x6b9-yA7JOIM",
+          "name": "SadButRelievedFaceSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__SadButRelievedFaceSvgrepoComSvg.tsx"
         }
       ],
       "images": [
@@ -2433,6 +2438,11 @@
           "id": "NRlPSYCqZqPt",
           "name": "Icon-512x512.svg",
           "filePath": "../public/plasmic/inlab/images/icon512X512Svg.svg"
+        },
+        {
+          "id": "LU44UjmA5oGN",
+          "name": "refresh-cw-alt-1-svgrepo-com.svg",
+          "filePath": "../public/plasmic/inlab/images/refreshCwAlt1SvgrepoComSvg.svg"
         }
       ],
       "indirect": false,

@@ -70,6 +70,8 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicNewNoticeBanner.module.css"; // plasmic-import: X347FgRZh6HH/css
 
+import SadButRelievedFaceSvgrepoComSvgIcon from "./icons/PlasmicIcon__SadButRelievedFaceSvgrepoComSvg"; // plasmic-import: x6b9-yA7JOIM/icon
+
 createPlasmicElementProxy;
 
 export type PlasmicNewNoticeBanner__VariantMembers = {};
@@ -88,6 +90,8 @@ export const PlasmicNewNoticeBanner__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicNewNoticeBanner__OverridesType = {
   root?: Flex__<typeof NewFeatureBanner>;
+  freeBox?: Flex__<"div">;
+  svg?: Flex__<"svg">;
   text?: Flex__<"div">;
 };
 
@@ -150,21 +154,40 @@ function PlasmicNewNoticeBanner__RenderFunc(props: {
       newVersionDatetime2={args.newNoticeDatetime}
     >
       <div
-        data-plasmic-name={"text"}
-        data-plasmic-override={overrides.text}
-        className={classNames(projectcss.all, projectcss.__wab_text, sty.text)}
-        dir={"rtl"}
+        data-plasmic-name={"freeBox"}
+        data-plasmic-override={overrides.freeBox}
+        className={classNames(projectcss.all, sty.freeBox)}
       >
-        {
-          "\u0645\u0647\u0644\u062a \u0627\u0634\u062a\u0631\u0627\u06a9 \u0631\u0627\u06cc\u06af\u0627\u0646 \u0634\u0645\u0627 \u062f\u0631 \u062a\u0627\u0631\u06cc\u062e 27 \u0628\u0647\u0645\u0646 \u067e\u0627\u06cc\u0627\u0646 \u0645\u06cc \u06cc\u0627\u0628\u062f. \r\n\u062f\u0631 \u0635\u0648\u0631\u062a \u062a\u0645\u0627\u06cc\u0644 \u0646\u0633\u0628\u062a \u0628\u0647 \u062e\u0631\u06cc\u062f \u0627\u0634\u062a\u0631\u0627\u06a9 \u0627\u0642\u062f\u0627\u0645 \u0646\u0645\u0627\u06cc\u06cc\u062f"
-        }
+        <SadButRelievedFaceSvgrepoComSvgIcon
+          data-plasmic-name={"svg"}
+          data-plasmic-override={overrides.svg}
+          className={classNames(projectcss.all, sty.svg)}
+          role={"img"}
+        />
+
+        <div
+          data-plasmic-name={"text"}
+          data-plasmic-override={overrides.text}
+          className={classNames(
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text
+          )}
+          dir={"rtl"}
+        >
+          {
+            "\u0645\u062a\u0627\u0633\u0641\u0627\u0646\u0647 \u0627\u0634\u062a\u0631\u0627\u06a9 \u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 \u0634\u0645\u0627 \u062a\u0645\u0627\u0645 \u0634\u062f\u0647\r\n\r\u062f\u0631 \u0635\u0648\u0631\u062a \u0646\u06cc\u0627\u0632 \u0628\u0647 \u062a\u0645\u062f\u06cc\u062f \u0627\u0634\u062a\u0631\u0627\u06a9 \u0628\u0647 \u0645\u0633\u0648\u0648\u0644 \u0641\u0646\u0627\u0648\u0631\u06cc \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 \u062e\u0648\u062f \u062e\u0628\u0631 \u062f\u0647\u06cc\u062f."
+          }
+        </div>
       </div>
     </NewFeatureBanner>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "text"],
+  root: ["root", "freeBox", "svg", "text"],
+  freeBox: ["freeBox", "svg", "text"],
+  svg: ["svg"],
   text: ["text"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -172,6 +195,8 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: typeof NewFeatureBanner;
+  freeBox: "div";
+  svg: "svg";
   text: "div";
 };
 
@@ -235,6 +260,8 @@ export const PlasmicNewNoticeBanner = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    freeBox: makeNodeComponent("freeBox"),
+    svg: makeNodeComponent("svg"),
     text: makeNodeComponent("text"),
 
     // Metadata about props expected for PlasmicNewNoticeBanner
