@@ -504,32 +504,6 @@ function PlasmicInlabLogin__RenderFunc(props: {
               }
             </div>
           ) : null}
-          {(() => {
-            try {
-              return window.location.origin === "https://thcsynapps.tums.ac.ir";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return true;
-              }
-              throw e;
-            }
-          })() ? (
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__kBsk9
-              )}
-              dir={"rtl"}
-            >
-              {
-                "\u0645\u0647\u0644\u062a \u0627\u0634\u062a\u0631\u0627\u06a9 \u0631\u0627\u06cc\u06af\u0627\u0646 \u0634\u0645\u0627 \u062f\u0631 \u062a\u0627\u0631\u06cc\u062e 27 \u0628\u0647\u0645\u0646 \u067e\u0627\u06cc\u0627\u0646 \u0645\u06cc \u06cc\u0627\u0628\u062f. \r\n\u062f\u0631 \u0635\u0648\u0631\u062a \u062a\u0645\u0627\u06cc\u0644 \u0646\u0633\u0628\u062a \u0628\u0647 \u062e\u0631\u06cc\u062f \u0627\u0634\u062a\u0631\u0627\u06a9 \u0627\u0642\u062f\u0627\u0645 \u0646\u0645\u0627\u06cc\u06cc\u062f"
-              }
-            </div>
-          ) : null}
           <TextInput
             data-plasmic-name={"username"}
             data-plasmic-override={overrides.username}
@@ -1388,11 +1362,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
           />
 
           {(() => {
-            return (
-              $props.newNoticeDatetime !==
-                localStorage.getItem("new_notice_datetime") &&
-              window.location.origin === "https://thcsynapps.tums.ac.ir"
-            );
+            return window.location.origin === "https://thcsynapps.tums.ac.ir";
           })()
             ? (() => {
                 const child$Props = {
