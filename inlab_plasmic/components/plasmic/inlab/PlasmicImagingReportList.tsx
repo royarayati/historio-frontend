@@ -129,7 +129,6 @@ export type PlasmicImagingReportList__OverridesType = {
   paraclinicName?: Flex__<"div">;
   paraclinicDatetime?: Flex__<"div">;
   paraclinicReportModal?: Flex__<typeof AntdModal>;
-  freeBox?: Flex__<"div">;
   radiologyReportText2?: Flex__<"div">;
   radiologyReportDatetime2?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
@@ -142,6 +141,7 @@ export type PlasmicImagingReportList__OverridesType = {
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
   getPacsUrl?: Flex__<typeof ApiFetcherComponent>;
   pacsButton?: Flex__<typeof Button>;
+  uploadedMedia?: Flex__<typeof ApiFetcherComponent>;
 };
 
 export interface DefaultImagingReportListProps {}
@@ -1403,7 +1403,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </div>
           </Button>
         </Stack__>
-        {$state.selectedTab == "ParaclinicReports" ? (
+        {$state.selectedTab === "ParaclinicReports" ? (
           <ApiFetcherComponent
             data-plasmic-name={"paraclinicsReport"}
             data-plasmic-override={overrides.paraclinicsReport}
@@ -2800,11 +2800,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
           width={"85%"}
           wrapClassName={classNames({ [sty["pcls_nVYN7IUeA_o9"]]: true })}
         >
-          <div
-            data-plasmic-name={"freeBox"}
-            data-plasmic-override={overrides.freeBox}
-            className={classNames(projectcss.all, sty.freeBox)}
-          >
+          <div className={classNames(projectcss.all, sty.freeBox__nwr7J)}>
             <div
               data-plasmic-name={"radiologyReportText2"}
               data-plasmic-override={overrides.radiologyReportText2}
@@ -3498,6 +3494,67 @@ function PlasmicImagingReportList__RenderFunc(props: {
             )}
           </DataCtxReader__>
         </ApiFetcherComponent>
+        {false ? (
+          <ApiFetcherComponent
+            data-plasmic-name={"uploadedMedia"}
+            data-plasmic-override={overrides.uploadedMedia}
+            className={classNames("__wab_instance", sty.uploadedMedia)}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v3/patient/media?patient_id=${undefined}`}
+            ref={ref => {
+              $refs["uploadedMedia"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <div className={classNames(projectcss.all, sty.freeBox__r40CV)}>
+                  {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                    (() => {
+                      try {
+                        return $ctx.fetched_data.data;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return [];
+                        }
+                        throw e;
+                      }
+                    })()
+                  ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                    const currentItem = __plasmic_item_0;
+                    const currentIndex = __plasmic_idx_0;
+                    return (
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__ly0Z
+                        )}
+                        key={currentIndex}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
+        ) : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -3537,7 +3594,6 @@ const PlasmicDescendants = {
     "paraclinicName",
     "paraclinicDatetime",
     "paraclinicReportModal",
-    "freeBox",
     "radiologyReportText2",
     "radiologyReportDatetime2",
     "switchingTabs",
@@ -3549,7 +3605,8 @@ const PlasmicDescendants = {
     "laboratory",
     "bookmarkIcon",
     "getPacsUrl",
-    "pacsButton"
+    "pacsButton",
+    "uploadedMedia"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -3668,11 +3725,9 @@ const PlasmicDescendants = {
   paraclinicDatetime: ["paraclinicDatetime"],
   paraclinicReportModal: [
     "paraclinicReportModal",
-    "freeBox",
     "radiologyReportText2",
     "radiologyReportDatetime2"
   ],
-  freeBox: ["freeBox", "radiologyReportText2"],
   radiologyReportText2: ["radiologyReportText2"],
   radiologyReportDatetime2: ["radiologyReportDatetime2"],
   switchingTabs: [
@@ -3701,7 +3756,8 @@ const PlasmicDescendants = {
   laboratory: ["laboratory"],
   bookmarkIcon: ["bookmarkIcon"],
   getPacsUrl: ["getPacsUrl", "pacsButton"],
-  pacsButton: ["pacsButton"]
+  pacsButton: ["pacsButton"],
+  uploadedMedia: ["uploadedMedia"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -3739,7 +3795,6 @@ type NodeDefaultElementType = {
   paraclinicName: "div";
   paraclinicDatetime: "div";
   paraclinicReportModal: typeof AntdModal;
-  freeBox: "div";
   radiologyReportText2: "div";
   radiologyReportDatetime2: "div";
   switchingTabs: "div";
@@ -3752,6 +3807,7 @@ type NodeDefaultElementType = {
   bookmarkIcon: typeof BookmarkIcon;
   getPacsUrl: typeof ApiFetcherComponent;
   pacsButton: typeof Button;
+  uploadedMedia: typeof ApiFetcherComponent;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -3847,7 +3903,6 @@ export const PlasmicImagingReportList = Object.assign(
     paraclinicName: makeNodeComponent("paraclinicName"),
     paraclinicDatetime: makeNodeComponent("paraclinicDatetime"),
     paraclinicReportModal: makeNodeComponent("paraclinicReportModal"),
-    freeBox: makeNodeComponent("freeBox"),
     radiologyReportText2: makeNodeComponent("radiologyReportText2"),
     radiologyReportDatetime2: makeNodeComponent("radiologyReportDatetime2"),
     switchingTabs: makeNodeComponent("switchingTabs"),
@@ -3860,6 +3915,7 @@ export const PlasmicImagingReportList = Object.assign(
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
     getPacsUrl: makeNodeComponent("getPacsUrl"),
     pacsButton: makeNodeComponent("pacsButton"),
+    uploadedMedia: makeNodeComponent("uploadedMedia"),
 
     // Metadata about props expected for PlasmicImagingReportList
     internalVariantProps: PlasmicImagingReportList__VariantProps,
