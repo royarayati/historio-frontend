@@ -3325,7 +3325,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
           method={"GET"}
           path={`/api/v3/patient/pacs_url?admission_id=${
             $ctx.params.adm_id
-          }&user_id=${localStorage.getItem("inlab_user_namespace_id")}`}
+          }&user_id=${localStorage.getItem(
+            "inlab_user_namespace_id"
+          )}&patient_id=${$ctx.params.code}`}
           ref={ref => {
             $refs["getPacsUrl"] = ref;
           }}
