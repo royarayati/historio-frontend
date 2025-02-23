@@ -6686,8 +6686,11 @@ function PlasmicHomepage__RenderFunc(props: {
                       </div>
                     ) : null}
                     {$ctx.fetched_data.loading == false &&
-                    $ctx.fetched_data.data == 0 &&
-                    $state.patientsSelectedTab !== "bookmark" ? (
+                    $ctx.fetched_data.data.length === 0 &&
+                    !(
+                      $state.searchbarFname.value === "" &&
+                      $state.searchbarLnameNcode.value === ""
+                    ) ? (
                       <div
                         data-plasmic-name={
                           "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
@@ -6727,7 +6730,9 @@ function PlasmicHomepage__RenderFunc(props: {
                         : $state.mainSelectedTab == "patients" &&
                           $state.patientsSelectedTab == "bookmark" &&
                           $ctx.fetched_data.loading == false &&
-                          $ctx.fetched_data.data.length === 0
+                          $ctx.fetched_data.data.length === 0 &&
+                          $state.searchbarFname.value == "" &&
+                          $state.searchbarLnameNcode.value == ""
                     ) ? (
                       <div
                         data-plasmic-name={"bookmarkGuide"}

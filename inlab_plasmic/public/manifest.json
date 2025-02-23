@@ -3,37 +3,37 @@
   "name": "Intelligent-Laboratory",
   "icons": [
     {
-      "src": "plasmic/inlab/images/icon36X36.svg",
+      "src": "plasmic/inlab/images/icon36X36Svg.svg",
       "type": "image/png",
       "sizes": "36x36"
     },
     {
-      "src": "plasmic/inlab/images/icon48X48.svg",
+      "src": "plasmic/inlab/images/icon48X48Svg.svg",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "plasmic/inlab/images/icon72X72.svg",
+      "src": "plasmic/inlab/images/icon72X72Svg.svg",
       "type": "image/png",
       "sizes": "72x72"
     },
     {
-      "src": "plasmic/inlab/images/icon96X96.svg",
+      "src": "plasmic/inlab/images/icon96X96Svg.svg",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "plasmic/inlab/images/icon144X144.svg",
+      "src": "plasmic/inlab/images/icon144X144Svg.svg",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "plasmic/inlab/images/icon192X192.svg",
+      "src": "plasmic/inlab/images/icon192X192Svg.svg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "plasmic/inlab/images/icon512X512.svg",
+      "src": "plasmic/inlab/images/icon512X512Svg.svg",
       "type": "image/png",
       "sizes": "512x512"
     }

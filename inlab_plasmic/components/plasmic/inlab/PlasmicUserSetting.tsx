@@ -1250,6 +1250,47 @@ function PlasmicUserSetting__RenderFunc(props: {
                     ) {
                       return;
                     }
+
+                    (async event => {
+                      const $steps = {};
+
+                      $steps["makeFalsePutUserPasswordActivation"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["putUserPasswordActivation"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["makeFalsePutUserPasswordActivation"] != null &&
+                        typeof $steps["makeFalsePutUserPasswordActivation"] ===
+                          "object" &&
+                        typeof $steps["makeFalsePutUserPasswordActivation"]
+                          .then === "function"
+                      ) {
+                        $steps["makeFalsePutUserPasswordActivation"] =
+                          await $steps["makeFalsePutUserPasswordActivation"];
+                      }
+                    }).apply(null, eventArgs);
                   }}
                   placeholder={
                     "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
@@ -1338,6 +1379,47 @@ function PlasmicUserSetting__RenderFunc(props: {
                     ) {
                       return;
                     }
+
+                    (async event => {
+                      const $steps = {};
+
+                      $steps["makeFalsePutUserPasswordActivation"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["putUserPasswordActivation"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["makeFalsePutUserPasswordActivation"] != null &&
+                        typeof $steps["makeFalsePutUserPasswordActivation"] ===
+                          "object" &&
+                        typeof $steps["makeFalsePutUserPasswordActivation"]
+                          .then === "function"
+                      ) {
+                        $steps["makeFalsePutUserPasswordActivation"] =
+                          await $steps["makeFalsePutUserPasswordActivation"];
+                      }
+                    }).apply(null, eventArgs);
                   }}
                   placeholder={
                     "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0645\u062c\u062f\u062f\u0627 \u062a\u06a9\u0631\u0627\u0631 \u06a9\u0646\u06cc\u062f"
