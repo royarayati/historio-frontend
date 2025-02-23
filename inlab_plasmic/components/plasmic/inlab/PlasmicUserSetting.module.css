@@ -380,6 +380,104 @@
   color: var(--token-9iYGdL7i3GKE);
   flex-shrink: 0;
 }
+.text__wv95T {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  font-weight: 700;
+  line-height: 1.5em;
+  flex-shrink: 0;
+  padding: 5px;
+}
+.shareToolContent {
+  background: #ffffff;
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  top: auto;
+  left: auto;
+  flex-direction: row-reverse;
+  margin-top: calc(0px + 8px) !important;
+  margin-right: 0px;
+  margin-bottom: 17px;
+  margin-left: 0px;
+  min-width: 0;
+  padding: 0px 16px;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
+}
+.shareToolContent > :global(.__wab_flex-container) {
+  flex-direction: row-reverse;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  min-width: 0;
+  margin-left: calc(0px - 8px);
+  width: calc(100% + 8px);
+}
+.shareToolContent > :global(.__wab_flex-container) > *,
+.shareToolContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.shareToolContent > :global(.__wab_flex-container) > picture > img,
+.shareToolContent
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 8px;
+}
+.shareToolContentdisabledLogoutButton {
+  left: auto;
+  top: auto;
+  margin-top: calc(0px + 8px) !important;
+}
+.shareTool:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.logoutButton:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  left: auto;
+  top: auto;
+  margin-top: calc(0px + 8px) !important;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  height: auto;
+}
+.logoutButtondisabledLogoutButton:global(.__wab_instance) {
+  left: auto;
+  top: auto;
+  opacity: 0.6;
+  margin-top: calc(0px + 8px) !important;
+}
+.svg__fLi6W {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+  display: none;
+}
+.text__zjr24 {
+  background: none;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: auto;
+  white-space: pre-wrap;
+  color: #ffffff;
+}
+.textdisabledLogoutButton__zjr24L5PSg {
+  height: auto;
+}
+.svg__uvacG {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
 .changePassword:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
@@ -501,6 +599,10 @@
   height: 24px;
   align-self: auto;
 }
+.putUserPassword:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
 .successfulChangePassword2:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
@@ -559,112 +661,6 @@
 }
 .text__lCl1 {
   background: #ffffff;
-}
-.triggerToOpenModalButton:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  font-weight: 700;
-  background: #ffffff;
-  border-width: 1px;
-  border-style: none;
-}
-.text__wv95T {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-weight: 700;
-  line-height: 1.5em;
-  flex-shrink: 0;
-  min-width: 0;
-}
-.shareToolContent {
-  background: #ffffff;
-  width: 100%;
-  height: auto;
-  display: flex;
-  position: relative;
-  top: auto;
-  left: auto;
-  flex-direction: row-reverse;
-  margin-top: calc(0px + 8px) !important;
-  margin-right: 0px;
-  margin-bottom: 17px;
-  margin-left: 0px;
-  min-width: 0;
-  padding: 0px 16px;
-  border-top: 1px solid #bdbdbd;
-  border-bottom: 1px solid #bdbdbd;
-}
-.shareToolContent > :global(.__wab_flex-container) {
-  flex-direction: row-reverse;
-  align-items: stretch;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  align-content: stretch;
-  min-width: 0;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-}
-.shareToolContent > :global(.__wab_flex-container) > *,
-.shareToolContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.shareToolContent > :global(.__wab_flex-container) > picture > img,
-.shareToolContent
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 8px;
-}
-.shareToolContentdisabledLogoutButton {
-  left: auto;
-  top: auto;
-  margin-top: calc(0px + 8px) !important;
-}
-.shareTool:global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
-}
-.logoutButton:global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
-  left: auto;
-  top: auto;
-  margin-top: calc(0px + 8px) !important;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  height: auto;
-}
-.logoutButtondisabledLogoutButton:global(.__wab_instance) {
-  left: auto;
-  top: auto;
-  opacity: 0.6;
-  margin-top: calc(0px + 8px) !important;
-}
-.svg__fLi6W {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-  display: none;
-}
-.text__zjr24 {
-  background: none;
-  padding-left: 0px;
-  padding-right: 0px;
-  height: auto;
-  white-space: pre-wrap;
-  color: #ffffff;
-}
-.textdisabledLogoutButton__zjr24L5PSg {
-  height: auto;
-}
-.svg__uvacG {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
 }
 .homepageSwitchingTab {
   display: flex;
