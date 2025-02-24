@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios , { AxiosResponse } from 'axios';
+
 import { InlabUser, GlobalContextType, GlobalContext } from './types/CommonTypes';
 
 export function logForDev(logText: string | null) {
@@ -30,6 +31,7 @@ export function getCurrentUser(): InlabUser {
     return undefined;
   }
 }
+
 
 export function isTokenExpired(token: string): boolean {
   const payloadBase64 = token.split('.')[1];
@@ -142,3 +144,5 @@ export function refreshAccessIfNeeded(globalContext: GlobalContextType, inlabUse
     }
   });
 }
+
+

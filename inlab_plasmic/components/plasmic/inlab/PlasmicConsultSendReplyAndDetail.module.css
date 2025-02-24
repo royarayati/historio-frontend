@@ -79,7 +79,7 @@
   border-top-width: 1px;
   min-width: 0;
 }
-.sendConsultContent {
+.sentConsultContent {
   display: block;
   position: fixed;
   width: auto;
@@ -213,7 +213,7 @@
   height: 30px;
   flex-shrink: 0;
 }
-.sendConsultReplyAlertContent {
+.consultReviewAlertContent {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -224,20 +224,19 @@
   max-width: 100%;
   padding: 8px;
 }
-.sendConsultReplySuccessfully:global(.__wab_instance) {
+.consultReviewUnsuccessfully:global(.__wab_instance) {
   max-width: 100%;
   width: auto;
   margin-top: 5px;
-  display: none;
 }
-.text__sRnCt {
+.text__l9JrS {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-.text___1BKnX {
+.text___22QZ {
   position: relative;
   width: 100%;
   height: auto;
@@ -256,45 +255,7 @@
   text-decoration-line: none !important;
   min-width: 0;
 }
-.svg__imP1P {
-  position: relative;
-  object-fit: cover;
-  max-width: 100%;
-  height: 24px;
-  align-self: auto;
-}
-.sendConsultReplyUnsuccessfully:global(.__wab_instance) {
-  max-width: 100%;
-  width: auto;
-  margin-top: 5px;
-}
-.text__aP {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.text__kn7L {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-family: var(--VazirmatnCustom);
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 400;
-  font-style: normal;
-  color: var(--token-IYO13gyYJHXG);
-  text-align: center;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  text-decoration-line: none !important;
-  min-width: 0;
-}
-.svg__pA82N {
+.svg__k60Kx {
   position: relative;
   object-fit: cover;
   max-width: 100%;
@@ -469,8 +430,19 @@
   min-width: 0;
   padding: 8px;
 }
-.presentIllnessTitle {
+.presentIllnessTitleContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
   width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.presentIllnessTitle {
+  width: auto;
   height: auto;
   max-width: 100%;
   background: #ffffff;
@@ -487,9 +459,28 @@
   user-select: none;
   text-decoration-line: none;
   align-self: center;
-  min-width: 0;
   padding: 5px 10px 5px 5px;
   border: 1px none #000000;
+}
+.copyPatientPresentIllness {
+  object-fit: cover;
+  max-width: 100%;
+  align-self: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.copyPatientPresentIllnessMessage {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  margin-right: 10px;
+  font-weight: 700;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: #00000080;
 }
 .patientPresentIllness {
   width: 100%;
@@ -738,7 +729,7 @@
   color: #000000b3;
   min-width: 0;
 }
-.sendConsultReplyButton:global(.__wab_instance) {
+.consultSendReplyButton:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   margin-left: 5px;
@@ -748,7 +739,7 @@
   min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .sendConsultReplyButton:global(.__wab_instance) {
+  .consultSendReplyButton:global(.__wab_instance) {
     margin-top: calc(5px + 4px) !important;
   }
 }
@@ -790,8 +781,19 @@
   min-width: 0;
   padding: 8px;
 }
-.finalConsultReplyTitle {
+.finalConsultReplyTitleContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
   width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.finalConsultReplyTitle {
+  width: auto;
   height: auto;
   max-width: 100%;
   background: #ffffff;
@@ -808,9 +810,28 @@
   user-select: none;
   text-decoration-line: none;
   align-self: center;
-  min-width: 0;
   padding: 5px 10px 5px 5px;
   border: 1px none #000000;
+}
+.copyFinalConsultReplyTitle {
+  object-fit: cover;
+  max-width: 100%;
+  align-self: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.copyFinalConsultReplyTitleMessage {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  margin-right: 10px;
+  font-weight: 700;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  color: #00000080;
 }
 .finalConsultReply {
   width: 100%;
@@ -917,7 +938,7 @@
   text-align: right;
   min-width: 0;
 }
-.confirmerConsultConfirmerTitle {
+.consultReviewerTitle {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -938,7 +959,7 @@
   padding: 5px 10px 5px 5px;
   border: 1px none #000000;
 }
-.confirmerConsultConfirmer {
+.consultReviewer {
   position: relative;
   width: 100%;
   height: auto;
@@ -946,6 +967,46 @@
   text-align: right;
   min-width: 0;
   padding: 5px 10px 5px 5px;
+}
+.consultReviewButton:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  margin-left: 5px;
+  margin-top: calc(5px + 4px) !important;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .consultReviewButton:global(.__wab_instance) {
+    margin-top: calc(5px + 4px) !important;
+  }
+}
+.reviewConsult {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__i0Hw {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__fpiyi {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }
 .switchingTab {
   display: flex;
@@ -1206,6 +1267,250 @@
   user-select: none;
   text-decoration-line: none;
   padding-top: 0px;
+  min-width: 0;
+}
+.modalConsultSendReplyConfirmation:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.modalConsultSendReplyConfirmation__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.confirmationContent2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+}
+.consultSendReplySuccessfully:global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  margin-top: 5px;
+  display: none;
+}
+.text__sRnCt {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text___1BKnX {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  min-width: 0;
+}
+.svg__imP1P {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.consultSendReplyUnsuccessfully:global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  margin-top: 5px;
+}
+.text__aP {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__kn7L {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  min-width: 0;
+}
+.svg__pA82N {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.confirmationYesNo2 {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.noConfirm2:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__exxAq {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__zTvth {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__mo80O {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.confirm2:global(.__wab_instance) {
+  max-width: 100%;
+  margin-left: 30px;
+}
+.text___3C019 {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__brWa {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__sj39M {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.unsuccessfulDeleteConsult2:global(.__wab_instance) {
+  max-width: 100%;
+  width: 180px;
+}
+.text__ezxle {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__bEjZh {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  min-width: 0;
+}
+.svg__baKhT {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.title2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  background: #ffffff;
+  min-width: 0;
+}
+.text__eYvti {
+  background: none;
+  margin-bottom: 10px;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+}
+.text__tvTEi {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 300;
   min-width: 0;
 }
 .modalConsultPaperReplyNecessity:global(.__wab_instance) {

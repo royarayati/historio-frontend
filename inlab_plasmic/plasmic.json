@@ -2276,6 +2276,11 @@
           "id": "x6b9-yA7JOIM",
           "name": "SadButRelievedFaceSvgrepoComSvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__SadButRelievedFaceSvgrepoComSvg.tsx"
+        },
+        {
+          "id": "crPh_fw9jxSR",
+          "name": "CopyIconSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__CopyIconSvg.tsx"
         }
       ],
       "images": [
@@ -2472,6 +2477,12 @@
           "name": "ApiFetcherComponent",
           "displayName": "ApiFetcherComponent",
           "componentImportPath": "./utils/ApiFetcherComponent"
+        },
+        {
+          "id": "7kAzsD1nNTbW",
+          "name": "UploadFileComponent",
+          "displayName": "UploadFileComponent",
+          "componentImportPath": "./utils/UploadFileComponent"
         }
       ],
       "customFunctions": []
