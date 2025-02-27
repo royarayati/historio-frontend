@@ -131,11 +131,11 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
       console.log("UploadFileComponent: axios request success: " + response)
   
       onAxiosSuccess(response);
-      return { success : true , data : response.data};
+      // return { success : true , data : response.data};
     } catch (error) {
-      console.log("UploadFileComponent: axios request error: " + error)
-      onAxiosError(error);
-      return { success : false , error :"upload error" }
+      // console.log("UploadFileComponent: axios request error: " + error)
+      // onAxiosError(error);
+      return { success : false , error :{} }
     }
   };
   
