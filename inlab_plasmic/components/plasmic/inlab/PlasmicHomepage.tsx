@@ -6731,8 +6731,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           $state.patientsSelectedTab == "bookmark" &&
                           $ctx.fetched_data.loading == false &&
                           $ctx.fetched_data.data.length === 0 &&
-                          $state.searchbarFname.value == "" &&
-                          $state.searchbarLnameNcode.value == ""
+                          $state.searchbarFname.value === "" &&
+                          $state.searchbarLnameNcode.value === ""
                     ) ? (
                       <div
                         data-plasmic-name={"bookmarkGuide"}

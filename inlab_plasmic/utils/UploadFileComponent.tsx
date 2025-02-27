@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState, useContext, forwardRef, useRef, useImperativeHandle } from 'react';
 import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-web/lib/host';
 import axios from 'axios';
-import { refreshAccessIfNeeded, logForDev, refreshUser } from './CommonUtils';
+import { refreshAccessIfNeeded , logForDev, refreshUser } from './CommonUtils';
 import { GlobalContext } from './types/CommonTypes';
 
 interface PropsType {
@@ -78,42 +78,40 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
 
   const reload = async () => {
     logForDev('UploadFileComponent: reload called.');
-
+  
     // Validate file
     if (!media) {
       setError('Please select a file to upload.');
       return;
     }
-
+  
     // Validate user
     if (!inlabUser) {
       setError('User is not authenticated. Please log in.');
       return;
     }
-
+  
     // Validate access token
     if (!inlabUser.access) {
       setError('User access token is missing. Please log in again.');
       return;
     }
-
+  
     setLoading(true);
     setError(null);
-
-     // Construct headers
+  
+    // Construct headers
     const authedHeaders = {
       Authorization: 'Bearer ' + inlabUser.access,
-      'x_namespace': props.x_namespace,
+      'X-Namespace': props.x_namespace,
     };
-
-
-
+    console.log("authedHeaders: ",authedHeaders);
+  
     // Make the API request
     try {
-
       const formData = new FormData();
-      formData.append('media', media); // assuming media is the file object
-
+      formData.append('media', media); // Append the file to the form data
+  
       const params = {
         patient_id: props.patientId,
         admission_id: props.admissionId,
@@ -121,31 +119,28 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
         description: props.description,
       };
 
-      const response = await axios.post(`${globalContext.baseUrl}/api/v3/patient/media`, formData ,{
-        
+  
+      const response = await axios.post(`${globalContext.baseUrl}/api/v3/patient/media`, formData, {
         headers: {
           ...authedHeaders,
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data', // This is automatically set by axios when using FormData
         },
-        params , 
-        // params: {
-        
-        //   patient_id: props.patientId,
-        //   admission_id: props.admissionId,
-        //   title: props.title,
-        //   description: props.description,
-        // },
-        // data : media ,
+        params,
       });
-
+  
       console.log("UploadFileComponent: axios request success: " + response)
-
+  
       onAxiosSuccess(response);
+      return { success : true , data : response.data};
     } catch (error) {
+      console.log("UploadFileComponent: axios request error: " + error)
       onAxiosError(error);
+      return { success : false , error :"upload error" }
     }
   };
-
+  
+  
+  
   useImperativeHandle(
     ref,
     () => ({
@@ -154,28 +149,35 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
     [reload]
   );
 
-  return (
-    <div className={props.className}>
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        style={{ display: 'none' }}
-      />
-      <button onClick={handleFilePickerClick}>
-        {props.pickerButtonText || 'Select File'}
-      </button>
-      {media && <div>Selected File: {media.name}</div>}
-      <button onClick={reload} disabled={!media || loading}>
-        {props.submitButtonText || 'Submit'}
-      </button>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <DataProvider name="fetched_data" data={{ loading: loading, ...data }}>
-        {props.children}
-      </DataProvider>
-    </div>
-  );
-});
+
+
+    return (
+      <div className={props.className}>
+        <DataProvider name="fetched_data" data={{ loading: loading, ...data }}>
+          {props.children}
+        </DataProvider>
+        <footer>
+          <div style={{ marginBottom: 10 }}>
+            <button onClick={handleFilePickerClick}>
+              {props.pickerButtonText || 'انتخاب فایل'}
+            </button>
+            {media && <div>Selected File: {media.name}</div>}
+          </div>
+          <div>
+            <button onClick={reload} disabled={!media || loading}>
+              {props.submitButtonText || 'آپلود فایل'}
+            </button>
+          </div>
+        </footer>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+        />
+      </div>
+    );
+  });
 
 export const UploadFileMeta: CodeComponentMeta<PropsType> = {
   name: 'UploadFileComponent',
@@ -189,12 +191,12 @@ export const UploadFileMeta: CodeComponentMeta<PropsType> = {
     delay: 'number',
     pickerButtonText: {
       type: 'string',
-      defaultValue: 'Select File',
+      defaultValue: 'انتخاب فایل',
       description: 'Text for the file picker button',
     },
     submitButtonText: {
       type: 'string',
-      defaultValue: 'Submit',
+      defaultValue: 'آپلود فایل',
       description: 'Text for the submit button',
     },
   },
