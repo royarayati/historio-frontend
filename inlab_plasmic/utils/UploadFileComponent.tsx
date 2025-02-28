@@ -94,10 +94,7 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
     };
 
     const reload = async () => {
-        if (!isMountedRef.current) return; // Exit if component is not mounted
-
-        logForDev('UploadFileComponent: reload called.');
-
+       
         // Validate file
         if (!media) {
             setError('Please select a file to upload.');
@@ -118,6 +115,7 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
 
         setLoading(true);
         setError(null);
+        console.log("finish loading");
 
         // Construct headers
         const authedHeaders = {
@@ -189,8 +187,9 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
                     {media && <div>Selected File: {media.name}</div>}
                 </div>
                 <div>
-                    <button onClick={() => reload()} disabled={!media || loading}>
-                        {props.submitButtonText || 'آپلود فایل'}
+                    {/* <button onClick={() => reload()} disabled={!media || loading}> */}
+                    <button onClick={() => reload()} >
+                        {(props.submitButtonText || 'آپلود فایل')}
                     </button>
                 </div>
             </footer>
