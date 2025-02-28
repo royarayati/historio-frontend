@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useState, useContext, forwardRef, useRef, useImpe
 import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-web/lib/host';
 import { refreshAccessIfNeeded , logForDev, refreshUser } from './CommonUtils';
 import { GlobalContext } from './types/CommonTypes';
+import { set } from '@plasmicapp/react-web';
 
 interface PropsType {
     className?: string;
@@ -93,6 +94,8 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
         }
     };
 
+    const [responseMessage , setresponseMessage] = useState('');
+
     const reload = async () => {
        
         // Validate file
@@ -152,6 +155,28 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
             console.log("UploadFileComponent: axios request success: " + response)
 
             onAxiosSuccess(response);
+
+            if (response.status === 201) {
+                setLoading(false);
+                setError(null);
+                setData(response);
+                // display success message
+                setresponseMessage('آپلود با موفقیت انجام شد')
+
+            } else if (response.status === 400) {
+                setLoading(false);
+                setError('an error occurred while uploading the file.');
+                // display error message
+                setresponseMessage('آپلود با خطا مواجه شد');
+            
+            }else if (response.status === 403) {
+                setLoading(false);
+                setError('media with this title already exists.');
+                // display error message
+                setresponseMessage('فایلی با این عنوان قبلا آپلود شده است');
+            }
+
+     
         } catch (error) {
             if (axios.isCancel(error)) {
                 // Request was cancelled, don't update state
@@ -187,10 +212,17 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
                     {media && <div>Selected File: {media.name}</div>}
                 </div>
                 <div>
-                    {/* <button onClick={() => reload()} disabled={!media || loading}> */}
+                    {/* <button onClick={() => reload()}>
+                        {loading ? 'در حال آپلود...' : props.submitButtonText || 'آپلود فایل'}
+                    </button> */}
                     <button onClick={() => reload()} >
                         {(props.submitButtonText || 'آپلود فایل')}
                     </button>
+                    <br />
+                    <span style = {{ color: 'green'}}>
+                        {responseMessage}
+                    </span>
+
                 </div>
             </footer>
             <input

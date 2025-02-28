@@ -65,7 +65,7 @@ import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // pla
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
-import UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
+import  UploadFileComponent from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -146,6 +146,8 @@ export type PlasmicImagingReportList__OverridesType = {
   descriptionTextInput?: Flex__<typeof TextInput>;
   radiologyReportDatetime3?: Flex__<"div">;
   deleteMediaAlarm?: Flex__<typeof AntdModal>;
+  cancel?: Flex__<typeof Button>;
+  ok?: Flex__<typeof Button>;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   homepage?: Flex__<typeof PlasmicImg__>;
@@ -582,7 +584,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
         path: "deleteMediaAlarm.open",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
         path: "mediaTitle",
@@ -624,7 +626,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
         path: "uploadMediaModal.open",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
+        initFunc: ({ $props, $state, $queries, $ctx }) => true
       },
       {
         path: "titleTextinput.value",
@@ -637,6 +639,66 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "cancel.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "cancel.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "cancel.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "cancel.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "cancel.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "ok.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "ok.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "ok.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "ok.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "ok.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -988,9 +1050,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                 sty.text__akAEr
               )}
             >
-              {
-                "\u0633\u0627\u06cc\u0631 \u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631"
-              }
+              {"\u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631"}
             </div>
           </Button>
           <Button
@@ -3445,7 +3505,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             plasmic_antd_5_hostless_css.plasmic_tokens,
             plasmic_plasmic_rich_components_css.plasmic_tokens
           )}
-          hideFooter={false}
+          hideFooter={true}
           maskClosable={true}
           modalContentClassName={classNames({
             [sty["pcls_bL9rb-EdGc4r"]]: true
@@ -3517,17 +3577,351 @@ function PlasmicImagingReportList__RenderFunc(props: {
           width={"85%"}
           wrapClassName={classNames({ [sty["pcls_Nhe57s8T_IrW"]]: true })}
         >
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text___7RZl5
-            )}
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__pLdfP)}
           >
-            {
-              "\u0627\u06cc\u0646 \u0641\u0627\u06cc\u0644 \u062a\u0646\u0647\u0627 \u062a\u0648\u0633\u0637 \u0641\u0631\u062f \u0628\u0627\u0631\u06af\u0630\u0627\u0631\u06cc \u06a9\u0646\u0646\u062f\u0647 \u0642\u0627\u0628\u0644 \u062d\u0630\u0641 \u06a9\u0631\u062f\u0646 \u0645\u06cc \u0628\u0627\u0634\u062f "
-            }
-          </div>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___7RZl5
+              )}
+            >
+              {
+                "\u0627\u06cc\u0646 \u0641\u0627\u06cc\u0644 \u062a\u0646\u0647\u0627 \u062a\u0648\u0633\u0637 \u0641\u0631\u062f \u0628\u0627\u0631\u06af\u0630\u0627\u0631\u06cc \u06a9\u0646\u0646\u062f\u0647 \u0642\u0627\u0628\u0644 \u062d\u0630\u0641 \u06a9\u0631\u062f\u0646 \u0645\u06cc \u0628\u0627\u0634\u062f "
+              }
+            </div>
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox__d6X4C)}
+            >
+              <Button
+                data-plasmic-name={"cancel"}
+                data-plasmic-override={overrides.cancel}
+                className={classNames("__wab_instance", sty.cancel)}
+                color={"clear"}
+                deselected={generateStateValueProp($state, [
+                  "cancel",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "cancel",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["closeDeleteMediaAlarm"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["deleteMediaAlarm", "open"]
+                          },
+                          operation: 0,
+                          value: false
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["closeDeleteMediaAlarm"] != null &&
+                    typeof $steps["closeDeleteMediaAlarm"] === "object" &&
+                    typeof $steps["closeDeleteMediaAlarm"].then === "function"
+                  ) {
+                    $steps["closeDeleteMediaAlarm"] = await $steps[
+                      "closeDeleteMediaAlarm"
+                    ];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["cancel", "deselected"])(
+                      eventArgs[0]
+                    );
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["cancel", "isDisabled"])(
+                      eventArgs[0]
+                    );
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["cancel", "selected"])(
+                      eventArgs[0]
+                    );
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "cancel",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "cancel",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "cancel",
+                  "selected"
+                ])}
+                sortDeselected={generateStateValueProp($state, [
+                  "cancel",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "cancel",
+                  "sortSelected"
+                ])}
+              >
+                {"\u062e\u06cc\u0631"}
+              </Button>
+              <Button
+                data-plasmic-name={"ok"}
+                data-plasmic-override={overrides.ok}
+                className={classNames("__wab_instance", sty.ok)}
+                color={"red"}
+                deselected={generateStateValueProp($state, [
+                  "ok",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "ok",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["callDeleteApi"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "DELETE",
+                            `/api/v3/patient/media?patient_id=${$ctx.params.code}&title=${$state.mediaTitle}`,
+                            (() => {
+                              try {
+                                return {
+                                  "X-Namespace": localStorage.getItem(
+                                    "inlab_user_namespace_id"
+                                  )
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions[
+                          "AuthGlobalContext.apiFetcher"
+                        ]?.apply(null, [...actionArgs.args]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["callDeleteApi"] != null &&
+                    typeof $steps["callDeleteApi"] === "object" &&
+                    typeof $steps["callDeleteApi"].then === "function"
+                  ) {
+                    $steps["callDeleteApi"] = await $steps["callDeleteApi"];
+                  }
+
+                  $steps["closeDelteMediaAlarmModal"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["deleteMediaAlarm", "open"]
+                          },
+                          operation: 0,
+                          value: false
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["closeDelteMediaAlarmModal"] != null &&
+                    typeof $steps["closeDelteMediaAlarmModal"] === "object" &&
+                    typeof $steps["closeDelteMediaAlarmModal"].then ===
+                      "function"
+                  ) {
+                    $steps["closeDelteMediaAlarmModal"] = await $steps[
+                      "closeDelteMediaAlarmModal"
+                    ];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["ok", "deselected"])(
+                      eventArgs[0]
+                    );
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["ok", "isDisabled"])(
+                      eventArgs[0]
+                    );
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["ok", "selected"])(
+                      eventArgs[0]
+                    );
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["ok", "sortDeselected"])(
+                      eventArgs[0]
+                    );
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["ok", "sortSelected"])(
+                      eventArgs[0]
+                    );
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, ["ok", "selected"])}
+                sortDeselected={generateStateValueProp($state, [
+                  "ok",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "ok",
+                  "sortSelected"
+                ])}
+              >
+                {"\u0628\u0644\u0647"}
+              </Button>
+            </Stack__>
+          </Stack__>
         </AntdModal>
         <div
           data-plasmic-name={"switchingTabs"}
@@ -4408,6 +4802,8 @@ const PlasmicDescendants = {
     "descriptionTextInput",
     "radiologyReportDatetime3",
     "deleteMediaAlarm",
+    "cancel",
+    "ok",
     "switchingTabs",
     "switchingTab",
     "homepage",
@@ -4576,7 +4972,9 @@ const PlasmicDescendants = {
   titleTextinput: ["titleTextinput"],
   descriptionTextInput: ["descriptionTextInput"],
   radiologyReportDatetime3: ["radiologyReportDatetime3"],
-  deleteMediaAlarm: ["deleteMediaAlarm"],
+  deleteMediaAlarm: ["deleteMediaAlarm", "cancel", "ok"],
+  cancel: ["cancel"],
+  ok: ["ok"],
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
@@ -4655,6 +5053,8 @@ type NodeDefaultElementType = {
   descriptionTextInput: typeof TextInput;
   radiologyReportDatetime3: "div";
   deleteMediaAlarm: typeof AntdModal;
+  cancel: typeof Button;
+  ok: typeof Button;
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   homepage: typeof PlasmicImg__;
@@ -4774,6 +5174,8 @@ export const PlasmicImagingReportList = Object.assign(
     descriptionTextInput: makeNodeComponent("descriptionTextInput"),
     radiologyReportDatetime3: makeNodeComponent("radiologyReportDatetime3"),
     deleteMediaAlarm: makeNodeComponent("deleteMediaAlarm"),
+    cancel: makeNodeComponent("cancel"),
+    ok: makeNodeComponent("ok"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),
