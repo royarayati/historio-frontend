@@ -4,7 +4,6 @@ import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-
 import { refreshAccessIfNeeded , logForDev, refreshUser } from './CommonUtils';
 import { GlobalContext } from './types/CommonTypes';
 
-
 interface PropsType {
     className?: string;
     children?: ReactNode;
@@ -32,8 +31,17 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
     const [media, setMedia] = useState<File | null>(null);
     const [error, setError] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const abortControllerRef = useRef<AbortController | null>(null);  // Ref to store AbortController
+    const abortControllerRef = useRef<AbortController | null>(null);  
+    const isMountedRef = useRef<boolean>(true); // Flag to check if component is mounted
 
+    useEffect(() => {
+        return () => {
+            isMountedRef.current = false; // Set to false when component unmounts
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort(); // Cancel the request
+            }
+        };
+    }, []);
 
     const handleFilePickerClick = () => {
         if (fileInputRef.current) {
@@ -52,9 +60,11 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
     };
 
     const onAxiosSuccess = (response: any) => {
-        logForDev('UploadFileComponent: axios request success: ' + (response.data ? 'Data Fetched' : 'Data Not Fetched'));
-        setLoading(false);
-        setData(response);
+        if (isMountedRef.current) { // Check if component is mounted
+            logForDev('UploadFileComponent: axios request success: ' + (response.data ? 'Data Fetched' : 'Data Not Fetched'));
+            setLoading(false);
+            setData(response);
+        }
     };
 
     const onAxiosError = async (error: any) => {
@@ -68,19 +78,23 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
                 await refreshUser(inlabUser, globalContext.baseUrl, globalContext.changeUserCallback);
                 await reload();
             } catch (error: any) {
-                setLoading(false);
-                setData(error);
-                setError('Failed to refresh user. Please try again.');
+                if (isMountedRef.current) { // Check if component is mounted
+                    setLoading(false);
+                    setData(error);
+                    setError('Failed to refresh user. Please try again.');
+                }
             }
         } else {
-            setLoading(false);
-            setData(error);
-            setError('An error occurred while uploading the file.');
+            if (isMountedRef.current) { // Check if component is mounted
+                setLoading(false);
+                setData(error);
+                setError('An error occurred while uploading the file.');
+            }
         }
     };
 
     const reload = async () => {
-        setLoading(true);
+        if (!isMountedRef.current) return; // Exit if component is not mounted
 
         logForDev('UploadFileComponent: reload called.');
 
@@ -102,7 +116,7 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
             return;
         }
 
-        setLoading(false);
+        setLoading(true);
         setError(null);
 
         // Construct headers
@@ -128,7 +142,6 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
                 description: props.description,
             };
 
-
             const response = await axios.post(`${globalContext.baseUrl}/api/v3/patient/media`, formData, {
                 headers: {
                     ...authedHeaders,
@@ -141,37 +154,16 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
             console.log("UploadFileComponent: axios request success: " + response)
 
             onAxiosSuccess(response);
-            // return { success : true , data : response.data};
         } catch (error) {
             if (axios.isCancel(error)) {
                 // Request was cancelled, don't update state
                 console.log('Request cancelled');
             } else {
-                // console.log("UploadFileComponent: axios request error: " + error)
-                // onAxiosError(error);
-                return { success: false, error: {} }
+                onAxiosError(error);
             }
         }
     };
 
-
-    useEffect(() => {
-        // Cleanup function to abort the request when the component unmounts
-        return () => {
-            if (abortControllerRef.current) {
-                abortControllerRef.current.abort(); // Cancel the request
-            }
-        };
-    }, []);
-
-
-    // useImperativeHandle(
-    //     ref,
-    //     () => ({
-    //         reload,
-    //     }),
-    //     [reload]
-    // );
     useImperativeHandle(
         ref,
         () => ({
@@ -183,8 +175,6 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
         }),
         [reload, loading]
       );
-
-
 
     return (
         <div className={props.className}>
@@ -199,7 +189,7 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
                     {media && <div>Selected File: {media.name}</div>}
                 </div>
                 <div>
-                    <button onClick={reload} disabled={!media || loading}>
+                    <button onClick={() => reload()} disabled={!media || loading}>
                         {props.submitButtonText || 'آپلود فایل'}
                     </button>
                 </div>
@@ -244,4 +234,5 @@ export const UploadFileMeta: CodeComponentMeta<PropsType> = {
     providesData: true,
     importPath: './utils/UploadFileComponent',
 };
+
 export default UploadFileComponent
