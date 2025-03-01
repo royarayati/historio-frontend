@@ -65,7 +65,6 @@ import ShareTool from "../../ShareTool"; // plasmic-import: B3T4IwC_PpNX/compone
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
-import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 
@@ -133,9 +132,8 @@ export type PlasmicUserSetting__OverridesType = {
   password?: Flex__<typeof TextInput>;
   repeatPasswordContent?: Flex__<"div">;
   repeatPassword?: Flex__<typeof TextInput>;
-  changePasswordButton?: Flex__<typeof Button>;
+  changePasswordButton2?: Flex__<typeof Button>;
   passwordRepeatPasswordMismatch2?: Flex__<typeof Alert>;
-  putUserPassword?: Flex__<typeof ApiFetcherComponent>;
   successfulChangePassword2?: Flex__<typeof Alert>;
   unsuccessfulChangePassword2?: Flex__<typeof Alert>;
   homepageSwitchingTab?: Flex__<"div">;
@@ -245,43 +243,49 @@ function PlasmicUserSetting__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
       },
       {
-        path: "changePasswordButton.isDisabled",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "changePasswordButton.selected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "changePasswordButton.deselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "changePasswordButton.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "changePasswordButton.sortSelected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "passwordRepeatPasswordMismatch",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "putUserPasswordActivation",
+        path: "changePasswordButton2.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "changePasswordButton2.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "changePasswordButton2.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "changePasswordButton2.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "changePasswordButton2.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "successfulChangePasswordState",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "unsuccessfulChangePasswordState",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -753,12 +757,12 @@ function PlasmicUserSetting__RenderFunc(props: {
                   ];
                 }
 
-                $steps["updatePutUserPasswordActivation"] = true
+                $steps["updateSuccessfulChangePasswordState"] = true
                   ? (() => {
                       const actionArgs = {
                         variable: {
                           objRoot: $state,
-                          variablePath: ["putUserPasswordActivation"]
+                          variablePath: ["successfulChangePasswordState"]
                         },
                         operation: 0,
                         value: false
@@ -780,15 +784,52 @@ function PlasmicUserSetting__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["updatePutUserPasswordActivation"] != null &&
-                  typeof $steps["updatePutUserPasswordActivation"] ===
+                  $steps["updateSuccessfulChangePasswordState"] != null &&
+                  typeof $steps["updateSuccessfulChangePasswordState"] ===
                     "object" &&
-                  typeof $steps["updatePutUserPasswordActivation"].then ===
+                  typeof $steps["updateSuccessfulChangePasswordState"].then ===
                     "function"
                 ) {
-                  $steps["updatePutUserPasswordActivation"] = await $steps[
-                    "updatePutUserPasswordActivation"
+                  $steps["updateSuccessfulChangePasswordState"] = await $steps[
+                    "updateSuccessfulChangePasswordState"
                   ];
+                }
+
+                $steps["updateUnsuccessfulChangePasswordState"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["unsuccessfulChangePasswordState"]
+                        },
+                        operation: 0,
+                        value: false
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateUnsuccessfulChangePasswordState"] != null &&
+                  typeof $steps["updateUnsuccessfulChangePasswordState"] ===
+                    "object" &&
+                  typeof $steps["updateUnsuccessfulChangePasswordState"]
+                    .then === "function"
+                ) {
+                  $steps["updateUnsuccessfulChangePasswordState"] =
+                    await $steps["updateUnsuccessfulChangePasswordState"];
                 }
 
                 $steps["updateChangePasswordOpen"] = true
@@ -1250,47 +1291,6 @@ function PlasmicUserSetting__RenderFunc(props: {
                     ) {
                       return;
                     }
-
-                    (async event => {
-                      const $steps = {};
-
-                      $steps["makeFalsePutUserPasswordActivation"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["putUserPasswordActivation"]
-                              },
-                              operation: 0,
-                              value: false
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["makeFalsePutUserPasswordActivation"] != null &&
-                        typeof $steps["makeFalsePutUserPasswordActivation"] ===
-                          "object" &&
-                        typeof $steps["makeFalsePutUserPasswordActivation"]
-                          .then === "function"
-                      ) {
-                        $steps["makeFalsePutUserPasswordActivation"] =
-                          await $steps["makeFalsePutUserPasswordActivation"];
-                      }
-                    }).apply(null, eventArgs);
                   }}
                   placeholder={
                     "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
@@ -1379,47 +1379,6 @@ function PlasmicUserSetting__RenderFunc(props: {
                     ) {
                       return;
                     }
-
-                    (async event => {
-                      const $steps = {};
-
-                      $steps["makeFalsePutUserPasswordActivation"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["putUserPasswordActivation"]
-                              },
-                              operation: 0,
-                              value: false
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["makeFalsePutUserPasswordActivation"] != null &&
-                        typeof $steps["makeFalsePutUserPasswordActivation"] ===
-                          "object" &&
-                        typeof $steps["makeFalsePutUserPasswordActivation"]
-                          .then === "function"
-                      ) {
-                        $steps["makeFalsePutUserPasswordActivation"] =
-                          await $steps["makeFalsePutUserPasswordActivation"];
-                      }
-                    }).apply(null, eventArgs);
                   }}
                   placeholder={
                     "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0645\u062c\u062f\u062f\u0627 \u062a\u06a9\u0631\u0627\u0631 \u06a9\u0646\u06cc\u062f"
@@ -1435,19 +1394,19 @@ function PlasmicUserSetting__RenderFunc(props: {
                 />
               </div>
               <Button
-                data-plasmic-name={"changePasswordButton"}
-                data-plasmic-override={overrides.changePasswordButton}
+                data-plasmic-name={"changePasswordButton2"}
+                data-plasmic-override={overrides.changePasswordButton2}
                 className={classNames(
                   "__wab_instance",
-                  sty.changePasswordButton
+                  sty.changePasswordButton2
                 )}
                 color={"blue"}
                 deselected={generateStateValueProp($state, [
-                  "changePasswordButton",
+                  "changePasswordButton2",
                   "deselected"
                 ])}
                 isDisabled={generateStateValueProp($state, [
-                  "changePasswordButton",
+                  "changePasswordButton2",
                   "isDisabled"
                 ])}
                 onClick={async event => {
@@ -1495,12 +1454,12 @@ function PlasmicUserSetting__RenderFunc(props: {
                       ];
                   }
 
-                  $steps["akeFalsePutUserPasswordActivation"] = true
+                  $steps["makeFalseSuccessfulChangePasswordState"] = true
                     ? (() => {
                         const actionArgs = {
                           variable: {
                             objRoot: $state,
-                            variablePath: ["putUserPasswordActivation"]
+                            variablePath: ["successfulChangePasswordState"]
                           },
                           operation: 0,
                           value: false
@@ -1522,15 +1481,53 @@ function PlasmicUserSetting__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
-                    $steps["akeFalsePutUserPasswordActivation"] != null &&
-                    typeof $steps["akeFalsePutUserPasswordActivation"] ===
+                    $steps["makeFalseSuccessfulChangePasswordState"] != null &&
+                    typeof $steps["makeFalseSuccessfulChangePasswordState"] ===
                       "object" &&
-                    typeof $steps["akeFalsePutUserPasswordActivation"].then ===
-                      "function"
+                    typeof $steps["makeFalseSuccessfulChangePasswordState"]
+                      .then === "function"
                   ) {
-                    $steps["akeFalsePutUserPasswordActivation"] = await $steps[
-                      "akeFalsePutUserPasswordActivation"
-                    ];
+                    $steps["makeFalseSuccessfulChangePasswordState"] =
+                      await $steps["makeFalseSuccessfulChangePasswordState"];
+                  }
+
+                  $steps["makeFalseUnsuccessfulChangePasswordState"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["unsuccessfulChangePasswordState"]
+                          },
+                          operation: 0,
+                          value: false
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["makeFalseUnsuccessfulChangePasswordState"] !=
+                      null &&
+                    typeof $steps[
+                      "makeFalseUnsuccessfulChangePasswordState"
+                    ] === "object" &&
+                    typeof $steps["makeFalseUnsuccessfulChangePasswordState"]
+                      .then === "function"
+                  ) {
+                    $steps["makeFalseUnsuccessfulChangePasswordState"] =
+                      await $steps["makeFalseUnsuccessfulChangePasswordState"];
                   }
 
                   $steps["makeTruePasswordRepeatPasswordMismatchState"] =
@@ -1575,13 +1572,50 @@ function PlasmicUserSetting__RenderFunc(props: {
                       ];
                   }
 
-                  $steps["makeTruePutUserPasswordActivation"] =
+                  $steps["putUserPassword"] =
                     $state.password.value === $state.repeatPassword.value
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              "PUT",
+                              `/api/v3/user/password/${$ctx.inlab_user.user.id}`,
+                              undefined,
+                              (() => {
+                                try {
+                                  return { password: $state.password.value };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            ]
+                          };
+                          return $globalActions[
+                            "AuthGlobalContext.apiFetcher"
+                          ]?.apply(null, [...actionArgs.args]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["putUserPassword"] != null &&
+                    typeof $steps["putUserPassword"] === "object" &&
+                    typeof $steps["putUserPassword"].then === "function"
+                  ) {
+                    $steps["putUserPassword"] = await $steps["putUserPassword"];
+                  }
+
+                  $steps["makeTrueSuccessfulChangePasswordState"] =
+                    $steps.putUserPassword.status === 200
                       ? (() => {
                           const actionArgs = {
                             variable: {
                               objRoot: $state,
-                              variablePath: ["putUserPasswordActivation"]
+                              variablePath: ["successfulChangePasswordState"]
                             },
                             operation: 0,
                             value: true
@@ -1603,44 +1637,58 @@ function PlasmicUserSetting__RenderFunc(props: {
                         })()
                       : undefined;
                   if (
-                    $steps["makeTruePutUserPasswordActivation"] != null &&
-                    typeof $steps["makeTruePutUserPasswordActivation"] ===
+                    $steps["makeTrueSuccessfulChangePasswordState"] != null &&
+                    typeof $steps["makeTrueSuccessfulChangePasswordState"] ===
                       "object" &&
-                    typeof $steps["makeTruePutUserPasswordActivation"].then ===
-                      "function"
+                    typeof $steps["makeTrueSuccessfulChangePasswordState"]
+                      .then === "function"
                   ) {
-                    $steps["makeTruePutUserPasswordActivation"] = await $steps[
-                      "makeTruePutUserPasswordActivation"
-                    ];
+                    $steps["makeTrueSuccessfulChangePasswordState"] =
+                      await $steps["makeTrueSuccessfulChangePasswordState"];
                   }
 
-                  $steps["runActionOnPutUserPassword"] =
-                    $state.password.value === $state.repeatPassword.value
+                  $steps["makeTrueUnsuccessfulChangePasswordState"] =
+                    $steps.putUserPassword.status != 200
                       ? (() => {
                           const actionArgs = {
-                            tplRef: "putUserPassword",
-                            action: "reload"
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["unsuccessfulChangePasswordState"]
+                            },
+                            operation: 0,
+                            value: true
                           };
-                          return (({ tplRef, action, args }) => {
-                            return $refs?.[tplRef]?.[action]?.(...(args ?? []));
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
                           })?.apply(null, [actionArgs]);
                         })()
                       : undefined;
                   if (
-                    $steps["runActionOnPutUserPassword"] != null &&
-                    typeof $steps["runActionOnPutUserPassword"] === "object" &&
-                    typeof $steps["runActionOnPutUserPassword"].then ===
-                      "function"
+                    $steps["makeTrueUnsuccessfulChangePasswordState"] != null &&
+                    typeof $steps["makeTrueUnsuccessfulChangePasswordState"] ===
+                      "object" &&
+                    typeof $steps["makeTrueUnsuccessfulChangePasswordState"]
+                      .then === "function"
                   ) {
-                    $steps["runActionOnPutUserPassword"] = await $steps[
-                      "runActionOnPutUserPassword"
-                    ];
+                    $steps["makeTrueUnsuccessfulChangePasswordState"] =
+                      await $steps["makeTrueUnsuccessfulChangePasswordState"];
                   }
                 }}
                 onDeselectedChange={async (...eventArgs: any) => {
                   ((...eventArgs) => {
                     generateStateOnChangeProp($state, [
-                      "changePasswordButton",
+                      "changePasswordButton2",
                       "deselected"
                     ])(eventArgs[0]);
                   }).apply(null, eventArgs);
@@ -1656,7 +1704,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                 onIsDisabledChange={async (...eventArgs: any) => {
                   ((...eventArgs) => {
                     generateStateOnChangeProp($state, [
-                      "changePasswordButton",
+                      "changePasswordButton2",
                       "isDisabled"
                     ])(eventArgs[0]);
                   }).apply(null, eventArgs);
@@ -1672,7 +1720,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                 onSelectedChange={async (...eventArgs: any) => {
                   ((...eventArgs) => {
                     generateStateOnChangeProp($state, [
-                      "changePasswordButton",
+                      "changePasswordButton2",
                       "selected"
                     ])(eventArgs[0]);
                   }).apply(null, eventArgs);
@@ -1688,7 +1736,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                 onSortDeselectedChange={async (...eventArgs: any) => {
                   ((...eventArgs) => {
                     generateStateOnChangeProp($state, [
-                      "changePasswordButton",
+                      "changePasswordButton2",
                       "sortDeselected"
                     ])(eventArgs[0]);
                   }).apply(null, eventArgs);
@@ -1704,7 +1752,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                 onSortSelectedChange={async (...eventArgs: any) => {
                   ((...eventArgs) => {
                     generateStateOnChangeProp($state, [
-                      "changePasswordButton",
+                      "changePasswordButton2",
                       "sortSelected"
                     ])(eventArgs[0]);
                   }).apply(null, eventArgs);
@@ -1718,15 +1766,15 @@ function PlasmicUserSetting__RenderFunc(props: {
                   }
                 }}
                 selected={generateStateValueProp($state, [
-                  "changePasswordButton",
+                  "changePasswordButton2",
                   "selected"
                 ])}
                 sortDeselected={generateStateValueProp($state, [
-                  "changePasswordButton",
+                  "changePasswordButton2",
                   "sortDeselected"
                 ])}
                 sortSelected={generateStateValueProp($state, [
-                  "changePasswordButton",
+                  "changePasswordButton2",
                   "sortSelected"
                 ])}
               >
@@ -1734,7 +1782,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text__tlPId
+                    sty.text__dmoKz
                   )}
                 >
                   {
@@ -1783,7 +1831,7 @@ function PlasmicUserSetting__RenderFunc(props: {
               ) : null}
               {(() => {
                 try {
-                  return $state.putUserPasswordActivation;
+                  return $state.successfulChangePasswordState;
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -1794,120 +1842,66 @@ function PlasmicUserSetting__RenderFunc(props: {
                   throw e;
                 }
               })() ? (
-                <ApiFetcherComponent
-                  data-plasmic-name={"putUserPassword"}
-                  data-plasmic-override={overrides.putUserPassword}
-                  className={classNames("__wab_instance", sty.putUserPassword)}
-                  method={"PUT"}
-                  path={`/api/v3/user/password/${$ctx.inlab_user.user.id}`}
-                  ref={ref => {
-                    $refs["putUserPassword"] = ref;
-                  }}
-                  requestBody={(() => {
-                    try {
-                      return { password: $state.password.value };
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
+                <Alert
+                  data-plasmic-name={"successfulChangePassword2"}
+                  data-plasmic-override={overrides.successfulChangePassword2}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.successfulChangePassword2
+                  )}
+                  header={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___6O8Tn
+                      )}
+                    >
+                      {
+                        "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0627\u0646\u062c\u0627\u0645 \u0634\u062f"
                       }
-                      throw e;
-                    }
-                  })()}
-                >
-                  <DataCtxReader__>
-                    {$ctx => (
-                      <React.Fragment>
-                        {(() => {
-                          try {
-                            return (
-                              !$ctx.fetched_data.loading &&
-                              $ctx.fetched_data.status === 200
-                            );
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return true;
-                            }
-                            throw e;
-                          }
-                        })() ? (
-                          <Alert
-                            data-plasmic-name={"successfulChangePassword2"}
-                            data-plasmic-override={
-                              overrides.successfulChangePassword2
-                            }
-                            className={classNames(
-                              "__wab_instance",
-                              sty.successfulChangePassword2
-                            )}
-                            header={
-                              <div
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text___6O8Tn
-                                )}
-                              >
-                                {
-                                  "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0627\u0646\u062c\u0627\u0645 \u0634\u062f"
-                                }
-                              </div>
-                            }
-                            noBody={true}
-                            success={true}
-                          />
-                        ) : null}
-                        {(() => {
-                          try {
-                            return (
-                              !$ctx.fetched_data.loading &&
-                              $ctx.fetched_data.status != 200
-                            );
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return true;
-                            }
-                            throw e;
-                          }
-                        })() ? (
-                          <Alert
-                            data-plasmic-name={"unsuccessfulChangePassword2"}
-                            data-plasmic-override={
-                              overrides.unsuccessfulChangePassword2
-                            }
-                            className={classNames(
-                              "__wab_instance",
-                              sty.unsuccessfulChangePassword2
-                            )}
-                            error={true}
-                            header={
-                              <div
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text___5HjGe
-                                )}
-                              >
-                                {
-                                  "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u062e\u0637\u0627 \u0647\u0645\u0631\u0627\u0647 \u0634\u062f"
-                                }
-                              </div>
-                            }
-                            noBody={true}
-                          />
-                        ) : null}
-                      </React.Fragment>
-                    )}
-                  </DataCtxReader__>
-                </ApiFetcherComponent>
+                    </div>
+                  }
+                  noBody={true}
+                  success={true}
+                />
+              ) : null}
+              {(() => {
+                try {
+                  return $state.unsuccessfulChangePasswordState;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <Alert
+                  data-plasmic-name={"unsuccessfulChangePassword2"}
+                  data-plasmic-override={overrides.unsuccessfulChangePassword2}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.unsuccessfulChangePassword2
+                  )}
+                  error={true}
+                  header={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___5HjGe
+                      )}
+                    >
+                      {
+                        "\u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0628\u0627 \u062e\u0637\u0627 \u0647\u0645\u0631\u0627\u0647 \u0634\u062f"
+                      }
+                    </div>
+                  }
+                  noBody={true}
+                />
               ) : null}
             </div>
           </AntdModal>
@@ -2190,9 +2184,8 @@ const PlasmicDescendants = {
     "password",
     "repeatPasswordContent",
     "repeatPassword",
-    "changePasswordButton",
+    "changePasswordButton2",
     "passwordRepeatPasswordMismatch2",
-    "putUserPassword",
     "successfulChangePassword2",
     "unsuccessfulChangePassword2",
     "homepageSwitchingTab",
@@ -2264,9 +2257,8 @@ const PlasmicDescendants = {
     "password",
     "repeatPasswordContent",
     "repeatPassword",
-    "changePasswordButton",
+    "changePasswordButton2",
     "passwordRepeatPasswordMismatch2",
-    "putUserPassword",
     "successfulChangePassword2",
     "unsuccessfulChangePassword2"
   ],
@@ -2276,9 +2268,8 @@ const PlasmicDescendants = {
     "password",
     "repeatPasswordContent",
     "repeatPassword",
-    "changePasswordButton",
+    "changePasswordButton2",
     "passwordRepeatPasswordMismatch2",
-    "putUserPassword",
     "successfulChangePassword2",
     "unsuccessfulChangePassword2"
   ],
@@ -2286,13 +2277,8 @@ const PlasmicDescendants = {
   password: ["password"],
   repeatPasswordContent: ["repeatPasswordContent", "repeatPassword"],
   repeatPassword: ["repeatPassword"],
-  changePasswordButton: ["changePasswordButton"],
+  changePasswordButton2: ["changePasswordButton2"],
   passwordRepeatPasswordMismatch2: ["passwordRepeatPasswordMismatch2"],
-  putUserPassword: [
-    "putUserPassword",
-    "successfulChangePassword2",
-    "unsuccessfulChangePassword2"
-  ],
   successfulChangePassword2: ["successfulChangePassword2"],
   unsuccessfulChangePassword2: ["unsuccessfulChangePassword2"],
   homepageSwitchingTab: ["homepageSwitchingTab", "switchingTab"],
@@ -2330,9 +2316,8 @@ type NodeDefaultElementType = {
   password: typeof TextInput;
   repeatPasswordContent: "div";
   repeatPassword: typeof TextInput;
-  changePasswordButton: typeof Button;
+  changePasswordButton2: typeof Button;
   passwordRepeatPasswordMismatch2: typeof Alert;
-  putUserPassword: typeof ApiFetcherComponent;
   successfulChangePassword2: typeof Alert;
   unsuccessfulChangePassword2: typeof Alert;
   homepageSwitchingTab: "div";
@@ -2428,11 +2413,10 @@ export const PlasmicUserSetting = Object.assign(
     password: makeNodeComponent("password"),
     repeatPasswordContent: makeNodeComponent("repeatPasswordContent"),
     repeatPassword: makeNodeComponent("repeatPassword"),
-    changePasswordButton: makeNodeComponent("changePasswordButton"),
+    changePasswordButton2: makeNodeComponent("changePasswordButton2"),
     passwordRepeatPasswordMismatch2: makeNodeComponent(
       "passwordRepeatPasswordMismatch2"
     ),
-    putUserPassword: makeNodeComponent("putUserPassword"),
     successfulChangePassword2: makeNodeComponent("successfulChangePassword2"),
     unsuccessfulChangePassword2: makeNodeComponent(
       "unsuccessfulChangePassword2"

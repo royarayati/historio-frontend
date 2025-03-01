@@ -64,6 +64,7 @@ export const ApiFetcherComponent = forwardRef<ApiActions, PropsType>((props: Pro
       Authorization: 'Bearer ' + inlabUser.access,
       ...props.headers,
     };
+    
 
     return axios
       .request({
