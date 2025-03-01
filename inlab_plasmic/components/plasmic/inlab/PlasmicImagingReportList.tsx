@@ -65,7 +65,7 @@ import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // pla
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
-import  UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
+import UploadFileComponent from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -3423,6 +3423,61 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           "__wab_instance",
                           sty.titleTextinput
                         )}
+                        endIcon={
+                          $state.value !== "" ? (
+                            <Icons8CloseSvgIcon
+                              className={classNames(
+                                projectcss.all,
+                                sty.svg__wcZLt
+                              )}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updateTitleTextinputValue"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "titleTextinput",
+                                            "value"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: ""
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateTitleTextinputValue"] != null &&
+                                  typeof $steps["updateTitleTextinputValue"] ===
+                                    "object" &&
+                                  typeof $steps["updateTitleTextinputValue"]
+                                    .then === "function"
+                                ) {
+                                  $steps["updateTitleTextinputValue"] =
+                                    await $steps["updateTitleTextinputValue"];
+                                }
+                              }}
+                              role={"img"}
+                            />
+                          ) : null
+                        }
                         onChange={async (...eventArgs: any) => {
                           ((...eventArgs) => {
                             generateStateOnChangeProp($state, [
@@ -3457,6 +3512,66 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           "__wab_instance",
                           sty.descriptionTextInput
                         )}
+                        endIcon={
+                          $state.value !== "" ? (
+                            <Icons8CloseSvgIcon
+                              className={classNames(
+                                projectcss.all,
+                                sty.svg___8WKjn
+                              )}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updateDescriptionTextInputValue"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "descriptionTextInput",
+                                            "value"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: ""
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateDescriptionTextInputValue"] !=
+                                    null &&
+                                  typeof $steps[
+                                    "updateDescriptionTextInputValue"
+                                  ] === "object" &&
+                                  typeof $steps[
+                                    "updateDescriptionTextInputValue"
+                                  ].then === "function"
+                                ) {
+                                  $steps["updateDescriptionTextInputValue"] =
+                                    await $steps[
+                                      "updateDescriptionTextInputValue"
+                                    ];
+                                }
+                              }}
+                              role={"img"}
+                            />
+                          ) : null
+                        }
                         onChange={async (...eventArgs: any) => {
                           ((...eventArgs) => {
                             generateStateOnChangeProp($state, [

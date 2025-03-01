@@ -2081,19 +2081,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {(() => {
-                    try {
-                      return $ctx.fetched_data.loading === false;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return true;
-                      }
-                      throw e;
-                    }
-                  })() ? (
+                  {false ? (
                     <div
                       data-plasmic-name={"labGroupTitles"}
                       data-plasmic-override={overrides.labGroupTitles}
