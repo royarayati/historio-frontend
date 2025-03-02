@@ -44,6 +44,18 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
         };
     }, []);
 
+
+
+    const reset = () => {
+      setMedia(null);
+      setError(null);
+      setData({});
+      setresponseMessage('');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    };
+
     const handleFilePickerClick = () => {
         if (fileInputRef.current) {
             fileInputRef.current.click();
@@ -156,12 +168,14 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
 
             onAxiosSuccess(response);
 
+            console.log('response status: ' , response.status);
+
             if (response.status === 201) {
                 setLoading(false);
                 setError(null);
                 setData(response);
                 // display success message
-                setresponseMessage('آپلود با موفقیت انجام شد')
+                setresponseMessage('آپلود با موفقیت انجام شد');
 
             } else if (response.status === 400) {
                 setLoading(false);
@@ -176,6 +190,8 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
                 setresponseMessage('فایلی با این عنوان قبلا آپلود شده است');
             }
 
+           
+            
      
         } catch (error) {
             if (axios.isCancel(error)) {
@@ -212,12 +228,12 @@ const UploadFileComponent = forwardRef<ApiActions, PropsType>((props, ref) => {
                     {media && <div>Selected File: {media.name}</div>}
                 </div>
                 <div>
-                    {/* <button onClick={() => reload()}>
-                        {loading ? 'در حال آپلود...' : props.submitButtonText || 'آپلود فایل'}
-                    </button> */}
                     <button onClick={() => reload()} >
                         {(props.submitButtonText || 'آپلود فایل')}
                     </button>
+                    {/* <button  onClick = {reset}>
+                        انتخاب فایل جدید 
+                    </button> */}
                     <br />
                     <span style = {{ color: 'green'}}>
                         {responseMessage}
