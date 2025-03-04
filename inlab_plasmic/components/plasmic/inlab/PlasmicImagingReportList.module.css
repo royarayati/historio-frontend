@@ -1006,10 +1006,34 @@
   letter-spacing: normal;
   min-width: 0;
 }
+.freeBox___9Tdjg {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 0px;
+}
 .radiologyReportDatetime2 {
   font-weight: 400;
   background: #ffffff;
   border-bottom: 1px solid #e7e7e7;
+}
+.freeBox__kWfUk {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
 }
 .copy {
   object-fit: cover;
@@ -1017,14 +1041,15 @@
   align-self: center;
   width: 30px;
   height: 40px;
+  flex-shrink: 0;
 }
 .text__oz5Rb {
   width: 100%;
   height: auto;
   max-width: 100%;
-  color: #38ca48;
-  text-align: left;
-  font-size: 10px;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: right;
+  font-size: var(--token-CdE1_0ZaCyT1);
   min-width: 0;
 }
 .uploadMediaModal:global(.__wab_instance) {
