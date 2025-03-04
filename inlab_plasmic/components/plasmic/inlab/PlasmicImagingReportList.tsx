@@ -3217,7 +3217,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             "open"
           ])}
           title={
-            <React.Fragment>
+            <div className={classNames(projectcss.all, sty.freeBox___9Tdjg)}>
               <div
                 data-plasmic-name={"radiologyReportDatetime2"}
                 data-plasmic-override={overrides.radiologyReportDatetime2}
@@ -3251,104 +3251,107 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     : ""}
                 </React.Fragment>
               </div>
-              <CopyIconSvgIcon
-                data-plasmic-name={"copy"}
-                data-plasmic-override={overrides.copy}
-                className={classNames(projectcss.all, sty.copy)}
-                onClick={async event => {
-                  const $steps = {};
+              <div className={classNames(projectcss.all, sty.freeBox__kWfUk)}>
+                <CopyIconSvgIcon
+                  data-plasmic-name={"copy"}
+                  data-plasmic-override={overrides.copy}
+                  className={classNames(projectcss.all, sty.copy)}
+                  onClick={async event => {
+                    const $steps = {};
 
-                  $steps["copyTextToClipboard"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return $$.copyToClipboard(
-                              $state.paraclinicReportText
-                            )
-                              ? $state.paraclinicReportText
-                              : "";
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["copyTextToClipboard"] != null &&
-                    typeof $steps["copyTextToClipboard"] === "object" &&
-                    typeof $steps["copyTextToClipboard"].then === "function"
-                  ) {
-                    $steps["copyTextToClipboard"] = await $steps[
-                      "copyTextToClipboard"
-                    ];
-                  }
+                    $steps["copyTextToClipboard"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            customFunction: async () => {
+                              return $$.copyToClipboard(
+                                $state.paraclinicReportText
+                              )
+                                ? $state.paraclinicReportText
+                                : "";
+                            }
+                          };
+                          return (({ customFunction }) => {
+                            return customFunction();
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["copyTextToClipboard"] != null &&
+                      typeof $steps["copyTextToClipboard"] === "object" &&
+                      typeof $steps["copyTextToClipboard"].then === "function"
+                    ) {
+                      $steps["copyTextToClipboard"] = await $steps[
+                        "copyTextToClipboard"
+                      ];
+                    }
 
-                  $steps["updateCopiedToClipboard"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["copiedToClipboard"]
-                          },
-                          operation: 0,
-                          value: true
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
+                    $steps["updateCopiedToClipboard"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["copiedToClipboard"]
+                            },
+                            operation: 0,
+                            value: true
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
 
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateCopiedToClipboard"] != null &&
-                    typeof $steps["updateCopiedToClipboard"] === "object" &&
-                    typeof $steps["updateCopiedToClipboard"].then === "function"
-                  ) {
-                    $steps["updateCopiedToClipboard"] = await $steps[
-                      "updateCopiedToClipboard"
-                    ];
-                  }
-                }}
-                role={"img"}
-              />
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateCopiedToClipboard"] != null &&
+                      typeof $steps["updateCopiedToClipboard"] === "object" &&
+                      typeof $steps["updateCopiedToClipboard"].then ===
+                        "function"
+                    ) {
+                      $steps["updateCopiedToClipboard"] = await $steps[
+                        "updateCopiedToClipboard"
+                      ];
+                    }
+                  }}
+                  role={"img"}
+                />
 
-              {(() => {
-                try {
-                  return $state.copiedToClipboard === true;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return true;
+                {(() => {
+                  try {
+                    return $state.copiedToClipboard === true;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
                   }
-                  throw e;
-                }
-              })() ? (
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__oz5Rb
-                  )}
-                >
-                  {
-                    "\u0631\u06cc\u067e\u0648\u0631\u062a \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u06a9\u067e\u06cc \u0634\u062f"
-                  }
-                </div>
-              ) : null}
-            </React.Fragment>
+                })() ? (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__oz5Rb
+                    )}
+                  >
+                    {
+                      "\u0631\u06cc\u067e\u0648\u0631\u062a \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u06a9\u067e\u06cc \u0634\u062f"
+                    }
+                  </div>
+                ) : null}
+              </div>
+            </div>
           }
           trigger={null}
           width={"85%"}
