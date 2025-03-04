@@ -4664,6 +4664,57 @@ function PlasmicHomepage__RenderFunc(props: {
                       onNotSatisfied={async () => {
                         const $steps = {};
 
+                        $steps["scrollToPreviousPatientCard"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    const targetElementId =
+                                      localStorage.getItem(
+                                        "patientcardidtarget"
+                                      );
+                                    console.log(
+                                      "Target element ID:",
+                                      targetElementId
+                                    );
+                                    const targetElement =
+                                      document.getElementById(targetElementId);
+                                    if (targetElement) {
+                                      targetElement.scrollIntoView({
+                                        behavior: "smooth",
+                                        block: "center",
+                                        inline: "nearest"
+                                      });
+                                      const elementRect =
+                                        targetElement.getBoundingClientRect();
+                                      const offset =
+                                        window.innerHeight / 2 -
+                                        elementRect.height / 2;
+                                      return window.scrollBy({
+                                        top: offset,
+                                        behavior: "smooth"
+                                      });
+                                    }
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["scrollToPreviousPatientCard"] != null &&
+                          typeof $steps["scrollToPreviousPatientCard"] ===
+                            "object" &&
+                          typeof $steps["scrollToPreviousPatientCard"].then ===
+                            "function"
+                        ) {
+                          $steps["scrollToPreviousPatientCard"] = await $steps[
+                            "scrollToPreviousPatientCard"
+                          ];
+                        }
+
                         $steps["setLocalBookmarkedList"] =
                           $state.searchbarFname.value === "" &&
                           $state.searchbarLnameNcode.value === "" &&
@@ -6884,6 +6935,20 @@ function PlasmicHomepage__RenderFunc(props: {
                                 projectcss.all,
                                 sty.patientCards
                               )}
+                              id={(() => {
+                                try {
+                                  return currentItem.id;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()}
                               key={currentIndex}
                             >
                               <Stack__
@@ -7117,6 +7182,39 @@ function PlasmicHomepage__RenderFunc(props: {
                                   onClick={async event => {
                                     const $steps = {};
 
+                                    $steps["updateSearchbarLnameNcodeValue"] =
+                                      true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              customFunction: async () => {
+                                                return localStorage.setItem(
+                                                  "patientcardidtarget",
+                                                  currentItem.id
+                                                );
+                                              }
+                                            };
+                                            return (({ customFunction }) => {
+                                              return customFunction();
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                    if (
+                                      $steps[
+                                        "updateSearchbarLnameNcodeValue"
+                                      ] != null &&
+                                      typeof $steps[
+                                        "updateSearchbarLnameNcodeValue"
+                                      ] === "object" &&
+                                      typeof $steps[
+                                        "updateSearchbarLnameNcodeValue"
+                                      ].then === "function"
+                                    ) {
+                                      $steps["updateSearchbarLnameNcodeValue"] =
+                                        await $steps[
+                                          "updateSearchbarLnameNcodeValue"
+                                        ];
+                                    }
+
                                     $steps["goToPatientProfile"] = true
                                       ? (() => {
                                           const actionArgs = {
@@ -7201,6 +7299,34 @@ function PlasmicHomepage__RenderFunc(props: {
                                   loading={"lazy"}
                                   onClick={async event => {
                                     const $steps = {};
+
+                                    $steps["setPatientcardIdTarget"] = true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            customFunction: async () => {
+                                              return localStorage.setItem(
+                                                "patientcardidtarget",
+                                                currentItem.id
+                                              );
+                                            }
+                                          };
+                                          return (({ customFunction }) => {
+                                            return customFunction();
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                    if (
+                                      $steps["setPatientcardIdTarget"] !=
+                                        null &&
+                                      typeof $steps[
+                                        "setPatientcardIdTarget"
+                                      ] === "object" &&
+                                      typeof $steps["setPatientcardIdTarget"]
+                                        .then === "function"
+                                    ) {
+                                      $steps["setPatientcardIdTarget"] =
+                                        await $steps["setPatientcardIdTarget"];
+                                    }
 
                                     $steps["goToConsultList"] = true
                                       ? (() => {
@@ -7287,6 +7413,36 @@ function PlasmicHomepage__RenderFunc(props: {
                                   onClick={async event => {
                                     const $steps = {};
 
+                                    $steps["setPatientcardIdTarget"] = true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            customFunction: async () => {
+                                              return (() => {
+                                                return localStorage.setItem(
+                                                  "patientcardidtarget",
+                                                  currentItem.id
+                                                );
+                                              })();
+                                            }
+                                          };
+                                          return (({ customFunction }) => {
+                                            return customFunction();
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                    if (
+                                      $steps["setPatientcardIdTarget"] !=
+                                        null &&
+                                      typeof $steps[
+                                        "setPatientcardIdTarget"
+                                      ] === "object" &&
+                                      typeof $steps["setPatientcardIdTarget"]
+                                        .then === "function"
+                                    ) {
+                                      $steps["setPatientcardIdTarget"] =
+                                        await $steps["setPatientcardIdTarget"];
+                                    }
+
                                     $steps["goToImagingReportList"] = true
                                       ? (() => {
                                           const actionArgs = {
@@ -7370,6 +7526,36 @@ function PlasmicHomepage__RenderFunc(props: {
                                   displayWidth={"20px"}
                                   onClick={async event => {
                                     const $steps = {};
+
+                                    $steps["setPatientcardIdTarget"] = true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            customFunction: async () => {
+                                              return (() => {
+                                                return localStorage.setItem(
+                                                  "patientcardidtarget",
+                                                  currentItem.id
+                                                );
+                                              })();
+                                            }
+                                          };
+                                          return (({ customFunction }) => {
+                                            return customFunction();
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                    if (
+                                      $steps["setPatientcardIdTarget"] !=
+                                        null &&
+                                      typeof $steps[
+                                        "setPatientcardIdTarget"
+                                      ] === "object" &&
+                                      typeof $steps["setPatientcardIdTarget"]
+                                        .then === "function"
+                                    ) {
+                                      $steps["setPatientcardIdTarget"] =
+                                        await $steps["setPatientcardIdTarget"];
+                                    }
 
                                     $steps["deleteLabDataFromTheLocalStorage"] =
                                       true

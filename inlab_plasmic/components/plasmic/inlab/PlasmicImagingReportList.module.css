@@ -1011,6 +1011,22 @@
   background: #ffffff;
   border-bottom: 1px solid #e7e7e7;
 }
+.copy {
+  object-fit: cover;
+  max-width: 100%;
+  align-self: center;
+  width: 30px;
+  height: 40px;
+}
+.text__oz5Rb {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: #38ca48;
+  text-align: left;
+  font-size: 10px;
+  min-width: 0;
+}
 .uploadMediaModal:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
