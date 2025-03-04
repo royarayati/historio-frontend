@@ -81,8 +81,11 @@ import sty from "./PlasmicImagingReportList.module.css"; // plasmic-import: AFB-
 
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
+import CopyIconSvgIcon from "./icons/PlasmicIcon__CopyIconSvg"; // plasmic-import: crPh_fw9jxSR/icon
 import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
 import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
+
+import __lib_copyToClipboard from "copy-to-clipboard";
 
 createPlasmicElementProxy;
 
@@ -140,6 +143,7 @@ export type PlasmicImagingReportList__OverridesType = {
   paraclinicReportModal?: Flex__<typeof AntdModal>;
   radiologyReportText2?: Flex__<"div">;
   radiologyReportDatetime2?: Flex__<"div">;
+  copy?: Flex__<"svg">;
   uploadMediaModal?: Flex__<typeof AntdModal>;
   uploadFileComponent?: Flex__<typeof UploadFileComponent>;
   titleTextinput?: Flex__<typeof TextInput>;
@@ -163,7 +167,9 @@ export type PlasmicImagingReportList__OverridesType = {
 
 export interface DefaultImagingReportListProps {}
 
-const $$ = {};
+const $$ = {
+  copyToClipboard: __lib_copyToClipboard
+};
 
 function useNextRouter() {
   try {
@@ -699,6 +705,12 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "copiedToClipboard",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -3205,39 +3217,138 @@ function PlasmicImagingReportList__RenderFunc(props: {
             "open"
           ])}
           title={
-            <div
-              data-plasmic-name={"radiologyReportDatetime2"}
-              data-plasmic-override={overrides.radiologyReportDatetime2}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.radiologyReportDatetime2
-              )}
-            >
-              <React.Fragment>
-                {$state.paraclinicReportDatetime
-                  ? (() => {
-                      const gregorianDate = new Date(
-                        $state.paraclinicReportDatetime
-                      );
-                      const shamsiDate = new Intl.DateTimeFormat(
-                        "fa-IR"
-                      ).format(gregorianDate);
-                      const shamsiTime = gregorianDate.toLocaleTimeString(
-                        "fa-IR",
-                        { hour12: false }
-                      );
-                      const englishDate = shamsiDate.replace(/[۰-۹]/g, d =>
-                        String.fromCharCode(d.charCodeAt(0) - 1728)
-                      );
-                      const englishTime = shamsiTime.replace(/[۰-۹]/g, d =>
-                        String.fromCharCode(d.charCodeAt(0) - 1728)
-                      );
-                      return `${englishDate} - ${englishTime}`;
-                    })()
-                  : ""}
-              </React.Fragment>
-            </div>
+            <React.Fragment>
+              <div
+                data-plasmic-name={"radiologyReportDatetime2"}
+                data-plasmic-override={overrides.radiologyReportDatetime2}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.radiologyReportDatetime2
+                )}
+              >
+                <React.Fragment>
+                  {$state.paraclinicReportDatetime
+                    ? (() => {
+                        const gregorianDate = new Date(
+                          $state.paraclinicReportDatetime
+                        );
+                        const shamsiDate = new Intl.DateTimeFormat(
+                          "fa-IR"
+                        ).format(gregorianDate);
+                        const shamsiTime = gregorianDate.toLocaleTimeString(
+                          "fa-IR",
+                          { hour12: false }
+                        );
+                        const englishDate = shamsiDate.replace(/[۰-۹]/g, d =>
+                          String.fromCharCode(d.charCodeAt(0) - 1728)
+                        );
+                        const englishTime = shamsiTime.replace(/[۰-۹]/g, d =>
+                          String.fromCharCode(d.charCodeAt(0) - 1728)
+                        );
+                        return `${englishDate} - ${englishTime}`;
+                      })()
+                    : ""}
+                </React.Fragment>
+              </div>
+              <CopyIconSvgIcon
+                data-plasmic-name={"copy"}
+                data-plasmic-override={overrides.copy}
+                className={classNames(projectcss.all, sty.copy)}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["copyTextToClipboard"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return $$.copyToClipboard(
+                              $state.paraclinicReportText
+                            )
+                              ? $state.paraclinicReportText
+                              : "";
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["copyTextToClipboard"] != null &&
+                    typeof $steps["copyTextToClipboard"] === "object" &&
+                    typeof $steps["copyTextToClipboard"].then === "function"
+                  ) {
+                    $steps["copyTextToClipboard"] = await $steps[
+                      "copyTextToClipboard"
+                    ];
+                  }
+
+                  $steps["updateCopiedToClipboard"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["copiedToClipboard"]
+                          },
+                          operation: 0,
+                          value: true
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateCopiedToClipboard"] != null &&
+                    typeof $steps["updateCopiedToClipboard"] === "object" &&
+                    typeof $steps["updateCopiedToClipboard"].then === "function"
+                  ) {
+                    $steps["updateCopiedToClipboard"] = await $steps[
+                      "updateCopiedToClipboard"
+                    ];
+                  }
+                }}
+                role={"img"}
+              />
+
+              {(() => {
+                try {
+                  return $state.copiedToClipboard === true;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__oz5Rb
+                  )}
+                >
+                  {
+                    "\u0631\u06cc\u067e\u0648\u0631\u062a \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u06a9\u067e\u06cc \u0634\u062f"
+                  }
+                </div>
+              ) : null}
+            </React.Fragment>
           }
           trigger={null}
           width={"85%"}
@@ -4911,6 +5022,7 @@ const PlasmicDescendants = {
     "paraclinicReportModal",
     "radiologyReportText2",
     "radiologyReportDatetime2",
+    "copy",
     "uploadMediaModal",
     "uploadFileComponent",
     "titleTextinput",
@@ -5068,10 +5180,12 @@ const PlasmicDescendants = {
   paraclinicReportModal: [
     "paraclinicReportModal",
     "radiologyReportText2",
-    "radiologyReportDatetime2"
+    "radiologyReportDatetime2",
+    "copy"
   ],
   radiologyReportText2: ["radiologyReportText2"],
   radiologyReportDatetime2: ["radiologyReportDatetime2"],
+  copy: ["copy"],
   uploadMediaModal: [
     "uploadMediaModal",
     "uploadFileComponent",
@@ -5162,6 +5276,7 @@ type NodeDefaultElementType = {
   paraclinicReportModal: typeof AntdModal;
   radiologyReportText2: "div";
   radiologyReportDatetime2: "div";
+  copy: "svg";
   uploadMediaModal: typeof AntdModal;
   uploadFileComponent: typeof UploadFileComponent;
   titleTextinput: typeof TextInput;
@@ -5283,6 +5398,7 @@ export const PlasmicImagingReportList = Object.assign(
     paraclinicReportModal: makeNodeComponent("paraclinicReportModal"),
     radiologyReportText2: makeNodeComponent("radiologyReportText2"),
     radiologyReportDatetime2: makeNodeComponent("radiologyReportDatetime2"),
+    copy: makeNodeComponent("copy"),
     uploadMediaModal: makeNodeComponent("uploadMediaModal"),
     uploadFileComponent: makeNodeComponent("uploadFileComponent"),
     titleTextinput: makeNodeComponent("titleTextinput"),
