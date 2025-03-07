@@ -26,9 +26,6 @@
 .homepage > * {
   grid-column: 4;
 }
-.homepage > * {
-  grid-column: 4;
-}
 @media (min-width: 0px) and (max-width: 760px) {
   .homepage {
     padding-top: 12px;

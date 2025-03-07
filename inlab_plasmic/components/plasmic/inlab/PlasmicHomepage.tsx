@@ -4919,6 +4919,45 @@ function PlasmicHomepage__RenderFunc(props: {
                             "setLocalPatientsNumber"
                           ];
                         }
+
+                        $steps["setPatientIndexIdList"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    const patient_index_id_list = (
+                                      $ctx.fetched_data?.data || []
+                                    ).map((item, index) => ({
+                                      number: index + 1,
+                                      patient_id: item.patient_id,
+                                      admission_id: item.id
+                                    }));
+                                    localStorage.setItem(
+                                      "patient_index_id_list",
+                                      JSON.stringify(patient_index_id_list)
+                                    );
+                                    return console.log(
+                                      "patient_index_id_list",
+                                      patient_index_id_list
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["setPatientIndexIdList"] != null &&
+                          typeof $steps["setPatientIndexIdList"] === "object" &&
+                          typeof $steps["setPatientIndexIdList"].then ===
+                            "function"
+                        ) {
+                          $steps["setPatientIndexIdList"] = await $steps[
+                            "setPatientIndexIdList"
+                          ];
+                        }
                       }}
                       skipPaths={[]}
                     />

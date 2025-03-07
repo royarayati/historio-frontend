@@ -295,42 +295,42 @@
         {
           "type": "renderModule",
           "assetId": "YivXi3wItkax",
-          "checksum": "5b11f2e536cc42c49dc520af31e5d78d"
+          "checksum": "dad2e3a253b7fa7dab2cafca7a3cb6ab"
         },
         {
           "type": "cssRules",
           "assetId": "YivXi3wItkax",
-          "checksum": "5b11f2e536cc42c49dc520af31e5d78d"
+          "checksum": "dad2e3a253b7fa7dab2cafca7a3cb6ab"
         },
         {
           "type": "renderModule",
           "assetId": "AFB-1jxjMqDb",
-          "checksum": "1d05303c6c0668dbe6858c4e73e07fe8"
+          "checksum": "dc55a438f2c97e603fb18871d6cde011"
         },
         {
           "type": "cssRules",
           "assetId": "AFB-1jxjMqDb",
-          "checksum": "1d05303c6c0668dbe6858c4e73e07fe8"
+          "checksum": "dc55a438f2c97e603fb18871d6cde011"
         },
         {
           "type": "renderModule",
           "assetId": "Ev8txsbuZl9W",
-          "checksum": "2e521843f686ee3192834e0798fc2b5b"
+          "checksum": "714d23ef292d8e231db836ccb6d0171a"
         },
         {
           "type": "cssRules",
           "assetId": "Ev8txsbuZl9W",
-          "checksum": "2e521843f686ee3192834e0798fc2b5b"
+          "checksum": "714d23ef292d8e231db836ccb6d0171a"
         },
         {
           "type": "renderModule",
           "assetId": "oQ9IYAdIiE5g",
-          "checksum": "a899df3ee0411282c104a69a2623a255"
+          "checksum": "d439e0860dcb863960fbed6e2dec939d"
         },
         {
           "type": "cssRules",
           "assetId": "oQ9IYAdIiE5g",
-          "checksum": "a899df3ee0411282c104a69a2623a255"
+          "checksum": "d439e0860dcb863960fbed6e2dec939d"
         },
         {
           "type": "renderModule",
@@ -1196,6 +1196,11 @@
           "type": "icon",
           "assetId": "crPh_fw9jxSR",
           "checksum": "97b5ab4f16b7f9e2378c36b728b011cd"
+        },
+        {
+          "type": "icon",
+          "assetId": "sbXZrFXKpPD-",
+          "checksum": "f075667f70cb6e5937b708dc8a19fbe3"
         },
         {
           "type": "image",

@@ -2281,6 +2281,11 @@
           "id": "crPh_fw9jxSR",
           "name": "CopyIconSvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__CopyIconSvg.tsx"
+        },
+        {
+          "id": "sbXZrFXKpPD-",
+          "name": "NextSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__NextSvgrepoComSvg.tsx"
         }
       ],
       "images": [

@@ -71,13 +71,117 @@
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   min-height: 0;
-  padding: 0px 24px 0px 12px;
+  padding: 6px 12px;
   margin: 0px;
   border-bottom: 1px none #ccccd2;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .header {
     justify-content: space-around;
+    padding: 6px;
+  }
+}
+.lastPatient {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 25%;
+  background: none;
+  border-radius: 5px;
+  padding: 4px;
+  border: 0.2px solid var(--token-9iYGdL7i3GKE);
+}
+.lastPatient > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: calc(0px - 4px);
+  width: calc(100% + 4px);
+}
+.lastPatient > :global(.__wab_flex-container) > *,
+.lastPatient > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.lastPatient > :global(.__wab_flex-container) > picture > img,
+.lastPatient
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 4px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .lastPatient {
+    width: 100%;
+    max-width: 20%;
+    min-width: 0;
+    padding: 2px;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .lastPatient > :global(.__wab_flex-container) {
+    justify-content: space-around;
+    min-width: 0;
+    margin-left: calc(0px - 2px);
+    width: calc(100% + 2px);
+    margin-top: calc(0px - 0px);
+    height: calc(100% + 0px);
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .lastPatient > :global(.__wab_flex-container) > *,
+  .lastPatient > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+  .lastPatient > :global(.__wab_flex-container) > picture > img,
+  .lastPatient
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > picture
+    > img {
+    margin-left: 2px;
+    margin-top: 0px;
+  }
+}
+.last {
+  object-fit: cover;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+  transform-style: preserve-3d;
+  flex-shrink: 0;
+}
+.last * {
+  transform-style: preserve-3d;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .last {
+    width: 18px;
+    height: 18px;
+    transform-style: preserve-3d;
+    flex-shrink: 0;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .last * {
+    transform-style: preserve-3d;
+  }
+}
+.text__kvCK {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  white-space: pre;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__kvCK {
+    margin-right: 0px;
+    margin-top: calc(0px + 0px) !important;
+    margin-bottom: 0px;
+    margin-left: calc(0px + 2px) !important;
+    font-size: 10px;
   }
 }
 .patientDataApiFetcher:global(.__wab_instance) {
@@ -113,6 +217,105 @@
   min-height: 0;
   padding: 2px;
   margin: 0px 8px 0px 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientNameAgeGender {
+    padding: 4px 0px;
+    margin: 0px;
+  }
+}
+.nextPatient {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 25%;
+  background: none;
+  border-radius: 5px;
+  padding: 4px;
+  border: 0.2px solid var(--token-9iYGdL7i3GKE);
+}
+.nextPatient > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: calc(0px - 4px);
+  width: calc(100% + 4px);
+}
+.nextPatient > :global(.__wab_flex-container) > *,
+.nextPatient > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.nextPatient > :global(.__wab_flex-container) > picture > img,
+.nextPatient
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 4px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .nextPatient {
+    width: 100%;
+    max-width: 20%;
+    min-width: 0;
+    padding: 2px;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .nextPatient > :global(.__wab_flex-container) {
+    justify-content: space-around;
+    min-width: 0;
+    margin-left: calc(0px - 2px);
+    width: calc(100% + 2px);
+    margin-top: calc(0px - 0px);
+    height: calc(100% + 0px);
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .nextPatient > :global(.__wab_flex-container) > *,
+  .nextPatient > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+  .nextPatient > :global(.__wab_flex-container) > picture > img,
+  .nextPatient
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > picture
+    > img {
+    margin-left: 2px;
+    margin-top: 0px;
+  }
+}
+.text__ckBTs {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  white-space: pre;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__ckBTs {
+    margin-right: 0px;
+    margin-top: calc(0px + 0px) !important;
+    margin-bottom: 0px;
+    margin-left: calc(0px + 2px) !important;
+    font-size: 10px;
+    white-space: pre;
+  }
+}
+.next {
+  object-fit: cover;
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .next {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
 }
 .tabButtons {
   display: flex;
