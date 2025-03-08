@@ -797,6 +797,35 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 $steps["getAdmIdPatientId"] = await $steps["getAdmIdPatientId"];
               }
 
+              $steps["updateDataLoaded"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["dataLoaded"]
+                      },
+                      operation: 0,
+                      value: false
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateDataLoaded"] != null &&
+                typeof $steps["updateDataLoaded"] === "object" &&
+                typeof $steps["updateDataLoaded"].then === "function"
+              ) {
+                $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
+              }
+
               $steps["goToNextLaboratoryData"] = true
                 ? (() => {
                     const actionArgs = {
@@ -1138,6 +1167,35 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 typeof $steps["getAdmIdPatientId"].then === "function"
               ) {
                 $steps["getAdmIdPatientId"] = await $steps["getAdmIdPatientId"];
+              }
+
+              $steps["updateDataLoaded"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["dataLoaded"]
+                      },
+                      operation: 0,
+                      value: false
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateDataLoaded"] != null &&
+                typeof $steps["updateDataLoaded"] === "object" &&
+                typeof $steps["updateDataLoaded"].then === "function"
+              ) {
+                $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
               }
 
               $steps["goToNextLaboratoryData"] = true
@@ -2326,19 +2384,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     data-plasmic-name={"conditionGuard"}
                     data-plasmic-override={overrides.conditionGuard}
                     className={classNames("__wab_instance", sty.conditionGuard)}
-                    condition={(() => {
-                      try {
-                        return $ctx.fetched_data.loading;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })()}
+                    condition={$ctx.fetched_data.loading}
                     onNotSatisfied={async () => {
                       const $steps = {};
 
@@ -2391,6 +2437,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                       )
                                     );
                                     return console.log(
+                                      "laboratory_data",
                                       JSON.parse(
                                         localStorage.getItem("laboratory_data")
                                       )

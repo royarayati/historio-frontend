@@ -891,7 +891,7 @@
   min-width: 0;
 }
 .لطفامنتظربمانید2 {
-  position: relative;
+  position: fixed;
   font-size: var(--token-sOr3fJ5Up5fq);
   background: var(--token-Hd7stmcqwCJ-);
   text-align: center;
@@ -905,14 +905,14 @@
   line-height: 1.5;
   letter-spacing: normal;
   user-select: none;
-  left: auto;
-  top: auto;
+  left: 20%;
+  top: 0;
   box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
-  right: auto;
-  width: 100%;
+  width: auto;
   max-width: 60%;
-  margin-bottom: 5%;
-  min-width: 0;
+  z-index: 3;
+  right: 0;
+  margin-top: 4px;
   border-radius: 5px;
   padding: 8px;
 }
@@ -1245,7 +1245,7 @@
   color: var(--token-b7Myz3RtiwPQ);
   width: 25px;
   height: 25px;
-  align-self: flex-end;
+  align-self: center;
   flex-shrink: 0;
 }
 .consultSendDateRepliedStatus {
