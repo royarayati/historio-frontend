@@ -2378,30 +2378,31 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         ];
                       }
 
-                      $steps["setTheLaboratoryDataToTheLocalStorage"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "laboratory_data",
-                                    JSON.stringify(
-                                      $ctx.fetched_data.data.lab_test_groups
-                                    )
-                                  );
-                                  return console.log(
-                                    JSON.parse(
-                                      localStorage.getItem("laboratory_data")
-                                    )
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
+                      $steps["setTheLaboratoryDataToTheLocalStorage"] =
+                        $ctx.fetched_data.loading === false
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "laboratory_data",
+                                      JSON.stringify(
+                                        $ctx.fetched_data.data.lab_test_groups
+                                      )
+                                    );
+                                    return console.log(
+                                      JSON.parse(
+                                        localStorage.getItem("laboratory_data")
+                                      )
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
                       if (
                         $steps["setTheLaboratoryDataToTheLocalStorage"] !=
                           null &&
