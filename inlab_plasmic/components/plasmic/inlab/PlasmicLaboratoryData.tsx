@@ -718,6 +718,32 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             onClick={async event => {
               const $steps = {};
 
+              $steps["deleteLabData"] = true
+                ? (() => {
+                    const actionArgs = {
+                      customFunction: async () => {
+                        return (() => {
+                          localStorage.setItem("laboratory_data", "");
+                          return console.log(
+                            "laboratory_data",
+                            localStorage.getItem("laboratory_data")
+                          );
+                        })();
+                      }
+                    };
+                    return (({ customFunction }) => {
+                      return customFunction();
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["deleteLabData"] != null &&
+                typeof $steps["deleteLabData"] === "object" &&
+                typeof $steps["deleteLabData"].then === "function"
+              ) {
+                $steps["deleteLabData"] = await $steps["deleteLabData"];
+              }
+
               $steps["getAdmIdPatientId"] = true
                 ? (() => {
                     const actionArgs = {
@@ -1034,6 +1060,32 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             className={classNames(projectcss.all, sty.nextPatient)}
             onClick={async event => {
               const $steps = {};
+
+              $steps["deleteLabData"] = true
+                ? (() => {
+                    const actionArgs = {
+                      customFunction: async () => {
+                        return (() => {
+                          localStorage.setItem("laboratory_data", "");
+                          return console.log(
+                            "laboratory_data",
+                            localStorage.getItem("laboratory_data")
+                          );
+                        })();
+                      }
+                    };
+                    return (({ customFunction }) => {
+                      return customFunction();
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["deleteLabData"] != null &&
+                typeof $steps["deleteLabData"] === "object" &&
+                typeof $steps["deleteLabData"].then === "function"
+              ) {
+                $steps["deleteLabData"] = await $steps["deleteLabData"];
+              }
 
               $steps["getAdmIdPatientId"] = true
                 ? (() => {
