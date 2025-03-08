@@ -65,7 +65,7 @@ import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // pla
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
-import UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
+import  UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -79,6 +79,7 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicImagingReportList.module.css"; // plasmic-import: AFB-1jxjMqDb/css
 
+import NextSvgrepoComSvgIcon from "./icons/PlasmicIcon__NextSvgrepoComSvg"; // plasmic-import: sbXZrFXKpPD-/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 import CopyIconSvgIcon from "./icons/PlasmicIcon__CopyIconSvg"; // plasmic-import: crPh_fw9jxSR/icon
@@ -108,9 +109,13 @@ export type PlasmicImagingReportList__OverridesType = {
   redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
+  lastPatient?: Flex__<"div">;
+  last?: Flex__<"svg">;
   getPatient?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
   saveAdmissionDatetime?: Flex__<typeof ConditionGuard>;
+  nextPatient?: Flex__<"div">;
+  next?: Flex__<"svg">;
   tabButtons?: Flex__<"div">;
   media?: Flex__<typeof Button>;
   paraclinicsButton?: Flex__<typeof Button>;
@@ -779,6 +784,141 @@ function PlasmicImagingReportList__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
+          <Stack__
+            as={"div"}
+            data-plasmic-name={"lastPatient"}
+            data-plasmic-override={overrides.lastPatient}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.lastPatient)}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["getAdmIdPatientId"] = true
+                ? (() => {
+                    const actionArgs = {
+                      customFunction: async () => {
+                        return (() => {
+                          const stored_patient_index_id_list = JSON.parse(
+                            localStorage.getItem("patient_index_id_list")
+                          );
+                          const specificItem =
+                            stored_patient_index_id_list.find(
+                              item =>
+                                item.admission_id ===
+                                parseInt($ctx.params.adm_id)
+                            );
+                          if (specificItem) {
+                            const specificNumber = specificItem.number;
+                            const newNumber = specificNumber - 1;
+                            const nextItem = stored_patient_index_id_list.find(
+                              item => item.number === newNumber
+                            );
+                            if (nextItem) {
+                              localStorage.setItem(
+                                "patient_id",
+                                nextItem.patient_id
+                              );
+                              return localStorage.setItem(
+                                "admission_id",
+                                nextItem.admission_id
+                              );
+                            } else {
+                              return console.log("No next item found.");
+                            }
+                          } else {
+                            return console.log(
+                              "No matching admission ID found."
+                            );
+                          }
+                        })();
+                      }
+                    };
+                    return (({ customFunction }) => {
+                      return customFunction();
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["getAdmIdPatientId"] != null &&
+                typeof $steps["getAdmIdPatientId"] === "object" &&
+                typeof $steps["getAdmIdPatientId"].then === "function"
+              ) {
+                $steps["getAdmIdPatientId"] = await $steps["getAdmIdPatientId"];
+              }
+
+              $steps["goToNextLaboratoryData"] = true
+                ? (() => {
+                    const actionArgs = {
+                      destination: `/patient/${(() => {
+                        try {
+                          return localStorage.getItem("patient_id");
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}/report/list/${(() => {
+                        try {
+                          return localStorage.getItem("admission_id");
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}`
+                    };
+                    return (({ destination }) => {
+                      if (
+                        typeof destination === "string" &&
+                        destination.startsWith("#")
+                      ) {
+                        document
+                          .getElementById(destination.substr(1))
+                          .scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        __nextRouter?.push(destination);
+                      }
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["goToNextLaboratoryData"] != null &&
+                typeof $steps["goToNextLaboratoryData"] === "object" &&
+                typeof $steps["goToNextLaboratoryData"].then === "function"
+              ) {
+                $steps["goToNextLaboratoryData"] = await $steps[
+                  "goToNextLaboratoryData"
+                ];
+              }
+            }}
+          >
+            <NextSvgrepoComSvgIcon
+              data-plasmic-name={"last"}
+              data-plasmic-override={overrides.last}
+              className={classNames(projectcss.all, sty.last)}
+              role={"img"}
+            />
+
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__t1Isb
+              )}
+            >
+              {hasVariant(globalVariants, "screen", "mobileFirst")
+                ? "\u0628\u06cc\u0645\u0627\u0631 \u0642\u0628\u0644\u06cc"
+                : "\u0628\u06cc\u0645\u0627\u0631 \u0642\u0628\u0644\u06cc"}
+            </div>
+          </Stack__>
           <ApiFetcherComponent
             data-plasmic-name={"getPatient"}
             data-plasmic-override={overrides.getPatient}
@@ -817,47 +957,141 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     )}
                     dir={"rtl"}
                   >
-                    <React.Fragment>
-                      {(() => {
-                        if (!$ctx.fetched_data.loading) {
-                          const item = $ctx.fetched_data.data[0];
-                          if (item.date_of_birth) {
-                            const dob = new Date(item.date_of_birth);
-                            const now = new Date();
-                            let ageYears =
-                              now.getFullYear() - dob.getFullYear();
-                            const monthDifference =
-                              now.getMonth() - dob.getMonth();
-                            if (
-                              monthDifference < 0 ||
-                              (monthDifference === 0 &&
-                                now.getDate() < dob.getDate())
-                            ) {
-                              ageYears--;
-                            }
-                            const fullName = `${item.first_name} ${item.last_name}`;
-                            const genderSymbol =
-                              item.gender === "F"
-                                ? " \u2640️"
-                                : item.gender === "M"
-                                ? " \u2642️"
-                                : "";
-                            if (ageYears < 1) {
-                              const ageMonths =
-                                Math.abs(monthDifference) +
-                                (now.getDate() < dob.getDate() ? -1 : 0);
-                              return `${fullName} ${ageMonths} month ${
-                                ageMonths !== 1 ? "s" : ""
-                              }${genderSymbol}`;
+                    {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                      <React.Fragment>
+                        {(() => {
+                          if (!$ctx.fetched_data.loading) {
+                            const item = $ctx.fetched_data.data[0];
+
+                            // Ensure date_of_birth exists
+                            if (item.date_of_birth) {
+                              // Parse the date_of_birth string in ISO format
+                              const dob = new Date(item.date_of_birth); // This will correctly parse the ISO 8601 string
+
+                              // Calculate age
+                              const now = new Date();
+                              const ageDiffMs = now - dob;
+                              const ageDays = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60 * 24)
+                              );
+                              const ageHours = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60)
+                              );
+
+                              // Construct full name
+                              const fullName = `${item.first_name} ${item.last_name}`;
+
+                              // Determine gender symbol
+                              const genderSymbol =
+                                item.gender === "F"
+                                  ? " ♀️"
+                                  : item.gender === "M"
+                                  ? " ♂️"
+                                  : "";
+
+                              // Handle cases for under one year old
+                              if (ageDays < 1) {
+                                return `${fullName}${ageHours}hour${genderSymbol}`;
+                              } else if (ageDays < 30) {
+                                return `${fullName}${ageDays}day${genderSymbol}`;
+                              } else {
+                                let ageYears =
+                                  now.getFullYear() - dob.getFullYear();
+                                const monthDifference =
+                                  now.getMonth() - dob.getMonth();
+
+                                // Adjust age if the birthday hasn't occurred yet this year
+                                if (
+                                  monthDifference < 0 ||
+                                  (monthDifference === 0 &&
+                                    now.getDate() < dob.getDate())
+                                ) {
+                                  ageYears--;
+                                }
+
+                                if (ageYears < 1) {
+                                  const ageMonths =
+                                    Math.abs(monthDifference) +
+                                    (now.getDate() < dob.getDate() ? -1 : 0);
+                                  return `${fullName} ${ageMonths} month${genderSymbol}`;
+                                } else {
+                                  return `${fullName} ${ageYears}${genderSymbol}`;
+                                }
+                              }
                             } else {
-                              return `${fullName} ${ageYears} ${genderSymbol}`;
+                              return "Date of birth not available.";
                             }
-                          } else {
-                            return "Date of birth not available.";
                           }
-                        }
-                      })()}
-                    </React.Fragment>
+                        })()}
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        {(() => {
+                          if (!$ctx.fetched_data.loading) {
+                            const item = $ctx.fetched_data.data[0];
+
+                            // Ensure date_of_birth exists
+                            if (item.date_of_birth) {
+                              // Parse the date_of_birth string in ISO format
+                              const dob = new Date(item.date_of_birth); // This will correctly parse the ISO 8601 string
+
+                              // Calculate age
+                              const now = new Date();
+                              const ageDiffMs = now - dob;
+                              const ageDays = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60 * 24)
+                              );
+                              const ageHours = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60)
+                              );
+
+                              // Construct full name
+                              const fullName = `${item.first_name} ${item.last_name}`;
+
+                              // Determine gender symbol
+                              const genderSymbol =
+                                item.gender === "F"
+                                  ? " ♀️"
+                                  : item.gender === "M"
+                                  ? " ♂️"
+                                  : "";
+
+                              // Handle cases for under one year old
+                              if (ageDays < 1) {
+                                return `${fullName}${ageHours}hour${genderSymbol}`;
+                              } else if (ageDays < 30) {
+                                return `${fullName}${ageDays}day${genderSymbol}`;
+                              } else {
+                                let ageYears =
+                                  now.getFullYear() - dob.getFullYear();
+                                const monthDifference =
+                                  now.getMonth() - dob.getMonth();
+
+                                // Adjust age if the birthday hasn't occurred yet this year
+                                if (
+                                  monthDifference < 0 ||
+                                  (monthDifference === 0 &&
+                                    now.getDate() < dob.getDate())
+                                ) {
+                                  ageYears--;
+                                }
+
+                                if (ageYears < 1) {
+                                  const ageMonths =
+                                    Math.abs(monthDifference) +
+                                    (now.getDate() < dob.getDate() ? -1 : 0);
+                                  return `${fullName} ${ageMonths} month${genderSymbol}`;
+                                } else {
+                                  return `${fullName} ${ageYears}${genderSymbol}`;
+                                }
+                              }
+                            } else {
+                              return "Date of birth not available.";
+                            }
+                          }
+                        })()}
+                      </React.Fragment>
+                    )}
                   </div>
                   {false ? (
                     <ConditionGuard
@@ -922,6 +1156,138 @@ function PlasmicImagingReportList__RenderFunc(props: {
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
+          <Stack__
+            as={"div"}
+            data-plasmic-name={"nextPatient"}
+            data-plasmic-override={overrides.nextPatient}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.nextPatient)}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["getAdmIdPatientId"] = true
+                ? (() => {
+                    const actionArgs = {
+                      customFunction: async () => {
+                        return (() => {
+                          const stored_patient_index_id_list = JSON.parse(
+                            localStorage.getItem("patient_index_id_list")
+                          );
+                          const specificItem =
+                            stored_patient_index_id_list.find(
+                              item =>
+                                item.admission_id ===
+                                parseInt($ctx.params.adm_id)
+                            );
+                          if (specificItem) {
+                            const specificNumber = specificItem.number;
+                            const newNumber = specificNumber + 1;
+                            const nextItem = stored_patient_index_id_list.find(
+                              item => item.number === newNumber
+                            );
+                            if (nextItem) {
+                              localStorage.setItem(
+                                "patient_id",
+                                nextItem.patient_id
+                              );
+                              return localStorage.setItem(
+                                "admission_id",
+                                nextItem.admission_id
+                              );
+                            } else {
+                              return console.log("No next item found.");
+                            }
+                          } else {
+                            return console.log(
+                              "No matching admission ID found."
+                            );
+                          }
+                        })();
+                      }
+                    };
+                    return (({ customFunction }) => {
+                      return customFunction();
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["getAdmIdPatientId"] != null &&
+                typeof $steps["getAdmIdPatientId"] === "object" &&
+                typeof $steps["getAdmIdPatientId"].then === "function"
+              ) {
+                $steps["getAdmIdPatientId"] = await $steps["getAdmIdPatientId"];
+              }
+
+              $steps["goToNextLaboratoryData"] = true
+                ? (() => {
+                    const actionArgs = {
+                      destination: `/patient/${(() => {
+                        try {
+                          return localStorage.getItem("patient_id");
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}/report/list/${(() => {
+                        try {
+                          return localStorage.getItem("admission_id");
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}`
+                    };
+                    return (({ destination }) => {
+                      if (
+                        typeof destination === "string" &&
+                        destination.startsWith("#")
+                      ) {
+                        document
+                          .getElementById(destination.substr(1))
+                          .scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        __nextRouter?.push(destination);
+                      }
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["goToNextLaboratoryData"] != null &&
+                typeof $steps["goToNextLaboratoryData"] === "object" &&
+                typeof $steps["goToNextLaboratoryData"].then === "function"
+              ) {
+                $steps["goToNextLaboratoryData"] = await $steps[
+                  "goToNextLaboratoryData"
+                ];
+              }
+            }}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__ghl3K
+              )}
+            >
+              {"\u0628\u06cc\u0645\u0627\u0631 \u0628\u0639\u062f\u06cc"}
+            </div>
+            <NextSvgrepoComSvgIcon
+              data-plasmic-name={"next"}
+              data-plasmic-override={overrides.next}
+              className={classNames(projectcss.all, sty.next)}
+              role={"img"}
+            />
+          </Stack__>
         </div>
         <Stack__
           as={"div"}
@@ -4990,9 +5356,13 @@ const PlasmicDescendants = {
     "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "header",
+    "lastPatient",
+    "last",
     "getPatient",
     "patientNameAgeGender",
     "saveAdmissionDatetime",
+    "nextPatient",
+    "next",
     "tabButtons",
     "media",
     "paraclinicsButton",
@@ -5050,13 +5420,21 @@ const PlasmicDescendants = {
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: [
     "header",
+    "lastPatient",
+    "last",
     "getPatient",
     "patientNameAgeGender",
-    "saveAdmissionDatetime"
+    "saveAdmissionDatetime",
+    "nextPatient",
+    "next"
   ],
+  lastPatient: ["lastPatient", "last"],
+  last: ["last"],
   getPatient: ["getPatient", "patientNameAgeGender", "saveAdmissionDatetime"],
   patientNameAgeGender: ["patientNameAgeGender"],
   saveAdmissionDatetime: ["saveAdmissionDatetime"],
+  nextPatient: ["nextPatient", "next"],
+  next: ["next"],
   tabButtons: ["tabButtons", "media", "paraclinicsButton", "paraclinicReports"],
   media: ["media"],
   paraclinicsButton: ["paraclinicsButton"],
@@ -5244,9 +5622,13 @@ type NodeDefaultElementType = {
   redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
+  lastPatient: "div";
+  last: "svg";
   getPatient: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
   saveAdmissionDatetime: typeof ConditionGuard;
+  nextPatient: "div";
+  next: "svg";
   tabButtons: "div";
   media: typeof Button;
   paraclinicsButton: typeof Button;
@@ -5366,9 +5748,13 @@ export const PlasmicImagingReportList = Object.assign(
       "redirectToNamespaceSelection"
     ),
     header: makeNodeComponent("header"),
+    lastPatient: makeNodeComponent("lastPatient"),
+    last: makeNodeComponent("last"),
     getPatient: makeNodeComponent("getPatient"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
     saveAdmissionDatetime: makeNodeComponent("saveAdmissionDatetime"),
+    nextPatient: makeNodeComponent("nextPatient"),
+    next: makeNodeComponent("next"),
     tabButtons: makeNodeComponent("tabButtons"),
     media: makeNodeComponent("media"),
     paraclinicsButton: makeNodeComponent("paraclinicsButton"),

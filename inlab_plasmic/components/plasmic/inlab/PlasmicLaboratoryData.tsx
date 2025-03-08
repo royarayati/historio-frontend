@@ -77,6 +77,7 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3wItkax/css
 
+import NextSvgrepoComSvgIcon from "./icons/PlasmicIcon__NextSvgrepoComSvg"; // plasmic-import: sbXZrFXKpPD-/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 import InformationIcon from "./icons/PlasmicIcon__Information"; // plasmic-import: tSD0oiaMd-7V/icon
@@ -106,8 +107,12 @@ export type PlasmicLaboratoryData__OverridesType = {
   redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
+  lastPatient?: Flex__<"div">;
+  last?: Flex__<"svg">;
   patientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
+  nextPatient?: Flex__<"div">;
+  next?: Flex__<"svg">;
   tabButtons?: Flex__<"div">;
   checkedFactor?: Flex__<typeof Button>;
   button?: Flex__<typeof Button>;
@@ -704,6 +709,194 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
+          <Stack__
+            as={"div"}
+            data-plasmic-name={"lastPatient"}
+            data-plasmic-override={overrides.lastPatient}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.lastPatient)}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["deleteLabData"] = true
+                ? (() => {
+                    const actionArgs = {
+                      customFunction: async () => {
+                        return (() => {
+                          localStorage.setItem("laboratory_data", "");
+                          return console.log(
+                            "laboratory_data",
+                            localStorage.getItem("laboratory_data")
+                          );
+                        })();
+                      }
+                    };
+                    return (({ customFunction }) => {
+                      return customFunction();
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["deleteLabData"] != null &&
+                typeof $steps["deleteLabData"] === "object" &&
+                typeof $steps["deleteLabData"].then === "function"
+              ) {
+                $steps["deleteLabData"] = await $steps["deleteLabData"];
+              }
+
+              $steps["getAdmIdPatientId"] = true
+                ? (() => {
+                    const actionArgs = {
+                      customFunction: async () => {
+                        return (() => {
+                          const stored_patient_index_id_list = JSON.parse(
+                            localStorage.getItem("patient_index_id_list")
+                          );
+                          const specificItem =
+                            stored_patient_index_id_list.find(
+                              item =>
+                                item.admission_id ===
+                                parseInt($ctx.params.adm_id)
+                            );
+                          if (specificItem) {
+                            const specificNumber = specificItem.number;
+                            const newNumber = specificNumber - 1;
+                            const nextItem = stored_patient_index_id_list.find(
+                              item => item.number === newNumber
+                            );
+                            if (nextItem) {
+                              localStorage.setItem(
+                                "patient_id",
+                                nextItem.patient_id
+                              );
+                              return localStorage.setItem(
+                                "admission_id",
+                                nextItem.admission_id
+                              );
+                            } else {
+                              return console.log("No next item found.");
+                            }
+                          } else {
+                            return console.log(
+                              "No matching admission ID found."
+                            );
+                          }
+                        })();
+                      }
+                    };
+                    return (({ customFunction }) => {
+                      return customFunction();
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["getAdmIdPatientId"] != null &&
+                typeof $steps["getAdmIdPatientId"] === "object" &&
+                typeof $steps["getAdmIdPatientId"].then === "function"
+              ) {
+                $steps["getAdmIdPatientId"] = await $steps["getAdmIdPatientId"];
+              }
+
+              $steps["updateDataLoaded"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["dataLoaded"]
+                      },
+                      operation: 0,
+                      value: false
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateDataLoaded"] != null &&
+                typeof $steps["updateDataLoaded"] === "object" &&
+                typeof $steps["updateDataLoaded"].then === "function"
+              ) {
+                $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
+              }
+
+              $steps["goToNextLaboratoryData"] = true
+                ? (() => {
+                    const actionArgs = {
+                      destination: `/patient/${(() => {
+                        try {
+                          return localStorage.getItem("patient_id");
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}/lab/${(() => {
+                        try {
+                          return localStorage.getItem("admission_id");
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}`
+                    };
+                    return (({ destination }) => {
+                      if (
+                        typeof destination === "string" &&
+                        destination.startsWith("#")
+                      ) {
+                        document
+                          .getElementById(destination.substr(1))
+                          .scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        __nextRouter?.push(destination);
+                      }
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["goToNextLaboratoryData"] != null &&
+                typeof $steps["goToNextLaboratoryData"] === "object" &&
+                typeof $steps["goToNextLaboratoryData"].then === "function"
+              ) {
+                $steps["goToNextLaboratoryData"] = await $steps[
+                  "goToNextLaboratoryData"
+                ];
+              }
+            }}
+          >
+            <NextSvgrepoComSvgIcon
+              data-plasmic-name={"last"}
+              data-plasmic-override={overrides.last}
+              className={classNames(projectcss.all, sty.last)}
+              role={"img"}
+            />
+
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__kvCK
+              )}
+            >
+              {"\u0628\u06cc\u0645\u0627\u0631 \u0642\u0628\u0644\u06cc"}
+            </div>
+          </Stack__>
           <ApiFetcherComponent
             data-plasmic-name={"patientDataApiFetcher"}
             data-plasmic-override={overrides.patientDataApiFetcher}
@@ -749,50 +942,332 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   )}
                   dir={"rtl"}
                 >
-                  <React.Fragment>
-                    {(() => {
-                      if (!$ctx.fetched_data.loading) {
-                        const item = $ctx.fetched_data.data[0];
-                        if (item.date_of_birth) {
-                          const dob = new Date(item.date_of_birth);
-                          const now = new Date();
-                          let ageYears = now.getFullYear() - dob.getFullYear();
-                          const monthDifference =
-                            now.getMonth() - dob.getMonth();
-                          if (
-                            monthDifference < 0 ||
-                            (monthDifference === 0 &&
-                              now.getDate() < dob.getDate())
-                          ) {
-                            ageYears--;
-                          }
-                          const fullName = `${item.first_name} ${item.last_name}`;
-                          const genderSymbol =
-                            item.gender === "F"
-                              ? " \u2640️"
-                              : item.gender === "M"
-                              ? " \u2642️"
-                              : "";
-                          if (ageYears < 1) {
-                            const ageMonths =
-                              Math.abs(monthDifference) +
-                              (now.getDate() < dob.getDate() ? -1 : 0);
-                            return `${fullName} ${ageMonths} month ${
-                              ageMonths !== 1 ? "s" : ""
-                            }${genderSymbol}`;
+                  {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                    <React.Fragment>
+                      {(() => {
+                        if (!$ctx.fetched_data.loading) {
+                          const item = $ctx.fetched_data.data[0];
+
+                          // Ensure date_of_birth exists
+                          if (item.date_of_birth) {
+                            // Parse the date_of_birth string in ISO format
+                            const dob = new Date(item.date_of_birth); // This will correctly parse the ISO 8601 string
+
+                            // Calculate age
+                            const now = new Date();
+                            const ageDiffMs = now - dob;
+                            const ageDays = Math.floor(
+                              ageDiffMs / (1000 * 60 * 60 * 24)
+                            );
+                            const ageHours = Math.floor(
+                              ageDiffMs / (1000 * 60 * 60)
+                            );
+
+                            // Construct full name
+                            const fullName = `${item.first_name} ${item.last_name}`;
+
+                            // Determine gender symbol
+                            const genderSymbol =
+                              item.gender === "F"
+                                ? " ♀️"
+                                : item.gender === "M"
+                                ? " ♂️"
+                                : "";
+
+                            // Handle cases for under one year old
+                            if (ageDays < 1) {
+                              return `${fullName}${ageHours}hour${genderSymbol}`;
+                            } else if (ageDays < 30) {
+                              return `${fullName}${ageDays}day${genderSymbol}`;
+                            } else {
+                              let ageYears =
+                                now.getFullYear() - dob.getFullYear();
+                              const monthDifference =
+                                now.getMonth() - dob.getMonth();
+
+                              // Adjust age if the birthday hasn't occurred yet this year
+                              if (
+                                monthDifference < 0 ||
+                                (monthDifference === 0 &&
+                                  now.getDate() < dob.getDate())
+                              ) {
+                                ageYears--;
+                              }
+
+                              if (ageYears < 1) {
+                                const ageMonths =
+                                  Math.abs(monthDifference) +
+                                  (now.getDate() < dob.getDate() ? -1 : 0);
+                                return `${fullName} ${ageMonths} month${genderSymbol}`;
+                              } else {
+                                return `${fullName} ${ageYears}${genderSymbol}`;
+                              }
+                            }
                           } else {
-                            return `${fullName} ${ageYears} ${genderSymbol}`;
+                            return "Date of birth not available.";
                           }
-                        } else {
-                          return "Date of birth not available.";
                         }
-                      }
-                    })()}
-                  </React.Fragment>
+                      })()}
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>
+                      {(() => {
+                        if (!$ctx.fetched_data.loading) {
+                          const item = $ctx.fetched_data.data[0];
+
+                          // Ensure date_of_birth exists
+                          if (item.date_of_birth) {
+                            // Parse the date_of_birth string in ISO format
+                            const dob = new Date(item.date_of_birth); // This will correctly parse the ISO 8601 string
+
+                            // Calculate age
+                            const now = new Date();
+                            const ageDiffMs = now - dob;
+                            const ageDays = Math.floor(
+                              ageDiffMs / (1000 * 60 * 60 * 24)
+                            );
+                            const ageHours = Math.floor(
+                              ageDiffMs / (1000 * 60 * 60)
+                            );
+
+                            // Construct full name
+                            const fullName = `${item.first_name} ${item.last_name}`;
+
+                            // Determine gender symbol
+                            const genderSymbol =
+                              item.gender === "F"
+                                ? " ♀️"
+                                : item.gender === "M"
+                                ? " ♂️"
+                                : "";
+
+                            // Handle cases for under one year old
+                            if (ageDays < 1) {
+                              return `${fullName}${ageHours}hour${genderSymbol}`;
+                            } else if (ageDays < 30) {
+                              return `${fullName}${ageDays}day${genderSymbol}`;
+                            } else {
+                              let ageYears =
+                                now.getFullYear() - dob.getFullYear();
+                              const monthDifference =
+                                now.getMonth() - dob.getMonth();
+
+                              // Adjust age if the birthday hasn't occurred yet this year
+                              if (
+                                monthDifference < 0 ||
+                                (monthDifference === 0 &&
+                                  now.getDate() < dob.getDate())
+                              ) {
+                                ageYears--;
+                              }
+
+                              if (ageYears < 1) {
+                                const ageMonths =
+                                  Math.abs(monthDifference) +
+                                  (now.getDate() < dob.getDate() ? -1 : 0);
+                                return `${fullName} ${ageMonths} month${genderSymbol}`;
+                              } else {
+                                return `${fullName} ${ageYears}${genderSymbol}`;
+                              }
+                            }
+                          } else {
+                            return "Date of birth not available.";
+                          }
+                        }
+                      })()}
+                    </React.Fragment>
+                  )}
                 </div>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
+          <Stack__
+            as={"div"}
+            data-plasmic-name={"nextPatient"}
+            data-plasmic-override={overrides.nextPatient}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.nextPatient)}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["deleteLabData"] = true
+                ? (() => {
+                    const actionArgs = {
+                      customFunction: async () => {
+                        return (() => {
+                          localStorage.setItem("laboratory_data", "");
+                          return console.log(
+                            "laboratory_data",
+                            localStorage.getItem("laboratory_data")
+                          );
+                        })();
+                      }
+                    };
+                    return (({ customFunction }) => {
+                      return customFunction();
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["deleteLabData"] != null &&
+                typeof $steps["deleteLabData"] === "object" &&
+                typeof $steps["deleteLabData"].then === "function"
+              ) {
+                $steps["deleteLabData"] = await $steps["deleteLabData"];
+              }
+
+              $steps["getAdmIdPatientId"] = true
+                ? (() => {
+                    const actionArgs = {
+                      customFunction: async () => {
+                        return (() => {
+                          const stored_patient_index_id_list = JSON.parse(
+                            localStorage.getItem("patient_index_id_list")
+                          );
+                          const specificItem =
+                            stored_patient_index_id_list.find(
+                              item =>
+                                item.admission_id ===
+                                parseInt($ctx.params.adm_id)
+                            );
+                          if (specificItem) {
+                            const specificNumber = specificItem.number;
+                            const newNumber = specificNumber + 1;
+                            const nextItem = stored_patient_index_id_list.find(
+                              item => item.number === newNumber
+                            );
+                            if (nextItem) {
+                              localStorage.setItem(
+                                "patient_id",
+                                nextItem.patient_id
+                              );
+                              return localStorage.setItem(
+                                "admission_id",
+                                nextItem.admission_id
+                              );
+                            } else {
+                              return console.log("No next item found.");
+                            }
+                          } else {
+                            return console.log(
+                              "No matching admission ID found."
+                            );
+                          }
+                        })();
+                      }
+                    };
+                    return (({ customFunction }) => {
+                      return customFunction();
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["getAdmIdPatientId"] != null &&
+                typeof $steps["getAdmIdPatientId"] === "object" &&
+                typeof $steps["getAdmIdPatientId"].then === "function"
+              ) {
+                $steps["getAdmIdPatientId"] = await $steps["getAdmIdPatientId"];
+              }
+
+              $steps["updateDataLoaded"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["dataLoaded"]
+                      },
+                      operation: 0,
+                      value: false
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateDataLoaded"] != null &&
+                typeof $steps["updateDataLoaded"] === "object" &&
+                typeof $steps["updateDataLoaded"].then === "function"
+              ) {
+                $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
+              }
+
+              $steps["goToNextLaboratoryData"] = true
+                ? (() => {
+                    const actionArgs = {
+                      destination: `/patient/${(() => {
+                        try {
+                          return localStorage.getItem("patient_id");
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}/lab/${(() => {
+                        try {
+                          return localStorage.getItem("admission_id");
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}`
+                    };
+                    return (({ destination }) => {
+                      if (
+                        typeof destination === "string" &&
+                        destination.startsWith("#")
+                      ) {
+                        document
+                          .getElementById(destination.substr(1))
+                          .scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        __nextRouter?.push(destination);
+                      }
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["goToNextLaboratoryData"] != null &&
+                typeof $steps["goToNextLaboratoryData"] === "object" &&
+                typeof $steps["goToNextLaboratoryData"].then === "function"
+              ) {
+                $steps["goToNextLaboratoryData"] = await $steps[
+                  "goToNextLaboratoryData"
+                ];
+              }
+            }}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__ckBTs
+              )}
+            >
+              {"\u0628\u06cc\u0645\u0627\u0631 \u0628\u0639\u062f\u06cc"}
+            </div>
+            <NextSvgrepoComSvgIcon
+              data-plasmic-name={"next"}
+              data-plasmic-override={overrides.next}
+              className={classNames(projectcss.all, sty.next)}
+              role={"img"}
+            />
+          </Stack__>
         </div>
         <Stack__
           as={"div"}
@@ -1909,19 +2384,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     data-plasmic-name={"conditionGuard"}
                     data-plasmic-override={overrides.conditionGuard}
                     className={classNames("__wab_instance", sty.conditionGuard)}
-                    condition={(() => {
-                      try {
-                        return $ctx.fetched_data.loading;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })()}
+                    condition={$ctx.fetched_data.loading}
                     onNotSatisfied={async () => {
                       const $steps = {};
 
@@ -1961,30 +2424,32 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         ];
                       }
 
-                      $steps["setTheLaboratoryDataToTheLocalStorage"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return (() => {
-                                  localStorage.setItem(
-                                    "laboratory_data",
-                                    JSON.stringify(
-                                      $ctx.fetched_data.data.lab_test_groups
-                                    )
-                                  );
-                                  return console.log(
-                                    JSON.parse(
-                                      localStorage.getItem("laboratory_data")
-                                    )
-                                  );
-                                })();
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
+                      $steps["setTheLaboratoryDataToTheLocalStorage"] =
+                        $ctx.fetched_data.loading === false
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    localStorage.setItem(
+                                      "laboratory_data",
+                                      JSON.stringify(
+                                        $ctx.fetched_data.data.lab_test_groups
+                                      )
+                                    );
+                                    return console.log(
+                                      "laboratory_data",
+                                      JSON.parse(
+                                        localStorage.getItem("laboratory_data")
+                                      )
+                                    );
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
                       if (
                         $steps["setTheLaboratoryDataToTheLocalStorage"] !=
                           null &&
@@ -3649,8 +4114,12 @@ const PlasmicDescendants = {
     "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "header",
+    "lastPatient",
+    "last",
     "patientDataApiFetcher",
     "patientNameAgeGender",
+    "nextPatient",
+    "next",
     "tabButtons",
     "checkedFactor",
     "button",
@@ -3698,9 +4167,21 @@ const PlasmicDescendants = {
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
-  header: ["header", "patientDataApiFetcher", "patientNameAgeGender"],
+  header: [
+    "header",
+    "lastPatient",
+    "last",
+    "patientDataApiFetcher",
+    "patientNameAgeGender",
+    "nextPatient",
+    "next"
+  ],
+  lastPatient: ["lastPatient", "last"],
+  last: ["last"],
   patientDataApiFetcher: ["patientDataApiFetcher", "patientNameAgeGender"],
   patientNameAgeGender: ["patientNameAgeGender"],
+  nextPatient: ["nextPatient", "next"],
+  next: ["next"],
   tabButtons: ["tabButtons", "checkedFactor", "button", "laboratoryResult"],
   checkedFactor: ["checkedFactor", "button"],
   button: ["button"],
@@ -3877,8 +4358,12 @@ type NodeDefaultElementType = {
   redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
+  lastPatient: "div";
+  last: "svg";
   patientDataApiFetcher: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
+  nextPatient: "div";
+  next: "svg";
   tabButtons: "div";
   checkedFactor: typeof Button;
   button: typeof Button;
@@ -3990,8 +4475,12 @@ export const PlasmicLaboratoryData = Object.assign(
       "redirectToNamespaceSelection"
     ),
     header: makeNodeComponent("header"),
+    lastPatient: makeNodeComponent("lastPatient"),
+    last: makeNodeComponent("last"),
     patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
+    nextPatient: makeNodeComponent("nextPatient"),
+    next: makeNodeComponent("next"),
     tabButtons: makeNodeComponent("tabButtons"),
     checkedFactor: makeNodeComponent("checkedFactor"),
     button: makeNodeComponent("button"),
