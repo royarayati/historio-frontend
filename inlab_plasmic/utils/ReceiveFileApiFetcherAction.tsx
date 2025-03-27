@@ -2,8 +2,7 @@ import axios from 'axios';
 import { refreshAccessIfNeeded, logForDev } from './CommonUtils';
 import { InlabUser } from './types/CommonTypes';
 
-// TODO: Handle errors
-export async function axiosCall( // TODO: better name
+export async function axiosCallReceiveFile(
   user: InlabUser | null,
   baseUrl: string,
   changeUserCallback: (user: InlabUser | null) => void,
@@ -11,6 +10,7 @@ export async function axiosCall( // TODO: better name
   path: string,
   headers?: any,
   requestBody?: any,
+  responseType: 'json' | 'blob' | 'arraybuffer' = 'json' // Add responseType parameter
 ): Promise<any> {
   return await refreshAccessIfNeeded({ baseUrl, changeUserCallback }, user)
     .then(user => {
@@ -23,7 +23,12 @@ export async function axiosCall( // TODO: better name
         url: baseUrl + path,
         headers: authedHeaders,
         data: requestBody,
+        responseType: responseType // Add responseType to the request config
       });
     })
-    .catch(error => {});
+    .catch(error => {
+      // You should handle errors here
+      console.error('API call failed:', error);
+      throw error;
+    });
 }
