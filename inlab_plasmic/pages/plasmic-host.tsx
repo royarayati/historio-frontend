@@ -36,7 +36,7 @@ registerGlobalContext(AuthGlobalContext, {
         { name: "requestBody", type: "object" },
       ],
     },
-    receiveFileApiFetcher: {
+    apiFetcherNew: {
       parameters: [
         { name: "method",
           type: "string",
