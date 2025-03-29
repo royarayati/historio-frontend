@@ -2,7 +2,7 @@ import axios from 'axios';
 import { refreshAccessIfNeeded, logForDev } from './CommonUtils';
 import { InlabUser } from './types/CommonTypes';
 
-export async function axiosCallNew(
+export async function axiosCallPlus(
   user: InlabUser | null,
   baseUrl: string,
   changeUserCallback: (user: InlabUser | null) => void,
