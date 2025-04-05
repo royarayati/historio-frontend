@@ -1,6 +1,6 @@
-// @ts-nocheck
 /* eslint-disable */
 /* tslint:disable */
+// @ts-nocheck
 /* prettier-ignore-start */
 
 /** @jsxRuntime classic */
@@ -75,9 +75,7 @@ export type PlasmicSwitchingTab2__VariantsArgs = {};
 type VariantPropType = keyof PlasmicSwitchingTab2__VariantsArgs;
 export const PlasmicSwitchingTab2__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicSwitchingTab2__ArgsType = {
-  children?: React.ReactNode;
-};
+export type PlasmicSwitchingTab2__ArgsType = { children?: React.ReactNode };
 type ArgPropType = keyof PlasmicSwitchingTab2__ArgsType;
 export const PlasmicSwitchingTab2__ArgProps = new Array<ArgPropType>(
   "children"
