@@ -1,6 +1,6 @@
-// @ts-nocheck
 /* eslint-disable */
 /* tslint:disable */
+// @ts-nocheck
 /* prettier-ignore-start */
 
 /** @jsxRuntime classic */
@@ -80,9 +80,7 @@ type VariantPropType = keyof PlasmicNewNoticeBanner__VariantsArgs;
 export const PlasmicNewNoticeBanner__VariantProps =
   new Array<VariantPropType>();
 
-export type PlasmicNewNoticeBanner__ArgsType = {
-  newNoticeDatetime?: string;
-};
+export type PlasmicNewNoticeBanner__ArgsType = { newNoticeDatetime?: string };
 type ArgPropType = keyof PlasmicNewNoticeBanner__ArgsType;
 export const PlasmicNewNoticeBanner__ArgProps = new Array<ArgPropType>(
   "newNoticeDatetime"

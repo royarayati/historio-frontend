@@ -29,12 +29,25 @@ registerGlobalContext(AuthGlobalContext, {
       parameters: [
         { name: "method",
           type: "string",
-          displayName: "Method: 'GET', 'POST', 'PUT', 'DELETE'"
+          displayName: "Method: 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'"
         },
         { name: "path", type: "string" },
         { name: "headers", type: "object" },
         { name: "requestBody", type: "object" },
-        
+      ],
+    },
+    apiFetcherPlus: {
+      parameters: [
+        { name: "method",
+          type: "string",
+          displayName: "Method: 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'"
+        },
+        { name: "path", type: "string" },
+        { name: "headers", type: "object" },
+        { name: "requestBody", type: "object" },
+        { name: "responseType",
+          type: "string",
+          displayName: "Response Type: 'json', 'blob', 'arraybuffer'" }
       ],
     },
     login: {

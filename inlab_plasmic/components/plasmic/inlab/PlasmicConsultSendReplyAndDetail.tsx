@@ -1,6 +1,6 @@
-// @ts-nocheck
 /* eslint-disable */
 /* tslint:disable */
+// @ts-nocheck
 /* prettier-ignore-start */
 
 /** @jsxRuntime classic */
@@ -68,7 +68,6 @@ import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -1013,118 +1012,6 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           onClick={async event => {
                             const $steps = {};
 
-                            $steps["openGetConsultTemplateInNewWindow"] =
-                              $ctx.fetched_data.data.state === 4
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return window.open(`/api/v3/consults/template?consult_id=${
-                                          $ctx.fetched_data.data.id
-                                        }
-&first_name=${
-                                          $ctx.fetched_data.data.patient
-                                            ? $ctx.fetched_data.data.patient
-                                                .first_name
-                                            : ""
-                                        }
-&last_name=${
-                                          $ctx.fetched_data.data.patient
-                                            ? $ctx.fetched_data.data.patient
-                                                .last_name
-                                            : ""
-                                        }
-&date_of_birth=${
-                                          $ctx.fetched_data.data.patient
-                                            ? $ctx.fetched_data.data.patient
-                                                .birth_date
-                                            : ""
-                                        }
-&admission_date=${
-                                          $ctx.fetched_data.data.patient
-                                            ? $ctx.fetched_data.data.patient
-                                                .admission_datetime
-                                            : ""
-                                        }
-&patient_ward=${
-                                          $ctx.fetched_data.data.effective_ward
-                                            ? $ctx.fetched_data.data
-                                                .effective_ward.name
-                                            : ""
-                                        }
-&sender=${
-                                          $ctx.fetched_data.data.requester
-                                            ? $ctx.fetched_data.data.requester
-                                                .rank.role +
-                                              " " +
-                                              $ctx.fetched_data.data.requester
-                                                .first_name +
-                                              " " +
-                                              $ctx.fetched_data.data.requester
-                                                .last_name
-                                            : ""
-                                        }
-&respondent=${
-                                          $ctx.fetched_data.data.consultant
-                                            ? $ctx.fetched_data.data.consultant
-                                                .rank.role +
-                                              " " +
-                                              $ctx.fetched_data.data.consultant
-                                                .first_name +
-                                              " " +
-                                              $ctx.fetched_data.data.consultant
-                                                .last_name
-                                            : ""
-                                        }
-&reviewer=${
-                                          $ctx.fetched_data.data.confirm_entries
-                                            ? $ctx.fetched_data.data.confirm_entries
-                                                .map(
-                                                  entry =>
-                                                    entry.confirmer.rank.role +
-                                                    " " +
-                                                    entry.confirmer.first_name +
-                                                    " " +
-                                                    entry.confirmer.last_name
-                                                )
-                                                .join("\u060C ")
-                                            : ""
-                                        }
-&sender_service=${
-                                          $ctx.fetched_data.data
-                                            .effective_patient_service
-                                            ? $ctx.fetched_data.data
-                                                .effective_patient_service.name
-                                            : ""
-                                        }
-&receiver_service=${
-                                          $ctx.fetched_data.data
-                                            .consultant_service
-                                            ? $ctx.fetched_data.data
-                                                .consultant_service.name
-                                            : ""
-                                        }`);
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                            if (
-                              $steps["openGetConsultTemplateInNewWindow"] !=
-                                null &&
-                              typeof $steps[
-                                "openGetConsultTemplateInNewWindow"
-                              ] === "object" &&
-                              typeof $steps["openGetConsultTemplateInNewWindow"]
-                                .then === "function"
-                            ) {
-                              $steps["openGetConsultTemplateInNewWindow"] =
-                                await $steps[
-                                  "openGetConsultTemplateInNewWindow"
-                                ];
-                            }
-
                             $steps[
                               "updateModalSetConsultPaperReplyTrueBeforePrintOpen"
                             ] =
@@ -1180,6 +1067,117 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                 "updateModalSetConsultPaperReplyTrueBeforePrintOpen"
                               ] = await $steps[
                                 "updateModalSetConsultPaperReplyTrueBeforePrintOpen"
+                              ];
+                            }
+
+                            $steps["postConsultFillTemplate"] =
+                              $ctx.fetched_data.data.state === 4
+                                ? (() => {
+                                    const actionArgs = {
+                                      args: [
+                                        "POST",
+                                        "/api/v3/consults/template",
+                                        (() => {
+                                          try {
+                                            return {
+                                              "X-Namespace":
+                                                localStorage.getItem(
+                                                  "inlab_user_namespace_id"
+                                                )
+                                            };
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })(),
+                                        (() => {
+                                          try {
+                                            return {
+                                              consult_id: parseInt(
+                                                $ctx.params.consult_id
+                                              ),
+                                              patient_id: 0
+                                            };
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })(),
+                                        "blob"
+                                      ]
+                                    };
+                                    return $globalActions[
+                                      "AuthGlobalContext.apiFetcherPlus"
+                                    ]?.apply(null, [...actionArgs.args]);
+                                  })()
+                                : undefined;
+                            if (
+                              $steps["postConsultFillTemplate"] != null &&
+                              typeof $steps["postConsultFillTemplate"] ===
+                                "object" &&
+                              typeof $steps["postConsultFillTemplate"].then ===
+                                "function"
+                            ) {
+                              $steps["postConsultFillTemplate"] = await $steps[
+                                "postConsultFillTemplate"
+                              ];
+                            }
+
+                            $steps["openConsultPrint"] =
+                              $ctx.fetched_data.data.state === 4 &&
+                              $steps.postConsultFillTemplate.status === 200
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return (() => {
+                                          const response =
+                                            $steps.postConsultFillTemplate;
+                                          if (response.data instanceof Blob) {
+                                            const pdfUrl = URL.createObjectURL(
+                                              response.data
+                                            );
+                                            window.open(pdfUrl, "_blank");
+                                            return setTimeout(
+                                              () => URL.revokeObjectURL(pdfUrl),
+                                              10000
+                                            );
+                                          } else {
+                                            console.error(
+                                              "Received non-Blob response:",
+                                              response
+                                            );
+                                            return alert(
+                                              "Error: Could not generate PDF"
+                                            );
+                                          }
+                                        })();
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                            if (
+                              $steps["openConsultPrint"] != null &&
+                              typeof $steps["openConsultPrint"] === "object" &&
+                              typeof $steps["openConsultPrint"].then ===
+                                "function"
+                            ) {
+                              $steps["openConsultPrint"] = await $steps[
+                                "openConsultPrint"
                               ];
                             }
                           }}
@@ -3308,126 +3306,124 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             onClick={async event => {
                               const $steps = {};
 
-                              $steps["putConsultPaperReply"] = true
+                              $steps["patchConsultPaperReply"] = true
                                 ? (() => {
                                     const actionArgs = {
                                       args: [
-                                        "PUT",
+                                        "PATCH",
                                         `/api/v3/consults/paper_reply/${$ctx.params.consult_id}`
                                       ]
                                     };
                                     return $globalActions[
-                                      "AuthGlobalContext.apiFetcher"
+                                      "AuthGlobalContext.apiFetcherPlus"
                                     ]?.apply(null, [...actionArgs.args]);
                                   })()
                                 : undefined;
                               if (
-                                $steps["putConsultPaperReply"] != null &&
-                                typeof $steps["putConsultPaperReply"] ===
+                                $steps["patchConsultPaperReply"] != null &&
+                                typeof $steps["patchConsultPaperReply"] ===
                                   "object" &&
-                                typeof $steps["putConsultPaperReply"].then ===
+                                typeof $steps["patchConsultPaperReply"].then ===
                                   "function"
                               ) {
-                                $steps["putConsultPaperReply"] = await $steps[
-                                  "putConsultPaperReply"
+                                $steps["patchConsultPaperReply"] = await $steps[
+                                  "patchConsultPaperReply"
                                 ];
                               }
 
-                              $steps["openGetConsultTemplateInNewWindow"] =
-                                $steps.putConsultPaperReply.status === 200
+                              $steps["postConsultFillTemplate"] =
+                                $steps.patchConsultPaperReply.status === 200
+                                  ? (() => {
+                                      const actionArgs = {
+                                        args: [
+                                          "POST",
+                                          "/api/v3/consults/template",
+                                          (() => {
+                                            try {
+                                              return {
+                                                "X-Namespace":
+                                                  localStorage.getItem(
+                                                    "inlab_user_namespace_id"
+                                                  )
+                                              };
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
+                                          })(),
+                                          (() => {
+                                            try {
+                                              return {
+                                                consult_id: parseInt(
+                                                  $ctx.params.consult_id
+                                                ),
+                                                patient_id: 0
+                                              };
+                                            } catch (e) {
+                                              if (
+                                                e instanceof TypeError ||
+                                                e?.plasmicType ===
+                                                  "PlasmicUndefinedDataError"
+                                              ) {
+                                                return undefined;
+                                              }
+                                              throw e;
+                                            }
+                                          })(),
+                                          "blob"
+                                        ]
+                                      };
+                                      return $globalActions[
+                                        "AuthGlobalContext.apiFetcherPlus"
+                                      ]?.apply(null, [...actionArgs.args]);
+                                    })()
+                                  : undefined;
+                              if (
+                                $steps["postConsultFillTemplate"] != null &&
+                                typeof $steps["postConsultFillTemplate"] ===
+                                  "object" &&
+                                typeof $steps["postConsultFillTemplate"]
+                                  .then === "function"
+                              ) {
+                                $steps["postConsultFillTemplate"] =
+                                  await $steps["postConsultFillTemplate"];
+                              }
+
+                              $steps["openConsultPrint"] =
+                                $steps.postConsultFillTemplate.status === 200
                                   ? (() => {
                                       const actionArgs = {
                                         customFunction: async () => {
-                                          return window.open(`/api/v3/consults/template?consult_id=${
-                                            $ctx.fetched_data.data.id
-                                          }
-&first_name=${
-                                            $ctx.fetched_data.data.patient
-                                              ? $ctx.fetched_data.data.patient
-                                                  .first_name
-                                              : ""
-                                          }
-&last_name=${
-                                            $ctx.fetched_data.data.patient
-                                              ? $ctx.fetched_data.data.patient
-                                                  .last_name
-                                              : ""
-                                          }
-&date_of_birth=${
-                                            $ctx.fetched_data.data.patient
-                                              ? $ctx.fetched_data.data.patient
-                                                  .birth_date
-                                              : ""
-                                          }
-&admission_date=${
-                                            $ctx.fetched_data.data.patient
-                                              ? $ctx.fetched_data.data.patient
-                                                  .admission_datetime
-                                              : ""
-                                          }
-&patient_ward=${
-                                            $ctx.fetched_data.data
-                                              .effective_ward
-                                              ? $ctx.fetched_data.data
-                                                  .effective_ward.name
-                                              : ""
-                                          }
-&sender=${
-                                            $ctx.fetched_data.data.requester
-                                              ? $ctx.fetched_data.data.requester
-                                                  .rank.role +
-                                                " " +
-                                                $ctx.fetched_data.data.requester
-                                                  .first_name +
-                                                " " +
-                                                $ctx.fetched_data.data.requester
-                                                  .last_name
-                                              : ""
-                                          }
-&respondent=${
-                                            $ctx.fetched_data.data.consultant
-                                              ? $ctx.fetched_data.data
-                                                  .consultant.rank.role +
-                                                " " +
-                                                $ctx.fetched_data.data
-                                                  .consultant.first_name +
-                                                " " +
-                                                $ctx.fetched_data.data
-                                                  .consultant.last_name
-                                              : ""
-                                          }
-&signer=${
-                                            $ctx.fetched_data.data
-                                              .confirm_entries
-                                              ? $ctx.fetched_data.data.confirm_entries
-                                                  .map(
-                                                    entry =>
-                                                      entry.confirmer.rank
-                                                        .role +
-                                                      " " +
-                                                      entry.confirmer
-                                                        .first_name +
-                                                      " " +
-                                                      entry.confirmer.last_name
-                                                  )
-                                                  .join("\u060C ")
-                                              : ""
-                                          }
-&sender_service=${
-                                            $ctx.fetched_data.data
-                                              .effective_patient_service
-                                              ? $ctx.fetched_data.data
-                                                  .effective_patient_service
-                                                  .name
-                                              : ""
-                                          }
-&receiver_service=${
-                                            $ctx.fetched_data.data
-                                              .consultant_service
-                                              ? $ctx.fetched_data.data
-                                                  .consultant_service.name
-                                              : ""
-                                          }`);
+                                          return (() => {
+                                            const response =
+                                              $steps.postConsultFillTemplate;
+                                            if (response.data instanceof Blob) {
+                                              const pdfUrl =
+                                                URL.createObjectURL(
+                                                  response.data
+                                                );
+                                              window.open(pdfUrl, "_blank");
+                                              return setTimeout(
+                                                () =>
+                                                  URL.revokeObjectURL(pdfUrl),
+                                                10000
+                                              );
+                                            } else {
+                                              console.error(
+                                                "Received non-Blob response:",
+                                                response
+                                              );
+                                              return alert(
+                                                "Error: Could not generate PDF"
+                                              );
+                                            }
+                                          })();
                                         }
                                       };
                                       return (({ customFunction }) => {
@@ -3436,25 +3432,21 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                     })()
                                   : undefined;
                               if (
-                                $steps["openGetConsultTemplateInNewWindow"] !=
-                                  null &&
-                                typeof $steps[
-                                  "openGetConsultTemplateInNewWindow"
-                                ] === "object" &&
-                                typeof $steps[
-                                  "openGetConsultTemplateInNewWindow"
-                                ].then === "function"
+                                $steps["openConsultPrint"] != null &&
+                                typeof $steps["openConsultPrint"] ===
+                                  "object" &&
+                                typeof $steps["openConsultPrint"].then ===
+                                  "function"
                               ) {
-                                $steps["openGetConsultTemplateInNewWindow"] =
-                                  await $steps[
-                                    "openGetConsultTemplateInNewWindow"
-                                  ];
+                                $steps["openConsultPrint"] = await $steps[
+                                  "openConsultPrint"
+                                ];
                               }
 
                               $steps[
                                 "updateModalSetConsultPaperReplyTrueBeforePrintOpen"
                               ] =
-                                $steps.putConsultPaperReply.status === 200
+                                $steps.postConsultFillTemplate.status === 200
                                   ? (() => {
                                       const actionArgs = {
                                         variable: {

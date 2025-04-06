@@ -890,48 +890,6 @@
   padding-bottom: 85px;
   min-width: 0;
 }
-.لطفامنتظربمانید2 {
-  position: fixed;
-  font-size: var(--token-sOr3fJ5Up5fq);
-  background: var(--token-Hd7stmcqwCJ-);
-  text-align: center;
-  align-self: center;
-  font-weight: 700;
-  white-space: pre-wrap;
-  font-family: var(--VazirmatnCustom);
-  font-style: normal;
-  color: var(--token-IYO13gyYJHXG);
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  user-select: none;
-  left: 20%;
-  top: 0;
-  box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
-  width: auto;
-  max-width: 60%;
-  z-index: 3;
-  right: 0;
-  margin-top: 4px;
-  border-radius: 5px;
-  padding: 8px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .لطفامنتظربمانید2 {
-    top: auto;
-    background: var(--token-Hd7stmcqwCJ-);
-    box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
-    font-size: var(--token-CdE1_0ZaCyT1);
-    z-index: 3;
-    left: auto;
-    position: relative;
-    right: auto;
-    display: block;
-    padding: 2px;
-    margin: 0px;
-    border-style: none;
-  }
-}
 .مشاورهایییافتنشد {
   position: relative;
   margin-top: 30px;
@@ -960,6 +918,34 @@
     box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
     margin-top: 15px;
     border-radius: 5px;
+  }
+}
+.لطفامنتظربمانید2 {
+  left: 20%;
+  top: 0px;
+  position: fixed;
+  right: 0px;
+  font-size: var(--token-sOr3fJ5Up5fq);
+  width: auto;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.5px;
+  text-decoration-line: none !important;
+  font-style: normal;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 0px 2px 5px 0px var(--token-4VVKgsFPDvBb);
+  background: var(--token-Hd7stmcqwCJ-);
+  margin-top: 4px;
+  z-index: 3;
+  max-width: 60%;
+  height: 25px;
+  border-radius: 5px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .لطفامنتظربمانید2 {
+    font-size: var(--token-CdE1_0ZaCyT1);
   }
 }
 .inboxConsultCard {
@@ -2271,27 +2257,25 @@
   top: 0;
   z-index: 3;
   max-width: 60%;
-  box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
+  box-shadow: 0px 2px 5px 0px var(--token-4VVKgsFPDvBb);
   right: 0;
   border-radius: 5px;
   padding: 8px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .لطفامنتظربمانید {
-    top: 0;
     background: var(--token-Hd7stmcqwCJ-);
-    box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
     font-size: var(--token-CdE1_0ZaCyT1);
     width: auto;
-    z-index: 3;
     max-width: 60%;
     left: 20%;
-    position: fixed;
     right: 0;
+    top: 0;
+    z-index: 3;
+    position: fixed;
     display: block;
     padding: 2px;
     margin: 0px;
-    border-style: none;
   }
 }
 .patientCards {

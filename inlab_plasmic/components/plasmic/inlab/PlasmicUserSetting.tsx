@@ -1,6 +1,6 @@
-// @ts-nocheck
 /* eslint-disable */
 /* tslint:disable */
+// @ts-nocheck
 /* prettier-ignore-start */
 
 /** @jsxRuntime classic */
@@ -1572,17 +1572,19 @@ function PlasmicUserSetting__RenderFunc(props: {
                       ];
                   }
 
-                  $steps["putUserPassword"] =
+                  $steps["patchUserPassword"] =
                     $state.password.value === $state.repeatPassword.value
                       ? (() => {
                           const actionArgs = {
                             args: [
-                              "PUT",
+                              "PATCH",
                               `/api/v3/user/password/${$ctx.inlab_user.user.id}`,
                               undefined,
                               (() => {
                                 try {
-                                  return { password: $state.password.value };
+                                  return {
+                                    password: $state.password.value
+                                  };
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -1597,20 +1599,22 @@ function PlasmicUserSetting__RenderFunc(props: {
                             ]
                           };
                           return $globalActions[
-                            "AuthGlobalContext.apiFetcher"
+                            "AuthGlobalContext.apiFetcherPlus"
                           ]?.apply(null, [...actionArgs.args]);
                         })()
                       : undefined;
                   if (
-                    $steps["putUserPassword"] != null &&
-                    typeof $steps["putUserPassword"] === "object" &&
-                    typeof $steps["putUserPassword"].then === "function"
+                    $steps["patchUserPassword"] != null &&
+                    typeof $steps["patchUserPassword"] === "object" &&
+                    typeof $steps["patchUserPassword"].then === "function"
                   ) {
-                    $steps["putUserPassword"] = await $steps["putUserPassword"];
+                    $steps["patchUserPassword"] = await $steps[
+                      "patchUserPassword"
+                    ];
                   }
 
                   $steps["makeTrueSuccessfulChangePasswordState"] =
-                    $steps.putUserPassword.status === 200
+                    $steps.patchUserPassword.status === 200
                       ? (() => {
                           const actionArgs = {
                             variable: {
@@ -1648,7 +1652,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                   }
 
                   $steps["makeTrueUnsuccessfulChangePasswordState"] =
-                    $steps.putUserPassword.status != 200
+                    $steps.patchUserPassword.status != 200
                       ? (() => {
                           const actionArgs = {
                             variable: {

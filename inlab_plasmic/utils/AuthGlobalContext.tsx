@@ -8,6 +8,7 @@ import { getDevicedId, getCurrentUser, logForDev, checkUserValidity } from './Co
 
 import { InlabUser, GlobalContext } from './types/CommonTypes';
 import { axiosCall } from './ApiFetcherAction';
+import { axiosCallPlus } from './ApiFetcherActionPlus';
 import { useRouter } from 'next/router';
 import LoaderSpinnerIcon from '@/components/plasmic/inlab/icons/PlasmicIcon__LoaderSpinner';
 
@@ -71,6 +72,12 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
     () => ({
       apiFetcher: async (method: string, path: string, headers?: any, requestBody?: any): Promise<any> => {
         return await axiosCall(inlabUser, baseUrl, changeUserCallback, method, path, headers, requestBody)
+          .then(response => response)
+          .catch(error => error);
+      },
+
+      apiFetcherPlus: async (method: string, path: string, headers?: any, requestBody?: any, responseType: 'json' | 'blob' | 'arraybuffer' = 'json'): Promise<any> => {
+        return await axiosCallPlus(inlabUser, baseUrl, changeUserCallback, method, path, headers, requestBody, responseType)
           .then(response => response)
           .catch(error => error);
       },

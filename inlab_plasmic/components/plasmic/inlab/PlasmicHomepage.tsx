@@ -1,6 +1,6 @@
-// @ts-nocheck
 /* eslint-disable */
 /* tslint:disable */
+// @ts-nocheck
 /* prettier-ignore-start */
 
 /** @jsxRuntime classic */
@@ -160,8 +160,8 @@ export type PlasmicHomepage__OverridesType = {
   filterTopicAndCurrentPageNumber?: Flex__<"div">;
   currentPageNumber?: Flex__<"div">;
   consults?: Flex__<typeof ApiFetcherComponent>;
-  لطفامنتظربمانید2?: Flex__<"div">;
   مشاورهایییافتنشد?: Flex__<"div">;
+  لطفامنتظربمانید2?: Flex__<"div">;
   inboxConsultCard?: Flex__<"div">;
   sentConsultEmergencyStatus?: Flex__<"div">;
   emergentSign?: Flex__<"div">;
@@ -3150,39 +3150,6 @@ function PlasmicHomepage__RenderFunc(props: {
                 <DataCtxReader__>
                   {$ctx => (
                     <React.Fragment>
-                      {(
-                        hasVariant(globalVariants, "screen", "mobileFirst")
-                          ? (() => {
-                              try {
-                                return $ctx.fetched_data.loading == true;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })()
-                          : $ctx.fetched_data.loading
-                      ) ? (
-                        <div
-                          data-plasmic-name={
-                            "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
-                          }
-                          data-plasmic-override={overrides.لطفامنتظربمانید2}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.لطفامنتظربمانید2
-                          )}
-                        >
-                          {
-                            "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                          }
-                        </div>
-                      ) : null}
                       {(() => {
                         try {
                           return (
@@ -3212,6 +3179,35 @@ function PlasmicHomepage__RenderFunc(props: {
                         >
                           {
                             "\u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
+                          }
+                        </div>
+                      ) : null}
+                      {(() => {
+                        try {
+                          return $ctx.fetched_data.loading;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <div
+                          data-plasmic-name={
+                            "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
+                          }
+                          data-plasmic-override={overrides.لطفامنتظربمانید2}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.لطفامنتظربمانید2
+                          )}
+                        >
+                          {
+                            "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
                           }
                         </div>
                       ) : null}
@@ -14587,8 +14583,8 @@ const PlasmicDescendants = {
     "filterTopicAndCurrentPageNumber",
     "currentPageNumber",
     "consults",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
     "inboxConsultCard",
     "sentConsultEmergencyStatus",
     "emergentSign",
@@ -14740,8 +14736,8 @@ const PlasmicDescendants = {
     "filterTopicAndCurrentPageNumber",
     "currentPageNumber",
     "consults",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
     "inboxConsultCard",
     "sentConsultEmergencyStatus",
     "emergentSign",
@@ -14896,8 +14892,8 @@ const PlasmicDescendants = {
     "filterTopicAndCurrentPageNumber",
     "currentPageNumber",
     "consults",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
     "inboxConsultCard",
     "sentConsultEmergencyStatus",
     "emergentSign",
@@ -14956,8 +14952,8 @@ const PlasmicDescendants = {
   currentPageNumber: ["currentPageNumber"],
   consults: [
     "consults",
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2",
     "inboxConsultCard",
     "sentConsultEmergencyStatus",
     "emergentSign",
@@ -14991,11 +14987,11 @@ const PlasmicDescendants = {
     "radiologyReport2",
     "laboratoryData2"
   ],
-  لطفامنتظربمانید2: [
-    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
-  ],
   مشاورهایییافتنشد: [
     "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+  ],
+  لطفامنتظربمانید2: [
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
   ],
   inboxConsultCard: [
     "inboxConsultCard",
@@ -15512,8 +15508,8 @@ type NodeDefaultElementType = {
   filterTopicAndCurrentPageNumber: "div";
   currentPageNumber: "div";
   consults: typeof ApiFetcherComponent;
-  لطفامنتظربمانید2: "div";
   مشاورهایییافتنشد: "div";
+  لطفامنتظربمانید2: "div";
   inboxConsultCard: "div";
   sentConsultEmergencyStatus: "div";
   emergentSign: "div";
@@ -15731,11 +15727,11 @@ export const PlasmicHomepage = Object.assign(
     ),
     currentPageNumber: makeNodeComponent("currentPageNumber"),
     consults: makeNodeComponent("consults"),
-    لطفامنتظربمانید2: makeNodeComponent(
-      "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
-    ),
     مشاورهایییافتنشد: makeNodeComponent(
       "\u0645\u0634\u0627\u0648\u0631\u0647\u0627\u06cc\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+    ),
+    لطفامنتظربمانید2: makeNodeComponent(
+      "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f2"
     ),
     inboxConsultCard: makeNodeComponent("inboxConsultCard"),
     sentConsultEmergencyStatus: makeNodeComponent("sentConsultEmergencyStatus"),
