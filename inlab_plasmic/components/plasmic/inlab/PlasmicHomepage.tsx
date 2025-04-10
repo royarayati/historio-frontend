@@ -216,6 +216,10 @@ export type PlasmicHomepage__OverridesType = {
   sortingTabWardFilter?: Flex__<"div">;
   sortByAdmissionDatetime?: Flex__<typeof Button>;
   sortByBed?: Flex__<typeof Button>;
+  sortingTabBookmarkFilter2?: Flex__<"div">;
+  sortByRotation?: Flex__<typeof Button>;
+  sortByShift?: Flex__<typeof Button>;
+  allBookmarks?: Flex__<typeof Button>;
   buttonپاککردنهمهبوکمارکها?: Flex__<typeof Button>;
   بیمارییافتنشد?: Flex__<"div">;
   bookmarkGuide?: Flex__<"div">;
@@ -224,7 +228,10 @@ export type PlasmicHomepage__OverridesType = {
   لطفامنتظربمانید?: Flex__<"div">;
   patientCards?: Flex__<"div">;
   patientNameBookmarkIcon?: Flex__<"div">;
-  dismision?: Flex__<"div">;
+  category?: Flex__<"div">;
+  categorize?: Flex__<"div">;
+  rotation?: Flex__<typeof Button>;
+  shift?: Flex__<typeof Button>;
   firstLastName?: Flex__<"div">;
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
   wardRoom?: Flex__<"div">;
@@ -1549,6 +1556,290 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "rotation[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "rotation[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "rotation[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "rotation[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "rotation[].sortSelected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "shift[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "shift[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "shift[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "shift[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "shift[].sortSelected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "bookmarkType",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return "";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "sortByRotation.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByRotation.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "sortByRotation.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "sortByRotation.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.bookmarkType !== "rotation";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "sortByRotation.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.bookmarkType === "rotation";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "sortByShift.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByShift.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByShift.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sortByShift.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.bookmarkType !== "shift";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "sortByShift.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant(globalVariants, "screen", "mobileFirst")
+            ? (() => {
+                try {
+                  return $state.bookmarkType === "shift";
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
+            : (() => {
+                try {
+                  return $state.bookmarkType === "shift";
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
+      },
+      {
+        path: "allBookmarks.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "allBookmarks.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "allBookmarks.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "allBookmarks.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.bookmarkType !== "";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "allBookmarks.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant(globalVariants, "screen", "mobileFirst")
+            ? (() => {
+                try {
+                  return $state.bookmarkType === "";
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
+            : (() => {
+                try {
+                  return $state.bookmarkType === "";
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
+      },
+      {
+        path: "showSuccessAlarmText",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -5564,7 +5855,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 $state.searchDismissed
                   ? 8
                   : 30
-              }&sort_by_bed=${$state.sortingByBed}`}
+              }&sort_by_bed=${$state.sortingByBed}&type=${$state.bookmarkType}`}
               ref={ref => {
                 $refs["patients"] = ref;
               }}
@@ -5583,7 +5874,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       onNotSatisfied={async () => {
                         const $steps = {};
 
-                        $steps["scrollToPreviousPatientCard"] = true
+                        $steps["scrollToPreviousPatientCard"] = false
                           ? (() => {
                               const actionArgs = {
                                 customFunction: async () => {
@@ -7625,6 +7916,568 @@ function PlasmicHomepage__RenderFunc(props: {
                         ) : null}
                         {(
                           hasVariant(globalVariants, "screen", "mobileFirst")
+                            ? localStorage.getItem("patients_selected_tab") ===
+                              "bookmark"
+                            : localStorage.getItem("patients_selected_tab") ===
+                              "bookmark"
+                        ) ? (
+                          <Stack__
+                            as={"div"}
+                            data-plasmic-name={"sortingTabBookmarkFilter2"}
+                            data-plasmic-override={
+                              overrides.sortingTabBookmarkFilter2
+                            }
+                            hasGap={true}
+                            className={classNames(
+                              projectcss.all,
+                              sty.sortingTabBookmarkFilter2
+                            )}
+                          >
+                            <Button
+                              data-plasmic-name={"sortByRotation"}
+                              data-plasmic-override={overrides.sortByRotation}
+                              className={classNames(
+                                "__wab_instance",
+                                sty.sortByRotation
+                              )}
+                              deselected={generateStateValueProp($state, [
+                                "sortByRotation",
+                                "deselected"
+                              ])}
+                              isDisabled={generateStateValueProp($state, [
+                                "sortByRotation",
+                                "isDisabled"
+                              ])}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updateBookmarkType"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: ["bookmarkType"]
+                                        },
+                                        operation: 0,
+                                        value: "rotation"
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateBookmarkType"] != null &&
+                                  typeof $steps["updateBookmarkType"] ===
+                                    "object" &&
+                                  typeof $steps["updateBookmarkType"].then ===
+                                    "function"
+                                ) {
+                                  $steps["updateBookmarkType"] = await $steps[
+                                    "updateBookmarkType"
+                                  ];
+                                }
+                              }}
+                              onDeselectedChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByRotation",
+                                    "deselected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onIsDisabledChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByRotation",
+                                    "isDisabled"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSelectedChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByRotation",
+                                    "selected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSortDeselectedChange={async (
+                                ...eventArgs: any
+                              ) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByRotation",
+                                    "sortDeselected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSortSelectedChange={async (
+                                ...eventArgs: any
+                              ) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByRotation",
+                                    "sortSelected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              selected={generateStateValueProp($state, [
+                                "sortByRotation",
+                                "selected"
+                              ])}
+                              sortDeselected={generateStateValueProp($state, [
+                                "sortByRotation",
+                                "sortDeselected"
+                              ])}
+                              sortSelected={generateStateValueProp($state, [
+                                "sortByRotation",
+                                "sortSelected"
+                              ])}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__hdWha
+                                )}
+                              >
+                                {hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? "\u0633\u0627\u06cc\u062a \u0635\u0628\u062d"
+                                  : "\u0633\u0627\u06cc\u062a \u0635\u0628\u062d"}
+                              </div>
+                            </Button>
+                            <Button
+                              data-plasmic-name={"sortByShift"}
+                              data-plasmic-override={overrides.sortByShift}
+                              className={classNames(
+                                "__wab_instance",
+                                sty.sortByShift
+                              )}
+                              deselected={generateStateValueProp($state, [
+                                "sortByShift",
+                                "deselected"
+                              ])}
+                              isDisabled={generateStateValueProp($state, [
+                                "sortByShift",
+                                "isDisabled"
+                              ])}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updateBookmarkType"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: ["bookmarkType"]
+                                        },
+                                        operation: 0,
+                                        value: "shift"
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateBookmarkType"] != null &&
+                                  typeof $steps["updateBookmarkType"] ===
+                                    "object" &&
+                                  typeof $steps["updateBookmarkType"].then ===
+                                    "function"
+                                ) {
+                                  $steps["updateBookmarkType"] = await $steps[
+                                    "updateBookmarkType"
+                                  ];
+                                }
+                              }}
+                              onDeselectedChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByShift",
+                                    "deselected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onIsDisabledChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByShift",
+                                    "isDisabled"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSelectedChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByShift",
+                                    "selected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSortDeselectedChange={async (
+                                ...eventArgs: any
+                              ) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByShift",
+                                    "sortDeselected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSortSelectedChange={async (
+                                ...eventArgs: any
+                              ) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "sortByShift",
+                                    "sortSelected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              selected={generateStateValueProp($state, [
+                                "sortByShift",
+                                "selected"
+                              ])}
+                              sortDeselected={generateStateValueProp($state, [
+                                "sortByShift",
+                                "sortDeselected"
+                              ])}
+                              sortSelected={generateStateValueProp($state, [
+                                "sortByShift",
+                                "sortSelected"
+                              ])}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__rMkDg
+                                )}
+                              >
+                                {hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? "\u06a9\u0634\u06cc\u06a9"
+                                  : "\u06a9\u0634\u06cc\u06a9"}
+                              </div>
+                            </Button>
+                            <Button
+                              data-plasmic-name={"allBookmarks"}
+                              data-plasmic-override={overrides.allBookmarks}
+                              className={classNames(
+                                "__wab_instance",
+                                sty.allBookmarks
+                              )}
+                              deselected={generateStateValueProp($state, [
+                                "allBookmarks",
+                                "deselected"
+                              ])}
+                              isDisabled={generateStateValueProp($state, [
+                                "allBookmarks",
+                                "isDisabled"
+                              ])}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updateBookmarkType"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: ["bookmarkType"]
+                                        },
+                                        operation: 0,
+                                        value: ""
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updateBookmarkType"] != null &&
+                                  typeof $steps["updateBookmarkType"] ===
+                                    "object" &&
+                                  typeof $steps["updateBookmarkType"].then ===
+                                    "function"
+                                ) {
+                                  $steps["updateBookmarkType"] = await $steps[
+                                    "updateBookmarkType"
+                                  ];
+                                }
+                              }}
+                              onDeselectedChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "allBookmarks",
+                                    "deselected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onIsDisabledChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "allBookmarks",
+                                    "isDisabled"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSelectedChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "allBookmarks",
+                                    "selected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSortDeselectedChange={async (
+                                ...eventArgs: any
+                              ) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "allBookmarks",
+                                    "sortDeselected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSortSelectedChange={async (
+                                ...eventArgs: any
+                              ) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "allBookmarks",
+                                    "sortSelected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              selected={generateStateValueProp($state, [
+                                "allBookmarks",
+                                "selected"
+                              ])}
+                              sortDeselected={generateStateValueProp($state, [
+                                "allBookmarks",
+                                "sortDeselected"
+                              ])}
+                              sortSelected={generateStateValueProp($state, [
+                                "allBookmarks",
+                                "sortSelected"
+                              ])}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__gozUd
+                                )}
+                              >
+                                {hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? "\u0647\u0645\u0647"
+                                  : "\u0647\u0645\u0647 "}
+                              </div>
+                            </Button>
+                            {(
+                              hasVariant(
+                                globalVariants,
+                                "screen",
+                                "mobileFirst"
+                              )
+                                ? false
+                                : false
+                            ) ? (
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__n7AQj
+                                )}
+                                dir={"rtl"}
+                                dr={
+                                  hasVariant(
+                                    globalVariants,
+                                    "screen",
+                                    "mobileFirst"
+                                  )
+                                    ? "rtl"
+                                    : undefined
+                                }
+                              >
+                                {
+                                  "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0631\u0627\u0633\u0627\u0633:"
+                                }
+                              </div>
+                            ) : null}
+                          </Stack__>
+                        ) : null}
+                        {(
+                          hasVariant(globalVariants, "screen", "mobileFirst")
                             ? true
                             : false
                         ) ? (
@@ -7945,6 +8798,17 @@ function PlasmicHomepage__RenderFunc(props: {
                         </div>
                       </div>
                     ) : null}
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__gUkO
+                      )}
+                    >
+                      {
+                        "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0634\u062f!"
+                      }
+                    </div>
                     {(
                       hasVariant(globalVariants, "screen", "mobileFirst")
                         ? (() => {
@@ -8057,36 +8921,721 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.patientNameBookmarkIcon
                                 )}
                               >
-                                {(() => {
-                                  try {
-                                    return currentItem.dismissed;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return false;
-                                    }
-                                    throw e;
-                                  }
-                                })() ? (
+                                <div
+                                  data-plasmic-name={"category"}
+                                  data-plasmic-override={overrides.category}
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.category
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {currentItem.type === "shift"
+                                      ? "کشیک"
+                                      : currentItem.type === "rotation"
+                                      ? "سایت صبح"
+                                      : ""}
+                                  </React.Fragment>
+                                </div>
+                                {currentItem.bookmarked === true &&
+                                currentItem.type === null ? (
                                   <Stack__
                                     as={"div"}
-                                    data-plasmic-name={"dismision"}
-                                    data-plasmic-override={overrides.dismision}
+                                    data-plasmic-name={"categorize"}
+                                    data-plasmic-override={overrides.categorize}
                                     hasGap={true}
                                     className={classNames(
                                       projectcss.all,
-                                      sty.dismision
+                                      sty.categorize
                                     )}
                                   >
+                                    {(() => {
+                                      const child$Props = {
+                                        className: classNames(
+                                          "__wab_instance",
+                                          sty.rotation
+                                        ),
+                                        color: "blue",
+                                        deselected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "rotation",
+                                            __plasmic_idx_0,
+                                            "deselected"
+                                          ]
+                                        ),
+                                        isDisabled: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "rotation",
+                                            __plasmic_idx_0,
+                                            "isDisabled"
+                                          ]
+                                        ),
+                                        onClick: async event => {
+                                          const $steps = {};
+
+                                          $steps["patchBookmark"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  args: [
+                                                    "PATCH",
+                                                    `/api/v3/bookmark/bookmark_type?admission_id=${
+                                                      currentItem.id
+                                                    }&type=${"rotation"}`,
+                                                    {
+                                                      "X-Namespace":
+                                                        localStorage.getItem(
+                                                          "inlab_user_namespace_id"
+                                                        )
+                                                    }
+                                                  ]
+                                                };
+                                                return $globalActions[
+                                                  "AuthGlobalContext.apiFetcherPlus"
+                                                ]?.apply(null, [
+                                                  ...actionArgs.args
+                                                ]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["patchBookmark"] != null &&
+                                            typeof $steps["patchBookmark"] ===
+                                              "object" &&
+                                            typeof $steps["patchBookmark"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["patchBookmark"] =
+                                              await $steps["patchBookmark"];
+                                          }
+
+                                          $steps["updateShowSuccessAlarmText"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "showSuccessAlarmText"
+                                                      ]
+                                                    },
+                                                    operation: 0,
+                                                    value: true
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      value
+                                                    );
+                                                    return value;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ] = await $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ];
+                                          }
+
+                                          $steps["invokeGlobalAction"] =
+                                            $steps.patchBookmark.status === 200
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    args: [
+                                                      "success",
+                                                      "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0634\u062f",
+                                                      undefined,
+                                                      undefined,
+                                                      "topLeft"
+                                                    ]
+                                                  };
+                                                  return $globalActions[
+                                                    "plasmic-antd5-config-provider.showNotification"
+                                                  ]?.apply(null, [
+                                                    ...actionArgs.args
+                                                  ]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps["invokeGlobalAction"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "invokeGlobalAction"
+                                            ] === "object" &&
+                                            typeof $steps["invokeGlobalAction"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["invokeGlobalAction"] =
+                                              await $steps[
+                                                "invokeGlobalAction"
+                                              ];
+                                          }
+                                        },
+                                        onDeselectedChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "rotation",
+                                              __plasmic_idx_0,
+                                              "deselected"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        onIsDisabledChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "rotation",
+                                              __plasmic_idx_0,
+                                              "isDisabled"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        onSelectedChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "rotation",
+                                              __plasmic_idx_0,
+                                              "selected"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        onSortDeselectedChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "rotation",
+                                              __plasmic_idx_0,
+                                              "sortDeselected"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        onSortSelectedChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "rotation",
+                                              __plasmic_idx_0,
+                                              "sortSelected"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        selected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "rotation",
+                                            __plasmic_idx_0,
+                                            "selected"
+                                          ]
+                                        ),
+                                        sortDeselected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "rotation",
+                                            __plasmic_idx_0,
+                                            "sortDeselected"
+                                          ]
+                                        ),
+                                        sortSelected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "rotation",
+                                            __plasmic_idx_0,
+                                            "sortSelected"
+                                          ]
+                                        )
+                                      };
+
+                                      initializePlasmicStates(
+                                        $state,
+                                        [
+                                          {
+                                            name: "rotation[].isDisabled",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "rotation[].selected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "rotation[].deselected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "rotation[].sortDeselected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "rotation[].sortSelected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          }
+                                        ],
+                                        [__plasmic_idx_0]
+                                      );
+                                      return (
+                                        <Button
+                                          data-plasmic-name={"rotation"}
+                                          data-plasmic-override={
+                                            overrides.rotation
+                                          }
+                                          {...child$Props}
+                                        >
+                                          <div
+                                            className={classNames(
+                                              projectcss.all,
+                                              projectcss.__wab_text,
+                                              sty.text___1ZkDv
+                                            )}
+                                          >
+                                            {
+                                              "\u0633\u0627\u06cc\u062a \u0635\u0628\u062d"
+                                            }
+                                          </div>
+                                        </Button>
+                                      );
+                                    })()}
+                                    {(() => {
+                                      const child$Props = {
+                                        className: classNames(
+                                          "__wab_instance",
+                                          sty.shift
+                                        ),
+                                        color: "green",
+                                        deselected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "shift",
+                                            __plasmic_idx_0,
+                                            "deselected"
+                                          ]
+                                        ),
+                                        isDisabled: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "shift",
+                                            __plasmic_idx_0,
+                                            "isDisabled"
+                                          ]
+                                        ),
+                                        onClick: async event => {
+                                          const $steps = {};
+
+                                          $steps["patchBookmark"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  args: [
+                                                    "PATCH",
+                                                    `/api/v3/bookmark/bookmark_type?admission_id=${
+                                                      currentItem.id
+                                                    }&type=${"shift"}`,
+                                                    (() => {
+                                                      try {
+                                                        return {
+                                                          "X-Namespace":
+                                                            localStorage.getItem(
+                                                              "inlab_user_namespace_id"
+                                                            )
+                                                        };
+                                                      } catch (e) {
+                                                        if (
+                                                          e instanceof
+                                                            TypeError ||
+                                                          e?.plasmicType ===
+                                                            "PlasmicUndefinedDataError"
+                                                        ) {
+                                                          return undefined;
+                                                        }
+                                                        throw e;
+                                                      }
+                                                    })()
+                                                  ]
+                                                };
+                                                return $globalActions[
+                                                  "AuthGlobalContext.apiFetcherPlus"
+                                                ]?.apply(null, [
+                                                  ...actionArgs.args
+                                                ]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["patchBookmark"] != null &&
+                                            typeof $steps["patchBookmark"] ===
+                                              "object" &&
+                                            typeof $steps["patchBookmark"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["patchBookmark"] =
+                                              await $steps["patchBookmark"];
+                                          }
+
+                                          $steps["updateShowSuccessAlarmText"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "showSuccessAlarmText"
+                                                      ]
+                                                    },
+                                                    operation: 0,
+                                                    value: true
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      value
+                                                    );
+                                                    return value;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ] = await $steps[
+                                              "updateShowSuccessAlarmText"
+                                            ];
+                                          }
+
+                                          $steps["invokeGlobalAction"] =
+                                            $steps.patchBookmark.status === 200
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    args: [
+                                                      "success",
+                                                      "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0634\u062f"
+                                                    ]
+                                                  };
+                                                  return $globalActions[
+                                                    "plasmic-antd5-config-provider.showNotification"
+                                                  ]?.apply(null, [
+                                                    ...actionArgs.args
+                                                  ]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps["invokeGlobalAction"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "invokeGlobalAction"
+                                            ] === "object" &&
+                                            typeof $steps["invokeGlobalAction"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["invokeGlobalAction"] =
+                                              await $steps[
+                                                "invokeGlobalAction"
+                                              ];
+                                          }
+                                        },
+                                        onDeselectedChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "shift",
+                                              __plasmic_idx_0,
+                                              "deselected"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        onIsDisabledChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "shift",
+                                              __plasmic_idx_0,
+                                              "isDisabled"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        onSelectedChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "shift",
+                                              __plasmic_idx_0,
+                                              "selected"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        onSortDeselectedChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "shift",
+                                              __plasmic_idx_0,
+                                              "sortDeselected"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        onSortSelectedChange: async (
+                                          ...eventArgs: any
+                                        ) => {
+                                          ((...eventArgs) => {
+                                            generateStateOnChangeProp($state, [
+                                              "shift",
+                                              __plasmic_idx_0,
+                                              "sortSelected"
+                                            ])(eventArgs[0]);
+                                          }).apply(null, eventArgs);
+
+                                          if (
+                                            eventArgs.length > 1 &&
+                                            eventArgs[1] &&
+                                            eventArgs[1]._plasmic_state_init_
+                                          ) {
+                                            return;
+                                          }
+                                        },
+                                        selected: generateStateValueProp(
+                                          $state,
+                                          ["shift", __plasmic_idx_0, "selected"]
+                                        ),
+                                        sortDeselected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "shift",
+                                            __plasmic_idx_0,
+                                            "sortDeselected"
+                                          ]
+                                        ),
+                                        sortSelected: generateStateValueProp(
+                                          $state,
+                                          [
+                                            "shift",
+                                            __plasmic_idx_0,
+                                            "sortSelected"
+                                          ]
+                                        )
+                                      };
+
+                                      initializePlasmicStates(
+                                        $state,
+                                        [
+                                          {
+                                            name: "shift[].isDisabled",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "shift[].selected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "shift[].deselected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "shift[].sortDeselected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          },
+                                          {
+                                            name: "shift[].sortSelected",
+                                            initFunc: ({
+                                              $props,
+                                              $state,
+                                              $queries
+                                            }) => undefined
+                                          }
+                                        ],
+                                        [__plasmic_idx_0]
+                                      );
+                                      return (
+                                        <Button
+                                          data-plasmic-name={"shift"}
+                                          data-plasmic-override={
+                                            overrides.shift
+                                          }
+                                          {...child$Props}
+                                        >
+                                          <div
+                                            className={classNames(
+                                              projectcss.all,
+                                              projectcss.__wab_text,
+                                              sty.text__mjzFs
+                                            )}
+                                          >
+                                            {"\u06a9\u0634\u06cc\u06a9"}
+                                          </div>
+                                        </Button>
+                                      );
+                                    })()}
                                     <div
                                       className={classNames(
                                         projectcss.all,
                                         projectcss.__wab_text,
-                                        sty.text__tJgau
+                                        sty.text__lT5Qg
                                       )}
+                                      dir={"rtl"}
                                     >
                                       <React.Fragment>
                                         <span
@@ -8095,7 +9644,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                           }
                                           style={{ color: "#DA0000" }}
                                         >
-                                          {"\u062a\u0631\u062e\u06cc\u0635"}
+                                          {
+                                            "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 :"
+                                          }
                                         </span>
                                       </React.Fragment>
                                     </div>
@@ -8115,7 +9666,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                   <React.Fragment>
                                     {currentItem.first_name +
                                       " " +
-                                      currentItem.last_name}
+                                      currentItem.last_name +
+                                      (currentItem.dismissed
+                                        ? " (ترخیص) "
+                                        : "")}
                                   </React.Fragment>
                                 </div>
                                 {(() => {
@@ -14639,6 +16193,10 @@ const PlasmicDescendants = {
     "sortingTabWardFilter",
     "sortByAdmissionDatetime",
     "sortByBed",
+    "sortingTabBookmarkFilter2",
+    "sortByRotation",
+    "sortByShift",
+    "allBookmarks",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
@@ -14647,7 +16205,10 @@ const PlasmicDescendants = {
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
-    "dismision",
+    "category",
+    "categorize",
+    "rotation",
+    "shift",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -14792,6 +16353,10 @@ const PlasmicDescendants = {
     "sortingTabWardFilter",
     "sortByAdmissionDatetime",
     "sortByBed",
+    "sortingTabBookmarkFilter2",
+    "sortByRotation",
+    "sortByShift",
+    "allBookmarks",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
@@ -14800,7 +16365,10 @@ const PlasmicDescendants = {
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
-    "dismision",
+    "category",
+    "categorize",
+    "rotation",
+    "shift",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -15208,6 +16776,10 @@ const PlasmicDescendants = {
     "sortingTabWardFilter",
     "sortByAdmissionDatetime",
     "sortByBed",
+    "sortingTabBookmarkFilter2",
+    "sortByRotation",
+    "sortByShift",
+    "allBookmarks",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
@@ -15216,7 +16788,10 @@ const PlasmicDescendants = {
     "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f",
     "patientCards",
     "patientNameBookmarkIcon",
-    "dismision",
+    "category",
+    "categorize",
+    "rotation",
+    "shift",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -15243,6 +16818,10 @@ const PlasmicDescendants = {
     "sortingTabWardFilter",
     "sortByAdmissionDatetime",
     "sortByBed",
+    "sortingTabBookmarkFilter2",
+    "sortByRotation",
+    "sortByShift",
+    "allBookmarks",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
   ],
   patientsTabs: [
@@ -15281,6 +16860,15 @@ const PlasmicDescendants = {
   ],
   sortByAdmissionDatetime: ["sortByAdmissionDatetime"],
   sortByBed: ["sortByBed"],
+  sortingTabBookmarkFilter2: [
+    "sortingTabBookmarkFilter2",
+    "sortByRotation",
+    "sortByShift",
+    "allBookmarks"
+  ],
+  sortByRotation: ["sortByRotation"],
+  sortByShift: ["sortByShift"],
+  allBookmarks: ["allBookmarks"],
   buttonپاککردنهمهبوکمارکها: [
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
   ],
@@ -15296,7 +16884,10 @@ const PlasmicDescendants = {
   patientCards: [
     "patientCards",
     "patientNameBookmarkIcon",
-    "dismision",
+    "category",
+    "categorize",
+    "rotation",
+    "shift",
     "firstLastName",
     "bookmarkIcon",
     "wardRoom",
@@ -15310,11 +16901,17 @@ const PlasmicDescendants = {
   ],
   patientNameBookmarkIcon: [
     "patientNameBookmarkIcon",
-    "dismision",
+    "category",
+    "categorize",
+    "rotation",
+    "shift",
     "firstLastName",
     "bookmarkIcon"
   ],
-  dismision: ["dismision"],
+  category: ["category"],
+  categorize: ["categorize", "rotation", "shift"],
+  rotation: ["rotation"],
+  shift: ["shift"],
   firstLastName: ["firstLastName"],
   bookmarkIcon: ["bookmarkIcon"],
   wardRoom: ["wardRoom", "roomBed", "ward"],
@@ -15564,6 +17161,10 @@ type NodeDefaultElementType = {
   sortingTabWardFilter: "div";
   sortByAdmissionDatetime: typeof Button;
   sortByBed: typeof Button;
+  sortingTabBookmarkFilter2: "div";
+  sortByRotation: typeof Button;
+  sortByShift: typeof Button;
+  allBookmarks: typeof Button;
   buttonپاککردنهمهبوکمارکها: typeof Button;
   بیمارییافتنشد: "div";
   bookmarkGuide: "div";
@@ -15572,7 +17173,10 @@ type NodeDefaultElementType = {
   لطفامنتظربمانید: "div";
   patientCards: "div";
   patientNameBookmarkIcon: "div";
-  dismision: "div";
+  category: "div";
+  categorize: "div";
+  rotation: typeof Button;
+  shift: typeof Button;
   firstLastName: "div";
   bookmarkIcon: typeof BookmarkIcon;
   wardRoom: "div";
@@ -15791,6 +17395,10 @@ export const PlasmicHomepage = Object.assign(
     sortingTabWardFilter: makeNodeComponent("sortingTabWardFilter"),
     sortByAdmissionDatetime: makeNodeComponent("sortByAdmissionDatetime"),
     sortByBed: makeNodeComponent("sortByBed"),
+    sortingTabBookmarkFilter2: makeNodeComponent("sortingTabBookmarkFilter2"),
+    sortByRotation: makeNodeComponent("sortByRotation"),
+    sortByShift: makeNodeComponent("sortByShift"),
+    allBookmarks: makeNodeComponent("allBookmarks"),
     buttonپاککردنهمهبوکمارکها: makeNodeComponent(
       "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
     ),
@@ -15805,7 +17413,10 @@ export const PlasmicHomepage = Object.assign(
     ),
     patientCards: makeNodeComponent("patientCards"),
     patientNameBookmarkIcon: makeNodeComponent("patientNameBookmarkIcon"),
-    dismision: makeNodeComponent("dismision"),
+    category: makeNodeComponent("category"),
+    categorize: makeNodeComponent("categorize"),
+    rotation: makeNodeComponent("rotation"),
+    shift: makeNodeComponent("shift"),
     firstLastName: makeNodeComponent("firstLastName"),
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
     wardRoom: makeNodeComponent("wardRoom"),
