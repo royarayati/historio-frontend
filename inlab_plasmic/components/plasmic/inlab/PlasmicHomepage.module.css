@@ -2253,6 +2253,30 @@
   width: auto;
   height: 1em;
 }
+.text__gUkO {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  white-space: pre;
+  left: auto;
+  top: auto;
+  z-index: 5;
+  right: auto;
+  background: #52c41a;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  text-align: center;
+  min-width: 0;
+  padding: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__gUkO {
+    left: auto;
+    top: auto;
+    right: auto;
+    display: block;
+  }
+}
 .بیمارییافتنشد {
   position: relative;
   margin-top: 30px;
@@ -2378,23 +2402,6 @@
   .text__jzEz {
     font-size: var(--token-sOr3fJ5Up5fq);
   }
-}
-.text__gUkO {
-  position: relative;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  white-space: pre;
-  left: auto;
-  top: auto;
-  z-index: 5;
-  right: auto;
-  background: #52c41a;
-  justify-self: flex-start;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  text-align: center;
-  display: none;
-  padding: 0px;
 }
 .لطفامنتظربمانید {
   position: fixed;

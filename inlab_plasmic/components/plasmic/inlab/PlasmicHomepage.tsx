@@ -79,7 +79,6 @@ import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/c
 import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 import NewNoticeBanner from "../../NewNoticeBanner"; // plasmic-import: X347FgRZh6HH/component
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
@@ -8681,6 +8680,50 @@ function PlasmicHomepage__RenderFunc(props: {
                             ) : null}
                           </div>
                         ) : null}
+                        {(
+                          hasVariant(globalVariants, "screen", "mobileFirst")
+                            ? (() => {
+                                try {
+                                  return (() => {
+                                    const showSuccessAlarmText =
+                                      $state.showSuccessAlarmText;
+                                    setTimeout(() => {
+                                      $state.showSuccessAlarmText = false;
+                                    }, 4000);
+                                    return showSuccessAlarmText;
+                                  })();
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return true;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            : (() => {
+                                const showSuccessAlarmText =
+                                  $state.showSuccessAlarmText;
+                                setTimeout(() => {
+                                  $state.showSuccessAlarmText = false;
+                                }, 4000);
+                                return showSuccessAlarmText;
+                              })()
+                        ) ? (
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__gUkO
+                            )}
+                          >
+                            {
+                              "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0634\u062f!"
+                            }
+                          </div>
+                        ) : null}
                       </div>
                     ) : null}
                     {$ctx.fetched_data.loading == false &&
@@ -8798,17 +8841,6 @@ function PlasmicHomepage__RenderFunc(props: {
                         </div>
                       </div>
                     ) : null}
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__gUkO
-                      )}
-                    >
-                      {
-                        "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0634\u062f!"
-                      }
-                    </div>
                     {(
                       hasVariant(globalVariants, "screen", "mobileFirst")
                         ? (() => {
@@ -9064,25 +9096,24 @@ function PlasmicHomepage__RenderFunc(props: {
                                             ];
                                           }
 
-                                          $steps["invokeGlobalAction"] =
-                                            $steps.patchBookmark.status === 200
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    args: [
-                                                      "success",
-                                                      "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0634\u062f",
-                                                      undefined,
-                                                      undefined,
-                                                      "topLeft"
-                                                    ]
-                                                  };
-                                                  return $globalActions[
-                                                    "plasmic-antd5-config-provider.showNotification"
-                                                  ]?.apply(null, [
-                                                    ...actionArgs.args
-                                                  ]);
-                                                })()
-                                              : undefined;
+                                          $steps["invokeGlobalAction"] = false
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  args: [
+                                                    "success",
+                                                    "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0634\u062f",
+                                                    undefined,
+                                                    undefined,
+                                                    "topLeft"
+                                                  ]
+                                                };
+                                                return $globalActions[
+                                                  "plasmic-antd5-config-provider.showNotification"
+                                                ]?.apply(null, [
+                                                  ...actionArgs.args
+                                                ]);
+                                              })()
+                                            : undefined;
                                           if (
                                             $steps["invokeGlobalAction"] !=
                                               null &&
@@ -9415,22 +9446,21 @@ function PlasmicHomepage__RenderFunc(props: {
                                             ];
                                           }
 
-                                          $steps["invokeGlobalAction"] =
-                                            $steps.patchBookmark.status === 200
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    args: [
-                                                      "success",
-                                                      "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0634\u062f"
-                                                    ]
-                                                  };
-                                                  return $globalActions[
-                                                    "plasmic-antd5-config-provider.showNotification"
-                                                  ]?.apply(null, [
-                                                    ...actionArgs.args
-                                                  ]);
-                                                })()
-                                              : undefined;
+                                          $steps["invokeGlobalAction"] = false
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  args: [
+                                                    "success",
+                                                    "\u062f\u0633\u062a\u0647 \u0628\u0646\u062f\u06cc \u0634\u062f"
+                                                  ]
+                                                };
+                                                return $globalActions[
+                                                  "plasmic-antd5-config-provider.showNotification"
+                                                ]?.apply(null, [
+                                                  ...actionArgs.args
+                                                ]);
+                                              })()
+                                            : undefined;
                                           if (
                                             $steps["invokeGlobalAction"] !=
                                               null &&
