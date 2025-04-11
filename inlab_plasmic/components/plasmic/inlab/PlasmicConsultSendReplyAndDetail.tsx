@@ -62,6 +62,7 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import Alert2 from "../../Alert2"; // plasmic-import: RABqkXkLRlle/component
 import Bullet from "../../Bullet"; // plasmic-import: sWsqjPSVIYww/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
@@ -117,6 +118,8 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   pageFunctionTopicOfSendReply?: Flex__<"div">;
   pageFunctionTopicOfDatail?: Flex__<"div">;
   printConsult?: Flex__<"svg">;
+  printProcessing?: Flex__<typeof Alert>;
+  printError?: Flex__<typeof Alert>;
   consultReviewAlertContent?: Flex__<"div">;
   consultReviewUnsuccessfully?: Flex__<typeof Alert2>;
   senderServiceContent?: Flex__<"div">;
@@ -174,6 +177,8 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   confirmationYesNo3?: Flex__<"div">;
   noConfirm3?: Flex__<typeof Button>;
   confirm3?: Flex__<typeof Button>;
+  printProcessing2?: Flex__<typeof Alert>;
+  printError2?: Flex__<typeof Alert>;
   title3?: Flex__<"div">;
   switchingTab?: Flex__<"div">;
   homepage?: Flex__<typeof PlasmicImg__>;
@@ -552,6 +557,18 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "printProcessingState",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "printErrorState",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -1070,6 +1087,85 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               ];
                             }
 
+                            $steps["updatePrintErrorState2"] =
+                              $ctx.fetched_data.data.state === 4
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["printErrorState"]
+                                      },
+                                      operation: 0,
+                                      value: false
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                            if (
+                              $steps["updatePrintErrorState2"] != null &&
+                              typeof $steps["updatePrintErrorState2"] ===
+                                "object" &&
+                              typeof $steps["updatePrintErrorState2"].then ===
+                                "function"
+                            ) {
+                              $steps["updatePrintErrorState2"] = await $steps[
+                                "updatePrintErrorState2"
+                              ];
+                            }
+
+                            $steps["updatePrintProcessingState"] =
+                              $ctx.fetched_data.data.state === 4
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["printProcessingState"]
+                                      },
+                                      operation: 0,
+                                      value: true
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                            if (
+                              $steps["updatePrintProcessingState"] != null &&
+                              typeof $steps["updatePrintProcessingState"] ===
+                                "object" &&
+                              typeof $steps["updatePrintProcessingState"]
+                                .then === "function"
+                            ) {
+                              $steps["updatePrintProcessingState"] =
+                                await $steps["updatePrintProcessingState"];
+                            }
+
                             $steps["postConsultFillTemplate"] =
                               $ctx.fetched_data.data.state === 4
                                 ? (() => {
@@ -1180,11 +1276,171 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                 "openConsultPrint"
                               ];
                             }
+
+                            $steps["updatePrintProcessingState2"] =
+                              $ctx.fetched_data.data.state === 4 &&
+                              $steps.postConsultFillTemplate
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["printProcessingState"]
+                                      },
+                                      operation: 0,
+                                      value: false
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                            if (
+                              $steps["updatePrintProcessingState2"] != null &&
+                              typeof $steps["updatePrintProcessingState2"] ===
+                                "object" &&
+                              typeof $steps["updatePrintProcessingState2"]
+                                .then === "function"
+                            ) {
+                              $steps["updatePrintProcessingState2"] =
+                                await $steps["updatePrintProcessingState2"];
+                            }
+
+                            $steps["updatePrintErrorState"] =
+                              $ctx.fetched_data.data.state === 4 &&
+                              $steps.postConsultFillTemplate.status != 200
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["printErrorState"]
+                                      },
+                                      operation: 0,
+                                      value: true
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                            if (
+                              $steps["updatePrintErrorState"] != null &&
+                              typeof $steps["updatePrintErrorState"] ===
+                                "object" &&
+                              typeof $steps["updatePrintErrorState"].then ===
+                                "function"
+                            ) {
+                              $steps["updatePrintErrorState"] = await $steps[
+                                "updatePrintErrorState"
+                              ];
+                            }
                           }}
                           role={"img"}
                         />
                       ) : null}
                     </div>
+                    {(() => {
+                      try {
+                        return (
+                          $state.printProcessingState &&
+                          $ctx.fetched_data.data.state === 4
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <Alert
+                        data-plasmic-name={"printProcessing"}
+                        data-plasmic-override={overrides.printProcessing}
+                        body={
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__acsaH
+                            )}
+                          >
+                            {
+                              "\u062f\u0631 \u062d\u0627\u0644 \u062a\u0648\u0644\u06cc\u062f \u062e\u0631\u0648\u062c\u06cc \u067e\u0631\u06cc\u0646\u062a\u060c \u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u06cc\u0646\u062f"
+                            }
+                          </div>
+                        }
+                        className={classNames(
+                          "__wab_instance",
+                          sty.printProcessing
+                        )}
+                        noHeader={true}
+                        noIcon={true}
+                        warning={true}
+                      />
+                    ) : null}
+                    {(() => {
+                      try {
+                        return (
+                          $state.printErrorState &&
+                          $ctx.fetched_data.data.state === 4
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <Alert
+                        data-plasmic-name={"printError"}
+                        data-plasmic-override={overrides.printError}
+                        body={
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text___0K0Ee
+                            )}
+                          >
+                            {
+                              "\u062e\u0637\u0627 \u062f\u0631 \u067e\u0631\u06cc\u0646\u062a\u060c \u0645\u062c\u062f\u062f \u0627\u0642\u062f\u0627\u0645 \u06a9\u0646\u06cc\u062f"
+                            }
+                          </div>
+                        }
+                        className={classNames("__wab_instance", sty.printError)}
+                        error={true}
+                        noHeader={true}
+                        noIcon={true}
+                      />
+                    ) : null}
                     <div
                       data-plasmic-name={"consultReviewAlertContent"}
                       data-plasmic-override={
@@ -3306,6 +3562,83 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             onClick={async event => {
                               const $steps = {};
 
+                              $steps["updatePrintErrorState"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["printErrorState"]
+                                      },
+                                      operation: 0,
+                                      value: false
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["updatePrintErrorState"] != null &&
+                                typeof $steps["updatePrintErrorState"] ===
+                                  "object" &&
+                                typeof $steps["updatePrintErrorState"].then ===
+                                  "function"
+                              ) {
+                                $steps["updatePrintErrorState"] = await $steps[
+                                  "updatePrintErrorState"
+                                ];
+                              }
+
+                              $steps["updatePrintProcessingState"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["printProcessingState"]
+                                      },
+                                      operation: 0,
+                                      value: true
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["updatePrintProcessingState"] != null &&
+                                typeof $steps["updatePrintProcessingState"] ===
+                                  "object" &&
+                                typeof $steps["updatePrintProcessingState"]
+                                  .then === "function"
+                              ) {
+                                $steps["updatePrintProcessingState"] =
+                                  await $steps["updatePrintProcessingState"];
+                              }
+
                               $steps["patchConsultPaperReply"] = true
                                 ? (() => {
                                     const actionArgs = {
@@ -3443,6 +3776,45 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                 ];
                               }
 
+                              $steps["updatePrintProcessingState2"] =
+                                $steps.postConsultFillTemplate
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: ["printProcessingState"]
+                                        },
+                                        operation: 0,
+                                        value: false
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                              if (
+                                $steps["updatePrintProcessingState2"] != null &&
+                                typeof $steps["updatePrintProcessingState2"] ===
+                                  "object" &&
+                                typeof $steps["updatePrintProcessingState2"]
+                                  .then === "function"
+                              ) {
+                                $steps["updatePrintProcessingState2"] =
+                                  await $steps["updatePrintProcessingState2"];
+                              }
+
                               $steps[
                                 "updateModalSetConsultPaperReplyTrueBeforePrintOpen"
                               ] =
@@ -3498,6 +3870,47 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                   "updateModalSetConsultPaperReplyTrueBeforePrintOpen"
                                 ] = await $steps[
                                   "updateModalSetConsultPaperReplyTrueBeforePrintOpen"
+                                ];
+                              }
+
+                              $steps["updatePrintErrorState2"] =
+                                $steps.patchConsultPaperReply.status != 200 ||
+                                $steps.postConsultFillTemplate.status != 200
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: ["printErrorState"]
+                                        },
+                                        operation: 0,
+                                        value: true
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                              if (
+                                $steps["updatePrintErrorState2"] != null &&
+                                typeof $steps["updatePrintErrorState2"] ===
+                                  "object" &&
+                                typeof $steps["updatePrintErrorState2"].then ===
+                                  "function"
+                              ) {
+                                $steps["updatePrintErrorState2"] = await $steps[
+                                  "updatePrintErrorState2"
                                 ];
                               }
                             }}
@@ -3608,6 +4021,82 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             </div>
                           </Button>
                         </div>
+                        {(() => {
+                          try {
+                            return $state.printProcessingState;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })() ? (
+                          <Alert
+                            data-plasmic-name={"printProcessing2"}
+                            data-plasmic-override={overrides.printProcessing2}
+                            body={
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__s3I51
+                                )}
+                              >
+                                {
+                                  "\u062f\u0631 \u062d\u0627\u0644 \u062a\u0648\u0644\u06cc\u062f \u062e\u0631\u0648\u062c\u06cc \u067e\u0631\u06cc\u0646\u062a\u060c \u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u06cc\u0646\u062f"
+                                }
+                              </div>
+                            }
+                            className={classNames(
+                              "__wab_instance",
+                              sty.printProcessing2
+                            )}
+                            noHeader={true}
+                            noIcon={true}
+                            warning={true}
+                          />
+                        ) : null}
+                        {(() => {
+                          try {
+                            return $state.printErrorState;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })() ? (
+                          <Alert
+                            data-plasmic-name={"printError2"}
+                            data-plasmic-override={overrides.printError2}
+                            body={
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__nNqg8
+                                )}
+                              >
+                                {
+                                  "\u062e\u0637\u0627 \u062f\u0631 \u067e\u0631\u06cc\u0646\u062a\u060c \u0645\u062c\u062f\u062f \u0627\u0642\u062f\u0627\u0645 \u06a9\u0646\u06cc\u062f"
+                                }
+                              </div>
+                            }
+                            className={classNames(
+                              "__wab_instance",
+                              sty.printError2
+                            )}
+                            error={true}
+                            noHeader={true}
+                            noIcon={true}
+                          />
+                        ) : null}
                       </div>
                     </AntdModal>
                   </Stack__>
@@ -5357,6 +5846,8 @@ const PlasmicDescendants = {
     "pageFunctionTopicOfSendReply",
     "pageFunctionTopicOfDatail",
     "printConsult",
+    "printProcessing",
+    "printError",
     "consultReviewAlertContent",
     "consultReviewUnsuccessfully",
     "senderServiceContent",
@@ -5414,6 +5905,8 @@ const PlasmicDescendants = {
     "confirmationYesNo3",
     "noConfirm3",
     "confirm3",
+    "printProcessing2",
+    "printError2",
     "title3",
     "switchingTab",
     "homepage",
@@ -5466,6 +5959,8 @@ const PlasmicDescendants = {
     "pageFunctionTopicOfSendReply",
     "pageFunctionTopicOfDatail",
     "printConsult",
+    "printProcessing",
+    "printError",
     "consultReviewAlertContent",
     "consultReviewUnsuccessfully",
     "senderServiceContent",
@@ -5523,6 +6018,8 @@ const PlasmicDescendants = {
     "confirmationYesNo3",
     "noConfirm3",
     "confirm3",
+    "printProcessing2",
+    "printError2",
     "title3"
   ],
   getUniqueConsult: [
@@ -5533,6 +6030,8 @@ const PlasmicDescendants = {
     "pageFunctionTopicOfSendReply",
     "pageFunctionTopicOfDatail",
     "printConsult",
+    "printProcessing",
+    "printError",
     "consultReviewAlertContent",
     "consultReviewUnsuccessfully",
     "senderServiceContent",
@@ -5590,6 +6089,8 @@ const PlasmicDescendants = {
     "confirmationYesNo3",
     "noConfirm3",
     "confirm3",
+    "printProcessing2",
+    "printError2",
     "title3"
   ],
   sendConsult: [
@@ -5599,6 +6100,8 @@ const PlasmicDescendants = {
     "pageFunctionTopicOfSendReply",
     "pageFunctionTopicOfDatail",
     "printConsult",
+    "printProcessing",
+    "printError",
     "consultReviewAlertContent",
     "consultReviewUnsuccessfully",
     "senderServiceContent",
@@ -5656,6 +6159,8 @@ const PlasmicDescendants = {
     "confirmationYesNo3",
     "noConfirm3",
     "confirm3",
+    "printProcessing2",
+    "printError2",
     "title3"
   ],
   consultHeader: [
@@ -5669,6 +6174,8 @@ const PlasmicDescendants = {
   pageFunctionTopicOfSendReply: ["pageFunctionTopicOfSendReply"],
   pageFunctionTopicOfDatail: ["pageFunctionTopicOfDatail"],
   printConsult: ["printConsult"],
+  printProcessing: ["printProcessing"],
+  printError: ["printError"],
   consultReviewAlertContent: [
     "consultReviewAlertContent",
     "consultReviewUnsuccessfully"
@@ -5798,17 +6305,23 @@ const PlasmicDescendants = {
     "confirmationYesNo3",
     "noConfirm3",
     "confirm3",
+    "printProcessing2",
+    "printError2",
     "title3"
   ],
   confirmationContent3: [
     "confirmationContent3",
     "confirmationYesNo3",
     "noConfirm3",
-    "confirm3"
+    "confirm3",
+    "printProcessing2",
+    "printError2"
   ],
   confirmationYesNo3: ["confirmationYesNo3", "noConfirm3", "confirm3"],
   noConfirm3: ["noConfirm3"],
   confirm3: ["confirm3"],
+  printProcessing2: ["printProcessing2"],
+  printError2: ["printError2"],
   title3: ["title3"],
   switchingTab: [
     "switchingTab",
@@ -5894,6 +6407,8 @@ type NodeDefaultElementType = {
   pageFunctionTopicOfSendReply: "div";
   pageFunctionTopicOfDatail: "div";
   printConsult: "svg";
+  printProcessing: typeof Alert;
+  printError: typeof Alert;
   consultReviewAlertContent: "div";
   consultReviewUnsuccessfully: typeof Alert2;
   senderServiceContent: "div";
@@ -5951,6 +6466,8 @@ type NodeDefaultElementType = {
   confirmationYesNo3: "div";
   noConfirm3: typeof Button;
   confirm3: typeof Button;
+  printProcessing2: typeof Alert;
+  printError2: typeof Alert;
   title3: "div";
   switchingTab: "div";
   homepage: typeof PlasmicImg__;
@@ -6057,6 +6574,8 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     ),
     pageFunctionTopicOfDatail: makeNodeComponent("pageFunctionTopicOfDatail"),
     printConsult: makeNodeComponent("printConsult"),
+    printProcessing: makeNodeComponent("printProcessing"),
+    printError: makeNodeComponent("printError"),
     consultReviewAlertContent: makeNodeComponent("consultReviewAlertContent"),
     consultReviewUnsuccessfully: makeNodeComponent(
       "consultReviewUnsuccessfully"
@@ -6136,6 +6655,8 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     confirmationYesNo3: makeNodeComponent("confirmationYesNo3"),
     noConfirm3: makeNodeComponent("noConfirm3"),
     confirm3: makeNodeComponent("confirm3"),
+    printProcessing2: makeNodeComponent("printProcessing2"),
+    printError2: makeNodeComponent("printError2"),
     title3: makeNodeComponent("title3"),
     switchingTab: makeNodeComponent("switchingTab"),
     homepage: makeNodeComponent("homepage"),
