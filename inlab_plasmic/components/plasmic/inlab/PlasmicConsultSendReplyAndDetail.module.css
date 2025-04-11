@@ -213,6 +213,62 @@
   height: 30px;
   flex-shrink: 0;
 }
+.printProcessing:global(.__wab_instance) {
+  max-width: 100%;
+  align-self: flex-end;
+  width: auto;
+  margin-right: 8px;
+}
+.text__yf3SQ {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__acsaH {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  min-width: 0;
+}
+.svg___49VZ {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.printError:global(.__wab_instance) {
+  max-width: 100%;
+  align-self: flex-end;
+  width: auto;
+  margin-right: 8px;
+}
+.text__u477C {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text___0K0Ee {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  min-width: 0;
+}
+.svg__h0Iu {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
 .consultReviewAlertContent {
   display: flex;
   flex-direction: column;
@@ -1108,6 +1164,62 @@
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.printProcessing2:global(.__wab_instance) {
+  max-width: 100%;
+  align-self: center;
+  width: auto;
+  margin-right: 8px;
+}
+.text__awPs0 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__s3I51 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  min-width: 0;
+}
+.svg__vXj2G {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.printError2:global(.__wab_instance) {
+  max-width: 100%;
+  align-self: center;
+  width: auto;
+  margin-right: 8px;
+}
+.text__poNeY {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__nNqg8 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  min-width: 0;
+}
+.svg__bnWol {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
 }
 .title3 {
   display: flex;

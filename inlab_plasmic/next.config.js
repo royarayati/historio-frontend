@@ -82,3 +82,4 @@ module.exports = withSentryConfig(
     automaticVercelMonitors: true,
   }
 );
+

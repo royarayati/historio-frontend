@@ -35,7 +35,7 @@
 }
 .header {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: fixed;
   align-items: center;
   justify-content: center;
@@ -60,6 +60,106 @@
   max-width: 100%;
   min-width: 0;
 }
+.patientConsultPrintContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  min-width: 0;
+  padding: 0px 8px;
+}
+.printConsult {
+  object-fit: cover;
+  max-width: 100%;
+  align-self: center;
+  color: var(--token-9iYGdL7i3GKE);
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+.printProcessing:global(.__wab_instance) {
+  max-width: 100%;
+  align-self: flex-end;
+  width: auto;
+  margin-right: 8px;
+}
+.text__e2Gff {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text___7VCbN {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  min-width: 0;
+}
+.svg__y4J2G {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.printError:global(.__wab_instance) {
+  max-width: 100%;
+  align-self: flex-end;
+  width: auto;
+  margin-right: 8px;
+}
+.text__u6D23 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__dpnky {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  min-width: 0;
+}
+.svg__phZMp {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
 .pageContent {
   display: flex;
   flex-direction: column;
@@ -80,7 +180,7 @@
   max-width: 100%;
   width: 100%;
   left: 0px;
-  top: 50px;
+  top: 100px;
   z-index: 1;
   overflow: auto;
   bottom: 70px;
