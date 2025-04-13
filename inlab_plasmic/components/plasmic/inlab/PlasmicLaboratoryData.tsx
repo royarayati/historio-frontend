@@ -2372,7 +2372,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
             }}
             method={"GET"}
-            path={`/api/v3/remote_his/labs?patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&all_admissions=${$state.allAdmissions}`}
+            path={`/api/v3/remote_his/labs?patient_id=${
+              $ctx.params.code
+            }&admission_id=${$ctx.params.adm_id}&all_admissions=${
+              $state.allAdmissions
+            }&timestamp=${Date.now()}`}
             ref={ref => {
               $refs["labData"] = ref;
             }}
@@ -2384,7 +2388,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     data-plasmic-name={"conditionGuard"}
                     data-plasmic-override={overrides.conditionGuard}
                     className={classNames("__wab_instance", sty.conditionGuard)}
-                    condition={$ctx.fetched_data.loading}
+                    condition={
+                      $ctx.fetched_data.loading === true ||
+                      !$ctx.fetched_data.data?.lab_test_groups
+                    }
                     onNotSatisfied={async () => {
                       const $steps = {};
 
@@ -2433,14 +2440,13 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     localStorage.setItem(
                                       "laboratory_data",
                                       JSON.stringify(
-                                        $ctx.fetched_data.data.lab_test_groups
+                                        $ctx.fetched_data.data
+                                          ?.lab_test_groups || []
                                       )
                                     );
                                     return console.log(
                                       "laboratory_data",
-                                      JSON.parse(
-                                        localStorage.getItem("laboratory_data")
-                                      )
+                                      localStorage.getItem("laboratory_data")
                                     );
                                   })();
                                 }
@@ -2518,7 +2524,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                             throw e;
                           }
                         })()
-                      : ($ctx.fetched_data.loading = false)
+                      : $ctx.fetched_data.loading === false
                   ) ? (
                     <div
                       className={classNames(
@@ -2532,8 +2538,22 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {$ctx.fetched_data.loading == false &&
-                  $ctx.fetched_data.data.lab_test_groups == 0 ? (
+                  {(() => {
+                    try {
+                      return (
+                        $state.dataLoaded === true &&
+                        localStorage.getItem("laboratory_data") === "[]"
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return false;
+                      }
+                      throw e;
+                    }
+                  })() ? (
                     <div
                       className={classNames(
                         projectcss.all,

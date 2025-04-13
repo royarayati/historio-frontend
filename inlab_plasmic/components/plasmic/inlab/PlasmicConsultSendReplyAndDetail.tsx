@@ -1390,7 +1390,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             )}
                           >
                             {
-                              "\u062f\u0631 \u062d\u0627\u0644 \u062a\u0648\u0644\u06cc\u062f \u062e\u0631\u0648\u062c\u06cc \u067e\u0631\u06cc\u0646\u062a\u060c \u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u06cc\u0646\u062f"
+                              "\u062f\u0631 \u062d\u0627\u0644 \u062a\u0648\u0644\u06cc\u062f \u062e\u0631\u0648\u062c\u06cc \u067e\u0631\u06cc\u0646\u062a\u060c \u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
                             }
                           </div>
                         }
@@ -4046,7 +4046,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                 )}
                               >
                                 {
-                                  "\u062f\u0631 \u062d\u0627\u0644 \u062a\u0648\u0644\u06cc\u062f \u062e\u0631\u0648\u062c\u06cc \u067e\u0631\u06cc\u0646\u062a\u060c \u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u06cc\u0646\u062f"
+                                  "\u062f\u0631 \u062d\u0627\u0644 \u062a\u0648\u0644\u06cc\u062f \u062e\u0631\u0648\u062c\u06cc \u067e\u0631\u06cc\u0646\u062a\u060c \u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
                                 }
                               </div>
                             }
