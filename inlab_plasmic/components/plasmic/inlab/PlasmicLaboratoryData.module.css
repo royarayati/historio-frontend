@@ -1030,6 +1030,12 @@
   flex-shrink: 0;
   padding: 5px 2px 2px;
 }
+.bookmarkLab:global(.__wab_instance) {
+  max-width: 100%;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
 .freeBox__awQQv {
   display: flex;
   flex-direction: column;
@@ -1037,9 +1043,10 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: auto;
+  height: 100%;
   max-width: 100%;
   min-width: 0;
+  min-height: 0;
   padding: 0px;
 }
 .factorResultUnit {
@@ -1057,24 +1064,13 @@
   color: #ff0000;
   min-width: 0;
 }
-.normalRange2 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  color: var(--token-8PxxXPNrIohQ);
-  min-width: 0;
-  display: none;
-}
-.normalRange2viewNormalRange {
-  display: block;
-}
 .normalRangeIcon {
   object-fit: cover;
   max-width: 100%;
   color: var(--token-8PxxXPNrIohQ);
   align-self: flex-end;
   height: 1em;
+  flex-shrink: 0;
 }
 .laboratoryResultNormalRange:global(.__wab_instance) {
   max-width: 100%;
