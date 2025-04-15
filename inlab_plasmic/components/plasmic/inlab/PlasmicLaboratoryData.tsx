@@ -64,6 +64,7 @@ import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; /
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
+import BookmarkLab from "../../BookmarkLab"; // plasmic-import: yhUiLESiXQuk/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -136,9 +137,9 @@ export type PlasmicLaboratoryData__OverridesType = {
   issuedDatetime?: Flex__<"div">;
   labLists?: Flex__<"div">;
   factorNameValue?: Flex__<"div">;
+  bookmarkLab?: Flex__<typeof BookmarkLab>;
   factorResultUnit?: Flex__<"div">;
   abnormalFactorName?: Flex__<"div">;
-  normalRange2?: Flex__<"div">;
   normalRangeIcon?: Flex__<"svg">;
   laboratoryResultNormalRange?: Flex__<typeof AntdModal>;
   factorname?: Flex__<"div">;
@@ -633,6 +634,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "bookmarkLab[][][].selected",
+        type: "private",
+        variableType: "boolean"
       }
     ],
     [$props, $ctx, $refs]
@@ -2372,11 +2378,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
             }}
             method={"GET"}
-            path={`/api/v3/remote_his/labs?patient_id=${
+            path={`/api/v3/bookmark/labs?patient_id=${
               $ctx.params.code
             }&admission_id=${$ctx.params.adm_id}&all_admissions=${
               $state.allAdmissions
-            }&timestamp=${Date.now()}`}
+            }&bookmarked=false&timestamp=${Date.now()}`}
             ref={ref => {
               $refs["labData"] = ref;
             }}
@@ -2509,6 +2515,17 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     }}
                   />
 
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__uudG9
+                    )}
+                  >
+                    {
+                      "\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u0627\u06cc\u06a9\u0648\u0646 \u0633\u062a\u0627\u0631\u0647 \u0645\u06cc\u062a\u0648\u0627\u0646\u06cc\u062f \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0647\u0645 \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u0628\u0647 \u0644\u06cc\u0633\u062a \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0646\u062a\u062e\u0628 \u062f\u0631 \u06a9\u0627\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0627\u0636\u0627\u0641\u0647 \u06a9\u0646\u06cc\u062f"
+                    }
+                  </div>
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? (() => {
@@ -3008,7 +3025,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                             const $steps = {};
 
                                             $steps["updateLabResultObject"] =
-                                              currentItem.normal_range != ""
+                                              false
                                                 ? (() => {
                                                     const actionArgs = {
                                                       variable: {
@@ -3063,7 +3080,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
 
                                             $steps[
                                               "updateLaboratoryResultNormalRangeOpen"
-                                            ] = true
+                                            ] = false
                                               ? (() => {
                                                   const actionArgs = {
                                                     variable: {
@@ -3121,11 +3138,276 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                             }
                                           }}
                                         >
+                                          {currentItem.value !== ""
+                                            ? (() => {
+                                                const child$Props = {
+                                                  admissionId: (() => {
+                                                    try {
+                                                      return parseInt(
+                                                        $ctx.params.adm_id
+                                                      );
+                                                    } catch (e) {
+                                                      if (
+                                                        e instanceof
+                                                          TypeError ||
+                                                        e?.plasmicType ===
+                                                          "PlasmicUndefinedDataError"
+                                                      ) {
+                                                        return undefined;
+                                                      }
+                                                      throw e;
+                                                    }
+                                                  })(),
+                                                  bookmarked: (() => {
+                                                    try {
+                                                      return (
+                                                        currentItem.bookmarked ===
+                                                        true
+                                                      );
+                                                    } catch (e) {
+                                                      if (
+                                                        e instanceof
+                                                          TypeError ||
+                                                        e?.plasmicType ===
+                                                          "PlasmicUndefinedDataError"
+                                                      ) {
+                                                        return [];
+                                                      }
+                                                      throw e;
+                                                    }
+                                                  })(),
+                                                  className: classNames(
+                                                    "__wab_instance",
+                                                    sty.bookmarkLab
+                                                  ),
+                                                  itemKey: "laboratory_id",
+                                                  laboratoryId: (() => {
+                                                    try {
+                                                      return currentItem.id;
+                                                    } catch (e) {
+                                                      if (
+                                                        e instanceof
+                                                          TypeError ||
+                                                        e?.plasmicType ===
+                                                          "PlasmicUndefinedDataError"
+                                                      ) {
+                                                        return undefined;
+                                                      }
+                                                      throw e;
+                                                    }
+                                                  })(),
+                                                  onSelectedChange: async (
+                                                    ...eventArgs: any
+                                                  ) => {
+                                                    generateStateOnChangeProp(
+                                                      $state,
+                                                      [
+                                                        "bookmarkLab",
+                                                        __plasmic_idx_0,
+                                                        __plasmic_idx_1,
+                                                        __plasmic_idx_2,
+                                                        "selected"
+                                                      ]
+                                                    ).apply(null, eventArgs);
+
+                                                    if (
+                                                      eventArgs.length > 1 &&
+                                                      eventArgs[1] &&
+                                                      eventArgs[1]
+                                                        ._plasmic_state_init_
+                                                    ) {
+                                                      return;
+                                                    }
+                                                  },
+                                                  patientId: (() => {
+                                                    try {
+                                                      return parseInt(
+                                                        $ctx.params.code
+                                                      );
+                                                    } catch (e) {
+                                                      if (
+                                                        e instanceof
+                                                          TypeError ||
+                                                        e?.plasmicType ===
+                                                          "PlasmicUndefinedDataError"
+                                                      ) {
+                                                        return undefined;
+                                                      }
+                                                      throw e;
+                                                    }
+                                                  })(),
+                                                  selected:
+                                                    generateStateValueProp(
+                                                      $state,
+                                                      [
+                                                        "bookmarkLab",
+                                                        __plasmic_idx_0,
+                                                        __plasmic_idx_1,
+                                                        __plasmic_idx_2,
+                                                        "selected"
+                                                      ]
+                                                    )
+                                                };
+
+                                                initializePlasmicStates(
+                                                  $state,
+                                                  [
+                                                    {
+                                                      name: "bookmarkLab[][][].selected",
+                                                      initFunc: ({
+                                                        $props,
+                                                        $state,
+                                                        $queries
+                                                      }) =>
+                                                        currentItem.bookmarked
+                                                    }
+                                                  ],
+                                                  [
+                                                    __plasmic_idx_0,
+                                                    __plasmic_idx_1,
+                                                    __plasmic_idx_2
+                                                  ]
+                                                );
+                                                return (
+                                                  <BookmarkLab
+                                                    data-plasmic-name={
+                                                      "bookmarkLab"
+                                                    }
+                                                    data-plasmic-override={
+                                                      overrides.bookmarkLab
+                                                    }
+                                                    {...child$Props}
+                                                  />
+                                                );
+                                              })()
+                                            : null}
                                           <div
                                             className={classNames(
                                               projectcss.all,
                                               sty.freeBox__awQQv
                                             )}
+                                            onClick={async event => {
+                                              const $steps = {};
+
+                                              $steps["updateLabResultObject"] =
+                                                currentItem.normal_range !==
+                                                null
+                                                  ? (() => {
+                                                      const actionArgs = {
+                                                        variable: {
+                                                          objRoot: $state,
+                                                          variablePath: [
+                                                            "labResultObject"
+                                                          ]
+                                                        },
+                                                        operation: 0,
+                                                        value: currentItem
+                                                      };
+                                                      return (({
+                                                        variable,
+                                                        value,
+                                                        startIndex,
+                                                        deleteCount
+                                                      }) => {
+                                                        if (!variable) {
+                                                          return;
+                                                        }
+                                                        const {
+                                                          objRoot,
+                                                          variablePath
+                                                        } = variable;
+
+                                                        $stateSet(
+                                                          objRoot,
+                                                          variablePath,
+                                                          value
+                                                        );
+                                                        return value;
+                                                      })?.apply(null, [
+                                                        actionArgs
+                                                      ]);
+                                                    })()
+                                                  : undefined;
+                                              if (
+                                                $steps[
+                                                  "updateLabResultObject"
+                                                ] != null &&
+                                                typeof $steps[
+                                                  "updateLabResultObject"
+                                                ] === "object" &&
+                                                typeof $steps[
+                                                  "updateLabResultObject"
+                                                ].then === "function"
+                                              ) {
+                                                $steps[
+                                                  "updateLabResultObject"
+                                                ] = await $steps[
+                                                  "updateLabResultObject"
+                                                ];
+                                              }
+
+                                              $steps[
+                                                "updateLaboratoryResultNormalRangeOpen"
+                                              ] = true
+                                                ? (() => {
+                                                    const actionArgs = {
+                                                      variable: {
+                                                        objRoot: $state,
+                                                        variablePath: [
+                                                          "laboratoryResultNormalRange",
+                                                          "open"
+                                                        ]
+                                                      },
+                                                      operation: 4
+                                                    };
+                                                    return (({
+                                                      variable,
+                                                      value,
+                                                      startIndex,
+                                                      deleteCount
+                                                    }) => {
+                                                      if (!variable) {
+                                                        return;
+                                                      }
+                                                      const {
+                                                        objRoot,
+                                                        variablePath
+                                                      } = variable;
+
+                                                      const oldValue =
+                                                        $stateGet(
+                                                          objRoot,
+                                                          variablePath
+                                                        );
+                                                      $stateSet(
+                                                        objRoot,
+                                                        variablePath,
+                                                        !oldValue
+                                                      );
+                                                      return !oldValue;
+                                                    })?.apply(null, [
+                                                      actionArgs
+                                                    ]);
+                                                  })()
+                                                : undefined;
+                                              if (
+                                                $steps[
+                                                  "updateLaboratoryResultNormalRangeOpen"
+                                                ] != null &&
+                                                typeof $steps[
+                                                  "updateLaboratoryResultNormalRangeOpen"
+                                                ] === "object" &&
+                                                typeof $steps[
+                                                  "updateLaboratoryResultNormalRangeOpen"
+                                                ].then === "function"
+                                              ) {
+                                                $steps[
+                                                  "updateLaboratoryResultNormalRangeOpen"
+                                                ] = await $steps[
+                                                  "updateLaboratoryResultNormalRangeOpen"
+                                                ];
+                                              }
+                                            }}
                                           >
                                             {currentItem.abnormal != 1 ? (
                                               <div
@@ -3215,88 +3497,24 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                                 )}
                                               </div>
                                             ) : null}
-                                            {(
-                                              hasVariant(
-                                                $state,
-                                                "viewNormalRange",
-                                                "viewNormalRange"
-                                              )
-                                                ? (() => {
-                                                    try {
-                                                      return (
-                                                        currentItem.normal_range !=
-                                                        null
-                                                      );
-                                                    } catch (e) {
-                                                      if (
-                                                        e instanceof
-                                                          TypeError ||
-                                                        e?.plasmicType ===
-                                                          "PlasmicUndefinedDataError"
-                                                      ) {
-                                                        return true;
-                                                      }
-                                                      throw e;
-                                                    }
-                                                  })()
-                                                : true
-                                            ) ? (
-                                              <div
+                                            {currentItem.normal_range !==
+                                              null &&
+                                            currentItem.normal_range !== "" ? (
+                                              <InformationIcon
                                                 data-plasmic-name={
-                                                  "normalRange2"
+                                                  "normalRangeIcon"
                                                 }
                                                 data-plasmic-override={
-                                                  overrides.normalRange2
+                                                  overrides.normalRangeIcon
                                                 }
                                                 className={classNames(
                                                   projectcss.all,
-                                                  projectcss.__wab_text,
-                                                  sty.normalRange2,
-                                                  {
-                                                    [sty.normalRange2viewNormalRange]:
-                                                      hasVariant(
-                                                        $state,
-                                                        "viewNormalRange",
-                                                        "viewNormalRange"
-                                                      )
-                                                  }
+                                                  sty.normalRangeIcon
                                                 )}
-                                              >
-                                                <React.Fragment>
-                                                  {(() => {
-                                                    try {
-                                                      return currentItem.normal_range;
-                                                    } catch (e) {
-                                                      if (
-                                                        e instanceof
-                                                          TypeError ||
-                                                        e?.plasmicType ===
-                                                          "PlasmicUndefinedDataError"
-                                                      ) {
-                                                        return "";
-                                                      }
-                                                      throw e;
-                                                    }
-                                                  })()}
-                                                </React.Fragment>
-                                              </div>
+                                                role={"img"}
+                                              />
                                             ) : null}
                                           </div>
-                                          {currentItem.normal_range !== "" ? (
-                                            <InformationIcon
-                                              data-plasmic-name={
-                                                "normalRangeIcon"
-                                              }
-                                              data-plasmic-override={
-                                                overrides.normalRangeIcon
-                                              }
-                                              className={classNames(
-                                                projectcss.all,
-                                                sty.normalRangeIcon
-                                              )}
-                                              role={"img"}
-                                            />
-                                          ) : null}
                                         </Stack__>
                                       </Stack__>
                                     );
@@ -4163,9 +4381,9 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNameValue",
+    "bookmarkLab",
     "factorResultUnit",
     "abnormalFactorName",
-    "normalRange2",
     "normalRangeIcon",
     "laboratoryResultNormalRange",
     "factorname",
@@ -4232,9 +4450,9 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNameValue",
+    "bookmarkLab",
     "factorResultUnit",
     "abnormalFactorName",
-    "normalRange2",
     "normalRangeIcon"
   ],
   conditionGuard: ["conditionGuard"],
@@ -4251,9 +4469,9 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNameValue",
+    "bookmarkLab",
     "factorResultUnit",
     "abnormalFactorName",
-    "normalRange2",
     "normalRangeIcon"
   ],
   labResults: [
@@ -4266,9 +4484,9 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNameValue",
+    "bookmarkLab",
     "factorResultUnit",
     "abnormalFactorName",
-    "normalRange2",
     "normalRangeIcon"
   ],
   checkedFactors: ["checkedFactors", "labGroupName", "factorName"],
@@ -4280,9 +4498,9 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNameValue",
+    "bookmarkLab",
     "factorResultUnit",
     "abnormalFactorName",
-    "normalRange2",
     "normalRangeIcon"
   ],
   labPerDate: [
@@ -4290,30 +4508,30 @@ const PlasmicDescendants = {
     "issuedDatetime",
     "labLists",
     "factorNameValue",
+    "bookmarkLab",
     "factorResultUnit",
     "abnormalFactorName",
-    "normalRange2",
     "normalRangeIcon"
   ],
   issuedDatetime: ["issuedDatetime"],
   labLists: [
     "labLists",
     "factorNameValue",
+    "bookmarkLab",
     "factorResultUnit",
     "abnormalFactorName",
-    "normalRange2",
     "normalRangeIcon"
   ],
   factorNameValue: [
     "factorNameValue",
+    "bookmarkLab",
     "factorResultUnit",
     "abnormalFactorName",
-    "normalRange2",
     "normalRangeIcon"
   ],
+  bookmarkLab: ["bookmarkLab"],
   factorResultUnit: ["factorResultUnit"],
   abnormalFactorName: ["abnormalFactorName"],
-  normalRange2: ["normalRange2"],
   normalRangeIcon: ["normalRangeIcon"],
   laboratoryResultNormalRange: [
     "laboratoryResultNormalRange",
@@ -4407,9 +4625,9 @@ type NodeDefaultElementType = {
   issuedDatetime: "div";
   labLists: "div";
   factorNameValue: "div";
+  bookmarkLab: typeof BookmarkLab;
   factorResultUnit: "div";
   abnormalFactorName: "div";
-  normalRange2: "div";
   normalRangeIcon: "svg";
   laboratoryResultNormalRange: typeof AntdModal;
   factorname: "div";
@@ -4524,9 +4742,9 @@ export const PlasmicLaboratoryData = Object.assign(
     issuedDatetime: makeNodeComponent("issuedDatetime"),
     labLists: makeNodeComponent("labLists"),
     factorNameValue: makeNodeComponent("factorNameValue"),
+    bookmarkLab: makeNodeComponent("bookmarkLab"),
     factorResultUnit: makeNodeComponent("factorResultUnit"),
     abnormalFactorName: makeNodeComponent("abnormalFactorName"),
-    normalRange2: makeNodeComponent("normalRange2"),
     normalRangeIcon: makeNodeComponent("normalRangeIcon"),
     laboratoryResultNormalRange: makeNodeComponent(
       "laboratoryResultNormalRange"

@@ -1724,6 +1724,19 @@
           "cssFilePath": "plasmic/inlab/PlasmicBullet.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "yhUiLESiXQuk",
+          "name": "BookmarkLab",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicBookmarkLab.tsx",
+          "importSpec": {
+            "modulePath": "BookmarkLab.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicBookmarkLab.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

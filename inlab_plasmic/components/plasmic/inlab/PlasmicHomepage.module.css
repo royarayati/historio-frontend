@@ -36,6 +36,14 @@
     grid-column: 4;
   }
 }
+.homepagepatientSummary > * {
+  grid-column: 4;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .homepagepatientSummary > * {
+    grid-column: 4;
+  }
+}
 .redirectToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
@@ -874,7 +882,7 @@
 }
 .currentPageNumber {
   position: relative;
-  width: 35px;
+  width: 45px;
   height: 15px;
   max-width: 100%;
   font-size: 10px;
@@ -2174,6 +2182,31 @@
   width: auto;
   height: 1em;
 }
+.patientsSummary:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text___77RmO {
+  color: #000000;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  padding-right: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .textpatientSummary___77RmOCcPm4 {
+    font-size: 10px;
+  }
+}
+.svg__h3ZvI {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__dottc {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
 .text__n7AQj {
   position: relative;
   width: auto;
@@ -2713,6 +2746,217 @@
   user-select: none;
   text-decoration-line: none;
   min-width: 0;
+}
+.patientSummary2 {
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  display: none;
+  padding: 8px;
+}
+.patientSummary2 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+}
+.patientSummary2patientSummary {
+  display: flex;
+  padding: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientSummary2patientSummary > :global(.__wab_flex-container) {
+    justify-content: center;
+    margin-left: calc(0px - 0px);
+    width: calc(100% + 0px);
+    margin-top: calc(0px - 4px);
+    height: calc(100% + 4px);
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientSummary2patientSummary > :global(.__wab_flex-container) > *,
+  .patientSummary2patientSummary
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > *,
+  .patientSummary2patientSummary
+    > :global(.__wab_flex-container)
+    > picture
+    > img,
+  .patientSummary2patientSummary
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > picture
+    > img {
+    margin-left: 0px;
+    margin-top: 4px;
+  }
+}
+.freeBox__gNXmc {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.freeBoxpatientSummary__gNXmcCcPm4 {
+  padding: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .freeBoxpatientSummary__gNXmcCcPm4 {
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+.text__ppFbg {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.textpatientSummary__ppFbgCcPm4 {
+  text-align: right;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .textpatientSummary__ppFbgCcPm4 {
+    text-align: right;
+    padding: 4px;
+  }
+}
+.bookmarkedLabs:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.bookmarkedLabspatientSummary:global(.__wab_instance) {
+  width: 100%;
+  min-width: 0;
+}
+.freeBox__j1Duv {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.freeBoxpatientSummary__j1DuvCcPm4 {
+  padding: 4px;
+  border: 0.2px solid var(--token-8PxxXPNrIohQ);
+}
+.text__rGxJ4 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .textpatientSummary__rGxJ4CcPm4 {
+    font-size: 10px;
+  }
+}
+.text__xRsl2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .textpatientSummary__xRsl2CcPm4 {
+    font-size: var(--token-CdE1_0ZaCyT1);
+  }
+}
+.bookmarkedLabsItem {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.bookmarkedLabsItem > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-width: 0;
+}
+.bookmarkedLabsItempatientSummary {
+  padding: 0px;
+  border: 0px none var(--token-8PxxXPNrIohQ);
+}
+.bookmarkedLabsItempatientSummary > :global(.__wab_flex-container) {
+  align-items: center;
+  justify-content: space-around;
+  margin-left: calc(0px - 12px);
+  width: calc(100% + 12px);
+  margin-top: calc(0px - 0px);
+  height: calc(100% + 0px);
+}
+.bookmarkedLabsItempatientSummary > :global(.__wab_flex-container) > *,
+.bookmarkedLabsItempatientSummary
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.bookmarkedLabsItempatientSummary
+  > :global(.__wab_flex-container)
+  > picture
+  > img,
+.bookmarkedLabsItempatientSummary
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 12px;
+  margin-top: 0px;
+}
+.factorName {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.factorNamepatientSummary {
+  text-align: left;
+  width: auto;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .factorNamepatientSummary {
+    text-align: center;
+  }
+}
+.labDatetime {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.labDatetimepatientSummary {
+  width: auto;
+  white-space: pre;
+  text-align: left;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .labDatetimepatientSummary {
+    font-size: var(--token-CdE1_0ZaCyT1);
+  }
 }
 .patientDataButtons {
   position: relative;
