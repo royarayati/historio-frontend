@@ -6540,6 +6540,34 @@ function PlasmicHomepage__RenderFunc(props: {
                                       "logConsole"
                                     ];
                                   }
+
+                                  $steps["updatePatientSummary"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          vgroup: "patientSummary",
+                                          operation: 6,
+                                          value: "patientSummary"
+                                        };
+                                        return (({ vgroup, value }) => {
+                                          if (typeof value === "string") {
+                                            value = [value];
+                                          }
+
+                                          $stateSet($state, vgroup, false);
+                                          return false;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updatePatientSummary"] != null &&
+                                    typeof $steps["updatePatientSummary"] ===
+                                      "object" &&
+                                    typeof $steps["updatePatientSummary"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updatePatientSummary"] =
+                                      await $steps["updatePatientSummary"];
+                                  }
                                 }}
                                 onDeselectedChange={async (
                                   ...eventArgs: any
@@ -6989,6 +7017,34 @@ function PlasmicHomepage__RenderFunc(props: {
                                   ) {
                                     $steps["setPatientcardidEmpty"] =
                                       await $steps["setPatientcardidEmpty"];
+                                  }
+
+                                  $steps["updatePatientSummary"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          vgroup: "patientSummary",
+                                          operation: 6,
+                                          value: "patientSummary"
+                                        };
+                                        return (({ vgroup, value }) => {
+                                          if (typeof value === "string") {
+                                            value = [value];
+                                          }
+
+                                          $stateSet($state, vgroup, false);
+                                          return false;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updatePatientSummary"] != null &&
+                                    typeof $steps["updatePatientSummary"] ===
+                                      "object" &&
+                                    typeof $steps["updatePatientSummary"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updatePatientSummary"] =
+                                      await $steps["updatePatientSummary"];
                                   }
                                 }}
                                 onDeselectedChange={async (
