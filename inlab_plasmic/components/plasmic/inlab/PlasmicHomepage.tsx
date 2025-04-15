@@ -2568,6 +2568,38 @@ function PlasmicHomepage__RenderFunc(props: {
                     ) {
                       return;
                     }
+
+                    (async event => {
+                      const $steps = {};
+
+                      $steps["updatePatientSummary"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              vgroup: "patientSummary",
+                              operation: 6,
+                              value: "patientSummary"
+                            };
+                            return (({ vgroup, value }) => {
+                              if (typeof value === "string") {
+                                value = [value];
+                              }
+
+                              $stateSet($state, vgroup, false);
+                              return false;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updatePatientSummary"] != null &&
+                        typeof $steps["updatePatientSummary"] === "object" &&
+                        typeof $steps["updatePatientSummary"].then ===
+                          "function"
+                      ) {
+                        $steps["updatePatientSummary"] = await $steps[
+                          "updatePatientSummary"
+                        ];
+                      }
+                    }).apply(null, eventArgs);
                   }}
                   placeholder={
                     "\u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc\u060c \u06a9\u062f\u0645\u0644\u06cc"
@@ -2651,6 +2683,38 @@ function PlasmicHomepage__RenderFunc(props: {
                     ) {
                       return;
                     }
+
+                    (async event => {
+                      const $steps = {};
+
+                      $steps["updatePatientSummary"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              vgroup: "patientSummary",
+                              operation: 6,
+                              value: "patientSummary"
+                            };
+                            return (({ vgroup, value }) => {
+                              if (typeof value === "string") {
+                                value = [value];
+                              }
+
+                              $stateSet($state, vgroup, false);
+                              return false;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updatePatientSummary"] != null &&
+                        typeof $steps["updatePatientSummary"] === "object" &&
+                        typeof $steps["updatePatientSummary"].then ===
+                          "function"
+                      ) {
+                        $steps["updatePatientSummary"] = await $steps[
+                          "updatePatientSummary"
+                        ];
+                      }
+                    }).apply(null, eventArgs);
                   }}
                   placeholder={"\u0646\u0627\u0645"}
                   startIcon={
