@@ -218,7 +218,6 @@ export type PlasmicHomepage__OverridesType = {
   bookmarkedButtonStack?: Flex__<"div">;
   bookmarked?: Flex__<typeof Button>;
   bookmarkedPatientNumber?: Flex__<"div">;
-  patientsSummary?: Flex__<typeof Button>;
   sortingTabWardFilter?: Flex__<"div">;
   sortByAdmissionDatetime?: Flex__<typeof Button>;
   sortByBed?: Flex__<typeof Button>;
@@ -226,6 +225,7 @@ export type PlasmicHomepage__OverridesType = {
   sortByRotation?: Flex__<typeof Button>;
   sortByShift?: Flex__<typeof Button>;
   allBookmarks?: Flex__<typeof Button>;
+  patientsSummary?: Flex__<typeof Button>;
   buttonپاککردنهمهبوکمارکها?: Flex__<typeof Button>;
   بیمارییافتنشد?: Flex__<"div">;
   bookmarkGuide?: Flex__<"div">;
@@ -1875,52 +1875,24 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return !$state.patientSummary;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+          hasVariant($state, "patientSummary", "patientSummary") &&
+          hasVariant(globalVariants, "screen", "mobileFirst")
+            ? []
+            : hasVariant($state, "patientSummary", "patientSummary")
+            ? []
+            : "sortDeselected"
       },
       {
         path: "patientsSummary.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant($state, "patientSummary", "patientSummary") &&
           hasVariant(globalVariants, "screen", "mobileFirst")
-            ? (() => {
-                try {
-                  return $state.bookmarkType === "";
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return [];
-                  }
-                  throw e;
-                }
-              })()
-            : (() => {
-                try {
-                  return $state.patientSummary;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return [];
-                  }
-                  throw e;
-                }
-              })()
+            ? "sortSelected"
+            : hasVariant($state, "patientSummary", "patientSummary")
+            ? "sortSelected"
+            : undefined
       },
       {
         path: "patientSummary",
@@ -7550,196 +7522,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                 </div>
                               </Button>
                             </div>
-                            <Button
-                              data-plasmic-name={"patientsSummary"}
-                              data-plasmic-override={overrides.patientsSummary}
-                              className={classNames(
-                                "__wab_instance",
-                                sty.patientsSummary,
-                                {
-                                  [sty.patientsSummarypatientSummary]:
-                                    hasVariant(
-                                      $state,
-                                      "patientSummary",
-                                      "patientSummary"
-                                    )
-                                }
-                              )}
-                              deselected={generateStateValueProp($state, [
-                                "patientsSummary",
-                                "deselected"
-                              ])}
-                              isDisabled={generateStateValueProp($state, [
-                                "patientsSummary",
-                                "isDisabled"
-                              ])}
-                              onClick={async event => {
-                                const $steps = {};
-
-                                $steps["updatePatientSummary"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        vgroup: "patientSummary",
-                                        operation: 2
-                                      };
-                                      return (({ vgroup, value }) => {
-                                        if (typeof value === "string") {
-                                          value = [value];
-                                        }
-
-                                        const oldValue = $stateGet(
-                                          $state,
-                                          vgroup
-                                        );
-                                        $stateSet($state, vgroup, !oldValue);
-                                        return !oldValue;
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["updatePatientSummary"] != null &&
-                                  typeof $steps["updatePatientSummary"] ===
-                                    "object" &&
-                                  typeof $steps["updatePatientSummary"].then ===
-                                    "function"
-                                ) {
-                                  $steps["updatePatientSummary"] = await $steps[
-                                    "updatePatientSummary"
-                                  ];
-                                }
-                              }}
-                              onDeselectedChange={async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "patientsSummary",
-                                    "deselected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onIsDisabledChange={async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "patientsSummary",
-                                    "isDisabled"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onSelectedChange={async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "patientsSummary",
-                                    "selected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onSortDeselectedChange={async (
-                                ...eventArgs: any
-                              ) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "patientsSummary",
-                                    "sortDeselected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              onSortSelectedChange={async (
-                                ...eventArgs: any
-                              ) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "patientsSummary",
-                                    "sortSelected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              }}
-                              selected={generateStateValueProp($state, [
-                                "patientsSummary",
-                                "selected"
-                              ])}
-                              sortDeselected={generateStateValueProp($state, [
-                                "patientsSummary",
-                                "sortDeselected"
-                              ])}
-                              sortSelected={generateStateValueProp($state, [
-                                "patientsSummary",
-                                "sortSelected"
-                              ])}
-                            >
-                              <div
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text___77RmO,
-                                  {
-                                    [sty.textpatientSummary___77RmOCcPm4]:
-                                      hasVariant(
-                                        $state,
-                                        "patientSummary",
-                                        "patientSummary"
-                                      )
-                                  }
-                                )}
-                              >
-                                {hasVariant(
-                                  $state,
-                                  "patientSummary",
-                                  "patientSummary"
-                                ) &&
-                                hasVariant(
-                                  globalVariants,
-                                  "screen",
-                                  "mobileFirst"
-                                )
-                                  ? "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
-                                  : hasVariant(
-                                      globalVariants,
-                                      "screen",
-                                      "mobileFirst"
-                                    )
-                                  ? "\u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
-                                  : "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 "}
-                              </div>
-                            </Button>
                           </Stack__>
                         ) : null}
                         {(
@@ -8568,7 +8350,14 @@ function PlasmicHomepage__RenderFunc(props: {
                               data-plasmic-override={overrides.allBookmarks}
                               className={classNames(
                                 "__wab_instance",
-                                sty.allBookmarks
+                                sty.allBookmarks,
+                                {
+                                  [sty.allBookmarkspatientSummary]: hasVariant(
+                                    $state,
+                                    "patientSummary",
+                                    "patientSummary"
+                                  )
+                                }
                               )}
                               deselected={generateStateValueProp($state, [
                                 "allBookmarks",
@@ -8731,6 +8520,196 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )
                                   ? "\u0647\u0645\u0647"
                                   : "\u0647\u0645\u0647 "}
+                              </div>
+                            </Button>
+                            <Button
+                              data-plasmic-name={"patientsSummary"}
+                              data-plasmic-override={overrides.patientsSummary}
+                              className={classNames(
+                                "__wab_instance",
+                                sty.patientsSummary,
+                                {
+                                  [sty.patientsSummarypatientSummary]:
+                                    hasVariant(
+                                      $state,
+                                      "patientSummary",
+                                      "patientSummary"
+                                    )
+                                }
+                              )}
+                              deselected={generateStateValueProp($state, [
+                                "patientsSummary",
+                                "deselected"
+                              ])}
+                              isDisabled={generateStateValueProp($state, [
+                                "patientsSummary",
+                                "isDisabled"
+                              ])}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["updatePatientSummary"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        vgroup: "patientSummary",
+                                        operation: 2
+                                      };
+                                      return (({ vgroup, value }) => {
+                                        if (typeof value === "string") {
+                                          value = [value];
+                                        }
+
+                                        const oldValue = $stateGet(
+                                          $state,
+                                          vgroup
+                                        );
+                                        $stateSet($state, vgroup, !oldValue);
+                                        return !oldValue;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["updatePatientSummary"] != null &&
+                                  typeof $steps["updatePatientSummary"] ===
+                                    "object" &&
+                                  typeof $steps["updatePatientSummary"].then ===
+                                    "function"
+                                ) {
+                                  $steps["updatePatientSummary"] = await $steps[
+                                    "updatePatientSummary"
+                                  ];
+                                }
+                              }}
+                              onDeselectedChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "patientsSummary",
+                                    "deselected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onIsDisabledChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "patientsSummary",
+                                    "isDisabled"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSelectedChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "patientsSummary",
+                                    "selected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSortDeselectedChange={async (
+                                ...eventArgs: any
+                              ) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "patientsSummary",
+                                    "sortDeselected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              onSortSelectedChange={async (
+                                ...eventArgs: any
+                              ) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "patientsSummary",
+                                    "sortSelected"
+                                  ])(eventArgs[0]);
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              selected={generateStateValueProp($state, [
+                                "patientsSummary",
+                                "selected"
+                              ])}
+                              sortDeselected={generateStateValueProp($state, [
+                                "patientsSummary",
+                                "sortDeselected"
+                              ])}
+                              sortSelected={generateStateValueProp($state, [
+                                "patientsSummary",
+                                "sortSelected"
+                              ])}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text___77RmO,
+                                  {
+                                    [sty.textpatientSummary___77RmOCcPm4]:
+                                      hasVariant(
+                                        $state,
+                                        "patientSummary",
+                                        "patientSummary"
+                                      )
+                                  }
+                                )}
+                              >
+                                {hasVariant(
+                                  $state,
+                                  "patientSummary",
+                                  "patientSummary"
+                                ) &&
+                                hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
+                                  : hasVariant(
+                                      globalVariants,
+                                      "screen",
+                                      "mobileFirst"
+                                    )
+                                  ? "\u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
+                                  : "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 "}
                               </div>
                             </Button>
                             {(
@@ -9996,7 +9975,15 @@ function PlasmicHomepage__RenderFunc(props: {
                                   className={classNames(
                                     projectcss.all,
                                     projectcss.__wab_text,
-                                    sty.firstLastName
+                                    sty.firstLastName,
+                                    {
+                                      [sty.firstLastNamepatientSummary]:
+                                        hasVariant(
+                                          $state,
+                                          "patientSummary",
+                                          "patientSummary"
+                                        )
+                                    }
                                   )}
                                 >
                                   <React.Fragment>
@@ -10336,6 +10323,68 @@ function PlasmicHomepage__RenderFunc(props: {
                                               : "Enter some text"}
                                           </div>
                                         ) : null}
+                                        {(
+                                          hasVariant(
+                                            $state,
+                                            "patientSummary",
+                                            "patientSummary"
+                                          )
+                                            ? (() => {
+                                                try {
+                                                  return (
+                                                    $ctx.fetched_data
+                                                      .loading === false &&
+                                                    $ctx.fetched_data.data
+                                                      .length === 0
+                                                  );
+                                                } catch (e) {
+                                                  if (
+                                                    e instanceof TypeError ||
+                                                    e?.plasmicType ===
+                                                      "PlasmicUndefinedDataError"
+                                                  ) {
+                                                    return true;
+                                                  }
+                                                  throw e;
+                                                }
+                                              })()
+                                            : true
+                                        ) ? (
+                                          <div
+                                            className={classNames(
+                                              projectcss.all,
+                                              projectcss.__wab_text,
+                                              sty.text__xRsl2,
+                                              {
+                                                [sty.textpatientSummary__xRsl2CcPm4]:
+                                                  hasVariant(
+                                                    $state,
+                                                    "patientSummary",
+                                                    "patientSummary"
+                                                  )
+                                              }
+                                            )}
+                                          >
+                                            {hasVariant(
+                                              $state,
+                                              "patientSummary",
+                                              "patientSummary"
+                                            ) &&
+                                            hasVariant(
+                                              globalVariants,
+                                              "screen",
+                                              "mobileFirst"
+                                            )
+                                              ? "\u0634\u0645\u0627 \u0645\u06cc\u062a\u0648\u0627\u0646\u06cc\u062f \u0627\u0632 \u0635\u0641\u062d\u0647 \u0622\u0632\u0645\u0627\u06cc\u0634\u060c \u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u0627\u06cc\u06a9\u0648\u0646 \u0633\u062a\u0627\u0631\u0647 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0647\u0645 \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u0628\u0647 \u0627\u06cc\u0646 \u0644\u06cc\u0633\u062a \u0627\u0636\u0627\u0641\u0647 \u06a9\u0646\u06cc\u062f "
+                                              : hasVariant(
+                                                  $state,
+                                                  "patientSummary",
+                                                  "patientSummary"
+                                                )
+                                              ? "\u0634\u0645\u0627 \u0645\u06cc\u062a\u0648\u0627\u0646\u06cc\u062f \u0627\u0632 \u0635\u0641\u062d\u0647 \u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u060c\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u0627\u06cc\u06a9\u0648\u0646 \u0633\u062a\u0627\u0631\u0647 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0647\u0645 \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u0628\u0647 \u0627\u06cc\u0646 \u0644\u06cc\u0633\u062a \u0627\u0636\u0627\u0641\u0647 \u06a9\u0646\u06cc\u062f "
+                                              : "Enter some text"}
+                                          </div>
+                                        ) : null}
                                         {(_par =>
                                           !_par
                                             ? []
@@ -10537,41 +10586,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                             );
                                           }
                                         )}
-                                        {(
-                                          hasVariant(
-                                            $state,
-                                            "patientSummary",
-                                            "patientSummary"
-                                          )
-                                            ? $ctx.fetched_data.loading ===
-                                                false &&
-                                              $ctx.fetched_data.data === ""
-                                            : true
-                                        ) ? (
-                                          <div
-                                            className={classNames(
-                                              projectcss.all,
-                                              projectcss.__wab_text,
-                                              sty.text__xRsl2,
-                                              {
-                                                [sty.textpatientSummary__xRsl2CcPm4]:
-                                                  hasVariant(
-                                                    $state,
-                                                    "patientSummary",
-                                                    "patientSummary"
-                                                  )
-                                              }
-                                            )}
-                                          >
-                                            {hasVariant(
-                                              $state,
-                                              "patientSummary",
-                                              "patientSummary"
-                                            )
-                                              ? "\u0634\u0645\u0627 \u0645\u06cc\u062a\u0648\u0627\u0646\u06cc\u062f \u0627\u0632 \u0635\u0641\u062d\u0647 \u0622\u0632\u0645\u0627\u06cc\u0634\u0627\u062a \u060c\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u0627\u06cc\u06a9\u0648\u0646 \u0633\u062a\u0627\u0631\u0647 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0647\u0645 \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u0628\u0647 \u0627\u06cc\u0646 \u0644\u06cc\u0633\u062a \u0627\u0636\u0627\u0641\u0647 \u06a9\u0646\u06cc\u062f "
-                                              : "Enter some text"}
-                                          </div>
-                                        ) : null}
                                       </div>
                                     )}
                                   </DataCtxReader__>
@@ -16971,7 +16985,6 @@ const PlasmicDescendants = {
     "bookmarkedButtonStack",
     "bookmarked",
     "bookmarkedPatientNumber",
-    "patientsSummary",
     "sortingTabWardFilter",
     "sortByAdmissionDatetime",
     "sortByBed",
@@ -16979,6 +16992,7 @@ const PlasmicDescendants = {
     "sortByRotation",
     "sortByShift",
     "allBookmarks",
+    "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
@@ -17137,7 +17151,6 @@ const PlasmicDescendants = {
     "bookmarkedButtonStack",
     "bookmarked",
     "bookmarkedPatientNumber",
-    "patientsSummary",
     "sortingTabWardFilter",
     "sortByAdmissionDatetime",
     "sortByBed",
@@ -17145,6 +17158,7 @@ const PlasmicDescendants = {
     "sortByRotation",
     "sortByShift",
     "allBookmarks",
+    "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
@@ -17566,7 +17580,6 @@ const PlasmicDescendants = {
     "bookmarkedButtonStack",
     "bookmarked",
     "bookmarkedPatientNumber",
-    "patientsSummary",
     "sortingTabWardFilter",
     "sortByAdmissionDatetime",
     "sortByBed",
@@ -17574,6 +17587,7 @@ const PlasmicDescendants = {
     "sortByRotation",
     "sortByShift",
     "allBookmarks",
+    "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
     "bookmarkGuide",
@@ -17614,7 +17628,6 @@ const PlasmicDescendants = {
     "bookmarkedButtonStack",
     "bookmarked",
     "bookmarkedPatientNumber",
-    "patientsSummary",
     "sortingTabWardFilter",
     "sortByAdmissionDatetime",
     "sortByBed",
@@ -17622,6 +17635,7 @@ const PlasmicDescendants = {
     "sortByRotation",
     "sortByShift",
     "allBookmarks",
+    "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
   ],
   patientsTabs: [
@@ -17634,8 +17648,7 @@ const PlasmicDescendants = {
     "physicianPatientNumber",
     "bookmarkedButtonStack",
     "bookmarked",
-    "bookmarkedPatientNumber",
-    "patientsSummary"
+    "bookmarkedPatientNumber"
   ],
   wardButtonStack: ["wardButtonStack", "ward2", "wardPatientNumber"],
   ward2: ["ward2", "wardPatientNumber"],
@@ -17654,7 +17667,6 @@ const PlasmicDescendants = {
   ],
   bookmarked: ["bookmarked", "bookmarkedPatientNumber"],
   bookmarkedPatientNumber: ["bookmarkedPatientNumber"],
-  patientsSummary: ["patientsSummary"],
   sortingTabWardFilter: [
     "sortingTabWardFilter",
     "sortByAdmissionDatetime",
@@ -17666,11 +17678,13 @@ const PlasmicDescendants = {
     "sortingTabBookmarkFilter2",
     "sortByRotation",
     "sortByShift",
-    "allBookmarks"
+    "allBookmarks",
+    "patientsSummary"
   ],
   sortByRotation: ["sortByRotation"],
   sortByShift: ["sortByShift"],
   allBookmarks: ["allBookmarks"],
+  patientsSummary: ["patientsSummary"],
   buttonپاککردنهمهبوکمارکها: [
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
   ],
@@ -17981,7 +17995,6 @@ type NodeDefaultElementType = {
   bookmarkedButtonStack: "div";
   bookmarked: typeof Button;
   bookmarkedPatientNumber: "div";
-  patientsSummary: typeof Button;
   sortingTabWardFilter: "div";
   sortByAdmissionDatetime: typeof Button;
   sortByBed: typeof Button;
@@ -17989,6 +18002,7 @@ type NodeDefaultElementType = {
   sortByRotation: typeof Button;
   sortByShift: typeof Button;
   allBookmarks: typeof Button;
+  patientsSummary: typeof Button;
   buttonپاککردنهمهبوکمارکها: typeof Button;
   بیمارییافتنشد: "div";
   bookmarkGuide: "div";
@@ -18221,7 +18235,6 @@ export const PlasmicHomepage = Object.assign(
     bookmarkedButtonStack: makeNodeComponent("bookmarkedButtonStack"),
     bookmarked: makeNodeComponent("bookmarked"),
     bookmarkedPatientNumber: makeNodeComponent("bookmarkedPatientNumber"),
-    patientsSummary: makeNodeComponent("patientsSummary"),
     sortingTabWardFilter: makeNodeComponent("sortingTabWardFilter"),
     sortByAdmissionDatetime: makeNodeComponent("sortByAdmissionDatetime"),
     sortByBed: makeNodeComponent("sortByBed"),
@@ -18229,6 +18242,7 @@ export const PlasmicHomepage = Object.assign(
     sortByRotation: makeNodeComponent("sortByRotation"),
     sortByShift: makeNodeComponent("sortByShift"),
     allBookmarks: makeNodeComponent("allBookmarks"),
+    patientsSummary: makeNodeComponent("patientsSummary"),
     buttonپاککردنهمهبوکمارکها: makeNodeComponent(
       "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627"
     ),
