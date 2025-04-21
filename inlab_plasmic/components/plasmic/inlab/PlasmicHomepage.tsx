@@ -10735,7 +10735,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                     overrides.patientProfile
                                   }
                                   alt={""}
-                                  className={classNames(sty.patientProfile)}
+                                  className={classNames(sty.patientProfile, {
+                                    [sty.patientProfilepatientSummary]:
+                                      hasVariant(
+                                        $state,
+                                        "patientSummary",
+                                        "patientSummary"
+                                      )
+                                  })}
                                   displayHeight={"auto"}
                                   displayMaxHeight={"none"}
                                   displayMaxWidth={"100%"}
@@ -11080,7 +11087,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                     overrides.laboratoryData
                                   }
                                   alt={""}
-                                  className={classNames(sty.laboratoryData)}
+                                  className={classNames(sty.laboratoryData, {
+                                    [sty.laboratoryDatapatientSummary]:
+                                      hasVariant(
+                                        $state,
+                                        "patientSummary",
+                                        "patientSummary"
+                                      )
+                                  })}
                                   displayHeight={"auto"}
                                   displayMaxHeight={"none"}
                                   displayMaxWidth={"100%"}
