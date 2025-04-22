@@ -2340,6 +2340,38 @@
     border-radius: 5px;
   }
 }
+.error422 {
+  position: relative;
+  margin-top: 30px;
+  font-size: var(--token-sOr3fJ5Up5fq);
+  background: none;
+  width: auto;
+  text-align: center;
+  align-self: center;
+  font-weight: 700;
+  white-space: pre-wrap;
+  font-family: var(--VazirmatnCustom);
+  font-style: normal;
+  color: #cb1616;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  user-select: none;
+  text-decoration-line: none !important;
+  box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
+  border-radius: 5px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .error422 {
+    background: #e0ecff;
+    box-shadow: 0px 2px 5px 0px var(--token-zeOmhvqK1boB);
+    margin-top: 15px;
+    white-space: pre-wrap;
+    display: block;
+    border-radius: 5px;
+  }
+}
 .bookmarkGuide {
   display: flex;
   position: fixed;
@@ -3418,6 +3450,14 @@
     margin-top: calc(15px + 6px) !important;
     border-radius: 5px;
   }
+}
+.text__n4MGl {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: #cb1616;
+  min-width: 0;
 }
 .freeBox__rkeNk {
   display: flex;

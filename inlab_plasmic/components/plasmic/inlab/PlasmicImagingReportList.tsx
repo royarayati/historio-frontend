@@ -65,8 +65,8 @@ import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // pla
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
-import UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
+import  UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 
@@ -82,9 +82,9 @@ import sty from "./PlasmicImagingReportList.module.css"; // plasmic-import: AFB-
 import NextSvgrepoComSvgIcon from "./icons/PlasmicIcon__NextSvgrepoComSvg"; // plasmic-import: sbXZrFXKpPD-/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
-import CopyIconSvgIcon from "./icons/PlasmicIcon__CopyIconSvg"; // plasmic-import: crPh_fw9jxSR/icon
 import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
 import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
+import CopyIconSvgIcon from "./icons/PlasmicIcon__CopyIconSvg"; // plasmic-import: crPh_fw9jxSR/icon
 
 import __lib_copyToClipboard from "copy-to-clipboard";
 
@@ -147,6 +147,8 @@ export type PlasmicImagingReportList__OverridesType = {
   description?: Flex__<"div">;
   paraclinicReportModal?: Flex__<typeof AntdModal>;
   radiologyReportText2?: Flex__<"div">;
+  reportSummary?: Flex__<typeof TextInput>;
+  sendReportSummary?: Flex__<typeof Button>;
   radiologyReportDatetime2?: Flex__<"div">;
   copy?: Flex__<"svg">;
   uploadMediaModal?: Flex__<typeof AntdModal>;
@@ -716,6 +718,60 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "reportSummary.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "sendReportSummary.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sendReportSummary.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sendReportSummary.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sendReportSummary.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sendReportSummary.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "paraclinicReportName",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "paraclinicReportId",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "showSuccessMassage",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -1027,67 +1083,85 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     ) : (
                       <React.Fragment>
                         {(() => {
-                          if (!$ctx.fetched_data.loading) {
-                            const item = $ctx.fetched_data.data[0];
-
-                            // Ensure date_of_birth exists
-                            if (item.date_of_birth) {
-                              // Parse the date_of_birth string in ISO format
-                              const dob = new Date(item.date_of_birth); // This will correctly parse the ISO 8601 string
-
-                              // Calculate age
-                              const now = new Date();
-                              const ageDiffMs = now - dob;
-                              const ageDays = Math.floor(
-                                ageDiffMs / (1000 * 60 * 60 * 24)
-                              );
-                              const ageHours = Math.floor(
-                                ageDiffMs / (1000 * 60 * 60)
-                              );
-
-                              // Construct full name
-                              const fullName = `${item.first_name} ${item.last_name}`;
-
-                              // Determine gender symbol
-                              const genderSymbol =
-                                item.gender === "F"
-                                  ? " ♀️"
-                                  : item.gender === "M"
-                                  ? " ♂️"
-                                  : "";
-
-                              // Handle cases for under one year old
-                              if (ageDays < 1) {
-                                return `${fullName}${ageHours}hour${genderSymbol}`;
-                              } else if (ageDays < 30) {
-                                return `${fullName}${ageDays}day${genderSymbol}`;
-                              } else {
-                                let ageYears =
-                                  now.getFullYear() - dob.getFullYear();
-                                const monthDifference =
-                                  now.getMonth() - dob.getMonth();
-
-                                // Adjust age if the birthday hasn't occurred yet this year
-                                if (
-                                  monthDifference < 0 ||
-                                  (monthDifference === 0 &&
-                                    now.getDate() < dob.getDate())
-                                ) {
-                                  ageYears--;
-                                }
-
-                                if (ageYears < 1) {
-                                  const ageMonths =
-                                    Math.abs(monthDifference) +
-                                    (now.getDate() < dob.getDate() ? -1 : 0);
-                                  return `${fullName} ${ageMonths} month${genderSymbol}`;
-                                } else {
-                                  return `${fullName} ${ageYears}${genderSymbol}`;
-                                }
+                          const namespace_type = localStorage.getItem(
+                            "inlab_user_his_type"
+                          );
+                          if (namespace_type !== "tums_api") {
+                            if (!$ctx.fetched_data.loading) {
+                              if (
+                                !$ctx.fetched_data.data ||
+                                $ctx.fetched_data.data.length === 0
+                              ) {
+                                return "";
                               }
-                            } else {
-                              return "Date of birth not available.";
+                              const item = $ctx.fetched_data.data[0];
+                              if (item && item.date_of_birth) {
+                                const dob = new Date(item.date_of_birth);
+                                const now = new Date();
+                                const ageDiffMs = now - dob;
+                                const ageDays = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60 * 24)
+                                );
+                                const ageHours = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60)
+                                );
+                                const fullName = `${item.first_name} ${item.last_name}`;
+                                const genderSymbol =
+                                  item.gender === "F"
+                                    ? " \u2640️"
+                                    : item.gender === "M"
+                                    ? " \u2642️"
+                                    : "";
+                                if (ageDays < 1) {
+                                  const hoursText =
+                                    ageHours === 1 ? " hour" : " hours";
+                                  return `${fullName}${hoursText}${genderSymbol}`;
+                                } else if (ageDays < 30) {
+                                  const daysText =
+                                    ageDays === 1 ? " day" : " days";
+                                  return `${fullName}${ageDays}${daysText}${genderSymbol}`;
+                                } else {
+                                  let ageYears =
+                                    now.getFullYear() - dob.getFullYear();
+                                  const monthDifference =
+                                    now.getMonth() - dob.getMonth();
+                                  if (
+                                    monthDifference < 0 ||
+                                    (monthDifference === 0 &&
+                                      now.getDate() < dob.getDate())
+                                  ) {
+                                    ageYears--;
+                                  }
+                                  if (ageYears < 1) {
+                                    let ageMonths = monthDifference;
+                                    if (now.getDate() < dob.getDate()) {
+                                      ageMonths--;
+                                    }
+                                    if (ageMonths < 0) {
+                                      ageMonths += 12;
+                                    }
+                                    const monthsText =
+                                      ageMonths === 1 ? " month" : " months";
+                                    return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
+                                  } else {
+                                    const yearsText =
+                                      ageYears === 1 ? " year" : " years";
+                                    return `${fullName} ${ageYears}${yearsText}${genderSymbol}`;
+                                  }
+                                }
+                              } else {
+                                return "Date of birth not available.";
+                              }
                             }
+                          } else if (namespace_type === "tums_api") {
+                            if (
+                              !$ctx.fetched_data.data ||
+                              $ctx.fetched_data.data.length === 0
+                            ) {
+                              return "";
+                            }
+                            const currentitem = $ctx.fetched_data.data[0];
+                            return `${currentitem.first_name} ${currentitem.last_name}`;
                           }
                         })()}
                       </React.Fragment>
@@ -2005,8 +2079,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {$ctx.fetched_data.loading == false &&
-                  $ctx.fetched_data.data.radiology_services == "" ? (
+                  {$ctx.fetched_data.loading === false &&
+                  $ctx.fetched_data.data.radiology_services === "" ? (
                     <div
                       className={classNames(
                         projectcss.all,
@@ -2016,6 +2090,36 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     >
                       {
                         "\u06af\u0632\u0627\u0631\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a "
+                      }
+                    </div>
+                  ) : null}
+                  {(() => {
+                    try {
+                      return (
+                        $ctx.fetched_data.loading === false &&
+                        localStorage.getItem("inlab_user_his_type") ===
+                          "tums_api" &&
+                        $ctx.fetched_data.response.status === 422
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__vH4JT
+                      )}
+                    >
+                      {
+                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0645\u0634\u0627\u0647\u062f\u0647 \u0646\u062a\u0627\u06cc\u062c \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f"
                       }
                     </div>
                   ) : null}
@@ -2196,6 +2300,142 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                       await $steps[
                                         "updateParaclinicReportDatetime"
                                       ];
+                                  }
+
+                                  $steps["updateParaclinicReportId"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["paraclinicReportId"]
+                                          },
+                                          operation: 0,
+                                          value: currentItem.id
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateParaclinicReportId"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateParaclinicReportId"
+                                    ] === "object" &&
+                                    typeof $steps["updateParaclinicReportId"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateParaclinicReportId"] =
+                                      await $steps["updateParaclinicReportId"];
+                                  }
+
+                                  $steps["updateParaclinicReportName"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: [
+                                              "paraclinicReportName"
+                                            ]
+                                          },
+                                          operation: 0,
+                                          value: currentItem.title
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateParaclinicReportName"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateParaclinicReportName"
+                                    ] === "object" &&
+                                    typeof $steps["updateParaclinicReportName"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateParaclinicReportName"] =
+                                      await $steps[
+                                        "updateParaclinicReportName"
+                                      ];
+                                  }
+
+                                  $steps["updateShowSuccessMassage"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["showSuccessMassage"]
+                                          },
+                                          operation: 0,
+                                          value: false
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateShowSuccessMassage"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateShowSuccessMassage"
+                                    ] === "object" &&
+                                    typeof $steps["updateShowSuccessMassage"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateShowSuccessMassage"] =
+                                      await $steps["updateShowSuccessMassage"];
                                   }
 
                                   $steps["updateParaclinicReportModalOpen"] =
@@ -2684,8 +2924,38 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
+                  {(() => {
+                    try {
+                      return (
+                        $ctx.fetched_data.loading === false &&
+                        localStorage.getItem("inlab_user_his_type") ===
+                          "tums_api" &&
+                        $ctx.fetched_data.response.status === 422
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__oVF
+                      )}
+                    >
+                      {
+                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0645\u0634\u0627\u0647\u062f\u0647 \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0647\u0627\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 \u0628\u06cc\u0645\u0627\u0631 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f"
+                      }
+                    </div>
+                  ) : null}
                   {$ctx.fetched_data.loading === false &&
-                  $ctx.fetched_data.data.length === 0 ? (
+                  $ctx.fetched_data.data === 0 ? (
                     <div
                       className={classNames(
                         projectcss.all,
@@ -3723,7 +3993,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
           width={"85%"}
           wrapClassName={classNames({ [sty["pcls_nVYN7IUeA_o9"]]: true })}
         >
-          <div className={classNames(projectcss.all, sty.freeBox__nwr7J)}>
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__nwr7J)}
+          >
             <div
               data-plasmic-name={"radiologyReportText2"}
               data-plasmic-override={overrides.radiologyReportText2}
@@ -3736,7 +4010,292 @@ function PlasmicImagingReportList__RenderFunc(props: {
             >
               <React.Fragment>{$state.paraclinicReportText}</React.Fragment>
             </div>
-          </div>
+            <div className={classNames(projectcss.all, sty.freeBox__frRHf)}>
+              {false ? (
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__mYjDu
+                  )}
+                >
+                  {
+                    "\u062e\u0644\u0627\u0635\u0647 \u0631\u06cc\u067e\u0648\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u062f\u0631 \u0627\u06cc\u0646 \u0642\u0633\u0645\u062a \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f \u062a\u0627 \u062f\u0631 \u0635\u0641\u062d\u0647 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0628\u06cc\u0645\u0627\u0631 \u0648 \u062f\u0631 \u06a9\u0627\u0631\u062a \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0622\u0646 \u0631\u0627 \u0645\u0634\u0627\u0647\u062f\u0647 \u06a9\u0646\u06cc\u062f"
+                  }
+                </div>
+              ) : null}
+              {(() => {
+                try {
+                  return $state.showSuccessMassage === true;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__w3C8P
+                  )}
+                >
+                  {
+                    "\u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f"
+                  }
+                </div>
+              ) : null}
+              <TextInput
+                data-plasmic-name={"reportSummary"}
+                data-plasmic-override={overrides.reportSummary}
+                className={classNames("__wab_instance", sty.reportSummary)}
+                onChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "reportSummary",
+                      "value"
+                    ])((e => e.target?.value).apply(null, eventArgs));
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                placeholder={
+                  "\u062e\u0644\u0627\u0635\u0647 \u0631\u06cc\u067e\u0648\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u062f\u0631 \u0627\u06cc\u0646 \u0642\u0633\u0645\u062a \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f \u062a\u0627 \u062f\u0631 \u0635\u0641\u062d\u0647 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0628\u06cc\u0645\u0627\u0631 \u0648 \u062f\u0631 \u06a9\u0627\u0631\u062a \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0622\u0646 \u0631\u0627 \u0645\u0634\u0627\u0647\u062f\u0647 \u06a9\u0646\u06cc\u062f"
+                }
+                value={
+                  generateStateValueProp($state, ["reportSummary", "value"]) ??
+                  ""
+                }
+              />
+
+              <Button
+                data-plasmic-name={"sendReportSummary"}
+                data-plasmic-override={overrides.sendReportSummary}
+                className={classNames("__wab_instance", sty.sendReportSummary)}
+                color={"blue"}
+                deselected={generateStateValueProp($state, [
+                  "sendReportSummary",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "sendReportSummary",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["invokeGlobalAction"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "POST",
+                            "/api/v3/bookmark?q_bookmark=true",
+                            (() => {
+                              try {
+                                return {
+                                  "X-Namespace": localStorage.getItem(
+                                    "inlab_user_namespace_id"
+                                  )
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })(),
+                            (() => {
+                              try {
+                                return {
+                                  item_key: "paraclicnic_report",
+                                  item_content: {
+                                    report: $state.reportSummary.value,
+                                    report_title: $state.paraclinicReportName,
+                                    report_datetime:
+                                      $state.paraclinicReportDatetime
+                                  },
+                                  item_id: $state.paraclinicReportId,
+                                  datetime: "string",
+                                  laboratory_id: 0,
+                                  admission_id: $ctx.params.adm_id,
+                                  patient_id: $ctx.params.code
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions[
+                          "AuthGlobalContext.apiFetcherPlus"
+                        ]?.apply(null, [...actionArgs.args]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["invokeGlobalAction"] != null &&
+                    typeof $steps["invokeGlobalAction"] === "object" &&
+                    typeof $steps["invokeGlobalAction"].then === "function"
+                  ) {
+                    $steps["invokeGlobalAction"] = await $steps[
+                      "invokeGlobalAction"
+                    ];
+                  }
+
+                  $steps["updateShowSuccessMassage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["showSuccessMassage"]
+                          },
+                          operation: 0,
+                          value: true
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateShowSuccessMassage"] != null &&
+                    typeof $steps["updateShowSuccessMassage"] === "object" &&
+                    typeof $steps["updateShowSuccessMassage"].then ===
+                      "function"
+                  ) {
+                    $steps["updateShowSuccessMassage"] = await $steps[
+                      "updateShowSuccessMassage"
+                    ];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendReportSummary",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendReportSummary",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendReportSummary",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendReportSummary",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "sendReportSummary",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "sendReportSummary",
+                  "selected"
+                ])}
+                sortDeselected={generateStateValueProp($state, [
+                  "sendReportSummary",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "sendReportSummary",
+                  "sortSelected"
+                ])}
+              >
+                {
+                  "\u062b\u0628\u062a \u0627\u0637\u0644\u0627\u0639\u0627\u062a"
+                }
+              </Button>
+            </div>
+          </Stack__>
         </AntdModal>
         <AntdModal
           data-plasmic-name={"uploadMediaModal"}
@@ -5200,6 +5759,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   const $steps = {};
 
                   $steps["goToPage"] =
+                    $ctx.fetched_data.loading === false &&
                     $ctx.fetched_data.data !== ""
                       ? (() => {
                           const actionArgs = {
@@ -5394,6 +5954,8 @@ const PlasmicDescendants = {
     "description",
     "paraclinicReportModal",
     "radiologyReportText2",
+    "reportSummary",
+    "sendReportSummary",
     "radiologyReportDatetime2",
     "copy",
     "uploadMediaModal",
@@ -5561,10 +6123,14 @@ const PlasmicDescendants = {
   paraclinicReportModal: [
     "paraclinicReportModal",
     "radiologyReportText2",
+    "reportSummary",
+    "sendReportSummary",
     "radiologyReportDatetime2",
     "copy"
   ],
   radiologyReportText2: ["radiologyReportText2"],
+  reportSummary: ["reportSummary"],
+  sendReportSummary: ["sendReportSummary"],
   radiologyReportDatetime2: ["radiologyReportDatetime2"],
   copy: ["copy"],
   uploadMediaModal: [
@@ -5660,6 +6226,8 @@ type NodeDefaultElementType = {
   description: "div";
   paraclinicReportModal: typeof AntdModal;
   radiologyReportText2: "div";
+  reportSummary: typeof TextInput;
+  sendReportSummary: typeof Button;
   radiologyReportDatetime2: "div";
   copy: "svg";
   uploadMediaModal: typeof AntdModal;
@@ -5786,6 +6354,8 @@ export const PlasmicImagingReportList = Object.assign(
     description: makeNodeComponent("description"),
     paraclinicReportModal: makeNodeComponent("paraclinicReportModal"),
     radiologyReportText2: makeNodeComponent("radiologyReportText2"),
+    reportSummary: makeNodeComponent("reportSummary"),
+    sendReportSummary: makeNodeComponent("sendReportSummary"),
     radiologyReportDatetime2: makeNodeComponent("radiologyReportDatetime2"),
     copy: makeNodeComponent("copy"),
     uploadMediaModal: makeNodeComponent("uploadMediaModal"),

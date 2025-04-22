@@ -213,7 +213,7 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                 className={classNames("__wab_instance", sty.namespaces)}
                 headers={{ "X-Namespace": "undefined " }}
                 method={"GET"}
-                path={"/api/v2/user/user_namespaces"}
+                path={"/api/v3/user/namespaces"}
                 ref={ref => {
                   $refs["namespaces"] = ref;
                 }}
@@ -267,9 +267,13 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                             "inlab_user_namespace_id",
                                             currentItem.id
                                           );
-                                          return localStorage.setItem(
+                                          localStorage.setItem(
                                             "inlab_user_namespace_title",
                                             currentItem.title
+                                          );
+                                          return localStorage.setItem(
+                                            "inlab_user_his_type",
+                                            currentItem.his_type
                                           );
                                         })();
                                       }
