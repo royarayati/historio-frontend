@@ -9159,12 +9159,14 @@ function PlasmicHomepage__RenderFunc(props: {
                         ? $ctx.fetched_data.loading === false &&
                           localStorage.getItem("inlab_user_his_type") ===
                             "tums_api" &&
-                          ($ctx.fetched_data.response.status === 422 ||
+                          (($ctx.fetched_data.response &&
+                            $ctx.fetched_data.response.status === 422) ||
                             $ctx.fetched_data.status !== 200)
                         : $ctx.fetched_data.loading === false &&
                           localStorage.getItem("inlab_user_his_type") ===
                             "tums_api" &&
-                          ($ctx.fetched_data.response.status === 422 ||
+                          (($ctx.fetched_data.response &&
+                            $ctx.fetched_data.response.status === 422) ||
                             $ctx.fetched_data.status !== 200)
                     ) ? (
                       <div
