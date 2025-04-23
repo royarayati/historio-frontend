@@ -1229,15 +1229,15 @@
   max-width: 100%;
   align-self: center;
   min-width: 0;
-  padding: 0px;
+  padding: 4px;
 }
 .freeBox__nwr7J > :global(.__wab_flex-container) {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   min-width: 0;
-  margin-top: calc(0px - 4px);
-  height: calc(100% + 4px);
+  margin-top: calc(0px - 6px);
+  height: calc(100% + 6px);
 }
 .freeBox__nwr7J > :global(.__wab_flex-container) > *,
 .freeBox__nwr7J > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
@@ -1247,9 +1247,9 @@
   > :global(.__wab_slot)
   > picture
   > img {
-  margin-top: 4px;
+  margin-top: 6px;
 }
-.radiologyReportText2 {
+.radiologyReportText {
   text-align: right;
   font-size: var(--token-sOr3fJ5Up5fq);
   line-height: 1.5;
@@ -1258,25 +1258,49 @@
   width: 100%;
   letter-spacing: normal;
   min-width: 0;
+  border-radius: 5px;
+  padding: 4px;
+  border-bottom: 0.5px solid var(--token-8PxxXPNrIohQ);
 }
-.freeBox__frRHf {
+.reportSummarySection {
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
+  border: 0.5px solid var(--token-8PxxXPNrIohQ);
+}
+.reportSummarySection > :global(.__wab_flex-container) {
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   min-width: 0;
-  padding: 4px;
-  border: 0.5px solid var(--token-8PxxXPNrIohQ);
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.reportSummarySection > :global(.__wab_flex-container) > *,
+.reportSummarySection
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.reportSummarySection > :global(.__wab_flex-container) > picture > img,
+.reportSummarySection
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
 }
 .text__mYjDu {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
+  text-align: right;
   min-width: 0;
 }
 .text__w3C8P {
@@ -1289,7 +1313,7 @@
   min-width: 0;
 }
 .reportSummary:global(.__wab_instance) {
-  max-width: 100%;
+  max-width: 95%;
   width: 100%;
   min-width: 0;
 }

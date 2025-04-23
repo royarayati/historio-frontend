@@ -82,9 +82,10 @@ import sty from "./PlasmicImagingReportList.module.css"; // plasmic-import: AFB-
 import NextSvgrepoComSvgIcon from "./icons/PlasmicIcon__NextSvgrepoComSvg"; // plasmic-import: sbXZrFXKpPD-/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
-import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import EvaEdit2OutlineIcon from "./icons/PlasmicIcon__EvaEdit2Outline"; // plasmic-import: pE37P96Dcs-s/icon
 import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 import CopyIconSvgIcon from "./icons/PlasmicIcon__CopyIconSvg"; // plasmic-import: crPh_fw9jxSR/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
 
 import __lib_copyToClipboard from "copy-to-clipboard";
 
@@ -146,7 +147,8 @@ export type PlasmicImagingReportList__OverridesType = {
   title?: Flex__<"div">;
   description?: Flex__<"div">;
   paraclinicReportModal?: Flex__<typeof AntdModal>;
-  radiologyReportText2?: Flex__<"div">;
+  radiologyReportText?: Flex__<"div">;
+  reportSummarySection?: Flex__<"div">;
   reportSummary?: Flex__<typeof TextInput>;
   sendReportSummary?: Flex__<typeof Button>;
   radiologyReportDatetime2?: Flex__<"div">;
@@ -3990,7 +3992,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </div>
           }
           trigger={null}
-          width={"85%"}
+          width={"90%"}
           wrapClassName={classNames({ [sty["pcls_nVYN7IUeA_o9"]]: true })}
         >
           <Stack__
@@ -3999,31 +4001,35 @@ function PlasmicImagingReportList__RenderFunc(props: {
             className={classNames(projectcss.all, sty.freeBox__nwr7J)}
           >
             <div
-              data-plasmic-name={"radiologyReportText2"}
-              data-plasmic-override={overrides.radiologyReportText2}
+              data-plasmic-name={"radiologyReportText"}
+              data-plasmic-override={overrides.radiologyReportText}
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.radiologyReportText2
+                sty.radiologyReportText
               )}
               dir={"auto"}
             >
               <React.Fragment>{$state.paraclinicReportText}</React.Fragment>
             </div>
-            <div className={classNames(projectcss.all, sty.freeBox__frRHf)}>
-              {false ? (
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__mYjDu
-                  )}
-                >
-                  {
-                    "\u062e\u0644\u0627\u0635\u0647 \u0631\u06cc\u067e\u0648\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u062f\u0631 \u0627\u06cc\u0646 \u0642\u0633\u0645\u062a \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f \u062a\u0627 \u062f\u0631 \u0635\u0641\u062d\u0647 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0628\u06cc\u0645\u0627\u0631 \u0648 \u062f\u0631 \u06a9\u0627\u0631\u062a \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0622\u0646 \u0631\u0627 \u0645\u0634\u0627\u0647\u062f\u0647 \u06a9\u0646\u06cc\u062f"
-                  }
-                </div>
-              ) : null}
+            <Stack__
+              as={"div"}
+              data-plasmic-name={"reportSummarySection"}
+              data-plasmic-override={overrides.reportSummarySection}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.reportSummarySection)}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__mYjDu
+                )}
+              >
+                {
+                  "\u0634\u0645\u0627 \u0645\u06cc \u062a\u0648\u0627\u0646\u06cc\u062f \u062e\u0644\u0627\u0635\u0647 \u0631\u06cc\u067e\u0648\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u062f\u0631 \u0627\u06cc\u0646 \u0642\u0633\u0645\u062a \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f \u062a\u0627 \u062f\u0631 \u0635\u0641\u062d\u0647 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0628\u06cc\u0645\u0627\u0631 \u0622\u0646 \u0631\u0627 \u0645\u0634\u0627\u0647\u062f\u0647 \u06a9\u0646\u06cc\u062f"
+                }
+              </div>
               {(() => {
                 try {
                   return $state.showSuccessMassage === true;
@@ -4070,7 +4076,13 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   }
                 }}
                 placeholder={
-                  "\u062e\u0644\u0627\u0635\u0647 \u0631\u06cc\u067e\u0648\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u062f\u0631 \u0627\u06cc\u0646 \u0642\u0633\u0645\u062a \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f \u062a\u0627 \u062f\u0631 \u0635\u0641\u062d\u0647 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0628\u06cc\u0645\u0627\u0631 \u0648 \u062f\u0631 \u06a9\u0627\u0631\u062a \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0622\u0646 \u0631\u0627 \u0645\u0634\u0627\u0647\u062f\u0647 \u06a9\u0646\u06cc\u062f"
+                  "\u062e\u0644\u0627\u0635\u0647 \u0631\u06cc\u067e\u0648\u0631\u062a"
+                }
+                startIcon={
+                  <EvaEdit2OutlineIcon
+                    className={classNames(projectcss.all, sty.svg__yRqFj)}
+                    role={"img"}
+                  />
                 }
                 value={
                   generateStateValueProp($state, ["reportSummary", "value"]) ??
@@ -4294,7 +4306,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   "\u062b\u0628\u062a \u0627\u0637\u0644\u0627\u0639\u0627\u062a"
                 }
               </Button>
-            </div>
+            </Stack__>
           </Stack__>
         </AntdModal>
         <AntdModal
@@ -5953,7 +5965,8 @@ const PlasmicDescendants = {
     "title",
     "description",
     "paraclinicReportModal",
-    "radiologyReportText2",
+    "radiologyReportText",
+    "reportSummarySection",
     "reportSummary",
     "sendReportSummary",
     "radiologyReportDatetime2",
@@ -6122,13 +6135,19 @@ const PlasmicDescendants = {
   description: ["description"],
   paraclinicReportModal: [
     "paraclinicReportModal",
-    "radiologyReportText2",
+    "radiologyReportText",
+    "reportSummarySection",
     "reportSummary",
     "sendReportSummary",
     "radiologyReportDatetime2",
     "copy"
   ],
-  radiologyReportText2: ["radiologyReportText2"],
+  radiologyReportText: ["radiologyReportText"],
+  reportSummarySection: [
+    "reportSummarySection",
+    "reportSummary",
+    "sendReportSummary"
+  ],
   reportSummary: ["reportSummary"],
   sendReportSummary: ["sendReportSummary"],
   radiologyReportDatetime2: ["radiologyReportDatetime2"],
@@ -6225,7 +6244,8 @@ type NodeDefaultElementType = {
   title: "div";
   description: "div";
   paraclinicReportModal: typeof AntdModal;
-  radiologyReportText2: "div";
+  radiologyReportText: "div";
+  reportSummarySection: "div";
   reportSummary: typeof TextInput;
   sendReportSummary: typeof Button;
   radiologyReportDatetime2: "div";
@@ -6353,7 +6373,8 @@ export const PlasmicImagingReportList = Object.assign(
     title: makeNodeComponent("title"),
     description: makeNodeComponent("description"),
     paraclinicReportModal: makeNodeComponent("paraclinicReportModal"),
-    radiologyReportText2: makeNodeComponent("radiologyReportText2"),
+    radiologyReportText: makeNodeComponent("radiologyReportText"),
+    reportSummarySection: makeNodeComponent("reportSummarySection"),
     reportSummary: makeNodeComponent("reportSummary"),
     sendReportSummary: makeNodeComponent("sendReportSummary"),
     radiologyReportDatetime2: makeNodeComponent("radiologyReportDatetime2"),
