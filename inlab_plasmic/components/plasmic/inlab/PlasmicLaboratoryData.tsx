@@ -951,134 +951,170 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   {hasVariant(globalVariants, "screen", "mobileFirst") ? (
                     <React.Fragment>
                       {(() => {
-                        if (!$ctx.fetched_data.loading) {
-                          const item = $ctx.fetched_data.data[0];
-
-                          // Ensure date_of_birth exists
-                          if (item.date_of_birth) {
-                            // Parse the date_of_birth string in ISO format
-                            const dob = new Date(item.date_of_birth); // This will correctly parse the ISO 8601 string
-
-                            // Calculate age
-                            const now = new Date();
-                            const ageDiffMs = now - dob;
-                            const ageDays = Math.floor(
-                              ageDiffMs / (1000 * 60 * 60 * 24)
-                            );
-                            const ageHours = Math.floor(
-                              ageDiffMs / (1000 * 60 * 60)
-                            );
-
-                            // Construct full name
-                            const fullName = `${item.first_name} ${item.last_name}`;
-
-                            // Determine gender symbol
-                            const genderSymbol =
-                              item.gender === "F"
-                                ? " ♀️"
-                                : item.gender === "M"
-                                ? " ♂️"
-                                : "";
-
-                            // Handle cases for under one year old
-                            if (ageDays < 1) {
-                              return `${fullName}${ageHours}hour${genderSymbol}`;
-                            } else if (ageDays < 30) {
-                              return `${fullName}${ageDays}day${genderSymbol}`;
-                            } else {
-                              let ageYears =
-                                now.getFullYear() - dob.getFullYear();
-                              const monthDifference =
-                                now.getMonth() - dob.getMonth();
-
-                              // Adjust age if the birthday hasn't occurred yet this year
-                              if (
-                                monthDifference < 0 ||
-                                (monthDifference === 0 &&
-                                  now.getDate() < dob.getDate())
-                              ) {
-                                ageYears--;
-                              }
-
-                              if (ageYears < 1) {
-                                const ageMonths =
-                                  Math.abs(monthDifference) +
-                                  (now.getDate() < dob.getDate() ? -1 : 0);
-                                return `${fullName} ${ageMonths} month${genderSymbol}`;
-                              } else {
-                                return `${fullName} ${ageYears}${genderSymbol}`;
-                              }
+                        const namespace_type = localStorage.getItem(
+                          "inlab_user_his_type"
+                        );
+                        if (namespace_type !== "tums_api") {
+                          if (!$ctx.fetched_data.loading) {
+                            if (
+                              !$ctx.fetched_data.data ||
+                              $ctx.fetched_data.data.length === 0
+                            ) {
+                              return "";
                             }
-                          } else {
-                            return "Date of birth not available.";
+                            const item = $ctx.fetched_data.data[0];
+                            if (item && item.date_of_birth) {
+                              const dob = new Date(item.date_of_birth);
+                              const now = new Date();
+                              const ageDiffMs = now - dob;
+                              const ageDays = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60 * 24)
+                              );
+                              const ageHours = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60)
+                              );
+                              const fullName = `${item.first_name} ${item.last_name}`;
+                              const genderSymbol =
+                                item.gender === "F"
+                                  ? " \u2640️"
+                                  : item.gender === "M"
+                                  ? " \u2642️"
+                                  : "";
+                              if (ageDays < 1) {
+                                const hoursText =
+                                  ageHours === 1 ? " hour" : " hours";
+                                return `${fullName}${hoursText}${genderSymbol}`;
+                              } else if (ageDays < 30) {
+                                const daysText =
+                                  ageDays === 1 ? " day" : " days";
+                                return `${fullName}${ageDays}${daysText}${genderSymbol}`;
+                              } else {
+                                let ageYears =
+                                  now.getFullYear() - dob.getFullYear();
+                                const monthDifference =
+                                  now.getMonth() - dob.getMonth();
+                                if (
+                                  monthDifference < 0 ||
+                                  (monthDifference === 0 &&
+                                    now.getDate() < dob.getDate())
+                                ) {
+                                  ageYears--;
+                                }
+                                if (ageYears < 1) {
+                                  let ageMonths = monthDifference;
+                                  if (now.getDate() < dob.getDate()) {
+                                    ageMonths--;
+                                  }
+                                  if (ageMonths < 0) {
+                                    ageMonths += 12;
+                                  }
+                                  const monthsText =
+                                    ageMonths === 1 ? " month" : " months";
+                                  return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
+                                } else {
+                                  const yearsText =
+                                    ageYears === 1 ? " year" : " years";
+                                  return `${fullName} ${ageYears}${yearsText}${genderSymbol}`;
+                                }
+                              }
+                            } else {
+                              return "Date of birth not available.";
+                            }
                           }
+                        } else if (namespace_type === "tums_api") {
+                          if (
+                            !$ctx.fetched_data.data ||
+                            $ctx.fetched_data.data.length === 0
+                          ) {
+                            return "";
+                          }
+                          const currentitem = $ctx.fetched_data.data[0];
+                          return `${currentitem.first_name} ${currentitem.last_name}`;
                         }
                       })()}
                     </React.Fragment>
                   ) : (
                     <React.Fragment>
                       {(() => {
-                        if (!$ctx.fetched_data.loading) {
-                          const item = $ctx.fetched_data.data[0];
-
-                          // Ensure date_of_birth exists
-                          if (item.date_of_birth) {
-                            // Parse the date_of_birth string in ISO format
-                            const dob = new Date(item.date_of_birth); // This will correctly parse the ISO 8601 string
-
-                            // Calculate age
-                            const now = new Date();
-                            const ageDiffMs = now - dob;
-                            const ageDays = Math.floor(
-                              ageDiffMs / (1000 * 60 * 60 * 24)
-                            );
-                            const ageHours = Math.floor(
-                              ageDiffMs / (1000 * 60 * 60)
-                            );
-
-                            // Construct full name
-                            const fullName = `${item.first_name} ${item.last_name}`;
-
-                            // Determine gender symbol
-                            const genderSymbol =
-                              item.gender === "F"
-                                ? " ♀️"
-                                : item.gender === "M"
-                                ? " ♂️"
-                                : "";
-
-                            // Handle cases for under one year old
-                            if (ageDays < 1) {
-                              return `${fullName}${ageHours}hour${genderSymbol}`;
-                            } else if (ageDays < 30) {
-                              return `${fullName}${ageDays}day${genderSymbol}`;
-                            } else {
-                              let ageYears =
-                                now.getFullYear() - dob.getFullYear();
-                              const monthDifference =
-                                now.getMonth() - dob.getMonth();
-
-                              // Adjust age if the birthday hasn't occurred yet this year
-                              if (
-                                monthDifference < 0 ||
-                                (monthDifference === 0 &&
-                                  now.getDate() < dob.getDate())
-                              ) {
-                                ageYears--;
-                              }
-
-                              if (ageYears < 1) {
-                                const ageMonths =
-                                  Math.abs(monthDifference) +
-                                  (now.getDate() < dob.getDate() ? -1 : 0);
-                                return `${fullName} ${ageMonths} month${genderSymbol}`;
-                              } else {
-                                return `${fullName} ${ageYears}${genderSymbol}`;
-                              }
+                        const namespace_type = localStorage.getItem(
+                          "inlab_user_his_type"
+                        );
+                        if (namespace_type !== "tums_api") {
+                          if (!$ctx.fetched_data.loading) {
+                            if (
+                              !$ctx.fetched_data.data ||
+                              $ctx.fetched_data.data.length === 0
+                            ) {
+                              return "";
                             }
-                          } else {
-                            return "Date of birth not available.";
+                            const item = $ctx.fetched_data.data[0];
+                            if (item && item.date_of_birth) {
+                              const dob = new Date(item.date_of_birth);
+                              const now = new Date();
+                              const ageDiffMs = now - dob;
+                              const ageDays = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60 * 24)
+                              );
+                              const ageHours = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60)
+                              );
+                              const fullName = `${item.first_name} ${item.last_name}`;
+                              const genderSymbol =
+                                item.gender === "F"
+                                  ? " \u2640️"
+                                  : item.gender === "M"
+                                  ? " \u2642️"
+                                  : "";
+                              if (ageDays < 1) {
+                                const hoursText =
+                                  ageHours === 1 ? " hour" : " hours";
+                                return `${fullName}${hoursText}${genderSymbol}`;
+                              } else if (ageDays < 30) {
+                                const daysText =
+                                  ageDays === 1 ? " day" : " days";
+                                return `${fullName}${ageDays}${daysText}${genderSymbol}`;
+                              } else {
+                                let ageYears =
+                                  now.getFullYear() - dob.getFullYear();
+                                const monthDifference =
+                                  now.getMonth() - dob.getMonth();
+                                if (
+                                  monthDifference < 0 ||
+                                  (monthDifference === 0 &&
+                                    now.getDate() < dob.getDate())
+                                ) {
+                                  ageYears--;
+                                }
+                                if (ageYears < 1) {
+                                  let ageMonths = monthDifference;
+                                  if (now.getDate() < dob.getDate()) {
+                                    ageMonths--;
+                                  }
+                                  if (ageMonths < 0) {
+                                    ageMonths += 12;
+                                  }
+                                  const monthsText =
+                                    ageMonths === 1 ? " month" : " months";
+                                  return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
+                                } else {
+                                  const yearsText =
+                                    ageYears === 1 ? " year" : " years";
+                                  return `${fullName} ${ageYears}${genderSymbol}`;
+                                }
+                              }
+                            } else {
+                              return "Date of birth not available.";
+                            }
                           }
+                        } else if (namespace_type === "tums_api") {
+                          if (
+                            !$ctx.fetched_data.data ||
+                            $ctx.fetched_data.data.length === 0
+                          ) {
+                            return "";
+                          }
+                          const currentitem = $ctx.fetched_data.data[0];
+                          return `${currentitem.first_name} ${currentitem.last_name}`;
                         }
                       })()}
                     </React.Fragment>
@@ -2555,6 +2591,33 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? $ctx.fetched_data.loading === false &&
+                        localStorage.getItem("inlab_user_his_type") ===
+                          "tums_api" &&
+                        (($ctx.fetched_data.response &&
+                          $ctx.fetched_data.response.status === 422) ||
+                          $ctx.fetched_data.status !== 200)
+                      : $ctx.fetched_data.loading === false &&
+                        localStorage.getItem("inlab_user_his_type") ===
+                          "tums_api" &&
+                        (($ctx.fetched_data.response &&
+                          $ctx.fetched_data.response.status === 422) ||
+                          $ctx.fetched_data.status !== 200)
+                  ) ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__uNkUb
+                      )}
+                    >
+                      {
+                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0645\u0634\u0627\u0647\u062f\u0647 \u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634 \u0628\u06cc\u0645\u0627\u0631 \u0635\u0631\u0641\u0627 \u0628\u0627 \u06a9\u062f \u0628\u0631\u06af\u0647 \u0628\u06cc\u0645\u0627\u0631 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0627\u0633\u062a \u0648 \u0628\u0627 \u06a9\u062f \u0628\u06cc\u0645\u0627\u0631 \u0648\u06cc\u0627 \u06a9\u062f \u067e\u0630\u06cc\u0631\u0634 \u0628\u06cc\u0645\u0627\u0631 \u0627\u06cc\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0648\u062c\u0648\u062f \u0646\u062f\u0627\u0631\u062f"
+                      }
+                    </div>
+                  ) : null}
                   {(() => {
                     try {
                       return (
@@ -3694,6 +3757,36 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     >
                       {
                         "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a "
+                      }
+                    </div>
+                  ) : null}
+                  {(() => {
+                    try {
+                      return (
+                        $ctx.fetched_data.loading === false &&
+                        localStorage.getItem("inlab_user_his_type") ===
+                          "tums_api" &&
+                        $ctx.fetched_data.response.status === 422
+                      );
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___4W7AB
+                      )}
+                    >
+                      {
+                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c  \u0645\u0634\u0627\u0647\u062f\u0647 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f"
                       }
                     </div>
                   ) : null}
