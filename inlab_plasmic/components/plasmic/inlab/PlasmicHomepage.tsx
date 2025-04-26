@@ -76,7 +76,6 @@ import { AntdSwitch } from "@plasmicpkgs/antd5/skinny/registerSwitch";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
-import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 import NewNoticeBanner from "../../NewNoticeBanner"; // plasmic-import: X347FgRZh6HH/component
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
@@ -244,7 +243,7 @@ export type PlasmicHomepage__OverridesType = {
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
   wardRoom?: Flex__<"div">;
   roomBed?: Flex__<"div">;
-  button?: Flex__<typeof AntdButton>;
+  button?: Flex__<typeof Button>;
   ward?: Flex__<"div">;
   wardRoom2?: Flex__<"div">;
   roomBed2?: Flex__<"div">;
@@ -1925,6 +1924,31 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "button[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "button[].sortSelected",
+        type: "private",
+        variableType: "boolean"
       }
     ],
     [$props, $ctx, $refs]
@@ -10292,122 +10316,37 @@ function PlasmicHomepage__RenderFunc(props: {
                                     </React.Fragment>
                                   </div>
                                 ) : null}
-                                <AntdButton
-                                  data-plasmic-name={"button"}
-                                  data-plasmic-override={overrides.button}
-                                  className={classNames(
-                                    "__wab_instance",
-                                    sty.button
-                                  )}
-                                  onClick={async () => {
-                                    const $steps = {};
+                                {(() => {
+                                  const child$Props = {
+                                    className: classNames(
+                                      "__wab_instance",
+                                      sty.button
+                                    ),
+                                    color: "blue",
+                                    deselected: generateStateValueProp($state, [
+                                      "button",
+                                      __plasmic_idx_0,
+                                      "deselected"
+                                    ]),
+                                    isDisabled: generateStateValueProp($state, [
+                                      "button",
+                                      __plasmic_idx_0,
+                                      "isDisabled"
+                                    ]),
+                                    onClick: async event => {
+                                      const $steps = {};
 
-                                    $steps["updateSelectedAdmissionId"] = true
-                                      ? (() => {
-                                          const actionArgs = {
-                                            variable: {
-                                              objRoot: $state,
-                                              variablePath: [
-                                                "selectedAdmissionId"
-                                              ]
-                                            },
-                                            operation: 0,
-                                            value: currentItem.id
-                                          };
-                                          return (({
-                                            variable,
-                                            value,
-                                            startIndex,
-                                            deleteCount
-                                          }) => {
-                                            if (!variable) {
-                                              return;
-                                            }
-                                            const { objRoot, variablePath } =
-                                              variable;
-
-                                            $stateSet(
-                                              objRoot,
-                                              variablePath,
-                                              value
-                                            );
-                                            return value;
-                                          })?.apply(null, [actionArgs]);
-                                        })()
-                                      : undefined;
-                                    if (
-                                      $steps["updateSelectedAdmissionId"] !=
-                                        null &&
-                                      typeof $steps[
-                                        "updateSelectedAdmissionId"
-                                      ] === "object" &&
-                                      typeof $steps["updateSelectedAdmissionId"]
-                                        .then === "function"
-                                    ) {
-                                      $steps["updateSelectedAdmissionId"] =
-                                        await $steps[
-                                          "updateSelectedAdmissionId"
-                                        ];
-                                    }
-
-                                    $steps["updateSelectedPatientId"] = true
-                                      ? (() => {
-                                          const actionArgs = {
-                                            variable: {
-                                              objRoot: $state,
-                                              variablePath: [
-                                                "selectedPatientId"
-                                              ]
-                                            },
-                                            operation: 0,
-                                            value: currentItem.patient_id
-                                          };
-                                          return (({
-                                            variable,
-                                            value,
-                                            startIndex,
-                                            deleteCount
-                                          }) => {
-                                            if (!variable) {
-                                              return;
-                                            }
-                                            const { objRoot, variablePath } =
-                                              variable;
-
-                                            $stateSet(
-                                              objRoot,
-                                              variablePath,
-                                              value
-                                            );
-                                            return value;
-                                          })?.apply(null, [actionArgs]);
-                                        })()
-                                      : undefined;
-                                    if (
-                                      $steps["updateSelectedPatientId"] !=
-                                        null &&
-                                      typeof $steps[
-                                        "updateSelectedPatientId"
-                                      ] === "object" &&
-                                      typeof $steps["updateSelectedPatientId"]
-                                        .then === "function"
-                                    ) {
-                                      $steps["updateSelectedPatientId"] =
-                                        await $steps["updateSelectedPatientId"];
-                                    }
-
-                                    $steps["updatePatientSummaryModalOpen"] =
-                                      true
+                                      $steps["updateSelectedAdmissionId"] = true
                                         ? (() => {
                                             const actionArgs = {
                                               variable: {
                                                 objRoot: $state,
                                                 variablePath: [
-                                                  "patientSummaryModal",
-                                                  "open"
+                                                  "selectedAdmissionId"
                                                 ]
                                               },
-                                              operation: 4
+                                              operation: 0,
+                                              value: currentItem.id
                                             };
                                             return (({
                                               variable,
@@ -10421,58 +10360,322 @@ function PlasmicHomepage__RenderFunc(props: {
                                               const { objRoot, variablePath } =
                                                 variable;
 
-                                              const oldValue = $stateGet(
-                                                objRoot,
-                                                variablePath
-                                              );
                                               $stateSet(
                                                 objRoot,
                                                 variablePath,
-                                                !oldValue
+                                                value
                                               );
-                                              return !oldValue;
+                                              return value;
                                             })?.apply(null, [actionArgs]);
                                           })()
                                         : undefined;
-                                    if (
-                                      $steps["updatePatientSummaryModalOpen"] !=
-                                        null &&
-                                      typeof $steps[
-                                        "updatePatientSummaryModalOpen"
-                                      ] === "object" &&
-                                      typeof $steps[
-                                        "updatePatientSummaryModalOpen"
-                                      ].then === "function"
-                                    ) {
+                                      if (
+                                        $steps["updateSelectedAdmissionId"] !=
+                                          null &&
+                                        typeof $steps[
+                                          "updateSelectedAdmissionId"
+                                        ] === "object" &&
+                                        typeof $steps[
+                                          "updateSelectedAdmissionId"
+                                        ].then === "function"
+                                      ) {
+                                        $steps["updateSelectedAdmissionId"] =
+                                          await $steps[
+                                            "updateSelectedAdmissionId"
+                                          ];
+                                      }
+
+                                      $steps["updateSelectedPatientId"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "selectedPatientId"
+                                                ]
+                                              },
+                                              operation: 0,
+                                              value: currentItem.patient_id
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              $stateSet(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps["updateSelectedPatientId"] !=
+                                          null &&
+                                        typeof $steps[
+                                          "updateSelectedPatientId"
+                                        ] === "object" &&
+                                        typeof $steps["updateSelectedPatientId"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["updateSelectedPatientId"] =
+                                          await $steps[
+                                            "updateSelectedPatientId"
+                                          ];
+                                      }
+
                                       $steps["updatePatientSummaryModalOpen"] =
-                                        await $steps[
+                                        true
+                                          ? (() => {
+                                              const actionArgs = {
+                                                variable: {
+                                                  objRoot: $state,
+                                                  variablePath: [
+                                                    "patientSummaryModal",
+                                                    "open"
+                                                  ]
+                                                },
+                                                operation: 4
+                                              };
+                                              return (({
+                                                variable,
+                                                value,
+                                                startIndex,
+                                                deleteCount
+                                              }) => {
+                                                if (!variable) {
+                                                  return;
+                                                }
+                                                const {
+                                                  objRoot,
+                                                  variablePath
+                                                } = variable;
+
+                                                const oldValue = $stateGet(
+                                                  objRoot,
+                                                  variablePath
+                                                );
+                                                $stateSet(
+                                                  objRoot,
+                                                  variablePath,
+                                                  !oldValue
+                                                );
+                                                return !oldValue;
+                                              })?.apply(null, [actionArgs]);
+                                            })()
+                                          : undefined;
+                                      if (
+                                        $steps[
+                                          "updatePatientSummaryModalOpen"
+                                        ] != null &&
+                                        typeof $steps[
+                                          "updatePatientSummaryModalOpen"
+                                        ] === "object" &&
+                                        typeof $steps[
+                                          "updatePatientSummaryModalOpen"
+                                        ].then === "function"
+                                      ) {
+                                        $steps[
+                                          "updatePatientSummaryModalOpen"
+                                        ] = await $steps[
                                           "updatePatientSummaryModalOpen"
                                         ];
-                                    }
-                                  }}
-                                  shape={"default"}
-                                  type={
-                                    hasVariant(
-                                      globalVariants,
-                                      "screen",
-                                      "mobileFirst"
+                                      }
+                                    },
+                                    onDeselectedChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "button",
+                                          __plasmic_idx_0,
+                                          "deselected"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    onIsDisabledChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "button",
+                                          __plasmic_idx_0,
+                                          "isDisabled"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    onSelectedChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "button",
+                                          __plasmic_idx_0,
+                                          "selected"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    onSortDeselectedChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "button",
+                                          __plasmic_idx_0,
+                                          "sortDeselected"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    onSortSelectedChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "button",
+                                          __plasmic_idx_0,
+                                          "sortSelected"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    selected: generateStateValueProp($state, [
+                                      "button",
+                                      __plasmic_idx_0,
+                                      "selected"
+                                    ]),
+                                    size4: "compact",
+                                    sortDeselected: generateStateValueProp(
+                                      $state,
+                                      [
+                                        "button",
+                                        __plasmic_idx_0,
+                                        "sortDeselected"
+                                      ]
+                                    ),
+                                    sortSelected: generateStateValueProp(
+                                      $state,
+                                      [
+                                        "button",
+                                        __plasmic_idx_0,
+                                        "sortSelected"
+                                      ]
                                     )
-                                      ? "default"
-                                      : "ghost"
-                                  }
-                                >
-                                  <div
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.__wab_text,
-                                      sty.text__ifv56
-                                    )}
-                                  >
-                                    {
-                                      "\u062e\u0644\u0627\u0635\u0647 \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u06cc\u0645\u0627\u0631"
-                                    }
-                                  </div>
-                                </AntdButton>
+                                  };
+
+                                  initializePlasmicStates(
+                                    $state,
+                                    [
+                                      {
+                                        name: "button[].isDisabled",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      },
+                                      {
+                                        name: "button[].selected",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      },
+                                      {
+                                        name: "button[].deselected",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      },
+                                      {
+                                        name: "button[].sortDeselected",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      },
+                                      {
+                                        name: "button[].sortSelected",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      }
+                                    ],
+                                    [__plasmic_idx_0]
+                                  );
+                                  return (
+                                    <Button
+                                      data-plasmic-name={"button"}
+                                      data-plasmic-override={overrides.button}
+                                      {...child$Props}
+                                    >
+                                      <div
+                                        className={classNames(
+                                          projectcss.all,
+                                          projectcss.__wab_text,
+                                          sty.text__qDhSs
+                                        )}
+                                      >
+                                        {
+                                          "\u062e\u0644\u0627\u0635\u0647 \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u06cc\u0645\u0627\u0631"
+                                        }
+                                      </div>
+                                    </Button>
+                                  );
+                                })()}
                                 <div
                                   data-plasmic-name={"ward"}
                                   data-plasmic-override={overrides.ward}
@@ -18595,7 +18798,7 @@ type NodeDefaultElementType = {
   bookmarkIcon: typeof BookmarkIcon;
   wardRoom: "div";
   roomBed: "div";
-  button: typeof AntdButton;
+  button: typeof Button;
   ward: "div";
   wardRoom2: "div";
   roomBed2: "div";
