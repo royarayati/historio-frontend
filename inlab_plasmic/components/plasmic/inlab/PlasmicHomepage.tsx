@@ -1911,7 +1911,8 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "patientSummaryModal.open",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant(globalVariants, "screen", "mobileFirst") ? false : false
       },
       {
         path: "selectedPatientId",
@@ -10456,8 +10457,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       "screen",
                                       "mobileFirst"
                                     )
-                                      ? "ghost"
-                                      : "default"
+                                      ? "default"
+                                      : "ghost"
                                   }
                                 >
                                   <div
@@ -16963,7 +16964,17 @@ function PlasmicHomepage__RenderFunc(props: {
           }}
           open={generateStateValueProp($state, ["patientSummaryModal", "open"])}
           title={
-            "\u062e\u0644\u0627\u0635\u0647 \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u06cc\u0645\u0627\u0631"
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___28Wb
+              )}
+            >
+              {
+                "\u062e\u0644\u0627\u0635\u0647 \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u06cc\u0645\u0627\u0631"
+              }
+            </div>
           }
           trigger={null}
           width={

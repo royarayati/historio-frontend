@@ -5044,3 +5044,8 @@
     font-size: var(--token-CdE1_0ZaCyT1);
   }
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .text___28Wb {
+    background: #ffffff;
+  }
+}
