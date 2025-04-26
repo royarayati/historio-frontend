@@ -3129,6 +3129,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                         try {
                           return $ctx.fetched_data.loading &&
                             localStorage.getItem("consult_service_list") &&
+                            localStorage.getItem("consult_service_list") !=
+                              "undefined" &&
                             $state.searchBarServices.value == ""
                             ? JSON.parse(
                                 localStorage.getItem("consult_service_list")
