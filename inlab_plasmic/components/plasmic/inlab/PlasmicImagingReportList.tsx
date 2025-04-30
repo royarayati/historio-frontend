@@ -4066,24 +4066,27 @@ function PlasmicImagingReportList__RenderFunc(props: {
               )}
               dir={"auto"}
             >
-              <React.Fragment>
-                {(() => {
-                  function formatTextWithDirection(text) {
-                    if (!text) return "";
-                    return text
-                      .split("\n")
-                      .filter(line => line.trim())
-                      .map(line => {
-                        const isRtl = /[\u0600-\u06FF]/.test(line);
-                        const direction = isRtl ? "rtl" : "ltr";
-                        const alignment = isRtl ? "right" : "left";
-                        return `<div dir="${direction}" style="text-align: ${alignment}">${line}</div>`;
-                      })
-                      .join("");
-                  }
-                  return formatTextWithDirection($state.paraclinicReportText);
-                })()}
-              </React.Fragment>
+              <div
+                className={projectcss.__wab_expr_html_text}
+                dangerouslySetInnerHTML={{
+                  __html: (() => {
+                    function formatTextWithDirection(text) {
+                      if (!text) return "";
+                      return text
+                        .split("\n")
+                        .filter(line => line.trim())
+                        .map(line => {
+                          const isRtl = /[\u0600-\u06FF]/.test(line);
+                          const direction = isRtl ? "rtl" : "ltr";
+                          const alignment = isRtl ? "right" : "left";
+                          return `<div dir="${direction}" style="text-align: ${alignment}">${line}</div>`;
+                        })
+                        .join("");
+                    }
+                    return formatTextWithDirection($state.paraclinicReportText);
+                  })()
+                }}
+              />
             </div>
             {false ? (
               <Stack__

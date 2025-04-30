@@ -10844,6 +10844,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     projectcss.__wab_text,
                                     sty.roomBed2
                                   )}
+                                  dir={"rtl"}
                                 >
                                   <React.Fragment>
                                     {currentItem.room +

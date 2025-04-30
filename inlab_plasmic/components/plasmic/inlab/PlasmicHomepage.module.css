@@ -2763,9 +2763,19 @@
 .button:global(.__wab_instance) {
   max-width: 100%;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .button:global(.__wab_instance) {
+    width: auto;
+  }
+}
 .text__qDhSs {
   padding-top: 0px;
   font-size: var(--token-CdE1_0ZaCyT1);
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__qDhSs {
+    font-size: 10px;
+  }
 }
 .svg__jgRn {
   position: relative;
