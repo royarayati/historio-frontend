@@ -1118,9 +1118,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return !localStorage.getItem("main_selected_tab")
-                ? "patients"
-                : localStorage.getItem("main_selected_tab");
+              return localStorage.getItem("main_selected_tab") || "patients";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -1317,7 +1315,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.sortingByBed == true;
+              return $state.sortingByBed === "true";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -1336,7 +1334,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.sortingByBed == false;
+              return $state.sortingByBed !== "true";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -1373,7 +1371,7 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.sortingByBed == false;
+              return $state.sortingByBed !== "true";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -1393,7 +1391,7 @@ function PlasmicHomepage__RenderFunc(props: {
           hasVariant(globalVariants, "screen", "mobileFirst")
             ? (() => {
                 try {
-                  return $state.sortingByBed == true;
+                  return $state.sortingByBed === "true";
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -1406,7 +1404,7 @@ function PlasmicHomepage__RenderFunc(props: {
               })()
             : (() => {
                 try {
-                  return $state.sortingByBed == true;
+                  return $state.sortingByBed === "true";
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -1425,7 +1423,9 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return true;
+              return !localStorage.getItem("sort_by_bed")
+                ? true
+                : localStorage.getItem("sort_by_bed");
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -2996,6 +2996,31 @@ function PlasmicHomepage__RenderFunc(props: {
                       "updateMainSelectedTab"
                     ];
                   }
+
+                  $steps["setConsultLocalstorgae"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem(
+                              "main_selected_tab",
+                              "consult"
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setConsultLocalstorgae"] != null &&
+                    typeof $steps["setConsultLocalstorgae"] === "object" &&
+                    typeof $steps["setConsultLocalstorgae"].then === "function"
+                  ) {
+                    $steps["setConsultLocalstorgae"] = await $steps[
+                      "setConsultLocalstorgae"
+                    ];
+                  }
                 }}
               >
                 <Icons8CloseSvgIcon
@@ -3178,6 +3203,31 @@ function PlasmicHomepage__RenderFunc(props: {
                   ) {
                     $steps["updateMainSelectedTab"] = await $steps[
                       "updateMainSelectedTab"
+                    ];
+                  }
+
+                  $steps["setPatientsLocalstorgae"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return localStorage.setItem(
+                              "main_selected_tab",
+                              "patients"
+                            );
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["setPatientsLocalstorgae"] != null &&
+                    typeof $steps["setPatientsLocalstorgae"] === "object" &&
+                    typeof $steps["setPatientsLocalstorgae"].then === "function"
+                  ) {
+                    $steps["setPatientsLocalstorgae"] = await $steps[
+                      "setPatientsLocalstorgae"
                     ];
                   }
                 }}
@@ -7813,6 +7863,40 @@ function PlasmicHomepage__RenderFunc(props: {
                                     "updateSortingByBed"
                                   ];
                                 }
+
+                                $steps["setSortByBedLocalstorgae"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        customFunction: async () => {
+                                          return (() => {
+                                            localStorage.setItem(
+                                              "sort_by_bed",
+                                              false
+                                            );
+                                            return console.log(
+                                              "sort_by_bed",
+                                              localStorage.getItem(
+                                                "sort_by_bed"
+                                              )
+                                            );
+                                          })();
+                                        }
+                                      };
+                                      return (({ customFunction }) => {
+                                        return customFunction();
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["setSortByBedLocalstorgae"] != null &&
+                                  typeof $steps["setSortByBedLocalstorgae"] ===
+                                    "object" &&
+                                  typeof $steps["setSortByBedLocalstorgae"]
+                                    .then === "function"
+                                ) {
+                                  $steps["setSortByBedLocalstorgae"] =
+                                    await $steps["setSortByBedLocalstorgae"];
+                                }
                               }}
                               onDeselectedChange={async (...eventArgs: any) => {
                                 ((...eventArgs) => {
@@ -8008,6 +8092,40 @@ function PlasmicHomepage__RenderFunc(props: {
                                   $steps["updateSortingByBed"] = await $steps[
                                     "updateSortingByBed"
                                   ];
+                                }
+
+                                $steps["setSortByBedLocalstorgae"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        customFunction: async () => {
+                                          return (() => {
+                                            localStorage.setItem(
+                                              "sort_by_bed",
+                                              true
+                                            );
+                                            return console.log(
+                                              "sort_by_bed",
+                                              localStorage.getItem(
+                                                "sort_by_bed"
+                                              )
+                                            );
+                                          })();
+                                        }
+                                      };
+                                      return (({ customFunction }) => {
+                                        return customFunction();
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["setSortByBedLocalstorgae"] != null &&
+                                  typeof $steps["setSortByBedLocalstorgae"] ===
+                                    "object" &&
+                                  typeof $steps["setSortByBedLocalstorgae"]
+                                    .then === "function"
+                                ) {
+                                  $steps["setSortByBedLocalstorgae"] =
+                                    await $steps["setSortByBedLocalstorgae"];
                                 }
                               }}
                               onDeselectedChange={async (...eventArgs: any) => {
@@ -10726,6 +10844,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     projectcss.__wab_text,
                                     sty.roomBed2
                                   )}
+                                  dir={"rtl"}
                                 >
                                   <React.Fragment>
                                     {currentItem.room +

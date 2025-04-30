@@ -445,7 +445,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
         path: "paraclinicReportModal.open",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant(globalVariants, "screen", "mobileFirst") ? false : false
       },
       {
         path: "paraclinicReportText",
@@ -2104,11 +2105,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       ? $ctx.fetched_data.loading === false &&
                         localStorage.getItem("inlab_user_his_type") !==
                           "tums_api" &&
-                        $ctx.fetched_data.data.radiology_services.length === 0
+                        $ctx.fetched_data.data.length === 0
                       : $ctx.fetched_data.loading === false &&
                         localStorage.getItem("inlab_user_his_type") !==
                           "tums_api" &&
-                        $ctx.fetched_data.data.radiology_services.length === 0
+                        $ctx.fetched_data.data.length === 0
                   ) ? (
                     <div
                       className={classNames(
@@ -4065,7 +4066,27 @@ function PlasmicImagingReportList__RenderFunc(props: {
               )}
               dir={"auto"}
             >
-              <React.Fragment>{$state.paraclinicReportText}</React.Fragment>
+              <div
+                className={projectcss.__wab_expr_html_text}
+                dangerouslySetInnerHTML={{
+                  __html: (() => {
+                    function formatTextWithDirection(text) {
+                      if (!text) return "";
+                      return text
+                        .split("\n")
+                        .filter(line => line.trim())
+                        .map(line => {
+                          const isRtl = /[\u0600-\u06FF]/.test(line);
+                          const direction = isRtl ? "rtl" : "ltr";
+                          const alignment = isRtl ? "right" : "left";
+                          return `<div dir="${direction}" style="text-align: ${alignment}">${line}</div>`;
+                        })
+                        .join("");
+                    }
+                    return formatTextWithDirection($state.paraclinicReportText);
+                  })()
+                }}
+              />
             </div>
             {false ? (
               <Stack__
