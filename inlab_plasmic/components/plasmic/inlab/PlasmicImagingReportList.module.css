@@ -1281,6 +1281,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  background: #30a46c;
   min-width: 0;
   border-radius: 5px;
   padding: 8px;
@@ -1312,7 +1313,8 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  text-align: right;
+  text-align: center;
+  color: #ffffff;
   min-width: 0;
 }
 .text__w3C8P {

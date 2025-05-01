@@ -63,6 +63,7 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import BookmarkLab from "../../BookmarkLab"; // plasmic-import: yhUiLESiXQuk/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
@@ -81,6 +82,8 @@ import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3w
 import NextSvgrepoComSvgIcon from "./icons/PlasmicIcon__NextSvgrepoComSvg"; // plasmic-import: sbXZrFXKpPD-/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 import InformationIcon from "./icons/PlasmicIcon__Information"; // plasmic-import: tSD0oiaMd-7V/icon
 
 createPlasmicElementProxy;
@@ -123,6 +126,9 @@ export type PlasmicLaboratoryData__OverridesType = {
   button2?: Flex__<typeof Button>;
   allAdmissionsLab?: Flex__<typeof Button>;
   currentAdmissionLab?: Flex__<typeof Button>;
+  searchLabsSection?: Flex__<"div">;
+  searchLabs?: Flex__<typeof TextInput>;
+  svg?: Flex__<"svg">;
   labData?: Flex__<typeof ApiFetcherComponent>;
   conditionGuard?: Flex__<typeof ConditionGuard>;
   labGroupTitles?: Flex__<"div">;
@@ -233,20 +239,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "checkedFactor.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.selectedTab == "CheckedFactors";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "checkedFactor.deselected",
@@ -277,7 +270,20 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "checkedFactor.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.selectedTab == "CheckedFactors";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "laboratoryResult.isDisabled",
@@ -289,20 +295,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "laboratoryResult.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.selectedTab == "LabTestResult";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "laboratoryResult.deselected",
@@ -333,7 +326,20 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "laboratoryResult.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.selectedTab == "LabTestResult";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "selectedTab",
@@ -479,20 +485,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "allAdmissionsLab.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.allAdmissions == true;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "allAdmissionsLab.deselected",
@@ -523,7 +516,20 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "allAdmissionsLab.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.allAdmissions == true;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "currentAdmissionLab.isDisabled",
@@ -535,20 +541,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "currentAdmissionLab.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.allAdmissions == false;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "currentAdmissionLab.deselected",
@@ -579,7 +572,20 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "currentAdmissionLab.sortSelected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.allAdmissions == false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "laboratoryResultNormalRange.open",
@@ -639,6 +645,12 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         path: "bookmarkLab[][][].selected",
         type: "private",
         variableType: "boolean"
+      },
+      {
+        path: "searchLabs.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -1014,7 +1026,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                 } else {
                                   const yearsText =
                                     ageYears === 1 ? " year" : " years";
-                                  return `${fullName} ${ageYears}${yearsText}${genderSymbol}`;
+                                  return `${fullName} ${ageYears}${genderSymbol}`;
                                 }
                               }
                             } else {
@@ -2399,6 +2411,139 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             </Button>
           </Stack__>
         ) : null}
+        <div
+          data-plasmic-name={"searchLabsSection"}
+          data-plasmic-override={overrides.searchLabsSection}
+          className={classNames(projectcss.all, sty.searchLabsSection)}
+        >
+          <TextInput
+            data-plasmic-name={"searchLabs"}
+            data-plasmic-override={overrides.searchLabs}
+            className={classNames("__wab_instance", sty.searchLabs)}
+            endIcon={
+              $state.value !== "" ? (
+                <Icons8CloseSvgIcon
+                  data-plasmic-name={"svg"}
+                  data-plasmic-override={overrides.svg}
+                  className={classNames(projectcss.all, sty.svg)}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateSearchLabsValue"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["searchLabs", "value"]
+                            },
+                            operation: 1
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, undefined);
+                            return undefined;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateSearchLabsValue"] != null &&
+                      typeof $steps["updateSearchLabsValue"] === "object" &&
+                      typeof $steps["updateSearchLabsValue"].then === "function"
+                    ) {
+                      $steps["updateSearchLabsValue"] = await $steps[
+                        "updateSearchLabsValue"
+                      ];
+                    }
+                  }}
+                  role={"img"}
+                />
+              ) : null
+            }
+            onChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, ["searchLabs", "value"])(
+                  (e => e.target?.value).apply(null, eventArgs)
+                );
+              }).apply(null, eventArgs);
+
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+
+              (async event => {
+                const $steps = {};
+
+                $steps["scrollToSearchedLab"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (() => {
+                            const searchTerm = $state.searchLabs.value
+                              .trim()
+                              .toLowerCase();
+                            if (!searchTerm) return;
+                            const matchedElements = Array.from(
+                              document.querySelectorAll(`[id*="${searchTerm}"]`)
+                            );
+                            const foundElement = matchedElements.find(el =>
+                              el.id.toLowerCase().includes(searchTerm)
+                            );
+                            if (foundElement) {
+                              foundElement.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center",
+                                inline: "center"
+                              });
+                              foundElement.style.transition =
+                                "background-color 0.5s";
+                              foundElement.style.backgroundColor = "yellow";
+                              return setTimeout(() => {
+                                foundElement.style.backgroundColor = "";
+                              }, 10000);
+                            } else {
+                              return console.log("No matching element found");
+                            }
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["scrollToSearchedLab"] != null &&
+                  typeof $steps["scrollToSearchedLab"] === "object" &&
+                  typeof $steps["scrollToSearchedLab"].then === "function"
+                ) {
+                  $steps["scrollToSearchedLab"] = await $steps[
+                    "scrollToSearchedLab"
+                  ];
+                }
+              }).apply(null, eventArgs);
+            }}
+            placeholder={
+              "\u062c\u0633\u062a \u0648 \u062c\u0648\u06cc \u0646\u0627\u0645 \u0622\u0632\u0645\u0627\u06cc\u0634"
+            }
+            showEndIcon={true}
+            value={
+              generateStateValueProp($state, ["searchLabs", "value"]) ?? ""
+            }
+          />
+        </div>
         {$state.selectedTab === "LabTestResult" ? (
           <ApiFetcherComponent
             data-plasmic-name={"labData"}
@@ -2880,6 +3025,22 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                         )
                                     }
                                   )}
+                                  id={(() => {
+                                    try {
+                                      return currentItem.name
+                                        .toLowerCase()
+                                        .replace(".", "");
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()}
                                   key={currentIndex}
                                 >
                                   <React.Fragment>
@@ -4460,6 +4621,9 @@ const PlasmicDescendants = {
     "button2",
     "allAdmissionsLab",
     "currentAdmissionLab",
+    "searchLabsSection",
+    "searchLabs",
+    "svg",
     "labData",
     "conditionGuard",
     "labGroupTitles",
@@ -4528,6 +4692,9 @@ const PlasmicDescendants = {
   button2: ["button2"],
   allAdmissionsLab: ["allAdmissionsLab"],
   currentAdmissionLab: ["currentAdmissionLab"],
+  searchLabsSection: ["searchLabsSection", "searchLabs", "svg"],
+  searchLabs: ["searchLabs", "svg"],
+  svg: ["svg"],
   labData: [
     "labData",
     "conditionGuard",
@@ -4704,6 +4871,9 @@ type NodeDefaultElementType = {
   button2: typeof Button;
   allAdmissionsLab: typeof Button;
   currentAdmissionLab: typeof Button;
+  searchLabsSection: "div";
+  searchLabs: typeof TextInput;
+  svg: "svg";
   labData: typeof ApiFetcherComponent;
   conditionGuard: typeof ConditionGuard;
   labGroupTitles: "div";
@@ -4821,6 +4991,9 @@ export const PlasmicLaboratoryData = Object.assign(
     button2: makeNodeComponent("button2"),
     allAdmissionsLab: makeNodeComponent("allAdmissionsLab"),
     currentAdmissionLab: makeNodeComponent("currentAdmissionLab"),
+    searchLabsSection: makeNodeComponent("searchLabsSection"),
+    searchLabs: makeNodeComponent("searchLabs"),
+    svg: makeNodeComponent("svg"),
     labData: makeNodeComponent("labData"),
     conditionGuard: makeNodeComponent("conditionGuard"),
     labGroupTitles: makeNodeComponent("labGroupTitles"),

@@ -66,7 +66,7 @@ import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
-import  UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
+import { UploadFileComponent } from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 
@@ -2109,7 +2109,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       : $ctx.fetched_data.loading === false &&
                         localStorage.getItem("inlab_user_his_type") !==
                           "tums_api" &&
-                        $ctx.fetched_data.data.length === 0
+                        $ctx.fetched_data.length === 0
                   ) ? (
                     <div
                       className={classNames(
@@ -2899,6 +2899,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                       projectcss.__wab_text,
                                       sty.paraclinicType
                                     )}
+                                    dir={"rtl"}
                                   >
                                     <React.Fragment>
                                       {currentItem.title.replace(
@@ -4104,7 +4105,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   )}
                 >
                   {
-                    "\u0634\u0645\u0627 \u0645\u06cc \u062a\u0648\u0627\u0646\u06cc\u062f \u062e\u0644\u0627\u0635\u0647 \u0631\u06cc\u067e\u0648\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u062f\u0631 \u0627\u06cc\u0646 \u0642\u0633\u0645\u062a \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f \u062a\u0627 \u062f\u0631 \u0635\u0641\u062d\u0647 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0628\u06cc\u0645\u0627\u0631 \u0622\u0646 \u0631\u0627 \u0645\u0634\u0627\u0647\u062f\u0647 \u06a9\u0646\u06cc\u062f"
+                    "\u0642\u0633\u0645\u062a \u0647\u0627\u06cc \u0645\u0647\u0645 \u06af\u0632\u0627\u0631\u0634 \u0628\u0627\u0644\u0627 \u0631\u0627 \u06a9\u067e\u06cc \u0648 \u062f\u0631 \u0627\u06cc\u0646 \u0628\u0627\u06a9\u0633 \u062c\u0627\u06cc \u06af\u0630\u0627\u0631\u06cc \u06a9\u0646\u06cc\u062f \u0648 \u062f\u0631 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0645\u0634\u0627\u0647\u062f\u0647 \u06a9\u0646\u06cc\u062f"
                   }
                 </div>
                 {(() => {
@@ -4176,7 +4177,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     "__wab_instance",
                     sty.sendReportSummary
                   )}
-                  color={"blue"}
+                  color={"clear"}
                   deselected={generateStateValueProp($state, [
                     "sendReportSummary",
                     "deselected"
