@@ -2497,25 +2497,25 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                             if (!searchTerm) return;
                             const matchedElements = Array.from(
                               document.querySelectorAll(`[id*="${searchTerm}"]`)
-                            );
-                            const foundElement = matchedElements.find(el =>
+                            ).filter(el =>
                               el.id.toLowerCase().includes(searchTerm)
                             );
-                            if (foundElement) {
-                              foundElement.scrollIntoView({
-                                behavior: "smooth",
-                                block: "center",
-                                inline: "center"
-                              });
-                              foundElement.style.transition =
-                                "background-color 0.5s";
-                              foundElement.style.backgroundColor = "yellow";
-                              return setTimeout(() => {
-                                foundElement.style.backgroundColor = "";
-                              }, 10000);
-                            } else {
-                              return console.log("No matching element found");
+                            if (matchedElements.length === 0) {
+                              console.log("No matching element found");
+                              return;
                             }
+                            const firstMatch = matchedElements[0];
+                            firstMatch.scrollIntoView({
+                              behavior: "smooth",
+                              block: "center",
+                              inline: "center"
+                            });
+                            firstMatch.style.transition =
+                              "background-color 0.5s";
+                            firstMatch.style.backgroundColor = "yellow";
+                            return setTimeout(() => {
+                              firstMatch.style.backgroundColor = "";
+                            }, 10000);
                           })();
                         }
                       };

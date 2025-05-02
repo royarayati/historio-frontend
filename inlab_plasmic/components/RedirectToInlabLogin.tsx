@@ -38,7 +38,7 @@ function RedirectToInlabLogin(props: RedirectToInlabLoginProps) {
   // By default, we are just piping all RedirectToInlabLoginProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToInlabLogin {...props} />;
+  return <PlasmicRedirectToInlabLogin  />;
 }
 
 export default RedirectToInlabLogin;
