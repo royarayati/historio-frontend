@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800&family=Vazirmatn%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800&family=Vazirmatn%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800&family=Inter%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800&display=swap");
 
 .plasmic_tokens {
   --token-sOr3fJ5Up5fq: 14px;
@@ -59,6 +59,52 @@
   --plasmic-token-filter-tab: var(--token-w6XJB4jo1qqO);
   --token-9FP8Zn8H8LBL: #ffffff;
   --plasmic-token-white-color: var(--token-9FP8Zn8H8LBL);
+  --token-_4-ntd2poXac: 0.25rem;
+  --plasmic-token-size-4: var(--token-_4-ntd2poXac);
+  --token-gT8GM_eUi3Z2: 0.375rem;
+  --plasmic-token-size-6: var(--token-gT8GM_eUi3Z2);
+  --token-97i_uC0EPBwU: #d1d5db;
+  --plasmic-token-basic-border: var(--token-97i_uC0EPBwU);
+  --token-AbJ0W-K7opJE: #ffffff;
+  --plasmic-token-basic-container-background: var(--token-AbJ0W-K7opJE);
+  --token-goQXpK0S37Un: 0.125rem;
+  --plasmic-token-size-2: var(--token-goQXpK0S37Un);
+  --token-Hm3SlAJH-Xg2: #2563eb;
+  --plasmic-token-brand-brand: var(--token-Hm3SlAJH-Xg2);
+  --token-3DlQ9mVQ6NFy: 1rem;
+  --plasmic-token-font-md: var(--token-3DlQ9mVQ6NFy);
+  --token-shxF4F_ggPFB: 1.25;
+  --plasmic-token-line-height-md: var(--token-shxF4F_ggPFB);
+  --token-0SUmebUCJbd8: 0.625rem;
+  --plasmic-token-size-10: var(--token-0SUmebUCJbd8);
+  --token-NyTao7Ew0j3m: #6b7280;
+  --plasmic-token-basic-text-secondary: var(--token-NyTao7Ew0j3m);
+  --token-pdEW6FcP2Ces: 2rem;
+  --plasmic-token-size-32: var(--token-pdEW6FcP2Ces);
+  --token-2ER69RM1tTPk: 1rem;
+  --plasmic-token-size-16: var(--token-2ER69RM1tTPk);
+  --token-WSOQKxqtSk7F: #030712;
+  --plasmic-token-basic-text-primary: var(--token-WSOQKxqtSk7F);
+  --token-HrYxe9bGiUsp: Inter;
+  --plasmic-token-sans-serif: var(--token-HrYxe9bGiUsp);
+  --token-4n0HtNprqHMN: 0.75rem;
+  --plasmic-token-font-sm: var(--token-4n0HtNprqHMN);
+  --token-EEV95BcNsKjl: 1;
+  --plasmic-token-line-height-sm: var(--token-EEV95BcNsKjl);
+  --token-iGfYmUJpbSN2: 1.25rem;
+  --plasmic-token-font-lg: var(--token-iGfYmUJpbSN2);
+  --token-8jyLAFp05Pjx: 1.4;
+  --plasmic-token-line-height-lg: var(--token-8jyLAFp05Pjx);
+  --token-9V0KuWHEiqvW: #dc2626;
+  --plasmic-token-destructive-destructive: var(--token-9V0KuWHEiqvW);
+  --token-c8x7mfdddVHV: #e5e7eb;
+  --plasmic-token-muted-muted-border: var(--token-c8x7mfdddVHV);
+  --token-swqYw2qjyf1R: #f3f4f6;
+  --plasmic-token-muted-muted-soft: var(--token-swqYw2qjyf1R);
+  --token-NQTGvQtHifK9: #dbeafe;
+  --plasmic-token-brand-brand-soft: var(--token-NQTGvQtHifK9);
+  --token-sfLcv3n8rVPG: 0.5rem;
+  --plasmic-token-size-8: var(--token-sfLcv3n8rVPG);
 }
 
 @media (min-width: 0px) and (max-width: 760px) {

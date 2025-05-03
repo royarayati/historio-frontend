@@ -64,6 +64,7 @@ import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; /
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
+import { AntdSelect } from "@plasmicpkgs/antd5/skinny/registerSelect";
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import BookmarkLab from "../../BookmarkLab"; // plasmic-import: yhUiLESiXQuk/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
@@ -126,9 +127,9 @@ export type PlasmicLaboratoryData__OverridesType = {
   button2?: Flex__<typeof Button>;
   allAdmissionsLab?: Flex__<typeof Button>;
   currentAdmissionLab?: Flex__<typeof Button>;
-  searchLabsSection?: Flex__<"div">;
   searchLabs?: Flex__<typeof TextInput>;
   svg?: Flex__<"svg">;
+  filterSelector?: Flex__<typeof AntdSelect>;
   labData?: Flex__<typeof ApiFetcherComponent>;
   conditionGuard?: Flex__<typeof ConditionGuard>;
   labGroupTitles?: Flex__<"div">;
@@ -651,6 +652,12 @@ function PlasmicLaboratoryData__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "filterSelector.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => "false"
       }
     ],
     [$props, $ctx, $refs]
@@ -2024,137 +2031,458 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 </div>
               </Button>
             ) : null}
-            <Button
-              data-plasmic-name={"allAdmissionsLab"}
-              data-plasmic-override={overrides.allAdmissionsLab}
-              className={classNames("__wab_instance", sty.allAdmissionsLab)}
-              deselected={generateStateValueProp($state, [
-                "allAdmissionsLab",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "allAdmissionsLab",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
+            {false ? (
+              <Button
+                data-plasmic-name={"allAdmissionsLab"}
+                data-plasmic-override={overrides.allAdmissionsLab}
+                className={classNames("__wab_instance", sty.allAdmissionsLab)}
+                deselected={generateStateValueProp($state, [
+                  "allAdmissionsLab",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "allAdmissionsLab",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
 
-                $steps["updateAllAdmissions"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["allAdmissions"]
-                        },
-                        operation: 0,
-                        value: true
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
+                  $steps["updateAllAdmissions"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["allAdmissions"]
+                          },
+                          operation: 0,
+                          value: true
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
 
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateAllAdmissions"] != null &&
-                  typeof $steps["updateAllAdmissions"] === "object" &&
-                  typeof $steps["updateAllAdmissions"].then === "function"
-                ) {
-                  $steps["updateAllAdmissions"] = await $steps[
-                    "updateAllAdmissions"
-                  ];
-                }
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateAllAdmissions"] != null &&
+                    typeof $steps["updateAllAdmissions"] === "object" &&
+                    typeof $steps["updateAllAdmissions"].then === "function"
+                  ) {
+                    $steps["updateAllAdmissions"] = await $steps[
+                      "updateAllAdmissions"
+                    ];
+                  }
 
-                $steps["invokeGlobalAction"] = false
-                  ? (() => {
-                      const actionArgs = {
-                        args: [
-                          "GET",
-                          `/api/v3/remote_his/labs?patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&all_admissions=${$state.allAdmissions}`,
-                          (() => {
-                            try {
-                              return {
-                                "X-Namespace": localStorage.getItem(
-                                  "inlab_user_namespace_id"
-                                )
-                              };
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
+                  $steps["invokeGlobalAction"] = false
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "GET",
+                            `/api/v3/remote_his/labs?patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&all_admissions=${$state.allAdmissions}`,
+                            (() => {
+                              try {
+                                return {
+                                  "X-Namespace": localStorage.getItem(
+                                    "inlab_user_namespace_id"
+                                  )
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
                               }
-                              throw e;
-                            }
+                            })()
+                          ]
+                        };
+                        return $globalActions[
+                          "AuthGlobalContext.apiFetcher"
+                        ]?.apply(null, [...actionArgs.args]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["invokeGlobalAction"] != null &&
+                    typeof $steps["invokeGlobalAction"] === "object" &&
+                    typeof $steps["invokeGlobalAction"].then === "function"
+                  ) {
+                    $steps["invokeGlobalAction"] = await $steps[
+                      "invokeGlobalAction"
+                    ];
+                  }
+
+                  $steps["updateDataLoaded"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["dataLoaded"]
+                          },
+                          operation: 0,
+                          value: "false"
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateDataLoaded"] != null &&
+                    typeof $steps["updateDataLoaded"] === "object" &&
+                    typeof $steps["updateDataLoaded"].then === "function"
+                  ) {
+                    $steps["updateDataLoaded"] = await $steps[
+                      "updateDataLoaded"
+                    ];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "allAdmissionsLab",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "allAdmissionsLab",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "allAdmissionsLab",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "allAdmissionsLab",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "allAdmissionsLab",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "allAdmissionsLab",
+                  "selected"
+                ])}
+                sortDeselected={generateStateValueProp($state, [
+                  "allAdmissionsLab",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "allAdmissionsLab",
+                  "sortSelected"
+                ])}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__m4Iup
+                  )}
+                >
+                  {
+                    "\u062a\u0645\u0627\u0645 \u0628\u0633\u062a\u0631\u06cc \u0647\u0627"
+                  }
+                </div>
+              </Button>
+            ) : null}
+            {false ? (
+              <Button
+                data-plasmic-name={"currentAdmissionLab"}
+                data-plasmic-override={overrides.currentAdmissionLab}
+                className={classNames(
+                  "__wab_instance",
+                  sty.currentAdmissionLab
+                )}
+                deselected={generateStateValueProp($state, [
+                  "currentAdmissionLab",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "currentAdmissionLab",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateAllAdmissions"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["allAdmissions"]
+                          },
+                          operation: 0,
+                          value: false
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateAllAdmissions"] != null &&
+                    typeof $steps["updateAllAdmissions"] === "object" &&
+                    typeof $steps["updateAllAdmissions"].then === "function"
+                  ) {
+                    $steps["updateAllAdmissions"] = await $steps[
+                      "updateAllAdmissions"
+                    ];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "currentAdmissionLab",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "currentAdmissionLab",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "currentAdmissionLab",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "currentAdmissionLab",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "currentAdmissionLab",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "currentAdmissionLab",
+                  "selected"
+                ])}
+                sortDeselected={generateStateValueProp($state, [
+                  "currentAdmissionLab",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "currentAdmissionLab",
+                  "sortSelected"
+                ])}
+                startIcon={null}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__cbFaS
+                  )}
+                >
+                  {" \u0628\u0633\u062a\u0631\u06cc \u0641\u0639\u0644\u06cc"}
+                </div>
+              </Button>
+            ) : null}
+            <TextInput
+              data-plasmic-name={"searchLabs"}
+              data-plasmic-override={overrides.searchLabs}
+              className={classNames("__wab_instance", sty.searchLabs)}
+              endIcon={
+                $state.value !== "" ? (
+                  <Icons8CloseSvgIcon
+                    data-plasmic-name={"svg"}
+                    data-plasmic-override={overrides.svg}
+                    className={classNames(projectcss.all, sty.svg)}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateSearchLabsValue"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["searchLabs", "value"]
+                              },
+                              operation: 1
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, undefined);
+                              return undefined;
+                            })?.apply(null, [actionArgs]);
                           })()
-                        ]
-                      };
-                      return $globalActions[
-                        "AuthGlobalContext.apiFetcher"
-                      ]?.apply(null, [...actionArgs.args]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["invokeGlobalAction"] != null &&
-                  typeof $steps["invokeGlobalAction"] === "object" &&
-                  typeof $steps["invokeGlobalAction"].then === "function"
-                ) {
-                  $steps["invokeGlobalAction"] = await $steps[
-                    "invokeGlobalAction"
-                  ];
-                }
-
-                $steps["updateDataLoaded"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["dataLoaded"]
-                        },
-                        operation: 0,
-                        value: "false"
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateDataLoaded"] != null &&
-                  typeof $steps["updateDataLoaded"] === "object" &&
-                  typeof $steps["updateDataLoaded"].then === "function"
-                ) {
-                  $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
-                }
-              }}
-              onDeselectedChange={async (...eventArgs: any) => {
+                        : undefined;
+                      if (
+                        $steps["updateSearchLabsValue"] != null &&
+                        typeof $steps["updateSearchLabsValue"] === "object" &&
+                        typeof $steps["updateSearchLabsValue"].then ===
+                          "function"
+                      ) {
+                        $steps["updateSearchLabsValue"] = await $steps[
+                          "updateSearchLabsValue"
+                        ];
+                      }
+                    }}
+                    role={"img"}
+                  />
+                ) : null
+              }
+              onChange={async (...eventArgs: any) => {
                 ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "allAdmissionsLab",
-                    "deselected"
-                  ])(eventArgs[0]);
+                  generateStateOnChangeProp($state, ["searchLabs", "value"])(
+                    (e => e.target?.value).apply(null, eventArgs)
+                  );
                 }).apply(null, eventArgs);
 
                 if (
@@ -2164,416 +2492,201 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 ) {
                   return;
                 }
-              }}
-              onIsDisabledChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "allAdmissionsLab",
-                    "isDisabled"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "allAdmissionsLab",
-                    "selected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                (async event => {
+                  const $steps = {};
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSortDeselectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "allAdmissionsLab",
-                    "sortDeselected"
-                  ])(eventArgs[0]);
+                  $steps["scrollToSearchedLab"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (() => {
+                              const searchTerm = $state.searchLabs.value
+                                .trim()
+                                .toLowerCase();
+                              if (!searchTerm) return;
+                              if (document.readyState !== "complete") {
+                                console.warn(
+                                  "DOM not fully loaded. Consider running this code after page load."
+                                );
+                              }
+                              const allElementsWithIds = Array.from(
+                                document.querySelectorAll("[id]")
+                              ).sort((a, b) =>
+                                a.compareDocumentPosition(b) &
+                                Node.DOCUMENT_POSITION_FOLLOWING
+                                  ? -1
+                                  : 1
+                              );
+                              const firstMatch = allElementsWithIds.find(el =>
+                                el.id.toLowerCase().includes(searchTerm)
+                              );
+                              if (!firstMatch) {
+                                console.log("No matching element found");
+                                return;
+                              }
+                              try {
+                                firstMatch.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: "center",
+                                  inline: "center"
+                                });
+                              } catch (e) {
+                                console.warn(
+                                  "Smooth scroll failed, using instant scroll:",
+                                  e
+                                );
+                                firstMatch.scrollIntoView();
+                              }
+                              if (!firstMatch.style.transition) {
+                                firstMatch.style.transition =
+                                  "background-color 0.5s";
+                              }
+                              firstMatch.style.backgroundColor = "yellow";
+                              const highlightTimeout = setTimeout(() => {
+                                firstMatch.style.backgroundColor = "";
+                              }, 8000);
+                              const observer = new MutationObserver(() => {
+                                if (!document.body.contains(firstMatch)) {
+                                  clearTimeout(highlightTimeout);
+                                  observer.disconnect();
+                                }
+                              });
+                              return observer.observe(document.body, {
+                                childList: true,
+                                subtree: true
+                              });
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["scrollToSearchedLab"] != null &&
+                    typeof $steps["scrollToSearchedLab"] === "object" &&
+                    typeof $steps["scrollToSearchedLab"].then === "function"
+                  ) {
+                    $steps["scrollToSearchedLab"] = await $steps[
+                      "scrollToSearchedLab"
+                    ];
+                  }
                 }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
               }}
-              onSortSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "allAdmissionsLab",
-                    "sortSelected"
-                  ])(eventArgs[0]);
+              placeholder={
+                "\u062c\u0633\u062a \u0648 \u062c\u0648\u06cc \u0646\u0627\u0645 \u0622\u0632\u0645\u0627\u06cc\u0634"
+              }
+              showEndIcon={true}
+              value={
+                generateStateValueProp($state, ["searchLabs", "value"]) ?? ""
+              }
+            />
+
+            <AntdSelect
+              data-plasmic-name={"filterSelector"}
+              data-plasmic-override={overrides.filterSelector}
+              bordered={true}
+              className={classNames("__wab_instance", sty.filterSelector)}
+              defaultStylesClassName={classNames(
+                projectcss.root_reset,
+                projectcss.plasmic_default_styles,
+                projectcss.plasmic_mixins,
+                projectcss.plasmic_tokens,
+                plasmic_antd_5_hostless_css.plasmic_tokens,
+                plasmic_plasmic_rich_components_css.plasmic_tokens
+              )}
+              defaultValue={"false"}
+              mode={"single"}
+              onChange={async (...eventArgs: any) => {
+                generateStateOnChangeProp($state, [
+                  "filterSelector",
+                  "value"
+                ]).apply(null, eventArgs);
+
+                (async (value, option) => {
+                  const $steps = {};
+
+                  $steps["updateAllAdmissions"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["allAdmissions"]
+                          },
+                          operation: 0,
+                          value: $state.filterSelector.value
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateAllAdmissions"] != null &&
+                    typeof $steps["updateAllAdmissions"] === "object" &&
+                    typeof $steps["updateAllAdmissions"].then === "function"
+                  ) {
+                    $steps["updateAllAdmissions"] = await $steps[
+                      "updateAllAdmissions"
+                    ];
+                  }
                 }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
               }}
-              selected={generateStateValueProp($state, [
-                "allAdmissionsLab",
-                "selected"
+              optionClassName={classNames({ [sty["pcls_lsOPKEYtV593"]]: true })}
+              options={(() => {
+                const __composite = [
+                  { value: null, label: null, type: "option" },
+                  { value: null, label: null, type: "option" }
+                ];
+                __composite["0"]["value"] = "false";
+                __composite["0"]["label"] =
+                  "\u0628\u0633\u062a\u0631\u06cc \u0641\u0639\u0644\u06cc";
+                __composite["1"]["value"] = "true";
+                __composite["1"]["label"] =
+                  "\u062a\u0645\u0627\u0645 \u0628\u0633\u062a\u0631\u06cc \u0647\u0627";
+                return __composite;
+              })()}
+              placeholder={"Select..."}
+              placeholderClassName={classNames({
+                [sty["pcls_9DNpcMK9C8vK"]]: hasVariant(
+                  globalVariants,
+                  "screen",
+                  "mobileFirst"
+                ),
+                [sty["pcls_kave3uZQ63Ck"]]: true
+              })}
+              popupClassName={classNames({ [sty["pcls_qX2774S1vXrJ"]]: true })}
+              popupScopeClassName={sty["filterSelector__popup"]}
+              showSearch={false}
+              size={"small"}
+              triggerClassName={classNames({
+                [sty["pcls_JzA4CyBHjNHZ"]]: true,
+                [sty["pcls_puT2k-mf-BIB"]]: hasVariant(
+                  globalVariants,
+                  "screen",
+                  "mobileFirst"
+                )
+              })}
+              value={generateStateValueProp($state, [
+                "filterSelector",
+                "value"
               ])}
-              sortDeselected={generateStateValueProp($state, [
-                "allAdmissionsLab",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "allAdmissionsLab",
-                "sortSelected"
-              ])}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__m4Iup
-                )}
-              >
-                {
-                  "\u062a\u0645\u0627\u0645 \u0628\u0633\u062a\u0631\u06cc \u0647\u0627"
-                }
-              </div>
-            </Button>
-            <Button
-              data-plasmic-name={"currentAdmissionLab"}
-              data-plasmic-override={overrides.currentAdmissionLab}
-              className={classNames("__wab_instance", sty.currentAdmissionLab)}
-              deselected={generateStateValueProp($state, [
-                "currentAdmissionLab",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "currentAdmissionLab",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateAllAdmissions"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["allAdmissions"]
-                        },
-                        operation: 0,
-                        value: false
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateAllAdmissions"] != null &&
-                  typeof $steps["updateAllAdmissions"] === "object" &&
-                  typeof $steps["updateAllAdmissions"].then === "function"
-                ) {
-                  $steps["updateAllAdmissions"] = await $steps[
-                    "updateAllAdmissions"
-                  ];
-                }
-              }}
-              onDeselectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "currentAdmissionLab",
-                    "deselected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onIsDisabledChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "currentAdmissionLab",
-                    "isDisabled"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "currentAdmissionLab",
-                    "selected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSortDeselectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "currentAdmissionLab",
-                    "sortDeselected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSortSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "currentAdmissionLab",
-                    "sortSelected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              selected={generateStateValueProp($state, [
-                "currentAdmissionLab",
-                "selected"
-              ])}
-              sortDeselected={generateStateValueProp($state, [
-                "currentAdmissionLab",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "currentAdmissionLab",
-                "sortSelected"
-              ])}
-              startIcon={null}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__cbFaS
-                )}
-              >
-                {" \u0628\u0633\u062a\u0631\u06cc \u0641\u0639\u0644\u06cc"}
-              </div>
-            </Button>
+            />
           </Stack__>
         ) : null}
-        <div
-          data-plasmic-name={"searchLabsSection"}
-          data-plasmic-override={overrides.searchLabsSection}
-          className={classNames(projectcss.all, sty.searchLabsSection)}
-        >
-          <TextInput
-            data-plasmic-name={"searchLabs"}
-            data-plasmic-override={overrides.searchLabs}
-            className={classNames("__wab_instance", sty.searchLabs)}
-            endIcon={
-              $state.value !== "" ? (
-                <Icons8CloseSvgIcon
-                  data-plasmic-name={"svg"}
-                  data-plasmic-override={overrides.svg}
-                  className={classNames(projectcss.all, sty.svg)}
-                  onClick={async event => {
-                    const $steps = {};
-
-                    $steps["updateSearchLabsValue"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            variable: {
-                              objRoot: $state,
-                              variablePath: ["searchLabs", "value"]
-                            },
-                            operation: 1
-                          };
-                          return (({
-                            variable,
-                            value,
-                            startIndex,
-                            deleteCount
-                          }) => {
-                            if (!variable) {
-                              return;
-                            }
-                            const { objRoot, variablePath } = variable;
-
-                            $stateSet(objRoot, variablePath, undefined);
-                            return undefined;
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["updateSearchLabsValue"] != null &&
-                      typeof $steps["updateSearchLabsValue"] === "object" &&
-                      typeof $steps["updateSearchLabsValue"].then === "function"
-                    ) {
-                      $steps["updateSearchLabsValue"] = await $steps[
-                        "updateSearchLabsValue"
-                      ];
-                    }
-                  }}
-                  role={"img"}
-                />
-              ) : null
-            }
-            onChange={async (...eventArgs: any) => {
-              ((...eventArgs) => {
-                generateStateOnChangeProp($state, ["searchLabs", "value"])(
-                  (e => e.target?.value).apply(null, eventArgs)
-                );
-              }).apply(null, eventArgs);
-
-              if (
-                eventArgs.length > 1 &&
-                eventArgs[1] &&
-                eventArgs[1]._plasmic_state_init_
-              ) {
-                return;
-              }
-
-              (async event => {
-                const $steps = {};
-
-                $steps["scrollToSearchedLab"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        customFunction: async () => {
-                          return (() => {
-                            const searchTerm = $state.searchLabs.value
-                              .trim()
-                              .toLowerCase();
-                            if (!searchTerm) return;
-                            if (document.readyState !== "complete") {
-                              console.warn(
-                                "DOM not fully loaded. Consider running this code after page load."
-                              );
-                            }
-                            const allElementsWithIds = Array.from(
-                              document.querySelectorAll("[id]")
-                            ).sort((a, b) =>
-                              a.compareDocumentPosition(b) &
-                              Node.DOCUMENT_POSITION_FOLLOWING
-                                ? -1
-                                : 1
-                            );
-                            const firstMatch = allElementsWithIds.find(el =>
-                              el.id.toLowerCase().includes(searchTerm)
-                            );
-                            if (!firstMatch) {
-                              console.log("No matching element found");
-                              return;
-                            }
-                            try {
-                              firstMatch.scrollIntoView({
-                                behavior: "smooth",
-                                block: "center",
-                                inline: "center"
-                              });
-                            } catch (e) {
-                              console.warn(
-                                "Smooth scroll failed, using instant scroll:",
-                                e
-                              );
-                              firstMatch.scrollIntoView();
-                            }
-                            if (!firstMatch.style.transition) {
-                              firstMatch.style.transition =
-                                "background-color 0.5s";
-                            }
-                            firstMatch.style.backgroundColor = "yellow";
-                            const highlightTimeout = setTimeout(() => {
-                              firstMatch.style.backgroundColor = "";
-                            }, 8000);
-                            const observer = new MutationObserver(() => {
-                              if (!document.body.contains(firstMatch)) {
-                                clearTimeout(highlightTimeout);
-                                observer.disconnect();
-                              }
-                            });
-                            return observer.observe(document.body, {
-                              childList: true,
-                              subtree: true
-                            });
-                          })();
-                        }
-                      };
-                      return (({ customFunction }) => {
-                        return customFunction();
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["scrollToSearchedLab"] != null &&
-                  typeof $steps["scrollToSearchedLab"] === "object" &&
-                  typeof $steps["scrollToSearchedLab"].then === "function"
-                ) {
-                  $steps["scrollToSearchedLab"] = await $steps[
-                    "scrollToSearchedLab"
-                  ];
-                }
-              }).apply(null, eventArgs);
-            }}
-            placeholder={
-              "\u062c\u0633\u062a \u0648 \u062c\u0648\u06cc \u0646\u0627\u0645 \u0622\u0632\u0645\u0627\u06cc\u0634"
-            }
-            showEndIcon={true}
-            value={
-              generateStateValueProp($state, ["searchLabs", "value"]) ?? ""
-            }
-          />
-        </div>
         {$state.selectedTab === "LabTestResult" ? (
           <ApiFetcherComponent
             data-plasmic-name={"labData"}
@@ -4657,9 +4770,9 @@ const PlasmicDescendants = {
     "button2",
     "allAdmissionsLab",
     "currentAdmissionLab",
-    "searchLabsSection",
     "searchLabs",
     "svg",
+    "filterSelector",
     "labData",
     "conditionGuard",
     "labGroupTitles",
@@ -4722,15 +4835,18 @@ const PlasmicDescendants = {
     "normalRange",
     "button2",
     "allAdmissionsLab",
-    "currentAdmissionLab"
+    "currentAdmissionLab",
+    "searchLabs",
+    "svg",
+    "filterSelector"
   ],
   normalRange: ["normalRange", "button2"],
   button2: ["button2"],
   allAdmissionsLab: ["allAdmissionsLab"],
   currentAdmissionLab: ["currentAdmissionLab"],
-  searchLabsSection: ["searchLabsSection", "searchLabs", "svg"],
   searchLabs: ["searchLabs", "svg"],
   svg: ["svg"],
+  filterSelector: ["filterSelector"],
   labData: [
     "labData",
     "conditionGuard",
@@ -4907,9 +5023,9 @@ type NodeDefaultElementType = {
   button2: typeof Button;
   allAdmissionsLab: typeof Button;
   currentAdmissionLab: typeof Button;
-  searchLabsSection: "div";
   searchLabs: typeof TextInput;
   svg: "svg";
+  filterSelector: typeof AntdSelect;
   labData: typeof ApiFetcherComponent;
   conditionGuard: typeof ConditionGuard;
   labGroupTitles: "div";
@@ -5027,9 +5143,9 @@ export const PlasmicLaboratoryData = Object.assign(
     button2: makeNodeComponent("button2"),
     allAdmissionsLab: makeNodeComponent("allAdmissionsLab"),
     currentAdmissionLab: makeNodeComponent("currentAdmissionLab"),
-    searchLabsSection: makeNodeComponent("searchLabsSection"),
     searchLabs: makeNodeComponent("searchLabs"),
     svg: makeNodeComponent("svg"),
+    filterSelector: makeNodeComponent("filterSelector"),
     labData: makeNodeComponent("labData"),
     conditionGuard: makeNodeComponent("conditionGuard"),
     labGroupTitles: makeNodeComponent("labGroupTitles"),

@@ -171,10 +171,10 @@
   text-align: right;
   font-weight: 700;
   height: 100%;
-  margin-top: 4px;
-  margin-right: 4px;
-  margin-bottom: 4px;
-  margin-left: calc(4px + 8px) !important;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: calc(0px + 8px) !important;
   align-self: center;
   pointer-events: auto;
   cursor: auto;
@@ -205,7 +205,7 @@
   }
 }
 .inputshowStartIcon {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .inputshowStartIcon {
@@ -213,41 +213,41 @@
   }
 }
 .inputshowEndIcon {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
 }
 .inputisDisabled {
   cursor: not-allowed;
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
 }
 .inputerror {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
 }
 .textInput:hover .input {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
 }
 .textInput .input___focusVisibleWithin {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
   outline: none;
 }
 .textInputshowStartIcon .input___focusVisibleWithin_showStartIcon {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
   outline: none;
 }
 .textInputshowEndIcon .input___focusVisibleWithin_showEndIcon {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
   outline: none;
 }
 .textInputshowEndIcon_showStartIcon
   .input___focusVisibleWithin_showEndIcon_showStartIcon {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
   outline: none;
 }
 .textInput .input:focus {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
   outline: none;
 }
 .textInput .input::placeholder {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .textInput .input::placeholder {
@@ -256,15 +256,15 @@
 }
 .textInput .input___focusVisibleWithin::placeholder {
   background: var(--token-Yq556PvPjGii);
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
   outline: none;
 }
 .textInput .input___focusVisibleWithin:focus {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
   outline: none;
 }
 .textInput:hover .input::placeholder {
-  margin-left: calc(4px + 8px) !important;
+  margin-left: calc(0px + 8px) !important;
 }
 .endIconContainer {
   display: flex;
