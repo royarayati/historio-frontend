@@ -2495,27 +2495,57 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               .trim()
                               .toLowerCase();
                             if (!searchTerm) return;
-                            const matchedElements = Array.from(
-                              document.querySelectorAll(`[id*="${searchTerm}"]`)
-                            ).filter(el =>
+                            if (document.readyState !== "complete") {
+                              console.warn(
+                                "DOM not fully loaded. Consider running this code after page load."
+                              );
+                            }
+                            const allElementsWithIds = Array.from(
+                              document.querySelectorAll("[id]")
+                            ).sort((a, b) =>
+                              a.compareDocumentPosition(b) &
+                              Node.DOCUMENT_POSITION_FOLLOWING
+                                ? -1
+                                : 1
+                            );
+                            const firstMatch = allElementsWithIds.find(el =>
                               el.id.toLowerCase().includes(searchTerm)
                             );
-                            if (matchedElements.length === 0) {
+                            if (!firstMatch) {
                               console.log("No matching element found");
                               return;
                             }
-                            const firstMatch = matchedElements[0];
-                            firstMatch.scrollIntoView({
-                              behavior: "smooth",
-                              block: "center",
-                              inline: "center"
-                            });
-                            firstMatch.style.transition =
-                              "background-color 0.5s";
+                            try {
+                              firstMatch.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center",
+                                inline: "center"
+                              });
+                            } catch (e) {
+                              console.warn(
+                                "Smooth scroll failed, using instant scroll:",
+                                e
+                              );
+                              firstMatch.scrollIntoView();
+                            }
+                            if (!firstMatch.style.transition) {
+                              firstMatch.style.transition =
+                                "background-color 0.5s";
+                            }
                             firstMatch.style.backgroundColor = "yellow";
-                            return setTimeout(() => {
+                            const highlightTimeout = setTimeout(() => {
                               firstMatch.style.backgroundColor = "";
-                            }, 10000);
+                            }, 8000);
+                            const observer = new MutationObserver(() => {
+                              if (!document.body.contains(firstMatch)) {
+                                clearTimeout(highlightTimeout);
+                                observer.disconnect();
+                              }
+                            });
+                            return observer.observe(document.body, {
+                              childList: true,
+                              subtree: true
+                            });
                           })();
                         }
                       };
@@ -2696,17 +2726,19 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     }}
                   />
 
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__uudG9
-                    )}
-                  >
-                    {
-                      "\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u0627\u06cc\u06a9\u0648\u0646 \u0633\u062a\u0627\u0631\u0647 \u0645\u06cc\u062a\u0648\u0627\u0646\u06cc\u062f \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0647\u0645 \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u0628\u0647 \u0644\u06cc\u0633\u062a \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0646\u062a\u062e\u0628 \u062f\u0631 \u06a9\u0627\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0627\u0636\u0627\u0641\u0647 \u06a9\u0646\u06cc\u062f"
-                    }
-                  </div>
+                  {false ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__uudG9
+                      )}
+                    >
+                      {
+                        "\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u0627\u06cc\u06a9\u0648\u0646 \u0633\u062a\u0627\u0631\u0647 \u0645\u06cc\u062a\u0648\u0627\u0646\u06cc\u062f \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0647\u0645 \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u0628\u0647 \u0644\u06cc\u0633\u062a \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0645\u0646\u062a\u062e\u0628 \u062f\u0631 \u06a9\u0627\u0631\u062a \u0628\u06cc\u0645\u0627\u0631 \u0627\u0636\u0627\u0641\u0647 \u06a9\u0646\u06cc\u062f"
+                      }
+                    </div>
+                  ) : null}
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? (() => {
@@ -2952,7 +2984,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                 )}
                                 id={(() => {
                                   try {
-                                    return currentItem.title;
+                                    return currentItem.title
+                                      .toLowerCase()
+                                      .replace(",", "");
                                   } catch (e) {
                                     if (
                                       e instanceof TypeError ||
@@ -3029,6 +3063,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     try {
                                       return currentItem.name
                                         .toLowerCase()
+                                        .replace(".", "")
+                                        .replace(".", "")
                                         .replace(".", "");
                                     } catch (e) {
                                       if (

@@ -1244,31 +1244,11 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                             const pdfUrl = URL.createObjectURL(
                                               response.data
                                             );
-                                            const iframe =
-                                              document.createElement("iframe");
-                                            iframe.style.position = "fixed";
-                                            iframe.style.top = "0";
-                                            iframe.style.left = "0";
-                                            iframe.style.width = "100%";
-                                            iframe.style.height = "100%";
-                                            iframe.style.border = "none";
-                                            iframe.style.zIndex = "9999";
-                                            iframe.style.backgroundColor =
-                                              "white";
-                                            document.body.appendChild(iframe);
-                                            iframe.onload = function () {
-                                              try {
-                                                iframe.contentWindow.focus();
-                                                iframe.contentWindow.print();
-                                              } catch (e) {
-                                                console.error(
-                                                  "Print error:",
-                                                  e
-                                                );
-                                                window.open(pdfUrl, "_blank");
-                                              }
-                                            };
-                                            return (iframe.src = pdfUrl);
+                                            window.open(pdfUrl, "_blank");
+                                            return setTimeout(
+                                              () => URL.revokeObjectURL(pdfUrl),
+                                              10000
+                                            );
                                           } else {
                                             console.error(
                                               "Received non-Blob response:",
@@ -3761,33 +3741,12 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                                 URL.createObjectURL(
                                                   response.data
                                                 );
-                                              const iframe =
-                                                document.createElement(
-                                                  "iframe"
-                                                );
-                                              iframe.style.position = "fixed";
-                                              iframe.style.top = "0";
-                                              iframe.style.left = "0";
-                                              iframe.style.width = "100%";
-                                              iframe.style.height = "100%";
-                                              iframe.style.border = "none";
-                                              iframe.style.zIndex = "9999";
-                                              iframe.style.backgroundColor =
-                                                "white";
-                                              document.body.appendChild(iframe);
-                                              iframe.onload = function () {
-                                                try {
-                                                  iframe.contentWindow.focus();
-                                                  iframe.contentWindow.print();
-                                                } catch (e) {
-                                                  console.error(
-                                                    "Print error:",
-                                                    e
-                                                  );
-                                                  window.open(pdfUrl, "_blank");
-                                                }
-                                              };
-                                              return (iframe.src = pdfUrl);
+                                              window.open(pdfUrl, "_blank");
+                                              return setTimeout(
+                                                () =>
+                                                  URL.revokeObjectURL(pdfUrl),
+                                                10000
+                                              );
                                             } else {
                                               console.error(
                                                 "Received non-Blob response:",

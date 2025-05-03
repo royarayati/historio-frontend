@@ -1082,7 +1082,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   } else {
                                     const yearsText =
                                       ageYears === 1 ? " year" : " years";
-                                    return `${fullName} ${ageYears}${yearsText}${genderSymbol}`;
+                                    return `${fullName} ${ageYears}${genderSymbol}`;
                                   }
                                 }
                               } else {
@@ -1167,7 +1167,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                   } else {
                                     const yearsText =
                                       ageYears === 1 ? " year" : " years";
-                                    return `${fullName} ${ageYears}${yearsText}${genderSymbol}`;
+                                    return `${fullName} ${ageYears}${genderSymbol}`;
                                   }
                                 }
                               } else {

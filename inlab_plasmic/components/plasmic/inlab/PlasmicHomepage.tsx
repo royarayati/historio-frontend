@@ -1430,7 +1430,7 @@ function PlasmicHomepage__RenderFunc(props: {
           (() => {
             try {
               return !localStorage.getItem("sort_by_bed")
-                ? true
+                ? "true"
                 : localStorage.getItem("sort_by_bed");
             } catch (e) {
               if (
@@ -17775,343 +17775,267 @@ function PlasmicHomepage__RenderFunc(props: {
                 </DataCtxReader__>
               </ApiFetcherComponent>
             </div>
-            <div className={classNames(projectcss.all, sty.freeBox__eqPq0)}>
-              <ApiFetcherComponent
-                data-plasmic-name={"bookmarkedParaclinicReports"}
-                data-plasmic-override={overrides.bookmarkedParaclinicReports}
-                className={classNames(
-                  "__wab_instance",
-                  sty.bookmarkedParaclinicReports,
-                  {
-                    [sty.bookmarkedParaclinicReportspatientSummary]: hasVariant(
-                      $state,
-                      "patientSummary",
-                      "patientSummary"
-                    )
-                  }
-                )}
-                headers={
-                  hasVariant($state, "patientSummary", "patientSummary")
-                    ? (() => {
-                        try {
-                          return {
-                            "X-Namespace": localStorage.getItem(
-                              "inlab_user_namespace_id"
-                            )
-                          };
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
-                          }
-                          throw e;
-                        }
-                      })()
-                    : (() => {
-                        try {
-                          return {
-                            "X-Namespace": localStorage.getItem(
-                              "inlab_user_namespace_id"
-                            )
-                          };
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
-                          }
-                          throw e;
-                        }
-                      })()
-                }
-                method={
-                  hasVariant($state, "patientSummary", "patientSummary")
-                    ? "GET"
-                    : "GET"
-                }
-                path={
-                  hasVariant($state, "patientSummary", "patientSummary")
-                    ? `/api/v3/bookmark/labs?admission_id=${currentItem.id}&patient_id=${currentItem.patient_id}&all_admissions=false&bookmarked=true`
-                    : `/api/v3/bookmark/paraclinic_reports?patient_id=${$state.selectedPatientId}`
-                }
-                ref={ref => {
-                  $refs["bookmarkedParaclinicReports"] = ref;
-                }}
-              >
-                <DataCtxReader__>
-                  {$ctx => (
-                    <Stack__
-                      as={"div"}
-                      hasGap={true}
-                      className={classNames(
-                        projectcss.all,
-                        sty.freeBox__hEYtC,
-                        {
-                          [sty.freeBoxpatientSummary__hEYtCCcPm4]: hasVariant(
-                            $state,
-                            "patientSummary",
-                            "patientSummary"
-                          )
-                        }
-                      )}
-                    >
-                      {(
+            {false ? (
+              <div className={classNames(projectcss.all, sty.freeBox__eqPq0)}>
+                <ApiFetcherComponent
+                  data-plasmic-name={"bookmarkedParaclinicReports"}
+                  data-plasmic-override={overrides.bookmarkedParaclinicReports}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.bookmarkedParaclinicReports,
+                    {
+                      [sty.bookmarkedParaclinicReportspatientSummary]:
                         hasVariant($state, "patientSummary", "patientSummary")
-                          ? (() => {
-                              try {
-                                return $ctx.fetched_data.loading === true;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })()
-                          : true
-                      ) ? (
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__pFp7O,
-                            {
-                              [sty.textpatientSummary__pFp7OCcPm4]: hasVariant(
-                                $state,
-                                "patientSummary",
-                                "patientSummary"
-                              )
-                            }
-                          )}
-                        >
-                          {hasVariant(
-                            $state,
-                            "patientSummary",
-                            "patientSummary"
-                          )
-                            ? "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                            : "\u062e\u0644\u0627\u0635\u0647 \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631"}
-                        </div>
-                      ) : null}
-                      {(
-                        hasVariant($state, "patientSummary", "patientSummary")
-                          ? (() => {
-                              try {
-                                return $ctx.fetched_data.loading === true;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })()
-                          : $ctx.fetched_data.loading === false &&
-                            $ctx.fetched_data.data.length === 0
-                      ) ? (
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text___8E7QN,
-                            {
-                              [sty.textpatientSummary___8E7QNCcPm4]: hasVariant(
-                                $state,
-                                "patientSummary",
-                                "patientSummary"
-                              )
-                            }
-                          )}
-                        >
-                          {hasVariant(
-                            $state,
-                            "patientSummary",
-                            "patientSummary"
-                          )
-                            ? "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                            : "\u062e\u0644\u0627\u0635\u0647 \u0627\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"}
-                        </div>
-                      ) : null}
-                      {(
-                        hasVariant($state, "patientSummary", "patientSummary")
-                          ? (() => {
-                              try {
-                                return $ctx.fetched_data.loading === true;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })()
-                          : (() => {
-                              try {
-                                return $ctx.fetched_data.loading === true;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return true;
-                                }
-                                throw e;
-                              }
-                            })()
-                      ) ? (
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__up5M0,
-                            {
-                              [sty.textpatientSummary__up5M0CcPm4]: hasVariant(
-                                $state,
-                                "patientSummary",
-                                "patientSummary"
-                              )
-                            }
-                          )}
-                        >
-                          {hasVariant(
-                            $state,
-                            "patientSummary",
-                            "patientSummary"
-                          )
-                            ? "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                            : "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"}
-                        </div>
-                      ) : null}
-                      {(_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
+                    }
+                  )}
+                  headers={
+                    hasVariant($state, "patientSummary", "patientSummary")
+                      ? (() => {
                           try {
-                            return $ctx.fetched_data.data;
+                            return {
+                              "X-Namespace": localStorage.getItem(
+                                "inlab_user_namespace_id"
+                              )
+                            };
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
                               e?.plasmicType === "PlasmicUndefinedDataError"
                             ) {
-                              return [];
+                              return undefined;
                             }
                             throw e;
                           }
                         })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const currentItem = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
+                      : (() => {
+                          try {
+                            return {
+                              "X-Namespace": localStorage.getItem(
+                                "inlab_user_namespace_id"
+                              )
+                            };
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                  }
+                  method={
+                    hasVariant($state, "patientSummary", "patientSummary")
+                      ? "GET"
+                      : "GET"
+                  }
+                  path={
+                    hasVariant($state, "patientSummary", "patientSummary")
+                      ? `/api/v3/bookmark/labs?admission_id=${currentItem.id}&patient_id=${currentItem.patient_id}&all_admissions=false&bookmarked=true`
+                      : `/api/v3/bookmark/paraclinic_reports?patient_id=${$state.selectedPatientId}`
+                  }
+                  ref={ref => {
+                    $refs["bookmarkedParaclinicReports"] = ref;
+                  }}
+                >
+                  <DataCtxReader__>
+                    {$ctx => (
+                      <Stack__
+                        as={"div"}
+                        hasGap={true}
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__hEYtC,
+                          {
+                            [sty.freeBoxpatientSummary__hEYtCCcPm4]: hasVariant(
+                              $state,
+                              "patientSummary",
+                              "patientSummary"
+                            )
+                          }
+                        )}
+                      >
+                        {(
+                          hasVariant($state, "patientSummary", "patientSummary")
+                            ? (() => {
+                                try {
+                                  return $ctx.fetched_data.loading === true;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return true;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            : true
+                        ) ? (
                           <div
-                            data-plasmic-name={"paraclinicReport"}
-                            data-plasmic-override={overrides.paraclinicReport}
                             className={classNames(
                               projectcss.all,
-                              sty.paraclinicReport
-                            )}
-                            key={currentIndex}
-                          >
-                            <Stack__
-                              as={"div"}
-                              data-plasmic-name={"bookmarkedLabsItem2"}
-                              data-plasmic-override={
-                                overrides.bookmarkedLabsItem2
+                              projectcss.__wab_text,
+                              sty.text__pFp7O,
+                              {
+                                [sty.textpatientSummary__pFp7OCcPm4]:
+                                  hasVariant(
+                                    $state,
+                                    "patientSummary",
+                                    "patientSummary"
+                                  )
                               }
-                              hasGap={true}
+                            )}
+                          >
+                            {hasVariant(
+                              $state,
+                              "patientSummary",
+                              "patientSummary"
+                            )
+                              ? "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                              : "\u062e\u0644\u0627\u0635\u0647 \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631"}
+                          </div>
+                        ) : null}
+                        {(
+                          hasVariant($state, "patientSummary", "patientSummary")
+                            ? (() => {
+                                try {
+                                  return $ctx.fetched_data.loading === true;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return true;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            : $ctx.fetched_data.loading === false &&
+                              $ctx.fetched_data.data.length === 0
+                        ) ? (
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text___8E7QN,
+                              {
+                                [sty.textpatientSummary___8E7QNCcPm4]:
+                                  hasVariant(
+                                    $state,
+                                    "patientSummary",
+                                    "patientSummary"
+                                  )
+                              }
+                            )}
+                          >
+                            {hasVariant(
+                              $state,
+                              "patientSummary",
+                              "patientSummary"
+                            )
+                              ? "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                              : "\u062e\u0644\u0627\u0635\u0647 \u0627\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"}
+                          </div>
+                        ) : null}
+                        {(
+                          hasVariant($state, "patientSummary", "patientSummary")
+                            ? (() => {
+                                try {
+                                  return $ctx.fetched_data.loading === true;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return true;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            : (() => {
+                                try {
+                                  return $ctx.fetched_data.loading === true;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return true;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                        ) ? (
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__up5M0,
+                              {
+                                [sty.textpatientSummary__up5M0CcPm4]:
+                                  hasVariant(
+                                    $state,
+                                    "patientSummary",
+                                    "patientSummary"
+                                  )
+                              }
+                            )}
+                          >
+                            {hasVariant(
+                              $state,
+                              "patientSummary",
+                              "patientSummary"
+                            )
+                              ? "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                              : "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"}
+                          </div>
+                        ) : null}
+                        {(_par =>
+                          !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                          (() => {
+                            try {
+                              return $ctx.fetched_data.data;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return [];
+                              }
+                              throw e;
+                            }
+                          })()
+                        ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                          const currentItem = __plasmic_item_0;
+                          const currentIndex = __plasmic_idx_0;
+                          return (
+                            <div
+                              data-plasmic-name={"paraclinicReport"}
+                              data-plasmic-override={overrides.paraclinicReport}
                               className={classNames(
                                 projectcss.all,
-                                sty.bookmarkedLabsItem2,
-                                {
-                                  [sty.bookmarkedLabsItem2patientSummary]:
-                                    hasVariant(
-                                      $state,
-                                      "patientSummary",
-                                      "patientSummary"
-                                    )
-                                }
+                                sty.paraclinicReport
                               )}
+                              key={currentIndex}
                             >
-                              <div
-                                data-plasmic-name={"reportTitle"}
-                                data-plasmic-override={overrides.reportTitle}
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.reportTitle,
-                                  {
-                                    [sty.reportTitlepatientSummary]: hasVariant(
-                                      $state,
-                                      "patientSummary",
-                                      "patientSummary"
-                                    )
-                                  }
-                                )}
-                              >
-                                {hasVariant(
-                                  $state,
-                                  "patientSummary",
-                                  "patientSummary"
-                                ) ? (
-                                  <React.Fragment>
-                                    {(() => {
-                                      try {
-                                        return (
-                                          currentItem.value.factor_name +
-                                          " " +
-                                          ": " +
-                                          currentItem.value.value
-                                        );
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return "";
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                  </React.Fragment>
-                                ) : (
-                                  <React.Fragment>
-                                    {(() => {
-                                      try {
-                                        return currentItem.item_content
-                                          .report_title;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return "";
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                  </React.Fragment>
-                                )}
-                              </div>
-                              <div
-                                data-plasmic-name={"reportDatetime2"}
+                              <Stack__
+                                as={"div"}
+                                data-plasmic-name={"bookmarkedLabsItem2"}
                                 data-plasmic-override={
-                                  overrides.reportDatetime2
+                                  overrides.bookmarkedLabsItem2
                                 }
+                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.reportDatetime2,
+                                  sty.bookmarkedLabsItem2,
                                   {
-                                    [sty.reportDatetime2patientSummary]:
+                                    [sty.bookmarkedLabsItem2patientSummary]:
                                       hasVariant(
                                         $state,
                                         "patientSummary",
@@ -18120,127 +18044,210 @@ function PlasmicHomepage__RenderFunc(props: {
                                   }
                                 )}
                               >
-                                {hasVariant(
-                                  $state,
-                                  "patientSummary",
-                                  "patientSummary"
-                                ) ? (
-                                  <React.Fragment>
-                                    {(() => {
-                                      try {
-                                        return (() => {
-                                          const gregorianDate = new Date(
-                                            currentItem.issued_datetime
-                                          );
-                                          const shamsiDate =
-                                            new Intl.DateTimeFormat(
-                                              "fa-IR"
-                                            ).format(gregorianDate);
-                                          const shamsiTime =
-                                            gregorianDate.toLocaleTimeString(
-                                              "fa-IR",
-                                              { hour12: false }
-                                            );
-                                          const englishDate =
-                                            shamsiDate.replace(/[۰-۹]/g, d =>
-                                              String.fromCharCode(
-                                                d.charCodeAt(0) - 1728
-                                              )
-                                            );
-                                          const englishTime = shamsiTime
-                                            .replace(/[۰-۹]/g, d =>
-                                              String.fromCharCode(
-                                                d.charCodeAt(0) - 1728
-                                              )
-                                            )
-                                            .split(":")
-                                            .slice(0, 2)
-                                            .join(":");
-                                          return `(${englishDate}-${englishTime})`;
-                                        })();
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return "";
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                  </React.Fragment>
-                                ) : (
-                                  <React.Fragment>
-                                    {(() => {
-                                      const gregorianDate = new Date(
-                                        currentItem.item_content.report_datetime
-                                      );
-                                      const shamsiDate =
-                                        new Intl.DateTimeFormat("fa-IR").format(
-                                          gregorianDate
-                                        );
-                                      const shamsiTime =
-                                        gregorianDate.toLocaleTimeString(
-                                          "fa-IR",
-                                          { hour12: false }
-                                        );
-                                      const englishDate = shamsiDate.replace(
-                                        /[۰-۹]/g,
-                                        d =>
-                                          String.fromCharCode(
-                                            d.charCodeAt(0) - 1728
-                                          )
-                                      );
-                                      const englishTime = shamsiTime
-                                        .replace(/[۰-۹]/g, d =>
-                                          String.fromCharCode(
-                                            d.charCodeAt(0) - 1728
-                                          )
+                                <div
+                                  data-plasmic-name={"reportTitle"}
+                                  data-plasmic-override={overrides.reportTitle}
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.reportTitle,
+                                    {
+                                      [sty.reportTitlepatientSummary]:
+                                        hasVariant(
+                                          $state,
+                                          "patientSummary",
+                                          "patientSummary"
                                         )
-                                        .split(":")
-                                        .slice(0, 2)
-                                        .join(":");
-                                      return `${englishDate}-${englishTime}`;
-                                    })()}
-                                  </React.Fragment>
-                                )}
-                              </div>
-                            </Stack__>
-                            <div
-                              data-plasmic-name={"report"}
-                              data-plasmic-override={overrides.report}
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.report
-                              )}
-                            >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.item_content.report;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
                                     }
-                                    throw e;
+                                  )}
+                                >
+                                  {hasVariant(
+                                    $state,
+                                    "patientSummary",
+                                    "patientSummary"
+                                  ) ? (
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return (
+                                            currentItem.value.factor_name +
+                                            " " +
+                                            ": " +
+                                            currentItem.value.value
+                                          );
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  ) : (
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return currentItem.item_content
+                                            .report_title;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  )}
+                                </div>
+                                <div
+                                  data-plasmic-name={"reportDatetime2"}
+                                  data-plasmic-override={
+                                    overrides.reportDatetime2
                                   }
-                                })()}
-                              </React.Fragment>
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.reportDatetime2,
+                                    {
+                                      [sty.reportDatetime2patientSummary]:
+                                        hasVariant(
+                                          $state,
+                                          "patientSummary",
+                                          "patientSummary"
+                                        )
+                                    }
+                                  )}
+                                >
+                                  {hasVariant(
+                                    $state,
+                                    "patientSummary",
+                                    "patientSummary"
+                                  ) ? (
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return (() => {
+                                            const gregorianDate = new Date(
+                                              currentItem.issued_datetime
+                                            );
+                                            const shamsiDate =
+                                              new Intl.DateTimeFormat(
+                                                "fa-IR"
+                                              ).format(gregorianDate);
+                                            const shamsiTime =
+                                              gregorianDate.toLocaleTimeString(
+                                                "fa-IR",
+                                                { hour12: false }
+                                              );
+                                            const englishDate =
+                                              shamsiDate.replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              );
+                                            const englishTime = shamsiTime
+                                              .replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              )
+                                              .split(":")
+                                              .slice(0, 2)
+                                              .join(":");
+                                            return `(${englishDate}-${englishTime})`;
+                                          })();
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  ) : (
+                                    <React.Fragment>
+                                      {(() => {
+                                        const gregorianDate = new Date(
+                                          currentItem.item_content.report_datetime
+                                        );
+                                        const shamsiDate =
+                                          new Intl.DateTimeFormat(
+                                            "fa-IR"
+                                          ).format(gregorianDate);
+                                        const shamsiTime =
+                                          gregorianDate.toLocaleTimeString(
+                                            "fa-IR",
+                                            { hour12: false }
+                                          );
+                                        const englishDate = shamsiDate.replace(
+                                          /[۰-۹]/g,
+                                          d =>
+                                            String.fromCharCode(
+                                              d.charCodeAt(0) - 1728
+                                            )
+                                        );
+                                        const englishTime = shamsiTime
+                                          .replace(/[۰-۹]/g, d =>
+                                            String.fromCharCode(
+                                              d.charCodeAt(0) - 1728
+                                            )
+                                          )
+                                          .split(":")
+                                          .slice(0, 2)
+                                          .join(":");
+                                        return `${englishDate}-${englishTime}`;
+                                      })()}
+                                    </React.Fragment>
+                                  )}
+                                </div>
+                              </Stack__>
+                              <div
+                                data-plasmic-name={"report"}
+                                data-plasmic-override={overrides.report}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.report
+                                )}
+                              >
+                                <React.Fragment>
+                                  {(() => {
+                                    try {
+                                      return currentItem.item_content.report;
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return "";
+                                      }
+                                      throw e;
+                                    }
+                                  })()}
+                                </React.Fragment>
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
-                    </Stack__>
-                  )}
-                </DataCtxReader__>
-              </ApiFetcherComponent>
-            </div>
+                          );
+                        })}
+                      </Stack__>
+                    )}
+                  </DataCtxReader__>
+                </ApiFetcherComponent>
+              </div>
+            ) : null}
           </Stack__>
         </AntdModal>
       </div>
