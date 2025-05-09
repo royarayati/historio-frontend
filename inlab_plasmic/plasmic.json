@@ -2792,6 +2792,12 @@
           "name": "UploadFileComponent",
           "displayName": "UploadFileComponent",
           "componentImportPath": "./utils/UploadFileComponent"
+        },
+        {
+          "id": "Nd_qzxO4SbRZ",
+          "name": "ApiFetcherComponentPlusCache",
+          "displayName": "ApiFetcherComponentPlusCache",
+          "componentImportPath": "./utils/ApiFetcherComponentPlusCache"
         }
       ],
       "customFunctions": []

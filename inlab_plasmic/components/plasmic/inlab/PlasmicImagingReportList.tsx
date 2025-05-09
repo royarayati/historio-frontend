@@ -64,6 +64,7 @@ import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; /
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import  UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
@@ -133,6 +134,18 @@ export type PlasmicImagingReportList__OverridesType = {
   paraclinicTitle?: Flex__<"div">;
   previousAdmission?: Flex__<typeof Button>;
   paraclinicType?: Flex__<"div">;
+  apiFetcherComponentPlusCache?: Flex__<typeof ApiFetcherComponentPlusCache>;
+  viewPacsButton2?: Flex__<typeof Button>;
+  paraclinicReportsSection2?: Flex__<"section">;
+  paraclinicReportSection2?: Flex__<"section">;
+  paraclinicReportList3?: Flex__<"div">;
+  paraclinicReportCard2?: Flex__<"div">;
+  paraclinicTitleDatetime2?: Flex__<"div">;
+  paraclinicName3?: Flex__<"div">;
+  paraclinicDatetime3?: Flex__<"div">;
+  paraclinicTitle2?: Flex__<"div">;
+  previousAdmission2?: Flex__<typeof Button>;
+  paraclinicType2?: Flex__<"div">;
   paraclinics?: Flex__<typeof ApiFetcherComponent>;
   paraclinicsList?: Flex__<"div">;
   paraclinicNameDatetime?: Flex__<"div">;
@@ -212,6 +225,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
+
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
@@ -775,6 +789,61 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "viewPacsButton2.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "viewPacsButton2.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "viewPacsButton2.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "viewPacsButton2.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "viewPacsButton2.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "previousAdmission2[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "previousAdmission2[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "previousAdmission2[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "previousAdmission2[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "previousAdmission2[].sortSelected",
+        type: "private",
+        variableType: "boolean"
       }
     ],
     [$props, $ctx, $refs]
@@ -1827,7 +1896,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </div>
           </Button>
         </Stack__>
-        {$state.selectedTab === "ParaclinicReports" ? (
+        {false ? (
           <ApiFetcherComponent
             data-plasmic-name={"paraclinicsReport"}
             data-plasmic-override={overrides.paraclinicsReport}
@@ -2920,6 +2989,1130 @@ function PlasmicImagingReportList__RenderFunc(props: {
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
+        ) : null}
+        {(() => {
+          try {
+            return $state.selectedTab === "ParaclinicReports";
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })() ? (
+          <ApiFetcherComponentPlusCache
+            data-plasmic-name={"apiFetcherComponentPlusCache"}
+            data-plasmic-override={overrides.apiFetcherComponentPlusCache}
+            cache={"yes"}
+            cacheKey={"radiology"}
+            cacheType={"radiology"}
+            className={classNames(
+              "__wab_instance",
+              sty.apiFetcherComponentPlusCache
+            )}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v3/patient/${$ctx.params.code}/radiology_services/recent?offset=0&limit=20`}
+            patientId={(() => {
+              try {
+                return $ctx.params.code;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            ref={ref => {
+              $refs["apiFetcherComponentPlusCache"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <React.Fragment>
+                  {false ? (
+                    <Button
+                      data-plasmic-name={"viewPacsButton2"}
+                      data-plasmic-override={overrides.viewPacsButton2}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.viewPacsButton2
+                      )}
+                      color={(() => {
+                        try {
+                          return $ctx.fetched_data.loading === true
+                            ? "clear"
+                            : "blue";
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "blue";
+                          }
+                          throw e;
+                        }
+                      })()}
+                      deselected={generateStateValueProp($state, [
+                        "viewPacsButton2",
+                        "deselected"
+                      ])}
+                      isDisabled={generateStateValueProp($state, [
+                        "viewPacsButton2",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["goToPage"] =
+                          localStorage.getItem("namespace_id") !== "5"
+                            ? (() => {
+                                const actionArgs = {
+                                  destination: (() => {
+                                    try {
+                                      return $ctx.fetched_data.data.pacs_url;
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                };
+                                return (({ destination }) => {
+                                  if (
+                                    typeof destination === "string" &&
+                                    destination.startsWith("#")
+                                  ) {
+                                    document
+                                      .getElementById(destination.substr(1))
+                                      .scrollIntoView({ behavior: "smooth" });
+                                  } else {
+                                    __nextRouter?.push(destination);
+                                  }
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["goToPage"] != null &&
+                          typeof $steps["goToPage"] === "object" &&
+                          typeof $steps["goToPage"].then === "function"
+                        ) {
+                          $steps["goToPage"] = await $steps["goToPage"];
+                        }
+
+                        $steps["goToPage2"] =
+                          localStorage.getItem("namespace_id") === "5" &&
+                          window.location.origin ===
+                            "https://synapps.tums.ac.ir"
+                            ? (() => {
+                                const actionArgs = {
+                                  destination: (() => {
+                                    try {
+                                      return localStorage.getItem(
+                                        "ikhc_pacs_url"
+                                      );
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                };
+                                return (({ destination }) => {
+                                  if (
+                                    typeof destination === "string" &&
+                                    destination.startsWith("#")
+                                  ) {
+                                    document
+                                      .getElementById(destination.substr(1))
+                                      .scrollIntoView({ behavior: "smooth" });
+                                  } else {
+                                    __nextRouter?.push(destination);
+                                  }
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["goToPage2"] != null &&
+                          typeof $steps["goToPage2"] === "object" &&
+                          typeof $steps["goToPage2"].then === "function"
+                        ) {
+                          $steps["goToPage2"] = await $steps["goToPage2"];
+                        }
+                      }}
+                      onDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton2",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onIsDisabledChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton2",
+                            "isDisabled"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton2",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton2",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "viewPacsButton2",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      selected={generateStateValueProp($state, [
+                        "viewPacsButton2",
+                        "selected"
+                      ])}
+                      sortDeselected={generateStateValueProp($state, [
+                        "viewPacsButton2",
+                        "sortDeselected"
+                      ])}
+                      sortSelected={generateStateValueProp($state, [
+                        "viewPacsButton2",
+                        "sortSelected"
+                      ])}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__vxby8
+                        )}
+                      >
+                        {"View PACS"}
+                      </div>
+                    </Button>
+                  ) : null}
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? $ctx.fetched_data.loading == true
+                      : $ctx.fetched_data.loading == true
+                  ) ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__tiGvg
+                      )}
+                    >
+                      {
+                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                      }
+                    </div>
+                  ) : null}
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? $ctx.fetched_data.loading === false &&
+                        localStorage.getItem("inlab_user_his_type") !==
+                          "tums_api" &&
+                        $ctx.fetched_data.data.length === 0
+                      : $ctx.fetched_data.loading === false &&
+                        localStorage.getItem("inlab_user_his_type") !==
+                          "tums_api" &&
+                        $ctx.fetched_data.length === 0
+                  ) ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__cwGZz
+                      )}
+                    >
+                      {
+                        "\u06af\u0632\u0627\u0631\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a "
+                      }
+                    </div>
+                  ) : null}
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? (() => {
+                          try {
+                            return (
+                              $ctx.fetched_data.loading === false &&
+                              localStorage.getItem("inlab_user_his_type") ===
+                                "tums_api" &&
+                              (($ctx.fetched_data.response &&
+                                $ctx.fetched_data.response.status === 422) ||
+                                $ctx.fetched_data.status !== 200)
+                            );
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })()
+                      : (() => {
+                          try {
+                            return (
+                              $ctx.fetched_data.loading === false &&
+                              localStorage.getItem("inlab_user_his_type") ===
+                                "tums_api" &&
+                              (($ctx.fetched_data.response &&
+                                $ctx.fetched_data.response.status === 422) ||
+                                $ctx.fetched_data.status !== 200)
+                            );
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })()
+                  ) ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___5EVZc
+                      )}
+                    >
+                      {
+                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0645\u0634\u0627\u0647\u062f\u0647 \u0646\u062a\u0627\u06cc\u062c \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f"
+                      }
+                    </div>
+                  ) : null}
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? true
+                      : (() => {
+                          try {
+                            return $ctx.fetched_data.loading === false;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })()
+                  ) ? (
+                    <section
+                      data-plasmic-name={"paraclinicReportsSection2"}
+                      data-plasmic-override={
+                        overrides.paraclinicReportsSection2
+                      }
+                      className={classNames(
+                        projectcss.all,
+                        sty.paraclinicReportsSection2
+                      )}
+                    >
+                      <section
+                        data-plasmic-name={"paraclinicReportSection2"}
+                        data-plasmic-override={
+                          overrides.paraclinicReportSection2
+                        }
+                        className={classNames(
+                          projectcss.all,
+                          sty.paraclinicReportSection2
+                        )}
+                      >
+                        {(_par =>
+                          !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                          (() => {
+                            try {
+                              return $ctx.fetched_data.data.radiology_services;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return [];
+                              }
+                              throw e;
+                            }
+                          })()
+                        ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                          const currentItem = __plasmic_item_0;
+                          const currentIndex = __plasmic_idx_0;
+                          return (
+                            <Stack__
+                              as={"div"}
+                              data-plasmic-name={"paraclinicReportList3"}
+                              data-plasmic-override={
+                                overrides.paraclinicReportList3
+                              }
+                              hasGap={true}
+                              className={classNames(
+                                projectcss.all,
+                                sty.paraclinicReportList3
+                              )}
+                              key={currentIndex}
+                            >
+                              <Stack__
+                                as={"div"}
+                                data-plasmic-name={"paraclinicReportCard2"}
+                                data-plasmic-override={
+                                  overrides.paraclinicReportCard2
+                                }
+                                hasGap={true}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.paraclinicReportCard2
+                                )}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["updateParaclinicReportsText"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: [
+                                              "paraclinicReportText"
+                                            ]
+                                          },
+                                          operation: 0,
+                                          value: currentItem.report
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateParaclinicReportsText"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateParaclinicReportsText"
+                                    ] === "object" &&
+                                    typeof $steps["updateParaclinicReportsText"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateParaclinicReportsText"] =
+                                      await $steps[
+                                        "updateParaclinicReportsText"
+                                      ];
+                                  }
+
+                                  $steps["updateParaclinicReportDatetime"] =
+                                    true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "paraclinicReportDatetime"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: currentItem.service_datetime
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["updateParaclinicReportDatetime"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateParaclinicReportDatetime"
+                                    ] === "object" &&
+                                    typeof $steps[
+                                      "updateParaclinicReportDatetime"
+                                    ].then === "function"
+                                  ) {
+                                    $steps["updateParaclinicReportDatetime"] =
+                                      await $steps[
+                                        "updateParaclinicReportDatetime"
+                                      ];
+                                  }
+
+                                  $steps["updateParaclinicReportId"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["paraclinicReportId"]
+                                          },
+                                          operation: 0,
+                                          value: currentItem.id
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateParaclinicReportId"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateParaclinicReportId"
+                                    ] === "object" &&
+                                    typeof $steps["updateParaclinicReportId"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateParaclinicReportId"] =
+                                      await $steps["updateParaclinicReportId"];
+                                  }
+
+                                  $steps["updateParaclinicReportName"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: [
+                                              "paraclinicReportName"
+                                            ]
+                                          },
+                                          operation: 0,
+                                          value: currentItem.title
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateParaclinicReportName"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateParaclinicReportName"
+                                    ] === "object" &&
+                                    typeof $steps["updateParaclinicReportName"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateParaclinicReportName"] =
+                                      await $steps[
+                                        "updateParaclinicReportName"
+                                      ];
+                                  }
+
+                                  $steps["updateShowSuccessMassage"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["showSuccessMassage"]
+                                          },
+                                          operation: 0,
+                                          value: false
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateShowSuccessMassage"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateShowSuccessMassage"
+                                    ] === "object" &&
+                                    typeof $steps["updateShowSuccessMassage"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateShowSuccessMassage"] =
+                                      await $steps["updateShowSuccessMassage"];
+                                  }
+
+                                  $steps["updateParaclinicReportModalOpen"] =
+                                    true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "paraclinicReportModal",
+                                                "open"
+                                              ]
+                                            },
+                                            operation: 4
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            const oldValue = $stateGet(
+                                              objRoot,
+                                              variablePath
+                                            );
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              !oldValue
+                                            );
+                                            return !oldValue;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["updateParaclinicReportModalOpen"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateParaclinicReportModalOpen"
+                                    ] === "object" &&
+                                    typeof $steps[
+                                      "updateParaclinicReportModalOpen"
+                                    ].then === "function"
+                                  ) {
+                                    $steps["updateParaclinicReportModalOpen"] =
+                                      await $steps[
+                                        "updateParaclinicReportModalOpen"
+                                      ];
+                                  }
+                                }}
+                              >
+                                <Stack__
+                                  as={"div"}
+                                  data-plasmic-name={"paraclinicTitleDatetime2"}
+                                  data-plasmic-override={
+                                    overrides.paraclinicTitleDatetime2
+                                  }
+                                  hasGap={true}
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.paraclinicTitleDatetime2
+                                  )}
+                                >
+                                  <div
+                                    data-plasmic-name={"paraclinicName3"}
+                                    data-plasmic-override={
+                                      overrides.paraclinicName3
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.paraclinicName3
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {currentItem.service_name}
+                                    </React.Fragment>
+                                  </div>
+                                  <div
+                                    data-plasmic-name={"paraclinicDatetime3"}
+                                    data-plasmic-override={
+                                      overrides.paraclinicDatetime3
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.paraclinicDatetime3
+                                    )}
+                                  >
+                                    {hasVariant(
+                                      globalVariants,
+                                      "screen",
+                                      "mobileFirst"
+                                    ) ? (
+                                      <React.Fragment>
+                                        {(() => {
+                                          const gregorianDate = new Date(
+                                            currentItem.service_datetime
+                                          );
+                                          const shamsiDate =
+                                            new Intl.DateTimeFormat(
+                                              "fa-IR"
+                                            ).format(gregorianDate);
+                                          const shamsiTime =
+                                            gregorianDate.toLocaleTimeString(
+                                              "fa-IR",
+                                              { hour12: false }
+                                            );
+                                          const englishDate =
+                                            shamsiDate.replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
+                                          const englishTime =
+                                            shamsiTime.replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
+                                          return `${englishDate}  ${englishTime}`;
+                                        })()}
+                                      </React.Fragment>
+                                    ) : (
+                                      <React.Fragment>
+                                        {(() => {
+                                          const gregorianDate = new Date(
+                                            currentItem.service_datetime
+                                          );
+                                          gregorianDate.setSeconds(0);
+                                          const shamsiDate =
+                                            new Intl.DateTimeFormat(
+                                              "fa-IR"
+                                            ).format(gregorianDate);
+                                          const shamsiTime =
+                                            gregorianDate.toLocaleTimeString(
+                                              "fa-IR",
+                                              { hour12: false }
+                                            );
+                                          const englishDate =
+                                            shamsiDate.replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
+                                          const englishTime =
+                                            shamsiTime.replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
+                                          const timeWithoutSeconds = englishTime
+                                            .split(":")
+                                            .slice(0, 2)
+                                            .join(":");
+                                          return `${englishDate}  ${timeWithoutSeconds}`;
+                                        })()}
+                                      </React.Fragment>
+                                    )}
+                                  </div>
+                                </Stack__>
+                                <div
+                                  data-plasmic-name={"paraclinicTitle2"}
+                                  data-plasmic-override={
+                                    overrides.paraclinicTitle2
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.paraclinicTitle2
+                                  )}
+                                >
+                                  {false
+                                    ? (() => {
+                                        const child$Props = {
+                                          className: classNames(
+                                            "__wab_instance",
+                                            sty.previousAdmission2
+                                          ),
+                                          color: "red",
+                                          deselected: generateStateValueProp(
+                                            $state,
+                                            [
+                                              "previousAdmission2",
+                                              __plasmic_idx_0,
+                                              "deselected"
+                                            ]
+                                          ),
+                                          isDisabled: generateStateValueProp(
+                                            $state,
+                                            [
+                                              "previousAdmission2",
+                                              __plasmic_idx_0,
+                                              "isDisabled"
+                                            ]
+                                          ),
+                                          onDeselectedChange: async (
+                                            ...eventArgs: any
+                                          ) => {
+                                            ((...eventArgs) => {
+                                              generateStateOnChangeProp(
+                                                $state,
+                                                [
+                                                  "previousAdmission2",
+                                                  __plasmic_idx_0,
+                                                  "deselected"
+                                                ]
+                                              )(eventArgs[0]);
+                                            }).apply(null, eventArgs);
+
+                                            if (
+                                              eventArgs.length > 1 &&
+                                              eventArgs[1] &&
+                                              eventArgs[1]._plasmic_state_init_
+                                            ) {
+                                              return;
+                                            }
+                                          },
+                                          onIsDisabledChange: async (
+                                            ...eventArgs: any
+                                          ) => {
+                                            ((...eventArgs) => {
+                                              generateStateOnChangeProp(
+                                                $state,
+                                                [
+                                                  "previousAdmission2",
+                                                  __plasmic_idx_0,
+                                                  "isDisabled"
+                                                ]
+                                              )(eventArgs[0]);
+                                            }).apply(null, eventArgs);
+
+                                            if (
+                                              eventArgs.length > 1 &&
+                                              eventArgs[1] &&
+                                              eventArgs[1]._plasmic_state_init_
+                                            ) {
+                                              return;
+                                            }
+                                          },
+                                          onSelectedChange: async (
+                                            ...eventArgs: any
+                                          ) => {
+                                            ((...eventArgs) => {
+                                              generateStateOnChangeProp(
+                                                $state,
+                                                [
+                                                  "previousAdmission2",
+                                                  __plasmic_idx_0,
+                                                  "selected"
+                                                ]
+                                              )(eventArgs[0]);
+                                            }).apply(null, eventArgs);
+
+                                            if (
+                                              eventArgs.length > 1 &&
+                                              eventArgs[1] &&
+                                              eventArgs[1]._plasmic_state_init_
+                                            ) {
+                                              return;
+                                            }
+                                          },
+                                          onSortDeselectedChange: async (
+                                            ...eventArgs: any
+                                          ) => {
+                                            ((...eventArgs) => {
+                                              generateStateOnChangeProp(
+                                                $state,
+                                                [
+                                                  "previousAdmission2",
+                                                  __plasmic_idx_0,
+                                                  "sortDeselected"
+                                                ]
+                                              )(eventArgs[0]);
+                                            }).apply(null, eventArgs);
+
+                                            if (
+                                              eventArgs.length > 1 &&
+                                              eventArgs[1] &&
+                                              eventArgs[1]._plasmic_state_init_
+                                            ) {
+                                              return;
+                                            }
+                                          },
+                                          onSortSelectedChange: async (
+                                            ...eventArgs: any
+                                          ) => {
+                                            ((...eventArgs) => {
+                                              generateStateOnChangeProp(
+                                                $state,
+                                                [
+                                                  "previousAdmission2",
+                                                  __plasmic_idx_0,
+                                                  "sortSelected"
+                                                ]
+                                              )(eventArgs[0]);
+                                            }).apply(null, eventArgs);
+
+                                            if (
+                                              eventArgs.length > 1 &&
+                                              eventArgs[1] &&
+                                              eventArgs[1]._plasmic_state_init_
+                                            ) {
+                                              return;
+                                            }
+                                          },
+                                          selected: generateStateValueProp(
+                                            $state,
+                                            [
+                                              "previousAdmission2",
+                                              __plasmic_idx_0,
+                                              "selected"
+                                            ]
+                                          ),
+                                          sortDeselected:
+                                            generateStateValueProp($state, [
+                                              "previousAdmission2",
+                                              __plasmic_idx_0,
+                                              "sortDeselected"
+                                            ]),
+                                          sortSelected: generateStateValueProp(
+                                            $state,
+                                            [
+                                              "previousAdmission2",
+                                              __plasmic_idx_0,
+                                              "sortSelected"
+                                            ]
+                                          )
+                                        };
+
+                                        initializePlasmicStates(
+                                          $state,
+                                          [
+                                            {
+                                              name: "previousAdmission2[].isDisabled",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            },
+                                            {
+                                              name: "previousAdmission2[].selected",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            },
+                                            {
+                                              name: "previousAdmission2[].deselected",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            },
+                                            {
+                                              name: "previousAdmission2[].sortDeselected",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            },
+                                            {
+                                              name: "previousAdmission2[].sortSelected",
+                                              initFunc: ({
+                                                $props,
+                                                $state,
+                                                $queries
+                                              }) => undefined
+                                            }
+                                          ],
+                                          [__plasmic_idx_0]
+                                        );
+                                        return (
+                                          <Button
+                                            data-plasmic-name={
+                                              "previousAdmission2"
+                                            }
+                                            data-plasmic-override={
+                                              overrides.previousAdmission2
+                                            }
+                                            {...child$Props}
+                                          >
+                                            {
+                                              "\u0628\u0633\u062a\u0631\u06cc \u0642\u0628\u0644\u06cc "
+                                            }
+                                          </Button>
+                                        );
+                                      })()
+                                    : null}
+                                  <div
+                                    data-plasmic-name={"paraclinicType2"}
+                                    data-plasmic-override={
+                                      overrides.paraclinicType2
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.paraclinicType2
+                                    )}
+                                    dir={"rtl"}
+                                  >
+                                    <React.Fragment>
+                                      {currentItem.title.replace(
+                                        /\(\s+#\s*\)/g,
+                                        ""
+                                      )}
+                                    </React.Fragment>
+                                  </div>
+                                </div>
+                              </Stack__>
+                            </Stack__>
+                          );
+                        })}
+                      </section>
+                    </section>
+                  ) : null}
+                </React.Fragment>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponentPlusCache>
         ) : null}
         {$state.selectedTab === "Paraclinics" ? (
           <ApiFetcherComponent
@@ -6037,6 +7230,18 @@ const PlasmicDescendants = {
     "paraclinicTitle",
     "previousAdmission",
     "paraclinicType",
+    "apiFetcherComponentPlusCache",
+    "viewPacsButton2",
+    "paraclinicReportsSection2",
+    "paraclinicReportSection2",
+    "paraclinicReportList3",
+    "paraclinicReportCard2",
+    "paraclinicTitleDatetime2",
+    "paraclinicName3",
+    "paraclinicDatetime3",
+    "paraclinicTitle2",
+    "previousAdmission2",
+    "paraclinicType2",
     "paraclinics",
     "paraclinicsList",
     "paraclinicNameDatetime",
@@ -6167,6 +7372,77 @@ const PlasmicDescendants = {
   paraclinicTitle: ["paraclinicTitle", "previousAdmission", "paraclinicType"],
   previousAdmission: ["previousAdmission"],
   paraclinicType: ["paraclinicType"],
+  apiFetcherComponentPlusCache: [
+    "apiFetcherComponentPlusCache",
+    "viewPacsButton2",
+    "paraclinicReportsSection2",
+    "paraclinicReportSection2",
+    "paraclinicReportList3",
+    "paraclinicReportCard2",
+    "paraclinicTitleDatetime2",
+    "paraclinicName3",
+    "paraclinicDatetime3",
+    "paraclinicTitle2",
+    "previousAdmission2",
+    "paraclinicType2"
+  ],
+  viewPacsButton2: ["viewPacsButton2"],
+  paraclinicReportsSection2: [
+    "paraclinicReportsSection2",
+    "paraclinicReportSection2",
+    "paraclinicReportList3",
+    "paraclinicReportCard2",
+    "paraclinicTitleDatetime2",
+    "paraclinicName3",
+    "paraclinicDatetime3",
+    "paraclinicTitle2",
+    "previousAdmission2",
+    "paraclinicType2"
+  ],
+  paraclinicReportSection2: [
+    "paraclinicReportSection2",
+    "paraclinicReportList3",
+    "paraclinicReportCard2",
+    "paraclinicTitleDatetime2",
+    "paraclinicName3",
+    "paraclinicDatetime3",
+    "paraclinicTitle2",
+    "previousAdmission2",
+    "paraclinicType2"
+  ],
+  paraclinicReportList3: [
+    "paraclinicReportList3",
+    "paraclinicReportCard2",
+    "paraclinicTitleDatetime2",
+    "paraclinicName3",
+    "paraclinicDatetime3",
+    "paraclinicTitle2",
+    "previousAdmission2",
+    "paraclinicType2"
+  ],
+  paraclinicReportCard2: [
+    "paraclinicReportCard2",
+    "paraclinicTitleDatetime2",
+    "paraclinicName3",
+    "paraclinicDatetime3",
+    "paraclinicTitle2",
+    "previousAdmission2",
+    "paraclinicType2"
+  ],
+  paraclinicTitleDatetime2: [
+    "paraclinicTitleDatetime2",
+    "paraclinicName3",
+    "paraclinicDatetime3"
+  ],
+  paraclinicName3: ["paraclinicName3"],
+  paraclinicDatetime3: ["paraclinicDatetime3"],
+  paraclinicTitle2: [
+    "paraclinicTitle2",
+    "previousAdmission2",
+    "paraclinicType2"
+  ],
+  previousAdmission2: ["previousAdmission2"],
+  paraclinicType2: ["paraclinicType2"],
   paraclinics: [
     "paraclinics",
     "paraclinicsList",
@@ -6316,6 +7592,18 @@ type NodeDefaultElementType = {
   paraclinicTitle: "div";
   previousAdmission: typeof Button;
   paraclinicType: "div";
+  apiFetcherComponentPlusCache: typeof ApiFetcherComponentPlusCache;
+  viewPacsButton2: typeof Button;
+  paraclinicReportsSection2: "section";
+  paraclinicReportSection2: "section";
+  paraclinicReportList3: "div";
+  paraclinicReportCard2: "div";
+  paraclinicTitleDatetime2: "div";
+  paraclinicName3: "div";
+  paraclinicDatetime3: "div";
+  paraclinicTitle2: "div";
+  previousAdmission2: typeof Button;
+  paraclinicType2: "div";
   paraclinics: typeof ApiFetcherComponent;
   paraclinicsList: "div";
   paraclinicNameDatetime: "div";
@@ -6445,6 +7733,20 @@ export const PlasmicImagingReportList = Object.assign(
     paraclinicTitle: makeNodeComponent("paraclinicTitle"),
     previousAdmission: makeNodeComponent("previousAdmission"),
     paraclinicType: makeNodeComponent("paraclinicType"),
+    apiFetcherComponentPlusCache: makeNodeComponent(
+      "apiFetcherComponentPlusCache"
+    ),
+    viewPacsButton2: makeNodeComponent("viewPacsButton2"),
+    paraclinicReportsSection2: makeNodeComponent("paraclinicReportsSection2"),
+    paraclinicReportSection2: makeNodeComponent("paraclinicReportSection2"),
+    paraclinicReportList3: makeNodeComponent("paraclinicReportList3"),
+    paraclinicReportCard2: makeNodeComponent("paraclinicReportCard2"),
+    paraclinicTitleDatetime2: makeNodeComponent("paraclinicTitleDatetime2"),
+    paraclinicName3: makeNodeComponent("paraclinicName3"),
+    paraclinicDatetime3: makeNodeComponent("paraclinicDatetime3"),
+    paraclinicTitle2: makeNodeComponent("paraclinicTitle2"),
+    previousAdmission2: makeNodeComponent("previousAdmission2"),
+    paraclinicType2: makeNodeComponent("paraclinicType2"),
     paraclinics: makeNodeComponent("paraclinics"),
     paraclinicsList: makeNodeComponent("paraclinicsList"),
     paraclinicNameDatetime: makeNodeComponent("paraclinicNameDatetime"),
