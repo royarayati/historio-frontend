@@ -277,7 +277,7 @@ export const ApiFetcherComponentPlusCacheMeta: CodeComponentMeta<ApiFetcherProps
     },
   },
   providesData: true,
-  importPath: './components/testApifetcherCache',
+  importPath: './utils/ApiFetcherComponentPlusCache',
 };
 
 

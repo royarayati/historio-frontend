@@ -76,6 +76,7 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicPatientProfile.module.css"; // plasmic-import: Ev8txsbuZl9W/css
 
+import LastTrackButtonSvgrepoComSvgIcon from "./icons/PlasmicIcon__LastTrackButtonSvgrepoComSvg"; // plasmic-import: 40Mu0isncOEt/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 
@@ -103,12 +104,14 @@ export type PlasmicPatientProfile__OverridesType = {
   header?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
+  lastPatient?: Flex__<"svg">;
   homepage?: Flex__<typeof PlasmicImg__>;
   consult?: Flex__<typeof PlasmicImg__>;
   patientProfile5?: Flex__<typeof PlasmicImg__>;
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratory?: Flex__<typeof PlasmicImg__>;
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
+  nextPatient?: Flex__<"svg">;
   patientDataList?: Flex__<"div">;
   patientDemographicData?: Flex__<"div">;
   patientProfileApi?: Flex__<typeof ApiFetcherComponent>;
@@ -363,6 +366,125 @@ function PlasmicPatientProfile__RenderFunc(props: {
               data-plasmic-override={overrides.switchingTab}
               className={classNames("__wab_instance", sty.switchingTab)}
             >
+              <LastTrackButtonSvgrepoComSvgIcon
+                data-plasmic-name={"lastPatient"}
+                data-plasmic-override={overrides.lastPatient}
+                className={classNames(projectcss.all, sty.lastPatient)}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["getAdmIdPatientId"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (() => {
+                              const stored_patient_index_id_list = JSON.parse(
+                                localStorage.getItem("patient_index_id_list")
+                              );
+                              const specificItem =
+                                stored_patient_index_id_list.find(
+                                  item =>
+                                    item.admission_id ===
+                                    parseInt($ctx.params.adm_id)
+                                );
+                              if (specificItem) {
+                                const specificNumber = specificItem.number;
+                                const newNumber = specificNumber - 1;
+                                const nextItem =
+                                  stored_patient_index_id_list.find(
+                                    item => item.number === newNumber
+                                  );
+                                if (nextItem) {
+                                  localStorage.setItem(
+                                    "patient_id",
+                                    nextItem.patient_id
+                                  );
+                                  return localStorage.setItem(
+                                    "admission_id",
+                                    nextItem.admission_id
+                                  );
+                                } else {
+                                  return console.log("No next item found.");
+                                }
+                              } else {
+                                return console.log(
+                                  "No matching admission ID found."
+                                );
+                              }
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["getAdmIdPatientId"] != null &&
+                    typeof $steps["getAdmIdPatientId"] === "object" &&
+                    typeof $steps["getAdmIdPatientId"].then === "function"
+                  ) {
+                    $steps["getAdmIdPatientId"] = await $steps[
+                      "getAdmIdPatientId"
+                    ];
+                  }
+
+                  $steps["goToPatientProfile"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return localStorage.getItem("patient_id");
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}/profile/${(() => {
+                            try {
+                              return localStorage.getItem("admission_id");
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToPatientProfile"] != null &&
+                    typeof $steps["goToPatientProfile"] === "object" &&
+                    typeof $steps["goToPatientProfile"].then === "function"
+                  ) {
+                    $steps["goToPatientProfile"] = await $steps[
+                      "goToPatientProfile"
+                    ];
+                  }
+                }}
+                role={"img"}
+              />
+
               <PlasmicImg__
                 data-plasmic-name={"homepage"}
                 data-plasmic-override={overrides.homepage}
@@ -373,7 +495,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
-                displayWidth={"20%"}
+                displayWidth={"15%"}
                 loading={"lazy"}
                 onClick={async event => {
                   const $steps = {};
@@ -421,7 +543,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
-                displayWidth={"20%"}
+                displayWidth={"15%"}
                 loading={"lazy"}
                 onClick={async event => {
                   const $steps = {};
@@ -572,7 +694,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
-                displayWidth={"20%"}
+                displayWidth={"15%"}
                 onClick={async event => {
                   const $steps = {};
 
@@ -647,7 +769,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
-                displayWidth={"20%"}
+                displayWidth={"15%"}
                 loading={"lazy"}
                 onClick={async event => {
                   const $steps = {};
@@ -854,6 +976,124 @@ function PlasmicPatientProfile__RenderFunc(props: {
                   />
                 );
               })()}
+              <LastTrackButtonSvgrepoComSvgIcon
+                data-plasmic-name={"nextPatient"}
+                data-plasmic-override={overrides.nextPatient}
+                className={classNames(projectcss.all, sty.nextPatient)}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["getAdmIdPatientId"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (() => {
+                              const stored_patient_index_id_list = JSON.parse(
+                                localStorage.getItem("patient_index_id_list")
+                              );
+                              const specificItem =
+                                stored_patient_index_id_list.find(
+                                  item =>
+                                    item.admission_id ===
+                                    parseInt($ctx.params.adm_id)
+                                );
+                              if (specificItem) {
+                                const specificNumber = specificItem.number;
+                                const newNumber = specificNumber + 1;
+                                const nextItem =
+                                  stored_patient_index_id_list.find(
+                                    item => item.number === newNumber
+                                  );
+                                if (nextItem) {
+                                  localStorage.setItem(
+                                    "patient_id",
+                                    nextItem.patient_id
+                                  );
+                                  return localStorage.setItem(
+                                    "admission_id",
+                                    nextItem.admission_id
+                                  );
+                                } else {
+                                  return console.log("No next item found.");
+                                }
+                              } else {
+                                return console.log(
+                                  "No matching admission ID found."
+                                );
+                              }
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["getAdmIdPatientId"] != null &&
+                    typeof $steps["getAdmIdPatientId"] === "object" &&
+                    typeof $steps["getAdmIdPatientId"].then === "function"
+                  ) {
+                    $steps["getAdmIdPatientId"] = await $steps[
+                      "getAdmIdPatientId"
+                    ];
+                  }
+
+                  $steps["goToPatientProfile"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return localStorage.getItem("patient_id");
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}/profile/${(() => {
+                            try {
+                              return localStorage.getItem("admission_id");
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToPatientProfile"] != null &&
+                    typeof $steps["goToPatientProfile"] === "object" &&
+                    typeof $steps["goToPatientProfile"].then === "function"
+                  ) {
+                    $steps["goToPatientProfile"] = await $steps[
+                      "goToPatientProfile"
+                    ];
+                  }
+                }}
+                role={"img"}
+              />
             </SwitchingTab>
           </div>
           <Stack__
@@ -2889,12 +3129,14 @@ const PlasmicDescendants = {
     "header",
     "switchingTabs",
     "switchingTab",
+    "lastPatient",
     "homepage",
     "consult",
     "patientProfile5",
     "radiologyReport",
     "laboratory",
     "bookmarkIcon",
+    "nextPatient",
     "patientDataList",
     "patientDemographicData",
     "patientProfileApi",
@@ -2949,28 +3191,34 @@ const PlasmicDescendants = {
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
+    "lastPatient",
     "homepage",
     "consult",
     "patientProfile5",
     "radiologyReport",
     "laboratory",
-    "bookmarkIcon"
+    "bookmarkIcon",
+    "nextPatient"
   ],
   switchingTab: [
     "switchingTab",
+    "lastPatient",
     "homepage",
     "consult",
     "patientProfile5",
     "radiologyReport",
     "laboratory",
-    "bookmarkIcon"
+    "bookmarkIcon",
+    "nextPatient"
   ],
+  lastPatient: ["lastPatient"],
   homepage: ["homepage"],
   consult: ["consult"],
   patientProfile5: ["patientProfile5"],
   radiologyReport: ["radiologyReport"],
   laboratory: ["laboratory"],
   bookmarkIcon: ["bookmarkIcon"],
+  nextPatient: ["nextPatient"],
   patientDataList: [
     "patientDataList",
     "patientDemographicData",
@@ -3285,12 +3533,14 @@ type NodeDefaultElementType = {
   header: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
+  lastPatient: "svg";
   homepage: typeof PlasmicImg__;
   consult: typeof PlasmicImg__;
   patientProfile5: typeof PlasmicImg__;
   radiologyReport: typeof PlasmicImg__;
   laboratory: typeof PlasmicImg__;
   bookmarkIcon: typeof BookmarkIcon;
+  nextPatient: "svg";
   patientDataList: "div";
   patientDemographicData: "div";
   patientProfileApi: typeof ApiFetcherComponent;
@@ -3407,12 +3657,14 @@ export const PlasmicPatientProfile = Object.assign(
     header: makeNodeComponent("header"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
+    lastPatient: makeNodeComponent("lastPatient"),
     homepage: makeNodeComponent("homepage"),
     consult: makeNodeComponent("consult"),
     patientProfile5: makeNodeComponent("patientProfile5"),
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratory: makeNodeComponent("laboratory"),
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
+    nextPatient: makeNodeComponent("nextPatient"),
     patientDataList: makeNodeComponent("patientDataList"),
     patientDemographicData: makeNodeComponent("patientDemographicData"),
     patientProfileApi: makeNodeComponent("patientProfileApi"),

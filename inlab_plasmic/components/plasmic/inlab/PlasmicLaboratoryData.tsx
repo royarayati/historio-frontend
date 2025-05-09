@@ -87,6 +87,7 @@ import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP
 import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
 import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 import InformationIcon from "./icons/PlasmicIcon__Information"; // plasmic-import: tSD0oiaMd-7V/icon
+import LastTrackButtonSvgrepoComSvgIcon from "./icons/PlasmicIcon__LastTrackButtonSvgrepoComSvg"; // plasmic-import: 40Mu0isncOEt/icon
 
 createPlasmicElementProxy;
 
@@ -174,12 +175,14 @@ export type PlasmicLaboratoryData__OverridesType = {
   labGroupFactorName?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
+  lastPatient2?: Flex__<"svg">;
   homepage?: Flex__<typeof PlasmicImg__>;
   consult?: Flex__<typeof PlasmicImg__>;
   patientProfile?: Flex__<typeof PlasmicImg__>;
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratoryPage2?: Flex__<typeof PlasmicImg__>;
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
+  nextPatient2?: Flex__<"svg">;
 };
 
 export interface DefaultLaboratoryDataProps {}
@@ -1163,193 +1166,203 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
-          <Stack__
-            as={"div"}
-            data-plasmic-name={"nextPatient"}
-            data-plasmic-override={overrides.nextPatient}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.nextPatient)}
-            onClick={async event => {
-              const $steps = {};
+          {false ? (
+            <Stack__
+              as={"div"}
+              data-plasmic-name={"nextPatient"}
+              data-plasmic-override={overrides.nextPatient}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.nextPatient)}
+              onClick={async event => {
+                const $steps = {};
 
-              $steps["deleteLabData"] = true
-                ? (() => {
-                    const actionArgs = {
-                      customFunction: async () => {
-                        return (() => {
-                          localStorage.setItem("laboratory_data", "");
-                          return console.log(
-                            "laboratory_data",
-                            localStorage.getItem("laboratory_data")
-                          );
-                        })();
-                      }
-                    };
-                    return (({ customFunction }) => {
-                      return customFunction();
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["deleteLabData"] != null &&
-                typeof $steps["deleteLabData"] === "object" &&
-                typeof $steps["deleteLabData"].then === "function"
-              ) {
-                $steps["deleteLabData"] = await $steps["deleteLabData"];
-              }
-
-              $steps["getAdmIdPatientId"] = true
-                ? (() => {
-                    const actionArgs = {
-                      customFunction: async () => {
-                        return (() => {
-                          const stored_patient_index_id_list = JSON.parse(
-                            localStorage.getItem("patient_index_id_list")
-                          );
-                          const specificItem =
-                            stored_patient_index_id_list.find(
-                              item =>
-                                item.admission_id ===
-                                parseInt($ctx.params.adm_id)
-                            );
-                          if (specificItem) {
-                            const specificNumber = specificItem.number;
-                            const newNumber = specificNumber + 1;
-                            const nextItem = stored_patient_index_id_list.find(
-                              item => item.number === newNumber
-                            );
-                            if (nextItem) {
-                              localStorage.setItem(
-                                "patient_id",
-                                nextItem.patient_id
-                              );
-                              return localStorage.setItem(
-                                "admission_id",
-                                nextItem.admission_id
-                              );
-                            } else {
-                              return console.log("No next item found.");
-                            }
-                          } else {
+                $steps["deleteLabData"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (() => {
+                            localStorage.setItem("laboratory_data", "");
                             return console.log(
-                              "No matching admission ID found."
+                              "laboratory_data",
+                              localStorage.getItem("laboratory_data")
                             );
-                          }
-                        })();
-                      }
-                    };
-                    return (({ customFunction }) => {
-                      return customFunction();
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["getAdmIdPatientId"] != null &&
-                typeof $steps["getAdmIdPatientId"] === "object" &&
-                typeof $steps["getAdmIdPatientId"].then === "function"
-              ) {
-                $steps["getAdmIdPatientId"] = await $steps["getAdmIdPatientId"];
-              }
-
-              $steps["updateDataLoaded"] = true
-                ? (() => {
-                    const actionArgs = {
-                      variable: {
-                        objRoot: $state,
-                        variablePath: ["dataLoaded"]
-                      },
-                      operation: 0,
-                      value: false
-                    };
-                    return (({ variable, value, startIndex, deleteCount }) => {
-                      if (!variable) {
-                        return;
-                      }
-                      const { objRoot, variablePath } = variable;
-
-                      $stateSet(objRoot, variablePath, value);
-                      return value;
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["updateDataLoaded"] != null &&
-                typeof $steps["updateDataLoaded"] === "object" &&
-                typeof $steps["updateDataLoaded"].then === "function"
-              ) {
-                $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
-              }
-
-              $steps["goToNextLaboratoryData"] = true
-                ? (() => {
-                    const actionArgs = {
-                      destination: `/patient/${(() => {
-                        try {
-                          return localStorage.getItem("patient_id");
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
-                          }
-                          throw e;
+                          })();
                         }
-                      })()}/lab/${(() => {
-                        try {
-                          return localStorage.getItem("admission_id");
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
-                          }
-                          throw e;
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["deleteLabData"] != null &&
+                  typeof $steps["deleteLabData"] === "object" &&
+                  typeof $steps["deleteLabData"].then === "function"
+                ) {
+                  $steps["deleteLabData"] = await $steps["deleteLabData"];
+                }
+
+                $steps["getAdmIdPatientId"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (() => {
+                            const stored_patient_index_id_list = JSON.parse(
+                              localStorage.getItem("patient_index_id_list")
+                            );
+                            const specificItem =
+                              stored_patient_index_id_list.find(
+                                item =>
+                                  item.admission_id ===
+                                  parseInt($ctx.params.adm_id)
+                              );
+                            if (specificItem) {
+                              const specificNumber = specificItem.number;
+                              const newNumber = specificNumber + 1;
+                              const nextItem =
+                                stored_patient_index_id_list.find(
+                                  item => item.number === newNumber
+                                );
+                              if (nextItem) {
+                                localStorage.setItem(
+                                  "patient_id",
+                                  nextItem.patient_id
+                                );
+                                return localStorage.setItem(
+                                  "admission_id",
+                                  nextItem.admission_id
+                                );
+                              } else {
+                                return console.log("No next item found.");
+                              }
+                            } else {
+                              return console.log(
+                                "No matching admission ID found."
+                              );
+                            }
+                          })();
                         }
-                      })()}`
-                    };
-                    return (({ destination }) => {
-                      if (
-                        typeof destination === "string" &&
-                        destination.startsWith("#")
-                      ) {
-                        document
-                          .getElementById(destination.substr(1))
-                          .scrollIntoView({ behavior: "smooth" });
-                      } else {
-                        __nextRouter?.push(destination);
-                      }
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["goToNextLaboratoryData"] != null &&
-                typeof $steps["goToNextLaboratoryData"] === "object" &&
-                typeof $steps["goToNextLaboratoryData"].then === "function"
-              ) {
-                $steps["goToNextLaboratoryData"] = await $steps[
-                  "goToNextLaboratoryData"
-                ];
-              }
-            }}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__ckBTs
-              )}
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["getAdmIdPatientId"] != null &&
+                  typeof $steps["getAdmIdPatientId"] === "object" &&
+                  typeof $steps["getAdmIdPatientId"].then === "function"
+                ) {
+                  $steps["getAdmIdPatientId"] = await $steps[
+                    "getAdmIdPatientId"
+                  ];
+                }
+
+                $steps["updateDataLoaded"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["dataLoaded"]
+                        },
+                        operation: 0,
+                        value: false
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateDataLoaded"] != null &&
+                  typeof $steps["updateDataLoaded"] === "object" &&
+                  typeof $steps["updateDataLoaded"].then === "function"
+                ) {
+                  $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
+                }
+
+                $steps["goToNextLaboratoryData"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/patient/${(() => {
+                          try {
+                            return localStorage.getItem("patient_id");
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/lab/${(() => {
+                          try {
+                            return localStorage.getItem("admission_id");
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToNextLaboratoryData"] != null &&
+                  typeof $steps["goToNextLaboratoryData"] === "object" &&
+                  typeof $steps["goToNextLaboratoryData"].then === "function"
+                ) {
+                  $steps["goToNextLaboratoryData"] = await $steps[
+                    "goToNextLaboratoryData"
+                  ];
+                }
+              }}
             >
-              {"\u0628\u06cc\u0645\u0627\u0631 \u0628\u0639\u062f\u06cc"}
-            </div>
-            <NextSvgrepoComSvgIcon
-              data-plasmic-name={"next"}
-              data-plasmic-override={overrides.next}
-              className={classNames(projectcss.all, sty.next)}
-              role={"img"}
-            />
-          </Stack__>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__ckBTs
+                )}
+              >
+                {"\u0628\u06cc\u0645\u0627\u0631 \u0628\u0639\u062f\u06cc"}
+              </div>
+              <NextSvgrepoComSvgIcon
+                data-plasmic-name={"next"}
+                data-plasmic-override={overrides.next}
+                className={classNames(projectcss.all, sty.next)}
+                role={"img"}
+              />
+            </Stack__>
+          ) : null}
         </div>
         <Stack__
           as={"div"}
@@ -5484,6 +5497,185 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             data-plasmic-override={overrides.switchingTab}
             className={classNames("__wab_instance", sty.switchingTab)}
           >
+            <LastTrackButtonSvgrepoComSvgIcon
+              data-plasmic-name={"lastPatient2"}
+              data-plasmic-override={overrides.lastPatient2}
+              className={classNames(projectcss.all, sty.lastPatient2)}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["runCode"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (() => {
+                            localStorage.setItem("laboratory_data", "");
+                            return console.log(
+                              "laboratory_data",
+                              localStorage.getItem("laboratory_data")
+                            );
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["runCode"] != null &&
+                  typeof $steps["runCode"] === "object" &&
+                  typeof $steps["runCode"].then === "function"
+                ) {
+                  $steps["runCode"] = await $steps["runCode"];
+                }
+
+                $steps["getAdmIdPatientId"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (() => {
+                            const stored_patient_index_id_list = JSON.parse(
+                              localStorage.getItem("patient_index_id_list")
+                            );
+                            const specificItem =
+                              stored_patient_index_id_list.find(
+                                item =>
+                                  item.admission_id ===
+                                  parseInt($ctx.params.adm_id)
+                              );
+                            if (specificItem) {
+                              const specificNumber = specificItem.number;
+                              const newNumber = specificNumber - 1;
+                              const nextItem =
+                                stored_patient_index_id_list.find(
+                                  item => item.number === newNumber
+                                );
+                              if (nextItem) {
+                                localStorage.setItem(
+                                  "patient_id",
+                                  nextItem.patient_id
+                                );
+                                return localStorage.setItem(
+                                  "admission_id",
+                                  nextItem.admission_id
+                                );
+                              } else {
+                                return console.log("No next item found.");
+                              }
+                            } else {
+                              return console.log(
+                                "No matching admission ID found."
+                              );
+                            }
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["getAdmIdPatientId"] != null &&
+                  typeof $steps["getAdmIdPatientId"] === "object" &&
+                  typeof $steps["getAdmIdPatientId"].then === "function"
+                ) {
+                  $steps["getAdmIdPatientId"] = await $steps[
+                    "getAdmIdPatientId"
+                  ];
+                }
+
+                $steps["updateDataLoaded"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["dataLoaded"]
+                        },
+                        operation: 0,
+                        value: false
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateDataLoaded"] != null &&
+                  typeof $steps["updateDataLoaded"] === "object" &&
+                  typeof $steps["updateDataLoaded"].then === "function"
+                ) {
+                  $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
+                }
+
+                $steps["goToLaboratoryData"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/patient/${(() => {
+                          try {
+                            return localStorage.getItem("patient_id");
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/lab/${(() => {
+                          try {
+                            return localStorage.getItem("admission_id");
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToLaboratoryData"] != null &&
+                  typeof $steps["goToLaboratoryData"] === "object" &&
+                  typeof $steps["goToLaboratoryData"].then === "function"
+                ) {
+                  $steps["goToLaboratoryData"] = await $steps[
+                    "goToLaboratoryData"
+                  ];
+                }
+              }}
+              role={"img"}
+            />
+
             <PlasmicImg__
               data-plasmic-name={"homepage"}
               data-plasmic-override={overrides.homepage}
@@ -5494,7 +5686,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
               displayMinWidth={"0"}
-              displayWidth={"20%"}
+              displayWidth={"15%"}
               loading={"lazy"}
               onClick={async event => {
                 const $steps = {};
@@ -5542,7 +5734,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
               displayMinWidth={"0"}
-              displayWidth={"20%"}
+              displayWidth={"15%"}
               loading={"lazy"}
               onClick={async event => {
                 const $steps = {};
@@ -5616,7 +5808,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
               displayMinWidth={"0"}
-              displayWidth={"20%"}
+              displayWidth={"15%"}
               loading={"lazy"}
               onClick={async event => {
                 const $steps = {};
@@ -5692,7 +5884,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
               displayMinWidth={"0"}
-              displayWidth={"20%"}
+              displayWidth={"15%"}
               onClick={async event => {
                 const $steps = {};
 
@@ -5948,6 +6140,184 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 />
               );
             })()}
+            <LastTrackButtonSvgrepoComSvgIcon
+              data-plasmic-name={"nextPatient2"}
+              data-plasmic-override={overrides.nextPatient2}
+              className={classNames(projectcss.all, sty.nextPatient2)}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["runCode"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (() => {
+                            localStorage.setItem("laboratory_data", "");
+                            return console.log(
+                              "laboratory_data",
+                              localStorage.getItem("laboratory_data")
+                            );
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["runCode"] != null &&
+                  typeof $steps["runCode"] === "object" &&
+                  typeof $steps["runCode"].then === "function"
+                ) {
+                  $steps["runCode"] = await $steps["runCode"];
+                }
+
+                $steps["getAdmIdPatientId"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (() => {
+                            const stored_patient_index_id_list = JSON.parse(
+                              localStorage.getItem("patient_index_id_list")
+                            );
+                            const specificItem =
+                              stored_patient_index_id_list.find(
+                                item =>
+                                  item.admission_id ===
+                                  parseInt($ctx.params.adm_id)
+                              );
+                            if (specificItem) {
+                              const specificNumber = specificItem.number;
+                              const newNumber = specificNumber + 1;
+                              const nextItem =
+                                stored_patient_index_id_list.find(
+                                  item => item.number === newNumber
+                                );
+                              if (nextItem) {
+                                localStorage.setItem(
+                                  "patient_id",
+                                  nextItem.patient_id
+                                );
+                                return localStorage.setItem(
+                                  "admission_id",
+                                  nextItem.admission_id
+                                );
+                              } else {
+                                return console.log("No next item found.");
+                              }
+                            } else {
+                              return console.log(
+                                "No matching admission ID found."
+                              );
+                            }
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["getAdmIdPatientId"] != null &&
+                  typeof $steps["getAdmIdPatientId"] === "object" &&
+                  typeof $steps["getAdmIdPatientId"].then === "function"
+                ) {
+                  $steps["getAdmIdPatientId"] = await $steps[
+                    "getAdmIdPatientId"
+                  ];
+                }
+
+                $steps["updateDataLoaded"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["dataLoaded"]
+                        },
+                        operation: 0,
+                        value: false
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateDataLoaded"] != null &&
+                  typeof $steps["updateDataLoaded"] === "object" &&
+                  typeof $steps["updateDataLoaded"].then === "function"
+                ) {
+                  $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
+                }
+
+                $steps["goToLaboratoryData"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/patient/${(() => {
+                          try {
+                            return localStorage.getItem("patient_id");
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}/lab/${(() => {
+                          try {
+                            return localStorage.getItem("admission_id");
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToLaboratoryData"] != null &&
+                  typeof $steps["goToLaboratoryData"] === "object" &&
+                  typeof $steps["goToLaboratoryData"].then === "function"
+                ) {
+                  $steps["goToLaboratoryData"] = await $steps[
+                    "goToLaboratoryData"
+                  ];
+                }
+              }}
+              role={"img"}
+            />
           </SwitchingTab>
         </Stack__>
       </div>
@@ -6022,12 +6392,14 @@ const PlasmicDescendants = {
     "labGroupFactorName",
     "switchingTabs",
     "switchingTab",
+    "lastPatient2",
     "homepage",
     "consult",
     "patientProfile",
     "radiologyReport",
     "laboratoryPage2",
-    "bookmarkIcon"
+    "bookmarkIcon",
+    "nextPatient2"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -6287,28 +6659,34 @@ const PlasmicDescendants = {
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
+    "lastPatient2",
     "homepage",
     "consult",
     "patientProfile",
     "radiologyReport",
     "laboratoryPage2",
-    "bookmarkIcon"
+    "bookmarkIcon",
+    "nextPatient2"
   ],
   switchingTab: [
     "switchingTab",
+    "lastPatient2",
     "homepage",
     "consult",
     "patientProfile",
     "radiologyReport",
     "laboratoryPage2",
-    "bookmarkIcon"
+    "bookmarkIcon",
+    "nextPatient2"
   ],
+  lastPatient2: ["lastPatient2"],
   homepage: ["homepage"],
   consult: ["consult"],
   patientProfile: ["patientProfile"],
   radiologyReport: ["radiologyReport"],
   laboratoryPage2: ["laboratoryPage2"],
-  bookmarkIcon: ["bookmarkIcon"]
+  bookmarkIcon: ["bookmarkIcon"],
+  nextPatient2: ["nextPatient2"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -6379,12 +6757,14 @@ type NodeDefaultElementType = {
   labGroupFactorName: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
+  lastPatient2: "svg";
   homepage: typeof PlasmicImg__;
   consult: typeof PlasmicImg__;
   patientProfile: typeof PlasmicImg__;
   radiologyReport: typeof PlasmicImg__;
   laboratoryPage2: typeof PlasmicImg__;
   bookmarkIcon: typeof BookmarkIcon;
+  nextPatient2: "svg";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -6517,12 +6897,14 @@ export const PlasmicLaboratoryData = Object.assign(
     labGroupFactorName: makeNodeComponent("labGroupFactorName"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
+    lastPatient2: makeNodeComponent("lastPatient2"),
     homepage: makeNodeComponent("homepage"),
     consult: makeNodeComponent("consult"),
     patientProfile: makeNodeComponent("patientProfile"),
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratoryPage2: makeNodeComponent("laboratoryPage2"),
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
+    nextPatient2: makeNodeComponent("nextPatient2"),
 
     // Metadata about props expected for PlasmicLaboratoryData
     internalVariantProps: PlasmicLaboratoryData__VariantProps,

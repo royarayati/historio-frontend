@@ -2590,6 +2590,11 @@
           "id": "gusDM8QUdhXX",
           "name": "ChevronDownIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__ChevronDown.tsx"
+        },
+        {
+          "id": "40Mu0isncOEt",
+          "name": "LastTrackButtonSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__LastTrackButtonSvgrepoComSvg.tsx"
         }
       ],
       "images": [
