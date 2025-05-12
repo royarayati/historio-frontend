@@ -64,7 +64,7 @@ import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; /
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache";
+import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 
 import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
@@ -3602,15 +3602,15 @@ type NodeComponentProps<T extends NodeNameType> =
     args?: PlasmicPatientProfile__ArgsType;
     overrides?: NodeOverridesType<T>;
   } & Omit<PlasmicPatientProfile__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    /* Specify args directly as props*/ Omit<
-      PlasmicPatientProfile__ArgsType,
-      ReservedPropsType
-    > &
-    /* Specify overrides for each element directly as props*/ Omit<
+    // Specify args directly as props
+    Omit<PlasmicPatientProfile__ArgsType, ReservedPropsType> &
+    // Specify overrides for each element directly as props
+    Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    /* Specify props for the root element*/ Omit<
+    // Specify props for the root element
+    Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;

@@ -67,7 +67,7 @@ import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/compone
 import { AntdSelect } from "@plasmicpkgs/antd5/skinny/registerSelect";
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import BookmarkLab from "../../BookmarkLab"; // plasmic-import: yhUiLESiXQuk/component
-import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache";
+import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -6779,15 +6779,15 @@ type NodeComponentProps<T extends NodeNameType> =
     args?: PlasmicLaboratoryData__ArgsType;
     overrides?: NodeOverridesType<T>;
   } & Omit<PlasmicLaboratoryData__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    /* Specify args directly as props*/ Omit<
-      PlasmicLaboratoryData__ArgsType,
-      ReservedPropsType
-    > &
-    /* Specify overrides for each element directly as props*/ Omit<
+    // Specify args directly as props
+    Omit<PlasmicLaboratoryData__ArgsType, ReservedPropsType> &
+    // Specify overrides for each element directly as props
+    Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    /* Specify props for the root element*/ Omit<
+    // Specify props for the root element
+    Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
