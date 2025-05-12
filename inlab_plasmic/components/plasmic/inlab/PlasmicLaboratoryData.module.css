@@ -82,13 +82,13 @@
   }
 }
 .lastPatient {
-  display: flex;
   flex-direction: row;
   position: relative;
   width: auto;
   height: auto;
   max-width: 25%;
   background: none;
+  display: none;
   border-radius: 5px;
   padding: 4px;
   border: 0.2px solid var(--token-9iYGdL7i3GKE);

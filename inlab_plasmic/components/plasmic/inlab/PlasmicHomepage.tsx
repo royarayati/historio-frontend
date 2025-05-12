@@ -3665,8 +3665,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     ? parseInt(localStorage.getItem("consult_page_number"), 10)
                     : 1) -
                     1) *
-                  20
-                }`}&limit=20&${
+                  10
+                }`}&limit=10&${
                   localStorage.getItem("GET_V2_consult_query_param")
                     ? localStorage.getItem("GET_V2_consult_query_param")
                     : ""
@@ -4135,7 +4135,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                   )
                                                 : 1) -
                                                 1) *
-                                                20
+                                                10
                                             );
                                           } catch (e) {
                                             if (

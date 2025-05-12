@@ -180,10 +180,10 @@
   max-width: 100%;
   width: 100%;
   left: 0px;
-  top: 100px;
+  top: 70px;
   z-index: 1;
   overflow: auto;
-  bottom: 70px;
+  bottom: 90px;
   min-width: 0;
 }
 .getConsult:global(.__wab_instance) {
@@ -663,8 +663,13 @@
   top: auto;
   z-index: 2;
   position: fixed;
-  bottom: 13%;
-  right: 3%;
+  bottom: 65px;
+  right: 20px;
+  width: 110px;
+  height: 30px;
+}
+.text__uPLh2 {
+  font-size: var(--token-CdE1_0ZaCyT1);
 }
 .svg__myV {
   position: relative;

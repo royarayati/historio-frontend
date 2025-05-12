@@ -67,7 +67,7 @@ import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
-import { UploadFileComponent } from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
+import  UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 
@@ -1911,7 +1911,19 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </div>
           </Button>
         </Stack__>
-        {false ? (
+        {(() => {
+          try {
+            return $state.selectedTab === "ParaclinicReports";
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })() ? (
           <ApiFetcherComponent
             data-plasmic-name={"paraclinicsReport"}
             data-plasmic-override={overrides.paraclinicsReport}
@@ -3005,19 +3017,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
         ) : null}
-        {(() => {
-          try {
-            return $state.selectedTab === "ParaclinicReports";
-          } catch (e) {
-            if (
-              e instanceof TypeError ||
-              e?.plasmicType === "PlasmicUndefinedDataError"
-            ) {
-              return true;
-            }
-            throw e;
-          }
-        })() ? (
+        {false ? (
           <ApiFetcherComponentPlusCache
             data-plasmic-name={"apiFetcherComponentPlusCache"}
             data-plasmic-override={overrides.apiFetcherComponentPlusCache}

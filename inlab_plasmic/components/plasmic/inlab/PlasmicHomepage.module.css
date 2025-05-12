@@ -1067,10 +1067,9 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-bottom-style: dashed;
-  border-bottom-width: 1px;
   min-width: 0;
   padding: 4px;
+  border-bottom: 1px dashed #00000033;
 }
 .patientName {
   width: auto;

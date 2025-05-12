@@ -2721,7 +2721,19 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             />
           </Stack__>
         ) : null}
-        {false ? (
+        {(() => {
+          try {
+            return $state.selectedTab === "LabTestResult";
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })() ? (
           <ApiFetcherComponent
             data-plasmic-name={"labData"}
             data-plasmic-override={overrides.labData}
@@ -3940,19 +3952,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
         ) : null}
-        {(() => {
-          try {
-            return $state.selectedTab === "LabTestResult";
-          } catch (e) {
-            if (
-              e instanceof TypeError ||
-              e?.plasmicType === "PlasmicUndefinedDataError"
-            ) {
-              return true;
-            }
-            throw e;
-          }
-        })() ? (
+        {false ? (
           <ApiFetcherComponentPlusCache
             data-plasmic-name={"apiFetcherComponentPlusCache"}
             data-plasmic-override={overrides.apiFetcherComponentPlusCache}

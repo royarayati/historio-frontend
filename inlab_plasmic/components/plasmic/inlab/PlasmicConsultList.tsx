@@ -661,36 +661,37 @@ function PlasmicConsultList__RenderFunc(props: {
                     ];
                   }
 
-                  $steps["openConsultPrint"] = false
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return (() => {
-                              const response = $steps.postConsultFillTemplate;
-                              if (response.data instanceof Blob) {
-                                const pdfUrl = URL.createObjectURL(
-                                  response.data
-                                );
-                                window.open(pdfUrl, "_blank");
-                                return setTimeout(
-                                  () => URL.revokeObjectURL(pdfUrl),
-                                  10000
-                                );
-                              } else {
-                                console.error(
-                                  "Received non-Blob response:",
-                                  response
-                                );
-                                return alert("Error: Could not generate PDF");
-                              }
-                            })();
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
+                  $steps["openConsultPrint"] =
+                    $steps.postConsultFillTemplate.status === 200
+                      ? (() => {
+                          const actionArgs = {
+                            customFunction: async () => {
+                              return (() => {
+                                const response = $steps.postConsultFillTemplate;
+                                if (response.data instanceof Blob) {
+                                  const pdfUrl = URL.createObjectURL(
+                                    response.data
+                                  );
+                                  window.open(pdfUrl, "_blank");
+                                  return setTimeout(
+                                    () => URL.revokeObjectURL(pdfUrl),
+                                    10000
+                                  );
+                                } else {
+                                  console.error(
+                                    "Received non-Blob response:",
+                                    response
+                                  );
+                                  return alert("Error: Could not generate PDF");
+                                }
+                              })();
+                            }
+                          };
+                          return (({ customFunction }) => {
+                            return customFunction();
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
                   if (
                     $steps["openConsultPrint"] != null &&
                     typeof $steps["openConsultPrint"] === "object" &&
@@ -2178,9 +2179,17 @@ function PlasmicConsultList__RenderFunc(props: {
               "sortSelected"
             ])}
           >
-            {
-              "\u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u062c\u062f\u06cc\u062f"
-            }
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__uPLh2
+              )}
+            >
+              {
+                "\u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u062c\u062f\u06cc\u062f"
+              }
+            </div>
           </Button>
           <div
             data-plasmic-name={"switchingTabs"}
