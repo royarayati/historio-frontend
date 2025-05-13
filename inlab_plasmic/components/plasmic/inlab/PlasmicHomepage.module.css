@@ -1067,10 +1067,9 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-bottom-style: dashed;
-  border-bottom-width: 1px;
   min-width: 0;
   padding: 4px;
+  border-bottom: 1px dashed #00000033;
 }
 .patientName {
   width: auto;
@@ -4792,6 +4791,11 @@
   background: #ffffff;
   outline: none;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientSummaryModal:global(.__wab_instance) {
+    overflow: auto;
+  }
+}
 .patientSummaryList {
   display: flex;
   flex-direction: column;
@@ -4807,6 +4811,18 @@
   justify-content: flex-start;
   align-items: center;
   min-width: 0;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.patientSummaryList > :global(.__wab_flex-container) > *,
+.patientSummaryList > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.patientSummaryList > :global(.__wab_flex-container) > picture > img,
+.patientSummaryList
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .patientSummaryList {
@@ -5060,6 +5076,206 @@
   .labDatetimepatientSummary {
     font-size: var(--token-CdE1_0ZaCyT1);
   }
+}
+.freeBox__eqPq0 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--token-8PxxXPNrIohQ);
+}
+.bookmarkedParaclinicReports:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  min-width: 0;
+}
+.bookmarkedParaclinicReportspatientSummary:global(.__wab_instance) {
+  width: 100%;
+  min-width: 0;
+}
+.freeBox__hEYtC {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.freeBox__hEYtC > :global(.__wab_flex-container) {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.freeBox__hEYtC > :global(.__wab_flex-container) > *,
+.freeBox__hEYtC > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__hEYtC > :global(.__wab_flex-container) > picture > img,
+.freeBox__hEYtC
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.freeBoxpatientSummary__hEYtCCcPm4 {
+  padding: 4px;
+  border: 0.2px solid var(--token-8PxxXPNrIohQ);
+}
+.text__pFp7O {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .textpatientSummary__pFp7OCcPm4 {
+    font-size: 10px;
+  }
+}
+.text___8E7QN {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  background: var(--token-Hd7stmcqwCJ-);
+  min-width: 0;
+}
+.textpatientSummary___8E7QNCcPm4 {
+  display: block;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .textpatientSummary___8E7QNCcPm4 {
+    font-size: 10px;
+  }
+}
+.text__up5M0 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 10px;
+  background: var(--token-Hd7stmcqwCJ-);
+  min-width: 0;
+}
+.textpatientSummary__up5M0CcPm4 {
+  display: block;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .textpatientSummary__up5M0CcPm4 {
+    font-size: 10px;
+  }
+}
+.paraclinicReport {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+  border: 0.5px dashed var(--token-8PxxXPNrIohQ);
+}
+.bookmarkedLabsItem2 {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 4px;
+}
+.bookmarkedLabsItem2 > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-width: 0;
+}
+.bookmarkedLabsItem2patientSummary {
+  padding: 0px;
+  border: 0px none var(--token-8PxxXPNrIohQ);
+}
+.bookmarkedLabsItem2patientSummary > :global(.__wab_flex-container) {
+  align-items: center;
+  justify-content: space-around;
+  margin-left: calc(0px - 12px);
+  width: calc(100% + 12px);
+  margin-top: calc(0px - 0px);
+  height: calc(100% + 0px);
+}
+.bookmarkedLabsItem2patientSummary > :global(.__wab_flex-container) > *,
+.bookmarkedLabsItem2patientSummary
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.bookmarkedLabsItem2patientSummary
+  > :global(.__wab_flex-container)
+  > picture
+  > img,
+.bookmarkedLabsItem2patientSummary
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 12px;
+  margin-top: 0px;
+}
+.reportTitle {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  min-width: 0;
+}
+.reportTitlepatientSummary {
+  text-align: left;
+  width: auto;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .reportTitlepatientSummary {
+    text-align: center;
+  }
+}
+.reportDatetime2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.reportDatetime2patientSummary {
+  width: auto;
+  white-space: pre;
+  text-align: left;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .reportDatetime2patientSummary {
+    font-size: var(--token-CdE1_0ZaCyT1);
+  }
+}
+.report {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .text___28Wb {

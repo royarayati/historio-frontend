@@ -114,9 +114,6 @@ export const PlasmicButton__VariantProps = new Array<VariantPropType>(
 );
 
 export type PlasmicButton__ArgsType = {
-  children?: React.ReactNode;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
   link?: string;
   submitsForm?: boolean;
   target?: boolean;
@@ -125,12 +122,12 @@ export type PlasmicButton__ArgsType = {
   onDeselectedChange?: (val: any) => void;
   onSortDeselectedChange?: (val: any) => void;
   onSortSelectedChange?: (val: any) => void;
+  children?: React.ReactNode;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 };
 type ArgPropType = keyof PlasmicButton__ArgsType;
 export const PlasmicButton__ArgProps = new Array<ArgPropType>(
-  "children",
-  "startIcon",
-  "endIcon",
   "link",
   "submitsForm",
   "target",
@@ -138,7 +135,10 @@ export const PlasmicButton__ArgProps = new Array<ArgPropType>(
   "onSelectedChange",
   "onDeselectedChange",
   "onSortDeselectedChange",
-  "onSortSelectedChange"
+  "onSortSelectedChange",
+  "children",
+  "startIcon",
+  "endIcon"
 );
 
 export type PlasmicButton__OverridesType = {
@@ -201,6 +201,7 @@ function PlasmicButton__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
+
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
@@ -657,15 +658,15 @@ type NodeComponentProps<T extends NodeNameType> =
     args?: PlasmicButton__ArgsType;
     overrides?: NodeOverridesType<T>;
   } & Omit<PlasmicButton__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    /* Specify args directly as props*/ Omit<
-      PlasmicButton__ArgsType,
-      ReservedPropsType
-    > &
-    /* Specify overrides for each element directly as props*/ Omit<
+    // Specify args directly as props
+    Omit<PlasmicButton__ArgsType, ReservedPropsType> &
+    // Specify overrides for each element directly as props
+    Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    /* Specify props for the root element*/ Omit<
+    // Specify props for the root element
+    Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;

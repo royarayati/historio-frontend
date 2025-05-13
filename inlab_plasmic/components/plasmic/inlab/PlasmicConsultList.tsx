@@ -192,6 +192,7 @@ function PlasmicConsultList__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
+
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
@@ -2178,9 +2179,17 @@ function PlasmicConsultList__RenderFunc(props: {
               "sortSelected"
             ])}
           >
-            {
-              "\u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u062c\u062f\u06cc\u062f"
-            }
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__uPLh2
+              )}
+            >
+              {
+                "\u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u062c\u062f\u06cc\u062f"
+              }
+            </div>
           </Button>
           <div
             data-plasmic-name={"switchingTabs"}
@@ -3701,15 +3710,15 @@ type NodeComponentProps<T extends NodeNameType> =
     args?: PlasmicConsultList__ArgsType;
     overrides?: NodeOverridesType<T>;
   } & Omit<PlasmicConsultList__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    /* Specify args directly as props*/ Omit<
-      PlasmicConsultList__ArgsType,
-      ReservedPropsType
-    > &
-    /* Specify overrides for each element directly as props*/ Omit<
+    // Specify args directly as props
+    Omit<PlasmicConsultList__ArgsType, ReservedPropsType> &
+    // Specify overrides for each element directly as props
+    Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    /* Specify props for the root element*/ Omit<
+    // Specify props for the root element
+    Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
