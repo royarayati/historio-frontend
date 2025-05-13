@@ -3958,7 +3958,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             data-plasmic-override={overrides.apiFetcherComponentPlusCache}
             cache={"yes"}
             cacheKey={"laboratory"}
-            cacheType={"lab"}
             className={classNames(
               "__wab_instance",
               sty.apiFetcherComponentPlusCache

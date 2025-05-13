@@ -1911,19 +1911,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </div>
           </Button>
         </Stack__>
-        {(() => {
-          try {
-            return $state.selectedTab === "ParaclinicReports";
-          } catch (e) {
-            if (
-              e instanceof TypeError ||
-              e?.plasmicType === "PlasmicUndefinedDataError"
-            ) {
-              return true;
-            }
-            throw e;
-          }
-        })() ? (
+        {false ? (
           <ApiFetcherComponent
             data-plasmic-name={"paraclinicsReport"}
             data-plasmic-override={overrides.paraclinicsReport}
@@ -2199,13 +2187,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") !==
-                          "tums_api" &&
-                        $ctx.fetched_data.data.length === 0
+                        $ctx.fetched_data.data.radiology_services.length === 0
                       : $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") !==
-                          "tums_api" &&
-                        $ctx.fetched_data.length === 0
+                        $ctx.fetched_data.data.radiology_services.length === 0
                   ) ? (
                     <div
                       className={classNames(
@@ -3017,17 +3001,29 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
         ) : null}
-        {false ? (
+        {$state.selectedTab === "ParaclinicReports" ? (
           <ApiFetcherComponentPlusCache
             data-plasmic-name={"apiFetcherComponentPlusCache"}
             data-plasmic-override={overrides.apiFetcherComponentPlusCache}
             cache={"yes"}
-            cacheKey={"radiology"}
-            cacheType={"radiology"}
+            cacheKey={(() => {
+              try {
+                return "radiology";
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             className={classNames(
               "__wab_instance",
               sty.apiFetcherComponentPlusCache
             )}
+            delay={2000}
             headers={(() => {
               try {
                 return {
@@ -3309,13 +3305,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") !==
-                          "tums_api" &&
-                        $ctx.fetched_data.data.length === 0
+                        $ctx.fetched_data.data &&
+                        $ctx.fetched_data.data.radiology_services.length === 0
                       : $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") !==
-                          "tums_api" &&
-                        $ctx.fetched_data.length === 0
+                        $ctx.fetched_data.data &&
+                        $ctx.fetched_data.data.radiology_services.length === 0
                   ) ? (
                     <div
                       className={classNames(
@@ -5257,7 +5251,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </div>
           }
           trigger={null}
-          width={"90%"}
+          width={
+            hasVariant(globalVariants, "screen", "mobileFirst") ? "82%" : "90%"
+          }
           wrapClassName={classNames({ [sty["pcls_nVYN7IUeA_o9"]]: true })}
         >
           <Stack__
