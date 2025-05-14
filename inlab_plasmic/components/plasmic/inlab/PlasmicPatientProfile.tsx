@@ -1644,6 +1644,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                   "__wab_instance",
                   sty.patientProfileApiCache
                 )}
+                delay={10}
                 headers={(() => {
                   try {
                     return {

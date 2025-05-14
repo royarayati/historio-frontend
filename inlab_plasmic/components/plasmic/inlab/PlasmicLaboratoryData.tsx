@@ -62,12 +62,12 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { AntdSelect } from "@plasmicpkgs/antd5/skinny/registerSelect";
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import BookmarkLab from "../../BookmarkLab"; // plasmic-import: yhUiLESiXQuk/component
-import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -120,6 +120,8 @@ export type PlasmicLaboratoryData__OverridesType = {
   patientNameAgeGender?: Flex__<"div">;
   nextPatient?: Flex__<"div">;
   next?: Flex__<"svg">;
+  apiFetcherComponentPlusCache2?: Flex__<typeof ApiFetcherComponentPlusCache>;
+  patientNameAgeGender2?: Flex__<"div">;
   tabButtons?: Flex__<"div">;
   checkedFactor?: Flex__<typeof Button>;
   button?: Flex__<typeof Button>;
@@ -946,226 +948,233 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               {"\u0628\u06cc\u0645\u0627\u0631 \u0642\u0628\u0644\u06cc"}
             </div>
           </Stack__>
-          <ApiFetcherComponent
-            data-plasmic-name={"patientDataApiFetcher"}
-            data-plasmic-override={overrides.patientDataApiFetcher}
-            className={classNames("__wab_instance", sty.patientDataApiFetcher)}
-            delay={50}
-            headers={(() => {
-              try {
-                return {
-                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
-                };
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
-              }
-            })()}
-            method={"GET"}
-            path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
-            ref={ref => {
-              $refs["patientDataApiFetcher"] = ref;
-            }}
-          >
-            <DataCtxReader__>
-              {$ctx => (
-                <div
-                  data-plasmic-name={"patientNameAgeGender"}
-                  data-plasmic-override={overrides.patientNameAgeGender}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.patientNameAgeGender,
-                    {
-                      [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
-                        $state,
-                        "viewNormalRange",
-                        "viewNormalRange"
-                      )
-                    }
-                  )}
-                  dir={"rtl"}
-                >
-                  {hasVariant(globalVariants, "screen", "mobileFirst") ? (
-                    <React.Fragment>
-                      {(() => {
-                        const namespace_type = localStorage.getItem(
-                          "inlab_user_his_type"
-                        );
-                        if (namespace_type !== "tums_api") {
-                          if (!$ctx.fetched_data.loading) {
-                            if (
-                              !$ctx.fetched_data.data ||
-                              $ctx.fetched_data.data.length === 0
-                            ) {
-                              return "";
-                            }
-                            const item = $ctx.fetched_data.data[0];
-                            if (item && item.date_of_birth) {
-                              const dob = new Date(item.date_of_birth);
-                              const now = new Date();
-                              const ageDiffMs = now - dob;
-                              const ageDays = Math.floor(
-                                ageDiffMs / (1000 * 60 * 60 * 24)
-                              );
-                              const ageHours = Math.floor(
-                                ageDiffMs / (1000 * 60 * 60)
-                              );
-                              const fullName = `${item.first_name} ${item.last_name}`;
-                              const genderSymbol =
-                                item.gender === "F"
-                                  ? " \u2640️"
-                                  : item.gender === "M"
-                                  ? " \u2642️"
-                                  : "";
-                              if (ageDays < 1) {
-                                const hoursText =
-                                  ageHours === 1 ? " hour" : " hours";
-                                return `${fullName}${hoursText}${genderSymbol}`;
-                              } else if (ageDays < 30) {
-                                const daysText =
-                                  ageDays === 1 ? " day" : " days";
-                                return `${fullName}${ageDays}${daysText}${genderSymbol}`;
-                              } else {
-                                let ageYears =
-                                  now.getFullYear() - dob.getFullYear();
-                                const monthDifference =
-                                  now.getMonth() - dob.getMonth();
-                                if (
-                                  monthDifference < 0 ||
-                                  (monthDifference === 0 &&
-                                    now.getDate() < dob.getDate())
-                                ) {
-                                  ageYears--;
-                                }
-                                if (ageYears < 1) {
-                                  let ageMonths = monthDifference;
-                                  if (now.getDate() < dob.getDate()) {
-                                    ageMonths--;
-                                  }
-                                  if (ageMonths < 0) {
-                                    ageMonths += 12;
-                                  }
-                                  const monthsText =
-                                    ageMonths === 1 ? " month" : " months";
-                                  return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
-                                } else {
-                                  const yearsText =
-                                    ageYears === 1 ? " year" : " years";
-                                  return `${fullName} ${ageYears}${genderSymbol}`;
-                                }
-                              }
-                            } else {
-                              return "Date of birth not available.";
-                            }
-                          }
-                        } else if (namespace_type === "tums_api") {
-                          if (
-                            !$ctx.fetched_data.data ||
-                            $ctx.fetched_data.data.length === 0
-                          ) {
-                            return "";
-                          }
-                          const currentitem = $ctx.fetched_data.data[0];
-                          return `${currentitem.first_name} ${currentitem.last_name}`;
-                        }
-                      })()}
-                    </React.Fragment>
-                  ) : (
-                    <React.Fragment>
-                      {(() => {
-                        const namespace_type = localStorage.getItem(
-                          "inlab_user_his_type"
-                        );
-                        if (namespace_type !== "tums_api") {
-                          if (!$ctx.fetched_data.loading) {
-                            if (
-                              !$ctx.fetched_data.data ||
-                              $ctx.fetched_data.data.length === 0
-                            ) {
-                              return "";
-                            }
-                            const item = $ctx.fetched_data.data[0];
-                            if (item && item.date_of_birth) {
-                              const dob = new Date(item.date_of_birth);
-                              const now = new Date();
-                              const ageDiffMs = now - dob;
-                              const ageDays = Math.floor(
-                                ageDiffMs / (1000 * 60 * 60 * 24)
-                              );
-                              const ageHours = Math.floor(
-                                ageDiffMs / (1000 * 60 * 60)
-                              );
-                              const fullName = `${item.first_name} ${item.last_name}`;
-                              const genderSymbol =
-                                item.gender === "F"
-                                  ? " \u2640️"
-                                  : item.gender === "M"
-                                  ? " \u2642️"
-                                  : "";
-                              if (ageDays < 1) {
-                                const hoursText =
-                                  ageHours === 1 ? " hour" : " hours";
-                                return `${fullName}${hoursText}${genderSymbol}`;
-                              } else if (ageDays < 30) {
-                                const daysText =
-                                  ageDays === 1 ? " day" : " days";
-                                return `${fullName}${ageDays}${daysText}${genderSymbol}`;
-                              } else {
-                                let ageYears =
-                                  now.getFullYear() - dob.getFullYear();
-                                const monthDifference =
-                                  now.getMonth() - dob.getMonth();
-                                if (
-                                  monthDifference < 0 ||
-                                  (monthDifference === 0 &&
-                                    now.getDate() < dob.getDate())
-                                ) {
-                                  ageYears--;
-                                }
-                                if (ageYears < 1) {
-                                  let ageMonths = monthDifference;
-                                  if (now.getDate() < dob.getDate()) {
-                                    ageMonths--;
-                                  }
-                                  if (ageMonths < 0) {
-                                    ageMonths += 12;
-                                  }
-                                  const monthsText =
-                                    ageMonths === 1 ? " month" : " months";
-                                  return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
-                                } else {
-                                  const yearsText =
-                                    ageYears === 1 ? " year" : " years";
-                                  return `${fullName} ${ageYears}${genderSymbol}`;
-                                }
-                              }
-                            } else {
-                              return "Date of birth not available.";
-                            }
-                          }
-                        } else if (namespace_type === "tums_api") {
-                          if (
-                            !$ctx.fetched_data.data ||
-                            $ctx.fetched_data.data.length === 0
-                          ) {
-                            return "";
-                          }
-                          const currentitem = $ctx.fetched_data.data[0];
-                          return `${currentitem.first_name} ${currentitem.last_name}`;
-                        }
-                      })()}
-                    </React.Fragment>
-                  )}
-                </div>
+          {false ? (
+            <ApiFetcherComponent
+              data-plasmic-name={"patientDataApiFetcher"}
+              data-plasmic-override={overrides.patientDataApiFetcher}
+              className={classNames(
+                "__wab_instance",
+                sty.patientDataApiFetcher
               )}
-            </DataCtxReader__>
-          </ApiFetcherComponent>
+              delay={50}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+              ref={ref => {
+                $refs["patientDataApiFetcher"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <div
+                    data-plasmic-name={"patientNameAgeGender"}
+                    data-plasmic-override={overrides.patientNameAgeGender}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.patientNameAgeGender,
+                      {
+                        [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
+                          $state,
+                          "viewNormalRange",
+                          "viewNormalRange"
+                        )
+                      }
+                    )}
+                    dir={"rtl"}
+                  >
+                    {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                      <React.Fragment>
+                        {(() => {
+                          const namespace_type = localStorage.getItem(
+                            "inlab_user_his_type"
+                          );
+                          if (namespace_type !== "tums_api") {
+                            if (!$ctx.fetched_data.loading) {
+                              if (
+                                !$ctx.fetched_data.data ||
+                                $ctx.fetched_data.data.length === 0
+                              ) {
+                                return "";
+                              }
+                              const item = $ctx.fetched_data.data[0];
+                              if (item && item.date_of_birth) {
+                                const dob = new Date(item.date_of_birth);
+                                const now = new Date();
+                                const ageDiffMs = now - dob;
+                                const ageDays = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60 * 24)
+                                );
+                                const ageHours = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60)
+                                );
+                                const fullName = `${item.first_name} ${item.last_name}`;
+                                const genderSymbol =
+                                  item.gender === "F"
+                                    ? " \u2640️"
+                                    : item.gender === "M"
+                                    ? " \u2642️"
+                                    : "";
+                                if (ageDays < 1) {
+                                  const hoursText =
+                                    ageHours === 1 ? " hour" : " hours";
+                                  return `${fullName}${hoursText}${genderSymbol}`;
+                                } else if (ageDays < 30) {
+                                  const daysText =
+                                    ageDays === 1 ? " day" : " days";
+                                  return `${fullName}${ageDays}${daysText}${genderSymbol}`;
+                                } else {
+                                  let ageYears =
+                                    now.getFullYear() - dob.getFullYear();
+                                  const monthDifference =
+                                    now.getMonth() - dob.getMonth();
+                                  if (
+                                    monthDifference < 0 ||
+                                    (monthDifference === 0 &&
+                                      now.getDate() < dob.getDate())
+                                  ) {
+                                    ageYears--;
+                                  }
+                                  if (ageYears < 1) {
+                                    let ageMonths = monthDifference;
+                                    if (now.getDate() < dob.getDate()) {
+                                      ageMonths--;
+                                    }
+                                    if (ageMonths < 0) {
+                                      ageMonths += 12;
+                                    }
+                                    const monthsText =
+                                      ageMonths === 1 ? " month" : " months";
+                                    return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
+                                  } else {
+                                    const yearsText =
+                                      ageYears === 1 ? " year" : " years";
+                                    return `${fullName} ${ageYears}${genderSymbol}`;
+                                  }
+                                }
+                              } else {
+                                return "Date of birth not available.";
+                              }
+                            }
+                          } else if (namespace_type === "tums_api") {
+                            if (
+                              !$ctx.fetched_data.data ||
+                              $ctx.fetched_data.data.length === 0
+                            ) {
+                              return "";
+                            }
+                            const currentitem = $ctx.fetched_data.data[0];
+                            return `${currentitem.first_name} ${currentitem.last_name}`;
+                          }
+                        })()}
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        {(() => {
+                          const namespace_type = localStorage.getItem(
+                            "inlab_user_his_type"
+                          );
+                          if (namespace_type !== "tums_api") {
+                            if (!$ctx.fetched_data.loading) {
+                              if (
+                                !$ctx.fetched_data.data ||
+                                $ctx.fetched_data.data.length === 0
+                              ) {
+                                return "";
+                              }
+                              const item = $ctx.fetched_data.data[0];
+                              if (item && item.date_of_birth) {
+                                const dob = new Date(item.date_of_birth);
+                                const now = new Date();
+                                const ageDiffMs = now - dob;
+                                const ageDays = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60 * 24)
+                                );
+                                const ageHours = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60)
+                                );
+                                const fullName = `${item.first_name} ${item.last_name}`;
+                                const genderSymbol =
+                                  item.gender === "F"
+                                    ? " \u2640️"
+                                    : item.gender === "M"
+                                    ? " \u2642️"
+                                    : "";
+                                if (ageDays < 1) {
+                                  const hoursText =
+                                    ageHours === 1 ? " hour" : " hours";
+                                  return `${fullName}${hoursText}${genderSymbol}`;
+                                } else if (ageDays < 30) {
+                                  const daysText =
+                                    ageDays === 1 ? " day" : " days";
+                                  return `${fullName}${ageDays}${daysText}${genderSymbol}`;
+                                } else {
+                                  let ageYears =
+                                    now.getFullYear() - dob.getFullYear();
+                                  const monthDifference =
+                                    now.getMonth() - dob.getMonth();
+                                  if (
+                                    monthDifference < 0 ||
+                                    (monthDifference === 0 &&
+                                      now.getDate() < dob.getDate())
+                                  ) {
+                                    ageYears--;
+                                  }
+                                  if (ageYears < 1) {
+                                    let ageMonths = monthDifference;
+                                    if (now.getDate() < dob.getDate()) {
+                                      ageMonths--;
+                                    }
+                                    if (ageMonths < 0) {
+                                      ageMonths += 12;
+                                    }
+                                    const monthsText =
+                                      ageMonths === 1 ? " month" : " months";
+                                    return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
+                                  } else {
+                                    const yearsText =
+                                      ageYears === 1 ? " year" : " years";
+                                    return `${fullName} ${ageYears}${genderSymbol}`;
+                                  }
+                                }
+                              } else {
+                                return "Date of birth not available.";
+                              }
+                            }
+                          } else if (namespace_type === "tums_api") {
+                            if (
+                              !$ctx.fetched_data.data ||
+                              $ctx.fetched_data.data.length === 0
+                            ) {
+                              return "";
+                            }
+                            const currentitem = $ctx.fetched_data.data[0];
+                            return `${currentitem.first_name} ${currentitem.last_name}`;
+                          }
+                        })()}
+                      </React.Fragment>
+                    )}
+                  </div>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponent>
+          ) : null}
           {false ? (
             <Stack__
               as={"div"}
@@ -1363,6 +1372,256 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               />
             </Stack__>
           ) : null}
+          <ApiFetcherComponentPlusCache
+            data-plasmic-name={"apiFetcherComponentPlusCache2"}
+            data-plasmic-override={overrides.apiFetcherComponentPlusCache2}
+            cache={"yes"}
+            cacheKey={(() => {
+              try {
+                return "profile";
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            className={classNames(
+              "__wab_instance",
+              sty.apiFetcherComponentPlusCache2
+            )}
+            delay={10}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+            patientId={(() => {
+              try {
+                return $ctx.params.code;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            ref={ref => {
+              $refs["apiFetcherComponentPlusCache2"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <div
+                  data-plasmic-name={"patientNameAgeGender2"}
+                  data-plasmic-override={overrides.patientNameAgeGender2}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.patientNameAgeGender2,
+                    {
+                      [sty.patientNameAgeGender2viewNormalRange]: hasVariant(
+                        $state,
+                        "viewNormalRange",
+                        "viewNormalRange"
+                      )
+                    }
+                  )}
+                  dir={"rtl"}
+                >
+                  {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                    <React.Fragment>
+                      {(() => {
+                        const namespace_type = localStorage.getItem(
+                          "inlab_user_his_type"
+                        );
+                        if (namespace_type !== "tums_api") {
+                          if (!$ctx.fetched_data.loading) {
+                            if (
+                              !$ctx.fetched_data.data ||
+                              $ctx.fetched_data.data.length === 0
+                            ) {
+                              return "";
+                            }
+                            const item = $ctx.fetched_data.data[0];
+                            if (item && item.date_of_birth) {
+                              const dob = new Date(item.date_of_birth);
+                              const now = new Date();
+                              const ageDiffMs = now - dob;
+                              const ageDays = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60 * 24)
+                              );
+                              const ageHours = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60)
+                              );
+                              const fullName = `${item.first_name} ${item.last_name}`;
+                              const genderSymbol =
+                                item.gender === "F"
+                                  ? " \u2640️"
+                                  : item.gender === "M"
+                                  ? " \u2642️"
+                                  : "";
+                              if (ageDays < 1) {
+                                const hoursText =
+                                  ageHours === 1 ? " hour" : " hours";
+                                return `${fullName}${hoursText}${genderSymbol}`;
+                              } else if (ageDays < 30) {
+                                const daysText =
+                                  ageDays === 1 ? " day" : " days";
+                                return `${fullName}${ageDays}${daysText}${genderSymbol}`;
+                              } else {
+                                let ageYears =
+                                  now.getFullYear() - dob.getFullYear();
+                                const monthDifference =
+                                  now.getMonth() - dob.getMonth();
+                                if (
+                                  monthDifference < 0 ||
+                                  (monthDifference === 0 &&
+                                    now.getDate() < dob.getDate())
+                                ) {
+                                  ageYears--;
+                                }
+                                if (ageYears < 1) {
+                                  let ageMonths = monthDifference;
+                                  if (now.getDate() < dob.getDate()) {
+                                    ageMonths--;
+                                  }
+                                  if (ageMonths < 0) {
+                                    ageMonths += 12;
+                                  }
+                                  const monthsText =
+                                    ageMonths === 1 ? " month" : " months";
+                                  return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
+                                } else {
+                                  const yearsText =
+                                    ageYears === 1 ? " year" : " years";
+                                  return `${fullName} ${ageYears}${genderSymbol}`;
+                                }
+                              }
+                            } else {
+                              return "Date of birth not available.";
+                            }
+                          }
+                        } else if (namespace_type === "tums_api") {
+                          if (
+                            !$ctx.fetched_data.data ||
+                            $ctx.fetched_data.data.length === 0
+                          ) {
+                            return "";
+                          }
+                          const currentitem = $ctx.fetched_data.data[0];
+                          return `${currentitem.first_name} ${currentitem.last_name}`;
+                        }
+                      })()}
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>
+                      {(() => {
+                        const namespace_type = localStorage.getItem(
+                          "inlab_user_his_type"
+                        );
+                        if (namespace_type !== "tums_api") {
+                          if (!$ctx.fetched_data.loading) {
+                            if (
+                              !$ctx.fetched_data.data ||
+                              $ctx.fetched_data.data.length === 0
+                            ) {
+                              return "";
+                            }
+                            const item = $ctx.fetched_data.data[0];
+                            if (item && item.date_of_birth) {
+                              const dob = new Date(item.date_of_birth);
+                              const now = new Date();
+                              const ageDiffMs = now - dob;
+                              const ageDays = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60 * 24)
+                              );
+                              const ageHours = Math.floor(
+                                ageDiffMs / (1000 * 60 * 60)
+                              );
+                              const fullName = `${item.first_name} ${item.last_name}`;
+                              const genderSymbol =
+                                item.gender === "F"
+                                  ? " \u2640️"
+                                  : item.gender === "M"
+                                  ? " \u2642️"
+                                  : "";
+                              if (ageDays < 1) {
+                                const hoursText =
+                                  ageHours === 1 ? " hour" : " hours";
+                                return `${fullName}${hoursText}${genderSymbol}`;
+                              } else if (ageDays < 30) {
+                                const daysText =
+                                  ageDays === 1 ? " day" : " days";
+                                return `${fullName}${ageDays}${daysText}${genderSymbol}`;
+                              } else {
+                                let ageYears =
+                                  now.getFullYear() - dob.getFullYear();
+                                const monthDifference =
+                                  now.getMonth() - dob.getMonth();
+                                if (
+                                  monthDifference < 0 ||
+                                  (monthDifference === 0 &&
+                                    now.getDate() < dob.getDate())
+                                ) {
+                                  ageYears--;
+                                }
+                                if (ageYears < 1) {
+                                  let ageMonths = monthDifference;
+                                  if (now.getDate() < dob.getDate()) {
+                                    ageMonths--;
+                                  }
+                                  if (ageMonths < 0) {
+                                    ageMonths += 12;
+                                  }
+                                  const monthsText =
+                                    ageMonths === 1 ? " month" : " months";
+                                  return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
+                                } else {
+                                  const yearsText =
+                                    ageYears === 1 ? " year" : " years";
+                                  return `${fullName} ${ageYears}${genderSymbol}`;
+                                }
+                              }
+                            } else {
+                              return "Date of birth not available.";
+                            }
+                          }
+                        } else if (namespace_type === "tums_api") {
+                          if (
+                            !$ctx.fetched_data.data ||
+                            $ctx.fetched_data.data.length === 0
+                          ) {
+                            return "";
+                          }
+                          const currentitem = $ctx.fetched_data.data[0];
+                          return `${currentitem.first_name} ${currentitem.last_name}`;
+                        }
+                      })()}
+                    </React.Fragment>
+                  )}
+                </div>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponentPlusCache>
         </div>
         <Stack__
           as={"div"}
@@ -3957,11 +4216,24 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             data-plasmic-name={"apiFetcherComponentPlusCache"}
             data-plasmic-override={overrides.apiFetcherComponentPlusCache}
             cache={"yes"}
-            cacheKey={"laboratory"}
+            cacheKey={(() => {
+              try {
+                return "laboratory";
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             className={classNames(
               "__wab_instance",
               sty.apiFetcherComponentPlusCache
             )}
+            delay={10}
             headers={(() => {
               try {
                 return {
@@ -6336,6 +6608,8 @@ const PlasmicDescendants = {
     "patientNameAgeGender",
     "nextPatient",
     "next",
+    "apiFetcherComponentPlusCache2",
+    "patientNameAgeGender2",
     "tabButtons",
     "checkedFactor",
     "button",
@@ -6409,7 +6683,9 @@ const PlasmicDescendants = {
     "patientDataApiFetcher",
     "patientNameAgeGender",
     "nextPatient",
-    "next"
+    "next",
+    "apiFetcherComponentPlusCache2",
+    "patientNameAgeGender2"
   ],
   lastPatient: ["lastPatient", "last"],
   last: ["last"],
@@ -6417,6 +6693,11 @@ const PlasmicDescendants = {
   patientNameAgeGender: ["patientNameAgeGender"],
   nextPatient: ["nextPatient", "next"],
   next: ["next"],
+  apiFetcherComponentPlusCache2: [
+    "apiFetcherComponentPlusCache2",
+    "patientNameAgeGender2"
+  ],
+  patientNameAgeGender2: ["patientNameAgeGender2"],
   tabButtons: ["tabButtons", "checkedFactor", "button", "laboratoryResult"],
   checkedFactor: ["checkedFactor", "button"],
   button: ["button"],
@@ -6701,6 +6982,8 @@ type NodeDefaultElementType = {
   patientNameAgeGender: "div";
   nextPatient: "div";
   next: "svg";
+  apiFetcherComponentPlusCache2: typeof ApiFetcherComponentPlusCache;
+  patientNameAgeGender2: "div";
   tabButtons: "div";
   checkedFactor: typeof Button;
   button: typeof Button;
@@ -6837,6 +7120,10 @@ export const PlasmicLaboratoryData = Object.assign(
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
     nextPatient: makeNodeComponent("nextPatient"),
     next: makeNodeComponent("next"),
+    apiFetcherComponentPlusCache2: makeNodeComponent(
+      "apiFetcherComponentPlusCache2"
+    ),
+    patientNameAgeGender2: makeNodeComponent("patientNameAgeGender2"),
     tabButtons: makeNodeComponent("tabButtons"),
     checkedFactor: makeNodeComponent("checkedFactor"),
     button: makeNodeComponent("button"),

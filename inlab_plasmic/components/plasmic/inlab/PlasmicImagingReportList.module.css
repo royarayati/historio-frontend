@@ -297,6 +297,30 @@
     flex-shrink: 0;
   }
 }
+.apiFetcherComponentPlusCache2:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  min-width: 0;
+}
+.patientNameAgeGender2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 30px;
+  font-size: 16px;
+  color: #70727a;
+  white-space: pre;
+  min-width: 0;
+  padding: 4px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientNameAgeGender2 {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
 .tabButtons {
   display: flex;
   position: fixed;
