@@ -1620,12 +1620,24 @@ function PlasmicPatientProfile__RenderFunc(props: {
                   data-plasmic-name={"patientProfileApiCache"}
                   data-plasmic-override={overrides.patientProfileApiCache}
                   cache={"yes"}
-                  cacheKey={"profile"}
-                  cacheType={"profile"}
+                  cacheKey={(() => {
+                    try {
+                      return "profile";
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
                   className={classNames(
                     "__wab_instance",
                     sty.patientProfileApiCache
                   )}
+                  delay={10}
                   headers={(() => {
                     try {
                       return {

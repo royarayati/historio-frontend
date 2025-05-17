@@ -6096,8 +6096,8 @@ function PlasmicHomepage__RenderFunc(props: {
                 ($state.searchbarFname.value ||
                   $state.searchbarLnameNcode.value) !== "" &&
                 $state.searchDismissed
-                  ? 8
-                  : 30
+                  ? 10
+                  : 40
               }&sort_by_bed=${$state.sortingByBed}&type=${$state.bookmarkType}`}
               ref={ref => {
                 $refs["patients"] = ref;

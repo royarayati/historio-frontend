@@ -63,8 +63,8 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
-import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
+import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import  UploadFileComponent  from "../../../utils/UploadFileComponent"; // plasmic-import: 7kAzsD1nNTbW/codeComponent
@@ -119,6 +119,8 @@ export type PlasmicImagingReportList__OverridesType = {
   saveAdmissionDatetime?: Flex__<typeof ConditionGuard>;
   nextPatient?: Flex__<"div">;
   next?: Flex__<"svg">;
+  apiFetcherComponentPlusCache2?: Flex__<typeof ApiFetcherComponentPlusCache>;
+  patientNameAgeGender2?: Flex__<"div">;
   tabButtons?: Flex__<"div">;
   media?: Flex__<typeof Button>;
   paraclinicsButton?: Flex__<typeof Button>;
@@ -1467,6 +1469,253 @@ function PlasmicImagingReportList__RenderFunc(props: {
               />
             </Stack__>
           ) : null}
+          {false ? (
+            <ApiFetcherComponentPlusCache
+              data-plasmic-name={"apiFetcherComponentPlusCache2"}
+              data-plasmic-override={overrides.apiFetcherComponentPlusCache2}
+              cache={"yes"}
+              cacheKey={(() => {
+                try {
+                  return "profile";
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              className={classNames(
+                "__wab_instance",
+                sty.apiFetcherComponentPlusCache2
+              )}
+              delay={10}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+              patientId={(() => {
+                try {
+                  return $ctx.params.code;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              ref={ref => {
+                $refs["apiFetcherComponentPlusCache2"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <div
+                    data-plasmic-name={"patientNameAgeGender2"}
+                    data-plasmic-override={overrides.patientNameAgeGender2}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.patientNameAgeGender2
+                    )}
+                    dir={"rtl"}
+                  >
+                    {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                      <React.Fragment>
+                        {(() => {
+                          const namespace_type = localStorage.getItem(
+                            "inlab_user_his_type"
+                          );
+                          if (namespace_type !== "tums_api") {
+                            if (!$ctx.fetched_data.loading) {
+                              if (
+                                !$ctx.fetched_data.data ||
+                                $ctx.fetched_data.data.length === 0
+                              ) {
+                                return "";
+                              }
+                              const item = $ctx.fetched_data.data[0];
+                              if (item && item.date_of_birth) {
+                                const dob = new Date(item.date_of_birth);
+                                const now = new Date();
+                                const ageDiffMs = now - dob;
+                                const ageDays = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60 * 24)
+                                );
+                                const ageHours = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60)
+                                );
+                                const fullName = `${item.first_name} ${item.last_name}`;
+                                const genderSymbol =
+                                  item.gender === "F"
+                                    ? " \u2640️"
+                                    : item.gender === "M"
+                                    ? " \u2642️"
+                                    : "";
+                                if (ageDays < 1) {
+                                  const hoursText =
+                                    ageHours === 1 ? " hour" : " hours";
+                                  return `${fullName}${hoursText}${genderSymbol}`;
+                                } else if (ageDays < 30) {
+                                  const daysText =
+                                    ageDays === 1 ? " day" : " days";
+                                  return `${fullName}${ageDays}${daysText}${genderSymbol}`;
+                                } else {
+                                  let ageYears =
+                                    now.getFullYear() - dob.getFullYear();
+                                  const monthDifference =
+                                    now.getMonth() - dob.getMonth();
+                                  if (
+                                    monthDifference < 0 ||
+                                    (monthDifference === 0 &&
+                                      now.getDate() < dob.getDate())
+                                  ) {
+                                    ageYears--;
+                                  }
+                                  if (ageYears < 1) {
+                                    let ageMonths = monthDifference;
+                                    if (now.getDate() < dob.getDate()) {
+                                      ageMonths--;
+                                    }
+                                    if (ageMonths < 0) {
+                                      ageMonths += 12;
+                                    }
+                                    const monthsText =
+                                      ageMonths === 1 ? " month" : " months";
+                                    return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
+                                  } else {
+                                    const yearsText =
+                                      ageYears === 1 ? " year" : " years";
+                                    return `${fullName} ${ageYears}${genderSymbol}`;
+                                  }
+                                }
+                              } else {
+                                return "Date of birth not available.";
+                              }
+                            }
+                          } else if (namespace_type === "tums_api") {
+                            if (
+                              !$ctx.fetched_data.data ||
+                              $ctx.fetched_data.data.length === 0
+                            ) {
+                              return "";
+                            }
+                            const currentitem = $ctx.fetched_data.data[0];
+                            return `${currentitem.first_name} ${currentitem.last_name}`;
+                          }
+                        })()}
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        {(() => {
+                          const namespace_type = localStorage.getItem(
+                            "inlab_user_his_type"
+                          );
+                          if (namespace_type !== "tums_api") {
+                            if (!$ctx.fetched_data.loading) {
+                              if (
+                                !$ctx.fetched_data.data ||
+                                $ctx.fetched_data.data.length === 0
+                              ) {
+                                return "";
+                              }
+                              const item = $ctx.fetched_data.data[0];
+                              if (item && item.date_of_birth) {
+                                const dob = new Date(item.date_of_birth);
+                                const now = new Date();
+                                const ageDiffMs = now - dob;
+                                const ageDays = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60 * 24)
+                                );
+                                const ageHours = Math.floor(
+                                  ageDiffMs / (1000 * 60 * 60)
+                                );
+                                const fullName = `${item.first_name} ${item.last_name}`;
+                                const genderSymbol =
+                                  item.gender === "F"
+                                    ? " \u2640️"
+                                    : item.gender === "M"
+                                    ? " \u2642️"
+                                    : "";
+                                if (ageDays < 1) {
+                                  const hoursText =
+                                    ageHours === 1 ? " hour" : " hours";
+                                  return `${fullName}${hoursText}${genderSymbol}`;
+                                } else if (ageDays < 30) {
+                                  const daysText =
+                                    ageDays === 1 ? " day" : " days";
+                                  return `${fullName}${ageDays}${daysText}${genderSymbol}`;
+                                } else {
+                                  let ageYears =
+                                    now.getFullYear() - dob.getFullYear();
+                                  const monthDifference =
+                                    now.getMonth() - dob.getMonth();
+                                  if (
+                                    monthDifference < 0 ||
+                                    (monthDifference === 0 &&
+                                      now.getDate() < dob.getDate())
+                                  ) {
+                                    ageYears--;
+                                  }
+                                  if (ageYears < 1) {
+                                    let ageMonths = monthDifference;
+                                    if (now.getDate() < dob.getDate()) {
+                                      ageMonths--;
+                                    }
+                                    if (ageMonths < 0) {
+                                      ageMonths += 12;
+                                    }
+                                    const monthsText =
+                                      ageMonths === 1 ? " month" : " months";
+                                    return `${fullName} ${ageMonths}${monthsText}${genderSymbol}`;
+                                  } else {
+                                    const yearsText =
+                                      ageYears === 1 ? " year" : " years";
+                                    return `${fullName} ${ageYears}${genderSymbol}`;
+                                  }
+                                }
+                              } else {
+                                return "Date of birth not available.";
+                              }
+                            }
+                          } else if (namespace_type === "tums_api") {
+                            if (
+                              !$ctx.fetched_data.data ||
+                              $ctx.fetched_data.data.length === 0
+                            ) {
+                              return "";
+                            }
+                            const currentitem = $ctx.fetched_data.data[0];
+                            return `${currentitem.first_name} ${currentitem.last_name}`;
+                          }
+                        })()}
+                      </React.Fragment>
+                    )}
+                  </div>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponentPlusCache>
+          ) : null}
         </div>
         <Stack__
           as={"div"}
@@ -1475,141 +1724,157 @@ function PlasmicImagingReportList__RenderFunc(props: {
           hasGap={true}
           className={classNames(projectcss.all, sty.tabButtons)}
         >
-          <Button
-            data-plasmic-name={"media"}
-            data-plasmic-override={overrides.media}
-            className={classNames("__wab_instance", sty.media)}
-            deselected={generateStateValueProp($state, ["media", "deselected"])}
-            isDisabled={generateStateValueProp($state, ["media", "isDisabled"])}
-            onClick={async event => {
-              const $steps = {};
+          {false ? (
+            <Button
+              data-plasmic-name={"media"}
+              data-plasmic-override={overrides.media}
+              className={classNames("__wab_instance", sty.media)}
+              deselected={generateStateValueProp($state, [
+                "media",
+                "deselected"
+              ])}
+              isDisabled={generateStateValueProp($state, [
+                "media",
+                "isDisabled"
+              ])}
+              onClick={async event => {
+                const $steps = {};
 
-              $steps["updateStateParaclinics"] = true
-                ? (() => {
-                    const actionArgs = {
-                      variable: {
-                        objRoot: $state,
-                        variablePath: ["selectedTab"]
-                      },
-                      operation: 0,
-                      value: "media"
-                    };
-                    return (({ variable, value, startIndex, deleteCount }) => {
-                      if (!variable) {
-                        return;
-                      }
-                      const { objRoot, variablePath } = variable;
+                $steps["updateStateParaclinics"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["selectedTab"]
+                        },
+                        operation: 0,
+                        value: "media"
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
 
-                      $stateSet(objRoot, variablePath, value);
-                      return value;
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["updateStateParaclinics"] != null &&
-                typeof $steps["updateStateParaclinics"] === "object" &&
-                typeof $steps["updateStateParaclinics"].then === "function"
-              ) {
-                $steps["updateStateParaclinics"] = await $steps[
-                  "updateStateParaclinics"
-                ];
-              }
-            }}
-            onDeselectedChange={async (...eventArgs: any) => {
-              ((...eventArgs) => {
-                generateStateOnChangeProp($state, ["media", "deselected"])(
-                  eventArgs[0]
-                );
-              }).apply(null, eventArgs);
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateStateParaclinics"] != null &&
+                  typeof $steps["updateStateParaclinics"] === "object" &&
+                  typeof $steps["updateStateParaclinics"].then === "function"
+                ) {
+                  $steps["updateStateParaclinics"] = await $steps[
+                    "updateStateParaclinics"
+                  ];
+                }
+              }}
+              onDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["media", "deselected"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
 
-              if (
-                eventArgs.length > 1 &&
-                eventArgs[1] &&
-                eventArgs[1]._plasmic_state_init_
-              ) {
-                return;
-              }
-            }}
-            onIsDisabledChange={async (...eventArgs: any) => {
-              ((...eventArgs) => {
-                generateStateOnChangeProp($state, ["media", "isDisabled"])(
-                  eventArgs[0]
-                );
-              }).apply(null, eventArgs);
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onIsDisabledChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["media", "isDisabled"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
 
-              if (
-                eventArgs.length > 1 &&
-                eventArgs[1] &&
-                eventArgs[1]._plasmic_state_init_
-              ) {
-                return;
-              }
-            }}
-            onSelectedChange={async (...eventArgs: any) => {
-              ((...eventArgs) => {
-                generateStateOnChangeProp($state, ["media", "selected"])(
-                  eventArgs[0]
-                );
-              }).apply(null, eventArgs);
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["media", "selected"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
 
-              if (
-                eventArgs.length > 1 &&
-                eventArgs[1] &&
-                eventArgs[1]._plasmic_state_init_
-              ) {
-                return;
-              }
-            }}
-            onSortDeselectedChange={async (...eventArgs: any) => {
-              ((...eventArgs) => {
-                generateStateOnChangeProp($state, ["media", "sortDeselected"])(
-                  eventArgs[0]
-                );
-              }).apply(null, eventArgs);
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onSortDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "media",
+                    "sortDeselected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
 
-              if (
-                eventArgs.length > 1 &&
-                eventArgs[1] &&
-                eventArgs[1]._plasmic_state_init_
-              ) {
-                return;
-              }
-            }}
-            onSortSelectedChange={async (...eventArgs: any) => {
-              ((...eventArgs) => {
-                generateStateOnChangeProp($state, ["media", "sortSelected"])(
-                  eventArgs[0]
-                );
-              }).apply(null, eventArgs);
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onSortSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["media", "sortSelected"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
 
-              if (
-                eventArgs.length > 1 &&
-                eventArgs[1] &&
-                eventArgs[1]._plasmic_state_init_
-              ) {
-                return;
-              }
-            }}
-            selected={generateStateValueProp($state, ["media", "selected"])}
-            sortDeselected={generateStateValueProp($state, [
-              "media",
-              "sortDeselected"
-            ])}
-            sortSelected={generateStateValueProp($state, [
-              "media",
-              "sortSelected"
-            ])}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__akAEr
-              )}
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              selected={generateStateValueProp($state, ["media", "selected"])}
+              sortDeselected={generateStateValueProp($state, [
+                "media",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "media",
+                "sortSelected"
+              ])}
             >
-              {"\u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631"}
-            </div>
-          </Button>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__akAEr
+                )}
+              >
+                {
+                  "\u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631"
+                }
+              </div>
+            </Button>
+          ) : null}
           <Button
             data-plasmic-name={"paraclinicsButton"}
             data-plasmic-override={overrides.paraclinicsButton}
@@ -2199,13 +2464,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") !==
-                          "tums_api" &&
-                        $ctx.fetched_data.data.length === 0
+                        $ctx.fetched_data.data.radiology_services.length === 0
                       : $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") !==
-                          "tums_api" &&
-                        $ctx.fetched_data.length === 0
+                        $ctx.fetched_data.data.radiology_services.length === 0
                   ) ? (
                     <div
                       className={classNames(
@@ -3022,12 +3283,24 @@ function PlasmicImagingReportList__RenderFunc(props: {
             data-plasmic-name={"apiFetcherComponentPlusCache"}
             data-plasmic-override={overrides.apiFetcherComponentPlusCache}
             cache={"yes"}
-            cacheKey={"radiology"}
-            cacheType={"radiology"}
+            cacheKey={(() => {
+              try {
+                return "radiology";
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             className={classNames(
               "__wab_instance",
               sty.apiFetcherComponentPlusCache
             )}
+            delay={10}
             headers={(() => {
               try {
                 return {
@@ -3309,13 +3582,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
                       ? $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") !==
-                          "tums_api" &&
-                        $ctx.fetched_data.data.length === 0
+                        $ctx.fetched_data.data &&
+                        $ctx.fetched_data.data.radiology_services.length === 0
                       : $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") !==
-                          "tums_api" &&
-                        $ctx.fetched_data.length === 0
+                        $ctx.fetched_data.data &&
+                        $ctx.fetched_data.data.radiology_services.length === 0
                   ) ? (
                     <div
                       className={classNames(
@@ -5257,7 +5528,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
             </div>
           }
           trigger={null}
-          width={"90%"}
+          width={
+            hasVariant(globalVariants, "screen", "mobileFirst") ? "82%" : "90%"
+          }
           wrapClassName={classNames({ [sty["pcls_nVYN7IUeA_o9"]]: true })}
         >
           <Stack__
@@ -7120,152 +7393,161 @@ function PlasmicImagingReportList__RenderFunc(props: {
             />
           </SwitchingTab>
         </div>
-        <Button
-          data-plasmic-name={"uploadMedia"}
-          data-plasmic-override={overrides.uploadMedia}
-          className={classNames("__wab_instance", sty.uploadMedia)}
-          color={"green"}
-          deselected={generateStateValueProp($state, [
-            "uploadMedia",
-            "deselected"
-          ])}
-          isDisabled={generateStateValueProp($state, [
-            "uploadMedia",
-            "isDisabled"
-          ])}
-          onClick={async event => {
-            const $steps = {};
+        {(
+          hasVariant(globalVariants, "screen", "mobileFirst") ? false : false
+        ) ? (
+          <Button
+            data-plasmic-name={"uploadMedia"}
+            data-plasmic-override={overrides.uploadMedia}
+            className={classNames("__wab_instance", sty.uploadMedia)}
+            color={"green"}
+            deselected={generateStateValueProp($state, [
+              "uploadMedia",
+              "deselected"
+            ])}
+            isDisabled={generateStateValueProp($state, [
+              "uploadMedia",
+              "isDisabled"
+            ])}
+            onClick={async event => {
+              const $steps = {};
 
-            $steps["openUploadMediaModal"] = true
-              ? (() => {
-                  const actionArgs = {
-                    variable: {
-                      objRoot: $state,
-                      variablePath: ["uploadMediaModal", "open"]
-                    },
-                    operation: 0,
-                    value: true
-                  };
-                  return (({ variable, value, startIndex, deleteCount }) => {
-                    if (!variable) {
-                      return;
-                    }
-                    const { objRoot, variablePath } = variable;
+              $steps["openUploadMediaModal"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["uploadMediaModal", "open"]
+                      },
+                      operation: 0,
+                      value: true
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
 
-                    $stateSet(objRoot, variablePath, value);
-                    return value;
-                  })?.apply(null, [actionArgs]);
-                })()
-              : undefined;
-            if (
-              $steps["openUploadMediaModal"] != null &&
-              typeof $steps["openUploadMediaModal"] === "object" &&
-              typeof $steps["openUploadMediaModal"].then === "function"
-            ) {
-              $steps["openUploadMediaModal"] = await $steps[
-                "openUploadMediaModal"
-              ];
-            }
-          }}
-          onDeselectedChange={async (...eventArgs: any) => {
-            ((...eventArgs) => {
-              generateStateOnChangeProp($state, ["uploadMedia", "deselected"])(
-                eventArgs[0]
-              );
-            }).apply(null, eventArgs);
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["openUploadMediaModal"] != null &&
+                typeof $steps["openUploadMediaModal"] === "object" &&
+                typeof $steps["openUploadMediaModal"].then === "function"
+              ) {
+                $steps["openUploadMediaModal"] = await $steps[
+                  "openUploadMediaModal"
+                ];
+              }
+            }}
+            onDeselectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "uploadMedia",
+                  "deselected"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
 
-            if (
-              eventArgs.length > 1 &&
-              eventArgs[1] &&
-              eventArgs[1]._plasmic_state_init_
-            ) {
-              return;
-            }
-          }}
-          onIsDisabledChange={async (...eventArgs: any) => {
-            ((...eventArgs) => {
-              generateStateOnChangeProp($state, ["uploadMedia", "isDisabled"])(
-                eventArgs[0]
-              );
-            }).apply(null, eventArgs);
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onIsDisabledChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "uploadMedia",
+                  "isDisabled"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
 
-            if (
-              eventArgs.length > 1 &&
-              eventArgs[1] &&
-              eventArgs[1]._plasmic_state_init_
-            ) {
-              return;
-            }
-          }}
-          onSelectedChange={async (...eventArgs: any) => {
-            ((...eventArgs) => {
-              generateStateOnChangeProp($state, ["uploadMedia", "selected"])(
-                eventArgs[0]
-              );
-            }).apply(null, eventArgs);
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onSelectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, ["uploadMedia", "selected"])(
+                  eventArgs[0]
+                );
+              }).apply(null, eventArgs);
 
-            if (
-              eventArgs.length > 1 &&
-              eventArgs[1] &&
-              eventArgs[1]._plasmic_state_init_
-            ) {
-              return;
-            }
-          }}
-          onSortDeselectedChange={async (...eventArgs: any) => {
-            ((...eventArgs) => {
-              generateStateOnChangeProp($state, [
-                "uploadMedia",
-                "sortDeselected"
-              ])(eventArgs[0]);
-            }).apply(null, eventArgs);
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onSortDeselectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "uploadMedia",
+                  "sortDeselected"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
 
-            if (
-              eventArgs.length > 1 &&
-              eventArgs[1] &&
-              eventArgs[1]._plasmic_state_init_
-            ) {
-              return;
-            }
-          }}
-          onSortSelectedChange={async (...eventArgs: any) => {
-            ((...eventArgs) => {
-              generateStateOnChangeProp($state, [
-                "uploadMedia",
-                "sortSelected"
-              ])(eventArgs[0]);
-            }).apply(null, eventArgs);
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onSortSelectedChange={async (...eventArgs: any) => {
+              ((...eventArgs) => {
+                generateStateOnChangeProp($state, [
+                  "uploadMedia",
+                  "sortSelected"
+                ])(eventArgs[0]);
+              }).apply(null, eventArgs);
 
-            if (
-              eventArgs.length > 1 &&
-              eventArgs[1] &&
-              eventArgs[1]._plasmic_state_init_
-            ) {
-              return;
-            }
-          }}
-          selected={generateStateValueProp($state, ["uploadMedia", "selected"])}
-          sortDeselected={generateStateValueProp($state, [
-            "uploadMedia",
-            "sortDeselected"
-          ])}
-          sortSelected={generateStateValueProp($state, [
-            "uploadMedia",
-            "sortSelected"
-          ])}
-        >
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text__ci0I5
-            )}
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            selected={generateStateValueProp($state, [
+              "uploadMedia",
+              "selected"
+            ])}
+            sortDeselected={generateStateValueProp($state, [
+              "uploadMedia",
+              "sortDeselected"
+            ])}
+            sortSelected={generateStateValueProp($state, [
+              "uploadMedia",
+              "sortSelected"
+            ])}
           >
-            {
-              "+ \u0622\u067e\u0644\u0648\u062f \u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631"
-            }
-          </div>
-        </Button>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__ci0I5
+              )}
+            >
+              {
+                "+ \u0622\u067e\u0644\u0648\u062f \u0645\u062f\u0627\u0631\u06a9 \u0628\u06cc\u0645\u0627\u0631"
+              }
+            </div>
+          </Button>
+        ) : null}
         <ApiFetcherComponent
           data-plasmic-name={"getPacsUrl"}
           data-plasmic-override={overrides.getPacsUrl}
@@ -7466,6 +7748,8 @@ const PlasmicDescendants = {
     "saveAdmissionDatetime",
     "nextPatient",
     "next",
+    "apiFetcherComponentPlusCache2",
+    "patientNameAgeGender2",
     "tabButtons",
     "media",
     "paraclinicsButton",
@@ -7546,7 +7830,9 @@ const PlasmicDescendants = {
     "patientNameAgeGender",
     "saveAdmissionDatetime",
     "nextPatient",
-    "next"
+    "next",
+    "apiFetcherComponentPlusCache2",
+    "patientNameAgeGender2"
   ],
   lastPatient: ["lastPatient", "last"],
   last: ["last"],
@@ -7555,6 +7841,11 @@ const PlasmicDescendants = {
   saveAdmissionDatetime: ["saveAdmissionDatetime"],
   nextPatient: ["nextPatient", "next"],
   next: ["next"],
+  apiFetcherComponentPlusCache2: [
+    "apiFetcherComponentPlusCache2",
+    "patientNameAgeGender2"
+  ],
+  patientNameAgeGender2: ["patientNameAgeGender2"],
   tabButtons: ["tabButtons", "media", "paraclinicsButton", "paraclinicReports"],
   media: ["media"],
   paraclinicsButton: ["paraclinicsButton"],
@@ -7836,6 +8127,8 @@ type NodeDefaultElementType = {
   saveAdmissionDatetime: typeof ConditionGuard;
   nextPatient: "div";
   next: "svg";
+  apiFetcherComponentPlusCache2: typeof ApiFetcherComponentPlusCache;
+  patientNameAgeGender2: "div";
   tabButtons: "div";
   media: typeof Button;
   paraclinicsButton: typeof Button;
@@ -7979,6 +8272,10 @@ export const PlasmicImagingReportList = Object.assign(
     saveAdmissionDatetime: makeNodeComponent("saveAdmissionDatetime"),
     nextPatient: makeNodeComponent("nextPatient"),
     next: makeNodeComponent("next"),
+    apiFetcherComponentPlusCache2: makeNodeComponent(
+      "apiFetcherComponentPlusCache2"
+    ),
+    patientNameAgeGender2: makeNodeComponent("patientNameAgeGender2"),
     tabButtons: makeNodeComponent("tabButtons"),
     media: makeNodeComponent("media"),
     paraclinicsButton: makeNodeComponent("paraclinicsButton"),

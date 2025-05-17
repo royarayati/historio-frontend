@@ -318,6 +318,55 @@
     flex-shrink: 0;
   }
 }
+.apiFetcherComponentPlusCache2:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  min-width: 0;
+}
+.patientNameAgeGender2 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  text-align: center;
+  font-weight: 400;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  right: auto;
+  max-height: 30px;
+  font-size: var(--token-sOr3fJ5Up5fq);
+  align-self: center;
+  color: #70727a;
+  white-space: pre;
+  min-width: 0;
+  min-height: 0;
+  padding: 2px;
+  margin: 0px 8px 0px 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientNameAgeGender2 {
+    font-size: var(--token-NMUbRE7XpwuK);
+    left: auto;
+    top: auto;
+    right: auto;
+    padding: 4px 0px;
+    margin: 0px;
+  }
+}
+.patientNameAgeGender2viewNormalRange {
+  left: auto;
+  top: auto;
+  right: auto;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientNameAgeGender2viewNormalRange {
+    left: auto;
+    top: auto;
+    right: auto;
+  }
+}
 .tabButtons {
   display: flex;
   flex-direction: row;
