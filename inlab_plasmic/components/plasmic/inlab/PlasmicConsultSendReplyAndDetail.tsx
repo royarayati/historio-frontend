@@ -815,7 +815,9 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         try {
                           return (
                             !$ctx.fetched_data.loading &&
-                            $ctx.fetched_data.data.state != 4
+                            $ctx.fetched_data.data.state != 4 &&
+                            $ctx.fetched_data.data.requester.id ===
+                              $ctx.inlab_user.user.id
                           );
                         } catch (e) {
                           if (

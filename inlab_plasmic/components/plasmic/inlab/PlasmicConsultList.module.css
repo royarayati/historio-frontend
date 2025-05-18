@@ -385,6 +385,7 @@
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+  color: #00000080;
 }
 .receiverService {
   position: relative;
