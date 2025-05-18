@@ -7545,301 +7545,271 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             )}
                             key={currentIndex}
                           >
-                            {false
-                              ? (() => {
-                                  const child$Props = {
-                                    className: classNames(
-                                      "__wab_instance",
-                                      sty.deleteMedia
-                                    ),
-                                    color: "red",
-                                    deselected: generateStateValueProp($state, [
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.deleteMedia
+                                ),
+                                color: "red",
+                                deselected: generateStateValueProp($state, [
+                                  "deleteMedia",
+                                  __plasmic_idx_0,
+                                  "deselected"
+                                ]),
+                                isDisabled: generateStateValueProp($state, [
+                                  "deleteMedia",
+                                  __plasmic_idx_0,
+                                  "isDisabled"
+                                ]),
+                                onClick: async event => {
+                                  const $steps = {};
+
+                                  $steps["updateMediaTitle"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["mediaTitle"]
+                                          },
+                                          operation: 0,
+                                          value: currentItem.title
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateMediaTitle"] != null &&
+                                    typeof $steps["updateMediaTitle"] ===
+                                      "object" &&
+                                    typeof $steps["updateMediaTitle"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateMediaTitle"] = await $steps[
+                                      "updateMediaTitle"
+                                    ];
+                                  }
+
+                                  $steps["updateDeleteMediaAlarmOpen"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: [
+                                              "deleteMediaAlarm",
+                                              "open"
+                                            ]
+                                          },
+                                          operation: 0,
+                                          value: true
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateDeleteMediaAlarmOpen"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updateDeleteMediaAlarmOpen"
+                                    ] === "object" &&
+                                    typeof $steps["updateDeleteMediaAlarmOpen"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateDeleteMediaAlarmOpen"] =
+                                      await $steps[
+                                        "updateDeleteMediaAlarmOpen"
+                                      ];
+                                  }
+                                },
+                                onDeselectedChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
                                       "deleteMedia",
                                       __plasmic_idx_0,
                                       "deselected"
-                                    ]),
-                                    isDisabled: generateStateValueProp($state, [
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onIsDisabledChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
                                       "deleteMedia",
                                       __plasmic_idx_0,
                                       "isDisabled"
-                                    ]),
-                                    onClick: async event => {
-                                      const $steps = {};
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
 
-                                      $steps["updateMediaTitle"] = true
-                                        ? (() => {
-                                            const actionArgs = {
-                                              variable: {
-                                                objRoot: $state,
-                                                variablePath: ["mediaTitle"]
-                                              },
-                                              operation: 0,
-                                              value: currentItem.title
-                                            };
-                                            return (({
-                                              variable,
-                                              value,
-                                              startIndex,
-                                              deleteCount
-                                            }) => {
-                                              if (!variable) {
-                                                return;
-                                              }
-                                              const { objRoot, variablePath } =
-                                                variable;
-
-                                              $stateSet(
-                                                objRoot,
-                                                variablePath,
-                                                value
-                                              );
-                                              return value;
-                                            })?.apply(null, [actionArgs]);
-                                          })()
-                                        : undefined;
-                                      if (
-                                        $steps["updateMediaTitle"] != null &&
-                                        typeof $steps["updateMediaTitle"] ===
-                                          "object" &&
-                                        typeof $steps["updateMediaTitle"]
-                                          .then === "function"
-                                      ) {
-                                        $steps["updateMediaTitle"] =
-                                          await $steps["updateMediaTitle"];
-                                      }
-
-                                      $steps["updateDeleteMediaAlarmOpen"] =
-                                        true
-                                          ? (() => {
-                                              const actionArgs = {
-                                                variable: {
-                                                  objRoot: $state,
-                                                  variablePath: [
-                                                    "deleteMediaAlarm",
-                                                    "open"
-                                                  ]
-                                                },
-                                                operation: 0,
-                                                value: true
-                                              };
-                                              return (({
-                                                variable,
-                                                value,
-                                                startIndex,
-                                                deleteCount
-                                              }) => {
-                                                if (!variable) {
-                                                  return;
-                                                }
-                                                const {
-                                                  objRoot,
-                                                  variablePath
-                                                } = variable;
-
-                                                $stateSet(
-                                                  objRoot,
-                                                  variablePath,
-                                                  value
-                                                );
-                                                return value;
-                                              })?.apply(null, [actionArgs]);
-                                            })()
-                                          : undefined;
-                                      if (
-                                        $steps["updateDeleteMediaAlarmOpen"] !=
-                                          null &&
-                                        typeof $steps[
-                                          "updateDeleteMediaAlarmOpen"
-                                        ] === "object" &&
-                                        typeof $steps[
-                                          "updateDeleteMediaAlarmOpen"
-                                        ].then === "function"
-                                      ) {
-                                        $steps["updateDeleteMediaAlarmOpen"] =
-                                          await $steps[
-                                            "updateDeleteMediaAlarmOpen"
-                                          ];
-                                      }
-                                    },
-                                    onDeselectedChange: async (
-                                      ...eventArgs: any
-                                    ) => {
-                                      ((...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "deleteMedia",
-                                          __plasmic_idx_0,
-                                          "deselected"
-                                        ])(eventArgs[0]);
-                                      }).apply(null, eventArgs);
-
-                                      if (
-                                        eventArgs.length > 1 &&
-                                        eventArgs[1] &&
-                                        eventArgs[1]._plasmic_state_init_
-                                      ) {
-                                        return;
-                                      }
-                                    },
-                                    onIsDisabledChange: async (
-                                      ...eventArgs: any
-                                    ) => {
-                                      ((...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "deleteMedia",
-                                          __plasmic_idx_0,
-                                          "isDisabled"
-                                        ])(eventArgs[0]);
-                                      }).apply(null, eventArgs);
-
-                                      if (
-                                        eventArgs.length > 1 &&
-                                        eventArgs[1] &&
-                                        eventArgs[1]._plasmic_state_init_
-                                      ) {
-                                        return;
-                                      }
-                                    },
-                                    onSelectedChange: async (
-                                      ...eventArgs: any
-                                    ) => {
-                                      ((...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "deleteMedia",
-                                          __plasmic_idx_0,
-                                          "selected"
-                                        ])(eventArgs[0]);
-                                      }).apply(null, eventArgs);
-
-                                      if (
-                                        eventArgs.length > 1 &&
-                                        eventArgs[1] &&
-                                        eventArgs[1]._plasmic_state_init_
-                                      ) {
-                                        return;
-                                      }
-                                    },
-                                    onSortDeselectedChange: async (
-                                      ...eventArgs: any
-                                    ) => {
-                                      ((...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "deleteMedia",
-                                          __plasmic_idx_0,
-                                          "sortDeselected"
-                                        ])(eventArgs[0]);
-                                      }).apply(null, eventArgs);
-
-                                      if (
-                                        eventArgs.length > 1 &&
-                                        eventArgs[1] &&
-                                        eventArgs[1]._plasmic_state_init_
-                                      ) {
-                                        return;
-                                      }
-                                    },
-                                    onSortSelectedChange: async (
-                                      ...eventArgs: any
-                                    ) => {
-                                      ((...eventArgs) => {
-                                        generateStateOnChangeProp($state, [
-                                          "deleteMedia",
-                                          __plasmic_idx_0,
-                                          "sortSelected"
-                                        ])(eventArgs[0]);
-                                      }).apply(null, eventArgs);
-
-                                      if (
-                                        eventArgs.length > 1 &&
-                                        eventArgs[1] &&
-                                        eventArgs[1]._plasmic_state_init_
-                                      ) {
-                                        return;
-                                      }
-                                    },
-                                    selected: generateStateValueProp($state, [
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onSelectedChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
                                       "deleteMedia",
                                       __plasmic_idx_0,
                                       "selected"
-                                    ]),
-                                    sortDeselected: generateStateValueProp(
-                                      $state,
-                                      [
-                                        "deleteMedia",
-                                        __plasmic_idx_0,
-                                        "sortDeselected"
-                                      ]
-                                    ),
-                                    sortSelected: generateStateValueProp(
-                                      $state,
-                                      [
-                                        "deleteMedia",
-                                        __plasmic_idx_0,
-                                        "sortSelected"
-                                      ]
-                                    )
-                                  };
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
 
-                                  initializePlasmicStates(
-                                    $state,
-                                    [
-                                      {
-                                        name: "deleteMedia[].isDisabled",
-                                        initFunc: ({
-                                          $props,
-                                          $state,
-                                          $queries
-                                        }) => undefined
-                                      },
-                                      {
-                                        name: "deleteMedia[].selected",
-                                        initFunc: ({
-                                          $props,
-                                          $state,
-                                          $queries
-                                        }) => undefined
-                                      },
-                                      {
-                                        name: "deleteMedia[].deselected",
-                                        initFunc: ({
-                                          $props,
-                                          $state,
-                                          $queries
-                                        }) => undefined
-                                      },
-                                      {
-                                        name: "deleteMedia[].sortDeselected",
-                                        initFunc: ({
-                                          $props,
-                                          $state,
-                                          $queries
-                                        }) => undefined
-                                      },
-                                      {
-                                        name: "deleteMedia[].sortSelected",
-                                        initFunc: ({
-                                          $props,
-                                          $state,
-                                          $queries
-                                        }) => undefined
-                                      }
-                                    ],
-                                    [__plasmic_idx_0]
-                                  );
-                                  return (
-                                    <Button
-                                      data-plasmic-name={"deleteMedia"}
-                                      data-plasmic-override={
-                                        overrides.deleteMedia
-                                      }
-                                      {...child$Props}
-                                    >
-                                      {
-                                        "\u062d\u0630\u0641 \u0641\u0627\u06cc\u0644"
-                                      }
-                                    </Button>
-                                  );
-                                })()
-                              : null}
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onSortDeselectedChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "deleteMedia",
+                                      __plasmic_idx_0,
+                                      "sortDeselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onSortSelectedChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "deleteMedia",
+                                      __plasmic_idx_0,
+                                      "sortSelected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                selected: generateStateValueProp($state, [
+                                  "deleteMedia",
+                                  __plasmic_idx_0,
+                                  "selected"
+                                ]),
+                                sortDeselected: generateStateValueProp($state, [
+                                  "deleteMedia",
+                                  __plasmic_idx_0,
+                                  "sortDeselected"
+                                ]),
+                                sortSelected: generateStateValueProp($state, [
+                                  "deleteMedia",
+                                  __plasmic_idx_0,
+                                  "sortSelected"
+                                ])
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "deleteMedia[].isDisabled",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "deleteMedia[].selected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "deleteMedia[].deselected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "deleteMedia[].sortDeselected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "deleteMedia[].sortSelected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  }
+                                ],
+                                [__plasmic_idx_0]
+                              );
+                              return (
+                                <Button
+                                  data-plasmic-name={"deleteMedia"}
+                                  data-plasmic-override={overrides.deleteMedia}
+                                  {...child$Props}
+                                >
+                                  {
+                                    "\u062d\u0630\u0641 \u0641\u0627\u06cc\u0644"
+                                  }
+                                </Button>
+                              );
+                            })()}
                             <PlasmicImg__
                               data-plasmic-name={"mediaImage"}
                               data-plasmic-override={overrides.mediaImage}
