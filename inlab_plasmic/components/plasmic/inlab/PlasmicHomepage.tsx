@@ -4246,7 +4246,11 @@ function PlasmicHomepage__RenderFunc(props: {
                                     ) : null}
                                     {(() => {
                                       try {
-                                        return currentItem.state != 4;
+                                        return (
+                                          currentItem.state != 4 &&
+                                          currentItem.requester.id ===
+                                            $ctx.inlab_user.user.id
+                                        );
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||

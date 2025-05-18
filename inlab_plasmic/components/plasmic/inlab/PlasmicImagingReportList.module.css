@@ -464,453 +464,6 @@
   width: auto;
   height: 1em;
 }
-.paraclinicsReport:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  position: fixed;
-  width: 100%;
-  overflow: auto;
-  z-index: 1;
-  left: 0px;
-  top: 160px;
-  bottom: 60px;
-  grid-column-start: 1 !important;
-  grid-column-end: -1 !important;
-  padding: 0px 17px;
-  margin: 0px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicsReport:global(.__wab_instance) {
-    z-index: 1;
-    left: 0px;
-    top: 160px;
-    position: fixed;
-    padding-top: 0px;
-    bottom: 66px;
-    margin: 0px;
-  }
-}
-.viewPacsButton:global(.__wab_instance) {
-  max-width: 100%;
-  width: 100%;
-  margin-top: 8px;
-  margin-bottom: 0px;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  position: relative;
-  height: 30px;
-  align-self: center;
-  min-width: 0;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .viewPacsButton:global(.__wab_instance) {
-    margin-top: 25px;
-    height: 40px;
-    left: auto;
-    top: auto;
-  }
-}
-.text___4Thhk {
-  font-size: 16px;
-  text-align: center;
-  align-self: stretch;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .text___4Thhk {
-    text-align: center;
-    align-self: center;
-  }
-}
-.svg__tMj4 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__gjLoE {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.text__pIosL {
-  position: fixed;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  left: 0px;
-  top: 68px;
-  z-index: 1;
-  text-align: center;
-  background: #ffffff80;
-  right: 0px;
-  font-size: 12px;
-  min-width: 0;
-  border-radius: 5px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .text__pIosL {
-    font-size: 10px;
-    display: block;
-  }
-}
-.text__scVr8 {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  flex-grow: 0;
-  margin-top: 12px;
-  background: #ffffff;
-  white-space: pre-wrap;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  position: relative;
-  min-width: 0;
-  border-radius: 5px;
-  padding: 8px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .text__scVr8 {
-    left: auto;
-    top: auto;
-    display: block;
-  }
-}
-.text__vH4JT {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  flex-grow: 0;
-  margin-top: 12px;
-  background: #ffffff;
-  white-space: pre-wrap;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  position: relative;
-  color: #cb1616;
-  min-width: 0;
-  border-radius: 5px;
-  padding: 8px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .text__vH4JT {
-    display: block;
-  }
-}
-.paraclinicReportsSection {
-  display: grid;
-  position: relative;
-  align-content: flex-start;
-  justify-items: center;
-  width: 100%;
-  padding-left: 0;
-  padding-right: 0;
-  left: auto;
-  top: auto;
-  padding-top: 15px;
-  grid-column-start: 1 !important;
-  grid-column-end: -1 !important;
-  grid-template-columns:
-    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
-    min(
-      var(--plsmc-standard-width),
-      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
-    )
-    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
-}
-.paraclinicReportsSection > * {
-  grid-column: 4;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicReportsSection {
-    overflow: auto;
-    padding-top: 12px;
-    position: relative;
-    left: auto;
-    top: auto;
-    display: grid;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicReportsSection > * {
-    grid-column: 4;
-  }
-}
-.paraclinicReportSection {
-  display: grid;
-  position: relative;
-  align-content: flex-start;
-  justify-items: center;
-  width: 100%;
-  left: auto;
-  top: auto;
-  grid-column-start: 1 !important;
-  grid-column-end: -1 !important;
-  grid-template-columns:
-    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
-    min(
-      var(--plsmc-standard-width),
-      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
-    )
-    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
-  padding: 0px;
-}
-.paraclinicReportSection > * {
-  grid-column: 4;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicReportSection > * {
-    grid-column: 4;
-  }
-}
-.paraclinicReportList2 {
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  max-width: 100%;
-  background: none;
-  flex-grow: 1;
-  width: 100%;
-  z-index: 0;
-  grid-column-start: 1 !important;
-  grid-column-end: -1 !important;
-  padding: 0px;
-  margin: 0px;
-}
-.paraclinicReportList2 > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  align-content: stretch;
-  margin-top: calc(0px - 0px);
-  height: calc(100% + 0px);
-}
-.paraclinicReportList2 > :global(.__wab_flex-container) > *,
-.paraclinicReportList2
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.paraclinicReportList2 > :global(.__wab_flex-container) > picture > img,
-.paraclinicReportList2
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 0px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicReportList2 {
-    width: 100%;
-    min-width: 0;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicReportList2 > :global(.__wab_flex-container) {
-    min-width: 0;
-    margin-left: calc(0px - 0px);
-    width: calc(100% + 0px);
-    margin-top: calc(0px - 0px);
-    height: calc(100% + 0px);
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicReportList2 > :global(.__wab_flex-container) > *,
-  .paraclinicReportList2
-    > :global(.__wab_flex-container)
-    > :global(.__wab_slot)
-    > *,
-  .paraclinicReportList2 > :global(.__wab_flex-container) > picture > img,
-  .paraclinicReportList2
-    > :global(.__wab_flex-container)
-    > :global(.__wab_slot)
-    > picture
-    > img {
-    margin-left: 0px;
-    margin-top: 0px;
-  }
-}
-.paraclinicReportCard {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-  flex-grow: 1;
-  margin-bottom: 10px;
-  box-shadow: 0px 2px 14px 0px #0000001f;
-  margin-top: calc(0px + 0px) !important;
-  margin-right: 0px;
-  margin-left: 0px;
-  align-self: center;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  min-width: 0;
-  border-radius: 5px;
-  padding: 16px 20px;
-  border: 0.5px solid #d3d3d3;
-}
-.paraclinicReportCard > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-width: 0;
-  margin-top: calc(0px - 0px);
-  height: calc(100% + 0px);
-}
-.paraclinicReportCard > :global(.__wab_flex-container) > *,
-.paraclinicReportCard
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.paraclinicReportCard > :global(.__wab_flex-container) > picture > img,
-.paraclinicReportCard
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 0px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicReportCard {
-    width: 100%;
-    margin-left: calc(0px + 0px) !important;
-    margin-top: calc(0px + 0px) !important;
-    min-width: 0;
-    border-width: 0px;
-    border-style: none;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicReportCard > :global(.__wab_flex-container) {
-    min-width: 0;
-  }
-}
-.paraclinicTitleDatetime {
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  border-bottom-style: none;
-  border-bottom-width: 0px;
-  margin-bottom: 8px;
-  min-width: 0;
-  padding: 0px;
-}
-.paraclinicTitleDatetime > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: flex-start;
-  min-width: 0;
-  margin-left: calc(0px - 0px);
-  width: calc(100% + 0px);
-}
-.paraclinicTitleDatetime > :global(.__wab_flex-container) > *,
-.paraclinicTitleDatetime
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.paraclinicTitleDatetime > :global(.__wab_flex-container) > picture > img,
-.paraclinicTitleDatetime
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 0px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicTitleDatetime {
-    margin-top: calc(0px + 0px) !important;
-    margin-right: 0px;
-    margin-bottom: 16px;
-    margin-left: 0px;
-  }
-}
-.paraclinicName2 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  white-space: pre-wrap;
-  text-align: left;
-  font-size: 16px;
-  line-height: 18px;
-  align-self: center;
-  min-width: 0;
-}
-.paraclinicDatetime2 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  white-space: pre-wrap;
-  text-align: right;
-  font-size: 16px;
-  line-height: 18px;
-  align-self: center;
-  min-width: 0;
-  border-left: 0px none var(--token-IYO13gyYJHXG);
-}
-.paraclinicTitle {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  align-self: center;
-  min-width: 0;
-  padding: 0px;
-}
-.previousAdmission:global(.__wab_instance) {
-  max-width: 100%;
-}
-.svg__zUnOu {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__vqGHw {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.paraclinicType {
-  position: relative;
-  height: auto;
-  max-width: 100%;
-  font-size: 16px;
-  text-align: right;
-  width: 100%;
-  white-space: pre-wrap;
-  align-self: center;
-  line-height: 18px;
-  min-width: 0;
-  padding: 0px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicType {
-    font-size: 16px;
-    text-align: right;
-    width: 100%;
-    max-width: 100%;
-    align-self: center;
-    line-height: 18px;
-    min-width: 0;
-  }
-}
 .apiFetcherComponentPlusCache:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
@@ -1584,104 +1137,6 @@
     top: auto;
   }
 }
-.patientMedia:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  left: 10%;
-  top: 160px;
-  z-index: 1;
-  position: fixed;
-  bottom: 60px;
-  width: 100%;
-  text-align: center;
-  justify-self: flex-start;
-  right: 10%;
-  overflow: auto;
-  grid-column-start: 1 !important;
-  grid-column-end: -1 !important;
-}
-.mediaList {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  align-self: center;
-  min-width: 0;
-  padding: 4px;
-}
-.mediaObject {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 95%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  overflow: auto;
-  padding: 4px;
-  border-bottom: 0.5px solid var(--token-8PxxXPNrIohQ);
-}
-.deleteMedia:global(.__wab_instance) {
-  max-width: 100%;
-  width: auto;
-  align-self: flex-start;
-}
-.svg__avVvt {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__kPYg {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.mediaImage {
-  object-fit: cover;
-  max-width: 100%;
-}
-.mediaImage > picture > img {
-  object-fit: cover;
-}
-.title {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.description {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.text__yUvc3 {
-  position: fixed;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  left: 0px;
-  top: 68px;
-  z-index: 1;
-  min-width: 0;
-}
-.text__blhd0 {
-  position: relative;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  background: #ffffff;
-  padding: 4px;
-}
 .paraclinicReportModal:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
@@ -1906,8 +1361,8 @@
   justify-content: flex-start;
   align-items: center;
   min-width: 0;
-  margin-top: calc(0px - 4px);
-  height: calc(100% + 4px);
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
 }
 .freeBox__p8Zz > :global(.__wab_flex-container) > *,
 .freeBox__p8Zz > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
@@ -1917,51 +1372,7 @@
   > :global(.__wab_slot)
   > picture
   > img {
-  margin-top: 4px;
-}
-.uploadFileComponent:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  width: 100%;
-  min-width: 0;
-}
-.freeBox__n2DhP {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.freeBox__n2DhP > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 0;
-  margin-top: calc(0px - 4px);
-  height: calc(100% + 4px);
-}
-.freeBox__n2DhP > :global(.__wab_flex-container) > *,
-.freeBox__n2DhP > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__n2DhP > :global(.__wab_flex-container) > picture > img,
-.freeBox__n2DhP
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 4px;
-}
-.text__pBWxZ {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  background: var(--token-F0UhOcqDIzJI);
-  color: #ffffff;
-  min-width: 0;
-  display: none;
-  padding: 4px;
+  margin-top: 8px;
 }
 .titleTextinput:global(.__wab_instance) {
   max-width: 100%;
@@ -1994,6 +1405,47 @@
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.uploadComponent:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: auto;
+}
+.button__yalir:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__oWfV5 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.uploadButton:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.svg___18ES {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg___1Eas {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__smRca {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #bdbdbd80;
+  min-width: 0;
 }
 .radiologyReportDatetime3 {
   font-weight: 700;
@@ -2332,4 +1784,590 @@
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.paraclinicSection {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  left: 0px;
+  top: 160px;
+  z-index: 1;
+  bottom: 60px;
+  overflow: auto;
+  min-width: 0;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicSection {
+    padding: 4px;
+  }
+}
+.paraclinicsReport:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  left: auto;
+  top: auto;
+  bottom: auto;
+  min-width: 0;
+  padding: 0px 17px;
+  margin: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicsReport:global(.__wab_instance) {
+    z-index: 1;
+    left: auto;
+    top: auto;
+    position: relative;
+    padding-top: 0px;
+    bottom: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0px;
+  }
+}
+.viewPacsButton:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 0px;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  height: 30px;
+  align-self: center;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .viewPacsButton:global(.__wab_instance) {
+    margin-top: 25px;
+    height: 40px;
+    left: auto;
+    top: auto;
+  }
+}
+.text___4Thhk {
+  font-size: 16px;
+  text-align: center;
+  align-self: stretch;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text___4Thhk {
+    text-align: center;
+    align-self: center;
+  }
+}
+.svg__tMj4 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__gjLoE {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__pIosL {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: 0px;
+  top: 68px;
+  z-index: 1;
+  text-align: center;
+  background: #ffffff80;
+  right: 0px;
+  font-size: 12px;
+  min-width: 0;
+  border-radius: 5px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__pIosL {
+    font-size: 10px;
+    display: block;
+  }
+}
+.text__scVr8 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  flex-grow: 0;
+  margin-top: 12px;
+  background: #ffffff;
+  white-space: pre-wrap;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__scVr8 {
+    left: auto;
+    top: auto;
+    display: block;
+  }
+}
+.text__vH4JT {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  flex-grow: 0;
+  margin-top: 12px;
+  background: #ffffff;
+  white-space: pre-wrap;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  color: #cb1616;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__vH4JT {
+    display: block;
+  }
+}
+.paraclinicReportsSection {
+  display: grid;
+  position: relative;
+  align-content: flex-start;
+  justify-items: center;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  left: auto;
+  top: auto;
+  padding-top: 15px;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  grid-template-columns:
+    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
+    min(
+      var(--plsmc-standard-width),
+      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
+    )
+    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+}
+.paraclinicReportsSection > * {
+  grid-column: 4;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportsSection {
+    overflow: auto;
+    padding-top: 12px;
+    position: relative;
+    left: auto;
+    top: auto;
+    display: grid;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportsSection > * {
+    grid-column: 4;
+  }
+}
+.paraclinicReportSection {
+  display: grid;
+  position: relative;
+  align-content: flex-start;
+  justify-items: center;
+  width: 100%;
+  left: auto;
+  top: auto;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  grid-template-columns:
+    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
+    min(
+      var(--plsmc-standard-width),
+      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
+    )
+    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+  padding: 0px;
+}
+.paraclinicReportSection > * {
+  grid-column: 4;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportSection > * {
+    grid-column: 4;
+  }
+}
+.paraclinicReportList2 {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  max-width: 100%;
+  background: none;
+  flex-grow: 1;
+  width: 100%;
+  z-index: 0;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  padding: 0px;
+  margin: 0px;
+}
+.paraclinicReportList2 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  margin-top: calc(0px - 0px);
+  height: calc(100% + 0px);
+}
+.paraclinicReportList2 > :global(.__wab_flex-container) > *,
+.paraclinicReportList2
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.paraclinicReportList2 > :global(.__wab_flex-container) > picture > img,
+.paraclinicReportList2
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportList2 {
+    width: 100%;
+    min-width: 0;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportList2 > :global(.__wab_flex-container) {
+    min-width: 0;
+    margin-left: calc(0px - 0px);
+    width: calc(100% + 0px);
+    margin-top: calc(0px - 0px);
+    height: calc(100% + 0px);
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportList2 > :global(.__wab_flex-container) > *,
+  .paraclinicReportList2
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > *,
+  .paraclinicReportList2 > :global(.__wab_flex-container) > picture > img,
+  .paraclinicReportList2
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > picture
+    > img {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+}
+.paraclinicReportCard {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  flex-grow: 1;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 14px 0px #0000001f;
+  margin-top: calc(0px + 0px) !important;
+  margin-right: 0px;
+  margin-left: 0px;
+  align-self: center;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 16px 20px;
+  border: 0.5px solid #d3d3d3;
+}
+.paraclinicReportCard > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - 0px);
+  height: calc(100% + 0px);
+}
+.paraclinicReportCard > :global(.__wab_flex-container) > *,
+.paraclinicReportCard
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.paraclinicReportCard > :global(.__wab_flex-container) > picture > img,
+.paraclinicReportCard
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportCard {
+    width: 100%;
+    margin-left: calc(0px + 0px) !important;
+    margin-top: calc(0px + 0px) !important;
+    min-width: 0;
+    border-width: 0px;
+    border-style: none;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportCard > :global(.__wab_flex-container) {
+    min-width: 0;
+  }
+}
+.paraclinicTitleDatetime {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  margin-bottom: 8px;
+  min-width: 0;
+  padding: 0px;
+}
+.paraclinicTitleDatetime > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-left: calc(0px - 0px);
+  width: calc(100% + 0px);
+}
+.paraclinicTitleDatetime > :global(.__wab_flex-container) > *,
+.paraclinicTitleDatetime
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.paraclinicTitleDatetime > :global(.__wab_flex-container) > picture > img,
+.paraclinicTitleDatetime
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicTitleDatetime {
+    margin-top: calc(0px + 0px) !important;
+    margin-right: 0px;
+    margin-bottom: 16px;
+    margin-left: 0px;
+  }
+}
+.paraclinicName2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  white-space: pre-wrap;
+  text-align: left;
+  font-size: 16px;
+  line-height: 18px;
+  align-self: center;
+  min-width: 0;
+}
+.paraclinicDatetime2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  white-space: pre-wrap;
+  text-align: right;
+  font-size: 16px;
+  line-height: 18px;
+  align-self: center;
+  min-width: 0;
+  border-left: 0px none var(--token-IYO13gyYJHXG);
+}
+.paraclinicTitle {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  min-width: 0;
+  padding: 0px;
+}
+.previousAdmission:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__zUnOu {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__vqGHw {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.paraclinicType {
+  position: relative;
+  height: auto;
+  max-width: 100%;
+  font-size: 16px;
+  text-align: right;
+  width: 100%;
+  white-space: pre-wrap;
+  align-self: center;
+  line-height: 18px;
+  min-width: 0;
+  padding: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicType {
+    font-size: 16px;
+    text-align: right;
+    width: 100%;
+    max-width: 100%;
+    align-self: center;
+    line-height: 18px;
+    min-width: 0;
+  }
+}
+.patientMedia:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  bottom: auto;
+  width: 100%;
+  text-align: center;
+  right: auto;
+  padding-right: 17px;
+  padding-left: 17px;
+  padding-top: 10px;
+  min-width: 0;
+  border-top: 1px solid var(--token-8PxxXPNrIohQ);
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientMedia:global(.__wab_instance) {
+    margin-top: 10px;
+    padding-top: 20px;
+  }
+}
+.mediaList {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  min-width: 0;
+  padding: 0px;
+}
+.mediaList > :global(.__wab_flex-container) {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  margin-top: calc(0px - 0px);
+  height: calc(100% + 0px);
+}
+.mediaList > :global(.__wab_flex-container) > *,
+.mediaList > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.mediaList > :global(.__wab_flex-container) > picture > img,
+.mediaList
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 0px;
+}
+.mediaObject {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  background: #ffffff;
+  margin-bottom: 10px;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 16px 20px;
+  border-bottom: 0.5px solid #d3d3d3;
+}
+.deleteMedia:global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  align-self: flex-start;
+}
+.svg__avVvt {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__kPYg {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.mediaImage {
+  object-fit: contain;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+.mediaImage > picture > img {
+  object-fit: contain;
+}
+.title {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.description {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__blhd0 {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  padding: 4px;
 }
