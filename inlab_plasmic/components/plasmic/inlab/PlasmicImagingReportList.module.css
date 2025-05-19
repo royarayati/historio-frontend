@@ -29,7 +29,7 @@
     grid-column: 4;
   }
 }
-.paraclinicReportsListbookmarked > * {
+.paraclinicReportsListshowReportSummary > * {
   grid-column: 4;
 }
 .redirectToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
@@ -2009,6 +2009,9 @@
     grid-column: 4;
   }
 }
+.paraclinicReportSectionshowReportSummary > * {
+  grid-column: 4;
+}
 .paraclinicReportList2 {
   display: flex;
   flex-direction: column;
@@ -2018,10 +2021,13 @@
   flex-grow: 1;
   width: 100%;
   z-index: 0;
+  box-shadow: 0px 2px 14px 0px #0000001f;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
+  border-radius: 5px;
   padding: 0px;
-  margin: 0px;
+  margin: 0px 0px 10px;
+  border: 0.5px solid #d3d3d3;
 }
 .paraclinicReportList2 > :global(.__wab_flex-container) {
   flex-direction: column;
@@ -2048,6 +2054,7 @@
 @media (min-width: 0px) and (max-width: 760px) {
   .paraclinicReportList2 {
     width: 100%;
+    margin-bottom: 10px;
     min-width: 0;
   }
 }
@@ -2085,8 +2092,8 @@
   max-width: 100%;
   background: #ffffff;
   flex-grow: 1;
-  margin-bottom: 10px;
-  box-shadow: 0px 2px 14px 0px #0000001f;
+  margin-bottom: 0px;
+  box-shadow: none;
   margin-top: calc(0px + 0px) !important;
   margin-right: 0px;
   margin-left: 0px;
@@ -2095,9 +2102,9 @@
   top: auto;
   z-index: 1;
   min-width: 0;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 16px 20px;
-  border: 0.5px solid #d3d3d3;
+  border: 0px none #d3d3d3;
 }
 .paraclinicReportCard > :global(.__wab_flex-container) {
   flex-direction: column;
@@ -2134,6 +2141,9 @@
   .paraclinicReportCard > :global(.__wab_flex-container) {
     min-width: 0;
   }
+}
+.paraclinicReportCardshowReportSummary {
+  margin-top: calc(0px + 0px) !important;
 }
 .paraclinicTitleDatetime {
   display: flex;
@@ -2253,6 +2263,115 @@
     line-height: 18px;
     min-width: 0;
   }
+}
+.reportSummary2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  margin-bottom: 0px;
+  margin-top: calc(0px + 0px) !important;
+  margin-right: 0px;
+  margin-left: 0px;
+  min-width: 0;
+  padding: 0px 20px 10px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .reportSummary2 {
+    margin-top: calc(0px + 0px) !important;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: calc(0px + 0px) !important;
+  }
+}
+.reportSummary2showReportSummary {
+  margin-top: calc(0px + 0px) !important;
+}
+.showSummaryButton:global(.__wab_instance) {
+  max-width: 100%;
+  align-self: flex-end;
+}
+.text__psEmK {
+  text-align: right;
+  color: var(--token-IYO13gyYJHXG);
+}
+.svg__fcLEe {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__zZws {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.apiFetcherComponent:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.apiFetcherComponentshowReportSummary:global(.__wab_instance) {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+}
+.freeBox__iqke {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.text__vVm0 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.textshowReportSummary__vVm0OusrM {
+  text-align: center;
+}
+.text__sZmoY {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.textshowReportSummary__sZmoYOusrM {
+  text-align: center;
+}
+.freeBox__urhij {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.text__yfiZm {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.textshowReportSummary__yfiZmOusrM {
+  text-align: right;
 }
 .patientMedia:global(.__wab_instance) {
   max-width: 100%;
