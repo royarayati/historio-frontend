@@ -369,7 +369,7 @@
   line-height: 1.5;
   letter-spacing: normal;
   white-space: pre-wrap;
-  user-select: none;
+  user-select: text;
   text-decoration-line: none;
   min-width: 0;
 }
@@ -402,7 +402,7 @@
   line-height: 1.5;
   letter-spacing: normal;
   white-space: pre-wrap;
-  user-select: none;
+  user-select: text;
   text-decoration-line: none;
   min-width: 0;
 }
@@ -438,7 +438,7 @@
   line-height: 1.5;
   letter-spacing: normal;
   white-space: pre-wrap;
-  user-select: none;
+  user-select: text;
   text-decoration-line: none;
   font-size: var(--token-CdE1_0ZaCyT1);
   min-width: 0;
@@ -463,7 +463,7 @@
   line-height: 1.5;
   letter-spacing: normal;
   white-space: pre-wrap;
-  user-select: none;
+  user-select: text;
   text-decoration-line: none;
   font-size: var(--token-CdE1_0ZaCyT1);
   min-width: 0;
@@ -651,6 +651,7 @@
   font-weight: 700;
   width: auto;
   align-self: center;
+  user-select: text;
   padding: 4px;
 }
 @media (min-width: 0px) and (max-width: 760px) {

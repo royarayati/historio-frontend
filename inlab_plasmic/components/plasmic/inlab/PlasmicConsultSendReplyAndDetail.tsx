@@ -2945,7 +2945,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             {(() => {
                               try {
                                 return $ctx.fetched_data.data.confirm_entries !=
-                                  []
+                                  ""
                                   ? $ctx.fetched_data.data.confirm_entries
                                       .map(
                                         entry =>
