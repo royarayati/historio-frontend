@@ -367,7 +367,7 @@
   line-height: 1.5;
   letter-spacing: normal;
   white-space: pre-wrap;
-  user-select: none;
+  user-select: text;
   text-decoration-line: none;
   border-bottom-style: solid;
   border-bottom-width: 1px;
@@ -423,7 +423,7 @@
   line-height: 1.5;
   letter-spacing: normal;
   white-space: pre-wrap;
-  user-select: none;
+  user-select: text;
   text-decoration-line: none;
   border-bottom-style: solid;
   border-bottom-width: 1px;
@@ -471,6 +471,7 @@
   max-width: 100%;
   border-bottom-style: solid;
   border-bottom-width: 1px;
+  user-select: text;
   min-width: 0;
   padding: 5px;
 }
@@ -553,7 +554,7 @@
   line-height: 1.5;
   letter-spacing: normal;
   white-space: pre-wrap;
-  user-select: none;
+  user-select: text;
   text-decoration-line: none;
   align-self: center;
   min-width: 0;
@@ -655,6 +656,7 @@
   height: auto;
   max-width: 100%;
   align-self: center;
+  user-select: text;
   padding: 5px;
 }
 .consultSendDatetime {
@@ -666,6 +668,7 @@
   padding-left: 5px;
   align-self: center;
   padding-right: 5px;
+  user-select: text;
 }
 .lastEditDatetimeTitle {
   width: 100%;
@@ -698,6 +701,7 @@
   padding-left: 5px;
   align-self: center;
   padding-right: 5px;
+  user-select: text;
 }
 .consultSendReplyContent {
   display: flex;
@@ -904,7 +908,7 @@
   line-height: 1.5;
   letter-spacing: normal;
   white-space: pre-wrap;
-  user-select: none;
+  user-select: text;
   text-decoration-line: none;
   align-self: center;
   min-width: 0;
@@ -980,6 +984,7 @@
   height: auto;
   max-width: 100%;
   text-align: right;
+  user-select: text;
   min-width: 0;
   padding: 5px 10px 5px 5px;
 }
@@ -992,6 +997,7 @@
   padding-left: 5px;
   padding-right: 10px;
   text-align: right;
+  user-select: text;
   min-width: 0;
 }
 .consultReviewerTitle {
@@ -1021,6 +1027,7 @@
   height: auto;
   max-width: 100%;
   text-align: right;
+  user-select: text;
   min-width: 0;
   padding: 5px 10px 5px 5px;
 }

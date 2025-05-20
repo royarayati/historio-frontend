@@ -1078,6 +1078,7 @@
   font-size: var(--token-sOr3fJ5Up5fq);
   font-weight: 700;
   padding-bottom: 4px;
+  user-select: text;
 }
 .patientWard2 {
   position: relative;
@@ -1085,6 +1086,7 @@
   height: auto;
   max-width: 100%;
   font-size: var(--token-CdE1_0ZaCyT1);
+  user-select: text;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .patientWard2 {
@@ -1109,6 +1111,7 @@
   height: auto;
   max-width: 100%;
   font-weight: 700;
+  user-select: text;
   min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -1130,6 +1133,7 @@
   height: auto;
   max-width: 100%;
   font-weight: 700;
+  user-select: text;
   min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -1154,6 +1158,7 @@
   height: auto;
   max-width: 100%;
   font-size: var(--token-CdE1_0ZaCyT1);
+  user-select: text;
   min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -1168,6 +1173,7 @@
   max-width: 100%;
   margin-right: 10px;
   font-size: var(--token-CdE1_0ZaCyT1);
+  user-select: text;
   min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -1263,6 +1269,7 @@
   max-width: 100%;
   align-self: center;
   font-weight: 700;
+  user-select: text;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .consultSendDate {
