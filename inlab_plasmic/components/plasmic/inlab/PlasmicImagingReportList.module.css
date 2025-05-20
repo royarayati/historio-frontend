@@ -1254,6 +1254,11 @@
   width: 100%;
   min-width: 0;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .reportSummary:global(.__wab_instance) {
+    flex-shrink: 0;
+  }
+}
 .svg__yRqFj {
   position: relative;
   object-fit: cover;

@@ -4195,6 +4195,54 @@ function PlasmicImagingReportList__RenderFunc(props: {
                 data-plasmic-name={"reportSummary"}
                 data-plasmic-override={overrides.reportSummary}
                 className={classNames("__wab_instance", sty.reportSummary)}
+                endIcon={
+                  $state.value !== "" ? (
+                    <Icons8CloseSvgIcon
+                      className={classNames(projectcss.all, sty.svg___19YlM)}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["updateReportSummaryValue"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["reportSummary", "value"]
+                                },
+                                operation: 1
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, undefined);
+                                return undefined;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateReportSummaryValue"] != null &&
+                          typeof $steps["updateReportSummaryValue"] ===
+                            "object" &&
+                          typeof $steps["updateReportSummaryValue"].then ===
+                            "function"
+                        ) {
+                          $steps["updateReportSummaryValue"] = await $steps[
+                            "updateReportSummaryValue"
+                          ];
+                        }
+                      }}
+                      role={"img"}
+                    />
+                  ) : null
+                }
                 onChange={async (...eventArgs: any) => {
                   ((...eventArgs) => {
                     generateStateOnChangeProp($state, [
