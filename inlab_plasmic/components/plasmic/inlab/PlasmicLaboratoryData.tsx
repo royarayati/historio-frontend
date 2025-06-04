@@ -2898,36 +2898,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 (async (value, option) => {
                   const $steps = {};
 
-                  $steps["deleteTheLabDataFromLocalStorage"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return (() => {
-                              localStorage.setItem("laboratory_data", "");
-                              return console.log(
-                                "laboratory_data",
-                                localStorage.getItem("laboratory_data")
-                              );
-                            })();
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["deleteTheLabDataFromLocalStorage"] != null &&
-                    typeof $steps["deleteTheLabDataFromLocalStorage"] ===
-                      "object" &&
-                    typeof $steps["deleteTheLabDataFromLocalStorage"].then ===
-                      "function"
-                  ) {
-                    $steps["deleteTheLabDataFromLocalStorage"] = await $steps[
-                      "deleteTheLabDataFromLocalStorage"
-                    ];
-                  }
-
                   $steps["updateAllAdmissions"] = true
                     ? (() => {
                         const actionArgs = {
@@ -2961,6 +2931,36 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   ) {
                     $steps["updateAllAdmissions"] = await $steps[
                       "updateAllAdmissions"
+                    ];
+                  }
+
+                  $steps["deleteTheLabDataFromLocalStorage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (() => {
+                              localStorage.setItem("laboratory_data", "");
+                              return console.log(
+                                "laboratory_data",
+                                localStorage.getItem("laboratory_data")
+                              );
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["deleteTheLabDataFromLocalStorage"] != null &&
+                    typeof $steps["deleteTheLabDataFromLocalStorage"] ===
+                      "object" &&
+                    typeof $steps["deleteTheLabDataFromLocalStorage"].then ===
+                      "function"
+                  ) {
+                    $steps["deleteTheLabDataFromLocalStorage"] = await $steps[
+                      "deleteTheLabDataFromLocalStorage"
                     ];
                   }
 
