@@ -2898,7 +2898,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 (async (value, option) => {
                   const $steps = {};
 
-                  $steps["deleteTheLabDataFromLocalStorage"] = false
+                  $steps["deleteTheLabDataFromLocalStorage"] = true
                     ? (() => {
                         const actionArgs = {
                           customFunction: async () => {
@@ -2966,7 +2966,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
 
                   $steps["runActionOnLabData"] = true
                     ? (() => {
-                        const actionArgs = { tplRef: "labData" };
+                        const actionArgs = {
+                          tplRef: "labData",
+                          action: "reload"
+                        };
                         return (({ tplRef, action, args }) => {
                           return $refs?.[tplRef]?.[action]?.(...(args ?? []));
                         })?.apply(null, [actionArgs]);
