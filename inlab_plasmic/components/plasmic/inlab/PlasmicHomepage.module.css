@@ -4789,18 +4789,18 @@
   text-decoration-line: none;
   min-width: 0;
 }
-.patientSummaryModal:global(.__wab_instance) {
+.patientHistoryModal:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   background: #ffffff;
 }
-.patientSummaryModal__modal :global(.ant-modal-content) {
+.patientHistoryModal__modal :global(.ant-modal-content) {
   color: var(--token-IYO13gyYJHXG);
   background: #ffffff;
   outline: none;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .patientSummaryModal:global(.__wab_instance) {
+  .patientHistoryModal:global(.__wab_instance) {
     overflow: auto;
   }
 }
@@ -4838,6 +4838,7 @@
   }
 }
 .patientSummaryListpatientSummary {
+  display: flex;
   padding: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -5284,6 +5285,182 @@
   height: auto;
   max-width: 100%;
   min-width: 0;
+}
+.patientHistory {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.patientHistory > :global(.__wab_flex-container) {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.patientHistory > :global(.__wab_flex-container) > *,
+.patientHistory > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.patientHistory > :global(.__wab_flex-container) > picture > img,
+.patientHistory
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientHistory {
+    padding: 0px;
+  }
+}
+.patientHistorypatientSummary {
+  padding: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientHistorypatientSummary > :global(.__wab_flex-container) {
+    justify-content: center;
+    margin-left: calc(0px - 0px);
+    width: calc(100% + 0px);
+    margin-top: calc(0px - 4px);
+    height: calc(100% + 4px);
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientHistorypatientSummary > :global(.__wab_flex-container) > *,
+  .patientHistorypatientSummary
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > *,
+  .patientHistorypatientSummary
+    > :global(.__wab_flex-container)
+    > picture
+    > img,
+  .patientHistorypatientSummary
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > picture
+    > img {
+    margin-left: 0px;
+    margin-top: 4px;
+  }
+}
+.patientChiefComplaint {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid var(--token-8PxxXPNrIohQ);
+}
+.text__ik9Nf {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.chiefComplaint:global(.__wab_instance) {
+  max-width: 100%;
+  height: auto;
+}
+.svg__roNJb {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+  color: var(--token-9iYGdL7i3GKE);
+}
+.svg__t5OrO {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.patientPastMedicalHistory {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid var(--token-8PxxXPNrIohQ);
+}
+.patientPastMedicalHistory > :global(.__wab_flex-container) {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.patientPastMedicalHistory > :global(.__wab_flex-container) > *,
+.patientPastMedicalHistory
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.patientPastMedicalHistory > :global(.__wab_flex-container) > picture > img,
+.patientPastMedicalHistory
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
+}
+.text__lGoXo {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.select:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__bbu5N {
+  text-align: right;
+}
+.otherPmh:global(.__wab_instance) {
+  max-width: 100%;
+  height: auto;
+}
+.svg__nbMtD {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.submit:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__cK6Mc {
+  color: #ffffff;
+}
+.svg__xsKhx {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__ay5QK {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .text___28Wb {
