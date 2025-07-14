@@ -2023,6 +2023,20 @@
           "cssFilePath": "plasmic/inlab/PlasmicSelect.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "LsXtPkapGRoc",
+          "name": "PatientSummary",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicPatientSummary.tsx",
+          "importSpec": {
+            "modulePath": "../pages/patient/[code]/summary/[adm_id].tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicPatientSummary.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/patient/[code]/summary/[adm_id]"
         }
       ],
       "icons": [

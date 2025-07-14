@@ -53,6 +53,12 @@
 .rootcolor_link {
   background: #ffffff00;
 }
+.rootcolor_yellow {
+  background: #ffd666;
+}
+.rootcolor_lightRed {
+  background: #fff2f0;
+}
 .rootselected {
   background: none;
   border-top-style: none;
@@ -151,6 +157,12 @@
 }
 .slotTargetChildrencolor_link {
   color: #0091ff;
+}
+.slotTargetChildrencolor_yellow {
+  color: var(--token-IYO13gyYJHXG);
+}
+.slotTargetChildrencolor_lightRed {
+  color: var(--token-WSOQKxqtSk7F);
 }
 .slotTargetChildrenselected {
   color: var(--token-IYO13gyYJHXG);

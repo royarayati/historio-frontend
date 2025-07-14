@@ -8,7 +8,7 @@
   background: #ffffff;
   min-width: 0;
   border-radius: 5px;
-  padding: 5px 0px;
+  padding: 5px;
   border: 1px solid var(--token-9iYGdL7i3GKE);
 }
 .textInput > :global(.__wab_flex-container) {
