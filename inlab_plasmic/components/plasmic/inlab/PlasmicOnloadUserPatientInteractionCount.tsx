@@ -61,8 +61,6 @@ import {
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 
-import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
-
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
@@ -135,10 +133,6 @@ function PlasmicOnloadUserPatientInteractionCount__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const $globalActions = useGlobalActions?.();
-
-  const globalVariants = ensureGlobalVariants({
-    screen: useScreenVariantsjEqVmdAbnKYc()
-  });
 
   return (
     <SideEffect

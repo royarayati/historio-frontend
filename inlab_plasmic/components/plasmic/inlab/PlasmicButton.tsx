@@ -79,7 +79,7 @@ export type PlasmicButton__VariantMembers = {
   isDisabled: "isDisabled";
   shape: "rounded" | "round" | "sharp";
   size4: "compact";
-  color: "blue" | "green" | "red" | "clear" | "link";
+  color: "blue" | "green" | "red" | "clear" | "link" | "yellow" | "lightRed";
   selected: "selected";
   deselected: "deselected";
   sortDeselected: "sortDeselected";
@@ -91,7 +91,9 @@ export type PlasmicButton__VariantsArgs = {
   isDisabled?: SingleBooleanChoiceArg<"isDisabled">;
   shape?: SingleChoiceArg<"rounded" | "round" | "sharp">;
   size4?: SingleChoiceArg<"compact">;
-  color?: SingleChoiceArg<"blue" | "green" | "red" | "clear" | "link">;
+  color?: SingleChoiceArg<
+    "blue" | "green" | "red" | "clear" | "link" | "yellow" | "lightRed"
+  >;
   selected?: SingleBooleanChoiceArg<"selected">;
   deselected?: SingleBooleanChoiceArg<"deselected">;
   sortDeselected?: SingleBooleanChoiceArg<"sortDeselected">;
@@ -158,7 +160,9 @@ export interface DefaultButtonProps extends pp.BaseButtonProps {
   onSortSelectedChange?: (val: any) => void;
   shape?: SingleChoiceArg<"rounded" | "round" | "sharp">;
   size4?: SingleChoiceArg<"compact">;
-  color?: SingleChoiceArg<"blue" | "green" | "red" | "clear" | "link">;
+  color?: SingleChoiceArg<
+    "blue" | "green" | "red" | "clear" | "link" | "yellow" | "lightRed"
+  >;
   selected?: SingleBooleanChoiceArg<"selected">;
   deselected?: SingleBooleanChoiceArg<"deselected">;
   sortDeselected?: SingleBooleanChoiceArg<"sortDeselected">;
@@ -315,8 +319,10 @@ function PlasmicButton__RenderFunc(props: {
             hasVariant($state, "color", "blue"),
           [sty.rootcolor_clear]: hasVariant($state, "color", "clear"),
           [sty.rootcolor_green]: hasVariant($state, "color", "green"),
+          [sty.rootcolor_lightRed]: hasVariant($state, "color", "lightRed"),
           [sty.rootcolor_link]: hasVariant($state, "color", "link"),
           [sty.rootcolor_red]: hasVariant($state, "color", "red"),
+          [sty.rootcolor_yellow]: hasVariant($state, "color", "yellow"),
           [sty.rootdeselected]: hasVariant($state, "deselected", "deselected"),
           [sty.roothoverDeselected]: hasVariant(
             $state,
@@ -475,6 +481,11 @@ function PlasmicButton__RenderFunc(props: {
               "color",
               "green"
             ),
+            [sty.slotTargetChildrencolor_lightRed]: hasVariant(
+              $state,
+              "color",
+              "lightRed"
+            ),
             [sty.slotTargetChildrencolor_link]: hasVariant(
               $state,
               "color",
@@ -484,6 +495,11 @@ function PlasmicButton__RenderFunc(props: {
               $state,
               "color",
               "red"
+            ),
+            [sty.slotTargetChildrencolor_yellow]: hasVariant(
+              $state,
+              "color",
+              "yellow"
             ),
             [sty.slotTargetChildrendeselected]: hasVariant(
               $state,

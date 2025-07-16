@@ -62,8 +62,6 @@ import {
 import { BaseSection } from "@plasmicpkgs/react-aria/skinny/registerSection";
 import MenuItem from "../../MenuItem"; // plasmic-import: 8n8tp8Zp9D88/component
 
-import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
-
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
@@ -137,10 +135,6 @@ function PlasmicMenuSection__RenderFunc(props: {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
-
-  const globalVariants = ensureGlobalVariants({
-    screen: useScreenVariantsjEqVmdAbnKYc()
-  });
 
   return (
     <BaseSection

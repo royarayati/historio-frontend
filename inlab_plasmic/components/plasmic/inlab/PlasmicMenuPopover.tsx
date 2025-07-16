@@ -65,8 +65,6 @@ import { listboxHelpers as BaseListBox_Helpers } from "@plasmicpkgs/react-aria/s
 import MenuItem from "../../MenuItem"; // plasmic-import: 8n8tp8Zp9D88/component
 import MenuSection from "../../MenuSection"; // plasmic-import: T3nOCWnfjpj8/component
 
-import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
-
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
@@ -165,10 +163,6 @@ function PlasmicMenuPopover__RenderFunc(props: {
     $ctx,
     $queries: {},
     $refs
-  });
-
-  const globalVariants = ensureGlobalVariants({
-    screen: useScreenVariantsjEqVmdAbnKYc()
   });
 
   return (
