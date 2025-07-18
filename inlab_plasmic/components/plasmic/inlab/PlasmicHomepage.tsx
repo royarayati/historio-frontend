@@ -104,6 +104,8 @@ import BookmarkDashFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkDash
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 
+import { processAndCompressBase64 as __fn_processAndCompressBase64 } from "../../../utils/ImageCompression"; // plasmic-import: processAndCompressBase64/customFunction
+
 createPlasmicElementProxy;
 
 export type PlasmicHomepage__VariantMembers = {
@@ -316,7 +318,9 @@ export type PlasmicHomepage__OverridesType = {
 
 export interface DefaultHomepageProps {}
 
-const $$ = {};
+const $$ = {
+  processAndCompressBase64: __fn_processAndCompressBase64
+};
 
 function useNextRouter() {
   try {
@@ -2099,6 +2103,12 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "compressedImage",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
     [$props, $ctx, $refs]
@@ -17875,6 +17885,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   "files"
                 ])}
                 listType={"picture"}
+                multiple={false}
                 onFilesChange={async (...eventArgs: any) => {
                   generateStateOnChangeProp($state, [
                     "uploadComponent",
@@ -17981,6 +17992,122 @@ function PlasmicHomepage__RenderFunc(props: {
                     ];
                   }
 
+                  $steps["updateCompressedImage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["compressedImage"]
+                          },
+                          operation: 0,
+                          value: $state.uploadComponent.files.map(
+                            file => file.contents
+                          )
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateCompressedImage"] != null &&
+                    typeof $steps["updateCompressedImage"] === "object" &&
+                    typeof $steps["updateCompressedImage"].then === "function"
+                  ) {
+                    $steps["updateCompressedImage"] = await $steps[
+                      "updateCompressedImage"
+                    ];
+                  }
+
+                  $steps["updateCompressedImage2"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["compressedImage"]
+                          },
+                          operation: 0,
+                          value: $$.processAndCompressBase64(
+                            $state.compressedImage[0]
+                          )
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateCompressedImage2"] != null &&
+                    typeof $steps["updateCompressedImage2"] === "object" &&
+                    typeof $steps["updateCompressedImage2"].then === "function"
+                  ) {
+                    $steps["updateCompressedImage2"] = await $steps[
+                      "updateCompressedImage2"
+                    ];
+                  }
+
+                  $steps["runCode"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (() => {
+                              console.log(
+                                "compressedImage:",
+                                $state.compressedImage
+                              );
+                              console.log(
+                                "Type:",
+                                typeof $state.compressedImage
+                              );
+                              return $state.compressedImage.then(
+                                compressedBase64 => {
+                                  const sizeKB =
+                                    (compressedBase64.length * 0.75) / 1024;
+                                  console.log(
+                                    `Compressed image size: ${sizeKB.toFixed(
+                                      1
+                                    )} KB`
+                                  );
+                                }
+                              );
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["runCode"] != null &&
+                    typeof $steps["runCode"] === "object" &&
+                    typeof $steps["runCode"].then === "function"
+                  ) {
+                    $steps["runCode"] = await $steps["runCode"];
+                  }
+
                   $steps["postMedia"] = true
                     ? (() => {
                         const actionArgs = {
@@ -18014,7 +18141,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             })(),
                             (() => {
                               try {
-                                return $state.uploadComponent.files;
+                                return $state.compressedImage;
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||

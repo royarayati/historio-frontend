@@ -82,7 +82,9 @@ import { ApiFetcherMeta } from '../utils/ApiFetcherComponent';
 import { ApiFetcherComponent } from '../utils/ApiFetcherComponent';
 import { UploadFileMeta } from '../utils/UploadFileComponent';
 import UploadFileComponent from '../utils/UploadFileComponent';
+import { registerFunction } from '@plasmicapp/react-web/lib/host';
 import { ApiFetcherComponentPlusCache, ApiFetcherComponentPlusCacheMeta } from '../utils/ApiFetcherComponentPlusCache';
+import { processAndCompressBase64 ,compressMultipleBase64Images } from '../utils/ImageCompression'; 
 
 
 // Register global context
@@ -123,6 +125,46 @@ registerGlobalContext(AuthGlobalContext, {
 registerComponent(ApiFetcherComponent, ApiFetcherMeta);
 registerComponent(UploadFileComponent, UploadFileMeta);
 registerComponent(ApiFetcherComponentPlusCache, ApiFetcherComponentPlusCacheMeta);
+
+export const registerAdd = registerFunction(
+  processAndCompressBase64,
+  {
+    name: 'processAndCompressBase64',
+    importPath: './utils/ImageCompression.tsx',
+    params: [
+      {
+        name: 'input_base64string',
+        type: 'any', // <-- fix here
+        description: 'Raw base64 image string'
+      },
+      {
+        name: 'quality',
+        type: 'any', // <-- fix here
+        description: 'JPEG compression quality (0.1 to 1.0)'
+      }
+    ]
+  }
+);
+
+export const registerAdd2 = registerFunction(
+  compressMultipleBase64Images,
+  {
+    name: 'CompressMultipleBase64',
+    importPath: './utils/ImageCompression.tsx',
+    params: [
+      {
+        name: 'input_base64strings',
+        type: 'array', // <-- fix here
+        description: 'Raw base64 image strings'
+      },
+      {
+        name: 'quality',
+        type: 'any', // <-- fix here
+        description: 'JPEG compression quality (0.1 to 1.0)'
+      }
+    ]
+  }
+);
 
 // Export Plasmic host
 export default function PlasmicHost() {

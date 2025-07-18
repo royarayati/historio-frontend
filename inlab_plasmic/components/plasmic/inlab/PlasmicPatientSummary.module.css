@@ -1122,6 +1122,12 @@
 .diseaseProgress:global(.__wab_instance) {
   max-width: 100%;
 }
+.svg__cxQ9D {
+  object-fit: cover;
+  max-width: 100%;
+  color: var(--token-tawGjJMbHvx-);
+  height: 1em;
+}
 .svg__t2P6N {
   position: relative;
   object-fit: cover;
@@ -1416,7 +1422,49 @@
 .patientConditionDischarge:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
 }
-.drugsSection {
+.followUpSuggestionSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+  border: 0.2px dotted var(--token-8PxxXPNrIohQ);
+}
+.followUpSuggestionSection > :global(.__wab_flex-container) {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.followUpSuggestionSection > :global(.__wab_flex-container) > *,
+.followUpSuggestionSection
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > *,
+.followUpSuggestionSection > :global(.__wab_flex-container) > picture > img,
+.followUpSuggestionSection
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
+}
+.text__kybVt {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-weight: 600;
+  min-width: 0;
+  padding: 4px;
+  border-bottom: 0.2px dotted var(--token-8PxxXPNrIohQ);
+}
+.dietSection {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1429,6 +1477,30 @@
   padding: 8px;
 }
 .text__pSyDj {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin-bottom: 0px;
+  min-width: 0;
+}
+.diet:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.drugsSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.text__dIXh1 {
   position: relative;
   width: 100%;
   height: auto;
@@ -1461,12 +1533,11 @@
 .followups:global(.__wab_instance) {
   max-width: 100%;
 }
-.svg__oxEo {
-  position: relative;
+.svg__l81Uw {
   object-fit: cover;
-  width: auto;
+  max-width: 100%;
+  color: var(--token-tawGjJMbHvx-);
   height: 1em;
-  color: var(--token-9iYGdL7i3GKE);
 }
 .svg__hjAjg {
   position: relative;
