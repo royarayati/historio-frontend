@@ -2609,6 +2609,21 @@
           "id": "40Mu0isncOEt",
           "name": "LastTrackButtonSvgrepoComSvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__LastTrackButtonSvgrepoComSvg.tsx"
+        },
+        {
+          "id": "je3YY87Oac_G",
+          "name": "HospitalSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__HospitalSvgrepoComSvg.tsx"
+        },
+        {
+          "id": "OGWp3OaLXNaS",
+          "name": "DrugSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__DrugSvgrepoComSvg.tsx"
+        },
+        {
+          "id": "xHUFSyd3dkRu",
+          "name": "DrugSvgrepoCom1SvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__DrugSvgrepoCom1Svg.tsx"
         }
       ],
       "images": [
@@ -2819,7 +2834,22 @@
           "componentImportPath": "./utils/ApiFetcherComponentPlusCache"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [
+        {
+          "defaultExport": false,
+          "id": "processAndCompressBase64",
+          "importPath": "./utils/ImageCompression.tsx",
+          "name": "processAndCompressBase64",
+          "namespace": null
+        },
+        {
+          "defaultExport": false,
+          "id": "processAndCompressMultipleBase64",
+          "importPath": "./utils/ImageCompression.tsx",
+          "name": "processAndCompressMultipleBase64",
+          "namespace": null
+        }
+      ]
     }
   ],
   "globalVariants": {

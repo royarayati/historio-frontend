@@ -86,6 +86,8 @@ import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic
 import MdiAccountIcon from "./icons/PlasmicIcon__MdiAccount"; // plasmic-import: mC78MSouMgiO/icon
 import EvaEdit2OutlineIcon from "./icons/PlasmicIcon__EvaEdit2Outline"; // plasmic-import: pE37P96Dcs-s/icon
 import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import DrugSvgrepoCom1SvgIcon from "./icons/PlasmicIcon__DrugSvgrepoCom1Svg"; // plasmic-import: xHUFSyd3dkRu/icon
+import HospitalSvgrepoComSvgIcon from "./icons/PlasmicIcon__HospitalSvgrepoComSvg"; // plasmic-import: je3YY87Oac_G/icon
 
 createPlasmicElementProxy;
 
@@ -168,6 +170,9 @@ export type PlasmicPatientSummary__OverridesType = {
   بهبودینسبی?: Flex__<typeof MenuItem>;
   فوت?: Flex__<typeof MenuItem>;
   رضایتشخصی?: Flex__<typeof MenuItem>;
+  followUpSuggestionSection?: Flex__<"div">;
+  dietSection?: Flex__<"div">;
+  diet?: Flex__<typeof AntdInput>;
   drugsSection?: Flex__<"div">;
   drug?: Flex__<typeof AntdInput>;
   followupSection?: Flex__<"div">;
@@ -283,7 +288,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "drug.value",
+        path: "diet.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
@@ -738,6 +743,14 @@ function PlasmicPatientSummary__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "drug.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       }
     ],
     [$props, $ctx, $refs]
@@ -5565,7 +5578,12 @@ function PlasmicPatientSummary__RenderFunc(props: {
                         return;
                       }
                     }}
-                    startIcon={null}
+                    startIcon={
+                      <EvaEdit2OutlineIcon
+                        className={classNames(projectcss.all, sty.svg__cxQ9D)}
+                        role={"img"}
+                      />
+                    }
                     value={
                       generateStateValueProp($state, [
                         "diseaseProgress",
@@ -5610,6 +5628,12 @@ function PlasmicPatientSummary__RenderFunc(props: {
                         return;
                       }
                     }}
+                    startIcon={
+                      <DrugSvgrepoCom1SvgIcon
+                        className={classNames(projectcss.all, sty.svg__mpnTv)}
+                        role={"img"}
+                      />
+                    }
                     value={
                       generateStateValueProp($state, ["procedures", "value"]) ??
                       ""
@@ -6672,99 +6696,180 @@ function PlasmicPatientSummary__RenderFunc(props: {
                     ])}
                   />
                 </div>
-                <div
-                  data-plasmic-name={"drugsSection"}
-                  data-plasmic-override={overrides.drugsSection}
-                  className={classNames(projectcss.all, sty.drugsSection)}
+                <Stack__
+                  as={"div"}
+                  data-plasmic-name={"followUpSuggestionSection"}
+                  data-plasmic-override={overrides.followUpSuggestionSection}
+                  hasGap={true}
+                  className={classNames(
+                    projectcss.all,
+                    sty.followUpSuggestionSection
+                  )}
                 >
                   <div
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.text__pSyDj
+                      sty.text__kybVt
                     )}
                   >
                     {
-                      "\u062f\u0627\u0631\u0648\u0647\u0627\u06cc \u062a\u062c\u0648\u06cc\u0632\u06cc "
+                      "\u062a\u0648\u0635\u06cc\u0647 \u0647\u0627\u06cc \u067e\u0633 \u0627\u0632 \u062a\u0631\u062e\u06cc\u0635"
                     }
                   </div>
-                  {(() => {
-                    const child$Props = {
-                      className: classNames("__wab_instance", sty.drug),
-                      onChange: async (...eventArgs: any) => {
-                        generateStateOnChangePropForCodeComponents(
-                          $state,
-                          "value",
-                          ["drug", "value"],
-                          AntdInput_Helpers
-                        ).apply(null, eventArgs);
-                      },
-                      value: generateStateValueProp($state, ["drug", "value"])
-                    };
-                    initializeCodeComponentStates(
-                      $state,
-                      [
-                        {
-                          name: "value",
-                          plasmicStateName: "drug.value"
-                        }
-                      ],
-                      [],
-                      AntdInput_Helpers ?? {},
-                      child$Props
-                    );
+                  <div
+                    data-plasmic-name={"dietSection"}
+                    data-plasmic-override={overrides.dietSection}
+                    className={classNames(projectcss.all, sty.dietSection)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__pSyDj
+                      )}
+                    >
+                      {
+                        "\u0631\u0698\u06cc\u0645 \u063a\u0630\u0627\u06cc\u06cc "
+                      }
+                    </div>
+                    {(() => {
+                      const child$Props = {
+                        className: classNames("__wab_instance", sty.diet),
+                        onChange: async (...eventArgs: any) => {
+                          generateStateOnChangePropForCodeComponents(
+                            $state,
+                            "value",
+                            ["diet", "value"],
+                            AntdInput_Helpers
+                          ).apply(null, eventArgs);
+                        },
+                        value: generateStateValueProp($state, ["diet", "value"])
+                      };
+                      initializeCodeComponentStates(
+                        $state,
+                        [
+                          {
+                            name: "value",
+                            plasmicStateName: "diet.value"
+                          }
+                        ],
+                        [],
+                        AntdInput_Helpers ?? {},
+                        child$Props
+                      );
 
-                    return (
-                      <AntdInput
-                        data-plasmic-name={"drug"}
-                        data-plasmic-override={overrides.drug}
-                        {...child$Props}
-                      />
-                    );
-                  })()}
-                </div>
-                <div
-                  data-plasmic-name={"followupSection"}
-                  data-plasmic-override={overrides.followupSection}
-                  className={classNames(projectcss.all, sty.followupSection)}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__smGnI
-                    )}
-                  >
-                    {
-                      "\u0645\u0631\u0627\u062c\u0639\u0627\u062a \u0628\u0639\u062f\u06cc \u0628\u06cc\u0645\u0627\u0631"
-                    }
+                      return (
+                        <AntdInput
+                          data-plasmic-name={"diet"}
+                          data-plasmic-override={overrides.diet}
+                          {...child$Props}
+                        />
+                      );
+                    })()}
                   </div>
-                  <TextInput
-                    data-plasmic-name={"followups"}
-                    data-plasmic-override={overrides.followups}
-                    className={classNames("__wab_instance", sty.followups)}
-                    onChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
+                  <div
+                    data-plasmic-name={"drugsSection"}
+                    data-plasmic-override={overrides.drugsSection}
+                    className={classNames(projectcss.all, sty.drugsSection)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__dIXh1
+                      )}
+                    >
+                      {
+                        "\u062f\u0627\u0631\u0648\u0647\u0627\u06cc \u062a\u062c\u0648\u06cc\u0632\u06cc "
+                      }
+                    </div>
+                    {(() => {
+                      const child$Props = {
+                        className: classNames("__wab_instance", sty.drug),
+                        onChange: async (...eventArgs: any) => {
+                          generateStateOnChangePropForCodeComponents(
+                            $state,
+                            "value",
+                            ["drug", "value"],
+                            AntdInput_Helpers
+                          ).apply(null, eventArgs);
+                        },
+                        value: generateStateValueProp($state, ["drug", "value"])
+                      };
+                      initializeCodeComponentStates(
+                        $state,
+                        [
+                          {
+                            name: "value",
+                            plasmicStateName: "drug.value"
+                          }
+                        ],
+                        [],
+                        AntdInput_Helpers ?? {},
+                        child$Props
+                      );
+
+                      return (
+                        <AntdInput
+                          data-plasmic-name={"drug"}
+                          data-plasmic-override={overrides.drug}
+                          {...child$Props}
+                        />
+                      );
+                    })()}
+                  </div>
+                  <div
+                    data-plasmic-name={"followupSection"}
+                    data-plasmic-override={overrides.followupSection}
+                    className={classNames(projectcss.all, sty.followupSection)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__smGnI
+                      )}
+                    >
+                      {
+                        "\u0645\u0631\u0627\u062c\u0639\u0627\u062a \u0628\u0639\u062f\u06cc \u0628\u06cc\u0645\u0627\u0631"
+                      }
+                    </div>
+                    <TextInput
+                      data-plasmic-name={"followups"}
+                      data-plasmic-override={overrides.followups}
+                      className={classNames("__wab_instance", sty.followups)}
+                      onChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "followups",
+                            "value"
+                          ])((e => e.target?.value).apply(null, eventArgs));
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      startIcon={
+                        <HospitalSvgrepoComSvgIcon
+                          className={classNames(projectcss.all, sty.svg__l81Uw)}
+                          role={"img"}
+                        />
+                      }
+                      value={
+                        generateStateValueProp($state, [
                           "followups",
                           "value"
-                        ])((e => e.target?.value).apply(null, eventArgs));
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
+                        ]) ?? ""
                       }
-                    }}
-                    value={
-                      generateStateValueProp($state, ["followups", "value"]) ??
-                      ""
-                    }
-                  />
-                </div>
+                    />
+                  </div>
+                </Stack__>
                 <Button
                   data-plasmic-name={"postSummary"}
                   data-plasmic-override={overrides.postSummary}
@@ -6822,6 +6927,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                       laboratory: $state.selectedLaboratoryData,
                                       paraclinic_reports:
                                         $state.selectedParaclinicReports,
+                                      diet: $state.diet.value,
                                       drugs: $state.drug.value,
                                       follow_ups: $state.followups.value,
                                       patient_condition:
@@ -8223,6 +8329,9 @@ const PlasmicDescendants = {
     "\u0628\u0647\u0628\u0648\u062f\u06cc\u0646\u0633\u0628\u06cc",
     "\u0641\u0648\u062a",
     "\u0631\u0636\u0627\u06cc\u062a\u0634\u062e\u0635\u06cc",
+    "followUpSuggestionSection",
+    "dietSection",
+    "diet",
     "drugsSection",
     "drug",
     "followupSection",
@@ -8319,6 +8428,9 @@ const PlasmicDescendants = {
     "\u0628\u0647\u0628\u0648\u062f\u06cc\u0646\u0633\u0628\u06cc",
     "\u0641\u0648\u062a",
     "\u0631\u0636\u0627\u06cc\u062a\u0634\u062e\u0635\u06cc",
+    "followUpSuggestionSection",
+    "dietSection",
+    "diet",
     "drugsSection",
     "drug",
     "followupSection",
@@ -8531,6 +8643,9 @@ const PlasmicDescendants = {
     "\u0628\u0647\u0628\u0648\u062f\u06cc\u0646\u0633\u0628\u06cc",
     "\u0641\u0648\u062a",
     "\u0631\u0636\u0627\u06cc\u062a\u0634\u062e\u0635\u06cc",
+    "followUpSuggestionSection",
+    "dietSection",
+    "diet",
     "drugsSection",
     "drug",
     "followupSection",
@@ -8580,6 +8695,17 @@ const PlasmicDescendants = {
   بهبودینسبی: ["\u0628\u0647\u0628\u0648\u062f\u06cc\u0646\u0633\u0628\u06cc"],
   فوت: ["\u0641\u0648\u062a"],
   رضایتشخصی: ["\u0631\u0636\u0627\u06cc\u062a\u0634\u062e\u0635\u06cc"],
+  followUpSuggestionSection: [
+    "followUpSuggestionSection",
+    "dietSection",
+    "diet",
+    "drugsSection",
+    "drug",
+    "followupSection",
+    "followups"
+  ],
+  dietSection: ["dietSection", "diet"],
+  diet: ["diet"],
   drugsSection: ["drugsSection", "drug"],
   drug: ["drug"],
   followupSection: ["followupSection", "followups"],
@@ -8771,6 +8897,9 @@ type NodeDefaultElementType = {
   بهبودینسبی: typeof MenuItem;
   فوت: typeof MenuItem;
   رضایتشخصی: typeof MenuItem;
+  followUpSuggestionSection: "div";
+  dietSection: "div";
+  diet: typeof AntdInput;
   drugsSection: "div";
   drug: typeof AntdInput;
   followupSection: "div";
@@ -8959,6 +9088,9 @@ export const PlasmicPatientSummary = Object.assign(
     رضایتشخصی: makeNodeComponent(
       "\u0631\u0636\u0627\u06cc\u062a\u0634\u062e\u0635\u06cc"
     ),
+    followUpSuggestionSection: makeNodeComponent("followUpSuggestionSection"),
+    dietSection: makeNodeComponent("dietSection"),
+    diet: makeNodeComponent("diet"),
     drugsSection: makeNodeComponent("drugsSection"),
     drug: makeNodeComponent("drug"),
     followupSection: makeNodeComponent("followupSection"),

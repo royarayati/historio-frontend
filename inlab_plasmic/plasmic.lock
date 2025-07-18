@@ -2,7 +2,7 @@
   "projects": [
     {
       "projectId": "gmeH6XgPaBtkt51HunAo4g",
-      "version": "18.20.0",
+      "version": "18.21.0",
       "dependencies": {},
       "lang": "ts",
       "fileLocks": [
@@ -278,7 +278,7 @@
         "8PtdGodUbexNYgkuyBUcWu": "3.29.0",
         "3m3vFk1dnCzZnwT8k489Jy": "0.8.0",
         "aEHVN5v6mfM4eovDsL8Z7d": "0.4.0",
-        "gmeH6XgPaBtkt51HunAo4g": "18.20.0"
+        "gmeH6XgPaBtkt51HunAo4g": "18.21.0"
       },
       "lang": "ts",
       "fileLocks": [
@@ -340,12 +340,12 @@
         {
           "type": "renderModule",
           "assetId": "oQ9IYAdIiE5g",
-          "checksum": "0c83af3a73b1e50096629dfe158240a1"
+          "checksum": "f11795aa45241b32406c5b15b8d7823f"
         },
         {
           "type": "cssRules",
           "assetId": "oQ9IYAdIiE5g",
-          "checksum": "0c83af3a73b1e50096629dfe158240a1"
+          "checksum": "f11795aa45241b32406c5b15b8d7823f"
         },
         {
           "type": "renderModule",
@@ -730,12 +730,12 @@
         {
           "type": "renderModule",
           "assetId": "LsXtPkapGRoc",
-          "checksum": "b0301766caeb2cde85abfae47743b213"
+          "checksum": "20ba1371c51380e103374f482a0c35d8"
         },
         {
           "type": "cssRules",
           "assetId": "LsXtPkapGRoc",
-          "checksum": "b0301766caeb2cde85abfae47743b213"
+          "checksum": "20ba1371c51380e103374f482a0c35d8"
         },
         {
           "type": "icon",
@@ -1306,6 +1306,21 @@
           "type": "icon",
           "assetId": "40Mu0isncOEt",
           "checksum": "f3e176572dea86e2ee27a62ac6c99349"
+        },
+        {
+          "type": "icon",
+          "assetId": "je3YY87Oac_G",
+          "checksum": "8fac1d09e7f114a18748b00b5294b0cc"
+        },
+        {
+          "type": "icon",
+          "assetId": "OGWp3OaLXNaS",
+          "checksum": "7ef4e1bc07bddac5ffc1872e79478700"
+        },
+        {
+          "type": "icon",
+          "assetId": "xHUFSyd3dkRu",
+          "checksum": "f76fc3ef202618023aa5706828c865e4"
         },
         {
           "type": "image",
