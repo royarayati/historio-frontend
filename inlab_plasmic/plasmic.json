@@ -2844,9 +2844,9 @@
         },
         {
           "defaultExport": false,
-          "id": "processAndCompressMultipleBase64",
+          "id": "CompressMultipleBase64",
           "importPath": "./utils/ImageCompression.tsx",
-          "name": "processAndCompressMultipleBase64",
+          "name": "CompressMultipleBase64",
           "namespace": null
         }
       ]

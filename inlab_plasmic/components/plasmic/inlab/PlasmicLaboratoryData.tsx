@@ -3651,37 +3651,43 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     )}
                                   >
                                     <React.Fragment>
-                                      {(() => {
-                                        const gregorianDate = new Date(
-                                          currentItem.issued_datetime
-                                        );
-                                        const shamsiDate =
-                                          new Intl.DateTimeFormat(
-                                            "fa-IR"
-                                          ).format(gregorianDate);
-                                        const shamsiTime =
-                                          gregorianDate.toLocaleTimeString(
-                                            "fa-IR",
-                                            { hour12: false }
-                                          );
-                                        const englishDate = shamsiDate.replace(
-                                          /[۰-۹]/g,
-                                          d =>
-                                            String.fromCharCode(
-                                              d.charCodeAt(0) - 1728
-                                            )
-                                        );
-                                        const englishTime = shamsiTime
-                                          .replace(/[۰-۹]/g, d =>
-                                            String.fromCharCode(
-                                              d.charCodeAt(0) - 1728
-                                            )
-                                          )
-                                          .split(":")
-                                          .slice(0, 2)
-                                          .join(":");
-                                        return `${englishDate}  ${englishTime}`;
-                                      })()}
+                                      {localStorage.getItem(
+                                        "inlab_user_his_type"
+                                      ) !== "tums_api" &&
+                                      localStorage.getItem(
+                                        "inlab_user_his_type"
+                                      ) !== "tebvarayane_db"
+                                        ? (() => {
+                                            const gregorianDate = new Date(
+                                              currentItem.issued_datetime
+                                            );
+                                            const shamsiDate =
+                                              new Intl.DateTimeFormat(
+                                                "fa-IR"
+                                              ).format(gregorianDate);
+                                            const shamsiTime =
+                                              gregorianDate.toLocaleTimeString(
+                                                "fa-IR",
+                                                { hour12: false }
+                                              );
+                                            const englishDate =
+                                              shamsiDate.replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              );
+                                            const englishTime = shamsiTime
+                                              .replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              )
+                                              .split(":")
+                                              .slice(0, 2)
+                                              .join(":");
+                                            return `${englishDate}-${englishTime}`;
+                                          })()
+                                        : currentItem.issued_datetime}
                                     </React.Fragment>
                                   </div>
                                   {(_par =>
@@ -5698,33 +5704,42 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               )}
                             >
                               <React.Fragment>
-                                {(() => {
-                                  const gregorianDate = new Date(
-                                    currentItem.issued_datetime
-                                  );
-                                  const shamsiDate = new Intl.DateTimeFormat(
-                                    "fa-IR"
-                                  ).format(gregorianDate);
-                                  const shamsiTime =
-                                    gregorianDate.toLocaleTimeString("fa-IR", {
-                                      hour12: false
-                                    });
-                                  const englishDate = shamsiDate.replace(
-                                    /[۰-۹]/g,
-                                    d =>
-                                      String.fromCharCode(
-                                        d.charCodeAt(0) - 1728
-                                      )
-                                  );
-                                  const englishTime = shamsiTime.replace(
-                                    /[۰-۹]/g,
-                                    d =>
-                                      String.fromCharCode(
-                                        d.charCodeAt(0) - 1728
-                                      )
-                                  );
-                                  return `${englishDate}  ${englishTime}`;
-                                })()}
+                                {localStorage.getItem("inlab_user_his_type") !==
+                                  "tums_api" &&
+                                localStorage.getItem("inlab_user_his_type") !==
+                                  "tebvarayane_db"
+                                  ? (() => {
+                                      const gregorianDate = new Date(
+                                        currentItem.issued_datetime
+                                      );
+                                      const shamsiDate =
+                                        new Intl.DateTimeFormat("fa-IR").format(
+                                          gregorianDate
+                                        );
+                                      const shamsiTime =
+                                        gregorianDate.toLocaleTimeString(
+                                          "fa-IR",
+                                          { hour12: false }
+                                        );
+                                      const englishDate = shamsiDate.replace(
+                                        /[۰-۹]/g,
+                                        d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                      );
+                                      const englishTime = shamsiTime
+                                        .replace(/[۰-۹]/g, d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                        )
+                                        .split(":")
+                                        .slice(0, 2)
+                                        .join(":");
+                                      return `${englishDate}-${englishTime}`;
+                                    })()
+                                  : currentItem.issued_datetime}
                               </React.Fragment>
                             </div>
                             <div

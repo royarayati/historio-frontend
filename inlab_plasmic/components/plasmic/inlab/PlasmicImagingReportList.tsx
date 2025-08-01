@@ -90,6 +90,7 @@ import CopyIconSvgIcon from "./icons/PlasmicIcon__CopyIconSvg"; // plasmic-impor
 import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
 import LastTrackButtonSvgrepoComSvgIcon from "./icons/PlasmicIcon__LastTrackButtonSvgrepoComSvg"; // plasmic-import: 40Mu0isncOEt/icon
 
+import { processAndCompressBase64 as __fn_processAndCompressBase64 } from "../../../utils/ImageCompression"; // plasmic-import: processAndCompressBase64/customFunction
 import __lib_copyToClipboard from "copy-to-clipboard";
 
 createPlasmicElementProxy;
@@ -205,6 +206,7 @@ export type PlasmicImagingReportList__OverridesType = {
 export interface DefaultImagingReportListProps {}
 
 const $$ = {
+  processAndCompressBase64: __fn_processAndCompressBase64,
   copyToClipboard: __lib_copyToClipboard
 };
 
@@ -1024,6 +1026,12 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "compressedImage",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
     [$props, $ctx, $refs]
@@ -3882,39 +3890,44 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             <React.Fragment>
                               {(() => {
                                 try {
-                                  return (() => {
-                                    const gregorianDate = new Date(
-                                      currentItem.issued_datetime
-                                    );
-                                    gregorianDate.setSeconds(0);
-                                    const shamsiDate = new Intl.DateTimeFormat(
-                                      "fa-IR"
-                                    ).format(gregorianDate);
-                                    const shamsiTime =
-                                      gregorianDate.toLocaleTimeString(
-                                        "fa-IR",
-                                        { hour12: false }
-                                      );
-                                    const englishDate = shamsiDate.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
-                                        )
-                                    );
-                                    const englishTime = shamsiTime.replace(
-                                      /[۰-۹]/g,
-                                      d =>
-                                        String.fromCharCode(
-                                          d.charCodeAt(0) - 1728
-                                        )
-                                    );
-                                    const timeWithoutSeconds = englishTime
-                                      .split(":")
-                                      .slice(0, 2)
-                                      .join(":");
-                                    return `${englishDate}  ${timeWithoutSeconds}`;
-                                  })();
+                                  return localStorage.getItem(
+                                    "inlab_user_his_type"
+                                  ) !== "tums_api" &&
+                                    localStorage.getItem(
+                                      "inlab_user_his_type"
+                                    ) !== "tebvarayane_db"
+                                    ? (() => {
+                                        const gregorianDate = new Date(
+                                          currentItem.issued_datetime
+                                        );
+                                        const shamsiDate =
+                                          new Intl.DateTimeFormat(
+                                            "fa-IR"
+                                          ).format(gregorianDate);
+                                        const shamsiTime =
+                                          gregorianDate.toLocaleTimeString(
+                                            "fa-IR",
+                                            { hour12: false }
+                                          );
+                                        const englishDate = shamsiDate.replace(
+                                          /[۰-۹]/g,
+                                          d =>
+                                            String.fromCharCode(
+                                              d.charCodeAt(0) - 1728
+                                            )
+                                        );
+                                        const englishTime = shamsiTime
+                                          .replace(/[۰-۹]/g, d =>
+                                            String.fromCharCode(
+                                              d.charCodeAt(0) - 1728
+                                            )
+                                          )
+                                          .split(":")
+                                          .slice(0, 2)
+                                          .join(":");
+                                        return `${englishDate}-${englishTime}`;
+                                      })()
+                                    : currentItem.issued_datetime;
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -4788,6 +4801,82 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   ];
                 }
 
+                $steps["updateCompressedImage"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["compressedImage"]
+                        },
+                        operation: 0,
+                        value: $state.uploadComponent.files.map(
+                          file => file.contents
+                        )
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateCompressedImage"] != null &&
+                  typeof $steps["updateCompressedImage"] === "object" &&
+                  typeof $steps["updateCompressedImage"].then === "function"
+                ) {
+                  $steps["updateCompressedImage"] = await $steps[
+                    "updateCompressedImage"
+                  ];
+                }
+
+                $steps["updateCompressedImage2"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["compressedImage"]
+                        },
+                        operation: 0,
+                        value: $$.processAndCompressBase64(
+                          $state.compressedImage[0]
+                        )
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateCompressedImage2"] != null &&
+                  typeof $steps["updateCompressedImage2"] === "object" &&
+                  typeof $steps["updateCompressedImage2"].then === "function"
+                ) {
+                  $steps["updateCompressedImage2"] = await $steps[
+                    "updateCompressedImage2"
+                  ];
+                }
+
                 $steps["postMedia"] = true
                   ? (() => {
                       const actionArgs = {
@@ -4813,7 +4902,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           })(),
                           (() => {
                             try {
-                              return $state.uploadComponent.files;
+                              return $state.compressedImage;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -7853,39 +7942,59 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                         </React.Fragment>
                                       ) : (
                                         <React.Fragment>
-                                          {(() => {
-                                            const gregorianDate = new Date(
-                                              currentItem.service_datetime
-                                            );
-                                            gregorianDate.setSeconds(0);
-                                            const shamsiDate =
-                                              new Intl.DateTimeFormat(
-                                                "fa-IR"
-                                              ).format(gregorianDate);
-                                            const shamsiTime =
-                                              gregorianDate.toLocaleTimeString(
-                                                "fa-IR",
-                                                { hour12: false }
-                                              );
-                                            const englishDate =
-                                              shamsiDate.replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
-                                            const englishTime =
-                                              shamsiTime.replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
-                                            const timeWithoutSeconds =
-                                              englishTime
-                                                .split(":")
-                                                .slice(0, 2)
-                                                .join(":");
-                                            return `${englishDate}  ${timeWithoutSeconds}`;
-                                          })()}
+                                          {
+                                            // (() => {
+                                            //   const gregorianDate = new Date(currentItem.service_datetime);
+                                            //   gregorianDate.setSeconds(0);
+                                            //   const shamsiDate = new Intl.DateTimeFormat('fa-IR').format(gregorianDate);
+                                            //   const shamsiTime = gregorianDate.toLocaleTimeString('fa-IR', { hour12: false });
+                                            //   const englishDate = shamsiDate.replace(/[۰-۹]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 1728));
+                                            //   const englishTime = shamsiTime.replace(/[۰-۹]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 1728));
+                                            //   const timeWithoutSeconds = englishTime.split(':').slice(0, 2).join(':');
+                                            //   return `${englishDate}  ${timeWithoutSeconds}`;
+                                            // })()
+
+                                            localStorage.getItem(
+                                              "inlab_user_his_type"
+                                            ) !== "tums_api" &&
+                                            localStorage.getItem(
+                                              "inlab_user_his_type"
+                                            ) !== "tebvarayane_db"
+                                              ? (() => {
+                                                  const gregorianDate =
+                                                    new Date(
+                                                      currentItem.service_datetime
+                                                    );
+                                                  const shamsiDate =
+                                                    new Intl.DateTimeFormat(
+                                                      "fa-IR"
+                                                    ).format(gregorianDate);
+                                                  const shamsiTime =
+                                                    gregorianDate.toLocaleTimeString(
+                                                      "fa-IR",
+                                                      { hour12: false }
+                                                    );
+                                                  const englishDate =
+                                                    shamsiDate.replace(
+                                                      /[۰-۹]/g,
+                                                      d =>
+                                                        String.fromCharCode(
+                                                          d.charCodeAt(0) - 1728
+                                                        )
+                                                    );
+                                                  const englishTime = shamsiTime
+                                                    .replace(/[۰-۹]/g, d =>
+                                                      String.fromCharCode(
+                                                        d.charCodeAt(0) - 1728
+                                                      )
+                                                    )
+                                                    .split(":")
+                                                    .slice(0, 2)
+                                                    .join(":");
+                                                  return `${englishDate}-${englishTime}`;
+                                                })()
+                                              : currentItem.service_datetime
+                                          }
                                         </React.Fragment>
                                       )}
                                     </div>

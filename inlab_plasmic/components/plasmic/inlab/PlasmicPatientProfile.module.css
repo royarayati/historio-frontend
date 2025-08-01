@@ -1040,7 +1040,6 @@
   padding: 0px;
 }
 .patientSummary {
-  display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
@@ -1048,6 +1047,7 @@
   max-width: 100%;
   background: #ffffff;
   min-width: 0;
+  display: none;
   border-radius: 5px;
   padding: 8px;
   border: 0.5px solid var(--token-8PxxXPNrIohQ);
@@ -1361,6 +1361,23 @@
   height: 1em;
 }
 .svg___02478 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.dischargeSummary:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.svg__yylLg {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg___6NNjv {
   position: relative;
   object-fit: cover;
   width: auto;
