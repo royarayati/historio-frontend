@@ -62,8 +62,8 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import Alert2 from "../../Alert2"; // plasmic-import: RABqkXkLRlle/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import Alert2 from "../../Alert2"; // plasmic-import: RABqkXkLRlle/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
@@ -80,9 +80,9 @@ import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFog
 import sty from "./PlasmicConsultSendDraft.module.css"; // plasmic-import: ZHE7N-0S_BIq/css
 
 import RubbishBinSvgrepoComSvgIcon from "./icons/PlasmicIcon__RubbishBinSvgrepoComSvg"; // plasmic-import: 4fW54JbpNQ-Y/icon
-import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
+import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
 import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
 import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 
@@ -113,9 +113,6 @@ export type PlasmicConsultSendDraft__OverridesType = {
   consultHeader?: Flex__<"div">;
   deleteConsult?: Flex__<"svg">;
   pageFunctionTopic?: Flex__<"div">;
-  sendConsultAlertContent?: Flex__<"div">;
-  sendConsultSuccessfully?: Flex__<typeof Alert2>;
-  sendConsultUnsuccessfully2?: Flex__<typeof Alert2>;
   senderServiceContent?: Flex__<"div">;
   senderService?: Flex__<"div">;
   selectedSenderService?: Flex__<"div">;
@@ -135,6 +132,8 @@ export type PlasmicConsultSendDraft__OverridesType = {
   emergentOff?: Flex__<"div">;
   emergentOn?: Flex__<"div">;
   guide?: Flex__<"div">;
+  sendConsultAlertContent?: Flex__<"div">;
+  sendConsultUnsuccessfully?: Flex__<typeof Alert2>;
   sendOrDraftButton?: Flex__<"div">;
   draftConsultButton?: Flex__<typeof Button>;
   saveDraftConsult?: Flex__<"div">;
@@ -272,12 +271,6 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
-        path: "sendConsultSuccessfullyAlert",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
         path: "sendConsultUnsuccessfullyAlert",
@@ -816,11 +809,9 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
             >
               <DataCtxReader__>
                 {$ctx => (
-                  <Stack__
-                    as={"div"}
+                  <div
                     data-plasmic-name={"sendConsult"}
                     data-plasmic-override={overrides.sendConsult}
-                    hasGap={true}
                     className={classNames(projectcss.all, sty.sendConsult)}
                   >
                     <div
@@ -949,82 +940,6 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           "\u0627\u0631\u0633\u0627\u0644 \u0645\u0634\u0627\u0648\u0631\u0647 \u067e\u06cc\u0634 \u0646\u0648\u06cc\u0633 \u0634\u062f\u0647"
                         }
                       </div>
-                    </div>
-                    <div
-                      data-plasmic-name={"sendConsultAlertContent"}
-                      data-plasmic-override={overrides.sendConsultAlertContent}
-                      className={classNames(
-                        projectcss.all,
-                        sty.sendConsultAlertContent
-                      )}
-                    >
-                      <Alert2
-                        data-plasmic-name={"sendConsultSuccessfully"}
-                        data-plasmic-override={
-                          overrides.sendConsultSuccessfully
-                        }
-                        body={
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__za5Ld
-                            )}
-                          >
-                            {
-                              "\u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f"
-                            }
-                          </div>
-                        }
-                        className={classNames(
-                          "__wab_instance",
-                          sty.sendConsultSuccessfully
-                        )}
-                        noHeader={true}
-                        noIcon={true}
-                        success={true}
-                      />
-
-                      {(() => {
-                        try {
-                          return $state.sendConsultUnsuccessfullyAlert;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })() ? (
-                        <Alert2
-                          data-plasmic-name={"sendConsultUnsuccessfully2"}
-                          data-plasmic-override={
-                            overrides.sendConsultUnsuccessfully2
-                          }
-                          body={
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___0V5S
-                              )}
-                            >
-                              {
-                                "\u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f"
-                              }
-                            </div>
-                          }
-                          className={classNames(
-                            "__wab_instance",
-                            sty.sendConsultUnsuccessfully2
-                          )}
-                          error={true}
-                          noHeader={true}
-                          noIcon={true}
-                        />
-                      ) : null}
                     </div>
                     <div
                       data-plasmic-name={"senderServiceContent"}
@@ -2080,6 +1995,55 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                       }
                     </div>
                     <div
+                      data-plasmic-name={"sendConsultAlertContent"}
+                      data-plasmic-override={overrides.sendConsultAlertContent}
+                      className={classNames(
+                        projectcss.all,
+                        sty.sendConsultAlertContent
+                      )}
+                    >
+                      {(() => {
+                        try {
+                          return $state.sendConsultUnsuccessfullyAlert;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
+                        }
+                      })() ? (
+                        <Alert2
+                          data-plasmic-name={"sendConsultUnsuccessfully"}
+                          data-plasmic-override={
+                            overrides.sendConsultUnsuccessfully
+                          }
+                          body={
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text___0V5S
+                              )}
+                            >
+                              {
+                                "\u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f"
+                              }
+                            </div>
+                          }
+                          className={classNames(
+                            "__wab_instance",
+                            sty.sendConsultUnsuccessfully
+                          )}
+                          error={true}
+                          noHeader={true}
+                          noIcon={true}
+                        />
+                      ) : null}
+                    </div>
+                    <div
                       data-plasmic-name={"sendOrDraftButton"}
                       data-plasmic-override={overrides.sendOrDraftButton}
                       className={classNames(
@@ -2105,50 +2069,6 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                         ])}
                         onClick={async event => {
                           const $steps = {};
-
-                          $steps["makeFalseSendConsultSuccessfullyAlert"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: [
-                                      "sendConsultSuccessfullyAlert"
-                                    ]
-                                  },
-                                  operation: 0,
-                                  value: false
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["makeFalseSendConsultSuccessfullyAlert"] !=
-                              null &&
-                            typeof $steps[
-                              "makeFalseSendConsultSuccessfullyAlert"
-                            ] === "object" &&
-                            typeof $steps[
-                              "makeFalseSendConsultSuccessfullyAlert"
-                            ].then === "function"
-                          ) {
-                            $steps["makeFalseSendConsultSuccessfullyAlert"] =
-                              await $steps[
-                                "makeFalseSendConsultSuccessfullyAlert"
-                              ];
-                          }
 
                           $steps["makeFalseSendConsultUnsuccessfullyAlert"] =
                             true
@@ -2275,51 +2195,6 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                             $steps["putConsultDraft"] = await $steps[
                               "putConsultDraft"
                             ];
-                          }
-
-                          $steps["makeTrueSendConsultSuccessfullyAlert"] =
-                            $steps.putConsultDraft?.status === 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: [
-                                        "sendConsultSuccessfullyAlert"
-                                      ]
-                                    },
-                                    operation: 0,
-                                    value: true
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["makeTrueSendConsultSuccessfullyAlert"] !=
-                              null &&
-                            typeof $steps[
-                              "makeTrueSendConsultSuccessfullyAlert"
-                            ] === "object" &&
-                            typeof $steps[
-                              "makeTrueSendConsultSuccessfullyAlert"
-                            ].then === "function"
-                          ) {
-                            $steps["makeTrueSendConsultSuccessfullyAlert"] =
-                              await $steps[
-                                "makeTrueSendConsultSuccessfullyAlert"
-                              ];
                           }
 
                           $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
@@ -2550,50 +2425,6 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                         onClick={async event => {
                           const $steps = {};
 
-                          $steps["makeFalseSendConsultSuccessfullyAlert"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: [
-                                      "sendConsultSuccessfullyAlert"
-                                    ]
-                                  },
-                                  operation: 0,
-                                  value: false
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["makeFalseSendConsultSuccessfullyAlert"] !=
-                              null &&
-                            typeof $steps[
-                              "makeFalseSendConsultSuccessfullyAlert"
-                            ] === "object" &&
-                            typeof $steps[
-                              "makeFalseSendConsultSuccessfullyAlert"
-                            ].then === "function"
-                          ) {
-                            $steps["makeFalseSendConsultSuccessfullyAlert"] =
-                              await $steps[
-                                "makeFalseSendConsultSuccessfullyAlert"
-                              ];
-                          }
-
                           $steps["makeFalseSendConsultUnsuccessfullyAlert"] =
                             true
                               ? (() => {
@@ -2720,51 +2551,6 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                             $steps["postDraftedConsult"] = await $steps[
                               "postDraftedConsult"
                             ];
-                          }
-
-                          $steps["makeTrueSendConsultSuccessfullyAlert"] =
-                            $steps.postDraftedConsult?.status === 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: [
-                                        "sendConsultSuccessfullyAlert"
-                                      ]
-                                    },
-                                    operation: 0,
-                                    value: true
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["makeTrueSendConsultSuccessfullyAlert"] !=
-                              null &&
-                            typeof $steps[
-                              "makeTrueSendConsultSuccessfullyAlert"
-                            ] === "object" &&
-                            typeof $steps[
-                              "makeTrueSendConsultSuccessfullyAlert"
-                            ].then === "function"
-                          ) {
-                            $steps["makeTrueSendConsultSuccessfullyAlert"] =
-                              await $steps[
-                                "makeTrueSendConsultSuccessfullyAlert"
-                              ];
                           }
 
                           $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
@@ -2977,7 +2763,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                         </div>
                       </Button>
                     </div>
-                  </Stack__>
+                  </div>
                 )}
               </DataCtxReader__>
             </ApiFetcherComponent>
@@ -5288,9 +5074,6 @@ const PlasmicDescendants = {
     "consultHeader",
     "deleteConsult",
     "pageFunctionTopic",
-    "sendConsultAlertContent",
-    "sendConsultSuccessfully",
-    "sendConsultUnsuccessfully2",
     "senderServiceContent",
     "senderService",
     "selectedSenderService",
@@ -5310,6 +5093,8 @@ const PlasmicDescendants = {
     "emergentOff",
     "emergentOn",
     "guide",
+    "sendConsultAlertContent",
+    "sendConsultUnsuccessfully",
     "sendOrDraftButton",
     "draftConsultButton",
     "saveDraftConsult",
@@ -5379,9 +5164,6 @@ const PlasmicDescendants = {
     "consultHeader",
     "deleteConsult",
     "pageFunctionTopic",
-    "sendConsultAlertContent",
-    "sendConsultSuccessfully",
-    "sendConsultUnsuccessfully2",
     "senderServiceContent",
     "senderService",
     "selectedSenderService",
@@ -5401,6 +5183,8 @@ const PlasmicDescendants = {
     "emergentOff",
     "emergentOn",
     "guide",
+    "sendConsultAlertContent",
+    "sendConsultUnsuccessfully",
     "sendOrDraftButton",
     "draftConsultButton",
     "saveDraftConsult",
@@ -5413,9 +5197,6 @@ const PlasmicDescendants = {
     "consultHeader",
     "deleteConsult",
     "pageFunctionTopic",
-    "sendConsultAlertContent",
-    "sendConsultSuccessfully",
-    "sendConsultUnsuccessfully2",
     "senderServiceContent",
     "senderService",
     "selectedSenderService",
@@ -5435,6 +5216,8 @@ const PlasmicDescendants = {
     "emergentOff",
     "emergentOn",
     "guide",
+    "sendConsultAlertContent",
+    "sendConsultUnsuccessfully",
     "sendOrDraftButton",
     "draftConsultButton",
     "saveDraftConsult",
@@ -5446,9 +5229,6 @@ const PlasmicDescendants = {
     "consultHeader",
     "deleteConsult",
     "pageFunctionTopic",
-    "sendConsultAlertContent",
-    "sendConsultSuccessfully",
-    "sendConsultUnsuccessfully2",
     "senderServiceContent",
     "senderService",
     "selectedSenderService",
@@ -5468,6 +5248,8 @@ const PlasmicDescendants = {
     "emergentOff",
     "emergentOn",
     "guide",
+    "sendConsultAlertContent",
+    "sendConsultUnsuccessfully",
     "sendOrDraftButton",
     "draftConsultButton",
     "saveDraftConsult",
@@ -5477,13 +5259,6 @@ const PlasmicDescendants = {
   consultHeader: ["consultHeader", "deleteConsult", "pageFunctionTopic"],
   deleteConsult: ["deleteConsult"],
   pageFunctionTopic: ["pageFunctionTopic"],
-  sendConsultAlertContent: [
-    "sendConsultAlertContent",
-    "sendConsultSuccessfully",
-    "sendConsultUnsuccessfully2"
-  ],
-  sendConsultSuccessfully: ["sendConsultSuccessfully"],
-  sendConsultUnsuccessfully2: ["sendConsultUnsuccessfully2"],
   senderServiceContent: [
     "senderServiceContent",
     "senderService",
@@ -5534,6 +5309,11 @@ const PlasmicDescendants = {
   emergentOff: ["emergentOff"],
   emergentOn: ["emergentOn"],
   guide: ["guide"],
+  sendConsultAlertContent: [
+    "sendConsultAlertContent",
+    "sendConsultUnsuccessfully"
+  ],
+  sendConsultUnsuccessfully: ["sendConsultUnsuccessfully"],
   sendOrDraftButton: [
     "sendOrDraftButton",
     "draftConsultButton",
@@ -5702,9 +5482,6 @@ type NodeDefaultElementType = {
   consultHeader: "div";
   deleteConsult: "svg";
   pageFunctionTopic: "div";
-  sendConsultAlertContent: "div";
-  sendConsultSuccessfully: typeof Alert2;
-  sendConsultUnsuccessfully2: typeof Alert2;
   senderServiceContent: "div";
   senderService: "div";
   selectedSenderService: "div";
@@ -5724,6 +5501,8 @@ type NodeDefaultElementType = {
   emergentOff: "div";
   emergentOn: "div";
   guide: "div";
+  sendConsultAlertContent: "div";
+  sendConsultUnsuccessfully: typeof Alert2;
   sendOrDraftButton: "div";
   draftConsultButton: typeof Button;
   saveDraftConsult: "div";
@@ -5844,9 +5623,6 @@ export const PlasmicConsultSendDraft = Object.assign(
     consultHeader: makeNodeComponent("consultHeader"),
     deleteConsult: makeNodeComponent("deleteConsult"),
     pageFunctionTopic: makeNodeComponent("pageFunctionTopic"),
-    sendConsultAlertContent: makeNodeComponent("sendConsultAlertContent"),
-    sendConsultSuccessfully: makeNodeComponent("sendConsultSuccessfully"),
-    sendConsultUnsuccessfully2: makeNodeComponent("sendConsultUnsuccessfully2"),
     senderServiceContent: makeNodeComponent("senderServiceContent"),
     senderService: makeNodeComponent("senderService"),
     selectedSenderService: makeNodeComponent("selectedSenderService"),
@@ -5870,6 +5646,8 @@ export const PlasmicConsultSendDraft = Object.assign(
     emergentOff: makeNodeComponent("emergentOff"),
     emergentOn: makeNodeComponent("emergentOn"),
     guide: makeNodeComponent("guide"),
+    sendConsultAlertContent: makeNodeComponent("sendConsultAlertContent"),
+    sendConsultUnsuccessfully: makeNodeComponent("sendConsultUnsuccessfully"),
     sendOrDraftButton: makeNodeComponent("sendOrDraftButton"),
     draftConsultButton: makeNodeComponent("draftConsultButton"),
     saveDraftConsult: makeNodeComponent("saveDraftConsult"),

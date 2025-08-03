@@ -330,9 +330,7 @@ function PlasmicAlert__RenderFunc(props: {
           throw e;
         }
       })() ? (
-        <Stack__
-          as={"div"}
-          hasGap={true}
+        <div
           className={classNames(projectcss.all, sty.freeBox___714Pb, {
             [sty.freeBoxerrorNoDescription___714PbYlYx4]: hasVariant(
               $state,
@@ -391,9 +389,7 @@ function PlasmicAlert__RenderFunc(props: {
             )
           })}
         >
-          <Stack__
-            as={"div"}
-            hasGap={true}
+          <div
             className={classNames(projectcss.all, sty.freeBox__cUclm, {
               [sty.freeBoxerrorNoDescription__cUclmylYx4]: hasVariant(
                 $state,
@@ -539,7 +535,7 @@ function PlasmicAlert__RenderFunc(props: {
                 value: args.body
               })}
             </div>
-          </Stack__>
+          </div>
           <div
             className={classNames(projectcss.all, sty.freeBox__sca1K, {
               [sty.freeBoxnoIcon__sca1Kmkx82]: hasVariant(
@@ -560,7 +556,7 @@ function PlasmicAlert__RenderFunc(props: {
               value: args.icon
             })}
           </div>
-        </Stack__>
+        </div>
       ) : null}
     </div>
   ) as React.ReactElement | null;

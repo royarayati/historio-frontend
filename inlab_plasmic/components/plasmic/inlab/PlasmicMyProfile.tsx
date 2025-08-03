@@ -335,11 +335,7 @@ function PlasmicMyProfile__RenderFunc(props: {
               data-plasmic-override={overrides.picsAndName}
               className={classNames(projectcss.all, sty.picsAndName)}
             >
-              <Stack__
-                as={"div"}
-                hasGap={true}
-                className={classNames(projectcss.all, sty.freeBox__twhAz)}
-              >
+              <div className={classNames(projectcss.all, sty.freeBox__twhAz)}>
                 <div
                   data-plasmic-name={"name"}
                   data-plasmic-override={overrides.name}
@@ -418,7 +414,7 @@ function PlasmicMyProfile__RenderFunc(props: {
                     })()}
                   </React.Fragment>
                 </div>
-              </Stack__>
+              </div>
               <PlasmicImg__
                 data-plasmic-name={"img"}
                 data-plasmic-override={overrides.img}
@@ -439,11 +435,9 @@ function PlasmicMyProfile__RenderFunc(props: {
                 }}
               />
             </div>
-            <Stack__
-              as={"div"}
+            <div
               data-plasmic-name={"firstName"}
               data-plasmic-override={overrides.firstName}
-              hasGap={true}
               className={classNames(projectcss.all, sty.firstName)}
             >
               <div
@@ -535,12 +529,10 @@ function PlasmicMyProfile__RenderFunc(props: {
                   />
                 );
               })()}
-            </Stack__>
-            <Stack__
-              as={"div"}
+            </div>
+            <div
               data-plasmic-name={"lastName"}
               data-plasmic-override={overrides.lastName}
-              hasGap={true}
               className={classNames(projectcss.all, sty.lastName)}
             >
               <div
@@ -627,12 +619,10 @@ function PlasmicMyProfile__RenderFunc(props: {
                   />
                 );
               })()}
-            </Stack__>
-            <Stack__
-              as={"div"}
+            </div>
+            <div
               data-plasmic-name={"email"}
               data-plasmic-override={overrides.email}
-              hasGap={true}
               className={classNames(projectcss.all, sty.email)}
             >
               <div
@@ -714,14 +704,12 @@ function PlasmicMyProfile__RenderFunc(props: {
                   />
                 );
               })()}
-            </Stack__>
-            <Stack__
-              as={"div"}
+            </div>
+            <div
               data-plasmic-name={
                 "\u0639\u06a9\u0633\u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
               }
               data-plasmic-override={overrides.عکسپروفایل}
-              hasGap={true}
               className={classNames(projectcss.all, sty.عکسپروفایل)}
             >
               <div
@@ -771,7 +759,7 @@ function PlasmicMyProfile__RenderFunc(props: {
                   </div>
                 </AntdButton>
               </UploadWrapper>
-            </Stack__>
+            </div>
             <Button
               data-plasmic-name={"save"}
               data-plasmic-override={overrides.save}

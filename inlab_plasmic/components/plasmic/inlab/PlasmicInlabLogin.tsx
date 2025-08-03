@@ -436,11 +436,9 @@ function PlasmicInlabLogin__RenderFunc(props: {
           informationNoDescription={true}
         />
 
-        <Stack__
-          as={"div"}
+        <div
           data-plasmic-name={"pageContent"}
           data-plasmic-override={overrides.pageContent}
-          hasGap={true}
           className={classNames(projectcss.all, sty.pageContent, {
             [sty.pageContentdisabledLoginButton]: hasVariant(
               $state,
@@ -1110,6 +1108,41 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "resetPassword",
                 "isDisabled"
               ])}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["goToGoogleFormOfCreateEditAccount"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination:
+                          "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToGoogleFormOfCreateEditAccount"] != null &&
+                  typeof $steps["goToGoogleFormOfCreateEditAccount"] ===
+                    "object" &&
+                  typeof $steps["goToGoogleFormOfCreateEditAccount"].then ===
+                    "function"
+                ) {
+                  $steps["goToGoogleFormOfCreateEditAccount"] = await $steps[
+                    "goToGoogleFormOfCreateEditAccount"
+                  ];
+                }
+              }}
               onDeselectedChange={async (...eventArgs: any) => {
                 ((...eventArgs) => {
                   generateStateOnChangeProp($state, [
@@ -1235,6 +1268,41 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "createAccount",
                 "isDisabled"
               ])}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["goToGoogleFormOfCreateEditAccount"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination:
+                          "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToGoogleFormOfCreateEditAccount"] != null &&
+                  typeof $steps["goToGoogleFormOfCreateEditAccount"] ===
+                    "object" &&
+                  typeof $steps["goToGoogleFormOfCreateEditAccount"].then ===
+                    "function"
+                ) {
+                  $steps["goToGoogleFormOfCreateEditAccount"] = await $steps[
+                    "goToGoogleFormOfCreateEditAccount"
+                  ];
+                }
+              }}
               onDeselectedChange={async (...eventArgs: any) => {
                 ((...eventArgs) => {
                   generateStateOnChangeProp($state, [
@@ -1669,7 +1737,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 );
               })()
             : null}
-        </Stack__>
+        </div>
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;

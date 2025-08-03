@@ -182,11 +182,9 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
               sty.namespacesContentStructure
             )}
           >
-            <Stack__
-              as={"div"}
+            <div
               data-plasmic-name={"namespacesContent"}
               data-plasmic-override={overrides.namespacesContent}
-              hasGap={true}
               className={classNames(projectcss.all, sty.namespacesContent)}
             >
               <div
@@ -215,11 +213,9 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
               >
                 <DataCtxReader__>
                   {$ctx => (
-                    <Stack__
-                      as={"div"}
+                    <div
                       data-plasmic-name={"namespacesList"}
                       data-plasmic-override={overrides.namespacesList}
-                      hasGap={true}
                       className={classNames(projectcss.all, sty.namespacesList)}
                     >
                       {(_par =>
@@ -442,11 +438,11 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                           </div>
                         );
                       })}
-                    </Stack__>
+                    </div>
                   )}
                 </DataCtxReader__>
               </ApiFetcherComponent>
-            </Stack__>
+            </div>
           </div>
         </div>
       </div>

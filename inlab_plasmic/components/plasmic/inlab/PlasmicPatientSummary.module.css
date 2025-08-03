@@ -59,26 +59,12 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 4px;
   grid-column-start: 3 !important;
   grid-column-end: -3 !important;
   padding: 8px;
-}
-.summaryListSection > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: calc(0px - 4px);
-  height: calc(100% + 4px);
-}
-.summaryListSection > :global(.__wab_flex-container) > *,
-.summaryListSection > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.summaryListSection > :global(.__wab_flex-container) > picture > img,
-.summaryListSection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 4px;
 }
 .getSummaryApi:global(.__wab_instance) {
   max-width: 100%;
@@ -117,32 +103,15 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  justify-content: center;
+  align-items: center;
   overflow: auto;
+  row-gap: 4px;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   padding: 8px;
   margin: 0px;
   border: 0.2px solid var(--token-8PxxXPNrIohQ);
-}
-.getDischargeSummarySection > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: calc(0px - 4px);
-  height: calc(100% + 4px);
-}
-.getDischargeSummarySection > :global(.__wab_flex-container) > *,
-.getDischargeSummarySection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.getDischargeSummarySection > :global(.__wab_flex-container) > picture > img,
-.getDischargeSummarySection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 4px;
 }
 .getChiefComplaintSection2 {
   display: flex;
@@ -224,30 +193,12 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
   min-width: 0;
   padding: 8px;
   border: 0.2px solid var(--token-8PxxXPNrIohQ);
-}
-.getLaboratorySection > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.getLaboratorySection > :global(.__wab_flex-container) > *,
-.getLaboratorySection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.getLaboratorySection > :global(.__wab_flex-container) > picture > img,
-.getLaboratorySection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
 }
 .freeBox__xwBe9 {
   display: flex;
@@ -291,35 +242,18 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
   left: auto;
   top: auto;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 8px;
   min-width: 0;
   padding: 4px;
-}
-.freeBox__pUhiu > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  min-width: 0;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.freeBox__pUhiu > :global(.__wab_flex-container) > *,
-.freeBox__pUhiu > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__pUhiu > :global(.__wab_flex-container) > picture > img,
-.freeBox__pUhiu
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 8px;
-  margin-top: 8px;
 }
 .text__fuYaj {
   position: relative;
@@ -334,29 +268,11 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.getParaclinicReportsSection > :global(.__wab_flex-container) {
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  row-gap: 8px;
   min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.getParaclinicReportsSection > :global(.__wab_flex-container) > *,
-.getParaclinicReportsSection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.getParaclinicReportsSection > :global(.__wab_flex-container) > picture > img,
-.getParaclinicReportsSection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
+  padding: 8px;
 }
 .freeBox__yIk4 {
   display: flex;
@@ -365,26 +281,11 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.freeBox__yIk4 > :global(.__wab_flex-container) {
-  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  row-gap: 8px;
   min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.freeBox__yIk4 > :global(.__wab_flex-container) > *,
-.freeBox__yIk4 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__yIk4 > :global(.__wab_flex-container) > picture > img,
-.freeBox__yIk4
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
+  padding: 8px;
 }
 .freeBox___1NEqh {
   display: flex;
@@ -536,29 +437,15 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
   overflow: auto;
+  row-gap: 4px;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   padding: 8px;
   margin: 0px;
   border: 0.2px solid var(--token-8PxxXPNrIohQ);
-}
-.editSummarySection > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: calc(0px - 4px);
-  height: calc(100% + 4px);
-}
-.editSummarySection > :global(.__wab_flex-container) > *,
-.editSummarySection > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.editSummarySection > :global(.__wab_flex-container) > picture > img,
-.editSummarySection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 4px;
 }
 .editedChiefComplaintSection {
   display: flex;
@@ -680,30 +567,12 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
   min-width: 0;
   padding: 8px;
   border: 0.2px solid var(--token-8PxxXPNrIohQ);
-}
-.editedLaboratorySection > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.editedLaboratorySection > :global(.__wab_flex-container) > *,
-.editedLaboratorySection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.editedLaboratorySection > :global(.__wab_flex-container) > picture > img,
-.editedLaboratorySection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
 }
 .freeBox__p5NrF {
   display: flex;
@@ -754,35 +623,18 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
   left: auto;
   top: auto;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 8px;
   min-width: 0;
   padding: 4px;
-}
-.freeBox__zWe6X > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  min-width: 0;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.freeBox__zWe6X > :global(.__wab_flex-container) > *,
-.freeBox__zWe6X > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__zWe6X > :global(.__wab_flex-container) > picture > img,
-.freeBox__zWe6X
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 8px;
-  margin-top: 8px;
 }
 .text__jDkeV {
   position: relative;
@@ -801,32 +653,11 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.editedParaclinicReportsSection > :global(.__wab_flex-container) {
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  row-gap: 8px;
   min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.editedParaclinicReportsSection > :global(.__wab_flex-container) > *,
-.editedParaclinicReportsSection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.editedParaclinicReportsSection
-  > :global(.__wab_flex-container)
-  > picture
-  > img,
-.editedParaclinicReportsSection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
+  padding: 8px;
 }
 .selectParaclinicReportsButton2:global(.__wab_instance) {
   max-width: 100%;
@@ -854,26 +685,11 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.freeBox__gyjwo > :global(.__wab_flex-container) {
-  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  row-gap: 8px;
   min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.freeBox__gyjwo > :global(.__wab_flex-container) > *,
-.freeBox__gyjwo > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__gyjwo > :global(.__wab_flex-container) > picture > img,
-.freeBox__gyjwo
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
+  padding: 8px;
 }
 .paraclinicReport4 {
   position: relative;
@@ -1054,32 +870,14 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  overflow: auto;
-  margin-top: calc(0px + 4px) !important;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  min-width: 0;
-  padding: 8px;
-  border: 0.2px solid var(--token-8PxxXPNrIohQ);
-}
-.addSummarySection > :global(.__wab_flex-container) {
-  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow: auto;
+  row-gap: 4px;
   min-width: 0;
-  margin-top: calc(0px - 4px);
-  height: calc(100% + 4px);
-}
-.addSummarySection > :global(.__wab_flex-container) > *,
-.addSummarySection > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.addSummarySection > :global(.__wab_flex-container) > picture > img,
-.addSummarySection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 4px;
+  padding: 8px;
+  margin: 0px;
+  border: 0.2px solid var(--token-8PxxXPNrIohQ);
 }
 .chiefComplaintSection {
   display: flex;
@@ -1184,27 +982,12 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
   min-width: 0;
   padding: 8px;
   border: 0.2px solid var(--token-8PxxXPNrIohQ);
-}
-.laboratorySection > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.laboratorySection > :global(.__wab_flex-container) > *,
-.laboratorySection > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.laboratorySection > :global(.__wab_flex-container) > picture > img,
-.laboratorySection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
 }
 .freeBox__oFwQo {
   display: flex;
@@ -1255,35 +1038,18 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
   left: auto;
   top: auto;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 8px;
   min-width: 0;
   padding: 4px;
-}
-.freeBox___1KaCy > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  min-width: 0;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.freeBox___1KaCy > :global(.__wab_flex-container) > *,
-.freeBox___1KaCy > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox___1KaCy > :global(.__wab_flex-container) > picture > img,
-.freeBox___1KaCy
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 8px;
-  margin-top: 8px;
 }
 .text__xkT1L {
   position: relative;
@@ -1302,29 +1068,11 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.paraclinicReportsSection > :global(.__wab_flex-container) {
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  row-gap: 8px;
   min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.paraclinicReportsSection > :global(.__wab_flex-container) > *,
-.paraclinicReportsSection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.paraclinicReportsSection > :global(.__wab_flex-container) > picture > img,
-.paraclinicReportsSection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
+  padding: 8px;
 }
 .selectParaclinicReportsButton:global(.__wab_instance) {
   max-width: 100%;
@@ -1352,26 +1100,11 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.freeBox__jzOhv > :global(.__wab_flex-container) {
-  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  row-gap: 8px;
   min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.freeBox__jzOhv > :global(.__wab_flex-container) > *,
-.freeBox__jzOhv > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__jzOhv > :global(.__wab_flex-container) > picture > img,
-.freeBox__jzOhv
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
+  padding: 8px;
 }
 .paraclinicReport3 {
   position: relative;
@@ -1445,30 +1178,12 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
   min-width: 0;
   padding: 8px;
   border: 0.2px dotted var(--token-8PxxXPNrIohQ);
-}
-.followUpSuggestionSection > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.followUpSuggestionSection > :global(.__wab_flex-container) > *,
-.followUpSuggestionSection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.followUpSuggestionSection > :global(.__wab_flex-container) > picture > img,
-.followUpSuggestionSection
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
 }
 .text__kybVt {
   position: relative;
@@ -1614,27 +1329,12 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
   min-width: 0;
   padding: 0px;
   border: 1px none var(--token-8PxxXPNrIohQ);
-}
-.labData > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.labData > :global(.__wab_flex-container) > *,
-.labData > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.labData > :global(.__wab_flex-container) > picture > img,
-.labData
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
 }
 .labGroupSection {
   display: flex;
@@ -1652,6 +1352,8 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 500%;
@@ -1660,28 +1362,11 @@
   border-right-width: 0.5px;
   border-bottom-width: 0.1px;
   border-left-width: 0.5px;
+  column-gap: 0px;
   min-width: 0;
   padding: 0px;
   border-style: solid;
   border-color: var(--token-8PxxXPNrIohQ);
-}
-.labGroup > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: flex-start;
-  min-width: 0;
-  margin-left: calc(0px - 0px);
-  width: calc(100% + 0px);
-}
-.labGroup > :global(.__wab_flex-container) > *,
-.labGroup > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.labGroup > :global(.__wab_flex-container) > picture > img,
-.labGroup
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 0px;
 }
 .labFactors {
   display: flex;
@@ -1762,32 +1447,17 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 35px;
   max-width: 100%;
   align-self: center;
+  column-gap: 4px;
   min-width: 0;
   flex-shrink: 0;
   padding: 2px;
   border: 0.1px solid var(--token-8PxxXPNrIohQ);
-}
-.freeBox__ivvzx > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-  margin-left: calc(0px - 4px);
-  width: calc(100% + 4px);
-}
-.freeBox__ivvzx > :global(.__wab_flex-container) > *,
-.freeBox__ivvzx > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__ivvzx > :global(.__wab_flex-container) > picture > img,
-.freeBox__ivvzx
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 4px;
 }
 .bookmarkLab:global(.__wab_instance) {
   max-width: 100%;
@@ -1835,30 +1505,12 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
   min-width: 0;
   padding: 0px;
   border: 1px none var(--token-8PxxXPNrIohQ);
-}
-.paraclinicReportList > :global(.__wab_flex-container) {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.paraclinicReportList > :global(.__wab_flex-container) > *,
-.paraclinicReportList
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > *,
-.paraclinicReportList > :global(.__wab_flex-container) > picture > img,
-.paraclinicReportList
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
 }
 .successMassage {
   position: relative;
@@ -1920,29 +1572,14 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  align-items: center;
+  justify-content: flex-end;
   width: 100%;
   height: auto;
   max-width: 100%;
+  column-gap: 4px;
   min-width: 0;
   padding: 8px;
-}
-.freeBox__hc70C > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  min-width: 0;
-  margin-left: calc(0px - 4px);
-  width: calc(100% + 4px);
-}
-.freeBox__hc70C > :global(.__wab_flex-container) > *,
-.freeBox__hc70C > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__hc70C > :global(.__wab_flex-container) > picture > img,
-.freeBox__hc70C
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 4px;
 }
 .addParaclinicReport:global(.__wab_instance) {
   max-width: 100%;

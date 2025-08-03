@@ -1127,11 +1127,9 @@ function PlasmicPatientProfile__RenderFunc(props: {
               />
             </SwitchingTab>
           </div>
-          <Stack__
-            as={"div"}
+          <div
             data-plasmic-name={"patientDataList"}
             data-plasmic-override={overrides.patientDataList}
-            hasGap={true}
             className={classNames(projectcss.all, sty.patientDataList)}
           >
             <div
@@ -1195,21 +1193,17 @@ function PlasmicPatientProfile__RenderFunc(props: {
                         </div>
                       ) : null}
                       {$ctx.fetched_data.loading === false ? (
-                        <Stack__
-                          as={"div"}
+                        <div
                           data-plasmic-name={"patientData"}
                           data-plasmic-override={overrides.patientData}
-                          hasGap={true}
                           className={classNames(
                             projectcss.all,
                             sty.patientData
                           )}
                         >
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"patientProfileBox"}
                             data-plasmic-override={overrides.patientProfileBox}
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.patientProfileBox
@@ -1574,12 +1568,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                 </React.Fragment>
                               </div>
                             </div>
-                          </Stack__>
-                          <Stack__
-                            as={"div"}
+                          </div>
+                          <div
                             data-plasmic-name={"patientStatus"}
                             data-plasmic-override={overrides.patientStatus}
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.patientStatus
@@ -1646,8 +1638,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                 "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631"
                               }
                             </div>
-                          </Stack__>
-                        </Stack__>
+                          </div>
+                        </div>
                       ) : null}
                     </React.Fragment>
                   )}
@@ -1729,23 +1721,19 @@ function PlasmicPatientProfile__RenderFunc(props: {
                           </div>
                         ) : null}
                         {$ctx.fetched_data.loading === false ? (
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"patientData2"}
                             data-plasmic-override={overrides.patientData2}
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.patientData2
                             )}
                           >
-                            <Stack__
-                              as={"div"}
+                            <div
                               data-plasmic-name={"patientProfileBox2"}
                               data-plasmic-override={
                                 overrides.patientProfileBox2
                               }
-                              hasGap={true}
                               className={classNames(
                                 projectcss.all,
                                 sty.patientProfileBox2
@@ -2105,12 +2093,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                   </React.Fragment>
                                 </div>
                               </div>
-                            </Stack__>
-                            <Stack__
-                              as={"div"}
+                            </div>
+                            <div
                               data-plasmic-name={"patientStatus2"}
                               data-plasmic-override={overrides.patientStatus2}
-                              hasGap={true}
                               className={classNames(
                                 projectcss.all,
                                 sty.patientStatus2
@@ -2176,8 +2162,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                   "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631"
                                 }
                               </div>
-                            </Stack__>
-                          </Stack__>
+                            </div>
+                          </div>
                         ) : null}
                       </React.Fragment>
                     )}
@@ -2185,11 +2171,9 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 </ApiFetcherComponentPlusCache>
               ) : null}
             </div>
-            <Stack__
-              as={"div"}
+            <div
               data-plasmic-name={"patientSummary"}
               data-plasmic-override={overrides.patientSummary}
-              hasGap={true}
               className={classNames(projectcss.all, sty.patientSummary)}
             >
               <div
@@ -3160,7 +3144,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                   </ApiFetcherComponent>
                 </div>
               ) : null}
-            </Stack__>
+            </div>
             {false ? (
               <Button
                 data-plasmic-name={"dischargeSummary"}
@@ -3329,7 +3313,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 }
               </Button>
             ) : null}
-          </Stack__>
+          </div>
         </div>
       </div>
     </React.Fragment>

@@ -354,11 +354,9 @@ function PlasmicUserSetting__RenderFunc(props: {
             )}
           />
 
-          <Stack__
-            as={"div"}
+          <div
             data-plasmic-name={"pageContent"}
             data-plasmic-override={overrides.pageContent}
-            hasGap={true}
             className={classNames(projectcss.all, sty.pageContent, {
               [sty.pageContentdisabledLogoutButton]: hasVariant(
                 $state,
@@ -378,11 +376,9 @@ function PlasmicUserSetting__RenderFunc(props: {
                 )
               })}
             >
-              <Stack__
-                as={"div"}
+              <div
                 data-plasmic-name={"nameRankUsername"}
                 data-plasmic-override={overrides.nameRankUsername}
-                hasGap={true}
                 className={classNames(projectcss.all, sty.nameRankUsername, {
                   [sty.nameRankUsernamedisabledLogoutButton]: hasVariant(
                     $state,
@@ -461,7 +457,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                     })()}
                   </React.Fragment>
                 </div>
-              </Stack__>
+              </div>
               <PersonCropSquareFillSvgrepoComSvgIcon
                 data-plasmic-name={"userPicture"}
                 data-plasmic-override={overrides.userPicture}
@@ -469,11 +465,9 @@ function PlasmicUserSetting__RenderFunc(props: {
                 role={"img"}
               />
             </div>
-            <Stack__
-              as={"div"}
+            <div
               data-plasmic-name={"myProfile"}
               data-plasmic-override={overrides.myProfile}
-              hasGap={true}
               className={classNames(projectcss.all, sty.myProfile)}
               onClick={async event => {
                 const $steps = {};
@@ -551,12 +545,10 @@ function PlasmicUserSetting__RenderFunc(props: {
                 className={classNames(projectcss.all, sty.svg___5QIhx)}
                 role={"img"}
               />
-            </Stack__>
-            <Stack__
-              as={"div"}
+            </div>
+            <div
               data-plasmic-name={"namespace"}
               data-plasmic-override={overrides.namespace}
-              hasGap={true}
               className={classNames(projectcss.all, sty.namespace, {
                 [sty.namespacedisabledLogoutButton]: hasVariant(
                   $state,
@@ -658,11 +650,9 @@ function PlasmicUserSetting__RenderFunc(props: {
                 role={"img"}
               />
 
-              <Stack__
-                as={"div"}
+              <div
                 data-plasmic-name={"namespaceTitle"}
                 data-plasmic-override={overrides.namespaceTitle}
-                hasGap={true}
                 className={classNames(projectcss.all, sty.namespaceTitle)}
               >
                 <div
@@ -703,13 +693,11 @@ function PlasmicUserSetting__RenderFunc(props: {
                     {localStorage.getItem("inlab_user_namespace_title")}
                   </React.Fragment>
                 </div>
-              </Stack__>
-            </Stack__>
-            <Stack__
-              as={"div"}
+              </div>
+            </div>
+            <div
               data-plasmic-name={"resetPassword"}
               data-plasmic-override={overrides.resetPassword}
-              hasGap={true}
               className={classNames(projectcss.all, sty.resetPassword, {
                 [sty.resetPassworddisabledLogoutButton]: hasVariant(
                   $state,
@@ -888,12 +876,10 @@ function PlasmicUserSetting__RenderFunc(props: {
                   " \u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 "
                 }
               </div>
-            </Stack__>
-            <Stack__
-              as={"div"}
+            </div>
+            <div
               data-plasmic-name={"shareToolContent"}
               data-plasmic-override={overrides.shareToolContent}
-              hasGap={true}
               className={classNames(projectcss.all, sty.shareToolContent, {
                 [sty.shareToolContentdisabledLogoutButton]: hasVariant(
                   $state,
@@ -907,7 +893,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                 data-plasmic-override={overrides.shareTool}
                 className={classNames("__wab_instance", sty.shareTool)}
               />
-            </Stack__>
+            </div>
             <Button
               data-plasmic-name={"logoutButton"}
               data-plasmic-override={overrides.logoutButton}
@@ -1171,7 +1157,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                 )}
               </div>
             </Button>
-          </Stack__>
+          </div>
           <AntdModal
             data-plasmic-name={"changePassword"}
             data-plasmic-override={overrides.changePassword}

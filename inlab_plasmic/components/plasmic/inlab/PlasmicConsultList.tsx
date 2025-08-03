@@ -127,7 +127,8 @@ export type PlasmicConsultList__OverridesType = {
   senderDoctor?: Flex__<"div">;
   receiverDoctor?: Flex__<"div">;
   tagsAndDelete?: Flex__<"div">;
-  draftTag?: Flex__<"div">;
+  sendDraftTag?: Flex__<"div">;
+  replyDraftTag?: Flex__<"div">;
   paperRepliedStatus?: Flex__<"div">;
   inAppRepliedStatus?: Flex__<"div">;
   empty?: Flex__<"div">;
@@ -974,11 +975,9 @@ function PlasmicConsultList__RenderFunc(props: {
                         const currentItem = __plasmic_item_0;
                         const currentIndex = __plasmic_idx_0;
                         return (
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"sentConsultCard"}
                             data-plasmic-override={overrides.sentConsultCard}
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.sentConsultCard
@@ -1266,19 +1265,50 @@ function PlasmicConsultList__RenderFunc(props: {
                                       }
                                     })() ? (
                                       <div
-                                        data-plasmic-name={"draftTag"}
+                                        data-plasmic-name={"sendDraftTag"}
                                         data-plasmic-override={
-                                          overrides.draftTag
+                                          overrides.sendDraftTag
                                         }
                                         className={classNames(
                                           projectcss.all,
                                           projectcss.__wab_text,
-                                          sty.draftTag
+                                          sty.sendDraftTag
                                         )}
                                         dir={"rtl"}
                                       >
                                         {
                                           "\u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647"
+                                        }
+                                      </div>
+                                    ) : null}
+                                    {(() => {
+                                      try {
+                                        return currentItem.state === 3;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return true;
+                                        }
+                                        throw e;
+                                      }
+                                    })() ? (
+                                      <div
+                                        data-plasmic-name={"replyDraftTag"}
+                                        data-plasmic-override={
+                                          overrides.replyDraftTag
+                                        }
+                                        className={classNames(
+                                          projectcss.all,
+                                          projectcss.__wab_text,
+                                          sty.replyDraftTag
+                                        )}
+                                        dir={"rtl"}
+                                      >
+                                        {
+                                          "\u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u067e\u0627\u0633\u062e"
                                         }
                                       </div>
                                     ) : null}
@@ -1352,8 +1382,7 @@ function PlasmicConsultList__RenderFunc(props: {
                                       try {
                                         return (
                                           currentItem.state === 1 ||
-                                          currentItem.state === 2 ||
-                                          currentItem.state === 3
+                                          currentItem.state === 2
                                         );
                                       } catch (e) {
                                         if (
@@ -2016,7 +2045,7 @@ function PlasmicConsultList__RenderFunc(props: {
                                 </div>
                               </div>
                             </div>
-                          </Stack__>
+                          </div>
                         );
                       })}
                     </React.Fragment>
@@ -3295,7 +3324,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "draftTag",
+    "sendDraftTag",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -3366,7 +3396,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "draftTag",
+    "sendDraftTag",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -3397,7 +3428,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "draftTag",
+    "sendDraftTag",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -3427,7 +3459,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "draftTag",
+    "sendDraftTag",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -3460,7 +3493,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "draftTag",
+    "sendDraftTag",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -3486,7 +3520,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "draftTag",
+    "sendDraftTag",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -3511,7 +3546,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "draftTag",
+    "sendDraftTag",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -3533,7 +3569,8 @@ const PlasmicDescendants = {
     "senderDoctor",
     "receiverDoctor",
     "tagsAndDelete",
-    "draftTag",
+    "sendDraftTag",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -3567,13 +3604,15 @@ const PlasmicDescendants = {
   receiverDoctor: ["receiverDoctor"],
   tagsAndDelete: [
     "tagsAndDelete",
-    "draftTag",
+    "sendDraftTag",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
     "deleteConsult"
   ],
-  draftTag: ["draftTag"],
+  sendDraftTag: ["sendDraftTag"],
+  replyDraftTag: ["replyDraftTag"],
   paperRepliedStatus: ["paperRepliedStatus"],
   inAppRepliedStatus: ["inAppRepliedStatus"],
   empty: ["empty"],
@@ -3673,7 +3712,8 @@ type NodeDefaultElementType = {
   senderDoctor: "div";
   receiverDoctor: "div";
   tagsAndDelete: "div";
-  draftTag: "div";
+  sendDraftTag: "div";
+  replyDraftTag: "div";
   paperRepliedStatus: "div";
   inAppRepliedStatus: "div";
   empty: "div";
@@ -3797,7 +3837,8 @@ export const PlasmicConsultList = Object.assign(
     senderDoctor: makeNodeComponent("senderDoctor"),
     receiverDoctor: makeNodeComponent("receiverDoctor"),
     tagsAndDelete: makeNodeComponent("tagsAndDelete"),
-    draftTag: makeNodeComponent("draftTag"),
+    sendDraftTag: makeNodeComponent("sendDraftTag"),
+    replyDraftTag: makeNodeComponent("replyDraftTag"),
     paperRepliedStatus: makeNodeComponent("paperRepliedStatus"),
     inAppRepliedStatus: makeNodeComponent("inAppRepliedStatus"),
     empty: makeNodeComponent("empty"),

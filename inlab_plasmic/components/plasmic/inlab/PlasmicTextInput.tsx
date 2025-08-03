@@ -269,13 +269,11 @@ function PlasmicTextInput__RenderFunc(props: {
   };
 
   return (
-    <Stack__
-      as={"div"}
+    <div
       data-plasmic-name={"textInput"}
       data-plasmic-override={overrides.textInput}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      hasGap={true}
       className={classNames(
         projectcss.all,
         projectcss.root_reset,
@@ -467,7 +465,7 @@ function PlasmicTextInput__RenderFunc(props: {
           })}
         </div>
       ) : null}
-    </Stack__>
+    </div>
   ) as React.ReactElement | null;
 }
 

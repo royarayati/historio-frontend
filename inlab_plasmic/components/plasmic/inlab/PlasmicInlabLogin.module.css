@@ -92,30 +92,16 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
   width: 100%;
   height: auto;
   max-width: 100%;
   margin-top: 60px;
+  row-gap: 12px;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   padding: 8px;
-}
-.pageContent > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-top: calc(0px - 12px);
-  height: calc(100% + 12px);
-}
-.pageContent > :global(.__wab_flex-container) > *,
-.pageContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.pageContent > :global(.__wab_flex-container) > picture > img,
-.pageContent
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 12px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .pageContent {

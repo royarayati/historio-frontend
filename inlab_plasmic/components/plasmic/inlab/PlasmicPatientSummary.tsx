@@ -936,11 +936,9 @@ function PlasmicPatientSummary__RenderFunc(props: {
               </DataCtxReader__>
             </ApiFetcherComponent>
           </div>
-          <Stack__
-            as={"div"}
+          <div
             data-plasmic-name={"summaryListSection"}
             data-plasmic-override={overrides.summaryListSection}
-            hasGap={true}
             className={classNames(projectcss.all, sty.summaryListSection)}
           >
             <ApiFetcherComponent
@@ -1055,13 +1053,11 @@ function PlasmicPatientSummary__RenderFunc(props: {
                           const currentItem = __plasmic_item_0;
                           const currentIndex = __plasmic_idx_0;
                           return (
-                            <Stack__
-                              as={"div"}
+                            <div
                               data-plasmic-name={"getDischargeSummarySection"}
                               data-plasmic-override={
                                 overrides.getDischargeSummarySection
                               }
-                              hasGap={true}
                               className={classNames(
                                 projectcss.all,
                                 sty.getDischargeSummarySection
@@ -1220,13 +1216,11 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                   </React.Fragment>
                                 </div>
                               </div>
-                              <Stack__
-                                as={"div"}
+                              <div
                                 data-plasmic-name={"getLaboratorySection"}
                                 data-plasmic-override={
                                   overrides.getLaboratorySection
                                 }
-                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
                                   sty.getLaboratorySection
@@ -1574,9 +1568,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                 </div>
                                 {Object.keys(currentItem.laboratory).length >
                                 0 ? (
-                                  <Stack__
-                                    as={"div"}
-                                    hasGap={true}
+                                  <div
                                     className={classNames(
                                       projectcss.all,
                                       sty.freeBox__pUhiu
@@ -1660,18 +1652,16 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                         );
                                       }
                                     )}
-                                  </Stack__>
+                                  </div>
                                 ) : null}
-                              </Stack__>
-                              <Stack__
-                                as={"div"}
+                              </div>
+                              <div
                                 data-plasmic-name={
                                   "getParaclinicReportsSection"
                                 }
                                 data-plasmic-override={
                                   overrides.getParaclinicReportsSection
                                 }
-                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
                                   sty.getParaclinicReportsSection
@@ -1690,9 +1680,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                 </div>
                                 {Object.keys(currentItem.paraclinic_reports)
                                   .length > 0 ? (
-                                  <Stack__
-                                    as={"div"}
-                                    hasGap={true}
+                                  <div
                                     className={classNames(
                                       projectcss.all,
                                       sty.freeBox__yIk4
@@ -1781,9 +1769,9 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                         );
                                       }
                                     )}
-                                  </Stack__>
+                                  </div>
                                 ) : null}
-                              </Stack__>
+                              </div>
                               <div
                                 data-plasmic-name={"getPatientConditionSection"}
                                 data-plasmic-override={
@@ -1901,7 +1889,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                   </React.Fragment>
                                 </div>
                               </div>
-                            </Stack__>
+                            </div>
                           );
                         })
                       : null}
@@ -2206,13 +2194,11 @@ function PlasmicPatientSummary__RenderFunc(props: {
                           const currentItem = __plasmic_item_0;
                           const currentIndex = __plasmic_idx_0;
                           return (
-                            <Stack__
-                              as={"div"}
+                            <div
                               data-plasmic-name={"editSummarySection"}
                               data-plasmic-override={
                                 overrides.editSummarySection
                               }
-                              hasGap={true}
                               className={classNames(
                                 projectcss.all,
                                 sty.editSummarySection
@@ -2917,13 +2903,11 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                   );
                                 })()}
                               </div>
-                              <Stack__
-                                as={"div"}
+                              <div
                                 data-plasmic-name={"editedLaboratorySection"}
                                 data-plasmic-override={
                                   overrides.editedLaboratorySection
                                 }
-                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
                                   sty.editedLaboratorySection
@@ -3307,9 +3291,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                   <DataCtxReader__>
                                     {$ctx => (
                                       <React.Fragment>
-                                        <Stack__
-                                          as={"div"}
-                                          hasGap={true}
+                                        <div
                                           className={classNames(
                                             projectcss.all,
                                             sty.freeBox__zWe6X
@@ -3426,7 +3408,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                               );
                                             }
                                           )}
-                                        </Stack__>
+                                        </div>
                                         <ConditionGuard
                                           className={classNames(
                                             "__wab_instance",
@@ -3499,16 +3481,14 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                     )}
                                   </DataCtxReader__>
                                 </ApiFetcherComponent>
-                              </Stack__>
-                              <Stack__
-                                as={"div"}
+                              </div>
+                              <div
                                 data-plasmic-name={
                                   "editedParaclinicReportsSection"
                                 }
                                 data-plasmic-override={
                                   overrides.editedParaclinicReportsSection
                                 }
-                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
                                   sty.editedParaclinicReportsSection
@@ -3841,9 +3821,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                     </Button>
                                   );
                                 })()}
-                                <Stack__
-                                  as={"div"}
-                                  hasGap={true}
+                                <div
                                   className={classNames(
                                     projectcss.all,
                                     sty.freeBox__gyjwo
@@ -4373,8 +4351,8 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                       }
                                     }}
                                   />
-                                </Stack__>
-                              </Stack__>
+                                </div>
+                              </div>
                               <div
                                 data-plasmic-name={
                                   "editedPatientConditionSection"
@@ -5237,7 +5215,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                   </Button>
                                 );
                               })()}
-                            </Stack__>
+                            </div>
                           );
                         })
                       : null}
@@ -5417,11 +5395,9 @@ function PlasmicPatientSummary__RenderFunc(props: {
                 throw e;
               }
             })() ? (
-              <Stack__
-                as={"div"}
+              <div
                 data-plasmic-name={"addSummarySection"}
                 data-plasmic-override={overrides.addSummarySection}
-                hasGap={true}
                 className={classNames(projectcss.all, sty.addSummarySection)}
               >
                 <div
@@ -5672,11 +5648,9 @@ function PlasmicPatientSummary__RenderFunc(props: {
                     }
                   />
                 </div>
-                <Stack__
-                  as={"div"}
+                <div
                   data-plasmic-name={"laboratorySection"}
                   data-plasmic-override={overrides.laboratorySection}
-                  hasGap={true}
                   className={classNames(projectcss.all, sty.laboratorySection)}
                 >
                   <div
@@ -5932,9 +5906,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                     <DataCtxReader__>
                       {$ctx => (
                         <React.Fragment>
-                          <Stack__
-                            as={"div"}
-                            hasGap={true}
+                          <div
                             className={classNames(
                               projectcss.all,
                               sty.freeBox___1KaCy
@@ -6023,7 +5995,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                 </div>
                               );
                             })}
-                          </Stack__>
+                          </div>
                           <ConditionGuard
                             className={classNames(
                               "__wab_instance",
@@ -6078,12 +6050,10 @@ function PlasmicPatientSummary__RenderFunc(props: {
                       )}
                     </DataCtxReader__>
                   </ApiFetcherComponent>
-                </Stack__>
-                <Stack__
-                  as={"div"}
+                </div>
+                <div
                   data-plasmic-name={"paraclinicReportsSection"}
                   data-plasmic-override={overrides.paraclinicReportsSection}
-                  hasGap={true}
                   className={classNames(
                     projectcss.all,
                     sty.paraclinicReportsSection
@@ -6264,9 +6234,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                       }
                     </div>
                   </Button>
-                  <Stack__
-                    as={"div"}
-                    hasGap={true}
+                  <div
                     className={classNames(projectcss.all, sty.freeBox__jzOhv)}
                   >
                     {(() => {
@@ -6624,8 +6592,8 @@ function PlasmicPatientSummary__RenderFunc(props: {
                         </div>
                       );
                     })}
-                  </Stack__>
-                </Stack__>
+                  </div>
+                </div>
                 <div
                   data-plasmic-name={"patientConditionSection"}
                   data-plasmic-override={overrides.patientConditionSection}
@@ -6728,11 +6696,9 @@ function PlasmicPatientSummary__RenderFunc(props: {
                     ])}
                   />
                 </div>
-                <Stack__
-                  as={"div"}
+                <div
                   data-plasmic-name={"followUpSuggestionSection"}
                   data-plasmic-override={overrides.followUpSuggestionSection}
-                  hasGap={true}
                   className={classNames(
                     projectcss.all,
                     sty.followUpSuggestionSection
@@ -6901,7 +6867,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                       }
                     />
                   </div>
-                </Stack__>
+                </div>
                 <Button
                   data-plasmic-name={"postSummary"}
                   data-plasmic-override={overrides.postSummary}
@@ -7136,7 +7102,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                     }
                   </div>
                 </Button>
-              </Stack__>
+              </div>
             ) : null}
             <AntdModal
               data-plasmic-name={"laboratoryData"}
@@ -7227,11 +7193,9 @@ function PlasmicPatientSummary__RenderFunc(props: {
                           }
                         </div>
                       ) : null}
-                      <Stack__
-                        as={"div"}
+                      <div
                         data-plasmic-name={"labData"}
                         data-plasmic-override={overrides.labData}
-                        hasGap={true}
                         className={classNames(projectcss.all, sty.labData)}
                       >
                         {(_par =>
@@ -7262,11 +7226,9 @@ function PlasmicPatientSummary__RenderFunc(props: {
                               )}
                               key={currentIndex}
                             >
-                              <Stack__
-                                as={"div"}
+                              <div
                                 data-plasmic-name={"labGroup"}
                                 data-plasmic-override={overrides.labGroup}
-                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
                                   sty.labGroup
@@ -7466,9 +7428,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                           const currentItem = __plasmic_item_2;
                                           const currentIndex = __plasmic_idx_2;
                                           return (
-                                            <Stack__
-                                              as={"div"}
-                                              hasGap={true}
+                                            <div
                                               className={classNames(
                                                 projectcss.all,
                                                 sty.freeBox__ivvzx
@@ -7659,18 +7619,18 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                                   })()}
                                                 </React.Fragment>
                                               </div>
-                                            </Stack__>
+                                            </div>
                                           );
                                         }
                                       )}
                                     </div>
                                   );
                                 })}
-                              </Stack__>
+                              </div>
                             </div>
                           );
                         })}
-                      </Stack__>
+                      </div>
                     </React.Fragment>
                   )}
                 </DataCtxReader__>
@@ -7771,11 +7731,9 @@ function PlasmicPatientSummary__RenderFunc(props: {
                           }
                         </div>
                       ) : null}
-                      <Stack__
-                        as={"div"}
+                      <div
                         data-plasmic-name={"paraclinicReportList"}
                         data-plasmic-override={overrides.paraclinicReportList}
-                        hasGap={true}
                         className={classNames(
                           projectcss.all,
                           sty.paraclinicReportList
@@ -7971,9 +7929,7 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                   })()}
                                 </React.Fragment>
                               </div>
-                              <Stack__
-                                as={"div"}
-                                hasGap={true}
+                              <div
                                 className={classNames(
                                   projectcss.all,
                                   sty.freeBox__hc70C
@@ -8275,17 +8231,17 @@ function PlasmicPatientSummary__RenderFunc(props: {
                                     </Button>
                                   );
                                 })()}
-                              </Stack__>
+                              </div>
                             </div>
                           );
                         })}
-                      </Stack__>
+                      </div>
                     </React.Fragment>
                   )}
                 </DataCtxReader__>
               </ApiFetcherComponent>
             </AntdModal>
-          </Stack__>
+          </div>
         </div>
       </div>
     </React.Fragment>
