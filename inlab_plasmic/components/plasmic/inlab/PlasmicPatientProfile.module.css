@@ -910,6 +910,7 @@
   padding: 0px;
 }
 .patientSummary {
+  display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
@@ -920,7 +921,6 @@
   background: #ffffff;
   row-gap: 8px;
   min-width: 0;
-  display: none;
   border-radius: 5px;
   padding: 8px;
   border: 0.5px solid var(--token-8PxxXPNrIohQ);
