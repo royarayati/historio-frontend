@@ -760,11 +760,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
-          <Stack__
-            as={"div"}
+          <div
             data-plasmic-name={"lastPatient"}
             data-plasmic-override={overrides.lastPatient}
-            hasGap={true}
             className={classNames(projectcss.all, sty.lastPatient)}
             onClick={async event => {
               const $steps = {};
@@ -947,7 +945,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             >
               {"\u0628\u06cc\u0645\u0627\u0631 \u0642\u0628\u0644\u06cc"}
             </div>
-          </Stack__>
+          </div>
           <ApiFetcherComponent
             data-plasmic-name={"patientDataApiFetcher"}
             data-plasmic-override={overrides.patientDataApiFetcher}
@@ -1169,11 +1167,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             </DataCtxReader__>
           </ApiFetcherComponent>
           {false ? (
-            <Stack__
-              as={"div"}
+            <div
               data-plasmic-name={"nextPatient"}
               data-plasmic-override={overrides.nextPatient}
-              hasGap={true}
               className={classNames(projectcss.all, sty.nextPatient)}
               onClick={async event => {
                 const $steps = {};
@@ -1363,7 +1359,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 className={classNames(projectcss.all, sty.next)}
                 role={"img"}
               />
-            </Stack__>
+            </div>
           ) : null}
           {false ? (
             <ApiFetcherComponentPlusCache
@@ -1620,11 +1616,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             </ApiFetcherComponentPlusCache>
           ) : null}
         </div>
-        <Stack__
-          as={"div"}
+        <div
           data-plasmic-name={"tabButtons"}
           data-plasmic-override={overrides.tabButtons}
-          hasGap={true}
           className={classNames(projectcss.all, sty.tabButtons)}
         >
           <Button
@@ -2037,13 +2031,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               }
             </div>
           </Button>
-        </Stack__>
+        </div>
         {$state.selectedTab === "LabTestResult" ? (
-          <Stack__
-            as={"div"}
+          <div
             data-plasmic-name={"labFilters"}
             data-plasmic-override={overrides.labFilters}
-            hasGap={true}
             className={classNames(projectcss.all, sty.labFilters)}
           >
             {false ? (
@@ -3026,7 +3018,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 "value"
               ])}
             />
-          </Stack__>
+          </div>
         ) : null}
         {(() => {
           try {
@@ -3384,11 +3376,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     const currentItem = __plasmic_item_0;
                     const currentIndex = __plasmic_idx_0;
                     return (
-                      <Stack__
-                        as={"div"}
+                      <div
                         data-plasmic-name={"laboratoryLists"}
                         data-plasmic-override={overrides.laboratoryLists}
-                        hasGap={true}
                         className={classNames(
                           projectcss.all,
                           sty.laboratoryLists,
@@ -3561,13 +3551,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               );
                             })}
                           </div>
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"laboratoryResultsPerTitle"}
                             data-plasmic-override={
                               overrides.laboratoryResultsPerTitle
                             }
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.laboratoryResultsPerTitle,
@@ -3612,11 +3600,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               const currentItem = __plasmic_item_1;
                               const currentIndex = __plasmic_idx_1;
                               return (
-                                <Stack__
-                                  as={"div"}
+                                <div
                                   data-plasmic-name={"labPerDate"}
                                   data-plasmic-override={overrides.labPerDate}
-                                  hasGap={true}
                                   className={classNames(
                                     projectcss.all,
                                     sty.labPerDate,
@@ -3651,37 +3637,43 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     )}
                                   >
                                     <React.Fragment>
-                                      {(() => {
-                                        const gregorianDate = new Date(
-                                          currentItem.issued_datetime
-                                        );
-                                        const shamsiDate =
-                                          new Intl.DateTimeFormat(
-                                            "fa-IR"
-                                          ).format(gregorianDate);
-                                        const shamsiTime =
-                                          gregorianDate.toLocaleTimeString(
-                                            "fa-IR",
-                                            { hour12: false }
-                                          );
-                                        const englishDate = shamsiDate.replace(
-                                          /[۰-۹]/g,
-                                          d =>
-                                            String.fromCharCode(
-                                              d.charCodeAt(0) - 1728
-                                            )
-                                        );
-                                        const englishTime = shamsiTime
-                                          .replace(/[۰-۹]/g, d =>
-                                            String.fromCharCode(
-                                              d.charCodeAt(0) - 1728
-                                            )
-                                          )
-                                          .split(":")
-                                          .slice(0, 2)
-                                          .join(":");
-                                        return `${englishDate}  ${englishTime}`;
-                                      })()}
+                                      {localStorage.getItem(
+                                        "inlab_user_his_type"
+                                      ) !== "tums_api" &&
+                                      localStorage.getItem(
+                                        "inlab_user_his_type"
+                                      ) !== "tebvarayane_db"
+                                        ? (() => {
+                                            const gregorianDate = new Date(
+                                              currentItem.issued_datetime
+                                            );
+                                            const shamsiDate =
+                                              new Intl.DateTimeFormat(
+                                                "fa-IR"
+                                              ).format(gregorianDate);
+                                            const shamsiTime =
+                                              gregorianDate.toLocaleTimeString(
+                                                "fa-IR",
+                                                { hour12: false }
+                                              );
+                                            const englishDate =
+                                              shamsiDate.replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              );
+                                            const englishTime = shamsiTime
+                                              .replace(/[۰-۹]/g, d =>
+                                                String.fromCharCode(
+                                                  d.charCodeAt(0) - 1728
+                                                )
+                                              )
+                                              .split(":")
+                                              .slice(0, 2)
+                                              .join(":");
+                                            return `${englishDate}-${englishTime}`;
+                                          })()
+                                        : currentItem.issued_datetime}
                                     </React.Fragment>
                                   </div>
                                   {(_par =>
@@ -3708,13 +3700,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     const currentItem = __plasmic_item_2;
                                     const currentIndex = __plasmic_idx_2;
                                     return (
-                                      <Stack__
-                                        as={"div"}
+                                      <div
                                         data-plasmic-name={"labLists"}
                                         data-plasmic-override={
                                           overrides.labLists
                                         }
-                                        hasGap={true}
                                         className={classNames(
                                           projectcss.all,
                                           sty.labLists,
@@ -3729,13 +3719,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                         )}
                                         key={currentIndex}
                                       >
-                                        <Stack__
-                                          as={"div"}
+                                        <div
                                           data-plasmic-name={"factorNameValue"}
                                           data-plasmic-override={
                                             overrides.factorNameValue
                                           }
-                                          hasGap={true}
                                           className={classNames(
                                             projectcss.all,
                                             sty.factorNameValue,
@@ -4242,16 +4230,16 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                               />
                                             ) : null}
                                           </div>
-                                        </Stack__>
-                                      </Stack__>
+                                        </div>
+                                      </div>
                                     );
                                   })}
-                                </Stack__>
+                                </div>
                               );
                             })}
-                          </Stack__>
+                          </div>
                         </div>
-                      </Stack__>
+                      </div>
                     );
                   })}
                 </React.Fragment>
@@ -4567,11 +4555,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     const currentItem = __plasmic_item_0;
                     const currentIndex = __plasmic_idx_0;
                     return (
-                      <Stack__
-                        as={"div"}
+                      <div
                         data-plasmic-name={"laboratoryLists2"}
                         data-plasmic-override={overrides.laboratoryLists2}
-                        hasGap={true}
                         className={classNames(
                           projectcss.all,
                           sty.laboratoryLists2,
@@ -4745,13 +4731,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               );
                             })}
                           </div>
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"laboratoryResultsPerTitle2"}
                             data-plasmic-override={
                               overrides.laboratoryResultsPerTitle2
                             }
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.laboratoryResultsPerTitle2,
@@ -4796,11 +4780,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               const currentItem = __plasmic_item_1;
                               const currentIndex = __plasmic_idx_1;
                               return (
-                                <Stack__
-                                  as={"div"}
+                                <div
                                   data-plasmic-name={"labPerDate2"}
                                   data-plasmic-override={overrides.labPerDate2}
-                                  hasGap={true}
                                   className={classNames(
                                     projectcss.all,
                                     sty.labPerDate2,
@@ -4892,13 +4874,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     const currentItem = __plasmic_item_2;
                                     const currentIndex = __plasmic_idx_2;
                                     return (
-                                      <Stack__
-                                        as={"div"}
+                                      <div
                                         data-plasmic-name={"labLists2"}
                                         data-plasmic-override={
                                           overrides.labLists2
                                         }
-                                        hasGap={true}
                                         className={classNames(
                                           projectcss.all,
                                           sty.labLists2,
@@ -4913,13 +4893,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                         )}
                                         key={currentIndex}
                                       >
-                                        <Stack__
-                                          as={"div"}
+                                        <div
                                           data-plasmic-name={"factorNameValue2"}
                                           data-plasmic-override={
                                             overrides.factorNameValue2
                                           }
-                                          hasGap={true}
                                           className={classNames(
                                             projectcss.all,
                                             sty.factorNameValue2,
@@ -5426,16 +5404,16 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                               />
                                             ) : null}
                                           </div>
-                                        </Stack__>
-                                      </Stack__>
+                                        </div>
+                                      </div>
                                     );
                                   })}
-                                </Stack__>
+                                </div>
                               );
                             })}
-                          </Stack__>
+                          </div>
                         </div>
-                      </Stack__>
+                      </div>
                     );
                   })}
                 </React.Fragment>
@@ -5651,11 +5629,9 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       throw e;
                     }
                   })() ? (
-                    <Stack__
-                      as={"div"}
+                    <div
                       data-plasmic-name={"labFactorList"}
                       data-plasmic-override={overrides.labFactorList}
-                      hasGap={true}
                       className={classNames(projectcss.all, sty.labFactorList)}
                     >
                       {(_par =>
@@ -5698,33 +5674,42 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               )}
                             >
                               <React.Fragment>
-                                {(() => {
-                                  const gregorianDate = new Date(
-                                    currentItem.issued_datetime
-                                  );
-                                  const shamsiDate = new Intl.DateTimeFormat(
-                                    "fa-IR"
-                                  ).format(gregorianDate);
-                                  const shamsiTime =
-                                    gregorianDate.toLocaleTimeString("fa-IR", {
-                                      hour12: false
-                                    });
-                                  const englishDate = shamsiDate.replace(
-                                    /[۰-۹]/g,
-                                    d =>
-                                      String.fromCharCode(
-                                        d.charCodeAt(0) - 1728
-                                      )
-                                  );
-                                  const englishTime = shamsiTime.replace(
-                                    /[۰-۹]/g,
-                                    d =>
-                                      String.fromCharCode(
-                                        d.charCodeAt(0) - 1728
-                                      )
-                                  );
-                                  return `${englishDate}  ${englishTime}`;
-                                })()}
+                                {localStorage.getItem("inlab_user_his_type") !==
+                                  "tums_api" &&
+                                localStorage.getItem("inlab_user_his_type") !==
+                                  "tebvarayane_db"
+                                  ? (() => {
+                                      const gregorianDate = new Date(
+                                        currentItem.issued_datetime
+                                      );
+                                      const shamsiDate =
+                                        new Intl.DateTimeFormat("fa-IR").format(
+                                          gregorianDate
+                                        );
+                                      const shamsiTime =
+                                        gregorianDate.toLocaleTimeString(
+                                          "fa-IR",
+                                          { hour12: false }
+                                        );
+                                      const englishDate = shamsiDate.replace(
+                                        /[۰-۹]/g,
+                                        d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                      );
+                                      const englishTime = shamsiTime
+                                        .replace(/[۰-۹]/g, d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                        )
+                                        .split(":")
+                                        .slice(0, 2)
+                                        .join(":");
+                                      return `${englishDate}-${englishTime}`;
+                                    })()
+                                  : currentItem.issued_datetime}
                               </React.Fragment>
                             </div>
                             <div
@@ -5797,18 +5782,16 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                           </div>
                         );
                       })}
-                    </Stack__>
+                    </div>
                   ) : null}
                 </React.Fragment>
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
         ) : null}
-        <Stack__
-          as={"div"}
+        <div
           data-plasmic-name={"switchingTabs"}
           data-plasmic-override={overrides.switchingTabs}
-          hasGap={true}
           className={classNames(projectcss.all, sty.switchingTabs)}
         >
           <SwitchingTab
@@ -6638,7 +6621,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               role={"img"}
             />
           </SwitchingTab>
-        </Stack__>
+        </div>
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;

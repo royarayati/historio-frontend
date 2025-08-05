@@ -136,13 +136,11 @@ function PlasmicNewFeatureBanner__RenderFunc(props: {
   const $refs = refsRef.current;
 
   return (
-    <Stack__
-      as={"div"}
+    <div
       data-plasmic-name={"newFeatureBanner"}
       data-plasmic-override={overrides.newFeatureBanner}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      hasGap={true}
       className={classNames(
         projectcss.all,
         projectcss.root_reset,
@@ -191,7 +189,7 @@ function PlasmicNewFeatureBanner__RenderFunc(props: {
           className: classNames(sty.slotTargetChildren)
         })}
       </div>
-    </Stack__>
+    </div>
   ) as React.ReactElement | null;
 }
 

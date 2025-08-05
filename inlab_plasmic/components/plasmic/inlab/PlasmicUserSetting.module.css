@@ -42,31 +42,17 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
   height: 927px;
   max-width: 100%;
   justify-self: flex-start;
   margin-top: 23px;
+  row-gap: 8px;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   padding: 18px 8px 8px;
-}
-.pageContent > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: calc(0px - 8px);
-  height: calc(100% + 8px);
-}
-.pageContent > :global(.__wab_flex-container) > *,
-.pageContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.pageContent > :global(.__wab_flex-container) > picture > img,
-.pageContent
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 8px;
 }
 .pictureAndName {
   display: flex;
@@ -77,48 +63,27 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  margin-top: calc(0px + 8px) !important;
   left: auto;
   top: auto;
-  margin-left: 0px;
   background: #ffffff;
-  margin-right: 0px;
-  margin-bottom: 0px;
   min-width: 0;
   padding: 0px 0px 0px 6px;
+  margin: 0px;
   border-top: 1px solid var(--token-8PxxXPNrIohQ);
   border-bottom: 1px solid var(--token-8PxxXPNrIohQ);
-}
-.pictureAndNamedisabledLogoutButton {
-  margin-top: calc(0px + 8px) !important;
 }
 .nameRankUsername {
   display: flex;
   position: relative;
   flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
   width: 100%;
   height: auto;
   max-width: 100%;
+  row-gap: 0px;
   min-width: 0;
   padding: 6px 8px 0px 0px;
-}
-.nameRankUsername > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  min-width: 0;
-  margin-top: calc(0px - 0px);
-  height: calc(100% + 0px);
-}
-.nameRankUsername > :global(.__wab_flex-container) > *,
-.nameRankUsername > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.nameRankUsername > :global(.__wab_flex-container) > picture > img,
-.nameRankUsername
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 0px;
 }
 .name {
   display: block;
@@ -132,7 +97,7 @@
   top: auto;
   left: auto;
   text-align: right;
-  margin-top: calc(3px + 0px) !important;
+  margin-top: 3px;
   white-space: pre-wrap;
 }
 .userRankTitle {
@@ -142,7 +107,7 @@
   max-width: 100%;
   align-self: flex-end;
   text-align: right;
-  margin-top: calc(5px + 0px) !important;
+  margin-top: 5px;
   font-size: var(--token-sOr3fJ5Up5fq);
   white-space: pre-wrap;
   font-weight: 500;
@@ -154,7 +119,7 @@
   max-width: 100%;
   align-self: flex-end;
   text-align: right;
-  margin-top: calc(5px + 0px) !important;
+  margin-top: 5px;
   font-size: var(--token-sOr3fJ5Up5fq);
   white-space: pre-wrap;
   font-weight: 500;
@@ -177,28 +142,14 @@
   top: auto;
   left: auto;
   flex-direction: row-reverse;
-  margin-top: calc(46px + 8px) !important;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 46px;
+  column-gap: 8px;
   display: none;
   padding: 16px;
   border-top: 1px solid #bdbdbd;
   border-bottom: 1px solid #bdbdbd;
-}
-.myProfile > :global(.__wab_flex-container) {
-  flex-direction: row-reverse;
-  align-items: center;
-  justify-content: flex-end;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-}
-.myProfile > :global(.__wab_flex-container) > *,
-.myProfile > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.myProfile > :global(.__wab_flex-container) > picture > img,
-.myProfile
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 8px;
 }
 .myProfile2 {
   display: block;
@@ -232,35 +183,14 @@
   top: auto;
   left: auto;
   flex-direction: row-reverse;
-  margin-top: calc(0px + 8px) !important;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  min-width: 0;
-  padding: 0px 16px;
-  border-top: 1px solid var(--token-8PxxXPNrIohQ);
-  border-bottom: 1px solid var(--token-8PxxXPNrIohQ);
-}
-.namespace > :global(.__wab_flex-container) {
-  flex-direction: row-reverse;
   align-items: center;
   justify-content: flex-start;
+  column-gap: 8px;
   min-width: 0;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-}
-.namespace > :global(.__wab_flex-container) > *,
-.namespace > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.namespace > :global(.__wab_flex-container) > picture > img,
-.namespace
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 8px;
-}
-.namespacedisabledLogoutButton {
-  margin-top: calc(0px + 8px) !important;
+  padding: 0px 16px;
+  margin: 0px;
+  border-top: 1px solid var(--token-8PxxXPNrIohQ);
+  border-bottom: 1px solid var(--token-8PxxXPNrIohQ);
 }
 .hospitalIcon {
   position: relative;
@@ -275,30 +205,15 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
   align-self: flex-end;
+  row-gap: 4px;
   min-width: 0;
   padding: 8px;
-}
-.namespaceTitle > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start;
-  min-width: 0;
-  margin-top: calc(0px - 4px);
-  height: calc(100% + 4px);
-}
-.namespaceTitle > :global(.__wab_flex-container) > *,
-.namespaceTitle > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.namespaceTitle > :global(.__wab_flex-container) > picture > img,
-.namespaceTitle
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 4px;
 }
 .hospital2 {
   display: block;
@@ -317,19 +232,13 @@
   width: auto;
   height: auto;
   max-width: 100%;
-  margin-top: calc(0px + 4px) !important;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
   text-align: right;
   font-size: var(--token-sOr3fJ5Up5fq);
   color: var(--token-9iYGdL7i3GKE);
   white-space: pre-wrap;
   font-weight: 700;
   padding: 0px;
-}
-.namespaceNamedisabledLogoutButton {
-  margin-top: calc(0px + 4px) !important;
+  margin: 0px;
 }
 .resetPassword {
   background: #ffffff;
@@ -340,35 +249,14 @@
   top: auto;
   left: auto;
   flex-direction: row-reverse;
-  margin-top: calc(0px + 8px) !important;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  min-width: 0;
-  padding: 0px 16px;
-  border-top: 1px solid #bdbdbd;
-  border-bottom: 1px solid #bdbdbd;
-}
-.resetPassword > :global(.__wab_flex-container) {
-  flex-direction: row-reverse;
   align-items: center;
   justify-content: flex-start;
+  column-gap: 8px;
   min-width: 0;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-}
-.resetPassword > :global(.__wab_flex-container) > *,
-.resetPassword > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.resetPassword > :global(.__wab_flex-container) > picture > img,
-.resetPassword
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 8px;
-}
-.resetPassworddisabledLogoutButton {
-  margin-top: calc(0px + 8px) !important;
+  padding: 0px 16px;
+  margin: 0px;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
 }
 .resetPasswordImage {
   position: relative;
@@ -399,39 +287,20 @@
   top: auto;
   left: auto;
   flex-direction: row-reverse;
-  margin-top: calc(0px + 8px) !important;
-  margin-right: 0px;
-  margin-bottom: 17px;
-  margin-left: 0px;
-  min-width: 0;
-  padding: 0px 16px;
-  border-top: 1px solid #bdbdbd;
-  border-bottom: 1px solid #bdbdbd;
-}
-.shareToolContent > :global(.__wab_flex-container) {
-  flex-direction: row-reverse;
   align-items: stretch;
   justify-content: flex-start;
   flex-wrap: nowrap;
   align-content: stretch;
+  column-gap: 8px;
   min-width: 0;
-  margin-left: calc(0px - 8px);
-  width: calc(100% + 8px);
-}
-.shareToolContent > :global(.__wab_flex-container) > *,
-.shareToolContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.shareToolContent > :global(.__wab_flex-container) > picture > img,
-.shareToolContent
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: 8px;
+  padding: 0px 16px;
+  margin: 0px 0px 17px;
+  border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
 }
 .shareToolContentdisabledLogoutButton {
   left: auto;
   top: auto;
-  margin-top: calc(0px + 8px) !important;
 }
 .shareTool:global(.__wab_instance) {
   max-width: 100%;
@@ -442,17 +311,13 @@
   position: relative;
   left: auto;
   top: auto;
-  margin-top: calc(0px + 8px) !important;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
   height: auto;
+  margin: 0px;
 }
 .logoutButtondisabledLogoutButton:global(.__wab_instance) {
   left: auto;
   top: auto;
   opacity: 0.6;
-  margin-top: calc(0px + 8px) !important;
 }
 .svg__fLi6W {
   position: relative;

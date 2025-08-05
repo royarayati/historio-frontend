@@ -542,11 +542,9 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                     const currentItem = __plasmic_item_0;
                     const currentIndex = __plasmic_idx_0;
                     return (
-                      <Stack__
-                        as={"div"}
+                      <div
                         data-plasmic-name={"imagingReportList"}
                         data-plasmic-override={overrides.imagingReportList}
-                        hasGap={true}
                         className={classNames(
                           projectcss.all,
                           sty.imagingReportList
@@ -554,11 +552,9 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                         key={currentIndex}
                       >
                         {currentItem.id == $ctx.params.reportID ? (
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"imagingReportCard"}
                             data-plasmic-override={overrides.imagingReportCard}
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.imagingReportCard
@@ -619,9 +615,9 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                                 {currentItem.report}
                               </React.Fragment>
                             </div>
-                          </Stack__>
+                          </div>
                         ) : null}
-                      </Stack__>
+                      </div>
                     );
                   })}
                 </React.Fragment>

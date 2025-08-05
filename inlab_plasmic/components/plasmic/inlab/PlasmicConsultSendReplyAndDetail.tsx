@@ -63,8 +63,8 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
-import Alert2 from "../../Alert2"; // plasmic-import: RABqkXkLRlle/component
 import Bullet from "../../Bullet"; // plasmic-import: sWsqjPSVIYww/component
+import Alert2 from "../../Alert2"; // plasmic-import: RABqkXkLRlle/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -120,8 +120,6 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   printConsult?: Flex__<"svg">;
   printProcessing?: Flex__<typeof Alert>;
   printError?: Flex__<typeof Alert>;
-  consultReviewAlertContent?: Flex__<"div">;
-  consultReviewUnsuccessfully?: Flex__<typeof Alert2>;
   senderServiceContent?: Flex__<"div">;
   senderService?: Flex__<"div">;
   selectedSenderService?: Flex__<"div">;
@@ -153,8 +151,13 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   paperReplyBullet?: Flex__<typeof Bullet>;
   paperReplyTitle?: Flex__<"div">;
   sendReplyGuide?: Flex__<"div">;
+  consultSendDraftReplyAlertContent?: Flex__<"div">;
+  consultSendDraftReplyUnsuccessfully?: Flex__<typeof Alert2>;
+  consultSendReplyAndDraftReplyButton?: Flex__<"div">;
+  consultSendDraftReplyButton?: Flex__<typeof Button>;
+  sendDraftReply?: Flex__<"div">;
   consultSendReplyButton?: Flex__<typeof Button>;
-  sendConsult2?: Flex__<"div">;
+  sendReply?: Flex__<"div">;
   repliedConsultContent?: Flex__<"div">;
   finalConsultReplyTitleContent?: Flex__<"div">;
   finalConsultReplyTitle?: Flex__<"div">;
@@ -170,6 +173,8 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   respondentConsultTime?: Flex__<"div">;
   consultReviewerTitle?: Flex__<"div">;
   consultReviewer?: Flex__<"div">;
+  consultReviewAlertContent?: Flex__<"div">;
+  consultReviewUnsuccessfully?: Flex__<typeof Alert2>;
   consultReviewButton?: Flex__<typeof Button>;
   reviewConsult?: Flex__<"div">;
   modalSetConsultPaperReplyTrueBeforePrint?: Flex__<typeof AntdModal>;
@@ -196,12 +201,10 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   guide2?: Flex__<"div">;
   modalConsultSendReplyConfirmation?: Flex__<typeof AntdModal>;
   confirmationContent2?: Flex__<"div">;
-  consultSendReplySuccessfully?: Flex__<typeof Alert2>;
   consultSendReplyUnsuccessfully?: Flex__<typeof Alert2>;
   confirmationYesNo2?: Flex__<"div">;
   noConfirm2?: Flex__<typeof Button>;
   confirm2?: Flex__<typeof Button>;
-  unsuccessfulDeleteConsult2?: Flex__<typeof Alert3>;
   title2?: Flex__<"div">;
 };
 
@@ -253,40 +256,34 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "consultSendReplyButton.isDisabled",
+        path: "consultSendDraftReplyButton.isDisabled",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "consultSendReplyButton.selected",
+        path: "consultSendDraftReplyButton.selected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "consultSendReplyButton.deselected",
+        path: "consultSendDraftReplyButton.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "consultSendReplyButton.sortDeselected",
+        path: "consultSendDraftReplyButton.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "consultSendReplyButton.sortSelected",
+        path: "consultSendDraftReplyButton.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "sendConsultReplySuccessfullyAlert",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
         path: "sendConsultReplyUnsuccessfullyAlert",
@@ -377,7 +374,21 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
-          "\u0628\u0627 \u0633\u0644\u0627\u0645 \u0648 \u062a\u0634\u06a9\u0631 \u0627\u0632 \u0645\u0634\u0627\u0648\u0631\u0647"
+          (() => {
+            try {
+              return $ctx.fetched_data.data.reply
+                ? $ctx.fetched_data.data.reply
+                : "با سلام و تشکر از مشاوره";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "copyPatientPresentIllnessMessageState",
@@ -567,6 +578,42 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
       },
       {
         path: "printErrorState",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "consultSendReplyButton.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "consultSendReplyButton.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "consultSendReplyButton.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "consultSendReplyButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "consultSendReplyButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "consultSendDraftReplyUnsuccessfullyAlert",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -799,11 +846,9 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
             >
               <DataCtxReader__>
                 {$ctx => (
-                  <Stack__
-                    as={"div"}
+                  <div
                     data-plasmic-name={"sendConsult"}
                     data-plasmic-override={overrides.sendConsult}
-                    hasGap={true}
                     className={classNames(projectcss.all, sty.sendConsult)}
                   >
                     <div
@@ -1444,57 +1489,6 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         noIcon={true}
                       />
                     ) : null}
-                    <div
-                      data-plasmic-name={"consultReviewAlertContent"}
-                      data-plasmic-override={
-                        overrides.consultReviewAlertContent
-                      }
-                      className={classNames(
-                        projectcss.all,
-                        sty.consultReviewAlertContent
-                      )}
-                    >
-                      {(() => {
-                        try {
-                          return $state.consultReviewUnsuccessfullyAlert;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })() ? (
-                        <Alert2
-                          data-plasmic-name={"consultReviewUnsuccessfully"}
-                          data-plasmic-override={
-                            overrides.consultReviewUnsuccessfully
-                          }
-                          body={
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___22QZ
-                              )}
-                            >
-                              {
-                                "\u062b\u0628\u062a \u0645\u0631\u0648\u0631 \u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f"
-                              }
-                            </div>
-                          }
-                          className={classNames(
-                            "__wab_instance",
-                            sty.consultReviewUnsuccessfully
-                          )}
-                          error={true}
-                          noHeader={true}
-                          noIcon={true}
-                        />
-                      ) : null}
-                    </div>
                     <div
                       data-plasmic-name={"senderServiceContent"}
                       data-plasmic-override={overrides.senderServiceContent}
@@ -2154,50 +2148,86 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             "\u0645\u062a\u0646 \u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647"
                           }
                         </div>
-                        <textarea
-                          data-plasmic-name={"consultReplyInput"}
-                          data-plasmic-override={overrides.consultReplyInput}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.textarea,
-                            sty.consultReplyInput
-                          )}
-                          onChange={async (...eventArgs: any) => {
-                            (e => {
-                              generateStateOnChangeProp($state, [
+                        {(() => {
+                          const child$Props = {
+                            className: classNames(
+                              projectcss.all,
+                              projectcss.textarea,
+                              sty.consultReplyInput
+                            ),
+                            onChange: async (...eventArgs: any) => {
+                              (e => {
+                                generateStateOnChangeProp($state, [
+                                  "consultReplyInput",
+                                  "value"
+                                ])(e.target.value);
+                              }).apply(null, eventArgs);
+                            },
+                            ref: ref => {
+                              $refs["consultReplyInput"] = ref;
+                            },
+                            rows: (() => {
+                              try {
+                                return $state.consultReplyInput.value.split(
+                                  "\n"
+                                ).length < 2
+                                  ? $state.consultReplyInput.value.split("\n")
+                                      .length + 1
+                                  : $state.consultReplyInput.value.split("\n")
+                                      .length;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })(),
+                            value:
+                              generateStateValueProp($state, [
                                 "consultReplyInput",
                                 "value"
-                              ])(e.target.value);
-                            }).apply(null, eventArgs);
-                          }}
-                          ref={ref => {
-                            $refs["consultReplyInput"] = ref;
-                          }}
-                          rows={(() => {
-                            try {
-                              return $state.consultReplyInput.value.split("\n")
-                                .length < 2
-                                ? $state.consultReplyInput.value.split("\n")
-                                    .length + 1
-                                : $state.consultReplyInput.value.split("\n")
-                                    .length;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
+                              ]) ?? ""
+                          };
+
+                          initializePlasmicStates(
+                            $state,
+                            [
+                              {
+                                name: "consultReplyInput.value",
+                                initFunc: ({ $props, $state, $queries }) =>
+                                  (() => {
+                                    try {
+                                      return $ctx.fetched_data.data.reply
+                                        ? $ctx.fetched_data.data.reply
+                                        : "با سلام و تشکر از مشاوره";
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
                               }
-                              throw e;
-                            }
-                          })()}
-                          value={
-                            generateStateValueProp($state, [
-                              "consultReplyInput",
-                              "value"
-                            ]) ?? ""
-                          }
-                        />
+                            ],
+                            []
+                          );
+                          return (
+                            <textarea
+                              data-plasmic-name={"consultReplyInput"}
+                              data-plasmic-override={
+                                overrides.consultReplyInput
+                              }
+                              {...child$Props}
+                            />
+                          );
+                        })()}
                       </div>
                     ) : null}
                     {(() => {
@@ -2331,7 +2361,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         dir={"rtl"}
                       >
                         {
-                          "\u0627\u06cc\u0646\u062a\u0631\u0646 \u0647\u0627 \u0648 \u062f\u0627\u0646\u0634\u062c\u0648\u06cc\u0627\u0646\u06cc \u06a9\u0647 \u0634\u0645\u0627\u0631\u0647 \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0646\u062f\u0627\u0631\u0646\u062f\u060c \u0627\u0645\u06a9\u0627\u0646 \u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647 \u0646\u062f\u0627\u0631\u0646\u062f"
+                          "\u0627\u06cc\u0646\u062a\u0631\u0646 \u0647\u0627 \u0648 \u062f\u0627\u0646\u0634\u062c\u0648\u06cc\u0627\u0646\u06cc \u06a9\u0647 \u0634\u0645\u0627\u0631\u0647 \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u0646\u062f\u0627\u0631\u0646\u062f\u060c \u0627\u0645\u06a9\u0627\u0646 \u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647 \u0646\u062f\u0627\u0631\u0646\u062f\n\u062f\u0631 \u0635\u0648\u0631\u062a \u062a\u0627\u06cc\u06cc\u062f \u0648 \u062b\u0628\u062a \u0635\u062d\u06cc\u062d \u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633/\u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0647 \u0635\u0641\u062d\u0647 \u0644\u06cc\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0647\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0645\u0646\u062a\u0642\u0644 \u0645\u06cc \u0634\u0648\u06cc\u062f"
                         }
                       </div>
                     ) : null}
@@ -2352,184 +2382,666 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         throw e;
                       }
                     })() ? (
-                      <Button
-                        data-plasmic-name={"consultSendReplyButton"}
-                        data-plasmic-override={overrides.consultSendReplyButton}
+                      <div
+                        data-plasmic-name={"consultSendDraftReplyAlertContent"}
+                        data-plasmic-override={
+                          overrides.consultSendDraftReplyAlertContent
+                        }
                         className={classNames(
-                          "__wab_instance",
-                          sty.consultSendReplyButton
+                          projectcss.all,
+                          sty.consultSendDraftReplyAlertContent
                         )}
-                        color={"blue"}
-                        deselected={generateStateValueProp($state, [
-                          "consultSendReplyButton",
-                          "deselected"
-                        ])}
-                        isDisabled={generateStateValueProp($state, [
-                          "consultSendReplyButton",
-                          "isDisabled"
-                        ])}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps[
-                            "updateModalConsultSendReplyConfirmationOpen"
-                          ] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: [
-                                      "modalConsultSendReplyConfirmation",
-                                      "open"
-                                    ]
-                                  },
-                                  operation: 4
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  const oldValue = $stateGet(
-                                    objRoot,
-                                    variablePath
-                                  );
-                                  $stateSet(objRoot, variablePath, !oldValue);
-                                  return !oldValue;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps[
-                              "updateModalConsultSendReplyConfirmationOpen"
-                            ] != null &&
-                            typeof $steps[
-                              "updateModalConsultSendReplyConfirmationOpen"
-                            ] === "object" &&
-                            typeof $steps[
-                              "updateModalConsultSendReplyConfirmationOpen"
-                            ].then === "function"
-                          ) {
-                            $steps[
-                              "updateModalConsultSendReplyConfirmationOpen"
-                            ] = await $steps[
-                              "updateModalConsultSendReplyConfirmationOpen"
-                            ];
+                      >
+                        {(() => {
+                          try {
+                            return $state.consultSendDraftReplyUnsuccessfullyAlert;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
                           }
-                        }}
-                        onDeselectedChange={async (...eventArgs: any) => {
-                          ((...eventArgs) => {
-                            generateStateOnChangeProp($state, [
+                        })() ? (
+                          <Alert2
+                            data-plasmic-name={
+                              "consultSendDraftReplyUnsuccessfully"
+                            }
+                            data-plasmic-override={
+                              overrides.consultSendDraftReplyUnsuccessfully
+                            }
+                            body={
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__ufPlX
+                                )}
+                              >
+                                {
+                                  "\u062b\u0628\u062a \u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f"
+                                }
+                              </div>
+                            }
+                            className={classNames(
+                              "__wab_instance",
+                              sty.consultSendDraftReplyUnsuccessfully
+                            )}
+                            error={true}
+                            noHeader={true}
+                            noIcon={true}
+                          />
+                        ) : null}
+                      </div>
+                    ) : null}
+                    {(() => {
+                      try {
+                        return (
+                          $ctx.fetched_data.data.state === 1 ||
+                          $ctx.fetched_data.data.state === 2 ||
+                          $ctx.fetched_data.data.state === 3
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={
+                          "consultSendReplyAndDraftReplyButton"
+                        }
+                        data-plasmic-override={
+                          overrides.consultSendReplyAndDraftReplyButton
+                        }
+                        className={classNames(
+                          projectcss.all,
+                          sty.consultSendReplyAndDraftReplyButton
+                        )}
+                      >
+                        {(() => {
+                          try {
+                            return (
+                              $ctx.fetched_data.data.state === 1 ||
+                              $ctx.fetched_data.data.state === 2 ||
+                              $ctx.fetched_data.data.state === 3
+                            );
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })() ? (
+                          <Button
+                            data-plasmic-name={"consultSendDraftReplyButton"}
+                            data-plasmic-override={
+                              overrides.consultSendDraftReplyButton
+                            }
+                            className={classNames(
+                              "__wab_instance",
+                              sty.consultSendDraftReplyButton
+                            )}
+                            color={"clear"}
+                            deselected={generateStateValueProp($state, [
+                              "consultSendDraftReplyButton",
+                              "deselected"
+                            ])}
+                            isDisabled={generateStateValueProp($state, [
+                              "consultSendDraftReplyButton",
+                              "isDisabled"
+                            ])}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps[
+                                "updateConsultSendDraftReplyUnsuccessfullyAlert"
+                              ] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: [
+                                          "consultSendDraftReplyUnsuccessfullyAlert"
+                                        ]
+                                      },
+                                      operation: 0,
+                                      value: false
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps[
+                                  "updateConsultSendDraftReplyUnsuccessfullyAlert"
+                                ] != null &&
+                                typeof $steps[
+                                  "updateConsultSendDraftReplyUnsuccessfullyAlert"
+                                ] === "object" &&
+                                typeof $steps[
+                                  "updateConsultSendDraftReplyUnsuccessfullyAlert"
+                                ].then === "function"
+                              ) {
+                                $steps[
+                                  "updateConsultSendDraftReplyUnsuccessfullyAlert"
+                                ] = await $steps[
+                                  "updateConsultSendDraftReplyUnsuccessfullyAlert"
+                                ];
+                              }
+
+                              $steps["putConsultDraftReply"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      args: [
+                                        "PUT",
+                                        `/api/v2/consult/${$ctx.params.consult_id}/draft_reply`,
+                                        (() => {
+                                          try {
+                                            return {
+                                              "X-Namespace":
+                                                localStorage.getItem(
+                                                  "inlab_user_namespace_id"
+                                                )
+                                            };
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })(),
+                                        (() => {
+                                          try {
+                                            return {
+                                              paper_reply:
+                                                $state.paperReplyStatusState,
+                                              reply:
+                                                $state.consultReplyInput.value
+                                            };
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })()
+                                      ]
+                                    };
+                                    return $globalActions[
+                                      "AuthGlobalContext.apiFetcherPlus"
+                                    ]?.apply(null, [...actionArgs.args]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["putConsultDraftReply"] != null &&
+                                typeof $steps["putConsultDraftReply"] ===
+                                  "object" &&
+                                typeof $steps["putConsultDraftReply"].then ===
+                                  "function"
+                              ) {
+                                $steps["putConsultDraftReply"] = await $steps[
+                                  "putConsultDraftReply"
+                                ];
+                              }
+
+                              $steps[
+                                "updateConsultSendDraftReplyButtonIsDisabled2"
+                              ] =
+                                $steps.putConsultDraftReply.status != 200
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "consultSendDraftReplyUnsuccessfullyAlert"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: true
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                              if (
+                                $steps[
+                                  "updateConsultSendDraftReplyButtonIsDisabled2"
+                                ] != null &&
+                                typeof $steps[
+                                  "updateConsultSendDraftReplyButtonIsDisabled2"
+                                ] === "object" &&
+                                typeof $steps[
+                                  "updateConsultSendDraftReplyButtonIsDisabled2"
+                                ].then === "function"
+                              ) {
+                                $steps[
+                                  "updateConsultSendDraftReplyButtonIsDisabled2"
+                                ] = await $steps[
+                                  "updateConsultSendDraftReplyButtonIsDisabled2"
+                                ];
+                              }
+
+                              $steps["goToConsultList"] =
+                                $steps.putConsultDraftReply.status === 200
+                                  ? (() => {
+                                      const actionArgs = {
+                                        destination: `/consult/list/${(() => {
+                                          try {
+                                            return $ctx.params.code;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })()}/${(() => {
+                                          try {
+                                            return $ctx.params.adm_id;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })()}`
+                                      };
+                                      return (({ destination }) => {
+                                        if (
+                                          typeof destination === "string" &&
+                                          destination.startsWith("#")
+                                        ) {
+                                          document
+                                            .getElementById(
+                                              destination.substr(1)
+                                            )
+                                            .scrollIntoView({
+                                              behavior: "smooth"
+                                            });
+                                        } else {
+                                          __nextRouter?.push(destination);
+                                        }
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                              if (
+                                $steps["goToConsultList"] != null &&
+                                typeof $steps["goToConsultList"] === "object" &&
+                                typeof $steps["goToConsultList"].then ===
+                                  "function"
+                              ) {
+                                $steps["goToConsultList"] = await $steps[
+                                  "goToConsultList"
+                                ];
+                              }
+                            }}
+                            onDeselectedChange={async (...eventArgs: any) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendDraftReplyButton",
+                                  "deselected"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            onIsDisabledChange={async (...eventArgs: any) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendDraftReplyButton",
+                                  "isDisabled"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            onSelectedChange={async (...eventArgs: any) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendDraftReplyButton",
+                                  "selected"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            onSortDeselectedChange={async (
+                              ...eventArgs: any
+                            ) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendDraftReplyButton",
+                                  "sortDeselected"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            onSortSelectedChange={async (...eventArgs: any) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendDraftReplyButton",
+                                  "sortSelected"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            selected={generateStateValueProp($state, [
+                              "consultSendDraftReplyButton",
+                              "selected"
+                            ])}
+                            sortDeselected={generateStateValueProp($state, [
+                              "consultSendDraftReplyButton",
+                              "sortDeselected"
+                            ])}
+                            sortSelected={generateStateValueProp($state, [
+                              "consultSendDraftReplyButton",
+                              "sortSelected"
+                            ])}
+                          >
+                            <div
+                              data-plasmic-name={"sendDraftReply"}
+                              data-plasmic-override={overrides.sendDraftReply}
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.sendDraftReply
+                              )}
+                            >
+                              {
+                                "\u062b\u0628\u062a \u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u067e\u0627\u0633\u062e"
+                              }
+                            </div>
+                          </Button>
+                        ) : null}
+                        {(() => {
+                          try {
+                            return (
+                              $ctx.fetched_data.data.state === 1 ||
+                              $ctx.fetched_data.data.state === 2 ||
+                              $ctx.fetched_data.data.state === 3
+                            );
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })() ? (
+                          <Button
+                            data-plasmic-name={"consultSendReplyButton"}
+                            data-plasmic-override={
+                              overrides.consultSendReplyButton
+                            }
+                            className={classNames(
+                              "__wab_instance",
+                              sty.consultSendReplyButton
+                            )}
+                            color={"blue"}
+                            deselected={generateStateValueProp($state, [
                               "consultSendReplyButton",
                               "deselected"
-                            ])(eventArgs[0]);
-                          }).apply(null, eventArgs);
-
-                          if (
-                            eventArgs.length > 1 &&
-                            eventArgs[1] &&
-                            eventArgs[1]._plasmic_state_init_
-                          ) {
-                            return;
-                          }
-                        }}
-                        onIsDisabledChange={async (...eventArgs: any) => {
-                          ((...eventArgs) => {
-                            generateStateOnChangeProp($state, [
+                            ])}
+                            isDisabled={generateStateValueProp($state, [
                               "consultSendReplyButton",
                               "isDisabled"
-                            ])(eventArgs[0]);
-                          }).apply(null, eventArgs);
+                            ])}
+                            onClick={async event => {
+                              const $steps = {};
 
-                          if (
-                            eventArgs.length > 1 &&
-                            eventArgs[1] &&
-                            eventArgs[1]._plasmic_state_init_
-                          ) {
-                            return;
-                          }
-                        }}
-                        onSelectedChange={async (...eventArgs: any) => {
-                          ((...eventArgs) => {
-                            generateStateOnChangeProp($state, [
+                              $steps[
+                                "updateModalConsultSendReplyConfirmationOpen"
+                              ] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: [
+                                          "modalConsultSendReplyConfirmation",
+                                          "open"
+                                        ]
+                                      },
+                                      operation: 4
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      const oldValue = $stateGet(
+                                        objRoot,
+                                        variablePath
+                                      );
+                                      $stateSet(
+                                        objRoot,
+                                        variablePath,
+                                        !oldValue
+                                      );
+                                      return !oldValue;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps[
+                                  "updateModalConsultSendReplyConfirmationOpen"
+                                ] != null &&
+                                typeof $steps[
+                                  "updateModalConsultSendReplyConfirmationOpen"
+                                ] === "object" &&
+                                typeof $steps[
+                                  "updateModalConsultSendReplyConfirmationOpen"
+                                ].then === "function"
+                              ) {
+                                $steps[
+                                  "updateModalConsultSendReplyConfirmationOpen"
+                                ] = await $steps[
+                                  "updateModalConsultSendReplyConfirmationOpen"
+                                ];
+                              }
+                            }}
+                            onDeselectedChange={async (...eventArgs: any) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendReplyButton",
+                                  "deselected"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            onIsDisabledChange={async (...eventArgs: any) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendReplyButton",
+                                  "isDisabled"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            onSelectedChange={async (...eventArgs: any) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendReplyButton",
+                                  "selected"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            onSortDeselectedChange={async (
+                              ...eventArgs: any
+                            ) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendReplyButton",
+                                  "sortDeselected"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            onSortSelectedChange={async (...eventArgs: any) => {
+                              ((...eventArgs) => {
+                                generateStateOnChangeProp($state, [
+                                  "consultSendReplyButton",
+                                  "sortSelected"
+                                ])(eventArgs[0]);
+                              }).apply(null, eventArgs);
+
+                              if (
+                                eventArgs.length > 1 &&
+                                eventArgs[1] &&
+                                eventArgs[1]._plasmic_state_init_
+                              ) {
+                                return;
+                              }
+                            }}
+                            selected={generateStateValueProp($state, [
                               "consultSendReplyButton",
                               "selected"
-                            ])(eventArgs[0]);
-                          }).apply(null, eventArgs);
-
-                          if (
-                            eventArgs.length > 1 &&
-                            eventArgs[1] &&
-                            eventArgs[1]._plasmic_state_init_
-                          ) {
-                            return;
-                          }
-                        }}
-                        onSortDeselectedChange={async (...eventArgs: any) => {
-                          ((...eventArgs) => {
-                            generateStateOnChangeProp($state, [
+                            ])}
+                            sortDeselected={generateStateValueProp($state, [
                               "consultSendReplyButton",
                               "sortDeselected"
-                            ])(eventArgs[0]);
-                          }).apply(null, eventArgs);
-
-                          if (
-                            eventArgs.length > 1 &&
-                            eventArgs[1] &&
-                            eventArgs[1]._plasmic_state_init_
-                          ) {
-                            return;
-                          }
-                        }}
-                        onSortSelectedChange={async (...eventArgs: any) => {
-                          ((...eventArgs) => {
-                            generateStateOnChangeProp($state, [
+                            ])}
+                            sortSelected={generateStateValueProp($state, [
                               "consultSendReplyButton",
                               "sortSelected"
-                            ])(eventArgs[0]);
-                          }).apply(null, eventArgs);
-
-                          if (
-                            eventArgs.length > 1 &&
-                            eventArgs[1] &&
-                            eventArgs[1]._plasmic_state_init_
-                          ) {
-                            return;
-                          }
-                        }}
-                        selected={generateStateValueProp($state, [
-                          "consultSendReplyButton",
-                          "selected"
-                        ])}
-                        sortDeselected={generateStateValueProp($state, [
-                          "consultSendReplyButton",
-                          "sortDeselected"
-                        ])}
-                        sortSelected={generateStateValueProp($state, [
-                          "consultSendReplyButton",
-                          "sortSelected"
-                        ])}
-                      >
-                        <div
-                          data-plasmic-name={"sendConsult2"}
-                          data-plasmic-override={overrides.sendConsult2}
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.sendConsult2
-                          )}
-                        >
-                          {
-                            "\u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e"
-                          }
-                        </div>
-                      </Button>
+                            ])}
+                          >
+                            <div
+                              data-plasmic-name={"sendReply"}
+                              data-plasmic-override={overrides.sendReply}
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.sendReply
+                              )}
+                            >
+                              {
+                                "\u0627\u0631\u0633\u0627\u0644 \u067e\u0627\u0633\u062e"
+                              }
+                            </div>
+                          </Button>
+                        ) : null}
+                      </div>
                     ) : null}
                     {(() => {
                       try {
@@ -2969,6 +3481,75 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             })()}
                           </React.Fragment>
                         </div>
+                      </div>
+                    ) : null}
+                    {(() => {
+                      try {
+                        return (
+                          !$ctx.fetched_data.loading &&
+                          $ctx.fetched_data.data.state === 4 &&
+                          $ctx.inlab_user.user.rank.name === "professor"
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        data-plasmic-name={"consultReviewAlertContent"}
+                        data-plasmic-override={
+                          overrides.consultReviewAlertContent
+                        }
+                        className={classNames(
+                          projectcss.all,
+                          sty.consultReviewAlertContent
+                        )}
+                      >
+                        {(() => {
+                          try {
+                            return $state.consultReviewUnsuccessfullyAlert;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return true;
+                            }
+                            throw e;
+                          }
+                        })() ? (
+                          <Alert2
+                            data-plasmic-name={"consultReviewUnsuccessfully"}
+                            data-plasmic-override={
+                              overrides.consultReviewUnsuccessfully
+                            }
+                            body={
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text___22QZ
+                                )}
+                              >
+                                {
+                                  "\u062b\u0628\u062a \u0645\u0631\u0648\u0631 \u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f"
+                                }
+                              </div>
+                            }
+                            className={classNames(
+                              "__wab_instance",
+                              sty.consultReviewUnsuccessfully
+                            )}
+                            error={true}
+                            noHeader={true}
+                            noIcon={true}
+                          />
+                        ) : null}
                       </div>
                     ) : null}
                     {(() => {
@@ -4102,7 +4683,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         ) : null}
                       </div>
                     </AntdModal>
-                  </Stack__>
+                  </div>
                 )}
               </DataCtxReader__>
             </ApiFetcherComponent>
@@ -5142,31 +5723,6 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
               data-plasmic-override={overrides.confirmationContent2}
               className={classNames(projectcss.all, sty.confirmationContent2)}
             >
-              <Alert2
-                data-plasmic-name={"consultSendReplySuccessfully"}
-                data-plasmic-override={overrides.consultSendReplySuccessfully}
-                body={
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___1BKnX
-                    )}
-                  >
-                    {
-                      "\u067e\u0627\u0633\u062e \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f"
-                    }
-                  </div>
-                }
-                className={classNames(
-                  "__wab_instance",
-                  sty.consultSendReplySuccessfully
-                )}
-                noHeader={true}
-                noIcon={true}
-                success={true}
-              />
-
               {(() => {
                 try {
                   return $state.sendConsultReplyUnsuccessfullyAlert;
@@ -5393,47 +5949,6 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                   onClick={async event => {
                     const $steps = {};
 
-                    $steps["updateSendConsultReplySuccessfullyAlert"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            variable: {
-                              objRoot: $state,
-                              variablePath: [
-                                "sendConsultReplySuccessfullyAlert"
-                              ]
-                            },
-                            operation: 0,
-                            value: false
-                          };
-                          return (({
-                            variable,
-                            value,
-                            startIndex,
-                            deleteCount
-                          }) => {
-                            if (!variable) {
-                              return;
-                            }
-                            const { objRoot, variablePath } = variable;
-
-                            $stateSet(objRoot, variablePath, value);
-                            return value;
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["updateSendConsultReplySuccessfullyAlert"] !=
-                        null &&
-                      typeof $steps[
-                        "updateSendConsultReplySuccessfullyAlert"
-                      ] === "object" &&
-                      typeof $steps["updateSendConsultReplySuccessfullyAlert"]
-                        .then === "function"
-                    ) {
-                      $steps["updateSendConsultReplySuccessfullyAlert"] =
-                        await $steps["updateSendConsultReplySuccessfullyAlert"];
-                    }
-
                     $steps["updateSendConsultReplyUnsuccessfullyAlert"] = true
                       ? (() => {
                           const actionArgs = {
@@ -5533,50 +6048,6 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       $steps["postConsultReply"] = await $steps[
                         "postConsultReply"
                       ];
-                    }
-
-                    $steps["updateSendConsultReplySuccessfullyAlert2"] =
-                      $steps.postConsultReply?.status === 200
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: [
-                                  "sendConsultReplySuccessfullyAlert"
-                                ]
-                              },
-                              operation: 0,
-                              value: true
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                    if (
-                      $steps["updateSendConsultReplySuccessfullyAlert2"] !=
-                        null &&
-                      typeof $steps[
-                        "updateSendConsultReplySuccessfullyAlert2"
-                      ] === "object" &&
-                      typeof $steps["updateSendConsultReplySuccessfullyAlert2"]
-                        .then === "function"
-                    ) {
-                      $steps["updateSendConsultReplySuccessfullyAlert2"] =
-                        await $steps[
-                          "updateSendConsultReplySuccessfullyAlert2"
-                        ];
                     }
 
                     $steps["updateSendConsultReplyUnsuccessfullyAlert2"] =
@@ -5785,44 +6256,6 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                   </div>
                 </Button>
               </div>
-              {(() => {
-                try {
-                  return $state.deleteConsultUnsuccessfullyAlert;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return true;
-                  }
-                  throw e;
-                }
-              })() ? (
-                <Alert3
-                  data-plasmic-name={"unsuccessfulDeleteConsult2"}
-                  data-plasmic-override={overrides.unsuccessfulDeleteConsult2}
-                  body={
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__bEjZh
-                      )}
-                    >
-                      {
-                        "\u062d\u0630\u0641 \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0627 \u062e\u0637\u0627 \u0647\u0645\u0631\u0627\u0647 \u0634\u062f"
-                      }
-                    </div>
-                  }
-                  className={classNames(
-                    "__wab_instance",
-                    sty.unsuccessfulDeleteConsult2
-                  )}
-                  error={true}
-                  noHeader={true}
-                  noIcon={true}
-                />
-              ) : null}
             </div>
           </AntdModal>
         </div>
@@ -5851,8 +6284,6 @@ const PlasmicDescendants = {
     "printConsult",
     "printProcessing",
     "printError",
-    "consultReviewAlertContent",
-    "consultReviewUnsuccessfully",
     "senderServiceContent",
     "senderService",
     "selectedSenderService",
@@ -5884,8 +6315,13 @@ const PlasmicDescendants = {
     "paperReplyBullet",
     "paperReplyTitle",
     "sendReplyGuide",
+    "consultSendDraftReplyAlertContent",
+    "consultSendDraftReplyUnsuccessfully",
+    "consultSendReplyAndDraftReplyButton",
+    "consultSendDraftReplyButton",
+    "sendDraftReply",
     "consultSendReplyButton",
-    "sendConsult2",
+    "sendReply",
     "repliedConsultContent",
     "finalConsultReplyTitleContent",
     "finalConsultReplyTitle",
@@ -5901,6 +6337,8 @@ const PlasmicDescendants = {
     "respondentConsultTime",
     "consultReviewerTitle",
     "consultReviewer",
+    "consultReviewAlertContent",
+    "consultReviewUnsuccessfully",
     "consultReviewButton",
     "reviewConsult",
     "modalSetConsultPaperReplyTrueBeforePrint",
@@ -5927,12 +6365,10 @@ const PlasmicDescendants = {
     "guide2",
     "modalConsultSendReplyConfirmation",
     "confirmationContent2",
-    "consultSendReplySuccessfully",
     "consultSendReplyUnsuccessfully",
     "confirmationYesNo2",
     "noConfirm2",
     "confirm2",
-    "unsuccessfulDeleteConsult2",
     "title2"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
@@ -5964,8 +6400,6 @@ const PlasmicDescendants = {
     "printConsult",
     "printProcessing",
     "printError",
-    "consultReviewAlertContent",
-    "consultReviewUnsuccessfully",
     "senderServiceContent",
     "senderService",
     "selectedSenderService",
@@ -5997,8 +6431,13 @@ const PlasmicDescendants = {
     "paperReplyBullet",
     "paperReplyTitle",
     "sendReplyGuide",
+    "consultSendDraftReplyAlertContent",
+    "consultSendDraftReplyUnsuccessfully",
+    "consultSendReplyAndDraftReplyButton",
+    "consultSendDraftReplyButton",
+    "sendDraftReply",
     "consultSendReplyButton",
-    "sendConsult2",
+    "sendReply",
     "repliedConsultContent",
     "finalConsultReplyTitleContent",
     "finalConsultReplyTitle",
@@ -6014,6 +6453,8 @@ const PlasmicDescendants = {
     "respondentConsultTime",
     "consultReviewerTitle",
     "consultReviewer",
+    "consultReviewAlertContent",
+    "consultReviewUnsuccessfully",
     "consultReviewButton",
     "reviewConsult",
     "modalSetConsultPaperReplyTrueBeforePrint",
@@ -6035,8 +6476,6 @@ const PlasmicDescendants = {
     "printConsult",
     "printProcessing",
     "printError",
-    "consultReviewAlertContent",
-    "consultReviewUnsuccessfully",
     "senderServiceContent",
     "senderService",
     "selectedSenderService",
@@ -6068,8 +6507,13 @@ const PlasmicDescendants = {
     "paperReplyBullet",
     "paperReplyTitle",
     "sendReplyGuide",
+    "consultSendDraftReplyAlertContent",
+    "consultSendDraftReplyUnsuccessfully",
+    "consultSendReplyAndDraftReplyButton",
+    "consultSendDraftReplyButton",
+    "sendDraftReply",
     "consultSendReplyButton",
-    "sendConsult2",
+    "sendReply",
     "repliedConsultContent",
     "finalConsultReplyTitleContent",
     "finalConsultReplyTitle",
@@ -6085,6 +6529,8 @@ const PlasmicDescendants = {
     "respondentConsultTime",
     "consultReviewerTitle",
     "consultReviewer",
+    "consultReviewAlertContent",
+    "consultReviewUnsuccessfully",
     "consultReviewButton",
     "reviewConsult",
     "modalSetConsultPaperReplyTrueBeforePrint",
@@ -6105,8 +6551,6 @@ const PlasmicDescendants = {
     "printConsult",
     "printProcessing",
     "printError",
-    "consultReviewAlertContent",
-    "consultReviewUnsuccessfully",
     "senderServiceContent",
     "senderService",
     "selectedSenderService",
@@ -6138,8 +6582,13 @@ const PlasmicDescendants = {
     "paperReplyBullet",
     "paperReplyTitle",
     "sendReplyGuide",
+    "consultSendDraftReplyAlertContent",
+    "consultSendDraftReplyUnsuccessfully",
+    "consultSendReplyAndDraftReplyButton",
+    "consultSendDraftReplyButton",
+    "sendDraftReply",
     "consultSendReplyButton",
-    "sendConsult2",
+    "sendReply",
     "repliedConsultContent",
     "finalConsultReplyTitleContent",
     "finalConsultReplyTitle",
@@ -6155,6 +6604,8 @@ const PlasmicDescendants = {
     "respondentConsultTime",
     "consultReviewerTitle",
     "consultReviewer",
+    "consultReviewAlertContent",
+    "consultReviewUnsuccessfully",
     "consultReviewButton",
     "reviewConsult",
     "modalSetConsultPaperReplyTrueBeforePrint",
@@ -6179,11 +6630,6 @@ const PlasmicDescendants = {
   printConsult: ["printConsult"],
   printProcessing: ["printProcessing"],
   printError: ["printError"],
-  consultReviewAlertContent: [
-    "consultReviewAlertContent",
-    "consultReviewUnsuccessfully"
-  ],
-  consultReviewUnsuccessfully: ["consultReviewUnsuccessfully"],
   senderServiceContent: [
     "senderServiceContent",
     "senderService",
@@ -6260,8 +6706,25 @@ const PlasmicDescendants = {
   paperReplyBullet: ["paperReplyBullet"],
   paperReplyTitle: ["paperReplyTitle"],
   sendReplyGuide: ["sendReplyGuide"],
-  consultSendReplyButton: ["consultSendReplyButton", "sendConsult2"],
-  sendConsult2: ["sendConsult2"],
+  consultSendDraftReplyAlertContent: [
+    "consultSendDraftReplyAlertContent",
+    "consultSendDraftReplyUnsuccessfully"
+  ],
+  consultSendDraftReplyUnsuccessfully: ["consultSendDraftReplyUnsuccessfully"],
+  consultSendReplyAndDraftReplyButton: [
+    "consultSendReplyAndDraftReplyButton",
+    "consultSendDraftReplyButton",
+    "sendDraftReply",
+    "consultSendReplyButton",
+    "sendReply"
+  ],
+  consultSendDraftReplyButton: [
+    "consultSendDraftReplyButton",
+    "sendDraftReply"
+  ],
+  sendDraftReply: ["sendDraftReply"],
+  consultSendReplyButton: ["consultSendReplyButton", "sendReply"],
+  sendReply: ["sendReply"],
   repliedConsultContent: [
     "repliedConsultContent",
     "finalConsultReplyTitleContent",
@@ -6300,6 +6763,11 @@ const PlasmicDescendants = {
   respondentConsultTime: ["respondentConsultTime"],
   consultReviewerTitle: ["consultReviewerTitle"],
   consultReviewer: ["consultReviewer"],
+  consultReviewAlertContent: [
+    "consultReviewAlertContent",
+    "consultReviewUnsuccessfully"
+  ],
+  consultReviewUnsuccessfully: ["consultReviewUnsuccessfully"],
   consultReviewButton: ["consultReviewButton", "reviewConsult"],
   reviewConsult: ["reviewConsult"],
   modalSetConsultPaperReplyTrueBeforePrint: [
@@ -6365,29 +6833,23 @@ const PlasmicDescendants = {
   modalConsultSendReplyConfirmation: [
     "modalConsultSendReplyConfirmation",
     "confirmationContent2",
-    "consultSendReplySuccessfully",
     "consultSendReplyUnsuccessfully",
     "confirmationYesNo2",
     "noConfirm2",
     "confirm2",
-    "unsuccessfulDeleteConsult2",
     "title2"
   ],
   confirmationContent2: [
     "confirmationContent2",
-    "consultSendReplySuccessfully",
     "consultSendReplyUnsuccessfully",
     "confirmationYesNo2",
     "noConfirm2",
-    "confirm2",
-    "unsuccessfulDeleteConsult2"
+    "confirm2"
   ],
-  consultSendReplySuccessfully: ["consultSendReplySuccessfully"],
   consultSendReplyUnsuccessfully: ["consultSendReplyUnsuccessfully"],
   confirmationYesNo2: ["confirmationYesNo2", "noConfirm2", "confirm2"],
   noConfirm2: ["noConfirm2"],
   confirm2: ["confirm2"],
-  unsuccessfulDeleteConsult2: ["unsuccessfulDeleteConsult2"],
   title2: ["title2"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -6412,8 +6874,6 @@ type NodeDefaultElementType = {
   printConsult: "svg";
   printProcessing: typeof Alert;
   printError: typeof Alert;
-  consultReviewAlertContent: "div";
-  consultReviewUnsuccessfully: typeof Alert2;
   senderServiceContent: "div";
   senderService: "div";
   selectedSenderService: "div";
@@ -6445,8 +6905,13 @@ type NodeDefaultElementType = {
   paperReplyBullet: typeof Bullet;
   paperReplyTitle: "div";
   sendReplyGuide: "div";
+  consultSendDraftReplyAlertContent: "div";
+  consultSendDraftReplyUnsuccessfully: typeof Alert2;
+  consultSendReplyAndDraftReplyButton: "div";
+  consultSendDraftReplyButton: typeof Button;
+  sendDraftReply: "div";
   consultSendReplyButton: typeof Button;
-  sendConsult2: "div";
+  sendReply: "div";
   repliedConsultContent: "div";
   finalConsultReplyTitleContent: "div";
   finalConsultReplyTitle: "div";
@@ -6462,6 +6927,8 @@ type NodeDefaultElementType = {
   respondentConsultTime: "div";
   consultReviewerTitle: "div";
   consultReviewer: "div";
+  consultReviewAlertContent: "div";
+  consultReviewUnsuccessfully: typeof Alert2;
   consultReviewButton: typeof Button;
   reviewConsult: "div";
   modalSetConsultPaperReplyTrueBeforePrint: typeof AntdModal;
@@ -6488,12 +6955,10 @@ type NodeDefaultElementType = {
   guide2: "div";
   modalConsultSendReplyConfirmation: typeof AntdModal;
   confirmationContent2: "div";
-  consultSendReplySuccessfully: typeof Alert2;
   consultSendReplyUnsuccessfully: typeof Alert2;
   confirmationYesNo2: "div";
   noConfirm2: typeof Button;
   confirm2: typeof Button;
-  unsuccessfulDeleteConsult2: typeof Alert3;
   title2: "div";
 };
 
@@ -6579,10 +7044,6 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     printConsult: makeNodeComponent("printConsult"),
     printProcessing: makeNodeComponent("printProcessing"),
     printError: makeNodeComponent("printError"),
-    consultReviewAlertContent: makeNodeComponent("consultReviewAlertContent"),
-    consultReviewUnsuccessfully: makeNodeComponent(
-      "consultReviewUnsuccessfully"
-    ),
     senderServiceContent: makeNodeComponent("senderServiceContent"),
     senderService: makeNodeComponent("senderService"),
     selectedSenderService: makeNodeComponent("selectedSenderService"),
@@ -6624,8 +7085,21 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     paperReplyBullet: makeNodeComponent("paperReplyBullet"),
     paperReplyTitle: makeNodeComponent("paperReplyTitle"),
     sendReplyGuide: makeNodeComponent("sendReplyGuide"),
+    consultSendDraftReplyAlertContent: makeNodeComponent(
+      "consultSendDraftReplyAlertContent"
+    ),
+    consultSendDraftReplyUnsuccessfully: makeNodeComponent(
+      "consultSendDraftReplyUnsuccessfully"
+    ),
+    consultSendReplyAndDraftReplyButton: makeNodeComponent(
+      "consultSendReplyAndDraftReplyButton"
+    ),
+    consultSendDraftReplyButton: makeNodeComponent(
+      "consultSendDraftReplyButton"
+    ),
+    sendDraftReply: makeNodeComponent("sendDraftReply"),
     consultSendReplyButton: makeNodeComponent("consultSendReplyButton"),
-    sendConsult2: makeNodeComponent("sendConsult2"),
+    sendReply: makeNodeComponent("sendReply"),
     repliedConsultContent: makeNodeComponent("repliedConsultContent"),
     finalConsultReplyTitleContent: makeNodeComponent(
       "finalConsultReplyTitleContent"
@@ -6649,6 +7123,10 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     respondentConsultTime: makeNodeComponent("respondentConsultTime"),
     consultReviewerTitle: makeNodeComponent("consultReviewerTitle"),
     consultReviewer: makeNodeComponent("consultReviewer"),
+    consultReviewAlertContent: makeNodeComponent("consultReviewAlertContent"),
+    consultReviewUnsuccessfully: makeNodeComponent(
+      "consultReviewUnsuccessfully"
+    ),
     consultReviewButton: makeNodeComponent("consultReviewButton"),
     reviewConsult: makeNodeComponent("reviewConsult"),
     modalSetConsultPaperReplyTrueBeforePrint: makeNodeComponent(
@@ -6681,16 +7159,12 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
       "modalConsultSendReplyConfirmation"
     ),
     confirmationContent2: makeNodeComponent("confirmationContent2"),
-    consultSendReplySuccessfully: makeNodeComponent(
-      "consultSendReplySuccessfully"
-    ),
     consultSendReplyUnsuccessfully: makeNodeComponent(
       "consultSendReplyUnsuccessfully"
     ),
     confirmationYesNo2: makeNodeComponent("confirmationYesNo2"),
     noConfirm2: makeNodeComponent("noConfirm2"),
     confirm2: makeNodeComponent("confirm2"),
-    unsuccessfulDeleteConsult2: makeNodeComponent("unsuccessfulDeleteConsult2"),
     title2: makeNodeComponent("title2"),
 
     // Metadata about props expected for PlasmicConsultSendReplyAndDetail

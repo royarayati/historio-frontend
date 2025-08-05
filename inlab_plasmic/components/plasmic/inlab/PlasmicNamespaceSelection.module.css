@@ -46,6 +46,8 @@
   display: flex;
   position: absolute;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 100%;
   left: 0px;
@@ -53,28 +55,11 @@
   z-index: 1;
   overflow: auto;
   height: auto;
+  row-gap: 18px;
   min-width: 0;
   padding: 8px;
   border-style: solid;
   border-color: var(--token-Pxe4wDL2kJpb);
-}
-.namespacesContent > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-  margin-top: calc(0px - 18px);
-  height: calc(100% + 18px);
-}
-.namespacesContent > :global(.__wab_flex-container) > *,
-.namespacesContent > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.namespacesContent > :global(.__wab_flex-container) > picture > img,
-.namespacesContent
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 18px;
 }
 .text {
   position: relative;
@@ -82,19 +67,16 @@
   height: auto;
   max-width: 100%;
   font-weight: 700;
-  margin-bottom: 0px;
   left: auto;
   top: auto;
   z-index: 1;
   right: auto;
   align-self: center;
   background: none;
-  margin-top: calc(0px + 18px) !important;
-  margin-right: 0px;
-  margin-left: 0px;
   white-space: pre-wrap;
   font-size: 16px;
   padding: 8px;
+  margin: 0px;
   border-bottom: 1px solid #1b90fa;
 }
 .namespaces:global(.__wab_instance) {
@@ -108,39 +90,21 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: auto;
   max-width: 100%;
   overflow: auto;
   width: auto;
+  row-gap: 12px;
   padding: 8px;
   border: 0px none var(--token-9iYGdL7i3GKE);
-}
-.namespacesList > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: calc(0px - 12px);
-  height: calc(100% + 12px);
-}
-.namespacesList > :global(.__wab_flex-container) > *,
-.namespacesList > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.namespacesList > :global(.__wab_flex-container) > picture > img,
-.namespacesList
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 12px;
 }
 .namespaceName {
   position: relative;
   width: 147px;
   height: auto;
   max-width: 100%;
-  margin-top: calc(0px + 12px) !important;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
   text-align: center;
   font-size: 14px;
   box-shadow: 0px 4px 16px 0px #0706066b;
@@ -148,5 +112,6 @@
   white-space: pre-wrap;
   border-radius: 5px;
   padding: 8px;
+  margin: 0px;
   border: 1px solid var(--token-9iYGdL7i3GKE);
 }

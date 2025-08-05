@@ -237,36 +237,21 @@
 .sentConsultCard {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
   max-width: 100%;
+  flex-wrap: nowrap;
+  align-content: stretch;
   background: #ffffff;
   box-shadow: 2px 2px 5px 0px var(--token-WxvvgatuPYoJ);
   flex-grow: 1;
   overflow: auto;
   margin-bottom: 5px;
+  row-gap: 6px;
   min-width: 0;
   border-radius: 9px;
   border: 0.5px solid var(--token-8PxxXPNrIohQ);
-}
-.sentConsultCard > :global(.__wab_flex-container) {
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  align-content: stretch;
-  min-width: 0;
-  margin-top: calc(0px - 6px);
-  height: calc(100% + 6px);
-}
-.sentConsultCard > :global(.__wab_flex-container) > *,
-.sentConsultCard > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.sentConsultCard > :global(.__wab_flex-container) > picture > img,
-.sentConsultCard
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-top: 6px;
 }
 .sentConsultEmergencyStatus {
   display: flex;
@@ -483,7 +468,7 @@
   height: auto;
   max-width: 100%;
 }
-.draftTag {
+.sendDraftTag {
   position: relative;
   height: auto;
   max-width: 100%;
@@ -502,6 +487,28 @@
   border-top-right-radius: 999px;
   border-bottom-right-radius: 999px;
   font-size: 10px;
+  margin-bottom: 5px;
+  padding: 4px;
+}
+.replyDraftTag {
+  position: relative;
+  height: auto;
+  max-width: 100%;
+  font-weight: 700;
+  width: 81px;
+  align-self: flex-start;
+  background: #ffffff;
+  font-family: var(--VazirmatnCustom);
+  color: #ff4d4f;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+  font-size: 11px;
   margin-bottom: 5px;
   padding: 4px;
 }

@@ -190,6 +190,7 @@ export type PlasmicHomepage__OverridesType = {
   receiverDoctor?: Flex__<"div">;
   tagsAndDelete?: Flex__<"div">;
   consultCardNumber?: Flex__<"div">;
+  replyDraftTag?: Flex__<"div">;
   paperRepliedStatus?: Flex__<"div">;
   inAppRepliedStatus?: Flex__<"div">;
   empty?: Flex__<"div">;
@@ -804,7 +805,21 @@ function PlasmicHomepage__RenderFunc(props: {
                   throw e;
                 }
               })()
-            : undefined
+            : (() => {
+                try {
+                  return (
+                    window.location.origin === "https://thcsynapps.tums.ac.ir"
+                  );
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
+                  }
+                  throw e;
+                }
+              })()
       },
       {
         path: "متوجهشدم2.isDisabled",
@@ -2209,11 +2224,9 @@ function PlasmicHomepage__RenderFunc(props: {
               plasmic_plasmic_rich_components_css.plasmic_tokens
             )}
             footer={
-              <Stack__
-                as={"div"}
+              <div
                 data-plasmic-name={"deleteCancel"}
                 data-plasmic-override={overrides.deleteCancel}
-                hasGap={true}
                 className={classNames(projectcss.all, sty.deleteCancel)}
               >
                 <Button
@@ -2564,7 +2577,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     }
                   </div>
                 </Button>
-              </Stack__>
+              </div>
             }
             modalContentClassName={classNames({
               [sty["pcls_pFu_x0Xy_idR"]]: true
@@ -2629,11 +2642,9 @@ function PlasmicHomepage__RenderFunc(props: {
               </div>
             </div>
           </AntdModal>
-          <Stack__
-            as={"div"}
+          <div
             data-plasmic-name={"controlPanel"}
             data-plasmic-override={overrides.controlPanel}
-            hasGap={true}
             className={classNames(projectcss.all, sty.controlPanel)}
           >
             <div
@@ -2666,11 +2677,9 @@ function PlasmicHomepage__RenderFunc(props: {
               data-plasmic-override={overrides.searchSetting2}
               className={classNames(projectcss.all, sty.searchSetting2)}
             >
-              <Stack__
-                as={"div"}
+              <div
                 data-plasmic-name={"searchinputSetting"}
                 data-plasmic-override={overrides.searchinputSetting}
-                hasGap={true}
                 className={classNames(projectcss.all, sty.searchinputSetting)}
               >
                 <MenuIcon
@@ -2940,15 +2949,13 @@ function PlasmicHomepage__RenderFunc(props: {
                     ]) ?? ""
                   }
                 />
-              </Stack__>
+              </div>
               {$state.mainSelectedTab === "patients" ||
               $state.searchbarLnameNcode.value !== "" ||
               $state.searchbarFname.value !== "" ? (
-                <Stack__
-                  as={"div"}
+                <div
                   data-plasmic-name={"dismissed"}
                   data-plasmic-override={overrides.dismissed}
-                  hasGap={true}
                   className={classNames(projectcss.all, sty.dismissed)}
                 >
                   <Switch
@@ -3104,14 +3111,12 @@ function PlasmicHomepage__RenderFunc(props: {
                       "\u062c\u0633\u062a \u0648 \u062c\u0648 \u062f\u0631 \u0645\u06cc\u0627\u0646 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647 : "
                     }
                   </div>
-                </Stack__>
+                </div>
               ) : null}
             </div>
-            <Stack__
-              as={"div"}
+            <div
               data-plasmic-name={"mainTabs"}
               data-plasmic-override={overrides.mainTabs}
-              hasGap={true}
               className={classNames(projectcss.all, sty.mainTabs)}
             >
               <div
@@ -3519,7 +3524,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   </div>
                 </Button>
               </div>
-            </Stack__>
+            </div>
             {(() => {
               try {
                 return $state.searchbarLnameNcode.value !== "";
@@ -3547,7 +3552,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 {""}
               </div>
             ) : null}
-          </Stack__>
+          </div>
           {(() => {
             try {
               return (
@@ -3911,11 +3916,9 @@ function PlasmicHomepage__RenderFunc(props: {
                         const currentItem = __plasmic_item_0;
                         const currentIndex = __plasmic_idx_0;
                         return (
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"inboxConsultCard"}
                             data-plasmic-override={overrides.inboxConsultCard}
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.inboxConsultCard
@@ -4305,6 +4308,37 @@ function PlasmicHomepage__RenderFunc(props: {
                                     </div>
                                     {(() => {
                                       try {
+                                        return currentItem.state === 3;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return true;
+                                        }
+                                        throw e;
+                                      }
+                                    })() ? (
+                                      <div
+                                        data-plasmic-name={"replyDraftTag"}
+                                        data-plasmic-override={
+                                          overrides.replyDraftTag
+                                        }
+                                        className={classNames(
+                                          projectcss.all,
+                                          projectcss.__wab_text,
+                                          sty.replyDraftTag
+                                        )}
+                                        dir={"rtl"}
+                                      >
+                                        {
+                                          "\u067e\u06cc\u0634\u200c\u0646\u0648\u06cc\u0633 \u067e\u0627\u0633\u062e"
+                                        }
+                                      </div>
+                                    ) : null}
+                                    {(() => {
+                                      try {
                                         return (
                                           currentItem.state === 4 &&
                                           currentItem.paper_reply
@@ -4371,7 +4405,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                     ) : null}
                                     {(() => {
                                       try {
-                                        return currentItem.state != 4;
+                                        return (
+                                          currentItem.state === 1 ||
+                                          currentItem.state === 2
+                                        );
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
@@ -5512,7 +5549,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 </div>
                               </div>
                             </div>
-                          </Stack__>
+                          </div>
                         );
                       })}
                     </React.Fragment>
@@ -6588,21 +6625,17 @@ function PlasmicHomepage__RenderFunc(props: {
                             ? $state.mainSelectedTab === "patients"
                             : true
                         ) ? (
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"patientsTabs"}
                             data-plasmic-override={overrides.patientsTabs}
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.patientsTabs
                             )}
                           >
-                            <Stack__
-                              as={"div"}
+                            <div
                               data-plasmic-name={"wardButtonStack"}
                               data-plasmic-override={overrides.wardButtonStack}
-                              hasGap={true}
                               className={classNames(
                                 projectcss.all,
                                 sty.wardButtonStack
@@ -7076,7 +7109,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   </React.Fragment>
                                 </div>
                               </Button>
-                            </Stack__>
+                            </div>
                             <div
                               data-plasmic-name={"physicianButtonStack"}
                               data-plasmic-override={
@@ -7906,7 +7939,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 </div>
                               </Button>
                             </div>
-                          </Stack__>
+                          </div>
                         ) : null}
                         {(
                           hasVariant(globalVariants, "screen", "mobileFirst")
@@ -7931,13 +7964,11 @@ function PlasmicHomepage__RenderFunc(props: {
                                 }
                               })()
                         ) ? (
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"sortingTabWardFilter"}
                             data-plasmic-override={
                               overrides.sortingTabWardFilter
                             }
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.sortingTabWardFilter
@@ -8436,7 +8467,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 }
                               </div>
                             ) : null}
-                          </Stack__>
+                          </div>
                         ) : null}
                         {(
                           hasVariant(globalVariants, "screen", "mobileFirst")
@@ -8445,13 +8476,11 @@ function PlasmicHomepage__RenderFunc(props: {
                             : localStorage.getItem("patients_selected_tab") ===
                               "bookmark"
                         ) ? (
-                          <Stack__
-                            as={"div"}
+                          <div
                             data-plasmic-name={"sortingTabBookmarkFilter2"}
                             data-plasmic-override={
                               overrides.sortingTabBookmarkFilter2
                             }
-                            hasGap={true}
                             className={classNames(
                               projectcss.all,
                               sty.sortingTabBookmarkFilter2
@@ -9210,7 +9239,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 }
                               </div>
                             ) : null}
-                          </Stack__>
+                          </div>
                         ) : null}
                         {(
                           hasVariant(globalVariants, "screen", "mobileFirst")
@@ -9510,7 +9539,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         )}
                       >
                         {
-                          "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0635\u0631\u0641\u0627 \u0628\u0627 \u06a9\u062f \u067e\u0630\u06cc\u0631\u0634 \u0622\u0646 \u0647\u0627 \u0645\u06cc\u0633\u0631 \u0627\u0633\u062a \u0648 \u0628\u0627 \u0646\u0627\u0645\u060c \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u060c \u0646\u0627\u0645 \u0628\u062e\u0634\u060c \u0646\u0627\u0645 \u067e\u0632\u0634\u06a9 \u0645\u0639\u0627\u0644\u062c\u060c \u06a9\u062f \u0645\u0644\u06cc \u0648 \u06a9\u062f \u0628\u06cc\u0645\u0627\u0631 \u0627\u06cc\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0648\u062c\u0648\u062f \u0646\u062f\u0627\u0631\u062f"
+                          "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f."
                         }
                       </div>
                     ) : null}
@@ -9714,13 +9743,11 @@ function PlasmicHomepage__RenderFunc(props: {
                               })()}
                               key={currentIndex}
                             >
-                              <Stack__
-                                as={"div"}
+                              <div
                                 data-plasmic-name={"patientNameBookmarkIcon"}
                                 data-plasmic-override={
                                   overrides.patientNameBookmarkIcon
                                 }
-                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
                                   sty.patientNameBookmarkIcon,
@@ -9753,11 +9780,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                 </div>
                                 {currentItem.bookmarked === true &&
                                 currentItem.type === null ? (
-                                  <Stack__
-                                    as={"div"}
+                                  <div
                                     data-plasmic-name={"categorize"}
                                     data-plasmic-override={overrides.categorize}
-                                    hasGap={true}
                                     className={classNames(
                                       projectcss.all,
                                       sty.categorize
@@ -10461,7 +10486,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         </span>
                                       </React.Fragment>
                                     </div>
-                                  </Stack__>
+                                  </div>
                                 ) : null}
                                 <div
                                   data-plasmic-name={"firstLastName"}
@@ -10568,7 +10593,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                     />
                                   );
                                 })()}
-                              </Stack__>
+                              </div>
                               <div
                                 data-plasmic-name={"wardRoom"}
                                 data-plasmic-override={overrides.wardRoom}
@@ -11757,11 +11782,7 @@ function PlasmicHomepage__RenderFunc(props: {
           }}
           open={generateStateValueProp($state, ["modalWard", "open"])}
           title={
-            <Stack__
-              as={"div"}
-              hasGap={true}
-              className={classNames(projectcss.all, sty.freeBox__rmb7C)}
-            >
+            <div className={classNames(projectcss.all, sty.freeBox__rmb7C)}>
               <Icons8CloseSvgIcon
                 className={classNames(projectcss.all, sty.svg__iTh9P)}
                 onClick={async event => {
@@ -11908,7 +11929,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   ""
                 }
               />
-            </Stack__>
+            </div>
           }
           trigger={null}
           wrapClassName={classNames({ [sty["pcls_9pcykcaA_oRg"]]: true })}
@@ -12000,11 +12021,9 @@ function PlasmicHomepage__RenderFunc(props: {
                     skipPaths={[]}
                   />
 
-                  <Stack__
-                    as={"div"}
+                  <div
                     data-plasmic-name={"wardsList"}
                     data-plasmic-override={overrides.wardsList}
-                    hasGap={true}
                     className={classNames(projectcss.all, sty.wardsList)}
                   >
                     {(_par =>
@@ -12273,7 +12292,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         </div>
                       );
                     })}
-                  </Stack__>
+                  </div>
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -12309,11 +12328,7 @@ function PlasmicHomepage__RenderFunc(props: {
           }}
           open={generateStateValueProp($state, ["modalPhysician", "open"])}
           title={
-            <Stack__
-              as={"div"}
-              hasGap={true}
-              className={classNames(projectcss.all, sty.freeBox__rkeNk)}
-            >
+            <div className={classNames(projectcss.all, sty.freeBox__rkeNk)}>
               <Icons8CloseSvgIcon
                 className={classNames(projectcss.all, sty.svg___0Tmhc)}
                 onClick={async event => {
@@ -12380,11 +12395,9 @@ function PlasmicHomepage__RenderFunc(props: {
                 role={"img"}
               />
 
-              <Stack__
-                as={"div"}
+              <div
                 data-plasmic-name={"searchbars"}
                 data-plasmic-override={overrides.searchbars}
-                hasGap={true}
                 className={classNames(projectcss.all, sty.searchbars)}
               >
                 <TextInput
@@ -12566,8 +12579,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     ]) ?? ""
                   }
                 />
-              </Stack__>
-            </Stack__>
+              </div>
+            </div>
           }
           trigger={null}
           wrapClassName={classNames({ [sty["pcls_IF4RfoWSlpeq"]]: true })}
@@ -12638,11 +12651,9 @@ function PlasmicHomepage__RenderFunc(props: {
               <DataCtxReader__>
                 {$ctx => (
                   <React.Fragment>
-                    <Stack__
-                      as={"div"}
+                    <div
                       data-plasmic-name={"physiciansList2"}
                       data-plasmic-override={overrides.physiciansList2}
-                      hasGap={true}
                       className={classNames(
                         projectcss.all,
                         sty.physiciansList2
@@ -13053,7 +13064,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           }
                         </div>
                       ) : null}
-                    </Stack__>
+                    </div>
                     {(() => {
                       try {
                         return (
@@ -13159,11 +13170,9 @@ function PlasmicHomepage__RenderFunc(props: {
             }
             trigger={null}
           >
-            <Stack__
-              as={"div"}
+            <div
               data-plasmic-name={"filterTypes"}
               data-plasmic-override={overrides.filterTypes}
-              hasGap={true}
               className={classNames(projectcss.all, sty.filterTypes)}
             >
               <div
@@ -13627,7 +13636,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   "\u067e\u0627\u06a9 \u06a9\u0631\u062f\u0646 \u0641\u06cc\u0644\u062a\u0631 \u0647\u0627"
                 }
               </div>
-            </Stack__>
+            </div>
           </AntdModal>
         ) : null}
         {(() => {
@@ -13766,11 +13775,9 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                   trigger={null}
                 >
-                  <Stack__
-                    as={"div"}
+                  <div
                     data-plasmic-name={"serviceListContent"}
                     data-plasmic-override={overrides.serviceListContent}
-                    hasGap={true}
                     className={classNames(
                       projectcss.all,
                       sty.serviceListContent
@@ -14310,7 +14317,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         </div>
                       );
                     })}
-                  </Stack__>
+                  </div>
                 </AntdModal>
               )}
             </DataCtxReader__>
@@ -14728,7 +14735,7 @@ function PlasmicHomepage__RenderFunc(props: {
             </AntdModal>
           );
         })()}
-        {false
+        {window.location.origin === "https://thcsynapps.tums.ac.ir"
           ? (() => {
               const child$Props = {
                 className: classNames("__wab_instance", sty.modalNoticeBanner),
@@ -14809,7 +14816,22 @@ function PlasmicHomepage__RenderFunc(props: {
                               throw e;
                             }
                           })()
-                        : undefined
+                        : (() => {
+                            try {
+                              return (
+                                window.location.origin ===
+                                "https://thcsynapps.tums.ac.ir"
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
                   }
                 ],
                 []
@@ -15164,11 +15186,9 @@ function PlasmicHomepage__RenderFunc(props: {
                   data-plasmic-override={overrides.modalNps}
                   {...child$Props}
                 >
-                  <Stack__
-                    as={"div"}
+                  <div
                     data-plasmic-name={"columns"}
                     data-plasmic-override={overrides.columns}
-                    hasGap={true}
                     className={classNames(projectcss.all, sty.columns)}
                   >
                     <div
@@ -16810,7 +16830,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         {"10"}
                       </div>
                     </div>
-                  </Stack__>
+                  </div>
                 </AntdModal>
               );
             })()
@@ -17868,11 +17888,9 @@ function PlasmicHomepage__RenderFunc(props: {
                 </DataCtxReader__>
               </ApiFetcherComponent>
             </div>
-            <Stack__
-              as={"div"}
+            <div
               data-plasmic-name={"uploadSection"}
               data-plasmic-override={overrides.uploadSection}
-              hasGap={true}
               className={classNames(projectcss.all, sty.uploadSection)}
             >
               <UploadWrapper
@@ -18343,7 +18361,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 </div>
               </Button>
-            </Stack__>
+            </div>
           </div>
         </AntdModal>
         <AntdModal
@@ -18392,11 +18410,9 @@ function PlasmicHomepage__RenderFunc(props: {
             hasVariant(globalVariants, "screen", "mobileFirst") ? "90%" : "90%"
           }
         >
-          <Stack__
-            as={"div"}
+          <div
             data-plasmic-name={"deleteSection"}
             data-plasmic-override={overrides.deleteSection}
-            hasGap={true}
             className={classNames(projectcss.all, sty.deleteSection)}
           >
             <Button
@@ -18756,7 +18772,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 "\u0622\u06cc\u0627 \u0627\u0632 \u062d\u0630\u0641 \u0627\u06cc\u0646 \u0634\u0631\u062d \u062d\u0627\u0644 \u0627\u0637\u0645\u06cc\u0646\u0627\u0646 \u062f\u0627\u0631\u06cc\u062f\u061f"
               }
             </div>
-          </Stack__>
+          </div>
         </AntdModal>
       </div>
     </React.Fragment>
@@ -18819,6 +18835,7 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "consultCardNumber",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -18998,6 +19015,7 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "consultCardNumber",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -19167,6 +19185,7 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "consultCardNumber",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -19227,6 +19246,7 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "consultCardNumber",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -19267,6 +19287,7 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "consultCardNumber",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -19300,6 +19321,7 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "consultCardNumber",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -19332,6 +19354,7 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "consultCardNumber",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -19361,6 +19384,7 @@ const PlasmicDescendants = {
     "receiverDoctor",
     "tagsAndDelete",
     "consultCardNumber",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
@@ -19401,12 +19425,14 @@ const PlasmicDescendants = {
   tagsAndDelete: [
     "tagsAndDelete",
     "consultCardNumber",
+    "replyDraftTag",
     "paperRepliedStatus",
     "inAppRepliedStatus",
     "empty",
     "deleteConsult"
   ],
   consultCardNumber: ["consultCardNumber"],
+  replyDraftTag: ["replyDraftTag"],
   paperRepliedStatus: ["paperRepliedStatus"],
   inAppRepliedStatus: ["inAppRepliedStatus"],
   empty: ["empty"],
@@ -19872,6 +19898,7 @@ type NodeDefaultElementType = {
   receiverDoctor: "div";
   tagsAndDelete: "div";
   consultCardNumber: "div";
+  replyDraftTag: "div";
   paperRepliedStatus: "div";
   inAppRepliedStatus: "div";
   empty: "div";
@@ -20121,6 +20148,7 @@ export const PlasmicHomepage = Object.assign(
     receiverDoctor: makeNodeComponent("receiverDoctor"),
     tagsAndDelete: makeNodeComponent("tagsAndDelete"),
     consultCardNumber: makeNodeComponent("consultCardNumber"),
+    replyDraftTag: makeNodeComponent("replyDraftTag"),
     paperRepliedStatus: makeNodeComponent("paperRepliedStatus"),
     inAppRepliedStatus: makeNodeComponent("inAppRepliedStatus"),
     empty: makeNodeComponent("empty"),
