@@ -3858,9 +3858,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                                 const child$Props = {
                                                   admissionId: (() => {
                                                     try {
-                                                      return parseInt(
-                                                        $ctx.params.adm_id
-                                                      );
+                                                      return $ctx.params.adm_id;
                                                     } catch (e) {
                                                       if (
                                                         e instanceof
@@ -3936,9 +3934,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                                   },
                                                   patientId: (() => {
                                                     try {
-                                                      return parseInt(
-                                                        $ctx.params.code
-                                                      );
+                                                      return $ctx.params.code;
                                                     } catch (e) {
                                                       if (
                                                         e instanceof
