@@ -805,21 +805,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   throw e;
                 }
               })()
-            : (() => {
-                try {
-                  return (
-                    window.location.origin === "https://thcsynapps.tums.ac.ir"
-                  );
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return false;
-                  }
-                  throw e;
-                }
-              })()
+            : undefined
       },
       {
         path: "متوجهشدم2.isDisabled",
@@ -14735,7 +14721,7 @@ function PlasmicHomepage__RenderFunc(props: {
             </AntdModal>
           );
         })()}
-        {window.location.origin === "https://thcsynapps.tums.ac.ir"
+        {false
           ? (() => {
               const child$Props = {
                 className: classNames("__wab_instance", sty.modalNoticeBanner),
@@ -14816,22 +14802,7 @@ function PlasmicHomepage__RenderFunc(props: {
                               throw e;
                             }
                           })()
-                        : (() => {
-                            try {
-                              return (
-                                window.location.origin ===
-                                "https://thcsynapps.tums.ac.ir"
-                              );
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return false;
-                              }
-                              throw e;
-                            }
-                          })()
+                        : undefined
                   }
                 ],
                 []
