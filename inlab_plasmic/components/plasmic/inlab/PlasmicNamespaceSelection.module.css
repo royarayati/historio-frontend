@@ -115,3 +115,18 @@
   margin: 0px;
   border: 1px solid var(--token-9iYGdL7i3GKE);
 }
+.namespaceName2 {
+  position: relative;
+  width: 147px;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0px 4px 16px 0px #0706066b;
+  background: #ffffff;
+  white-space: pre-wrap;
+  border-radius: 5px;
+  padding: 8px;
+  margin: 0px;
+  border: 1px solid var(--token-9iYGdL7i3GKE);
+}

@@ -33,7 +33,6 @@ import {
   classNames,
   createPlasmicElementProxy,
   deriveRenderOpts,
-  ensureGlobalVariants,
   generateOnMutateForSpec,
   generateStateOnChangeProp,
   generateStateOnChangePropForCodeComponents,
@@ -62,11 +61,13 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToHomepage from "../../RedirectToHomepage"; // plasmic-import: x1Fxn6tnPsJ0/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
+import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
+import { _useStyleTokens as useStyleTokens_antd_5_hostless } from "../antd_5_hostless/PlasmicStyleTokensProvider"; // plasmic-import: ohDidvG9XsCeFumugENU3J/styleTokensProvider
+import { _useStyleTokens as useStyleTokens_plasmic_rich_components } from "../plasmic_rich_components/PlasmicStyleTokensProvider"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/styleTokensProvider
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
-import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
-import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicNamespaceSelection.module.css"; // plasmic-import: yfSr1skfxkHn/css
 
@@ -92,6 +93,7 @@ export type PlasmicNamespaceSelection__OverridesType = {
   namespaces?: Flex__<typeof ApiFetcherComponent>;
   namespacesList?: Flex__<"div">;
   namespaceName?: Flex__<"div">;
+  namespaceName2?: Flex__<"div">;
 };
 
 export interface DefaultNamespaceSelectionProps {}
@@ -135,6 +137,12 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const styleTokensClassNames = _useStyleTokens();
+  const styleTokensClassNames_antd_5_hostless =
+    useStyleTokens_antd_5_hostless();
+  const styleTokensClassNames_plasmic_rich_components =
+    useStyleTokens_plasmic_rich_components();
+
   return (
     <React.Fragment>
       <Head></Head>
@@ -156,9 +164,9 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
             projectcss.root_reset,
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
-            projectcss.plasmic_tokens,
-            plasmic_antd_5_hostless_css.plasmic_tokens,
-            plasmic_plasmic_rich_components_css.plasmic_tokens,
+            styleTokensClassNames,
+            styleTokensClassNames_antd_5_hostless,
+            styleTokensClassNames_plasmic_rich_components,
             sty.namespaceSelection
           )}
         >
@@ -218,226 +226,455 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                       data-plasmic-override={overrides.namespacesList}
                       className={classNames(projectcss.all, sty.namespacesList)}
                     >
-                      {(_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
-                          try {
-                            return $ctx.fetched_data.data;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return [];
-                            }
-                            throw e;
+                      {!(
+                        window.location.origin ===
+                          "https://synappsdemo.tums.ac.ir" &&
+                        $ctx.inlab_user.user.username === "inlabtest"
+                      )
+                        ? (_par =>
+                            !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                            (() => {
+                              try {
+                                return $ctx.fetched_data.data;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return [];
+                                }
+                                throw e;
+                              }
+                            })()
+                          ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                            const currentItem = __plasmic_item_0;
+                            const currentIndex = __plasmic_idx_0;
+                            return (
+                              <div
+                                data-plasmic-name={"namespaceName"}
+                                data-plasmic-override={overrides.namespaceName}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.namespaceName
+                                )}
+                                key={currentIndex}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["namespaceIdTitleLocalStorage"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return (() => {
+                                              localStorage.setItem(
+                                                "inlab_user_namespace_id",
+                                                currentItem.id
+                                              );
+                                              localStorage.setItem(
+                                                "inlab_user_namespace_title",
+                                                currentItem.title
+                                              );
+                                              return localStorage.setItem(
+                                                "inlab_user_his_type",
+                                                currentItem.his_type
+                                              );
+                                            })();
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["namespaceIdTitleLocalStorage"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "namespaceIdTitleLocalStorage"
+                                    ] === "object" &&
+                                    typeof $steps[
+                                      "namespaceIdTitleLocalStorage"
+                                    ].then === "function"
+                                  ) {
+                                    $steps["namespaceIdTitleLocalStorage"] =
+                                      await $steps[
+                                        "namespaceIdTitleLocalStorage"
+                                      ];
+                                  }
+
+                                  $steps["resetFilterWardWardNameWardId"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return (() => {
+                                              localStorage.removeItem(
+                                                "patients_selected_tab"
+                                              );
+                                              localStorage.removeItem(
+                                                "main_selected_tab"
+                                              );
+                                              localStorage.removeItem(
+                                                "bookmarked_list2"
+                                              );
+                                              localStorage.removeItem(
+                                                "ward_list"
+                                              );
+                                              localStorage.removeItem(
+                                                "filter_ward_name"
+                                              );
+                                              localStorage.removeItem(
+                                                "filter_ward_id"
+                                              );
+                                              localStorage.removeItem(
+                                                "physicians_list"
+                                              );
+                                              localStorage.removeItem(
+                                                "filter_physician_name"
+                                              );
+                                              return localStorage.removeItem(
+                                                "filter_physician_id"
+                                              );
+                                            })();
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["resetFilterWardWardNameWardId"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "resetFilterWardWardNameWardId"
+                                    ] === "object" &&
+                                    typeof $steps[
+                                      "resetFilterWardWardNameWardId"
+                                    ].then === "function"
+                                  ) {
+                                    $steps["resetFilterWardWardNameWardId"] =
+                                      await $steps[
+                                        "resetFilterWardWardNameWardId"
+                                      ];
+                                  }
+
+                                  $steps["logConsole"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return (() => {
+                                              console.log(
+                                                `selected_tab: ${localStorage.getItem(
+                                                  "selected_tab"
+                                                )}`
+                                              );
+                                              console.log(
+                                                `bookmark_list: ${localStorage.getItem(
+                                                  "bookmark_list"
+                                                )}`
+                                              );
+                                              console.log(
+                                                `ward_list: ${localStorage.getItem(
+                                                  "ward_list"
+                                                )}`
+                                              );
+                                              console.log(
+                                                `filter_ward_name: ${localStorage.getItem(
+                                                  "filter_ward_name"
+                                                )}`
+                                              );
+                                              console.log(
+                                                `filter_ward_id: ${localStorage.getItem(
+                                                  "filter_ward_id"
+                                                )}`
+                                              );
+                                              console.log(
+                                                `physicians_list: ${localStorage.getItem(
+                                                  "physicians_list"
+                                                )}`
+                                              );
+                                              console.log(
+                                                `filter_physician_name: ${localStorage.getItem(
+                                                  "filter_physician_name"
+                                                )}`
+                                              );
+                                              return console.log(
+                                                `filter_physician_id: ${localStorage.getItem(
+                                                  "filter_physician_id"
+                                                )}`
+                                              );
+                                            })();
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["logConsole"] != null &&
+                                    typeof $steps["logConsole"] === "object" &&
+                                    typeof $steps["logConsole"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["logConsole"] = await $steps[
+                                      "logConsole"
+                                    ];
+                                  }
+
+                                  $steps["goToHomepage"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          destination: `/patients`
+                                        };
+                                        return (({ destination }) => {
+                                          if (
+                                            typeof destination === "string" &&
+                                            destination.startsWith("#")
+                                          ) {
+                                            document
+                                              .getElementById(
+                                                destination.substr(1)
+                                              )
+                                              .scrollIntoView({
+                                                behavior: "smooth"
+                                              });
+                                          } else {
+                                            __nextRouter?.push(destination);
+                                          }
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["goToHomepage"] != null &&
+                                    typeof $steps["goToHomepage"] ===
+                                      "object" &&
+                                    typeof $steps["goToHomepage"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["goToHomepage"] = await $steps[
+                                      "goToHomepage"
+                                    ];
+                                  }
+                                }}
+                              >
+                                <React.Fragment>
+                                  {currentItem.title}
+                                </React.Fragment>
+                              </div>
+                            );
+                          })
+                        : null}
+                      {(() => {
+                        try {
+                          return (
+                            window.location.origin ===
+                              "https://synappsdemo.tums.ac.ir" &&
+                            $ctx.inlab_user.user.username === "inlabtest"
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
                           }
-                        })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const currentItem = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
-                          <div
-                            data-plasmic-name={"namespaceName"}
-                            data-plasmic-override={overrides.namespaceName}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.namespaceName
-                            )}
-                            key={currentIndex}
-                            onClick={async event => {
-                              const $steps = {};
+                          throw e;
+                        }
+                      })() ? (
+                        <div
+                          data-plasmic-name={"namespaceName2"}
+                          data-plasmic-override={overrides.namespaceName2}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.namespaceName2
+                          )}
+                          onClick={async event => {
+                            const $steps = {};
 
-                              $steps["namespaceIdTitleLocalStorage"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return (() => {
-                                          localStorage.setItem(
-                                            "inlab_user_namespace_id",
-                                            currentItem.id
-                                          );
-                                          localStorage.setItem(
-                                            "inlab_user_namespace_title",
-                                            currentItem.title
-                                          );
-                                          return localStorage.setItem(
-                                            "inlab_user_his_type",
-                                            currentItem.his_type
-                                          );
-                                        })();
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["namespaceIdTitleLocalStorage"] !=
-                                  null &&
-                                typeof $steps[
-                                  "namespaceIdTitleLocalStorage"
-                                ] === "object" &&
-                                typeof $steps["namespaceIdTitleLocalStorage"]
-                                  .then === "function"
-                              ) {
-                                $steps["namespaceIdTitleLocalStorage"] =
-                                  await $steps["namespaceIdTitleLocalStorage"];
-                              }
+                            $steps["namespaceIdTitleLocalStorage"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        localStorage.setItem(
+                                          "inlab_user_namespace_id",
+                                          6
+                                        );
+                                        localStorage.setItem(
+                                          "inlab_user_namespace_title",
+                                          "تست (mock)"
+                                        );
+                                        return localStorage.setItem(
+                                          "inlab_user_his_type",
+                                          "mock"
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["namespaceIdTitleLocalStorage"] != null &&
+                              typeof $steps["namespaceIdTitleLocalStorage"] ===
+                                "object" &&
+                              typeof $steps["namespaceIdTitleLocalStorage"]
+                                .then === "function"
+                            ) {
+                              $steps["namespaceIdTitleLocalStorage"] =
+                                await $steps["namespaceIdTitleLocalStorage"];
+                            }
 
-                              $steps["resetFilterWardWardNameWardId"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return (() => {
-                                          localStorage.removeItem(
-                                            "patients_selected_tab"
-                                          );
-                                          localStorage.removeItem(
-                                            "main_selected_tab"
-                                          );
-                                          localStorage.removeItem(
-                                            "bookmarked_list2"
-                                          );
-                                          localStorage.removeItem("ward_list");
-                                          localStorage.removeItem(
+                            $steps["resetFilterWardWardNameWardId"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        localStorage.removeItem(
+                                          "patients_selected_tab"
+                                        );
+                                        localStorage.removeItem(
+                                          "main_selected_tab"
+                                        );
+                                        localStorage.removeItem(
+                                          "bookmarked_list2"
+                                        );
+                                        localStorage.removeItem("ward_list");
+                                        localStorage.removeItem(
+                                          "filter_ward_name"
+                                        );
+                                        localStorage.removeItem(
+                                          "filter_ward_id"
+                                        );
+                                        localStorage.removeItem(
+                                          "physicians_list"
+                                        );
+                                        localStorage.removeItem(
+                                          "filter_physician_name"
+                                        );
+                                        return localStorage.removeItem(
+                                          "filter_physician_id"
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["resetFilterWardWardNameWardId"] != null &&
+                              typeof $steps["resetFilterWardWardNameWardId"] ===
+                                "object" &&
+                              typeof $steps["resetFilterWardWardNameWardId"]
+                                .then === "function"
+                            ) {
+                              $steps["resetFilterWardWardNameWardId"] =
+                                await $steps["resetFilterWardWardNameWardId"];
+                            }
+
+                            $steps["logConsole"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        console.log(
+                                          `selected_tab: ${localStorage.getItem(
+                                            "selected_tab"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `bookmark_list: ${localStorage.getItem(
+                                            "bookmark_list"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `ward_list: ${localStorage.getItem(
+                                            "ward_list"
+                                          )}`
+                                        );
+                                        console.log(
+                                          `filter_ward_name: ${localStorage.getItem(
                                             "filter_ward_name"
-                                          );
-                                          localStorage.removeItem(
+                                          )}`
+                                        );
+                                        console.log(
+                                          `filter_ward_id: ${localStorage.getItem(
                                             "filter_ward_id"
-                                          );
-                                          localStorage.removeItem(
+                                          )}`
+                                        );
+                                        console.log(
+                                          `physicians_list: ${localStorage.getItem(
                                             "physicians_list"
-                                          );
-                                          localStorage.removeItem(
+                                          )}`
+                                        );
+                                        console.log(
+                                          `filter_physician_name: ${localStorage.getItem(
                                             "filter_physician_name"
-                                          );
-                                          return localStorage.removeItem(
+                                          )}`
+                                        );
+                                        return console.log(
+                                          `filter_physician_id: ${localStorage.getItem(
                                             "filter_physician_id"
-                                          );
-                                        })();
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["resetFilterWardWardNameWardId"] !=
-                                  null &&
-                                typeof $steps[
-                                  "resetFilterWardWardNameWardId"
-                                ] === "object" &&
-                                typeof $steps["resetFilterWardWardNameWardId"]
-                                  .then === "function"
-                              ) {
-                                $steps["resetFilterWardWardNameWardId"] =
-                                  await $steps["resetFilterWardWardNameWardId"];
-                              }
+                                          )}`
+                                        );
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["logConsole"] != null &&
+                              typeof $steps["logConsole"] === "object" &&
+                              typeof $steps["logConsole"].then === "function"
+                            ) {
+                              $steps["logConsole"] = await $steps["logConsole"];
+                            }
 
-                              $steps["logConsole"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      customFunction: async () => {
-                                        return (() => {
-                                          console.log(
-                                            `selected_tab: ${localStorage.getItem(
-                                              "selected_tab"
-                                            )}`
-                                          );
-                                          console.log(
-                                            `bookmark_list: ${localStorage.getItem(
-                                              "bookmark_list"
-                                            )}`
-                                          );
-                                          console.log(
-                                            `ward_list: ${localStorage.getItem(
-                                              "ward_list"
-                                            )}`
-                                          );
-                                          console.log(
-                                            `filter_ward_name: ${localStorage.getItem(
-                                              "filter_ward_name"
-                                            )}`
-                                          );
-                                          console.log(
-                                            `filter_ward_id: ${localStorage.getItem(
-                                              "filter_ward_id"
-                                            )}`
-                                          );
-                                          console.log(
-                                            `physicians_list: ${localStorage.getItem(
-                                              "physicians_list"
-                                            )}`
-                                          );
-                                          console.log(
-                                            `filter_physician_name: ${localStorage.getItem(
-                                              "filter_physician_name"
-                                            )}`
-                                          );
-                                          return console.log(
-                                            `filter_physician_id: ${localStorage.getItem(
-                                              "filter_physician_id"
-                                            )}`
-                                          );
-                                        })();
-                                      }
-                                    };
-                                    return (({ customFunction }) => {
-                                      return customFunction();
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["logConsole"] != null &&
-                                typeof $steps["logConsole"] === "object" &&
-                                typeof $steps["logConsole"].then === "function"
-                              ) {
-                                $steps["logConsole"] = await $steps[
-                                  "logConsole"
-                                ];
-                              }
-
-                              $steps["goToHomepage"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      destination: `/patients`
-                                    };
-                                    return (({ destination }) => {
-                                      if (
-                                        typeof destination === "string" &&
-                                        destination.startsWith("#")
-                                      ) {
-                                        document
-                                          .getElementById(destination.substr(1))
-                                          .scrollIntoView({
-                                            behavior: "smooth"
-                                          });
-                                      } else {
-                                        __nextRouter?.push(destination);
-                                      }
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["goToHomepage"] != null &&
-                                typeof $steps["goToHomepage"] === "object" &&
-                                typeof $steps["goToHomepage"].then ===
-                                  "function"
-                              ) {
-                                $steps["goToHomepage"] = await $steps[
-                                  "goToHomepage"
-                                ];
-                              }
-                            }}
-                          >
-                            <React.Fragment>{currentItem.title}</React.Fragment>
-                          </div>
-                        );
-                      })}
+                            $steps["goToHomepage"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    destination: `/patients`
+                                  };
+                                  return (({ destination }) => {
+                                    if (
+                                      typeof destination === "string" &&
+                                      destination.startsWith("#")
+                                    ) {
+                                      document
+                                        .getElementById(destination.substr(1))
+                                        .scrollIntoView({ behavior: "smooth" });
+                                    } else {
+                                      __nextRouter?.push(destination);
+                                    }
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["goToHomepage"] != null &&
+                              typeof $steps["goToHomepage"] === "object" &&
+                              typeof $steps["goToHomepage"].then === "function"
+                            ) {
+                              $steps["goToHomepage"] = await $steps[
+                                "goToHomepage"
+                              ];
+                            }
+                          }}
+                        >
+                          {
+                            "\u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 \u062a\u0633\u062a (mock)"
+                          }
+                        </div>
+                      ) : null}
                     </div>
                   )}
                 </DataCtxReader__>
@@ -460,7 +697,8 @@ const PlasmicDescendants = {
     "text",
     "namespaces",
     "namespacesList",
-    "namespaceName"
+    "namespaceName",
+    "namespaceName2"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToHomepage: ["redirectToHomepage"],
@@ -470,19 +708,27 @@ const PlasmicDescendants = {
     "text",
     "namespaces",
     "namespacesList",
-    "namespaceName"
+    "namespaceName",
+    "namespaceName2"
   ],
   namespacesContent: [
     "namespacesContent",
     "text",
     "namespaces",
     "namespacesList",
-    "namespaceName"
+    "namespaceName",
+    "namespaceName2"
   ],
   text: ["text"],
-  namespaces: ["namespaces", "namespacesList", "namespaceName"],
-  namespacesList: ["namespacesList", "namespaceName"],
-  namespaceName: ["namespaceName"]
+  namespaces: [
+    "namespaces",
+    "namespacesList",
+    "namespaceName",
+    "namespaceName2"
+  ],
+  namespacesList: ["namespacesList", "namespaceName", "namespaceName2"],
+  namespaceName: ["namespaceName"],
+  namespaceName2: ["namespaceName2"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -497,6 +743,7 @@ type NodeDefaultElementType = {
   namespaces: typeof ApiFetcherComponent;
   namespacesList: "div";
   namespaceName: "div";
+  namespaceName2: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -567,6 +814,7 @@ export const PlasmicNamespaceSelection = Object.assign(
     namespaces: makeNodeComponent("namespaces"),
     namespacesList: makeNodeComponent("namespacesList"),
     namespaceName: makeNodeComponent("namespaceName"),
+    namespaceName2: makeNodeComponent("namespaceName2"),
 
     // Metadata about props expected for PlasmicNamespaceSelection
     internalVariantProps: PlasmicNamespaceSelection__VariantProps,

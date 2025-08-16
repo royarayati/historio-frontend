@@ -5,12 +5,13 @@
 // Plasmic Project: wjafXWEvDytFogT7SiMy2v
 
 import * as React from "react";
-import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
+
+import { hasVariant } from "@plasmicapp/react-web";
+import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
 import { CommerceProviderComponent } from "@plasmicpkgs/commerce-shopify";
 import { AuthGlobalContext } from "../../../utils/AuthGlobalContext"; // plasmic-import: Ys_jKOzaYeYo/codeComponent
 import { EmbedCss } from "@plasmicpkgs/plasmic-embed-css";
-import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 export interface GlobalContextsProviderProps {
   children?: React.ReactElement;
@@ -39,10 +40,7 @@ export default function GlobalContextsProvider(
     embedCssProps
   } = props;
 
-  const globalVariants = ensureGlobalVariants({
-    screen: useScreenVariantsjEqVmdAbnKYc()
-  });
-
+  const globalVariants = _useGlobalVariants();
   return (
     <AntdConfigProvider
       {...antdConfigProviderProps}
