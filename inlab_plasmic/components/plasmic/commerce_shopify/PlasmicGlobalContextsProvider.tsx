@@ -5,7 +5,8 @@
 // Plasmic Project: i3z63WaCLuRiSZRBwZC8d1
 
 import * as React from "react";
-import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
+
+import { _useGlobalVariants } from "./plasmic"; // plasmic-import: i3z63WaCLuRiSZRBwZC8d1/projectModule
 import { CommerceProviderComponent } from "@plasmicpkgs/commerce-shopify";
 
 export interface GlobalContextsProviderProps {
