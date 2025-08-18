@@ -1687,7 +1687,6 @@
   .text__scVr8 {
     left: auto;
     top: auto;
-    display: block;
   }
 }
 .text__vH4JT {
@@ -1706,11 +1705,6 @@
   min-width: 0;
   border-radius: 5px;
   padding: 8px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .text__vH4JT {
-    display: block;
-  }
 }
 .paraclinicReportsSection {
   display: grid;

@@ -5,8 +5,7 @@
 // Plasmic Project: ohDidvG9XsCeFumugENU3J
 
 import * as React from "react";
-
-import { _useGlobalVariants } from "./plasmic"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectModule
+import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
 
 export interface GlobalContextsProviderProps {

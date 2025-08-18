@@ -33,6 +33,7 @@ import {
   classNames,
   createPlasmicElementProxy,
   deriveRenderOpts,
+  ensureGlobalVariants,
   generateOnMutateForSpec,
   generateStateOnChangeProp,
   generateStateOnChangePropForCodeComponents,
@@ -70,13 +71,13 @@ import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
-import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
-import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_antd_5_hostless } from "../antd_5_hostless/PlasmicStyleTokensProvider"; // plasmic-import: ohDidvG9XsCeFumugENU3J/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_plasmic_rich_components } from "../plasmic_rich_components/PlasmicStyleTokensProvider"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/styleTokensProvider
+
+import { useScreenVariants as useScreenVariantsjEqVmdAbnKYc } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: jEqVmdAbnKYc/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicImagingReportList.module.css"; // plasmic-import: AFB-1jxjMqDb/css
 
@@ -1042,12 +1043,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
     $refs
   });
 
-  const globalVariants = _useGlobalVariants();
-  const styleTokensClassNames = _useStyleTokens();
-  const styleTokensClassNames_antd_5_hostless =
-    useStyleTokens_antd_5_hostless();
-  const styleTokensClassNames_plasmic_rich_components =
-    useStyleTokens_plasmic_rich_components();
+  const globalVariants = ensureGlobalVariants({
+    screen: useScreenVariantsjEqVmdAbnKYc()
+  });
 
   return (
     <React.Fragment>
@@ -1069,9 +1067,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
           projectcss.root_reset,
           projectcss.plasmic_default_styles,
           projectcss.plasmic_mixins,
-          styleTokensClassNames,
-          styleTokensClassNames_antd_5_hostless,
-          styleTokensClassNames_plasmic_rich_components,
+          projectcss.plasmic_tokens,
+          plasmic_antd_5_hostless_css.plasmic_tokens,
+          plasmic_plasmic_rich_components_css.plasmic_tokens,
           sty.paraclinicReportsList,
           {
             [sty.paraclinicReportsListshowReportSummary]: hasVariant(
@@ -3947,9 +3945,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
             projectcss.root_reset,
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
-            styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components
+            projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens
           )}
           hideFooter={true}
           maskClosable={true}
@@ -4497,9 +4495,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
             projectcss.root_reset,
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
-            styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components
+            projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens
           )}
           hideFooter={true}
           maskClosable={true}
@@ -5097,9 +5095,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
             projectcss.root_reset,
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
-            styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components
+            projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens
           )}
           hideFooter={true}
           maskClosable={true}
@@ -5554,9 +5552,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
             projectcss.root_reset,
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
-            styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components
+            projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens
           )}
           hideFooter={true}
           maskClosable={true}
@@ -7345,12 +7343,25 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     ) : null}
                     {(
                       hasVariant(globalVariants, "screen", "mobileFirst")
-                        ? $ctx.fetched_data.loading === false &&
-                          $ctx.fetched_data.data &&
-                          $ctx.fetched_data.data.radiology_services.length === 0
-                        : $ctx.fetched_data.loading === false &&
-                          $ctx.fetched_data.data &&
-                          $ctx.fetched_data.data.radiology_services.length === 0
+                        ? false
+                        : (() => {
+                            try {
+                              return (
+                                $ctx.fetched_data.loading === false &&
+                                $ctx.fetched_data.data &&
+                                $ctx.fetched_data.data.radiology_services
+                                  .length === 0
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return true;
+                              }
+                              throw e;
+                            }
+                          })()
                     ) ? (
                       <div
                         className={classNames(
@@ -7366,46 +7377,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     ) : null}
                     {(
                       hasVariant(globalVariants, "screen", "mobileFirst")
-                        ? (() => {
-                            try {
-                              return (
-                                $ctx.fetched_data.loading === false &&
-                                localStorage.getItem("inlab_user_his_type") ===
-                                  "tums_api" &&
-                                (($ctx.fetched_data.response &&
-                                  $ctx.fetched_data.response.status === 422) ||
-                                  $ctx.fetched_data.status !== 200)
-                              );
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return true;
-                              }
-                              throw e;
-                            }
-                          })()
-                        : (() => {
-                            try {
-                              return (
-                                $ctx.fetched_data.loading === false &&
-                                localStorage.getItem("inlab_user_his_type") ===
-                                  "tums_api" &&
-                                (($ctx.fetched_data.response &&
-                                  $ctx.fetched_data.response.status === 422) ||
-                                  $ctx.fetched_data.status !== 200)
-                              );
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return true;
-                              }
-                              throw e;
-                            }
-                          })()
+                        ? false
+                        : false
                     ) ? (
                       <div
                         className={classNames(
