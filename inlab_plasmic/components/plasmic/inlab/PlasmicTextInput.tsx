@@ -33,6 +33,7 @@ import {
   classNames,
   createPlasmicElementProxy,
   deriveRenderOpts,
+  ensureGlobalVariants,
   generateOnMutateForSpec,
   generateStateOnChangeProp,
   generateStateOnChangePropForCodeComponents,
@@ -60,13 +61,10 @@ import {
 
 import * as pp from "@plasmicapp/react-web";
 
-import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
-import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_antd_5_hostless } from "../antd_5_hostless/PlasmicStyleTokensProvider"; // plasmic-import: ohDidvG9XsCeFumugENU3J/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_plasmic_rich_components } from "../plasmic_rich_components/PlasmicStyleTokensProvider"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/styleTokensProvider
-
 import "@plasmicapp/react-web/lib/plasmic.css";
 
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicTextInput.module.css"; // plasmic-import: WB4OwDxc51ck/css
 
@@ -270,12 +268,6 @@ function PlasmicTextInput__RenderFunc(props: {
     focus_input: isInputFocus
   };
 
-  const styleTokensClassNames = _useStyleTokens();
-  const styleTokensClassNames_antd_5_hostless =
-    useStyleTokens_antd_5_hostless();
-  const styleTokensClassNames_plasmic_rich_components =
-    useStyleTokens_plasmic_rich_components();
-
   return (
     <div
       data-plasmic-name={"textInput"}
@@ -287,9 +279,9 @@ function PlasmicTextInput__RenderFunc(props: {
         projectcss.root_reset,
         projectcss.plasmic_default_styles,
         projectcss.plasmic_mixins,
-        styleTokensClassNames,
-        styleTokensClassNames_antd_5_hostless,
-        styleTokensClassNames_plasmic_rich_components,
+        projectcss.plasmic_tokens,
+        plasmic_antd_5_hostless_css.plasmic_tokens,
+        plasmic_plasmic_rich_components_css.plasmic_tokens,
         sty.textInput,
         {
           [sty.textInput___focusVisibleWithin]:
@@ -446,15 +438,18 @@ function PlasmicTextInput__RenderFunc(props: {
               "showStartIcon"
             )
           })}
+          onClick={async event => {
+            const $steps = {};
+          }}
         >
           {renderPlasmicSlot({
-            defaultContents:
-              $state.value !== "" ? (
-                <Icons8CloseSvgIcon
-                  className={classNames(projectcss.all, sty.svg__m0Xvn)}
-                  role={"img"}
-                />
-              ) : null,
+            defaultContents: (
+              <Icons8CloseSvgIcon
+                className={classNames(projectcss.all, sty.svg__m0Xvn)}
+                role={"img"}
+              />
+            ),
+
             value: args.endIcon,
             className: classNames(sty.slotTargetEndIcon, {
               [sty.slotTargetEndIcon___focusVisibleWithin]:
