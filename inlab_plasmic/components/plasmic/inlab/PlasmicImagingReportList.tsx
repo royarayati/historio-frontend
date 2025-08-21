@@ -7040,19 +7040,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
             )}
           </DataCtxReader__>
         </ApiFetcherComponent>
-        {(() => {
-          try {
-            return $state.selectedTab === "ParaclinicReports";
-          } catch (e) {
-            if (
-              e instanceof TypeError ||
-              e?.plasmicType === "PlasmicUndefinedDataError"
-            ) {
-              return true;
-            }
-            throw e;
-          }
-        })() ? (
+        {$state.selectedTab === "ParaclinicReports" ? (
           <div
             data-plasmic-name={"paraclinicSection"}
             data-plasmic-override={overrides.paraclinicSection}
@@ -7846,89 +7834,87 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                         "mobileFirst"
                                       ) ? (
                                         <React.Fragment>
-                                          {(() => {
-                                            const gregorianDate = new Date(
-                                              currentItem.service_datetime
-                                            );
-                                            const shamsiDate =
-                                              new Intl.DateTimeFormat(
-                                                "fa-IR"
-                                              ).format(gregorianDate);
-                                            const shamsiTime =
-                                              gregorianDate.toLocaleTimeString(
-                                                "fa-IR",
-                                                { hour12: false }
-                                              );
-                                            const englishDate =
-                                              shamsiDate.replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
-                                            const englishTime =
-                                              shamsiTime.replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
-                                            return `${englishDate}  ${englishTime}`;
-                                          })()}
-                                        </React.Fragment>
-                                      ) : (
-                                        <React.Fragment>
-                                          {
-                                            // (() => {
-                                            //   const gregorianDate = new Date(currentItem.service_datetime);
-                                            //   gregorianDate.setSeconds(0);
-                                            //   const shamsiDate = new Intl.DateTimeFormat('fa-IR').format(gregorianDate);
-                                            //   const shamsiTime = gregorianDate.toLocaleTimeString('fa-IR', { hour12: false });
-                                            //   const englishDate = shamsiDate.replace(/[۰-۹]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 1728));
-                                            //   const englishTime = shamsiTime.replace(/[۰-۹]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 1728));
-                                            //   const timeWithoutSeconds = englishTime.split(':').slice(0, 2).join(':');
-                                            //   return `${englishDate}  ${timeWithoutSeconds}`;
-                                            // })()
-
-                                            localStorage.getItem(
-                                              "inlab_user_his_type"
-                                            ) !== "tums_api" &&
-                                            localStorage.getItem(
-                                              "inlab_user_his_type"
-                                            ) !== "tebvarayane_db"
-                                              ? (() => {
-                                                  const gregorianDate =
-                                                    new Date(
-                                                      currentItem.service_datetime
-                                                    );
-                                                  const shamsiDate =
-                                                    new Intl.DateTimeFormat(
-                                                      "fa-IR"
-                                                    ).format(gregorianDate);
-                                                  const shamsiTime =
-                                                    gregorianDate.toLocaleTimeString(
-                                                      "fa-IR",
-                                                      { hour12: false }
-                                                    );
-                                                  const englishDate =
-                                                    shamsiDate.replace(
-                                                      /[۰-۹]/g,
-                                                      d =>
-                                                        String.fromCharCode(
-                                                          d.charCodeAt(0) - 1728
-                                                        )
-                                                    );
-                                                  const englishTime = shamsiTime
-                                                    .replace(/[۰-۹]/g, d =>
+                                          {localStorage.getItem(
+                                            "inlab_user_his_type"
+                                          ) !== "tums_api" &&
+                                          localStorage.getItem(
+                                            "inlab_user_his_type"
+                                          ) !== "tebvarayane_db"
+                                            ? (() => {
+                                                const gregorianDate = new Date(
+                                                  currentItem.service_datetime
+                                                );
+                                                const shamsiDate =
+                                                  new Intl.DateTimeFormat(
+                                                    "fa-IR"
+                                                  ).format(gregorianDate);
+                                                const shamsiTime =
+                                                  gregorianDate.toLocaleTimeString(
+                                                    "fa-IR",
+                                                    { hour12: false }
+                                                  );
+                                                const englishDate =
+                                                  shamsiDate.replace(
+                                                    /[۰-۹]/g,
+                                                    d =>
                                                       String.fromCharCode(
                                                         d.charCodeAt(0) - 1728
                                                       )
+                                                  );
+                                                const englishTime = shamsiTime
+                                                  .replace(/[۰-۹]/g, d =>
+                                                    String.fromCharCode(
+                                                      d.charCodeAt(0) - 1728
                                                     )
-                                                    .split(":")
-                                                    .slice(0, 2)
-                                                    .join(":");
-                                                  return `${englishDate}-${englishTime}`;
-                                                })()
-                                              : currentItem.service_datetime
-                                          }
+                                                  )
+                                                  .split(":")
+                                                  .slice(0, 2)
+                                                  .join(":");
+                                                return `${englishDate}-${englishTime}`;
+                                              })()
+                                            : currentItem.service_datetime}
+                                        </React.Fragment>
+                                      ) : (
+                                        <React.Fragment>
+                                          {localStorage.getItem(
+                                            "inlab_user_his_type"
+                                          ) !== "tums_api" &&
+                                          localStorage.getItem(
+                                            "inlab_user_his_type"
+                                          ) !== "tebvarayane_db"
+                                            ? (() => {
+                                                const gregorianDate = new Date(
+                                                  currentItem.service_datetime
+                                                );
+                                                const shamsiDate =
+                                                  new Intl.DateTimeFormat(
+                                                    "fa-IR"
+                                                  ).format(gregorianDate);
+                                                const shamsiTime =
+                                                  gregorianDate.toLocaleTimeString(
+                                                    "fa-IR",
+                                                    { hour12: false }
+                                                  );
+                                                const englishDate =
+                                                  shamsiDate.replace(
+                                                    /[۰-۹]/g,
+                                                    d =>
+                                                      String.fromCharCode(
+                                                        d.charCodeAt(0) - 1728
+                                                      )
+                                                  );
+                                                const englishTime = shamsiTime
+                                                  .replace(/[۰-۹]/g, d =>
+                                                    String.fromCharCode(
+                                                      d.charCodeAt(0) - 1728
+                                                    )
+                                                  )
+                                                  .split(":")
+                                                  .slice(0, 2)
+                                                  .join(":");
+                                                return `${englishDate}-${englishTime}`;
+                                              })()
+                                            : currentItem.service_datetime}
                                         </React.Fragment>
                                       )}
                                     </div>
