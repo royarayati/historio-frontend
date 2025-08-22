@@ -7334,7 +7334,24 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     ) : null}
                     {(
                       hasVariant(globalVariants, "screen", "mobileFirst")
-                        ? false
+                        ? (() => {
+                            try {
+                              return (
+                                $ctx.fetched_data.loading === false &&
+                                $ctx.fetched_data.data &&
+                                $ctx.fetched_data.data.radiology_services
+                                  .length === 0
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return true;
+                              }
+                              throw e;
+                            }
+                          })()
                         : (() => {
                             try {
                               return (

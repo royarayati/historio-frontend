@@ -1687,6 +1687,7 @@
   .text__scVr8 {
     left: auto;
     top: auto;
+    display: block;
   }
 }
 .text__vH4JT {
