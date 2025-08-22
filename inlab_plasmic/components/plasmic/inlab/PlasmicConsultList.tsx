@@ -635,7 +635,8 @@ function PlasmicConsultList__RenderFunc(props: {
                               try {
                                 return {
                                   consult_id: 0,
-                                  patient_id: parseInt($ctx.params.code)
+                                  patient_id: parseInt($ctx.params.code),
+                                  admission_id: parseInt($ctx.params.adm_id)
                                 };
                               } catch (e) {
                                 if (
