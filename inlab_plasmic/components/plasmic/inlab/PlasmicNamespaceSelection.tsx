@@ -400,9 +400,14 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                                   "filter_physician_name"
                                                 )}`
                                               );
-                                              return console.log(
+                                              console.log(
                                                 `filter_physician_id: ${localStorage.getItem(
                                                   "filter_physician_id"
+                                                )}`
+                                              );
+                                              return console.log(
+                                                `his_type: ${localStorage.getItem(
+                                                  "inlab_user_his_type"
                                                 )}`
                                               );
                                             })();
