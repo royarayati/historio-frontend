@@ -271,6 +271,7 @@ function PlasmicTextInput__RenderFunc(props: {
     focus_input: isInputFocus
   };
 
+  const globalVariants = _useGlobalVariants();
   const styleTokensClassNames = _useStyleTokens();
   const styleTokensClassNames_antd_5_hostless =
     useStyleTokens_antd_5_hostless();
@@ -423,6 +424,8 @@ function PlasmicTextInput__RenderFunc(props: {
       {(
         hasVariant($state, "showEndIcon", "showEndIcon")
           ? true
+          : hasVariant(globalVariants, "screen", "mobileFirst")
+          ? true
           : $state.value !== ""
       ) ? (
         <div
@@ -449,6 +452,35 @@ function PlasmicTextInput__RenderFunc(props: {
           })}
           onClick={async event => {
             const $steps = {};
+
+            $steps["updateInputValue"] = true
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["input", "value"]
+                    },
+                    operation: 0,
+                    value: ""
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+
+                    $stateSet(objRoot, variablePath, value);
+                    return value;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["updateInputValue"] != null &&
+              typeof $steps["updateInputValue"] === "object" &&
+              typeof $steps["updateInputValue"].then === "function"
+            ) {
+              $steps["updateInputValue"] = await $steps["updateInputValue"];
+            }
           }}
         >
           {renderPlasmicSlot({

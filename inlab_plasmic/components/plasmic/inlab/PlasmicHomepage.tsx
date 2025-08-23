@@ -233,6 +233,7 @@ export type PlasmicHomepage__OverridesType = {
   patientsSummary?: Flex__<typeof Button>;
   buttonپاککردنهمهبوکمارکها?: Flex__<typeof Button>;
   بیمارییافتنشد?: Flex__<"div">;
+  بیمارییافتنشد2?: Flex__<"div">;
   error422?: Flex__<"div">;
   bookmarkGuide?: Flex__<"div">;
   bookmarkImage?: Flex__<"svg">;
@@ -2742,7 +2743,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   objRoot: $state,
                                   variablePath: ["searchbarLnameNcode", "value"]
                                 },
-                                operation: 1,
+                                operation: 0,
                                 value: ""
                               };
                               return (({
@@ -2756,8 +2757,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                 }
                                 const { objRoot, variablePath } = variable;
 
-                                $stateSet(objRoot, variablePath, undefined);
-                                return undefined;
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
                               })?.apply(null, [actionArgs]);
                             })()
                           : undefined;
@@ -2793,34 +2794,6 @@ function PlasmicHomepage__RenderFunc(props: {
 
                     (async event => {
                       const $steps = {};
-
-                      $steps["updatePatientSummary"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              vgroup: "patientSummary",
-                              operation: 6,
-                              value: "patientSummary"
-                            };
-                            return (({ vgroup, value }) => {
-                              if (typeof value === "string") {
-                                value = [value];
-                              }
-
-                              $stateSet($state, vgroup, false);
-                              return false;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updatePatientSummary"] != null &&
-                        typeof $steps["updatePatientSummary"] === "object" &&
-                        typeof $steps["updatePatientSummary"].then ===
-                          "function"
-                      ) {
-                        $steps["updatePatientSummary"] = await $steps[
-                          "updatePatientSummary"
-                        ];
-                      }
                     }).apply(null, eventArgs);
                   }}
                   placeholder={
@@ -9524,6 +9497,37 @@ function PlasmicHomepage__RenderFunc(props: {
                     ) : null}
                     {(
                       hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? $ctx.fetched_data.loading == false &&
+                          $ctx.fetched_data.data &&
+                          $ctx.fetched_data.data.length === 0 &&
+                          $state.patientsSelectedTab == "bookmark" &&
+                          ($state.searchbarFname.value !== "" ||
+                            $state.searchbarLnameNcode.value !== "")
+                        : $ctx.fetched_data.loading == false &&
+                          $ctx.fetched_data.data &&
+                          $ctx.fetched_data.data.length === 0 &&
+                          $state.patientsSelectedTab == "bookmark" &&
+                          ($state.searchbarFname.value !== "" ||
+                            $state.searchbarLnameNcode.value !== "")
+                    ) ? (
+                      <div
+                        data-plasmic-name={
+                          "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2"
+                        }
+                        data-plasmic-override={overrides.بیمارییافتنشد2}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.بیمارییافتنشد2
+                        )}
+                      >
+                        {
+                          "\u0628\u06cc\u0645\u0627\u0631\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
+                        }
+                      </div>
+                    ) : null}
+                    {(
+                      hasVariant(globalVariants, "screen", "mobileFirst")
                         ? $ctx.fetched_data.loading === false &&
                           localStorage.getItem("inlab_user_his_type") ===
                             "tums_api" &&
@@ -9566,7 +9570,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           $state.searchbarLnameNcode.value === "" &&
                           $ctx.fetched_data.loading == false &&
                           $ctx.fetched_data.data &&
-                          $ctx.fetched_data.data.lenght === 0
+                          $ctx.fetched_data.data.length === 0
                     ) ? (
                       <div
                         data-plasmic-name={"bookmarkGuide"}
@@ -18877,6 +18881,7 @@ const PlasmicDescendants = {
     "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2",
     "error422",
     "bookmarkGuide",
     "bookmarkImage",
@@ -19057,6 +19062,7 @@ const PlasmicDescendants = {
     "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2",
     "error422",
     "bookmarkGuide",
     "bookmarkImage",
@@ -19494,6 +19500,7 @@ const PlasmicDescendants = {
     "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2",
     "error422",
     "bookmarkGuide",
     "bookmarkImage",
@@ -19594,6 +19601,9 @@ const PlasmicDescendants = {
   ],
   بیمارییافتنشد: [
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+  ],
+  بیمارییافتنشد2: [
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2"
   ],
   error422: ["error422"],
   bookmarkGuide: ["bookmarkGuide", "bookmarkImage", "bookmarkedImage"],
@@ -19940,6 +19950,7 @@ type NodeDefaultElementType = {
   patientsSummary: typeof Button;
   buttonپاککردنهمهبوکمارکها: typeof Button;
   بیمارییافتنشد: "div";
+  بیمارییافتنشد2: "div";
   error422: "div";
   bookmarkGuide: "div";
   bookmarkImage: "svg";
@@ -20197,6 +20208,9 @@ export const PlasmicHomepage = Object.assign(
     ),
     بیمارییافتنشد: makeNodeComponent(
       "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+    ),
+    بیمارییافتنشد2: makeNodeComponent(
+      "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2"
     ),
     error422: makeNodeComponent("error422"),
     bookmarkGuide: makeNodeComponent("bookmarkGuide"),
