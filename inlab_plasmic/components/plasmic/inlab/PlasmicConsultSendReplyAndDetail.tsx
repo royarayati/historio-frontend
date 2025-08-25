@@ -2558,12 +2558,12 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                 ];
                               }
 
-                              $steps["putConsultDraftReply"] = true
+                              $steps["patchConsultDraftReply"] = true
                                 ? (() => {
                                     const actionArgs = {
                                       args: [
-                                        "PUT",
-                                        `/api/v2/consult/${$ctx.params.consult_id}/draft_reply`,
+                                        "PATCH",
+                                        `/api/v3/consults/${$ctx.params.consult_id}`,
                                         (() => {
                                           try {
                                             return {
@@ -2586,6 +2586,27 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                         (() => {
                                           try {
                                             return {
+                                              state: 3,
+                                              priority:
+                                                $ctx.fetched_data.data.priority,
+                                              sender_id:
+                                                $ctx.fetched_data.data.requester
+                                                  .id,
+                                              suggested_receiver_id:
+                                                $ctx.fetched_data.data
+                                                  .suggested_consultant.id,
+                                              sender_service_id:
+                                                $ctx.fetched_data.data
+                                                  .effective_patient_service.id,
+                                              receiver_service_id:
+                                                $ctx.fetched_data.data
+                                                  .consultant_service.id,
+                                              patient_id: $ctx.params.code,
+                                              admission_id: $ctx.params.adm_id,
+                                              illness:
+                                                $ctx.fetched_data.data.illness,
+                                              respondent_id:
+                                                $ctx.inlab_user.user.id,
                                               paper_reply:
                                                 $state.paperReplyStatusState,
                                               reply:
@@ -2610,21 +2631,21 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                   })()
                                 : undefined;
                               if (
-                                $steps["putConsultDraftReply"] != null &&
-                                typeof $steps["putConsultDraftReply"] ===
+                                $steps["patchConsultDraftReply"] != null &&
+                                typeof $steps["patchConsultDraftReply"] ===
                                   "object" &&
-                                typeof $steps["putConsultDraftReply"].then ===
+                                typeof $steps["patchConsultDraftReply"].then ===
                                   "function"
                               ) {
-                                $steps["putConsultDraftReply"] = await $steps[
-                                  "putConsultDraftReply"
+                                $steps["patchConsultDraftReply"] = await $steps[
+                                  "patchConsultDraftReply"
                                 ];
                               }
 
                               $steps[
                                 "updateConsultSendDraftReplyButtonIsDisabled2"
                               ] =
-                                $steps.putConsultDraftReply.status != 200
+                                $steps.patchConsultDraftReply.status != 200
                                   ? (() => {
                                       const actionArgs = {
                                         variable: {
@@ -2672,7 +2693,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               }
 
                               $steps["goToConsultList"] =
-                                $steps.putConsultDraftReply.status === 200
+                                $steps.patchConsultDraftReply.status === 200
                                   ? (() => {
                                       const actionArgs = {
                                         destination: `/consult/list/${(() => {
@@ -3647,12 +3668,12 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               ];
                           }
 
-                          $steps["postConsultReview"] = true
+                          $steps["patchConsultReview"] = true
                             ? (() => {
                                 const actionArgs = {
                                   args: [
-                                    "POST",
-                                    `/api/v2/consult/${$ctx.params.consult_id}/confirm`,
+                                    "PATCH",
+                                    `/api/v3/consults/${$ctx.params.consult_id}`,
                                     (() => {
                                       try {
                                         return {
@@ -3671,27 +3692,66 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                         throw e;
                                       }
                                     })(),
-                                    undefined
+                                    (() => {
+                                      try {
+                                        return {
+                                          state: 4,
+                                          priority:
+                                            $ctx.fetched_data.data.priority,
+                                          sender_id:
+                                            $ctx.fetched_data.data.requester.id,
+                                          suggested_receiver_id:
+                                            $ctx.fetched_data.data
+                                              .suggested_consultant.id,
+                                          sender_service_id:
+                                            $ctx.fetched_data.data
+                                              .effective_patient_service.id,
+                                          receiver_service_id:
+                                            $ctx.fetched_data.data
+                                              .consultant_service.id,
+                                          patient_id: $ctx.params.code,
+                                          admission_id: $ctx.params.adm_id,
+                                          illness:
+                                            $ctx.fetched_data.data.illness,
+                                          respondent_id:
+                                            $ctx.fetched_data.data.consultant
+                                              .id,
+                                          paper_reply:
+                                            $ctx.fetched_data.data.paper_reply,
+                                          reply: $ctx.fetched_data.data.reply,
+                                          reviewer_id: $ctx.inlab_user.user.id
+                                        };
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
                                   ]
                                 };
                                 return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
+                                  "AuthGlobalContext.apiFetcherPlus"
                                 ]?.apply(null, [...actionArgs.args]);
                               })()
                             : undefined;
                           if (
-                            $steps["postConsultReview"] != null &&
-                            typeof $steps["postConsultReview"] === "object" &&
-                            typeof $steps["postConsultReview"].then ===
+                            $steps["patchConsultReview"] != null &&
+                            typeof $steps["patchConsultReview"] === "object" &&
+                            typeof $steps["patchConsultReview"].then ===
                               "function"
                           ) {
-                            $steps["postConsultReview"] = await $steps[
-                              "postConsultReview"
+                            $steps["patchConsultReview"] = await $steps[
+                              "patchConsultReview"
                             ];
                           }
 
                           $steps["runActionOnGetUniqueConsult"] =
-                            $steps.postConsultReview?.status === 200
+                            $steps.patchConsultReview?.status === 200
                               ? (() => {
                                   const actionArgs = {
                                     tplRef: "getUniqueConsult",
@@ -3716,7 +3776,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           }
 
                           $steps["updateConsultReviewUnsuccessfullyAlert2"] =
-                            $steps.postConsultReview?.status != 200
+                            $steps.patchConsultReview?.status != 200
                               ? (() => {
                                   const actionArgs = {
                                     variable: {
@@ -5385,7 +5445,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "DELETE",
-                              `/api/v2/consult/${$ctx.params.consult_id}`,
+                              `/api/v3/consults/${$ctx.params.consult_id}`,
                               (() => {
                                 try {
                                   return {
@@ -5407,7 +5467,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             ]
                           };
                           return $globalActions[
-                            "AuthGlobalContext.apiFetcher"
+                            "AuthGlobalContext.apiFetcherPlus"
                           ]?.apply(null, [...actionArgs.args]);
                         })()
                       : undefined;
@@ -6001,12 +6061,12 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         ];
                     }
 
-                    $steps["postConsultReply"] = true
+                    $steps["patchConsultReply"] = true
                       ? (() => {
                           const actionArgs = {
                             args: [
-                              "POST",
-                              `/api/v2/consult/${$ctx.params.consult_id}/reply`,
+                              "PATCH",
+                              `/api/v3/consults/${$ctx.params.consult_id}`,
                               (() => {
                                 try {
                                   return {
@@ -6028,6 +6088,23 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               (() => {
                                 try {
                                   return {
+                                    state: 4,
+                                    priority: $ctx.fetched_data.data.priority,
+                                    sender_id:
+                                      $ctx.fetched_data.data.requester.id,
+                                    suggested_receiver_id:
+                                      $ctx.fetched_data.data
+                                        .suggested_consultant.id,
+                                    sender_service_id:
+                                      $ctx.fetched_data.data
+                                        .effective_patient_service.id,
+                                    receiver_service_id:
+                                      $ctx.fetched_data.data.consultant_service
+                                        .id,
+                                    patient_id: $ctx.params.code,
+                                    admission_id: $ctx.params.adm_id,
+                                    illness: $ctx.fetched_data.data.illness,
+                                    respondent_id: $ctx.inlab_user.user.id,
                                     paper_reply: $state.paperReplyStatusState,
                                     reply: $state.consultReplyInput.value
                                   };
@@ -6045,22 +6122,22 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             ]
                           };
                           return $globalActions[
-                            "AuthGlobalContext.apiFetcher"
+                            "AuthGlobalContext.apiFetcherPlus"
                           ]?.apply(null, [...actionArgs.args]);
                         })()
                       : undefined;
                     if (
-                      $steps["postConsultReply"] != null &&
-                      typeof $steps["postConsultReply"] === "object" &&
-                      typeof $steps["postConsultReply"].then === "function"
+                      $steps["patchConsultReply"] != null &&
+                      typeof $steps["patchConsultReply"] === "object" &&
+                      typeof $steps["patchConsultReply"].then === "function"
                     ) {
-                      $steps["postConsultReply"] = await $steps[
-                        "postConsultReply"
+                      $steps["patchConsultReply"] = await $steps[
+                        "patchConsultReply"
                       ];
                     }
 
                     $steps["updateSendConsultReplyUnsuccessfullyAlert2"] =
-                      $steps.postConsultReply?.status != 200
+                      $steps.patchConsultReply?.status != 200
                         ? (() => {
                             const actionArgs = {
                               variable: {
@@ -6105,7 +6182,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                     }
 
                     $steps["goToConsultList"] =
-                      $steps.postConsultReply?.status === 200
+                      $steps.patchConsultReply?.status === 200
                         ? (() => {
                             const actionArgs = {
                               destination: `/consult/list/${(() => {
