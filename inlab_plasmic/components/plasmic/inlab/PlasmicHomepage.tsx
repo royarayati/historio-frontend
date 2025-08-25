@@ -18531,23 +18531,16 @@ function PlasmicHomepage__RenderFunc(props: {
           data-plasmic-name={"namespaceChecker"}
           data-plasmic-override={overrides.namespaceChecker}
           className={classNames("__wab_instance", sty.namespaceChecker)}
-          headers={(() => {
-            try {
-              return {
-                "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
-              };
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()}
           method={"GET"}
-          path={"/api/v3/user/namespaces"}
+          path={
+            hasVariant(globalVariants, "screen", "mobileFirst")
+              ? `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
+                  "inlab_user_namespace_id"
+                )}`
+              : `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
+                  "inlab_user_namespace_id"
+                )}`
+          }
           ref={ref => {
             $refs["namespaceChecker"] = ref;
           }}
