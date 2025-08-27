@@ -2587,30 +2587,17 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                           try {
                                             return {
                                               state: 3,
-                                              priority:
-                                                $ctx.fetched_data.data.priority,
-                                              sender_id:
-                                                $ctx.fetched_data.data.requester
-                                                  .id,
-                                              suggested_receiver_id:
-                                                $ctx.fetched_data.data
-                                                  .suggested_consultant.id,
-                                              sender_service_id:
-                                                $ctx.fetched_data.data
-                                                  .effective_patient_service.id,
-                                              receiver_service_id:
-                                                $ctx.fetched_data.data
-                                                  .consultant_service.id,
                                               patient_id: $ctx.params.code,
                                               admission_id: $ctx.params.adm_id,
-                                              illness:
-                                                $ctx.fetched_data.data.illness,
                                               respondent_id:
                                                 $ctx.inlab_user.user.id,
                                               paper_reply:
                                                 $state.paperReplyStatusState,
                                               reply:
-                                                $state.consultReplyInput.value
+                                                $state.paperReplyStatusState
+                                                  ? null
+                                                  : $state.consultReplyInput
+                                                      .value
                                             };
                                           } catch (e) {
                                             if (
@@ -3696,29 +3683,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                       try {
                                         return {
                                           state: 4,
-                                          priority:
-                                            $ctx.fetched_data.data.priority,
-                                          sender_id:
-                                            $ctx.fetched_data.data.requester.id,
-                                          suggested_receiver_id:
-                                            $ctx.fetched_data.data
-                                              .suggested_consultant.id,
-                                          sender_service_id:
-                                            $ctx.fetched_data.data
-                                              .effective_patient_service.id,
-                                          receiver_service_id:
-                                            $ctx.fetched_data.data
-                                              .consultant_service.id,
                                           patient_id: $ctx.params.code,
                                           admission_id: $ctx.params.adm_id,
-                                          illness:
-                                            $ctx.fetched_data.data.illness,
-                                          respondent_id:
-                                            $ctx.fetched_data.data.consultant
-                                              .id,
-                                          paper_reply:
-                                            $ctx.fetched_data.data.paper_reply,
-                                          reply: $ctx.fetched_data.data.reply,
                                           reviewer_id: $ctx.inlab_user.user.id
                                         };
                                       } catch (e) {
@@ -5154,30 +5120,17 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                           try {
                                             return {
                                               state: 4,
-                                              priority:
-                                                $ctx.fetched_data.data.priority,
-                                              sender_id:
-                                                $ctx.fetched_data.data.requester
-                                                  .id,
-                                              suggested_receiver_id:
-                                                $ctx.fetched_data.data
-                                                  .suggested_consultant.id,
-                                              sender_service_id:
-                                                $ctx.fetched_data.data
-                                                  .effective_patient_service.id,
-                                              receiver_service_id:
-                                                $ctx.fetched_data.data
-                                                  .consultant_service.id,
                                               patient_id: $ctx.params.code,
                                               admission_id: $ctx.params.adm_id,
-                                              illness:
-                                                $ctx.fetched_data.data.illness,
                                               respondent_id:
                                                 $ctx.inlab_user.user.id,
                                               paper_reply:
                                                 $state.paperReplyStatusState,
                                               reply:
-                                                $state.consultReplyInput.value
+                                                $state.paperReplyStatusState
+                                                  ? null
+                                                  : $state.consultReplyInput
+                                                      .value
                                             };
                                           } catch (e) {
                                             if (
