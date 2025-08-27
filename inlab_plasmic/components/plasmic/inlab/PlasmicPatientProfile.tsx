@@ -412,30 +412,33 @@ function PlasmicPatientProfile__RenderFunc(props: {
                         const actionArgs = {
                           customFunction: async () => {
                             return (() => {
-                              const stored_patient_index_id_list = JSON.parse(
-                                localStorage.getItem("patient_index_id_list")
-                              );
+                              const stored_patient_index_id_list =
+                                JSON.parse(
+                                  localStorage.getItem("patient_index_id_list")
+                                ) || [];
                               const specificItem =
                                 stored_patient_index_id_list.find(
                                   item =>
-                                    item.admission_id ===
+                                    parseInt(item.admission_id) ===
                                     parseInt($ctx.params.adm_id)
                                 );
                               if (specificItem) {
-                                const specificNumber = specificItem.number;
+                                const specificNumber = parseInt(
+                                  specificItem.number
+                                );
                                 const newNumber = specificNumber - 1;
                                 const nextItem =
                                   stored_patient_index_id_list.find(
-                                    item => item.number === newNumber
+                                    item => parseInt(item.number) === newNumber
                                   );
                                 if (nextItem) {
                                   localStorage.setItem(
                                     "patient_id",
-                                    nextItem.patient_id
+                                    nextItem.patient_id.toString()
                                   );
                                   return localStorage.setItem(
                                     "admission_id",
-                                    nextItem.admission_id
+                                    nextItem.admission_id.toString()
                                   );
                                 } else {
                                   return console.log("No next item found.");
@@ -1022,30 +1025,33 @@ function PlasmicPatientProfile__RenderFunc(props: {
                         const actionArgs = {
                           customFunction: async () => {
                             return (() => {
-                              const stored_patient_index_id_list = JSON.parse(
-                                localStorage.getItem("patient_index_id_list")
-                              );
+                              const stored_patient_index_id_list =
+                                JSON.parse(
+                                  localStorage.getItem("patient_index_id_list")
+                                ) || [];
                               const specificItem =
                                 stored_patient_index_id_list.find(
                                   item =>
-                                    item.admission_id ===
+                                    parseInt(item.admission_id) ===
                                     parseInt($ctx.params.adm_id)
                                 );
                               if (specificItem) {
-                                const specificNumber = specificItem.number;
+                                const specificNumber = parseInt(
+                                  specificItem.number
+                                );
                                 const newNumber = specificNumber + 1;
                                 const nextItem =
                                   stored_patient_index_id_list.find(
-                                    item => item.number === newNumber
+                                    item => parseInt(item.number) === newNumber
                                   );
                                 if (nextItem) {
                                   localStorage.setItem(
                                     "patient_id",
-                                    nextItem.patient_id
+                                    nextItem.patient_id.toString()
                                   );
                                   return localStorage.setItem(
                                     "admission_id",
-                                    nextItem.admission_id
+                                    nextItem.admission_id.toString()
                                   );
                                 } else {
                                   return console.log("No next item found.");
@@ -1899,9 +1905,15 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               )}
                             >
                               <React.Fragment>
-                                {$ctx.fetched_data.data.length !== 0 &&
-                                  ($ctx.fetched_data.data[0].dismissed
-                                    ? (() => {
+                                {localStorage.getItem("inlab_user_his_type") !==
+                                  "tums_api" &&
+                                localStorage.getItem("inlab_user_his_type") !==
+                                  "tebvarayane_db"
+                                  ? (() => {
+                                      if ($ctx.fetched_data.data.length === 0)
+                                        return "";
+
+                                      if ($ctx.fetched_data.data[0].dismissed) {
                                         const gregorianDate = new Date(
                                           $ctx.fetched_data.data[0].dismission_datetime
                                         );
@@ -1930,9 +1942,17 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                           .split(":")
                                           .slice(0, 2)
                                           .join(":");
-                                        return `${"ترخیص"} ${englishDate} ${englishTime}`;
-                                      })()
-                                    : "بستری")}
+                                        return `ترخیص ${englishDate} ${englishTime}`;
+                                      } else {
+                                        return "بستری";
+                                      }
+                                    })()
+                                  : $ctx.fetched_data.data.length !== 0
+                                  ? $ctx.fetched_data.data[0].dismissed
+                                    ? $ctx.fetched_data.data[0]
+                                        .dismission_datetime
+                                    : "بستری"
+                                  : ""}
                               </React.Fragment>
                             </div>
                             <div
@@ -2684,36 +2704,45 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                     <React.Fragment>
                                       {(() => {
                                         try {
-                                          return (() => {
-                                            const gregorianDate = new Date(
-                                              currentItem.issued_datetime
-                                            );
-                                            const shamsiDate =
-                                              new Intl.DateTimeFormat(
-                                                "fa-IR"
-                                              ).format(gregorianDate);
-                                            const shamsiTime =
-                                              gregorianDate.toLocaleTimeString(
-                                                "fa-IR",
-                                                { hour12: false }
-                                              );
-                                            const englishDate =
-                                              shamsiDate.replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              );
-                                            const englishTime = shamsiTime
-                                              .replace(/[۰-۹]/g, d =>
-                                                String.fromCharCode(
-                                                  d.charCodeAt(0) - 1728
-                                                )
-                                              )
-                                              .split(":")
-                                              .slice(0, 2)
-                                              .join(":");
-                                            return `(${englishDate}-${englishTime})`;
-                                          })();
+                                          return localStorage.getItem(
+                                            "inlab_user_his_type"
+                                          ) !== "tums_api" &&
+                                            localStorage.getItem(
+                                              "inlab_user_his_type"
+                                            ) !== "tebvarayane_db"
+                                            ? (() => {
+                                                const gregorianDate = new Date(
+                                                  currentItem.issued_datetime
+                                                );
+                                                const shamsiDate =
+                                                  new Intl.DateTimeFormat(
+                                                    "fa-IR"
+                                                  ).format(gregorianDate);
+                                                const shamsiTime =
+                                                  gregorianDate.toLocaleTimeString(
+                                                    "fa-IR",
+                                                    { hour12: false }
+                                                  );
+                                                const englishDate =
+                                                  shamsiDate.replace(
+                                                    /[۰-۹]/g,
+                                                    d =>
+                                                      String.fromCharCode(
+                                                        d.charCodeAt(0) - 1728
+                                                      )
+                                                  );
+                                                const englishTime = shamsiTime
+                                                  .replace(/[۰-۹]/g, d =>
+                                                    String.fromCharCode(
+                                                      d.charCodeAt(0) - 1728
+                                                    )
+                                                  )
+                                                  .split(":")
+                                                  .slice(0, 2)
+                                                  .join(":");
+                                                return `${englishDate}-${englishTime}`;
+                                              })()
+                                            : currentItem.issued_datetime;
                                         } catch (e) {
                                           if (
                                             e instanceof TypeError ||

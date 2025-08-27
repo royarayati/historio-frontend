@@ -4309,10 +4309,9 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                       (() => {
                         try {
                           return (() => {
-                            const nonEmptyData =
-                              $ctx.fetched_data.data.illnesses.filter(
-                                item => item !== ""
-                              );
+                            const nonEmptyData = $ctx.fetched_data.data.filter(
+                              item => item !== ""
+                            );
                             const uniqueData = [...new Set(nonEmptyData)];
                             return uniqueData;
                           })();
@@ -4455,7 +4454,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     })}
                     {(() => {
                       try {
-                        return $ctx.fetched_data.data.illnesses == 0;
+                        return $ctx.fetched_data.data == 0;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||

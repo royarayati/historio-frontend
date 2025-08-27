@@ -3000,7 +3000,7 @@ function PlasmicConsultList__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "DELETE",
-                              `/api/v2/consult/${$state.consultId}`,
+                              `/api/v3/consults/${$state.consultId}`,
                               (() => {
                                 try {
                                   return {
@@ -3022,7 +3022,7 @@ function PlasmicConsultList__RenderFunc(props: {
                             ]
                           };
                           return $globalActions[
-                            "AuthGlobalContext.apiFetcher"
+                            "AuthGlobalContext.apiFetcherPlus"
                           ]?.apply(null, [...actionArgs.args]);
                         })()
                       : undefined;

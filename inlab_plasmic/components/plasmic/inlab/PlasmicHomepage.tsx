@@ -16900,7 +16900,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "DELETE",
-                              `/api/v2/consult/${$state.consultId}`,
+                              `/api/v3/consults/${$state.consultId}`,
                               (() => {
                                 try {
                                   return {
@@ -16922,7 +16922,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             ]
                           };
                           return $globalActions[
-                            "AuthGlobalContext.apiFetcher"
+                            "AuthGlobalContext.apiFetcherPlus"
                           ]?.apply(null, [...actionArgs.args]);
                         })()
                       : undefined;
@@ -18586,10 +18586,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                   "namespace_is_expired"
                                 )}`
                               );
-                              return console.log(
+                              console.log(
                                 `namespace_expiration_datetime: ${localStorage.getItem(
                                   "namespace_expiration_datetime"
                                 )}`
+                              );
+                              localStorage.setItem(
+                                "inlab_user_his_type",
+                                $ctx.fetched_data.data[0].his_type
+                              );
+                              return console.log(
+                                `inlab_user_his_type ${localStorage.getItem(
+                                  "inlab_user_his_type"
+                                )} `
                               );
                             })();
                           }

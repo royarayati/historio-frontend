@@ -5956,30 +5956,33 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       const actionArgs = {
                         customFunction: async () => {
                           return (() => {
-                            const stored_patient_index_id_list = JSON.parse(
-                              localStorage.getItem("patient_index_id_list")
-                            );
+                            const stored_patient_index_id_list =
+                              JSON.parse(
+                                localStorage.getItem("patient_index_id_list")
+                              ) || [];
                             const specificItem =
                               stored_patient_index_id_list.find(
                                 item =>
-                                  item.admission_id ===
+                                  parseInt(item.admission_id) ===
                                   parseInt($ctx.params.adm_id)
                               );
                             if (specificItem) {
-                              const specificNumber = specificItem.number;
+                              const specificNumber = parseInt(
+                                specificItem.number
+                              );
                               const newNumber = specificNumber - 1;
                               const nextItem =
                                 stored_patient_index_id_list.find(
-                                  item => item.number === newNumber
+                                  item => parseInt(item.number) === newNumber
                                 );
                               if (nextItem) {
                                 localStorage.setItem(
                                   "patient_id",
-                                  nextItem.patient_id
+                                  nextItem.patient_id.toString()
                                 );
                                 return localStorage.setItem(
                                   "admission_id",
-                                  nextItem.admission_id
+                                  nextItem.admission_id.toString()
                                 );
                               } else {
                                 return console.log("No next item found.");
@@ -6599,30 +6602,33 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       const actionArgs = {
                         customFunction: async () => {
                           return (() => {
-                            const stored_patient_index_id_list = JSON.parse(
-                              localStorage.getItem("patient_index_id_list")
-                            );
+                            const stored_patient_index_id_list =
+                              JSON.parse(
+                                localStorage.getItem("patient_index_id_list")
+                              ) || [];
                             const specificItem =
                               stored_patient_index_id_list.find(
                                 item =>
-                                  item.admission_id ===
+                                  parseInt(item.admission_id) ===
                                   parseInt($ctx.params.adm_id)
                               );
                             if (specificItem) {
-                              const specificNumber = specificItem.number;
+                              const specificNumber = parseInt(
+                                specificItem.number
+                              );
                               const newNumber = specificNumber + 1;
                               const nextItem =
                                 stored_patient_index_id_list.find(
-                                  item => item.number === newNumber
+                                  item => parseInt(item.number) === newNumber
                                 );
                               if (nextItem) {
                                 localStorage.setItem(
                                   "patient_id",
-                                  nextItem.patient_id
+                                  nextItem.patient_id.toString()
                                 );
                                 return localStorage.setItem(
                                   "admission_id",
-                                  nextItem.admission_id
+                                  nextItem.admission_id.toString()
                                 );
                               } else {
                                 return console.log("No next item found.");
