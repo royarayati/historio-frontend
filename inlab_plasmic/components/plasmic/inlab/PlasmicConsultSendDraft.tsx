@@ -2118,12 +2118,12 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                               ];
                           }
 
-                          $steps["putConsultDraft"] = true
+                          $steps["patchDraftedToDraftedConsult"] = true
                             ? (() => {
                                 const actionArgs = {
                                   args: [
-                                    "PUT",
-                                    `/api/v2/consult/${$ctx.params.consult_id}/draft`,
+                                    "PATCH",
+                                    `/api/v3/consults/${$ctx.params.consult_id}`,
                                     (() => {
                                       try {
                                         return {
@@ -2145,32 +2145,34 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                     (() => {
                                       try {
                                         return {
-                                          cause_of_consult: "",
-                                          consultant_service_id:
-                                            $state.receiverServiceId == null
-                                              ? $ctx.fetched_data.data
-                                                  .consultant_service.id
-                                              : $state.receiverServiceId,
-                                          effective_patient_service_id:
-                                            $state.senderServiceId == null
-                                              ? $ctx.fetched_data.data
-                                                  .effective_patient_service.id
-                                              : $state.senderServiceId,
-                                          illness:
-                                            $state.patientPresentIllness.value,
+                                          state: 0,
                                           priority:
                                             $state.emergencyButtonUserInteractionState
                                               ? $state.consultEmergencyStatusState
                                               : $ctx.fetched_data.data.priority,
-                                          problem_list: [],
-                                          suggested_consultant_id:
+                                          sender_id: $ctx.inlab_user.user.id,
+                                          suggested_receiver_id:
                                             $state.receiverDoctorId == null
                                               ? $ctx.fetched_data.data
                                                   .suggested_consultant == null
                                                 ? null
                                                 : $ctx.fetched_data.data
                                                     .suggested_consultant.id
-                                              : $state.receiverDoctorId
+                                              : $state.receiverDoctorId,
+                                          sender_service_id:
+                                            $state.senderServiceId == null
+                                              ? $ctx.fetched_data.data
+                                                  .effective_patient_service.id
+                                              : $state.senderServiceId,
+                                          receiver_service_id:
+                                            $state.receiverServiceId == null
+                                              ? $ctx.fetched_data.data
+                                                  .consultant_service.id
+                                              : $state.receiverServiceId,
+                                          patient_id: $ctx.params.code,
+                                          admission_id: $ctx.params.adm_id,
+                                          illness:
+                                            $state.patientPresentIllness.value
                                         };
                                       } catch (e) {
                                         if (
@@ -2186,22 +2188,23 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                   ]
                                 };
                                 return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
+                                  "AuthGlobalContext.apiFetcherPlus"
                                 ]?.apply(null, [...actionArgs.args]);
                               })()
                             : undefined;
                           if (
-                            $steps["putConsultDraft"] != null &&
-                            typeof $steps["putConsultDraft"] === "object" &&
-                            typeof $steps["putConsultDraft"].then === "function"
+                            $steps["patchDraftedToDraftedConsult"] != null &&
+                            typeof $steps["patchDraftedToDraftedConsult"] ===
+                              "object" &&
+                            typeof $steps["patchDraftedToDraftedConsult"]
+                              .then === "function"
                           ) {
-                            $steps["putConsultDraft"] = await $steps[
-                              "putConsultDraft"
-                            ];
+                            $steps["patchDraftedToDraftedConsult"] =
+                              await $steps["patchDraftedToDraftedConsult"];
                           }
 
                           $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
-                            $steps.putConsultDraft?.status != 200
+                            $steps.patchDraftedToDraftedConsult?.status != 200
                               ? (() => {
                                   const actionArgs = {
                                     variable: {
@@ -2246,7 +2249,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           }
 
                           $steps["goToConsultListPage"] =
-                            $steps.putConsultDraft?.status === 200
+                            $steps.patchDraftedToDraftedConsult?.status === 200
                               ? (() => {
                                   const actionArgs = {
                                     destination: `/consult/list/${(() => {
@@ -2473,12 +2476,12 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                               ];
                           }
 
-                          $steps["postDraftedConsult"] = true
+                          $steps["patchDraftedToSentConsult"] = true
                             ? (() => {
                                 const actionArgs = {
                                   args: [
-                                    "POST",
-                                    `/api/v2/consult/${$ctx.params.consult_id}/request`,
+                                    "PATCH",
+                                    `/api/v3/consults/${$ctx.params.consult_id}`,
                                     (() => {
                                       try {
                                         return {
@@ -2500,32 +2503,34 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                     (() => {
                                       try {
                                         return {
-                                          cause_of_consult: "",
-                                          consultant_service_id:
-                                            $state.receiverServiceId == null
-                                              ? $ctx.fetched_data.data
-                                                  .consultant_service.id
-                                              : $state.receiverServiceId,
-                                          effective_patient_service_id:
-                                            $state.senderServiceId == null
-                                              ? $ctx.fetched_data.data
-                                                  .effective_patient_service.id
-                                              : $state.senderServiceId,
-                                          illness:
-                                            $state.patientPresentIllness.value,
+                                          state: 1,
                                           priority:
                                             $state.emergencyButtonUserInteractionState
                                               ? $state.consultEmergencyStatusState
                                               : $ctx.fetched_data.data.priority,
-                                          problem_list: [],
-                                          suggested_consultant_id:
+                                          sender_id: $ctx.inlab_user.user.id,
+                                          suggested_receiver_id:
                                             $state.receiverDoctorId == null
                                               ? $ctx.fetched_data.data
                                                   .suggested_consultant == null
                                                 ? null
                                                 : $ctx.fetched_data.data
                                                     .suggested_consultant.id
-                                              : $state.receiverDoctorId
+                                              : $state.receiverDoctorId,
+                                          sender_service_id:
+                                            $state.senderServiceId == null
+                                              ? $ctx.fetched_data.data
+                                                  .effective_patient_service.id
+                                              : $state.senderServiceId,
+                                          receiver_service_id:
+                                            $state.receiverServiceId == null
+                                              ? $ctx.fetched_data.data
+                                                  .consultant_service.id
+                                              : $state.receiverServiceId,
+                                          patient_id: $ctx.params.code,
+                                          admission_id: $ctx.params.adm_id,
+                                          illness:
+                                            $state.patientPresentIllness.value
                                         };
                                       } catch (e) {
                                         if (
@@ -2541,23 +2546,24 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                   ]
                                 };
                                 return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
+                                  "AuthGlobalContext.apiFetcherPlus"
                                 ]?.apply(null, [...actionArgs.args]);
                               })()
                             : undefined;
                           if (
-                            $steps["postDraftedConsult"] != null &&
-                            typeof $steps["postDraftedConsult"] === "object" &&
-                            typeof $steps["postDraftedConsult"].then ===
+                            $steps["patchDraftedToSentConsult"] != null &&
+                            typeof $steps["patchDraftedToSentConsult"] ===
+                              "object" &&
+                            typeof $steps["patchDraftedToSentConsult"].then ===
                               "function"
                           ) {
-                            $steps["postDraftedConsult"] = await $steps[
-                              "postDraftedConsult"
+                            $steps["patchDraftedToSentConsult"] = await $steps[
+                              "patchDraftedToSentConsult"
                             ];
                           }
 
                           $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
-                            $steps.postDraftedConsult?.status != 200
+                            $steps.patchDraftedToSentConsult?.status != 200
                               ? (() => {
                                   const actionArgs = {
                                     variable: {
@@ -2602,7 +2608,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           }
 
                           $steps["goToConsultListPage"] =
-                            $steps.postDraftedConsult?.status === 200
+                            $steps.patchDraftedToSentConsult?.status === 200
                               ? (() => {
                                   const actionArgs = {
                                     destination: `/consult/list/${(() => {
@@ -4176,7 +4182,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v2/patient/${$ctx.params.code}/consult/illness`}
+            path={`/api/v3/consults/illnesses?patient_id=${$ctx.params.code}`}
             ref={ref => {
               $refs["getPresentIlness"] = ref;
             }}
@@ -4303,10 +4309,9 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                       (() => {
                         try {
                           return (() => {
-                            const nonEmptyData =
-                              $ctx.fetched_data.data.illnesses.filter(
-                                item => item !== ""
-                              );
+                            const nonEmptyData = $ctx.fetched_data.data.filter(
+                              item => item !== ""
+                            );
                             const uniqueData = [...new Set(nonEmptyData)];
                             return uniqueData;
                           })();
@@ -4449,7 +4454,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     })}
                     {(() => {
                       try {
-                        return $ctx.fetched_data.data.illnesses == 0;
+                        return $ctx.fetched_data.data == 0;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
@@ -4778,7 +4783,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "DELETE",
-                              `/api/v2/consult/${$ctx.params.consult_id}`,
+                              `/api/v3/consults/${$ctx.params.consult_id}`,
                               (() => {
                                 try {
                                   return {
@@ -4800,7 +4805,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                             ]
                           };
                           return $globalActions[
-                            "AuthGlobalContext.apiFetcher"
+                            "AuthGlobalContext.apiFetcherPlus"
                           ]?.apply(null, [...actionArgs.args]);
                         })()
                       : undefined;

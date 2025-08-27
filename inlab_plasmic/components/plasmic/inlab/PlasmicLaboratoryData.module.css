@@ -1752,3 +1752,13 @@
 .nextPatient2 * {
   transform-style: preserve-3d;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .nextPatient2 {
+    transform-style: preserve-3d;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .nextPatient2 * {
+    transform-style: preserve-3d;
+  }
+}

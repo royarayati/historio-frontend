@@ -77,7 +77,6 @@ import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // pla
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
-import NewNoticeBanner from "../../NewNoticeBanner"; // plasmic-import: X347FgRZh6HH/component
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
@@ -103,6 +102,7 @@ import BookmarkPlusSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgr
 import BookmarkDashFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComSvg"; // plasmic-import: OXlS9uB7Ffdy/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
 import Icon6Icon from "./icons/PlasmicIcon__Icon6"; // plasmic-import: qdjybZJw3tm3/icon
+import SadButRelievedFaceSvgrepoComSvgIcon from "./icons/PlasmicIcon__SadButRelievedFaceSvgrepoComSvg"; // plasmic-import: x6b9-yA7JOIM/icon
 
 import { processAndCompressBase64 as __fn_processAndCompressBase64 } from "../../../utils/ImageCompression"; // plasmic-import: processAndCompressBase64/customFunction
 
@@ -233,6 +233,7 @@ export type PlasmicHomepage__OverridesType = {
   patientsSummary?: Flex__<typeof Button>;
   buttonپاککردنهمهبوکمارکها?: Flex__<typeof Button>;
   بیمارییافتنشد?: Flex__<"div">;
+  بیمارییافتنشد2?: Flex__<"div">;
   error422?: Flex__<"div">;
   bookmarkGuide?: Flex__<"div">;
   bookmarkImage?: Flex__<"svg">;
@@ -289,9 +290,6 @@ export type PlasmicHomepage__OverridesType = {
   modalFeatureBanner?: Flex__<typeof AntdModal>;
   newFeatureBanner?: Flex__<typeof NewFeatureBanner>;
   متوجهشدم?: Flex__<typeof Button>;
-  modalNoticeBanner?: Flex__<typeof AntdModal>;
-  newNoticeBanner?: Flex__<typeof NewNoticeBanner>;
-  متوجهشدم2?: Flex__<typeof Button>;
   modalNps?: Flex__<typeof AntdModal>;
   columns?: Flex__<"div">;
   modalDeleteConsultConfirmation?: Flex__<typeof AntdModal>;
@@ -315,6 +313,10 @@ export type PlasmicHomepage__OverridesType = {
   deleteSection?: Flex__<"div">;
   cancelButton2?: Flex__<typeof Button>;
   deleteButton?: Flex__<typeof Button>;
+  namespaceChecker?: Flex__<typeof ApiFetcherComponent>;
+  modalExpiredBanner?: Flex__<typeof AntdModal>;
+  modalExpirationAlarmBanner?: Flex__<typeof AntdModal>;
+  متوجهشدم2?: Flex__<typeof Button>;
 };
 
 export interface DefaultHomepageProps {}
@@ -784,17 +786,27 @@ function PlasmicHomepage__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
-        path: "modalNoticeBanner.open",
+        path: "modalExpirationAlarmBanner.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           hasVariant(globalVariants, "screen", "mobileFirst")
             ? (() => {
                 try {
-                  return (
-                    $props.newNoticeDatetime !==
-                    localStorage.getItem("new_notice_datetime")
-                  );
+                  return (() => {
+                    const expirationStr = localStorage.getItem(
+                      "namespace_expiration_datetime"
+                    );
+                    let expiringSoon = false;
+                    if (expirationStr) {
+                      const expirationTs = new Date(expirationStr).getTime();
+                      const nowTs = Date.now();
+                      const oneWeekInMs = 7 * 24 * 60 * 60 * 1000;
+                      const diff = expirationTs - nowTs;
+                      expiringSoon = diff > 0 && diff <= oneWeekInMs;
+                    }
+                    return expiringSoon;
+                  })();
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -807,9 +819,20 @@ function PlasmicHomepage__RenderFunc(props: {
               })()
             : (() => {
                 try {
-                  return (
-                    window.location.origin === "https://thcsynapps.tums.ac.ir"
-                  );
+                  return (() => {
+                    const expirationStr = localStorage.getItem(
+                      "namespace_expiration_datetime"
+                    );
+                    let expiringSoon = false;
+                    if (expirationStr) {
+                      const expirationTs = new Date(expirationStr).getTime();
+                      const nowTs = Date.now();
+                      const oneWeekInMs = 7 * 24 * 60 * 60 * 1000;
+                      const diff = expirationTs - nowTs;
+                      expiringSoon = diff > 0 && diff <= oneWeekInMs;
+                    }
+                    return expiringSoon;
+                  })();
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -2124,6 +2147,67 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "modalExpiredBanner.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant(globalVariants, "screen", "mobileFirst")
+            ? (() => {
+                try {
+                  return (() => {
+                    const expirationStr = localStorage.getItem(
+                      "namespace_expiration_datetime"
+                    );
+                    let expiredOrNow = false;
+                    if (expirationStr) {
+                      const expirationTs = new Date(expirationStr).getTime();
+                      const nowTs = Date.now();
+                      expiredOrNow = expirationTs <= nowTs;
+                    }
+                    return expiredOrNow;
+                  })();
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
+                  }
+                  throw e;
+                }
+              })()
+            : (() => {
+                try {
+                  return (() => {
+                    const expirationStr = localStorage.getItem(
+                      "namespace_expiration_datetime"
+                    );
+                    let expiredOrNow = false;
+                    if (expirationStr) {
+                      const expirationTs = new Date(expirationStr).getTime();
+                      const nowTs = Date.now();
+                      expiredOrNow = expirationTs <= nowTs;
+                    }
+                    return expiredOrNow;
+                  })();
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
+                  }
+                  throw e;
+                }
+              })()
+      },
+      {
+        path: "checkNamespace",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -2742,7 +2826,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   objRoot: $state,
                                   variablePath: ["searchbarLnameNcode", "value"]
                                 },
-                                operation: 1,
+                                operation: 0,
                                 value: ""
                               };
                               return (({
@@ -2756,8 +2840,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                 }
                                 const { objRoot, variablePath } = variable;
 
-                                $stateSet(objRoot, variablePath, undefined);
-                                return undefined;
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
                               })?.apply(null, [actionArgs]);
                             })()
                           : undefined;
@@ -2793,34 +2877,6 @@ function PlasmicHomepage__RenderFunc(props: {
 
                     (async event => {
                       const $steps = {};
-
-                      $steps["updatePatientSummary"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              vgroup: "patientSummary",
-                              operation: 6,
-                              value: "patientSummary"
-                            };
-                            return (({ vgroup, value }) => {
-                              if (typeof value === "string") {
-                                value = [value];
-                              }
-
-                              $stateSet($state, vgroup, false);
-                              return false;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updatePatientSummary"] != null &&
-                        typeof $steps["updatePatientSummary"] === "object" &&
-                        typeof $steps["updatePatientSummary"].then ===
-                          "function"
-                      ) {
-                        $steps["updatePatientSummary"] = await $steps[
-                          "updatePatientSummary"
-                        ];
-                      }
                     }).apply(null, eventArgs);
                   }}
                   placeholder={
@@ -9524,6 +9580,37 @@ function PlasmicHomepage__RenderFunc(props: {
                     ) : null}
                     {(
                       hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? $ctx.fetched_data.loading == false &&
+                          $ctx.fetched_data.data &&
+                          $ctx.fetched_data.data.length === 0 &&
+                          $state.patientsSelectedTab == "bookmark" &&
+                          ($state.searchbarFname.value !== "" ||
+                            $state.searchbarLnameNcode.value !== "")
+                        : $ctx.fetched_data.loading == false &&
+                          $ctx.fetched_data.data &&
+                          $ctx.fetched_data.data.length === 0 &&
+                          $state.patientsSelectedTab == "bookmark" &&
+                          ($state.searchbarFname.value !== "" ||
+                            $state.searchbarLnameNcode.value !== "")
+                    ) ? (
+                      <div
+                        data-plasmic-name={
+                          "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2"
+                        }
+                        data-plasmic-override={overrides.بیمارییافتنشد2}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.بیمارییافتنشد2
+                        )}
+                      >
+                        {
+                          "\u0628\u06cc\u0645\u0627\u0631\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f"
+                        }
+                      </div>
+                    ) : null}
+                    {(
+                      hasVariant(globalVariants, "screen", "mobileFirst")
                         ? $ctx.fetched_data.loading === false &&
                           localStorage.getItem("inlab_user_his_type") ===
                             "tums_api" &&
@@ -9566,7 +9653,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           $state.searchbarLnameNcode.value === "" &&
                           $ctx.fetched_data.loading == false &&
                           $ctx.fetched_data.data &&
-                          $ctx.fetched_data.data.lenght === 0
+                          $ctx.fetched_data.data.length === 0
                     ) ? (
                       <div
                         data-plasmic-name={"bookmarkGuide"}
@@ -14733,339 +14820,6 @@ function PlasmicHomepage__RenderFunc(props: {
             </AntdModal>
           );
         })()}
-        {window.location.origin === "https://thcsynapps.tums.ac.ir"
-          ? (() => {
-              const child$Props = {
-                className: classNames("__wab_instance", sty.modalNoticeBanner),
-                closeButtonClassName: classNames({
-                  [sty["pcls_-p1PGff7sV5P"]]: true
-                }),
-                closeIcon: null,
-                defaultStylesClassName: classNames(
-                  projectcss.root_reset,
-                  projectcss.plasmic_default_styles,
-                  projectcss.plasmic_mixins,
-                  styleTokensClassNames,
-                  styleTokensClassNames_antd_5_hostless,
-                  styleTokensClassNames_plasmic_rich_components
-                ),
-                hideFooter: true,
-                maskClosable: false,
-                modalContentClassName: classNames({
-                  [sty["pcls_meaj_737D3HF"]]: true
-                }),
-                modalScopeClassName: sty["modalNoticeBanner__modal"],
-                onOpenChange: async (...eventArgs: any) => {
-                  generateStateOnChangeProp($state, [
-                    "modalNoticeBanner",
-                    "open"
-                  ]).apply(null, eventArgs);
-                },
-                open: generateStateValueProp($state, [
-                  "modalNoticeBanner",
-                  "open"
-                ]),
-                title: (
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__xga15
-                    )}
-                  >
-                    {"\u0627\u0637\u0644\u0627\u0639\u06cc\u0647"}
-                  </div>
-                ),
-                trigger: null,
-                width: "80%",
-                wrapClassName: classNames({ [sty["pcls_TufeBRfdpEOi"]]: true })
-              };
-              initializeCodeComponentStates(
-                $state,
-                [
-                  {
-                    name: "open",
-                    plasmicStateName: "modalNoticeBanner.open"
-                  }
-                ],
-                [],
-                undefined ?? {},
-                child$Props
-              );
-              initializePlasmicStates(
-                $state,
-                [
-                  {
-                    name: "modalNoticeBanner.open",
-                    initFunc: ({ $props, $state, $queries }) =>
-                      hasVariant(globalVariants, "screen", "mobileFirst")
-                        ? (() => {
-                            try {
-                              return (
-                                $props.newNoticeDatetime !==
-                                localStorage.getItem("new_notice_datetime")
-                              );
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return false;
-                              }
-                              throw e;
-                            }
-                          })()
-                        : (() => {
-                            try {
-                              return (
-                                window.location.origin ===
-                                "https://thcsynapps.tums.ac.ir"
-                              );
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return false;
-                              }
-                              throw e;
-                            }
-                          })()
-                  }
-                ],
-                []
-              );
-              return (
-                <AntdModal
-                  data-plasmic-name={"modalNoticeBanner"}
-                  data-plasmic-override={overrides.modalNoticeBanner}
-                  {...child$Props}
-                >
-                  <NewNoticeBanner
-                    data-plasmic-name={"newNoticeBanner"}
-                    data-plasmic-override={overrides.newNoticeBanner}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.newNoticeBanner
-                    )}
-                    newNoticeDatetime={args.newNoticeDatetime}
-                  />
-
-                  <Button
-                    data-plasmic-name={
-                      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
-                    }
-                    data-plasmic-override={overrides.متوجهشدم2}
-                    className={classNames("__wab_instance", sty.متوجهشدم2)}
-                    color={"blue"}
-                    deselected={generateStateValueProp($state, [
-                      "متوجهشدم2",
-                      "deselected"
-                    ])}
-                    isDisabled={generateStateValueProp($state, [
-                      "متوجهشدم2",
-                      "isDisabled"
-                    ])}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["setUpdateVersionLocalStorage"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return localStorage.setItem(
-                                  "new_notice_datetime",
-                                  $props.newNoticeDatetime
-                                );
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["setUpdateVersionLocalStorage"] != null &&
-                        typeof $steps["setUpdateVersionLocalStorage"] ===
-                          "object" &&
-                        typeof $steps["setUpdateVersionLocalStorage"].then ===
-                          "function"
-                      ) {
-                        $steps["setUpdateVersionLocalStorage"] = await $steps[
-                          "setUpdateVersionLocalStorage"
-                        ];
-                      }
-
-                      $steps["updateModalNoticeBannerOpen"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["modalNoticeBanner", "open"]
-                              },
-                              operation: 0,
-                              value: false
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateModalNoticeBannerOpen"] != null &&
-                        typeof $steps["updateModalNoticeBannerOpen"] ===
-                          "object" &&
-                        typeof $steps["updateModalNoticeBannerOpen"].then ===
-                          "function"
-                      ) {
-                        $steps["updateModalNoticeBannerOpen"] = await $steps[
-                          "updateModalNoticeBannerOpen"
-                        ];
-                      }
-
-                      $steps["runCode"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              customFunction: async () => {
-                                return console.log(
-                                  `"new_notice_datetime": ${localStorage.getItem(
-                                    "new_notice_datetime"
-                                  )}`
-                                );
-                              }
-                            };
-                            return (({ customFunction }) => {
-                              return customFunction();
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-                    }}
-                    onDeselectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "متوجهشدم2",
-                          "deselected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onIsDisabledChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "متوجهشدم2",
-                          "isDisabled"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSelectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "متوجهشدم2",
-                          "selected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSortDeselectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "متوجهشدم2",
-                          "sortDeselected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSortSelectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "متوجهشدم2",
-                          "sortSelected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    selected={generateStateValueProp($state, [
-                      "متوجهشدم2",
-                      "selected"
-                    ])}
-                    shape={"sharp"}
-                    sortDeselected={generateStateValueProp($state, [
-                      "متوجهشدم2",
-                      "sortDeselected"
-                    ])}
-                    sortSelected={generateStateValueProp($state, [
-                      "متوجهشدم2",
-                      "sortSelected"
-                    ])}
-                  >
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text___3SwMh
-                      )}
-                    >
-                      {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
-                    </div>
-                  </Button>
-                </AntdModal>
-              );
-            })()
-          : null}
         {false
           ? (() => {
               const child$Props = {
@@ -17146,7 +16900,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "DELETE",
-                              `/api/v2/consult/${$state.consultId}`,
+                              `/api/v3/consults/${$state.consultId}`,
                               (() => {
                                 try {
                                   return {
@@ -17168,7 +16922,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             ]
                           };
                           return $globalActions[
-                            "AuthGlobalContext.apiFetcher"
+                            "AuthGlobalContext.apiFetcherPlus"
                           ]?.apply(null, [...actionArgs.args]);
                         })()
                       : undefined;
@@ -18773,6 +18527,676 @@ function PlasmicHomepage__RenderFunc(props: {
             </div>
           </div>
         </AntdModal>
+        <ApiFetcherComponent
+          data-plasmic-name={"namespaceChecker"}
+          data-plasmic-override={overrides.namespaceChecker}
+          className={classNames("__wab_instance", sty.namespaceChecker)}
+          method={"GET"}
+          path={
+            hasVariant(globalVariants, "screen", "mobileFirst")
+              ? `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
+                  "inlab_user_namespace_id"
+                )}`
+              : `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
+                  "inlab_user_namespace_id"
+                )}`
+          }
+          ref={ref => {
+            $refs["namespaceChecker"] = ref;
+          }}
+        >
+          <DataCtxReader__>
+            {$ctx => (
+              <ConditionGuard
+                className={classNames(
+                  "__wab_instance",
+                  sty.conditionGuard___08F8V
+                )}
+                condition={(() => {
+                  try {
+                    return $ctx.fetched_data.loading;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return false;
+                    }
+                    throw e;
+                  }
+                })()}
+                onNotSatisfied={async () => {
+                  const $steps = {};
+
+                  $steps["runCode"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (() => {
+                              localStorage.setItem(
+                                "namespace_expiration_datetime",
+                                $ctx.fetched_data.data[0].expiration_datetime
+                              );
+                              localStorage.setItem(
+                                "namespace_is_expired",
+                                $ctx.fetched_data.data[0].is_expired
+                              );
+                              console.log(
+                                `namespace_is_expired: ${localStorage.getItem(
+                                  "namespace_is_expired"
+                                )}`
+                              );
+                              console.log(
+                                `namespace_expiration_datetime: ${localStorage.getItem(
+                                  "namespace_expiration_datetime"
+                                )}`
+                              );
+                              localStorage.setItem(
+                                "inlab_user_his_type",
+                                $ctx.fetched_data.data[0].his_type
+                              );
+                              return console.log(
+                                `inlab_user_his_type ${localStorage.getItem(
+                                  "inlab_user_his_type"
+                                )} `
+                              );
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["runCode"] != null &&
+                    typeof $steps["runCode"] === "object" &&
+                    typeof $steps["runCode"].then === "function"
+                  ) {
+                    $steps["runCode"] = await $steps["runCode"];
+                  }
+
+                  $steps["updateCheckNamespace"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["checkNamespace"]
+                          },
+                          operation: 0,
+                          value: "true"
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateCheckNamespace"] != null &&
+                    typeof $steps["updateCheckNamespace"] === "object" &&
+                    typeof $steps["updateCheckNamespace"].then === "function"
+                  ) {
+                    $steps["updateCheckNamespace"] = await $steps[
+                      "updateCheckNamespace"
+                    ];
+                  }
+                }}
+              />
+            )}
+          </DataCtxReader__>
+        </ApiFetcherComponent>
+        {$state.checkNamespace === "true"
+          ? (() => {
+              const child$Props = {
+                className: classNames("__wab_instance", sty.modalExpiredBanner),
+                closeButtonClassName: classNames({
+                  [sty["pcls_sx5tVTBEDHfS"]]: true
+                }),
+                closeIcon: null,
+                defaultStylesClassName: classNames(
+                  projectcss.root_reset,
+                  projectcss.plasmic_default_styles,
+                  projectcss.plasmic_mixins,
+                  styleTokensClassNames,
+                  styleTokensClassNames_antd_5_hostless,
+                  styleTokensClassNames_plasmic_rich_components
+                ),
+                hideFooter: true,
+                maskClosable: false,
+                modalContentClassName: classNames({
+                  [sty["pcls_aR_XwUYjlXaE"]]: true
+                }),
+                modalScopeClassName: sty["modalExpiredBanner__modal"],
+                onOpenChange: async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
+                    "modalExpiredBanner",
+                    "open"
+                  ]).apply(null, eventArgs);
+                },
+                open: generateStateValueProp($state, [
+                  "modalExpiredBanner",
+                  "open"
+                ]),
+                title: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__jZn2H
+                    )}
+                  >
+                    {"\u0627\u0637\u0644\u0627\u0639\u06cc\u0647"}
+                  </div>
+                ),
+                trigger: null,
+                width: "90%",
+                wrapClassName: classNames({ [sty["pcls_Rs0kw9r5fGdz"]]: true })
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "open",
+                    plasmicStateName: "modalExpiredBanner.open"
+                  }
+                ],
+                [],
+                undefined ?? {},
+                child$Props
+              );
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "modalExpiredBanner.open",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return (() => {
+                                const expirationStr = localStorage.getItem(
+                                  "namespace_expiration_datetime"
+                                );
+                                let expiredOrNow = false;
+                                if (expirationStr) {
+                                  const expirationTs = new Date(
+                                    expirationStr
+                                  ).getTime();
+                                  const nowTs = Date.now();
+                                  expiredOrNow = expirationTs <= nowTs;
+                                }
+                                return expiredOrNow;
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : (() => {
+                            try {
+                              return (() => {
+                                const expirationStr = localStorage.getItem(
+                                  "namespace_expiration_datetime"
+                                );
+                                let expiredOrNow = false;
+                                if (expirationStr) {
+                                  const expirationTs = new Date(
+                                    expirationStr
+                                  ).getTime();
+                                  const nowTs = Date.now();
+                                  expiredOrNow = expirationTs <= nowTs;
+                                }
+                                return expiredOrNow;
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                  }
+                ],
+                []
+              );
+              return (
+                <AntdModal
+                  data-plasmic-name={"modalExpiredBanner"}
+                  data-plasmic-override={overrides.modalExpiredBanner}
+                  {...child$Props}
+                >
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox___3JmKc)}
+                  >
+                    <SadButRelievedFaceSvgrepoComSvgIcon
+                      className={classNames(projectcss.all, sty.svg__ccZzl)}
+                      role={"img"}
+                    />
+
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___17NAf
+                      )}
+                      dir={"rtl"}
+                    >
+                      {
+                        "\u0627\u0634\u062a\u0631\u0627\u06a9 \u0646\u0631\u0645 \u0627\u0641\u0632\u0627\u0631 \u0634\u0645\u0627 \u0628\u0647 \u067e\u0627\u06cc\u0627\u0646 \u0631\u0633\u06cc\u062f\n \u0644\u0637\u0641\u0627\u064b \u0647\u0645\u0627\u0647\u0646\u06af\u06cc \u0644\u0627\u0632\u0645 \u0631\u0627 \u0628\u0627 \u0628\u062e\u0634 IT \u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 \u0627\u0646\u062c\u0627\u0645 \u062f\u0647\u06cc\u062f. \ud83d\ude4f"
+                      }
+                    </div>
+                  </div>
+                </AntdModal>
+              );
+            })()
+          : null}
+        {(() => {
+          try {
+            return $state.checkNamespace === "true";
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })()
+          ? (() => {
+              const child$Props = {
+                className: classNames(
+                  "__wab_instance",
+                  sty.modalExpirationAlarmBanner
+                ),
+                closeButtonClassName: classNames({
+                  [sty["pcls_-p1PGff7sV5P"]]: true
+                }),
+                closeIcon: null,
+                defaultStylesClassName: classNames(
+                  projectcss.root_reset,
+                  projectcss.plasmic_default_styles,
+                  projectcss.plasmic_mixins,
+                  styleTokensClassNames,
+                  styleTokensClassNames_antd_5_hostless,
+                  styleTokensClassNames_plasmic_rich_components
+                ),
+                hideFooter: true,
+                maskClosable: false,
+                modalContentClassName: classNames({
+                  [sty["pcls_meaj_737D3HF"]]: true
+                }),
+                modalScopeClassName: sty["modalExpirationAlarmBanner__modal"],
+                onOpenChange: async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
+                    "modalExpirationAlarmBanner",
+                    "open"
+                  ]).apply(null, eventArgs);
+                },
+                open: generateStateValueProp($state, [
+                  "modalExpirationAlarmBanner",
+                  "open"
+                ]),
+                title: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__xga15
+                    )}
+                  >
+                    {"\u0627\u0637\u0644\u0627\u0639\u06cc\u0647"}
+                  </div>
+                ),
+                trigger: null,
+                width: "90%",
+                wrapClassName: classNames({ [sty["pcls_TufeBRfdpEOi"]]: true })
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "open",
+                    plasmicStateName: "modalExpirationAlarmBanner.open"
+                  }
+                ],
+                [],
+                undefined ?? {},
+                child$Props
+              );
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "modalExpirationAlarmBanner.open",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return (() => {
+                                const expirationStr = localStorage.getItem(
+                                  "namespace_expiration_datetime"
+                                );
+                                let expiringSoon = false;
+                                if (expirationStr) {
+                                  const expirationTs = new Date(
+                                    expirationStr
+                                  ).getTime();
+                                  const nowTs = Date.now();
+                                  const oneWeekInMs = 7 * 24 * 60 * 60 * 1000;
+                                  const diff = expirationTs - nowTs;
+                                  expiringSoon =
+                                    diff > 0 && diff <= oneWeekInMs;
+                                }
+                                return expiringSoon;
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : (() => {
+                            try {
+                              return (() => {
+                                const expirationStr = localStorage.getItem(
+                                  "namespace_expiration_datetime"
+                                );
+                                let expiringSoon = false;
+                                if (expirationStr) {
+                                  const expirationTs = new Date(
+                                    expirationStr
+                                  ).getTime();
+                                  const nowTs = Date.now();
+                                  const oneWeekInMs = 7 * 24 * 60 * 60 * 1000;
+                                  const diff = expirationTs - nowTs;
+                                  expiringSoon =
+                                    diff > 0 && diff <= oneWeekInMs;
+                                }
+                                return expiringSoon;
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                  }
+                ],
+                []
+              );
+              return (
+                <AntdModal
+                  data-plasmic-name={"modalExpirationAlarmBanner"}
+                  data-plasmic-override={overrides.modalExpirationAlarmBanner}
+                  {...child$Props}
+                >
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox__nFqPy)}
+                  >
+                    <SadButRelievedFaceSvgrepoComSvgIcon
+                      className={classNames(projectcss.all, sty.svg__bboE7)}
+                      role={"img"}
+                    />
+
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__lASnR
+                      )}
+                      dir={"rtl"}
+                    >
+                      {
+                        "\u06cc\u06a9 \u0647\u0641\u062a\u0647 \u062a\u0627 \u0627\u0646\u0642\u0636\u0627\u06cc \u0627\u0634\u062a\u0631\u0627\u06a9 \u0646\u0631\u0645\u200c\u0627\u0641\u0632\u0627\u0631 \u0628\u0627\u0642\u06cc \u0645\u0627\u0646\u062f\u0647!\n \u0628\u0631\u0627\u06cc \u062c\u0644\u0648\u06af\u06cc\u0631\u06cc \u0627\u0632 \u0642\u0637\u0639 \u062f\u0633\u062a\u0631\u0633\u06cc\u060c \u0644\u0637\u0641\u0627\u064b \u0647\u0645\u0627\u0647\u0646\u06af\u06cc \u0644\u0627\u0632\u0645 \u0631\u0627 \u0628\u0627 \u0628\u062e\u0634 IT \u0628\u06cc\u0645\u0627\u0631\u0633\u062a\u0627\u0646 \u0627\u0646\u062c\u0627\u0645 \u062f\u0647\u06cc\u062f. \ud83d\ude4f"
+                      }
+                    </div>
+                  </div>
+                  <Button
+                    data-plasmic-name={
+                      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
+                    }
+                    data-plasmic-override={overrides.متوجهشدم2}
+                    className={classNames("__wab_instance", sty.متوجهشدم2)}
+                    color={"blue"}
+                    deselected={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["setUpdateVersionLocalStorage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return localStorage.setItem(
+                                  "new_notice_datetime",
+                                  $props.newNoticeDatetime
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setUpdateVersionLocalStorage"] != null &&
+                        typeof $steps["setUpdateVersionLocalStorage"] ===
+                          "object" &&
+                        typeof $steps["setUpdateVersionLocalStorage"].then ===
+                          "function"
+                      ) {
+                        $steps["setUpdateVersionLocalStorage"] = await $steps[
+                          "setUpdateVersionLocalStorage"
+                        ];
+                      }
+
+                      $steps["updateModalNoticeBannerOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: [
+                                  "modalExpirationAlarmBanner",
+                                  "open"
+                                ]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateModalNoticeBannerOpen"] != null &&
+                        typeof $steps["updateModalNoticeBannerOpen"] ===
+                          "object" &&
+                        typeof $steps["updateModalNoticeBannerOpen"].then ===
+                          "function"
+                      ) {
+                        $steps["updateModalNoticeBannerOpen"] = await $steps[
+                          "updateModalNoticeBannerOpen"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return console.log(
+                                  `"new_notice_datetime": ${localStorage.getItem(
+                                    "new_notice_datetime"
+                                  )}`
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+                    }}
+                    onDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم2",
+                          "deselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onIsDisabledChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم2",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم2",
+                          "selected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم2",
+                          "sortDeselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم2",
+                          "sortSelected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "selected"
+                    ])}
+                    shape={"sharp"}
+                    sortDeselected={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "متوجهشدم2",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___3SwMh
+                      )}
+                    >
+                      {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
+                    </div>
+                  </Button>
+                </AntdModal>
+              );
+            })()
+          : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -18877,6 +19301,7 @@ const PlasmicDescendants = {
     "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2",
     "error422",
     "bookmarkGuide",
     "bookmarkImage",
@@ -18933,9 +19358,6 @@ const PlasmicDescendants = {
     "modalFeatureBanner",
     "newFeatureBanner",
     "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645",
-    "modalNoticeBanner",
-    "newNoticeBanner",
-    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452",
     "modalNps",
     "columns",
     "modalDeleteConsultConfirmation",
@@ -18958,7 +19380,11 @@ const PlasmicDescendants = {
     "deletePatientHistoryModal",
     "deleteSection",
     "cancelButton2",
-    "deleteButton"
+    "deleteButton",
+    "namespaceChecker",
+    "modalExpiredBanner",
+    "modalExpirationAlarmBanner",
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -19057,6 +19483,7 @@ const PlasmicDescendants = {
     "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2",
     "error422",
     "bookmarkGuide",
     "bookmarkImage",
@@ -19494,6 +19921,7 @@ const PlasmicDescendants = {
     "patientsSummary",
     "button\u067e\u0627\u06a9\u06a9\u0631\u062f\u0646\u0647\u0645\u0647\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9\u0647\u0627",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f",
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2",
     "error422",
     "bookmarkGuide",
     "bookmarkImage",
@@ -19594,6 +20022,9 @@ const PlasmicDescendants = {
   ],
   بیمارییافتنشد: [
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
+  ],
+  بیمارییافتنشد2: [
+    "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2"
   ],
   error422: ["error422"],
   bookmarkGuide: ["bookmarkGuide", "bookmarkImage", "bookmarkedImage"],
@@ -19764,13 +20195,6 @@ const PlasmicDescendants = {
   ],
   newFeatureBanner: ["newFeatureBanner"],
   متوجهشدم: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"],
-  modalNoticeBanner: [
-    "modalNoticeBanner",
-    "newNoticeBanner",
-    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
-  ],
-  newNoticeBanner: ["newNoticeBanner"],
-  متوجهشدم2: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"],
   modalNps: ["modalNps", "columns"],
   columns: ["columns"],
   modalDeleteConsultConfirmation: [
@@ -19837,7 +20261,14 @@ const PlasmicDescendants = {
   ],
   deleteSection: ["deleteSection", "cancelButton2", "deleteButton"],
   cancelButton2: ["cancelButton2"],
-  deleteButton: ["deleteButton"]
+  deleteButton: ["deleteButton"],
+  namespaceChecker: ["namespaceChecker"],
+  modalExpiredBanner: ["modalExpiredBanner"],
+  modalExpirationAlarmBanner: [
+    "modalExpirationAlarmBanner",
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
+  ],
+  متوجهشدم2: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -19940,6 +20371,7 @@ type NodeDefaultElementType = {
   patientsSummary: typeof Button;
   buttonپاککردنهمهبوکمارکها: typeof Button;
   بیمارییافتنشد: "div";
+  بیمارییافتنشد2: "div";
   error422: "div";
   bookmarkGuide: "div";
   bookmarkImage: "svg";
@@ -19996,9 +20428,6 @@ type NodeDefaultElementType = {
   modalFeatureBanner: typeof AntdModal;
   newFeatureBanner: typeof NewFeatureBanner;
   متوجهشدم: typeof Button;
-  modalNoticeBanner: typeof AntdModal;
-  newNoticeBanner: typeof NewNoticeBanner;
-  متوجهشدم2: typeof Button;
   modalNps: typeof AntdModal;
   columns: "div";
   modalDeleteConsultConfirmation: typeof AntdModal;
@@ -20022,6 +20451,10 @@ type NodeDefaultElementType = {
   deleteSection: "div";
   cancelButton2: typeof Button;
   deleteButton: typeof Button;
+  namespaceChecker: typeof ApiFetcherComponent;
+  modalExpiredBanner: typeof AntdModal;
+  modalExpirationAlarmBanner: typeof AntdModal;
+  متوجهشدم2: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -20198,6 +20631,9 @@ export const PlasmicHomepage = Object.assign(
     بیمارییافتنشد: makeNodeComponent(
       "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f"
     ),
+    بیمارییافتنشد2: makeNodeComponent(
+      "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f2"
+    ),
     error422: makeNodeComponent("error422"),
     bookmarkGuide: makeNodeComponent("bookmarkGuide"),
     bookmarkImage: makeNodeComponent("bookmarkImage"),
@@ -20262,11 +20698,6 @@ export const PlasmicHomepage = Object.assign(
     متوجهشدم: makeNodeComponent(
       "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"
     ),
-    modalNoticeBanner: makeNodeComponent("modalNoticeBanner"),
-    newNoticeBanner: makeNodeComponent("newNoticeBanner"),
-    متوجهشدم2: makeNodeComponent(
-      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
-    ),
     modalNps: makeNodeComponent("modalNps"),
     columns: makeNodeComponent("columns"),
     modalDeleteConsultConfirmation: makeNodeComponent(
@@ -20292,6 +20723,12 @@ export const PlasmicHomepage = Object.assign(
     deleteSection: makeNodeComponent("deleteSection"),
     cancelButton2: makeNodeComponent("cancelButton2"),
     deleteButton: makeNodeComponent("deleteButton"),
+    namespaceChecker: makeNodeComponent("namespaceChecker"),
+    modalExpiredBanner: makeNodeComponent("modalExpiredBanner"),
+    modalExpirationAlarmBanner: makeNodeComponent("modalExpirationAlarmBanner"),
+    متوجهشدم2: makeNodeComponent(
+      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
+    ),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,

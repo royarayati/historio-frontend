@@ -1645,7 +1645,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "POST",
-                              `/api/v2/patient/${$ctx.params.code}/consult/draft`,
+                              "/api/v3/consults",
                               (() => {
                                 try {
                                   return {
@@ -1667,18 +1667,20 @@ function PlasmicConsultSend__RenderFunc(props: {
                               (() => {
                                 try {
                                   return {
-                                    cause_of_consult: "",
-                                    consultant_service_id: localStorage.getItem(
-                                      "receiver_service_id"
-                                    ),
-                                    effective_patient_service_id:
-                                      localStorage.getItem("sender_service_id"),
-                                    illness: $state.patientPresentIllness.value,
+                                    state: 0,
                                     priority:
                                       $state.consultEmergencyStatusState,
-                                    problem_list: [],
-                                    suggested_consultant_id:
-                                      $state.receiverDoctorId
+                                    sender_id: $ctx.inlab_user.user.id,
+                                    suggested_receiver_id:
+                                      $state.receiverDoctorId,
+                                    sender_service_id:
+                                      localStorage.getItem("sender_service_id"),
+                                    receiver_service_id: localStorage.getItem(
+                                      "receiver_service_id"
+                                    ),
+                                    patient_id: $ctx.params.code,
+                                    admission_id: $ctx.params.adm_id,
+                                    illness: $state.patientPresentIllness.value
                                   };
                                 } catch (e) {
                                   if (
@@ -1694,7 +1696,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                             ]
                           };
                           return $globalActions[
-                            "AuthGlobalContext.apiFetcher"
+                            "AuthGlobalContext.apiFetcherPlus"
                           ]?.apply(null, [...actionArgs.args]);
                         })()
                       : undefined;
@@ -1974,7 +1976,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "POST",
-                              `/api/v2/patient/${$ctx.params.code}/consult`,
+                              "/api/v3/consults",
                               (() => {
                                 try {
                                   return {
@@ -1996,18 +1998,20 @@ function PlasmicConsultSend__RenderFunc(props: {
                               (() => {
                                 try {
                                   return {
-                                    cause_of_consult: "",
-                                    consultant_service_id: localStorage.getItem(
-                                      "receiver_service_id"
-                                    ),
-                                    effective_patient_service_id:
-                                      localStorage.getItem("sender_service_id"),
-                                    illness: $state.patientPresentIllness.value,
+                                    state: 1,
                                     priority:
                                       $state.consultEmergencyStatusState,
-                                    problem_list: [],
-                                    suggested_consultant_id:
-                                      $state.receiverDoctorId
+                                    sender_id: $ctx.inlab_user.user.id,
+                                    suggested_receiver_id:
+                                      $state.receiverDoctorId,
+                                    sender_service_id:
+                                      localStorage.getItem("sender_service_id"),
+                                    receiver_service_id: localStorage.getItem(
+                                      "receiver_service_id"
+                                    ),
+                                    patient_id: $ctx.params.code,
+                                    admission_id: $ctx.params.adm_id,
+                                    illness: $state.patientPresentIllness.value
                                   };
                                 } catch (e) {
                                   if (
@@ -2023,7 +2027,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                             ]
                           };
                           return $globalActions[
-                            "AuthGlobalContext.apiFetcher"
+                            "AuthGlobalContext.apiFetcherPlus"
                           ]?.apply(null, [...actionArgs.args]);
                         })()
                       : undefined;
@@ -3785,7 +3789,7 @@ function PlasmicConsultSend__RenderFunc(props: {
               }
             })()}
             method={"GET"}
-            path={`/api/v2/patient/${$ctx.params.code}/consult/illness`}
+            path={`/api/v3/consults/illnesses?patient_id=${$ctx.params.code}`}
             ref={ref => {
               $refs["getPresentIlness"] = ref;
             }}
@@ -3912,10 +3916,9 @@ function PlasmicConsultSend__RenderFunc(props: {
                       (() => {
                         try {
                           return (() => {
-                            const nonEmptyData =
-                              $ctx.fetched_data.data.illnesses.filter(
-                                item => item !== ""
-                              );
+                            const nonEmptyData = $ctx.fetched_data.data.filter(
+                              item => item !== ""
+                            );
                             const uniqueData = [...new Set(nonEmptyData)];
                             return uniqueData;
                           })();
@@ -4058,7 +4061,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                     })}
                     {(() => {
                       try {
-                        return $ctx.fetched_data.data.illnesses == 0;
+                        return $ctx.fetched_data.data == 0;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||

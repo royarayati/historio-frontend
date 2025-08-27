@@ -1467,6 +1467,16 @@
 .nextPatient2 * {
   transform-style: preserve-3d;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .nextPatient2 {
+    transform-style: preserve-3d;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .nextPatient2 * {
+    transform-style: preserve-3d;
+  }
+}
 .uploadMedia:global(.__wab_instance) {
   max-width: 100%;
   left: 0px;

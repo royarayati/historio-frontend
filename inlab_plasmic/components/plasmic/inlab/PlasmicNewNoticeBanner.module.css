@@ -4,26 +4,3 @@
   position: relative;
   min-height: 0;
 }
-.freeBox {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 0;
-  padding: 8px;
-}
-.svg {
-  object-fit: cover;
-  max-width: 100%;
-  width: 50px;
-  height: 43px;
-  flex-shrink: 0;
-}
-.text {
-  line-height: 1.8;
-  text-align: center;
-}
