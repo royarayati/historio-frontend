@@ -4107,56 +4107,71 @@ function PlasmicImagingReportList__RenderFunc(props: {
           ])}
           title={
             <div className={classNames(projectcss.all, sty.freeBox___9Tdjg)}>
-              <div
-                data-plasmic-name={"radiologyReportDatetime2"}
-                data-plasmic-override={overrides.radiologyReportDatetime2}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.radiologyReportDatetime2
-                )}
-              >
-                <React.Fragment>
-                  {
-                    // $state.paraclinicReportDatetime ? (() => {
-                    //   const gregorianDate = new Date($state.paraclinicReportDatetime);
-                    //   const shamsiDate = new Intl.DateTimeFormat("fa-IR").format(gregorianDate);
-                    //   const shamsiTime = gregorianDate.toLocaleTimeString("fa-IR", { hour12: false });
-                    //   const englishDate = shamsiDate.replace(/[۰-۹]/g, d => String.fromCharCode(d.charCodeAt(0) - 1728));
-                    //   const englishTime = shamsiTime.replace(/[۰-۹]/g, d => String.fromCharCode(d.charCodeAt(0) - 1728));
-                    //   return `${ englishDate } - ${ englishTime }`;
-                    // })() : ""
-                    localStorage.getItem("inlab_user_his_type") !==
-                      "tums_api" &&
-                    localStorage.getItem("inlab_user_his_type") !==
-                      "tebvarayane_db"
+              {false ? (
+                <div
+                  data-plasmic-name={"radiologyReportDatetime2"}
+                  data-plasmic-override={overrides.radiologyReportDatetime2}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.radiologyReportDatetime2
+                  )}
+                >
+                  <React.Fragment>
+                    {$state.paraclinicReportDatetime
                       ? (() => {
-                          const gregorianDate = new Date(
-                            $state.paraclinicReportDatetime
+                          const hisType = localStorage.getItem(
+                            "inlab_user_his_type"
                           );
-                          const shamsiDate = new Intl.DateTimeFormat(
-                            "fa-IR"
-                          ).format(gregorianDate);
-                          const shamsiTime = gregorianDate.toLocaleTimeString(
-                            "fa-IR",
-                            { hour12: false }
-                          );
-                          const englishDate = shamsiDate.replace(/[۰-۹]/g, d =>
-                            String.fromCharCode(d.charCodeAt(0) - 1728)
-                          );
-                          const englishTime = shamsiTime
-                            .replace(/[۰-۹]/g, d =>
-                              String.fromCharCode(d.charCodeAt(0) - 1728)
-                            )
-                            .split(":")
-                            .slice(0, 2)
-                            .join(":");
-                          return `${englishDate}-${englishTime}`;
+
+                          // اگر نوع HIS خاص نباشه، تاریخ شمسی + ساعت رو نشون بده
+                          if (
+                            hisType !== "tums_api" &&
+                            hisType !== "tebvarayane_db"
+                          ) {
+                            const gregorianDate = new Date(
+                              $state.paraclinicReportDatetime
+                            );
+
+                            // چک معتبر بودن تاریخ
+                            if (isNaN(gregorianDate)) {
+                              console.warn(
+                                "Invalid date:",
+                                $state.paraclinicReportDatetime
+                              );
+                              return "";
+                            }
+
+                            const shamsiDate = new Intl.DateTimeFormat(
+                              "fa-IR"
+                            ).format(gregorianDate);
+                            const shamsiTime = gregorianDate.toLocaleTimeString(
+                              "fa-IR",
+                              { hour12: false }
+                            );
+
+                            // تبدیل اعداد فارسی به انگلیسی
+                            const toEnglishNumbers = str =>
+                              str.replace(/[۰-۹]/g, d =>
+                                String.fromCharCode(d.charCodeAt(0) - 1728)
+                              );
+
+                            const englishDate = toEnglishNumbers(shamsiDate);
+                            const englishTime = toEnglishNumbers(shamsiTime)
+                              .split(":")
+                              .slice(0, 2)
+                              .join(":");
+
+                            return `${englishDate}-${englishTime}`;
+                          }
+
+                          // اگر HIS از نوع tums_api یا tebvarayane_db بود
+                          return $state.paraclinicReportDatetime;
                         })()
-                      : $state.paraclinicReportDatetime
-                  }
-                </React.Fragment>
-              </div>
+                      : ""}
+                  </React.Fragment>
+                </div>
+              ) : null}
               <div className={classNames(projectcss.all, sty.freeBox__kWfUk)}>
                 <CopyIconSvgIcon
                   data-plasmic-name={"copy"}
