@@ -836,7 +836,7 @@
   align-self: center;
   min-width: 0;
   border-radius: 5px;
-  padding: 8px;
+  padding: 12px 8px 8px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .لطفامنتظربمانید2 {

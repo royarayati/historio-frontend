@@ -2224,6 +2224,12 @@ function PlasmicHomepage__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "changeConsultPageNumberReloadGetConsult",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -3881,7 +3887,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       $state.modalConsultFilterType.open,
                       $state.modalConsultServiceList.open,
                       $state.modalDeleteConsultConfirmation.open,
-                      localStorage.getItem("consult_page_number")
+                      $state.changeConsultPageNumberReloadGetConsult
                     ];
                   } catch (e) {
                     if (
@@ -5790,6 +5796,56 @@ function PlasmicHomepage__RenderFunc(props: {
                       ) {
                         $steps["goToPage"] = await $steps["goToPage"];
                       }
+
+                      $steps["updateChangeConsultPageNumberReloadGetConsult"] =
+                        true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "changeConsultPageNumberReloadGetConsult"
+                                  ]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ] != null &&
+                        typeof $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ] === "object" &&
+                        typeof $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ].then === "function"
+                      ) {
+                        $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ] = await $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ];
+                      }
                     }}
                     onDeselectedChange={async (...eventArgs: any) => {
                       ((...eventArgs) => {
@@ -5953,6 +6009,57 @@ function PlasmicHomepage__RenderFunc(props: {
                         ) {
                           $steps["decreaseConsultPageNumber"] = await $steps[
                             "decreaseConsultPageNumber"
+                          ];
+                        }
+
+                        $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "changeConsultPageNumberReloadGetConsult"
+                                  ]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps[
+                            "updateChangeConsultPageNumberReloadGetConsult"
+                          ] != null &&
+                          typeof $steps[
+                            "updateChangeConsultPageNumberReloadGetConsult"
+                          ] === "object" &&
+                          typeof $steps[
+                            "updateChangeConsultPageNumberReloadGetConsult"
+                          ].then === "function"
+                        ) {
+                          $steps[
+                            "updateChangeConsultPageNumberReloadGetConsult"
+                          ] = await $steps[
+                            "updateChangeConsultPageNumberReloadGetConsult"
                           ];
                         }
                       },
@@ -6157,6 +6264,56 @@ function PlasmicHomepage__RenderFunc(props: {
                       ) {
                         $steps["increaseConsultPageNumber"] = await $steps[
                           "increaseConsultPageNumber"
+                        ];
+                      }
+
+                      $steps["updateChangeConsultPageNumberReloadGetConsult"] =
+                        true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "changeConsultPageNumberReloadGetConsult"
+                                  ]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ] != null &&
+                        typeof $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ] === "object" &&
+                        typeof $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ].then === "function"
+                      ) {
+                        $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
+                        ] = await $steps[
+                          "updateChangeConsultPageNumberReloadGetConsult"
                         ];
                       }
                     }}
