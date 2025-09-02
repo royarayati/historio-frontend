@@ -73,6 +73,7 @@ import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { Switch } from "@plasmicpkgs/antd/skinny/registerSwitch";
 import { AntdSwitch } from "@plasmicpkgs/antd5/skinny/registerSwitch";
+import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import { AntdDropdown } from "@plasmicpkgs/antd5/skinny/registerDropdown";
@@ -170,7 +171,7 @@ export type PlasmicHomepage__OverridesType = {
   filterType?: Flex__<"div">;
   filterTopicAndCurrentPageNumber?: Flex__<"div">;
   currentPageNumber?: Flex__<"div">;
-  consults?: Flex__<typeof ApiFetcherComponent>;
+  consults?: Flex__<typeof ApiFetcherComponentPlus>;
   مشاورهایییافتنشد?: Flex__<"div">;
   لطفامنتظربمانید2?: Flex__<"div">;
   inboxConsultCard?: Flex__<"div">;
@@ -281,7 +282,7 @@ export type PlasmicHomepage__OverridesType = {
   senderServiceType?: Flex__<"div">;
   receiverServiceType?: Flex__<"div">;
   deleteFilters?: Flex__<"div">;
-  getServicesForConsult?: Flex__<typeof ApiFetcherComponent>;
+  getServicesForConsult?: Flex__<typeof ApiFetcherComponentPlus>;
   modalConsultServiceList?: Flex__<typeof AntdModal>;
   serviceListContent?: Flex__<"div">;
   searchBarServicesContent?: Flex__<"div">;
@@ -3877,10 +3878,28 @@ function PlasmicHomepage__RenderFunc(props: {
                   </div>
                 </div>
               </div>
-              <ApiFetcherComponent
+              <ApiFetcherComponentPlus
                 data-plasmic-name={"consults"}
                 data-plasmic-override={overrides.consults}
+                autoFetch={true}
                 className={classNames("__wab_instance", sty.consults)}
+                fetchTriggers={(() => {
+                  try {
+                    return [
+                      $state.mainSelectedTab,
+                      $state.modalConsultFilterType.open,
+                      $state.modalConsultServiceList.open
+                    ];
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
                 headers={(() => {
                   try {
                     return {
@@ -5636,7 +5655,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     </React.Fragment>
                   )}
                 </DataCtxReader__>
-              </ApiFetcherComponent>
+              </ApiFetcherComponentPlus>
               <div
                 data-plasmic-name={"consultTabPaginationBar"}
                 data-plasmic-override={overrides.consultTabPaginationBar}
@@ -14304,11 +14323,27 @@ function PlasmicHomepage__RenderFunc(props: {
             throw e;
           }
         })() ? (
-          <ApiFetcherComponent
+          <ApiFetcherComponentPlus
             data-plasmic-name={"getServicesForConsult"}
             data-plasmic-override={overrides.getServicesForConsult}
+            autoFetch={true}
             className={classNames("__wab_instance", sty.getServicesForConsult)}
-            delay={300}
+            fetchTriggers={(() => {
+              try {
+                return [
+                  $state.searchBarServices.value,
+                  $state.modalConsultServiceList.open
+                ];
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             headers={(() => {
               try {
                 return {
@@ -14973,7 +15008,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 </AntdModal>
               )}
             </DataCtxReader__>
-          </ApiFetcherComponent>
+          </ApiFetcherComponentPlus>
         ) : null}
         {(() => {
           const child$Props = {
@@ -17504,10 +17539,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     $steps["runActionOnConsults"] =
                       $steps.deleteCondult?.status === 200
                         ? (() => {
-                            const actionArgs = {
-                              tplRef: "consults",
-                              action: "reload"
-                            };
+                            const actionArgs = { tplRef: "consults" };
                             return (({ tplRef, action, args }) => {
                               return $refs?.[tplRef]?.[action]?.(
                                 ...(args ?? [])
@@ -20869,7 +20901,7 @@ type NodeDefaultElementType = {
   filterType: "div";
   filterTopicAndCurrentPageNumber: "div";
   currentPageNumber: "div";
-  consults: typeof ApiFetcherComponent;
+  consults: typeof ApiFetcherComponentPlus;
   مشاورهایییافتنشد: "div";
   لطفامنتظربمانید2: "div";
   inboxConsultCard: "div";
@@ -20980,7 +21012,7 @@ type NodeDefaultElementType = {
   senderServiceType: "div";
   receiverServiceType: "div";
   deleteFilters: "div";
-  getServicesForConsult: typeof ApiFetcherComponent;
+  getServicesForConsult: typeof ApiFetcherComponentPlus;
   modalConsultServiceList: typeof AntdModal;
   serviceListContent: "div";
   searchBarServicesContent: "div";

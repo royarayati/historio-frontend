@@ -61,7 +61,7 @@ import {
 
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
-import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -101,7 +101,7 @@ export type PlasmicConsultList__OverridesType = {
   redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
-  patientDataForHeader?: Flex__<typeof ApiFetcherComponent>;
+  patientDataForHeader?: Flex__<typeof ApiFetcherComponentPlus>;
   patientNameAgeGender?: Flex__<"div">;
   patientConsultPrintContent?: Flex__<"div">;
   printConsult?: Flex__<"svg">;
@@ -109,7 +109,7 @@ export type PlasmicConsultList__OverridesType = {
   printError?: Flex__<typeof Alert>;
   pageContent?: Flex__<"div">;
   consultListContent?: Flex__<"div">;
-  getConsult?: Flex__<typeof ApiFetcherComponent>;
+  getConsult?: Flex__<typeof ApiFetcherComponentPlus>;
   لطفامنتطربمانید?: Flex__<"div">;
   مشاورهایبرایبیمارثبتنشدهاست?: Flex__<"div">;
   sentConsultCard?: Flex__<"div">;
@@ -422,11 +422,11 @@ function PlasmicConsultList__RenderFunc(props: {
             data-plasmic-override={overrides.header}
             className={classNames(projectcss.all, sty.header)}
           >
-            <ApiFetcherComponent
+            <ApiFetcherComponentPlus
               data-plasmic-name={"patientDataForHeader"}
               data-plasmic-override={overrides.patientDataForHeader}
+              autoFetch={true}
               className={classNames("__wab_instance", sty.patientDataForHeader)}
-              delay={50}
               headers={(() => {
                 try {
                   return {
@@ -518,7 +518,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   </div>
                 )}
               </DataCtxReader__>
-            </ApiFetcherComponent>
+            </ApiFetcherComponentPlus>
             <div
               data-plasmic-name={"patientConsultPrintContent"}
               data-plasmic-override={overrides.patientConsultPrintContent}
@@ -867,9 +867,10 @@ function PlasmicConsultList__RenderFunc(props: {
               data-plasmic-override={overrides.consultListContent}
               className={classNames(projectcss.all, sty.consultListContent)}
             >
-              <ApiFetcherComponent
+              <ApiFetcherComponentPlus
                 data-plasmic-name={"getConsult"}
                 data-plasmic-override={overrides.getConsult}
+                autoFetch={true}
                 className={classNames("__wab_instance", sty.getConsult)}
                 headers={(() => {
                   try {
@@ -2055,7 +2056,7 @@ function PlasmicConsultList__RenderFunc(props: {
                     </React.Fragment>
                   )}
                 </DataCtxReader__>
-              </ApiFetcherComponent>
+              </ApiFetcherComponentPlus>
             </div>
           </div>
           <Button
@@ -3037,10 +3038,7 @@ function PlasmicConsultList__RenderFunc(props: {
                     $steps["runActionOnGetConsult"] =
                       $steps.deleteCondult?.status === 200
                         ? (() => {
-                            const actionArgs = {
-                              tplRef: "getConsult",
-                              action: "reload"
-                            };
+                            const actionArgs = { tplRef: "getConsult" };
                             return (({ tplRef, action, args }) => {
                               return $refs?.[tplRef]?.[action]?.(
                                 ...(args ?? [])
@@ -3690,7 +3688,7 @@ type NodeDefaultElementType = {
   redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
-  patientDataForHeader: typeof ApiFetcherComponent;
+  patientDataForHeader: typeof ApiFetcherComponentPlus;
   patientNameAgeGender: "div";
   patientConsultPrintContent: "div";
   printConsult: "svg";
@@ -3698,7 +3696,7 @@ type NodeDefaultElementType = {
   printError: typeof Alert;
   pageContent: "div";
   consultListContent: "div";
-  getConsult: typeof ApiFetcherComponent;
+  getConsult: typeof ApiFetcherComponentPlus;
   لطفامنتطربمانید: "div";
   مشاورهایبرایبیمارثبتنشدهاست: "div";
   sentConsultCard: "div";

@@ -61,7 +61,7 @@ import {
 
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
-import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import Alert2 from "../../Alert2"; // plasmic-import: RABqkXkLRlle/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -100,7 +100,7 @@ export type PlasmicConsultSend__OverridesType = {
   redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
-  patientDataForHeader?: Flex__<typeof ApiFetcherComponent>;
+  patientDataForHeader?: Flex__<typeof ApiFetcherComponentPlus>;
   freeBox?: Flex__<"div">;
   patientNameAgeGender?: Flex__<"div">;
   patientService?: Flex__<"div">;
@@ -139,7 +139,7 @@ export type PlasmicConsultSend__OverridesType = {
   patientProfile?: Flex__<typeof PlasmicImg__>;
   imagingReportList?: Flex__<typeof PlasmicImg__>;
   laboratoryData?: Flex__<typeof PlasmicImg__>;
-  getServices?: Flex__<typeof ApiFetcherComponent>;
+  getServices?: Flex__<typeof ApiFetcherComponentPlus>;
   modalServiceList?: Flex__<typeof AntdModal>;
   servicesList?: Flex__<"div">;
   conditionGuard?: Flex__<typeof ConditionGuard>;
@@ -148,7 +148,7 @@ export type PlasmicConsultSend__OverridesType = {
   clearContent2?: Flex__<"svg">;
   servicesName2?: Flex__<"div">;
   servicesName?: Flex__<"div">;
-  getUsers?: Flex__<typeof ApiFetcherComponent>;
+  getUsers?: Flex__<typeof ApiFetcherComponentPlus>;
   modalReceiverDoctor?: Flex__<typeof AntdModal>;
   receiverDoctorList?: Flex__<"div">;
   doctorNameInputContent?: Flex__<"div">;
@@ -156,7 +156,7 @@ export type PlasmicConsultSend__OverridesType = {
   clearContent?: Flex__<"svg">;
   noDoctors?: Flex__<"div">;
   doctorNames?: Flex__<"div">;
-  getPresentIlness?: Flex__<typeof ApiFetcherComponent>;
+  getPresentIlness?: Flex__<typeof ApiFetcherComponentPlus>;
   modalPatientPresentIlness?: Flex__<typeof AntdModal>;
   patientPresentIlness?: Flex__<"div">;
   presentIllness?: Flex__<"div">;
@@ -444,9 +444,10 @@ function PlasmicConsultSend__RenderFunc(props: {
             data-plasmic-override={overrides.header}
             className={classNames(projectcss.all, sty.header)}
           >
-            <ApiFetcherComponent
+            <ApiFetcherComponentPlus
               data-plasmic-name={"patientDataForHeader"}
               data-plasmic-override={overrides.patientDataForHeader}
+              autoFetch={true}
               className={classNames("__wab_instance", sty.patientDataForHeader)}
               delay={50}
               headers={(() => {
@@ -575,7 +576,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                   </div>
                 )}
               </DataCtxReader__>
-            </ApiFetcherComponent>
+            </ApiFetcherComponentPlus>
           </div>
           <div
             data-plasmic-name={"sendConsultContent"}
@@ -2634,11 +2635,31 @@ function PlasmicConsultSend__RenderFunc(props: {
               />
             </SwitchingTab>
           </div>
-          <ApiFetcherComponent
+          <ApiFetcherComponentPlus
             data-plasmic-name={"getServices"}
             data-plasmic-override={overrides.getServices}
+            autoFetch={true}
             className={classNames("__wab_instance", sty.getServices)}
-            delay={300}
+            fetchTriggers={(() => {
+              try {
+                return (() => {
+                  {
+                    return [
+                      $state.searchBarServices.value,
+                      $state.modalServiceList.open
+                    ];
+                  }
+                })();
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             headers={(() => {
               try {
                 return {
@@ -3288,11 +3309,32 @@ function PlasmicConsultSend__RenderFunc(props: {
                 </AntdModal>
               )}
             </DataCtxReader__>
-          </ApiFetcherComponent>
-          <ApiFetcherComponent
+          </ApiFetcherComponentPlus>
+          <ApiFetcherComponentPlus
             data-plasmic-name={"getUsers"}
             data-plasmic-override={overrides.getUsers}
+            autoFetch={true}
             className={classNames("__wab_instance", sty.getUsers)}
+            fetchTriggers={(() => {
+              try {
+                return (() => {
+                  {
+                    return [
+                      $state.doctorNameInput.value,
+                      $state.modalReceiverDoctor.open
+                    ];
+                  }
+                })();
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             method={"GET"}
             path={`/api/v3/user?doctor_name=${$state.doctorNameInput.value}`}
             ref={ref => {
@@ -3768,11 +3810,25 @@ function PlasmicConsultSend__RenderFunc(props: {
                 </AntdModal>
               )}
             </DataCtxReader__>
-          </ApiFetcherComponent>
-          <ApiFetcherComponent
+          </ApiFetcherComponentPlus>
+          <ApiFetcherComponentPlus
             data-plasmic-name={"getPresentIlness"}
             data-plasmic-override={overrides.getPresentIlness}
+            autoFetch={true}
             className={classNames("__wab_instance", sty.getPresentIlness)}
+            fetchTrigger={(() => {
+              try {
+                return $state.modalPatientPresentIlness.open;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             headers={(() => {
               try {
                 return {
@@ -4090,7 +4146,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                 </AntdModal>
               )}
             </DataCtxReader__>
-          </ApiFetcherComponent>
+          </ApiFetcherComponentPlus>
         </div>
       </div>
     </React.Fragment>
@@ -4437,7 +4493,7 @@ type NodeDefaultElementType = {
   redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
-  patientDataForHeader: typeof ApiFetcherComponent;
+  patientDataForHeader: typeof ApiFetcherComponentPlus;
   freeBox: "div";
   patientNameAgeGender: "div";
   patientService: "div";
@@ -4476,7 +4532,7 @@ type NodeDefaultElementType = {
   patientProfile: typeof PlasmicImg__;
   imagingReportList: typeof PlasmicImg__;
   laboratoryData: typeof PlasmicImg__;
-  getServices: typeof ApiFetcherComponent;
+  getServices: typeof ApiFetcherComponentPlus;
   modalServiceList: typeof AntdModal;
   servicesList: "div";
   conditionGuard: typeof ConditionGuard;
@@ -4485,7 +4541,7 @@ type NodeDefaultElementType = {
   clearContent2: "svg";
   servicesName2: "div";
   servicesName: "div";
-  getUsers: typeof ApiFetcherComponent;
+  getUsers: typeof ApiFetcherComponentPlus;
   modalReceiverDoctor: typeof AntdModal;
   receiverDoctorList: "div";
   doctorNameInputContent: "div";
@@ -4493,7 +4549,7 @@ type NodeDefaultElementType = {
   clearContent: "svg";
   noDoctors: "div";
   doctorNames: "div";
-  getPresentIlness: typeof ApiFetcherComponent;
+  getPresentIlness: typeof ApiFetcherComponentPlus;
   modalPatientPresentIlness: typeof AntdModal;
   patientPresentIlness: "div";
   presentIllness: "div";
