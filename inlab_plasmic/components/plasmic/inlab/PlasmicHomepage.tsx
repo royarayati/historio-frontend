@@ -59,13 +59,6 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
-import {
-  executePlasmicDataOp,
-  usePlasmicDataOp,
-  usePlasmicInvalidate
-} from "@plasmicapp/react-web/lib/data-sources";
-
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
@@ -2241,8 +2234,6 @@ function PlasmicHomepage__RenderFunc(props: {
     $queries: {},
     $refs
   });
-  const dataSourcesCtx = usePlasmicDataSourceContext();
-  const plasmicInvalidate = usePlasmicInvalidate();
 
   const globalVariants = _useGlobalVariants();
   const styleTokensClassNames = _useStyleTokens();
@@ -3888,7 +3879,9 @@ function PlasmicHomepage__RenderFunc(props: {
                     return [
                       $state.mainSelectedTab,
                       $state.modalConsultFilterType.open,
-                      $state.modalConsultServiceList.open
+                      $state.modalConsultServiceList.open,
+                      $state.modalDeleteConsultConfirmation.open,
+                      localStorage.getItem("consult_page_number")
                     ];
                   } catch (e) {
                     if (
@@ -5797,27 +5790,6 @@ function PlasmicHomepage__RenderFunc(props: {
                       ) {
                         $steps["goToPage"] = await $steps["goToPage"];
                       }
-
-                      $steps["refreshData"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              queryInvalidation: ["plasmic_refresh_all"]
-                            };
-                            return (async ({ queryInvalidation }) => {
-                              if (!queryInvalidation) {
-                                return;
-                              }
-                              await plasmicInvalidate(queryInvalidation);
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["refreshData"] != null &&
-                        typeof $steps["refreshData"] === "object" &&
-                        typeof $steps["refreshData"].then === "function"
-                      ) {
-                        $steps["refreshData"] = await $steps["refreshData"];
-                      }
                     }}
                     onDeselectedChange={async (...eventArgs: any) => {
                       ((...eventArgs) => {
@@ -5982,27 +5954,6 @@ function PlasmicHomepage__RenderFunc(props: {
                           $steps["decreaseConsultPageNumber"] = await $steps[
                             "decreaseConsultPageNumber"
                           ];
-                        }
-
-                        $steps["refreshData"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                queryInvalidation: ["plasmic_refresh_all"]
-                              };
-                              return (async ({ queryInvalidation }) => {
-                                if (!queryInvalidation) {
-                                  return;
-                                }
-                                await plasmicInvalidate(queryInvalidation);
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                        if (
-                          $steps["refreshData"] != null &&
-                          typeof $steps["refreshData"] === "object" &&
-                          typeof $steps["refreshData"].then === "function"
-                        ) {
-                          $steps["refreshData"] = await $steps["refreshData"];
                         }
                       },
                       onDeselectedChange: async (...eventArgs: any) => {
@@ -6207,27 +6158,6 @@ function PlasmicHomepage__RenderFunc(props: {
                         $steps["increaseConsultPageNumber"] = await $steps[
                           "increaseConsultPageNumber"
                         ];
-                      }
-
-                      $steps["refreshData"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              queryInvalidation: ["plasmic_refresh_all"]
-                            };
-                            return (async ({ queryInvalidation }) => {
-                              if (!queryInvalidation) {
-                                return;
-                              }
-                              await plasmicInvalidate(queryInvalidation);
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["refreshData"] != null &&
-                        typeof $steps["refreshData"] === "object" &&
-                        typeof $steps["refreshData"].then === "function"
-                      ) {
-                        $steps["refreshData"] = await $steps["refreshData"];
                       }
                     }}
                     onDeselectedChange={async (...eventArgs: any) => {

@@ -872,6 +872,19 @@ function PlasmicConsultList__RenderFunc(props: {
                 data-plasmic-override={overrides.getConsult}
                 autoFetch={true}
                 className={classNames("__wab_instance", sty.getConsult)}
+                fetchTrigger={(() => {
+                  try {
+                    return $state.modalDeleteConsultConfirmation.open;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
                 headers={(() => {
                   try {
                     return {

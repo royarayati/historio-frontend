@@ -617,6 +617,12 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "consultReviewStateToReloadGetConsult",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -825,6 +831,19 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
               data-plasmic-override={overrides.getUniqueConsult}
               autoFetch={true}
               className={classNames("__wab_instance", sty.getUniqueConsult)}
+              fetchTrigger={(() => {
+                try {
+                  return $state.consultReviewStateToReloadGetConsult;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
               headers={(() => {
                 try {
                   return {
@@ -3717,28 +3736,54 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             ];
                           }
 
-                          $steps["runActionOnGetUniqueConsult"] =
+                          $steps["updateConsultReviewStateToReloadGetConsult"] =
                             $steps.patchConsultReview?.status === 200
                               ? (() => {
                                   const actionArgs = {
-                                    tplRef: "getUniqueConsult"
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "consultReviewStateToReloadGetConsult"
+                                      ]
+                                    },
+                                    operation: 4
                                   };
-                                  return (({ tplRef, action, args }) => {
-                                    return $refs?.[tplRef]?.[action]?.(
-                                      ...(args ?? [])
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    const oldValue = $stateGet(
+                                      objRoot,
+                                      variablePath
                                     );
+                                    $stateSet(objRoot, variablePath, !oldValue);
+                                    return !oldValue;
                                   })?.apply(null, [actionArgs]);
                                 })()
                               : undefined;
                           if (
-                            $steps["runActionOnGetUniqueConsult"] != null &&
-                            typeof $steps["runActionOnGetUniqueConsult"] ===
-                              "object" &&
-                            typeof $steps["runActionOnGetUniqueConsult"]
-                              .then === "function"
+                            $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ] != null &&
+                            typeof $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ] === "object" &&
+                            typeof $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ].then === "function"
                           ) {
-                            $steps["runActionOnGetUniqueConsult"] =
-                              await $steps["runActionOnGetUniqueConsult"];
+                            $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ] = await $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ];
                           }
 
                           $steps["updateConsultReviewUnsuccessfullyAlert2"] =
