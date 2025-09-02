@@ -774,11 +774,11 @@
 .consults:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
+  width: 100%;
+  padding-bottom: 85px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin-top: 10px;
-  padding-bottom: 85px;
   min-width: 0;
 }
 .مشاورهایییافتنشد {
@@ -813,9 +813,8 @@
 }
 .لطفامنتظربمانید2 {
   left: 20%;
-  top: 0px;
+  top: 0;
   position: fixed;
-  right: 0px;
   font-size: var(--token-sOr3fJ5Up5fq);
   width: auto;
   text-transform: none;
@@ -830,13 +829,19 @@
   margin-top: 4px;
   z-index: 3;
   max-width: 60%;
-  height: 25px;
+  height: auto;
+  align-self: center;
+  right: 0;
+  bottom: auto;
   border-radius: 5px;
-  padding: 8px;
+  padding: 12px 8px 8px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .لطفامنتظربمانید2 {
     font-size: var(--token-CdE1_0ZaCyT1);
+    left: auto;
+    top: auto;
+    right: auto;
   }
 }
 .inboxConsultCard {
@@ -2352,26 +2357,44 @@
     flex-shrink: 0;
   }
 }
-.category {
-  position: relative;
+.uploadHistoryBookmarkType:global(.__wab_instance) {
   max-width: 100%;
-  text-align: left;
-  align-self: center;
-  color: var(--token-IYO13gyYJHXG);
-  font-size: var(--token-CdE1_0ZaCyT1);
-  font-family: var(--VazirmatnCustom);
-  font-weight: 400;
-  font-style: normal;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre;
-  user-select: none;
-  text-decoration-line: none;
-  background: var(--token-Hd7stmcqwCJ-);
+  object-fit: cover;
+}
+.menuItem__ip2Yj:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__veJ2K {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.menuItem__r1Bc:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__ujotA {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.button__dhItm:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__ppVdZ {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
 }
 .categorize {
-  display: flex;
   position: relative;
   flex-direction: row;
   align-items: center;
@@ -2381,6 +2404,7 @@
   width: auto;
   height: auto;
   column-gap: 2px;
+  display: none;
   padding: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -2474,7 +2498,7 @@
     flex-shrink: 0;
   }
 }
-.wardRoom {
+.wardBookmarkType {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -2505,11 +2529,29 @@
   text-decoration-line: none;
   min-width: 0;
 }
-.uploadPatientHistory:global(.__wab_instance) {
+.bookmarkType2 {
+  position: relative;
+  max-width: 100%;
+  text-align: left;
+  align-self: center;
+  color: var(--token-IYO13gyYJHXG);
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none;
+  background: var(--token-Hd7stmcqwCJ-);
+}
+.upl5OadPatientHistory:global(.__wab_instance) {
   max-width: 100%;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .uploadPatientHistory:global(.__wab_instance) {
+  .upl5OadPatientHistory:global(.__wab_instance) {
     width: auto;
   }
 }
@@ -2534,7 +2576,7 @@
   width: auto;
   height: 1em;
 }
-.ward {
+.wardName {
   position: relative;
   width: 100%;
   height: auto;
@@ -2553,7 +2595,7 @@
   text-decoration-line: none;
   min-width: 0;
 }
-.wardRoom2 {
+.roomBedPart {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -2565,26 +2607,7 @@
   min-width: 0;
   padding: 0px 30px 5px 10px;
 }
-.roomBed2 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-size: 12px;
-  text-align: right;
-  white-space: pre-wrap;
-  font-family: var(--VazirmatnCustom);
-  font-weight: 400;
-  font-style: normal;
-  color: var(--token-IYO13gyYJHXG);
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  user-select: none;
-  text-decoration-line: none;
-  min-width: 0;
-}
-.ward3 {
+.roomBedName {
   position: relative;
   width: 100%;
   height: auto;
@@ -4396,7 +4419,7 @@
   max-width: 100%;
   object-fit: cover;
 }
-.button:global(.__wab_instance) {
+.button__uolPs:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
 }

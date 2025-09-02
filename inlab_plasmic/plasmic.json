@@ -2866,6 +2866,12 @@
           "name": "ApiFetcherComponentPlusCache",
           "displayName": "ApiFetcherComponentPlusCache",
           "componentImportPath": "./utils/ApiFetcherComponentPlusCache"
+        },
+        {
+          "id": "CnSDJxtIOp8H",
+          "name": "ApiFetcherComponentPlus",
+          "displayName": "ApiFetcherComponentPlus",
+          "componentImportPath": "./utils/ApiFetcherComponentPlus"
         }
       ],
       "customFunctions": [

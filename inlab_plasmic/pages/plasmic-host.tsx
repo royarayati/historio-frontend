@@ -84,6 +84,7 @@ import { UploadFileMeta } from '../utils/UploadFileComponent';
 import UploadFileComponent from '../utils/UploadFileComponent';
 import { registerFunction } from '@plasmicapp/react-web/lib/host';
 import { ApiFetcherComponentPlusCache, ApiFetcherComponentPlusCacheMeta } from '../utils/ApiFetcherComponentPlusCache';
+import { ApiFetcherComponentPlus, ApiFetcherMetaPlus } from '../utils/ApiFetcherComponentPlus';
 import { processAndCompressBase64 ,compressMultipleBase64Images } from '../utils/ImageCompression'; 
 
 
@@ -125,6 +126,7 @@ registerGlobalContext(AuthGlobalContext, {
 registerComponent(ApiFetcherComponent, ApiFetcherMeta);
 registerComponent(UploadFileComponent, UploadFileMeta);
 registerComponent(ApiFetcherComponentPlusCache, ApiFetcherComponentPlusCacheMeta);
+registerComponent(ApiFetcherComponentPlus, ApiFetcherMetaPlus);
 
 export const registerAdd = registerFunction(
   processAndCompressBase64,

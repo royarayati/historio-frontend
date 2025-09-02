@@ -61,7 +61,7 @@ import {
 
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
-import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
+import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
 import Bullet from "../../Bullet"; // plasmic-import: sWsqjPSVIYww/component
 import Alert2 from "../../Alert2"; // plasmic-import: RABqkXkLRlle/component
@@ -106,12 +106,12 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
-  patientDataForHeader?: Flex__<typeof ApiFetcherComponent>;
+  patientDataForHeader?: Flex__<typeof ApiFetcherComponentPlus>;
   freeBox?: Flex__<"div">;
   patientNameAgeGender?: Flex__<"div">;
   patientService?: Flex__<"div">;
   sentConsultContent?: Flex__<"div">;
-  getUniqueConsult?: Flex__<typeof ApiFetcherComponent>;
+  getUniqueConsult?: Flex__<typeof ApiFetcherComponentPlus>;
   sendConsult?: Flex__<"div">;
   consultHeader?: Flex__<"div">;
   deleteConsult?: Flex__<"svg">;
@@ -617,6 +617,12 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "consultReviewStateToReloadGetConsult",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -682,11 +688,11 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
             data-plasmic-override={overrides.header}
             className={classNames(projectcss.all, sty.header)}
           >
-            <ApiFetcherComponent
+            <ApiFetcherComponentPlus
               data-plasmic-name={"patientDataForHeader"}
               data-plasmic-override={overrides.patientDataForHeader}
+              autoFetch={true}
               className={classNames("__wab_instance", sty.patientDataForHeader)}
-              delay={50}
               headers={(() => {
                 try {
                   return {
@@ -813,17 +819,31 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                   </div>
                 )}
               </DataCtxReader__>
-            </ApiFetcherComponent>
+            </ApiFetcherComponentPlus>
           </div>
           <div
             data-plasmic-name={"sentConsultContent"}
             data-plasmic-override={overrides.sentConsultContent}
             className={classNames(projectcss.all, sty.sentConsultContent)}
           >
-            <ApiFetcherComponent
+            <ApiFetcherComponentPlus
               data-plasmic-name={"getUniqueConsult"}
               data-plasmic-override={overrides.getUniqueConsult}
+              autoFetch={true}
               className={classNames("__wab_instance", sty.getUniqueConsult)}
+              fetchTrigger={(() => {
+                try {
+                  return $state.consultReviewStateToReloadGetConsult;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
               headers={(() => {
                 try {
                   return {
@@ -3716,29 +3736,54 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             ];
                           }
 
-                          $steps["runActionOnGetUniqueConsult"] =
+                          $steps["updateConsultReviewStateToReloadGetConsult"] =
                             $steps.patchConsultReview?.status === 200
                               ? (() => {
                                   const actionArgs = {
-                                    tplRef: "getUniqueConsult",
-                                    action: "reload"
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "consultReviewStateToReloadGetConsult"
+                                      ]
+                                    },
+                                    operation: 4
                                   };
-                                  return (({ tplRef, action, args }) => {
-                                    return $refs?.[tplRef]?.[action]?.(
-                                      ...(args ?? [])
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    const oldValue = $stateGet(
+                                      objRoot,
+                                      variablePath
                                     );
+                                    $stateSet(objRoot, variablePath, !oldValue);
+                                    return !oldValue;
                                   })?.apply(null, [actionArgs]);
                                 })()
                               : undefined;
                           if (
-                            $steps["runActionOnGetUniqueConsult"] != null &&
-                            typeof $steps["runActionOnGetUniqueConsult"] ===
-                              "object" &&
-                            typeof $steps["runActionOnGetUniqueConsult"]
-                              .then === "function"
+                            $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ] != null &&
+                            typeof $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ] === "object" &&
+                            typeof $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ].then === "function"
                           ) {
-                            $steps["runActionOnGetUniqueConsult"] =
-                              await $steps["runActionOnGetUniqueConsult"];
+                            $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ] = await $steps[
+                              "updateConsultReviewStateToReloadGetConsult"
+                            ];
                           }
 
                           $steps["updateConsultReviewUnsuccessfullyAlert2"] =
@@ -5385,7 +5430,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                   </div>
                 )}
               </DataCtxReader__>
-            </ApiFetcherComponent>
+            </ApiFetcherComponentPlus>
           </div>
           <div
             data-plasmic-name={"switchingTab"}
@@ -6975,12 +7020,12 @@ type NodeDefaultElementType = {
   redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
-  patientDataForHeader: typeof ApiFetcherComponent;
+  patientDataForHeader: typeof ApiFetcherComponentPlus;
   freeBox: "div";
   patientNameAgeGender: "div";
   patientService: "div";
   sentConsultContent: "div";
-  getUniqueConsult: typeof ApiFetcherComponent;
+  getUniqueConsult: typeof ApiFetcherComponentPlus;
   sendConsult: "div";
   consultHeader: "div";
   deleteConsult: "svg";

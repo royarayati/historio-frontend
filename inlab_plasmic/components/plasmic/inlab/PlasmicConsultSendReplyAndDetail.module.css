@@ -126,6 +126,8 @@
 @media (min-width: 0px) and (max-width: 760px) {
   .sendConsult {
     position: relative;
+    left: auto;
+    top: auto;
   }
 }
 .consultHeader {
