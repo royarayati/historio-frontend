@@ -40,7 +40,7 @@ function OnloadUserPatientInteractionCount(
   // By default, we are just piping all OnloadUserPatientInteractionCountProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicOnloadUserPatientInteractionCount />;
+  return <PlasmicOnloadUserPatientInteractionCount   />;
 }
 
 export default OnloadUserPatientInteractionCount;

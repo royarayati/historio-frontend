@@ -361,6 +361,8 @@ function PlasmicHomepage__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const globalVariants = _useGlobalVariants();
+
   const $globalActions = useGlobalActions?.();
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
@@ -2241,7 +2243,6 @@ function PlasmicHomepage__RenderFunc(props: {
     $refs
   });
 
-  const globalVariants = _useGlobalVariants();
   const styleTokensClassNames = _useStyleTokens();
   const styleTokensClassNames_antd_5_hostless =
     useStyleTokens_antd_5_hostless();
@@ -9813,13 +9814,15 @@ function PlasmicHomepage__RenderFunc(props: {
                             "tums_api" &&
                           (($ctx.fetched_data.response &&
                             $ctx.fetched_data.response.status === 422) ||
-                            $ctx.fetched_data.status !== 200)
+                            ($ctx.fetched_data.status !== 200 &&
+                              $state.searchDismissed === true))
                         : $ctx.fetched_data.loading === false &&
                           localStorage.getItem("inlab_user_his_type") ===
                             "tums_api" &&
                           (($ctx.fetched_data.response &&
                             $ctx.fetched_data.response.status === 422) ||
-                            $ctx.fetched_data.status !== 200)
+                            ($ctx.fetched_data.status !== 200 &&
+                              $state.searchDismissed === true))
                     ) ? (
                       <div
                         data-plasmic-name={"error422"}
