@@ -4,7 +4,7 @@ import { DataProvider, GlobalActionsProvider } from '@plasmicapp/host';
 
 import axios from 'axios';
 
-import { getDevicedId, getCurrentUser, logForDev, checkUserValidity } from './CommonUtils';
+import { getCurrentUser, logForDev, checkUserValidity } from './CommonUtils'; // getDevicedId commented
 
 import { InlabUser, GlobalContext } from './types/CommonTypes';
 import { axiosCall } from './ApiFetcherAction';
@@ -87,8 +87,8 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
           .post(baseUrl + '/api/v3/user/login', {
             username,
             password,
-            device_id: getDevicedId(),
-            force_logout_other_sessions: true,
+            // device_id: getDevicedId(),
+            // force_logout_other_sessions: true,
           })
           .then(response => {
             if (response.status === 200) {
