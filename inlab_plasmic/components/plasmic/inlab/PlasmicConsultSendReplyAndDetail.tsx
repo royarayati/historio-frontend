@@ -3523,7 +3523,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         return (
                           !$ctx.fetched_data.loading &&
                           $ctx.fetched_data.data.state === 4 &&
-                          $ctx.inlab_user.user.rank.name === "professor"
+                          $ctx.inlab_user.user.info.rank.name === "professor"
                         );
                       } catch (e) {
                         if (
@@ -3592,7 +3592,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         return (
                           !$ctx.fetched_data.loading &&
                           $ctx.fetched_data.data.state === 4 &&
-                          $ctx.inlab_user.user.rank.name === "professor" &&
+                          $ctx.inlab_user.user.info.rank.name === "professor" &&
                           ($ctx.fetched_data.data.confirm_entries
                             ? $ctx.fetched_data.data.confirm_entries.some(
                                 entry =>
