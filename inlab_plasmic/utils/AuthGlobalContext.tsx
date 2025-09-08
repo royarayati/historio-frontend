@@ -84,7 +84,7 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
 
       login: async (username: string, password: string): Promise<any> => {
         return await axios
-          .post(baseUrl + '/api/v2/user/login', {
+          .post(baseUrl + '/api/v3/user/login', {
             username,
             password,
             device_id: getDevicedId(),
