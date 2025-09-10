@@ -3699,7 +3699,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     </div>
                   ) : null}
                   {$ctx.fetched_data.loading === false &&
-                  localStorage.getItem("inlab_user_his_type") !== "tums_api" &&
                   $ctx.fetched_data.data.length === 0 ? (
                     <div
                       className={classNames(
