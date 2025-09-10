@@ -423,7 +423,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                   <React.Fragment>
                     {(() => {
                       try {
-                        return $ctx.inlab_user.user.rank.title;
+                        return $ctx.inlab_user.user.info.rank.title;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
