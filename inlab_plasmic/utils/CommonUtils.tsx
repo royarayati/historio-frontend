@@ -57,6 +57,7 @@ export async function refreshUser(inlabUser: InlabUser, baseUrl: string, changeU
       if (response.status === 200) {
         console.log('CommonUtils: refreshUser: success: 200');
         inlabUser.access = response.data.access;
+        inlabUser.refresh = response.data.refresh;
         changeUserCallback(inlabUser);
       } else {
         changeUserCallback(null);
@@ -127,6 +128,7 @@ export function refreshAccessIfNeeded(globalContext: GlobalContextType, inlabUse
           if (response.status === 200) {
             // TODO: better naming for keys maybe?
             inlabUser.access = response.data.access;
+            inlabUser.refresh = response.data.refresh;
             changeUserCallback(inlabUser);
             resolve(inlabUser);
           } else {
