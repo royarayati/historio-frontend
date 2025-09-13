@@ -1270,10 +1270,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                               consult_id: parseInt(
                                                 $ctx.params.consult_id
                                               ),
-                                              patient_id: 0,
-                                              admission_id: parseInt(
-                                                $ctx.params.adm_id
-                                              )
+                                              patient_id: 0
+                                              // "admission_id": parseInt($ctx.params.adm_id)
                                             };
                                           } catch (e) {
                                             if (
@@ -4358,10 +4356,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                                 consult_id: parseInt(
                                                   $ctx.params.consult_id
                                                 ),
-                                                patient_id: 0,
-                                                admission_id: parseInt(
-                                                  $ctx.params.adm_id
-                                                )
+                                                patient_id: 0
+                                                // "admission_id": parseInt($ctx.params.adm_id)
                                               };
                                             } catch (e) {
                                               if (
