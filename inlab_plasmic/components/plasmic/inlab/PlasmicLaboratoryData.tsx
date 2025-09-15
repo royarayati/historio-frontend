@@ -3373,28 +3373,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {(
-                    hasVariant(globalVariants, "screen", "mobileFirst")
-                      ? $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") ===
-                          "tums_api" &&
-                        (($ctx.fetched_data.response &&
-                          $ctx.fetched_data.response.status === 422) ||
-                          $ctx.fetched_data.status !== 200)
-                      : false
-                  ) ? (
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__uNkUb
-                      )}
-                    >
-                      {
-                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0645\u0634\u0627\u0647\u062f\u0647 \u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634 \u0628\u06cc\u0645\u0627\u0631 \u0635\u0631\u0641\u0627 \u0628\u0627 \u06a9\u062f \u0628\u0631\u06af\u0647 \u0628\u06cc\u0645\u0627\u0631 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0627\u0633\u062a \u0648 \u0628\u0627 \u06a9\u062f \u0628\u06cc\u0645\u0627\u0631 \u0648\u06cc\u0627 \u06a9\u062f \u067e\u0630\u06cc\u0631\u0634 \u0628\u06cc\u0645\u0627\u0631 \u0627\u06cc\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0648\u062c\u0648\u062f \u0646\u062f\u0627\u0631\u062f"
-                      }
-                    </div>
-                  ) : null}
                   {(() => {
                     try {
                       return (
@@ -4616,33 +4594,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       }
                     </div>
                   ) : null}
-                  {(
-                    hasVariant(globalVariants, "screen", "mobileFirst")
-                      ? $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") ===
-                          "tums_api" &&
-                        (($ctx.fetched_data.response &&
-                          $ctx.fetched_data.response.status === 422) ||
-                          $ctx.fetched_data.status !== 200)
-                      : $ctx.fetched_data.loading === false &&
-                        localStorage.getItem("inlab_user_his_type") ===
-                          "tums_api" &&
-                        (($ctx.fetched_data.response &&
-                          $ctx.fetched_data.response.status === 422) ||
-                          $ctx.fetched_data.status !== 200)
-                  ) ? (
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__tjDbO
-                      )}
-                    >
-                      {
-                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0645\u0634\u0627\u0647\u062f\u0647 \u0646\u062a\u0627\u06cc\u062c \u0622\u0632\u0645\u0627\u06cc\u0634 \u0628\u06cc\u0645\u0627\u0631 \u0635\u0631\u0641\u0627 \u0628\u0627 \u06a9\u062f \u0628\u0631\u06af\u0647 \u0628\u06cc\u0645\u0627\u0631 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0627\u0633\u062a \u0648 \u0628\u0627 \u06a9\u062f \u0628\u06cc\u0645\u0627\u0631 \u0648\u06cc\u0627 \u06a9\u062f \u067e\u0630\u06cc\u0631\u0634 \u0628\u06cc\u0645\u0627\u0631 \u0627\u06cc\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0648\u062c\u0648\u062f \u0646\u062f\u0627\u0631\u062f"
-                      }
-                    </div>
-                  ) : null}
                   {(() => {
                     try {
                       return (
@@ -5720,19 +5671,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     >
                       {
                         "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a "
-                      }
-                    </div>
-                  ) : null}
-                  {false ? (
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text___4W7AB
-                      )}
-                    >
-                      {
-                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c  \u0645\u0634\u0627\u0647\u062f\u0647 \u0627\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f"
                       }
                     </div>
                   ) : null}

@@ -142,8 +142,6 @@ export type PlasmicConsultSendReplyAndDetail__OverridesType = {
   senderAndSendDateTitle?: Flex__<"div">;
   consultSender?: Flex__<"div">;
   consultSendDatetime?: Flex__<"div">;
-  lastEditDatetimeTitle?: Flex__<"div">;
-  lastEditDatetime?: Flex__<"div">;
   consultSendReplyContent?: Flex__<"div">;
   consultReplyTitle?: Flex__<"div">;
   consultReplyInput?: Flex__<"textarea">;
@@ -2042,79 +2040,6 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                     );
                                     return `${englishTime} ${englishDate}`;
                                   })();
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                          <div
-                            data-plasmic-name={"lastEditDatetimeTitle"}
-                            data-plasmic-override={
-                              overrides.lastEditDatetimeTitle
-                            }
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.lastEditDatetimeTitle
-                            )}
-                          >
-                            {
-                              "\u0622\u062e\u0631\u06cc\u0646 \u0632\u0645\u0627\u0646 \u0648\u06cc\u0631\u0627\u06cc\u0634 \u0645\u0634\u0627\u0648\u0631\u0647"
-                            }
-                          </div>
-                          <div
-                            data-plasmic-name={"lastEditDatetime"}
-                            data-plasmic-override={overrides.lastEditDatetime}
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.lastEditDatetime
-                            )}
-                            dir={"rtl"}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return $ctx.fetched_data.data
-                                    .last_edited_request_datetime
-                                    ? (() => {
-                                        const gregorianDate = new Date(
-                                          $ctx.fetched_data.data.last_edited_request_datetime
-                                        );
-                                        const shamsiDate =
-                                          new Intl.DateTimeFormat(
-                                            "fa-IR"
-                                          ).format(gregorianDate);
-                                        const shamsiTime =
-                                          gregorianDate.toLocaleTimeString(
-                                            "fa-IR",
-                                            { hour12: false }
-                                          );
-                                        const englishDate = shamsiDate.replace(
-                                          /[۰-۹]/g,
-                                          d =>
-                                            String.fromCharCode(
-                                              d.charCodeAt(0) - 1728
-                                            )
-                                        );
-                                        const englishTime = shamsiTime.replace(
-                                          /[۰-۹]/g,
-                                          d =>
-                                            String.fromCharCode(
-                                              d.charCodeAt(0) - 1728
-                                            )
-                                        );
-                                        return `${englishTime} ${englishDate}`;
-                                      })()
-                                    : "-";
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -6442,8 +6367,6 @@ const PlasmicDescendants = {
     "senderAndSendDateTitle",
     "consultSender",
     "consultSendDatetime",
-    "lastEditDatetimeTitle",
-    "lastEditDatetime",
     "consultSendReplyContent",
     "consultReplyTitle",
     "consultReplyInput",
@@ -6558,8 +6481,6 @@ const PlasmicDescendants = {
     "senderAndSendDateTitle",
     "consultSender",
     "consultSendDatetime",
-    "lastEditDatetimeTitle",
-    "lastEditDatetime",
     "consultSendReplyContent",
     "consultReplyTitle",
     "consultReplyInput",
@@ -6641,8 +6562,6 @@ const PlasmicDescendants = {
     "senderAndSendDateTitle",
     "consultSender",
     "consultSendDatetime",
-    "lastEditDatetimeTitle",
-    "lastEditDatetime",
     "consultSendReplyContent",
     "consultReplyTitle",
     "consultReplyInput",
@@ -6723,8 +6642,6 @@ const PlasmicDescendants = {
     "senderAndSendDateTitle",
     "consultSender",
     "consultSendDatetime",
-    "lastEditDatetimeTitle",
-    "lastEditDatetime",
     "consultSendReplyContent",
     "consultReplyTitle",
     "consultReplyInput",
@@ -6833,9 +6750,7 @@ const PlasmicDescendants = {
     "senderDoctorAndTime",
     "senderAndSendDateTitle",
     "consultSender",
-    "consultSendDatetime",
-    "lastEditDatetimeTitle",
-    "lastEditDatetime"
+    "consultSendDatetime"
   ],
   emergent: ["emergent"],
   elective: ["elective"],
@@ -6843,15 +6758,11 @@ const PlasmicDescendants = {
     "senderDoctorAndTime",
     "senderAndSendDateTitle",
     "consultSender",
-    "consultSendDatetime",
-    "lastEditDatetimeTitle",
-    "lastEditDatetime"
+    "consultSendDatetime"
   ],
   senderAndSendDateTitle: ["senderAndSendDateTitle"],
   consultSender: ["consultSender"],
   consultSendDatetime: ["consultSendDatetime"],
-  lastEditDatetimeTitle: ["lastEditDatetimeTitle"],
-  lastEditDatetime: ["lastEditDatetime"],
   consultSendReplyContent: [
     "consultSendReplyContent",
     "consultReplyTitle",
@@ -7053,8 +6964,6 @@ type NodeDefaultElementType = {
   senderAndSendDateTitle: "div";
   consultSender: "div";
   consultSendDatetime: "div";
-  lastEditDatetimeTitle: "div";
-  lastEditDatetime: "div";
   consultSendReplyContent: "div";
   consultReplyTitle: "div";
   consultReplyInput: "textarea";
@@ -7233,8 +7142,6 @@ export const PlasmicConsultSendReplyAndDetail = Object.assign(
     senderAndSendDateTitle: makeNodeComponent("senderAndSendDateTitle"),
     consultSender: makeNodeComponent("consultSender"),
     consultSendDatetime: makeNodeComponent("consultSendDatetime"),
-    lastEditDatetimeTitle: makeNodeComponent("lastEditDatetimeTitle"),
-    lastEditDatetime: makeNodeComponent("lastEditDatetime"),
     consultSendReplyContent: makeNodeComponent("consultSendReplyContent"),
     consultReplyTitle: makeNodeComponent("consultReplyTitle"),
     consultReplyInput: makeNodeComponent("consultReplyInput"),

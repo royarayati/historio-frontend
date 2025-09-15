@@ -465,30 +465,6 @@
     display: block;
   }
 }
-.text___5EVZc {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  flex-grow: 0;
-  margin-top: 12px;
-  background: #ffffff;
-  white-space: pre-wrap;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  position: relative;
-  color: #cb1616;
-  min-width: 0;
-  border-radius: 5px;
-  padding: 8px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .text___5EVZc {
-    left: auto;
-    top: auto;
-    display: block;
-  }
-}
 .paraclinicReportsSection2 {
   display: grid;
   position: relative;
@@ -758,23 +734,6 @@
   .text__plPBz {
     display: block;
   }
-}
-.text__oVF {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  flex-grow: 0;
-  margin-top: 12px;
-  background: #ffffff;
-  white-space: pre-wrap;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  position: relative;
-  color: #cb1616;
-  min-width: 0;
-  border-radius: 5px;
-  padding: 8px;
 }
 .text___26En9 {
   width: 100%;
@@ -1699,23 +1658,6 @@
     top: auto;
     display: block;
   }
-}
-.text__vH4JT {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  flex-grow: 0;
-  margin-top: 12px;
-  background: #ffffff;
-  white-space: pre-wrap;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  position: relative;
-  color: #cb1616;
-  min-width: 0;
-  border-radius: 5px;
-  padding: 8px;
 }
 .paraclinicReportsSection {
   display: grid;
