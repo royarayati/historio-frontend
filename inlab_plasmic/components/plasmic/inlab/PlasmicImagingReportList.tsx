@@ -2830,61 +2830,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   ) : null}
                   {(
                     hasVariant(globalVariants, "screen", "mobileFirst")
-                      ? (() => {
-                          try {
-                            return (
-                              $ctx.fetched_data.loading === false &&
-                              localStorage.getItem("inlab_user_his_type") ===
-                                "tums_api" &&
-                              (($ctx.fetched_data.response &&
-                                $ctx.fetched_data.response.status === 422) ||
-                                $ctx.fetched_data.status !== 200)
-                            );
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return true;
-                            }
-                            throw e;
-                          }
-                        })()
-                      : (() => {
-                          try {
-                            return (
-                              $ctx.fetched_data.loading === false &&
-                              localStorage.getItem("inlab_user_his_type") ===
-                                "tums_api" &&
-                              (($ctx.fetched_data.response &&
-                                $ctx.fetched_data.response.status === 422) ||
-                                $ctx.fetched_data.status !== 200)
-                            );
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return true;
-                            }
-                            throw e;
-                          }
-                        })()
-                  ) ? (
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text___5EVZc
-                      )}
-                    >
-                      {
-                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0645\u0634\u0627\u0647\u062f\u0647 \u0646\u062a\u0627\u06cc\u062c \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f"
-                      }
-                    </div>
-                  ) : null}
-                  {(
-                    hasVariant(globalVariants, "screen", "mobileFirst")
                       ? true
                       : (() => {
                           try {
@@ -3678,23 +3623,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     >
                       {
                         "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
-                      }
-                    </div>
-                  ) : null}
-                  {(
-                    hasVariant(globalVariants, "screen", "mobileFirst")
-                      ? false
-                      : false
-                  ) ? (
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__oVF
-                      )}
-                    >
-                      {
-                        "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0645\u0634\u0627\u0647\u062f\u0647 \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0647\u0627\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0634\u062f\u0647 \u0628\u06cc\u0645\u0627\u0631 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f"
                       }
                     </div>
                   ) : null}
@@ -7564,23 +7492,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       >
                         {
                           "\u06af\u0632\u0627\u0631\u0634\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a "
-                        }
-                      </div>
-                    ) : null}
-                    {(
-                      hasVariant(globalVariants, "screen", "mobileFirst")
-                        ? false
-                        : false
-                    ) ? (
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__vH4JT
-                        )}
-                      >
-                        {
-                          "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0645\u0634\u0627\u0647\u062f\u0647 \u0646\u062a\u0627\u06cc\u062c \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0628\u06cc\u0645\u0627\u0631 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f"
                         }
                       </div>
                     ) : null}
