@@ -4175,10 +4175,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                currentItem.details.patient[0]
+                                                currentItem.details.patient
                                                   .first_name +
                                                 " " +
-                                                currentItem.details.patient[0]
+                                                currentItem.details.patient
                                                   .last_name
                                               );
                                             } catch (e) {
@@ -4208,8 +4208,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                         <React.Fragment>
                                           {(() => {
                                             try {
-                                              return currentItem.details.ward
-                                                .name;
+                                              return currentItem.details.patient
+                                                .ward[0].name;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
