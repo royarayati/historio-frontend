@@ -70,8 +70,6 @@ import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_antd_5_hostless } from "../antd_5_hostless/PlasmicStyleTokensProvider"; // plasmic-import: ohDidvG9XsCeFumugENU3J/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_plasmic_rich_components } from "../plasmic_rich_components/PlasmicStyleTokensProvider"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/styleTokensProvider
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -371,10 +369,6 @@ function PlasmicConsultList__RenderFunc(props: {
   });
 
   const styleTokensClassNames = _useStyleTokens();
-  const styleTokensClassNames_antd_5_hostless =
-    useStyleTokens_antd_5_hostless();
-  const styleTokensClassNames_plasmic_rich_components =
-    useStyleTokens_plasmic_rich_components();
 
   return (
     <React.Fragment>
@@ -398,8 +392,6 @@ function PlasmicConsultList__RenderFunc(props: {
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
             styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components,
             sty.consultList
           )}
         >
@@ -904,7 +896,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   }
                 })()}
                 method={"GET"}
-                path={`/api/v2/patient/${$ctx.params.code}/consult`}
+                path={`/api/v3/consults?drafted_consult=true&dismissed_consult=true&patient_id=${$ctx.params.code}`}
                 ref={ref => {
                   $refs["getConsult"] = ref;
                 }}
@@ -945,7 +937,7 @@ function PlasmicConsultList__RenderFunc(props: {
                         try {
                           return (
                             $ctx.fetched_data.loading === false &&
-                            $ctx.fetched_data.data.consults == ""
+                            !$ctx.fetched_data.data.count
                           );
                         } catch (e) {
                           if (
@@ -979,7 +971,7 @@ function PlasmicConsultList__RenderFunc(props: {
                         !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                         (() => {
                           try {
-                            return $ctx.fetched_data.data.consults;
+                            return $ctx.fetched_data.data.items;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -1119,8 +1111,8 @@ function PlasmicConsultList__RenderFunc(props: {
                                         <React.Fragment>
                                           {(() => {
                                             try {
-                                              return currentItem
-                                                .effective_patient_service.name;
+                                              return currentItem.details
+                                                .sender_service.name;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -1158,8 +1150,8 @@ function PlasmicConsultList__RenderFunc(props: {
                                         <React.Fragment>
                                           {(() => {
                                             try {
-                                              return currentItem
-                                                .consultant_service.name;
+                                              return currentItem.details
+                                                .receiver_service.name;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -1199,13 +1191,14 @@ function PlasmicConsultList__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                currentItem.requester.rank
-                                                  .role +
+                                                currentItem.details.sender.info
+                                                  .rank.role +
                                                 " " +
-                                                currentItem.requester
+                                                currentItem.details.sender
                                                   .first_name +
                                                 " " +
-                                                currentItem.requester.last_name
+                                                currentItem.details.sender
+                                                  .last_name
                                               );
                                             } catch (e) {
                                               if (
@@ -1235,14 +1228,16 @@ function PlasmicConsultList__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                currentItem.suggested_consultant
-                                                  .rank.role +
+                                                currentItem.details
+                                                  .suggested_receiver.info.rank
+                                                  .role +
                                                 " " +
-                                                currentItem.suggested_consultant
+                                                currentItem.details
+                                                  .suggested_receiver
                                                   .first_name +
                                                 " " +
-                                                currentItem.suggested_consultant
-                                                  .last_name
+                                                currentItem.details
+                                                  .suggested_receiver.last_name
                                               );
                                             } catch (e) {
                                               if (
@@ -1432,7 +1427,7 @@ function PlasmicConsultList__RenderFunc(props: {
                                       try {
                                         return (
                                           currentItem.state !== 4 &&
-                                          currentItem.requester.id ===
+                                          currentItem.requester_id ===
                                             $ctx.inlab_user.user.id
                                         );
                                       } catch (e) {
@@ -2727,9 +2722,7 @@ function PlasmicConsultList__RenderFunc(props: {
               projectcss.root_reset,
               projectcss.plasmic_default_styles,
               projectcss.plasmic_mixins,
-              styleTokensClassNames,
-              styleTokensClassNames_antd_5_hostless,
-              styleTokensClassNames_plasmic_rich_components
+              styleTokensClassNames
             )}
             hideFooter={true}
             maskClosable={true}

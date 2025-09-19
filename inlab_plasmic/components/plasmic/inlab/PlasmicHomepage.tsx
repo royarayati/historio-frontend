@@ -73,13 +73,11 @@ import { AntdDropdown } from "@plasmicpkgs/antd5/skinny/registerDropdown";
 import { AntdMenuItem } from "@plasmicpkgs/antd5/skinny/registerMenu";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
-import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
+import NewFeatureBanner from "../../NewFeatureBanner"; // plasmic-import: 3tcwCShdS0g0/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_antd_5_hostless } from "../antd_5_hostless/PlasmicStyleTokensProvider"; // plasmic-import: ohDidvG9XsCeFumugENU3J/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_plasmic_rich_components } from "../plasmic_rich_components/PlasmicStyleTokensProvider"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/styleTokensProvider
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -283,11 +281,6 @@ export type PlasmicHomepage__OverridesType = {
   clearContent?: Flex__<"svg">;
   noServices?: Flex__<"div">;
   servicesName?: Flex__<"div">;
-  modalFeatureBanner?: Flex__<typeof AntdModal>;
-  newFeatureBanner?: Flex__<typeof NewFeatureBanner>;
-  متوجهشدم?: Flex__<typeof Button>;
-  modalNps?: Flex__<typeof AntdModal>;
-  columns?: Flex__<"div">;
   modalDeleteConsultConfirmation?: Flex__<typeof AntdModal>;
   confirmationContent?: Flex__<"div">;
   confirmationYesNo?: Flex__<"div">;
@@ -296,6 +289,9 @@ export type PlasmicHomepage__OverridesType = {
   unsuccessfulDeleteConsult?: Flex__<typeof Alert3>;
   title?: Flex__<"div">;
   guide?: Flex__<"div">;
+  modalFeatureBanner?: Flex__<typeof AntdModal>;
+  newFeatureBanner?: Flex__<typeof NewFeatureBanner>;
+  متوجهشدم?: Flex__<typeof Button>;
   patientHistoryModal?: Flex__<typeof AntdModal>;
   getSection?: Flex__<"div">;
   getPatientHistoryComponent?: Flex__<typeof ApiFetcherComponent>;
@@ -312,6 +308,8 @@ export type PlasmicHomepage__OverridesType = {
   modalExpiredBanner?: Flex__<typeof AntdModal>;
   modalExpirationAlarmBanner?: Flex__<typeof AntdModal>;
   متوجهشدم2?: Flex__<typeof Button>;
+  modalHospitalMessageBanner?: Flex__<typeof AntdModal>;
+  متوجهشدم3?: Flex__<typeof Button>;
 };
 
 export interface DefaultHomepageProps {}
@@ -689,22 +687,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   throw e;
                 }
               })()
-            : (() => {
-                try {
-                  return (
-                    $props.newVersionDatetime !==
-                    localStorage.getItem("new_version_datetime")
-                  );
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return false;
-                  }
-                  throw e;
-                }
-              })()
+            : undefined
       },
       {
         path: "متوجهشدم.isDisabled",
@@ -901,25 +884,6 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
-      },
-      {
-        path: "modalNps.open",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return !localStorage.getItem("NPS_score");
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return false;
-              }
-              throw e;
-            }
-          })()
       },
       {
         path: "npsScore",
@@ -2232,6 +2196,85 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "modalHospitalMessageBanner.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant(globalVariants, "screen", "mobileFirst")
+            ? (() => {
+                try {
+                  return (() => {
+                    const expirationStr = localStorage.getItem(
+                      "namespace_expiration_datetime"
+                    );
+                    let expiringSoon = false;
+                    if (expirationStr) {
+                      const expirationTs = new Date(expirationStr).getTime();
+                      const nowTs = Date.now();
+                      const oneWeekInMs = 7 * 24 * 60 * 60 * 1000;
+                      const diff = expirationTs - nowTs;
+                      expiringSoon = diff > 0 && diff <= oneWeekInMs;
+                    }
+                    return expiringSoon;
+                  })();
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
+                  }
+                  throw e;
+                }
+              })()
+            : (() => {
+                try {
+                  return (
+                    localStorage.getItem("namespace_show_message") === true &&
+                    localStorage.getItem("namespace_message_checked") === false
+                  );
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
+                  }
+                  throw e;
+                }
+              })()
+      },
+      {
+        path: "متوجهشدم3.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "متوجهشدم3.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "متوجهشدم3.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "متوجهشدم3.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "متوجهشدم3.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -2244,10 +2287,6 @@ function PlasmicHomepage__RenderFunc(props: {
   });
 
   const styleTokensClassNames = _useStyleTokens();
-  const styleTokensClassNames_antd_5_hostless =
-    useStyleTokens_antd_5_hostless();
-  const styleTokensClassNames_plasmic_rich_components =
-    useStyleTokens_plasmic_rich_components();
 
   return (
     <React.Fragment>
@@ -2283,8 +2322,6 @@ function PlasmicHomepage__RenderFunc(props: {
           projectcss.plasmic_default_styles,
           projectcss.plasmic_mixins,
           styleTokensClassNames,
-          styleTokensClassNames_antd_5_hostless,
-          styleTokensClassNames_plasmic_rich_components,
           sty.homepage,
           {
             [sty.homepagepatientSummary]: hasVariant(
@@ -2327,9 +2364,7 @@ function PlasmicHomepage__RenderFunc(props: {
               projectcss.root_reset,
               projectcss.plasmic_default_styles,
               projectcss.plasmic_mixins,
-              styleTokensClassNames,
-              styleTokensClassNames_antd_5_hostless,
-              styleTokensClassNames_plasmic_rich_components
+              styleTokensClassNames
             )}
             footer={
               <div
@@ -3918,17 +3953,17 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 })()}
                 method={"GET"}
-                path={`/api/v2/consult?${`offset=${
+                path={`/api/v3/consults?drafted_consult=false&dismissed_consult=true${
+                  localStorage.getItem("GET_V3_consult_query_param")
+                    ? localStorage.getItem("GET_V3_consult_query_param")
+                    : ""
+                }&limit=10&offset=${`${
                   ((localStorage.getItem("consult_page_number")
                     ? parseInt(localStorage.getItem("consult_page_number"), 10)
                     : 1) -
                     1) *
                   10
-                }`}&limit=10&${
-                  localStorage.getItem("GET_V2_consult_query_param")
-                    ? localStorage.getItem("GET_V2_consult_query_param")
-                    : ""
-                }`}
+                }`}`}
                 ref={ref => {
                   $refs["consults"] = ref;
                 }}
@@ -3940,7 +3975,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         try {
                           return (
                             $ctx.fetched_data.loading === false &&
-                            $ctx.fetched_data.data.consults == ""
+                            $ctx.fetched_data.data.items == 0
                           );
                         } catch (e) {
                           if (
@@ -4001,7 +4036,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                         (() => {
                           try {
-                            return $ctx.fetched_data.data.consults;
+                            return $ctx.fetched_data.data.items;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -4140,9 +4175,11 @@ function PlasmicHomepage__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                currentItem.patient.first_name +
+                                                currentItem.details.patient[0]
+                                                  .first_name +
                                                 " " +
-                                                currentItem.patient.last_name
+                                                currentItem.details.patient[0]
+                                                  .last_name
                                               );
                                             } catch (e) {
                                               if (
@@ -4171,7 +4208,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         <React.Fragment>
                                           {(() => {
                                             try {
-                                              return currentItem.effective_ward
+                                              return currentItem.details.ward
                                                 .name;
                                             } catch (e) {
                                               if (
@@ -4213,8 +4250,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                         <React.Fragment>
                                           {(() => {
                                             try {
-                                              return currentItem
-                                                .effective_patient_service.name;
+                                              return currentItem.details
+                                                .sender_service.name;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -4252,8 +4289,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                         <React.Fragment>
                                           {(() => {
                                             try {
-                                              return currentItem
-                                                .consultant_service.name;
+                                              return currentItem.details
+                                                .receiver_service.name;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -4293,13 +4330,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                currentItem.requester.rank
-                                                  .role +
+                                                currentItem.details.sender.info
+                                                  .rank.role +
                                                 " " +
-                                                currentItem.requester
+                                                currentItem.details.sender
                                                   .first_name +
                                                 " " +
-                                                currentItem.requester.last_name
+                                                currentItem.details.sender
+                                                  .last_name
                                               );
                                             } catch (e) {
                                               if (
@@ -4329,14 +4367,16 @@ function PlasmicHomepage__RenderFunc(props: {
                                           {(() => {
                                             try {
                                               return (
-                                                currentItem.suggested_consultant
-                                                  .rank.role +
+                                                currentItem.details
+                                                  .suggested_receiver.info.rank
+                                                  .role +
                                                 " " +
-                                                currentItem.suggested_consultant
+                                                currentItem.details
+                                                  .suggested_receiver
                                                   .first_name +
                                                 " " +
-                                                currentItem.suggested_consultant
-                                                  .last_name
+                                                currentItem.details
+                                                  .suggested_receiver.last_name
                                               );
                                             } catch (e) {
                                               if (
@@ -4538,7 +4578,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       try {
                                         return (
                                           currentItem.state != 4 &&
-                                          currentItem.requester.id ===
+                                          currentItem.requester_id ===
                                             $ctx.inlab_user.user.id
                                         );
                                       } catch (e) {
@@ -4832,8 +4872,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               const actionArgs = {
                                                 destination: `/consult/send/reply/detail/${(() => {
                                                   try {
-                                                    return currentItem.patient
-                                                      .profile_id;
+                                                    return currentItem.patient_iid;
                                                   } catch (e) {
                                                     if (
                                                       e instanceof TypeError ||
@@ -4846,8 +4885,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                   }
                                                 })()}/${(() => {
                                                   try {
-                                                    return currentItem.patient
-                                                      .admission_id;
+                                                    return currentItem.details
+                                                      .patient.id;
                                                   } catch (e) {
                                                     if (
                                                       e instanceof TypeError ||
@@ -4952,8 +4991,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               const actionArgs = {
                                                 destination: `/consult/send/reply/detail/${(() => {
                                                   try {
-                                                    return currentItem.patient
-                                                      .profile_id;
+                                                    return currentItem.patient_iid;
                                                   } catch (e) {
                                                     if (
                                                       e instanceof TypeError ||
@@ -4966,8 +5004,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                   }
                                                 })()}/${(() => {
                                                   try {
-                                                    return currentItem.patient
-                                                      .admission_id;
+                                                    return currentItem.details
+                                                      .patient.id;
                                                   } catch (e) {
                                                     if (
                                                       e instanceof TypeError ||
@@ -5074,13 +5112,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 return (() => {
                                                   localStorage.setItem(
                                                     "patient_id",
-                                                    currentItem.patient
-                                                      .profile_id
+                                                    currentItem.patient_iid
                                                   );
                                                   localStorage.setItem(
                                                     "admission_id",
-                                                    currentItem.patient
-                                                      .admission_id
+                                                    currentItem.details.patient
+                                                      .id
                                                   );
                                                   return console.log(
                                                     localStorage.getItem(
@@ -5121,8 +5158,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                             const actionArgs = {
                                               destination: `/patient/${(() => {
                                                 try {
-                                                  return currentItem.patient
-                                                    .profile_id;
+                                                  return currentItem.patient_iid;
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -5135,8 +5171,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 }
                                               })()}/profile/${(() => {
                                                 try {
-                                                  return currentItem.patient
-                                                    .admission_id;
+                                                  return currentItem.details
+                                                    .patient.id;
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -5213,13 +5249,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 return (() => {
                                                   localStorage.setItem(
                                                     "patient_id",
-                                                    currentItem.patient
-                                                      .profile_id
+                                                    currentItem.patient_iid
                                                   );
                                                   localStorage.setItem(
                                                     "admission_id",
-                                                    currentItem.patient
-                                                      .admission_id
+                                                    currentItem.details.patient
+                                                      .id
                                                   );
                                                   return console.log(
                                                     localStorage.getItem(
@@ -5260,8 +5295,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                             const actionArgs = {
                                               destination: `/consult/list/${(() => {
                                                 try {
-                                                  return currentItem.patient
-                                                    .profile_id;
+                                                  return currentItem.patient_iid;
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -5274,8 +5308,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 }
                                               })()}/${(() => {
                                                 try {
-                                                  return currentItem.patient
-                                                    .admission_id;
+                                                  return currentItem.details
+                                                    .patient.id;
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -5351,13 +5385,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 return (() => {
                                                   localStorage.setItem(
                                                     "patient_id",
-                                                    currentItem.patient
-                                                      .profile_id
+                                                    currentItem.patient_iid
                                                   );
                                                   localStorage.setItem(
                                                     "admission_id",
-                                                    currentItem.patient
-                                                      .admission_id
+                                                    currentItem.details.patient
+                                                      .id
                                                   );
                                                   return console.log(
                                                     localStorage.getItem(
@@ -5398,8 +5431,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                             const actionArgs = {
                                               destination: `/patient/${(() => {
                                                 try {
-                                                  return currentItem.patient
-                                                    .profile_id;
+                                                  return currentItem.patient_iid;
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -5412,8 +5444,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 }
                                               })()}/report/list/${(() => {
                                                 try {
-                                                  return currentItem.patient
-                                                    .admission_id;
+                                                  return currentItem.details
+                                                    .patient.id;
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -5491,13 +5523,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 return (() => {
                                                   localStorage.setItem(
                                                     "patient_id",
-                                                    currentItem.patient
-                                                      .profile_id
+                                                    currentItem.patient_iid
                                                   );
                                                   localStorage.setItem(
                                                     "admission_id",
-                                                    currentItem.patient
-                                                      .admission_id
+                                                    currentItem.details.patient
+                                                      .id
                                                   );
                                                   return console.log(
                                                     localStorage.getItem(
@@ -5581,8 +5612,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                             const actionArgs = {
                                               destination: `/patient/${(() => {
                                                 try {
-                                                  return currentItem.patient
-                                                    .profile_id;
+                                                  return currentItem.patient_iid;
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -5595,8 +5625,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 }
                                               })()}/lab/${(() => {
                                                 try {
-                                                  return currentItem.patient
-                                                    .admission_id;
+                                                  return currentItem.details
+                                                    .patient.id;
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -12525,9 +12555,7 @@ function PlasmicHomepage__RenderFunc(props: {
             projectcss.root_reset,
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
-            styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components
+            styleTokensClassNames
           )}
           hideFooter={true}
           maskClosable={false}
@@ -13071,9 +13099,7 @@ function PlasmicHomepage__RenderFunc(props: {
             projectcss.root_reset,
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
-            styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components
+            styleTokensClassNames
           )}
           hideFooter={true}
           maskClosable={false}
@@ -13883,9 +13909,7 @@ function PlasmicHomepage__RenderFunc(props: {
               projectcss.root_reset,
               projectcss.plasmic_default_styles,
               projectcss.plasmic_mixins,
-              styleTokensClassNames,
-              styleTokensClassNames_antd_5_hostless,
-              styleTokensClassNames_plasmic_rich_components
+              styleTokensClassNames
             )}
             hideFooter={true}
             maskClosable={false}
@@ -14328,12 +14352,12 @@ function PlasmicHomepage__RenderFunc(props: {
                     ];
                   }
 
-                  $steps["setLocalGetV2ConsultQueryParam"] = true
+                  $steps["setLocalGetV3ConsultQueryParam"] = true
                     ? (() => {
                         const actionArgs = {
                           customFunction: async () => {
                             return localStorage.removeItem(
-                              "GET_V2_consult_query_param"
+                              "GET_V3_consult_query_param"
                             );
                           }
                         };
@@ -14343,14 +14367,14 @@ function PlasmicHomepage__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
-                    $steps["setLocalGetV2ConsultQueryParam"] != null &&
-                    typeof $steps["setLocalGetV2ConsultQueryParam"] ===
+                    $steps["setLocalGetV3ConsultQueryParam"] != null &&
+                    typeof $steps["setLocalGetV3ConsultQueryParam"] ===
                       "object" &&
-                    typeof $steps["setLocalGetV2ConsultQueryParam"].then ===
+                    typeof $steps["setLocalGetV3ConsultQueryParam"].then ===
                       "function"
                   ) {
-                    $steps["setLocalGetV2ConsultQueryParam"] = await $steps[
-                      "setLocalGetV2ConsultQueryParam"
+                    $steps["setLocalGetV3ConsultQueryParam"] = await $steps[
+                      "setLocalGetV3ConsultQueryParam"
                     ];
                   }
 
@@ -14468,9 +14492,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     projectcss.root_reset,
                     projectcss.plasmic_default_styles,
                     projectcss.plasmic_mixins,
-                    styleTokensClassNames,
-                    styleTokensClassNames_antd_5_hostless,
-                    styleTokensClassNames_plasmic_rich_components
+                    styleTokensClassNames
                   )}
                   hideFooter={true}
                   maskClosable={true}
@@ -14852,7 +14874,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             }
 
                             $steps[
-                              "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                              "localStorageSetGetV3ConsultSenderServiceQueryParam"
                             ] =
                               localStorage.getItem("consult_filter_type") ===
                               "سرویس مبدا"
@@ -14860,8 +14882,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     const actionArgs = {
                                       customFunction: async () => {
                                         return localStorage.setItem(
-                                          "GET_V2_consult_query_param",
-                                          `effective_patient_service_id=${localStorage.getItem(
+                                          "GET_V3_consult_query_param",
+                                          `&sender_service_id=${localStorage.getItem(
                                             "filter_service_id"
                                           )}`
                                         );
@@ -14874,24 +14896,24 @@ function PlasmicHomepage__RenderFunc(props: {
                                 : undefined;
                             if (
                               $steps[
-                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                                "localStorageSetGetV3ConsultSenderServiceQueryParam"
                               ] != null &&
                               typeof $steps[
-                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                                "localStorageSetGetV3ConsultSenderServiceQueryParam"
                               ] === "object" &&
                               typeof $steps[
-                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                                "localStorageSetGetV3ConsultSenderServiceQueryParam"
                               ].then === "function"
                             ) {
                               $steps[
-                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                                "localStorageSetGetV3ConsultSenderServiceQueryParam"
                               ] = await $steps[
-                                "localStorageSetGetV2ConsultSenderServiceQueryParam"
+                                "localStorageSetGetV3ConsultSenderServiceQueryParam"
                               ];
                             }
 
                             $steps[
-                              "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                              "localStorageSetGetV3ConsultReceiverServiceQueryParam"
                             ] =
                               localStorage.getItem("consult_filter_type") ===
                               "سرویس مقصد"
@@ -14899,8 +14921,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     const actionArgs = {
                                       customFunction: async () => {
                                         return localStorage.setItem(
-                                          "GET_V2_consult_query_param",
-                                          `consultant_service_id=${localStorage.getItem(
+                                          "GET_V3_consult_query_param",
+                                          `&receiver_service_id=${localStorage.getItem(
                                             "filter_service_id"
                                           )}`
                                         );
@@ -14913,19 +14935,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                 : undefined;
                             if (
                               $steps[
-                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                                "localStorageSetGetV3ConsultReceiverServiceQueryParam"
                               ] != null &&
                               typeof $steps[
-                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                                "localStorageSetGetV3ConsultReceiverServiceQueryParam"
                               ] === "object" &&
                               typeof $steps[
-                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                                "localStorageSetGetV3ConsultReceiverServiceQueryParam"
                               ].then === "function"
                             ) {
                               $steps[
-                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                                "localStorageSetGetV3ConsultReceiverServiceQueryParam"
                               ] = await $steps[
-                                "localStorageSetGetV2ConsultReceiverServiceQueryParam"
+                                "localStorageSetGetV3ConsultReceiverServiceQueryParam"
                               ];
                             }
 
@@ -15012,14 +15034,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                 await $steps["consoleLogFilterServiceName"];
                             }
 
-                            $steps["consoleLogGetV2ConsultQueryParam"] = true
+                            $steps["consoleLogGetV3ConsultQueryParam"] = true
                               ? (() => {
                                   const actionArgs = {
                                     customFunction: async () => {
                                       return console.log(
-                                        "GET_V2_consult_query_param:",
+                                        "GET_V3_consult_query_param:",
                                         localStorage.getItem(
-                                          "GET_V2_consult_query_param"
+                                          "GET_V3_consult_query_param"
                                         )
                                       );
                                     }
@@ -15030,17 +15052,17 @@ function PlasmicHomepage__RenderFunc(props: {
                                 })()
                               : undefined;
                             if (
-                              $steps["consoleLogGetV2ConsultQueryParam"] !=
+                              $steps["consoleLogGetV3ConsultQueryParam"] !=
                                 null &&
                               typeof $steps[
-                                "consoleLogGetV2ConsultQueryParam"
+                                "consoleLogGetV3ConsultQueryParam"
                               ] === "object" &&
-                              typeof $steps["consoleLogGetV2ConsultQueryParam"]
+                              typeof $steps["consoleLogGetV3ConsultQueryParam"]
                                 .then === "function"
                             ) {
-                              $steps["consoleLogGetV2ConsultQueryParam"] =
+                              $steps["consoleLogGetV3ConsultQueryParam"] =
                                 await $steps[
-                                  "consoleLogGetV2ConsultQueryParam"
+                                  "consoleLogGetV3ConsultQueryParam"
                                 ];
                             }
 
@@ -15101,2186 +15123,6 @@ function PlasmicHomepage__RenderFunc(props: {
           </ApiFetcherComponentPlus>
         ) : null}
         {(() => {
-          const child$Props = {
-            className: classNames("__wab_instance", sty.modalFeatureBanner),
-            closeButtonClassName: classNames({
-              [sty["pcls_LFU_8oG2APY4"]]: true
-            }),
-            closeIcon: null,
-            defaultStylesClassName: classNames(
-              projectcss.root_reset,
-              projectcss.plasmic_default_styles,
-              projectcss.plasmic_mixins,
-              styleTokensClassNames,
-              styleTokensClassNames_antd_5_hostless,
-              styleTokensClassNames_plasmic_rich_components
-            ),
-            hideFooter: true,
-            maskClosable: false,
-            modalContentClassName: classNames({
-              [sty["pcls_W8KQUTE3lWjO"]]: true
-            }),
-            modalScopeClassName: sty["modalFeatureBanner__modal"],
-            onOpenChange: async (...eventArgs: any) => {
-              generateStateOnChangeProp($state, [
-                "modalFeatureBanner",
-                "open"
-              ]).apply(null, eventArgs);
-            },
-            open: generateStateValueProp($state, [
-              "modalFeatureBanner",
-              "open"
-            ]),
-            title: (
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__zLxjE
-                )}
-              >
-                {
-                  "\u0648\u06cc\u0698\u06af\u06cc \u0647\u0627\u06cc \u062c\u062f\u06cc\u062f"
-                }
-              </div>
-            ),
-            trigger: null,
-            wrapClassName: classNames({ [sty["pcls_SijkiB5x5hlZ"]]: true })
-          };
-          initializeCodeComponentStates(
-            $state,
-            [
-              {
-                name: "open",
-                plasmicStateName: "modalFeatureBanner.open"
-              }
-            ],
-            [],
-            undefined ?? {},
-            child$Props
-          );
-          initializePlasmicStates(
-            $state,
-            [
-              {
-                name: "modalFeatureBanner.open",
-                initFunc: ({ $props, $state, $queries }) =>
-                  hasVariant(globalVariants, "screen", "mobileFirst")
-                    ? (() => {
-                        try {
-                          return (
-                            $props.newVersionDatetime !==
-                            localStorage.getItem("new_version_datetime")
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return false;
-                          }
-                          throw e;
-                        }
-                      })()
-                    : (() => {
-                        try {
-                          return (
-                            $props.newVersionDatetime !==
-                            localStorage.getItem("new_version_datetime")
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return false;
-                          }
-                          throw e;
-                        }
-                      })()
-              }
-            ],
-            []
-          );
-          return (
-            <AntdModal
-              data-plasmic-name={"modalFeatureBanner"}
-              data-plasmic-override={overrides.modalFeatureBanner}
-              {...child$Props}
-            >
-              <NewFeatureBanner
-                data-plasmic-name={"newFeatureBanner"}
-                data-plasmic-override={overrides.newFeatureBanner}
-                className={classNames("__wab_instance", sty.newFeatureBanner)}
-                newVersionDatetime2={args.newVersionDatetime}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__o7FzR
-                  )}
-                  dir={"rtl"}
-                >
-                  <React.Fragment>
-                    <React.Fragment>{""}</React.Fragment>
-                    {
-                      <ul
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.ul,
-                          sty.ul__tVrkg
-                        )}
-                      >
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li___2GatI
-                          )}
-                        >
-                          {
-                            "\u0627\u0636\u0627\u0641\u0647 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0622\u067e\u0644\u0648\u062f \u062a\u0635\u0648\u06cc\u0631 \u0628\u0631\u0627\u06cc \u0647\u0631 \u0628\u06cc\u0645\u0627\u0631 "
-                          }
-                        </li>
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__aDBuU
-                          )}
-                        >
-                          {
-                            "\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u062f\u06a9\u0645\u0647 add to homescreen \u062f\u0631 \u0645\u0631\u0648\u0631\u06af\u0631 \u062e\u0648\u062f \u0645\u06cc \u062a\u0648\u0627\u0646\u06cc\u062f \u0646\u0633\u062e\u0647 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0631 \u0631\u0648\u06cc \u06af\u0648\u0634\u06cc \u062e\u0648\u062f \u0646\u0635\u0628 \u06a9\u0646\u06cc\u062f"
-                          }
-                        </li>
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__aPzlf
-                          )}
-                        >
-                          {
-                            "\u0627\u0636\u0627\u0641\u0647 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0627 \u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0648 \u06cc\u0627 \u0634\u0645\u0627\u0631\u0647 \u0645\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
-                          }
-                        </li>
-                      </ul>
-                    }
-                    <React.Fragment>{""}</React.Fragment>
-                    {
-                      <ul
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.ul,
-                          sty.ul__ctBZ
-                        )}
-                      >
-                        <li
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.li,
-                            projectcss.__wab_text,
-                            sty.li__cXPbD
-                          )}
-                        >
-                          {
-                            "\u062f\u0631\u0635\u0648\u0631\u062a \u0639\u062f\u0645 \u0646\u0645\u0627\u06cc\u0634 \u0644\u06cc\u0633\u062a \u0628\u062e\u0634 \u0647\u0627\u060c \u0628\u0627 \u0632\u062f\u0646 \u06a9\u0646\u0627\u0631 \u0622\u062f\u0631\u0633 \u0645\u0631\u0648\u0631\u06af\u0631\u060c \u06a9\u064e\u0634 \u0645\u0631\u0648\u0631\u06af\u0631 \u0631\u0627 \u067e\u0627\u06a9 \u0646\u0645\u0627\u06cc\u06cc\u062f (Clear cache)"
-                          }
-                        </li>
-                      </ul>
-                    }
-                    <React.Fragment>{""}</React.Fragment>
-                  </React.Fragment>
-                </div>
-              </NewFeatureBanner>
-              <Button
-                data-plasmic-name={
-                  "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"
-                }
-                data-plasmic-override={overrides.متوجهشدم}
-                className={classNames("__wab_instance", sty.متوجهشدم)}
-                color={"blue"}
-                deselected={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "deselected"
-                ])}
-                isDisabled={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "isDisabled"
-                ])}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["setUpdateVersionLocalStorage"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return localStorage.setItem(
-                              "new_version_datetime",
-                              $props.newVersionDatetime
-                            );
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["setUpdateVersionLocalStorage"] != null &&
-                    typeof $steps["setUpdateVersionLocalStorage"] ===
-                      "object" &&
-                    typeof $steps["setUpdateVersionLocalStorage"].then ===
-                      "function"
-                  ) {
-                    $steps["setUpdateVersionLocalStorage"] = await $steps[
-                      "setUpdateVersionLocalStorage"
-                    ];
-                  }
-
-                  $steps["updateModalFeatureBannerOpen"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["modalFeatureBanner", "open"]
-                          },
-                          operation: 0,
-                          value: false
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateModalFeatureBannerOpen"] != null &&
-                    typeof $steps["updateModalFeatureBannerOpen"] ===
-                      "object" &&
-                    typeof $steps["updateModalFeatureBannerOpen"].then ===
-                      "function"
-                  ) {
-                    $steps["updateModalFeatureBannerOpen"] = await $steps[
-                      "updateModalFeatureBannerOpen"
-                    ];
-                  }
-
-                  $steps["runCode"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return (() => {
-                              return console.log(
-                                `"new_version_datetime": ${localStorage.getItem(
-                                  "new_version_datetime"
-                                )}`
-                              );
-                            })();
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["runCode"] != null &&
-                    typeof $steps["runCode"] === "object" &&
-                    typeof $steps["runCode"].then === "function"
-                  ) {
-                    $steps["runCode"] = await $steps["runCode"];
-                  }
-                }}
-                onDeselectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "متوجهشدم",
-                      "deselected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onIsDisabledChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "متوجهشدم",
-                      "isDisabled"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSelectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, ["متوجهشدم", "selected"])(
-                      eventArgs[0]
-                    );
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSortDeselectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "متوجهشدم",
-                      "sortDeselected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSortSelectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "متوجهشدم",
-                      "sortSelected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                selected={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "selected"
-                ])}
-                shape={"sharp"}
-                sortDeselected={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "sortDeselected"
-                ])}
-                sortSelected={generateStateValueProp($state, [
-                  "متوجهشدم",
-                  "sortSelected"
-                ])}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text___0JqOy
-                  )}
-                >
-                  {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
-                </div>
-              </Button>
-            </AntdModal>
-          );
-        })()}
-        {false
-          ? (() => {
-              const child$Props = {
-                className: classNames("__wab_instance", sty.modalNps),
-                closeIcon: null,
-                defaultStylesClassName: classNames(
-                  projectcss.root_reset,
-                  projectcss.plasmic_default_styles,
-                  projectcss.plasmic_mixins,
-                  styleTokensClassNames,
-                  styleTokensClassNames_antd_5_hostless,
-                  styleTokensClassNames_plasmic_rich_components
-                ),
-                hideFooter: true,
-                maskClosable: false,
-                modalContentClassName: classNames({
-                  [sty["pcls_O5s2E5s6CSo-"]]: true
-                }),
-                modalScopeClassName: sty["modalNps__modal"],
-                onOpenChange: async (...eventArgs: any) => {
-                  generateStateOnChangeProp($state, ["modalNps", "open"]).apply(
-                    null,
-                    eventArgs
-                  );
-                },
-                open: generateStateValueProp($state, ["modalNps", "open"]),
-                title: (
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__zOiDr
-                    )}
-                    dir={"rtl"}
-                  >
-                    {hasVariant(globalVariants, "screen", "mobileFirst") ? (
-                      <React.Fragment>
-                        <span
-                          className={
-                            "plasmic_default__all plasmic_default__span"
-                          }
-                          style={{ color: "#000000", fontWeight: 800 }}
-                        >
-                          {
-                            "\u0686\u0642\u062f\u0631 \u062d\u0627\u0636\u0631 \u0647\u0633\u062a\u06cc\u062f \u0627\u06cc\u0646\u0644\u0628\u200c\u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0647 \u0633\u0627\u06cc\u0631\u06cc\u0646 \u0645\u0639\u0631\u0641\u06cc \u06a9\u0646\u06cc\u062f\u061f "
-                          }
-                        </span>
-                        <React.Fragment>{"\n"}</React.Fragment>
-                        <span
-                          className={
-                            "plasmic_default__all plasmic_default__span"
-                          }
-                          style={{ color: "#000000", fontWeight: 800 }}
-                        >
-                          {
-                            "( 0 : \u0647\u0631\u06af\u0632    10 : \u062e\u06cc\u0644\u06cc \u0632\u06cc\u0627\u062f )"
-                          }
-                        </span>
-                      </React.Fragment>
-                    ) : (
-                      <React.Fragment>
-                        <span
-                          className={
-                            "plasmic_default__all plasmic_default__span"
-                          }
-                          style={{ color: "#000000", fontWeight: 800 }}
-                        >
-                          {
-                            "\u0686\u0642\u062f\u0631 \u062d\u0627\u0636\u0631 \u0647\u0633\u062a\u06cc\u062f \u0627\u06cc\u0646\u0644\u0628\u200c\u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0647 \u0633\u0627\u06cc\u0631\u06cc\u0646 \u0645\u0639\u0631\u0641\u06cc \u06a9\u0646\u06cc\u062f\u061f ( 0 : \u0647\u0631\u06af\u0632     10 : \u062e\u06cc\u0644\u06cc \u0632\u06cc\u0627\u062f )"
-                          }
-                        </span>
-                      </React.Fragment>
-                    )}
-                  </div>
-                ),
-                trigger: null,
-                width: "85%"
-              };
-              initializeCodeComponentStates(
-                $state,
-                [
-                  {
-                    name: "open",
-                    plasmicStateName: "modalNps.open"
-                  }
-                ],
-                [],
-                undefined ?? {},
-                child$Props
-              );
-              initializePlasmicStates(
-                $state,
-                [
-                  {
-                    name: "modalNps.open",
-                    initFunc: ({ $props, $state, $queries }) =>
-                      (() => {
-                        try {
-                          return !localStorage.getItem("NPS_score");
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return false;
-                          }
-                          throw e;
-                        }
-                      })()
-                  }
-                ],
-                []
-              );
-              return (
-                <AntdModal
-                  data-plasmic-name={"modalNps"}
-                  data-plasmic-override={overrides.modalNps}
-                  {...child$Props}
-                >
-                  <div
-                    data-plasmic-name={"columns"}
-                    data-plasmic-override={overrides.columns}
-                    className={classNames(projectcss.all, sty.columns)}
-                  >
-                    <div
-                      className={classNames(projectcss.all, sty.column__jN2Lb)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__awXqP
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 0
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"0"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__vouX)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__m5Bdj
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 1
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"1"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__rH3P)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__glBnQ
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 2
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"2"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__u5JYs)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__jpf1G
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 3
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"3"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__qo37P)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text___7D4XV
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 4
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"4"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__nTn8H)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__yfPmS
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 5
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"5"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__uMkJu)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__in5S
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 6
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"6"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__g9D50)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__axA4C
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 7
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"7"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__gEBse)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__jAhAx
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 8
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"\ufeff8"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__ghPy9)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__k5MHa
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 9
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"\ufeff9"}
-                      </div>
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.column__t0CWh)}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text___3DYqN
-                        )}
-                        onClick={async event => {
-                          const $steps = {};
-
-                          $steps["updateStateNpsScore"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["npsScore"]
-                                  },
-                                  operation: 0,
-                                  value: 10
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateNpsScore"] != null &&
-                            typeof $steps["updateStateNpsScore"] === "object" &&
-                            typeof $steps["updateStateNpsScore"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateNpsScore"] = await $steps[
-                              "updateStateNpsScore"
-                            ];
-                          }
-
-                          $steps["runCode"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      localStorage.setItem(
-                                        "NPS_score",
-                                        $state.npsScore
-                                      );
-                                      console.log(
-                                        `state_NPS_score: ${$state.npsScore}`
-                                      );
-                                      return console.log(
-                                        `local_NPS_score: ${localStorage.getItem(
-                                          "NPS_score"
-                                        )}`
-                                      );
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runCode"] != null &&
-                            typeof $steps["runCode"] === "object" &&
-                            typeof $steps["runCode"].then === "function"
-                          ) {
-                            $steps["runCode"] = await $steps["runCode"];
-                          }
-
-                          $steps["postNps"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    `/n8n/webhook/NPS?namespace_id=${localStorage.getItem(
-                                      "inlab_user_namespace_id"
-                                    )}&score=${localStorage.getItem(
-                                      "NPS_score"
-                                    )}`
-                                  ]
-                                };
-                                return $globalActions[
-                                  "AuthGlobalContext.apiFetcher"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["postNps"] != null &&
-                            typeof $steps["postNps"] === "object" &&
-                            typeof $steps["postNps"].then === "function"
-                          ) {
-                            $steps["postNps"] = await $steps["postNps"];
-                          }
-
-                          $steps["updateModalNpsOpen"] =
-                            $steps.postNps.status == 200
-                              ? (() => {
-                                  const actionArgs = {
-                                    variable: {
-                                      objRoot: $state,
-                                      variablePath: ["modalNps", "open"]
-                                    },
-                                    operation: 0,
-                                    value: false
-                                  };
-                                  return (({
-                                    variable,
-                                    value,
-                                    startIndex,
-                                    deleteCount
-                                  }) => {
-                                    if (!variable) {
-                                      return;
-                                    }
-                                    const { objRoot, variablePath } = variable;
-
-                                    $stateSet(objRoot, variablePath, value);
-                                    return value;
-                                  })?.apply(null, [actionArgs]);
-                                })()
-                              : undefined;
-                          if (
-                            $steps["updateModalNpsOpen"] != null &&
-                            typeof $steps["updateModalNpsOpen"] === "object" &&
-                            typeof $steps["updateModalNpsOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateModalNpsOpen"] = await $steps[
-                              "updateModalNpsOpen"
-                            ];
-                          }
-                        }}
-                      >
-                        {"10"}
-                      </div>
-                    </div>
-                  </div>
-                </AntdModal>
-              );
-            })()
-          : null}
-        {(() => {
           try {
             return $state.mainSelectedTab === "consult";
           } catch (e) {
@@ -17304,9 +15146,7 @@ function PlasmicHomepage__RenderFunc(props: {
               projectcss.root_reset,
               projectcss.plasmic_default_styles,
               projectcss.plasmic_mixins,
-              styleTokensClassNames,
-              styleTokensClassNames_antd_5_hostless,
-              styleTokensClassNames_plasmic_rich_components
+              styleTokensClassNames
             )}
             hideFooter={true}
             maskClosable={true}
@@ -17880,6 +15720,407 @@ function PlasmicHomepage__RenderFunc(props: {
             </div>
           </AntdModal>
         ) : null}
+        {false
+          ? (() => {
+              const child$Props = {
+                className: classNames("__wab_instance", sty.modalFeatureBanner),
+                closeButtonClassName: classNames({
+                  [sty["pcls_LFU_8oG2APY4"]]: true
+                }),
+                closeIcon: null,
+                defaultStylesClassName: classNames(
+                  projectcss.root_reset,
+                  projectcss.plasmic_default_styles,
+                  projectcss.plasmic_mixins,
+                  styleTokensClassNames
+                ),
+                hideFooter: true,
+                maskClosable: false,
+                modalContentClassName: classNames({
+                  [sty["pcls_W8KQUTE3lWjO"]]: true
+                }),
+                modalScopeClassName: sty["modalFeatureBanner__modal"],
+                onOpenChange: async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
+                    "modalFeatureBanner",
+                    "open"
+                  ]).apply(null, eventArgs);
+                },
+                open: generateStateValueProp($state, [
+                  "modalFeatureBanner",
+                  "open"
+                ]),
+                title: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__zLxjE
+                    )}
+                  >
+                    {
+                      "\u0648\u06cc\u0698\u06af\u06cc \u0647\u0627\u06cc \u062c\u062f\u06cc\u062f"
+                    }
+                  </div>
+                ),
+                trigger: null,
+                wrapClassName: classNames({ [sty["pcls_SijkiB5x5hlZ"]]: true })
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "open",
+                    plasmicStateName: "modalFeatureBanner.open"
+                  }
+                ],
+                [],
+                undefined ?? {},
+                child$Props
+              );
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "modalFeatureBanner.open",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return (
+                                $props.newVersionDatetime !==
+                                localStorage.getItem("new_version_datetime")
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : undefined
+                  }
+                ],
+                []
+              );
+              return (
+                <AntdModal
+                  data-plasmic-name={"modalFeatureBanner"}
+                  data-plasmic-override={overrides.modalFeatureBanner}
+                  {...child$Props}
+                >
+                  <NewFeatureBanner
+                    data-plasmic-name={"newFeatureBanner"}
+                    data-plasmic-override={overrides.newFeatureBanner}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.newFeatureBanner
+                    )}
+                    newVersionDatetime2={args.newVersionDatetime}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__o7FzR
+                      )}
+                      dir={"rtl"}
+                    >
+                      <React.Fragment>
+                        <React.Fragment>{""}</React.Fragment>
+                        {
+                          <ul
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.ul,
+                              sty.ul__tVrkg
+                            )}
+                          >
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li___2GatI
+                              )}
+                            >
+                              {
+                                "\u0627\u0636\u0627\u0641\u0647 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0622\u067e\u0644\u0648\u062f \u062a\u0635\u0648\u06cc\u0631 \u0628\u0631\u0627\u06cc \u0647\u0631 \u0628\u06cc\u0645\u0627\u0631 "
+                              }
+                            </li>
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__aDBuU
+                              )}
+                            >
+                              {
+                                "\u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u062f\u06a9\u0645\u0647 add to homescreen \u062f\u0631 \u0645\u0631\u0648\u0631\u06af\u0631 \u062e\u0648\u062f \u0645\u06cc \u062a\u0648\u0627\u0646\u06cc\u062f \u0646\u0633\u062e\u0647 \u0627\u06cc\u0646\u0644\u0628 \u067e\u0644\u0627\u0633 \u0631\u0627 \u0628\u0631 \u0631\u0648\u06cc \u06af\u0648\u0634\u06cc \u062e\u0648\u062f \u0646\u0635\u0628 \u06a9\u0646\u06cc\u062f"
+                              }
+                            </li>
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__aPzlf
+                              )}
+                            >
+                              {
+                                "\u0627\u0636\u0627\u0641\u0647 \u0634\u062f\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0627 \u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0648 \u06cc\u0627 \u0634\u0645\u0627\u0631\u0647 \u0645\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
+                              }
+                            </li>
+                          </ul>
+                        }
+                        <React.Fragment>{""}</React.Fragment>
+                        {
+                          <ul
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.ul,
+                              sty.ul__ctBZ
+                            )}
+                          >
+                            <li
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.li,
+                                projectcss.__wab_text,
+                                sty.li__cXPbD
+                              )}
+                            >
+                              {
+                                "\u062f\u0631\u0635\u0648\u0631\u062a \u0639\u062f\u0645 \u0646\u0645\u0627\u06cc\u0634 \u0644\u06cc\u0633\u062a \u0628\u062e\u0634 \u0647\u0627\u060c \u0628\u0627 \u0632\u062f\u0646 \u06a9\u0646\u0627\u0631 \u0622\u062f\u0631\u0633 \u0645\u0631\u0648\u0631\u06af\u0631\u060c \u06a9\u064e\u0634 \u0645\u0631\u0648\u0631\u06af\u0631 \u0631\u0627 \u067e\u0627\u06a9 \u0646\u0645\u0627\u06cc\u06cc\u062f (Clear cache)"
+                              }
+                            </li>
+                          </ul>
+                        }
+                        <React.Fragment>{""}</React.Fragment>
+                      </React.Fragment>
+                    </div>
+                  </NewFeatureBanner>
+                  <Button
+                    data-plasmic-name={
+                      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"
+                    }
+                    data-plasmic-override={overrides.متوجهشدم}
+                    className={classNames("__wab_instance", sty.متوجهشدم)}
+                    color={"blue"}
+                    deselected={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["setUpdateVersionLocalStorage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return localStorage.setItem(
+                                  "new_version_datetime",
+                                  $props.newVersionDatetime
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setUpdateVersionLocalStorage"] != null &&
+                        typeof $steps["setUpdateVersionLocalStorage"] ===
+                          "object" &&
+                        typeof $steps["setUpdateVersionLocalStorage"].then ===
+                          "function"
+                      ) {
+                        $steps["setUpdateVersionLocalStorage"] = await $steps[
+                          "setUpdateVersionLocalStorage"
+                        ];
+                      }
+
+                      $steps["updateModalFeatureBannerOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["modalFeatureBanner", "open"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateModalFeatureBannerOpen"] != null &&
+                        typeof $steps["updateModalFeatureBannerOpen"] ===
+                          "object" &&
+                        typeof $steps["updateModalFeatureBannerOpen"].then ===
+                          "function"
+                      ) {
+                        $steps["updateModalFeatureBannerOpen"] = await $steps[
+                          "updateModalFeatureBannerOpen"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  return console.log(
+                                    `"new_version_datetime": ${localStorage.getItem(
+                                      "new_version_datetime"
+                                    )}`
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+                    }}
+                    onDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم",
+                          "deselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onIsDisabledChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم",
+                          "selected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم",
+                          "sortDeselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم",
+                          "sortSelected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "selected"
+                    ])}
+                    shape={"sharp"}
+                    sortDeselected={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "متوجهشدم",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___0JqOy
+                      )}
+                    >
+                      {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
+                    </div>
+                  </Button>
+                </AntdModal>
+              );
+            })()
+          : null}
         <AntdModal
           data-plasmic-name={"patientHistoryModal"}
           data-plasmic-override={overrides.patientHistoryModal}
@@ -17897,9 +16138,7 @@ function PlasmicHomepage__RenderFunc(props: {
             projectcss.root_reset,
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
-            styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components
+            styleTokensClassNames
           )}
           hideFooter={true}
           modalContentClassName={classNames({
@@ -18825,9 +17064,7 @@ function PlasmicHomepage__RenderFunc(props: {
             projectcss.root_reset,
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
-            styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components
+            styleTokensClassNames
           )}
           hideFooter={true}
           modalContentClassName={classNames({
@@ -19235,6 +17472,7 @@ function PlasmicHomepage__RenderFunc(props: {
           <DataCtxReader__>
             {$ctx => (
               <ConditionGuard
+                children={null}
                 className={classNames(
                   "__wab_instance",
                   sty.conditionGuard___08F8V
@@ -19268,6 +17506,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                 "namespace_is_expired",
                                 $ctx.fetched_data.data[0].is_expired
                               );
+                              localstorage.setItem(
+                                "namespace_show_message",
+                                $ctx.fetched_data.data[0].show_hospital_message
+                              );
+                              localstorage.setItem(
+                                "namespace_message",
+                                $ctx.fetched_data.data[0].hospital_message
+                              );
                               console.log(
                                 `namespace_is_expired: ${localStorage.getItem(
                                   "namespace_is_expired"
@@ -19282,10 +17528,20 @@ function PlasmicHomepage__RenderFunc(props: {
                                 "inlab_user_his_type",
                                 $ctx.fetched_data.data[0].his_type
                               );
-                              return console.log(
+                              console.log(
                                 `inlab_user_his_type ${localStorage.getItem(
                                   "inlab_user_his_type"
                                 )} `
+                              );
+                              console.log(
+                                `namespace_show_message ${localstorage.getItem(
+                                  "namespace_show_message"
+                                )}`
+                              );
+                              return console.log(
+                                `namespace_message ${localstorage.getItem(
+                                  "namespace_message"
+                                )}`
                               );
                             })();
                           }
@@ -19355,9 +17611,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   projectcss.root_reset,
                   projectcss.plasmic_default_styles,
                   projectcss.plasmic_mixins,
-                  styleTokensClassNames,
-                  styleTokensClassNames_antd_5_hostless,
-                  styleTokensClassNames_plasmic_rich_components
+                  styleTokensClassNames
                 ),
                 hideFooter: true,
                 maskClosable: false,
@@ -19523,9 +17777,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   projectcss.root_reset,
                   projectcss.plasmic_default_styles,
                   projectcss.plasmic_mixins,
-                  styleTokensClassNames,
-                  styleTokensClassNames_antd_5_hostless,
-                  styleTokensClassNames_plasmic_rich_components
+                  styleTokensClassNames
                 ),
                 hideFooter: true,
                 maskClosable: false,
@@ -19884,6 +18136,361 @@ function PlasmicHomepage__RenderFunc(props: {
               );
             })()
           : null}
+        {false
+          ? (() => {
+              const child$Props = {
+                className: classNames(
+                  "__wab_instance",
+                  sty.modalHospitalMessageBanner
+                ),
+                closeButtonClassName: classNames({
+                  [sty["pcls_eNclSS2bTl7V"]]: true
+                }),
+                closeIcon: null,
+                defaultStylesClassName: classNames(
+                  projectcss.root_reset,
+                  projectcss.plasmic_default_styles,
+                  projectcss.plasmic_mixins,
+                  styleTokensClassNames
+                ),
+                hideFooter: true,
+                maskClosable: false,
+                modalContentClassName: classNames({
+                  [sty["pcls_WoxlSIszvXIi"]]: true
+                }),
+                modalScopeClassName: sty["modalHospitalMessageBanner__modal"],
+                onOpenChange: async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
+                    "modalHospitalMessageBanner",
+                    "open"
+                  ]).apply(null, eventArgs);
+                },
+                open: generateStateValueProp($state, [
+                  "modalHospitalMessageBanner",
+                  "open"
+                ]),
+                title: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__oH4Vd
+                    )}
+                  >
+                    {"\u0627\u0637\u0644\u0627\u0639\u06cc\u0647"}
+                  </div>
+                ),
+                trigger: null,
+                width: "90%",
+                wrapClassName: classNames({ [sty["pcls_Xsw2R_rbykET"]]: true })
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "open",
+                    plasmicStateName: "modalHospitalMessageBanner.open"
+                  }
+                ],
+                [],
+                undefined ?? {},
+                child$Props
+              );
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "modalHospitalMessageBanner.open",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return (() => {
+                                const expirationStr = localStorage.getItem(
+                                  "namespace_expiration_datetime"
+                                );
+                                let expiringSoon = false;
+                                if (expirationStr) {
+                                  const expirationTs = new Date(
+                                    expirationStr
+                                  ).getTime();
+                                  const nowTs = Date.now();
+                                  const oneWeekInMs = 7 * 24 * 60 * 60 * 1000;
+                                  const diff = expirationTs - nowTs;
+                                  expiringSoon =
+                                    diff > 0 && diff <= oneWeekInMs;
+                                }
+                                return expiringSoon;
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : (() => {
+                            try {
+                              return (
+                                localStorage.getItem(
+                                  "namespace_show_message"
+                                ) === true &&
+                                localStorage.getItem(
+                                  "namespace_message_checked"
+                                ) === false
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                  }
+                ],
+                []
+              );
+              return (
+                <AntdModal
+                  data-plasmic-name={"modalHospitalMessageBanner"}
+                  data-plasmic-override={overrides.modalHospitalMessageBanner}
+                  {...child$Props}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__gsfV0
+                    )}
+                  >
+                    <React.Fragment>
+                      {localStorage.getItem("namespace_message")}
+                    </React.Fragment>
+                  </div>
+                  <Button
+                    data-plasmic-name={
+                      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"
+                    }
+                    data-plasmic-override={overrides.متوجهشدم3}
+                    className={classNames("__wab_instance", sty.متوجهشدم3)}
+                    color={"blue"}
+                    deselected={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["setUpdateVersionLocalStorage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return localStorage.setItem(
+                                  "namespace_message_checked",
+                                  true
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setUpdateVersionLocalStorage"] != null &&
+                        typeof $steps["setUpdateVersionLocalStorage"] ===
+                          "object" &&
+                        typeof $steps["setUpdateVersionLocalStorage"].then ===
+                          "function"
+                      ) {
+                        $steps["setUpdateVersionLocalStorage"] = await $steps[
+                          "setUpdateVersionLocalStorage"
+                        ];
+                      }
+
+                      $steps["updateModalNoticeBannerOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: [
+                                  "modalHospitalMessageBanner",
+                                  "open"
+                                ]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateModalNoticeBannerOpen"] != null &&
+                        typeof $steps["updateModalNoticeBannerOpen"] ===
+                          "object" &&
+                        typeof $steps["updateModalNoticeBannerOpen"].then ===
+                          "function"
+                      ) {
+                        $steps["updateModalNoticeBannerOpen"] = await $steps[
+                          "updateModalNoticeBannerOpen"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return console.log(
+                                  `"new_notice_datetime": ${localStorage.getItem(
+                                    "new_notice_datetime"
+                                  )}`
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+                    }}
+                    onDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "deselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onIsDisabledChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "selected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "sortDeselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "sortSelected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "selected"
+                    ])}
+                    shape={"sharp"}
+                    sortDeselected={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___02VwG
+                      )}
+                    >
+                      {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
+                    </div>
+                  </Button>
+                </AntdModal>
+              );
+            })()
+          : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -20042,11 +18649,6 @@ const PlasmicDescendants = {
     "clearContent",
     "noServices",
     "servicesName",
-    "modalFeatureBanner",
-    "newFeatureBanner",
-    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645",
-    "modalNps",
-    "columns",
     "modalDeleteConsultConfirmation",
     "confirmationContent",
     "confirmationYesNo",
@@ -20055,6 +18657,9 @@ const PlasmicDescendants = {
     "unsuccessfulDeleteConsult",
     "title",
     "guide",
+    "modalFeatureBanner",
+    "newFeatureBanner",
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645",
     "patientHistoryModal",
     "getSection",
     "getPatientHistoryComponent",
@@ -20070,7 +18675,9 @@ const PlasmicDescendants = {
     "namespaceChecker",
     "modalExpiredBanner",
     "modalExpirationAlarmBanner",
-    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452",
+    "modalHospitalMessageBanner",
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -20880,15 +19487,6 @@ const PlasmicDescendants = {
   clearContent: ["clearContent"],
   noServices: ["noServices"],
   servicesName: ["servicesName"],
-  modalFeatureBanner: [
-    "modalFeatureBanner",
-    "newFeatureBanner",
-    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"
-  ],
-  newFeatureBanner: ["newFeatureBanner"],
-  متوجهشدم: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"],
-  modalNps: ["modalNps", "columns"],
-  columns: ["columns"],
   modalDeleteConsultConfirmation: [
     "modalDeleteConsultConfirmation",
     "confirmationContent",
@@ -20912,6 +19510,13 @@ const PlasmicDescendants = {
   unsuccessfulDeleteConsult: ["unsuccessfulDeleteConsult"],
   title: ["title", "guide"],
   guide: ["guide"],
+  modalFeatureBanner: [
+    "modalFeatureBanner",
+    "newFeatureBanner",
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"
+  ],
+  newFeatureBanner: ["newFeatureBanner"],
+  متوجهشدم: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"],
   patientHistoryModal: [
     "patientHistoryModal",
     "getSection",
@@ -20953,7 +19558,12 @@ const PlasmicDescendants = {
     "modalExpirationAlarmBanner",
     "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
   ],
-  متوجهشدم2: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"]
+  متوجهشدم2: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"],
+  modalHospitalMessageBanner: [
+    "modalHospitalMessageBanner",
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"
+  ],
+  متوجهشدم3: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -21110,11 +19720,6 @@ type NodeDefaultElementType = {
   clearContent: "svg";
   noServices: "div";
   servicesName: "div";
-  modalFeatureBanner: typeof AntdModal;
-  newFeatureBanner: typeof NewFeatureBanner;
-  متوجهشدم: typeof Button;
-  modalNps: typeof AntdModal;
-  columns: "div";
   modalDeleteConsultConfirmation: typeof AntdModal;
   confirmationContent: "div";
   confirmationYesNo: "div";
@@ -21123,6 +19728,9 @@ type NodeDefaultElementType = {
   unsuccessfulDeleteConsult: typeof Alert3;
   title: "div";
   guide: "div";
+  modalFeatureBanner: typeof AntdModal;
+  newFeatureBanner: typeof NewFeatureBanner;
+  متوجهشدم: typeof Button;
   patientHistoryModal: typeof AntdModal;
   getSection: "div";
   getPatientHistoryComponent: typeof ApiFetcherComponent;
@@ -21139,6 +19747,8 @@ type NodeDefaultElementType = {
   modalExpiredBanner: typeof AntdModal;
   modalExpirationAlarmBanner: typeof AntdModal;
   متوجهشدم2: typeof Button;
+  modalHospitalMessageBanner: typeof AntdModal;
+  متوجهشدم3: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -21377,13 +19987,6 @@ export const PlasmicHomepage = Object.assign(
     clearContent: makeNodeComponent("clearContent"),
     noServices: makeNodeComponent("noServices"),
     servicesName: makeNodeComponent("servicesName"),
-    modalFeatureBanner: makeNodeComponent("modalFeatureBanner"),
-    newFeatureBanner: makeNodeComponent("newFeatureBanner"),
-    متوجهشدم: makeNodeComponent(
-      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"
-    ),
-    modalNps: makeNodeComponent("modalNps"),
-    columns: makeNodeComponent("columns"),
     modalDeleteConsultConfirmation: makeNodeComponent(
       "modalDeleteConsultConfirmation"
     ),
@@ -21394,6 +19997,11 @@ export const PlasmicHomepage = Object.assign(
     unsuccessfulDeleteConsult: makeNodeComponent("unsuccessfulDeleteConsult"),
     title: makeNodeComponent("title"),
     guide: makeNodeComponent("guide"),
+    modalFeatureBanner: makeNodeComponent("modalFeatureBanner"),
+    newFeatureBanner: makeNodeComponent("newFeatureBanner"),
+    متوجهشدم: makeNodeComponent(
+      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u0645"
+    ),
     patientHistoryModal: makeNodeComponent("patientHistoryModal"),
     getSection: makeNodeComponent("getSection"),
     getPatientHistoryComponent: makeNodeComponent("getPatientHistoryComponent"),
@@ -21411,6 +20019,10 @@ export const PlasmicHomepage = Object.assign(
     modalExpirationAlarmBanner: makeNodeComponent("modalExpirationAlarmBanner"),
     متوجهشدم2: makeNodeComponent(
       "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
+    ),
+    modalHospitalMessageBanner: makeNodeComponent("modalHospitalMessageBanner"),
+    متوجهشدم3: makeNodeComponent(
+      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"
     ),
 
     // Metadata about props expected for PlasmicHomepage

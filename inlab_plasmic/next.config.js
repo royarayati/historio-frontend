@@ -34,22 +34,23 @@ const nextConfig = {
   basePath: '/new_inlab',
 };
 
-module.exports = withPWA({
-  dest: "public",         // destination directory for the PWA files
-  disable: false,
-  register: true,         // register the PWA service worker
-  skipWaiting: true,      // skip waiting for service worker activation
+// First apply PWA configuration with simplified settings to avoid GenerateSW warnings
+const pwaConfig = withPWA({
+  dest: "public",
+  disable: process.env.NODE_ENV === 'development', // Disable PWA in development to avoid warnings
+  register: true,
+  skipWaiting: true,
+  // Simplified configuration to avoid multiple GenerateSW calls
+  buildExcludes: [/middleware-manifest\.json$/],
+  // Allow larger files to be precached (default is 2MB)
+  maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
 })(nextConfig);
 
-
-
-
-// Injected content via Sentry wizard below
-
+// Then apply Sentry configuration
 const { withSentryConfig } = require("@sentry/nextjs");
 
 module.exports = withSentryConfig(
-  module.exports,
+  pwaConfig,
   {
     // For all available options, see:
     // https://www.npmjs.com/package/@sentry/webpack-plugin#options

@@ -1102,6 +1102,255 @@
   width: auto;
   height: 1em;
 }
+.switchingTab {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: 0;
+  top: auto;
+  z-index: 1;
+  right: 0;
+  bottom: 10px;
+  padding: 0px 40px 5px;
+}
+.switchingTab__zTopp:global(.__wab_instance) {
+  max-width: 100%;
+}
+.homepage {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  height: 25px;
+  margin: 0;
+  border-right: 1px none #aeaeae;
+}
+.homepage > picture > img {
+  object-fit: fill;
+}
+.consultList {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  height: 25px;
+  margin: 0;
+  border-left: 1px solid #00000045;
+}
+.consultList > picture > img {
+  object-fit: fill;
+}
+.patientProfile {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  height: 25px;
+  margin: 0;
+  border-left: 1px solid #00000045;
+}
+.patientProfile > picture > img {
+  object-fit: fill;
+}
+.imagingReportList {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  height: 25px;
+  margin: 1px;
+  border-right: 1px solid #00000045;
+  border-left: 1px solid #00000045;
+}
+.imagingReportList > picture > img {
+  object-fit: fill;
+}
+.laboratoryData {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  border-right-style: none;
+  border-right-width: 1px;
+  height: 25px;
+  margin: 0;
+}
+.laboratoryData > picture > img {
+  object-fit: fill;
+}
+.modalConsultSendReplyConfirmation:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.modalConsultSendReplyConfirmation__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.confirmationContent2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+}
+.consultSendReplyUnsuccessfully:global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  margin-top: 5px;
+}
+.text__aP {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__kn7L {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  min-width: 0;
+}
+.svg__pA82N {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.confirmationYesNo2 {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.noConfirm2:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__exxAq {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__zTvth {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__mo80O {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.confirm2:global(.__wab_instance) {
+  max-width: 100%;
+  margin-left: 30px;
+}
+.text___3C019 {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__brWa {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__sj39M {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.title2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  background: #ffffff;
+  min-width: 0;
+}
+.text__eYvti {
+  background: none;
+  margin-bottom: 10px;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+}
+.text__tvTEi {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 300;
+  min-width: 0;
+}
 .modalSetConsultPaperReplyTrueBeforePrint:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
@@ -1288,255 +1537,6 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none;
-}
-.modalConsultSendReplyConfirmation:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-}
-.modalConsultSendReplyConfirmation__modal :global(.ant-modal-content) {
-  background: #ffffff;
-  outline: none;
-}
-.confirmationContent2 {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  background: #ffffff;
-  min-width: 0;
-}
-.consultSendReplyUnsuccessfully:global(.__wab_instance) {
-  max-width: 100%;
-  width: auto;
-  margin-top: 5px;
-}
-.text__aP {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.text__kn7L {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-family: var(--VazirmatnCustom);
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 400;
-  font-style: normal;
-  color: var(--token-IYO13gyYJHXG);
-  text-align: center;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  text-decoration-line: none !important;
-  min-width: 0;
-}
-.svg__pA82N {
-  position: relative;
-  object-fit: cover;
-  max-width: 100%;
-  height: 24px;
-  align-self: auto;
-}
-.confirmationYesNo2 {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  align-items: stretch;
-  justify-content: center;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.noConfirm2:global(.__wab_instance) {
-  max-width: 100%;
-}
-.text__exxAq {
-  font-family: var(--VazirmatnCustom);
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 500;
-  font-style: normal;
-  color: #ffffff;
-  text-align: center;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre;
-  user-select: none;
-  text-decoration-line: none !important;
-}
-.svg__zTvth {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__mo80O {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.confirm2:global(.__wab_instance) {
-  max-width: 100%;
-  margin-left: 30px;
-}
-.text___3C019 {
-  font-family: var(--VazirmatnCustom);
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 500;
-  font-style: normal;
-  color: #ffffff;
-  text-align: center;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre;
-  user-select: none;
-  text-decoration-line: none !important;
-}
-.svg__brWa {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__sj39M {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.title2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 8px;
-  background: #ffffff;
-  min-width: 0;
-}
-.text__eYvti {
-  background: none;
-  margin-bottom: 10px;
-  font-family: var(--VazirmatnCustom);
-  font-size: var(--token-sOr3fJ5Up5fq);
-  font-weight: 700;
-  font-style: normal;
-  color: var(--token-IYO13gyYJHXG);
-  text-align: center;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  text-decoration-line: none;
-}
-.text__tvTEi {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  font-weight: 300;
-  min-width: 0;
-}
-.switchingTab {
-  display: flex;
-  flex-direction: row;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  left: 0;
-  top: auto;
-  z-index: 1;
-  right: 0;
-  bottom: 10px;
-  padding: 0px 40px 5px;
-}
-.switchingTab__zTopp:global(.__wab_instance) {
-  max-width: 100%;
-}
-.homepage {
-  position: relative;
-  object-fit: fill;
-  max-width: 100%;
-  width: 20%;
-  height: 25px;
-  margin: 0;
-  border-right: 1px none #aeaeae;
-}
-.homepage > picture > img {
-  object-fit: fill;
-}
-.consultList {
-  position: relative;
-  object-fit: fill;
-  max-width: 100%;
-  width: 20%;
-  height: 25px;
-  margin: 0;
-  border-left: 1px solid #00000045;
-}
-.consultList > picture > img {
-  object-fit: fill;
-}
-.patientProfile {
-  position: relative;
-  object-fit: fill;
-  max-width: 100%;
-  width: 20%;
-  height: 25px;
-  margin: 0;
-  border-left: 1px solid #00000045;
-}
-.patientProfile > picture > img {
-  object-fit: fill;
-}
-.imagingReportList {
-  position: relative;
-  object-fit: fill;
-  max-width: 100%;
-  width: 20%;
-  height: 25px;
-  margin: 1px;
-  border-right: 1px solid #00000045;
-  border-left: 1px solid #00000045;
-}
-.imagingReportList > picture > img {
-  object-fit: fill;
-}
-.laboratoryData {
-  position: relative;
-  object-fit: fill;
-  max-width: 100%;
-  width: 20%;
-  border-right-style: none;
-  border-right-width: 1px;
-  height: 25px;
-  margin: 0;
-}
-.laboratoryData > picture > img {
-  object-fit: fill;
 }
 .modalDeleteConsultConfirmation:global(.__wab_instance) {
   max-width: 100%;
