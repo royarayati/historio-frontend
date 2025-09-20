@@ -255,9 +255,12 @@ export type PlasmicHomepage__OverridesType = {
   laboratoryData?: Flex__<typeof PlasmicImg__>;
   commentButton?: Flex__<typeof Button>;
   modalWard?: Flex__<typeof AntdModal>;
-  wardList?: Flex__<typeof ApiFetcherComponent>;
+  wardListEx?: Flex__<typeof ApiFetcherComponent>;
   wardsList?: Flex__<"div">;
   wardsName?: Flex__<"div">;
+  wardList?: Flex__<typeof ApiFetcherComponentPlus>;
+  wardsList2?: Flex__<"div">;
+  wardsName2?: Flex__<"div">;
   searchbarWard?: Flex__<typeof TextInput>;
   modalPhysician?: Flex__<typeof AntdModal>;
   راهنمایسرچپزشک?: Flex__<"div">;
@@ -9864,7 +9867,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         )}
                       >
                         {
-                          "\u0628\u0647 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0622\u06cc \u062a\u06cc \u0645\u062d\u062a\u0631\u0645 \u062f\u0627\u0646\u0634\u06af\u0627\u0647 \u0639\u0644\u0648\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062a\u0647\u0631\u0627\u0646\u060c \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647 \u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f."
+                          "\u0628\u0647 \u0635\u0644\u0627\u062d\u062f\u06cc\u062f \u0645\u062f\u06cc\u0631\u06cc\u062a \u0645\u062d\u062a\u0631\u0645 \u0641\u0646\u0627\u0648\u0631\u06cc \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u062f\u0627\u0646\u0634\u06af\u0627\u0647\u060c \u062c\u0647\u062a \u062c\u0644\u0648\u06af\u06cc\u0631\u06cc \u0627\u0632 \u0627\u06cc\u062c\u0627\u062f \u06a9\u0646\u062f\u06cc \u062f\u0631 HIS \u0634\u0641\u0627\u060c \u0645\u0648\u0642\u062a\u0627 \u0633\u0631\u0686 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647 \u0627\u0645\u06a9\u0627\u0646\u067e\u0630\u06cc\u0631 \u0646\u0645\u06cc \u0628\u0627\u0634\u062f"
                         }
                       </div>
                     ) : null}
@@ -12723,11 +12726,399 @@ function PlasmicHomepage__RenderFunc(props: {
           trigger={null}
           wrapClassName={classNames({ [sty["pcls_9pcykcaA_oRg"]]: true })}
         >
-          <ApiFetcherComponent
+          {false ? (
+            <ApiFetcherComponent
+              data-plasmic-name={"wardListEx"}
+              data-plasmic-override={overrides.wardListEx}
+              className={classNames("__wab_instance", sty.wardListEx)}
+              delay={300}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/remote_his/wards?search_input=${$state.searchbarWard.value}`}
+              ref={ref => {
+                $refs["wardListEx"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <React.Fragment>
+                    <ConditionGuard
+                      children={null}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.conditionGuard__vzTt2
+                      )}
+                      condition={(() => {
+                        try {
+                          return $ctx.fetched_data.loading;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return false;
+                          }
+                          throw e;
+                        }
+                      })()}
+                      onNotSatisfied={async () => {
+                        const $steps = {};
+
+                        $steps["setLocalWardList"] =
+                          $state.searchbarWard.value == ""
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      localStorage.setItem(
+                                        "ward_list",
+                                        JSON.stringify($ctx.fetched_data.data)
+                                      );
+                                      return console.log(
+                                        `ward_list: ${localStorage.getItem(
+                                          "ward_list"
+                                        )}`
+                                      );
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["setLocalWardList"] != null &&
+                          typeof $steps["setLocalWardList"] === "object" &&
+                          typeof $steps["setLocalWardList"].then === "function"
+                        ) {
+                          $steps["setLocalWardList"] = await $steps[
+                            "setLocalWardList"
+                          ];
+                        }
+                      }}
+                      skipPaths={[]}
+                    />
+
+                    <div
+                      data-plasmic-name={"wardsList"}
+                      data-plasmic-override={overrides.wardsList}
+                      className={classNames(projectcss.all, sty.wardsList)}
+                    >
+                      {(_par =>
+                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                        (() => {
+                          try {
+                            return $ctx.fetched_data.loading &
+                              (localStorage.getItem("ward_list") !==
+                                "undefined") &&
+                              $state.searchbarWard.value === ""
+                              ? JSON.parse(localStorage.getItem("ward_list"))
+                              : $ctx.fetched_data.data;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
+                          }
+                        })()
+                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                        const currentItem = __plasmic_item_0;
+                        const currentIndex = __plasmic_idx_0;
+                        return (
+                          <div
+                            data-plasmic-name={"wardsName"}
+                            data-plasmic-override={overrides.wardsName}
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.wardsName
+                            )}
+                            key={currentIndex}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["updateModalWardOpen"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["modalWard", "open"]
+                                      },
+                                      operation: 0,
+                                      value: false
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["updateModalWardOpen"] != null &&
+                                typeof $steps["updateModalWardOpen"] ===
+                                  "object" &&
+                                typeof $steps["updateModalWardOpen"].then ===
+                                  "function"
+                              ) {
+                                $steps["updateModalWardOpen"] = await $steps[
+                                  "updateModalWardOpen"
+                                ];
+                              }
+
+                              $steps["setStateSelectedTab"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["patientsSelectedTab"]
+                                      },
+                                      operation: 0,
+                                      value: "ward"
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["setStateSelectedTab"] != null &&
+                                typeof $steps["setStateSelectedTab"] ===
+                                  "object" &&
+                                typeof $steps["setStateSelectedTab"].then ===
+                                  "function"
+                              ) {
+                                $steps["setStateSelectedTab"] = await $steps[
+                                  "setStateSelectedTab"
+                                ];
+                              }
+
+                              $steps["setSelectedTabLocalStorage"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return localStorage.setItem(
+                                          "patients_selected_tab",
+                                          $state.patientsSelectedTab.toString()
+                                        );
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["setSelectedTabLocalStorage"] != null &&
+                                typeof $steps["setSelectedTabLocalStorage"] ===
+                                  "object" &&
+                                typeof $steps["setSelectedTabLocalStorage"]
+                                  .then === "function"
+                              ) {
+                                $steps["setSelectedTabLocalStorage"] =
+                                  await $steps["setSelectedTabLocalStorage"];
+                              }
+
+                              $steps["setStateFilterwardname"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["filterwardname"]
+                                      },
+                                      operation: 0,
+                                      value: currentItem.name
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["setStateFilterwardname"] != null &&
+                                typeof $steps["setStateFilterwardname"] ===
+                                  "object" &&
+                                typeof $steps["setStateFilterwardname"].then ===
+                                  "function"
+                              ) {
+                                $steps["setStateFilterwardname"] = await $steps[
+                                  "setStateFilterwardname"
+                                ];
+                              }
+
+                              $steps["setWardNameWardIdLocalStorage"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return (() => {
+                                          localStorage.setItem(
+                                            "filter_ward_name",
+                                            $state.filterwardname.toString()
+                                          );
+                                          return localStorage.setItem(
+                                            "filter_ward_id",
+                                            currentItem.id
+                                          );
+                                        })();
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["setWardNameWardIdLocalStorage"] !=
+                                  null &&
+                                typeof $steps[
+                                  "setWardNameWardIdLocalStorage"
+                                ] === "object" &&
+                                typeof $steps["setWardNameWardIdLocalStorage"]
+                                  .then === "function"
+                              ) {
+                                $steps["setWardNameWardIdLocalStorage"] =
+                                  await $steps["setWardNameWardIdLocalStorage"];
+                              }
+
+                              $steps["logConsole"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      customFunction: async () => {
+                                        return (() => {
+                                          console.log(
+                                            `state_patients_selected_tab: ${$state.patientsSelectedTab}`
+                                          );
+                                          console.log(
+                                            `state_filter_bookmarked: ${$state.bookmarked.selected}`
+                                          );
+                                          console.log(
+                                            `state_filter_ward: ${$state.ward2.selected}`
+                                          );
+                                          console.log(
+                                            `state_filter_ward_name: ${$state.filterwardname}`
+                                          );
+                                          console.log(
+                                            `state_filter_physician_name: ${$state.filterphysicianname}`
+                                          );
+                                          console.log(
+                                            `state_filter_physicians: ${$state.filterphysician}`
+                                          );
+                                          console.log(
+                                            `patients_selected_tab: ${localStorage.getItem(
+                                              "patients_selected_tab"
+                                            )}`
+                                          );
+                                          console.log(
+                                            `filter_ward_name: ${localStorage.getItem(
+                                              "filter_ward_name"
+                                            )}`
+                                          );
+                                          return console.log(
+                                            `filter_ward_id: ${localStorage.getItem(
+                                              "filter_ward_id"
+                                            )}`
+                                          );
+                                        })();
+                                      }
+                                    };
+                                    return (({ customFunction }) => {
+                                      return customFunction();
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["logConsole"] != null &&
+                                typeof $steps["logConsole"] === "object" &&
+                                typeof $steps["logConsole"].then === "function"
+                              ) {
+                                $steps["logConsole"] = await $steps[
+                                  "logConsole"
+                                ];
+                              }
+                            }}
+                          >
+                            <React.Fragment>{currentItem.name}</React.Fragment>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </React.Fragment>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponent>
+          ) : null}
+          <ApiFetcherComponentPlus
             data-plasmic-name={"wardList"}
             data-plasmic-override={overrides.wardList}
+            autoFetch={true}
             className={classNames("__wab_instance", sty.wardList)}
-            delay={300}
+            fetchTrigger={(() => {
+              try {
+                return $state.searchbarWard.value;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             headers={(() => {
               try {
                 return {
@@ -12756,7 +13147,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     children={null}
                     className={classNames(
                       "__wab_instance",
-                      sty.conditionGuard__vzTt2
+                      sty.conditionGuard__kHm1Z
                     )}
                     condition={(() => {
                       try {
@@ -12811,9 +13202,9 @@ function PlasmicHomepage__RenderFunc(props: {
                   />
 
                   <div
-                    data-plasmic-name={"wardsList"}
-                    data-plasmic-override={overrides.wardsList}
-                    className={classNames(projectcss.all, sty.wardsList)}
+                    data-plasmic-name={"wardsList2"}
+                    data-plasmic-override={overrides.wardsList2}
+                    className={classNames(projectcss.all, sty.wardsList2)}
                   >
                     {(_par =>
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
@@ -12839,12 +13230,12 @@ function PlasmicHomepage__RenderFunc(props: {
                       const currentIndex = __plasmic_idx_0;
                       return (
                         <div
-                          data-plasmic-name={"wardsName"}
-                          data-plasmic-override={overrides.wardsName}
+                          data-plasmic-name={"wardsName2"}
+                          data-plasmic-override={overrides.wardsName2}
                           className={classNames(
                             projectcss.all,
                             projectcss.__wab_text,
-                            sty.wardsName
+                            sty.wardsName2
                           )}
                           key={currentIndex}
                           onClick={async event => {
@@ -13085,7 +13476,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 </React.Fragment>
               )}
             </DataCtxReader__>
-          </ApiFetcherComponent>
+          </ApiFetcherComponentPlus>
         </AntdModal>
         <AntdModal
           data-plasmic-name={"modalPhysician"}
@@ -18623,9 +19014,12 @@ const PlasmicDescendants = {
     "laboratoryData",
     "commentButton",
     "modalWard",
-    "wardList",
+    "wardListEx",
     "wardsList",
     "wardsName",
+    "wardList",
+    "wardsList2",
+    "wardsName2",
     "searchbarWard",
     "modalPhysician",
     "\u0631\u0627\u0647\u0646\u0645\u0627\u06cc\u0633\u0631\u0686\u067e\u0632\u0634\u06a9",
@@ -19390,14 +19784,20 @@ const PlasmicDescendants = {
   commentButton: ["commentButton"],
   modalWard: [
     "modalWard",
-    "wardList",
+    "wardListEx",
     "wardsList",
     "wardsName",
+    "wardList",
+    "wardsList2",
+    "wardsName2",
     "searchbarWard"
   ],
-  wardList: ["wardList", "wardsList", "wardsName"],
+  wardListEx: ["wardListEx", "wardsList", "wardsName"],
   wardsList: ["wardsList", "wardsName"],
   wardsName: ["wardsName"],
+  wardList: ["wardList", "wardsList2", "wardsName2"],
+  wardsList2: ["wardsList2", "wardsName2"],
+  wardsName2: ["wardsName2"],
   searchbarWard: ["searchbarWard"],
   modalPhysician: [
     "modalPhysician",
@@ -19694,9 +20094,12 @@ type NodeDefaultElementType = {
   laboratoryData: typeof PlasmicImg__;
   commentButton: typeof Button;
   modalWard: typeof AntdModal;
-  wardList: typeof ApiFetcherComponent;
+  wardListEx: typeof ApiFetcherComponent;
   wardsList: "div";
   wardsName: "div";
+  wardList: typeof ApiFetcherComponentPlus;
+  wardsList2: "div";
+  wardsName2: "div";
   searchbarWard: typeof TextInput;
   modalPhysician: typeof AntdModal;
   راهنمایسرچپزشک: "div";
@@ -19957,9 +20360,12 @@ export const PlasmicHomepage = Object.assign(
     laboratoryData: makeNodeComponent("laboratoryData"),
     commentButton: makeNodeComponent("commentButton"),
     modalWard: makeNodeComponent("modalWard"),
-    wardList: makeNodeComponent("wardList"),
+    wardListEx: makeNodeComponent("wardListEx"),
     wardsList: makeNodeComponent("wardsList"),
     wardsName: makeNodeComponent("wardsName"),
+    wardList: makeNodeComponent("wardList"),
+    wardsList2: makeNodeComponent("wardsList2"),
+    wardsName2: makeNodeComponent("wardsName2"),
     searchbarWard: makeNodeComponent("searchbarWard"),
     modalPhysician: makeNodeComponent("modalPhysician"),
     راهنمایسرچپزشک: makeNodeComponent(
