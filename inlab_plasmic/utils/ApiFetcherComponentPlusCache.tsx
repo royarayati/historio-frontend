@@ -1,294 +1,26 @@
-// import { ReactNode, useEffect, useState, useContext, forwardRef, useImperativeHandle, useCallback } from 'react';
-// import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-web/lib/host';
-// import axios, { AxiosError, AxiosResponse } from 'axios';
-// import { refreshAccessIfNeeded, refreshUser } from './CommonUtils';
-// import { GlobalContext } from './types/CommonTypes';
-// import { cacheService } from './indexdb/CacheService';
+import {
+  ReactNode,
+  useEffect,
+  useState,
+  useContext,
+  forwardRef,
+  useImperativeHandle,
+  useCallback,
+  createContext,
+} from "react";
+import { useSelector } from "@plasmicapp/react-web/lib/host";
+import axios from "axios";
+import { refreshUser } from "./CommonUtils";
+import { GlobalContext } from "./types/CommonTypes";
+import { 
+  setCache, 
+  getCache, 
+  deleteCache
+} from "./indexdb/CacheService";
 
-// type PatientCacheType = 'lab' | 'radiology' | 'profile';
-// type CacheMode = 'yes' | 'no';
-// type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
-
-// interface ApiFetcherProps {
-//   className?: string;
-//   children?: ReactNode;
-//   method?: HttpMethod;
-//   path: string;
-//   headers?: Record<string, string>;
-//   requestBody?: unknown;
-//   delay?: number;
-//   cache?: CacheMode;
-//   cacheKey?: string;
-//   cacheType?: PatientCacheType | 'other';
-//   patientId?: string;
-//   cacheExpiry?: number;
-//   debugId?: string;
-// }
-
-// interface ApiActions {
-//   reload(): void;
-//   clearCache(): Promise<void>;
-// }
-
-// interface FetcherResponse {
-//   data?: unknown;
-//   fromCache?: boolean;
-//   error?: unknown;
-//   timestamp?: number;
-//   isFresh?: boolean;
-// }
-
-// const DEBUG_MODE = process.env.NODE_ENV === 'development';
-// const logDebug = (...args: unknown[]) => DEBUG_MODE && console.log('[ApiFetcher]', ...args);
-// const logError = (...args: unknown[]) => console.error('[ApiFetcher]', ...args);
-
-// export const ApiFetcherComponentPlusCache = forwardRef<ApiActions, ApiFetcherProps>(
-//   (props, ref) => {
-//     const { debugId = 'unknown' } = props;
-//     const globalContext = useContext(GlobalContext);
-//     const inlabUser = useSelector('inlab_user');
-
-//     const [response, setResponse] = useState<FetcherResponse>({});
-//     const [loading, setLoading] = useState(true);
-
-//     const getCacheKey = useCallback((): string => {
-//       if (props.cacheKey) return props.cacheKey;
-//       if (props.cacheType && props.cacheType !== 'other' && props.patientId) {
-//         return `${props.patientId}_${props.cacheType}`;
-//       }
-//       return `api_${props.method || 'GET'}_${props.path}_${JSON.stringify(props.requestBody || {})}`;
-//     }, [props.cacheKey, props.method, props.path, props.requestBody, props.cacheType, props.patientId]);
-
-//     const checkCache = useCallback(async (): Promise<unknown | null> => {
-//       if (props.cache !== 'yes') return null;
-
-//       try {
-//         const cacheKey = getCacheKey();
-//         const cachedData = await cacheService.getPatientData(props.patientId || 'api', cacheKey);
-        
-//         if (cachedData) {
-//           logDebug(`[${debugId}] Retrieved cached data for key: ${cacheKey}`);
-//           return cachedData;
-//         }
-//         return null;
-//       } catch (error) {
-//         logError(`[${debugId}] Cache check failed:`, error);
-//         return null;
-//       }
-//     }, [props.cache, props.patientId, getCacheKey, debugId]);
-
-//     const updateCache = useCallback(async (responseData: unknown): Promise<void> => {
-//       if (props.cache !== 'yes') return;
-
-//       try {
-//         const cacheKey = getCacheKey();
-//         await cacheService.setPatientData(
-//           props.patientId || 'api', 
-//           cacheKey, 
-//           responseData, 
-//           { ttl: props.cacheExpiry }
-//         );
-//       } catch (error) {
-//         logError(`[${debugId}] Cache update failed:`, error);
-//       }
-//     }, [props.cache, props.patientId, props.cacheExpiry, getCacheKey, debugId]);
-
-//     const clearCache = useCallback(async (): Promise<void> => {
-//       try {
-//         const cacheKey = getCacheKey();
-//         await cacheService.deletePatientData(props.patientId || 'api', cacheKey);
-//       } catch (error) {
-//         logError(`[${debugId}] Cache clear failed:`, error);
-//       }
-//     }, [props.patientId, getCacheKey, debugId]);
-
-//     const onAxiosSuccess = useCallback(async (axiosResponse: AxiosResponse): Promise<void> => {
-//       const responseData = axiosResponse.data || axiosResponse;
-      
-//       await updateCache(responseData);
-//       setResponse({ 
-//         data: responseData,
-//         fromCache: false,
-//         isFresh: true,
-//         timestamp: Date.now()
-//       });
-//       setLoading(false);
-//     }, [updateCache]);
-
-//     const loadData = useCallback(async (): Promise<void> => {
-//       setLoading(true);
-      
-//       try {
-//         // 1. First try to get cached data
-//         const cachedData = await checkCache();
-//         if (cachedData) {
-//           setResponse({
-//             data: cachedData,
-//             fromCache: true,
-//             isFresh: false,
-//             timestamp: Date.now()
-//           });
-//           setLoading(false);
-//         }
-
-//         // 2. Make API call
-//         const authedHeaders = {
-//           Authorization: 'Bearer ' + inlabUser.access,
-//           ...props.headers,
-//         };
-
-//         const response = await axios.request({
-//           method: props.method || 'GET',
-//           url: globalContext.baseUrl + props.path,
-//           headers: authedHeaders,
-//           data: props.requestBody,
-//         });
-
-//         await onAxiosSuccess(response);
-//       } catch (error) {
-//         if (axios.isCancel(error)) return;
-
-//         if (axios.isAxiosError(error) && error.response?.status === 401) {
-//           try {
-//             await refreshUser(inlabUser, globalContext.baseUrl, globalContext.changeUserCallback);
-//             await loadData(); // Retry after refresh
-//             return;
-//           } catch (refreshError) {
-//             const errorObj = refreshError instanceof Error ? refreshError : new Error(String(refreshError));
-//             setResponse({
-//               error: errorObj,
-//               timestamp: Date.now()
-//             });
-//             setLoading(false);
-//             return;
-//           }
-//         }
-
-//         const errorObj = error instanceof Error ? error : new Error(String(error));
-//         setResponse({
-//           error: errorObj,
-//           timestamp: Date.now()
-//         });
-//         setLoading(false);
-//       }
-//     }, [
-//       checkCache,
-//       onAxiosSuccess,
-//       inlabUser,
-//       props.method,
-//       props.path,
-//       props.headers,
-//       props.requestBody,
-//       globalContext.baseUrl,
-//       globalContext.changeUserCallback
-//     ]);
-
-//     useImperativeHandle(
-//       ref,
-//       () => ({
-//         reload: () => loadData().catch(error => {
-//           logError(`[${debugId}] Reload failed:`, error);
-//         }),
-//         clearCache: () => clearCache().catch(error => {
-//           logError(`[${debugId}] Clear cache failed:`, error);
-//           throw error;
-//         })
-//       }),
-//       [loadData, clearCache, debugId]
-//     );
-
-//     useEffect(() => {
-//       const controller = new AbortController();
-//       const timeout = setTimeout(() => {
-//         if (inlabUser) {
-//           refreshAccessIfNeeded(globalContext, inlabUser)
-//             .then(user => user && loadData())
-//             .catch(error => {
-//               logError(`[${debugId}] Initial load failed:`, error);
-//               setLoading(false);
-//             });
-//         }
-//       }, props.delay || 0);
-
-//       return () => {
-//         controller.abort();
-//         clearTimeout(timeout);
-//       };
-//     }, [loadData, inlabUser, globalContext, props.delay, debugId]);
-
-//     return (
-//       <div className={props.className}>
-//         <DataProvider name="fetched_data" data={{ loading, ...response }}>
-//           {props.children}
-//         </DataProvider>
-//       </div>
-//     );
-//   }
-// );
-
-// export const ApiFetcherComponentPlusCacheMeta: CodeComponentMeta<ApiFetcherProps> = {
-//   name: 'ApiFetcherComponentPlusCache',
-//   props: {
-//     children: 'slot',
-//     method: {
-//       type: 'choice',
-//       options: ['GET', 'POST', 'PUT', 'DELETE'],
-//       defaultValue: 'GET',
-//     },
-//     path: 'string',
-//     headers: 'object',
-//     requestBody: 'object',
-//     delay: 'number',
-//     cache: {
-//       type: 'choice',
-//       options: ['yes', 'no'],
-//       defaultValue: 'no',
-//     },
-//     cacheKey: {
-//       type: 'string',
-//       description: 'Custom key for caching',
-//     },
-//     cacheType: {
-//       type: 'choice',
-//       options: ['lab', 'radiology', 'profile', 'other'],
-//       description: 'Type of data being cached',
-//     },
-//     patientId: {
-//       type: 'string',
-//       description: 'Required for patient-specific caching',
-//     },
-//     cacheExpiry: {
-//       type: 'number',
-//       description: 'Cache expiration in milliseconds',
-//     },
-//     debugId: {
-//       type: 'string',
-//       description: 'Identifier for debugging',
-//     },
-//   },
-//   refActions: {
-//     reload: {
-//       description: 'Reload query',
-//       argTypes: [],
-//     },
-//     clearCache: {
-//       description: 'Clear cached data',
-//       argTypes: [],
-//     },
-//   },
-//   providesData: true,
-//   importPath: './utils/ApiFetcherComponentPlusCache',
-// };
-
-import { ReactNode, useEffect, useState, useContext, forwardRef, useImperativeHandle, useCallback } from 'react';
-import { CodeComponentMeta, DataProvider, useSelector } from '@plasmicapp/react-web/lib/host';
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { refreshAccessIfNeeded, refreshUser } from './CommonUtils';
-import { GlobalContext } from './types/CommonTypes';
-import  cacheService  from './indexdb/CacheService';
-
-type CacheMode = 'yes' | 'no';
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type CacheMode = "yes" | "no";
+type CacheStrategy = "cache-first" | "stale-while-revalidate" | "network-first";
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 interface ApiFetcherProps {
   className?: string;
@@ -301,6 +33,16 @@ interface ApiFetcherProps {
   cache?: CacheMode;
   cacheKey?: string;
   patientId?: string;
+  cacheStrategy?: CacheStrategy;
+  cacheTTL?: number; // Custom TTL in milliseconds
+  cacheTags?: string[]; // Tags for cache invalidation
+  debugMode?: boolean; // Enable cache debugging
+  // Slot children support
+  slotChildren?: ReactNode;
+  // Data rendering support
+  renderData?: (data: unknown, loading: boolean, error?: unknown) => ReactNode;
+  showData?: boolean; // Whether to show raw data
+  dataClassName?: string; // CSS class for data container
 }
 
 interface ApiActions {
@@ -316,268 +58,475 @@ interface FetcherResponse {
   isFresh?: boolean;
 }
 
-// ... (keep all the imports and interfaces same as before)
+export const ApiFetcherContext = createContext<
+  FetcherResponse & { 
+    loading: boolean;
+    reload: () => void;
+    clearCache: () => Promise<void>;
+  }
+>({ 
+  loading: true,
+  reload: () => {},
+  clearCache: async () => {}
+});
 
-export const ApiFetcherComponentPlusCache = forwardRef<ApiActions, ApiFetcherProps>(
-  (props, ref) => {
-    const globalContext = useContext(GlobalContext);
-    const inlabUser = useSelector('inlab_user');
+// Hook for easier access to the context
+export const useApiFetcher = () => {
+  const context = useContext(ApiFetcherContext);
+  if (!context) {
+    throw new Error('useApiFetcher must be used within an ApiFetcherComponentPlusCache');
+  }
+  return context;
+};
 
-    const [response, setResponse] = useState<FetcherResponse>({});
-    const [loading, setLoading] = useState(true);
-    const [currentCacheKey, setCurrentCacheKey] = useState<string | null>(null);
+// Metadata for Plasmic registration
+export const ApiFetcherComponentPlusCacheMeta = {
+  name: "ApiFetcherComponentPlusCache",
+  displayName: "API Fetcher with Cache",
+  description: "Enhanced API fetcher with IndexedDB caching support, slot children, and data rendering",
+  props: {
+    className: {
+      type: "string" as const,
+      displayName: "CSS Class",
+    },
+    method: {
+      type: "choice" as const,
+      options: ["GET", "POST", "PUT", "DELETE"],
+      displayName: "HTTP Method",
+      defaultValue: "GET",
+    },
+    path: {
+      type: "string" as const,
+      displayName: "API Path",
+      defaultValue: "/api/endpoint",
+    },
+    headers: {
+      type: "object" as const,
+      displayName: "Headers",
+    },
+    requestBody: {
+      type: "object" as const,
+      displayName: "Request Body",
+    },
+    delay: {
+      type: "number" as const,
+      displayName: "Delay (ms)",
+    },
+    cache: {
+      type: "choice" as const,
+      options: ["yes", "no"],
+      displayName: "Enable Cache",
+      defaultValue: "no",
+    },
+    patientId: {
+      type: "string" as const,
+      displayName: "Patient ID",
+    },
+    cacheKey: {
+      type: "string" as const,
+      displayName: "Cache Key",
+    },
+    cacheStrategy: {
+      type: "choice" as const,
+      options: ["cache-first", "stale-while-revalidate", "network-first"],
+      displayName: "Cache Strategy",
+      defaultValue: "cache-first",
+    },
+    cacheTTL: {
+      type: "number" as const,
+      displayName: "Cache TTL (ms)",
+      defaultValue: 3600000, // 1 hour
+    },
+    debugMode: {
+      type: "boolean" as const,
+      displayName: "Debug Mode",
+      defaultValue: false,
+    },
+    // Slot children support
+    slotChildren: {
+      type: "slot" as const,
+      displayName: "Slot Children",
+      defaultValue: [],
+    },
+    // Data rendering support
+    showData: {
+      type: "boolean" as const,
+      displayName: "Show Raw Data",
+      defaultValue: false,
+    },
+    dataClassName: {
+      type: "string" as const,
+      displayName: "Data Container CSS Class",
+      defaultValue: "api-data",
+    },
+  },
+  providesData: true,
+  importPath: "./utils/ApiFetcherComponentPlusCache",
+};
 
-    const getCompositeKey = useCallback(() => {
-      return props.cache === 'yes' && props.patientId && props.cacheKey 
-        ? `${props.cacheKey}_${props.patientId}`
-        : null;
-    }, [props.cache, props.patientId, props.cacheKey]);
+export const ApiFetcherComponentPlusCache = forwardRef<
+  ApiActions,
+  ApiFetcherProps
+>((props, ref) => {
+  const globalContext = useContext(GlobalContext);
+  const inlabUser = useSelector("inlab_user");
 
-    const validateCacheParams = useCallback(() => {
-      if (props.cache === 'yes' && (!props.patientId || !props.cacheKey)) {
-        throw new Error('Both patientId and cacheKey are required when cache="yes"');
+  const [response, setResponse] = useState<FetcherResponse>({});
+  const [loading, setLoading] = useState(true);
+
+  /** اطمینان از ورود پارامترهای کش - FAIL-SAFE VALIDATION */
+  const validateCacheParams = useCallback(() => {
+    if (props.cache === "yes") {
+      // Fail-safe: If parameters are invalid, just disable caching (no error)
+      if (!props.patientId || typeof props.patientId !== 'string' || props.patientId.trim() === '') {
+        console.log(`[CACHE VALIDATION] Invalid patientId, disabling cache: "${props.patientId}" for path: ${props.path}`);
+        return false; // Return false instead of throwing error
       }
-    }, [props.cache, props.patientId, props.cacheKey]);
-
-    const checkCache = useCallback(async (): Promise<unknown | null> => {
-      if (props.cache !== 'yes') return null;
-
-      validateCacheParams();
-      try {
-        const compositeKey = getCompositeKey();
-        if (!compositeKey) return null;
-        
-        return await cacheService.get(props.patientId!, props.cacheKey!);
-      } catch (error) {
-        console.error('Cache check failed:', error);
-        return null;
+      if (!props.cacheKey || typeof props.cacheKey !== 'string' || props.cacheKey.trim() === '') {
+        console.log(`[CACHE VALIDATION] Invalid cacheKey, disabling cache: "${props.cacheKey}" for path: ${props.path}`);
+        return false; // Return false instead of throwing error
       }
-    }, [props.cache, props.patientId, props.cacheKey, validateCacheParams, getCompositeKey]);
-
-    const loadData = useCallback(async (forceFresh = false): Promise<void> => {
-      setLoading(true);
-      const compositeKey = getCompositeKey();
       
-      // Clear previous data if patientId or cacheKey changed
-      if (compositeKey !== currentCacheKey) {
-        setResponse({});
-        setCurrentCacheKey(compositeKey);
-      }
+      // Log the validated parameters
+      console.log(`[CACHE VALIDATION] Valid cache parameters - patientId: "${props.patientId.trim()}", cacheKey: "${props.cacheKey.trim()}", path: "${props.path}"`);
+      return true; // Parameters are valid
+    }
+    return false; // Caching is disabled
+  }, [props.cache, props.patientId, props.cacheKey, props.path]);
 
-      try {
-        // 1. Try cache first (unless forcing fresh data)
-        if (!forceFresh && props.cache === 'yes') {
-          const cachedData = await checkCache();
-          if (cachedData) {
-            setResponse({
-              data: cachedData,
-              fromCache: true,
-              isFresh: false,
-              timestamp: Date.now()
+  /** بررسی وجود کش معتبر - FAIL-SAFE CACHE RETRIEVAL */
+  const checkCache = useCallback(async (): Promise<unknown | null> => {
+    if (props.cache !== "yes") return null;
+    
+    // Fail-safe: If validation fails, just skip caching
+    if (!validateCacheParams()) {
+      console.log(`[CACHE CHECK] Cache validation failed, skipping cache for path: ${props.path}`);
+      return null;
+    }
+    
+    try {
+      // Use trimmed values for consistency
+      const patientId = props.patientId!.trim();
+      const cacheKey = props.cacheKey!.trim();
+      
+      console.log(`[CACHE CHECK] Attempting to retrieve cached data for patientId: "${patientId}", cacheKey: "${cacheKey}"`);
+      
+      const cachedData = await getCache(patientId, cacheKey);
+      
+      if (cachedData) {
+        console.log(`[CACHE CHECK SUCCESS] Found cached data for patientId: "${patientId}", cacheKey: "${cacheKey}"`, {
+          dataType: typeof cachedData,
+          isArray: Array.isArray(cachedData),
+          dataSize: JSON.stringify(cachedData).length
+        });
+      } else {
+        console.log(`[CACHE CHECK MISS] No cached data found for patientId: "${patientId}", cacheKey: "${cacheKey}"`);
+      }
+      
+      return cachedData;
+    } catch (error) {
+      console.log(`[CACHE CHECK] Error occurred, falling back to API for path: ${props.path}:`, error instanceof Error ? error.message : String(error));
+      return null; // Always return null on error, never throw
+    }
+  }, [props.cache, props.patientId, props.cacheKey, props.path, validateCacheParams]);
+
+  /** دریافت داده تازه از API و ذخیره در کش */
+  const fetchFreshData = useCallback(async (): Promise<void> => {
+    try {
+      const res = await axios.request({
+        method: props.method || "GET",
+        url: globalContext.baseUrl + props.path,
+        headers: {
+          Authorization: `Bearer ${inlabUser.access}`,
+          ...props.headers,
+        },
+        data: props.requestBody,
+      });
+
+      const responseData = res.data || res;
+
+      if (props.cache === "yes" && validateCacheParams()) {
+        try {
+          // Use trimmed values for consistency
+          const patientId = props.patientId!.trim();
+          const cacheKey = props.cacheKey!.trim();
+          
+          console.log(`[CACHE STORE] Storing fresh data for patientId: "${patientId}", cacheKey: "${cacheKey}"`, {
+            path: props.path,
+            dataType: typeof responseData,
+            isArray: Array.isArray(responseData),
+            dataSize: JSON.stringify(responseData).length
+          });
+          
+          await setCache(patientId, cacheKey, responseData);
+          
+          console.log(`[CACHE STORE SUCCESS] Data successfully stored for patientId: "${patientId}", cacheKey: "${cacheKey}"`);
+          
+          if (props.debugMode) {
+            console.log(`[CACHE DEBUG] Detailed cache info for ${patientId}/${cacheKey}`, {
+              data: responseData,
+              ttl: props.cacheTTL,
+              tags: props.cacheTags,
+              path: props.path
             });
-            setLoading(false);
-            
-            // Still fetch fresh data in background
-            if (props.method === 'GET') {
-              fetchFreshData().catch(() => {}); // Silent fail for background refresh
-            }
-            return;
           }
+        } catch (cacheError) {
+          console.log(`[CACHE STORE] Failed to store data, continuing with API response: ${cacheError instanceof Error ? cacheError.message : String(cacheError)}`);
+          // Don't throw - we still want to return the data even if caching fails
         }
-
-        // 2. Fetch fresh data
-        await fetchFreshData();
-      } catch (error) {
-        handleLoadError(error);
+      } else if (props.cache === "yes") {
+        console.log(`[CACHE STORE] Cache validation failed, skipping cache storage for path: ${props.path}`);
       }
-    }, [checkCache, currentCacheKey, getCompositeKey, props.cache, props.method]);
 
-    const fetchFreshData = useCallback(async (): Promise<void> => {
-      try {
-        const response = await axios.request({
-          method: props.method || 'GET',
-          url: globalContext.baseUrl + props.path,
-          headers: {
-            Authorization: 'Bearer ' + inlabUser.access,
-            ...props.headers,
-          },
-          data: props.requestBody,
-        });
+      setResponse({
+        data: responseData,
+        fromCache: false,
+        isFresh: true,
+        timestamp: Date.now(),
+      });
+      setLoading(false);
+    } catch (error) {
+      throw error;
+    }
+  }, [
+    props.method,
+    props.path,
+    props.headers,
+    props.requestBody,
+    props.cache,
+    props.patientId,
+    props.cacheKey,
+    props.cacheTTL,
+    props.cacheTags,
+    props.debugMode,
+    globalContext.baseUrl,
+    inlabUser.access,
+  ]);
 
-        const responseData = response.data || response;
-        
-        // Update cache if enabled
-        if (props.cache === 'yes') {
-          try {
-            await cacheService.set(
-              props.patientId!,
-              props.cacheKey!,
-              responseData
-            );
-          } catch (cacheError) {
-            console.error('Cache update failed:', cacheError);
-          }
-        }
-
-        setResponse({ 
-          data: responseData,
-          fromCache: false,
-          isFresh: true,
-          timestamp: Date.now()
-        });
-        setLoading(false);
-      } catch (error) {
-        throw error; // Let loadData handle the error
-      }
-    }, [
-      props.method,
-      props.path,
-      props.headers,
-      props.requestBody,
-      props.cache,
-      props.patientId,
-      props.cacheKey,
-      globalContext.baseUrl,
-      inlabUser.access
-    ]);
-
-    const handleLoadError = useCallback(async (error: unknown): Promise<void> => {
+  /** مدیریت خطاها و تلاش مجدد در صورت 401 */
+  const handleLoadError = useCallback(
+    async (error: unknown): Promise<void> => {
       if (axios.isCancel(error)) return;
 
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         try {
-          await refreshUser(inlabUser, globalContext.baseUrl, globalContext.changeUserCallback);
-          await loadData(); // Retry after refresh
+          await refreshUser(
+            inlabUser,
+            globalContext.baseUrl,
+            globalContext.changeUserCallback
+          );
+          await loadData(); // retry
           return;
         } catch (refreshError) {
-          // Continue to error handling
           error = refreshError;
         }
       }
 
-      // For other errors, check if we have valid cached data
-      if (props.cache === 'yes') {
-        try {
+      // اگر کش معتبر نداریم، نمایش خطا
+      setResponse({
+        error: error instanceof Error ? error : new Error(String(error)),
+        timestamp: Date.now(),
+      });
+      setLoading(false);
+    },
+    [inlabUser, globalContext]
+  );
+
+  /** منطق اصلی بارگذاری داده با استراتژی‌های مختلف کش */
+  const loadData = useCallback(
+    async (forceFresh = false): Promise<void> => {
+      setLoading(true);
+
+      try {
+        const strategy = props.cacheStrategy || "cache-first";
+        
+        if (props.debugMode) {
+          console.log(`[Cache] Loading data with strategy: ${strategy}`, {
+            patientId: props.patientId,
+            cacheKey: props.cacheKey,
+            forceFresh
+          });
+        }
+
+        // Cache-First Strategy (default)
+        if (strategy === "cache-first" && !forceFresh && props.cache === "yes") {
           const cachedData = await checkCache();
           if (cachedData) {
+            if (props.debugMode) {
+              console.log(`[Cache] Cache HIT for ${props.patientId}/${props.cacheKey}`);
+            }
+            setResponse({
+              data: cachedData,
+              fromCache: true,
+              isFresh: true,
+              timestamp: Date.now(),
+            });
+            setLoading(false);
+            return;
+          }
+        }
+
+        // Stale-While-Revalidate Strategy
+        if (strategy === "stale-while-revalidate" && !forceFresh && props.cache === "yes") {
+          const cachedData = await checkCache();
+          if (cachedData) {
+            if (props.debugMode) {
+              console.log(`[Cache] Serving stale data for ${props.patientId}/${props.cacheKey}, revalidating...`);
+            }
             setResponse({
               data: cachedData,
               fromCache: true,
               isFresh: false,
               timestamp: Date.now(),
-              error: error instanceof Error ? error : new Error(String(error))
             });
             setLoading(false);
+            
+            // Fetch fresh data in background
+            fetchFreshData().catch(error => {
+              if (props.debugMode) {
+                console.warn(`[Cache] Background revalidation failed for ${props.patientId}/${props.cacheKey}:`, error);
+              }
+            });
             return;
           }
-        } catch (cacheError) {
-          console.error('Cache check failed during error handling:', cacheError);
         }
-      }
 
-      setResponse({
-        error: error instanceof Error ? error : new Error(String(error)),
-        timestamp: Date.now()
-      });
-      setLoading(false);
-    }, [checkCache, globalContext, inlabUser, loadData, props.cache]);
-
-    useImperativeHandle(
-      ref,
-      () => ({
-        reload: () => loadData(true), // Force fresh data on reload
-        clearCache: async () => {
-          if (props.cache === 'yes' && props.patientId && props.cacheKey) {
-            try {
-              await cacheService.delete(props.patientId, props.cacheKey);
-              await loadData(true); // Refresh after clearing cache
-            } catch (error) {
-              console.error('Cache clear failed:', error);
-              throw error;
+        // Network-First Strategy
+        if (strategy === "network-first") {
+          try {
+            await fetchFreshData();
+            return;
+          } catch (error) {
+            if (props.debugMode) {
+              console.log(`[Cache] Network failed, trying cache for ${props.patientId}/${props.cacheKey}`);
             }
+            // Fallback to cache on network failure
+            const cachedData = await checkCache();
+            if (cachedData) {
+              setResponse({
+                data: cachedData,
+                fromCache: true,
+                isFresh: false,
+                timestamp: Date.now(),
+              });
+              setLoading(false);
+              return;
+            }
+            throw error; // Re-throw if no cache available
           }
         }
-      }),
-      [loadData, props.cache, props.patientId, props.cacheKey]
-    );
 
-    useEffect(() => {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => {
-        if (inlabUser) {
-          refreshAccessIfNeeded(globalContext, inlabUser)
-            .then(user => user && loadData())
-            .catch(error => {
-              console.error('Initial load failed:', error);
-              setLoading(false);
-            });
-        }
-      }, props.delay || 0);
-
-      return () => {
-        controller.abort();
-        clearTimeout(timeout);
-      };
-    }, [loadData, inlabUser, globalContext, props.delay]);
-
-    // Add this effect to clear data when patientId or cacheKey changes
-    useEffect(() => {
-      const compositeKey = getCompositeKey();
-      if (compositeKey !== currentCacheKey) {
-        setResponse({});
-        setCurrentCacheKey(compositeKey);
+        // Default: fetch fresh data
+        await fetchFreshData();
+      } catch (error) {
+        await handleLoadError(error);
       }
-    }, [getCompositeKey, currentCacheKey]);
+    },
+    [props.cache, props.cacheStrategy, props.patientId, props.cacheKey, props.debugMode, checkCache, fetchFreshData, handleLoadError]
+  );
 
-    return (
+  /** بارگذاری اولیه */
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  /** متدهای قابل دسترسی از بیرون */
+  useImperativeHandle(ref, () => ({
+    reload: () => loadData(true),
+    clearCache: async () => {
+      if (props.patientId && props.cacheKey) {
+        await deleteCache(props.patientId, props.cacheKey);
+        if (props.debugMode) {
+          console.log(`[Cache] Cleared cache for ${props.patientId}/${props.cacheKey}`);
+        }
+      }
+    },
+  }));
+
+  // Render data if showData is enabled
+  const renderDataContent = () => {
+    if (!props.showData) return null;
+    
+    if (loading) {
+      return (
+        <div className={props.dataClassName || "api-data"}>
+          <div>Loading...</div>
+        </div>
+      );
+    }
+    
+    if (response.error) {
+      return (
+        <div className={props.dataClassName || "api-data"}>
+          <div style={{ color: 'red' }}>
+            Error: {response.error instanceof Error ? response.error.message : String(response.error)}
+          </div>
+        </div>
+      );
+    }
+    
+    if (response.data) {
+      return (
+        <div className={props.dataClassName || "api-data"}>
+          <div>
+            <strong>Data:</strong>
+            <pre style={{ 
+              background: '#f5f5f5', 
+              padding: '10px', 
+              borderRadius: '4px',
+              overflow: 'auto',
+              maxHeight: '300px'
+            }}>
+              {JSON.stringify(response.data, null, 2)}
+            </pre>
+            {response.fromCache && (
+              <div style={{ color: 'green', fontSize: '12px' }}>
+                ✓ Data from cache
+              </div>
+            )}
+            {response.timestamp && (
+              <div style={{ color: 'gray', fontSize: '12px' }}>
+                Timestamp: {new Date(response.timestamp).toLocaleString()}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+    
+    return null;
+  };
+
+  // Create context value with actions
+  const contextValue = {
+    ...response,
+    loading,
+    reload: () => loadData(true),
+    clearCache: async () => {
+      if (props.patientId && props.cacheKey) {
+        await deleteCache(props.patientId, props.cacheKey);
+        if (props.debugMode) {
+          console.log(`[Cache] Cleared cache for ${props.patientId}/${props.cacheKey}`);
+        }
+      }
+    }
+  };
+
+  return (
+    <ApiFetcherContext.Provider value={contextValue}>
       <div className={props.className}>
-        <DataProvider name="fetched_data" data={{ loading, ...response }}>
-          {props.children}
-        </DataProvider>
+        {/* Slot children - rendered first */}
+        {props.slotChildren}
+        
+        {/* Regular children */}
+        {props.children}
+        
+        {/* Custom render function */}
+        {props.renderData && props.renderData(response.data, loading, response.error)}
+        
+        {/* Data rendering */}
+        {renderDataContent()}
       </div>
-    );
-  }
-);
-
-// ... (keep the meta configuration same as before)
-// Keep the same meta configuration
-export const ApiFetcherComponentPlusCacheMeta: CodeComponentMeta<ApiFetcherProps> = {
-  name: 'ApiFetcherComponentPlusCache',
-  props: {
-    children: 'slot',
-    method: {
-      type: 'choice',
-      options: ['GET', 'POST', 'PUT', 'DELETE'],
-      defaultValue: 'GET',
-    },
-    path: 'string',
-    headers: 'object',
-    requestBody: 'object',
-    delay: 'number',
-    cache: {
-      type: 'choice',
-      options: ['yes', 'no'],
-      defaultValue: 'no',
-    },
-    cacheKey: {
-      type: 'string',
-      description: 'Required when cache="yes"',
-    },
-    patientId: {
-      type: 'string',
-      description: 'Required when cache="yes"',
-    },
-  },
-  refActions: {
-    reload: {
-      description: 'Reload query',
-      argTypes: [],
-    },
-    clearCache: {
-      description: 'Clear cached data',
-      argTypes: [],
-    },
-  },
-  providesData: true,
-  importPath: './utils/ApiFetcherComponentPlusCache',
-};
+    </ApiFetcherContext.Provider>
+  );
+});

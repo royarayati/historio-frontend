@@ -71,8 +71,6 @@ import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/compone
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_antd_5_hostless } from "../antd_5_hostless/PlasmicStyleTokensProvider"; // plasmic-import: ohDidvG9XsCeFumugENU3J/styleTokensProvider
-import { _useStyleTokens as useStyleTokens_plasmic_rich_components } from "../plasmic_rich_components/PlasmicStyleTokensProvider"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/styleTokensProvider
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -128,9 +126,7 @@ export type PlasmicConsultSendDraft__OverridesType = {
   previousPresentIllness?: Flex__<"div">;
   patientPresentIllness?: Flex__<"textarea">;
   consultEmergencyStatusButton?: Flex__<typeof Button>;
-  consultEmergencyStatus?: Flex__<"div">;
   emergentOff?: Flex__<"div">;
-  emergentOn?: Flex__<"div">;
   guide?: Flex__<"div">;
   sendConsultAlertContent?: Flex__<"div">;
   sendConsultUnsuccessfully?: Flex__<typeof Alert2>;
@@ -354,8 +350,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $ctx.fetched_data.data.illness
-                ? $ctx.fetched_data.data.illness
+              return $ctx.fetched_data.data.items[0].illness
+                ? $ctx.fetched_data.data.items[0].illness
                 : "با سلام و احترام";
             } catch (e) {
               if (
@@ -594,10 +590,6 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
   });
 
   const styleTokensClassNames = _useStyleTokens();
-  const styleTokensClassNames_antd_5_hostless =
-    useStyleTokens_antd_5_hostless();
-  const styleTokensClassNames_plasmic_rich_components =
-    useStyleTokens_plasmic_rich_components();
 
   return (
     <React.Fragment>
@@ -621,8 +613,6 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
             styleTokensClassNames,
-            styleTokensClassNames_antd_5_hostless,
-            styleTokensClassNames_plasmic_rich_components,
             sty.consultSend
           )}
         >
@@ -807,7 +797,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v2/consult/${$ctx.params.consult_id}`}
+              path={`/api/v3/consults?drafted_consult=true&dismissed_consult=true&consult_id=${$ctx.params.consult_id}`}
               ref={ref => {
                 $refs["getUniqueConsult"] = ref;
               }}
@@ -1100,11 +1090,11 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           {(() => {
                             try {
                               return $state.senderServiceName == null
-                                ? $ctx.fetched_data.data
-                                    .effective_patient_service.name == null
+                                ? $ctx.fetched_data.data.items[0].details
+                                    .sender_service.name == null
                                   ? "-"
-                                  : $ctx.fetched_data.data
-                                      .effective_patient_service.name
+                                  : $ctx.fetched_data.data.items[0].details
+                                      .sender_service.name
                                 : $state.senderServiceName;
                             } catch (e) {
                               if (
@@ -1274,13 +1264,13 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                         <React.Fragment>
                           {(() => {
                             try {
-                              return $state.receiverServiceName == null
-                                ? $ctx.fetched_data.data.consultant_service
-                                    .name == null
+                              return $state.senderServiceName == null
+                                ? $ctx.fetched_data.data.items[0].details
+                                    .receiver_service.name == null
                                   ? "-"
-                                  : $ctx.fetched_data.data.consultant_service
-                                      .name
-                                : $state.receiverServiceName;
+                                  : $ctx.fetched_data.data.items[0].details
+                                      .receiver_service.name
+                                : $state.senderServiceName;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -1371,16 +1361,16 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           {(() => {
                             try {
                               return $state.receiverDoctorName == null
-                                ? $ctx.fetched_data.data.suggested_consultant ==
-                                  null
+                                ? $ctx.fetched_data.data.items[0].details
+                                    .suggested_receiver == null
                                   ? "-"
                                   : "دکتر" +
                                     " " +
-                                    $ctx.fetched_data.data.suggested_consultant
-                                      .first_name +
+                                    $ctx.fetched_data.data.items[0].details
+                                      .suggested_receiver.first_name +
                                     " " +
-                                    $ctx.fetched_data.data.suggested_consultant
-                                      .last_name
+                                    $ctx.fetched_data.data.items[0].details
+                                      .suggested_receiver.last_name
                                 : $state.receiverDoctorName;
                             } catch (e) {
                               if (
@@ -1548,8 +1538,9 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                               initFunc: ({ $props, $state, $queries }) =>
                                 (() => {
                                   try {
-                                    return $ctx.fetched_data.data.illness
-                                      ? $ctx.fetched_data.data.illness
+                                    return $ctx.fetched_data.data.items[0]
+                                      .illness
+                                      ? $ctx.fetched_data.data.items[0].illness
                                       : "با سلام و احترام";
                                   } catch (e) {
                                     if (
@@ -1594,7 +1585,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                         try {
                           return $state.emergencyButtonUserInteractionState
                             ? !$state.emergencyButtonStatusState
-                            : $ctx.fetched_data.data.priority == 3
+                            : $ctx.fetched_data.data.items[0].priority == 3
                             ? true
                             : false;
                         } catch (e) {
@@ -1611,7 +1602,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                         try {
                           return $state.emergencyButtonUserInteractionState
                             ? $state.emergencyButtonStatusState
-                            : $ctx.fetched_data.data.priority == 3
+                            : $ctx.fetched_data.data.items[0].priority == 3
                             ? false
                             : true;
                         } catch (e) {
@@ -1892,98 +1883,17 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                         "sortSelected"
                       ])}
                     >
-                      {(() => {
-                        try {
-                          return $state.emergencyButtonUserInteractionState
-                            ? true
-                            : !$ctx.fetched_data.loading;
-                          // علت مشروط نکردن به لودینگ به تنهایی این است:
-                          // با هر اینترکشن کاربر روی این دکمه لودینگ ترو می شود و متن در صفحه پرش پیدا می کند
-                          // با این کار با اولین اینترکشن کاربر از آن جایی که محتوای دکمه از روی پاسخ ریکوئسن خوانده نشده و از روی استیت مربوطه خوانده می شود وابسته کردن به لودینک ریکوئست ضروری نیست
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return true;
-                          }
-                          throw e;
-                        }
-                      })() ? (
-                        <div
-                          data-plasmic-name={"consultEmergencyStatus"}
-                          data-plasmic-override={
-                            overrides.consultEmergencyStatus
-                          }
-                          className={classNames(
-                            projectcss.all,
-                            sty.consultEmergencyStatus
-                          )}
-                        >
-                          {(() => {
-                            try {
-                              return $state.emergencyButtonUserInteractionState
-                                ? !$state.emergencyButtonStatusState
-                                : $ctx.fetched_data.data.priority == 3
-                                ? true
-                                : false;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return true;
-                              }
-                              throw e;
-                            }
-                          })() ? (
-                            <div
-                              data-plasmic-name={"emergentOff"}
-                              data-plasmic-override={overrides.emergentOff}
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.emergentOff
-                              )}
-                            >
-                              {
-                                " \u0627\u0648\u0631\u0698\u0627\u0646\u0633\u06cc"
-                              }
-                            </div>
-                          ) : null}
-                          {(() => {
-                            try {
-                              return $state.emergencyButtonUserInteractionState
-                                ? $state.emergencyButtonStatusState
-                                : $ctx.fetched_data.data.priority == 3
-                                ? false
-                                : true;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return true;
-                              }
-                              throw e;
-                            }
-                          })() ? (
-                            <div
-                              data-plasmic-name={"emergentOn"}
-                              data-plasmic-override={overrides.emergentOn}
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.emergentOn
-                              )}
-                            >
-                              {
-                                " \u0627\u0648\u0631\u0698\u0627\u0646\u0633\u06cc"
-                              }
-                            </div>
-                          ) : null}
-                        </div>
-                      ) : null}
+                      <div
+                        data-plasmic-name={"emergentOff"}
+                        data-plasmic-override={overrides.emergentOff}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.emergentOff
+                        )}
+                      >
+                        {" \u0627\u0648\u0631\u0698\u0627\u0646\u0633\u06cc"}
+                      </div>
                     </Button>
                     <div
                       data-plasmic-name={"guide"}
@@ -2151,25 +2061,28 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                           priority:
                                             $state.emergencyButtonUserInteractionState
                                               ? $state.consultEmergencyStatusState
-                                              : $ctx.fetched_data.data.priority,
+                                              : $ctx.fetched_data.data.items[0]
+                                                  .priority,
                                           sender_id: $ctx.inlab_user.user.id,
                                           suggested_receiver_id:
                                             $state.receiverDoctorId == null
-                                              ? $ctx.fetched_data.data
+                                              ? $ctx.fetched_data.data.items[0]
+                                                  .details
                                                   .suggested_consultant == null
                                                 ? null
                                                 : $ctx.fetched_data.data
-                                                    .suggested_consultant.id
+                                                    .items[0]
+                                                    .suggested_consultant_id
                                               : $state.receiverDoctorId,
                                           sender_service_id:
                                             $state.senderServiceId == null
-                                              ? $ctx.fetched_data.data
-                                                  .effective_patient_service.id
+                                              ? $ctx.fetched_data.data.items[0]
+                                                  .effective_patient_service_iid
                                               : $state.senderServiceId,
                                           receiver_service_id:
                                             $state.receiverServiceId == null
-                                              ? $ctx.fetched_data.data
-                                                  .consultant_service.id
+                                              ? $ctx.fetched_data.data.items[0]
+                                                  .consultant_service_iid
                                               : $state.receiverServiceId,
                                           patient_id: $ctx.params.code,
                                           admission_id: $ctx.params.adm_id,
@@ -2509,25 +2422,28 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                           priority:
                                             $state.emergencyButtonUserInteractionState
                                               ? $state.consultEmergencyStatusState
-                                              : $ctx.fetched_data.data.priority,
+                                              : $ctx.fetched_data.data.items[0]
+                                                  .priority,
                                           sender_id: $ctx.inlab_user.user.id,
                                           suggested_receiver_id:
                                             $state.receiverDoctorId == null
-                                              ? $ctx.fetched_data.data
+                                              ? $ctx.fetched_data.data.items[0]
+                                                  .details
                                                   .suggested_consultant == null
                                                 ? null
                                                 : $ctx.fetched_data.data
-                                                    .suggested_consultant.id
+                                                    .items[0]
+                                                    .suggested_consultant_id
                                               : $state.receiverDoctorId,
                                           sender_service_id:
                                             $state.senderServiceId == null
-                                              ? $ctx.fetched_data.data
-                                                  .effective_patient_service.id
+                                              ? $ctx.fetched_data.data.items[0]
+                                                  .effective_patient_service_iid
                                               : $state.senderServiceId,
                                           receiver_service_id:
                                             $state.receiverServiceId == null
-                                              ? $ctx.fetched_data.data
-                                                  .consultant_service.id
+                                              ? $ctx.fetched_data.data.items[0]
+                                                  .consultant_service_iid
                                               : $state.receiverServiceId,
                                           patient_id: $ctx.params.code,
                                           admission_id: $ctx.params.adm_id,
@@ -3223,9 +3139,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     projectcss.root_reset,
                     projectcss.plasmic_default_styles,
                     projectcss.plasmic_mixins,
-                    styleTokensClassNames,
-                    styleTokensClassNames_antd_5_hostless,
-                    styleTokensClassNames_plasmic_rich_components
+                    styleTokensClassNames
                   )}
                   hideFooter={true}
                   modalContentClassName={classNames({
@@ -3798,9 +3712,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     projectcss.root_reset,
                     projectcss.plasmic_default_styles,
                     projectcss.plasmic_mixins,
-                    styleTokensClassNames,
-                    styleTokensClassNames_antd_5_hostless,
-                    styleTokensClassNames_plasmic_rich_components
+                    styleTokensClassNames
                   )}
                   hideFooter={true}
                   modalContentClassName={classNames({
@@ -4249,9 +4161,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     projectcss.root_reset,
                     projectcss.plasmic_default_styles,
                     projectcss.plasmic_mixins,
-                    styleTokensClassNames,
-                    styleTokensClassNames_antd_5_hostless,
-                    styleTokensClassNames_plasmic_rich_components
+                    styleTokensClassNames
                   )}
                   hideFooter={true}
                   modalContentClassName={classNames({
@@ -4544,9 +4454,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
               projectcss.root_reset,
               projectcss.plasmic_default_styles,
               projectcss.plasmic_mixins,
-              styleTokensClassNames,
-              styleTokensClassNames_antd_5_hostless,
-              styleTokensClassNames_plasmic_rich_components
+              styleTokensClassNames
             )}
             hideFooter={true}
             maskClosable={true}
@@ -5146,9 +5054,7 @@ const PlasmicDescendants = {
     "previousPresentIllness",
     "patientPresentIllness",
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus",
     "emergentOff",
-    "emergentOn",
     "guide",
     "sendConsultAlertContent",
     "sendConsultUnsuccessfully",
@@ -5236,9 +5142,7 @@ const PlasmicDescendants = {
     "previousPresentIllness",
     "patientPresentIllness",
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus",
     "emergentOff",
-    "emergentOn",
     "guide",
     "sendConsultAlertContent",
     "sendConsultUnsuccessfully",
@@ -5269,9 +5173,7 @@ const PlasmicDescendants = {
     "previousPresentIllness",
     "patientPresentIllness",
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus",
     "emergentOff",
-    "emergentOn",
     "guide",
     "sendConsultAlertContent",
     "sendConsultUnsuccessfully",
@@ -5301,9 +5203,7 @@ const PlasmicDescendants = {
     "previousPresentIllness",
     "patientPresentIllness",
     "consultEmergencyStatusButton",
-    "consultEmergencyStatus",
     "emergentOff",
-    "emergentOn",
     "guide",
     "sendConsultAlertContent",
     "sendConsultUnsuccessfully",
@@ -5352,19 +5252,8 @@ const PlasmicDescendants = {
   presentIllnessTitle: ["presentIllnessTitle"],
   previousPresentIllness: ["previousPresentIllness"],
   patientPresentIllness: ["patientPresentIllness"],
-  consultEmergencyStatusButton: [
-    "consultEmergencyStatusButton",
-    "consultEmergencyStatus",
-    "emergentOff",
-    "emergentOn"
-  ],
-  consultEmergencyStatus: [
-    "consultEmergencyStatus",
-    "emergentOff",
-    "emergentOn"
-  ],
+  consultEmergencyStatusButton: ["consultEmergencyStatusButton", "emergentOff"],
   emergentOff: ["emergentOff"],
-  emergentOn: ["emergentOn"],
   guide: ["guide"],
   sendConsultAlertContent: [
     "sendConsultAlertContent",
@@ -5554,9 +5443,7 @@ type NodeDefaultElementType = {
   previousPresentIllness: "div";
   patientPresentIllness: "textarea";
   consultEmergencyStatusButton: typeof Button;
-  consultEmergencyStatus: "div";
   emergentOff: "div";
-  emergentOn: "div";
   guide: "div";
   sendConsultAlertContent: "div";
   sendConsultUnsuccessfully: typeof Alert2;
@@ -5699,9 +5586,7 @@ export const PlasmicConsultSendDraft = Object.assign(
     consultEmergencyStatusButton: makeNodeComponent(
       "consultEmergencyStatusButton"
     ),
-    consultEmergencyStatus: makeNodeComponent("consultEmergencyStatus"),
     emergentOff: makeNodeComponent("emergentOff"),
-    emergentOn: makeNodeComponent("emergentOn"),
     guide: makeNodeComponent("guide"),
     sendConsultAlertContent: makeNodeComponent("sendConsultAlertContent"),
     sendConsultUnsuccessfully: makeNodeComponent("sendConsultUnsuccessfully"),

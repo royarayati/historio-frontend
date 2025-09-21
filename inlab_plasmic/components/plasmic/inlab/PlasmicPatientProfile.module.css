@@ -240,7 +240,7 @@
   padding: 8px;
   border-bottom: 0.5px solid var(--token-8PxxXPNrIohQ);
 }
-.patientProfileApi:global(.__wab_instance) {
+.patientProfileApiEx:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   position: relative;
@@ -583,18 +583,22 @@
   overflow: auto;
   min-width: 0;
 }
-.text___7AiXm {
+.patientProfileApi:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  min-width: 0;
+}
+.text__iagD2 {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
-  justify-self: center;
   background: #ffffff;
   margin-top: 12px;
   font-size: var(--token-CdE1_0ZaCyT1);
   white-space: pre-wrap;
-  grid-column-start: 3 !important;
-  grid-column-end: -3 !important;
+  min-width: 0;
   border-radius: 5px;
   padding: 8px;
 }
@@ -642,7 +646,7 @@
   min-height: 0;
   padding: 8px;
 }
-.text___3Gf42 {
+.text__qUoq9 {
   position: relative;
   width: 100%;
   height: auto;
@@ -663,7 +667,7 @@
   white-space: pre-wrap;
   min-width: 0;
 }
-.text__t6Tpb {
+.text___4Hwd2 {
   position: relative;
   width: 100%;
   height: auto;
@@ -684,7 +688,7 @@
   white-space: pre-wrap;
   min-width: 0;
 }
-.text__wrNh9 {
+.text__hsXzV {
   position: relative;
   width: 100%;
   height: auto;
@@ -705,7 +709,7 @@
   white-space: pre-wrap;
   min-width: 0;
 }
-.text__cpb0Y {
+.text__oGJu {
   position: relative;
   width: 100%;
   height: auto;
@@ -725,7 +729,7 @@
   position: relative;
   min-width: 0;
 }
-.text__epW57 {
+.text__ouhrv {
   position: relative;
   width: 100%;
   height: auto;
@@ -780,7 +784,7 @@
     font-size: var(--token-sOr3fJ5Up5fq);
   }
 }
-.text__jUiff {
+.text___9OH4V {
   position: relative;
   width: 100%;
   height: auto;
@@ -801,7 +805,7 @@
   white-space: pre-wrap;
   min-width: 0;
 }
-.text___8IiMx {
+.text__gdSwn {
   position: relative;
   width: 100%;
   height: auto;
@@ -824,7 +828,7 @@
   white-space: pre-wrap;
   padding: 0px 0px 8px;
 }
-.text__qhk2G {
+.text__uq8RC {
   position: relative;
   width: 100%;
   height: auto;
@@ -845,7 +849,7 @@
   min-width: 0;
   padding: 0px 0px 8px;
 }
-.text__wAzvs {
+.text__tg0Kk {
   position: relative;
   width: 100%;
   height: auto;
@@ -960,7 +964,7 @@
   padding: 4px;
   border-bottom: 0.5px dotted var(--token-8PxxXPNrIohQ);
 }
-.bookmarkedLabs:global(.__wab_instance) {
+.bookmarkedLabsEx:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   width: 100%;
@@ -969,7 +973,7 @@
   padding: 8px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .bookmarkedLabs:global(.__wab_instance) {
+  .bookmarkedLabsEx:global(.__wab_instance) {
     border-radius: 5px;
   }
 }
@@ -1061,6 +1065,105 @@
   height: 1em;
 }
 .svg__pZmdX {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.bookmarkedLabs:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  min-width: 0;
+}
+.freeBox___2OWg {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.text__e2HD {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  color: var(--token-IYO13gyYJHXG);
+  min-width: 0;
+}
+.text__xdGrh {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  color: var(--token-IYO13gyYJHXG);
+  min-width: 0;
+}
+.bookmarkedLabsList2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 0px;
+}
+.freeBox__lrc8P {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.factorNameValue2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__lKeHk {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.goToLabPage3:global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  align-self: center;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .goToLabPage3:global(.__wab_instance) {
+    display: flex;
+  }
+}
+.text__ooAhA {
+  text-align: center;
+}
+.svg__vljKm {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__xghnM {
   position: relative;
   object-fit: cover;
   width: auto;
