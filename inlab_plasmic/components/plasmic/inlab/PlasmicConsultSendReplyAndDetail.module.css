@@ -1537,6 +1537,23 @@
   white-space: pre-wrap;
   user-select: none;
   text-decoration-line: none;
+  padding-left: 0px;
+}
+.text__jbcww {
+  background: none;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--token-b7Myz3RtiwPQ);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  padding-left: 0px;
 }
 .modalDeleteConsultConfirmation:global(.__wab_instance) {
   max-width: 100%;

@@ -822,9 +822,12 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
               data-plasmic-override={overrides.getUniqueConsult}
               autoFetch={true}
               className={classNames("__wab_instance", sty.getUniqueConsult)}
-              fetchTrigger={(() => {
+              fetchTriggers={(() => {
                 try {
-                  return $state.consultReviewStateToReloadGetConsult;
+                  return [
+                    $state.modalSetConsultPaperReplyTrueBeforePrint.open,
+                    $state.consultReviewStateToReloadGetConsult
+                  ];
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -4902,6 +4905,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                 data-plasmic-name={"title3"}
                 data-plasmic-override={overrides.title3}
                 className={classNames(projectcss.all, sty.title3)}
+                dir={"rtl"}
               >
                 <div
                   className={classNames(
@@ -4912,6 +4916,17 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                 >
                   {
                     "\u0622\u06cc\u0627 \u067e\u0632\u0634\u06a9 \u0642\u0635\u062f \u062f\u0627\u0631\u062f \u0645\u0634\u0627\u0648\u0631\u0647 \u0631\u0627 \u0628\u0647 \u0635\u0648\u0631\u062a \u06a9\u0627\u063a\u0630\u06cc \u067e\u0627\u0633\u062e \u062f\u0647\u062f\u061f"
+                  }
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__jbcww
+                  )}
+                >
+                  {
+                    "\u0647\u0634\u062f\u0627\u0631: \u062f\u0631 \u063a\u06cc\u0631 \u0627\u06cc\u0646\u0635\u0648\u0631\u062a \u0631\u0648\u06cc \u062f\u06a9\u0645\u0647 \u0628\u0644\u0647 \u06a9\u0644\u06cc\u06a9 \u0646\u06a9\u0646\u06cc\u062f"
                   }
                 </div>
               </div>
@@ -4929,6 +4944,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                   projectcss.__wab_text,
                   sty.text__uCDmC
                 )}
+                dir={"rtl"}
               >
                 {
                   '\u0628\u0627 \u0632\u062f\u0646 \u0628\u0631 \u0631\u0648\u06cc "\u0628\u0644\u0647"\u060c \u0648\u0636\u0639\u06cc\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0628\u0647 \u062d\u0627\u0644\u062a \u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647 \u0628\u0647 \u0635\u0648\u0631\u062a \u06a9\u0627\u063a\u0630\u06cc\u060c \u062a\u063a\u06cc\u06cc\u0631 \u062f\u0627\u062f\u0647 \u062e\u0648\u0627\u0647\u062f \u0634\u062f \u0648 \u0633\u067e\u0633 \u067e\u0631\u06cc\u0646\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0622\u0645\u0627\u062f\u0647 \u0645\u06cc \u0634\u0648\u062f'
@@ -5193,12 +5209,51 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       ];
                     }
 
-                    $steps["patchConsultPaperReply"] = true
+                    $steps["postConsultFillTemplate"] = true
                       ? (() => {
                           const actionArgs = {
                             args: [
-                              "PATCH",
-                              `/api/v3/consults/paper_reply/${$ctx.params.consult_id}`
+                              "POST",
+                              "/api/v3/consults/template",
+                              (() => {
+                                try {
+                                  return {
+                                    "X-Namespace": localStorage.getItem(
+                                      "inlab_user_namespace_id"
+                                    )
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })(),
+                              (() => {
+                                try {
+                                  return {
+                                    consult_id: parseInt(
+                                      $ctx.params.consult_id
+                                    ),
+                                    patient_id: 0
+                                    // "admission_id": parseInt($ctx.params.adm_id)
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })(),
+                              "blob"
                             ]
                           };
                           return $globalActions[
@@ -5207,62 +5262,23 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         })()
                       : undefined;
                     if (
-                      $steps["patchConsultPaperReply"] != null &&
-                      typeof $steps["patchConsultPaperReply"] === "object" &&
-                      typeof $steps["patchConsultPaperReply"].then ===
+                      $steps["postConsultFillTemplate"] != null &&
+                      typeof $steps["postConsultFillTemplate"] === "object" &&
+                      typeof $steps["postConsultFillTemplate"].then ===
                         "function"
                     ) {
-                      $steps["patchConsultPaperReply"] = await $steps[
-                        "patchConsultPaperReply"
+                      $steps["postConsultFillTemplate"] = await $steps[
+                        "postConsultFillTemplate"
                       ];
                     }
 
-                    $steps["postConsultFillTemplate"] =
-                      $steps.patchConsultPaperReply.status === 200
+                    $steps["patchConsultPaperReply"] =
+                      $steps.postConsultFillTemplate.status === 200
                         ? (() => {
                             const actionArgs = {
                               args: [
-                                "POST",
-                                "/api/v3/consults/template",
-                                (() => {
-                                  try {
-                                    return {
-                                      "X-Namespace": localStorage.getItem(
-                                        "inlab_user_namespace_id"
-                                      )
-                                    };
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return undefined;
-                                    }
-                                    throw e;
-                                  }
-                                })(),
-                                (() => {
-                                  try {
-                                    return {
-                                      consult_id: parseInt(
-                                        $ctx.params.consult_id
-                                      ),
-                                      patient_id: 0
-                                      // "admission_id": parseInt($ctx.params.adm_id)
-                                    };
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return undefined;
-                                    }
-                                    throw e;
-                                  }
-                                })(),
-                                "blob"
+                                "PATCH",
+                                `/api/v3/consults/paper_reply/${$ctx.params.consult_id}`
                               ]
                             };
                             return $globalActions[
@@ -5271,13 +5287,13 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           })()
                         : undefined;
                     if (
-                      $steps["postConsultFillTemplate"] != null &&
-                      typeof $steps["postConsultFillTemplate"] === "object" &&
-                      typeof $steps["postConsultFillTemplate"].then ===
+                      $steps["patchConsultPaperReply"] != null &&
+                      typeof $steps["patchConsultPaperReply"] === "object" &&
+                      typeof $steps["patchConsultPaperReply"].then ===
                         "function"
                     ) {
-                      $steps["postConsultFillTemplate"] = await $steps[
-                        "postConsultFillTemplate"
+                      $steps["patchConsultPaperReply"] = await $steps[
+                        "patchConsultPaperReply"
                       ];
                     }
 

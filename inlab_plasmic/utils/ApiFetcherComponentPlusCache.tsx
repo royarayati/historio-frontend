@@ -37,6 +37,12 @@ interface ApiFetcherProps {
   cacheTTL?: number; // Custom TTL in milliseconds
   cacheTags?: string[]; // Tags for cache invalidation
   debugMode?: boolean; // Enable cache debugging
+  // Slot children support
+  slotChildren?: ReactNode;
+  // Data rendering support
+  renderData?: (data: unknown, loading: boolean, error?: unknown) => ReactNode;
+  showData?: boolean; // Whether to show raw data
+  dataClassName?: string; // CSS class for data container
 }
 
 interface ApiActions {
@@ -53,14 +59,31 @@ interface FetcherResponse {
 }
 
 export const ApiFetcherContext = createContext<
-  FetcherResponse & { loading: boolean }
->({ loading: true });
+  FetcherResponse & { 
+    loading: boolean;
+    reload: () => void;
+    clearCache: () => Promise<void>;
+  }
+>({ 
+  loading: true,
+  reload: () => {},
+  clearCache: async () => {}
+});
+
+// Hook for easier access to the context
+export const useApiFetcher = () => {
+  const context = useContext(ApiFetcherContext);
+  if (!context) {
+    throw new Error('useApiFetcher must be used within an ApiFetcherComponentPlusCache');
+  }
+  return context;
+};
 
 // Metadata for Plasmic registration
 export const ApiFetcherComponentPlusCacheMeta = {
   name: "ApiFetcherComponentPlusCache",
   displayName: "API Fetcher with Cache",
-  description: "Enhanced API fetcher with IndexedDB caching support",
+  description: "Enhanced API fetcher with IndexedDB caching support, slot children, and data rendering",
   props: {
     className: {
       type: "string" as const,
@@ -118,6 +141,23 @@ export const ApiFetcherComponentPlusCacheMeta = {
       type: "boolean" as const,
       displayName: "Debug Mode",
       defaultValue: false,
+    },
+    // Slot children support
+    slotChildren: {
+      type: "slot" as const,
+      displayName: "Slot Children",
+      defaultValue: [],
+    },
+    // Data rendering support
+    showData: {
+      type: "boolean" as const,
+      displayName: "Show Raw Data",
+      defaultValue: false,
+    },
+    dataClassName: {
+      type: "string" as const,
+      displayName: "Data Container CSS Class",
+      defaultValue: "api-data",
     },
   },
   providesData: true,
@@ -403,9 +443,90 @@ export const ApiFetcherComponentPlusCache = forwardRef<
     },
   }));
 
+  // Render data if showData is enabled
+  const renderDataContent = () => {
+    if (!props.showData) return null;
+    
+    if (loading) {
+      return (
+        <div className={props.dataClassName || "api-data"}>
+          <div>Loading...</div>
+        </div>
+      );
+    }
+    
+    if (response.error) {
+      return (
+        <div className={props.dataClassName || "api-data"}>
+          <div style={{ color: 'red' }}>
+            Error: {response.error instanceof Error ? response.error.message : String(response.error)}
+          </div>
+        </div>
+      );
+    }
+    
+    if (response.data) {
+      return (
+        <div className={props.dataClassName || "api-data"}>
+          <div>
+            <strong>Data:</strong>
+            <pre style={{ 
+              background: '#f5f5f5', 
+              padding: '10px', 
+              borderRadius: '4px',
+              overflow: 'auto',
+              maxHeight: '300px'
+            }}>
+              {JSON.stringify(response.data, null, 2)}
+            </pre>
+            {response.fromCache && (
+              <div style={{ color: 'green', fontSize: '12px' }}>
+                ✓ Data from cache
+              </div>
+            )}
+            {response.timestamp && (
+              <div style={{ color: 'gray', fontSize: '12px' }}>
+                Timestamp: {new Date(response.timestamp).toLocaleString()}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+    
+    return null;
+  };
+
+  // Create context value with actions
+  const contextValue = {
+    ...response,
+    loading,
+    reload: () => loadData(true),
+    clearCache: async () => {
+      if (props.patientId && props.cacheKey) {
+        await deleteCache(props.patientId, props.cacheKey);
+        if (props.debugMode) {
+          console.log(`[Cache] Cleared cache for ${props.patientId}/${props.cacheKey}`);
+        }
+      }
+    }
+  };
+
   return (
-    <ApiFetcherContext.Provider value={{ ...response, loading }}>
-      {props.children}
+    <ApiFetcherContext.Provider value={contextValue}>
+      <div className={props.className}>
+        {/* Slot children - rendered first */}
+        {props.slotChildren}
+        
+        {/* Regular children */}
+        {props.children}
+        
+        {/* Custom render function */}
+        {props.renderData && props.renderData(response.data, loading, response.error)}
+        
+        {/* Data rendering */}
+        {renderDataContent()}
+      </div>
     </ApiFetcherContext.Provider>
   );
 });
