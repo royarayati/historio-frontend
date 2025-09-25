@@ -1504,6 +1504,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 "__wab_instance",
                 sty.apiFetcherComponentPlusCache2
               )}
+              dataClassName={"api-data"}
               debugMode={false}
               delay={10}
               headers={(() => {
@@ -1538,6 +1539,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   throw e;
                 }
               })()}
+              showData={false}
             />
           ) : null}
         </div>
@@ -4162,6 +4164,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               "__wab_instance",
               sty.apiFetcherComponentPlusCache
             )}
+            dataClassName={"api-data"}
             debugMode={false}
             delay={10}
             headers={(() => {
@@ -4198,6 +4201,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 throw e;
               }
             })()}
+            showData={false}
           />
         ) : null}
         <AntdModal

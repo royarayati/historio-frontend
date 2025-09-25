@@ -2,7 +2,7 @@
   "projects": [
     {
       "projectId": "gmeH6XgPaBtkt51HunAo4g",
-      "version": "18.26.0",
+      "version": "18.27.0",
       "dependencies": {},
       "lang": "ts",
       "fileLocks": [
@@ -438,7 +438,7 @@
         "8PtdGodUbexNYgkuyBUcWu": "3.33.0",
         "3m3vFk1dnCzZnwT8k489Jy": "0.12.0",
         "aEHVN5v6mfM4eovDsL8Z7d": "0.7.0",
-        "gmeH6XgPaBtkt51HunAo4g": "18.26.0"
+        "gmeH6XgPaBtkt51HunAo4g": "18.27.0"
       },
       "lang": "ts",
       "fileLocks": [
@@ -480,42 +480,42 @@
         {
           "type": "renderModule",
           "assetId": "YivXi3wItkax",
-          "checksum": "36cbbf88539a655a2068d47cb2efd20d"
+          "checksum": "ac9e7aec745efc50800fe144ddb35fa6"
         },
         {
           "type": "cssRules",
           "assetId": "YivXi3wItkax",
-          "checksum": "36cbbf88539a655a2068d47cb2efd20d"
+          "checksum": "ac9e7aec745efc50800fe144ddb35fa6"
         },
         {
           "type": "renderModule",
           "assetId": "AFB-1jxjMqDb",
-          "checksum": "ca90a4b6f822591d5e06e733f919006f"
+          "checksum": "94e166072df6b81e07faceda6befa38e"
         },
         {
           "type": "cssRules",
           "assetId": "AFB-1jxjMqDb",
-          "checksum": "ca90a4b6f822591d5e06e733f919006f"
+          "checksum": "94e166072df6b81e07faceda6befa38e"
         },
         {
           "type": "renderModule",
           "assetId": "Ev8txsbuZl9W",
-          "checksum": "bf91850fb8d6b032afc11467818e871e"
+          "checksum": "0f8921a97b81b3bc0ad9dd86587f92ab"
         },
         {
           "type": "cssRules",
           "assetId": "Ev8txsbuZl9W",
-          "checksum": "bf91850fb8d6b032afc11467818e871e"
+          "checksum": "0f8921a97b81b3bc0ad9dd86587f92ab"
         },
         {
           "type": "renderModule",
           "assetId": "oQ9IYAdIiE5g",
-          "checksum": "6c0fa4fec6aae1d039f5125061114aaa"
+          "checksum": "fdd0f985c3ea4c4bc2d858c601e2a61b"
         },
         {
           "type": "cssRules",
           "assetId": "oQ9IYAdIiE5g",
-          "checksum": "6c0fa4fec6aae1d039f5125061114aaa"
+          "checksum": "fdd0f985c3ea4c4bc2d858c601e2a61b"
         },
         {
           "type": "renderModule",

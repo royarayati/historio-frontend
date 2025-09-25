@@ -2641,6 +2641,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
               "__wab_instance",
               sty.apiFetcherComponentPlusCache
             )}
+            dataClassName={"api-data"}
             debugMode={false}
             delay={10}
             headers={(() => {
@@ -2673,6 +2674,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                 throw e;
               }
             })()}
+            showData={false}
           />
         ) : null}
         {$state.selectedTab === "Paraclinics" ? (
