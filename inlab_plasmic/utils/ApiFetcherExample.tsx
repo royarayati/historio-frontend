@@ -81,3 +81,5 @@ const DataDisplayComponent: React.FC = () => {
 };
 
 export default ApiFetcherExample;
+
+

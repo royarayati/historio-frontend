@@ -1118,7 +1118,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         }
                         return (() => {
                           if ($ctx.fetched_data.loading) return "";
-                          if ($ctx.fetched_data.data.length === 0) return "";
+                          if (
+                            $ctx.fetched_data.data &&
+                            $ctx.fetched_data.data.length === 0
+                          )
+                            return "";
                           const item = $ctx.fetched_data.data[0];
                           return getPersonInfoWithAge(item);
                         })();
@@ -1274,7 +1278,11 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         }
                         return (() => {
                           if ($ctx.fetched_data.loading) return "";
-                          if ($ctx.fetched_data.data.length === 0) return "";
+                          if (
+                            $ctx.fetched_data.data &&
+                            $ctx.fetched_data.data.length === 0
+                          )
+                            return "";
                           const item = $ctx.fetched_data.data[0];
                           return getPersonInfoWithAge(item);
                         })();
@@ -1504,6 +1512,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 "__wab_instance",
                 sty.apiFetcherComponentPlusCache2
               )}
+              dataClassName={"api-data"}
               debugMode={false}
               delay={10}
               headers={(() => {
@@ -1538,6 +1547,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   throw e;
                 }
               })()}
+              showData={false}
             />
           ) : null}
         </div>
@@ -4162,6 +4172,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               "__wab_instance",
               sty.apiFetcherComponentPlusCache
             )}
+            dataClassName={"api-data"}
             debugMode={false}
             delay={10}
             headers={(() => {
@@ -4198,6 +4209,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 throw e;
               }
             })()}
+            showData={false}
           />
         ) : null}
         <AntdModal

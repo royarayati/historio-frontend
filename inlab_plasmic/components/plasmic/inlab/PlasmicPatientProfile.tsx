@@ -2072,6 +2072,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     "__wab_instance",
                     sty.patientProfileApiCache
                   )}
+                  dataClassName={"api-data"}
                   debugMode={true}
                   delay={10}
                   headers={(() => {
@@ -2106,6 +2107,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                       throw e;
                     }
                   })()}
+                  showData={false}
                 />
               ) : null}
               <ApiFetcherComponentPlus
@@ -2543,7 +2545,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                       return (() => {
                                         if ($ctx.fetched_data.loading)
                                           return "";
-                                        if ($ctx.fetched_data.data.length === 0)
+                                        if (
+                                          $ctx.fetched_data.data &&
+                                          $ctx.fetched_data.data.length === 0
+                                        )
                                           return "";
                                         const item = $ctx.fetched_data.data[0];
                                         return getPersonInfoWithAge(item);
@@ -2724,7 +2729,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                       return (() => {
                                         if ($ctx.fetched_data.loading)
                                           return "";
-                                        if ($ctx.fetched_data.data.length === 0)
+                                        if (
+                                          $ctx.fetched_data.data &&
+                                          $ctx.fetched_data.data.length === 0
+                                        )
                                           return "";
                                         const item = $ctx.fetched_data.data[0];
                                         return getPersonInfoWithAge(item);
@@ -2754,7 +2762,12 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                 )}
                                 dir={"rtl"}
                               >
-                                <React.Fragment>{"مشخص نشده"}</React.Fragment>
+                                <React.Fragment>
+                                  {
+                                    // $ctx.fetched_data.data[0].service[0].name ? $ctx.fetched_data.data[0].service[0].name : ""
+                                    "مشخص نشده"
+                                  }
+                                </React.Fragment>
                               </div>
                               <div
                                 className={classNames(

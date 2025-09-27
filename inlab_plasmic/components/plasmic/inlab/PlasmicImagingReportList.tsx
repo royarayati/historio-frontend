@@ -63,9 +63,9 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
-import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
+import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
@@ -80,7 +80,6 @@ import "@plasmicapp/react-web/lib/plasmic.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicImagingReportList.module.css"; // plasmic-import: AFB-1jxjMqDb/css
 
-import NextSvgrepoComSvgIcon from "./icons/PlasmicIcon__NextSvgrepoComSvg"; // plasmic-import: sbXZrFXKpPD-/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 import EvaEdit2OutlineIcon from "./icons/PlasmicIcon__EvaEdit2Outline"; // plasmic-import: pE37P96Dcs-s/icon
@@ -113,16 +112,9 @@ export type PlasmicImagingReportList__OverridesType = {
   redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
-  lastPatient?: Flex__<"div">;
-  last?: Flex__<"svg">;
   getPatient?: Flex__<typeof ApiFetcherComponentPlus>;
   patientNameAgeGender2?: Flex__<"div">;
   saveAdmissionDatetime2?: Flex__<typeof ConditionGuard>;
-  getPatientEx?: Flex__<typeof ApiFetcherComponent>;
-  patientNameAgeGender?: Flex__<"div">;
-  saveAdmissionDatetime?: Flex__<typeof ConditionGuard>;
-  nextPatient?: Flex__<"div">;
-  next?: Flex__<"svg">;
   tabButtons?: Flex__<"div">;
   media?: Flex__<typeof Button>;
   paraclinicsButton?: Flex__<typeof Button>;
@@ -164,6 +156,7 @@ export type PlasmicImagingReportList__OverridesType = {
   bookmarkIcon?: Flex__<typeof BookmarkIcon>;
   nextPatient2?: Flex__<"svg">;
   uploadMedia?: Flex__<typeof Button>;
+  getPatientForPacsUrl?: Flex__<typeof ApiFetcherComponentPlus>;
   getPacsUrl?: Flex__<typeof ApiFetcherComponent>;
   pacsButton?: Flex__<typeof Button>;
   paraclinicSection?: Flex__<"div">;
@@ -968,6 +961,18 @@ function PlasmicImagingReportList__RenderFunc(props: {
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "patientNationalCode",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "setNationalCode",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -1032,146 +1037,6 @@ function PlasmicImagingReportList__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
-          {(
-            hasVariant(globalVariants, "screen", "mobileFirst") ? false : false
-          ) ? (
-            <div
-              data-plasmic-name={"lastPatient"}
-              data-plasmic-override={overrides.lastPatient}
-              className={classNames(projectcss.all, sty.lastPatient)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["getAdmIdPatientId"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        customFunction: async () => {
-                          return (() => {
-                            const stored_patient_index_id_list = JSON.parse(
-                              localStorage.getItem("patient_index_id_list")
-                            );
-                            const specificItem =
-                              stored_patient_index_id_list.find(
-                                item =>
-                                  item.admission_id ===
-                                  parseInt($ctx.params.adm_id)
-                              );
-                            if (specificItem) {
-                              const specificNumber = specificItem.number;
-                              const newNumber = specificNumber - 1;
-                              const nextItem =
-                                stored_patient_index_id_list.find(
-                                  item => item.number === newNumber
-                                );
-                              if (nextItem) {
-                                localStorage.setItem(
-                                  "patient_id",
-                                  nextItem.patient_id
-                                );
-                                return localStorage.setItem(
-                                  "admission_id",
-                                  nextItem.admission_id
-                                );
-                              } else {
-                                return console.log("No next item found.");
-                              }
-                            } else {
-                              return console.log(
-                                "No matching admission ID found."
-                              );
-                            }
-                          })();
-                        }
-                      };
-                      return (({ customFunction }) => {
-                        return customFunction();
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["getAdmIdPatientId"] != null &&
-                  typeof $steps["getAdmIdPatientId"] === "object" &&
-                  typeof $steps["getAdmIdPatientId"].then === "function"
-                ) {
-                  $steps["getAdmIdPatientId"] = await $steps[
-                    "getAdmIdPatientId"
-                  ];
-                }
-
-                $steps["goToNextLaboratoryData"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: `/patient/${(() => {
-                          try {
-                            return localStorage.getItem("patient_id");
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/report/list/${(() => {
-                          try {
-                            return localStorage.getItem("admission_id");
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}`
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToNextLaboratoryData"] != null &&
-                  typeof $steps["goToNextLaboratoryData"] === "object" &&
-                  typeof $steps["goToNextLaboratoryData"].then === "function"
-                ) {
-                  $steps["goToNextLaboratoryData"] = await $steps[
-                    "goToNextLaboratoryData"
-                  ];
-                }
-              }}
-            >
-              <NextSvgrepoComSvgIcon
-                data-plasmic-name={"last"}
-                data-plasmic-override={overrides.last}
-                className={classNames(projectcss.all, sty.last)}
-                role={"img"}
-              />
-
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__t1Isb
-                )}
-              >
-                {hasVariant(globalVariants, "screen", "mobileFirst")
-                  ? "\u0628\u06cc\u0645\u0627\u0631 \u0642\u0628\u0644\u06cc"
-                  : "\u0628\u06cc\u0645\u0627\u0631 \u0642\u0628\u0644\u06cc"}
-              </div>
-            </div>
-          ) : null}
           <ApiFetcherComponentPlus
             data-plasmic-name={"getPatient"}
             data-plasmic-override={overrides.getPatient}
@@ -1366,7 +1231,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           }
                           return (() => {
                             if ($ctx.fetched_data.loading) return "";
-                            if ($ctx.fetched_data.data.length === 0) return "";
+                            if (
+                              $ctx.fetched_data.data &&
+                              $ctx.fetched_data.data.length === 0
+                            )
+                              return "";
                             const item = $ctx.fetched_data.data[0];
                             return getPersonInfoWithAge(item);
                           })();
@@ -1527,7 +1396,11 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           }
                           return (() => {
                             if ($ctx.fetched_data.loading) return "";
-                            if ($ctx.fetched_data.data.length === 0) return "";
+                            if (
+                              $ctx.fetched_data.data &&
+                              $ctx.fetched_data.data.length === 0
+                            )
+                              return "";
                             const item = $ctx.fetched_data.data[0];
                             return getPersonInfoWithAge(item);
                           })();
@@ -1535,439 +1408,17 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       </React.Fragment>
                     )}
                   </div>
-                  <ConditionGuard
-                    data-plasmic-name={"saveAdmissionDatetime2"}
-                    data-plasmic-override={overrides.saveAdmissionDatetime2}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.saveAdmissionDatetime2
-                    )}
-                    condition={
-                      $ctx.fetched_data.loading === false &&
-                      $ctx.fetched_data.data &&
-                      $ctx.fetched_data.data.length > 0
-                    }
-                    onNotSatisfied={async () => {
-                      const $steps = {};
-
-                      $steps["updateAdmissionDatetime"] =
-                        $ctx.fetched_data.loading === false &&
-                        $ctx.fetched_data.data.length > 0
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["admissionDatetime"]
-                                },
-                                operation: 0,
-                                value:
-                                  $ctx.fetched_data.data[0].admission_datetime
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["updateAdmissionDatetime"] != null &&
-                        typeof $steps["updateAdmissionDatetime"] === "object" &&
-                        typeof $steps["updateAdmissionDatetime"].then ===
-                          "function"
-                      ) {
-                        $steps["updateAdmissionDatetime"] = await $steps[
-                          "updateAdmissionDatetime"
-                        ];
-                      }
-                    }}
-                  />
-                </React.Fragment>
-              )}
-            </DataCtxReader__>
-          </ApiFetcherComponentPlus>
-          {false ? (
-            <ApiFetcherComponent
-              data-plasmic-name={"getPatientEx"}
-              data-plasmic-override={overrides.getPatientEx}
-              className={classNames("__wab_instance", sty.getPatientEx)}
-              headers={(() => {
-                try {
-                  return {
-                    "X-Namespace": localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )
-                  };
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
-                }
-              })()}
-              method={"GET"}
-              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
-              ref={ref => {
-                $refs["getPatientEx"] = ref;
-              }}
-            >
-              <DataCtxReader__>
-                {$ctx => (
-                  <React.Fragment>
-                    <div
-                      data-plasmic-name={"patientNameAgeGender"}
-                      data-plasmic-override={overrides.patientNameAgeGender}
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.patientNameAgeGender
-                      )}
-                      dir={"rtl"}
-                    >
-                      {hasVariant(globalVariants, "screen", "mobileFirst") ? (
-                        <React.Fragment>
-                          {(() => {
-                            function calcAgeShamsiDetailed(shamsiStr) {
-                              shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
-                                String.fromCharCode(d.charCodeAt(0) - 1728)
-                              );
-                              const [datePart] = shamsiStr.split(" ");
-                              let [birthYear, birthMonth, birthDay] = datePart
-                                .split("/")
-                                .map(Number);
-                              const gNow = new Date();
-                              const gy = gNow.getFullYear();
-                              const gm = gNow.getMonth() + 1;
-                              const gd = gNow.getDate();
-                              function g2j(gy, gm, gd) {
-                                const gDaysInMonth = [
-                                  31,
-                                  (gy % 4 === 0 && gy % 100 !== 0) ||
-                                  gy % 400 === 0
-                                    ? 29
-                                    : 28,
-                                  31,
-                                  30,
-                                  31,
-                                  30,
-                                  31,
-                                  31,
-                                  30,
-                                  31,
-                                  30,
-                                  31
-                                ];
-
-                                let g_day_no =
-                                  365 * (gy - 1600) +
-                                  Math.floor((gy - 1600 + 3) / 4) -
-                                  Math.floor((gy - 1600 + 99) / 100) +
-                                  Math.floor((gy - 1600 + 399) / 400);
-                                for (let i = 0; i < gm - 1; ++i)
-                                  g_day_no += gDaysInMonth[i];
-                                g_day_no += gd - 1;
-                                let j_day_no = g_day_no - 79;
-                                let j_np = Math.floor(j_day_no / 12053);
-                                j_day_no %= 12053;
-                                let jy =
-                                  979 +
-                                  33 * j_np +
-                                  4 * Math.floor(j_day_no / 1461);
-                                j_day_no %= 1461;
-                                if (j_day_no >= 366) {
-                                  jy += Math.floor((j_day_no - 1) / 365);
-                                  j_day_no = (j_day_no - 1) % 365;
-                                }
-                                const jDaysInMonth = [
-                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                                ];
-
-                                let jm;
-                                for (
-                                  jm = 0;
-                                  jm < 11 && j_day_no >= jDaysInMonth[jm];
-                                  ++jm
-                                )
-                                  j_day_no -= jDaysInMonth[jm];
-                                let jd = j_day_no + 1;
-                                return {
-                                  jy,
-                                  jm: jm + 1,
-                                  jd
-                                };
-                              }
-                              const today = g2j(gy, gm, gd);
-                              let yearDiff = today.jy - birthYear;
-                              let monthDiff = today.jm - birthMonth;
-                              let dayDiff = today.jd - birthDay;
-                              if (dayDiff < 0) {
-                                monthDiff--;
-                                const jDaysInMonth = [
-                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                                ];
-
-                                dayDiff +=
-                                  jDaysInMonth[(birthMonth - 2 + 12) % 12];
-                              }
-                              if (monthDiff < 0) {
-                                yearDiff--;
-                                monthDiff += 12;
-                              }
-                              if (yearDiff >= 1) {
-                                return `${yearDiff} ساله`;
-                              } else if (monthDiff >= 1) {
-                                return `${monthDiff} ماهه`;
-                              } else {
-                                return `${dayDiff} روزه`;
-                              }
-                            }
-                            function calcAgeGregorianDetailed(dateStr) {
-                              const dob = new Date(dateStr);
-                              const now = new Date();
-                              let yearDiff =
-                                now.getFullYear() - dob.getFullYear();
-                              let monthDiff = now.getMonth() - dob.getMonth();
-                              let dayDiff = now.getDate() - dob.getDate();
-                              if (dayDiff < 0) {
-                                monthDiff--;
-                                const prevMonth = new Date(
-                                  now.getFullYear(),
-                                  now.getMonth(),
-                                  0
-                                );
-                                dayDiff += prevMonth.getDate();
-                              }
-                              if (monthDiff < 0) {
-                                yearDiff--;
-                                monthDiff += 12;
-                              }
-                              if (yearDiff >= 1) {
-                                return `${yearDiff}`;
-                              } else if (monthDiff >= 1) {
-                                return `${monthDiff}ماهه`;
-                              } else {
-                                return `${dayDiff}روزه`;
-                              }
-                            }
-                            function getPersonInfoWithAge(item) {
-                              const hisType = localStorage.getItem(
-                                "inlab_user_his_type"
-                              );
-                              if (!item || !item.date_of_birth)
-                                return "تاریخ تولد موجود نیست.";
-                              const fullName = `${item.first_name} ${item.last_name}`;
-                              const genderSymbol =
-                                item.gender === "F"
-                                  ? " \u2640️"
-                                  : item.gender === "M"
-                                  ? " \u2642️"
-                                  : "";
-                              let ageString;
-                              if (
-                                hisType === "tums_api" ||
-                                hisType === "tebvarayane_db"
-                              ) {
-                                ageString = calcAgeShamsiDetailed(
-                                  item.date_of_birth
-                                );
-                              } else {
-                                ageString = calcAgeGregorianDetailed(
-                                  item.date_of_birth
-                                );
-                              }
-                              return `${fullName}${ageString}${genderSymbol}`;
-                            }
-                            return (() => {
-                              if ($ctx.fetched_data.loading) return "";
-                              if ($ctx.fetched_data.data.length === 0)
-                                return "";
-                              const item = $ctx.fetched_data.data[0];
-                              return getPersonInfoWithAge(item);
-                            })();
-                          })()}
-                        </React.Fragment>
-                      ) : (
-                        <React.Fragment>
-                          {(() => {
-                            function calcAgeShamsiDetailed(shamsiStr) {
-                              shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
-                                String.fromCharCode(d.charCodeAt(0) - 1728)
-                              );
-                              const [datePart] = shamsiStr.split(" ");
-                              let [birthYear, birthMonth, birthDay] = datePart
-                                .split("/")
-                                .map(Number);
-                              const gNow = new Date();
-                              const gy = gNow.getFullYear();
-                              const gm = gNow.getMonth() + 1;
-                              const gd = gNow.getDate();
-                              function g2j(gy, gm, gd) {
-                                const gDaysInMonth = [
-                                  31,
-                                  (gy % 4 === 0 && gy % 100 !== 0) ||
-                                  gy % 400 === 0
-                                    ? 29
-                                    : 28,
-                                  31,
-                                  30,
-                                  31,
-                                  30,
-                                  31,
-                                  31,
-                                  30,
-                                  31,
-                                  30,
-                                  31
-                                ];
-
-                                let g_day_no =
-                                  365 * (gy - 1600) +
-                                  Math.floor((gy - 1600 + 3) / 4) -
-                                  Math.floor((gy - 1600 + 99) / 100) +
-                                  Math.floor((gy - 1600 + 399) / 400);
-                                for (let i = 0; i < gm - 1; ++i)
-                                  g_day_no += gDaysInMonth[i];
-                                g_day_no += gd - 1;
-                                let j_day_no = g_day_no - 79;
-                                let j_np = Math.floor(j_day_no / 12053);
-                                j_day_no %= 12053;
-                                let jy =
-                                  979 +
-                                  33 * j_np +
-                                  4 * Math.floor(j_day_no / 1461);
-                                j_day_no %= 1461;
-                                if (j_day_no >= 366) {
-                                  jy += Math.floor((j_day_no - 1) / 365);
-                                  j_day_no = (j_day_no - 1) % 365;
-                                }
-                                const jDaysInMonth = [
-                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                                ];
-
-                                let jm;
-                                for (
-                                  jm = 0;
-                                  jm < 11 && j_day_no >= jDaysInMonth[jm];
-                                  ++jm
-                                )
-                                  j_day_no -= jDaysInMonth[jm];
-                                let jd = j_day_no + 1;
-                                return {
-                                  jy,
-                                  jm: jm + 1,
-                                  jd
-                                };
-                              }
-                              const today = g2j(gy, gm, gd);
-                              let yearDiff = today.jy - birthYear;
-                              let monthDiff = today.jm - birthMonth;
-                              let dayDiff = today.jd - birthDay;
-                              if (dayDiff < 0) {
-                                monthDiff--;
-                                const jDaysInMonth = [
-                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                                ];
-
-                                dayDiff +=
-                                  jDaysInMonth[(birthMonth - 2 + 12) % 12];
-                              }
-                              if (monthDiff < 0) {
-                                yearDiff--;
-                                monthDiff += 12;
-                              }
-                              if (yearDiff >= 1) {
-                                return `${yearDiff} ساله`;
-                              } else if (monthDiff >= 1) {
-                                return `${monthDiff} ماهه`;
-                              } else {
-                                return `${dayDiff} روزه`;
-                              }
-                            }
-                            function calcAgeGregorianDetailed(dateStr) {
-                              const dob = new Date(dateStr);
-                              const now = new Date();
-                              let yearDiff =
-                                now.getFullYear() - dob.getFullYear();
-                              let monthDiff = now.getMonth() - dob.getMonth();
-                              let dayDiff = now.getDate() - dob.getDate();
-                              if (dayDiff < 0) {
-                                monthDiff--;
-                                const prevMonth = new Date(
-                                  now.getFullYear(),
-                                  now.getMonth(),
-                                  0
-                                );
-                                dayDiff += prevMonth.getDate();
-                              }
-                              if (monthDiff < 0) {
-                                yearDiff--;
-                                monthDiff += 12;
-                              }
-                              if (yearDiff >= 1) {
-                                return `${yearDiff}`;
-                              } else if (monthDiff >= 1) {
-                                return `${monthDiff}ماهه`;
-                              } else {
-                                return `${dayDiff}روزه`;
-                              }
-                            }
-                            function getPersonInfoWithAge(item) {
-                              const hisType = localStorage.getItem(
-                                "inlab_user_his_type"
-                              );
-                              if (!item || !item.date_of_birth)
-                                return "تاریخ تولد موجود نیست.";
-                              const fullName = `${item.first_name} ${item.last_name}`;
-                              const genderSymbol =
-                                item.gender === "F"
-                                  ? " \u2640️"
-                                  : item.gender === "M"
-                                  ? " \u2642️"
-                                  : "";
-                              let ageString;
-                              if (
-                                hisType === "tums_api" ||
-                                hisType === "tebvarayane_db"
-                              ) {
-                                ageString = calcAgeShamsiDetailed(
-                                  item.date_of_birth
-                                );
-                              } else {
-                                ageString = calcAgeGregorianDetailed(
-                                  item.date_of_birth
-                                );
-                              }
-                              return `${fullName}${ageString}${genderSymbol}`;
-                            }
-                            return (() => {
-                              if ($ctx.fetched_data.loading) return "";
-                              if ($ctx.fetched_data.data.length === 0)
-                                return "";
-                              const item = $ctx.fetched_data.data[0];
-                              return getPersonInfoWithAge(item);
-                            })();
-                          })()}
-                        </React.Fragment>
-                      )}
-                    </div>
+                  {(
+                    hasVariant(globalVariants, "screen", "mobileFirst")
+                      ? false
+                      : false
+                  ) ? (
                     <ConditionGuard
-                      data-plasmic-name={"saveAdmissionDatetime"}
-                      data-plasmic-override={overrides.saveAdmissionDatetime}
+                      data-plasmic-name={"saveAdmissionDatetime2"}
+                      data-plasmic-override={overrides.saveAdmissionDatetime2}
                       className={classNames(
                         "__wab_instance",
-                        sty.saveAdmissionDatetime
+                        sty.saveAdmissionDatetime2
                       )}
                       condition={
                         $ctx.fetched_data.loading === false &&
@@ -2017,148 +1468,88 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             "updateAdmissionDatetime"
                           ];
                         }
+
+                        $steps["updatePatientNationalCode"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["patientNationalCode"]
+                                },
+                                operation: 0,
+                                value: $ctx.fetched_data.data[0].national_code
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updatePatientNationalCode"] != null &&
+                          typeof $steps["updatePatientNationalCode"] ===
+                            "object" &&
+                          typeof $steps["updatePatientNationalCode"].then ===
+                            "function"
+                        ) {
+                          $steps["updatePatientNationalCode"] = await $steps[
+                            "updatePatientNationalCode"
+                          ];
+                        }
+
+                        $steps["updateSetNationalCode"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["setNationalCode"]
+                                },
+                                operation: 0,
+                                value: true
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSetNationalCode"] != null &&
+                          typeof $steps["updateSetNationalCode"] === "object" &&
+                          typeof $steps["updateSetNationalCode"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSetNationalCode"] = await $steps[
+                            "updateSetNationalCode"
+                          ];
+                        }
                       }}
                     />
-                  </React.Fragment>
-                )}
-              </DataCtxReader__>
-            </ApiFetcherComponent>
-          ) : null}
-          {false ? (
-            <div
-              data-plasmic-name={"nextPatient"}
-              data-plasmic-override={overrides.nextPatient}
-              className={classNames(projectcss.all, sty.nextPatient)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["getAdmIdPatientId"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        customFunction: async () => {
-                          return (() => {
-                            const stored_patient_index_id_list = JSON.parse(
-                              localStorage.getItem("patient_index_id_list")
-                            );
-                            const specificItem =
-                              stored_patient_index_id_list.find(
-                                item =>
-                                  item.admission_id ===
-                                  parseInt($ctx.params.adm_id)
-                              );
-                            if (specificItem) {
-                              const specificNumber = specificItem.number;
-                              const newNumber = specificNumber + 1;
-                              const nextItem =
-                                stored_patient_index_id_list.find(
-                                  item => item.number === newNumber
-                                );
-                              if (nextItem) {
-                                localStorage.setItem(
-                                  "patient_id",
-                                  nextItem.patient_id
-                                );
-                                return localStorage.setItem(
-                                  "admission_id",
-                                  nextItem.admission_id
-                                );
-                              } else {
-                                return console.log("No next item found.");
-                              }
-                            } else {
-                              return console.log(
-                                "No matching admission ID found."
-                              );
-                            }
-                          })();
-                        }
-                      };
-                      return (({ customFunction }) => {
-                        return customFunction();
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["getAdmIdPatientId"] != null &&
-                  typeof $steps["getAdmIdPatientId"] === "object" &&
-                  typeof $steps["getAdmIdPatientId"].then === "function"
-                ) {
-                  $steps["getAdmIdPatientId"] = await $steps[
-                    "getAdmIdPatientId"
-                  ];
-                }
-
-                $steps["goToNextLaboratoryData"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: `/patient/${(() => {
-                          try {
-                            return localStorage.getItem("patient_id");
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/report/list/${(() => {
-                          try {
-                            return localStorage.getItem("admission_id");
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}`
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToNextLaboratoryData"] != null &&
-                  typeof $steps["goToNextLaboratoryData"] === "object" &&
-                  typeof $steps["goToNextLaboratoryData"].then === "function"
-                ) {
-                  $steps["goToNextLaboratoryData"] = await $steps[
-                    "goToNextLaboratoryData"
-                  ];
-                }
-              }}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__ghl3K
-                )}
-              >
-                {"\u0628\u06cc\u0645\u0627\u0631 \u0628\u0639\u062f\u06cc"}
-              </div>
-              <NextSvgrepoComSvgIcon
-                data-plasmic-name={"next"}
-                data-plasmic-override={overrides.next}
-                className={classNames(projectcss.all, sty.next)}
-                role={"img"}
-              />
-            </div>
-          ) : null}
+                  ) : null}
+                </React.Fragment>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponentPlus>
         </div>
         <div
           data-plasmic-name={"tabButtons"}
@@ -2641,6 +2032,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
               "__wab_instance",
               sty.apiFetcherComponentPlusCache
             )}
+            dataClassName={"api-data"}
             debugMode={false}
             delay={10}
             headers={(() => {
@@ -2673,6 +2065,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                 throw e;
               }
             })()}
+            showData={false}
           />
         ) : null}
         {$state.selectedTab === "Paraclinics" ? (
@@ -6070,188 +5463,266 @@ function PlasmicImagingReportList__RenderFunc(props: {
             }
           </div>
         </Button>
-        <ApiFetcherComponent
-          data-plasmic-name={"getPacsUrl"}
-          data-plasmic-override={overrides.getPacsUrl}
-          className={classNames("__wab_instance", sty.getPacsUrl)}
-          headers={{
-            "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
-          }}
+        <ApiFetcherComponentPlus
+          data-plasmic-name={"getPatientForPacsUrl"}
+          data-plasmic-override={overrides.getPatientForPacsUrl}
+          autoFetch={true}
+          className={classNames("__wab_instance", sty.getPatientForPacsUrl)}
+          headers={(() => {
+            try {
+              return {
+                "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+              };
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()}
           method={"GET"}
-          path={`/api/v3/patient/pacs_url?admission_id=${
-            $ctx.params.adm_id
-          }&user_id=${localStorage.getItem(
-            "inlab_user_namespace_id"
-          )}&patient_id=${$ctx.params.code}`}
+          path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
           ref={ref => {
-            $refs["getPacsUrl"] = ref;
+            $refs["getPatientForPacsUrl"] = ref;
           }}
         >
           <DataCtxReader__>
             {$ctx => (
-              <Button
-                data-plasmic-name={"pacsButton"}
-                data-plasmic-override={overrides.pacsButton}
-                className={classNames("__wab_instance", sty.pacsButton)}
-                color={"blue"}
-                deselected={generateStateValueProp($state, [
-                  "pacsButton",
-                  "deselected"
-                ])}
-                isDisabled={generateStateValueProp($state, [
-                  "pacsButton",
-                  "isDisabled"
-                ])}
-                onClick={async event => {
-                  const $steps = {};
+              <React.Fragment>
+                {(
+                  hasVariant(globalVariants, "screen", "mobileFirst")
+                    ? $ctx.fetched_data.loading == true
+                    : $ctx.fetched_data.loading == true
+                ) ? (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__hyRg8
+                    )}
+                  >
+                    {
+                      "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                    }
+                  </div>
+                ) : null}
+                {(() => {
+                  try {
+                    return $ctx.fetched_data.loading === false;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <ApiFetcherComponent
+                    data-plasmic-name={"getPacsUrl"}
+                    data-plasmic-override={overrides.getPacsUrl}
+                    className={classNames("__wab_instance", sty.getPacsUrl)}
+                    headers={{
+                      "X-Namespace": localStorage.getItem(
+                        "inlab_user_namespace_id"
+                      )
+                    }}
+                    method={"GET"}
+                    path={`/api/v3/patient/pacs_url?admission_id=${
+                      $ctx.params.adm_id
+                    }&user_id=${localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )}&patient_id=${$ctx.params.code}&national_code=${
+                      $ctx.fetched_data.loading === false &&
+                      $ctx.fetched_data.data &&
+                      $ctx.fetched_data.data[0].national_code
+                        ? $ctx.fetched_data.data[0].national_code
+                        : ""
+                    }`}
+                    ref={ref => {
+                      $refs["getPacsUrl"] = ref;
+                    }}
+                  >
+                    <DataCtxReader__>
+                      {$ctx => (
+                        <Button
+                          data-plasmic-name={"pacsButton"}
+                          data-plasmic-override={overrides.pacsButton}
+                          className={classNames(
+                            "__wab_instance",
+                            sty.pacsButton
+                          )}
+                          color={"blue"}
+                          deselected={generateStateValueProp($state, [
+                            "pacsButton",
+                            "deselected"
+                          ])}
+                          isDisabled={generateStateValueProp($state, [
+                            "pacsButton",
+                            "isDisabled"
+                          ])}
+                          onClick={async event => {
+                            const $steps = {};
 
-                  $steps["goToPage"] =
-                    $ctx.fetched_data.loading === false &&
-                    $ctx.fetched_data.data !== ""
-                      ? (() => {
-                          const actionArgs = {
-                            destination: (() => {
-                              try {
-                                return $ctx.fetched_data.data;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
-                                }
-                                throw e;
-                              }
-                            })()
-                          };
-                          return (({ destination }) => {
+                            $steps["goToPage"] =
+                              $ctx.fetched_data.loading === false &&
+                              $ctx.fetched_data.data !== ""
+                                ? (() => {
+                                    const actionArgs = {
+                                      destination: (() => {
+                                        try {
+                                          return $ctx.fetched_data.data;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                    };
+                                    return (({ destination }) => {
+                                      if (
+                                        typeof destination === "string" &&
+                                        destination.startsWith("#")
+                                      ) {
+                                        document
+                                          .getElementById(destination.substr(1))
+                                          .scrollIntoView({
+                                            behavior: "smooth"
+                                          });
+                                      } else {
+                                        __nextRouter?.push(destination);
+                                      }
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
                             if (
-                              typeof destination === "string" &&
-                              destination.startsWith("#")
+                              $steps["goToPage"] != null &&
+                              typeof $steps["goToPage"] === "object" &&
+                              typeof $steps["goToPage"].then === "function"
                             ) {
-                              document
-                                .getElementById(destination.substr(1))
-                                .scrollIntoView({ behavior: "smooth" });
-                            } else {
-                              __nextRouter?.push(destination);
+                              $steps["goToPage"] = await $steps["goToPage"];
                             }
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                  if (
-                    $steps["goToPage"] != null &&
-                    typeof $steps["goToPage"] === "object" &&
-                    typeof $steps["goToPage"].then === "function"
-                  ) {
-                    $steps["goToPage"] = await $steps["goToPage"];
-                  }
-                }}
-                onDeselectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "pacsButton",
-                      "deselected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
+                          }}
+                          onDeselectedChange={async (...eventArgs: any) => {
+                            ((...eventArgs) => {
+                              generateStateOnChangeProp($state, [
+                                "pacsButton",
+                                "deselected"
+                              ])(eventArgs[0]);
+                            }).apply(null, eventArgs);
 
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onIsDisabledChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "pacsButton",
-                      "isDisabled"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
+                            if (
+                              eventArgs.length > 1 &&
+                              eventArgs[1] &&
+                              eventArgs[1]._plasmic_state_init_
+                            ) {
+                              return;
+                            }
+                          }}
+                          onIsDisabledChange={async (...eventArgs: any) => {
+                            ((...eventArgs) => {
+                              generateStateOnChangeProp($state, [
+                                "pacsButton",
+                                "isDisabled"
+                              ])(eventArgs[0]);
+                            }).apply(null, eventArgs);
 
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSelectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "pacsButton",
-                      "selected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
+                            if (
+                              eventArgs.length > 1 &&
+                              eventArgs[1] &&
+                              eventArgs[1]._plasmic_state_init_
+                            ) {
+                              return;
+                            }
+                          }}
+                          onSelectedChange={async (...eventArgs: any) => {
+                            ((...eventArgs) => {
+                              generateStateOnChangeProp($state, [
+                                "pacsButton",
+                                "selected"
+                              ])(eventArgs[0]);
+                            }).apply(null, eventArgs);
 
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSortDeselectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "pacsButton",
-                      "sortDeselected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
+                            if (
+                              eventArgs.length > 1 &&
+                              eventArgs[1] &&
+                              eventArgs[1]._plasmic_state_init_
+                            ) {
+                              return;
+                            }
+                          }}
+                          onSortDeselectedChange={async (...eventArgs: any) => {
+                            ((...eventArgs) => {
+                              generateStateOnChangeProp($state, [
+                                "pacsButton",
+                                "sortDeselected"
+                              ])(eventArgs[0]);
+                            }).apply(null, eventArgs);
 
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSortSelectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "pacsButton",
-                      "sortSelected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
+                            if (
+                              eventArgs.length > 1 &&
+                              eventArgs[1] &&
+                              eventArgs[1]._plasmic_state_init_
+                            ) {
+                              return;
+                            }
+                          }}
+                          onSortSelectedChange={async (...eventArgs: any) => {
+                            ((...eventArgs) => {
+                              generateStateOnChangeProp($state, [
+                                "pacsButton",
+                                "sortSelected"
+                              ])(eventArgs[0]);
+                            }).apply(null, eventArgs);
 
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                selected={generateStateValueProp($state, [
-                  "pacsButton",
-                  "selected"
-                ])}
-                sortDeselected={generateStateValueProp($state, [
-                  "pacsButton",
-                  "sortDeselected"
-                ])}
-                sortSelected={generateStateValueProp($state, [
-                  "pacsButton",
-                  "sortSelected"
-                ])}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__et1R
-                  )}
-                >
-                  {"View PACS"}
-                </div>
-              </Button>
+                            if (
+                              eventArgs.length > 1 &&
+                              eventArgs[1] &&
+                              eventArgs[1]._plasmic_state_init_
+                            ) {
+                              return;
+                            }
+                          }}
+                          selected={generateStateValueProp($state, [
+                            "pacsButton",
+                            "selected"
+                          ])}
+                          sortDeselected={generateStateValueProp($state, [
+                            "pacsButton",
+                            "sortDeselected"
+                          ])}
+                          sortSelected={generateStateValueProp($state, [
+                            "pacsButton",
+                            "sortSelected"
+                          ])}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__et1R
+                            )}
+                          >
+                            {"View PACS"}
+                          </div>
+                        </Button>
+                      )}
+                    </DataCtxReader__>
+                  </ApiFetcherComponent>
+                ) : null}
+              </React.Fragment>
             )}
           </DataCtxReader__>
-        </ApiFetcherComponent>
+        </ApiFetcherComponentPlus>
         {$state.selectedTab === "ParaclinicReports" ? (
           <div
             data-plasmic-name={"paraclinicSection"}
@@ -9008,16 +8479,9 @@ const PlasmicDescendants = {
     "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "header",
-    "lastPatient",
-    "last",
     "getPatient",
     "patientNameAgeGender2",
     "saveAdmissionDatetime2",
-    "getPatientEx",
-    "patientNameAgeGender",
-    "saveAdmissionDatetime",
-    "nextPatient",
-    "next",
     "tabButtons",
     "media",
     "paraclinicsButton",
@@ -9059,6 +8523,7 @@ const PlasmicDescendants = {
     "bookmarkIcon",
     "nextPatient2",
     "uploadMedia",
+    "getPatientForPacsUrl",
     "getPacsUrl",
     "pacsButton",
     "paraclinicSection",
@@ -9090,31 +8555,13 @@ const PlasmicDescendants = {
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: [
     "header",
-    "lastPatient",
-    "last",
     "getPatient",
     "patientNameAgeGender2",
-    "saveAdmissionDatetime2",
-    "getPatientEx",
-    "patientNameAgeGender",
-    "saveAdmissionDatetime",
-    "nextPatient",
-    "next"
+    "saveAdmissionDatetime2"
   ],
-  lastPatient: ["lastPatient", "last"],
-  last: ["last"],
   getPatient: ["getPatient", "patientNameAgeGender2", "saveAdmissionDatetime2"],
   patientNameAgeGender2: ["patientNameAgeGender2"],
   saveAdmissionDatetime2: ["saveAdmissionDatetime2"],
-  getPatientEx: [
-    "getPatientEx",
-    "patientNameAgeGender",
-    "saveAdmissionDatetime"
-  ],
-  patientNameAgeGender: ["patientNameAgeGender"],
-  saveAdmissionDatetime: ["saveAdmissionDatetime"],
-  nextPatient: ["nextPatient", "next"],
-  next: ["next"],
   tabButtons: ["tabButtons", "media", "paraclinicsButton", "paraclinicReports"],
   media: ["media"],
   paraclinicsButton: ["paraclinicsButton"],
@@ -9214,6 +8661,7 @@ const PlasmicDescendants = {
   bookmarkIcon: ["bookmarkIcon"],
   nextPatient2: ["nextPatient2"],
   uploadMedia: ["uploadMedia"],
+  getPatientForPacsUrl: ["getPatientForPacsUrl", "getPacsUrl", "pacsButton"],
   getPacsUrl: ["getPacsUrl", "pacsButton"],
   pacsButton: ["pacsButton"],
   paraclinicSection: [
@@ -9371,16 +8819,9 @@ type NodeDefaultElementType = {
   redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
-  lastPatient: "div";
-  last: "svg";
   getPatient: typeof ApiFetcherComponentPlus;
   patientNameAgeGender2: "div";
   saveAdmissionDatetime2: typeof ConditionGuard;
-  getPatientEx: typeof ApiFetcherComponent;
-  patientNameAgeGender: "div";
-  saveAdmissionDatetime: typeof ConditionGuard;
-  nextPatient: "div";
-  next: "svg";
   tabButtons: "div";
   media: typeof Button;
   paraclinicsButton: typeof Button;
@@ -9422,6 +8863,7 @@ type NodeDefaultElementType = {
   bookmarkIcon: typeof BookmarkIcon;
   nextPatient2: "svg";
   uploadMedia: typeof Button;
+  getPatientForPacsUrl: typeof ApiFetcherComponentPlus;
   getPacsUrl: typeof ApiFetcherComponent;
   pacsButton: typeof Button;
   paraclinicSection: "div";
@@ -9515,16 +8957,9 @@ export const PlasmicImagingReportList = Object.assign(
       "redirectToNamespaceSelection"
     ),
     header: makeNodeComponent("header"),
-    lastPatient: makeNodeComponent("lastPatient"),
-    last: makeNodeComponent("last"),
     getPatient: makeNodeComponent("getPatient"),
     patientNameAgeGender2: makeNodeComponent("patientNameAgeGender2"),
     saveAdmissionDatetime2: makeNodeComponent("saveAdmissionDatetime2"),
-    getPatientEx: makeNodeComponent("getPatientEx"),
-    patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
-    saveAdmissionDatetime: makeNodeComponent("saveAdmissionDatetime"),
-    nextPatient: makeNodeComponent("nextPatient"),
-    next: makeNodeComponent("next"),
     tabButtons: makeNodeComponent("tabButtons"),
     media: makeNodeComponent("media"),
     paraclinicsButton: makeNodeComponent("paraclinicsButton"),
@@ -9568,6 +9003,7 @@ export const PlasmicImagingReportList = Object.assign(
     bookmarkIcon: makeNodeComponent("bookmarkIcon"),
     nextPatient2: makeNodeComponent("nextPatient2"),
     uploadMedia: makeNodeComponent("uploadMedia"),
+    getPatientForPacsUrl: makeNodeComponent("getPatientForPacsUrl"),
     getPacsUrl: makeNodeComponent("getPacsUrl"),
     pacsButton: makeNodeComponent("pacsButton"),
     paraclinicSection: makeNodeComponent("paraclinicSection"),
