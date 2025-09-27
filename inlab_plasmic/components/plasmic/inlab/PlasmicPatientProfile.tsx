@@ -2545,7 +2545,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                       return (() => {
                                         if ($ctx.fetched_data.loading)
                                           return "";
-                                        if ($ctx.fetched_data.data.length === 0)
+                                        if (
+                                          $ctx.fetched_data.data &&
+                                          $ctx.fetched_data.data.length === 0
+                                        )
                                           return "";
                                         const item = $ctx.fetched_data.data[0];
                                         return getPersonInfoWithAge(item);
@@ -2726,7 +2729,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                       return (() => {
                                         if ($ctx.fetched_data.loading)
                                           return "";
-                                        if ($ctx.fetched_data.data.length === 0)
+                                        if (
+                                          $ctx.fetched_data.data &&
+                                          $ctx.fetched_data.data.length === 0
+                                        )
                                           return "";
                                         const item = $ctx.fetched_data.data[0];
                                         return getPersonInfoWithAge(item);
