@@ -1125,7 +1125,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}`
+                        })()}/[national_code]`
                       };
                       return (({ destination }) => {
                         if (
@@ -2115,7 +2115,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}`
+                        })()}/[national_code]`
                       };
                       return (({ destination }) => {
                         if (
@@ -5286,7 +5286,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}`
+                        })()}/[national_code]`
                       };
                       return (({ destination }) => {
                         if (
@@ -5555,7 +5555,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}`
+                          })()}/[national_code]`
                         };
                         return (({ destination }) => {
                           if (
@@ -5896,7 +5896,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}`
+                        })()}/[national_code]`
                       };
                       return (({ destination }) => {
                         if (
@@ -6084,7 +6084,9 @@ function PlasmicImagingReportList__RenderFunc(props: {
             $ctx.params.adm_id
           }&user_id=${localStorage.getItem(
             "inlab_user_namespace_id"
-          )}&patient_id=${$ctx.params.code}`}
+          )}&patient_id=${$ctx.params.code}&national_code=${
+            $ctx.params.national_code
+          }`}
           ref={ref => {
             $refs["getPacsUrl"] = ref;
           }}

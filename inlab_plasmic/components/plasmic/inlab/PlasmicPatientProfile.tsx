@@ -791,7 +791,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}`
+                          })()}/[national_code]`
                         };
                         return (({ destination }) => {
                           if (
@@ -2757,9 +2757,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                 dir={"rtl"}
                               >
                                 <React.Fragment>
-                                  {$ctx.fetched_data.data[0].service[0].name
-                                    ? $ctx.fetched_data.data[0].service[0].name
-                                    : ""}
+                                  {
+                                    // $ctx.fetched_data.data[0].service[0].name ? $ctx.fetched_data.data[0].service[0].name : ""
+                                    "مشخص نشده"
+                                  }
                                 </React.Fragment>
                               </div>
                               <div
@@ -4245,7 +4246,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                             }
                                             throw e;
                                           }
-                                        })()}`
+                                        })()}/[national_code]`
                                       };
                                       return (({ destination }) => {
                                         if (
