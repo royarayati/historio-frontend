@@ -1514,12 +1514,12 @@
           "projectId": "wjafXWEvDytFogT7SiMy2v",
           "renderModuleFilePath": "plasmic/inlab/PlasmicImagingReportList.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/report/list/[adm_id]/[national_code].tsx"
+            "modulePath": "../pages/patient/[code]/report/list/[adm_id].tsx"
           },
           "cssFilePath": "plasmic/inlab/PlasmicImagingReportList.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/patient/[code]/report/list/[adm_id]/[national_code]"
+          "path": "/patient/[code]/report/list/[adm_id]"
         },
         {
           "id": "Ev8txsbuZl9W",

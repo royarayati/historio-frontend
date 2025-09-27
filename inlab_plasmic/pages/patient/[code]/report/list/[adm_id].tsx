@@ -2,9 +2,9 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import { PageParamsProvider as PageParamsProvider__ } from "@plasmicapp/react-web/lib/host";
-import GlobalContextsProvider from "../../../../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
+import GlobalContextsProvider from "../../../../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
 
-import { PlasmicImagingReportList } from "../../../../../../components/plasmic/inlab/PlasmicImagingReportList";
+import { PlasmicImagingReportList } from "../../../../../components/plasmic/inlab/PlasmicImagingReportList";
 import { useRouter } from "next/router";
 
 function ImagingReportList() {

@@ -70,73 +70,6 @@
     padding: 6px;
   }
 }
-.lastPatient {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  align-items: center;
-  justify-content: space-between;
-  width: auto;
-  height: auto;
-  max-width: 25%;
-  background: none;
-  column-gap: 4px;
-  border-radius: 5px;
-  padding: 4px;
-  border: 0.2px solid var(--token-9iYGdL7i3GKE);
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .lastPatient {
-    justify-content: space-around;
-    width: 100%;
-    max-width: 20%;
-    column-gap: 2px;
-    row-gap: 0px;
-    min-width: 0;
-    padding: 2px;
-  }
-}
-.last {
-  object-fit: cover;
-  max-width: 100%;
-  width: 20px;
-  height: 20px;
-  transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
-  transform-style: preserve-3d;
-  flex-shrink: 0;
-}
-.last * {
-  transform-style: preserve-3d;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .last {
-    width: 18px;
-    height: 18px;
-    transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
-    transform-style: preserve-3d;
-    flex-shrink: 0;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .last * {
-    transform-style: preserve-3d;
-  }
-}
-.text__t1Isb {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  white-space: pre;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  min-width: 0;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .text__t1Isb {
-    font-size: 10px;
-    margin: 0px;
-  }
-}
 .getPatient:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
@@ -164,98 +97,6 @@
 .saveAdmissionDatetime2:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
-  display: none;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .saveAdmissionDatetime2:global(.__wab_instance) {
-    display: none;
-  }
-}
-.getPatientEx:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-height: 28px;
-  min-width: 0;
-}
-.patientNameAgeGender {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  max-height: 30px;
-  font-size: 16px;
-  color: #70727a;
-  white-space: pre;
-  min-width: 0;
-  padding: 4px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .patientNameAgeGender {
-    padding-right: 0px;
-    padding-left: 0px;
-  }
-}
-.saveAdmissionDatetime:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-}
-.nextPatient {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  align-items: center;
-  justify-content: space-between;
-  width: auto;
-  height: auto;
-  max-width: 25%;
-  background: none;
-  column-gap: 4px;
-  border-radius: 5px;
-  padding: 4px;
-  border: 0.2px solid var(--token-9iYGdL7i3GKE);
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .nextPatient {
-    justify-content: space-around;
-    width: 100%;
-    max-width: 20%;
-    column-gap: 2px;
-    row-gap: 0px;
-    min-width: 0;
-    padding: 2px;
-  }
-}
-.text__ghl3K {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  white-space: pre;
-  font-size: var(--token-CdE1_0ZaCyT1);
-  min-width: 0;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .text__ghl3K {
-    font-size: 10px;
-    margin: 0px;
-  }
-}
-.next {
-  object-fit: cover;
-  max-width: 100%;
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .next {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
 }
 .tabButtons {
   display: flex;
@@ -1173,25 +1014,57 @@
   width: auto;
   height: 1em;
 }
+.getPatientForPacsUrl:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  left: 0px;
+  top: 125px;
+  z-index: 1;
+  position: fixed;
+  background: var(--token-9iYGdL7i3GKE);
+  height: 30px;
+  min-width: 0;
+}
+.text__hyRg8 {
+  position: fixed;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: 0px;
+  top: 130px;
+  z-index: 1;
+  text-align: center;
+  background: none;
+  font-size: 12px;
+  color: var(--token-AbJ0W-K7opJE);
+  border-radius: 5px;
+  padding: 4px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__hyRg8 {
+    font-size: 10px;
+    left: 40%;
+    top: 130px;
+    right: auto;
+    display: block;
+  }
+}
 .getPacsUrl:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   left: auto;
-  top: 120px;
+  top: auto;
   z-index: 1;
-  position: fixed;
+  position: relative;
   width: 100%;
-  right: 0;
-  justify-self: flex-start;
-  grid-column-start: 1 !important;
-  grid-column-end: -1 !important;
+  min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .getPacsUrl:global(.__wab_instance) {
-    top: 120px;
-    right: 0;
+    top: auto;
+    right: auto;
     left: auto;
-    width: 100%;
   }
 }
 .pacsButton:global(.__wab_instance) {

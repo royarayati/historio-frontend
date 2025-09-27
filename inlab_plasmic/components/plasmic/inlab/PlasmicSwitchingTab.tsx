@@ -360,7 +360,7 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()}/report/list/[adm_id]/[national_code]`
+                        })()}/report/list/[adm_id]`
                       };
                       return (({ destination }) => {
                         if (

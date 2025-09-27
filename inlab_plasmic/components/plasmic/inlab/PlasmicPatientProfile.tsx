@@ -791,7 +791,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/[national_code]`
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (
@@ -4246,7 +4246,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                             }
                                             throw e;
                                           }
-                                        })()}/[national_code]`
+                                        })()}`
                                       };
                                       return (({ destination }) => {
                                         if (

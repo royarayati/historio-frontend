@@ -4117,7 +4117,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/[national_code]`
+                          })()}`
                         };
                         return (({ destination }) => {
                           if (

@@ -5644,7 +5644,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                   }
                                                   throw e;
                                                 }
-                                              })()}/[national_code]`
+                                              })()}`
                                             };
                                             return (({ destination }) => {
                                               if (
@@ -15063,16 +15063,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                   onClick={async event => {
                                     const $steps = {};
 
-                                    $steps["setPatientcardIdTarget"] = true
+                                    $steps["setPatientcardNationalCode"] = true
                                       ? (() => {
                                           const actionArgs = {
                                             customFunction: async () => {
-                                              return (() => {
-                                                return localStorage.setItem(
-                                                  "patientcardidtarget",
-                                                  currentItem.id
-                                                );
-                                              })();
+                                              return localStorage.setItem(
+                                                "patient_national_code",
+                                                currentItem.national_code
+                                              );
                                             }
                                           };
                                           return (({ customFunction }) => {
@@ -15081,16 +15079,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                         })()
                                       : undefined;
                                     if (
-                                      $steps["setPatientcardIdTarget"] !=
+                                      $steps["setPatientcardNationalCode"] !=
                                         null &&
                                       typeof $steps[
-                                        "setPatientcardIdTarget"
+                                        "setPatientcardNationalCode"
                                       ] === "object" &&
-                                      typeof $steps["setPatientcardIdTarget"]
-                                        .then === "function"
+                                      typeof $steps[
+                                        "setPatientcardNationalCode"
+                                      ].then === "function"
                                     ) {
-                                      $steps["setPatientcardIdTarget"] =
-                                        await $steps["setPatientcardIdTarget"];
+                                      $steps["setPatientcardNationalCode"] =
+                                        await $steps[
+                                          "setPatientcardNationalCode"
+                                        ];
                                     }
 
                                     $steps["goToImagingReportList"] = true
@@ -15112,19 +15113,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                             })()}/report/list/${(() => {
                                               try {
                                                 return currentItem.id;
-                                              } catch (e) {
-                                                if (
-                                                  e instanceof TypeError ||
-                                                  e?.plasmicType ===
-                                                    "PlasmicUndefinedDataError"
-                                                ) {
-                                                  return undefined;
-                                                }
-                                                throw e;
-                                              }
-                                            })()}/${(() => {
-                                              try {
-                                                return currentItem.national_code;
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
