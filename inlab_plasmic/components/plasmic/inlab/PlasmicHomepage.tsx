@@ -92,6 +92,7 @@ import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic
 import EvaArrowBackFillIcon from "./icons/PlasmicIcon__EvaArrowBackFill"; // plasmic-import: ZONZXYcpoN3U/icon
 import RubbishBinSvgrepoComSvgIcon from "./icons/PlasmicIcon__RubbishBinSvgrepoComSvg"; // plasmic-import: 4fW54JbpNQ-Y/icon
 import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: kYUnvWOY7oUw/icon
+import FilterSvgrepoComSvgIcon from "./icons/PlasmicIcon__FilterSvgrepoComSvg"; // plasmic-import: Dhz8zkFVSPmT/icon
 import BookmarkPlusSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkPlusSvgrepoComSvg"; // plasmic-import: laC4EyEnFr3s/icon
 import BookmarkDashFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__BookmarkDashFillSvgrepoComSvg"; // plasmic-import: OXlS9uB7Ffdy/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: NFXRoS4oqKav/icon
@@ -218,12 +219,13 @@ export type PlasmicHomepage__OverridesType = {
   physician?: Flex__<typeof Button>;
   physicianPatientNumber?: Flex__<"div">;
   patientFiltersSection?: Flex__<"div">;
-  tabFilters?: Flex__<typeof AntdDropdown>;
-  filterButton?: Flex__<typeof AntdButton>;
+  patientFilterButton2?: Flex__<typeof Button>;
+  bookmarkedPatientNumber4?: Flex__<"div">;
   bookmarked?: Flex__<typeof Button>;
   bookmarkedPatientNumber?: Flex__<"div">;
-  changeTabFilters?: Flex__<typeof AntdDropdown>;
-  filterButton2?: Flex__<typeof AntdButton>;
+  selectpatientFilter?: Flex__<typeof AntdDropdown>;
+  patientFilterButton?: Flex__<typeof AntdButton>;
+  filterIcon?: Flex__<"svg">;
   bookmarkButtonSection?: Flex__<"div">;
   bookmarked2?: Flex__<typeof Button>;
   bookmarkedPatientNumber3?: Flex__<"div">;
@@ -2459,6 +2461,81 @@ function PlasmicHomepage__RenderFunc(props: {
                 e?.plasmicType === "PlasmicUndefinedDataError"
               ) {
                 return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "patientFilterButton2.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "patientFilterButton2.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "patientFilterButton2.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "patientFilterButton2.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab === "bookmark";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "patientFilterButton2.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.patientsSelectedTab !== "bookmark";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "patientFilterSelection",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return localStorage.getItem("patients_filter_selected") || "";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
               }
               throw e;
             }
@@ -8448,2294 +8525,2110 @@ function PlasmicHomepage__RenderFunc(props: {
                                 </div>
                               </Button>
                             </div>
-                            {false ? (
-                              <div
-                                data-plasmic-name={"patientFiltersSection"}
+                            <div
+                              data-plasmic-name={"patientFiltersSection"}
+                              data-plasmic-override={
+                                overrides.patientFiltersSection
+                              }
+                              className={classNames(
+                                projectcss.all,
+                                sty.patientFiltersSection
+                              )}
+                            >
+                              <Button
+                                data-plasmic-name={"patientFilterButton2"}
                                 data-plasmic-override={
-                                  overrides.patientFiltersSection
-                                }
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.patientFiltersSection
-                                )}
-                              >
-                                <AntdDropdown
-                                  data-plasmic-name={"tabFilters"}
-                                  data-plasmic-override={overrides.tabFilters}
-                                  className={classNames(
-                                    "__wab_instance",
-                                    sty.tabFilters
-                                  )}
-                                  dropdownMenuScopeClassName={
-                                    sty["tabFilters__dropdownMenu"]
-                                  }
-                                  menuClassName={classNames({
-                                    [sty["pcls_85k4LKCafZBT"]]: true
-                                  })}
-                                  menuItems={() => (
-                                    <React.Fragment>
-                                      <AntdMenuItem
-                                        className={classNames(
-                                          "__wab_instance",
-                                          sty.menuItem__dbWy
-                                        )}
-                                        key={"menu-item-1"}
-                                      >
-                                        <div
-                                          className={classNames(
-                                            projectcss.all,
-                                            projectcss.__wab_text,
-                                            sty.text__wj1IY
-                                          )}
-                                        >
-                                          {"Menu item"}
-                                        </div>
-                                      </AntdMenuItem>
-                                      <AntdMenuItem
-                                        className={classNames(
-                                          "__wab_instance",
-                                          sty.menuItem__yjD5V
-                                        )}
-                                        key={"menu-item-2"}
-                                      >
-                                        <div
-                                          className={classNames(
-                                            projectcss.all,
-                                            projectcss.__wab_text,
-                                            sty.text__ouLt5
-                                          )}
-                                        >
-                                          {"Menu item"}
-                                        </div>
-                                      </AntdMenuItem>
-                                    </React.Fragment>
-                                  )}
-                                  menuItemsJson={
-                                    hasVariant(
-                                      globalVariants,
-                                      "screen",
-                                      "mobileFirst"
-                                    )
-                                      ? (() => {
-                                          const __composite = [
-                                            {
-                                              type: "item",
-                                              label: null,
-                                              onClick: null
-                                            },
-                                            {
-                                              type: null,
-                                              value: "action1",
-                                              label: null,
-                                              onClick: null
-                                            },
-                                            {
-                                              type: null,
-                                              label: null,
-                                              onClick: null
-                                            }
-                                          ];
-                                          __composite["0"]["label"] =
-                                            $state.filterwardname
-                                              ? "بخش" +
-                                                " " +
-                                                $state.filterwardname
-                                              : "بخش";
-                                          __composite["0"]["onClick"] =
-                                            async info => {
-                                              const $steps = {};
-
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "patientsSelectedTab"
-                                                        ]
-                                                      },
-                                                      operation: 0,
-                                                      value: "ward"
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        value
-                                                      );
-                                                      return value;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] != null &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] === "object" &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ].then === "function"
-                                              ) {
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] = await $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ];
-                                              }
-
-                                              $steps["runCode"] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      customFunction:
-                                                        async () => {
-                                                          return (() => {
-                                                            localStorage.setItem(
-                                                              "patients_selected_tab",
-                                                              $state.patientsSelectedTab?.toString() ||
-                                                                ""
-                                                            );
-                                                            return console.log(
-                                                              "patients_selected_tab:",
-                                                              localStorage.getItem(
-                                                                "patients_selected_tab"
-                                                              )
-                                                            );
-                                                          })();
-                                                        }
-                                                    };
-                                                    return (({
-                                                      customFunction
-                                                    }) => {
-                                                      return customFunction();
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps["runCode"] != null &&
-                                                typeof $steps["runCode"] ===
-                                                  "object" &&
-                                                typeof $steps["runCode"]
-                                                  .then === "function"
-                                              ) {
-                                                $steps["runCode"] =
-                                                  await $steps["runCode"];
-                                              }
-                                            };
-                                          __composite["1"]["type"] = "item";
-                                          __composite["1"]["label"] =
-                                            $state.filterservicename
-                                              ? "سرویس" +
-                                                " " +
-                                                $state.filterservicename
-                                              : "سرویس";
-                                          __composite["1"]["onClick"] =
-                                            async info => {
-                                              const $steps = {};
-
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "patientsSelectedTab"
-                                                        ]
-                                                      },
-                                                      operation: 0,
-                                                      value: "service"
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        value
-                                                      );
-                                                      return value;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] != null &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] === "object" &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ].then === "function"
-                                              ) {
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] = await $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ];
-                                              }
-
-                                              $steps["runCode"] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      customFunction:
-                                                        async () => {
-                                                          return (() => {
-                                                            localStorage.setItem(
-                                                              "patients_selected_tab",
-                                                              $state.patientsSelectedTab?.toString() ||
-                                                                ""
-                                                            );
-                                                            return console.log(
-                                                              "patients_selected_tab:",
-                                                              localStorage.getItem(
-                                                                "patients_selected_tab"
-                                                              )
-                                                            );
-                                                          })();
-                                                        }
-                                                    };
-                                                    return (({
-                                                      customFunction
-                                                    }) => {
-                                                      return customFunction();
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps["runCode"] != null &&
-                                                typeof $steps["runCode"] ===
-                                                  "object" &&
-                                                typeof $steps["runCode"]
-                                                  .then === "function"
-                                              ) {
-                                                $steps["runCode"] =
-                                                  await $steps["runCode"];
-                                              }
-                                            };
-                                          __composite["2"]["type"] = "item";
-                                          __composite["2"]["label"] =
-                                            $state.filterphysicianname
-                                              ? "دکتر" +
-                                                " " +
-                                                $state.filterphysicianname
-                                              : "پزشک";
-                                          __composite["2"]["onClick"] =
-                                            async info => {
-                                              const $steps = {};
-
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "patientsSelectedTab"
-                                                        ]
-                                                      },
-                                                      operation: 0,
-                                                      value: "physician"
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        value
-                                                      );
-                                                      return value;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] != null &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] === "object" &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ].then === "function"
-                                              ) {
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] = await $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ];
-                                              }
-
-                                              $steps["runCode"] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      customFunction:
-                                                        async () => {
-                                                          return (() => {
-                                                            localStorage.setItem(
-                                                              "patients_selected_tab",
-                                                              $state.patientsSelectedTab?.toString() ||
-                                                                ""
-                                                            );
-                                                            return console.log(
-                                                              "patients_selected_tab:",
-                                                              localStorage.getItem(
-                                                                "patients_selected_tab"
-                                                              )
-                                                            );
-                                                          })();
-                                                        }
-                                                    };
-                                                    return (({
-                                                      customFunction
-                                                    }) => {
-                                                      return customFunction();
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps["runCode"] != null &&
-                                                typeof $steps["runCode"] ===
-                                                  "object" &&
-                                                typeof $steps["runCode"]
-                                                  .then === "function"
-                                              ) {
-                                                $steps["runCode"] =
-                                                  await $steps["runCode"];
-                                              }
-                                            };
-                                          return __composite;
-                                        })()
-                                      : (() => {
-                                          const __composite = [
-                                            {
-                                              type: "item",
-                                              onClick: null,
-                                              label: null
-                                            },
-                                            {
-                                              type: null,
-                                              value: "action1",
-                                              label: null,
-                                              onClick: null
-                                            },
-                                            {
-                                              type: null,
-                                              label: null,
-                                              onClick: null
-                                            }
-                                          ];
-                                          __composite["0"]["onClick"] =
-                                            async info => {
-                                              const $steps = {};
-
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "patientsSelectedTab"
-                                                        ]
-                                                      },
-                                                      operation: 0,
-                                                      value: "ward"
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        value
-                                                      );
-                                                      return value;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] != null &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] === "object" &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ].then === "function"
-                                              ) {
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] = await $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ];
-                                              }
-
-                                              $steps["runCode"] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      customFunction:
-                                                        async () => {
-                                                          return (() => {
-                                                            localStorage.setItem(
-                                                              "patients_selected_tab",
-                                                              $state.patientsSelectedTab?.toString() ||
-                                                                ""
-                                                            );
-                                                            return console.log(
-                                                              "patients_selected_tab:",
-                                                              localStorage.getItem(
-                                                                "patients_selected_tab"
-                                                              )
-                                                            );
-                                                          })();
-                                                        }
-                                                    };
-                                                    return (({
-                                                      customFunction
-                                                    }) => {
-                                                      return customFunction();
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps["runCode"] != null &&
-                                                typeof $steps["runCode"] ===
-                                                  "object" &&
-                                                typeof $steps["runCode"]
-                                                  .then === "function"
-                                              ) {
-                                                $steps["runCode"] =
-                                                  await $steps["runCode"];
-                                              }
-                                            };
-                                          __composite["0"]["label"] =
-                                            $state.filterwardname
-                                              ? "بخش" +
-                                                " " +
-                                                $state.filterwardname
-                                              : "بخش";
-                                          __composite["1"]["type"] = "item";
-                                          __composite["1"]["label"] =
-                                            $state.filterservicename
-                                              ? "سرویس" +
-                                                " " +
-                                                $state.filterservicename
-                                              : "سرویس";
-
-                                          __composite["1"]["onClick"] =
-                                            async info => {
-                                              const $steps = {};
-
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "patientsSelectedTab"
-                                                        ]
-                                                      },
-                                                      operation: 0,
-                                                      value: "service"
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        value
-                                                      );
-                                                      return value;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] != null &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] === "object" &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ].then === "function"
-                                              ) {
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] = await $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ];
-                                              }
-
-                                              $steps["runCode"] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      customFunction:
-                                                        async () => {
-                                                          return (() => {
-                                                            localStorage.setItem(
-                                                              "patients_selected_tab",
-                                                              $state.patientsSelectedTab?.toString() ||
-                                                                ""
-                                                            );
-                                                            return console.log(
-                                                              "patients_selected_tab:",
-                                                              localStorage.getItem(
-                                                                "patients_selected_tab"
-                                                              )
-                                                            );
-                                                          })();
-                                                        }
-                                                    };
-                                                    return (({
-                                                      customFunction
-                                                    }) => {
-                                                      return customFunction();
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps["runCode"] != null &&
-                                                typeof $steps["runCode"] ===
-                                                  "object" &&
-                                                typeof $steps["runCode"]
-                                                  .then === "function"
-                                              ) {
-                                                $steps["runCode"] =
-                                                  await $steps["runCode"];
-                                              }
-                                            };
-                                          __composite["2"]["type"] = "item";
-                                          __composite["2"]["label"] =
-                                            $state.filterphysicianname
-                                              ? "دکتر" +
-                                                " " +
-                                                $state.filterphysicianname
-                                              : "پزشک";
-                                          __composite["2"]["onClick"] =
-                                            async info => {
-                                              const $steps = {};
-
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "patientsSelectedTab"
-                                                        ]
-                                                      },
-                                                      operation: 0,
-                                                      value: "physician"
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        value
-                                                      );
-                                                      return value;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] != null &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] === "object" &&
-                                                typeof $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ].then === "function"
-                                              ) {
-                                                $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ] = await $steps[
-                                                  "updatePatientsSelectedTab"
-                                                ];
-                                              }
-
-                                              $steps["runCode"] = true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      customFunction:
-                                                        async () => {
-                                                          return (() => {
-                                                            localStorage.setItem(
-                                                              "patients_selected_tab",
-                                                              $state.patientsSelectedTab?.toString() ||
-                                                                ""
-                                                            );
-                                                            return console.log(
-                                                              "patients_selected_tab:",
-                                                              localStorage.getItem(
-                                                                "patients_selected_tab"
-                                                              )
-                                                            );
-                                                          })();
-                                                        }
-                                                    };
-                                                    return (({
-                                                      customFunction
-                                                    }) => {
-                                                      return customFunction();
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                              if (
-                                                $steps["runCode"] != null &&
-                                                typeof $steps["runCode"] ===
-                                                  "object" &&
-                                                typeof $steps["runCode"]
-                                                  .then === "function"
-                                              ) {
-                                                $steps["runCode"] =
-                                                  await $steps["runCode"];
-                                              }
-                                            };
-                                          return __composite;
-                                        })()
-                                  }
-                                  trigger={"click"}
-                                  useMenuItemsSlot={false}
-                                >
-                                  <AntdButton
-                                    data-plasmic-name={"filterButton"}
-                                    data-plasmic-override={
-                                      overrides.filterButton
-                                    }
-                                    className={classNames(
-                                      "__wab_instance",
-                                      sty.filterButton
-                                    )}
-                                    shape={
-                                      hasVariant(
-                                        globalVariants,
-                                        "screen",
-                                        "mobileFirst"
-                                      )
-                                        ? "round"
-                                        : "round"
-                                    }
-                                    size={
-                                      hasVariant(
-                                        globalVariants,
-                                        "screen",
-                                        "mobileFirst"
-                                      )
-                                        ? "medium"
-                                        : "large"
-                                    }
-                                    type={
-                                      hasVariant(
-                                        globalVariants,
-                                        "screen",
-                                        "mobileFirst"
-                                      )
-                                        ? "ghost"
-                                        : "ghost"
-                                    }
-                                  >
-                                    <div
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.__wab_text,
-                                        sty.text__lg7Xs
-                                      )}
-                                      dir={"rtl"}
-                                    >
-                                      <React.Fragment>
-                                        {(() => {
-                                          let filterText = "  بدون فیلتر ";
-                                          if (
-                                            $state.patientsSelectedTab ===
-                                            "service"
-                                          ) {
-                                            filterText = `سرویس ${
-                                              $state.filterservicename ?? ""
-                                            }`;
-                                          } else if (
-                                            $state.patientsSelectedTab ===
-                                            "ward"
-                                          ) {
-                                            filterText = `بخش ${
-                                              $state.filterwardname ?? ""
-                                            }`;
-                                          } else if (
-                                            $state?.patientsSelectedTab ===
-                                            "physician"
-                                          ) {
-                                            filterText = `دکتر ${
-                                              $state.filterphysicianname ?? ""
-                                            }`;
-                                          }
-                                          console.log(filterText);
-                                          localStorage.setItem(
-                                            "filter_label",
-                                            filterText
-                                          );
-                                          return filterText;
-                                        })()}
-                                      </React.Fragment>
-                                    </div>
-                                  </AntdButton>
-                                </AntdDropdown>
-                                <Button
-                                  data-plasmic-name={"bookmarked"}
-                                  data-plasmic-override={overrides.bookmarked}
-                                  className={classNames(
-                                    "__wab_instance",
-                                    sty.bookmarked
-                                  )}
-                                  deselected={generateStateValueProp($state, [
-                                    "bookmarked",
-                                    "deselected"
-                                  ])}
-                                  endIcon={
-                                    <IconIcon
-                                      className={classNames(
-                                        projectcss.all,
-                                        sty.svg__eNkB
-                                      )}
-                                      role={"img"}
-                                    />
-                                  }
-                                  isDisabled={generateStateValueProp($state, [
-                                    "bookmarked",
-                                    "isDisabled"
-                                  ])}
-                                  onClick={async event => {
-                                    const $steps = {};
-
-                                    $steps["setPatientcardidEmpty"] = true
-                                      ? (() => {
-                                          const actionArgs = {
-                                            customFunction: async () => {
-                                              return localStorage.setItem(
-                                                "patientcardidtarget",
-                                                ""
-                                              );
-                                            }
-                                          };
-                                          return (({ customFunction }) => {
-                                            return customFunction();
-                                          })?.apply(null, [actionArgs]);
-                                        })()
-                                      : undefined;
-                                    if (
-                                      $steps["setPatientcardidEmpty"] != null &&
-                                      typeof $steps["setPatientcardidEmpty"] ===
-                                        "object" &&
-                                      typeof $steps["setPatientcardidEmpty"]
-                                        .then === "function"
-                                    ) {
-                                      $steps["setPatientcardidEmpty"] =
-                                        await $steps["setPatientcardidEmpty"];
-                                    }
-
-                                    $steps["setBookmarkSelectedTab"] = true
-                                      ? (() => {
-                                          const actionArgs = {
-                                            variable: {
-                                              objRoot: $state,
-                                              variablePath: [
-                                                "patientsSelectedTab"
-                                              ]
-                                            },
-                                            operation: 0,
-                                            value: "bookmark"
-                                          };
-                                          return (({
-                                            variable,
-                                            value,
-                                            startIndex,
-                                            deleteCount
-                                          }) => {
-                                            if (!variable) {
-                                              return;
-                                            }
-                                            const { objRoot, variablePath } =
-                                              variable;
-
-                                            $stateSet(
-                                              objRoot,
-                                              variablePath,
-                                              value
-                                            );
-                                            return value;
-                                          })?.apply(null, [actionArgs]);
-                                        })()
-                                      : undefined;
-                                    if (
-                                      $steps["setBookmarkSelectedTab"] !=
-                                        null &&
-                                      typeof $steps[
-                                        "setBookmarkSelectedTab"
-                                      ] === "object" &&
-                                      typeof $steps["setBookmarkSelectedTab"]
-                                        .then === "function"
-                                    ) {
-                                      $steps["setBookmarkSelectedTab"] =
-                                        await $steps["setBookmarkSelectedTab"];
-                                    }
-
-                                    $steps["setSelectedTabLocalStorage"] = true
-                                      ? (() => {
-                                          const actionArgs = {
-                                            customFunction: async () => {
-                                              return localStorage.setItem(
-                                                "patients_selected_tab",
-                                                $state.patientsSelectedTab.toString()
-                                              );
-                                            }
-                                          };
-                                          return (({ customFunction }) => {
-                                            return customFunction();
-                                          })?.apply(null, [actionArgs]);
-                                        })()
-                                      : undefined;
-                                    if (
-                                      $steps["setSelectedTabLocalStorage"] !=
-                                        null &&
-                                      typeof $steps[
-                                        "setSelectedTabLocalStorage"
-                                      ] === "object" &&
-                                      typeof $steps[
-                                        "setSelectedTabLocalStorage"
-                                      ].then === "function"
-                                    ) {
-                                      $steps["setSelectedTabLocalStorage"] =
-                                        await $steps[
-                                          "setSelectedTabLocalStorage"
-                                        ];
-                                    }
-
-                                    $steps["consoleLog"] = true
-                                      ? (() => {
-                                          const actionArgs = {
-                                            customFunction: async () => {
-                                              return (() => {
-                                                console.log(
-                                                  `state_patients_selected_tab: ${$state.patientsSelectedTab} `
-                                                );
-                                                console.log(
-                                                  `state_filter_bookmarked: ${$state.filterBookmarked} `
-                                                );
-                                                return console.log(
-                                                  `patients_selected_tab: ${localStorage.getItem(
-                                                    "patients_selected_tab"
-                                                  )}`
-                                                );
-                                              })();
-                                            }
-                                          };
-                                          return (({ customFunction }) => {
-                                            return customFunction();
-                                          })?.apply(null, [actionArgs]);
-                                        })()
-                                      : undefined;
-                                    if (
-                                      $steps["consoleLog"] != null &&
-                                      typeof $steps["consoleLog"] ===
-                                        "object" &&
-                                      typeof $steps["consoleLog"].then ===
-                                        "function"
-                                    ) {
-                                      $steps["consoleLog"] = await $steps[
-                                        "consoleLog"
-                                      ];
-                                    }
-                                  }}
-                                  onDeselectedChange={async (
-                                    ...eventArgs: any
-                                  ) => {
-                                    ((...eventArgs) => {
-                                      generateStateOnChangeProp($state, [
-                                        "bookmarked",
-                                        "deselected"
-                                      ])(eventArgs[0]);
-                                    }).apply(null, eventArgs);
-
-                                    if (
-                                      eventArgs.length > 1 &&
-                                      eventArgs[1] &&
-                                      eventArgs[1]._plasmic_state_init_
-                                    ) {
-                                      return;
-                                    }
-                                  }}
-                                  onIsDisabledChange={async (
-                                    ...eventArgs: any
-                                  ) => {
-                                    ((...eventArgs) => {
-                                      generateStateOnChangeProp($state, [
-                                        "bookmarked",
-                                        "isDisabled"
-                                      ])(eventArgs[0]);
-                                    }).apply(null, eventArgs);
-
-                                    if (
-                                      eventArgs.length > 1 &&
-                                      eventArgs[1] &&
-                                      eventArgs[1]._plasmic_state_init_
-                                    ) {
-                                      return;
-                                    }
-                                  }}
-                                  onSelectedChange={async (
-                                    ...eventArgs: any
-                                  ) => {
-                                    ((...eventArgs) => {
-                                      generateStateOnChangeProp($state, [
-                                        "bookmarked",
-                                        "selected"
-                                      ])(eventArgs[0]);
-                                    }).apply(null, eventArgs);
-
-                                    if (
-                                      eventArgs.length > 1 &&
-                                      eventArgs[1] &&
-                                      eventArgs[1]._plasmic_state_init_
-                                    ) {
-                                      return;
-                                    }
-                                  }}
-                                  onSortDeselectedChange={async (
-                                    ...eventArgs: any
-                                  ) => {
-                                    ((...eventArgs) => {
-                                      generateStateOnChangeProp($state, [
-                                        "bookmarked",
-                                        "sortDeselected"
-                                      ])(eventArgs[0]);
-                                    }).apply(null, eventArgs);
-
-                                    if (
-                                      eventArgs.length > 1 &&
-                                      eventArgs[1] &&
-                                      eventArgs[1]._plasmic_state_init_
-                                    ) {
-                                      return;
-                                    }
-                                  }}
-                                  onSortSelectedChange={async (
-                                    ...eventArgs: any
-                                  ) => {
-                                    ((...eventArgs) => {
-                                      generateStateOnChangeProp($state, [
-                                        "bookmarked",
-                                        "sortSelected"
-                                      ])(eventArgs[0]);
-                                    }).apply(null, eventArgs);
-
-                                    if (
-                                      eventArgs.length > 1 &&
-                                      eventArgs[1] &&
-                                      eventArgs[1]._plasmic_state_init_
-                                    ) {
-                                      return;
-                                    }
-                                  }}
-                                  selected={generateStateValueProp($state, [
-                                    "bookmarked",
-                                    "selected"
-                                  ])}
-                                  sortDeselected={generateStateValueProp(
-                                    $state,
-                                    ["bookmarked", "sortDeselected"]
-                                  )}
-                                  sortSelected={generateStateValueProp($state, [
-                                    "bookmarked",
-                                    "sortSelected"
-                                  ])}
-                                >
-                                  {(() => {
-                                    try {
-                                      return (
-                                        $state.mainSelectedTab === "patients" &&
-                                        $state.patientsSelectedTab ===
-                                          "bookmark" &&
-                                        $state.patientNumber != ("" | "0") &&
-                                        !$ctx.fetched_data.loading
-                                      );
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return true;
-                                      }
-                                      throw e;
-                                    }
-                                  })() ? (
-                                    <div
-                                      data-plasmic-name={
-                                        "bookmarkedPatientNumber"
-                                      }
-                                      data-plasmic-override={
-                                        overrides.bookmarkedPatientNumber
-                                      }
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.__wab_text,
-                                        sty.bookmarkedPatientNumber
-                                      )}
-                                    >
-                                      <React.Fragment>
-                                        {(() => {
-                                          try {
-                                            return $state.patientNumber;
-                                          } catch (e) {
-                                            if (
-                                              e instanceof TypeError ||
-                                              e?.plasmicType ===
-                                                "PlasmicUndefinedDataError"
-                                            ) {
-                                              return "";
-                                            }
-                                            throw e;
-                                          }
-                                        })()}
-                                      </React.Fragment>
-                                    </div>
-                                  ) : null}
-                                  <div
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.__wab_text,
-                                      sty.text___5DmEl
-                                    )}
-                                  >
-                                    {
-                                      "\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"
-                                    }
-                                  </div>
-                                </Button>
-                              </div>
-                            ) : null}
-                            {false ? (
-                              <AntdDropdown
-                                data-plasmic-name={"changeTabFilters"}
-                                data-plasmic-override={
-                                  overrides.changeTabFilters
+                                  overrides.patientFilterButton2
                                 }
                                 className={classNames(
                                   "__wab_instance",
-                                  sty.changeTabFilters
+                                  sty.patientFilterButton2
                                 )}
-                                dropdownMenuScopeClassName={
-                                  sty["changeTabFilters__dropdownMenu"]
+                                deselected={generateStateValueProp($state, [
+                                  "patientFilterButton2",
+                                  "deselected"
+                                ])}
+                                endIcon={
+                                  <IconIcon
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.svg__dTRn
+                                    )}
+                                    role={"img"}
+                                  />
                                 }
-                                menuClassName={classNames({
-                                  [sty["pcls_M5CiLMzoEEbg"]]: true,
-                                  [sty["pcls__AIVocw_iaM3"]]: hasVariant(
-                                    globalVariants,
-                                    "screen",
-                                    "mobileFirst"
-                                  )
-                                })}
-                                menuItems={() => (
+                                isDisabled={generateStateValueProp($state, [
+                                  "patientFilterButton2",
+                                  "isDisabled"
+                                ])}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["setPatientselectiontab"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: [
+                                              "patientsSelectedTab"
+                                            ]
+                                          },
+                                          operation: 0,
+                                          value: $state.patientFilterSelection
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["setPatientselectiontab"] != null &&
+                                    typeof $steps["setPatientselectiontab"] ===
+                                      "object" &&
+                                    typeof $steps["setPatientselectiontab"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setPatientselectiontab"] =
+                                      await $steps["setPatientselectiontab"];
+                                  }
+
+                                  $steps["setSelectedTabLocalStorage"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return localStorage.setItem(
+                                              "patients_selected_tab",
+                                              $state.patientsSelectedTab.toString()
+                                            );
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["setSelectedTabLocalStorage"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "setSelectedTabLocalStorage"
+                                    ] === "object" &&
+                                    typeof $steps["setSelectedTabLocalStorage"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setSelectedTabLocalStorage"] =
+                                      await $steps[
+                                        "setSelectedTabLocalStorage"
+                                      ];
+                                  }
+
+                                  $steps["consoleLog"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return (() => {
+                                              console.log(
+                                                `state_patients_selected_tab: ${$state.patientsSelectedTab} `
+                                              );
+                                              console.log(
+                                                `state_filter_bookmarked: ${$state.filterBookmarked} `
+                                              );
+                                              return console.log(
+                                                `patients_selected_tab: ${localStorage.getItem(
+                                                  "patients_selected_tab"
+                                                )}`
+                                              );
+                                            })();
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["consoleLog"] != null &&
+                                    typeof $steps["consoleLog"] === "object" &&
+                                    typeof $steps["consoleLog"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["consoleLog"] = await $steps[
+                                      "consoleLog"
+                                    ];
+                                  }
+                                }}
+                                onDeselectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "patientFilterButton2",
+                                      "deselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onIsDisabledChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "patientFilterButton2",
+                                      "isDisabled"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSelectedChange={async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "patientFilterButton2",
+                                      "selected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSortDeselectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "patientFilterButton2",
+                                      "sortDeselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSortSelectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "patientFilterButton2",
+                                      "sortSelected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                selected={generateStateValueProp($state, [
+                                  "patientFilterButton2",
+                                  "selected"
+                                ])}
+                                sortDeselected={generateStateValueProp($state, [
+                                  "patientFilterButton2",
+                                  "sortDeselected"
+                                ])}
+                                sortSelected={generateStateValueProp($state, [
+                                  "patientFilterButton2",
+                                  "sortSelected"
+                                ])}
+                              >
+                                {(() => {
+                                  try {
+                                    return (
+                                      $state.mainSelectedTab === "patients" &&
+                                      $state.patientsSelectedTab ===
+                                        "bookmark" &&
+                                      $state.patientNumber != ("" | "0") &&
+                                      !$ctx.fetched_data.loading
+                                    );
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return true;
+                                    }
+                                    throw e;
+                                  }
+                                })() ? (
+                                  <div
+                                    data-plasmic-name={
+                                      "bookmarkedPatientNumber4"
+                                    }
+                                    data-plasmic-override={
+                                      overrides.bookmarkedPatientNumber4
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.bookmarkedPatientNumber4
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return $state.patientNumber;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                ) : null}
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text__zrKq
+                                  )}
+                                >
                                   <React.Fragment>
-                                    <AntdMenuItem
-                                      className={classNames(
-                                        "__wab_instance",
-                                        sty.menuItem__j7J59
-                                      )}
-                                      key={"menu-item-1"}
-                                    >
-                                      <div
-                                        className={classNames(
-                                          projectcss.all,
-                                          projectcss.__wab_text,
-                                          sty.text___1Nttk
-                                        )}
-                                      >
-                                        {"Menu item"}
-                                      </div>
-                                    </AntdMenuItem>
-                                    <AntdMenuItem
-                                      className={classNames(
-                                        "__wab_instance",
-                                        sty.menuItem__wxpuU
-                                      )}
-                                      key={"menu-item-2"}
-                                    >
-                                      <div
-                                        className={classNames(
-                                          projectcss.all,
-                                          projectcss.__wab_text,
-                                          sty.text__j4MSh
-                                        )}
-                                      >
-                                        {"Menu item"}
-                                      </div>
-                                    </AntdMenuItem>
+                                    {(() => {
+                                      switch ($state.patientFilterSelection) {
+                                        case "ward":
+                                          return `بخش ${$state.filterwardname}`;
+                                        case "physician":
+                                          return `پزشک ${$state.filterphysicianname}`;
+                                        case "service":
+                                          return `سرویس ${$state.filterservicename}`;
+                                      }
+                                    })()}
                                   </React.Fragment>
+                                </div>
+                              </Button>
+                              <Button
+                                data-plasmic-name={"bookmarked"}
+                                data-plasmic-override={overrides.bookmarked}
+                                className={classNames(
+                                  "__wab_instance",
+                                  sty.bookmarked
                                 )}
-                                menuItemsJson={
+                                deselected={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "deselected"
+                                ])}
+                                endIcon={
+                                  <IconIcon
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.svg__eNkB
+                                    )}
+                                    role={"img"}
+                                  />
+                                }
+                                isDisabled={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "isDisabled"
+                                ])}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["setPatientcardidEmpty"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return localStorage.setItem(
+                                              "patientcardidtarget",
+                                              ""
+                                            );
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["setPatientcardidEmpty"] != null &&
+                                    typeof $steps["setPatientcardidEmpty"] ===
+                                      "object" &&
+                                    typeof $steps["setPatientcardidEmpty"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setPatientcardidEmpty"] =
+                                      await $steps["setPatientcardidEmpty"];
+                                  }
+
+                                  $steps["setBookmarkSelectedTab"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: [
+                                              "patientsSelectedTab"
+                                            ]
+                                          },
+                                          operation: 0,
+                                          value: "bookmark"
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["setBookmarkSelectedTab"] != null &&
+                                    typeof $steps["setBookmarkSelectedTab"] ===
+                                      "object" &&
+                                    typeof $steps["setBookmarkSelectedTab"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setBookmarkSelectedTab"] =
+                                      await $steps["setBookmarkSelectedTab"];
+                                  }
+
+                                  $steps["setSelectedTabLocalStorage"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return localStorage.setItem(
+                                              "patients_selected_tab",
+                                              $state.patientsSelectedTab.toString()
+                                            );
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["setSelectedTabLocalStorage"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "setSelectedTabLocalStorage"
+                                    ] === "object" &&
+                                    typeof $steps["setSelectedTabLocalStorage"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["setSelectedTabLocalStorage"] =
+                                      await $steps[
+                                        "setSelectedTabLocalStorage"
+                                      ];
+                                  }
+
+                                  $steps["consoleLog"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          customFunction: async () => {
+                                            return (() => {
+                                              console.log(
+                                                `state_patients_selected_tab: ${$state.patientsSelectedTab} `
+                                              );
+                                              console.log(
+                                                `state_filter_bookmarked: ${$state.filterBookmarked} `
+                                              );
+                                              return console.log(
+                                                `patients_selected_tab: ${localStorage.getItem(
+                                                  "patients_selected_tab"
+                                                )}`
+                                              );
+                                            })();
+                                          }
+                                        };
+                                        return (({ customFunction }) => {
+                                          return customFunction();
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["consoleLog"] != null &&
+                                    typeof $steps["consoleLog"] === "object" &&
+                                    typeof $steps["consoleLog"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["consoleLog"] = await $steps[
+                                      "consoleLog"
+                                    ];
+                                  }
+                                }}
+                                onDeselectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "bookmarked",
+                                      "deselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onIsDisabledChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "bookmarked",
+                                      "isDisabled"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSelectedChange={async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "bookmarked",
+                                      "selected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSortDeselectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "bookmarked",
+                                      "sortDeselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                onSortSelectedChange={async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "bookmarked",
+                                      "sortSelected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                }}
+                                selected={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "selected"
+                                ])}
+                                sortDeselected={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "sortDeselected"
+                                ])}
+                                sortSelected={generateStateValueProp($state, [
+                                  "bookmarked",
+                                  "sortSelected"
+                                ])}
+                              >
+                                {(() => {
+                                  try {
+                                    return (
+                                      $state.mainSelectedTab === "patients" &&
+                                      $state.patientsSelectedTab ===
+                                        "bookmark" &&
+                                      $state.patientNumber != ("" | "0") &&
+                                      !$ctx.fetched_data.loading
+                                    );
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return true;
+                                    }
+                                    throw e;
+                                  }
+                                })() ? (
+                                  <div
+                                    data-plasmic-name={
+                                      "bookmarkedPatientNumber"
+                                    }
+                                    data-plasmic-override={
+                                      overrides.bookmarkedPatientNumber
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.bookmarkedPatientNumber
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return $state.patientNumber;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                ) : null}
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text___5DmEl
+                                  )}
+                                >
+                                  {
+                                    "\u0628\u0648\u06a9\u0645\u0627\u0631\u06a9 \u0647\u0627"
+                                  }
+                                </div>
+                              </Button>
+                            </div>
+                            <AntdDropdown
+                              data-plasmic-name={"selectpatientFilter"}
+                              data-plasmic-override={
+                                overrides.selectpatientFilter
+                              }
+                              className={classNames(
+                                "__wab_instance",
+                                sty.selectpatientFilter
+                              )}
+                              dropdownMenuScopeClassName={
+                                sty["selectpatientFilter__dropdownMenu"]
+                              }
+                              menuClassName={classNames({
+                                [sty["pcls_P6x-rsWcQSWe"]]: true
+                              })}
+                              menuItems={() => (
+                                <React.Fragment>
+                                  <AntdMenuItem
+                                    className={classNames(
+                                      "__wab_instance",
+                                      sty.menuItem___4Ablq
+                                    )}
+                                    key={"menu-item-1"}
+                                  >
+                                    <div
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.text__gYErh
+                                      )}
+                                    >
+                                      {"Menu item"}
+                                    </div>
+                                  </AntdMenuItem>
+                                  <AntdMenuItem
+                                    className={classNames(
+                                      "__wab_instance",
+                                      sty.menuItem__mg2Ya
+                                    )}
+                                    key={"menu-item-2"}
+                                  >
+                                    <div
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.text__uoItC
+                                      )}
+                                    >
+                                      {"Menu item"}
+                                    </div>
+                                  </AntdMenuItem>
+                                </React.Fragment>
+                              )}
+                              menuItemsJson={
+                                hasVariant(
+                                  globalVariants,
+                                  "screen",
+                                  "mobileFirst"
+                                )
+                                  ? (() => {
+                                      const __composite = [
+                                        {
+                                          type: "item",
+                                          onClick: null,
+                                          label: null
+                                        },
+                                        {
+                                          type: null,
+                                          value: "action1",
+                                          onClick: null,
+                                          label: null
+                                        },
+                                        {
+                                          type: null,
+                                          onClick: null,
+                                          label: null
+                                        }
+                                      ];
+                                      __composite["0"]["onClick"] =
+                                        async info => {
+                                          const $steps = {};
+
+                                          $steps["updateModalWardOpen"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  variable: {
+                                                    objRoot: $state,
+                                                    variablePath: [
+                                                      "modalWard",
+                                                      "open"
+                                                    ]
+                                                  },
+                                                  operation: 4
+                                                };
+                                                return (({
+                                                  variable,
+                                                  value,
+                                                  startIndex,
+                                                  deleteCount
+                                                }) => {
+                                                  if (!variable) {
+                                                    return;
+                                                  }
+                                                  const {
+                                                    objRoot,
+                                                    variablePath
+                                                  } = variable;
+
+                                                  const oldValue = $stateGet(
+                                                    objRoot,
+                                                    variablePath
+                                                  );
+                                                  $stateSet(
+                                                    objRoot,
+                                                    variablePath,
+                                                    !oldValue
+                                                  );
+                                                  return !oldValue;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["updateModalWardOpen"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "updateModalWardOpen"
+                                            ] === "object" &&
+                                            typeof $steps["updateModalWardOpen"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["updateModalWardOpen"] =
+                                              await $steps[
+                                                "updateModalWardOpen"
+                                              ];
+                                          }
+
+                                          $steps["updatePatientsSelectedTab"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "patientsSelectedTab"
+                                                      ]
+                                                    },
+                                                    operation: 0,
+                                                    value: "ward"
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      value
+                                                    );
+                                                    return value;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] = await $steps[
+                                              "updatePatientsSelectedTab"
+                                            ];
+                                          }
+
+                                          $steps[
+                                            "updatePatientFilterSelection"
+                                          ] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  variable: {
+                                                    objRoot: $state,
+                                                    variablePath: [
+                                                      "patientFilterSelection"
+                                                    ]
+                                                  },
+                                                  operation: 0,
+                                                  value: "ward"
+                                                };
+                                                return (({
+                                                  variable,
+                                                  value,
+                                                  startIndex,
+                                                  deleteCount
+                                                }) => {
+                                                  if (!variable) {
+                                                    return;
+                                                  }
+                                                  const {
+                                                    objRoot,
+                                                    variablePath
+                                                  } = variable;
+
+                                                  $stateSet(
+                                                    objRoot,
+                                                    variablePath,
+                                                    value
+                                                  );
+                                                  return value;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] = await $steps[
+                                              "updatePatientFilterSelection"
+                                            ];
+                                          }
+
+                                          $steps["runCode"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  customFunction: async () => {
+                                                    return (() => {
+                                                      localStorage.setItem(
+                                                        "patients_selected_tab",
+                                                        $state.patientsSelectedTab?.toString() ||
+                                                          ""
+                                                      );
+                                                      console.log(
+                                                        "patients_selected_tab:",
+                                                        localStorage.getItem(
+                                                          "patients_selected_tab"
+                                                        )
+                                                      );
+                                                      return localStorage.setItem(
+                                                        "patients_filter_selected",
+                                                        $state.patientFilterSelection.toString() ||
+                                                          ""
+                                                      );
+                                                    })();
+                                                  }
+                                                };
+                                                return (({
+                                                  customFunction
+                                                }) => {
+                                                  return customFunction();
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["runCode"] != null &&
+                                            typeof $steps["runCode"] ===
+                                              "object" &&
+                                            typeof $steps["runCode"].then ===
+                                              "function"
+                                          ) {
+                                            $steps["runCode"] = await $steps[
+                                              "runCode"
+                                            ];
+                                          }
+                                        };
+                                      __composite["0"]["label"] =
+                                        "\u0628\u062e\u0634";
+                                      __composite["1"]["type"] = "item";
+                                      __composite["1"]["onClick"] =
+                                        async info => {
+                                          const $steps = {};
+
+                                          $steps["updateModalServiceOpen"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "modalService",
+                                                        "open"
+                                                      ]
+                                                    },
+                                                    operation: 4
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    const oldValue = $stateGet(
+                                                      objRoot,
+                                                      variablePath
+                                                    );
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      !oldValue
+                                                    );
+                                                    return !oldValue;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps["updateModalServiceOpen"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "updateModalServiceOpen"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updateModalServiceOpen"
+                                            ].then === "function"
+                                          ) {
+                                            $steps["updateModalServiceOpen"] =
+                                              await $steps[
+                                                "updateModalServiceOpen"
+                                              ];
+                                          }
+
+                                          $steps["updatePatientsSelectedTab"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "patientsSelectedTab"
+                                                      ]
+                                                    },
+                                                    operation: 0,
+                                                    value: "service"
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      value
+                                                    );
+                                                    return value;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] = await $steps[
+                                              "updatePatientsSelectedTab"
+                                            ];
+                                          }
+
+                                          $steps[
+                                            "updatePatientFilterSelection"
+                                          ] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  variable: {
+                                                    objRoot: $state,
+                                                    variablePath: [
+                                                      "patientFilterSelection"
+                                                    ]
+                                                  },
+                                                  operation: 0,
+                                                  value: "service"
+                                                };
+                                                return (({
+                                                  variable,
+                                                  value,
+                                                  startIndex,
+                                                  deleteCount
+                                                }) => {
+                                                  if (!variable) {
+                                                    return;
+                                                  }
+                                                  const {
+                                                    objRoot,
+                                                    variablePath
+                                                  } = variable;
+
+                                                  $stateSet(
+                                                    objRoot,
+                                                    variablePath,
+                                                    value
+                                                  );
+                                                  return value;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] = await $steps[
+                                              "updatePatientFilterSelection"
+                                            ];
+                                          }
+
+                                          $steps["runCode"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  customFunction: async () => {
+                                                    return (() => {
+                                                      localStorage.setItem(
+                                                        "patients_selected_tab",
+                                                        $state.patientsSelectedTab?.toString() ||
+                                                          ""
+                                                      );
+                                                      console.log(
+                                                        "patients_selected_tab:",
+                                                        localStorage.getItem(
+                                                          "patients_selected_tab"
+                                                        )
+                                                      );
+                                                      return localStorage.setItem(
+                                                        "patients_filter_selected",
+                                                        $state.patientFilterSelection.toString() ||
+                                                          ""
+                                                      );
+                                                    })();
+                                                  }
+                                                };
+                                                return (({
+                                                  customFunction
+                                                }) => {
+                                                  return customFunction();
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["runCode"] != null &&
+                                            typeof $steps["runCode"] ===
+                                              "object" &&
+                                            typeof $steps["runCode"].then ===
+                                              "function"
+                                          ) {
+                                            $steps["runCode"] = await $steps[
+                                              "runCode"
+                                            ];
+                                          }
+                                        };
+                                      __composite["1"]["label"] =
+                                        "\u0633\u0631\u0648\u06cc\u0633";
+                                      __composite["2"]["type"] = "item";
+                                      __composite["2"]["onClick"] =
+                                        async info => {
+                                          const $steps = {};
+
+                                          $steps["updateModalPhysicianOpen"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "modalPhysician",
+                                                        "open"
+                                                      ]
+                                                    },
+                                                    operation: 4
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    const oldValue = $stateGet(
+                                                      objRoot,
+                                                      variablePath
+                                                    );
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      !oldValue
+                                                    );
+                                                    return !oldValue;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updateModalPhysicianOpen"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updateModalPhysicianOpen"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updateModalPhysicianOpen"
+                                            ].then === "function"
+                                          ) {
+                                            $steps["updateModalPhysicianOpen"] =
+                                              await $steps[
+                                                "updateModalPhysicianOpen"
+                                              ];
+                                          }
+
+                                          $steps["updatePatientsSelectedTab"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "patientsSelectedTab"
+                                                      ]
+                                                    },
+                                                    operation: 0,
+                                                    value: "physician"
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      value
+                                                    );
+                                                    return value;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] = await $steps[
+                                              "updatePatientsSelectedTab"
+                                            ];
+                                          }
+
+                                          $steps[
+                                            "updatePatientFilterSelection"
+                                          ] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  variable: {
+                                                    objRoot: $state,
+                                                    variablePath: [
+                                                      "patientFilterSelection"
+                                                    ]
+                                                  },
+                                                  operation: 0,
+                                                  value: "physician"
+                                                };
+                                                return (({
+                                                  variable,
+                                                  value,
+                                                  startIndex,
+                                                  deleteCount
+                                                }) => {
+                                                  if (!variable) {
+                                                    return;
+                                                  }
+                                                  const {
+                                                    objRoot,
+                                                    variablePath
+                                                  } = variable;
+
+                                                  $stateSet(
+                                                    objRoot,
+                                                    variablePath,
+                                                    value
+                                                  );
+                                                  return value;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] = await $steps[
+                                              "updatePatientFilterSelection"
+                                            ];
+                                          }
+
+                                          $steps["runCode"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  customFunction: async () => {
+                                                    return (() => {
+                                                      localStorage.setItem(
+                                                        "patients_selected_tab",
+                                                        $state.patientsSelectedTab?.toString() ||
+                                                          ""
+                                                      );
+                                                      console.log(
+                                                        "patients_selected_tab:",
+                                                        localStorage.getItem(
+                                                          "patients_selected_tab"
+                                                        )
+                                                      );
+                                                      return localStorage.setItem(
+                                                        "patients_filter_selected",
+                                                        $state.patientFilterSelection.toString() ||
+                                                          ""
+                                                      );
+                                                    })();
+                                                  }
+                                                };
+                                                return (({
+                                                  customFunction
+                                                }) => {
+                                                  return customFunction();
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["runCode"] != null &&
+                                            typeof $steps["runCode"] ===
+                                              "object" &&
+                                            typeof $steps["runCode"].then ===
+                                              "function"
+                                          ) {
+                                            $steps["runCode"] = await $steps[
+                                              "runCode"
+                                            ];
+                                          }
+                                        };
+                                      __composite["2"]["label"] =
+                                        "\u067e\u0632\u0634\u06a9";
+                                      return __composite;
+                                    })()
+                                  : (() => {
+                                      const __composite = [
+                                        {
+                                          type: "item",
+                                          onClick: null,
+                                          label: null
+                                        },
+                                        {
+                                          type: null,
+                                          value: "action1",
+                                          onClick: null,
+                                          label: null
+                                        },
+                                        {
+                                          type: null,
+                                          onClick: null,
+                                          label: null
+                                        }
+                                      ];
+                                      __composite["0"]["onClick"] =
+                                        async info => {
+                                          const $steps = {};
+
+                                          $steps["updateModalWardOpen"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  variable: {
+                                                    objRoot: $state,
+                                                    variablePath: [
+                                                      "modalWard",
+                                                      "open"
+                                                    ]
+                                                  },
+                                                  operation: 4
+                                                };
+                                                return (({
+                                                  variable,
+                                                  value,
+                                                  startIndex,
+                                                  deleteCount
+                                                }) => {
+                                                  if (!variable) {
+                                                    return;
+                                                  }
+                                                  const {
+                                                    objRoot,
+                                                    variablePath
+                                                  } = variable;
+
+                                                  const oldValue = $stateGet(
+                                                    objRoot,
+                                                    variablePath
+                                                  );
+                                                  $stateSet(
+                                                    objRoot,
+                                                    variablePath,
+                                                    !oldValue
+                                                  );
+                                                  return !oldValue;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["updateModalWardOpen"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "updateModalWardOpen"
+                                            ] === "object" &&
+                                            typeof $steps["updateModalWardOpen"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["updateModalWardOpen"] =
+                                              await $steps[
+                                                "updateModalWardOpen"
+                                              ];
+                                          }
+
+                                          $steps[
+                                            "updatePatientFilterSelection"
+                                          ] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  variable: {
+                                                    objRoot: $state,
+                                                    variablePath: [
+                                                      "patientFilterSelection"
+                                                    ]
+                                                  },
+                                                  operation: 0,
+                                                  value: "ward"
+                                                };
+                                                return (({
+                                                  variable,
+                                                  value,
+                                                  startIndex,
+                                                  deleteCount
+                                                }) => {
+                                                  if (!variable) {
+                                                    return;
+                                                  }
+                                                  const {
+                                                    objRoot,
+                                                    variablePath
+                                                  } = variable;
+
+                                                  $stateSet(
+                                                    objRoot,
+                                                    variablePath,
+                                                    value
+                                                  );
+                                                  return value;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] = await $steps[
+                                              "updatePatientFilterSelection"
+                                            ];
+                                          }
+
+                                          $steps["updatePatientsSelectedTab"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "patientsSelectedTab"
+                                                      ]
+                                                    },
+                                                    operation: 0,
+                                                    value: "ward"
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      value
+                                                    );
+                                                    return value;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] = await $steps[
+                                              "updatePatientsSelectedTab"
+                                            ];
+                                          }
+
+                                          $steps["runCode"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  customFunction: async () => {
+                                                    return (() => {
+                                                      localStorage.setItem(
+                                                        "patients_selected_tab",
+                                                        $state.patientsSelectedTab?.toString() ||
+                                                          ""
+                                                      );
+                                                      console.log(
+                                                        "patients_selected_tab:",
+                                                        localStorage.getItem(
+                                                          "patients_selected_tab"
+                                                        )
+                                                      );
+                                                      return localStorage.setItem(
+                                                        "patients_filter_selected",
+                                                        $state.patientFilterSelection.toString() ||
+                                                          ""
+                                                      );
+                                                    })();
+                                                  }
+                                                };
+                                                return (({
+                                                  customFunction
+                                                }) => {
+                                                  return customFunction();
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["runCode"] != null &&
+                                            typeof $steps["runCode"] ===
+                                              "object" &&
+                                            typeof $steps["runCode"].then ===
+                                              "function"
+                                          ) {
+                                            $steps["runCode"] = await $steps[
+                                              "runCode"
+                                            ];
+                                          }
+                                        };
+                                      __composite["0"]["label"] =
+                                        "\u0628\u062e\u0634";
+                                      __composite["1"]["type"] = "item";
+                                      __composite["1"]["onClick"] =
+                                        async info => {
+                                          const $steps = {};
+
+                                          $steps["updateModalServiceOpen"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "modalService",
+                                                        "open"
+                                                      ]
+                                                    },
+                                                    operation: 4
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    const oldValue = $stateGet(
+                                                      objRoot,
+                                                      variablePath
+                                                    );
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      !oldValue
+                                                    );
+                                                    return !oldValue;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps["updateModalServiceOpen"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "updateModalServiceOpen"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updateModalServiceOpen"
+                                            ].then === "function"
+                                          ) {
+                                            $steps["updateModalServiceOpen"] =
+                                              await $steps[
+                                                "updateModalServiceOpen"
+                                              ];
+                                          }
+
+                                          $steps[
+                                            "updatePatientFilterSelection"
+                                          ] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  variable: {
+                                                    objRoot: $state,
+                                                    variablePath: [
+                                                      "patientFilterSelection"
+                                                    ]
+                                                  },
+                                                  operation: 0,
+                                                  value: "service"
+                                                };
+                                                return (({
+                                                  variable,
+                                                  value,
+                                                  startIndex,
+                                                  deleteCount
+                                                }) => {
+                                                  if (!variable) {
+                                                    return;
+                                                  }
+                                                  const {
+                                                    objRoot,
+                                                    variablePath
+                                                  } = variable;
+
+                                                  $stateSet(
+                                                    objRoot,
+                                                    variablePath,
+                                                    value
+                                                  );
+                                                  return value;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] = await $steps[
+                                              "updatePatientFilterSelection"
+                                            ];
+                                          }
+
+                                          $steps["updatePatientsSelectedTab"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "patientsSelectedTab"
+                                                      ]
+                                                    },
+                                                    operation: 0,
+                                                    value: "service"
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      value
+                                                    );
+                                                    return value;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] = await $steps[
+                                              "updatePatientsSelectedTab"
+                                            ];
+                                          }
+
+                                          $steps["runCode"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  customFunction: async () => {
+                                                    return (() => {
+                                                      localStorage.setItem(
+                                                        "patients_selected_tab",
+                                                        $state.patientsSelectedTab?.toString() ||
+                                                          ""
+                                                      );
+                                                      console.log(
+                                                        "patients_selected_tab:",
+                                                        localStorage.getItem(
+                                                          "patients_selected_tab"
+                                                        )
+                                                      );
+                                                      return localStorage.setItem(
+                                                        "patients_filter_selected",
+                                                        $state.patientFilterSelection.toString() ||
+                                                          ""
+                                                      );
+                                                    })();
+                                                  }
+                                                };
+                                                return (({
+                                                  customFunction
+                                                }) => {
+                                                  return customFunction();
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["runCode"] != null &&
+                                            typeof $steps["runCode"] ===
+                                              "object" &&
+                                            typeof $steps["runCode"].then ===
+                                              "function"
+                                          ) {
+                                            $steps["runCode"] = await $steps[
+                                              "runCode"
+                                            ];
+                                          }
+                                        };
+                                      __composite["1"]["label"] =
+                                        "\u0633\u0631\u0648\u06cc\u0633";
+                                      __composite["2"]["type"] = "item";
+                                      __composite["2"]["onClick"] =
+                                        async info => {
+                                          const $steps = {};
+
+                                          $steps["updateModalPhysicianOpen"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "modalPhysician",
+                                                        "open"
+                                                      ]
+                                                    },
+                                                    operation: 4
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    const oldValue = $stateGet(
+                                                      objRoot,
+                                                      variablePath
+                                                    );
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      !oldValue
+                                                    );
+                                                    return !oldValue;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updateModalPhysicianOpen"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updateModalPhysicianOpen"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updateModalPhysicianOpen"
+                                            ].then === "function"
+                                          ) {
+                                            $steps["updateModalPhysicianOpen"] =
+                                              await $steps[
+                                                "updateModalPhysicianOpen"
+                                              ];
+                                          }
+
+                                          $steps[
+                                            "updatePatientFilterSelection"
+                                          ] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  variable: {
+                                                    objRoot: $state,
+                                                    variablePath: [
+                                                      "patientFilterSelection"
+                                                    ]
+                                                  },
+                                                  operation: 0,
+                                                  value: "physician"
+                                                };
+                                                return (({
+                                                  variable,
+                                                  value,
+                                                  startIndex,
+                                                  deleteCount
+                                                }) => {
+                                                  if (!variable) {
+                                                    return;
+                                                  }
+                                                  const {
+                                                    objRoot,
+                                                    variablePath
+                                                  } = variable;
+
+                                                  $stateSet(
+                                                    objRoot,
+                                                    variablePath,
+                                                    value
+                                                  );
+                                                  return value;
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientFilterSelection"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientFilterSelection"
+                                            ] = await $steps[
+                                              "updatePatientFilterSelection"
+                                            ];
+                                          }
+
+                                          $steps["updatePatientsSelectedTab"] =
+                                            true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    variable: {
+                                                      objRoot: $state,
+                                                      variablePath: [
+                                                        "patientsSelectedTab"
+                                                      ]
+                                                    },
+                                                    operation: 0,
+                                                    value: "physician"
+                                                  };
+                                                  return (({
+                                                    variable,
+                                                    value,
+                                                    startIndex,
+                                                    deleteCount
+                                                  }) => {
+                                                    if (!variable) {
+                                                      return;
+                                                    }
+                                                    const {
+                                                      objRoot,
+                                                      variablePath
+                                                    } = variable;
+
+                                                    $stateSet(
+                                                      objRoot,
+                                                      variablePath,
+                                                      value
+                                                    );
+                                                    return value;
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                          if (
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] != null &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] === "object" &&
+                                            typeof $steps[
+                                              "updatePatientsSelectedTab"
+                                            ].then === "function"
+                                          ) {
+                                            $steps[
+                                              "updatePatientsSelectedTab"
+                                            ] = await $steps[
+                                              "updatePatientsSelectedTab"
+                                            ];
+                                          }
+
+                                          $steps["runCode"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  customFunction: async () => {
+                                                    return (() => {
+                                                      localStorage.setItem(
+                                                        "patients_selected_tab",
+                                                        $state.patientsSelectedTab?.toString() ||
+                                                          ""
+                                                      );
+                                                      console.log(
+                                                        "patients_selected_tab:",
+                                                        localStorage.getItem(
+                                                          "patients_selected_tab"
+                                                        )
+                                                      );
+                                                      return localStorage.setItem(
+                                                        "patients_filter_selected",
+                                                        $state.patientFilterSelection.toString() ||
+                                                          ""
+                                                      );
+                                                    })();
+                                                  }
+                                                };
+                                                return (({
+                                                  customFunction
+                                                }) => {
+                                                  return customFunction();
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["runCode"] != null &&
+                                            typeof $steps["runCode"] ===
+                                              "object" &&
+                                            typeof $steps["runCode"].then ===
+                                              "function"
+                                          ) {
+                                            $steps["runCode"] = await $steps[
+                                              "runCode"
+                                            ];
+                                          }
+                                        };
+                                      __composite["2"]["label"] =
+                                        "\u067e\u0632\u0634\u06a9";
+                                      return __composite;
+                                    })()
+                              }
+                              trigger={"click"}
+                              useMenuItemsSlot={false}
+                            >
+                              <AntdButton
+                                data-plasmic-name={"patientFilterButton"}
+                                data-plasmic-override={
+                                  overrides.patientFilterButton
+                                }
+                                className={classNames(
+                                  "__wab_instance",
+                                  sty.patientFilterButton
+                                )}
+                                shape={
                                   hasVariant(
                                     globalVariants,
                                     "screen",
                                     "mobileFirst"
                                   )
-                                    ? (() => {
-                                        const __composite = [
-                                          {
-                                            type: "item",
-                                            label: null,
-                                            onClick: null
-                                          },
-                                          {
-                                            type: null,
-                                            value: "action1",
-                                            onClick: null,
-                                            label: null
-                                          },
-                                          {
-                                            type: null,
-                                            onClick: null,
-                                            label: null
-                                          }
-                                        ];
-                                        __composite["0"]["label"] =
-                                          "\u0628\u062e\u0634";
-                                        __composite["0"]["onClick"] =
-                                          async info => {
-                                            const $steps = {};
-
-                                            $steps["updateModalWardOpen"] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    variable: {
-                                                      objRoot: $state,
-                                                      variablePath: [
-                                                        "modalWard",
-                                                        "open"
-                                                      ]
-                                                    },
-                                                    operation: 4
-                                                  };
-                                                  return (({
-                                                    variable,
-                                                    value,
-                                                    startIndex,
-                                                    deleteCount
-                                                  }) => {
-                                                    if (!variable) {
-                                                      return;
-                                                    }
-                                                    const {
-                                                      objRoot,
-                                                      variablePath
-                                                    } = variable;
-
-                                                    const oldValue = $stateGet(
-                                                      objRoot,
-                                                      variablePath
-                                                    );
-                                                    $stateSet(
-                                                      objRoot,
-                                                      variablePath,
-                                                      !oldValue
-                                                    );
-                                                    return !oldValue;
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps["updateModalWardOpen"] !=
-                                                null &&
-                                              typeof $steps[
-                                                "updateModalWardOpen"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updateModalWardOpen"
-                                              ].then === "function"
-                                            ) {
-                                              $steps["updateModalWardOpen"] =
-                                                await $steps[
-                                                  "updateModalWardOpen"
-                                                ];
-                                            }
-
-                                            $steps[
-                                              "updatePatientsSelectedTab"
-                                            ] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    variable: {
-                                                      objRoot: $state,
-                                                      variablePath: [
-                                                        "patientsSelectedTab"
-                                                      ]
-                                                    },
-                                                    operation: 0,
-                                                    value: "ward"
-                                                  };
-                                                  return (({
-                                                    variable,
-                                                    value,
-                                                    startIndex,
-                                                    deleteCount
-                                                  }) => {
-                                                    if (!variable) {
-                                                      return;
-                                                    }
-                                                    const {
-                                                      objRoot,
-                                                      variablePath
-                                                    } = variable;
-
-                                                    $stateSet(
-                                                      objRoot,
-                                                      variablePath,
-                                                      value
-                                                    );
-                                                    return value;
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ].then === "function"
-                                            ) {
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = await $steps[
-                                                "updatePatientsSelectedTab"
-                                              ];
-                                            }
-
-                                            $steps["runCode"] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    customFunction:
-                                                      async () => {
-                                                        return (() => {
-                                                          localStorage.setItem(
-                                                            "patients_selected_tab",
-                                                            $state.patientsSelectedTab?.toString() ||
-                                                              ""
-                                                          );
-                                                          return console.log(
-                                                            "patients_selected_tab:",
-                                                            localStorage.getItem(
-                                                              "patients_selected_tab"
-                                                            )
-                                                          );
-                                                        })();
-                                                      }
-                                                  };
-                                                  return (({
-                                                    customFunction
-                                                  }) => {
-                                                    return customFunction();
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps["runCode"] != null &&
-                                              typeof $steps["runCode"] ===
-                                                "object" &&
-                                              typeof $steps["runCode"].then ===
-                                                "function"
-                                            ) {
-                                              $steps["runCode"] = await $steps[
-                                                "runCode"
-                                              ];
-                                            }
-                                          };
-                                        __composite["1"]["type"] = "item";
-                                        __composite["1"]["onClick"] =
-                                          async info => {
-                                            const $steps = {};
-
-                                            $steps["updateModalServiceOpen"] =
-                                              true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "modalService",
-                                                          "open"
-                                                        ]
-                                                      },
-                                                      operation: 4
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      const oldValue =
-                                                        $stateGet(
-                                                          objRoot,
-                                                          variablePath
-                                                        );
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        !oldValue
-                                                      );
-                                                      return !oldValue;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                            if (
-                                              $steps[
-                                                "updateModalServiceOpen"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updateModalServiceOpen"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updateModalServiceOpen"
-                                              ].then === "function"
-                                            ) {
-                                              $steps["updateModalServiceOpen"] =
-                                                await $steps[
-                                                  "updateModalServiceOpen"
-                                                ];
-                                            }
-
-                                            $steps[
-                                              "updatePatientsSelectedTab"
-                                            ] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    variable: {
-                                                      objRoot: $state,
-                                                      variablePath: [
-                                                        "patientsSelectedTab"
-                                                      ]
-                                                    },
-                                                    operation: 0,
-                                                    value: "service"
-                                                  };
-                                                  return (({
-                                                    variable,
-                                                    value,
-                                                    startIndex,
-                                                    deleteCount
-                                                  }) => {
-                                                    if (!variable) {
-                                                      return;
-                                                    }
-                                                    const {
-                                                      objRoot,
-                                                      variablePath
-                                                    } = variable;
-
-                                                    $stateSet(
-                                                      objRoot,
-                                                      variablePath,
-                                                      value
-                                                    );
-                                                    return value;
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ].then === "function"
-                                            ) {
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = await $steps[
-                                                "updatePatientsSelectedTab"
-                                              ];
-                                            }
-
-                                            $steps["runCode"] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    customFunction:
-                                                      async () => {
-                                                        return (() => {
-                                                          localStorage.setItem(
-                                                            "patients_selected_tab",
-                                                            $state.patientsSelectedTab?.toString() ||
-                                                              ""
-                                                          );
-                                                          return console.log(
-                                                            "patients_selected_tab:",
-                                                            localStorage.getItem(
-                                                              "patients_selected_tab"
-                                                            )
-                                                          );
-                                                        })();
-                                                      }
-                                                  };
-                                                  return (({
-                                                    customFunction
-                                                  }) => {
-                                                    return customFunction();
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps["runCode"] != null &&
-                                              typeof $steps["runCode"] ===
-                                                "object" &&
-                                              typeof $steps["runCode"].then ===
-                                                "function"
-                                            ) {
-                                              $steps["runCode"] = await $steps[
-                                                "runCode"
-                                              ];
-                                            }
-                                          };
-                                        __composite["1"]["label"] =
-                                          "\u0633\u0631\u0648\u06cc\u0633";
-                                        __composite["2"]["type"] = "item";
-                                        __composite["2"]["onClick"] =
-                                          async info => {
-                                            const $steps = {};
-
-                                            $steps["updateModalPhysicianOpen"] =
-                                              true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "modalPhysician",
-                                                          "open"
-                                                        ]
-                                                      },
-                                                      operation: 4
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      const oldValue =
-                                                        $stateGet(
-                                                          objRoot,
-                                                          variablePath
-                                                        );
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        !oldValue
-                                                      );
-                                                      return !oldValue;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                            if (
-                                              $steps[
-                                                "updateModalPhysicianOpen"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updateModalPhysicianOpen"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updateModalPhysicianOpen"
-                                              ].then === "function"
-                                            ) {
-                                              $steps[
-                                                "updateModalPhysicianOpen"
-                                              ] = await $steps[
-                                                "updateModalPhysicianOpen"
-                                              ];
-                                            }
-
-                                            $steps[
-                                              "updatePatientsSelectedTab"
-                                            ] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    variable: {
-                                                      objRoot: $state,
-                                                      variablePath: [
-                                                        "patientsSelectedTab"
-                                                      ]
-                                                    },
-                                                    operation: 0,
-                                                    value: "physician"
-                                                  };
-                                                  return (({
-                                                    variable,
-                                                    value,
-                                                    startIndex,
-                                                    deleteCount
-                                                  }) => {
-                                                    if (!variable) {
-                                                      return;
-                                                    }
-                                                    const {
-                                                      objRoot,
-                                                      variablePath
-                                                    } = variable;
-
-                                                    $stateSet(
-                                                      objRoot,
-                                                      variablePath,
-                                                      value
-                                                    );
-                                                    return value;
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ].then === "function"
-                                            ) {
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = await $steps[
-                                                "updatePatientsSelectedTab"
-                                              ];
-                                            }
-
-                                            $steps["runCode"] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    customFunction:
-                                                      async () => {
-                                                        return (() => {
-                                                          localStorage.setItem(
-                                                            "patients_selected_tab",
-                                                            $state.patientsSelectedTab?.toString() ||
-                                                              ""
-                                                          );
-                                                          return console.log(
-                                                            "patients_selected_tab:",
-                                                            localStorage.getItem(
-                                                              "patients_selected_tab"
-                                                            )
-                                                          );
-                                                        })();
-                                                      }
-                                                  };
-                                                  return (({
-                                                    customFunction
-                                                  }) => {
-                                                    return customFunction();
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps["runCode"] != null &&
-                                              typeof $steps["runCode"] ===
-                                                "object" &&
-                                              typeof $steps["runCode"].then ===
-                                                "function"
-                                            ) {
-                                              $steps["runCode"] = await $steps[
-                                                "runCode"
-                                              ];
-                                            }
-                                          };
-                                        __composite["2"]["label"] =
-                                          "\u067e\u0632\u0634\u06a9";
-                                        return __composite;
-                                      })()
-                                    : (() => {
-                                        const __composite = [
-                                          {
-                                            type: null,
-                                            onClick: null,
-                                            label: null
-                                          },
-                                          {
-                                            type: null,
-                                            value: "action1",
-                                            onClick: null,
-                                            label: null
-                                          },
-                                          {
-                                            type: null,
-                                            onClick: null,
-                                            label: null
-                                          }
-                                        ];
-                                        __composite["0"]["type"] = "item";
-                                        __composite["0"]["onClick"] =
-                                          async info => {
-                                            const $steps = {};
-
-                                            $steps["updateModalWardOpen"] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    variable: {
-                                                      objRoot: $state,
-                                                      variablePath: [
-                                                        "modalWard",
-                                                        "open"
-                                                      ]
-                                                    },
-                                                    operation: 4
-                                                  };
-                                                  return (({
-                                                    variable,
-                                                    value,
-                                                    startIndex,
-                                                    deleteCount
-                                                  }) => {
-                                                    if (!variable) {
-                                                      return;
-                                                    }
-                                                    const {
-                                                      objRoot,
-                                                      variablePath
-                                                    } = variable;
-
-                                                    const oldValue = $stateGet(
-                                                      objRoot,
-                                                      variablePath
-                                                    );
-                                                    $stateSet(
-                                                      objRoot,
-                                                      variablePath,
-                                                      !oldValue
-                                                    );
-                                                    return !oldValue;
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps["updateModalWardOpen"] !=
-                                                null &&
-                                              typeof $steps[
-                                                "updateModalWardOpen"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updateModalWardOpen"
-                                              ].then === "function"
-                                            ) {
-                                              $steps["updateModalWardOpen"] =
-                                                await $steps[
-                                                  "updateModalWardOpen"
-                                                ];
-                                            }
-
-                                            $steps[
-                                              "updatePatientsSelectedTab"
-                                            ] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    variable: {
-                                                      objRoot: $state,
-                                                      variablePath: [
-                                                        "patientsSelectedTab"
-                                                      ]
-                                                    },
-                                                    operation: 0,
-                                                    value: "ward"
-                                                  };
-                                                  return (({
-                                                    variable,
-                                                    value,
-                                                    startIndex,
-                                                    deleteCount
-                                                  }) => {
-                                                    if (!variable) {
-                                                      return;
-                                                    }
-                                                    const {
-                                                      objRoot,
-                                                      variablePath
-                                                    } = variable;
-
-                                                    $stateSet(
-                                                      objRoot,
-                                                      variablePath,
-                                                      value
-                                                    );
-                                                    return value;
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ].then === "function"
-                                            ) {
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = await $steps[
-                                                "updatePatientsSelectedTab"
-                                              ];
-                                            }
-
-                                            $steps["runCode"] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    customFunction:
-                                                      async () => {
-                                                        return (() => {
-                                                          localStorage.setItem(
-                                                            "patients_selected_tab",
-                                                            $state.patientsSelectedTab?.toString() ||
-                                                              ""
-                                                          );
-                                                          return console.log(
-                                                            "patients_selected_tab:",
-                                                            localStorage.getItem(
-                                                              "patients_selected_tab"
-                                                            )
-                                                          );
-                                                        })();
-                                                      }
-                                                  };
-                                                  return (({
-                                                    customFunction
-                                                  }) => {
-                                                    return customFunction();
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps["runCode"] != null &&
-                                              typeof $steps["runCode"] ===
-                                                "object" &&
-                                              typeof $steps["runCode"].then ===
-                                                "function"
-                                            ) {
-                                              $steps["runCode"] = await $steps[
-                                                "runCode"
-                                              ];
-                                            }
-                                          };
-                                        __composite["0"]["label"] =
-                                          "\u0628\u062e\u0634";
-                                        __composite["1"]["type"] = "item";
-                                        __composite["1"]["onClick"] =
-                                          async info => {
-                                            const $steps = {};
-
-                                            $steps["updateModalServiceOpen"] =
-                                              true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "modalService",
-                                                          "open"
-                                                        ]
-                                                      },
-                                                      operation: 4
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      const oldValue =
-                                                        $stateGet(
-                                                          objRoot,
-                                                          variablePath
-                                                        );
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        !oldValue
-                                                      );
-                                                      return !oldValue;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                            if (
-                                              $steps[
-                                                "updateModalServiceOpen"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updateModalServiceOpen"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updateModalServiceOpen"
-                                              ].then === "function"
-                                            ) {
-                                              $steps["updateModalServiceOpen"] =
-                                                await $steps[
-                                                  "updateModalServiceOpen"
-                                                ];
-                                            }
-
-                                            $steps[
-                                              "updatePatientsSelectedTab"
-                                            ] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    variable: {
-                                                      objRoot: $state,
-                                                      variablePath: [
-                                                        "patientsSelectedTab"
-                                                      ]
-                                                    },
-                                                    operation: 0,
-                                                    value: "service"
-                                                  };
-                                                  return (({
-                                                    variable,
-                                                    value,
-                                                    startIndex,
-                                                    deleteCount
-                                                  }) => {
-                                                    if (!variable) {
-                                                      return;
-                                                    }
-                                                    const {
-                                                      objRoot,
-                                                      variablePath
-                                                    } = variable;
-
-                                                    $stateSet(
-                                                      objRoot,
-                                                      variablePath,
-                                                      value
-                                                    );
-                                                    return value;
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ].then === "function"
-                                            ) {
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = await $steps[
-                                                "updatePatientsSelectedTab"
-                                              ];
-                                            }
-
-                                            $steps["runCode"] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    customFunction:
-                                                      async () => {
-                                                        return (() => {
-                                                          localStorage.setItem(
-                                                            "patients_selected_tab",
-                                                            $state.patientsSelectedTab?.toString() ||
-                                                              ""
-                                                          );
-                                                          return console.log(
-                                                            "patients_selected_tab:",
-                                                            localStorage.getItem(
-                                                              "patients_selected_tab"
-                                                            )
-                                                          );
-                                                        })();
-                                                      }
-                                                  };
-                                                  return (({
-                                                    customFunction
-                                                  }) => {
-                                                    return customFunction();
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps["runCode"] != null &&
-                                              typeof $steps["runCode"] ===
-                                                "object" &&
-                                              typeof $steps["runCode"].then ===
-                                                "function"
-                                            ) {
-                                              $steps["runCode"] = await $steps[
-                                                "runCode"
-                                              ];
-                                            }
-                                          };
-                                        __composite["1"]["label"] =
-                                          "\u0633\u0631\u0648\u06cc\u0633";
-                                        __composite["2"]["type"] = "item";
-                                        __composite["2"]["onClick"] =
-                                          async info => {
-                                            const $steps = {};
-
-                                            $steps["updateModalPhysicianOpen"] =
-                                              true
-                                                ? (() => {
-                                                    const actionArgs = {
-                                                      variable: {
-                                                        objRoot: $state,
-                                                        variablePath: [
-                                                          "modalPhysician",
-                                                          "open"
-                                                        ]
-                                                      },
-                                                      operation: 4
-                                                    };
-                                                    return (({
-                                                      variable,
-                                                      value,
-                                                      startIndex,
-                                                      deleteCount
-                                                    }) => {
-                                                      if (!variable) {
-                                                        return;
-                                                      }
-                                                      const {
-                                                        objRoot,
-                                                        variablePath
-                                                      } = variable;
-
-                                                      const oldValue =
-                                                        $stateGet(
-                                                          objRoot,
-                                                          variablePath
-                                                        );
-                                                      $stateSet(
-                                                        objRoot,
-                                                        variablePath,
-                                                        !oldValue
-                                                      );
-                                                      return !oldValue;
-                                                    })?.apply(null, [
-                                                      actionArgs
-                                                    ]);
-                                                  })()
-                                                : undefined;
-                                            if (
-                                              $steps[
-                                                "updateModalPhysicianOpen"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updateModalPhysicianOpen"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updateModalPhysicianOpen"
-                                              ].then === "function"
-                                            ) {
-                                              $steps[
-                                                "updateModalPhysicianOpen"
-                                              ] = await $steps[
-                                                "updateModalPhysicianOpen"
-                                              ];
-                                            }
-
-                                            $steps[
-                                              "updatePatientsSelectedTab"
-                                            ] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    variable: {
-                                                      objRoot: $state,
-                                                      variablePath: [
-                                                        "patientsSelectedTab"
-                                                      ]
-                                                    },
-                                                    operation: 0,
-                                                    value: "physician"
-                                                  };
-                                                  return (({
-                                                    variable,
-                                                    value,
-                                                    startIndex,
-                                                    deleteCount
-                                                  }) => {
-                                                    if (!variable) {
-                                                      return;
-                                                    }
-                                                    const {
-                                                      objRoot,
-                                                      variablePath
-                                                    } = variable;
-
-                                                    $stateSet(
-                                                      objRoot,
-                                                      variablePath,
-                                                      value
-                                                    );
-                                                    return value;
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] != null &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] === "object" &&
-                                              typeof $steps[
-                                                "updatePatientsSelectedTab"
-                                              ].then === "function"
-                                            ) {
-                                              $steps[
-                                                "updatePatientsSelectedTab"
-                                              ] = await $steps[
-                                                "updatePatientsSelectedTab"
-                                              ];
-                                            }
-
-                                            $steps["runCode"] = true
-                                              ? (() => {
-                                                  const actionArgs = {
-                                                    customFunction:
-                                                      async () => {
-                                                        return (() => {
-                                                          localStorage.setItem(
-                                                            "patients_selected_tab",
-                                                            $state.patientsSelectedTab?.toString() ||
-                                                              ""
-                                                          );
-                                                          return console.log(
-                                                            "patients_selected_tab:",
-                                                            localStorage.getItem(
-                                                              "patients_selected_tab"
-                                                            )
-                                                          );
-                                                        })();
-                                                      }
-                                                  };
-                                                  return (({
-                                                    customFunction
-                                                  }) => {
-                                                    return customFunction();
-                                                  })?.apply(null, [actionArgs]);
-                                                })()
-                                              : undefined;
-                                            if (
-                                              $steps["runCode"] != null &&
-                                              typeof $steps["runCode"] ===
-                                                "object" &&
-                                              typeof $steps["runCode"].then ===
-                                                "function"
-                                            ) {
-                                              $steps["runCode"] = await $steps[
-                                                "runCode"
-                                              ];
-                                            }
-                                          };
-                                        __composite["2"]["label"] =
-                                          "\u067e\u0632\u0634\u06a9";
-                                        return __composite;
-                                      })()
+                                    ? "round"
+                                    : "default"
                                 }
-                                trigger={"click"}
-                                useMenuItemsSlot={false}
+                                size={
+                                  hasVariant(
+                                    globalVariants,
+                                    "screen",
+                                    "mobileFirst"
+                                  )
+                                    ? "medium"
+                                    : "large"
+                                }
+                                type={
+                                  hasVariant(
+                                    globalVariants,
+                                    "screen",
+                                    "mobileFirst"
+                                  )
+                                    ? "ghost"
+                                    : "link"
+                                }
                               >
-                                <AntdButton
-                                  data-plasmic-name={"filterButton2"}
-                                  data-plasmic-override={
-                                    overrides.filterButton2
-                                  }
+                                <div
                                   className={classNames(
-                                    "__wab_instance",
-                                    sty.filterButton2
+                                    projectcss.all,
+                                    sty.freeBox___8UyO0
                                   )}
-                                  shape={
-                                    hasVariant(
-                                      globalVariants,
-                                      "screen",
-                                      "mobileFirst"
-                                    )
-                                      ? "default"
-                                      : "round"
-                                  }
-                                  size={
-                                    hasVariant(
-                                      globalVariants,
-                                      "screen",
-                                      "mobileFirst"
-                                    )
-                                      ? "small"
-                                      : "large"
-                                  }
-                                  type={"link"}
                                 >
                                   <div
                                     className={classNames(
                                       projectcss.all,
                                       projectcss.__wab_text,
-                                      sty.text__kYp3F
+                                      sty.text__pgZnX
                                     )}
                                     dir={"rtl"}
                                   >
-                                    <React.Fragment>
-                                      {"انتخاب فیلتر"}
-                                    </React.Fragment>
+                                    <React.Fragment>{"فیلترها"}</React.Fragment>
                                   </div>
-                                </AntdButton>
-                              </AntdDropdown>
-                            ) : null}
+                                  <FilterSvgrepoComSvgIcon
+                                    data-plasmic-name={"filterIcon"}
+                                    data-plasmic-override={overrides.filterIcon}
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.filterIcon
+                                    )}
+                                    role={"img"}
+                                  />
+                                </div>
+                              </AntdButton>
+                            </AntdDropdown>
                             <div
                               data-plasmic-name={"bookmarkButtonSection"}
                               data-plasmic-override={
@@ -16256,6 +16149,43 @@ function PlasmicHomepage__RenderFunc(props: {
                             ) {
                               $steps["setSelectedTabLocalStorage"] =
                                 await $steps["setSelectedTabLocalStorage"];
+                            }
+
+                            $steps["updatePatientFilterSelection"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["patientFilterSelection"]
+                                    },
+                                    operation: 0,
+                                    value: "ward"
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updatePatientFilterSelection"] != null &&
+                              typeof $steps["updatePatientFilterSelection"] ===
+                                "object" &&
+                              typeof $steps["updatePatientFilterSelection"]
+                                .then === "function"
+                            ) {
+                              $steps["updatePatientFilterSelection"] =
+                                await $steps["updatePatientFilterSelection"];
                             }
 
                             $steps["setStateFilterwardname"] = true
@@ -22502,12 +22432,13 @@ const PlasmicDescendants = {
     "physician",
     "physicianPatientNumber",
     "patientFiltersSection",
-    "tabFilters",
-    "filterButton",
+    "patientFilterButton2",
+    "bookmarkedPatientNumber4",
     "bookmarked",
     "bookmarkedPatientNumber",
-    "changeTabFilters",
-    "filterButton2",
+    "selectpatientFilter",
+    "patientFilterButton",
+    "filterIcon",
     "bookmarkButtonSection",
     "bookmarked2",
     "bookmarkedPatientNumber3",
@@ -22702,12 +22633,13 @@ const PlasmicDescendants = {
     "physician",
     "physicianPatientNumber",
     "patientFiltersSection",
-    "tabFilters",
-    "filterButton",
+    "patientFilterButton2",
+    "bookmarkedPatientNumber4",
     "bookmarked",
     "bookmarkedPatientNumber",
-    "changeTabFilters",
-    "filterButton2",
+    "selectpatientFilter",
+    "patientFilterButton",
+    "filterIcon",
     "bookmarkButtonSection",
     "bookmarked2",
     "bookmarkedPatientNumber3",
@@ -23150,12 +23082,13 @@ const PlasmicDescendants = {
     "physician",
     "physicianPatientNumber",
     "patientFiltersSection",
-    "tabFilters",
-    "filterButton",
+    "patientFilterButton2",
+    "bookmarkedPatientNumber4",
     "bookmarked",
     "bookmarkedPatientNumber",
-    "changeTabFilters",
-    "filterButton2",
+    "selectpatientFilter",
+    "patientFilterButton",
+    "filterIcon",
     "bookmarkButtonSection",
     "bookmarked2",
     "bookmarkedPatientNumber3",
@@ -23209,12 +23142,13 @@ const PlasmicDescendants = {
     "physician",
     "physicianPatientNumber",
     "patientFiltersSection",
-    "tabFilters",
-    "filterButton",
+    "patientFilterButton2",
+    "bookmarkedPatientNumber4",
     "bookmarked",
     "bookmarkedPatientNumber",
-    "changeTabFilters",
-    "filterButton2",
+    "selectpatientFilter",
+    "patientFilterButton",
+    "filterIcon",
     "bookmarkButtonSection",
     "bookmarked2",
     "bookmarkedPatientNumber3",
@@ -23240,12 +23174,13 @@ const PlasmicDescendants = {
     "physician",
     "physicianPatientNumber",
     "patientFiltersSection",
-    "tabFilters",
-    "filterButton",
+    "patientFilterButton2",
+    "bookmarkedPatientNumber4",
     "bookmarked",
     "bookmarkedPatientNumber",
-    "changeTabFilters",
-    "filterButton2",
+    "selectpatientFilter",
+    "patientFilterButton",
+    "filterIcon",
     "bookmarkButtonSection",
     "bookmarked2",
     "bookmarkedPatientNumber3"
@@ -23265,17 +23200,22 @@ const PlasmicDescendants = {
   physicianPatientNumber: ["physicianPatientNumber"],
   patientFiltersSection: [
     "patientFiltersSection",
-    "tabFilters",
-    "filterButton",
+    "patientFilterButton2",
+    "bookmarkedPatientNumber4",
     "bookmarked",
     "bookmarkedPatientNumber"
   ],
-  tabFilters: ["tabFilters", "filterButton"],
-  filterButton: ["filterButton"],
+  patientFilterButton2: ["patientFilterButton2", "bookmarkedPatientNumber4"],
+  bookmarkedPatientNumber4: ["bookmarkedPatientNumber4"],
   bookmarked: ["bookmarked", "bookmarkedPatientNumber"],
   bookmarkedPatientNumber: ["bookmarkedPatientNumber"],
-  changeTabFilters: ["changeTabFilters", "filterButton2"],
-  filterButton2: ["filterButton2"],
+  selectpatientFilter: [
+    "selectpatientFilter",
+    "patientFilterButton",
+    "filterIcon"
+  ],
+  patientFilterButton: ["patientFilterButton", "filterIcon"],
+  filterIcon: ["filterIcon"],
   bookmarkButtonSection: [
     "bookmarkButtonSection",
     "bookmarked2",
@@ -23667,12 +23607,13 @@ type NodeDefaultElementType = {
   physician: typeof Button;
   physicianPatientNumber: "div";
   patientFiltersSection: "div";
-  tabFilters: typeof AntdDropdown;
-  filterButton: typeof AntdButton;
+  patientFilterButton2: typeof Button;
+  bookmarkedPatientNumber4: "div";
   bookmarked: typeof Button;
   bookmarkedPatientNumber: "div";
-  changeTabFilters: typeof AntdDropdown;
-  filterButton2: typeof AntdButton;
+  selectpatientFilter: typeof AntdDropdown;
+  patientFilterButton: typeof AntdButton;
+  filterIcon: "svg";
   bookmarkButtonSection: "div";
   bookmarked2: typeof Button;
   bookmarkedPatientNumber3: "div";
@@ -23941,12 +23882,13 @@ export const PlasmicHomepage = Object.assign(
     physician: makeNodeComponent("physician"),
     physicianPatientNumber: makeNodeComponent("physicianPatientNumber"),
     patientFiltersSection: makeNodeComponent("patientFiltersSection"),
-    tabFilters: makeNodeComponent("tabFilters"),
-    filterButton: makeNodeComponent("filterButton"),
+    patientFilterButton2: makeNodeComponent("patientFilterButton2"),
+    bookmarkedPatientNumber4: makeNodeComponent("bookmarkedPatientNumber4"),
     bookmarked: makeNodeComponent("bookmarked"),
     bookmarkedPatientNumber: makeNodeComponent("bookmarkedPatientNumber"),
-    changeTabFilters: makeNodeComponent("changeTabFilters"),
-    filterButton2: makeNodeComponent("filterButton2"),
+    selectpatientFilter: makeNodeComponent("selectpatientFilter"),
+    patientFilterButton: makeNodeComponent("patientFilterButton"),
+    filterIcon: makeNodeComponent("filterIcon"),
     bookmarkButtonSection: makeNodeComponent("bookmarkButtonSection"),
     bookmarked2: makeNodeComponent("bookmarked2"),
     bookmarkedPatientNumber3: makeNodeComponent("bookmarkedPatientNumber3"),
