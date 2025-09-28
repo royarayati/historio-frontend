@@ -63,9 +63,9 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
+import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
-import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
@@ -115,6 +115,8 @@ export type PlasmicImagingReportList__OverridesType = {
   getPatient?: Flex__<typeof ApiFetcherComponentPlus>;
   patientNameAgeGender2?: Flex__<"div">;
   saveAdmissionDatetime2?: Flex__<typeof ConditionGuard>;
+  apiFetcherComponent2?: Flex__<typeof ApiFetcherComponent>;
+  patientNameAgeGender3?: Flex__<"div">;
   tabButtons?: Flex__<"div">;
   media?: Flex__<typeof Button>;
   paraclinicsButton?: Flex__<typeof Button>;
@@ -1037,11 +1039,529 @@ function PlasmicImagingReportList__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
-          <ApiFetcherComponentPlus
-            data-plasmic-name={"getPatient"}
-            data-plasmic-override={overrides.getPatient}
-            autoFetch={true}
-            className={classNames("__wab_instance", sty.getPatient)}
+          {false ? (
+            <ApiFetcherComponentPlus
+              data-plasmic-name={"getPatient"}
+              data-plasmic-override={overrides.getPatient}
+              autoFetch={true}
+              className={classNames("__wab_instance", sty.getPatient)}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+              ref={ref => {
+                $refs["getPatient"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <React.Fragment>
+                    <div
+                      data-plasmic-name={"patientNameAgeGender2"}
+                      data-plasmic-override={overrides.patientNameAgeGender2}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.patientNameAgeGender2
+                      )}
+                      dir={"rtl"}
+                    >
+                      {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                        <React.Fragment>
+                          {(() => {
+                            function calcAgeShamsiDetailed(shamsiStr) {
+                              shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
+                                String.fromCharCode(d.charCodeAt(0) - 1728)
+                              );
+                              const [datePart] = shamsiStr.split(" ");
+                              let [birthYear, birthMonth, birthDay] = datePart
+                                .split("/")
+                                .map(Number);
+                              const gNow = new Date();
+                              const gy = gNow.getFullYear();
+                              const gm = gNow.getMonth() + 1;
+                              const gd = gNow.getDate();
+                              function g2j(gy, gm, gd) {
+                                const gDaysInMonth = [
+                                  31,
+                                  (gy % 4 === 0 && gy % 100 !== 0) ||
+                                  gy % 400 === 0
+                                    ? 29
+                                    : 28,
+                                  31,
+                                  30,
+                                  31,
+                                  30,
+                                  31,
+                                  31,
+                                  30,
+                                  31,
+                                  30,
+                                  31
+                                ];
+
+                                let g_day_no =
+                                  365 * (gy - 1600) +
+                                  Math.floor((gy - 1600 + 3) / 4) -
+                                  Math.floor((gy - 1600 + 99) / 100) +
+                                  Math.floor((gy - 1600 + 399) / 400);
+                                for (let i = 0; i < gm - 1; ++i)
+                                  g_day_no += gDaysInMonth[i];
+                                g_day_no += gd - 1;
+                                let j_day_no = g_day_no - 79;
+                                let j_np = Math.floor(j_day_no / 12053);
+                                j_day_no %= 12053;
+                                let jy =
+                                  979 +
+                                  33 * j_np +
+                                  4 * Math.floor(j_day_no / 1461);
+                                j_day_no %= 1461;
+                                if (j_day_no >= 366) {
+                                  jy += Math.floor((j_day_no - 1) / 365);
+                                  j_day_no = (j_day_no - 1) % 365;
+                                }
+                                const jDaysInMonth = [
+                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                                ];
+
+                                let jm;
+                                for (
+                                  jm = 0;
+                                  jm < 11 && j_day_no >= jDaysInMonth[jm];
+                                  ++jm
+                                )
+                                  j_day_no -= jDaysInMonth[jm];
+                                let jd = j_day_no + 1;
+                                return {
+                                  jy,
+                                  jm: jm + 1,
+                                  jd
+                                };
+                              }
+                              const today = g2j(gy, gm, gd);
+                              let yearDiff = today.jy - birthYear;
+                              let monthDiff = today.jm - birthMonth;
+                              let dayDiff = today.jd - birthDay;
+                              if (dayDiff < 0) {
+                                monthDiff--;
+                                const jDaysInMonth = [
+                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                                ];
+
+                                dayDiff +=
+                                  jDaysInMonth[(birthMonth - 2 + 12) % 12];
+                              }
+                              if (monthDiff < 0) {
+                                yearDiff--;
+                                monthDiff += 12;
+                              }
+                              if (yearDiff >= 1) {
+                                return `${yearDiff} ساله`;
+                              } else if (monthDiff >= 1) {
+                                return `${monthDiff} ماهه`;
+                              } else {
+                                return `${dayDiff} روزه`;
+                              }
+                            }
+                            function calcAgeGregorianDetailed(dateStr) {
+                              const dob = new Date(dateStr);
+                              const now = new Date();
+                              let yearDiff =
+                                now.getFullYear() - dob.getFullYear();
+                              let monthDiff = now.getMonth() - dob.getMonth();
+                              let dayDiff = now.getDate() - dob.getDate();
+                              if (dayDiff < 0) {
+                                monthDiff--;
+                                const prevMonth = new Date(
+                                  now.getFullYear(),
+                                  now.getMonth(),
+                                  0
+                                );
+                                dayDiff += prevMonth.getDate();
+                              }
+                              if (monthDiff < 0) {
+                                yearDiff--;
+                                monthDiff += 12;
+                              }
+                              if (yearDiff >= 1) {
+                                return `${yearDiff}`;
+                              } else if (monthDiff >= 1) {
+                                return `${monthDiff}ماهه`;
+                              } else {
+                                return `${dayDiff}روزه`;
+                              }
+                            }
+                            function getPersonInfoWithAge(item) {
+                              const hisType = localStorage.getItem(
+                                "inlab_user_his_type"
+                              );
+                              if (!item || !item.date_of_birth)
+                                return "تاریخ تولد موجود نیست.";
+                              const fullName = `${item.first_name} ${item.last_name}`;
+                              const genderSymbol =
+                                item.gender === "F"
+                                  ? " \u2640️"
+                                  : item.gender === "M"
+                                  ? " \u2642️"
+                                  : "";
+                              let ageString;
+                              if (
+                                hisType === "tums_api" ||
+                                hisType === "tebvarayane_db"
+                              ) {
+                                ageString = calcAgeShamsiDetailed(
+                                  item.date_of_birth
+                                );
+                              } else {
+                                ageString = calcAgeGregorianDetailed(
+                                  item.date_of_birth
+                                );
+                              }
+                              return `${fullName}${ageString}${genderSymbol}`;
+                            }
+                            return (() => {
+                              if ($ctx.fetched_data.loading) return "";
+                              if (
+                                $ctx.fetched_data.data &&
+                                $ctx.fetched_data.data.length === 0
+                              )
+                                return "";
+                              const item = $ctx.fetched_data.data[0];
+                              return getPersonInfoWithAge(item);
+                            })();
+                          })()}
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          {(() => {
+                            function calcAgeShamsiDetailed(shamsiStr) {
+                              shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
+                                String.fromCharCode(d.charCodeAt(0) - 1728)
+                              );
+                              const [datePart] = shamsiStr.split(" ");
+                              let [birthYear, birthMonth, birthDay] = datePart
+                                .split("/")
+                                .map(Number);
+                              const gNow = new Date();
+                              const gy = gNow.getFullYear();
+                              const gm = gNow.getMonth() + 1;
+                              const gd = gNow.getDate();
+                              function g2j(gy, gm, gd) {
+                                const gDaysInMonth = [
+                                  31,
+                                  (gy % 4 === 0 && gy % 100 !== 0) ||
+                                  gy % 400 === 0
+                                    ? 29
+                                    : 28,
+                                  31,
+                                  30,
+                                  31,
+                                  30,
+                                  31,
+                                  31,
+                                  30,
+                                  31,
+                                  30,
+                                  31
+                                ];
+
+                                let g_day_no =
+                                  365 * (gy - 1600) +
+                                  Math.floor((gy - 1600 + 3) / 4) -
+                                  Math.floor((gy - 1600 + 99) / 100) +
+                                  Math.floor((gy - 1600 + 399) / 400);
+                                for (let i = 0; i < gm - 1; ++i)
+                                  g_day_no += gDaysInMonth[i];
+                                g_day_no += gd - 1;
+                                let j_day_no = g_day_no - 79;
+                                let j_np = Math.floor(j_day_no / 12053);
+                                j_day_no %= 12053;
+                                let jy =
+                                  979 +
+                                  33 * j_np +
+                                  4 * Math.floor(j_day_no / 1461);
+                                j_day_no %= 1461;
+                                if (j_day_no >= 366) {
+                                  jy += Math.floor((j_day_no - 1) / 365);
+                                  j_day_no = (j_day_no - 1) % 365;
+                                }
+                                const jDaysInMonth = [
+                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                                ];
+
+                                let jm;
+                                for (
+                                  jm = 0;
+                                  jm < 11 && j_day_no >= jDaysInMonth[jm];
+                                  ++jm
+                                )
+                                  j_day_no -= jDaysInMonth[jm];
+                                let jd = j_day_no + 1;
+                                return {
+                                  jy,
+                                  jm: jm + 1,
+                                  jd
+                                };
+                              }
+                              const today = g2j(gy, gm, gd);
+                              let yearDiff = today.jy - birthYear;
+                              let monthDiff = today.jm - birthMonth;
+                              let dayDiff = today.jd - birthDay;
+                              if (dayDiff < 0) {
+                                monthDiff--;
+                                const jDaysInMonth = [
+                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                                ];
+
+                                dayDiff +=
+                                  jDaysInMonth[(birthMonth - 2 + 12) % 12];
+                              }
+                              if (monthDiff < 0) {
+                                yearDiff--;
+                                monthDiff += 12;
+                              }
+                              if (yearDiff >= 1) {
+                                return `${yearDiff} ساله`;
+                              } else if (monthDiff >= 1) {
+                                return `${monthDiff} ماهه`;
+                              } else {
+                                return `${dayDiff} روزه`;
+                              }
+                            }
+                            function calcAgeGregorianDetailed(dateStr) {
+                              const dob = new Date(dateStr);
+                              const now = new Date();
+                              let yearDiff =
+                                now.getFullYear() - dob.getFullYear();
+                              let monthDiff = now.getMonth() - dob.getMonth();
+                              let dayDiff = now.getDate() - dob.getDate();
+                              if (dayDiff < 0) {
+                                monthDiff--;
+                                const prevMonth = new Date(
+                                  now.getFullYear(),
+                                  now.getMonth(),
+                                  0
+                                );
+                                dayDiff += prevMonth.getDate();
+                              }
+                              if (monthDiff < 0) {
+                                yearDiff--;
+                                monthDiff += 12;
+                              }
+                              if (yearDiff >= 1) {
+                                return `${yearDiff}`;
+                              } else if (monthDiff >= 1) {
+                                return `${monthDiff}ماهه`;
+                              } else {
+                                return `${dayDiff}روزه`;
+                              }
+                            }
+                            function getPersonInfoWithAge(item) {
+                              const hisType = localStorage.getItem(
+                                "inlab_user_his_type"
+                              );
+                              if (!item || !item.date_of_birth)
+                                return "تاریخ تولد موجود نیست.";
+                              const fullName = `${item.first_name} ${item.last_name}`;
+                              const genderSymbol =
+                                item.gender === "F"
+                                  ? " \u2640️"
+                                  : item.gender === "M"
+                                  ? " \u2642️"
+                                  : "";
+                              let ageString;
+                              if (
+                                hisType === "tums_api" ||
+                                hisType === "tebvarayane_db"
+                              ) {
+                                ageString = calcAgeShamsiDetailed(
+                                  item.date_of_birth
+                                );
+                              } else {
+                                ageString = calcAgeGregorianDetailed(
+                                  item.date_of_birth
+                                );
+                              }
+                              return `${fullName}${ageString}${genderSymbol}`;
+                            }
+                            return (() => {
+                              if ($ctx.fetched_data.loading) return "";
+                              if (
+                                $ctx.fetched_data.data &&
+                                $ctx.fetched_data.data.length === 0
+                              )
+                                return "";
+                              const item = $ctx.fetched_data.data[0];
+                              return getPersonInfoWithAge(item);
+                            })();
+                          })()}
+                        </React.Fragment>
+                      )}
+                    </div>
+                    {(
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? false
+                        : false
+                    ) ? (
+                      <ConditionGuard
+                        data-plasmic-name={"saveAdmissionDatetime2"}
+                        data-plasmic-override={overrides.saveAdmissionDatetime2}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.saveAdmissionDatetime2
+                        )}
+                        condition={
+                          $ctx.fetched_data.loading === false &&
+                          $ctx.fetched_data.data &&
+                          $ctx.fetched_data.data.length > 0
+                        }
+                        onNotSatisfied={async () => {
+                          const $steps = {};
+
+                          $steps["updateAdmissionDatetime"] =
+                            $ctx.fetched_data.loading === false &&
+                            $ctx.fetched_data.data.length > 0
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["admissionDatetime"]
+                                    },
+                                    operation: 0,
+                                    value:
+                                      $ctx.fetched_data.data[0]
+                                        .admission_datetime
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateAdmissionDatetime"] != null &&
+                            typeof $steps["updateAdmissionDatetime"] ===
+                              "object" &&
+                            typeof $steps["updateAdmissionDatetime"].then ===
+                              "function"
+                          ) {
+                            $steps["updateAdmissionDatetime"] = await $steps[
+                              "updateAdmissionDatetime"
+                            ];
+                          }
+
+                          $steps["updatePatientNationalCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["patientNationalCode"]
+                                  },
+                                  operation: 0,
+                                  value: $ctx.fetched_data.data[0].national_code
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updatePatientNationalCode"] != null &&
+                            typeof $steps["updatePatientNationalCode"] ===
+                              "object" &&
+                            typeof $steps["updatePatientNationalCode"].then ===
+                              "function"
+                          ) {
+                            $steps["updatePatientNationalCode"] = await $steps[
+                              "updatePatientNationalCode"
+                            ];
+                          }
+
+                          $steps["updateSetNationalCode"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["setNationalCode"]
+                                  },
+                                  operation: 0,
+                                  value: true
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateSetNationalCode"] != null &&
+                            typeof $steps["updateSetNationalCode"] ===
+                              "object" &&
+                            typeof $steps["updateSetNationalCode"].then ===
+                              "function"
+                          ) {
+                            $steps["updateSetNationalCode"] = await $steps[
+                              "updateSetNationalCode"
+                            ];
+                          }
+                        }}
+                      />
+                    ) : null}
+                  </React.Fragment>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponentPlus>
+          ) : null}
+          <ApiFetcherComponent
+            data-plasmic-name={"apiFetcherComponent2"}
+            data-plasmic-override={overrides.apiFetcherComponent2}
+            className={classNames("__wab_instance", sty.apiFetcherComponent2)}
             headers={(() => {
               try {
                 return {
@@ -1060,496 +1580,346 @@ function PlasmicImagingReportList__RenderFunc(props: {
             method={"GET"}
             path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
             ref={ref => {
-              $refs["getPatient"] = ref;
+              $refs["apiFetcherComponent2"] = ref;
             }}
           >
             <DataCtxReader__>
               {$ctx => (
-                <React.Fragment>
-                  <div
-                    data-plasmic-name={"patientNameAgeGender2"}
-                    data-plasmic-override={overrides.patientNameAgeGender2}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.patientNameAgeGender2
-                    )}
-                    dir={"rtl"}
-                  >
-                    {hasVariant(globalVariants, "screen", "mobileFirst") ? (
-                      <React.Fragment>
-                        {(() => {
-                          function calcAgeShamsiDetailed(shamsiStr) {
-                            shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
-                              String.fromCharCode(d.charCodeAt(0) - 1728)
-                            );
-                            const [datePart] = shamsiStr.split(" ");
-                            let [birthYear, birthMonth, birthDay] = datePart
-                              .split("/")
-                              .map(Number);
-                            const gNow = new Date();
-                            const gy = gNow.getFullYear();
-                            const gm = gNow.getMonth() + 1;
-                            const gd = gNow.getDate();
-                            function g2j(gy, gm, gd) {
-                              const gDaysInMonth = [
-                                31,
-                                (gy % 4 === 0 && gy % 100 !== 0) ||
-                                gy % 400 === 0
-                                  ? 29
-                                  : 28,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31
-                              ];
+                <div
+                  data-plasmic-name={"patientNameAgeGender3"}
+                  data-plasmic-override={overrides.patientNameAgeGender3}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.patientNameAgeGender3
+                  )}
+                  dir={"rtl"}
+                >
+                  {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                    <React.Fragment>
+                      {(() => {
+                        function calcAgeShamsiDetailed(shamsiStr) {
+                          shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
+                            String.fromCharCode(d.charCodeAt(0) - 1728)
+                          );
+                          const [datePart] = shamsiStr.split(" ");
+                          let [birthYear, birthMonth, birthDay] = datePart
+                            .split("/")
+                            .map(Number);
+                          const gNow = new Date();
+                          const gy = gNow.getFullYear();
+                          const gm = gNow.getMonth() + 1;
+                          const gd = gNow.getDate();
+                          function g2j(gy, gm, gd) {
+                            const gDaysInMonth = [
+                              31,
+                              (gy % 4 === 0 && gy % 100 !== 0) || gy % 400 === 0
+                                ? 29
+                                : 28,
+                              31,
+                              30,
+                              31,
+                              30,
+                              31,
+                              31,
+                              30,
+                              31,
+                              30,
+                              31
+                            ];
 
-                              let g_day_no =
-                                365 * (gy - 1600) +
-                                Math.floor((gy - 1600 + 3) / 4) -
-                                Math.floor((gy - 1600 + 99) / 100) +
-                                Math.floor((gy - 1600 + 399) / 400);
-                              for (let i = 0; i < gm - 1; ++i)
-                                g_day_no += gDaysInMonth[i];
-                              g_day_no += gd - 1;
-                              let j_day_no = g_day_no - 79;
-                              let j_np = Math.floor(j_day_no / 12053);
-                              j_day_no %= 12053;
-                              let jy =
-                                979 +
-                                33 * j_np +
-                                4 * Math.floor(j_day_no / 1461);
-                              j_day_no %= 1461;
-                              if (j_day_no >= 366) {
-                                jy += Math.floor((j_day_no - 1) / 365);
-                                j_day_no = (j_day_no - 1) % 365;
-                              }
-                              const jDaysInMonth = [
-                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                              ];
+                            let g_day_no =
+                              365 * (gy - 1600) +
+                              Math.floor((gy - 1600 + 3) / 4) -
+                              Math.floor((gy - 1600 + 99) / 100) +
+                              Math.floor((gy - 1600 + 399) / 400);
+                            for (let i = 0; i < gm - 1; ++i)
+                              g_day_no += gDaysInMonth[i];
+                            g_day_no += gd - 1;
+                            let j_day_no = g_day_no - 79;
+                            let j_np = Math.floor(j_day_no / 12053);
+                            j_day_no %= 12053;
+                            let jy =
+                              979 + 33 * j_np + 4 * Math.floor(j_day_no / 1461);
+                            j_day_no %= 1461;
+                            if (j_day_no >= 366) {
+                              jy += Math.floor((j_day_no - 1) / 365);
+                              j_day_no = (j_day_no - 1) % 365;
+                            }
+                            const jDaysInMonth = [
+                              31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                            ];
 
-                              let jm;
-                              for (
-                                jm = 0;
-                                jm < 11 && j_day_no >= jDaysInMonth[jm];
-                                ++jm
-                              )
-                                j_day_no -= jDaysInMonth[jm];
-                              let jd = j_day_no + 1;
-                              return {
-                                jy,
-                                jm: jm + 1,
-                                jd
-                              };
-                            }
-                            const today = g2j(gy, gm, gd);
-                            let yearDiff = today.jy - birthYear;
-                            let monthDiff = today.jm - birthMonth;
-                            let dayDiff = today.jd - birthDay;
-                            if (dayDiff < 0) {
-                              monthDiff--;
-                              const jDaysInMonth = [
-                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                              ];
-
-                              dayDiff +=
-                                jDaysInMonth[(birthMonth - 2 + 12) % 12];
-                            }
-                            if (monthDiff < 0) {
-                              yearDiff--;
-                              monthDiff += 12;
-                            }
-                            if (yearDiff >= 1) {
-                              return `${yearDiff} ساله`;
-                            } else if (monthDiff >= 1) {
-                              return `${monthDiff} ماهه`;
-                            } else {
-                              return `${dayDiff} روزه`;
-                            }
-                          }
-                          function calcAgeGregorianDetailed(dateStr) {
-                            const dob = new Date(dateStr);
-                            const now = new Date();
-                            let yearDiff =
-                              now.getFullYear() - dob.getFullYear();
-                            let monthDiff = now.getMonth() - dob.getMonth();
-                            let dayDiff = now.getDate() - dob.getDate();
-                            if (dayDiff < 0) {
-                              monthDiff--;
-                              const prevMonth = new Date(
-                                now.getFullYear(),
-                                now.getMonth(),
-                                0
-                              );
-                              dayDiff += prevMonth.getDate();
-                            }
-                            if (monthDiff < 0) {
-                              yearDiff--;
-                              monthDiff += 12;
-                            }
-                            if (yearDiff >= 1) {
-                              return `${yearDiff}`;
-                            } else if (monthDiff >= 1) {
-                              return `${monthDiff}ماهه`;
-                            } else {
-                              return `${dayDiff}روزه`;
-                            }
-                          }
-                          function getPersonInfoWithAge(item) {
-                            const hisType = localStorage.getItem(
-                              "inlab_user_his_type"
-                            );
-                            if (!item || !item.date_of_birth)
-                              return "تاریخ تولد موجود نیست.";
-                            const fullName = `${item.first_name} ${item.last_name}`;
-                            const genderSymbol =
-                              item.gender === "F"
-                                ? " \u2640️"
-                                : item.gender === "M"
-                                ? " \u2642️"
-                                : "";
-                            let ageString;
-                            if (
-                              hisType === "tums_api" ||
-                              hisType === "tebvarayane_db"
-                            ) {
-                              ageString = calcAgeShamsiDetailed(
-                                item.date_of_birth
-                              );
-                            } else {
-                              ageString = calcAgeGregorianDetailed(
-                                item.date_of_birth
-                              );
-                            }
-                            return `${fullName}${ageString}${genderSymbol}`;
-                          }
-                          return (() => {
-                            if ($ctx.fetched_data.loading) return "";
-                            if (
-                              $ctx.fetched_data.data &&
-                              $ctx.fetched_data.data.length === 0
+                            let jm;
+                            for (
+                              jm = 0;
+                              jm < 11 && j_day_no >= jDaysInMonth[jm];
+                              ++jm
                             )
-                              return "";
-                            const item = $ctx.fetched_data.data[0];
-                            return getPersonInfoWithAge(item);
-                          })();
-                        })()}
-                      </React.Fragment>
-                    ) : (
-                      <React.Fragment>
-                        {(() => {
-                          function calcAgeShamsiDetailed(shamsiStr) {
-                            shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
-                              String.fromCharCode(d.charCodeAt(0) - 1728)
+                              j_day_no -= jDaysInMonth[jm];
+                            let jd = j_day_no + 1;
+                            return {
+                              jy,
+                              jm: jm + 1,
+                              jd
+                            };
+                          }
+                          const today = g2j(gy, gm, gd);
+                          let yearDiff = today.jy - birthYear;
+                          let monthDiff = today.jm - birthMonth;
+                          let dayDiff = today.jd - birthDay;
+                          if (dayDiff < 0) {
+                            monthDiff--;
+                            const jDaysInMonth = [
+                              31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                            ];
+
+                            dayDiff += jDaysInMonth[(birthMonth - 2 + 12) % 12];
+                          }
+                          if (monthDiff < 0) {
+                            yearDiff--;
+                            monthDiff += 12;
+                          }
+                          if (yearDiff >= 1) {
+                            return `${yearDiff} ساله`;
+                          } else if (monthDiff >= 1) {
+                            return `${monthDiff} ماهه`;
+                          } else {
+                            return `${dayDiff} روزه`;
+                          }
+                        }
+                        function calcAgeGregorianDetailed(dateStr) {
+                          const dob = new Date(dateStr);
+                          const now = new Date();
+                          let yearDiff = now.getFullYear() - dob.getFullYear();
+                          let monthDiff = now.getMonth() - dob.getMonth();
+                          let dayDiff = now.getDate() - dob.getDate();
+                          if (dayDiff < 0) {
+                            monthDiff--;
+                            const prevMonth = new Date(
+                              now.getFullYear(),
+                              now.getMonth(),
+                              0
                             );
-                            const [datePart] = shamsiStr.split(" ");
-                            let [birthYear, birthMonth, birthDay] = datePart
-                              .split("/")
-                              .map(Number);
-                            const gNow = new Date();
-                            const gy = gNow.getFullYear();
-                            const gm = gNow.getMonth() + 1;
-                            const gd = gNow.getDate();
-                            function g2j(gy, gm, gd) {
-                              const gDaysInMonth = [
-                                31,
-                                (gy % 4 === 0 && gy % 100 !== 0) ||
-                                gy % 400 === 0
-                                  ? 29
-                                  : 28,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31
-                              ];
-
-                              let g_day_no =
-                                365 * (gy - 1600) +
-                                Math.floor((gy - 1600 + 3) / 4) -
-                                Math.floor((gy - 1600 + 99) / 100) +
-                                Math.floor((gy - 1600 + 399) / 400);
-                              for (let i = 0; i < gm - 1; ++i)
-                                g_day_no += gDaysInMonth[i];
-                              g_day_no += gd - 1;
-                              let j_day_no = g_day_no - 79;
-                              let j_np = Math.floor(j_day_no / 12053);
-                              j_day_no %= 12053;
-                              let jy =
-                                979 +
-                                33 * j_np +
-                                4 * Math.floor(j_day_no / 1461);
-                              j_day_no %= 1461;
-                              if (j_day_no >= 366) {
-                                jy += Math.floor((j_day_no - 1) / 365);
-                                j_day_no = (j_day_no - 1) % 365;
-                              }
-                              const jDaysInMonth = [
-                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                              ];
-
-                              let jm;
-                              for (
-                                jm = 0;
-                                jm < 11 && j_day_no >= jDaysInMonth[jm];
-                                ++jm
-                              )
-                                j_day_no -= jDaysInMonth[jm];
-                              let jd = j_day_no + 1;
-                              return {
-                                jy,
-                                jm: jm + 1,
-                                jd
-                              };
-                            }
-                            const today = g2j(gy, gm, gd);
-                            let yearDiff = today.jy - birthYear;
-                            let monthDiff = today.jm - birthMonth;
-                            let dayDiff = today.jd - birthDay;
-                            if (dayDiff < 0) {
-                              monthDiff--;
-                              const jDaysInMonth = [
-                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                              ];
-
-                              dayDiff +=
-                                jDaysInMonth[(birthMonth - 2 + 12) % 12];
-                            }
-                            if (monthDiff < 0) {
-                              yearDiff--;
-                              monthDiff += 12;
-                            }
-                            if (yearDiff >= 1) {
-                              return `${yearDiff} ساله`;
-                            } else if (monthDiff >= 1) {
-                              return `${monthDiff} ماهه`;
-                            } else {
-                              return `${dayDiff} روزه`;
-                            }
+                            dayDiff += prevMonth.getDate();
                           }
-                          function calcAgeGregorianDetailed(dateStr) {
-                            const dob = new Date(dateStr);
-                            const now = new Date();
-                            let yearDiff =
-                              now.getFullYear() - dob.getFullYear();
-                            let monthDiff = now.getMonth() - dob.getMonth();
-                            let dayDiff = now.getDate() - dob.getDate();
-                            if (dayDiff < 0) {
-                              monthDiff--;
-                              const prevMonth = new Date(
-                                now.getFullYear(),
-                                now.getMonth(),
-                                0
-                              );
-                              dayDiff += prevMonth.getDate();
-                            }
-                            if (monthDiff < 0) {
-                              yearDiff--;
-                              monthDiff += 12;
-                            }
-                            if (yearDiff >= 1) {
-                              return `${yearDiff}`;
-                            } else if (monthDiff >= 1) {
-                              return `${monthDiff}ماهه`;
-                            } else {
-                              return `${dayDiff}روزه`;
-                            }
+                          if (monthDiff < 0) {
+                            yearDiff--;
+                            monthDiff += 12;
                           }
-                          function getPersonInfoWithAge(item) {
-                            const hisType = localStorage.getItem(
-                              "inlab_user_his_type"
+                          if (yearDiff >= 1) {
+                            return `${yearDiff}`;
+                          } else if (monthDiff >= 1) {
+                            return `${monthDiff}ماهه`;
+                          } else {
+                            return `${dayDiff}روزه`;
+                          }
+                        }
+                        function getPersonInfoWithAge(item) {
+                          const hisType = localStorage.getItem(
+                            "inlab_user_his_type"
+                          );
+                          if (!item || !item.date_of_birth)
+                            return "تاریخ تولد موجود نیست.";
+                          const fullName = `${item.first_name} ${item.last_name}`;
+                          const genderSymbol =
+                            item.gender === "F"
+                              ? " \u2640️"
+                              : item.gender === "M"
+                              ? " \u2642️"
+                              : "";
+                          let ageString;
+                          if (
+                            hisType === "tums_api" ||
+                            hisType === "tebvarayane_db"
+                          ) {
+                            ageString = calcAgeShamsiDetailed(
+                              item.date_of_birth
                             );
-                            if (!item || !item.date_of_birth)
-                              return "تاریخ تولد موجود نیست.";
-                            const fullName = `${item.first_name} ${item.last_name}`;
-                            const genderSymbol =
-                              item.gender === "F"
-                                ? " \u2640️"
-                                : item.gender === "M"
-                                ? " \u2642️"
-                                : "";
-                            let ageString;
-                            if (
-                              hisType === "tums_api" ||
-                              hisType === "tebvarayane_db"
-                            ) {
-                              ageString = calcAgeShamsiDetailed(
-                                item.date_of_birth
-                              );
-                            } else {
-                              ageString = calcAgeGregorianDetailed(
-                                item.date_of_birth
-                              );
-                            }
-                            return `${fullName}${ageString}${genderSymbol}`;
+                          } else {
+                            ageString = calcAgeGregorianDetailed(
+                              item.date_of_birth
+                            );
                           }
-                          return (() => {
-                            if ($ctx.fetched_data.loading) return "";
-                            if (
-                              $ctx.fetched_data.data &&
-                              $ctx.fetched_data.data.length === 0
+                          return `${fullName}${ageString}${genderSymbol}`;
+                        }
+                        return (() => {
+                          if ($ctx.fetched_data.loading) return "";
+                          if (
+                            $ctx.fetched_data.data &&
+                            $ctx.fetched_data.data.length === 0
+                          )
+                            return "";
+                          const item = $ctx.fetched_data.data[0];
+                          return getPersonInfoWithAge(item);
+                        })();
+                      })()}
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>
+                      {(() => {
+                        function calcAgeShamsiDetailed(shamsiStr) {
+                          shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
+                            String.fromCharCode(d.charCodeAt(0) - 1728)
+                          );
+                          const [datePart] = shamsiStr.split(" ");
+                          let [birthYear, birthMonth, birthDay] = datePart
+                            .split("/")
+                            .map(Number);
+                          const gNow = new Date();
+                          const gy = gNow.getFullYear();
+                          const gm = gNow.getMonth() + 1;
+                          const gd = gNow.getDate();
+                          function g2j(gy, gm, gd) {
+                            const gDaysInMonth = [
+                              31,
+                              (gy % 4 === 0 && gy % 100 !== 0) || gy % 400 === 0
+                                ? 29
+                                : 28,
+                              31,
+                              30,
+                              31,
+                              30,
+                              31,
+                              31,
+                              30,
+                              31,
+                              30,
+                              31
+                            ];
+
+                            let g_day_no =
+                              365 * (gy - 1600) +
+                              Math.floor((gy - 1600 + 3) / 4) -
+                              Math.floor((gy - 1600 + 99) / 100) +
+                              Math.floor((gy - 1600 + 399) / 400);
+                            for (let i = 0; i < gm - 1; ++i)
+                              g_day_no += gDaysInMonth[i];
+                            g_day_no += gd - 1;
+                            let j_day_no = g_day_no - 79;
+                            let j_np = Math.floor(j_day_no / 12053);
+                            j_day_no %= 12053;
+                            let jy =
+                              979 + 33 * j_np + 4 * Math.floor(j_day_no / 1461);
+                            j_day_no %= 1461;
+                            if (j_day_no >= 366) {
+                              jy += Math.floor((j_day_no - 1) / 365);
+                              j_day_no = (j_day_no - 1) % 365;
+                            }
+                            const jDaysInMonth = [
+                              31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                            ];
+
+                            let jm;
+                            for (
+                              jm = 0;
+                              jm < 11 && j_day_no >= jDaysInMonth[jm];
+                              ++jm
                             )
-                              return "";
-                            const item = $ctx.fetched_data.data[0];
-                            return getPersonInfoWithAge(item);
-                          })();
-                        })()}
-                      </React.Fragment>
-                    )}
-                  </div>
-                  {(
-                    hasVariant(globalVariants, "screen", "mobileFirst")
-                      ? false
-                      : false
-                  ) ? (
-                    <ConditionGuard
-                      data-plasmic-name={"saveAdmissionDatetime2"}
-                      data-plasmic-override={overrides.saveAdmissionDatetime2}
-                      className={classNames(
-                        "__wab_instance",
-                        sty.saveAdmissionDatetime2
-                      )}
-                      condition={
-                        $ctx.fetched_data.loading === false &&
-                        $ctx.fetched_data.data &&
-                        $ctx.fetched_data.data.length > 0
-                      }
-                      onNotSatisfied={async () => {
-                        const $steps = {};
+                              j_day_no -= jDaysInMonth[jm];
+                            let jd = j_day_no + 1;
+                            return {
+                              jy,
+                              jm: jm + 1,
+                              jd
+                            };
+                          }
+                          const today = g2j(gy, gm, gd);
+                          let yearDiff = today.jy - birthYear;
+                          let monthDiff = today.jm - birthMonth;
+                          let dayDiff = today.jd - birthDay;
+                          if (dayDiff < 0) {
+                            monthDiff--;
+                            const jDaysInMonth = [
+                              31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                            ];
 
-                        $steps["updateAdmissionDatetime"] =
-                          $ctx.fetched_data.loading === false &&
-                          $ctx.fetched_data.data.length > 0
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["admissionDatetime"]
-                                  },
-                                  operation: 0,
-                                  value:
-                                    $ctx.fetched_data.data[0].admission_datetime
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["updateAdmissionDatetime"] != null &&
-                          typeof $steps["updateAdmissionDatetime"] ===
-                            "object" &&
-                          typeof $steps["updateAdmissionDatetime"].then ===
-                            "function"
-                        ) {
-                          $steps["updateAdmissionDatetime"] = await $steps[
-                            "updateAdmissionDatetime"
-                          ];
+                            dayDiff += jDaysInMonth[(birthMonth - 2 + 12) % 12];
+                          }
+                          if (monthDiff < 0) {
+                            yearDiff--;
+                            monthDiff += 12;
+                          }
+                          if (yearDiff >= 1) {
+                            return `${yearDiff} ساله`;
+                          } else if (monthDiff >= 1) {
+                            return `${monthDiff} ماهه`;
+                          } else {
+                            return `${dayDiff} روزه`;
+                          }
                         }
-
-                        $steps["updatePatientNationalCode"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["patientNationalCode"]
-                                },
-                                operation: 0,
-                                value: $ctx.fetched_data.data[0].national_code
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                        if (
-                          $steps["updatePatientNationalCode"] != null &&
-                          typeof $steps["updatePatientNationalCode"] ===
-                            "object" &&
-                          typeof $steps["updatePatientNationalCode"].then ===
-                            "function"
-                        ) {
-                          $steps["updatePatientNationalCode"] = await $steps[
-                            "updatePatientNationalCode"
-                          ];
+                        function calcAgeGregorianDetailed(dateStr) {
+                          const dob = new Date(dateStr);
+                          const now = new Date();
+                          let yearDiff = now.getFullYear() - dob.getFullYear();
+                          let monthDiff = now.getMonth() - dob.getMonth();
+                          let dayDiff = now.getDate() - dob.getDate();
+                          if (dayDiff < 0) {
+                            monthDiff--;
+                            const prevMonth = new Date(
+                              now.getFullYear(),
+                              now.getMonth(),
+                              0
+                            );
+                            dayDiff += prevMonth.getDate();
+                          }
+                          if (monthDiff < 0) {
+                            yearDiff--;
+                            monthDiff += 12;
+                          }
+                          if (yearDiff >= 1) {
+                            return `${yearDiff}`;
+                          } else if (monthDiff >= 1) {
+                            return `${monthDiff}ماهه`;
+                          } else {
+                            return `${dayDiff}روزه`;
+                          }
                         }
-
-                        $steps["updateSetNationalCode"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["setNationalCode"]
-                                },
-                                operation: 0,
-                                value: true
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                        if (
-                          $steps["updateSetNationalCode"] != null &&
-                          typeof $steps["updateSetNationalCode"] === "object" &&
-                          typeof $steps["updateSetNationalCode"].then ===
-                            "function"
-                        ) {
-                          $steps["updateSetNationalCode"] = await $steps[
-                            "updateSetNationalCode"
-                          ];
+                        function getPersonInfoWithAge(item) {
+                          const hisType = localStorage.getItem(
+                            "inlab_user_his_type"
+                          );
+                          if (!item || !item.date_of_birth)
+                            return "تاریخ تولد موجود نیست.";
+                          const fullName = `${item.first_name} ${item.last_name}`;
+                          const genderSymbol =
+                            item.gender === "F"
+                              ? " \u2640️"
+                              : item.gender === "M"
+                              ? " \u2642️"
+                              : "";
+                          let ageString;
+                          if (
+                            hisType === "tums_api" ||
+                            hisType === "tebvarayane_db"
+                          ) {
+                            ageString = calcAgeShamsiDetailed(
+                              item.date_of_birth
+                            );
+                          } else {
+                            ageString = calcAgeGregorianDetailed(
+                              item.date_of_birth
+                            );
+                          }
+                          return `${fullName}${ageString}${genderSymbol}`;
                         }
-                      }}
-                    />
-                  ) : null}
-                </React.Fragment>
+                        return (() => {
+                          if ($ctx.fetched_data.loading) return "";
+                          if (
+                            $ctx.fetched_data.data &&
+                            $ctx.fetched_data.data.length === 0
+                          )
+                            return "";
+                          const item = $ctx.fetched_data.data[0];
+                          return getPersonInfoWithAge(item);
+                        })();
+                      })()}
+                    </React.Fragment>
+                  )}
+                </div>
               )}
             </DataCtxReader__>
-          </ApiFetcherComponentPlus>
+          </ApiFetcherComponent>
         </div>
         <div
           data-plasmic-name={"tabButtons"}
@@ -5468,6 +5838,19 @@ function PlasmicImagingReportList__RenderFunc(props: {
           data-plasmic-override={overrides.getPatientForPacsUrl}
           autoFetch={true}
           className={classNames("__wab_instance", sty.getPatientForPacsUrl)}
+          fetchTrigger={(() => {
+            try {
+              return $ctx.params.adm_id;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()}
           headers={(() => {
             try {
               return {
@@ -5509,19 +5892,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     }
                   </div>
                 ) : null}
-                {(() => {
-                  try {
-                    return $ctx.fetched_data.loading === false;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return true;
-                    }
-                    throw e;
-                  }
-                })() ? (
+                {$ctx.fetched_data.loading === false ? (
                   <ApiFetcherComponent
                     data-plasmic-name={"getPacsUrl"}
                     data-plasmic-override={overrides.getPacsUrl}
@@ -5538,8 +5909,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       "inlab_user_namespace_id"
                     )}&patient_id=${$ctx.params.code}&national_code=${
                       $ctx.fetched_data.loading === false &&
-                      $ctx.fetched_data.data &&
-                      $ctx.fetched_data.data[0].national_code
+                      $ctx.fetched_data.data?.[0]?.national_code
                         ? $ctx.fetched_data.data[0].national_code
                         : ""
                     }`}
@@ -8482,6 +8852,8 @@ const PlasmicDescendants = {
     "getPatient",
     "patientNameAgeGender2",
     "saveAdmissionDatetime2",
+    "apiFetcherComponent2",
+    "patientNameAgeGender3",
     "tabButtons",
     "media",
     "paraclinicsButton",
@@ -8557,11 +8929,15 @@ const PlasmicDescendants = {
     "header",
     "getPatient",
     "patientNameAgeGender2",
-    "saveAdmissionDatetime2"
+    "saveAdmissionDatetime2",
+    "apiFetcherComponent2",
+    "patientNameAgeGender3"
   ],
   getPatient: ["getPatient", "patientNameAgeGender2", "saveAdmissionDatetime2"],
   patientNameAgeGender2: ["patientNameAgeGender2"],
   saveAdmissionDatetime2: ["saveAdmissionDatetime2"],
+  apiFetcherComponent2: ["apiFetcherComponent2", "patientNameAgeGender3"],
+  patientNameAgeGender3: ["patientNameAgeGender3"],
   tabButtons: ["tabButtons", "media", "paraclinicsButton", "paraclinicReports"],
   media: ["media"],
   paraclinicsButton: ["paraclinicsButton"],
@@ -8822,6 +9198,8 @@ type NodeDefaultElementType = {
   getPatient: typeof ApiFetcherComponentPlus;
   patientNameAgeGender2: "div";
   saveAdmissionDatetime2: typeof ConditionGuard;
+  apiFetcherComponent2: typeof ApiFetcherComponent;
+  patientNameAgeGender3: "div";
   tabButtons: "div";
   media: typeof Button;
   paraclinicsButton: typeof Button;
@@ -8960,6 +9338,8 @@ export const PlasmicImagingReportList = Object.assign(
     getPatient: makeNodeComponent("getPatient"),
     patientNameAgeGender2: makeNodeComponent("patientNameAgeGender2"),
     saveAdmissionDatetime2: makeNodeComponent("saveAdmissionDatetime2"),
+    apiFetcherComponent2: makeNodeComponent("apiFetcherComponent2"),
+    patientNameAgeGender3: makeNodeComponent("patientNameAgeGender3"),
     tabButtons: makeNodeComponent("tabButtons"),
     media: makeNodeComponent("media"),
     paraclinicsButton: makeNodeComponent("paraclinicsButton"),

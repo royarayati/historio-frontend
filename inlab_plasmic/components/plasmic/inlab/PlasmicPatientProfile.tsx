@@ -2115,6 +2115,19 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 data-plasmic-override={overrides.patientProfileApi}
                 autoFetch={true}
                 className={classNames("__wab_instance", sty.patientProfileApi)}
+                fetchTrigger={(() => {
+                  try {
+                    return $ctx.params.adm_id;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
                 headers={(() => {
                   try {
                     return {
