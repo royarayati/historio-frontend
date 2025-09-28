@@ -98,6 +98,30 @@
   max-width: 100%;
   object-fit: cover;
 }
+.apiFetcherComponent2:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  min-width: 0;
+}
+.patientNameAgeGender3 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 30px;
+  font-size: 16px;
+  color: #70727a;
+  white-space: pre;
+  min-width: 0;
+  padding: 4px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientNameAgeGender3 {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
 .tabButtons {
   display: flex;
   position: fixed;
@@ -1031,7 +1055,7 @@
   width: auto;
   height: auto;
   max-width: 100%;
-  left: 0px;
+  left: 40%;
   top: 130px;
   z-index: 1;
   text-align: center;
