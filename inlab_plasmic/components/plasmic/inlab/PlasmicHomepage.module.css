@@ -1812,7 +1812,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .patientFiltersSection {
-    background: #ffffff1a;
+    background: none;
     width: 100%;
     column-gap: 4px;
     row-gap: 0px;
@@ -1944,7 +1944,7 @@
   max-width: 100%;
   object-fit: cover;
   font-size: var(--token-NMUbRE7XpwuK);
-  border: 0.1px solid var(--token-tawGjJMbHvx-);
+  border: 0.1px none var(--token-tawGjJMbHvx-);
 }
 .selectpatientFilter__dropdownMenu:global(.ant-dropdown-menu) {
   color: #000000;
@@ -1954,6 +1954,8 @@
 @media (min-width: 0px) and (max-width: 760px) {
   .selectpatientFilter:global(.__wab_instance) {
     width: auto;
+    border-width: 0px;
+    border-style: none;
   }
 }
 .menuItem___4Ablq:global(.__wab_instance) {
