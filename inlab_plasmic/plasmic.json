@@ -2656,6 +2656,11 @@
           "id": "xHUFSyd3dkRu",
           "name": "DrugSvgrepoCom1SvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__DrugSvgrepoCom1Svg.tsx"
+        },
+        {
+          "id": "Dhz8zkFVSPmT",
+          "name": "FilterSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__FilterSvgrepoComSvg.tsx"
         }
       ],
       "images": [

@@ -1573,7 +1573,6 @@
   display: none;
 }
 .wardButtonStack {
-  display: flex;
   position: relative;
   flex-direction: row;
   align-items: center;
@@ -1582,6 +1581,7 @@
   align-self: center;
   width: auto;
   height: auto;
+  display: none;
   padding: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -1686,7 +1686,6 @@
   display: none;
 }
 .physicianButtonStack {
-  display: flex;
   position: relative;
   flex-direction: row;
   align-items: center;
@@ -1695,6 +1694,7 @@
   align-self: center;
   width: auto;
   height: auto;
+  display: none;
   padding: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
@@ -1805,14 +1805,14 @@
   height: auto;
   max-width: 100%;
   column-gap: 8px;
-  background: #ffffff40;
+  background: #ffffff1a;
   min-width: 0;
   border-radius: 5px;
   padding: 4px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .patientFiltersSection {
-    background: #ffffff33;
+    background: none;
     width: 100%;
     column-gap: 4px;
     row-gap: 0px;
@@ -1820,54 +1820,65 @@
     padding: 0px;
   }
 }
-.tabFilters:global(.__wab_instance) {
+.patientFilterButton2:global(.__wab_instance) {
   max-width: 100%;
-  object-fit: cover;
-  font-size: var(--token-NMUbRE7XpwuK);
-}
-.tabFilters__dropdownMenu:global(.ant-dropdown-menu) {
-  color: #000000;
-  background: #ffffff;
-  outline: none;
+  position: relative;
+  width: auto;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .tabFilters:global(.__wab_instance) {
+  .patientFilterButton2:global(.__wab_instance) {
     width: auto;
   }
 }
-.menuItem__dbWy:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-}
-.text__wj1IY {
+.bookmarkedPatientNumber4 {
   position: relative;
-  width: 100%;
-  height: auto;
+  width: 1rem;
+  height: 1rem;
   max-width: 100%;
-  min-width: 0;
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 300;
+  text-align: center;
+  background: var(--token-4VVKgsFPDvBb);
+  color: var(--token-9FP8Zn8H8LBL);
+  padding-right: 0.1rem;
+  padding-left: 0.1rem;
+  align-self: center;
+  line-height: 1.5;
+  border-radius: 100%;
+  margin: 0px 0.3rem 0px 0px;
 }
-.menuItem__yjD5V:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
+@media (min-width: 0px) and (max-width: 760px) {
+  .bookmarkedPatientNumber4 {
+    font-size: 10px;
+    width: 1rem;
+    height: 1rem;
+    line-height: 1.5;
+    margin: 0px 0.3rem 0px 0px;
+  }
 }
-.text__ouLt5 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.filterButton:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
+.text__zrKq {
+  font-size: var(--token-NMUbRE7XpwuK);
+  color: var(--token-IYO13gyYJHXG);
+  font-weight: 300;
   width: auto;
 }
-.text__lg7Xs {
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__zrKq {
+    font-size: var(--token-CdE1_0ZaCyT1);
+  }
+}
+.svg__ki96J {
   position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__dTRn {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+  display: none;
 }
 .bookmarked:global(.__wab_instance) {
   max-width: 100%;
@@ -1929,79 +1940,85 @@
   height: 1em;
   display: none;
 }
-.changeTabFilters:global(.__wab_instance) {
+.selectpatientFilter:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
-  font-size: 16px;
-  text-align: right;
-  align-self: center;
+  font-size: var(--token-NMUbRE7XpwuK);
+  border: 0.1px none var(--token-tawGjJMbHvx-);
 }
-.changeTabFilters__dropdownMenu:global(.ant-dropdown-menu) {
+.selectpatientFilter__dropdownMenu:global(.ant-dropdown-menu) {
   color: #000000;
   background: #ffffff;
   outline: none;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .changeTabFilters:global(.__wab_instance) {
-    font-size: var(--token-NMUbRE7XpwuK);
+  .selectpatientFilter:global(.__wab_instance) {
     width: auto;
+    border-width: 0px;
+    border-style: none;
   }
 }
-@media (min-width: 0px) and (max-width: 760px) {
-  .changeTabFilters__dropdownMenu:global(.ant-dropdown-menu) {
-    background: #f1f1f1;
-    outline: none;
-  }
-}
-.menuItem__j7J59:global(.__wab_instance) {
+.menuItem___4Ablq:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
 }
-.text___1Nttk {
+.text__gYErh {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-.menuItem__wxpuU:global(.__wab_instance) {
+.menuItem__mg2Ya:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
 }
-.text__j4MSh {
+.text__uoItC {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-.filterButton2:global(.__wab_instance) {
+.patientFilterButton:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   width: auto;
 }
+.freeBox___8UyO0 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  padding: 0px;
+}
 @media (min-width: 0px) and (max-width: 760px) {
-  .filterButton2:global(.__wab_instance) {
-    align-self: center;
-    text-align: right;
+  .freeBox___8UyO0 {
+    column-gap: 2px;
+    row-gap: 0px;
   }
 }
-.text__kYp3F {
+.text__pgZnX {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-@media (min-width: 0px) and (max-width: 760px) {
-  .text__kYp3F {
-    width: auto;
-    text-align: right;
-    font-size: var(--token-NMUbRE7XpwuK);
-  }
+.filterIcon {
+  object-fit: cover;
+  max-width: 100%;
+  color: var(--token-tawGjJMbHvx-);
+  width: 20px;
+  flex-shrink: 0;
+  height: 1em;
 }
 .bookmarkButtonSection {
-  display: flex;
   flex-direction: row;
   position: relative;
   align-items: stretch;
@@ -2009,6 +2026,7 @@
   width: auto;
   height: auto;
   max-width: 100%;
+  display: none;
   padding: 8px;
 }
 .bookmarked2:global(.__wab_instance) {
