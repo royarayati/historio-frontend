@@ -172,7 +172,6 @@ export type PlasmicConsultSendDraft__OverridesType = {
   confirm?: Flex__<typeof Button>;
   unsuccessfulDeleteConsult?: Flex__<typeof Alert3>;
   title?: Flex__<"div">;
-  guide2?: Flex__<"div">;
 };
 
 export interface DefaultConsultSendDraftProps {}
@@ -797,7 +796,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/consults?drafted_consult=true&dismissed_consult=true&consult_id=${$ctx.params.consult_id}`}
+              path={`/api/v3/consults?archived_search=true&dismissed_consult=true&drafted_consult=true&consult_id=${$ctx.params.consult_id}`}
               ref={ref => {
                 $refs["getUniqueConsult"] = ref;
               }}
@@ -4489,19 +4488,6 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     "\u0622\u06cc\u0627 \u0627\u0632 \u062d\u0630\u0641 \u067e\u06cc\u0634 \u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u0637\u0645\u06cc\u0646\u0627\u0646 \u062f\u0627\u0631\u06cc\u062f\u061f"
                   }
                 </div>
-                <div
-                  data-plasmic-name={"guide2"}
-                  data-plasmic-override={overrides.guide2}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.guide2
-                  )}
-                >
-                  {
-                    "\u067e\u06cc\u0634 \u0646\u0648\u06cc\u0633 \u0645\u0634\u0627\u0648\u0631\u0647 \u0641\u0642\u0637 \u0645\u06cc \u062a\u0648\u0627\u0646\u062f \u062a\u0648\u0633\u0637 \u067e\u0632\u0634\u06a9\u0627\u0646 \u062f\u0627\u0631\u0627\u06cc \u06a9\u062f \u0646\u0638\u0627\u0645 \u067e\u0632\u0634\u06a9\u06cc \u062d\u0630\u0641 \u0634\u0648\u062f"
-                  }
-                </div>
               </div>
             }
             trigger={null}
@@ -5099,8 +5085,7 @@ const PlasmicDescendants = {
     "noConfirm",
     "confirm",
     "unsuccessfulDeleteConsult",
-    "title",
-    "guide2"
+    "title"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -5393,8 +5378,7 @@ const PlasmicDescendants = {
     "noConfirm",
     "confirm",
     "unsuccessfulDeleteConsult",
-    "title",
-    "guide2"
+    "title"
   ],
   confirmationContent: [
     "confirmationContent",
@@ -5407,8 +5391,7 @@ const PlasmicDescendants = {
   noConfirm: ["noConfirm"],
   confirm: ["confirm"],
   unsuccessfulDeleteConsult: ["unsuccessfulDeleteConsult"],
-  title: ["title", "guide2"],
-  guide2: ["guide2"]
+  title: ["title"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -5489,7 +5472,6 @@ type NodeDefaultElementType = {
   confirm: typeof Button;
   unsuccessfulDeleteConsult: typeof Alert3;
   title: "div";
-  guide2: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -5634,7 +5616,6 @@ export const PlasmicConsultSendDraft = Object.assign(
     confirm: makeNodeComponent("confirm"),
     unsuccessfulDeleteConsult: makeNodeComponent("unsuccessfulDeleteConsult"),
     title: makeNodeComponent("title"),
-    guide2: makeNodeComponent("guide2"),
 
     // Metadata about props expected for PlasmicConsultSendDraft
     internalVariantProps: PlasmicConsultSendDraft__VariantProps,

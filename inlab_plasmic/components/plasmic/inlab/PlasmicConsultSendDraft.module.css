@@ -1191,22 +1191,3 @@
   user-select: none;
   text-decoration-line: none;
 }
-.guide2 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  font-size: 11px;
-  color: #000000b3;
-  font-family: var(--VazirmatnCustom);
-  font-weight: 700;
-  font-style: normal;
-  text-align: center;
-  text-transform: none;
-  line-height: 1.5;
-  letter-spacing: normal;
-  white-space: pre-wrap;
-  user-select: none;
-  text-decoration-line: none;
-  min-width: 0;
-}

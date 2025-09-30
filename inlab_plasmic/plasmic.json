@@ -2069,6 +2069,19 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/patient/[code]/summary/[adm_id]"
+        },
+        {
+          "id": "4gUzMR7IVe-U",
+          "name": "Switch",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicSwitch.tsx",
+          "importSpec": {
+            "modulePath": "Switch.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicSwitch.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
