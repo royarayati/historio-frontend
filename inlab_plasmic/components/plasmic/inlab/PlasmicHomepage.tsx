@@ -16794,7 +16794,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       return (() => {
                                         localStorage.setItem(
                                           "filter_service_name",
-                                          $state.filter_service_name
+                                          $state.filterservicename.toString()
                                         );
                                         localStorage.setItem(
                                           "filter_service_id",
