@@ -65,7 +65,7 @@
   flex-direction: row;
   position: relative;
   align-items: stretch;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -159,6 +159,48 @@
   max-width: 100%;
   height: 24px;
   align-self: auto;
+}
+.allAdmissionsContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  padding: 8px;
+}
+.text___2SBh6 {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  align-self: center;
+  margin-left: 10px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text___2SBh6 {
+    font-size: var(--token-CdE1_0ZaCyT1);
+    position: relative;
+  }
+}
+.isAllAdmissions:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  align-self: center;
 }
 .pageContent {
   display: flex;

@@ -4218,7 +4218,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 })()}
                 method={"GET"}
-                path={`/api/v3/consults?drafted_consult=false&dismissed_consult=true${
+                path={`/api/v3/consults?archived_search=false&dismissed_consult=true&drafted_consult=false${
                   localStorage.getItem("GET_V3_consult_query_param")
                     ? localStorage.getItem("GET_V3_consult_query_param")
                     : ""

@@ -856,7 +856,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/consults?drafted_consult=true&dismissed_consult=true&consult_id=${$ctx.params.consult_id}`}
+              path={`/api/v3/consults?archived_search=true&dismissed_consult=true&drafted_consult=true&consult_id=${$ctx.params.consult_id}`}
               ref={ref => {
                 $refs["getUniqueConsult"] = ref;
               }}

@@ -63,6 +63,7 @@ import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
+import { AntdSwitch } from "@plasmicpkgs/antd5/skinny/registerSwitch";
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -105,6 +106,8 @@ export type PlasmicConsultList__OverridesType = {
   printConsult?: Flex__<"svg">;
   printProcessing?: Flex__<typeof Alert>;
   printError?: Flex__<typeof Alert>;
+  allAdmissionsContent?: Flex__<"div">;
+  isAllAdmissions?: Flex__<typeof AntdSwitch>;
   pageContent?: Flex__<"div">;
   consultListContent?: Flex__<"div">;
   getConsult?: Flex__<typeof ApiFetcherComponentPlus>;
@@ -354,6 +357,31 @@ function PlasmicConsultList__RenderFunc(props: {
       },
       {
         path: "printErrorState",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "isAllAdmissions.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.allAdmissions;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "allAdmissions",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -848,6 +876,116 @@ function PlasmicConsultList__RenderFunc(props: {
                   noIcon={true}
                 />
               ) : null}
+              {(() => {
+                try {
+                  return !$state.printProcessingState;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div
+                  data-plasmic-name={"allAdmissionsContent"}
+                  data-plasmic-override={overrides.allAdmissionsContent}
+                  className={classNames(
+                    projectcss.all,
+                    sty.allAdmissionsContent
+                  )}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___2SBh6
+                    )}
+                    dir={"rtl"}
+                  >
+                    {
+                      "\u0645\u0634\u0627\u0648\u0631\u0647 \u062a\u0645\u0627\u0645 \u0628\u0633\u062a\u0631\u06cc\u200c\u0647\u0627"
+                    }
+                  </div>
+                  <AntdSwitch
+                    data-plasmic-name={"isAllAdmissions"}
+                    data-plasmic-override={overrides.isAllAdmissions}
+                    checked={generateStateValueProp($state, [
+                      "isAllAdmissions",
+                      "checked"
+                    ])}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.isAllAdmissions
+                    )}
+                    defaultChecked={(() => {
+                      try {
+                        return $state.allAdmissions;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return false;
+                        }
+                        throw e;
+                      }
+                    })()}
+                    onChange={async (...eventArgs: any) => {
+                      generateStateOnChangeProp($state, [
+                        "isAllAdmissions",
+                        "checked"
+                      ]).apply(null, eventArgs);
+
+                      (async checked => {
+                        const $steps = {};
+
+                        $steps["updateAllAdmissions"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["allAdmissions"]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateAllAdmissions"] != null &&
+                          typeof $steps["updateAllAdmissions"] === "object" &&
+                          typeof $steps["updateAllAdmissions"].then ===
+                            "function"
+                        ) {
+                          $steps["updateAllAdmissions"] = await $steps[
+                            "updateAllAdmissions"
+                          ];
+                        }
+                      }).apply(null, eventArgs);
+                    }}
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
           <div
@@ -865,9 +1003,12 @@ function PlasmicConsultList__RenderFunc(props: {
                 data-plasmic-override={overrides.getConsult}
                 autoFetch={true}
                 className={classNames("__wab_instance", sty.getConsult)}
-                fetchTrigger={(() => {
+                fetchTriggers={(() => {
                   try {
-                    return $state.modalDeleteConsultConfirmation.open;
+                    return [
+                      $state.modalDeleteConsultConfirmation.open,
+                      $state.allAdmissions
+                    ];
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -896,7 +1037,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   }
                 })()}
                 method={"GET"}
-                path={`/api/v3/consults?drafted_consult=true&dismissed_consult=true&patient_id=${$ctx.params.code}`}
+                path={`/api/v3/consults?archived_search=${$state.allAdmissions}&dismissed_consult=${$state.allAdmissions}&drafted_consult=true&patient_id=${$ctx.params.code}`}
                 ref={ref => {
                   $refs["getConsult"] = ref;
                 }}
@@ -3313,6 +3454,8 @@ const PlasmicDescendants = {
     "printConsult",
     "printProcessing",
     "printError",
+    "allAdmissionsContent",
+    "isAllAdmissions",
     "pageContent",
     "consultListContent",
     "getConsult",
@@ -3371,7 +3514,9 @@ const PlasmicDescendants = {
     "patientConsultPrintContent",
     "printConsult",
     "printProcessing",
-    "printError"
+    "printError",
+    "allAdmissionsContent",
+    "isAllAdmissions"
   ],
   patientDataForHeader: ["patientDataForHeader", "patientNameAgeGender"],
   patientNameAgeGender: ["patientNameAgeGender"],
@@ -3379,11 +3524,15 @@ const PlasmicDescendants = {
     "patientConsultPrintContent",
     "printConsult",
     "printProcessing",
-    "printError"
+    "printError",
+    "allAdmissionsContent",
+    "isAllAdmissions"
   ],
   printConsult: ["printConsult"],
   printProcessing: ["printProcessing"],
   printError: ["printError"],
+  allAdmissionsContent: ["allAdmissionsContent", "isAllAdmissions"],
+  isAllAdmissions: ["isAllAdmissions"],
   pageContent: [
     "pageContent",
     "consultListContent",
@@ -3701,6 +3850,8 @@ type NodeDefaultElementType = {
   printConsult: "svg";
   printProcessing: typeof Alert;
   printError: typeof Alert;
+  allAdmissionsContent: "div";
+  isAllAdmissions: typeof AntdSwitch;
   pageContent: "div";
   consultListContent: "div";
   getConsult: typeof ApiFetcherComponentPlus;
@@ -3822,6 +3973,8 @@ export const PlasmicConsultList = Object.assign(
     printConsult: makeNodeComponent("printConsult"),
     printProcessing: makeNodeComponent("printProcessing"),
     printError: makeNodeComponent("printError"),
+    allAdmissionsContent: makeNodeComponent("allAdmissionsContent"),
+    isAllAdmissions: makeNodeComponent("isAllAdmissions"),
     pageContent: makeNodeComponent("pageContent"),
     consultListContent: makeNodeComponent("consultListContent"),
     getConsult: makeNodeComponent("getConsult"),
