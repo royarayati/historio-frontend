@@ -2082,6 +2082,33 @@
           "cssFilePath": "plasmic/inlab/PlasmicSwitch.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "DIrQRiP30v_g",
+          "name": "PatientReception",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicPatientReception.tsx",
+          "importSpec": {
+            "modulePath": "../pages/patient/reception.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicPatientReception.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/patient/reception"
+        },
+        {
+          "id": "SuUYl1jytKAo",
+          "name": "BookmarkIcon2",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicBookmarkIcon2.tsx",
+          "importSpec": {
+            "modulePath": "BookmarkIcon2.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicBookmarkIcon2.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
