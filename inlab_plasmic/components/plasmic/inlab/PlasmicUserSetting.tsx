@@ -79,6 +79,7 @@ import PersonCropSquareFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__PersonCr
 import ProfileIcon from "./icons/PlasmicIcon__Profile"; // plasmic-import: -RBNimWBwZ_J/icon
 import Icon3Icon from "./icons/PlasmicIcon__Icon3"; // plasmic-import: Pji6nZZT_lpO/icon
 import Group1917Icon from "./icons/PlasmicIcon__Group1917"; // plasmic-import: ycuumst0kLdp/icon
+import HospitalReceptionSvgrepoComSvgIcon from "./icons/PlasmicIcon__HospitalReceptionSvgrepoComSvg"; // plasmic-import: p3SAMaQlfYCx/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
@@ -123,6 +124,8 @@ export type PlasmicUserSetting__OverridesType = {
   resetPasswordImage?: Flex__<"svg">;
   shareToolContent?: Flex__<"div">;
   shareTool?: Flex__<typeof ShareTool>;
+  patientReception?: Flex__<"div">;
+  receptionIcon?: Flex__<"svg">;
   logoutButton?: Flex__<typeof Button>;
   changePassword?: Flex__<typeof AntdModal>;
   modalContent?: Flex__<"div">;
@@ -920,6 +923,66 @@ function PlasmicUserSetting__RenderFunc(props: {
                 data-plasmic-override={overrides.shareTool}
                 className={classNames("__wab_instance", sty.shareTool)}
               />
+            </div>
+            <div
+              data-plasmic-name={"patientReception"}
+              data-plasmic-override={overrides.patientReception}
+              className={classNames(projectcss.all, sty.patientReception, {
+                [sty.patientReceptiondisabledLogoutButton]: hasVariant(
+                  $state,
+                  "disabledLogoutButton",
+                  "disabledLogoutButton"
+                )
+              })}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["goToPatientReception"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/patient/reception` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToPatientReception"] != null &&
+                  typeof $steps["goToPatientReception"] === "object" &&
+                  typeof $steps["goToPatientReception"].then === "function"
+                ) {
+                  $steps["goToPatientReception"] = await $steps[
+                    "goToPatientReception"
+                  ];
+                }
+              }}
+            >
+              <HospitalReceptionSvgrepoComSvgIcon
+                data-plasmic-name={"receptionIcon"}
+                data-plasmic-override={overrides.receptionIcon}
+                className={classNames(projectcss.all, sty.receptionIcon)}
+                role={"img"}
+              />
+
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__m6Aqq
+                )}
+              >
+                {
+                  "\u067e\u0630\u06cc\u0631\u0634 \u0628\u06cc\u0645\u0627\u0631 \u062f\u0631 \u0627\u06cc\u0646\u0644\u0628"
+                }
+              </div>
             </div>
             <Button
               data-plasmic-name={"logoutButton"}
@@ -2193,6 +2256,8 @@ const PlasmicDescendants = {
     "resetPasswordImage",
     "shareToolContent",
     "shareTool",
+    "patientReception",
+    "receptionIcon",
     "logoutButton",
     "changePassword",
     "modalContent",
@@ -2228,6 +2293,8 @@ const PlasmicDescendants = {
     "resetPasswordImage",
     "shareToolContent",
     "shareTool",
+    "patientReception",
+    "receptionIcon",
     "logoutButton"
   ],
   pictureAndName: [
@@ -2265,6 +2332,8 @@ const PlasmicDescendants = {
   resetPasswordImage: ["resetPasswordImage"],
   shareToolContent: ["shareToolContent", "shareTool"],
   shareTool: ["shareTool"],
+  patientReception: ["patientReception", "receptionIcon"],
+  receptionIcon: ["receptionIcon"],
   logoutButton: ["logoutButton"],
   changePassword: [
     "changePassword",
@@ -2325,6 +2394,8 @@ type NodeDefaultElementType = {
   resetPasswordImage: "svg";
   shareToolContent: "div";
   shareTool: typeof ShareTool;
+  patientReception: "div";
+  receptionIcon: "svg";
   logoutButton: typeof Button;
   changePassword: typeof AntdModal;
   modalContent: "div";
@@ -2422,6 +2493,8 @@ export const PlasmicUserSetting = Object.assign(
     resetPasswordImage: makeNodeComponent("resetPasswordImage"),
     shareToolContent: makeNodeComponent("shareToolContent"),
     shareTool: makeNodeComponent("shareTool"),
+    patientReception: makeNodeComponent("patientReception"),
+    receptionIcon: makeNodeComponent("receptionIcon"),
     logoutButton: makeNodeComponent("logoutButton"),
     changePassword: makeNodeComponent("changePassword"),
     modalContent: makeNodeComponent("modalContent"),
