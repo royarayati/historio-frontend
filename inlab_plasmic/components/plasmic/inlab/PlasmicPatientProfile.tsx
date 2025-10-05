@@ -1296,11 +1296,15 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                 <React.Fragment>
                                   {(() => {
                                     try {
-                                      return localStorage.getItem(
-                                        "inlab_user_his_type"
-                                      ) !== "tums_api" &&
+                                      return JSON.parse(
                                         localStorage.getItem(
                                           "inlab_user_his_type"
+                                        )
+                                      ) !== "tums_api" &&
+                                        JSON.parse(
+                                          localStorage.getItem(
+                                            "inlab_user_his_type"
+                                          )
                                         ) !== "tebvarayane_db"
                                         ? (() => {
                                             const gregorianDate = new Date(
@@ -1768,8 +1772,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                         }
                                       }
                                       function getPersonInfoWithAge(item) {
-                                        const hisType = localStorage.getItem(
-                                          "inlab_user_his_type"
+                                        const hisType = JSON.parse(
+                                          localStorage.getItem(
+                                            "inlab_user_his_type"
+                                          )
                                         );
                                         if (!item || !item.date_of_birth)
                                           return "تاریخ تولد موجود نیست.";
@@ -1940,10 +1946,12 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               )}
                             >
                               <React.Fragment>
-                                {localStorage.getItem("inlab_user_his_type") !==
-                                  "tums_api" &&
-                                localStorage.getItem("inlab_user_his_type") !==
-                                  "tebvarayane_db"
+                                {JSON.parse(
+                                  localStorage.getItem("inlab_user_his_type")
+                                ) !== "tums_api" &&
+                                JSON.parse(
+                                  localStorage.getItem("inlab_user_his_type")
+                                ) !== "tebvarayane_db"
                                   ? (() => {
                                       if ($ctx.fetched_data.data.length === 0)
                                         return "";
