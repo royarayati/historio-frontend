@@ -1588,8 +1588,10 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                         }
                                       }
                                       function getPersonInfoWithAge(item) {
-                                        const hisType = localStorage.getItem(
-                                          "inlab_user_his_type"
+                                        const hisType = JSON.parse(
+                                          localStorage.getItem(
+                                            "inlab_user_his_type"
+                                          )
                                         );
                                         if (!item || !item.date_of_birth)
                                           return "تاریخ تولد موجود نیست.";

@@ -487,43 +487,166 @@ function PlasmicConsultList__RenderFunc(props: {
                       {(() => {
                         try {
                           return (() => {
-                            if (!$ctx.fetched_data.loading) {
-                              const item = $ctx.fetched_data.data[0];
-                              if (item.date_of_birth) {
-                                const dob = new Date(item.date_of_birth);
-                                const now = new Date();
-                                let ageYears =
-                                  now.getFullYear() - dob.getFullYear();
-                                const monthDifference =
-                                  now.getMonth() - dob.getMonth();
-                                if (
-                                  monthDifference < 0 ||
-                                  (monthDifference === 0 &&
-                                    now.getDate() < dob.getDate())
-                                ) {
-                                  ageYears--;
+                            function calcAgeShamsiDetailed(shamsiStr) {
+                              shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
+                                String.fromCharCode(d.charCodeAt(0) - 1728)
+                              );
+                              const [datePart] = shamsiStr.split(" ");
+                              let [birthYear, birthMonth, birthDay] = datePart
+                                .split("/")
+                                .map(Number);
+                              const gNow = new Date();
+                              const gy = gNow.getFullYear();
+                              const gm = gNow.getMonth() + 1;
+                              const gd = gNow.getDate();
+                              function g2j(gy, gm, gd) {
+                                const gDaysInMonth = [
+                                  31,
+                                  (gy % 4 === 0 && gy % 100 !== 0) ||
+                                  gy % 400 === 0
+                                    ? 29
+                                    : 28,
+                                  31,
+                                  30,
+                                  31,
+                                  30,
+                                  31,
+                                  31,
+                                  30,
+                                  31,
+                                  30,
+                                  31
+                                ];
+
+                                let g_day_no =
+                                  365 * (gy - 1600) +
+                                  Math.floor((gy - 1600 + 3) / 4) -
+                                  Math.floor((gy - 1600 + 99) / 100) +
+                                  Math.floor((gy - 1600 + 399) / 400);
+                                for (let i = 0; i < gm - 1; ++i)
+                                  g_day_no += gDaysInMonth[i];
+                                g_day_no += gd - 1;
+                                let j_day_no = g_day_no - 79;
+                                let j_np = Math.floor(j_day_no / 12053);
+                                j_day_no %= 12053;
+                                let jy =
+                                  979 +
+                                  33 * j_np +
+                                  4 * Math.floor(j_day_no / 1461);
+                                j_day_no %= 1461;
+                                if (j_day_no >= 366) {
+                                  jy += Math.floor((j_day_no - 1) / 365);
+                                  j_day_no = (j_day_no - 1) % 365;
                                 }
-                                const fullName = `${item.first_name} ${item.last_name}`;
-                                const genderSymbol =
-                                  item.gender === "F"
-                                    ? " \u2640️"
-                                    : item.gender === "M"
-                                    ? " \u2642️"
-                                    : "";
-                                if (ageYears < 1) {
-                                  const ageMonths =
-                                    Math.abs(monthDifference) +
-                                    (now.getDate() < dob.getDate() ? -1 : 0);
-                                  return `${fullName} ${ageMonths} month ${
-                                    ageMonths !== 1 ? "s" : ""
-                                  }${genderSymbol}`;
-                                } else {
-                                  return `${fullName} ${ageYears} ${genderSymbol}`;
-                                }
+                                const jDaysInMonth = [
+                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                                ];
+
+                                let jm;
+                                for (
+                                  jm = 0;
+                                  jm < 11 && j_day_no >= jDaysInMonth[jm];
+                                  ++jm
+                                )
+                                  j_day_no -= jDaysInMonth[jm];
+                                let jd = j_day_no + 1;
+                                return {
+                                  jy,
+                                  jm: jm + 1,
+                                  jd
+                                };
+                              }
+                              const today = g2j(gy, gm, gd);
+                              let yearDiff = today.jy - birthYear;
+                              let monthDiff = today.jm - birthMonth;
+                              let dayDiff = today.jd - birthDay;
+                              if (dayDiff < 0) {
+                                monthDiff--;
+                                const jDaysInMonth = [
+                                  31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                                ];
+
+                                dayDiff +=
+                                  jDaysInMonth[(birthMonth - 2 + 12) % 12];
+                              }
+                              if (monthDiff < 0) {
+                                yearDiff--;
+                                monthDiff += 12;
+                              }
+                              if (yearDiff >= 1) {
+                                return `${yearDiff}`;
+                              } else if (monthDiff >= 1) {
+                                return `${monthDiff} ماهه`;
                               } else {
-                                return "Date of birth not available.";
+                                return `${dayDiff} روزه`;
                               }
                             }
+                            function calcAgeGregorianDetailed(dateStr) {
+                              const dob = new Date(dateStr);
+                              const now = new Date();
+                              let yearDiff =
+                                now.getFullYear() - dob.getFullYear();
+                              let monthDiff = now.getMonth() - dob.getMonth();
+                              let dayDiff = now.getDate() - dob.getDate();
+                              if (dayDiff < 0) {
+                                monthDiff--;
+                                const prevMonth = new Date(
+                                  now.getFullYear(),
+                                  now.getMonth(),
+                                  0
+                                );
+                                dayDiff += prevMonth.getDate();
+                              }
+                              if (monthDiff < 0) {
+                                yearDiff--;
+                                monthDiff += 12;
+                              }
+                              if (yearDiff >= 1) {
+                                return `${yearDiff}`;
+                              } else if (monthDiff >= 1) {
+                                return `${monthDiff}ماهه`;
+                              } else {
+                                return `${dayDiff}روزه`;
+                              }
+                            }
+                            function getPersonInfoWithAge(item) {
+                              const hisType = JSON.parse(
+                                localStorage.getItem("inlab_user_his_type")
+                              );
+                              if (!item || !item.date_of_birth)
+                                return "تاریخ تولد موجود نیست.";
+                              const fullName = `${item.first_name} ${item.last_name}`;
+                              const genderSymbol =
+                                item.gender === "F"
+                                  ? " \u2640️"
+                                  : item.gender === "M"
+                                  ? " \u2642️"
+                                  : "";
+                              let ageString;
+                              if (
+                                hisType === "tums_api" ||
+                                hisType === "tebvarayane_db"
+                              ) {
+                                ageString = calcAgeShamsiDetailed(
+                                  item.date_of_birth
+                                );
+                              } else {
+                                ageString = calcAgeGregorianDetailed(
+                                  item.date_of_birth
+                                );
+                              }
+                              return `${fullName} ${ageString}${genderSymbol}`;
+                            }
+                            return (() => {
+                              if ($ctx.fetched_data.loading) return "";
+                              if (
+                                $ctx.fetched_data.data &&
+                                $ctx.fetched_data.data.length === 0
+                              )
+                                return "";
+                              const item = $ctx.fetched_data.data[0];
+                              return getPersonInfoWithAge(item);
+                            })();
                           })();
                         } catch (e) {
                           if (
