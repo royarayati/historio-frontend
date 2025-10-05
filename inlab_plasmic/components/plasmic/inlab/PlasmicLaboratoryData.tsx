@@ -1249,8 +1249,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                           }
                         }
                         function getPersonInfoWithAge(item) {
-                          const hisType = localStorage.getItem(
-                            "inlab_user_his_type"
+                          const hisType = JSON.parse(
+                            localStorage.getItem("inlab_user_his_type")
                           );
                           if (!item || !item.date_of_birth)
                             return "تاریخ تولد موجود نیست.";
@@ -3542,11 +3542,15 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     )}
                                   >
                                     <React.Fragment>
-                                      {localStorage.getItem(
-                                        "inlab_user_his_type"
+                                      {JSON.parse(
+                                        localStorage.getItem(
+                                          "inlab_user_his_type"
+                                        )
                                       ) !== "tums_api" &&
-                                      localStorage.getItem(
-                                        "inlab_user_his_type"
+                                      JSON.parse(
+                                        localStorage.getItem(
+                                          "inlab_user_his_type"
+                                        )
                                       ) !== "tebvarayane_db"
                                         ? (() => {
                                             const gregorianDate = new Date(
@@ -4433,10 +4437,12 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                               )}
                             >
                               <React.Fragment>
-                                {localStorage.getItem("inlab_user_his_type") !==
-                                  "tums_api" &&
-                                localStorage.getItem("inlab_user_his_type") !==
-                                  "tebvarayane_db"
+                                {JSON.parse(
+                                  localStorage.getItem("inlab_user_his_type")
+                                ) !== "tums_api" &&
+                                JSON.parse(
+                                  localStorage.getItem("inlab_user_his_type")
+                                ) !== "tebvarayane_db"
                                   ? (() => {
                                       const gregorianDate = new Date(
                                         currentItem.issued_datetime

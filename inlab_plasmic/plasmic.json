@@ -2701,6 +2701,11 @@
           "id": "Dhz8zkFVSPmT",
           "name": "FilterSvgrepoComSvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__FilterSvgrepoComSvg.tsx"
+        },
+        {
+          "id": "p3SAMaQlfYCx",
+          "name": "HospitalReceptionSvgrepoComSvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__HospitalReceptionSvgrepoComSvg.tsx"
         }
       ],
       "images": [

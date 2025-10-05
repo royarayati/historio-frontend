@@ -1841,7 +1841,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             monthDiff += 12;
                           }
                           if (yearDiff >= 1) {
-                            return `${yearDiff} ساله`;
+                            return `${yearDiff}`;
                           } else if (monthDiff >= 1) {
                             return `${monthDiff} ماهه`;
                           } else {
@@ -1876,8 +1876,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           }
                         }
                         function getPersonInfoWithAge(item) {
-                          const hisType = localStorage.getItem(
-                            "inlab_user_his_type"
+                          const hisType = JSON.parse(
+                            localStorage.getItem("inlab_user_his_type")
                           );
                           if (!item || !item.date_of_birth)
                             return "تاریخ تولد موجود نیست.";
@@ -1901,7 +1901,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                               item.date_of_birth
                             );
                           }
-                          return `${fullName}${ageString}${genderSymbol}`;
+                          return `${fullName} ${ageString}${genderSymbol}`;
                         }
                         return (() => {
                           if ($ctx.fetched_data.loading) return "";
@@ -2813,11 +2813,13 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             <React.Fragment>
                               {(() => {
                                 try {
-                                  return localStorage.getItem(
-                                    "inlab_user_his_type"
+                                  return JSON.parse(
+                                    localStorage.getItem("inlab_user_his_type")
                                   ) !== "tums_api" &&
-                                    localStorage.getItem(
-                                      "inlab_user_his_type"
+                                    JSON.parse(
+                                      localStorage.getItem(
+                                        "inlab_user_his_type"
+                                      )
                                     ) !== "tebvarayane_db"
                                     ? (() => {
                                         const gregorianDate = new Date(
@@ -6929,11 +6931,15 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                         </React.Fragment>
                                       ) : (
                                         <React.Fragment>
-                                          {localStorage.getItem(
-                                            "inlab_user_his_type"
+                                          {JSON.parse(
+                                            localStorage.getItem(
+                                              "inlab_user_his_type"
+                                            )
                                           ) !== "tums_api" &&
-                                          localStorage.getItem(
-                                            "inlab_user_his_type"
+                                          JSON.parse(
+                                            localStorage.getItem(
+                                              "inlab_user_his_type"
+                                            )
                                           ) !== "tebvarayane_db"
                                             ? (() => {
                                                 const gregorianDate = new Date(

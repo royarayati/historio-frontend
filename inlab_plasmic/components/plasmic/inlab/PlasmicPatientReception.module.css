@@ -26,20 +26,19 @@
 .header {
   display: flex;
   flex-direction: row;
-  position: sticky;
+  position: relative;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  height: 100%;
+  height: 60px;
   max-width: 100%;
-  left: 0px;
-  top: 0px;
+  left: auto;
+  top: auto;
   z-index: 1;
   background: #ffffff;
   column-gap: 8px;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
-  min-height: 0;
   padding: 8px;
 }
 .addNewPatientPostApi:global(.__wab_instance) {
@@ -84,6 +83,9 @@
   background: none;
   row-gap: 12px;
   overflow: auto;
+  left: auto;
+  top: auto;
+  z-index: 1;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   padding: 0px;
@@ -716,6 +718,10 @@
   object-fit: cover;
   width: 100%;
   overflow: auto;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   padding: 12px;
@@ -768,6 +774,21 @@
   height: 1em;
 }
 .svg___5I8K {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.editDeletePatient2:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg___9H6K1 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg___9Nu0X {
   position: relative;
   object-fit: cover;
   width: auto;
@@ -1007,6 +1028,10 @@
   object-fit: cover;
   width: 100%;
   overflow: auto;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   padding: 12px;
@@ -1329,7 +1354,7 @@
   width: 100%;
   min-width: 0;
 }
-.serviceIdNameSection2 {
+.edittedServiceIdNameSection {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1350,7 +1375,7 @@
   max-width: 100%;
   align-self: flex-end;
 }
-.serviceIdNameInput2 {
+.edittedServiceIdNameInput {
   display: flex;
   flex-direction: row;
   position: relative;
@@ -1365,17 +1390,17 @@
   padding: 8px;
   border: 0.1px none var(--token-8PxxXPNrIohQ);
 }
-.serviceIdInput2:global(.__wab_instance) {
+.edittedServiceIdInput:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.serviceNameInput2:global(.__wab_instance) {
+.edittedServiceNameInput:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.physicianIdNameSection2 {
+.edittedPhysicianIdNameSection {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1396,7 +1421,7 @@
   max-width: 100%;
   align-self: flex-end;
 }
-.physicanIdNameInput2 {
+.edittedPhysicanIdNameInput {
   display: flex;
   flex-direction: row;
   position: relative;
@@ -1411,17 +1436,17 @@
   padding: 8px;
   border: 0.1px none var(--token-8PxxXPNrIohQ);
 }
-.physicianNameInput2:global(.__wab_instance) {
+.edittedPhysicianNameInput:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.physicanIdInput2:global(.__wab_instance) {
+.edittedPhysicanIdInput:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.roomBedSection2 {
+.edittedRoomBedSection {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1442,7 +1467,7 @@
   max-width: 100%;
   align-self: flex-end;
 }
-.roomBedInput2 {
+.edittedRoomBedInput {
   display: flex;
   flex-direction: row;
   position: relative;
@@ -1457,17 +1482,17 @@
   padding: 8px;
   border: 0.1px none var(--token-8PxxXPNrIohQ);
 }
-.bedNameInput2:global(.__wab_instance) {
+.edittedBedNameInput:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.roomNameInput2:global(.__wab_instance) {
+.edittedRoomNameInput:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.admissionDatetimeSection3 {
+.edittedAdmissionDatetimeSection3 {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1489,7 +1514,7 @@
   max-width: 100%;
   align-self: flex-end;
 }
-.admissionDatetimeSection4 {
+.edittedAdmissionDatetimeSection4 {
   display: flex;
   flex-direction: row;
   position: relative;
@@ -1502,22 +1527,22 @@
   min-width: 0;
   padding: 8px;
 }
-.yearOfAdmissionInput2:global(.__wab_instance) {
+.edittedYearOfAdmissionInput2:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.monthOfAdmissionInput2:global(.__wab_instance) {
+.edittedMonthOfAdmissionInput2:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.dayOfAdmissionInput2:global(.__wab_instance) {
+.edittedDayOfAdmissionInput2:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.dismissedSection2 {
+.edittedDismissedSection {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1539,7 +1564,7 @@
   max-width: 100%;
   align-self: flex-end;
 }
-.dismissedButton2:global(.__wab_instance) {
+.edittedDismissedButton:global(.__wab_instance) {
   display: flex;
   flex-direction: row;
   position: relative;
@@ -1576,7 +1601,7 @@
   max-width: 100%;
   min-width: 0;
 }
-.dismissionDatetimeSection3 {
+.edittedDismissionDatetimeSection {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1598,7 +1623,7 @@
   max-width: 100%;
   align-self: flex-end;
 }
-.dismissionDatetimeSection4 {
+.edittedDismissionDatetimeSection2 {
   display: flex;
   flex-direction: row;
   position: relative;
@@ -1611,25 +1636,28 @@
   min-width: 0;
   padding: 8px;
 }
-.yearOfDismissionInput2:global(.__wab_instance) {
+.edittedYearOfDismissionInput:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.monthOfDismissionInput2:global(.__wab_instance) {
+.edittedMonthOfDismissionInput:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.dayOfDismissionInput2:global(.__wab_instance) {
+.edittedDayOfDismissionInput:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.admitPatientButton2:global(.__wab_instance) {
+.editPatientButton:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
+}
+.text__yyAv {
+  padding-left: 0px;
 }
 .svg__mGggF {
   position: relative;
@@ -1642,4 +1670,20 @@
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.deletePatient:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.freeBox {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
 }
