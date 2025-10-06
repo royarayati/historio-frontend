@@ -67,6 +67,7 @@ import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"
 import BookmarkIcon2 from "../../BookmarkIcon2"; // plasmic-import: SuUYl1jytKAo/component
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
+import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
 
@@ -210,6 +211,8 @@ export type PlasmicPatientReception__OverridesType = {
   wardModal?: Flex__<typeof AntdModal>;
   searchWardInput?: Flex__<typeof TextInput>;
   getWardApi?: Flex__<typeof ApiFetcherComponentPlus>;
+  homepageSwitchingTab?: Flex__<"div">;
+  switchingTab?: Flex__<typeof SwitchingTab>;
 };
 
 export interface DefaultPatientReceptionProps {}
@@ -7249,6 +7252,249 @@ function PlasmicPatientReception__RenderFunc(props: {
               </DataCtxReader__>
             </ApiFetcherComponentPlus>
           </AntdModal>
+          <div
+            data-plasmic-name={"homepageSwitchingTab"}
+            data-plasmic-override={overrides.homepageSwitchingTab}
+            className={classNames(projectcss.all, sty.homepageSwitchingTab)}
+          >
+            <SwitchingTab
+              data-plasmic-name={"switchingTab"}
+              data-plasmic-override={overrides.switchingTab}
+              className={classNames("__wab_instance", sty.switchingTab)}
+            >
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__uiBiH)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"25%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToHomepage"] = true
+                    ? (() => {
+                        const actionArgs = { destination: `/patients` };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToHomepage"] != null &&
+                    typeof $steps["goToHomepage"] === "object" &&
+                    typeof $steps["goToHomepage"].then === "function"
+                  ) {
+                    $steps["goToHomepage"] = await $steps["goToHomepage"];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/icons8Home1Svg.svg",
+                  fullWidth: 150,
+                  fullHeight: 150,
+                  aspectRatio: 1
+                }}
+              />
+
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__ax2Fz)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"25%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToPatientProfile"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}/profile/[adm_id]`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToPatientProfile"] != null &&
+                    typeof $steps["goToPatientProfile"] === "object" &&
+                    typeof $steps["goToPatientProfile"].then === "function"
+                  ) {
+                    $steps["goToPatientProfile"] = await $steps[
+                      "goToPatientProfile"
+                    ];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/group2063.svg",
+                  fullWidth: 18.77,
+                  fullHeight: 20.34,
+                  aspectRatio: 0.904762
+                }}
+              />
+
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__xlKox)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"25%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToImagingReport1"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}/report/list/[adm_id]`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToImagingReport1"] != null &&
+                    typeof $steps["goToImagingReport1"] === "object" &&
+                    typeof $steps["goToImagingReport1"].then === "function"
+                  ) {
+                    $steps["goToImagingReport1"] = await $steps[
+                      "goToImagingReport1"
+                    ];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/group376.svg",
+                  fullWidth: 19.424,
+                  fullHeight: 19.98,
+                  aspectRatio: 1
+                }}
+              />
+
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__ocrWh)}
+                displayHeight={"25px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"25%"}
+                loading={"lazy"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToLaboratoryData"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}/lab/[adm_id]`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToLaboratoryData"] != null &&
+                    typeof $steps["goToLaboratoryData"] === "object" &&
+                    typeof $steps["goToLaboratoryData"].then === "function"
+                  ) {
+                    $steps["goToLaboratoryData"] = await $steps[
+                      "goToLaboratoryData"
+                    ];
+                  }
+                }}
+                src={{
+                  src: "/new_inlab/plasmic/inlab/images/group384.svg",
+                  fullWidth: 14.575,
+                  fullHeight: 18.692,
+                  aspectRatio: 0.789474
+                }}
+              />
+            </SwitchingTab>
+          </div>
         </div>
       </div>
     </React.Fragment>
@@ -7373,7 +7619,9 @@ const PlasmicDescendants = {
     "deletePatient",
     "wardModal",
     "searchWardInput",
-    "getWardApi"
+    "getWardApi",
+    "homepageSwitchingTab",
+    "switchingTab"
   ],
   header: ["header", "addNewPatientPostApi", "patientsListGetApi"],
   addNewPatientPostApi: ["addNewPatientPostApi"],
@@ -7911,7 +8159,9 @@ const PlasmicDescendants = {
   deletePatient: ["deletePatient"],
   wardModal: ["wardModal", "searchWardInput", "getWardApi"],
   searchWardInput: ["searchWardInput"],
-  getWardApi: ["getWardApi"]
+  getWardApi: ["getWardApi"],
+  homepageSwitchingTab: ["homepageSwitchingTab", "switchingTab"],
+  switchingTab: ["switchingTab"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -8034,6 +8284,8 @@ type NodeDefaultElementType = {
   wardModal: typeof AntdModal;
   searchWardInput: typeof TextInput;
   getWardApi: typeof ApiFetcherComponentPlus;
+  homepageSwitchingTab: "div";
+  switchingTab: typeof SwitchingTab;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -8240,6 +8492,8 @@ export const PlasmicPatientReception = Object.assign(
     wardModal: makeNodeComponent("wardModal"),
     searchWardInput: makeNodeComponent("searchWardInput"),
     getWardApi: makeNodeComponent("getWardApi"),
+    homepageSwitchingTab: makeNodeComponent("homepageSwitchingTab"),
+    switchingTab: makeNodeComponent("switchingTab"),
 
     // Metadata about props expected for PlasmicPatientReception
     internalVariantProps: PlasmicPatientReception__VariantProps,
