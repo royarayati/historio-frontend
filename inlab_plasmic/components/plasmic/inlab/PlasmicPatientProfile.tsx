@@ -112,7 +112,7 @@ export type PlasmicPatientProfile__OverridesType = {
   nextPatient?: Flex__<"svg">;
   patientDataList?: Flex__<"div">;
   patientDemographicData?: Flex__<"div">;
-  patientProfileApi?: Flex__<typeof ApiFetcherComponentPlus>;
+  patientProfileApiFetcher?: Flex__<typeof ApiFetcherComponentPlus>;
   patientData2?: Flex__<"div">;
   patientProfileBox2?: Flex__<"div">;
   nationalIdAdmissionTimeNoPacs3?: Flex__<"div">;
@@ -1167,10 +1167,13 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 }
               </div>
               <ApiFetcherComponentPlus
-                data-plasmic-name={"patientProfileApi"}
-                data-plasmic-override={overrides.patientProfileApi}
+                data-plasmic-name={"patientProfileApiFetcher"}
+                data-plasmic-override={overrides.patientProfileApiFetcher}
                 autoFetch={true}
-                className={classNames("__wab_instance", sty.patientProfileApi)}
+                className={classNames(
+                  "__wab_instance",
+                  sty.patientProfileApiFetcher
+                )}
                 fetchTrigger={(() => {
                   try {
                     return $ctx.params.adm_id;
@@ -1204,7 +1207,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 method={"GET"}
                 path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
                 ref={ref => {
-                  $refs["patientProfileApi"] = ref;
+                  $refs["patientProfileApiFetcher"] = ref;
                 }}
               >
                 <DataCtxReader__>
@@ -3676,7 +3679,7 @@ const PlasmicDescendants = {
     "nextPatient",
     "patientDataList",
     "patientDemographicData",
-    "patientProfileApi",
+    "patientProfileApiFetcher",
     "patientData2",
     "patientProfileBox2",
     "nationalIdAdmissionTimeNoPacs3",
@@ -3746,7 +3749,7 @@ const PlasmicDescendants = {
   patientDataList: [
     "patientDataList",
     "patientDemographicData",
-    "patientProfileApi",
+    "patientProfileApiFetcher",
     "patientData2",
     "patientProfileBox2",
     "nationalIdAdmissionTimeNoPacs3",
@@ -3781,7 +3784,7 @@ const PlasmicDescendants = {
   ],
   patientDemographicData: [
     "patientDemographicData",
-    "patientProfileApi",
+    "patientProfileApiFetcher",
     "patientData2",
     "patientProfileBox2",
     "nationalIdAdmissionTimeNoPacs3",
@@ -3800,8 +3803,8 @@ const PlasmicDescendants = {
     "patientStatus5",
     "\u0648\u0636\u0639\u06cc\u062a\u0628\u06cc\u0645\u0627\u06313"
   ],
-  patientProfileApi: [
-    "patientProfileApi",
+  patientProfileApiFetcher: [
+    "patientProfileApiFetcher",
     "patientData2",
     "patientProfileBox2",
     "nationalIdAdmissionTimeNoPacs3",
@@ -3965,7 +3968,7 @@ type NodeDefaultElementType = {
   nextPatient: "svg";
   patientDataList: "div";
   patientDemographicData: "div";
-  patientProfileApi: typeof ApiFetcherComponentPlus;
+  patientProfileApiFetcher: typeof ApiFetcherComponentPlus;
   patientData2: "div";
   patientProfileBox2: "div";
   nationalIdAdmissionTimeNoPacs3: "div";
@@ -4076,7 +4079,7 @@ export const PlasmicPatientProfile = Object.assign(
     nextPatient: makeNodeComponent("nextPatient"),
     patientDataList: makeNodeComponent("patientDataList"),
     patientDemographicData: makeNodeComponent("patientDemographicData"),
-    patientProfileApi: makeNodeComponent("patientProfileApi"),
+    patientProfileApiFetcher: makeNodeComponent("patientProfileApiFetcher"),
     patientData2: makeNodeComponent("patientData2"),
     patientProfileBox2: makeNodeComponent("patientProfileBox2"),
     nationalIdAdmissionTimeNoPacs3: makeNodeComponent(

@@ -62,12 +62,13 @@ import {
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
-import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
+import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { AntdSelect } from "@plasmicpkgs/antd5/skinny/registerSelect";
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import BookmarkLab from "../../BookmarkLab"; // plasmic-import: yhUiLESiXQuk/component
+import { ApiFetcherComponentPlusCache } from "../../../utils/ApiFetcherComponentPlusCache"; // plasmic-import: Nd_qzxO4SbRZ/codeComponent
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
@@ -79,7 +80,6 @@ import "@plasmicapp/react-web/lib/plasmic.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectcss
 import sty from "./PlasmicLaboratoryData.module.css"; // plasmic-import: YivXi3wItkax/css
 
-import NextSvgrepoComSvgIcon from "./icons/PlasmicIcon__NextSvgrepoComSvg"; // plasmic-import: sbXZrFXKpPD-/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
@@ -112,13 +112,10 @@ export type PlasmicLaboratoryData__OverridesType = {
   redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
-  lastPatient?: Flex__<"div">;
-  last?: Flex__<"svg">;
-  patientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
+  exPatientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
   patientNameAgeGender?: Flex__<"div">;
-  nextPatient?: Flex__<"div">;
-  next?: Flex__<"svg">;
-  apiFetcherComponentPlusCache2?: Flex__<typeof ApiFetcherComponentPlusCache>;
+  patientDataApiFetcher?: Flex__<typeof ApiFetcherComponentPlus>;
+  patientNameAgeGender2?: Flex__<"div">;
   tabButtons?: Flex__<"div">;
   checkedFactor?: Flex__<typeof Button>;
   button?: Flex__<typeof Button>;
@@ -737,197 +734,411 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
-          <div
-            data-plasmic-name={"lastPatient"}
-            data-plasmic-override={overrides.lastPatient}
-            className={classNames(projectcss.all, sty.lastPatient)}
-            onClick={async event => {
-              const $steps = {};
-
-              $steps["deleteLabData"] = true
-                ? (() => {
-                    const actionArgs = {
-                      customFunction: async () => {
-                        return (() => {
-                          localStorage.setItem("laboratory_data", "");
-                          return console.log(
-                            "laboratory_data",
-                            localStorage.getItem("laboratory_data")
-                          );
-                        })();
+          {false ? (
+            <ApiFetcherComponent
+              data-plasmic-name={"exPatientDataApiFetcher"}
+              data-plasmic-override={overrides.exPatientDataApiFetcher}
+              className={classNames(
+                "__wab_instance",
+                sty.exPatientDataApiFetcher
+              )}
+              delay={50}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
+              ref={ref => {
+                $refs["exPatientDataApiFetcher"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <div
+                    data-plasmic-name={"patientNameAgeGender"}
+                    data-plasmic-override={overrides.patientNameAgeGender}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.patientNameAgeGender,
+                      {
+                        [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
+                          $state,
+                          "viewNormalRange",
+                          "viewNormalRange"
+                        )
                       }
-                    };
-                    return (({ customFunction }) => {
-                      return customFunction();
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["deleteLabData"] != null &&
-                typeof $steps["deleteLabData"] === "object" &&
-                typeof $steps["deleteLabData"].then === "function"
-              ) {
-                $steps["deleteLabData"] = await $steps["deleteLabData"];
-              }
+                    )}
+                    dir={"rtl"}
+                  >
+                    {hasVariant(globalVariants, "screen", "mobileFirst") ? (
+                      <React.Fragment>
+                        {(() => {
+                          function calcAgeShamsiDetailed(shamsiStr) {
+                            shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
+                              String.fromCharCode(d.charCodeAt(0) - 1728)
+                            );
+                            const [datePart] = shamsiStr.split(" ");
+                            let [birthYear, birthMonth, birthDay] = datePart
+                              .split("/")
+                              .map(Number);
+                            const gNow = new Date();
+                            const gy = gNow.getFullYear();
+                            const gm = gNow.getMonth() + 1;
+                            const gd = gNow.getDate();
+                            function g2j(gy, gm, gd) {
+                              const gDaysInMonth = [
+                                31,
+                                (gy % 4 === 0 && gy % 100 !== 0) ||
+                                gy % 400 === 0
+                                  ? 29
+                                  : 28,
+                                31,
+                                30,
+                                31,
+                                30,
+                                31,
+                                31,
+                                30,
+                                31,
+                                30,
+                                31
+                              ];
 
-              $steps["getAdmIdPatientId"] = true
-                ? (() => {
-                    const actionArgs = {
-                      customFunction: async () => {
-                        return (() => {
-                          const stored_patient_index_id_list = JSON.parse(
-                            localStorage.getItem("patient_index_id_list")
-                          );
-                          const specificItem =
-                            stored_patient_index_id_list.find(
-                              item =>
-                                item.admission_id ===
-                                parseInt($ctx.params.adm_id)
-                            );
-                          if (specificItem) {
-                            const specificNumber = specificItem.number;
-                            const newNumber = specificNumber - 1;
-                            const nextItem = stored_patient_index_id_list.find(
-                              item => item.number === newNumber
-                            );
-                            if (nextItem) {
-                              localStorage.setItem(
-                                "patient_id",
-                                nextItem.patient_id
+                              let g_day_no =
+                                365 * (gy - 1600) +
+                                Math.floor((gy - 1600 + 3) / 4) -
+                                Math.floor((gy - 1600 + 99) / 100) +
+                                Math.floor((gy - 1600 + 399) / 400);
+                              for (let i = 0; i < gm - 1; ++i)
+                                g_day_no += gDaysInMonth[i];
+                              g_day_no += gd - 1;
+                              let j_day_no = g_day_no - 79;
+                              let j_np = Math.floor(j_day_no / 12053);
+                              j_day_no %= 12053;
+                              let jy =
+                                979 +
+                                33 * j_np +
+                                4 * Math.floor(j_day_no / 1461);
+                              j_day_no %= 1461;
+                              if (j_day_no >= 366) {
+                                jy += Math.floor((j_day_no - 1) / 365);
+                                j_day_no = (j_day_no - 1) % 365;
+                              }
+                              const jDaysInMonth = [
+                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                              ];
+
+                              let jm;
+                              for (
+                                jm = 0;
+                                jm < 11 && j_day_no >= jDaysInMonth[jm];
+                                ++jm
+                              )
+                                j_day_no -= jDaysInMonth[jm];
+                              let jd = j_day_no + 1;
+                              return {
+                                jy,
+                                jm: jm + 1,
+                                jd
+                              };
+                            }
+                            const today = g2j(gy, gm, gd);
+                            let yearDiff = today.jy - birthYear;
+                            let monthDiff = today.jm - birthMonth;
+                            let dayDiff = today.jd - birthDay;
+                            if (dayDiff < 0) {
+                              monthDiff--;
+                              const jDaysInMonth = [
+                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                              ];
+
+                              dayDiff +=
+                                jDaysInMonth[(birthMonth - 2 + 12) % 12];
+                            }
+                            if (monthDiff < 0) {
+                              yearDiff--;
+                              monthDiff += 12;
+                            }
+                            if (yearDiff >= 1) {
+                              return `${yearDiff}`;
+                            } else if (monthDiff >= 1) {
+                              return `${monthDiff} ماهه`;
+                            } else {
+                              return `${dayDiff} روزه`;
+                            }
+                          }
+                          function calcAgeGregorianDetailed(dateStr) {
+                            const dob = new Date(dateStr);
+                            const now = new Date();
+                            let yearDiff =
+                              now.getFullYear() - dob.getFullYear();
+                            let monthDiff = now.getMonth() - dob.getMonth();
+                            let dayDiff = now.getDate() - dob.getDate();
+                            if (dayDiff < 0) {
+                              monthDiff--;
+                              const prevMonth = new Date(
+                                now.getFullYear(),
+                                now.getMonth(),
+                                0
                               );
-                              return localStorage.setItem(
-                                "admission_id",
-                                nextItem.admission_id
+                              dayDiff += prevMonth.getDate();
+                            }
+                            if (monthDiff < 0) {
+                              yearDiff--;
+                              monthDiff += 12;
+                            }
+                            if (yearDiff >= 1) {
+                              return `${yearDiff}`;
+                            } else if (monthDiff >= 1) {
+                              return `${monthDiff}ماهه`;
+                            } else {
+                              return `${dayDiff}روزه`;
+                            }
+                          }
+                          function getPersonInfoWithAge(item) {
+                            const hisType = JSON.parse(
+                              localStorage.getItem("inlab_user_his_type")
+                            );
+                            if (!item || !item.date_of_birth)
+                              return "تاریخ تولد موجود نیست.";
+                            const fullName = `${item.first_name} ${item.last_name}`;
+                            const genderSymbol =
+                              item.gender === "F"
+                                ? " \u2640️"
+                                : item.gender === "M"
+                                ? " \u2642️"
+                                : "";
+                            let ageString;
+                            if (
+                              hisType === "tums_api" ||
+                              hisType === "tebvarayane_db"
+                            ) {
+                              ageString = calcAgeShamsiDetailed(
+                                item.date_of_birth
                               );
                             } else {
-                              return console.log("No next item found.");
+                              ageString = calcAgeGregorianDetailed(
+                                item.date_of_birth
+                              );
                             }
-                          } else {
-                            return console.log(
-                              "No matching admission ID found."
+                            return `${fullName} ${ageString}${genderSymbol}`;
+                          }
+                          return (() => {
+                            if ($ctx.fetched_data.loading) return "";
+                            if (
+                              $ctx.fetched_data.data &&
+                              $ctx.fetched_data.data.length === 0
+                            )
+                              return "";
+                            const item = $ctx.fetched_data.data[0];
+                            return getPersonInfoWithAge(item);
+                          })();
+                        })()}
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        {(() => {
+                          function calcAgeShamsiDetailed(shamsiStr) {
+                            shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
+                              String.fromCharCode(d.charCodeAt(0) - 1728)
                             );
+                            const [datePart] = shamsiStr.split(" ");
+                            let [birthYear, birthMonth, birthDay] = datePart
+                              .split("/")
+                              .map(Number);
+                            const gNow = new Date();
+                            const gy = gNow.getFullYear();
+                            const gm = gNow.getMonth() + 1;
+                            const gd = gNow.getDate();
+                            function g2j(gy, gm, gd) {
+                              const gDaysInMonth = [
+                                31,
+                                (gy % 4 === 0 && gy % 100 !== 0) ||
+                                gy % 400 === 0
+                                  ? 29
+                                  : 28,
+                                31,
+                                30,
+                                31,
+                                30,
+                                31,
+                                31,
+                                30,
+                                31,
+                                30,
+                                31
+                              ];
+
+                              let g_day_no =
+                                365 * (gy - 1600) +
+                                Math.floor((gy - 1600 + 3) / 4) -
+                                Math.floor((gy - 1600 + 99) / 100) +
+                                Math.floor((gy - 1600 + 399) / 400);
+                              for (let i = 0; i < gm - 1; ++i)
+                                g_day_no += gDaysInMonth[i];
+                              g_day_no += gd - 1;
+                              let j_day_no = g_day_no - 79;
+                              let j_np = Math.floor(j_day_no / 12053);
+                              j_day_no %= 12053;
+                              let jy =
+                                979 +
+                                33 * j_np +
+                                4 * Math.floor(j_day_no / 1461);
+                              j_day_no %= 1461;
+                              if (j_day_no >= 366) {
+                                jy += Math.floor((j_day_no - 1) / 365);
+                                j_day_no = (j_day_no - 1) % 365;
+                              }
+                              const jDaysInMonth = [
+                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                              ];
+
+                              let jm;
+                              for (
+                                jm = 0;
+                                jm < 11 && j_day_no >= jDaysInMonth[jm];
+                                ++jm
+                              )
+                                j_day_no -= jDaysInMonth[jm];
+                              let jd = j_day_no + 1;
+                              return {
+                                jy,
+                                jm: jm + 1,
+                                jd
+                              };
+                            }
+                            const today = g2j(gy, gm, gd);
+                            let yearDiff = today.jy - birthYear;
+                            let monthDiff = today.jm - birthMonth;
+                            let dayDiff = today.jd - birthDay;
+                            if (dayDiff < 0) {
+                              monthDiff--;
+                              const jDaysInMonth = [
+                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+                              ];
+
+                              dayDiff +=
+                                jDaysInMonth[(birthMonth - 2 + 12) % 12];
+                            }
+                            if (monthDiff < 0) {
+                              yearDiff--;
+                              monthDiff += 12;
+                            }
+                            if (yearDiff >= 1) {
+                              return `${yearDiff}`;
+                            } else if (monthDiff >= 1) {
+                              return `${monthDiff} ماهه`;
+                            } else {
+                              return `${dayDiff} روزه`;
+                            }
                           }
-                        })();
-                      }
-                    };
-                    return (({ customFunction }) => {
-                      return customFunction();
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["getAdmIdPatientId"] != null &&
-                typeof $steps["getAdmIdPatientId"] === "object" &&
-                typeof $steps["getAdmIdPatientId"].then === "function"
-              ) {
-                $steps["getAdmIdPatientId"] = await $steps["getAdmIdPatientId"];
-              }
-
-              $steps["updateDataLoaded"] = true
-                ? (() => {
-                    const actionArgs = {
-                      variable: {
-                        objRoot: $state,
-                        variablePath: ["dataLoaded"]
-                      },
-                      operation: 0,
-                      value: false
-                    };
-                    return (({ variable, value, startIndex, deleteCount }) => {
-                      if (!variable) {
-                        return;
-                      }
-                      const { objRoot, variablePath } = variable;
-
-                      $stateSet(objRoot, variablePath, value);
-                      return value;
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["updateDataLoaded"] != null &&
-                typeof $steps["updateDataLoaded"] === "object" &&
-                typeof $steps["updateDataLoaded"].then === "function"
-              ) {
-                $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
-              }
-
-              $steps["goToNextLaboratoryData"] = true
-                ? (() => {
-                    const actionArgs = {
-                      destination: `/patient/${(() => {
-                        try {
-                          return localStorage.getItem("patient_id");
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
+                          function calcAgeGregorianDetailed(dateStr) {
+                            const dob = new Date(dateStr);
+                            const now = new Date();
+                            let yearDiff =
+                              now.getFullYear() - dob.getFullYear();
+                            let monthDiff = now.getMonth() - dob.getMonth();
+                            let dayDiff = now.getDate() - dob.getDate();
+                            if (dayDiff < 0) {
+                              monthDiff--;
+                              const prevMonth = new Date(
+                                now.getFullYear(),
+                                now.getMonth(),
+                                0
+                              );
+                              dayDiff += prevMonth.getDate();
+                            }
+                            if (monthDiff < 0) {
+                              yearDiff--;
+                              monthDiff += 12;
+                            }
+                            if (yearDiff >= 1) {
+                              return `${yearDiff}`;
+                            } else if (monthDiff >= 1) {
+                              return `${monthDiff}ماهه`;
+                            } else {
+                              return `${dayDiff}روزه`;
+                            }
                           }
-                          throw e;
-                        }
-                      })()}/lab/${(() => {
-                        try {
-                          return localStorage.getItem("admission_id");
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
+                          function getPersonInfoWithAge(item) {
+                            const hisType = JSON.parse(
+                              localStorage.getItem("inlab_user_his_type")
+                            );
+                            if (!item || !item.date_of_birth)
+                              return "تاریخ تولد موجود نیست.";
+                            const fullName = `${item.first_name} ${item.last_name}`;
+                            const genderSymbol =
+                              item.gender === "F"
+                                ? " \u2640️"
+                                : item.gender === "M"
+                                ? " \u2642️"
+                                : "";
+                            let ageString;
+                            if (
+                              hisType === "tums_api" ||
+                              hisType === "tebvarayane_db"
+                            ) {
+                              ageString = calcAgeShamsiDetailed(
+                                item.date_of_birth
+                              );
+                            } else {
+                              ageString = calcAgeGregorianDetailed(
+                                item.date_of_birth
+                              );
+                            }
+                            return `${fullName} ${ageString}${genderSymbol}`;
                           }
-                          throw e;
-                        }
-                      })()}`
-                    };
-                    return (({ destination }) => {
-                      if (
-                        typeof destination === "string" &&
-                        destination.startsWith("#")
-                      ) {
-                        document
-                          .getElementById(destination.substr(1))
-                          .scrollIntoView({ behavior: "smooth" });
-                      } else {
-                        __nextRouter?.push(destination);
-                      }
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["goToNextLaboratoryData"] != null &&
-                typeof $steps["goToNextLaboratoryData"] === "object" &&
-                typeof $steps["goToNextLaboratoryData"].then === "function"
-              ) {
-                $steps["goToNextLaboratoryData"] = await $steps[
-                  "goToNextLaboratoryData"
-                ];
-              }
-            }}
-          >
-            <NextSvgrepoComSvgIcon
-              data-plasmic-name={"last"}
-              data-plasmic-override={overrides.last}
-              className={classNames(projectcss.all, sty.last)}
-              role={"img"}
-            />
-
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__kvCK
-              )}
-            >
-              {"\u0628\u06cc\u0645\u0627\u0631 \u0642\u0628\u0644\u06cc"}
-            </div>
-          </div>
-          <ApiFetcherComponent
+                          return (() => {
+                            if ($ctx.fetched_data.loading) return "";
+                            if (
+                              $ctx.fetched_data.data &&
+                              $ctx.fetched_data.data.length === 0
+                            )
+                              return "";
+                            const item = $ctx.fetched_data.data[0];
+                            return getPersonInfoWithAge(item);
+                          })();
+                        })()}
+                      </React.Fragment>
+                    )}
+                  </div>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponent>
+          ) : null}
+          <ApiFetcherComponentPlus
             data-plasmic-name={"patientDataApiFetcher"}
             data-plasmic-override={overrides.patientDataApiFetcher}
+            autoFetch={true}
             className={classNames("__wab_instance", sty.patientDataApiFetcher)}
-            delay={50}
+            fetchTrigger={(() => {
+              try {
+                return $ctx.params.adm_id;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             headers={(() => {
               try {
                 return {
@@ -952,14 +1163,14 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             <DataCtxReader__>
               {$ctx => (
                 <div
-                  data-plasmic-name={"patientNameAgeGender"}
-                  data-plasmic-override={overrides.patientNameAgeGender}
+                  data-plasmic-name={"patientNameAgeGender2"}
+                  data-plasmic-override={overrides.patientNameAgeGender2}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.patientNameAgeGender,
+                    sty.patientNameAgeGender2,
                     {
-                      [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
+                      [sty.patientNameAgeGender2viewNormalRange]: hasVariant(
                         $state,
                         "viewNormalRange",
                         "viewNormalRange"
@@ -1292,264 +1503,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 </div>
               )}
             </DataCtxReader__>
-          </ApiFetcherComponent>
-          {false ? (
-            <div
-              data-plasmic-name={"nextPatient"}
-              data-plasmic-override={overrides.nextPatient}
-              className={classNames(projectcss.all, sty.nextPatient)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["deleteLabData"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        customFunction: async () => {
-                          return (() => {
-                            localStorage.setItem("laboratory_data", "");
-                            return console.log(
-                              "laboratory_data",
-                              localStorage.getItem("laboratory_data")
-                            );
-                          })();
-                        }
-                      };
-                      return (({ customFunction }) => {
-                        return customFunction();
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["deleteLabData"] != null &&
-                  typeof $steps["deleteLabData"] === "object" &&
-                  typeof $steps["deleteLabData"].then === "function"
-                ) {
-                  $steps["deleteLabData"] = await $steps["deleteLabData"];
-                }
-
-                $steps["getAdmIdPatientId"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        customFunction: async () => {
-                          return (() => {
-                            const stored_patient_index_id_list = JSON.parse(
-                              localStorage.getItem("patient_index_id_list")
-                            );
-                            const specificItem =
-                              stored_patient_index_id_list.find(
-                                item =>
-                                  item.admission_id ===
-                                  parseInt($ctx.params.adm_id)
-                              );
-                            if (specificItem) {
-                              const specificNumber = specificItem.number;
-                              const newNumber = specificNumber + 1;
-                              const nextItem =
-                                stored_patient_index_id_list.find(
-                                  item => item.number === newNumber
-                                );
-                              if (nextItem) {
-                                localStorage.setItem(
-                                  "patient_id",
-                                  nextItem.patient_id
-                                );
-                                return localStorage.setItem(
-                                  "admission_id",
-                                  nextItem.admission_id
-                                );
-                              } else {
-                                return console.log("No next item found.");
-                              }
-                            } else {
-                              return console.log(
-                                "No matching admission ID found."
-                              );
-                            }
-                          })();
-                        }
-                      };
-                      return (({ customFunction }) => {
-                        return customFunction();
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["getAdmIdPatientId"] != null &&
-                  typeof $steps["getAdmIdPatientId"] === "object" &&
-                  typeof $steps["getAdmIdPatientId"].then === "function"
-                ) {
-                  $steps["getAdmIdPatientId"] = await $steps[
-                    "getAdmIdPatientId"
-                  ];
-                }
-
-                $steps["updateDataLoaded"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["dataLoaded"]
-                        },
-                        operation: 0,
-                        value: false
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateDataLoaded"] != null &&
-                  typeof $steps["updateDataLoaded"] === "object" &&
-                  typeof $steps["updateDataLoaded"].then === "function"
-                ) {
-                  $steps["updateDataLoaded"] = await $steps["updateDataLoaded"];
-                }
-
-                $steps["goToNextLaboratoryData"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: `/patient/${(() => {
-                          try {
-                            return localStorage.getItem("patient_id");
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}/lab/${(() => {
-                          try {
-                            return localStorage.getItem("admission_id");
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}`
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToNextLaboratoryData"] != null &&
-                  typeof $steps["goToNextLaboratoryData"] === "object" &&
-                  typeof $steps["goToNextLaboratoryData"].then === "function"
-                ) {
-                  $steps["goToNextLaboratoryData"] = await $steps[
-                    "goToNextLaboratoryData"
-                  ];
-                }
-              }}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__ckBTs
-                )}
-              >
-                {"\u0628\u06cc\u0645\u0627\u0631 \u0628\u0639\u062f\u06cc"}
-              </div>
-              <NextSvgrepoComSvgIcon
-                data-plasmic-name={"next"}
-                data-plasmic-override={overrides.next}
-                className={classNames(projectcss.all, sty.next)}
-                role={"img"}
-              />
-            </div>
-          ) : null}
-          {false ? (
-            <ApiFetcherComponentPlusCache
-              data-plasmic-name={"apiFetcherComponentPlusCache2"}
-              data-plasmic-override={overrides.apiFetcherComponentPlusCache2}
-              cache={"yes"}
-              cacheKey={(() => {
-                try {
-                  return "profile";
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
-                }
-              })()}
-              cacheStrategy={"cache-first"}
-              cacheTTL={3600000}
-              className={classNames(
-                "__wab_instance",
-                sty.apiFetcherComponentPlusCache2
-              )}
-              dataClassName={"api-data"}
-              debugMode={false}
-              delay={10}
-              headers={(() => {
-                try {
-                  return {
-                    "X-Namespace": localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )
-                  };
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
-                }
-              })()}
-              method={"GET"}
-              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
-              patientId={(() => {
-                try {
-                  return $ctx.params.code;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
-                }
-              })()}
-              showData={false}
-            />
-          ) : null}
+          </ApiFetcherComponentPlus>
         </div>
         <div
           data-plasmic-name={"tabButtons"}
@@ -5404,13 +5358,10 @@ const PlasmicDescendants = {
     "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "header",
-    "lastPatient",
-    "last",
-    "patientDataApiFetcher",
+    "exPatientDataApiFetcher",
     "patientNameAgeGender",
-    "nextPatient",
-    "next",
-    "apiFetcherComponentPlusCache2",
+    "patientDataApiFetcher",
+    "patientNameAgeGender2",
     "tabButtons",
     "checkedFactor",
     "button",
@@ -5466,21 +5417,15 @@ const PlasmicDescendants = {
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
   header: [
     "header",
-    "lastPatient",
-    "last",
-    "patientDataApiFetcher",
+    "exPatientDataApiFetcher",
     "patientNameAgeGender",
-    "nextPatient",
-    "next",
-    "apiFetcherComponentPlusCache2"
+    "patientDataApiFetcher",
+    "patientNameAgeGender2"
   ],
-  lastPatient: ["lastPatient", "last"],
-  last: ["last"],
-  patientDataApiFetcher: ["patientDataApiFetcher", "patientNameAgeGender"],
+  exPatientDataApiFetcher: ["exPatientDataApiFetcher", "patientNameAgeGender"],
   patientNameAgeGender: ["patientNameAgeGender"],
-  nextPatient: ["nextPatient", "next"],
-  next: ["next"],
-  apiFetcherComponentPlusCache2: ["apiFetcherComponentPlusCache2"],
+  patientDataApiFetcher: ["patientDataApiFetcher", "patientNameAgeGender2"],
+  patientNameAgeGender2: ["patientNameAgeGender2"],
   tabButtons: ["tabButtons", "checkedFactor", "button", "laboratoryResult"],
   checkedFactor: ["checkedFactor", "button"],
   button: ["button"],
@@ -5670,13 +5615,10 @@ type NodeDefaultElementType = {
   redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
-  lastPatient: "div";
-  last: "svg";
-  patientDataApiFetcher: typeof ApiFetcherComponent;
+  exPatientDataApiFetcher: typeof ApiFetcherComponent;
   patientNameAgeGender: "div";
-  nextPatient: "div";
-  next: "svg";
-  apiFetcherComponentPlusCache2: typeof ApiFetcherComponentPlusCache;
+  patientDataApiFetcher: typeof ApiFetcherComponentPlus;
+  patientNameAgeGender2: "div";
   tabButtons: "div";
   checkedFactor: typeof Button;
   button: typeof Button;
@@ -5794,15 +5736,10 @@ export const PlasmicLaboratoryData = Object.assign(
       "redirectToNamespaceSelection"
     ),
     header: makeNodeComponent("header"),
-    lastPatient: makeNodeComponent("lastPatient"),
-    last: makeNodeComponent("last"),
-    patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
+    exPatientDataApiFetcher: makeNodeComponent("exPatientDataApiFetcher"),
     patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
-    nextPatient: makeNodeComponent("nextPatient"),
-    next: makeNodeComponent("next"),
-    apiFetcherComponentPlusCache2: makeNodeComponent(
-      "apiFetcherComponentPlusCache2"
-    ),
+    patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
+    patientNameAgeGender2: makeNodeComponent("patientNameAgeGender2"),
     tabButtons: makeNodeComponent("tabButtons"),
     checkedFactor: makeNodeComponent("checkedFactor"),
     button: makeNodeComponent("button"),
