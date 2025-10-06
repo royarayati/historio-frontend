@@ -70,7 +70,7 @@
     padding: 6px;
   }
 }
-.getPatient:global(.__wab_instance) {
+.patientDataApiFetcher:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   width: 100%;
@@ -93,10 +93,6 @@
     padding-right: 0px;
     padding-left: 0px;
   }
-}
-.saveAdmissionDatetime2:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
 }
 .apiFetcherComponent2:global(.__wab_instance) {
   max-width: 100%;
@@ -206,7 +202,7 @@
   width: auto;
   height: 1em;
 }
-.paraclinicReports:global(.__wab_instance) {
+.paraclinicReportsButton:global(.__wab_instance) {
   max-width: 100%;
 }
 .text__b01Ci {
@@ -231,25 +227,7 @@
   width: auto;
   height: 1em;
 }
-.apiFetcherComponentPlusCache:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  left: 0px;
-  top: 160px;
-  z-index: 1;
-  position: fixed;
-  bottom: 60px;
-  width: 100%;
-  overflow: auto;
-  grid-column-start: 1 !important;
-  grid-column-end: -1 !important;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .apiFetcherComponentPlusCache:global(.__wab_instance) {
-    padding: 4px 8px;
-  }
-}
-.paraclinics:global(.__wab_instance) {
+.exParaclinics:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   position: fixed;
@@ -267,7 +245,7 @@
   margin: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .paraclinics:global(.__wab_instance) {
+  .exParaclinics:global(.__wab_instance) {
     z-index: 1;
     left: 0px;
     top: 160px;
@@ -406,6 +384,165 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .paraclinicDatetime {
+    left: auto;
+    top: auto;
+  }
+}
+.paraclinics:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  left: 0px;
+  top: 160px;
+  z-index: 1;
+  position: fixed;
+  bottom: auto;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  padding: 4px 17px 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinics:global(.__wab_instance) {
+    display: flex;
+  }
+}
+.text__b2YCt {
+  position: fixed;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: 17px;
+  top: 68px;
+  z-index: 1;
+  text-align: center;
+  background: #ffffff80;
+  font-size: 12px;
+  right: 17px;
+  border-radius: 5px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__b2YCt {
+    left: auto;
+    top: auto;
+    right: auto;
+    display: block;
+  }
+}
+.text__eO18R {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  flex-grow: 0;
+  margin-top: 12px;
+  background: #ffffff;
+  white-space: pre-wrap;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__eO18R {
+    left: auto;
+    top: auto;
+  }
+}
+.paraclinicsList2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  row-gap: 12px;
+  min-width: 0;
+  padding: 4px 0px 0px;
+}
+.paraclinicNameDatetime2 {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  align-self: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 32px;
+  min-width: 0;
+  padding: 4px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicNameDatetime2 {
+    column-gap: 8px;
+    row-gap: 0px;
+  }
+}
+.button2:global(.__wab_instance) {
+  max-width: 100%;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .button2:global(.__wab_instance) {
+    width: auto;
+  }
+}
+.text__mpEw3 {
+  width: 100%;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__mpEw3 {
+    font-size: var(--token-CdE1_0ZaCyT1);
+  }
+}
+.svg__ffpHg {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__tKVoZ {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.paraclinicName3 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  left: auto;
+  top: auto;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicName3 {
+    white-space: pre-wrap;
+    left: auto;
+    top: auto;
+    align-self: center;
+  }
+}
+.paraclinicDatetime3 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  left: auto;
+  top: auto;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicDatetime3 {
     left: auto;
     top: auto;
   }
@@ -1074,7 +1211,7 @@
     display: block;
   }
 }
-.getPacsUrl:global(.__wab_instance) {
+.exGetPacsUrl:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   left: auto;
@@ -1085,7 +1222,7 @@
   min-width: 0;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .getPacsUrl:global(.__wab_instance) {
+  .exGetPacsUrl:global(.__wab_instance) {
     top: auto;
     right: auto;
     left: auto;
@@ -1117,6 +1254,43 @@
   width: auto;
   height: 1em;
 }
+.getPacsUrl:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.viewPacsButton:global(.__wab_instance) {
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  right: auto;
+  height: auto;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .viewPacsButton:global(.__wab_instance) {
+    left: auto;
+    top: auto;
+    right: auto;
+  }
+}
+.text__sqnvC {
+  color: #ffffff;
+}
+.svg___9KTa {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__jiCk6 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
 .paraclinicSection {
   display: flex;
   flex-direction: column;
@@ -1139,7 +1313,7 @@
     padding: 4px;
   }
 }
-.paraclinicsReport:global(.__wab_instance) {
+.exParaclinicsReport:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   position: relative;
@@ -1153,7 +1327,7 @@
   margin: 0px;
 }
 @media (min-width: 0px) and (max-width: 760px) {
-  .paraclinicsReport:global(.__wab_instance) {
+  .exParaclinicsReport:global(.__wab_instance) {
     z-index: 1;
     left: auto;
     top: auto;
@@ -1164,50 +1338,6 @@
     padding-left: 15px;
     margin: 0px;
   }
-}
-.viewPacsButton:global(.__wab_instance) {
-  max-width: 100%;
-  width: 100%;
-  margin-top: 8px;
-  margin-bottom: 0px;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  position: relative;
-  height: 30px;
-  align-self: center;
-  min-width: 0;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .viewPacsButton:global(.__wab_instance) {
-    margin-top: 25px;
-    height: 40px;
-    left: auto;
-    top: auto;
-  }
-}
-.text___4Thhk {
-  font-size: 16px;
-  text-align: center;
-  align-self: stretch;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .text___4Thhk {
-    text-align: center;
-    align-self: center;
-  }
-}
-.svg__tMj4 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__gjLoE {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
 }
 .text__pIosL {
   position: fixed;
@@ -1610,6 +1740,420 @@
   min-width: 0;
 }
 .textshowReportSummary__yfiZmOusrM {
+  text-align: right;
+}
+.paraclinicsReport:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  padding-right: 17px;
+  padding-left: 17px;
+  width: 100%;
+  min-width: 0;
+}
+.text__y1HEe {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  text-align: center;
+  background: #ffffff80;
+  right: auto;
+  font-size: 12px;
+  min-width: 0;
+  border-radius: 5px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__y1HEe {
+    font-size: 10px;
+    left: auto;
+    top: auto;
+    right: auto;
+    display: block;
+  }
+}
+.text__x9Gg7 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  flex-grow: 0;
+  margin-top: 12px;
+  background: #ffffff;
+  white-space: pre-wrap;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__x9Gg7 {
+    left: auto;
+    top: auto;
+    display: block;
+  }
+}
+.paraclinicReportsSection2 {
+  display: grid;
+  position: relative;
+  align-content: flex-start;
+  justify-items: center;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  left: auto;
+  top: auto;
+  padding-top: 15px;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  grid-template-columns:
+    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
+    min(
+      var(--plsmc-standard-width),
+      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
+    )
+    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+}
+.paraclinicReportsSection2 > * {
+  grid-column: 4;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportsSection2 {
+    overflow: auto;
+    padding-top: 12px;
+    position: relative;
+    left: auto;
+    top: auto;
+    display: grid;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportsSection2 > * {
+    grid-column: 4;
+  }
+}
+.paraclinicReportSection2 {
+  display: grid;
+  position: relative;
+  align-content: flex-start;
+  justify-items: center;
+  width: 100%;
+  left: auto;
+  top: auto;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  grid-template-columns:
+    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
+    min(
+      var(--plsmc-standard-width),
+      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
+    )
+    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+  padding: 0px;
+}
+.paraclinicReportSection2 > * {
+  grid-column: 4;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportSection2 > * {
+    grid-column: 4;
+  }
+}
+.paraclinicReportSection2showReportSummary > * {
+  grid-column: 4;
+}
+.paraclinicReportList3 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  height: auto;
+  max-width: 100%;
+  background: none;
+  flex-grow: 1;
+  width: 100%;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  z-index: 0;
+  box-shadow: 0px 2px 14px 0px #0000001f;
+  row-gap: 0px;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  border-radius: 5px;
+  padding: 0px;
+  margin: 0px 0px 10px;
+  border: 0.5px solid #d3d3d3;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportList3 {
+    width: 100%;
+    margin-bottom: 10px;
+    row-gap: 0px;
+    column-gap: 0px;
+    min-width: 0;
+  }
+}
+.paraclinicReportCard2 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  flex-grow: 1;
+  box-shadow: none;
+  align-self: center;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  row-gap: 0px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 16px 20px;
+  margin: 0px;
+  border: 0px none #d3d3d3;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicReportCard2 {
+    width: 100%;
+    min-width: 0;
+    border-width: 0px;
+    border-style: none;
+  }
+}
+.paraclinicTitleDatetime2 {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  margin-bottom: 8px;
+  column-gap: 0px;
+  min-width: 0;
+  padding: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicTitleDatetime2 {
+    margin: 0px 0px 16px;
+  }
+}
+.paraclinicName4 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  white-space: pre-wrap;
+  text-align: left;
+  font-size: 16px;
+  line-height: 18px;
+  align-self: center;
+  min-width: 0;
+}
+.paraclinicDatetime4 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  white-space: pre-wrap;
+  text-align: right;
+  font-size: 16px;
+  line-height: 18px;
+  align-self: center;
+  min-width: 0;
+  border-left: 0px none var(--token-IYO13gyYJHXG);
+}
+.paraclinicTitle2 {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  align-self: center;
+  min-width: 0;
+  padding: 0px;
+}
+.previousAdmission2:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__w9H6S {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__lPKe {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.paraclinicType2 {
+  position: relative;
+  height: auto;
+  max-width: 100%;
+  font-size: 16px;
+  text-align: right;
+  width: 100%;
+  white-space: pre-wrap;
+  align-self: center;
+  line-height: 18px;
+  min-width: 0;
+  padding: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .paraclinicType2 {
+    font-size: 16px;
+    text-align: right;
+    width: 100%;
+    max-width: 100%;
+    align-self: center;
+    line-height: 18px;
+    min-width: 0;
+  }
+}
+.reportSummary3 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 0px 20px 10px;
+  margin: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .reportSummary3 {
+    margin: 0px;
+  }
+}
+.showSummaryButton2:global(.__wab_instance) {
+  max-width: 100%;
+  align-self: flex-end;
+}
+.text__mY7J9 {
+  text-align: right;
+  color: var(--token-IYO13gyYJHXG);
+}
+.svg__oxzDm {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__aYjRc {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.apiFetcherComponent3:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.apiFetcherComponent3showReportSummary:global(.__wab_instance) {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+}
+.freeBox__auMeb {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.text__rhcEy {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.textshowReportSummary__rhcEyOusrM {
+  text-align: center;
+}
+.text__dKd2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.textshowReportSummary__dKd2OusrM {
+  text-align: center;
+}
+.freeBox__rhmaQ {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: auto;
+  min-width: 0;
+  padding: 8px;
+}
+.freeBox__xCo3E {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.deleteReportSummary2:global(.__wab_instance) {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
+.svg__ofkvA {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__yia8 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__kUoZn {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.textshowReportSummary__kUoZnOusrM {
   text-align: right;
 }
 .patientMedia:global(.__wab_instance) {

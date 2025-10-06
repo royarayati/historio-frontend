@@ -65,6 +65,7 @@ import { AntdRadioGroup } from "@plasmicpkgs/antd5/skinny/registerRadio";
 import { AntdRadio } from "@plasmicpkgs/antd5/skinny/registerRadio";
 import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import BookmarkIcon2 from "../../BookmarkIcon2"; // plasmic-import: SuUYl1jytKAo/component
+import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
@@ -76,6 +77,8 @@ import sty from "./PlasmicPatientReception.module.css"; // plasmic-import: DIrQR
 
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: YIqBWKHX3AVs/icon
+import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
 
 createPlasmicElementProxy;
 
@@ -113,9 +116,6 @@ export type PlasmicPatientReception__OverridesType = {
   phoneNumberInput?: Flex__<typeof TextInput>;
   admissionDataSection?: Flex__<"div">;
   wardIdNameSection?: Flex__<"div">;
-  wardNameIdInput?: Flex__<"div">;
-  wardNameInput?: Flex__<typeof TextInput>;
-  wardIdInput?: Flex__<typeof TextInput>;
   serviceIdNameSection?: Flex__<"div">;
   serviceIdNameInput?: Flex__<"div">;
   serviceIdInput?: Flex__<typeof TextInput>;
@@ -161,6 +161,7 @@ export type PlasmicPatientReception__OverridesType = {
   radiologyReport?: Flex__<typeof PlasmicImg__>;
   laboratoryData?: Flex__<typeof PlasmicImg__>;
   editManualPatient?: Flex__<typeof ApiFetcherComponentPlus>;
+  conditionGuard?: Flex__<typeof ConditionGuard>;
   editAdmittedPatient?: Flex__<"div">;
   editPatientDataSection?: Flex__<"div">;
   editFisrtLastNameSection?: Flex__<"div">;
@@ -180,9 +181,6 @@ export type PlasmicPatientReception__OverridesType = {
   edittedPhoneNumberInput?: Flex__<typeof TextInput>;
   edittedAdmissionDataSection?: Flex__<"div">;
   edittedWardIdNameSection?: Flex__<"div">;
-  edittedWardNameIdInput?: Flex__<"div">;
-  edittedWardNameInput?: Flex__<typeof TextInput>;
-  edittedWardIdInput?: Flex__<typeof TextInput>;
   edittedServiceIdNameSection?: Flex__<"div">;
   edittedServiceIdNameInput?: Flex__<"div">;
   edittedServiceIdInput?: Flex__<typeof TextInput>;
@@ -209,7 +207,9 @@ export type PlasmicPatientReception__OverridesType = {
   edittedDayOfDismissionInput?: Flex__<typeof TextInput>;
   editPatientButton?: Flex__<typeof Button>;
   deletePatient?: Flex__<typeof AntdModal>;
-  freeBox?: Flex__<"div">;
+  wardModal?: Flex__<typeof AntdModal>;
+  searchWardInput?: Flex__<typeof TextInput>;
+  getWardApi?: Flex__<typeof ApiFetcherComponentPlus>;
 };
 
 export interface DefaultPatientReceptionProps {}
@@ -322,18 +322,6 @@ function PlasmicPatientReception__RenderFunc(props: {
       },
       {
         path: "phoneNumberInput.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
-        path: "wardNameInput.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
-        path: "wardIdInput.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
@@ -760,44 +748,6 @@ function PlasmicPatientReception__RenderFunc(props: {
           })()
       },
       {
-        path: "edittedWardNameInput.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $ctx.fetched_data.data[0].ward[0].name;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()
-      },
-      {
-        path: "edittedWardIdInput.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $ctx.fetched_data.data[0].ward[0].id;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()
-      },
-      {
         path: "edittedServiceIdInput.value",
         type: "private",
         variableType: "text",
@@ -1099,6 +1049,30 @@ function PlasmicPatientReception__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "wardModal.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "searchWardInput.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "selectedWardId",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "selectedWardName",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -2036,74 +2010,69 @@ function PlasmicPatientReception__RenderFunc(props: {
                     {"\u0628\u062e\u0634 \u0628\u0633\u062a\u0631\u06cc : "}
                   </div>
                   <div
-                    data-plasmic-name={"wardNameIdInput"}
-                    data-plasmic-override={overrides.wardNameIdInput}
-                    className={classNames(projectcss.all, sty.wardNameIdInput)}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__irkk9
+                    )}
+                    dir={"rtl"}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateWardModalOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["wardModal", "open"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateWardModalOpen"] != null &&
+                        typeof $steps["updateWardModalOpen"] === "object" &&
+                        typeof $steps["updateWardModalOpen"].then === "function"
+                      ) {
+                        $steps["updateWardModalOpen"] = await $steps[
+                          "updateWardModalOpen"
+                        ];
+                      }
+                    }}
                   >
-                    <TextInput
-                      data-plasmic-name={"wardNameInput"}
-                      data-plasmic-override={overrides.wardNameInput}
-                      className={classNames(
-                        "__wab_instance",
-                        sty.wardNameInput
-                      )}
-                      endIcon={null}
-                      onChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "wardNameInput",
-                            "value"
-                          ])((e => e.target?.value).apply(null, eventArgs));
-                        }).apply(null, eventArgs);
-
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return $state.selectedWardName === ""
+                            ? "----"
+                            : $state.selectedWardName;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "";
+                          }
+                          throw e;
                         }
-                      }}
-                      placeholder={"\u0646\u0627\u0645 \u0628\u062e\u0634 "}
-                      startIcon={null}
-                      value={
-                        generateStateValueProp($state, [
-                          "wardNameInput",
-                          "value"
-                        ]) ?? ""
-                      }
-                    />
-
-                    <TextInput
-                      data-plasmic-name={"wardIdInput"}
-                      data-plasmic-override={overrides.wardIdInput}
-                      className={classNames("__wab_instance", sty.wardIdInput)}
-                      endIcon={null}
-                      onChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "wardIdInput",
-                            "value"
-                          ])((e => e.target?.value).apply(null, eventArgs));
-                        }).apply(null, eventArgs);
-
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      placeholder={"\u06a9\u062f \u0628\u062e\u0634"}
-                      startIcon={null}
-                      value={
-                        generateStateValueProp($state, [
-                          "wardIdInput",
-                          "value"
-                        ]) ?? ""
-                      }
-                    />
+                      })()}
+                    </React.Fragment>
                   </div>
                 </div>
                 <div
@@ -2797,8 +2766,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                   },
                                   admission_data: {
                                     admission_datetime: `${$state.yearOfAdmissionInput.value}/${$state.monthOfAdmissionInput.value}/${$state.dayOfAdmissionInput.value}`,
-                                    ward_id: $state.wardIdInput.value,
-                                    ward_name: $state.wardNameInput.value,
+                                    ward_id: $state.selectedWardId,
+                                    ward_name: $state.selectedWardName,
                                     service_id: $state.serviceIdInput.value,
                                     service_name: $state.serviceNameInput.value,
                                     physician_id: $state.physicanIdInput.value,
@@ -4467,2417 +4436,2471 @@ function PlasmicPatientReception__RenderFunc(props: {
             >
               <DataCtxReader__>
                 {$ctx => (
-                  <div
-                    data-plasmic-name={"editAdmittedPatient"}
-                    data-plasmic-override={overrides.editAdmittedPatient}
-                    className={classNames(
-                      projectcss.all,
-                      sty.editAdmittedPatient
-                    )}
-                  >
-                    <div
-                      data-plasmic-name={"editPatientDataSection"}
-                      data-plasmic-override={overrides.editPatientDataSection}
-                      className={classNames(
-                        projectcss.all,
-                        sty.editPatientDataSection
-                      )}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__bgNi4
-                        )}
-                      >
-                        {
-                          "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u062f\u0645\u0648\u06af\u0631\u0627\u0641\u06cc\u06a9 \u0628\u06cc\u0645\u0627\u0631 "
-                        }
-                      </div>
-                      <div
-                        data-plasmic-name={"editFisrtLastNameSection"}
-                        data-plasmic-override={
-                          overrides.editFisrtLastNameSection
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.editFisrtLastNameSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__g6Eez
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc : "
-                          }
-                        </div>
-                        <div
-                          data-plasmic-name={"editFisrtLastNameInput"}
-                          data-plasmic-override={
-                            overrides.editFisrtLastNameInput
-                          }
-                          className={classNames(
-                            projectcss.all,
-                            sty.editFisrtLastNameInput
-                          )}
-                        >
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedLastName
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedLastName",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: (() => {
-                                try {
-                                  return (
-                                    "نام خانوادگی :" +
-                                    " " +
-                                    $ctx.fetched_data.data[0].last_name
-                                  );
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
-                                  }
-                                  throw e;
-                                }
-                              })(),
-                              startIcon: null,
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedLastName",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedLastName.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .last_name;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedLastName"}
-                                data-plasmic-override={
-                                  overrides.edittedLastName
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedFirstName
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedFirstName",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: (() => {
-                                try {
-                                  return (
-                                    "نام :" +
-                                    " " +
-                                    $ctx.fetched_data.data[0].first_name
-                                  );
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
-                                  }
-                                  throw e;
-                                }
-                              })(),
-                              startIcon: null,
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedFirstName",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedFirstName.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .first_name;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedFirstName"}
-                                data-plasmic-override={
-                                  overrides.edittedFirstName
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                        </div>
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedNationalCodeSection"}
-                        data-plasmic-override={
-                          overrides.edittedNationalCodeSection
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedNationalCodeSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__tsYx4
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u06a9\u062f\u0645\u0644\u06cc \u06cc\u0627 \u06a9\u062f\u0627\u062a\u0628\u0627\u0639 : "
-                          }
-                        </div>
-                        {(() => {
-                          const child$Props = {
-                            className: classNames(
-                              "__wab_instance",
-                              sty.edittedNationalCodeInput
-                            ),
-                            endIcon: null,
-                            onChange: async (...eventArgs: any) => {
-                              ((...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "edittedNationalCodeInput",
-                                  "value"
-                                ])(
-                                  (e => e.target?.value).apply(null, eventArgs)
-                                );
-                              }).apply(null, eventArgs);
-
-                              if (
-                                eventArgs.length > 1 &&
-                                eventArgs[1] &&
-                                eventArgs[1]._plasmic_state_init_
-                              ) {
-                                return;
-                              }
-                            },
-                            startIcon: null,
-                            type: "number",
-                            value:
-                              generateStateValueProp($state, [
-                                "edittedNationalCodeInput",
-                                "value"
-                              ]) ?? ""
-                          };
-
-                          initializePlasmicStates(
-                            $state,
-                            [
-                              {
-                                name: "edittedNationalCodeInput.value",
-                                initFunc: ({ $props, $state, $queries }) =>
-                                  (() => {
-                                    try {
-                                      return $ctx.fetched_data.data[0]
-                                        .national_code;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()
-                              }
-                            ],
-                            []
-                          );
-                          return (
-                            <TextInput
-                              data-plasmic-name={"edittedNationalCodeInput"}
-                              data-plasmic-override={
-                                overrides.edittedNationalCodeInput
-                              }
-                              {...child$Props}
-                            />
-                          );
-                        })()}
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedDateOfBirthSection"}
-                        data-plasmic-override={
-                          overrides.edittedDateOfBirthSection
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedDateOfBirthSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__e2Euz
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u062a\u0627\u0631\u06cc\u062e \u062a\u0648\u0644\u062f : "
-                          }
-                        </div>
-                        <div
-                          data-plasmic-name={"edittedDateOfBirthInputSection"}
-                          data-plasmic-override={
-                            overrides.edittedDateOfBirthInputSection
-                          }
-                          className={classNames(
-                            projectcss.all,
-                            sty.edittedDateOfBirthInputSection
-                          )}
-                        >
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedYearOfBirthInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedYearOfBirthInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              startIcon: null,
-                              type: "number",
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedYearOfBirthInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedYearOfBirthInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .date_of_birth;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedYearOfBirthInput"}
-                                data-plasmic-override={
-                                  overrides.edittedYearOfBirthInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedMonthOfBirthInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedMonthOfBirthInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              startIcon: null,
-                              type: "number",
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedMonthOfBirthInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedMonthOfBirthInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .date_of_birth;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedMonthOfBirthInput"}
-                                data-plasmic-override={
-                                  overrides.edittedMonthOfBirthInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedDayOfBirthInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedDayOfBirthInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              startIcon: null,
-                              type: "number",
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedDayOfBirthInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedDayOfBirthInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .date_of_birth;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedDayOfBirthInput"}
-                                data-plasmic-override={
-                                  overrides.edittedDayOfBirthInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                        </div>
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedGenderSection"}
-                        data-plasmic-override={overrides.edittedGenderSection}
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedGenderSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__x5Mj0
-                          )}
-                          dir={"rtl"}
-                        >
-                          {"\u062c\u0646\u0633\u06cc\u062a : "}
-                        </div>
-                        {(() => {
-                          const child$Props = {
-                            className: classNames(
-                              "__wab_instance",
-                              sty.edittedGenderButton
-                            ),
-                            defaultValue: (() => {
-                              try {
-                                return $ctx.fetched_data.data[0].gender ===
-                                  "male"
-                                  ? "male"
-                                  : "female";
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
-                                }
-                                throw e;
-                              }
-                            })(),
-                            onChange: async (...eventArgs: any) => {
-                              generateStateOnChangeProp($state, [
-                                "edittedGenderButton",
-                                "value"
-                              ]).apply(null, eventArgs);
-                            },
-                            options: (() => {
-                              const __composite = [
-                                { value: null, label: null },
-                                { value: null, label: null }
-                              ];
-                              __composite["0"]["value"] = "male";
-                              __composite["0"]["label"] = "\u0645\u0631\u062f";
-                              __composite["1"]["value"] = "female";
-                              __composite["1"]["label"] = "\u0632\u0646";
-                              return __composite;
-                            })(),
-
-                            value: generateStateValueProp($state, [
-                              "edittedGenderButton",
-                              "value"
-                            ])
-                          };
-                          initializeCodeComponentStates(
-                            $state,
-                            [
-                              {
-                                name: "value",
-                                plasmicStateName: "edittedGenderButton.value"
-                              }
-                            ],
-                            [],
-                            undefined ?? {},
-                            child$Props
-                          );
-                          initializePlasmicStates(
-                            $state,
-                            [
-                              {
-                                name: "edittedGenderButton.value",
-                                initFunc: ({ $props, $state, $queries }) =>
-                                  (() => {
-                                    try {
-                                      return $ctx.fetched_data.data[0]
-                                        .gender === "male"
-                                        ? "male"
-                                        : "female";
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()
-                              }
-                            ],
-                            []
-                          );
-                          return (
-                            <AntdRadioGroup
-                              data-plasmic-name={"edittedGenderButton"}
-                              data-plasmic-override={
-                                overrides.edittedGenderButton
-                              }
-                              {...child$Props}
-                            >
-                              <AntdRadio
-                                className={classNames(
-                                  "__wab_instance",
-                                  sty.radio__d3CGy
-                                )}
-                                value={"op1"}
-                              >
-                                <div
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.text__iGaoA
-                                  )}
-                                >
-                                  {"Option 1"}
-                                </div>
-                              </AntdRadio>
-                              <AntdRadio
-                                className={classNames(
-                                  "__wab_instance",
-                                  sty.radio__i4419
-                                )}
-                                value={"op2"}
-                              >
-                                <div
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.text__nt3E
-                                  )}
-                                >
-                                  {"Option 2"}
-                                </div>
-                              </AntdRadio>
-                            </AntdRadioGroup>
-                          );
-                        })()}
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedPhoneNumberSection"}
-                        data-plasmic-override={
-                          overrides.edittedPhoneNumberSection
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedPhoneNumberSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__otKyu
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u0634\u0645\u0627\u0631\u0647 \u0645\u0648\u0628\u0627\u06cc\u0644 : "
-                          }
-                        </div>
-                        {(() => {
-                          const child$Props = {
-                            className: classNames(
-                              "__wab_instance",
-                              sty.edittedPhoneNumberInput
-                            ),
-                            endIcon: null,
-                            onChange: async (...eventArgs: any) => {
-                              ((...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "edittedPhoneNumberInput",
-                                  "value"
-                                ])(
-                                  (e => e.target?.value).apply(null, eventArgs)
-                                );
-                              }).apply(null, eventArgs);
-
-                              if (
-                                eventArgs.length > 1 &&
-                                eventArgs[1] &&
-                                eventArgs[1]._plasmic_state_init_
-                              ) {
-                                return;
-                              }
-                            },
-                            startIcon: null,
-                            type: "number",
-                            value:
-                              generateStateValueProp($state, [
-                                "edittedPhoneNumberInput",
-                                "value"
-                              ]) ?? ""
-                          };
-
-                          initializePlasmicStates(
-                            $state,
-                            [
-                              {
-                                name: "edittedPhoneNumberInput.value",
-                                initFunc: ({ $props, $state, $queries }) =>
-                                  (() => {
-                                    try {
-                                      return $ctx.fetched_data.data[0]
-                                        .phone_number;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()
-                              }
-                            ],
-                            []
-                          );
-                          return (
-                            <TextInput
-                              data-plasmic-name={"edittedPhoneNumberInput"}
-                              data-plasmic-override={
-                                overrides.edittedPhoneNumberInput
-                              }
-                              {...child$Props}
-                            />
-                          );
-                        })()}
-                      </div>
-                    </div>
-                    <div
-                      data-plasmic-name={"edittedAdmissionDataSection"}
-                      data-plasmic-override={
-                        overrides.edittedAdmissionDataSection
-                      }
-                      className={classNames(
-                        projectcss.all,
-                        sty.edittedAdmissionDataSection
-                      )}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__wJuJk
-                        )}
-                      >
-                        {
-                          "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u0633\u062a\u0631\u06cc \u0628\u06cc\u0645\u0627\u0631 "
-                        }
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedWardIdNameSection"}
-                        data-plasmic-override={
-                          overrides.edittedWardIdNameSection
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedWardIdNameSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text___8UsyQ
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u0628\u062e\u0634 \u0628\u0633\u062a\u0631\u06cc : "
-                          }
-                        </div>
-                        <div
-                          data-plasmic-name={"edittedWardNameIdInput"}
-                          data-plasmic-override={
-                            overrides.edittedWardNameIdInput
-                          }
-                          className={classNames(
-                            projectcss.all,
-                            sty.edittedWardNameIdInput
-                          )}
-                        >
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedWardNameInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedWardNameInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              startIcon: null,
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedWardNameInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedWardNameInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0].ward[0]
-                                          .name;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedWardNameInput"}
-                                data-plasmic-override={
-                                  overrides.edittedWardNameInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedWardIdInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedWardIdInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              startIcon: null,
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedWardIdInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedWardIdInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0].ward[0]
-                                          .id;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedWardIdInput"}
-                                data-plasmic-override={
-                                  overrides.edittedWardIdInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                        </div>
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedServiceIdNameSection"}
-                        data-plasmic-override={
-                          overrides.edittedServiceIdNameSection
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedServiceIdNameSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__b45X
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u0633\u0631\u0648\u06cc\u0633 \u0628\u0633\u062a\u0631\u06cc : "
-                          }
-                        </div>
-                        <div
-                          data-plasmic-name={"edittedServiceIdNameInput"}
-                          data-plasmic-override={
-                            overrides.edittedServiceIdNameInput
-                          }
-                          className={classNames(
-                            projectcss.all,
-                            sty.edittedServiceIdNameInput
-                          )}
-                        >
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedServiceIdInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedServiceIdInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder:
-                                "\u0646\u0627\u0645 \u0633\u0631\u0648\u06cc\u0633",
-                              startIcon: null,
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedServiceIdInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedServiceIdInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .service[0].name;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedServiceIdInput"}
-                                data-plasmic-override={
-                                  overrides.edittedServiceIdInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedServiceNameInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedServiceNameInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              startIcon: null,
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedServiceNameInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedServiceNameInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .service[0].id;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedServiceNameInput"}
-                                data-plasmic-override={
-                                  overrides.edittedServiceNameInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                        </div>
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedPhysicianIdNameSection"}
-                        data-plasmic-override={
-                          overrides.edittedPhysicianIdNameSection
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedPhysicianIdNameSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__i2Wds
-                          )}
-                          dir={"rtl"}
-                        >
-                          {"\u067e\u0632\u0634\u06a9 : "}
-                        </div>
-                        <div
-                          data-plasmic-name={"edittedPhysicanIdNameInput"}
-                          data-plasmic-override={
-                            overrides.edittedPhysicanIdNameInput
-                          }
-                          className={classNames(
-                            projectcss.all,
-                            sty.edittedPhysicanIdNameInput
-                          )}
-                        >
-                          <TextInput
-                            data-plasmic-name={"edittedPhysicianNameInput"}
-                            data-plasmic-override={
-                              overrides.edittedPhysicianNameInput
-                            }
-                            className={classNames(
-                              "__wab_instance",
-                              sty.edittedPhysicianNameInput
-                            )}
-                            endIcon={null}
-                            onChange={async (...eventArgs: any) => {
-                              ((...eventArgs) => {
-                                generateStateOnChangeProp($state, [
-                                  "edittedPhysicianNameInput",
-                                  "value"
-                                ])(
-                                  (e => e.target?.value).apply(null, eventArgs)
-                                );
-                              }).apply(null, eventArgs);
-
-                              if (
-                                eventArgs.length > 1 &&
-                                eventArgs[1] &&
-                                eventArgs[1]._plasmic_state_init_
-                              ) {
-                                return;
-                              }
-                            }}
-                            placeholder={
-                              "\u0646\u0627\u0645 \u067e\u0632\u0634\u06a9"
-                            }
-                            startIcon={null}
-                            value={
-                              generateStateValueProp($state, [
-                                "edittedPhysicianNameInput",
-                                "value"
-                              ]) ?? ""
-                            }
-                          />
-
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedPhysicanIdInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedPhysicanIdInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder:
-                                "\u06a9\u062f \u067e\u0632\u0634\u06a9",
-                              startIcon: null,
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedPhysicanIdInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedPhysicanIdInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .physician;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedPhysicanIdInput"}
-                                data-plasmic-override={
-                                  overrides.edittedPhysicanIdInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                        </div>
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedRoomBedSection"}
-                        data-plasmic-override={overrides.edittedRoomBedSection}
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedRoomBedSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__vapnA
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u0627\u062a\u0627\u0642 \u0648 \u062a\u062e\u062a \u0628\u0633\u062a\u0631\u06cc : "
-                          }
-                        </div>
-                        <div
-                          data-plasmic-name={"edittedRoomBedInput"}
-                          data-plasmic-override={overrides.edittedRoomBedInput}
-                          className={classNames(
-                            projectcss.all,
-                            sty.edittedRoomBedInput
-                          )}
-                        >
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedBedNameInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedBedNameInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: "\u062a\u062e\u062a",
-                              startIcon: null,
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedBedNameInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedBedNameInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0].bed;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedBedNameInput"}
-                                data-plasmic-override={
-                                  overrides.edittedBedNameInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedRoomNameInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedRoomNameInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: "\u0627\u062a\u0627\u0642",
-                              startIcon: null,
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedRoomNameInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedRoomNameInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0].room;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={"edittedRoomNameInput"}
-                                data-plasmic-override={
-                                  overrides.edittedRoomNameInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                        </div>
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedAdmissionDatetimeSection3"}
-                        data-plasmic-override={
-                          overrides.edittedAdmissionDatetimeSection3
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedAdmissionDatetimeSection3
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__qZoP
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u062a\u0627\u0631\u06cc\u062e \u0648 \u0632\u0645\u0627\u0646 \u0628\u0633\u062a\u0631\u06cc : "
-                          }
-                        </div>
-                        <div
-                          data-plasmic-name={"edittedAdmissionDatetimeSection4"}
-                          data-plasmic-override={
-                            overrides.edittedAdmissionDatetimeSection4
-                          }
-                          className={classNames(
-                            projectcss.all,
-                            sty.edittedAdmissionDatetimeSection4
-                          )}
-                        >
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedYearOfAdmissionInput2
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedYearOfAdmissionInput2",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: "\u0633\u0627\u0644 ",
-                              startIcon: null,
-                              type: "number",
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedYearOfAdmissionInput2",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedYearOfAdmissionInput2.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .admission_datetime;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={
-                                  "edittedYearOfAdmissionInput2"
-                                }
-                                data-plasmic-override={
-                                  overrides.edittedYearOfAdmissionInput2
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedMonthOfAdmissionInput2
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedMonthOfAdmissionInput2",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: "\u0645\u0627\u0647 ",
-                              startIcon: null,
-                              type: "number",
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedMonthOfAdmissionInput2",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedMonthOfAdmissionInput2.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .admission_datetime;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={
-                                  "edittedMonthOfAdmissionInput2"
-                                }
-                                data-plasmic-override={
-                                  overrides.edittedMonthOfAdmissionInput2
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedDayOfAdmissionInput2
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedDayOfAdmissionInput2",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: "\u0631\u0648\u0632 ",
-                              startIcon: null,
-                              type: "number",
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedDayOfAdmissionInput2",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedDayOfAdmissionInput2.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .admission_datetime;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={
-                                  "edittedDayOfAdmissionInput2"
-                                }
-                                data-plasmic-override={
-                                  overrides.edittedDayOfAdmissionInput2
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                        </div>
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedDismissedSection"}
-                        data-plasmic-override={
-                          overrides.edittedDismissedSection
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedDismissedSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__mPkgM
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 :"
-                          }
-                        </div>
-                        {(() => {
-                          const child$Props = {
-                            className: classNames(
-                              "__wab_instance",
-                              sty.edittedDismissedButton
-                            ),
-                            defaultValue: (() => {
-                              try {
-                                return $ctx.fetched_data.data[0].dismissed ===
-                                  "true"
-                                  ? "true"
-                                  : "false";
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
-                                }
-                                throw e;
-                              }
-                            })(),
-                            onChange: async (...eventArgs: any) => {
-                              generateStateOnChangeProp($state, [
-                                "edittedDismissedButton",
-                                "value"
-                              ]).apply(null, eventArgs);
-                            },
-                            options: (() => {
-                              const __composite = [
-                                { value: null, label: null },
-                                { value: null, label: null }
-                              ];
-                              __composite["0"]["value"] = "true";
-                              __composite["0"]["label"] =
-                                "\u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647";
-                              __composite["1"]["value"] = "false";
-                              __composite["1"]["label"] =
-                                "\u0628\u0633\u062a\u0631\u06cc";
-                              return __composite;
-                            })(),
-
-                            value: generateStateValueProp($state, [
-                              "edittedDismissedButton",
-                              "value"
-                            ])
-                          };
-                          initializeCodeComponentStates(
-                            $state,
-                            [
-                              {
-                                name: "value",
-                                plasmicStateName: "edittedDismissedButton.value"
-                              }
-                            ],
-                            [],
-                            undefined ?? {},
-                            child$Props
-                          );
-                          initializePlasmicStates(
-                            $state,
-                            [
-                              {
-                                name: "edittedDismissedButton.value",
-                                initFunc: ({ $props, $state, $queries }) =>
-                                  (() => {
-                                    try {
-                                      return $ctx.fetched_data.data[0]
-                                        .dismissed === "true"
-                                        ? "true"
-                                        : "false";
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()
-                              }
-                            ],
-                            []
-                          );
-                          return (
-                            <AntdRadioGroup
-                              data-plasmic-name={"edittedDismissedButton"}
-                              data-plasmic-override={
-                                overrides.edittedDismissedButton
-                              }
-                              {...child$Props}
-                            >
-                              <AntdRadio
-                                className={classNames(
-                                  "__wab_instance",
-                                  sty.radio__muiek
-                                )}
-                                value={"op1"}
-                              >
-                                <div
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.text__osgrd
-                                  )}
-                                >
-                                  {"Option 1"}
-                                </div>
-                              </AntdRadio>
-                              <AntdRadio
-                                className={classNames(
-                                  "__wab_instance",
-                                  sty.radio__l38RD
-                                )}
-                                value={"op2"}
-                              >
-                                <div
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.text__pw9P1
-                                  )}
-                                >
-                                  {"Option 2"}
-                                </div>
-                              </AntdRadio>
-                            </AntdRadioGroup>
-                          );
-                        })()}
-                      </div>
-                      <div
-                        data-plasmic-name={"edittedDismissionDatetimeSection"}
-                        data-plasmic-override={
-                          overrides.edittedDismissionDatetimeSection
-                        }
-                        className={classNames(
-                          projectcss.all,
-                          sty.edittedDismissionDatetimeSection
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            projectcss.__wab_text,
-                            sty.text__beIHr
-                          )}
-                          dir={"rtl"}
-                        >
-                          {
-                            "\u062a\u0627\u0631\u06cc\u062e \u0648 \u0632\u0645\u0627\u0646 \u062a\u0631\u062e\u06cc\u0635 : "
-                          }
-                        </div>
-                        <div
-                          data-plasmic-name={
-                            "edittedDismissionDatetimeSection2"
-                          }
-                          data-plasmic-override={
-                            overrides.edittedDismissionDatetimeSection2
-                          }
-                          className={classNames(
-                            projectcss.all,
-                            sty.edittedDismissionDatetimeSection2
-                          )}
-                        >
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedYearOfDismissionInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedYearOfDismissionInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: "\u0633\u0627\u0644 ",
-                              startIcon: null,
-                              type: "number",
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedYearOfDismissionInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedYearOfDismissionInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .dismission_datetime;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={
-                                  "edittedYearOfDismissionInput"
-                                }
-                                data-plasmic-override={
-                                  overrides.edittedYearOfDismissionInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedMonthOfDismissionInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedMonthOfDismissionInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: "\u0645\u0627\u0647 ",
-                              startIcon: null,
-                              type: "number",
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedMonthOfDismissionInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedMonthOfDismissionInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .dismission_datetime;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={
-                                  "edittedMonthOfDismissionInput"
-                                }
-                                data-plasmic-override={
-                                  overrides.edittedMonthOfDismissionInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.edittedDayOfDismissionInput
-                              ),
-                              endIcon: null,
-                              onChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "edittedDayOfDismissionInput",
-                                    "value"
-                                  ])(
-                                    (e => e.target?.value).apply(
-                                      null,
-                                      eventArgs
-                                    )
-                                  );
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              placeholder: "\u0631\u0648\u0632 ",
-                              startIcon: null,
-                              type: "number",
-                              value:
-                                generateStateValueProp($state, [
-                                  "edittedDayOfDismissionInput",
-                                  "value"
-                                ]) ?? ""
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "edittedDayOfDismissionInput.value",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    (() => {
-                                      try {
-                                        return $ctx.fetched_data.data[0]
-                                          .dismission_datetime;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                }
-                              ],
-                              []
-                            );
-                            return (
-                              <TextInput
-                                data-plasmic-name={
-                                  "edittedDayOfDismissionInput"
-                                }
-                                data-plasmic-override={
-                                  overrides.edittedDayOfDismissionInput
-                                }
-                                {...child$Props}
-                              />
-                            );
-                          })()}
-                        </div>
-                      </div>
-                    </div>
-                    <Button
-                      data-plasmic-name={"editPatientButton"}
-                      data-plasmic-override={overrides.editPatientButton}
+                  <React.Fragment>
+                    <ConditionGuard
+                      data-plasmic-name={"conditionGuard"}
+                      data-plasmic-override={overrides.conditionGuard}
                       className={classNames(
                         "__wab_instance",
-                        sty.editPatientButton
+                        sty.conditionGuard
                       )}
-                      color={"yellow"}
-                      deselected={generateStateValueProp($state, [
-                        "editPatientButton",
-                        "deselected"
-                      ])}
-                      endIcon={
-                        <IconIcon
-                          className={classNames(projectcss.all, sty.svg__f88Dc)}
-                          role={"img"}
-                        />
-                      }
-                      isDisabled={generateStateValueProp($state, [
-                        "editPatientButton",
-                        "isDisabled"
-                      ])}
-                      onClick={async event => {
+                      condition={(() => {
+                        try {
+                          return $ctx.fetched_data.loading;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return false;
+                          }
+                          throw e;
+                        }
+                      })()}
+                      onNotSatisfied={async () => {
                         const $steps = {};
 
-                        $steps["callPatchEndpoint"] = true
+                        $steps["updateSelectedWardId"] = true
                           ? (() => {
                               const actionArgs = {
-                                args: [
-                                  "PATCH",
-                                  `/api/v3/remote_his_manual/admissions?national_code=${$state.edittedNationalCodeInput.value}&admission_id=${$state.admissionId}`,
-                                  (() => {
-                                    try {
-                                      return {
-                                        "X-Namespace": localStorage.getItem(
-                                          "inlab_user_namespace_id"
-                                        )
-                                      };
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })(),
-                                  (() => {
-                                    try {
-                                      return {
-                                        patient_data: {
-                                          first_name:
-                                            $state.edittedFirstName.value,
-                                          last_name:
-                                            $state.edittedLastName.value,
-                                          father_name: "",
-                                          gender:
-                                            $state.edittedGenderButton.value,
-                                          date_of_birth: `${$state.edittedYearOfBirthInput.value}/${$state.edittedMonthOfBirthInput.value}/${$state.edittedDayOfBirthInput.value}`,
-                                          phone_number:
-                                            $state.edittedPhoneNumberInput.value
-                                        },
-                                        admission_data: {
-                                          admission_datetime: `${$state.edittedYearOfAdmissionInput2.value}/${$state.edittedMonthOfAdmissionInput2.value}/${$state.edittedDayOfAdmissionInput2.value}`,
-                                          ward_id:
-                                            $state.edittedWardIdInput.value,
-                                          ward_name:
-                                            $state.edittedWardNameInput.value,
-                                          service_id:
-                                            $state.edittedServiceIdInput.value,
-                                          service_name:
-                                            $state.edittedServiceNameInput
-                                              .value,
-                                          physician_id:
-                                            $state.edittedPhysicanIdInput.value,
-                                          physician_name:
-                                            $state.edittedPhysicianNameInput
-                                              .value,
-                                          room: $state.edittedRoomNameInput
-                                            .value,
-                                          bed: $state.edittedBedNameInput.value,
-                                          dismissed:
-                                            $state.edittedDismissedButton.value,
-                                          dismission_datetime: `${$state.edittedYearOfDismissionInput.value}/${$state.edittedMonthOfDismissionInput.value}/${$state.edittedDayOfDismissionInput.value}`
-                                        }
-                                      };
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()
-                                ]
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["selectedWardId"]
+                                },
+                                operation: 0,
+                                value:
+                                  $ctx.fetched_data.data &&
+                                  $ctx.fetched_data.data[0] &&
+                                  $ctx.fetched_data.data[0].ward
+                                    ? $ctx.fetched_data.data[0].ward[0].id
+                                    : ""
                               };
-                              return $globalActions[
-                                "AuthGlobalContext.apiFetcherPlus"
-                              ]?.apply(null, [...actionArgs.args]);
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
                             })()
                           : undefined;
                         if (
-                          $steps["callPatchEndpoint"] != null &&
-                          typeof $steps["callPatchEndpoint"] === "object" &&
-                          typeof $steps["callPatchEndpoint"].then === "function"
+                          $steps["updateSelectedWardId"] != null &&
+                          typeof $steps["updateSelectedWardId"] === "object" &&
+                          typeof $steps["updateSelectedWardId"].then ===
+                            "function"
                         ) {
-                          $steps["callPatchEndpoint"] = await $steps[
-                            "callPatchEndpoint"
+                          $steps["updateSelectedWardId"] = await $steps[
+                            "updateSelectedWardId"
+                          ];
+                        }
+
+                        $steps["updateSelectedWardName"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["selectedWardName"]
+                                },
+                                operation: 0,
+                                value:
+                                  $ctx.fetched_data.data &&
+                                  $ctx.fetched_data.data[0] &&
+                                  $ctx.fetched_data.data[0].ward
+                                    ? $ctx.fetched_data.data[0].ward[0].name
+                                    : ""
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSelectedWardName"] != null &&
+                          typeof $steps["updateSelectedWardName"] ===
+                            "object" &&
+                          typeof $steps["updateSelectedWardName"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSelectedWardName"] = await $steps[
+                            "updateSelectedWardName"
                           ];
                         }
                       }}
-                      onDeselectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "editPatientButton",
-                            "deselected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                    />
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onIsDisabledChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "editPatientButton",
-                            "isDisabled"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
-
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onSelectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "editPatientButton",
-                            "selected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
-
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onSortDeselectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "editPatientButton",
-                            "sortDeselected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
-
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onSortSelectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "editPatientButton",
-                            "sortSelected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
-
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      selected={generateStateValueProp($state, [
-                        "editPatientButton",
-                        "selected"
-                      ])}
-                      sortDeselected={generateStateValueProp($state, [
-                        "editPatientButton",
-                        "sortDeselected"
-                      ])}
-                      sortSelected={generateStateValueProp($state, [
-                        "editPatientButton",
-                        "sortSelected"
-                      ])}
+                    <div
+                      data-plasmic-name={"editAdmittedPatient"}
+                      data-plasmic-override={overrides.editAdmittedPatient}
+                      className={classNames(
+                        projectcss.all,
+                        sty.editAdmittedPatient
+                      )}
                     >
                       <div
+                        data-plasmic-name={"editPatientDataSection"}
+                        data-plasmic-override={overrides.editPatientDataSection}
                         className={classNames(
                           projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__yyAv
+                          sty.editPatientDataSection
                         )}
                       >
-                        {
-                          "\u0648\u06cc\u0631\u0627\u06cc\u0634 \u0628\u06cc\u0645\u0627\u0631"
-                        }
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__bgNi4
+                          )}
+                        >
+                          {
+                            "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u062f\u0645\u0648\u06af\u0631\u0627\u0641\u06cc\u06a9 \u0628\u06cc\u0645\u0627\u0631 "
+                          }
+                        </div>
+                        <div
+                          data-plasmic-name={"editFisrtLastNameSection"}
+                          data-plasmic-override={
+                            overrides.editFisrtLastNameSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.editFisrtLastNameSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__g6Eez
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc : "
+                            }
+                          </div>
+                          <div
+                            data-plasmic-name={"editFisrtLastNameInput"}
+                            data-plasmic-override={
+                              overrides.editFisrtLastNameInput
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              sty.editFisrtLastNameInput
+                            )}
+                          >
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedLastName
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedLastName",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: (() => {
+                                  try {
+                                    return (
+                                      "نام خانوادگی :" +
+                                      " " +
+                                      $ctx.fetched_data.data[0].last_name
+                                    );
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })(),
+                                startIcon: null,
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedLastName",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedLastName.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .last_name;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedLastName"}
+                                  data-plasmic-override={
+                                    overrides.edittedLastName
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedFirstName
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedFirstName",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: (() => {
+                                  try {
+                                    return (
+                                      "نام :" +
+                                      " " +
+                                      $ctx.fetched_data.data[0].first_name
+                                    );
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })(),
+                                startIcon: null,
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedFirstName",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedFirstName.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .first_name;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedFirstName"}
+                                  data-plasmic-override={
+                                    overrides.edittedFirstName
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                          </div>
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedNationalCodeSection"}
+                          data-plasmic-override={
+                            overrides.edittedNationalCodeSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedNationalCodeSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__tsYx4
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u06a9\u062f\u0645\u0644\u06cc \u06cc\u0627 \u06a9\u062f\u0627\u062a\u0628\u0627\u0639 : "
+                            }
+                          </div>
+                          {(() => {
+                            const child$Props = {
+                              className: classNames(
+                                "__wab_instance",
+                                sty.edittedNationalCodeInput
+                              ),
+                              endIcon: null,
+                              onChange: async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "edittedNationalCodeInput",
+                                    "value"
+                                  ])(
+                                    (e => e.target?.value).apply(
+                                      null,
+                                      eventArgs
+                                    )
+                                  );
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              },
+                              startIcon: null,
+                              type: "number",
+                              value:
+                                generateStateValueProp($state, [
+                                  "edittedNationalCodeInput",
+                                  "value"
+                                ]) ?? ""
+                            };
+
+                            initializePlasmicStates(
+                              $state,
+                              [
+                                {
+                                  name: "edittedNationalCodeInput.value",
+                                  initFunc: ({ $props, $state, $queries }) =>
+                                    (() => {
+                                      try {
+                                        return $ctx.fetched_data.data[0]
+                                          .national_code;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                }
+                              ],
+                              []
+                            );
+                            return (
+                              <TextInput
+                                data-plasmic-name={"edittedNationalCodeInput"}
+                                data-plasmic-override={
+                                  overrides.edittedNationalCodeInput
+                                }
+                                {...child$Props}
+                              />
+                            );
+                          })()}
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedDateOfBirthSection"}
+                          data-plasmic-override={
+                            overrides.edittedDateOfBirthSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedDateOfBirthSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__e2Euz
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u062a\u0627\u0631\u06cc\u062e \u062a\u0648\u0644\u062f : "
+                            }
+                          </div>
+                          <div
+                            data-plasmic-name={"edittedDateOfBirthInputSection"}
+                            data-plasmic-override={
+                              overrides.edittedDateOfBirthInputSection
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              sty.edittedDateOfBirthInputSection
+                            )}
+                          >
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedYearOfBirthInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedYearOfBirthInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                startIcon: null,
+                                type: "number",
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedYearOfBirthInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedYearOfBirthInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .date_of_birth;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedYearOfBirthInput"}
+                                  data-plasmic-override={
+                                    overrides.edittedYearOfBirthInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedMonthOfBirthInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedMonthOfBirthInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                startIcon: null,
+                                type: "number",
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedMonthOfBirthInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedMonthOfBirthInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .date_of_birth;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedMonthOfBirthInput"}
+                                  data-plasmic-override={
+                                    overrides.edittedMonthOfBirthInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedDayOfBirthInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedDayOfBirthInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                startIcon: null,
+                                type: "number",
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedDayOfBirthInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedDayOfBirthInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .date_of_birth;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedDayOfBirthInput"}
+                                  data-plasmic-override={
+                                    overrides.edittedDayOfBirthInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                          </div>
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedGenderSection"}
+                          data-plasmic-override={overrides.edittedGenderSection}
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedGenderSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__x5Mj0
+                            )}
+                            dir={"rtl"}
+                          >
+                            {"\u062c\u0646\u0633\u06cc\u062a : "}
+                          </div>
+                          {(() => {
+                            const child$Props = {
+                              className: classNames(
+                                "__wab_instance",
+                                sty.edittedGenderButton
+                              ),
+                              defaultValue: (() => {
+                                try {
+                                  return $ctx.fetched_data.data[0].gender ===
+                                    "male"
+                                    ? "male"
+                                    : "female";
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })(),
+                              onChange: async (...eventArgs: any) => {
+                                generateStateOnChangeProp($state, [
+                                  "edittedGenderButton",
+                                  "value"
+                                ]).apply(null, eventArgs);
+                              },
+                              options: (() => {
+                                const __composite = [
+                                  { value: null, label: null },
+                                  { value: null, label: null }
+                                ];
+                                __composite["0"]["value"] = "male";
+                                __composite["0"]["label"] =
+                                  "\u0645\u0631\u062f";
+                                __composite["1"]["value"] = "female";
+                                __composite["1"]["label"] = "\u0632\u0646";
+                                return __composite;
+                              })(),
+
+                              value: generateStateValueProp($state, [
+                                "edittedGenderButton",
+                                "value"
+                              ])
+                            };
+                            initializeCodeComponentStates(
+                              $state,
+                              [
+                                {
+                                  name: "value",
+                                  plasmicStateName: "edittedGenderButton.value"
+                                }
+                              ],
+                              [],
+                              undefined ?? {},
+                              child$Props
+                            );
+                            initializePlasmicStates(
+                              $state,
+                              [
+                                {
+                                  name: "edittedGenderButton.value",
+                                  initFunc: ({ $props, $state, $queries }) =>
+                                    (() => {
+                                      try {
+                                        return $ctx.fetched_data.data[0]
+                                          .gender === "male"
+                                          ? "male"
+                                          : "female";
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                }
+                              ],
+                              []
+                            );
+                            return (
+                              <AntdRadioGroup
+                                data-plasmic-name={"edittedGenderButton"}
+                                data-plasmic-override={
+                                  overrides.edittedGenderButton
+                                }
+                                {...child$Props}
+                              >
+                                <AntdRadio
+                                  className={classNames(
+                                    "__wab_instance",
+                                    sty.radio__d3CGy
+                                  )}
+                                  value={"op1"}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__iGaoA
+                                    )}
+                                  >
+                                    {"Option 1"}
+                                  </div>
+                                </AntdRadio>
+                                <AntdRadio
+                                  className={classNames(
+                                    "__wab_instance",
+                                    sty.radio__i4419
+                                  )}
+                                  value={"op2"}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__nt3E
+                                    )}
+                                  >
+                                    {"Option 2"}
+                                  </div>
+                                </AntdRadio>
+                              </AntdRadioGroup>
+                            );
+                          })()}
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedPhoneNumberSection"}
+                          data-plasmic-override={
+                            overrides.edittedPhoneNumberSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedPhoneNumberSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__otKyu
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u0634\u0645\u0627\u0631\u0647 \u0645\u0648\u0628\u0627\u06cc\u0644 : "
+                            }
+                          </div>
+                          {(() => {
+                            const child$Props = {
+                              className: classNames(
+                                "__wab_instance",
+                                sty.edittedPhoneNumberInput
+                              ),
+                              endIcon: null,
+                              onChange: async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "edittedPhoneNumberInput",
+                                    "value"
+                                  ])(
+                                    (e => e.target?.value).apply(
+                                      null,
+                                      eventArgs
+                                    )
+                                  );
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              },
+                              startIcon: null,
+                              type: "number",
+                              value:
+                                generateStateValueProp($state, [
+                                  "edittedPhoneNumberInput",
+                                  "value"
+                                ]) ?? ""
+                            };
+
+                            initializePlasmicStates(
+                              $state,
+                              [
+                                {
+                                  name: "edittedPhoneNumberInput.value",
+                                  initFunc: ({ $props, $state, $queries }) =>
+                                    (() => {
+                                      try {
+                                        return $ctx.fetched_data.data[0]
+                                          .phone_number;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                }
+                              ],
+                              []
+                            );
+                            return (
+                              <TextInput
+                                data-plasmic-name={"edittedPhoneNumberInput"}
+                                data-plasmic-override={
+                                  overrides.edittedPhoneNumberInput
+                                }
+                                {...child$Props}
+                              />
+                            );
+                          })()}
+                        </div>
                       </div>
-                    </Button>
-                  </div>
+                      <div
+                        data-plasmic-name={"edittedAdmissionDataSection"}
+                        data-plasmic-override={
+                          overrides.edittedAdmissionDataSection
+                        }
+                        className={classNames(
+                          projectcss.all,
+                          sty.edittedAdmissionDataSection
+                        )}
+                      >
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__wJuJk
+                          )}
+                        >
+                          {
+                            "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u0633\u062a\u0631\u06cc \u0628\u06cc\u0645\u0627\u0631 "
+                          }
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedWardIdNameSection"}
+                          data-plasmic-override={
+                            overrides.edittedWardIdNameSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedWardIdNameSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text___8UsyQ
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u0628\u062e\u0634 \u0628\u0633\u062a\u0631\u06cc : "
+                            }
+                          </div>
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__xkwSr
+                            )}
+                            dir={"rtl"}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["updateWardModalOpen"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["wardModal", "open"]
+                                      },
+                                      operation: 0,
+                                      value: true
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["updateWardModalOpen"] != null &&
+                                typeof $steps["updateWardModalOpen"] ===
+                                  "object" &&
+                                typeof $steps["updateWardModalOpen"].then ===
+                                  "function"
+                              ) {
+                                $steps["updateWardModalOpen"] = await $steps[
+                                  "updateWardModalOpen"
+                                ];
+                              }
+                            }}
+                          >
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return $state.selectedWardName === ""
+                                    ? "----"
+                                    : $state.selectedWardName;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "";
+                                  }
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
+                          </div>
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedServiceIdNameSection"}
+                          data-plasmic-override={
+                            overrides.edittedServiceIdNameSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedServiceIdNameSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__b45X
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u0633\u0631\u0648\u06cc\u0633 \u0628\u0633\u062a\u0631\u06cc : "
+                            }
+                          </div>
+                          <div
+                            data-plasmic-name={"edittedServiceIdNameInput"}
+                            data-plasmic-override={
+                              overrides.edittedServiceIdNameInput
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              sty.edittedServiceIdNameInput
+                            )}
+                          >
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedServiceIdInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedServiceIdInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder:
+                                  "\u0646\u0627\u0645 \u0633\u0631\u0648\u06cc\u0633",
+                                startIcon: null,
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedServiceIdInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedServiceIdInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .service[0].name;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedServiceIdInput"}
+                                  data-plasmic-override={
+                                    overrides.edittedServiceIdInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedServiceNameInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedServiceNameInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                startIcon: null,
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedServiceNameInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedServiceNameInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .service[0].id;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedServiceNameInput"}
+                                  data-plasmic-override={
+                                    overrides.edittedServiceNameInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                          </div>
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedPhysicianIdNameSection"}
+                          data-plasmic-override={
+                            overrides.edittedPhysicianIdNameSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedPhysicianIdNameSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__i2Wds
+                            )}
+                            dir={"rtl"}
+                          >
+                            {"\u067e\u0632\u0634\u06a9 : "}
+                          </div>
+                          <div
+                            data-plasmic-name={"edittedPhysicanIdNameInput"}
+                            data-plasmic-override={
+                              overrides.edittedPhysicanIdNameInput
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              sty.edittedPhysicanIdNameInput
+                            )}
+                          >
+                            <TextInput
+                              data-plasmic-name={"edittedPhysicianNameInput"}
+                              data-plasmic-override={
+                                overrides.edittedPhysicianNameInput
+                              }
+                              className={classNames(
+                                "__wab_instance",
+                                sty.edittedPhysicianNameInput
+                              )}
+                              endIcon={null}
+                              onChange={async (...eventArgs: any) => {
+                                ((...eventArgs) => {
+                                  generateStateOnChangeProp($state, [
+                                    "edittedPhysicianNameInput",
+                                    "value"
+                                  ])(
+                                    (e => e.target?.value).apply(
+                                      null,
+                                      eventArgs
+                                    )
+                                  );
+                                }).apply(null, eventArgs);
+
+                                if (
+                                  eventArgs.length > 1 &&
+                                  eventArgs[1] &&
+                                  eventArgs[1]._plasmic_state_init_
+                                ) {
+                                  return;
+                                }
+                              }}
+                              placeholder={
+                                "\u0646\u0627\u0645 \u067e\u0632\u0634\u06a9"
+                              }
+                              startIcon={null}
+                              value={
+                                generateStateValueProp($state, [
+                                  "edittedPhysicianNameInput",
+                                  "value"
+                                ]) ?? ""
+                              }
+                            />
+
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedPhysicanIdInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedPhysicanIdInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder:
+                                  "\u06a9\u062f \u067e\u0632\u0634\u06a9",
+                                startIcon: null,
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedPhysicanIdInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedPhysicanIdInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .physician;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedPhysicanIdInput"}
+                                  data-plasmic-override={
+                                    overrides.edittedPhysicanIdInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                          </div>
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedRoomBedSection"}
+                          data-plasmic-override={
+                            overrides.edittedRoomBedSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedRoomBedSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__vapnA
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u0627\u062a\u0627\u0642 \u0648 \u062a\u062e\u062a \u0628\u0633\u062a\u0631\u06cc : "
+                            }
+                          </div>
+                          <div
+                            data-plasmic-name={"edittedRoomBedInput"}
+                            data-plasmic-override={
+                              overrides.edittedRoomBedInput
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              sty.edittedRoomBedInput
+                            )}
+                          >
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedBedNameInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedBedNameInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: "\u062a\u062e\u062a",
+                                startIcon: null,
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedBedNameInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedBedNameInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0].bed;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedBedNameInput"}
+                                  data-plasmic-override={
+                                    overrides.edittedBedNameInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedRoomNameInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedRoomNameInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: "\u0627\u062a\u0627\u0642",
+                                startIcon: null,
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedRoomNameInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedRoomNameInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0].room;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={"edittedRoomNameInput"}
+                                  data-plasmic-override={
+                                    overrides.edittedRoomNameInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                          </div>
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedAdmissionDatetimeSection3"}
+                          data-plasmic-override={
+                            overrides.edittedAdmissionDatetimeSection3
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedAdmissionDatetimeSection3
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__qZoP
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u062a\u0627\u0631\u06cc\u062e \u0648 \u0632\u0645\u0627\u0646 \u0628\u0633\u062a\u0631\u06cc : "
+                            }
+                          </div>
+                          <div
+                            data-plasmic-name={
+                              "edittedAdmissionDatetimeSection4"
+                            }
+                            data-plasmic-override={
+                              overrides.edittedAdmissionDatetimeSection4
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              sty.edittedAdmissionDatetimeSection4
+                            )}
+                          >
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedYearOfAdmissionInput2
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedYearOfAdmissionInput2",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: "\u0633\u0627\u0644 ",
+                                startIcon: null,
+                                type: "number",
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedYearOfAdmissionInput2",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedYearOfAdmissionInput2.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .admission_datetime;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={
+                                    "edittedYearOfAdmissionInput2"
+                                  }
+                                  data-plasmic-override={
+                                    overrides.edittedYearOfAdmissionInput2
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedMonthOfAdmissionInput2
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedMonthOfAdmissionInput2",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: "\u0645\u0627\u0647 ",
+                                startIcon: null,
+                                type: "number",
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedMonthOfAdmissionInput2",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedMonthOfAdmissionInput2.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .admission_datetime;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={
+                                    "edittedMonthOfAdmissionInput2"
+                                  }
+                                  data-plasmic-override={
+                                    overrides.edittedMonthOfAdmissionInput2
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedDayOfAdmissionInput2
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedDayOfAdmissionInput2",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: "\u0631\u0648\u0632 ",
+                                startIcon: null,
+                                type: "number",
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedDayOfAdmissionInput2",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedDayOfAdmissionInput2.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .admission_datetime;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={
+                                    "edittedDayOfAdmissionInput2"
+                                  }
+                                  data-plasmic-override={
+                                    overrides.edittedDayOfAdmissionInput2
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                          </div>
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedDismissedSection"}
+                          data-plasmic-override={
+                            overrides.edittedDismissedSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedDismissedSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__mPkgM
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u0648\u0636\u0639\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 :"
+                            }
+                          </div>
+                          {(() => {
+                            const child$Props = {
+                              className: classNames(
+                                "__wab_instance",
+                                sty.edittedDismissedButton
+                              ),
+                              defaultValue: (() => {
+                                try {
+                                  return $ctx.fetched_data.data[0].dismissed ===
+                                    "true"
+                                    ? "true"
+                                    : "false";
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })(),
+                              onChange: async (...eventArgs: any) => {
+                                generateStateOnChangeProp($state, [
+                                  "edittedDismissedButton",
+                                  "value"
+                                ]).apply(null, eventArgs);
+                              },
+                              options: (() => {
+                                const __composite = [
+                                  { value: null, label: null },
+                                  { value: null, label: null }
+                                ];
+                                __composite["0"]["value"] = "true";
+                                __composite["0"]["label"] =
+                                  "\u062a\u0631\u062e\u06cc\u0635 \u0634\u062f\u0647";
+                                __composite["1"]["value"] = "false";
+                                __composite["1"]["label"] =
+                                  "\u0628\u0633\u062a\u0631\u06cc";
+                                return __composite;
+                              })(),
+
+                              value: generateStateValueProp($state, [
+                                "edittedDismissedButton",
+                                "value"
+                              ])
+                            };
+                            initializeCodeComponentStates(
+                              $state,
+                              [
+                                {
+                                  name: "value",
+                                  plasmicStateName:
+                                    "edittedDismissedButton.value"
+                                }
+                              ],
+                              [],
+                              undefined ?? {},
+                              child$Props
+                            );
+                            initializePlasmicStates(
+                              $state,
+                              [
+                                {
+                                  name: "edittedDismissedButton.value",
+                                  initFunc: ({ $props, $state, $queries }) =>
+                                    (() => {
+                                      try {
+                                        return $ctx.fetched_data.data[0]
+                                          .dismissed === "true"
+                                          ? "true"
+                                          : "false";
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                }
+                              ],
+                              []
+                            );
+                            return (
+                              <AntdRadioGroup
+                                data-plasmic-name={"edittedDismissedButton"}
+                                data-plasmic-override={
+                                  overrides.edittedDismissedButton
+                                }
+                                {...child$Props}
+                              >
+                                <AntdRadio
+                                  className={classNames(
+                                    "__wab_instance",
+                                    sty.radio__muiek
+                                  )}
+                                  value={"op1"}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__osgrd
+                                    )}
+                                  >
+                                    {"Option 1"}
+                                  </div>
+                                </AntdRadio>
+                                <AntdRadio
+                                  className={classNames(
+                                    "__wab_instance",
+                                    sty.radio__l38RD
+                                  )}
+                                  value={"op2"}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__pw9P1
+                                    )}
+                                  >
+                                    {"Option 2"}
+                                  </div>
+                                </AntdRadio>
+                              </AntdRadioGroup>
+                            );
+                          })()}
+                        </div>
+                        <div
+                          data-plasmic-name={"edittedDismissionDatetimeSection"}
+                          data-plasmic-override={
+                            overrides.edittedDismissionDatetimeSection
+                          }
+                          className={classNames(
+                            projectcss.all,
+                            sty.edittedDismissionDatetimeSection
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__beIHr
+                            )}
+                            dir={"rtl"}
+                          >
+                            {
+                              "\u062a\u0627\u0631\u06cc\u062e \u0648 \u0632\u0645\u0627\u0646 \u062a\u0631\u062e\u06cc\u0635 : "
+                            }
+                          </div>
+                          <div
+                            data-plasmic-name={
+                              "edittedDismissionDatetimeSection2"
+                            }
+                            data-plasmic-override={
+                              overrides.edittedDismissionDatetimeSection2
+                            }
+                            className={classNames(
+                              projectcss.all,
+                              sty.edittedDismissionDatetimeSection2
+                            )}
+                          >
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedYearOfDismissionInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedYearOfDismissionInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: "\u0633\u0627\u0644 ",
+                                startIcon: null,
+                                type: "number",
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedYearOfDismissionInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedYearOfDismissionInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .dismission_datetime;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={
+                                    "edittedYearOfDismissionInput"
+                                  }
+                                  data-plasmic-override={
+                                    overrides.edittedYearOfDismissionInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedMonthOfDismissionInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedMonthOfDismissionInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: "\u0645\u0627\u0647 ",
+                                startIcon: null,
+                                type: "number",
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedMonthOfDismissionInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedMonthOfDismissionInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .dismission_datetime;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={
+                                    "edittedMonthOfDismissionInput"
+                                  }
+                                  data-plasmic-override={
+                                    overrides.edittedMonthOfDismissionInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.edittedDayOfDismissionInput
+                                ),
+                                endIcon: null,
+                                onChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "edittedDayOfDismissionInput",
+                                      "value"
+                                    ])(
+                                      (e => e.target?.value).apply(
+                                        null,
+                                        eventArgs
+                                      )
+                                    );
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                placeholder: "\u0631\u0648\u0632 ",
+                                startIcon: null,
+                                type: "number",
+                                value:
+                                  generateStateValueProp($state, [
+                                    "edittedDayOfDismissionInput",
+                                    "value"
+                                  ]) ?? ""
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "edittedDayOfDismissionInput.value",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      (() => {
+                                        try {
+                                          return $ctx.fetched_data.data[0]
+                                            .dismission_datetime;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                  }
+                                ],
+                                []
+                              );
+                              return (
+                                <TextInput
+                                  data-plasmic-name={
+                                    "edittedDayOfDismissionInput"
+                                  }
+                                  data-plasmic-override={
+                                    overrides.edittedDayOfDismissionInput
+                                  }
+                                  {...child$Props}
+                                />
+                              );
+                            })()}
+                          </div>
+                        </div>
+                      </div>
+                      <Button
+                        data-plasmic-name={"editPatientButton"}
+                        data-plasmic-override={overrides.editPatientButton}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.editPatientButton
+                        )}
+                        color={"yellow"}
+                        deselected={generateStateValueProp($state, [
+                          "editPatientButton",
+                          "deselected"
+                        ])}
+                        endIcon={
+                          <IconIcon
+                            className={classNames(
+                              projectcss.all,
+                              sty.svg__f88Dc
+                            )}
+                            role={"img"}
+                          />
+                        }
+                        isDisabled={generateStateValueProp($state, [
+                          "editPatientButton",
+                          "isDisabled"
+                        ])}
+                        onClick={async event => {
+                          const $steps = {};
+
+                          $steps["callPatchEndpoint"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "PATCH",
+                                    `/api/v3/remote_his_manual/admissions?national_code=${$state.edittedNationalCodeInput.value}&admission_id=${$state.admissionId}`,
+                                    (() => {
+                                      try {
+                                        return {
+                                          "X-Namespace": localStorage.getItem(
+                                            "inlab_user_namespace_id"
+                                          )
+                                        };
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })(),
+                                    (() => {
+                                      try {
+                                        return {
+                                          patient_data: {
+                                            first_name:
+                                              $state.edittedFirstName.value,
+                                            last_name:
+                                              $state.edittedLastName.value,
+                                            father_name: "",
+                                            gender:
+                                              $state.edittedGenderButton.value,
+                                            date_of_birth: `${$state.edittedYearOfBirthInput.value}/${$state.edittedMonthOfBirthInput.value}/${$state.edittedDayOfBirthInput.value}`,
+                                            phone_number:
+                                              $state.edittedPhoneNumberInput
+                                                .value
+                                          },
+                                          admission_data: {
+                                            admission_datetime: `${$state.edittedYearOfAdmissionInput2.value}/${$state.edittedMonthOfAdmissionInput2.value}/${$state.edittedDayOfAdmissionInput2.value}`,
+                                            ward_id: $state.selectedWardId,
+                                            ward_name: $state.selectedWardName,
+                                            service_id:
+                                              $state.edittedServiceIdInput
+                                                .value,
+                                            service_name:
+                                              $state.edittedServiceNameInput
+                                                .value,
+                                            physician_id:
+                                              $state.edittedPhysicanIdInput
+                                                .value,
+                                            physician_name:
+                                              $state.edittedPhysicianNameInput
+                                                .value,
+                                            room: $state.edittedRoomNameInput
+                                              .value,
+                                            bed: $state.edittedBedNameInput
+                                              .value,
+                                            dismissed:
+                                              $state.edittedDismissedButton
+                                                .value,
+                                            dismission_datetime: `${$state.edittedYearOfDismissionInput.value}/${$state.edittedMonthOfDismissionInput.value}/${$state.edittedDayOfDismissionInput.value}`
+                                          }
+                                        };
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcherPlus"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["callPatchEndpoint"] != null &&
+                            typeof $steps["callPatchEndpoint"] === "object" &&
+                            typeof $steps["callPatchEndpoint"].then ===
+                              "function"
+                          ) {
+                            $steps["callPatchEndpoint"] = await $steps[
+                              "callPatchEndpoint"
+                            ];
+                          }
+                        }}
+                        onDeselectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "editPatientButton",
+                              "deselected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        onIsDisabledChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "editPatientButton",
+                              "isDisabled"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        onSelectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "editPatientButton",
+                              "selected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        onSortDeselectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "editPatientButton",
+                              "sortDeselected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        onSortSelectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "editPatientButton",
+                              "sortSelected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        selected={generateStateValueProp($state, [
+                          "editPatientButton",
+                          "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "editPatientButton",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "editPatientButton",
+                          "sortSelected"
+                        ])}
+                      >
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__yyAv
+                          )}
+                        >
+                          {
+                            "\u0648\u06cc\u0631\u0627\u06cc\u0634 \u0628\u06cc\u0645\u0627\u0631"
+                          }
+                        </div>
+                      </Button>
+                    </div>
+                  </React.Fragment>
                 )}
               </DataCtxReader__>
             </ApiFetcherComponentPlus>
@@ -6944,11 +6967,7 @@ function PlasmicPatientReception__RenderFunc(props: {
             title={"\u0647\u0634\u062f\u0627\u0631"}
             trigger={null}
           >
-            <div
-              data-plasmic-name={"freeBox"}
-              data-plasmic-override={overrides.freeBox}
-              className={classNames(projectcss.all, sty.freeBox)}
-            >
+            <div className={classNames(projectcss.all, sty.freeBox__ullGc)}>
               <div
                 className={classNames(
                   projectcss.all,
@@ -6962,6 +6981,273 @@ function PlasmicPatientReception__RenderFunc(props: {
                 }
               </div>
             </div>
+          </AntdModal>
+          <AntdModal
+            data-plasmic-name={"wardModal"}
+            data-plasmic-override={overrides.wardModal}
+            className={classNames("__wab_instance", sty.wardModal)}
+            defaultStylesClassName={classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              styleTokensClassNames
+            )}
+            hideFooter={true}
+            modalScopeClassName={sty["wardModal__modal"]}
+            onOpenChange={async (...eventArgs: any) => {
+              generateStateOnChangeProp($state, ["wardModal", "open"]).apply(
+                null,
+                eventArgs
+              );
+            }}
+            open={generateStateValueProp($state, ["wardModal", "open"])}
+            title={null}
+            trigger={null}
+          >
+            <div className={classNames(projectcss.all, sty.freeBox__yeVlU)}>
+              <TextInput
+                data-plasmic-name={"searchWardInput"}
+                data-plasmic-override={overrides.searchWardInput}
+                className={classNames("__wab_instance", sty.searchWardInput)}
+                onChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "searchWardInput",
+                      "value"
+                    ])((e => e.target?.value).apply(null, eventArgs));
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                placeholder={
+                  "\u0646\u0627\u0645 \u0628\u062e\u0634 \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
+                }
+                value={
+                  generateStateValueProp($state, [
+                    "searchWardInput",
+                    "value"
+                  ]) ?? ""
+                }
+              />
+            </div>
+            <ApiFetcherComponentPlus
+              data-plasmic-name={"getWardApi"}
+              data-plasmic-override={overrides.getWardApi}
+              autoFetch={true}
+              className={classNames("__wab_instance", sty.getWardApi)}
+              fetchTrigger={(() => {
+                try {
+                  return $state.searchWardInput.value;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/remote_his/wards?search_input=${$state.searchWardInput.value}`}
+              ref={ref => {
+                $refs["getWardApi"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox__xPsHt)}
+                  >
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__m4Xuu
+                          )}
+                          key={currentIndex}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["updateSelectedWardId"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["selectedWardId"]
+                                    },
+                                    operation: 0,
+                                    value: currentItem.id
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateSelectedWardId"] != null &&
+                              typeof $steps["updateSelectedWardId"] ===
+                                "object" &&
+                              typeof $steps["updateSelectedWardId"].then ===
+                                "function"
+                            ) {
+                              $steps["updateSelectedWardId"] = await $steps[
+                                "updateSelectedWardId"
+                              ];
+                            }
+
+                            $steps["updateSelectedWardName"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["selectedWardName"]
+                                    },
+                                    operation: 0,
+                                    value: currentItem.name
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateSelectedWardName"] != null &&
+                              typeof $steps["updateSelectedWardName"] ===
+                                "object" &&
+                              typeof $steps["updateSelectedWardName"].then ===
+                                "function"
+                            ) {
+                              $steps["updateSelectedWardName"] = await $steps[
+                                "updateSelectedWardName"
+                              ];
+                            }
+
+                            $steps["updateWardModalOpen"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["wardModal", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateWardModalOpen"] != null &&
+                              typeof $steps["updateWardModalOpen"] ===
+                                "object" &&
+                              typeof $steps["updateWardModalOpen"].then ===
+                                "function"
+                            ) {
+                              $steps["updateWardModalOpen"] = await $steps[
+                                "updateWardModalOpen"
+                              ];
+                            }
+                          }}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return currentItem.name;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponentPlus>
           </AntdModal>
         </div>
       </div>
@@ -6994,9 +7280,6 @@ const PlasmicDescendants = {
     "phoneNumberInput",
     "admissionDataSection",
     "wardIdNameSection",
-    "wardNameIdInput",
-    "wardNameInput",
-    "wardIdInput",
     "serviceIdNameSection",
     "serviceIdNameInput",
     "serviceIdInput",
@@ -7042,6 +7325,7 @@ const PlasmicDescendants = {
     "radiologyReport",
     "laboratoryData",
     "editManualPatient",
+    "conditionGuard",
     "editAdmittedPatient",
     "editPatientDataSection",
     "editFisrtLastNameSection",
@@ -7061,9 +7345,6 @@ const PlasmicDescendants = {
     "edittedPhoneNumberInput",
     "edittedAdmissionDataSection",
     "edittedWardIdNameSection",
-    "edittedWardNameIdInput",
-    "edittedWardNameInput",
-    "edittedWardIdInput",
     "edittedServiceIdNameSection",
     "edittedServiceIdNameInput",
     "edittedServiceIdInput",
@@ -7090,7 +7371,9 @@ const PlasmicDescendants = {
     "edittedDayOfDismissionInput",
     "editPatientButton",
     "deletePatient",
-    "freeBox"
+    "wardModal",
+    "searchWardInput",
+    "getWardApi"
   ],
   header: ["header", "addNewPatientPostApi", "patientsListGetApi"],
   addNewPatientPostApi: ["addNewPatientPostApi"],
@@ -7115,9 +7398,6 @@ const PlasmicDescendants = {
     "phoneNumberInput",
     "admissionDataSection",
     "wardIdNameSection",
-    "wardNameIdInput",
-    "wardNameInput",
-    "wardIdInput",
     "serviceIdNameSection",
     "serviceIdNameInput",
     "serviceIdInput",
@@ -7196,9 +7476,6 @@ const PlasmicDescendants = {
   admissionDataSection: [
     "admissionDataSection",
     "wardIdNameSection",
-    "wardNameIdInput",
-    "wardNameInput",
-    "wardIdInput",
     "serviceIdNameSection",
     "serviceIdNameInput",
     "serviceIdInput",
@@ -7224,15 +7501,7 @@ const PlasmicDescendants = {
     "monthOfDismissionInput",
     "dayOfDismissionInput"
   ],
-  wardIdNameSection: [
-    "wardIdNameSection",
-    "wardNameIdInput",
-    "wardNameInput",
-    "wardIdInput"
-  ],
-  wardNameIdInput: ["wardNameIdInput", "wardNameInput", "wardIdInput"],
-  wardNameInput: ["wardNameInput"],
-  wardIdInput: ["wardIdInput"],
+  wardIdNameSection: ["wardIdNameSection"],
   serviceIdNameSection: [
     "serviceIdNameSection",
     "serviceIdNameInput",
@@ -7381,6 +7650,7 @@ const PlasmicDescendants = {
   laboratoryData: ["laboratoryData"],
   editManualPatient: [
     "editManualPatient",
+    "conditionGuard",
     "editAdmittedPatient",
     "editPatientDataSection",
     "editFisrtLastNameSection",
@@ -7400,9 +7670,6 @@ const PlasmicDescendants = {
     "edittedPhoneNumberInput",
     "edittedAdmissionDataSection",
     "edittedWardIdNameSection",
-    "edittedWardNameIdInput",
-    "edittedWardNameInput",
-    "edittedWardIdInput",
     "edittedServiceIdNameSection",
     "edittedServiceIdNameInput",
     "edittedServiceIdInput",
@@ -7429,6 +7696,7 @@ const PlasmicDescendants = {
     "edittedDayOfDismissionInput",
     "editPatientButton"
   ],
+  conditionGuard: ["conditionGuard"],
   editAdmittedPatient: [
     "editAdmittedPatient",
     "editPatientDataSection",
@@ -7449,9 +7717,6 @@ const PlasmicDescendants = {
     "edittedPhoneNumberInput",
     "edittedAdmissionDataSection",
     "edittedWardIdNameSection",
-    "edittedWardNameIdInput",
-    "edittedWardNameInput",
-    "edittedWardIdInput",
     "edittedServiceIdNameSection",
     "edittedServiceIdNameInput",
     "edittedServiceIdInput",
@@ -7540,9 +7805,6 @@ const PlasmicDescendants = {
   edittedAdmissionDataSection: [
     "edittedAdmissionDataSection",
     "edittedWardIdNameSection",
-    "edittedWardNameIdInput",
-    "edittedWardNameInput",
-    "edittedWardIdInput",
     "edittedServiceIdNameSection",
     "edittedServiceIdNameInput",
     "edittedServiceIdInput",
@@ -7568,19 +7830,7 @@ const PlasmicDescendants = {
     "edittedMonthOfDismissionInput",
     "edittedDayOfDismissionInput"
   ],
-  edittedWardIdNameSection: [
-    "edittedWardIdNameSection",
-    "edittedWardNameIdInput",
-    "edittedWardNameInput",
-    "edittedWardIdInput"
-  ],
-  edittedWardNameIdInput: [
-    "edittedWardNameIdInput",
-    "edittedWardNameInput",
-    "edittedWardIdInput"
-  ],
-  edittedWardNameInput: ["edittedWardNameInput"],
-  edittedWardIdInput: ["edittedWardIdInput"],
+  edittedWardIdNameSection: ["edittedWardIdNameSection"],
   edittedServiceIdNameSection: [
     "edittedServiceIdNameSection",
     "edittedServiceIdNameInput",
@@ -7658,8 +7908,10 @@ const PlasmicDescendants = {
   edittedMonthOfDismissionInput: ["edittedMonthOfDismissionInput"],
   edittedDayOfDismissionInput: ["edittedDayOfDismissionInput"],
   editPatientButton: ["editPatientButton"],
-  deletePatient: ["deletePatient", "freeBox"],
-  freeBox: ["freeBox"]
+  deletePatient: ["deletePatient"],
+  wardModal: ["wardModal", "searchWardInput", "getWardApi"],
+  searchWardInput: ["searchWardInput"],
+  getWardApi: ["getWardApi"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -7688,9 +7940,6 @@ type NodeDefaultElementType = {
   phoneNumberInput: typeof TextInput;
   admissionDataSection: "div";
   wardIdNameSection: "div";
-  wardNameIdInput: "div";
-  wardNameInput: typeof TextInput;
-  wardIdInput: typeof TextInput;
   serviceIdNameSection: "div";
   serviceIdNameInput: "div";
   serviceIdInput: typeof TextInput;
@@ -7736,6 +7985,7 @@ type NodeDefaultElementType = {
   radiologyReport: typeof PlasmicImg__;
   laboratoryData: typeof PlasmicImg__;
   editManualPatient: typeof ApiFetcherComponentPlus;
+  conditionGuard: typeof ConditionGuard;
   editAdmittedPatient: "div";
   editPatientDataSection: "div";
   editFisrtLastNameSection: "div";
@@ -7755,9 +8005,6 @@ type NodeDefaultElementType = {
   edittedPhoneNumberInput: typeof TextInput;
   edittedAdmissionDataSection: "div";
   edittedWardIdNameSection: "div";
-  edittedWardNameIdInput: "div";
-  edittedWardNameInput: typeof TextInput;
-  edittedWardIdInput: typeof TextInput;
   edittedServiceIdNameSection: "div";
   edittedServiceIdNameInput: "div";
   edittedServiceIdInput: typeof TextInput;
@@ -7784,7 +8031,9 @@ type NodeDefaultElementType = {
   edittedDayOfDismissionInput: typeof TextInput;
   editPatientButton: typeof Button;
   deletePatient: typeof AntdModal;
-  freeBox: "div";
+  wardModal: typeof AntdModal;
+  searchWardInput: typeof TextInput;
+  getWardApi: typeof ApiFetcherComponentPlus;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -7869,9 +8118,6 @@ export const PlasmicPatientReception = Object.assign(
     phoneNumberInput: makeNodeComponent("phoneNumberInput"),
     admissionDataSection: makeNodeComponent("admissionDataSection"),
     wardIdNameSection: makeNodeComponent("wardIdNameSection"),
-    wardNameIdInput: makeNodeComponent("wardNameIdInput"),
-    wardNameInput: makeNodeComponent("wardNameInput"),
-    wardIdInput: makeNodeComponent("wardIdInput"),
     serviceIdNameSection: makeNodeComponent("serviceIdNameSection"),
     serviceIdNameInput: makeNodeComponent("serviceIdNameInput"),
     serviceIdInput: makeNodeComponent("serviceIdInput"),
@@ -7917,6 +8163,7 @@ export const PlasmicPatientReception = Object.assign(
     radiologyReport: makeNodeComponent("radiologyReport"),
     laboratoryData: makeNodeComponent("laboratoryData"),
     editManualPatient: makeNodeComponent("editManualPatient"),
+    conditionGuard: makeNodeComponent("conditionGuard"),
     editAdmittedPatient: makeNodeComponent("editAdmittedPatient"),
     editPatientDataSection: makeNodeComponent("editPatientDataSection"),
     editFisrtLastNameSection: makeNodeComponent("editFisrtLastNameSection"),
@@ -7940,9 +8187,6 @@ export const PlasmicPatientReception = Object.assign(
       "edittedAdmissionDataSection"
     ),
     edittedWardIdNameSection: makeNodeComponent("edittedWardIdNameSection"),
-    edittedWardNameIdInput: makeNodeComponent("edittedWardNameIdInput"),
-    edittedWardNameInput: makeNodeComponent("edittedWardNameInput"),
-    edittedWardIdInput: makeNodeComponent("edittedWardIdInput"),
     edittedServiceIdNameSection: makeNodeComponent(
       "edittedServiceIdNameSection"
     ),
@@ -7993,7 +8237,9 @@ export const PlasmicPatientReception = Object.assign(
     ),
     editPatientButton: makeNodeComponent("editPatientButton"),
     deletePatient: makeNodeComponent("deletePatient"),
-    freeBox: makeNodeComponent("freeBox"),
+    wardModal: makeNodeComponent("wardModal"),
+    searchWardInput: makeNodeComponent("searchWardInput"),
+    getWardApi: makeNodeComponent("getWardApi"),
 
     // Metadata about props expected for PlasmicPatientReception
     internalVariantProps: PlasmicPatientReception__VariantProps,

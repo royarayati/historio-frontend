@@ -240,7 +240,7 @@
   padding: 8px;
   border-bottom: 0.5px solid var(--token-8PxxXPNrIohQ);
 }
-.patientProfileApi:global(.__wab_instance) {
+.patientProfileApiFetcher:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
   width: 100%;
