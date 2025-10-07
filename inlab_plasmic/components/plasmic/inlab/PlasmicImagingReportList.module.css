@@ -397,6 +397,7 @@
   z-index: 1;
   position: fixed;
   bottom: auto;
+  overflow: auto;
   grid-column-start: 1 !important;
   grid-column-end: -1 !important;
   padding: 4px 17px 0px;
@@ -1748,6 +1749,7 @@
   padding-right: 17px;
   padding-left: 17px;
   width: 100%;
+  overflow: auto;
   min-width: 0;
 }
 .text__y1HEe {

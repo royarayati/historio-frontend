@@ -118,9 +118,6 @@ export type PlasmicPatientReception__OverridesType = {
   admissionDataSection?: Flex__<"div">;
   wardIdNameSection?: Flex__<"div">;
   serviceIdNameSection?: Flex__<"div">;
-  serviceIdNameInput?: Flex__<"div">;
-  serviceIdInput?: Flex__<typeof TextInput>;
-  serviceNameInput?: Flex__<typeof TextInput>;
   physicianIdNameSection?: Flex__<"div">;
   physicanIdNameInput?: Flex__<"div">;
   physicianNameInput?: Flex__<typeof TextInput>;
@@ -183,9 +180,6 @@ export type PlasmicPatientReception__OverridesType = {
   edittedAdmissionDataSection?: Flex__<"div">;
   edittedWardIdNameSection?: Flex__<"div">;
   edittedServiceIdNameSection?: Flex__<"div">;
-  edittedServiceIdNameInput?: Flex__<"div">;
-  edittedServiceIdInput?: Flex__<typeof TextInput>;
-  edittedServiceNameInput?: Flex__<typeof TextInput>;
   edittedPhysicianIdNameSection?: Flex__<"div">;
   edittedPhysicanIdNameInput?: Flex__<"div">;
   edittedPhysicianNameInput?: Flex__<typeof TextInput>;
@@ -211,6 +205,9 @@ export type PlasmicPatientReception__OverridesType = {
   wardModal?: Flex__<typeof AntdModal>;
   searchWardInput?: Flex__<typeof TextInput>;
   getWardApi?: Flex__<typeof ApiFetcherComponentPlus>;
+  serviceModal?: Flex__<typeof AntdModal>;
+  searchServiceInput?: Flex__<typeof TextInput>;
+  getServiceApi?: Flex__<typeof ApiFetcherComponentPlus>;
   homepageSwitchingTab?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
 };
@@ -325,18 +322,6 @@ function PlasmicPatientReception__RenderFunc(props: {
       },
       {
         path: "phoneNumberInput.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
-        path: "serviceIdInput.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
-        path: "serviceNameInput.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
@@ -751,44 +736,6 @@ function PlasmicPatientReception__RenderFunc(props: {
           })()
       },
       {
-        path: "edittedServiceIdInput.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $ctx.fetched_data.data[0].service[0].name;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()
-      },
-      {
-        path: "edittedServiceNameInput.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $ctx.fetched_data.data[0].service[0].id;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()
-      },
-      {
         path: "edittedPhysicianNameInput.value",
         type: "private",
         variableType: "text",
@@ -1076,6 +1023,49 @@ function PlasmicPatientReception__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "serviceModal.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "searchServiceInput.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "selectedServiceId",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "selectedServiceName",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "showSuccessMassage",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -1218,6 +1208,42 @@ function PlasmicPatientReception__RenderFunc(props: {
                 ) {
                   $steps["updatePatientListGetApi"] = await $steps[
                     "updatePatientListGetApi"
+                  ];
+                }
+
+                $steps["updatePatientListGetApi2"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["editPatient"]
+                        },
+                        operation: 0,
+                        value: false
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updatePatientListGetApi2"] != null &&
+                  typeof $steps["updatePatientListGetApi2"] === "object" &&
+                  typeof $steps["updatePatientListGetApi2"].then === "function"
+                ) {
+                  $steps["updatePatientListGetApi2"] = await $steps[
+                    "updatePatientListGetApi2"
                   ];
                 }
               }}
@@ -1539,6 +1565,25 @@ function PlasmicPatientReception__RenderFunc(props: {
               }
             </Button>
           </div>
+          {(() => {
+            const showSuccessMassage = $state.showSuccessMassage;
+            setTimeout(() => {
+              $state.showSuccessMassage = false;
+            }, 6000);
+            return showSuccessMassage;
+          })() ? (
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__yjyGu
+              )}
+            >
+              {
+                "\u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0627\u0646\u062c\u0627\u0645 \u0634\u062f"
+              }
+            </div>
+          ) : null}
           {$state.addNewPatientPostApi1 === true ? (
             <div
               data-plasmic-name={"admitPatient"}
@@ -2099,84 +2144,70 @@ function PlasmicPatientReception__RenderFunc(props: {
                     }
                   </div>
                   <div
-                    data-plasmic-name={"serviceIdNameInput"}
-                    data-plasmic-override={overrides.serviceIdNameInput}
                     className={classNames(
                       projectcss.all,
-                      sty.serviceIdNameInput
+                      projectcss.__wab_text,
+                      sty.text__nZuTm
                     )}
+                    dir={"rtl"}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateServiceModalOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["serviceModal", "open"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateServiceModalOpen"] != null &&
+                        typeof $steps["updateServiceModalOpen"] === "object" &&
+                        typeof $steps["updateServiceModalOpen"].then ===
+                          "function"
+                      ) {
+                        $steps["updateServiceModalOpen"] = await $steps[
+                          "updateServiceModalOpen"
+                        ];
+                      }
+                    }}
                   >
-                    <TextInput
-                      data-plasmic-name={"serviceIdInput"}
-                      data-plasmic-override={overrides.serviceIdInput}
-                      className={classNames(
-                        "__wab_instance",
-                        sty.serviceIdInput
-                      )}
-                      endIcon={null}
-                      onChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "serviceIdInput",
-                            "value"
-                          ])((e => e.target?.value).apply(null, eventArgs));
-                        }).apply(null, eventArgs);
-
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return $state.selectedServiceName === ""
+                            ? "----"
+                            : $state.selectedServiceName;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "";
+                          }
+                          throw e;
                         }
-                      }}
-                      placeholder={
-                        "\u0646\u0627\u0645 \u0633\u0631\u0648\u06cc\u0633"
-                      }
-                      startIcon={null}
-                      value={
-                        generateStateValueProp($state, [
-                          "serviceIdInput",
-                          "value"
-                        ]) ?? ""
-                      }
-                    />
-
-                    <TextInput
-                      data-plasmic-name={"serviceNameInput"}
-                      data-plasmic-override={overrides.serviceNameInput}
-                      className={classNames(
-                        "__wab_instance",
-                        sty.serviceNameInput
-                      )}
-                      endIcon={null}
-                      onChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "serviceNameInput",
-                            "value"
-                          ])((e => e.target?.value).apply(null, eventArgs));
-                        }).apply(null, eventArgs);
-
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      placeholder={
-                        "\u06a9\u062f \u0633\u0631\u0648\u06cc\u0633"
-                      }
-                      startIcon={null}
-                      value={
-                        generateStateValueProp($state, [
-                          "serviceNameInput",
-                          "value"
-                        ]) ?? ""
-                      }
-                    />
+                      })()}
+                    </React.Fragment>
                   </div>
                 </div>
                 <div
@@ -2771,8 +2802,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                     admission_datetime: `${$state.yearOfAdmissionInput.value}/${$state.monthOfAdmissionInput.value}/${$state.dayOfAdmissionInput.value}`,
                                     ward_id: $state.selectedWardId,
                                     ward_name: $state.selectedWardName,
-                                    service_id: $state.serviceIdInput.value,
-                                    service_name: $state.serviceNameInput.value,
+                                    service_id: $state.selectedServiceId,
+                                    service_name: $state.selectedServiceName,
                                     physician_id: $state.physicanIdInput.value,
                                     physician_name:
                                       $state.physicianNameInput.value,
@@ -3460,6 +3491,94 @@ function PlasmicPatientReception__RenderFunc(props: {
                                     $steps["updateEditPatient"] = await $steps[
                                       "updateEditPatient"
                                     ];
+                                  }
+
+                                  $steps["updatePatientListGetApi"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["patientListGetApi"]
+                                          },
+                                          operation: 0,
+                                          value: false
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updatePatientListGetApi"] != null &&
+                                    typeof $steps["updatePatientListGetApi"] ===
+                                      "object" &&
+                                    typeof $steps["updatePatientListGetApi"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updatePatientListGetApi"] =
+                                      await $steps["updatePatientListGetApi"];
+                                  }
+
+                                  $steps["updatePatientListGetApi2"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: [
+                                              "addNewPatientPostApi1"
+                                            ]
+                                          },
+                                          operation: 0,
+                                          value: false
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updatePatientListGetApi2"] !=
+                                      null &&
+                                    typeof $steps[
+                                      "updatePatientListGetApi2"
+                                    ] === "object" &&
+                                    typeof $steps["updatePatientListGetApi2"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updatePatientListGetApi2"] =
+                                      await $steps["updatePatientListGetApi2"];
                                   }
                                 },
                                 onDeselectedChange: async (
@@ -4385,7 +4504,11 @@ function PlasmicPatientReception__RenderFunc(props: {
           ) : null}
           {(() => {
             try {
-              return $state.editPatient === true;
+              return (
+                $state.editPatient === true &&
+                $state.addNewPatientPostApi1 === false &&
+                $state.patientListGetApi === false
+              );
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -4545,6 +4668,92 @@ function PlasmicPatientReception__RenderFunc(props: {
                         ) {
                           $steps["updateSelectedWardName"] = await $steps[
                             "updateSelectedWardName"
+                          ];
+                        }
+
+                        $steps["updateSelectedServiceId"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["selectedServiceId"]
+                                },
+                                operation: 0,
+                                value:
+                                  $ctx.fetched_data.data &&
+                                  $ctx.fetched_data.data[0] &&
+                                  $ctx.fetched_data.data[0].service
+                                    ? $ctx.fetched_data.data[0].service[0].id
+                                    : ""
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSelectedServiceId"] != null &&
+                          typeof $steps["updateSelectedServiceId"] ===
+                            "object" &&
+                          typeof $steps["updateSelectedServiceId"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSelectedServiceId"] = await $steps[
+                            "updateSelectedServiceId"
+                          ];
+                        }
+
+                        $steps["updateSelectedServiceName"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["selectedServiceName"]
+                                },
+                                operation: 0,
+                                value:
+                                  $ctx.fetched_data.data &&
+                                  $ctx.fetched_data.data[0] &&
+                                  $ctx.fetched_data.data[0].service
+                                    ? $ctx.fetched_data.data[0].service[0].name
+                                    : ""
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSelectedServiceName"] != null &&
+                          typeof $steps["updateSelectedServiceName"] ===
+                            "object" &&
+                          typeof $steps["updateSelectedServiceName"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSelectedServiceName"] = await $steps[
+                            "updateSelectedServiceName"
                           ];
                         }
                       }}
@@ -5516,159 +5725,73 @@ function PlasmicPatientReception__RenderFunc(props: {
                             }
                           </div>
                           <div
-                            data-plasmic-name={"edittedServiceIdNameInput"}
-                            data-plasmic-override={
-                              overrides.edittedServiceIdNameInput
-                            }
                             className={classNames(
                               projectcss.all,
-                              sty.edittedServiceIdNameInput
+                              projectcss.__wab_text,
+                              sty.text__wu316
                             )}
+                            dir={"rtl"}
+                            onClick={async event => {
+                              const $steps = {};
+
+                              $steps["updateServiceModalOpen"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: ["serviceModal", "open"]
+                                      },
+                                      operation: 0,
+                                      value: true
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["updateServiceModalOpen"] != null &&
+                                typeof $steps["updateServiceModalOpen"] ===
+                                  "object" &&
+                                typeof $steps["updateServiceModalOpen"].then ===
+                                  "function"
+                              ) {
+                                $steps["updateServiceModalOpen"] = await $steps[
+                                  "updateServiceModalOpen"
+                                ];
+                              }
+                            }}
                           >
-                            {(() => {
-                              const child$Props = {
-                                className: classNames(
-                                  "__wab_instance",
-                                  sty.edittedServiceIdInput
-                                ),
-                                endIcon: null,
-                                onChange: async (...eventArgs: any) => {
-                                  ((...eventArgs) => {
-                                    generateStateOnChangeProp($state, [
-                                      "edittedServiceIdInput",
-                                      "value"
-                                    ])(
-                                      (e => e.target?.value).apply(
-                                        null,
-                                        eventArgs
-                                      )
-                                    );
-                                  }).apply(null, eventArgs);
-
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return $state.selectedServiceName === ""
+                                    ? "----"
+                                    : $state.selectedServiceName;
+                                } catch (e) {
                                   if (
-                                    eventArgs.length > 1 &&
-                                    eventArgs[1] &&
-                                    eventArgs[1]._plasmic_state_init_
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
                                   ) {
-                                    return;
+                                    return "";
                                   }
-                                },
-                                placeholder:
-                                  "\u0646\u0627\u0645 \u0633\u0631\u0648\u06cc\u0633",
-                                startIcon: null,
-                                value:
-                                  generateStateValueProp($state, [
-                                    "edittedServiceIdInput",
-                                    "value"
-                                  ]) ?? ""
-                              };
-
-                              initializePlasmicStates(
-                                $state,
-                                [
-                                  {
-                                    name: "edittedServiceIdInput.value",
-                                    initFunc: ({ $props, $state, $queries }) =>
-                                      (() => {
-                                        try {
-                                          return $ctx.fetched_data.data[0]
-                                            .service[0].name;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return undefined;
-                                          }
-                                          throw e;
-                                        }
-                                      })()
-                                  }
-                                ],
-                                []
-                              );
-                              return (
-                                <TextInput
-                                  data-plasmic-name={"edittedServiceIdInput"}
-                                  data-plasmic-override={
-                                    overrides.edittedServiceIdInput
-                                  }
-                                  {...child$Props}
-                                />
-                              );
-                            })()}
-                            {(() => {
-                              const child$Props = {
-                                className: classNames(
-                                  "__wab_instance",
-                                  sty.edittedServiceNameInput
-                                ),
-                                endIcon: null,
-                                onChange: async (...eventArgs: any) => {
-                                  ((...eventArgs) => {
-                                    generateStateOnChangeProp($state, [
-                                      "edittedServiceNameInput",
-                                      "value"
-                                    ])(
-                                      (e => e.target?.value).apply(
-                                        null,
-                                        eventArgs
-                                      )
-                                    );
-                                  }).apply(null, eventArgs);
-
-                                  if (
-                                    eventArgs.length > 1 &&
-                                    eventArgs[1] &&
-                                    eventArgs[1]._plasmic_state_init_
-                                  ) {
-                                    return;
-                                  }
-                                },
-                                startIcon: null,
-                                value:
-                                  generateStateValueProp($state, [
-                                    "edittedServiceNameInput",
-                                    "value"
-                                  ]) ?? ""
-                              };
-
-                              initializePlasmicStates(
-                                $state,
-                                [
-                                  {
-                                    name: "edittedServiceNameInput.value",
-                                    initFunc: ({ $props, $state, $queries }) =>
-                                      (() => {
-                                        try {
-                                          return $ctx.fetched_data.data[0]
-                                            .service[0].id;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return undefined;
-                                          }
-                                          throw e;
-                                        }
-                                      })()
-                                  }
-                                ],
-                                []
-                              );
-                              return (
-                                <TextInput
-                                  data-plasmic-name={"edittedServiceNameInput"}
-                                  data-plasmic-override={
-                                    overrides.edittedServiceNameInput
-                                  }
-                                  {...child$Props}
-                                />
-                              );
-                            })()}
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
                           </div>
                         </div>
                         <div
@@ -6747,11 +6870,9 @@ function PlasmicPatientReception__RenderFunc(props: {
                                             ward_id: $state.selectedWardId,
                                             ward_name: $state.selectedWardName,
                                             service_id:
-                                              $state.edittedServiceIdInput
-                                                .value,
+                                              $state.selectedServiceId,
                                             service_name:
-                                              $state.edittedServiceNameInput
-                                                .value,
+                                              $state.selectedServiceName,
                                             physician_id:
                                               $state.edittedPhysicanIdInput
                                                 .value,
@@ -6794,6 +6915,44 @@ function PlasmicPatientReception__RenderFunc(props: {
                           ) {
                             $steps["callPatchEndpoint"] = await $steps[
                               "callPatchEndpoint"
+                            ];
+                          }
+
+                          $steps["updateShowSuccessMassage"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["showSuccessMassage"]
+                                  },
+                                  operation: 0,
+                                  value: true
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateShowSuccessMassage"] != null &&
+                            typeof $steps["updateShowSuccessMassage"] ===
+                              "object" &&
+                            typeof $steps["updateShowSuccessMassage"].then ===
+                              "function"
+                          ) {
+                            $steps["updateShowSuccessMassage"] = await $steps[
+                              "updateShowSuccessMassage"
                             ];
                           }
                         }}
@@ -7252,6 +7411,272 @@ function PlasmicPatientReception__RenderFunc(props: {
               </DataCtxReader__>
             </ApiFetcherComponentPlus>
           </AntdModal>
+          <AntdModal
+            data-plasmic-name={"serviceModal"}
+            data-plasmic-override={overrides.serviceModal}
+            className={classNames("__wab_instance", sty.serviceModal)}
+            defaultStylesClassName={classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              styleTokensClassNames
+            )}
+            hideFooter={true}
+            modalScopeClassName={sty["serviceModal__modal"]}
+            onOpenChange={async (...eventArgs: any) => {
+              generateStateOnChangeProp($state, ["serviceModal", "open"]).apply(
+                null,
+                eventArgs
+              );
+            }}
+            open={generateStateValueProp($state, ["serviceModal", "open"])}
+            title={null}
+            trigger={null}
+          >
+            <div className={classNames(projectcss.all, sty.freeBox__jpsYn)}>
+              <TextInput
+                data-plasmic-name={"searchServiceInput"}
+                data-plasmic-override={overrides.searchServiceInput}
+                className={classNames("__wab_instance", sty.searchServiceInput)}
+                onChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "searchServiceInput",
+                      "value"
+                    ])((e => e.target?.value).apply(null, eventArgs));
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                placeholder={
+                  "\u0646\u0627\u0645 \u0633\u0631\u0648\u06cc\u0633 \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
+                }
+                value={
+                  generateStateValueProp($state, [
+                    "searchServiceInput",
+                    "value"
+                  ]) ?? ""
+                }
+              />
+            </div>
+            <ApiFetcherComponentPlus
+              data-plasmic-name={"getServiceApi"}
+              data-plasmic-override={overrides.getServiceApi}
+              autoFetch={true}
+              className={classNames("__wab_instance", sty.getServiceApi)}
+              fetchTrigger={(() => {
+                try {
+                  return $state.searchServiceInput.value;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/remote_his/services?search_input=${$state.searchServiceInput.value}`}
+              ref={ref => {
+                $refs["getServiceApi"] = ref;
+              }}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox__xUkGt)}
+                  >
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $ctx.fetched_data.data;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text___1XV2
+                          )}
+                          key={currentIndex}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["updateSelectedServiceId"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["selectedServiceId"]
+                                    },
+                                    operation: 0,
+                                    value: currentItem.id
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateSelectedServiceId"] != null &&
+                              typeof $steps["updateSelectedServiceId"] ===
+                                "object" &&
+                              typeof $steps["updateSelectedServiceId"].then ===
+                                "function"
+                            ) {
+                              $steps["updateSelectedServiceId"] = await $steps[
+                                "updateSelectedServiceId"
+                              ];
+                            }
+
+                            $steps["updateSelectedServiceName"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["selectedServiceName"]
+                                    },
+                                    operation: 0,
+                                    value: currentItem.name
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateSelectedServiceName"] != null &&
+                              typeof $steps["updateSelectedServiceName"] ===
+                                "object" &&
+                              typeof $steps["updateSelectedServiceName"]
+                                .then === "function"
+                            ) {
+                              $steps["updateSelectedServiceName"] =
+                                await $steps["updateSelectedServiceName"];
+                            }
+
+                            $steps["updateServiceModalOpen"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["serviceModal", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateServiceModalOpen"] != null &&
+                              typeof $steps["updateServiceModalOpen"] ===
+                                "object" &&
+                              typeof $steps["updateServiceModalOpen"].then ===
+                                "function"
+                            ) {
+                              $steps["updateServiceModalOpen"] = await $steps[
+                                "updateServiceModalOpen"
+                              ];
+                            }
+                          }}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return currentItem.name;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponentPlus>
+          </AntdModal>
           <div
             data-plasmic-name={"homepageSwitchingTab"}
             data-plasmic-override={overrides.homepageSwitchingTab}
@@ -7527,9 +7952,6 @@ const PlasmicDescendants = {
     "admissionDataSection",
     "wardIdNameSection",
     "serviceIdNameSection",
-    "serviceIdNameInput",
-    "serviceIdInput",
-    "serviceNameInput",
     "physicianIdNameSection",
     "physicanIdNameInput",
     "physicianNameInput",
@@ -7592,9 +8014,6 @@ const PlasmicDescendants = {
     "edittedAdmissionDataSection",
     "edittedWardIdNameSection",
     "edittedServiceIdNameSection",
-    "edittedServiceIdNameInput",
-    "edittedServiceIdInput",
-    "edittedServiceNameInput",
     "edittedPhysicianIdNameSection",
     "edittedPhysicanIdNameInput",
     "edittedPhysicianNameInput",
@@ -7620,6 +8039,9 @@ const PlasmicDescendants = {
     "wardModal",
     "searchWardInput",
     "getWardApi",
+    "serviceModal",
+    "searchServiceInput",
+    "getServiceApi",
     "homepageSwitchingTab",
     "switchingTab"
   ],
@@ -7647,9 +8069,6 @@ const PlasmicDescendants = {
     "admissionDataSection",
     "wardIdNameSection",
     "serviceIdNameSection",
-    "serviceIdNameInput",
-    "serviceIdInput",
-    "serviceNameInput",
     "physicianIdNameSection",
     "physicanIdNameInput",
     "physicianNameInput",
@@ -7725,9 +8144,6 @@ const PlasmicDescendants = {
     "admissionDataSection",
     "wardIdNameSection",
     "serviceIdNameSection",
-    "serviceIdNameInput",
-    "serviceIdInput",
-    "serviceNameInput",
     "physicianIdNameSection",
     "physicanIdNameInput",
     "physicianNameInput",
@@ -7750,19 +8166,7 @@ const PlasmicDescendants = {
     "dayOfDismissionInput"
   ],
   wardIdNameSection: ["wardIdNameSection"],
-  serviceIdNameSection: [
-    "serviceIdNameSection",
-    "serviceIdNameInput",
-    "serviceIdInput",
-    "serviceNameInput"
-  ],
-  serviceIdNameInput: [
-    "serviceIdNameInput",
-    "serviceIdInput",
-    "serviceNameInput"
-  ],
-  serviceIdInput: ["serviceIdInput"],
-  serviceNameInput: ["serviceNameInput"],
+  serviceIdNameSection: ["serviceIdNameSection"],
   physicianIdNameSection: [
     "physicianIdNameSection",
     "physicanIdNameInput",
@@ -7919,9 +8323,6 @@ const PlasmicDescendants = {
     "edittedAdmissionDataSection",
     "edittedWardIdNameSection",
     "edittedServiceIdNameSection",
-    "edittedServiceIdNameInput",
-    "edittedServiceIdInput",
-    "edittedServiceNameInput",
     "edittedPhysicianIdNameSection",
     "edittedPhysicanIdNameInput",
     "edittedPhysicianNameInput",
@@ -7966,9 +8367,6 @@ const PlasmicDescendants = {
     "edittedAdmissionDataSection",
     "edittedWardIdNameSection",
     "edittedServiceIdNameSection",
-    "edittedServiceIdNameInput",
-    "edittedServiceIdInput",
-    "edittedServiceNameInput",
     "edittedPhysicianIdNameSection",
     "edittedPhysicanIdNameInput",
     "edittedPhysicianNameInput",
@@ -8054,9 +8452,6 @@ const PlasmicDescendants = {
     "edittedAdmissionDataSection",
     "edittedWardIdNameSection",
     "edittedServiceIdNameSection",
-    "edittedServiceIdNameInput",
-    "edittedServiceIdInput",
-    "edittedServiceNameInput",
     "edittedPhysicianIdNameSection",
     "edittedPhysicanIdNameInput",
     "edittedPhysicianNameInput",
@@ -8079,19 +8474,7 @@ const PlasmicDescendants = {
     "edittedDayOfDismissionInput"
   ],
   edittedWardIdNameSection: ["edittedWardIdNameSection"],
-  edittedServiceIdNameSection: [
-    "edittedServiceIdNameSection",
-    "edittedServiceIdNameInput",
-    "edittedServiceIdInput",
-    "edittedServiceNameInput"
-  ],
-  edittedServiceIdNameInput: [
-    "edittedServiceIdNameInput",
-    "edittedServiceIdInput",
-    "edittedServiceNameInput"
-  ],
-  edittedServiceIdInput: ["edittedServiceIdInput"],
-  edittedServiceNameInput: ["edittedServiceNameInput"],
+  edittedServiceIdNameSection: ["edittedServiceIdNameSection"],
   edittedPhysicianIdNameSection: [
     "edittedPhysicianIdNameSection",
     "edittedPhysicanIdNameInput",
@@ -8160,6 +8543,9 @@ const PlasmicDescendants = {
   wardModal: ["wardModal", "searchWardInput", "getWardApi"],
   searchWardInput: ["searchWardInput"],
   getWardApi: ["getWardApi"],
+  serviceModal: ["serviceModal", "searchServiceInput", "getServiceApi"],
+  searchServiceInput: ["searchServiceInput"],
+  getServiceApi: ["getServiceApi"],
   homepageSwitchingTab: ["homepageSwitchingTab", "switchingTab"],
   switchingTab: ["switchingTab"]
 } as const;
@@ -8191,9 +8577,6 @@ type NodeDefaultElementType = {
   admissionDataSection: "div";
   wardIdNameSection: "div";
   serviceIdNameSection: "div";
-  serviceIdNameInput: "div";
-  serviceIdInput: typeof TextInput;
-  serviceNameInput: typeof TextInput;
   physicianIdNameSection: "div";
   physicanIdNameInput: "div";
   physicianNameInput: typeof TextInput;
@@ -8256,9 +8639,6 @@ type NodeDefaultElementType = {
   edittedAdmissionDataSection: "div";
   edittedWardIdNameSection: "div";
   edittedServiceIdNameSection: "div";
-  edittedServiceIdNameInput: "div";
-  edittedServiceIdInput: typeof TextInput;
-  edittedServiceNameInput: typeof TextInput;
   edittedPhysicianIdNameSection: "div";
   edittedPhysicanIdNameInput: "div";
   edittedPhysicianNameInput: typeof TextInput;
@@ -8284,6 +8664,9 @@ type NodeDefaultElementType = {
   wardModal: typeof AntdModal;
   searchWardInput: typeof TextInput;
   getWardApi: typeof ApiFetcherComponentPlus;
+  serviceModal: typeof AntdModal;
+  searchServiceInput: typeof TextInput;
+  getServiceApi: typeof ApiFetcherComponentPlus;
   homepageSwitchingTab: "div";
   switchingTab: typeof SwitchingTab;
 };
@@ -8371,9 +8754,6 @@ export const PlasmicPatientReception = Object.assign(
     admissionDataSection: makeNodeComponent("admissionDataSection"),
     wardIdNameSection: makeNodeComponent("wardIdNameSection"),
     serviceIdNameSection: makeNodeComponent("serviceIdNameSection"),
-    serviceIdNameInput: makeNodeComponent("serviceIdNameInput"),
-    serviceIdInput: makeNodeComponent("serviceIdInput"),
-    serviceNameInput: makeNodeComponent("serviceNameInput"),
     physicianIdNameSection: makeNodeComponent("physicianIdNameSection"),
     physicanIdNameInput: makeNodeComponent("physicanIdNameInput"),
     physicianNameInput: makeNodeComponent("physicianNameInput"),
@@ -8442,9 +8822,6 @@ export const PlasmicPatientReception = Object.assign(
     edittedServiceIdNameSection: makeNodeComponent(
       "edittedServiceIdNameSection"
     ),
-    edittedServiceIdNameInput: makeNodeComponent("edittedServiceIdNameInput"),
-    edittedServiceIdInput: makeNodeComponent("edittedServiceIdInput"),
-    edittedServiceNameInput: makeNodeComponent("edittedServiceNameInput"),
     edittedPhysicianIdNameSection: makeNodeComponent(
       "edittedPhysicianIdNameSection"
     ),
@@ -8492,6 +8869,9 @@ export const PlasmicPatientReception = Object.assign(
     wardModal: makeNodeComponent("wardModal"),
     searchWardInput: makeNodeComponent("searchWardInput"),
     getWardApi: makeNodeComponent("getWardApi"),
+    serviceModal: makeNodeComponent("serviceModal"),
+    searchServiceInput: makeNodeComponent("searchServiceInput"),
+    getServiceApi: makeNodeComponent("getServiceApi"),
     homepageSwitchingTab: makeNodeComponent("homepageSwitchingTab"),
     switchingTab: makeNodeComponent("switchingTab"),
 
