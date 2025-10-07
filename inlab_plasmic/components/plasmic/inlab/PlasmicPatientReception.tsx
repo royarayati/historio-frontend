@@ -98,7 +98,7 @@ export type PlasmicPatientReception__OverridesType = {
   header?: Flex__<"div">;
   addNewPatientPostApi?: Flex__<typeof Button>;
   patientsListGetApi?: Flex__<typeof Button>;
-  admitPatient?: Flex__<"div">;
+  addPatient?: Flex__<"div">;
   patientDataSection?: Flex__<"div">;
   fisrtLastNameSection?: Flex__<"div">;
   fisrtLastNameInput?: Flex__<"div">;
@@ -139,7 +139,7 @@ export type PlasmicPatientReception__OverridesType = {
   monthOfDismissionInput?: Flex__<typeof TextInput>;
   dayOfDismissionInput?: Flex__<typeof TextInput>;
   admitPatientButton?: Flex__<typeof Button>;
-  manualPatientsEndpoint?: Flex__<typeof ApiFetcherComponentPlus>;
+  getManualPatientsEndpoint?: Flex__<typeof ApiFetcherComponentPlus>;
   patientCard?: Flex__<"div">;
   patientNameBookmarkIcon?: Flex__<"div">;
   editDeletePatient?: Flex__<typeof Button>;
@@ -495,7 +495,7 @@ function PlasmicPatientReception__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.patientListGetApi === true;
+              return $state.tabSelection === "get_patients";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -514,7 +514,7 @@ function PlasmicPatientReception__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.patientListGetApi === false;
+              return $state.tabSelection !== "get_patients";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -1066,6 +1066,44 @@ function PlasmicPatientReception__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "tabSelection",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return "get_patients";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "patientDeleted",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return false;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -1138,15 +1176,15 @@ function PlasmicPatientReception__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
-                $steps["updateAddNewPatientPostApi1"] = true
+                $steps["updateTabSelection"] = true
                   ? (() => {
                       const actionArgs = {
                         variable: {
                           objRoot: $state,
-                          variablePath: ["addNewPatientPostApi1"]
+                          variablePath: ["tabSelection"]
                         },
                         operation: 0,
-                        value: true
+                        value: "add_patient"
                       };
                       return (({
                         variable,
@@ -1165,85 +1203,12 @@ function PlasmicPatientReception__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["updateAddNewPatientPostApi1"] != null &&
-                  typeof $steps["updateAddNewPatientPostApi1"] === "object" &&
-                  typeof $steps["updateAddNewPatientPostApi1"].then ===
-                    "function"
+                  $steps["updateTabSelection"] != null &&
+                  typeof $steps["updateTabSelection"] === "object" &&
+                  typeof $steps["updateTabSelection"].then === "function"
                 ) {
-                  $steps["updateAddNewPatientPostApi1"] = await $steps[
-                    "updateAddNewPatientPostApi1"
-                  ];
-                }
-
-                $steps["updatePatientListGetApi"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["patientListGetApi"]
-                        },
-                        operation: 0,
-                        value: false
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updatePatientListGetApi"] != null &&
-                  typeof $steps["updatePatientListGetApi"] === "object" &&
-                  typeof $steps["updatePatientListGetApi"].then === "function"
-                ) {
-                  $steps["updatePatientListGetApi"] = await $steps[
-                    "updatePatientListGetApi"
-                  ];
-                }
-
-                $steps["updatePatientListGetApi2"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["editPatient"]
-                        },
-                        operation: 0,
-                        value: false
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updatePatientListGetApi2"] != null &&
-                  typeof $steps["updatePatientListGetApi2"] === "object" &&
-                  typeof $steps["updatePatientListGetApi2"].then === "function"
-                ) {
-                  $steps["updatePatientListGetApi2"] = await $steps[
-                    "updatePatientListGetApi2"
+                  $steps["updateTabSelection"] = await $steps[
+                    "updateTabSelection"
                   ];
                 }
               }}
@@ -1359,15 +1324,15 @@ function PlasmicPatientReception__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
-                $steps["updatePatientListGetApi"] = true
+                $steps["updateTabSelection"] = true
                   ? (() => {
                       const actionArgs = {
                         variable: {
                           objRoot: $state,
-                          variablePath: ["patientListGetApi"]
+                          variablePath: ["tabSelection"]
                         },
                         operation: 0,
-                        value: true
+                        value: "get_patients"
                       };
                       return (({
                         variable,
@@ -1386,84 +1351,12 @@ function PlasmicPatientReception__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["updatePatientListGetApi"] != null &&
-                  typeof $steps["updatePatientListGetApi"] === "object" &&
-                  typeof $steps["updatePatientListGetApi"].then === "function"
+                  $steps["updateTabSelection"] != null &&
+                  typeof $steps["updateTabSelection"] === "object" &&
+                  typeof $steps["updateTabSelection"].then === "function"
                 ) {
-                  $steps["updatePatientListGetApi"] = await $steps[
-                    "updatePatientListGetApi"
-                  ];
-                }
-
-                $steps["updatePatientListGetApi2"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["addNewPatientPostApi1"]
-                        },
-                        operation: 0,
-                        value: false
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updatePatientListGetApi2"] != null &&
-                  typeof $steps["updatePatientListGetApi2"] === "object" &&
-                  typeof $steps["updatePatientListGetApi2"].then === "function"
-                ) {
-                  $steps["updatePatientListGetApi2"] = await $steps[
-                    "updatePatientListGetApi2"
-                  ];
-                }
-
-                $steps["updatePatientListGetApi3"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["editPatient"]
-                        },
-                        operation: 0,
-                        value: false
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updatePatientListGetApi3"] != null &&
-                  typeof $steps["updatePatientListGetApi3"] === "object" &&
-                  typeof $steps["updatePatientListGetApi3"].then === "function"
-                ) {
-                  $steps["updatePatientListGetApi3"] = await $steps[
-                    "updatePatientListGetApi3"
+                  $steps["updateTabSelection"] = await $steps[
+                    "updateTabSelection"
                   ];
                 }
               }}
@@ -1584,11 +1477,11 @@ function PlasmicPatientReception__RenderFunc(props: {
               }
             </div>
           ) : null}
-          {$state.addNewPatientPostApi1 === true ? (
+          {$state.tabSelection === "add_patient" ? (
             <div
-              data-plasmic-name={"admitPatient"}
-              data-plasmic-override={overrides.admitPatient}
-              className={classNames(projectcss.all, sty.admitPatient)}
+              data-plasmic-name={"addPatient"}
+              data-plasmic-override={overrides.addPatient}
+              className={classNames(projectcss.all, sty.addPatient)}
             >
               <div
                 className={classNames(
@@ -2839,6 +2732,79 @@ function PlasmicPatientReception__RenderFunc(props: {
                       "callPostEndpoint"
                     ];
                   }
+
+                  $steps["updateShowSuccessMassage"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["showSuccessMassage"]
+                          },
+                          operation: 0,
+                          value: true
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateShowSuccessMassage"] != null &&
+                    typeof $steps["updateShowSuccessMassage"] === "object" &&
+                    typeof $steps["updateShowSuccessMassage"].then ===
+                      "function"
+                  ) {
+                    $steps["updateShowSuccessMassage"] = await $steps[
+                      "updateShowSuccessMassage"
+                    ];
+                  }
+
+                  $steps["updateTabSelection"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["tabSelection"]
+                          },
+                          operation: 0,
+                          value: "get_patients"
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateTabSelection"] != null &&
+                    typeof $steps["updateTabSelection"] === "object" &&
+                    typeof $steps["updateTabSelection"].then === "function"
+                  ) {
+                    $steps["updateTabSelection"] = await $steps[
+                      "updateTabSelection"
+                    ];
+                  }
                 }}
                 onDeselectedChange={async (...eventArgs: any) => {
                   ((...eventArgs) => {
@@ -2937,33 +2903,18 @@ function PlasmicPatientReception__RenderFunc(props: {
               </Button>
             </div>
           ) : null}
-          {(() => {
-            try {
-              return (
-                $state.editPatient === false &&
-                $state.addNewPatientPostApi1 === false
-              );
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return true;
-              }
-              throw e;
-            }
-          })() ? (
+          {$state.tabSelection === "get_patients" ? (
             <ApiFetcherComponentPlus
-              data-plasmic-name={"manualPatientsEndpoint"}
-              data-plasmic-override={overrides.manualPatientsEndpoint}
+              data-plasmic-name={"getManualPatientsEndpoint"}
+              data-plasmic-override={overrides.getManualPatientsEndpoint}
               autoFetch={true}
               className={classNames(
                 "__wab_instance",
-                sty.manualPatientsEndpoint
+                sty.getManualPatientsEndpoint
               )}
-              fetchTriggers={(() => {
+              fetchTrigger={(() => {
                 try {
-                  return $state.deletePatient.open;
+                  return $state.patientDeleted;
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -2994,7 +2945,7 @@ function PlasmicPatientReception__RenderFunc(props: {
               method={"GET"}
               path={"/api/v3/remote_his_manual/admissions"}
               ref={ref => {
-                $refs["manualPatientsEndpoint"] = ref;
+                $refs["getManualPatientsEndpoint"] = ref;
               }}
             >
               <DataCtxReader__>
@@ -3493,15 +3444,15 @@ function PlasmicPatientReception__RenderFunc(props: {
                                     ];
                                   }
 
-                                  $steps["updatePatientListGetApi"] = true
+                                  $steps["updatePatientListGetApi3"] = true
                                     ? (() => {
                                         const actionArgs = {
                                           variable: {
                                             objRoot: $state,
-                                            variablePath: ["patientListGetApi"]
+                                            variablePath: ["tabSelection"]
                                           },
                                           operation: 0,
-                                          value: false
+                                          value: "edit_patient"
                                         };
                                         return (({
                                           variable,
@@ -3525,60 +3476,16 @@ function PlasmicPatientReception__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
-                                    $steps["updatePatientListGetApi"] != null &&
-                                    typeof $steps["updatePatientListGetApi"] ===
-                                      "object" &&
-                                    typeof $steps["updatePatientListGetApi"]
-                                      .then === "function"
-                                  ) {
-                                    $steps["updatePatientListGetApi"] =
-                                      await $steps["updatePatientListGetApi"];
-                                  }
-
-                                  $steps["updatePatientListGetApi2"] = true
-                                    ? (() => {
-                                        const actionArgs = {
-                                          variable: {
-                                            objRoot: $state,
-                                            variablePath: [
-                                              "addNewPatientPostApi1"
-                                            ]
-                                          },
-                                          operation: 0,
-                                          value: false
-                                        };
-                                        return (({
-                                          variable,
-                                          value,
-                                          startIndex,
-                                          deleteCount
-                                        }) => {
-                                          if (!variable) {
-                                            return;
-                                          }
-                                          const { objRoot, variablePath } =
-                                            variable;
-
-                                          $stateSet(
-                                            objRoot,
-                                            variablePath,
-                                            value
-                                          );
-                                          return value;
-                                        })?.apply(null, [actionArgs]);
-                                      })()
-                                    : undefined;
-                                  if (
-                                    $steps["updatePatientListGetApi2"] !=
+                                    $steps["updatePatientListGetApi3"] !=
                                       null &&
                                     typeof $steps[
-                                      "updatePatientListGetApi2"
+                                      "updatePatientListGetApi3"
                                     ] === "object" &&
-                                    typeof $steps["updatePatientListGetApi2"]
+                                    typeof $steps["updatePatientListGetApi3"]
                                       .then === "function"
                                   ) {
-                                    $steps["updatePatientListGetApi2"] =
-                                      await $steps["updatePatientListGetApi2"];
+                                    $steps["updatePatientListGetApi3"] =
+                                      await $steps["updatePatientListGetApi3"];
                                   }
                                 },
                                 onDeselectedChange: async (
@@ -4504,11 +4411,7 @@ function PlasmicPatientReception__RenderFunc(props: {
           ) : null}
           {(() => {
             try {
-              return (
-                $state.editPatient === true &&
-                $state.addNewPatientPostApi1 === false &&
-                $state.patientListGetApi === false
-              );
+              return $state.tabSelection === "edit_patient";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -6955,6 +6858,43 @@ function PlasmicPatientReception__RenderFunc(props: {
                               "updateShowSuccessMassage"
                             ];
                           }
+
+                          $steps["updateTabSelection"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["tabSelection"]
+                                  },
+                                  operation: 0,
+                                  value: "get_patients"
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateTabSelection"] != null &&
+                            typeof $steps["updateTabSelection"] === "object" &&
+                            typeof $steps["updateTabSelection"].then ===
+                              "function"
+                          ) {
+                            $steps["updateTabSelection"] = await $steps[
+                              "updateTabSelection"
+                            ];
+                          }
                         }}
                         onDeselectedChange={async (...eventArgs: any) => {
                           ((...eventArgs) => {
@@ -7117,6 +7057,37 @@ function PlasmicPatientReception__RenderFunc(props: {
                 typeof $steps["callDeleteApi"].then === "function"
               ) {
                 $steps["callDeleteApi"] = await $steps["callDeleteApi"];
+              }
+
+              $steps["updatePatientDeleted"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["patientDeleted"]
+                      },
+                      operation: 0,
+                      value: true
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updatePatientDeleted"] != null &&
+                typeof $steps["updatePatientDeleted"] === "object" &&
+                typeof $steps["updatePatientDeleted"].then === "function"
+              ) {
+                $steps["updatePatientDeleted"] = await $steps[
+                  "updatePatientDeleted"
+                ];
               }
             }}
             onOpenChange={async (...eventArgs: any) => {
@@ -7932,7 +7903,7 @@ const PlasmicDescendants = {
     "header",
     "addNewPatientPostApi",
     "patientsListGetApi",
-    "admitPatient",
+    "addPatient",
     "patientDataSection",
     "fisrtLastNameSection",
     "fisrtLastNameInput",
@@ -7973,7 +7944,7 @@ const PlasmicDescendants = {
     "monthOfDismissionInput",
     "dayOfDismissionInput",
     "admitPatientButton",
-    "manualPatientsEndpoint",
+    "getManualPatientsEndpoint",
     "patientCard",
     "patientNameBookmarkIcon",
     "editDeletePatient",
@@ -8048,8 +8019,8 @@ const PlasmicDescendants = {
   header: ["header", "addNewPatientPostApi", "patientsListGetApi"],
   addNewPatientPostApi: ["addNewPatientPostApi"],
   patientsListGetApi: ["patientsListGetApi"],
-  admitPatient: [
-    "admitPatient",
+  addPatient: [
+    "addPatient",
     "patientDataSection",
     "fisrtLastNameSection",
     "fisrtLastNameInput",
@@ -8224,8 +8195,8 @@ const PlasmicDescendants = {
   monthOfDismissionInput: ["monthOfDismissionInput"],
   dayOfDismissionInput: ["dayOfDismissionInput"],
   admitPatientButton: ["admitPatientButton"],
-  manualPatientsEndpoint: [
-    "manualPatientsEndpoint",
+  getManualPatientsEndpoint: [
+    "getManualPatientsEndpoint",
     "patientCard",
     "patientNameBookmarkIcon",
     "editDeletePatient",
@@ -8557,7 +8528,7 @@ type NodeDefaultElementType = {
   header: "div";
   addNewPatientPostApi: typeof Button;
   patientsListGetApi: typeof Button;
-  admitPatient: "div";
+  addPatient: "div";
   patientDataSection: "div";
   fisrtLastNameSection: "div";
   fisrtLastNameInput: "div";
@@ -8598,7 +8569,7 @@ type NodeDefaultElementType = {
   monthOfDismissionInput: typeof TextInput;
   dayOfDismissionInput: typeof TextInput;
   admitPatientButton: typeof Button;
-  manualPatientsEndpoint: typeof ApiFetcherComponentPlus;
+  getManualPatientsEndpoint: typeof ApiFetcherComponentPlus;
   patientCard: "div";
   patientNameBookmarkIcon: "div";
   editDeletePatient: typeof Button;
@@ -8734,7 +8705,7 @@ export const PlasmicPatientReception = Object.assign(
     header: makeNodeComponent("header"),
     addNewPatientPostApi: makeNodeComponent("addNewPatientPostApi"),
     patientsListGetApi: makeNodeComponent("patientsListGetApi"),
-    admitPatient: makeNodeComponent("admitPatient"),
+    addPatient: makeNodeComponent("addPatient"),
     patientDataSection: makeNodeComponent("patientDataSection"),
     fisrtLastNameSection: makeNodeComponent("fisrtLastNameSection"),
     fisrtLastNameInput: makeNodeComponent("fisrtLastNameInput"),
@@ -8775,7 +8746,7 @@ export const PlasmicPatientReception = Object.assign(
     monthOfDismissionInput: makeNodeComponent("monthOfDismissionInput"),
     dayOfDismissionInput: makeNodeComponent("dayOfDismissionInput"),
     admitPatientButton: makeNodeComponent("admitPatientButton"),
-    manualPatientsEndpoint: makeNodeComponent("manualPatientsEndpoint"),
+    getManualPatientsEndpoint: makeNodeComponent("getManualPatientsEndpoint"),
     patientCard: makeNodeComponent("patientCard"),
     patientNameBookmarkIcon: makeNodeComponent("patientNameBookmarkIcon"),
     editDeletePatient: makeNodeComponent("editDeletePatient"),
