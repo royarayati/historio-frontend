@@ -151,11 +151,16 @@ export type PlasmicLaboratoryData__OverridesType = {
   factorname?: Flex__<"div">;
   labFactorNameUnit?: Flex__<"div">;
   factorNormalrange?: Flex__<"div">;
-  checkedFactorsApiFetcher?: Flex__<typeof ApiFetcherComponent>;
+  exCheckedFactorsApiFetcher?: Flex__<typeof ApiFetcherComponent>;
   labFactorList?: Flex__<"div">;
   labFactorPerDate?: Flex__<"div">;
   labFactorDatetime?: Flex__<"div">;
   labGroupFactorName?: Flex__<"div">;
+  checkedFactorsApiFetcher?: Flex__<typeof ApiFetcherComponentPlus>;
+  labFactorList2?: Flex__<"div">;
+  labFactorPerDate2?: Flex__<"div">;
+  labFactorDatetime2?: Flex__<"div">;
+  labGroupFactorName2?: Flex__<"div">;
   switchingTabs?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
   lastPatient2?: Flex__<"svg">;
@@ -4274,13 +4279,13 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             </div>
           </div>
         </AntdModal>
-        {$state.selectedTab === "CheckedFactors" ? (
+        {false ? (
           <ApiFetcherComponent
-            data-plasmic-name={"checkedFactorsApiFetcher"}
-            data-plasmic-override={overrides.checkedFactorsApiFetcher}
+            data-plasmic-name={"exCheckedFactorsApiFetcher"}
+            data-plasmic-override={overrides.exCheckedFactorsApiFetcher}
             className={classNames(
               "__wab_instance",
-              sty.checkedFactorsApiFetcher
+              sty.exCheckedFactorsApiFetcher
             )}
             headers={(() => {
               try {
@@ -4300,7 +4305,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
             method={"GET"}
             path={`/api/v3/remote_his/lab_factors?admission_id=${$ctx.params.adm_id}`}
             ref={ref => {
-              $refs["checkedFactorsApiFetcher"] = ref;
+              $refs["exCheckedFactorsApiFetcher"] = ref;
             }}
           >
             <DataCtxReader__>
@@ -4507,6 +4512,266 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               )}
             </DataCtxReader__>
           </ApiFetcherComponent>
+        ) : null}
+        {(() => {
+          try {
+            return $state.selectedTab === "CheckedFactors";
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })() ? (
+          <ApiFetcherComponentPlus
+            data-plasmic-name={"checkedFactorsApiFetcher"}
+            data-plasmic-override={overrides.checkedFactorsApiFetcher}
+            autoFetch={true}
+            className={classNames(
+              "__wab_instance",
+              sty.checkedFactorsApiFetcher
+            )}
+            fetchTrigger={(() => {
+              try {
+                return $ctx.params.adm_id;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            headers={(() => {
+              try {
+                return {
+                  "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
+                };
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+            method={"GET"}
+            path={`/api/v3/remote_his/lab_factors?admission_id=${$ctx.params.adm_id}`}
+            ref={ref => {
+              $refs["checkedFactorsApiFetcher"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <React.Fragment>
+                  {$ctx.fetched_data.loading == true ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__n8Uv1
+                      )}
+                    >
+                      {
+                        "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                      }
+                    </div>
+                  ) : null}
+                  {$ctx.fetched_data.loading == false &&
+                  $ctx.fetched_data.data == "" ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__xwmFv
+                      )}
+                    >
+                      {
+                        "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a "
+                      }
+                    </div>
+                  ) : null}
+                  {(() => {
+                    try {
+                      return true;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      data-plasmic-name={"labFactorList2"}
+                      data-plasmic-override={overrides.labFactorList2}
+                      className={classNames(projectcss.all, sty.labFactorList2)}
+                    >
+                      {(_par =>
+                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                        (() => {
+                          try {
+                            return $ctx.fetched_data.data;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
+                          }
+                        })()
+                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                        const currentItem = __plasmic_item_0;
+                        const currentIndex = __plasmic_idx_0;
+                        return (
+                          <div
+                            data-plasmic-name={"labFactorPerDate2"}
+                            data-plasmic-override={overrides.labFactorPerDate2}
+                            className={classNames(
+                              projectcss.all,
+                              sty.labFactorPerDate2
+                            )}
+                            key={currentIndex}
+                          >
+                            <div
+                              data-plasmic-name={"labFactorDatetime2"}
+                              data-plasmic-override={
+                                overrides.labFactorDatetime2
+                              }
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.labFactorDatetime2
+                              )}
+                            >
+                              <React.Fragment>
+                                {JSON.parse(
+                                  localStorage.getItem("inlab_user_his_type")
+                                ) !== "tums_api" &&
+                                JSON.parse(
+                                  localStorage.getItem("inlab_user_his_type")
+                                ) !== "tebvarayane_db"
+                                  ? (() => {
+                                      const gregorianDate = new Date(
+                                        currentItem.issued_datetime
+                                      );
+                                      const shamsiDate =
+                                        new Intl.DateTimeFormat("fa-IR").format(
+                                          gregorianDate
+                                        );
+                                      const shamsiTime =
+                                        gregorianDate.toLocaleTimeString(
+                                          "fa-IR",
+                                          { hour12: false }
+                                        );
+                                      const englishDate = shamsiDate.replace(
+                                        /[۰-۹]/g,
+                                        d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                      );
+                                      const englishTime = shamsiTime
+                                        .replace(/[۰-۹]/g, d =>
+                                          String.fromCharCode(
+                                            d.charCodeAt(0) - 1728
+                                          )
+                                        )
+                                        .split(":")
+                                        .slice(0, 2)
+                                        .join(":");
+                                      return `${englishDate}-${englishTime}`;
+                                    })()
+                                  : currentItem.issued_datetime}
+                              </React.Fragment>
+                            </div>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                sty.freeBox__ydSoI
+                              )}
+                            >
+                              <div
+                                data-plasmic-name={"labGroupFactorName2"}
+                                data-plasmic-override={
+                                  overrides.labGroupFactorName2
+                                }
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.labGroupFactorName2
+                                )}
+                              >
+                                <React.Fragment>
+                                  {currentItem.group_title}
+                                </React.Fragment>
+                              </div>
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.freeBox__pEbWp
+                                )}
+                              >
+                                {(_par =>
+                                  !_par
+                                    ? []
+                                    : Array.isArray(_par)
+                                    ? _par
+                                    : [_par])(
+                                  (() => {
+                                    try {
+                                      return currentItem.factors;
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return [];
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                ).map((__plasmic_item_1, __plasmic_idx_1) => {
+                                  const currentItem = __plasmic_item_1;
+                                  const currentIndex = __plasmic_idx_1;
+                                  return (
+                                    <div
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.text__zUogz
+                                      )}
+                                      key={currentIndex}
+                                    >
+                                      <React.Fragment>
+                                        {currentItem.factor_name}
+                                      </React.Fragment>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : null}
+                </React.Fragment>
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponentPlus>
         ) : null}
         <div
           data-plasmic-name={"switchingTabs"}
@@ -5397,11 +5662,16 @@ const PlasmicDescendants = {
     "factorname",
     "labFactorNameUnit",
     "factorNormalrange",
-    "checkedFactorsApiFetcher",
+    "exCheckedFactorsApiFetcher",
     "labFactorList",
     "labFactorPerDate",
     "labFactorDatetime",
     "labGroupFactorName",
+    "checkedFactorsApiFetcher",
+    "labFactorList2",
+    "labFactorPerDate2",
+    "labFactorDatetime2",
+    "labGroupFactorName2",
     "switchingTabs",
     "switchingTab",
     "lastPatient2",
@@ -5555,8 +5825,8 @@ const PlasmicDescendants = {
   factorname: ["factorname"],
   labFactorNameUnit: ["labFactorNameUnit"],
   factorNormalrange: ["factorNormalrange"],
-  checkedFactorsApiFetcher: [
-    "checkedFactorsApiFetcher",
+  exCheckedFactorsApiFetcher: [
+    "exCheckedFactorsApiFetcher",
     "labFactorList",
     "labFactorPerDate",
     "labFactorDatetime",
@@ -5575,6 +5845,26 @@ const PlasmicDescendants = {
   ],
   labFactorDatetime: ["labFactorDatetime"],
   labGroupFactorName: ["labGroupFactorName"],
+  checkedFactorsApiFetcher: [
+    "checkedFactorsApiFetcher",
+    "labFactorList2",
+    "labFactorPerDate2",
+    "labFactorDatetime2",
+    "labGroupFactorName2"
+  ],
+  labFactorList2: [
+    "labFactorList2",
+    "labFactorPerDate2",
+    "labFactorDatetime2",
+    "labGroupFactorName2"
+  ],
+  labFactorPerDate2: [
+    "labFactorPerDate2",
+    "labFactorDatetime2",
+    "labGroupFactorName2"
+  ],
+  labFactorDatetime2: ["labFactorDatetime2"],
+  labGroupFactorName2: ["labGroupFactorName2"],
   switchingTabs: [
     "switchingTabs",
     "switchingTab",
@@ -5654,11 +5944,16 @@ type NodeDefaultElementType = {
   factorname: "div";
   labFactorNameUnit: "div";
   factorNormalrange: "div";
-  checkedFactorsApiFetcher: typeof ApiFetcherComponent;
+  exCheckedFactorsApiFetcher: typeof ApiFetcherComponent;
   labFactorList: "div";
   labFactorPerDate: "div";
   labFactorDatetime: "div";
   labGroupFactorName: "div";
+  checkedFactorsApiFetcher: typeof ApiFetcherComponentPlus;
+  labFactorList2: "div";
+  labFactorPerDate2: "div";
+  labFactorDatetime2: "div";
+  labGroupFactorName2: "div";
   switchingTabs: "div";
   switchingTab: typeof SwitchingTab;
   lastPatient2: "svg";
@@ -5779,11 +6074,16 @@ export const PlasmicLaboratoryData = Object.assign(
     factorname: makeNodeComponent("factorname"),
     labFactorNameUnit: makeNodeComponent("labFactorNameUnit"),
     factorNormalrange: makeNodeComponent("factorNormalrange"),
-    checkedFactorsApiFetcher: makeNodeComponent("checkedFactorsApiFetcher"),
+    exCheckedFactorsApiFetcher: makeNodeComponent("exCheckedFactorsApiFetcher"),
     labFactorList: makeNodeComponent("labFactorList"),
     labFactorPerDate: makeNodeComponent("labFactorPerDate"),
     labFactorDatetime: makeNodeComponent("labFactorDatetime"),
     labGroupFactorName: makeNodeComponent("labGroupFactorName"),
+    checkedFactorsApiFetcher: makeNodeComponent("checkedFactorsApiFetcher"),
+    labFactorList2: makeNodeComponent("labFactorList2"),
+    labFactorPerDate2: makeNodeComponent("labFactorPerDate2"),
+    labFactorDatetime2: makeNodeComponent("labFactorDatetime2"),
+    labGroupFactorName2: makeNodeComponent("labGroupFactorName2"),
     switchingTabs: makeNodeComponent("switchingTabs"),
     switchingTab: makeNodeComponent("switchingTab"),
     lastPatient2: makeNodeComponent("lastPatient2"),
