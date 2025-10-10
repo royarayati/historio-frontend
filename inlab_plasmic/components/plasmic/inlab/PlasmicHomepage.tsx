@@ -29723,7 +29723,10 @@ function PlasmicHomepage__RenderFunc(props: {
           : null}
         {(() => {
           try {
-            return $state.checkNamespace === true;
+            return (
+              $state.checkNamespace === true &&
+              localStorage.getItem("namespace_message_datetime")
+            );
           } catch (e) {
             if (
               e instanceof TypeError ||

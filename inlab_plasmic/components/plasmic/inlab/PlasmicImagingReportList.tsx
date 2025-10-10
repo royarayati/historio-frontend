@@ -9491,7 +9491,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           return (
                             $ctx.fetched_data.loading === false &&
                             $ctx.fetched_data.data &&
-                            $ctx.fetched_data.data[0]
+                            $ctx.fetched_data.data.total === 0
                           );
                         } catch (e) {
                           if (
