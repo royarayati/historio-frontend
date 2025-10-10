@@ -5911,11 +5911,19 @@
   max-width: 100%;
   min-width: 0;
 }
-.namespaceChecker:global(.__wab_instance) {
+.exNamespaceChecker:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
 }
 .conditionGuard___08F8V:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.namespaceChecker:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.conditionGuard__xQm4C:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
 }
@@ -6042,6 +6050,85 @@
   height: 1em;
 }
 .text__xga15 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  background: #ffffff;
+  min-width: 0;
+}
+.modalHospitalMassage:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  background: none;
+}
+.modalHospitalMassage__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.pcls_TC1I2rpiID92 {
+  background: #ffffff66;
+  outline: none;
+}
+.freeBox__k9ZsE {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.text__g8KH {
+  line-height: 1.8;
+  text-align: right;
+}
+.متوجهشدم3:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  align-self: center;
+}
+.text__kcfwE {
+  font-size: var(--token-CdE1_0ZaCyT1);
+  font-weight: 500;
+  font-family: var(--VazirmatnCustom);
+  font-style: normal;
+  color: #ffffff;
+  text-align: right;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__bkoIn {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__bq5Nc {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__qiV7U {
   width: 100%;
   height: auto;
   max-width: 100%;

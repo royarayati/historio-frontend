@@ -375,10 +375,13 @@ export type PlasmicHomepage__OverridesType = {
   deleteSection?: Flex__<"div">;
   cancelButton2?: Flex__<typeof Button>;
   deleteButton?: Flex__<typeof Button>;
-  namespaceChecker?: Flex__<typeof ApiFetcherComponent>;
+  exNamespaceChecker?: Flex__<typeof ApiFetcherComponent>;
+  namespaceChecker?: Flex__<typeof ApiFetcherComponentPlus>;
   modalExpiredBanner?: Flex__<typeof AntdModal>;
   modalExpirationAlarmBanner?: Flex__<typeof AntdModal>;
   متوجهشدم2?: Flex__<typeof Button>;
+  modalHospitalMassage?: Flex__<typeof AntdModal>;
+  متوجهشدم3?: Flex__<typeof Button>;
 };
 
 export interface DefaultHomepageProps {}
@@ -3165,6 +3168,135 @@ function PlasmicHomepage__RenderFunc(props: {
         path: "upl5OadPatientHistory2[].sortSelected",
         type: "private",
         variableType: "boolean"
+      },
+      {
+        path: "modalHospitalMassage.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          hasVariant(globalVariants, "screen", "mobileFirst")
+            ? (() => {
+                try {
+                  return (() => {
+                    function checkNamespaceDatetime() {
+                      const reviewRaw = localStorage.getItem(
+                        "review_namespace_message_datetime"
+                      );
+                      const noticeRaw = localStorage.getItem(
+                        "namespace_message_datetime"
+                      );
+                      if (!reviewRaw) return true;
+                      if (!noticeRaw) return false;
+                      const reviewStr = reviewRaw.startsWith('"')
+                        ? JSON.parse(reviewRaw)
+                        : reviewRaw;
+                      const noticeStr = noticeRaw.startsWith('"')
+                        ? JSON.parse(noticeRaw)
+                        : noticeRaw;
+                      const reviewTime = new Date(reviewStr);
+                      const noticeTime = new Date(noticeStr);
+                      if (
+                        Number.isNaN(reviewTime.getTime()) ||
+                        Number.isNaN(noticeTime.getTime())
+                      ) {
+                        console.warn(
+                          "\u26D4 تاریخ‌ها در localStorage فرمت اشتباه دارند:",
+                          reviewStr,
+                          noticeStr
+                        );
+                        return false;
+                      }
+                      return noticeTime > reviewTime;
+                    }
+                    const allow = checkNamespaceDatetime();
+                    return allow;
+                  })();
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
+                  }
+                  throw e;
+                }
+              })()
+            : (() => {
+                try {
+                  return (() => {
+                    function checkNamespaceDatetime() {
+                      const reviewRaw = localStorage.getItem(
+                        "review_namespace_message_datetime"
+                      );
+                      const noticeRaw = localStorage.getItem(
+                        "namespace_message_datetime"
+                      );
+                      if (!reviewRaw) return true;
+                      if (!noticeRaw) return false;
+                      const reviewStr = reviewRaw.startsWith('"')
+                        ? JSON.parse(reviewRaw)
+                        : reviewRaw;
+                      const noticeStr = noticeRaw.startsWith('"')
+                        ? JSON.parse(noticeRaw)
+                        : noticeRaw;
+                      const reviewTime = new Date(reviewStr);
+                      const noticeTime = new Date(noticeStr);
+                      if (
+                        Number.isNaN(reviewTime.getTime()) ||
+                        Number.isNaN(noticeTime.getTime())
+                      ) {
+                        console.warn(
+                          "\u26D4 تاریخ‌ها در localStorage فرمت اشتباه دارند:",
+                          reviewStr,
+                          noticeStr
+                        );
+                        return false;
+                      }
+                      return noticeTime > reviewTime;
+                    }
+                    const allow = checkNamespaceDatetime();
+                    return allow;
+                  })();
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
+                  }
+                  throw e;
+                }
+              })()
+      },
+      {
+        path: "متوجهشدم3.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "متوجهشدم3.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "متوجهشدم3.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "متوجهشدم3.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "متوجهشدم3.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -28748,20 +28880,181 @@ function PlasmicHomepage__RenderFunc(props: {
             </div>
           </div>
         </AntdModal>
-        <ApiFetcherComponent
+        {false ? (
+          <ApiFetcherComponent
+            data-plasmic-name={"exNamespaceChecker"}
+            data-plasmic-override={overrides.exNamespaceChecker}
+            className={classNames("__wab_instance", sty.exNamespaceChecker)}
+            method={"GET"}
+            path={
+              hasVariant(globalVariants, "screen", "mobileFirst")
+                ? `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
+                    "inlab_user_namespace_id"
+                  )}`
+                : `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
+                    "inlab_user_namespace_id"
+                  )}`
+            }
+            ref={ref => {
+              $refs["exNamespaceChecker"] = ref;
+            }}
+          >
+            <DataCtxReader__>
+              {$ctx => (
+                <ConditionGuard
+                  children={null}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.conditionGuard___08F8V
+                  )}
+                  condition={(() => {
+                    try {
+                      return $ctx.fetched_data.loading;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return false;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  onNotSatisfied={async () => {
+                    const $steps = {};
+
+                    $steps["runCode"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            customFunction: async () => {
+                              return (() => {
+                                localStorage.setItem(
+                                  "namespace_expiration_datetime",
+                                  JSON.stringify(
+                                    $ctx.fetched_data.data[0]
+                                      .expiration_datetime
+                                  )
+                                );
+                                localStorage.setItem(
+                                  "namespace_is_expired",
+                                  JSON.stringify(
+                                    $ctx.fetched_data.data[0].is_expired
+                                  )
+                                );
+                                localStorage.setItem(
+                                  "namespace_show_message",
+                                  JSON.stringify(
+                                    $ctx.fetched_data.data[0]
+                                      .show_hospital_message
+                                  )
+                                );
+                                localStorage.setItem(
+                                  "namespace_message",
+                                  JSON.stringify(
+                                    $ctx.fetched_data.data[0].hospital_message
+                                  )
+                                );
+                                localStorage.setItem(
+                                  "inlab_user_his_type",
+                                  JSON.stringify(
+                                    $ctx.fetched_data.data[0].his_type
+                                  )
+                                );
+                                console.log(
+                                  `namespace_is_expired: ${JSON.parse(
+                                    localStorage.getItem("namespace_is_expired")
+                                  )}`
+                                );
+                                console.log(
+                                  `namespace_expiration_datetime: ${JSON.parse(
+                                    localStorage.getItem(
+                                      "namespace_expiration_datetime"
+                                    )
+                                  )}`
+                                );
+                                console.log(
+                                  `inlab_user_his_type: ${JSON.parse(
+                                    localStorage.getItem("inlab_user_his_type")
+                                  )}`
+                                );
+                                console.log(
+                                  `namespace_show_message: ${JSON.parse(
+                                    localStorage.getItem(
+                                      "namespace_show_message"
+                                    )
+                                  )}`
+                                );
+                                return console.log(
+                                  `namespace_message: ${JSON.parse(
+                                    localStorage.getItem("namespace_message")
+                                  )}`
+                                );
+                              })();
+                            }
+                          };
+                          return (({ customFunction }) => {
+                            return customFunction();
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["runCode"] != null &&
+                      typeof $steps["runCode"] === "object" &&
+                      typeof $steps["runCode"].then === "function"
+                    ) {
+                      $steps["runCode"] = await $steps["runCode"];
+                    }
+
+                    $steps["updateCheckNamespace"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["checkNamespace"]
+                            },
+                            operation: 0,
+                            value: true
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateCheckNamespace"] != null &&
+                      typeof $steps["updateCheckNamespace"] === "object" &&
+                      typeof $steps["updateCheckNamespace"].then === "function"
+                    ) {
+                      $steps["updateCheckNamespace"] = await $steps[
+                        "updateCheckNamespace"
+                      ];
+                    }
+                  }}
+                />
+              )}
+            </DataCtxReader__>
+          </ApiFetcherComponent>
+        ) : null}
+        <ApiFetcherComponentPlus
           data-plasmic-name={"namespaceChecker"}
           data-plasmic-override={overrides.namespaceChecker}
+          autoFetch={true}
           className={classNames("__wab_instance", sty.namespaceChecker)}
           method={"GET"}
-          path={
-            hasVariant(globalVariants, "screen", "mobileFirst")
-              ? `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
-                  "inlab_user_namespace_id"
-                )}`
-              : `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
-                  "inlab_user_namespace_id"
-                )}`
-          }
+          path={`/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
+            "inlab_user_namespace_id"
+          )}`}
           ref={ref => {
             $refs["namespaceChecker"] = ref;
           }}
@@ -28772,7 +29065,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 children={null}
                 className={classNames(
                   "__wab_instance",
-                  sty.conditionGuard___08F8V
+                  sty.conditionGuard__xQm4C
                 )}
                 condition={(() => {
                   try {
@@ -28802,16 +29095,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )
                               );
                               localStorage.setItem(
-                                "namespace_is_expired",
+                                "namespace_message_datetime",
                                 JSON.stringify(
-                                  $ctx.fetched_data.data[0].is_expired
-                                )
-                              );
-                              localStorage.setItem(
-                                "namespace_show_message",
-                                JSON.stringify(
-                                  $ctx.fetched_data.data[0]
-                                    .show_hospital_message
+                                  $ctx.fetched_data.data[0].set_message_datetime
                                 )
                               );
                               localStorage.setItem(
@@ -28827,11 +29113,6 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )
                               );
                               console.log(
-                                `namespace_is_expired: ${JSON.parse(
-                                  localStorage.getItem("namespace_is_expired")
-                                )}`
-                              );
-                              console.log(
                                 `namespace_expiration_datetime: ${JSON.parse(
                                   localStorage.getItem(
                                     "namespace_expiration_datetime"
@@ -28844,8 +29125,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )}`
                               );
                               console.log(
-                                `namespace_show_message: ${JSON.parse(
-                                  localStorage.getItem("namespace_show_message")
+                                `namespace_message_datetime: ${JSON.parse(
+                                  localStorage.getItem(
+                                    "namespace_message_datetime"
+                                  )
                                 )}`
                               );
                               return console.log(
@@ -28908,7 +29191,7 @@ function PlasmicHomepage__RenderFunc(props: {
               />
             )}
           </DataCtxReader__>
-        </ApiFetcherComponent>
+        </ApiFetcherComponentPlus>
         {(
           hasVariant(globalVariants, "screen", "mobileFirst")
             ? false
@@ -29438,6 +29721,449 @@ function PlasmicHomepage__RenderFunc(props: {
               );
             })()
           : null}
+        {(() => {
+          try {
+            return (
+              $state.checkNamespace === true &&
+              localStorage.getItem("namespace_message_datetime")
+            );
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return true;
+            }
+            throw e;
+          }
+        })()
+          ? (() => {
+              const child$Props = {
+                className: classNames(
+                  "__wab_instance",
+                  sty.modalHospitalMassage
+                ),
+                closeButtonClassName: classNames({
+                  [sty["pcls_e3M0IeDthQW6"]]: true
+                }),
+                closeIcon: null,
+                defaultStylesClassName: classNames(
+                  projectcss.root_reset,
+                  projectcss.plasmic_default_styles,
+                  projectcss.plasmic_mixins,
+                  styleTokensClassNames
+                ),
+                hideFooter: true,
+                maskClosable: false,
+                modalContentClassName: classNames({
+                  [sty["pcls_XSd0QJtPi2G6"]]: true
+                }),
+                modalScopeClassName: sty["modalHospitalMassage__modal"],
+                onOpenChange: async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
+                    "modalHospitalMassage",
+                    "open"
+                  ]).apply(null, eventArgs);
+                },
+                open: generateStateValueProp($state, [
+                  "modalHospitalMassage",
+                  "open"
+                ]),
+                title: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__qiV7U
+                    )}
+                  >
+                    {"\u0627\u0637\u0644\u0627\u0639\u06cc\u0647"}
+                  </div>
+                ),
+                trigger: null,
+                width: "90%",
+                wrapClassName: classNames({ [sty["pcls_TC1I2rpiID92"]]: true })
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "open",
+                    plasmicStateName: "modalHospitalMassage.open"
+                  }
+                ],
+                [],
+                undefined ?? {},
+                child$Props
+              );
+              initializePlasmicStates(
+                $state,
+                [
+                  {
+                    name: "modalHospitalMassage.open",
+                    initFunc: ({ $props, $state, $queries }) =>
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return (() => {
+                                function checkNamespaceDatetime() {
+                                  const reviewRaw = localStorage.getItem(
+                                    "review_namespace_message_datetime"
+                                  );
+                                  const noticeRaw = localStorage.getItem(
+                                    "namespace_message_datetime"
+                                  );
+                                  if (!reviewRaw) return true;
+                                  if (!noticeRaw) return false;
+                                  const reviewStr = reviewRaw.startsWith('"')
+                                    ? JSON.parse(reviewRaw)
+                                    : reviewRaw;
+                                  const noticeStr = noticeRaw.startsWith('"')
+                                    ? JSON.parse(noticeRaw)
+                                    : noticeRaw;
+                                  const reviewTime = new Date(reviewStr);
+                                  const noticeTime = new Date(noticeStr);
+                                  if (
+                                    Number.isNaN(reviewTime.getTime()) ||
+                                    Number.isNaN(noticeTime.getTime())
+                                  ) {
+                                    console.warn(
+                                      "\u26D4 تاریخ‌ها در localStorage فرمت اشتباه دارند:",
+                                      reviewStr,
+                                      noticeStr
+                                    );
+                                    return false;
+                                  }
+                                  return noticeTime > reviewTime;
+                                }
+                                const allow = checkNamespaceDatetime();
+                                return allow;
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : (() => {
+                            try {
+                              return (() => {
+                                function checkNamespaceDatetime() {
+                                  const reviewRaw = localStorage.getItem(
+                                    "review_namespace_message_datetime"
+                                  );
+                                  const noticeRaw = localStorage.getItem(
+                                    "namespace_message_datetime"
+                                  );
+                                  if (!reviewRaw) return true;
+                                  if (!noticeRaw) return false;
+                                  const reviewStr = reviewRaw.startsWith('"')
+                                    ? JSON.parse(reviewRaw)
+                                    : reviewRaw;
+                                  const noticeStr = noticeRaw.startsWith('"')
+                                    ? JSON.parse(noticeRaw)
+                                    : noticeRaw;
+                                  const reviewTime = new Date(reviewStr);
+                                  const noticeTime = new Date(noticeStr);
+                                  if (
+                                    Number.isNaN(reviewTime.getTime()) ||
+                                    Number.isNaN(noticeTime.getTime())
+                                  ) {
+                                    console.warn(
+                                      "\u26D4 تاریخ‌ها در localStorage فرمت اشتباه دارند:",
+                                      reviewStr,
+                                      noticeStr
+                                    );
+                                    return false;
+                                  }
+                                  return noticeTime > reviewTime;
+                                }
+                                const allow = checkNamespaceDatetime();
+                                return allow;
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return false;
+                              }
+                              throw e;
+                            }
+                          })()
+                  }
+                ],
+                []
+              );
+              return (
+                <AntdModal
+                  data-plasmic-name={"modalHospitalMassage"}
+                  data-plasmic-override={overrides.modalHospitalMassage}
+                  {...child$Props}
+                >
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox__k9ZsE)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__g8KH
+                      )}
+                      dir={"rtl"}
+                    >
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return JSON.parse(
+                              localStorage.getItem("namespace_message")
+                            );
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
+                    </div>
+                  </div>
+                  <Button
+                    data-plasmic-name={
+                      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"
+                    }
+                    data-plasmic-override={overrides.متوجهشدم3}
+                    className={classNames("__wab_instance", sty.متوجهشدم3)}
+                    color={"blue"}
+                    deselected={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["setReviewDatetimeLocalStorage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return (() => {
+                                  localStorage.setItem(
+                                    "review_namespace_message_datetime",
+                                    JSON.stringify(new Date().toISOString())
+                                  );
+                                  console.log(
+                                    "\uD83D\uDFE1 RAW review:",
+                                    localStorage.getItem(
+                                      "review_namespace_message_datetime"
+                                    )
+                                  );
+                                  return console.log(
+                                    "\uD83D\uDFE1 RAW notice:",
+                                    localStorage.getItem(
+                                      "namespace_message_datetime"
+                                    )
+                                  );
+                                })();
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["setReviewDatetimeLocalStorage"] != null &&
+                        typeof $steps["setReviewDatetimeLocalStorage"] ===
+                          "object" &&
+                        typeof $steps["setReviewDatetimeLocalStorage"].then ===
+                          "function"
+                      ) {
+                        $steps["setReviewDatetimeLocalStorage"] = await $steps[
+                          "setReviewDatetimeLocalStorage"
+                        ];
+                      }
+
+                      $steps["updateModalNoticeBannerOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["modalHospitalMassage", "open"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateModalNoticeBannerOpen"] != null &&
+                        typeof $steps["updateModalNoticeBannerOpen"] ===
+                          "object" &&
+                        typeof $steps["updateModalNoticeBannerOpen"].then ===
+                          "function"
+                      ) {
+                        $steps["updateModalNoticeBannerOpen"] = await $steps[
+                          "updateModalNoticeBannerOpen"
+                        ];
+                      }
+
+                      $steps["runCode"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return console.log(
+                                  `"review_namespace_message_datetime": ${localStorage.getItem(
+                                    "review_namespace_message_datetime"
+                                  )}`
+                                );
+                              }
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+                    }}
+                    onDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "deselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onIsDisabledChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "selected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "sortDeselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "متوجهشدم3",
+                          "sortSelected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "selected"
+                    ])}
+                    shape={"sharp"}
+                    sortDeselected={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "متوجهشدم3",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__kcfwE
+                      )}
+                    >
+                      {"\u0645\u062a\u0648\u062c\u0647 \u0634\u062f\u0645"}
+                    </div>
+                  </Button>
+                </AntdModal>
+              );
+            })()
+          : null}
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
@@ -29690,10 +30416,13 @@ const PlasmicDescendants = {
     "deleteSection",
     "cancelButton2",
     "deleteButton",
+    "exNamespaceChecker",
     "namespaceChecker",
     "modalExpiredBanner",
     "modalExpirationAlarmBanner",
-    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452",
+    "modalHospitalMassage",
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -30941,13 +31670,19 @@ const PlasmicDescendants = {
   deleteSection: ["deleteSection", "cancelButton2", "deleteButton"],
   cancelButton2: ["cancelButton2"],
   deleteButton: ["deleteButton"],
+  exNamespaceChecker: ["exNamespaceChecker"],
   namespaceChecker: ["namespaceChecker"],
   modalExpiredBanner: ["modalExpiredBanner"],
   modalExpirationAlarmBanner: [
     "modalExpirationAlarmBanner",
     "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
   ],
-  متوجهشدم2: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"]
+  متوجهشدم2: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"],
+  modalHospitalMassage: [
+    "modalHospitalMassage",
+    "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"
+  ],
+  متوجهشدم3: ["\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -31198,10 +31933,13 @@ type NodeDefaultElementType = {
   deleteSection: "div";
   cancelButton2: typeof Button;
   deleteButton: typeof Button;
-  namespaceChecker: typeof ApiFetcherComponent;
+  exNamespaceChecker: typeof ApiFetcherComponent;
+  namespaceChecker: typeof ApiFetcherComponentPlus;
   modalExpiredBanner: typeof AntdModal;
   modalExpirationAlarmBanner: typeof AntdModal;
   متوجهشدم2: typeof Button;
+  modalHospitalMassage: typeof AntdModal;
+  متوجهشدم3: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -31546,11 +32284,16 @@ export const PlasmicHomepage = Object.assign(
     deleteSection: makeNodeComponent("deleteSection"),
     cancelButton2: makeNodeComponent("cancelButton2"),
     deleteButton: makeNodeComponent("deleteButton"),
+    exNamespaceChecker: makeNodeComponent("exNamespaceChecker"),
     namespaceChecker: makeNodeComponent("namespaceChecker"),
     modalExpiredBanner: makeNodeComponent("modalExpiredBanner"),
     modalExpirationAlarmBanner: makeNodeComponent("modalExpirationAlarmBanner"),
     متوجهشدم2: makeNodeComponent(
       "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06452"
+    ),
+    modalHospitalMassage: makeNodeComponent("modalHospitalMassage"),
+    متوجهشدم3: makeNodeComponent(
+      "\u0645\u062a\u0648\u062c\u0647\u0634\u062f\u06453"
     ),
 
     // Metadata about props expected for PlasmicHomepage
