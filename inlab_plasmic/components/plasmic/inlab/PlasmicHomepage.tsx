@@ -7345,23 +7345,7 @@ function PlasmicHomepage__RenderFunc(props: {
               </div>
             </div>
           ) : null}
-          {(() => {
-            try {
-              return (
-                $state.mainSelectedTab === "patients" ||
-                $state.searchbarLnameNcode.value !== "" ||
-                $state.searchbarFname.value !== ""
-              );
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return true;
-              }
-              throw e;
-            }
-          })() ? (
+          {false ? (
             <ApiFetcherComponent
               data-plasmic-name={"exPatients"}
               data-plasmic-override={overrides.exPatients}
@@ -15177,7 +15161,23 @@ function PlasmicHomepage__RenderFunc(props: {
               </DataCtxReader__>
             </ApiFetcherComponent>
           ) : null}
-          {false ? (
+          {(() => {
+            try {
+              return (
+                $state.mainSelectedTab === "patients" ||
+                $state.searchbarLnameNcode.value !== "" ||
+                $state.searchbarFname.value !== ""
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
             <ApiFetcherComponentPlus
               data-plasmic-name={"patients"}
               data-plasmic-override={overrides.patients}
@@ -15197,7 +15197,10 @@ function PlasmicHomepage__RenderFunc(props: {
                     $state.searchbarFname.value,
                     $state.dismissedSwitch.value,
                     $state.sortingByBed,
-                    $state.bookmarkType
+                    $state.bookmarkType,
+                    localStorage.getItem("filter_physician_id"),
+                    localStorage.getItem("filter_ward_id"),
+                    localStorage.getItem("filter_service_id")
                   ];
                 } catch (e) {
                   if (
@@ -15231,12 +15234,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 $state.searchbarFname.value !== ""
                   ? $state.searchbarFname.value
                   : ""
-              }&national_code=${
-                parseInt($state.searchbarLnameNcode.value) ||
-                $state.searchbarLnameNcode.value == ""
-                  ? ""
-                  : $state.searchbarLnameNcode.value
-              } &ward_id=${
+              }&ward_id=${
                 $state.filterWard &
                 ($state.searchbarFname.value == "") &
                 ($state.searchbarLnameNcode.value == "")
@@ -15248,15 +15246,16 @@ function PlasmicHomepage__RenderFunc(props: {
                 ($state.searchbarLnameNcode.value == "")
                   ? localStorage.getItem("filter_physician_id")
                   : 0
-              }&service_id=${
-                $state.filterService2 &
-                ($state.searchbarFname.value == "") &
-                ($state.searchbarLnameNcode.value == "")
-                  ? localStorage.getItem("filter_service_id")
-                  : 0
-              }&dismissed=${$state.searchDismissed}&sort_by_bed=${
-                $state.sortingByBed
-              }&type=${$state.bookmarkType}&bookmarked=${
+              }&national_code=${
+                parseInt($state.searchbarLnameNcode.value)
+                  ? $state.searchbarLnameNcode.value
+                  : ""
+              }&last_name=${
+                parseInt($state.searchbarLnameNcode.value) ||
+                $state.searchbarLnameNcode.value == ""
+                  ? ""
+                  : $state.searchbarLnameNcode.value
+              }&dismissed=${$state.searchDismissed}&bookmarked=${
                 $state.searchbarFname.value === "" &&
                 $state.searchbarLnameNcode.value === "" &&
                 $state.patientsSelectedTab === "bookmark"
@@ -15268,6 +15267,14 @@ function PlasmicHomepage__RenderFunc(props: {
                 $state.searchDismissed
                   ? 10
                   : 40
+              }&sort_by_bed=${$state.sortingByBed}&type=${
+                $state.bookmarkType
+              }&service_id=${
+                $state.filterService2 &
+                ($state.searchbarFname.value == "") &
+                ($state.searchbarLnameNcode.value == "")
+                  ? localStorage.getItem("filter_service_id")
+                  : 0
               }`}
               ref={ref => {
                 $refs["patients"] = ref;
@@ -21137,15 +21144,17 @@ function PlasmicHomepage__RenderFunc(props: {
                     {(
                       hasVariant(globalVariants, "screen", "mobileFirst")
                         ? $ctx.fetched_data.loading === false &&
-                          localStorage.getItem("inlab_user_his_type") ===
-                            "tums_api" &&
+                          JSON.parse(
+                            localStorage.getItem("inlab_user_his_type")
+                          ) === "tums_api" &&
                           (($ctx.fetched_data.response &&
                             $ctx.fetched_data.response.status === 422) ||
                             ($ctx.fetched_data.status !== 200 &&
                               $state.searchDismissed === true))
                         : $ctx.fetched_data.loading === false &&
-                          localStorage.getItem("inlab_user_his_type") ===
-                            "tums_api" &&
+                          JSON.parse(
+                            localStorage.getItem("inlab_user_his_type")
+                          ) === "tums_api" &&
                           (($ctx.fetched_data.response &&
                             $ctx.fetched_data.response.status === 422) ||
                             ($ctx.fetched_data.status !== 200 &&
