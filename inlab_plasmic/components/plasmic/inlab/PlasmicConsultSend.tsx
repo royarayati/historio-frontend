@@ -1798,7 +1798,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                                       "receiver_service_id"
                                     ),
                                     patient_id: $ctx.params.code,
-                                    admission_id: $ctx.params.adm_id,
+                                    // "admission_id": $ctx.params.adm_id,
                                     illness: $state.patientPresentIllness.value
                                   };
                                 } catch (e) {
@@ -2129,7 +2129,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                                       "receiver_service_id"
                                     ),
                                     patient_id: $ctx.params.code,
-                                    admission_id: $ctx.params.adm_id,
+                                    // "admission_id": $ctx.params.adm_id,
                                     illness: $state.patientPresentIllness.value
                                   };
                                 } catch (e) {

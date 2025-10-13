@@ -1387,9 +1387,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                             return {
                                               consult_id: parseInt(
                                                 $ctx.params.consult_id
-                                              ),
-                                              patient_id: 0
-                                              // "admission_id": parseInt($ctx.params.adm_id)
+                                              )
                                             };
                                           } catch (e) {
                                             if (
@@ -2658,7 +2656,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                             return {
                                               state: 3,
                                               patient_id: $ctx.params.code,
-                                              admission_id: $ctx.params.adm_id,
+                                              // "admission_id": $ctx.params.adm_id,
                                               respondent_id:
                                                 $ctx.inlab_user.user.id,
                                               paper_reply:
@@ -4749,7 +4747,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                   return {
                                     state: 4,
                                     patient_id: $ctx.params.code,
-                                    admission_id: $ctx.params.adm_id,
+                                    // "admission_id": $ctx.params.adm_id,
                                     respondent_id: $ctx.inlab_user.user.id,
                                     paper_reply: $state.paperReplyStatusState,
                                     reply: $state.paperReplyStatusState
@@ -5361,11 +5359,7 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               (() => {
                                 try {
                                   return {
-                                    consult_id: parseInt(
-                                      $ctx.params.consult_id
-                                    ),
-                                    patient_id: 0
-                                    // "admission_id": parseInt($ctx.params.adm_id)
+                                    consult_id: parseInt($ctx.params.consult_id)
                                   };
                                 } catch (e) {
                                   if (
