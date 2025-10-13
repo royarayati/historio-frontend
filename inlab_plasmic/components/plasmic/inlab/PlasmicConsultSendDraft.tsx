@@ -1388,13 +1388,13 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                         <React.Fragment>
                           {(() => {
                             try {
-                              return $state.senderServiceName == null
+                              return $state.receiverServiceName == null
                                 ? $ctx.fetched_data.data.items[0].details
                                     .receiver_service.name == null
                                   ? "-"
                                   : $ctx.fetched_data.data.items[0].details
                                       .receiver_service.name
-                                : $state.senderServiceName;
+                                : $state.receiverServiceName;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -2209,7 +2209,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                                   .consultant_service_iid
                                               : $state.receiverServiceId,
                                           patient_id: $ctx.params.code,
-                                          admission_id: $ctx.params.adm_id,
+                                          // "admission_id": $ctx.params.adm_id,
                                           illness:
                                             $state.patientPresentIllness.value
                                         };
@@ -2570,7 +2570,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                                   .consultant_service_iid
                                               : $state.receiverServiceId,
                                           patient_id: $ctx.params.code,
-                                          admission_id: $ctx.params.adm_id,
+                                          // "admission_id": $ctx.params.adm_id,
                                           illness:
                                             $state.patientPresentIllness.value
                                         };

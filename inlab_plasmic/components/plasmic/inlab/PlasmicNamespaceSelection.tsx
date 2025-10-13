@@ -325,8 +325,32 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                               localStorage.removeItem(
                                                 "filter_physician_name"
                                               );
-                                              return localStorage.removeItem(
+                                              localStorage.removeItem(
                                                 "filter_physician_id"
+                                              );
+                                              localStorage.removeItem(
+                                                "consult_filter_type"
+                                              );
+                                              localStorage.removeItem(
+                                                "filter_service_id"
+                                              );
+                                              localStorage.removeItem(
+                                                "filter_service_name"
+                                              );
+                                              localStorage.removeItem(
+                                                "GET_V3_consult_query_param"
+                                              );
+                                              localStorage.removeItem(
+                                                "sender_service_id"
+                                              );
+                                              localStorage.removeItem(
+                                                "sender_service_name"
+                                              );
+                                              localStorage.removeItem(
+                                                "receiver_service_id"
+                                              );
+                                              return localStorage.removeItem(
+                                                "receiver_service_name"
                                               );
                                             })();
                                           }
@@ -555,8 +579,32 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                         localStorage.removeItem(
                                           "filter_physician_name"
                                         );
-                                        return localStorage.removeItem(
+                                        localStorage.removeItem(
                                           "filter_physician_id"
+                                        );
+                                        localStorage.removeItem(
+                                          "consult_filter_type"
+                                        );
+                                        localStorage.removeItem(
+                                          "filter_service_id"
+                                        );
+                                        localStorage.removeItem(
+                                          "filter_service_name"
+                                        );
+                                        localStorage.removeItem(
+                                          "GET_V3_consult_query_param"
+                                        );
+                                        localStorage.removeItem(
+                                          "sender_service_id"
+                                        );
+                                        localStorage.removeItem(
+                                          "sender_service_name"
+                                        );
+                                        localStorage.removeItem(
+                                          "receiver_service_id"
+                                        );
+                                        return localStorage.removeItem(
+                                          "receiver_service_name"
                                         );
                                       })();
                                     }
