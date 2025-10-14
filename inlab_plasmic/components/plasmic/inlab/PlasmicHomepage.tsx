@@ -6313,7 +6313,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                             const actionArgs = {
                                               destination: `/consult/list/${(() => {
                                                 try {
-                                                  return currentItem.patient_iid;
+                                                  return currentItem.patient_iid.trim();
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -6326,8 +6326,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 }
                                               })()}/${(() => {
                                                 try {
-                                                  return currentItem.details
-                                                    .patient.id;
+                                                  return currentItem.details.patient.id.trim();
                                                 } catch (e) {
                                                   if (
                                                     e instanceof TypeError ||
@@ -17930,7 +17929,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           }
 
                                           $steps["updatePatientsSelectedTab"] =
-                                            true
+                                            false
                                               ? (() => {
                                                   const actionArgs = {
                                                     variable: {
@@ -17985,7 +17984,7 @@ function PlasmicHomepage__RenderFunc(props: {
 
                                           $steps[
                                             "updatePatientFilterSelection"
-                                          ] = true
+                                          ] = false
                                             ? (() => {
                                                 const actionArgs = {
                                                   variable: {
@@ -18038,7 +18037,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                             ];
                                           }
 
-                                          $steps["runCode"] = true
+                                          $steps["runCode"] = false
                                             ? (() => {
                                                 const actionArgs = {
                                                   customFunction: async () => {
@@ -22811,7 +22810,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           const actionArgs = {
                                             destination: `/consult/list/${(() => {
                                               try {
-                                                return currentItem.patient_id;
+                                                return currentItem.patient_id.trim();
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
@@ -22824,7 +22823,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               }
                                             })()}/${(() => {
                                               try {
-                                                return currentItem.id;
+                                                return currentItem.id.trim();
                                               } catch (e) {
                                                 if (
                                                   e instanceof TypeError ||
