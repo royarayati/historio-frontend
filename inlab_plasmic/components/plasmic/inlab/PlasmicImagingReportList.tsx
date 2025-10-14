@@ -5660,7 +5660,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       const actionArgs = {
                         destination: `/consult/list/${(() => {
                           try {
-                            return $ctx.params.code;
+                            return $ctx.params.code.trim();
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -5672,7 +5672,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                           }
                         })()}/${(() => {
                           try {
-                            return $ctx.params.adm_id;
+                            return $ctx.params.adm_id.trim();
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
