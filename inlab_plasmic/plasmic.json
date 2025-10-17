@@ -2109,6 +2109,32 @@
           "cssFilePath": "plasmic/inlab/PlasmicBookmarkIcon2.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "XtocEoGBwLo3",
+          "name": "Button2",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicButton2.tsx",
+          "importSpec": {
+            "modulePath": "Button2.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicButton2.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "EJcUMYO7DIBf",
+          "name": "Modal",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicModal.tsx",
+          "importSpec": {
+            "modulePath": "Modal.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicModal.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -2706,6 +2732,16 @@
           "id": "p3SAMaQlfYCx",
           "name": "HospitalReceptionSvgrepoComSvgIcon",
           "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__HospitalReceptionSvgrepoComSvg.tsx"
+        },
+        {
+          "id": "BMOHVYgUyVoo",
+          "name": "CircleIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Circle.tsx"
+        },
+        {
+          "id": "REhGIqQO1v6N",
+          "name": "Signature6089035SvgIcon",
+          "moduleFilePath": "plasmic/inlab/icons/PlasmicIcon__Signature6089035Svg.tsx"
         }
       ],
       "images": [
@@ -2873,6 +2909,16 @@
           "id": "LU44UjmA5oGN",
           "name": "refresh-cw-alt-1-svgrepo-com.svg",
           "filePath": "../public/plasmic/inlab/images/refreshCwAlt1SvgrepoComSvg.svg"
+        },
+        {
+          "id": "u_P2zqjCZQfm",
+          "name": "عکس مهر و امضا پوشیده شده.jpg",
+          "filePath": "../public/plasmic/inlab/images/عکسمهروامضاپوشیدهشدهJpg.jpg"
+        },
+        {
+          "id": "BMzYzBIw2iBI",
+          "name": "عکس مهر و امضا پوشیده شده.jpg 2",
+          "filePath": "../public/plasmic/inlab/images/عکسمهروامضاپوشیدهشدهJpg2.jpg"
         }
       ],
       "indirect": false,

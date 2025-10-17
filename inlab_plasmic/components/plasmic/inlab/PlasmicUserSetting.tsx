@@ -66,6 +66,8 @@ import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import Alert from "../../Alert"; // plasmic-import: a9E2wGEF0Qy9/component
+import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
@@ -79,6 +81,7 @@ import PersonCropSquareFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__PersonCr
 import ProfileIcon from "./icons/PlasmicIcon__Profile"; // plasmic-import: -RBNimWBwZ_J/icon
 import Icon3Icon from "./icons/PlasmicIcon__Icon3"; // plasmic-import: Pji6nZZT_lpO/icon
 import Group1917Icon from "./icons/PlasmicIcon__Group1917"; // plasmic-import: ycuumst0kLdp/icon
+import Signature6089035SvgIcon from "./icons/PlasmicIcon__Signature6089035Svg"; // plasmic-import: REhGIqQO1v6N/icon
 import HospitalReceptionSvgrepoComSvgIcon from "./icons/PlasmicIcon__HospitalReceptionSvgrepoComSvg"; // plasmic-import: p3SAMaQlfYCx/icon
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
@@ -122,12 +125,14 @@ export type PlasmicUserSetting__OverridesType = {
   namespaceName?: Flex__<"div">;
   resetPassword?: Flex__<"div">;
   resetPasswordImage?: Flex__<"svg">;
+  uploadSignature?: Flex__<"div">;
+  uploadSignatureImage?: Flex__<"svg">;
   shareToolContent?: Flex__<"div">;
   shareTool?: Flex__<typeof ShareTool>;
   patientReception?: Flex__<"div">;
   receptionIcon?: Flex__<"svg">;
   logoutButton?: Flex__<typeof Button>;
-  changePassword?: Flex__<typeof AntdModal>;
+  modalChangePassword?: Flex__<typeof AntdModal>;
   modalContent?: Flex__<"div">;
   passwordContent?: Flex__<"div">;
   password?: Flex__<typeof TextInput>;
@@ -137,6 +142,15 @@ export type PlasmicUserSetting__OverridesType = {
   passwordRepeatPasswordMismatch2?: Flex__<typeof Alert>;
   successfulChangePassword2?: Flex__<typeof Alert>;
   unsuccessfulChangePassword2?: Flex__<typeof Alert>;
+  modalUploadSignature?: Flex__<typeof AntdModal>;
+  modalUploadContent?: Flex__<"div">;
+  uploadSignatureImageTool?: Flex__<typeof UploadWrapper>;
+  button?: Flex__<typeof AntdButton>;
+  uploadSignatureImageButton?: Flex__<typeof Button>;
+  processingUploadSignature?: Flex__<typeof Alert>;
+  largeSignatureImageSize?: Flex__<typeof Alert>;
+  successfulUploadSignature?: Flex__<typeof Alert>;
+  unsuccessfulUploadSignature?: Flex__<typeof Alert>;
   homepageSwitchingTab?: Flex__<"div">;
   switchingTab?: Flex__<typeof SwitchingTab>;
 };
@@ -229,7 +243,7 @@ function PlasmicUserSetting__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "changePassword.open",
+        path: "modalChangePassword.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -290,6 +304,72 @@ function PlasmicUserSetting__RenderFunc(props: {
       },
       {
         path: "unsuccessfulChangePasswordState",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "modalUploadSignature.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "uploadSignatureImageButton.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "uploadSignatureImageButton.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "uploadSignatureImageButton.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "uploadSignatureImageButton.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "uploadSignatureImageButton.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "uploadSignatureImageTool.files",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "successfulUploadSignatureState",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "unsuccessfulUploadSignatureState",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "processingUploadSignatureState",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "largeSignatureImageSizeStatus",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -856,7 +936,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                       const actionArgs = {
                         variable: {
                           objRoot: $state,
-                          variablePath: ["changePassword", "open"]
+                          variablePath: ["modalChangePassword", "open"]
                         },
                         operation: 4
                       };
@@ -904,6 +984,113 @@ function PlasmicUserSetting__RenderFunc(props: {
               >
                 {
                   " \u062a\u063a\u06cc\u06cc\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 "
+                }
+              </div>
+            </div>
+            <div
+              data-plasmic-name={"uploadSignature"}
+              data-plasmic-override={overrides.uploadSignature}
+              className={classNames(projectcss.all, sty.uploadSignature, {
+                [sty.uploadSignaturedisabledLogoutButton]: hasVariant(
+                  $state,
+                  "disabledLogoutButton",
+                  "disabledLogoutButton"
+                )
+              })}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["updateModalUploadSignatureOpen"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["modalUploadSignature", "open"]
+                        },
+                        operation: 4
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        const oldValue = $stateGet(objRoot, variablePath);
+                        $stateSet(objRoot, variablePath, !oldValue);
+                        return !oldValue;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateModalUploadSignatureOpen"] != null &&
+                  typeof $steps["updateModalUploadSignatureOpen"] ===
+                    "object" &&
+                  typeof $steps["updateModalUploadSignatureOpen"].then ===
+                    "function"
+                ) {
+                  $steps["updateModalUploadSignatureOpen"] = await $steps[
+                    "updateModalUploadSignatureOpen"
+                  ];
+                }
+
+                $steps["updateLogoutButtonIsDisabled"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["logoutButton", "isDisabled"]
+                        },
+                        operation: 0
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateLogoutButtonIsDisabled"] != null &&
+                  typeof $steps["updateLogoutButtonIsDisabled"] === "object" &&
+                  typeof $steps["updateLogoutButtonIsDisabled"].then ===
+                    "function"
+                ) {
+                  $steps["updateLogoutButtonIsDisabled"] = await $steps[
+                    "updateLogoutButtonIsDisabled"
+                  ];
+                }
+              }}
+            >
+              <Signature6089035SvgIcon
+                data-plasmic-name={"uploadSignatureImage"}
+                data-plasmic-override={overrides.uploadSignatureImage}
+                className={classNames(projectcss.all, sty.uploadSignatureImage)}
+                role={"img"}
+              />
+
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__oku2V
+                )}
+              >
+                {
+                  "\u0628\u0627\u0631\u06af\u0630\u0627\u0631\u06cc \u0639\u06a9\u0633 \u0645\u0647\u0631 \u0648 \u0627\u0645\u0636\u0627"
                 }
               </div>
             </div>
@@ -1249,9 +1436,9 @@ function PlasmicUserSetting__RenderFunc(props: {
             </Button>
           </div>
           <AntdModal
-            data-plasmic-name={"changePassword"}
-            data-plasmic-override={overrides.changePassword}
-            className={classNames("__wab_instance", sty.changePassword)}
+            data-plasmic-name={"modalChangePassword"}
+            data-plasmic-override={overrides.modalChangePassword}
+            className={classNames("__wab_instance", sty.modalChangePassword)}
             closeButtonClassName={classNames({
               [sty["pcls__psrn3OXhphL"]]: true
             })}
@@ -1266,14 +1453,17 @@ function PlasmicUserSetting__RenderFunc(props: {
             modalContentClassName={classNames({
               [sty["pcls_VyKcQQz6TGrW"]]: true
             })}
-            modalScopeClassName={sty["changePassword__modal"]}
+            modalScopeClassName={sty["modalChangePassword__modal"]}
             onOpenChange={async (...eventArgs: any) => {
               generateStateOnChangeProp($state, [
-                "changePassword",
+                "modalChangePassword",
                 "open"
               ]).apply(null, eventArgs);
             }}
-            open={generateStateValueProp($state, ["changePassword", "open"])}
+            open={generateStateValueProp($state, [
+              "modalChangePassword",
+              "open"
+            ])}
             title={
               <div
                 className={classNames(
@@ -1984,6 +2174,844 @@ function PlasmicUserSetting__RenderFunc(props: {
               ) : null}
             </div>
           </AntdModal>
+          {(() => {
+            try {
+              return true;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
+            <AntdModal
+              data-plasmic-name={"modalUploadSignature"}
+              data-plasmic-override={overrides.modalUploadSignature}
+              className={classNames("__wab_instance", sty.modalUploadSignature)}
+              closeButtonClassName={classNames({
+                [sty["pcls_MI-uqJ5MLWiZ"]]: true
+              })}
+              defaultStylesClassName={classNames(
+                projectcss.root_reset,
+                projectcss.plasmic_default_styles,
+                projectcss.plasmic_mixins,
+                styleTokensClassNames
+              )}
+              hideFooter={true}
+              maskClosable={true}
+              modalContentClassName={classNames({
+                [sty["pcls_j-QEdUoaul2H"]]: true
+              })}
+              modalScopeClassName={sty["modalUploadSignature__modal"]}
+              onOpenChange={async (...eventArgs: any) => {
+                generateStateOnChangeProp($state, [
+                  "modalUploadSignature",
+                  "open"
+                ]).apply(null, eventArgs);
+              }}
+              open={generateStateValueProp($state, [
+                "modalUploadSignature",
+                "open"
+              ])}
+              title={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__a6VGp
+                  )}
+                >
+                  {
+                    "\u0639\u06a9\u0633 \u0645\u0647\u0631 \u0648 \u0627\u0645\u0636\u0627\u06cc \u062e\u0648\u062f \u0631\u0627 \u0628\u0627\u0631\u06af\u0630\u0627\u0631\u06cc \u06a9\u0646\u06cc\u062f"
+                  }
+                </div>
+              }
+              trigger={null}
+              wrapClassName={classNames({ [sty["pcls_MlBhmhrVPr2o"]]: true })}
+            >
+              <div
+                data-plasmic-name={"modalUploadContent"}
+                data-plasmic-override={overrides.modalUploadContent}
+                className={classNames(projectcss.all, sty.modalUploadContent)}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___5Ae9F
+                  )}
+                  dir={"str"}
+                >
+                  {
+                    "\u0647\u0645\u0627\u0646\u0646\u062f \u0645\u062b\u0627\u0644 \u0632\u06cc\u0631 \u06cc\u06a9 \u0639\u06a9\u0633 \u0648\u0627\u0636\u062d \u0627\u0632 \u0645\u0647\u0631 \u0648 \u0627\u0645\u0636\u0627\u06cc \u062e\u0648\u062f \u0628\u06af\u06cc\u0631\u06cc\u062f\n\u062a\u0631\u062c\u06cc\u062d\u0627 \u062d\u0627\u0634\u06cc\u0647 \u0647\u0627\u06cc \u0627\u0636\u0627\u0641\u06cc \u0639\u06a9\u0633 \u0628\u0631\u06cc\u062f\u0647 \u0634\u0648\u062f\n\u062d\u062c\u0645 \u0639\u06a9\u0633 \u0646\u0628\u0627\u06cc\u062f \u0628\u06cc\u0634\u062a\u0631 \u0627\u0632 500 \u06a9\u06cc\u0644\u0648\u0628\u0627\u06cc\u062a \u0628\u0627\u0634\u062f"
+                  }
+                </div>
+                <PlasmicImg__
+                  alt={""}
+                  className={classNames(sty.img__tOtvO)}
+                  displayHeight={"auto"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"100%"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"300px"}
+                  loading={"lazy"}
+                  src={{
+                    src: "/new_inlab/plasmic/inlab/images/عکسمهروامضاپوشیدهشدهJpg2.jpg",
+                    fullWidth: 2100,
+                    fullHeight: 940,
+                    aspectRatio: undefined
+                  }}
+                />
+
+                <UploadWrapper
+                  data-plasmic-name={"uploadSignatureImageTool"}
+                  data-plasmic-override={overrides.uploadSignatureImageTool}
+                  accept={"image/*"}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.uploadSignatureImageTool
+                  )}
+                  dragAndDropFiles={true}
+                  files={generateStateValueProp($state, [
+                    "uploadSignatureImageTool",
+                    "files"
+                  ])}
+                  listType={"picture"}
+                  onFilesChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "uploadSignatureImageTool",
+                      "files"
+                    ]).apply(null, eventArgs);
+                  }}
+                  showUploadList={true}
+                >
+                  <AntdButton
+                    data-plasmic-name={"button"}
+                    data-plasmic-override={overrides.button}
+                    className={classNames("__wab_instance", sty.button)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__y0ZkF
+                      )}
+                    >
+                      {
+                        "\u0627\u0646\u062a\u062e\u0627\u0628 \u062a\u0635\u0648\u06cc\u0631 \u0645\u0647\u0631 \u0648 \u0627\u0645\u0636\u0627"
+                      }
+                    </div>
+                  </AntdButton>
+                </UploadWrapper>
+                <Button
+                  data-plasmic-name={"uploadSignatureImageButton"}
+                  data-plasmic-override={overrides.uploadSignatureImageButton}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.uploadSignatureImageButton
+                  )}
+                  color={"blue"}
+                  deselected={generateStateValueProp($state, [
+                    "uploadSignatureImageButton",
+                    "deselected"
+                  ])}
+                  isDisabled={generateStateValueProp($state, [
+                    "uploadSignatureImageButton",
+                    "isDisabled"
+                  ])}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateLargeSignatureImageSizeStatus"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["largeSignatureImageSizeStatus"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateLargeSignatureImageSizeStatus"] != null &&
+                      typeof $steps["updateLargeSignatureImageSizeStatus"] ===
+                        "object" &&
+                      typeof $steps["updateLargeSignatureImageSizeStatus"]
+                        .then === "function"
+                    ) {
+                      $steps["updateLargeSignatureImageSizeStatus"] =
+                        await $steps["updateLargeSignatureImageSizeStatus"];
+                    }
+
+                    $steps["updateSuccessfulUploadSignatureState"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["successfulUploadSignatureState"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateSuccessfulUploadSignatureState"] != null &&
+                      typeof $steps["updateSuccessfulUploadSignatureState"] ===
+                        "object" &&
+                      typeof $steps["updateSuccessfulUploadSignatureState"]
+                        .then === "function"
+                    ) {
+                      $steps["updateSuccessfulUploadSignatureState"] =
+                        await $steps["updateSuccessfulUploadSignatureState"];
+                    }
+
+                    $steps["updateUnsuccessfulUploadSignatureState"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["unsuccessfulUploadSignatureState"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateUnsuccessfulUploadSignatureState"] !=
+                        null &&
+                      typeof $steps[
+                        "updateUnsuccessfulUploadSignatureState"
+                      ] === "object" &&
+                      typeof $steps["updateUnsuccessfulUploadSignatureState"]
+                        .then === "function"
+                    ) {
+                      $steps["updateUnsuccessfulUploadSignatureState"] =
+                        await $steps["updateUnsuccessfulUploadSignatureState"];
+                    }
+
+                    $steps["updateLargeSignatureImageSizeStatus2"] =
+                      $state.uploadSignatureImageTool.files[0].size >= 500000
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["largeSignatureImageSizeStatus"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["updateLargeSignatureImageSizeStatus2"] != null &&
+                      typeof $steps["updateLargeSignatureImageSizeStatus2"] ===
+                        "object" &&
+                      typeof $steps["updateLargeSignatureImageSizeStatus2"]
+                        .then === "function"
+                    ) {
+                      $steps["updateLargeSignatureImageSizeStatus2"] =
+                        await $steps["updateLargeSignatureImageSizeStatus2"];
+                    }
+
+                    $steps["updateUploadSignatureImageToolFiles2"] =
+                      $state.uploadSignatureImageTool.files[0].size >= 500000
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: [
+                                  "uploadSignatureImageTool",
+                                  "files"
+                                ]
+                              },
+                              operation: 0,
+                              value: []
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["updateUploadSignatureImageToolFiles2"] != null &&
+                      typeof $steps["updateUploadSignatureImageToolFiles2"] ===
+                        "object" &&
+                      typeof $steps["updateUploadSignatureImageToolFiles2"]
+                        .then === "function"
+                    ) {
+                      $steps["updateUploadSignatureImageToolFiles2"] =
+                        await $steps["updateUploadSignatureImageToolFiles2"];
+                    }
+
+                    $steps["updateProcessingUploadSignatureState"] =
+                      $state.uploadSignatureImageTool.files[0].size < 500000
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["processingUploadSignatureState"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["updateProcessingUploadSignatureState"] != null &&
+                      typeof $steps["updateProcessingUploadSignatureState"] ===
+                        "object" &&
+                      typeof $steps["updateProcessingUploadSignatureState"]
+                        .then === "function"
+                    ) {
+                      $steps["updateProcessingUploadSignatureState"] =
+                        await $steps["updateProcessingUploadSignatureState"];
+                    }
+
+                    $steps["patchSignature"] =
+                      $state.uploadSignatureImageTool.files[0].size < 500000
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "PATCH",
+                                `/api/v3/user/signature/${$ctx.inlab_user.user.id}`,
+                                undefined,
+                                (() => {
+                                  try {
+                                    return {
+                                      signature: $state.uploadSignatureImageTool
+                                    };
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcherPlus"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["patchSignature"] != null &&
+                      typeof $steps["patchSignature"] === "object" &&
+                      typeof $steps["patchSignature"].then === "function"
+                    ) {
+                      $steps["patchSignature"] = await $steps["patchSignature"];
+                    }
+
+                    $steps["updateProcessingUploadSignatureState2"] =
+                      $steps.patchSignature
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["processingUploadSignatureState"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["updateProcessingUploadSignatureState2"] != null &&
+                      typeof $steps["updateProcessingUploadSignatureState2"] ===
+                        "object" &&
+                      typeof $steps["updateProcessingUploadSignatureState2"]
+                        .then === "function"
+                    ) {
+                      $steps["updateProcessingUploadSignatureState2"] =
+                        await $steps["updateProcessingUploadSignatureState2"];
+                    }
+
+                    $steps["updateSuccessfulUploadSignatureState2"] =
+                      $steps.patchSignature.status === 200
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["successfulUploadSignatureState"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["updateSuccessfulUploadSignatureState2"] != null &&
+                      typeof $steps["updateSuccessfulUploadSignatureState2"] ===
+                        "object" &&
+                      typeof $steps["updateSuccessfulUploadSignatureState2"]
+                        .then === "function"
+                    ) {
+                      $steps["updateSuccessfulUploadSignatureState2"] =
+                        await $steps["updateSuccessfulUploadSignatureState2"];
+                    }
+
+                    $steps["updateUploadSignatureImageToolFiles"] =
+                      $steps.patchSignature.status === 200
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: [
+                                  "uploadSignatureImageTool",
+                                  "files"
+                                ]
+                              },
+                              operation: 0,
+                              value: []
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["updateUploadSignatureImageToolFiles"] != null &&
+                      typeof $steps["updateUploadSignatureImageToolFiles"] ===
+                        "object" &&
+                      typeof $steps["updateUploadSignatureImageToolFiles"]
+                        .then === "function"
+                    ) {
+                      $steps["updateUploadSignatureImageToolFiles"] =
+                        await $steps["updateUploadSignatureImageToolFiles"];
+                    }
+
+                    $steps["updateUnsuccessfulUploadSignatureState2"] =
+                      $steps.patchSignature.status != 200
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: [
+                                  "unsuccessfulUploadSignatureState"
+                                ]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["updateUnsuccessfulUploadSignatureState2"] !=
+                        null &&
+                      typeof $steps[
+                        "updateUnsuccessfulUploadSignatureState2"
+                      ] === "object" &&
+                      typeof $steps["updateUnsuccessfulUploadSignatureState2"]
+                        .then === "function"
+                    ) {
+                      $steps["updateUnsuccessfulUploadSignatureState2"] =
+                        await $steps["updateUnsuccessfulUploadSignatureState2"];
+                    }
+                  }}
+                  onDeselectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "uploadSignatureImageButton",
+                        "deselected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                  onIsDisabledChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "uploadSignatureImageButton",
+                        "isDisabled"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                  onSelectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "uploadSignatureImageButton",
+                        "selected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                  onSortDeselectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "uploadSignatureImageButton",
+                        "sortDeselected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                  onSortSelectedChange={async (...eventArgs: any) => {
+                    ((...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "uploadSignatureImageButton",
+                        "sortSelected"
+                      ])(eventArgs[0]);
+                    }).apply(null, eventArgs);
+
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                  selected={generateStateValueProp($state, [
+                    "uploadSignatureImageButton",
+                    "selected"
+                  ])}
+                  sortDeselected={generateStateValueProp($state, [
+                    "uploadSignatureImageButton",
+                    "sortDeselected"
+                  ])}
+                  sortSelected={generateStateValueProp($state, [
+                    "uploadSignatureImageButton",
+                    "sortSelected"
+                  ])}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___07D20
+                    )}
+                  >
+                    {
+                      "\u0628\u0627\u0631\u06af\u0630\u0627\u0631\u06cc \u0639\u06a9\u0633"
+                    }
+                  </div>
+                </Button>
+                {(() => {
+                  try {
+                    return $state.processingUploadSignatureState;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <Alert
+                    data-plasmic-name={"processingUploadSignature"}
+                    data-plasmic-override={overrides.processingUploadSignature}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.processingUploadSignature
+                    )}
+                    header={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__uBm1F
+                        )}
+                      >
+                        {
+                          "\u062f\u0631 \u062d\u0627\u0644 \u0628\u0627\u0631\u06af\u0630\u0627\u0631\u06cc \u0639\u06a9\u0633\u060c \u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f"
+                        }
+                      </div>
+                    }
+                    noBody={true}
+                    warning={true}
+                  />
+                ) : null}
+                {(() => {
+                  try {
+                    return $state.largeSignatureImageSizeStatus;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <Alert
+                    data-plasmic-name={"largeSignatureImageSize"}
+                    data-plasmic-override={overrides.largeSignatureImageSize}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.largeSignatureImageSize
+                    )}
+                    error={true}
+                    header={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__k7JbB
+                        )}
+                      >
+                        {
+                          "\u062d\u062c\u0645 \u0639\u06a9\u0633 \u0628\u0627\u0631\u06af\u0630\u0627\u0631\u06cc \u0634\u062f\u0647 \u0628\u06cc\u0634\u062a\u0631 \u0627\u0632 \u062d\u062f \u0645\u062c\u0627\u0632 \u0627\u0633\u062a"
+                        }
+                      </div>
+                    }
+                    noBody={true}
+                  />
+                ) : null}
+                {(() => {
+                  try {
+                    return $state.successfulUploadSignatureState;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <Alert
+                    data-plasmic-name={"successfulUploadSignature"}
+                    data-plasmic-override={overrides.successfulUploadSignature}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.successfulUploadSignature
+                    )}
+                    header={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__jqXwl
+                        )}
+                      >
+                        {
+                          "\u0628\u0627\u0631\u06af\u0630\u0627\u0631\u06cc \u0639\u06a9\u0633 \u0645\u0647\u0631 \u0648 \u0627\u0645\u0636\u0627 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0627\u0646\u062c\u0627\u0645 \u0634\u062f"
+                        }
+                      </div>
+                    }
+                    noBody={true}
+                    success={true}
+                  />
+                ) : null}
+                {(() => {
+                  try {
+                    return $state.unsuccessfulUploadSignatureState;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <Alert
+                    data-plasmic-name={"unsuccessfulUploadSignature"}
+                    data-plasmic-override={
+                      overrides.unsuccessfulUploadSignature
+                    }
+                    className={classNames(
+                      "__wab_instance",
+                      sty.unsuccessfulUploadSignature
+                    )}
+                    error={true}
+                    header={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text___9Mt3T
+                        )}
+                      >
+                        {
+                          "\u0628\u0627\u0631\u06af\u0630\u0627\u0631\u06cc \u0639\u06a9\u0633 \u0645\u0647\u0631 \u0648 \u0627\u0645\u0636\u0627 \u0628\u0627 \u062e\u0637\u0627 \u0647\u0645\u0631\u0627\u0647 \u0634\u062f"
+                        }
+                      </div>
+                    }
+                    noBody={true}
+                  />
+                ) : null}
+              </div>
+            </AntdModal>
+          ) : null}
           <div
             data-plasmic-name={"homepageSwitchingTab"}
             data-plasmic-override={overrides.homepageSwitchingTab}
@@ -2254,12 +3282,14 @@ const PlasmicDescendants = {
     "namespaceName",
     "resetPassword",
     "resetPasswordImage",
+    "uploadSignature",
+    "uploadSignatureImage",
     "shareToolContent",
     "shareTool",
     "patientReception",
     "receptionIcon",
     "logoutButton",
-    "changePassword",
+    "modalChangePassword",
     "modalContent",
     "passwordContent",
     "password",
@@ -2269,6 +3299,15 @@ const PlasmicDescendants = {
     "passwordRepeatPasswordMismatch2",
     "successfulChangePassword2",
     "unsuccessfulChangePassword2",
+    "modalUploadSignature",
+    "modalUploadContent",
+    "uploadSignatureImageTool",
+    "button",
+    "uploadSignatureImageButton",
+    "processingUploadSignature",
+    "largeSignatureImageSize",
+    "successfulUploadSignature",
+    "unsuccessfulUploadSignature",
     "homepageSwitchingTab",
     "switchingTab"
   ],
@@ -2291,6 +3330,8 @@ const PlasmicDescendants = {
     "namespaceName",
     "resetPassword",
     "resetPasswordImage",
+    "uploadSignature",
+    "uploadSignatureImage",
     "shareToolContent",
     "shareTool",
     "patientReception",
@@ -2330,13 +3371,15 @@ const PlasmicDescendants = {
   namespaceName: ["namespaceName"],
   resetPassword: ["resetPassword", "resetPasswordImage"],
   resetPasswordImage: ["resetPasswordImage"],
+  uploadSignature: ["uploadSignature", "uploadSignatureImage"],
+  uploadSignatureImage: ["uploadSignatureImage"],
   shareToolContent: ["shareToolContent", "shareTool"],
   shareTool: ["shareTool"],
   patientReception: ["patientReception", "receptionIcon"],
   receptionIcon: ["receptionIcon"],
   logoutButton: ["logoutButton"],
-  changePassword: [
-    "changePassword",
+  modalChangePassword: [
+    "modalChangePassword",
     "modalContent",
     "passwordContent",
     "password",
@@ -2366,6 +3409,34 @@ const PlasmicDescendants = {
   passwordRepeatPasswordMismatch2: ["passwordRepeatPasswordMismatch2"],
   successfulChangePassword2: ["successfulChangePassword2"],
   unsuccessfulChangePassword2: ["unsuccessfulChangePassword2"],
+  modalUploadSignature: [
+    "modalUploadSignature",
+    "modalUploadContent",
+    "uploadSignatureImageTool",
+    "button",
+    "uploadSignatureImageButton",
+    "processingUploadSignature",
+    "largeSignatureImageSize",
+    "successfulUploadSignature",
+    "unsuccessfulUploadSignature"
+  ],
+  modalUploadContent: [
+    "modalUploadContent",
+    "uploadSignatureImageTool",
+    "button",
+    "uploadSignatureImageButton",
+    "processingUploadSignature",
+    "largeSignatureImageSize",
+    "successfulUploadSignature",
+    "unsuccessfulUploadSignature"
+  ],
+  uploadSignatureImageTool: ["uploadSignatureImageTool", "button"],
+  button: ["button"],
+  uploadSignatureImageButton: ["uploadSignatureImageButton"],
+  processingUploadSignature: ["processingUploadSignature"],
+  largeSignatureImageSize: ["largeSignatureImageSize"],
+  successfulUploadSignature: ["successfulUploadSignature"],
+  unsuccessfulUploadSignature: ["unsuccessfulUploadSignature"],
   homepageSwitchingTab: ["homepageSwitchingTab", "switchingTab"],
   switchingTab: ["switchingTab"]
 } as const;
@@ -2392,12 +3463,14 @@ type NodeDefaultElementType = {
   namespaceName: "div";
   resetPassword: "div";
   resetPasswordImage: "svg";
+  uploadSignature: "div";
+  uploadSignatureImage: "svg";
   shareToolContent: "div";
   shareTool: typeof ShareTool;
   patientReception: "div";
   receptionIcon: "svg";
   logoutButton: typeof Button;
-  changePassword: typeof AntdModal;
+  modalChangePassword: typeof AntdModal;
   modalContent: "div";
   passwordContent: "div";
   password: typeof TextInput;
@@ -2407,6 +3480,15 @@ type NodeDefaultElementType = {
   passwordRepeatPasswordMismatch2: typeof Alert;
   successfulChangePassword2: typeof Alert;
   unsuccessfulChangePassword2: typeof Alert;
+  modalUploadSignature: typeof AntdModal;
+  modalUploadContent: "div";
+  uploadSignatureImageTool: typeof UploadWrapper;
+  button: typeof AntdButton;
+  uploadSignatureImageButton: typeof Button;
+  processingUploadSignature: typeof Alert;
+  largeSignatureImageSize: typeof Alert;
+  successfulUploadSignature: typeof Alert;
+  unsuccessfulUploadSignature: typeof Alert;
   homepageSwitchingTab: "div";
   switchingTab: typeof SwitchingTab;
 };
@@ -2491,12 +3573,14 @@ export const PlasmicUserSetting = Object.assign(
     namespaceName: makeNodeComponent("namespaceName"),
     resetPassword: makeNodeComponent("resetPassword"),
     resetPasswordImage: makeNodeComponent("resetPasswordImage"),
+    uploadSignature: makeNodeComponent("uploadSignature"),
+    uploadSignatureImage: makeNodeComponent("uploadSignatureImage"),
     shareToolContent: makeNodeComponent("shareToolContent"),
     shareTool: makeNodeComponent("shareTool"),
     patientReception: makeNodeComponent("patientReception"),
     receptionIcon: makeNodeComponent("receptionIcon"),
     logoutButton: makeNodeComponent("logoutButton"),
-    changePassword: makeNodeComponent("changePassword"),
+    modalChangePassword: makeNodeComponent("modalChangePassword"),
     modalContent: makeNodeComponent("modalContent"),
     passwordContent: makeNodeComponent("passwordContent"),
     password: makeNodeComponent("password"),
@@ -2509,6 +3593,17 @@ export const PlasmicUserSetting = Object.assign(
     successfulChangePassword2: makeNodeComponent("successfulChangePassword2"),
     unsuccessfulChangePassword2: makeNodeComponent(
       "unsuccessfulChangePassword2"
+    ),
+    modalUploadSignature: makeNodeComponent("modalUploadSignature"),
+    modalUploadContent: makeNodeComponent("modalUploadContent"),
+    uploadSignatureImageTool: makeNodeComponent("uploadSignatureImageTool"),
+    button: makeNodeComponent("button"),
+    uploadSignatureImageButton: makeNodeComponent("uploadSignatureImageButton"),
+    processingUploadSignature: makeNodeComponent("processingUploadSignature"),
+    largeSignatureImageSize: makeNodeComponent("largeSignatureImageSize"),
+    successfulUploadSignature: makeNodeComponent("successfulUploadSignature"),
+    unsuccessfulUploadSignature: makeNodeComponent(
+      "unsuccessfulUploadSignature"
     ),
     homepageSwitchingTab: makeNodeComponent("homepageSwitchingTab"),
     switchingTab: makeNodeComponent("switchingTab"),

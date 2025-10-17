@@ -1351,11 +1351,12 @@
   font-weight: 300;
   min-width: 0;
 }
-.modalSetConsultPaperReplyTrueBeforePrint:global(.__wab_instance) {
+.modalSetPaperReplyTrueBeforePrintAndSetSignature:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
 }
-.modalSetConsultPaperReplyTrueBeforePrint__modal :global(.ant-modal-content) {
+.modalSetPaperReplyTrueBeforePrintAndSetSignature__modal
+  :global(.ant-modal-content) {
   background: #ffffff;
   outline: none;
 }
@@ -1379,6 +1380,52 @@
   margin-bottom: 10px;
   min-width: 0;
 }
+.isSignatureContent {
+  animation: none;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  padding: 8px;
+}
+.text__i5RVu {
+  animation: none;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  align-self: center;
+  margin-left: 10px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__i5RVu {
+    animation: none;
+    font-size: var(--token-CdE1_0ZaCyT1);
+    position: relative;
+  }
+}
+.isSignature2:global(.__wab_instance) {
+  animation: none;
+  max-width: 100%;
+  object-fit: cover;
+  align-self: center;
+}
 .confirmationYesNo3 {
   display: flex;
   flex-direction: row;
@@ -1388,10 +1435,8 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  padding-right: 8px;
-  padding-bottom: 8px;
-  padding-left: 8px;
   min-width: 0;
+  padding: 15px 15px 10px;
 }
 .noConfirm3:global(.__wab_instance) {
   max-width: 100%;
@@ -1554,6 +1599,182 @@
   user-select: none;
   text-decoration-line: none;
   padding-left: 0px;
+}
+.modalSetSignatureBeforeConsult:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.modalSetSignatureBeforeConsult__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.confirmationContent4 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+}
+.confirmationYesNo4 {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
+  min-width: 0;
+}
+.noConfirm4:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__kmBaj {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__vierV {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__oc47C {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.confirm4:global(.__wab_instance) {
+  max-width: 100%;
+  margin-left: 30px;
+}
+.text__qQa5U {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__tahaJ {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__kRiLq {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.unsuccessfulDeleteConsult2:global(.__wab_instance) {
+  max-width: 100%;
+  width: 180px;
+}
+.text__xtf6W {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__rFtQc {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  min-width: 0;
+}
+.svg___6IGns {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.isSignatureContent2 {
+  animation: none;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  padding: 8px;
+}
+.text__cSMvh {
+  animation: none;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-sOr3fJ5Up5fq);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--token-IYO13gyYJHXG);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  align-self: center;
+  margin-left: 10px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__cSMvh {
+    animation: none;
+    font-size: var(--token-CdE1_0ZaCyT1);
+    position: relative;
+  }
+}
+.isSignature3:global(.__wab_instance) {
+  animation: none;
+  max-width: 100%;
+  object-fit: cover;
+  align-self: center;
 }
 .modalDeleteConsultConfirmation:global(.__wab_instance) {
   max-width: 100%;

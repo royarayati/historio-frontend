@@ -151,11 +151,17 @@ export type PlasmicConsultList__OverridesType = {
   modalDeleteConsultConfirmation?: Flex__<typeof AntdModal>;
   confirmationContent?: Flex__<"div">;
   confirmationYesNo?: Flex__<"div">;
-  noConfirm?: Flex__<typeof Button>;
+  notConfirm?: Flex__<typeof Button>;
   confirm?: Flex__<typeof Button>;
   unsuccessfulDeleteConsult?: Flex__<typeof Alert3>;
   title?: Flex__<"div">;
   guide2?: Flex__<"div">;
+  modalPrintPatientConsult?: Flex__<typeof AntdModal>;
+  confirmationYesNo2?: Flex__<"div">;
+  notConfirm2?: Flex__<typeof Button>;
+  confirm2?: Flex__<typeof Button>;
+  isSignatureContent?: Flex__<"div">;
+  isSignature?: Flex__<typeof AntdSwitch>;
 };
 
 export interface DefaultConsultListProps {}
@@ -242,31 +248,31 @@ function PlasmicConsultList__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "noConfirm.isDisabled",
+        path: "notConfirm.isDisabled",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "noConfirm.selected",
+        path: "notConfirm.selected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "noConfirm.deselected",
+        path: "notConfirm.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "noConfirm.sortDeselected",
+        path: "notConfirm.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "noConfirm.sortSelected",
+        path: "notConfirm.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -382,6 +388,97 @@ function PlasmicConsultList__RenderFunc(props: {
       },
       {
         path: "allAdmissions",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "modalPrintPatientConsult.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "notConfirm2.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "notConfirm2.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "notConfirm2.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "notConfirm2.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "notConfirm2.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm2.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm2.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm2.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm2.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "confirm2.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "isSignature.checked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.signature;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "signature",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -715,15 +812,14 @@ function PlasmicConsultList__RenderFunc(props: {
                     ];
                   }
 
-                  $steps["updatePrintProcessingState"] = true
+                  $steps["updateModalPrintPatientConsultOpen"] = true
                     ? (() => {
                         const actionArgs = {
                           variable: {
                             objRoot: $state,
-                            variablePath: ["printProcessingState"]
+                            variablePath: ["modalPrintPatientConsult", "open"]
                           },
-                          operation: 0,
-                          value: true
+                          operation: 4
                         };
                         return (({
                           variable,
@@ -736,191 +832,21 @@ function PlasmicConsultList__RenderFunc(props: {
                           }
                           const { objRoot, variablePath } = variable;
 
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
                         })?.apply(null, [actionArgs]);
                       })()
                     : undefined;
                   if (
-                    $steps["updatePrintProcessingState"] != null &&
-                    typeof $steps["updatePrintProcessingState"] === "object" &&
-                    typeof $steps["updatePrintProcessingState"].then ===
+                    $steps["updateModalPrintPatientConsultOpen"] != null &&
+                    typeof $steps["updateModalPrintPatientConsultOpen"] ===
+                      "object" &&
+                    typeof $steps["updateModalPrintPatientConsultOpen"].then ===
                       "function"
                   ) {
-                    $steps["updatePrintProcessingState"] = await $steps[
-                      "updatePrintProcessingState"
-                    ];
-                  }
-
-                  $steps["postConsultFillTemplate"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          args: [
-                            "POST",
-                            "/api/v3/consults/template",
-                            (() => {
-                              try {
-                                return {
-                                  "X-Namespace": localStorage.getItem(
-                                    "inlab_user_namespace_id"
-                                  )
-                                };
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
-                                }
-                                throw e;
-                              }
-                            })(),
-                            (() => {
-                              try {
-                                return {
-                                  patient_id: $ctx.params.code
-                                };
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
-                                }
-                                throw e;
-                              }
-                            })(),
-                            "blob"
-                          ]
-                        };
-                        return $globalActions[
-                          "AuthGlobalContext.apiFetcherPlus"
-                        ]?.apply(null, [...actionArgs.args]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["postConsultFillTemplate"] != null &&
-                    typeof $steps["postConsultFillTemplate"] === "object" &&
-                    typeof $steps["postConsultFillTemplate"].then === "function"
-                  ) {
-                    $steps["postConsultFillTemplate"] = await $steps[
-                      "postConsultFillTemplate"
-                    ];
-                  }
-
-                  $steps["openConsultPrint"] =
-                    $steps.postConsultFillTemplate.status === 200
-                      ? (() => {
-                          const actionArgs = {
-                            customFunction: async () => {
-                              return (() => {
-                                const response = $steps.postConsultFillTemplate;
-                                if (response.data instanceof Blob) {
-                                  const pdfUrl = URL.createObjectURL(
-                                    response.data
-                                  );
-                                  window.open(pdfUrl, "_blank");
-                                  return setTimeout(
-                                    () => URL.revokeObjectURL(pdfUrl),
-                                    10000
-                                  );
-                                } else {
-                                  console.error(
-                                    "Received non-Blob response:",
-                                    response
-                                  );
-                                  return alert("Error: Could not generate PDF");
-                                }
-                              })();
-                            }
-                          };
-                          return (({ customFunction }) => {
-                            return customFunction();
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                  if (
-                    $steps["openConsultPrint"] != null &&
-                    typeof $steps["openConsultPrint"] === "object" &&
-                    typeof $steps["openConsultPrint"].then === "function"
-                  ) {
-                    $steps["openConsultPrint"] = await $steps[
-                      "openConsultPrint"
-                    ];
-                  }
-
-                  $steps["updatePrintProcessingState2"] =
-                    $steps.postConsultFillTemplate
-                      ? (() => {
-                          const actionArgs = {
-                            variable: {
-                              objRoot: $state,
-                              variablePath: ["printProcessingState"]
-                            },
-                            operation: 0,
-                            value: false
-                          };
-                          return (({
-                            variable,
-                            value,
-                            startIndex,
-                            deleteCount
-                          }) => {
-                            if (!variable) {
-                              return;
-                            }
-                            const { objRoot, variablePath } = variable;
-
-                            $stateSet(objRoot, variablePath, value);
-                            return value;
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                  if (
-                    $steps["updatePrintProcessingState2"] != null &&
-                    typeof $steps["updatePrintProcessingState2"] === "object" &&
-                    typeof $steps["updatePrintProcessingState2"].then ===
-                      "function"
-                  ) {
-                    $steps["updatePrintProcessingState2"] = await $steps[
-                      "updatePrintProcessingState2"
-                    ];
-                  }
-
-                  $steps["updatePrintErrorState2"] =
-                    $steps.postConsultFillTemplate.status != 200
-                      ? (() => {
-                          const actionArgs = {
-                            variable: {
-                              objRoot: $state,
-                              variablePath: ["printErrorState"]
-                            },
-                            operation: 0,
-                            value: true
-                          };
-                          return (({
-                            variable,
-                            value,
-                            startIndex,
-                            deleteCount
-                          }) => {
-                            if (!variable) {
-                              return;
-                            }
-                            const { objRoot, variablePath } = variable;
-
-                            $stateSet(objRoot, variablePath, value);
-                            return value;
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                  if (
-                    $steps["updatePrintErrorState2"] != null &&
-                    typeof $steps["updatePrintErrorState2"] === "object" &&
-                    typeof $steps["updatePrintErrorState2"].then === "function"
-                  ) {
-                    $steps["updatePrintErrorState2"] = await $steps[
-                      "updatePrintErrorState2"
+                    $steps["updateModalPrintPatientConsultOpen"] = await $steps[
+                      "updateModalPrintPatientConsultOpen"
                     ];
                   }
                 }}
@@ -3047,16 +2973,16 @@ function PlasmicConsultList__RenderFunc(props: {
                 className={classNames(projectcss.all, sty.confirmationYesNo)}
               >
                 <Button
-                  data-plasmic-name={"noConfirm"}
-                  data-plasmic-override={overrides.noConfirm}
-                  className={classNames("__wab_instance", sty.noConfirm)}
+                  data-plasmic-name={"notConfirm"}
+                  data-plasmic-override={overrides.notConfirm}
+                  className={classNames("__wab_instance", sty.notConfirm)}
                   color={"red"}
                   deselected={generateStateValueProp($state, [
-                    "noConfirm",
+                    "notConfirm",
                     "deselected"
                   ])}
                   isDisabled={generateStateValueProp($state, [
-                    "noConfirm",
+                    "notConfirm",
                     "isDisabled"
                   ])}
                   onClick={async event => {
@@ -3109,7 +3035,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   onDeselectedChange={async (...eventArgs: any) => {
                     ((...eventArgs) => {
                       generateStateOnChangeProp($state, [
-                        "noConfirm",
+                        "notConfirm",
                         "deselected"
                       ])(eventArgs[0]);
                     }).apply(null, eventArgs);
@@ -3125,7 +3051,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   onIsDisabledChange={async (...eventArgs: any) => {
                     ((...eventArgs) => {
                       generateStateOnChangeProp($state, [
-                        "noConfirm",
+                        "notConfirm",
                         "isDisabled"
                       ])(eventArgs[0]);
                     }).apply(null, eventArgs);
@@ -3141,7 +3067,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   onSelectedChange={async (...eventArgs: any) => {
                     ((...eventArgs) => {
                       generateStateOnChangeProp($state, [
-                        "noConfirm",
+                        "notConfirm",
                         "selected"
                       ])(eventArgs[0]);
                     }).apply(null, eventArgs);
@@ -3157,7 +3083,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   onSortDeselectedChange={async (...eventArgs: any) => {
                     ((...eventArgs) => {
                       generateStateOnChangeProp($state, [
-                        "noConfirm",
+                        "notConfirm",
                         "sortDeselected"
                       ])(eventArgs[0]);
                     }).apply(null, eventArgs);
@@ -3173,7 +3099,7 @@ function PlasmicConsultList__RenderFunc(props: {
                   onSortSelectedChange={async (...eventArgs: any) => {
                     ((...eventArgs) => {
                       generateStateOnChangeProp($state, [
-                        "noConfirm",
+                        "notConfirm",
                         "sortSelected"
                       ])(eventArgs[0]);
                     }).apply(null, eventArgs);
@@ -3187,16 +3113,16 @@ function PlasmicConsultList__RenderFunc(props: {
                     }
                   }}
                   selected={generateStateValueProp($state, [
-                    "noConfirm",
+                    "notConfirm",
                     "selected"
                   ])}
                   shape={"rounded"}
                   sortDeselected={generateStateValueProp($state, [
-                    "noConfirm",
+                    "notConfirm",
                     "sortDeselected"
                   ])}
                   sortSelected={generateStateValueProp($state, [
-                    "noConfirm",
+                    "notConfirm",
                     "sortSelected"
                   ])}
                 >
@@ -3557,6 +3483,692 @@ function PlasmicConsultList__RenderFunc(props: {
               ) : null}
             </div>
           </AntdModal>
+          <AntdModal
+            data-plasmic-name={"modalPrintPatientConsult"}
+            data-plasmic-override={overrides.modalPrintPatientConsult}
+            className={classNames(
+              "__wab_instance",
+              sty.modalPrintPatientConsult
+            )}
+            defaultStylesClassName={classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              styleTokensClassNames
+            )}
+            hideFooter={true}
+            maskClosable={true}
+            modalContentClassName={classNames({
+              [sty["pcls_xrrONBf17aY_"]]: true
+            })}
+            modalScopeClassName={sty["modalPrintPatientConsult__modal"]}
+            onOpenChange={async (...eventArgs: any) => {
+              generateStateOnChangeProp($state, [
+                "modalPrintPatientConsult",
+                "open"
+              ]).apply(null, eventArgs);
+            }}
+            open={generateStateValueProp($state, [
+              "modalPrintPatientConsult",
+              "open"
+            ])}
+            title={
+              <div
+                data-plasmic-name={"isSignatureContent"}
+                data-plasmic-override={overrides.isSignatureContent}
+                className={classNames(projectcss.all, sty.isSignatureContent)}
+                dir={"rtl"}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__t0Gsn
+                  )}
+                  dir={"rtl"}
+                >
+                  {
+                    "\u0639\u06a9\u0633 \u0645\u0647\u0631 / \u0627\u0645\u0636\u0627"
+                  }
+                </div>
+                <AntdSwitch
+                  data-plasmic-name={"isSignature"}
+                  data-plasmic-override={overrides.isSignature}
+                  checked={generateStateValueProp($state, [
+                    "isSignature",
+                    "checked"
+                  ])}
+                  className={classNames("__wab_instance", sty.isSignature)}
+                  defaultChecked={(() => {
+                    try {
+                      return $state.signature;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return false;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  onChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "isSignature",
+                      "checked"
+                    ]).apply(null, eventArgs);
+
+                    (async checked => {
+                      const $steps = {};
+
+                      $steps["updateSignature"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["signature"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateSignature"] != null &&
+                        typeof $steps["updateSignature"] === "object" &&
+                        typeof $steps["updateSignature"].then === "function"
+                      ) {
+                        $steps["updateSignature"] = await $steps[
+                          "updateSignature"
+                        ];
+                      }
+                    }).apply(null, eventArgs);
+                  }}
+                />
+              </div>
+            }
+            trigger={null}
+          >
+            <div
+              data-plasmic-name={"confirmationYesNo2"}
+              data-plasmic-override={overrides.confirmationYesNo2}
+              className={classNames(projectcss.all, sty.confirmationYesNo2)}
+            >
+              <Button
+                data-plasmic-name={"notConfirm2"}
+                data-plasmic-override={overrides.notConfirm2}
+                className={classNames("__wab_instance", sty.notConfirm2)}
+                color={"red"}
+                deselected={generateStateValueProp($state, [
+                  "notConfirm2",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "notConfirm2",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateModalPrintPatientConsultOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["modalPrintPatientConsult", "open"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateModalPrintPatientConsultOpen"] != null &&
+                    typeof $steps["updateModalPrintPatientConsultOpen"] ===
+                      "object" &&
+                    typeof $steps["updateModalPrintPatientConsultOpen"].then ===
+                      "function"
+                  ) {
+                    $steps["updateModalPrintPatientConsultOpen"] = await $steps[
+                      "updateModalPrintPatientConsultOpen"
+                    ];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "notConfirm2",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "notConfirm2",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "notConfirm2",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "notConfirm2",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "notConfirm2",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "notConfirm2",
+                  "selected"
+                ])}
+                shape={"rounded"}
+                sortDeselected={generateStateValueProp($state, [
+                  "notConfirm2",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "notConfirm2",
+                  "sortSelected"
+                ])}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__uv6Te
+                  )}
+                >
+                  {"\u0627\u0646\u0635\u0631\u0627\u0641"}
+                </div>
+              </Button>
+              <Button
+                data-plasmic-name={"confirm2"}
+                data-plasmic-override={overrides.confirm2}
+                className={classNames("__wab_instance", sty.confirm2)}
+                color={"blue"}
+                deselected={generateStateValueProp($state, [
+                  "confirm2",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "confirm2",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateModalPrintPatientConsultOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["modalPrintPatientConsult", "open"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateModalPrintPatientConsultOpen"] != null &&
+                    typeof $steps["updateModalPrintPatientConsultOpen"] ===
+                      "object" &&
+                    typeof $steps["updateModalPrintPatientConsultOpen"].then ===
+                      "function"
+                  ) {
+                    $steps["updateModalPrintPatientConsultOpen"] = await $steps[
+                      "updateModalPrintPatientConsultOpen"
+                    ];
+                  }
+
+                  $steps["updatePrintProcessingState"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["printProcessingState"]
+                          },
+                          operation: 0,
+                          value: true
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updatePrintProcessingState"] != null &&
+                    typeof $steps["updatePrintProcessingState"] === "object" &&
+                    typeof $steps["updatePrintProcessingState"].then ===
+                      "function"
+                  ) {
+                    $steps["updatePrintProcessingState"] = await $steps[
+                      "updatePrintProcessingState"
+                    ];
+                  }
+
+                  $steps["postConsultFillTemplate"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "POST",
+                            "/api/v3/consults/template",
+                            (() => {
+                              try {
+                                return {
+                                  "X-Namespace": localStorage.getItem(
+                                    "inlab_user_namespace_id"
+                                  )
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })(),
+                            (() => {
+                              try {
+                                return {
+                                  patient_id: $ctx.params.code,
+                                  with_signature: $state.signature
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })(),
+                            "blob"
+                          ]
+                        };
+                        return $globalActions[
+                          "AuthGlobalContext.apiFetcherPlus"
+                        ]?.apply(null, [...actionArgs.args]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["postConsultFillTemplate"] != null &&
+                    typeof $steps["postConsultFillTemplate"] === "object" &&
+                    typeof $steps["postConsultFillTemplate"].then === "function"
+                  ) {
+                    $steps["postConsultFillTemplate"] = await $steps[
+                      "postConsultFillTemplate"
+                    ];
+                  }
+
+                  $steps["openConsultPrint"] =
+                    $steps.postConsultFillTemplate.status === 200
+                      ? (() => {
+                          const actionArgs = {
+                            customFunction: async () => {
+                              return (() => {
+                                const response = $steps.postConsultFillTemplate;
+                                if (response.data instanceof Blob) {
+                                  const pdfUrl = URL.createObjectURL(
+                                    response.data
+                                  );
+                                  window.open(pdfUrl, "_blank");
+                                  return setTimeout(
+                                    () => URL.revokeObjectURL(pdfUrl),
+                                    10000
+                                  );
+                                } else {
+                                  console.error(
+                                    "Received non-Blob response:",
+                                    response
+                                  );
+                                  return alert("Error: Could not generate PDF");
+                                }
+                              })();
+                            }
+                          };
+                          return (({ customFunction }) => {
+                            return customFunction();
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["openConsultPrint"] != null &&
+                    typeof $steps["openConsultPrint"] === "object" &&
+                    typeof $steps["openConsultPrint"].then === "function"
+                  ) {
+                    $steps["openConsultPrint"] = await $steps[
+                      "openConsultPrint"
+                    ];
+                  }
+
+                  $steps["updatePrintProcessingState2"] =
+                    $steps.postConsultFillTemplate
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["printProcessingState"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updatePrintProcessingState2"] != null &&
+                    typeof $steps["updatePrintProcessingState2"] === "object" &&
+                    typeof $steps["updatePrintProcessingState2"].then ===
+                      "function"
+                  ) {
+                    $steps["updatePrintProcessingState2"] = await $steps[
+                      "updatePrintProcessingState2"
+                    ];
+                  }
+
+                  $steps["updateSignature"] = $steps.postConsultFillTemplate
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["signature"]
+                          },
+                          operation: 0,
+                          value: false
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateSignature"] != null &&
+                    typeof $steps["updateSignature"] === "object" &&
+                    typeof $steps["updateSignature"].then === "function"
+                  ) {
+                    $steps["updateSignature"] = await $steps["updateSignature"];
+                  }
+
+                  $steps["updatePrintErrorState"] =
+                    $steps.postConsultFillTemplate.status != 200
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["printErrorState"]
+                            },
+                            operation: 0,
+                            value: true
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updatePrintErrorState"] != null &&
+                    typeof $steps["updatePrintErrorState"] === "object" &&
+                    typeof $steps["updatePrintErrorState"].then === "function"
+                  ) {
+                    $steps["updatePrintErrorState"] = await $steps[
+                      "updatePrintErrorState"
+                    ];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirm2",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirm2",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, ["confirm2", "selected"])(
+                      eventArgs[0]
+                    );
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirm2",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "confirm2",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "confirm2",
+                  "selected"
+                ])}
+                shape={"rounded"}
+                sortDeselected={generateStateValueProp($state, [
+                  "confirm2",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "confirm2",
+                  "sortSelected"
+                ])}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__kg9OJ
+                  )}
+                >
+                  {"\u067e\u0631\u06cc\u0646\u062a"}
+                </div>
+              </Button>
+            </div>
+          </AntdModal>
         </div>
       </div>
     </React.Fragment>
@@ -3620,11 +4232,17 @@ const PlasmicDescendants = {
     "modalDeleteConsultConfirmation",
     "confirmationContent",
     "confirmationYesNo",
-    "noConfirm",
+    "notConfirm",
     "confirm",
     "unsuccessfulDeleteConsult",
     "title",
-    "guide2"
+    "guide2",
+    "modalPrintPatientConsult",
+    "confirmationYesNo2",
+    "notConfirm2",
+    "confirm2",
+    "isSignatureContent",
+    "isSignature"
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
@@ -3937,7 +4555,7 @@ const PlasmicDescendants = {
     "modalDeleteConsultConfirmation",
     "confirmationContent",
     "confirmationYesNo",
-    "noConfirm",
+    "notConfirm",
     "confirm",
     "unsuccessfulDeleteConsult",
     "title",
@@ -3946,16 +4564,29 @@ const PlasmicDescendants = {
   confirmationContent: [
     "confirmationContent",
     "confirmationYesNo",
-    "noConfirm",
+    "notConfirm",
     "confirm",
     "unsuccessfulDeleteConsult"
   ],
-  confirmationYesNo: ["confirmationYesNo", "noConfirm", "confirm"],
-  noConfirm: ["noConfirm"],
+  confirmationYesNo: ["confirmationYesNo", "notConfirm", "confirm"],
+  notConfirm: ["notConfirm"],
   confirm: ["confirm"],
   unsuccessfulDeleteConsult: ["unsuccessfulDeleteConsult"],
   title: ["title", "guide2"],
-  guide2: ["guide2"]
+  guide2: ["guide2"],
+  modalPrintPatientConsult: [
+    "modalPrintPatientConsult",
+    "confirmationYesNo2",
+    "notConfirm2",
+    "confirm2",
+    "isSignatureContent",
+    "isSignature"
+  ],
+  confirmationYesNo2: ["confirmationYesNo2", "notConfirm2", "confirm2"],
+  notConfirm2: ["notConfirm2"],
+  confirm2: ["confirm2"],
+  isSignatureContent: ["isSignatureContent", "isSignature"],
+  isSignature: ["isSignature"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -4016,11 +4647,17 @@ type NodeDefaultElementType = {
   modalDeleteConsultConfirmation: typeof AntdModal;
   confirmationContent: "div";
   confirmationYesNo: "div";
-  noConfirm: typeof Button;
+  notConfirm: typeof Button;
   confirm: typeof Button;
   unsuccessfulDeleteConsult: typeof Alert3;
   title: "div";
   guide2: "div";
+  modalPrintPatientConsult: typeof AntdModal;
+  confirmationYesNo2: "div";
+  notConfirm2: typeof Button;
+  confirm2: typeof Button;
+  isSignatureContent: "div";
+  isSignature: typeof AntdSwitch;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -4147,11 +4784,17 @@ export const PlasmicConsultList = Object.assign(
     ),
     confirmationContent: makeNodeComponent("confirmationContent"),
     confirmationYesNo: makeNodeComponent("confirmationYesNo"),
-    noConfirm: makeNodeComponent("noConfirm"),
+    notConfirm: makeNodeComponent("notConfirm"),
     confirm: makeNodeComponent("confirm"),
     unsuccessfulDeleteConsult: makeNodeComponent("unsuccessfulDeleteConsult"),
     title: makeNodeComponent("title"),
     guide2: makeNodeComponent("guide2"),
+    modalPrintPatientConsult: makeNodeComponent("modalPrintPatientConsult"),
+    confirmationYesNo2: makeNodeComponent("confirmationYesNo2"),
+    notConfirm2: makeNodeComponent("notConfirm2"),
+    confirm2: makeNodeComponent("confirm2"),
+    isSignatureContent: makeNodeComponent("isSignatureContent"),
+    isSignature: makeNodeComponent("isSignature"),
 
     // Metadata about props expected for PlasmicConsultList
     internalVariantProps: PlasmicConsultList__VariantProps,
