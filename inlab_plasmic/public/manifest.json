@@ -38,7 +38,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/new_inlab",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#386fff",
   "background_color": "#EDEDEDD9",

@@ -28,7 +28,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker
-          .register('/service-worker.js') // Path to your service worker in the public directory
+          .register('/sw.js') // Path to your service worker in the public directory
           .then((registration) => {
             console.log('Service Worker registered with scope:', registration.scope);
           })
