@@ -41,7 +41,7 @@ const pwaConfig = withPWA({
   register: true,
   skipWaiting: true,
   // Simplified configuration to avoid multiple GenerateSW calls
-  buildExcludes: [/middleware-manifest\.json$/],
+  buildExcludes: [/middleware-manifest\.json$/, /\.map$/],
   // Allow larger files to be precached (default is 2MB)
   maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
 })(nextConfig);

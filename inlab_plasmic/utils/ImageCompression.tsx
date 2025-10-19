@@ -35,9 +35,9 @@ function base64ToFile(base64: string, filename = 'image.jpg'): File {
  */
 export async function processAndCompressBase64(
   inputBase64: string,
-  targetMaxMB = 0.05,
-  maxDim = 800,
-  jpegQuality = 0.4
+  targetMaxMB = 0.2,
+  maxDim = 1200,
+  jpegQuality = 0.8
 ): Promise<string> {
   try {
     const imageFile = base64ToFile(inputBase64);
@@ -65,9 +65,9 @@ export async function processAndCompressBase64(
  */
 export async function compressMultipleBase64Images(
   base64Strings: string[],
-  targetMaxMB = 0.05,
-  maxDim = 800,
-  jpegQuality = 0.4
+  targetMaxMB = 0.2,
+  maxDim = 1200,
+  jpegQuality = 0.8
 ): Promise<string[]> {
   const tasks = base64Strings.map((b64) =>
     processAndCompressBase64(b64, targetMaxMB, maxDim, jpegQuality)
