@@ -82,46 +82,6 @@
     padding: 6px;
   }
 }
-.exPatientDataApiFetcher:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  position: relative;
-  width: 100%;
-  height: auto;
-  left: auto;
-  top: auto;
-  overflow: hidden;
-  align-self: center;
-  min-width: 0;
-  margin: 0px;
-}
-.patientNameAgeGender {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  text-align: center;
-  font-weight: 400;
-  left: auto;
-  top: auto;
-  z-index: 1;
-  right: auto;
-  max-height: 30px;
-  font-size: var(--token-NMUbRE7XpwuK);
-  align-self: center;
-  color: #70727a;
-  white-space: pre;
-  min-width: 0;
-  padding: 2px;
-  margin: 0px 8px 0px 0px;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .patientNameAgeGender {
-    font-size: var(--token-NMUbRE7XpwuK);
-    padding: 4px 0px;
-    margin: 0px;
-  }
-}
 .patientDataApiFetcher:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;

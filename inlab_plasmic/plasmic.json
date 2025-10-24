@@ -2058,14 +2058,14 @@
         },
         {
           "id": "LsXtPkapGRoc",
-          "name": "PatientSummary",
+          "name": "PatientDischargeSummary",
           "type": "managed",
           "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicPatientSummary.tsx",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicPatientDischargeSummary.tsx",
           "importSpec": {
             "modulePath": "../pages/patient/[code]/summary/[adm_id].tsx"
           },
-          "cssFilePath": "plasmic/inlab/PlasmicPatientSummary.module.css",
+          "cssFilePath": "plasmic/inlab/PlasmicPatientDischargeSummary.module.css",
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/patient/[code]/summary/[adm_id]"
@@ -2968,6 +2968,12 @@
           "name": "ApiFetcherComponentPlus",
           "displayName": "ApiFetcherComponentPlus",
           "componentImportPath": "./utils/ApiFetcherComponentPlus"
+        },
+        {
+          "id": "sQjghORGG9Gf",
+          "name": "SimpleFormBuilder",
+          "displayName": "SimpleFormBuilder",
+          "componentImportPath": "@/components/SimpleFormBuilder"
         }
       ],
       "customFunctions": [

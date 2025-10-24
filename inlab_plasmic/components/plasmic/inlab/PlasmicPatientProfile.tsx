@@ -3486,174 +3486,172 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 </div>
               ) : null}
             </div>
-            {false ? (
-              <Button
-                data-plasmic-name={"dischargeSummary"}
-                data-plasmic-override={overrides.dischargeSummary}
-                className={classNames("__wab_instance", sty.dischargeSummary)}
-                color={"blue"}
-                deselected={generateStateValueProp($state, [
-                  "dischargeSummary",
-                  "deselected"
-                ])}
-                isDisabled={generateStateValueProp($state, [
-                  "dischargeSummary",
-                  "isDisabled"
-                ])}
-                onClick={async event => {
-                  const $steps = {};
+            <Button
+              data-plasmic-name={"dischargeSummary"}
+              data-plasmic-override={overrides.dischargeSummary}
+              className={classNames("__wab_instance", sty.dischargeSummary)}
+              color={"blue"}
+              deselected={generateStateValueProp($state, [
+                "dischargeSummary",
+                "deselected"
+              ])}
+              isDisabled={generateStateValueProp($state, [
+                "dischargeSummary",
+                "isDisabled"
+              ])}
+              onClick={async event => {
+                const $steps = {};
 
-                  $steps["goToPatientSummary"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          destination: `/patient/${(() => {
-                            try {
-                              return $ctx.params.code;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
+                $steps["goToPatientSummary"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: `/patient/${(() => {
+                          try {
+                            return $ctx.params.code;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
                             }
-                          })()}/summary/${(() => {
-                            try {
-                              return $ctx.params.adm_id;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()}`
-                        };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
+                            throw e;
                           }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["goToPatientSummary"] != null &&
-                    typeof $steps["goToPatientSummary"] === "object" &&
-                    typeof $steps["goToPatientSummary"].then === "function"
-                  ) {
-                    $steps["goToPatientSummary"] = await $steps[
-                      "goToPatientSummary"
-                    ];
-                  }
-                }}
-                onDeselectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "dischargeSummary",
-                      "deselected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onIsDisabledChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "dischargeSummary",
-                      "isDisabled"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSelectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "dischargeSummary",
-                      "selected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSortDeselectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "dischargeSummary",
-                      "sortDeselected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSortSelectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "dischargeSummary",
-                      "sortSelected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                selected={generateStateValueProp($state, [
-                  "dischargeSummary",
-                  "selected"
-                ])}
-                sortDeselected={generateStateValueProp($state, [
-                  "dischargeSummary",
-                  "sortDeselected"
-                ])}
-                sortSelected={generateStateValueProp($state, [
-                  "dischargeSummary",
-                  "sortSelected"
-                ])}
-              >
-                {
-                  "\u062b\u0628\u062a \u062e\u0644\u0627\u0635\u0647 \u067e\u0631\u0648\u0646\u062f\u0647 \u0628\u06cc\u0645\u0627\u0631 "
+                        })()}/summary/${(() => {
+                          try {
+                            return $ctx.params.adm_id;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()}`
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToPatientSummary"] != null &&
+                  typeof $steps["goToPatientSummary"] === "object" &&
+                  typeof $steps["goToPatientSummary"].then === "function"
+                ) {
+                  $steps["goToPatientSummary"] = await $steps[
+                    "goToPatientSummary"
+                  ];
                 }
-              </Button>
-            ) : null}
+              }}
+              onDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "dischargeSummary",
+                    "deselected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onIsDisabledChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "dischargeSummary",
+                    "isDisabled"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "dischargeSummary",
+                    "selected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onSortDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "dischargeSummary",
+                    "sortDeselected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onSortSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "dischargeSummary",
+                    "sortSelected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              selected={generateStateValueProp($state, [
+                "dischargeSummary",
+                "selected"
+              ])}
+              sortDeselected={generateStateValueProp($state, [
+                "dischargeSummary",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "dischargeSummary",
+                "sortSelected"
+              ])}
+            >
+              {
+                "\u062b\u0628\u062a \u062e\u0644\u0627\u0635\u0647 \u067e\u0631\u0648\u0646\u062f\u0647 \u0628\u06cc\u0645\u0627\u0631 "
+              }
+            </Button>
           </div>
         </div>
       </div>

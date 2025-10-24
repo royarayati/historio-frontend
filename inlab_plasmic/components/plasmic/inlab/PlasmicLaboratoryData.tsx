@@ -61,11 +61,11 @@ import {
 
 import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: dnRUnqur1vWa/component
 import RedirectToNamespaceSelection from "../../RedirectToNamespaceSelection"; // plasmic-import: rhyWwtv3sPGn/component
-import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
 import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/component
 import { AntdSelect } from "@plasmicpkgs/antd5/skinny/registerSelect";
+import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import BookmarkLab from "../../BookmarkLab"; // plasmic-import: yhUiLESiXQuk/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
@@ -111,8 +111,6 @@ export type PlasmicLaboratoryData__OverridesType = {
   redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
   redirectToNamespaceSelection?: Flex__<typeof RedirectToNamespaceSelection>;
   header?: Flex__<"div">;
-  exPatientDataApiFetcher?: Flex__<typeof ApiFetcherComponent>;
-  patientNameAgeGender?: Flex__<"div">;
   patientDataApiFetcher?: Flex__<typeof ApiFetcherComponentPlus>;
   patientNameAgeGender2?: Flex__<"div">;
   tabButtons?: Flex__<"div">;
@@ -758,393 +756,6 @@ function PlasmicLaboratoryData__RenderFunc(props: {
           data-plasmic-override={overrides.header}
           className={classNames(projectcss.all, sty.header)}
         >
-          {false ? (
-            <ApiFetcherComponent
-              data-plasmic-name={"exPatientDataApiFetcher"}
-              data-plasmic-override={overrides.exPatientDataApiFetcher}
-              className={classNames(
-                "__wab_instance",
-                sty.exPatientDataApiFetcher
-              )}
-              delay={50}
-              headers={(() => {
-                try {
-                  return {
-                    "X-Namespace": localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )
-                  };
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
-                }
-              })()}
-              method={"GET"}
-              path={`/api/v3/remote_his/admissions?dismissed=true&admission_id=${$ctx.params.adm_id}&limit=1&offset=0`}
-              ref={ref => {
-                $refs["exPatientDataApiFetcher"] = ref;
-              }}
-            >
-              <DataCtxReader__>
-                {$ctx => (
-                  <div
-                    data-plasmic-name={"patientNameAgeGender"}
-                    data-plasmic-override={overrides.patientNameAgeGender}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.patientNameAgeGender,
-                      {
-                        [sty.patientNameAgeGenderviewNormalRange]: hasVariant(
-                          $state,
-                          "viewNormalRange",
-                          "viewNormalRange"
-                        )
-                      }
-                    )}
-                    dir={"rtl"}
-                  >
-                    {hasVariant(globalVariants, "screen", "mobileFirst") ? (
-                      <React.Fragment>
-                        {(() => {
-                          function calcAgeShamsiDetailed(shamsiStr) {
-                            shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
-                              String.fromCharCode(d.charCodeAt(0) - 1728)
-                            );
-                            const [datePart] = shamsiStr.split(" ");
-                            let [birthYear, birthMonth, birthDay] = datePart
-                              .split("/")
-                              .map(Number);
-                            const gNow = new Date();
-                            const gy = gNow.getFullYear();
-                            const gm = gNow.getMonth() + 1;
-                            const gd = gNow.getDate();
-                            function g2j(gy, gm, gd) {
-                              const gDaysInMonth = [
-                                31,
-                                (gy % 4 === 0 && gy % 100 !== 0) ||
-                                gy % 400 === 0
-                                  ? 29
-                                  : 28,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31
-                              ];
-
-                              let g_day_no =
-                                365 * (gy - 1600) +
-                                Math.floor((gy - 1600 + 3) / 4) -
-                                Math.floor((gy - 1600 + 99) / 100) +
-                                Math.floor((gy - 1600 + 399) / 400);
-                              for (let i = 0; i < gm - 1; ++i)
-                                g_day_no += gDaysInMonth[i];
-                              g_day_no += gd - 1;
-                              let j_day_no = g_day_no - 79;
-                              let j_np = Math.floor(j_day_no / 12053);
-                              j_day_no %= 12053;
-                              let jy =
-                                979 +
-                                33 * j_np +
-                                4 * Math.floor(j_day_no / 1461);
-                              j_day_no %= 1461;
-                              if (j_day_no >= 366) {
-                                jy += Math.floor((j_day_no - 1) / 365);
-                                j_day_no = (j_day_no - 1) % 365;
-                              }
-                              const jDaysInMonth = [
-                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                              ];
-
-                              let jm;
-                              for (
-                                jm = 0;
-                                jm < 11 && j_day_no >= jDaysInMonth[jm];
-                                ++jm
-                              )
-                                j_day_no -= jDaysInMonth[jm];
-                              let jd = j_day_no + 1;
-                              return {
-                                jy,
-                                jm: jm + 1,
-                                jd
-                              };
-                            }
-                            const today = g2j(gy, gm, gd);
-                            let yearDiff = today.jy - birthYear;
-                            let monthDiff = today.jm - birthMonth;
-                            let dayDiff = today.jd - birthDay;
-                            if (dayDiff < 0) {
-                              monthDiff--;
-                              const jDaysInMonth = [
-                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                              ];
-
-                              dayDiff +=
-                                jDaysInMonth[(birthMonth - 2 + 12) % 12];
-                            }
-                            if (monthDiff < 0) {
-                              yearDiff--;
-                              monthDiff += 12;
-                            }
-                            if (yearDiff >= 1) {
-                              return `${yearDiff}`;
-                            } else if (monthDiff >= 1) {
-                              return `${monthDiff} ماهه`;
-                            } else {
-                              return `${dayDiff} روزه`;
-                            }
-                          }
-                          function calcAgeGregorianDetailed(dateStr) {
-                            const dob = new Date(dateStr);
-                            const now = new Date();
-                            let yearDiff =
-                              now.getFullYear() - dob.getFullYear();
-                            let monthDiff = now.getMonth() - dob.getMonth();
-                            let dayDiff = now.getDate() - dob.getDate();
-                            if (dayDiff < 0) {
-                              monthDiff--;
-                              const prevMonth = new Date(
-                                now.getFullYear(),
-                                now.getMonth(),
-                                0
-                              );
-                              dayDiff += prevMonth.getDate();
-                            }
-                            if (monthDiff < 0) {
-                              yearDiff--;
-                              monthDiff += 12;
-                            }
-                            if (yearDiff >= 1) {
-                              return `${yearDiff}`;
-                            } else if (monthDiff >= 1) {
-                              return `${monthDiff}ماهه`;
-                            } else {
-                              return `${dayDiff}روزه`;
-                            }
-                          }
-                          function getPersonInfoWithAge(item) {
-                            const hisType = JSON.parse(
-                              localStorage.getItem("inlab_user_his_type")
-                            );
-                            if (!item || !item.date_of_birth)
-                              return "تاریخ تولد موجود نیست.";
-                            const fullName = `${item.first_name} ${item.last_name}`;
-                            const genderSymbol =
-                              item.gender === "F"
-                                ? " \u2640️"
-                                : item.gender === "M"
-                                ? " \u2642️"
-                                : "";
-                            let ageString;
-                            if (
-                              hisType === "tums_api" ||
-                              hisType === "tebvarayane_db"
-                            ) {
-                              ageString = calcAgeShamsiDetailed(
-                                item.date_of_birth
-                              );
-                            } else {
-                              ageString = calcAgeGregorianDetailed(
-                                item.date_of_birth
-                              );
-                            }
-                            return `${fullName} ${ageString}${genderSymbol}`;
-                          }
-                          return (() => {
-                            if ($ctx.fetched_data.loading) return "";
-                            if (
-                              $ctx.fetched_data.data &&
-                              $ctx.fetched_data.data.length === 0
-                            )
-                              return "";
-                            const item = $ctx.fetched_data.data[0];
-                            return getPersonInfoWithAge(item);
-                          })();
-                        })()}
-                      </React.Fragment>
-                    ) : (
-                      <React.Fragment>
-                        {(() => {
-                          function calcAgeShamsiDetailed(shamsiStr) {
-                            shamsiStr = shamsiStr.replace(/[۰-۹]/g, d =>
-                              String.fromCharCode(d.charCodeAt(0) - 1728)
-                            );
-                            const [datePart] = shamsiStr.split(" ");
-                            let [birthYear, birthMonth, birthDay] = datePart
-                              .split("/")
-                              .map(Number);
-                            const gNow = new Date();
-                            const gy = gNow.getFullYear();
-                            const gm = gNow.getMonth() + 1;
-                            const gd = gNow.getDate();
-                            function g2j(gy, gm, gd) {
-                              const gDaysInMonth = [
-                                31,
-                                (gy % 4 === 0 && gy % 100 !== 0) ||
-                                gy % 400 === 0
-                                  ? 29
-                                  : 28,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31,
-                                31,
-                                30,
-                                31,
-                                30,
-                                31
-                              ];
-
-                              let g_day_no =
-                                365 * (gy - 1600) +
-                                Math.floor((gy - 1600 + 3) / 4) -
-                                Math.floor((gy - 1600 + 99) / 100) +
-                                Math.floor((gy - 1600 + 399) / 400);
-                              for (let i = 0; i < gm - 1; ++i)
-                                g_day_no += gDaysInMonth[i];
-                              g_day_no += gd - 1;
-                              let j_day_no = g_day_no - 79;
-                              let j_np = Math.floor(j_day_no / 12053);
-                              j_day_no %= 12053;
-                              let jy =
-                                979 +
-                                33 * j_np +
-                                4 * Math.floor(j_day_no / 1461);
-                              j_day_no %= 1461;
-                              if (j_day_no >= 366) {
-                                jy += Math.floor((j_day_no - 1) / 365);
-                                j_day_no = (j_day_no - 1) % 365;
-                              }
-                              const jDaysInMonth = [
-                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                              ];
-
-                              let jm;
-                              for (
-                                jm = 0;
-                                jm < 11 && j_day_no >= jDaysInMonth[jm];
-                                ++jm
-                              )
-                                j_day_no -= jDaysInMonth[jm];
-                              let jd = j_day_no + 1;
-                              return {
-                                jy,
-                                jm: jm + 1,
-                                jd
-                              };
-                            }
-                            const today = g2j(gy, gm, gd);
-                            let yearDiff = today.jy - birthYear;
-                            let monthDiff = today.jm - birthMonth;
-                            let dayDiff = today.jd - birthDay;
-                            if (dayDiff < 0) {
-                              monthDiff--;
-                              const jDaysInMonth = [
-                                31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
-                              ];
-
-                              dayDiff +=
-                                jDaysInMonth[(birthMonth - 2 + 12) % 12];
-                            }
-                            if (monthDiff < 0) {
-                              yearDiff--;
-                              monthDiff += 12;
-                            }
-                            if (yearDiff >= 1) {
-                              return `${yearDiff}`;
-                            } else if (monthDiff >= 1) {
-                              return `${monthDiff} ماهه`;
-                            } else {
-                              return `${dayDiff} روزه`;
-                            }
-                          }
-                          function calcAgeGregorianDetailed(dateStr) {
-                            const dob = new Date(dateStr);
-                            const now = new Date();
-                            let yearDiff =
-                              now.getFullYear() - dob.getFullYear();
-                            let monthDiff = now.getMonth() - dob.getMonth();
-                            let dayDiff = now.getDate() - dob.getDate();
-                            if (dayDiff < 0) {
-                              monthDiff--;
-                              const prevMonth = new Date(
-                                now.getFullYear(),
-                                now.getMonth(),
-                                0
-                              );
-                              dayDiff += prevMonth.getDate();
-                            }
-                            if (monthDiff < 0) {
-                              yearDiff--;
-                              monthDiff += 12;
-                            }
-                            if (yearDiff >= 1) {
-                              return `${yearDiff}`;
-                            } else if (monthDiff >= 1) {
-                              return `${monthDiff}ماهه`;
-                            } else {
-                              return `${dayDiff}روزه`;
-                            }
-                          }
-                          function getPersonInfoWithAge(item) {
-                            const hisType = JSON.parse(
-                              localStorage.getItem("inlab_user_his_type")
-                            );
-                            if (!item || !item.date_of_birth)
-                              return "تاریخ تولد موجود نیست.";
-                            const fullName = `${item.first_name} ${item.last_name}`;
-                            const genderSymbol =
-                              item.gender === "F"
-                                ? " \u2640️"
-                                : item.gender === "M"
-                                ? " \u2642️"
-                                : "";
-                            let ageString;
-                            if (
-                              hisType === "tums_api" ||
-                              hisType === "tebvarayane_db"
-                            ) {
-                              ageString = calcAgeShamsiDetailed(
-                                item.date_of_birth
-                              );
-                            } else {
-                              ageString = calcAgeGregorianDetailed(
-                                item.date_of_birth
-                              );
-                            }
-                            return `${fullName} ${ageString}${genderSymbol}`;
-                          }
-                          return (() => {
-                            if ($ctx.fetched_data.loading) return "";
-                            if (
-                              $ctx.fetched_data.data &&
-                              $ctx.fetched_data.data.length === 0
-                            )
-                              return "";
-                            const item = $ctx.fetched_data.data[0];
-                            return getPersonInfoWithAge(item);
-                          })();
-                        })()}
-                      </React.Fragment>
-                    )}
-                  </div>
-                )}
-              </DataCtxReader__>
-            </ApiFetcherComponent>
-          ) : null}
           <ApiFetcherComponentPlus
             data-plasmic-name={"patientDataApiFetcher"}
             data-plasmic-override={overrides.patientDataApiFetcher}
@@ -6825,8 +6436,6 @@ const PlasmicDescendants = {
     "redirectToInlabLogin",
     "redirectToNamespaceSelection",
     "header",
-    "exPatientDataApiFetcher",
-    "patientNameAgeGender",
     "patientDataApiFetcher",
     "patientNameAgeGender2",
     "tabButtons",
@@ -6902,15 +6511,7 @@ const PlasmicDescendants = {
   ],
   redirectToInlabLogin: ["redirectToInlabLogin"],
   redirectToNamespaceSelection: ["redirectToNamespaceSelection"],
-  header: [
-    "header",
-    "exPatientDataApiFetcher",
-    "patientNameAgeGender",
-    "patientDataApiFetcher",
-    "patientNameAgeGender2"
-  ],
-  exPatientDataApiFetcher: ["exPatientDataApiFetcher", "patientNameAgeGender"],
-  patientNameAgeGender: ["patientNameAgeGender"],
+  header: ["header", "patientDataApiFetcher", "patientNameAgeGender2"],
   patientDataApiFetcher: ["patientDataApiFetcher", "patientNameAgeGender2"],
   patientNameAgeGender2: ["patientNameAgeGender2"],
   tabButtons: ["tabButtons", "checkedFactor", "button", "laboratoryResult"],
@@ -7215,8 +6816,6 @@ type NodeDefaultElementType = {
   redirectToInlabLogin: typeof RedirectToInlabLogin;
   redirectToNamespaceSelection: typeof RedirectToNamespaceSelection;
   header: "div";
-  exPatientDataApiFetcher: typeof ApiFetcherComponent;
-  patientNameAgeGender: "div";
   patientDataApiFetcher: typeof ApiFetcherComponentPlus;
   patientNameAgeGender2: "div";
   tabButtons: "div";
@@ -7356,8 +6955,6 @@ export const PlasmicLaboratoryData = Object.assign(
       "redirectToNamespaceSelection"
     ),
     header: makeNodeComponent("header"),
-    exPatientDataApiFetcher: makeNodeComponent("exPatientDataApiFetcher"),
-    patientNameAgeGender: makeNodeComponent("patientNameAgeGender"),
     patientDataApiFetcher: makeNodeComponent("patientDataApiFetcher"),
     patientNameAgeGender2: makeNodeComponent("patientNameAgeGender2"),
     tabButtons: makeNodeComponent("tabButtons"),
