@@ -2968,12 +2968,6 @@
           "name": "ApiFetcherComponentPlus",
           "displayName": "ApiFetcherComponentPlus",
           "componentImportPath": "./utils/ApiFetcherComponentPlus"
-        },
-        {
-          "id": "sQjghORGG9Gf",
-          "name": "SimpleFormBuilder",
-          "displayName": "SimpleFormBuilder",
-          "componentImportPath": "@/components/SimpleFormBuilder"
         }
       ],
       "customFunctions": [
