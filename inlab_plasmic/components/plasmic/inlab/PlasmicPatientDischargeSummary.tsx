@@ -110,7 +110,10 @@ export type PlasmicPatientDischargeSummary__OverridesType = {
   getSummaryApi?: Flex__<typeof ApiFetcherComponentPlus>;
   loading?: Flex__<"div">;
   getDischargeSummarySection?: Flex__<"div">;
+  printEditSection?: Flex__<"div">;
   printButton?: Flex__<typeof Button>;
+  editButton?: Flex__<typeof Button>;
+  deleteButton?: Flex__<typeof Button>;
   eachSummary?: Flex__<"div">;
   getChiefComplaintSection2?: Flex__<"div">;
   getFinalDiagnosisSection2?: Flex__<"div">;
@@ -163,6 +166,7 @@ export type PlasmicPatientDischargeSummary__OverridesType = {
   labIssuedDatetime?: Flex__<"div">;
   bookmarkLab?: Flex__<typeof BookmarkLab>;
   labResults?: Flex__<"div">;
+  saveLabs?: Flex__<typeof Button>;
   paraclinicReports?: Flex__<typeof AntdModal>;
   apiFetcherComponent2?: Flex__<typeof ApiFetcherComponent>;
   paraclinicReportList?: Flex__<"div">;
@@ -766,6 +770,98 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
         path: "printButton[].sortSelected",
         type: "private",
         variableType: "boolean"
+      },
+      {
+        path: "saveLabs.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "saveLabs.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "saveLabs.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "saveLabs.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "saveLabs.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "showSuccessAdmitSummary",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "editButton[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "editButton[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "editButton[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "editButton[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "editButton[].sortSelected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "deleteButton[].isDisabled",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "deleteButton[].selected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "deleteButton[].deselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "deleteButton[].sortDeselected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "deleteButton[].sortSelected",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "showDeleteSummaryAlarmText",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -1048,9 +1144,12 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
               data-plasmic-override={overrides.getSummaryApi}
               autoFetch={true}
               className={classNames("__wab_instance", sty.getSummaryApi)}
-              fetchTrigger={(() => {
+              fetchTriggers={(() => {
                 try {
-                  return $state.addPatientSummary;
+                  return [
+                    $state.showDeleteSummaryAlarmText,
+                    $state.addPatientSummary
+                  ];
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -1126,6 +1225,26 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                         }
                       </div>
                     ) : null}
+                    {(() => {
+                      const showSuccessAlarmText =
+                        $state.showDeleteSummaryAlarmText;
+                      setTimeout(() => {
+                        $state.showSuccessAlarmText = false;
+                      }, 3000);
+                      return showSuccessAlarmText;
+                    })() ? (
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__rOahs
+                        )}
+                      >
+                        {
+                          "\u062e\u0644\u0627\u0635\u0647 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062d\u0630\u0641 \u0634\u062f"
+                        }
+                      </div>
+                    ) : null}
                     {(_par =>
                       !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                       (() => {
@@ -1157,303 +1276,797 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                           dir={"rtl"}
                           key={currentIndex}
                         >
-                          {(() => {
-                            const child$Props = {
-                              className: classNames(
-                                "__wab_instance",
-                                sty.printButton
-                              ),
-                              color: "blue",
-                              deselected: generateStateValueProp($state, [
-                                "printButton",
-                                __plasmic_idx_0,
-                                "deselected"
-                              ]),
-                              isDisabled: generateStateValueProp($state, [
-                                "printButton",
-                                __plasmic_idx_0,
-                                "isDisabled"
-                              ]),
-                              onClick: async event => {
-                                const $steps = {};
+                          <div
+                            data-plasmic-name={"printEditSection"}
+                            data-plasmic-override={overrides.printEditSection}
+                            className={classNames(
+                              projectcss.all,
+                              sty.printEditSection
+                            )}
+                          >
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.printButton
+                                ),
+                                color: "blue",
+                                deselected: generateStateValueProp($state, [
+                                  "printButton",
+                                  __plasmic_idx_0,
+                                  "deselected"
+                                ]),
+                                isDisabled: generateStateValueProp($state, [
+                                  "printButton",
+                                  __plasmic_idx_0,
+                                  "isDisabled"
+                                ]),
+                                onClick: async event => {
+                                  const $steps = {};
 
-                                $steps["postPrintSummary"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        args: [
-                                          "POST",
-                                          "/api/v3/patient/discharge_summary/print",
-                                          (() => {
-                                            try {
-                                              return {
-                                                "X-Namespace":
-                                                  localStorage.getItem(
-                                                    "inlab_user_namespace_id"
-                                                  )
-                                              };
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return undefined;
-                                              }
-                                              throw e;
-                                            }
-                                          })(),
-                                          (() => {
-                                            try {
-                                              return {
-                                                national_code: $ctx.params.code,
-                                                patient_id: $ctx.params.code,
-                                                admission_id:
-                                                  $ctx.params.adm_id,
-                                                item_ids: [currentItem.item_id],
-                                                format: "pdf"
-                                              };
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return undefined;
-                                              }
-                                              throw e;
-                                            }
-                                          })()
-                                        ]
-                                      };
-                                      return $globalActions[
-                                        "AuthGlobalContext.apiFetcherPlus"
-                                      ]?.apply(null, [...actionArgs.args]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  $steps["postPrintSummary"] != null &&
-                                  typeof $steps["postPrintSummary"] ===
-                                    "object" &&
-                                  typeof $steps["postPrintSummary"].then ===
-                                    "function"
-                                ) {
-                                  $steps["postPrintSummary"] = await $steps[
-                                    "postPrintSummary"
-                                  ];
-                                }
-
-                                $steps["runCode"] =
-                                  $steps.postPrintSummary.status === 200
+                                  $steps["postPrintSummary"] = true
                                     ? (() => {
                                         const actionArgs = {
-                                          customFunction: async () => {
-                                            return (() => {
-                                              const response =
-                                                $steps.postPrintSummary;
-                                              if (
-                                                response.data &&
-                                                typeof response.data ===
-                                                  "string" &&
-                                                response.data.startsWith("%PDF")
-                                              ) {
-                                                const encoder =
-                                                  new TextEncoder();
-                                                const binaryData =
-                                                  encoder.encode(response.data);
-                                                const pdfBlob = new Blob(
-                                                  [binaryData],
-                                                  { type: "application/pdf" }
-                                                );
-                                                const pdfUrl =
-                                                  URL.createObjectURL(pdfBlob);
-                                                window.open(pdfUrl, "_blank");
-                                                return setTimeout(
-                                                  () =>
-                                                    URL.revokeObjectURL(pdfUrl),
-                                                  10000
-                                                );
-                                              } else {
-                                                console.error(
-                                                  "Received non-PDF response:",
-                                                  response
-                                                );
-                                                return alert(
-                                                  "Error: Could not generate PDF"
-                                                );
+                                          args: [
+                                            "POST",
+                                            "/api/v3/patient/discharge_summary/print",
+                                            (() => {
+                                              try {
+                                                return {
+                                                  "X-Namespace":
+                                                    localStorage.getItem(
+                                                      "inlab_user_namespace_id"
+                                                    )
+                                                };
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return undefined;
+                                                }
+                                                throw e;
                                               }
-                                            })();
-                                          }
+                                            })(),
+                                            (() => {
+                                              try {
+                                                return {
+                                                  national_code:
+                                                    $ctx.params.code,
+                                                  patient_id: $ctx.params.code,
+                                                  admission_id:
+                                                    $ctx.params.adm_id,
+                                                  item_ids: [
+                                                    currentItem.item_id
+                                                  ],
+                                                  format: "pdf"
+                                                };
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return undefined;
+                                                }
+                                                throw e;
+                                              }
+                                            })(),
+                                            "blob"
+                                          ]
                                         };
-                                        return (({ customFunction }) => {
-                                          return customFunction();
-                                        })?.apply(null, [actionArgs]);
+                                        return $globalActions[
+                                          "AuthGlobalContext.apiFetcherPlus"
+                                        ]?.apply(null, [...actionArgs.args]);
                                       })()
                                     : undefined;
-                                if (
-                                  $steps["runCode"] != null &&
-                                  typeof $steps["runCode"] === "object" &&
-                                  typeof $steps["runCode"].then === "function"
-                                ) {
-                                  $steps["runCode"] = await $steps["runCode"];
-                                }
-                              },
-                              onDeselectedChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "printButton",
-                                    __plasmic_idx_0,
-                                    "deselected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              onIsDisabledChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "printButton",
-                                    __plasmic_idx_0,
-                                    "isDisabled"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              onSelectedChange: async (...eventArgs: any) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "printButton",
-                                    __plasmic_idx_0,
-                                    "selected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              onSortDeselectedChange: async (
-                                ...eventArgs: any
-                              ) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "printButton",
-                                    __plasmic_idx_0,
-                                    "sortDeselected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              onSortSelectedChange: async (
-                                ...eventArgs: any
-                              ) => {
-                                ((...eventArgs) => {
-                                  generateStateOnChangeProp($state, [
-                                    "printButton",
-                                    __plasmic_idx_0,
-                                    "sortSelected"
-                                  ])(eventArgs[0]);
-                                }).apply(null, eventArgs);
-
-                                if (
-                                  eventArgs.length > 1 &&
-                                  eventArgs[1] &&
-                                  eventArgs[1]._plasmic_state_init_
-                                ) {
-                                  return;
-                                }
-                              },
-                              selected: generateStateValueProp($state, [
-                                "printButton",
-                                __plasmic_idx_0,
-                                "selected"
-                              ]),
-                              sortDeselected: generateStateValueProp($state, [
-                                "printButton",
-                                __plasmic_idx_0,
-                                "sortDeselected"
-                              ]),
-                              sortSelected: generateStateValueProp($state, [
-                                "printButton",
-                                __plasmic_idx_0,
-                                "sortSelected"
-                              ])
-                            };
-
-                            initializePlasmicStates(
-                              $state,
-                              [
-                                {
-                                  name: "printButton[].isDisabled",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                },
-                                {
-                                  name: "printButton[].selected",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                },
-                                {
-                                  name: "printButton[].deselected",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                },
-                                {
-                                  name: "printButton[].sortDeselected",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                },
-                                {
-                                  name: "printButton[].sortSelected",
-                                  initFunc: ({ $props, $state, $queries }) =>
-                                    undefined
-                                }
-                              ],
-                              [__plasmic_idx_0]
-                            );
-                            return (
-                              <Button
-                                data-plasmic-name={"printButton"}
-                                data-plasmic-override={overrides.printButton}
-                                {...child$Props}
-                              >
-                                <div
-                                  className={classNames(
-                                    projectcss.all,
-                                    projectcss.__wab_text,
-                                    sty.text__eAaDz
-                                  )}
-                                >
-                                  {
-                                    "\u067e\u0631\u06cc\u0646\u062a \u062e\u0644\u0627\u0635\u0647 \u067e\u0631\u0648\u0646\u062f\u0647"
+                                  if (
+                                    $steps["postPrintSummary"] != null &&
+                                    typeof $steps["postPrintSummary"] ===
+                                      "object" &&
+                                    typeof $steps["postPrintSummary"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["postPrintSummary"] = await $steps[
+                                      "postPrintSummary"
+                                    ];
                                   }
-                                </div>
-                              </Button>
-                            );
-                          })()}
+
+                                  $steps["runCode"] =
+                                    $steps.postPrintSummary.status === 200
+                                      ? (() => {
+                                          const actionArgs = {
+                                            customFunction: async () => {
+                                              return (() => {
+                                                const response =
+                                                  $steps.postPrintSummary;
+                                                if (
+                                                  response.data instanceof Blob
+                                                ) {
+                                                  const pdfUrl =
+                                                    URL.createObjectURL(
+                                                      response.data
+                                                    );
+                                                  window.open(pdfUrl, "_blank");
+                                                  return setTimeout(
+                                                    () =>
+                                                      URL.revokeObjectURL(
+                                                        pdfUrl
+                                                      ),
+                                                    10000
+                                                  );
+                                                } else {
+                                                  console.error(
+                                                    "Received non-Blob response:",
+                                                    response
+                                                  );
+                                                  return alert(
+                                                    "Error: Could not generate PDF"
+                                                  );
+                                                }
+                                              })();
+                                            }
+                                          };
+                                          return (({ customFunction }) => {
+                                            return customFunction();
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["runCode"] != null &&
+                                    typeof $steps["runCode"] === "object" &&
+                                    typeof $steps["runCode"].then === "function"
+                                  ) {
+                                    $steps["runCode"] = await $steps["runCode"];
+                                  }
+                                },
+                                onDeselectedChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "printButton",
+                                      __plasmic_idx_0,
+                                      "deselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onIsDisabledChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "printButton",
+                                      __plasmic_idx_0,
+                                      "isDisabled"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onSelectedChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "printButton",
+                                      __plasmic_idx_0,
+                                      "selected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onSortDeselectedChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "printButton",
+                                      __plasmic_idx_0,
+                                      "sortDeselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onSortSelectedChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "printButton",
+                                      __plasmic_idx_0,
+                                      "sortSelected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                selected: generateStateValueProp($state, [
+                                  "printButton",
+                                  __plasmic_idx_0,
+                                  "selected"
+                                ]),
+                                sortDeselected: generateStateValueProp($state, [
+                                  "printButton",
+                                  __plasmic_idx_0,
+                                  "sortDeselected"
+                                ]),
+                                sortSelected: generateStateValueProp($state, [
+                                  "printButton",
+                                  __plasmic_idx_0,
+                                  "sortSelected"
+                                ])
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "printButton[].isDisabled",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "printButton[].selected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "printButton[].deselected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "printButton[].sortDeselected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "printButton[].sortSelected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  }
+                                ],
+                                [__plasmic_idx_0]
+                              );
+                              return (
+                                <Button
+                                  data-plasmic-name={"printButton"}
+                                  data-plasmic-override={overrides.printButton}
+                                  {...child$Props}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__eAaDz
+                                    )}
+                                  >
+                                    {
+                                      "\u067e\u0631\u06cc\u0646\u062a \u062e\u0644\u0627\u0635\u0647 "
+                                    }
+                                  </div>
+                                </Button>
+                              );
+                            })()}
+                            {false
+                              ? (() => {
+                                  const child$Props = {
+                                    className: classNames(
+                                      "__wab_instance",
+                                      sty.editButton
+                                    ),
+                                    color: "yellow",
+                                    deselected: generateStateValueProp($state, [
+                                      "editButton",
+                                      __plasmic_idx_0,
+                                      "deselected"
+                                    ]),
+                                    isDisabled: generateStateValueProp($state, [
+                                      "editButton",
+                                      __plasmic_idx_0,
+                                      "isDisabled"
+                                    ]),
+                                    onClick: async event => {
+                                      const $steps = {};
+                                    },
+                                    onDeselectedChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "editButton",
+                                          __plasmic_idx_0,
+                                          "deselected"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    onIsDisabledChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "editButton",
+                                          __plasmic_idx_0,
+                                          "isDisabled"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    onSelectedChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "editButton",
+                                          __plasmic_idx_0,
+                                          "selected"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    onSortDeselectedChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "editButton",
+                                          __plasmic_idx_0,
+                                          "sortDeselected"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    onSortSelectedChange: async (
+                                      ...eventArgs: any
+                                    ) => {
+                                      ((...eventArgs) => {
+                                        generateStateOnChangeProp($state, [
+                                          "editButton",
+                                          __plasmic_idx_0,
+                                          "sortSelected"
+                                        ])(eventArgs[0]);
+                                      }).apply(null, eventArgs);
+
+                                      if (
+                                        eventArgs.length > 1 &&
+                                        eventArgs[1] &&
+                                        eventArgs[1]._plasmic_state_init_
+                                      ) {
+                                        return;
+                                      }
+                                    },
+                                    selected: generateStateValueProp($state, [
+                                      "editButton",
+                                      __plasmic_idx_0,
+                                      "selected"
+                                    ]),
+                                    sortDeselected: generateStateValueProp(
+                                      $state,
+                                      [
+                                        "editButton",
+                                        __plasmic_idx_0,
+                                        "sortDeselected"
+                                      ]
+                                    ),
+                                    sortSelected: generateStateValueProp(
+                                      $state,
+                                      [
+                                        "editButton",
+                                        __plasmic_idx_0,
+                                        "sortSelected"
+                                      ]
+                                    )
+                                  };
+
+                                  initializePlasmicStates(
+                                    $state,
+                                    [
+                                      {
+                                        name: "editButton[].isDisabled",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      },
+                                      {
+                                        name: "editButton[].selected",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      },
+                                      {
+                                        name: "editButton[].deselected",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      },
+                                      {
+                                        name: "editButton[].sortDeselected",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      },
+                                      {
+                                        name: "editButton[].sortSelected",
+                                        initFunc: ({
+                                          $props,
+                                          $state,
+                                          $queries
+                                        }) => undefined
+                                      }
+                                    ],
+                                    [__plasmic_idx_0]
+                                  );
+                                  return (
+                                    <Button
+                                      data-plasmic-name={"editButton"}
+                                      data-plasmic-override={
+                                        overrides.editButton
+                                      }
+                                      {...child$Props}
+                                    >
+                                      <div
+                                        className={classNames(
+                                          projectcss.all,
+                                          projectcss.__wab_text,
+                                          sty.text__v6WFq
+                                        )}
+                                      >
+                                        {
+                                          "\u0648\u06cc\u0631\u0627\u06cc\u0634 \u062e\u0644\u0627\u0635\u0647 "
+                                        }
+                                      </div>
+                                    </Button>
+                                  );
+                                })()
+                              : null}
+                            {(() => {
+                              const child$Props = {
+                                className: classNames(
+                                  "__wab_instance",
+                                  sty.deleteButton
+                                ),
+                                color: "red",
+                                deselected: generateStateValueProp($state, [
+                                  "deleteButton",
+                                  __plasmic_idx_0,
+                                  "deselected"
+                                ]),
+                                isDisabled: generateStateValueProp($state, [
+                                  "deleteButton",
+                                  __plasmic_idx_0,
+                                  "isDisabled"
+                                ]),
+                                onClick: async event => {
+                                  const $steps = {};
+
+                                  $steps["deleteSummary"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          args: [
+                                            "DELETE",
+                                            `/api/v3/patient/data?item_id=${currentItem.item_id}&national_code=${$ctx.params.code}`,
+                                            (() => {
+                                              try {
+                                                return {
+                                                  "X-Namespace":
+                                                    localStorage.getItem(
+                                                      "inlab_user_namespace_id"
+                                                    )
+                                                };
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return undefined;
+                                                }
+                                                throw e;
+                                              }
+                                            })()
+                                          ]
+                                        };
+                                        return $globalActions[
+                                          "AuthGlobalContext.apiFetcherPlus"
+                                        ]?.apply(null, [...actionArgs.args]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["deleteSummary"] != null &&
+                                    typeof $steps["deleteSummary"] ===
+                                      "object" &&
+                                    typeof $steps["deleteSummary"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["deleteSummary"] = await $steps[
+                                      "deleteSummary"
+                                    ];
+                                  }
+
+                                  $steps["updateShowDeleteSummaryAlarmText"] =
+                                    $steps.deleteSummary.status === 200
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "showDeleteSummaryAlarmText"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: true
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps[
+                                      "updateShowDeleteSummaryAlarmText"
+                                    ] != null &&
+                                    typeof $steps[
+                                      "updateShowDeleteSummaryAlarmText"
+                                    ] === "object" &&
+                                    typeof $steps[
+                                      "updateShowDeleteSummaryAlarmText"
+                                    ].then === "function"
+                                  ) {
+                                    $steps["updateShowDeleteSummaryAlarmText"] =
+                                      await $steps[
+                                        "updateShowDeleteSummaryAlarmText"
+                                      ];
+                                  }
+                                },
+                                onDeselectedChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "deleteButton",
+                                      __plasmic_idx_0,
+                                      "deselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onIsDisabledChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "deleteButton",
+                                      __plasmic_idx_0,
+                                      "isDisabled"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onSelectedChange: async (...eventArgs: any) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "deleteButton",
+                                      __plasmic_idx_0,
+                                      "selected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onSortDeselectedChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "deleteButton",
+                                      __plasmic_idx_0,
+                                      "sortDeselected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                onSortSelectedChange: async (
+                                  ...eventArgs: any
+                                ) => {
+                                  ((...eventArgs) => {
+                                    generateStateOnChangeProp($state, [
+                                      "deleteButton",
+                                      __plasmic_idx_0,
+                                      "sortSelected"
+                                    ])(eventArgs[0]);
+                                  }).apply(null, eventArgs);
+
+                                  if (
+                                    eventArgs.length > 1 &&
+                                    eventArgs[1] &&
+                                    eventArgs[1]._plasmic_state_init_
+                                  ) {
+                                    return;
+                                  }
+                                },
+                                selected: generateStateValueProp($state, [
+                                  "deleteButton",
+                                  __plasmic_idx_0,
+                                  "selected"
+                                ]),
+                                sortDeselected: generateStateValueProp($state, [
+                                  "deleteButton",
+                                  __plasmic_idx_0,
+                                  "sortDeselected"
+                                ]),
+                                sortSelected: generateStateValueProp($state, [
+                                  "deleteButton",
+                                  __plasmic_idx_0,
+                                  "sortSelected"
+                                ])
+                              };
+
+                              initializePlasmicStates(
+                                $state,
+                                [
+                                  {
+                                    name: "deleteButton[].isDisabled",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "deleteButton[].selected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "deleteButton[].deselected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "deleteButton[].sortDeselected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  },
+                                  {
+                                    name: "deleteButton[].sortSelected",
+                                    initFunc: ({ $props, $state, $queries }) =>
+                                      undefined
+                                  }
+                                ],
+                                [__plasmic_idx_0]
+                              );
+                              return (
+                                <Button
+                                  data-plasmic-name={"deleteButton"}
+                                  data-plasmic-override={overrides.deleteButton}
+                                  {...child$Props}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__uwcg
+                                    )}
+                                  >
+                                    {
+                                      "\u062d\u0630\u0641 \u062e\u0644\u0627\u0635\u0647 "
+                                    }
+                                  </div>
+                                </Button>
+                              );
+                            })()}
+                          </div>
                           {(_par =>
                             !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                             (() => {
@@ -2395,6 +3008,17 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
               )}
             >
               <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__agXiv
+                )}
+              >
+                {
+                  "\u062b\u0628\u062a \u062e\u0644\u0627\u0635\u0647 \u067e\u0631\u0648\u0646\u062f\u0647 \u062c\u062f\u06cc\u062f"
+                }
+              </div>
+              <div
                 data-plasmic-name={"chiefComplaintSection"}
                 data-plasmic-override={overrides.chiefComplaintSection}
                 className={classNames(
@@ -2557,6 +3181,7 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                 </div>
                 {(() => {
                   const child$Props = {
+                    autoSize: true,
                     className: classNames(
                       "__wab_instance",
                       sty.diseaseProgress
@@ -2614,6 +3239,7 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                 </div>
                 {(() => {
                   const child$Props = {
+                    autoSize: true,
                     className: classNames("__wab_instance", sty.procedures),
                     onChange: async (...eventArgs: any) => {
                       generateStateOnChangePropForCodeComponents(
@@ -3846,6 +4472,37 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                   />
                 </div>
               </div>
+              {(() => {
+                try {
+                  return (() => {
+                    const showSuccessAlarmText = $state.showSuccessAdmitSummary;
+                    setTimeout(() => {
+                      $state.showSuccessAlarmText = false;
+                    }, 4000);
+                    return showSuccessAlarmText;
+                  })();
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__bi3L5
+                  )}
+                >
+                  {
+                    "\u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f "
+                  }
+                </div>
+              ) : null}
               <Button
                 data-plasmic-name={"postSummary"}
                 data-plasmic-override={overrides.postSummary}
@@ -3974,6 +4631,45 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                   ) {
                     $steps["updateAddPatientSummary"] = await $steps[
                       "updateAddPatientSummary"
+                    ];
+                  }
+
+                  $steps["updateShowSuccessAdmitSummary"] =
+                    $steps.postData.status === 200
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["showSuccessAdmitSummary"]
+                            },
+                            operation: 0,
+                            value: true
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updateShowSuccessAdmitSummary"] != null &&
+                    typeof $steps["updateShowSuccessAdmitSummary"] ===
+                      "object" &&
+                    typeof $steps["updateShowSuccessAdmitSummary"].then ===
+                      "function"
+                  ) {
+                    $steps["updateShowSuccessAdmitSummary"] = await $steps[
+                      "updateShowSuccessAdmitSummary"
                     ];
                   }
                 }}
@@ -4107,7 +4803,216 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
               }}
               open={generateStateValueProp($state, ["laboratoryData", "open"])}
               title={
-                "\u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0632\u06cc\u0631 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
+                <React.Fragment>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__u3MmU
+                    )}
+                  >
+                    {
+                      "\u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0632\u06cc\u0631 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
+                    }
+                  </div>
+                  <Button
+                    data-plasmic-name={"saveLabs"}
+                    data-plasmic-override={overrides.saveLabs}
+                    className={classNames("__wab_instance", sty.saveLabs)}
+                    color={"green"}
+                    deselected={generateStateValueProp($state, [
+                      "saveLabs",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "saveLabs",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateLaboratoryDataOpen2"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["selectedLaboratoryData"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateLaboratoryDataOpen2"] != null &&
+                        typeof $steps["updateLaboratoryDataOpen2"] ===
+                          "object" &&
+                        typeof $steps["updateLaboratoryDataOpen2"].then ===
+                          "function"
+                      ) {
+                        $steps["updateLaboratoryDataOpen2"] = await $steps[
+                          "updateLaboratoryDataOpen2"
+                        ];
+                      }
+
+                      $steps["updateLaboratoryDataOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["laboratoryData", "open"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateLaboratoryDataOpen"] != null &&
+                        typeof $steps["updateLaboratoryDataOpen"] ===
+                          "object" &&
+                        typeof $steps["updateLaboratoryDataOpen"].then ===
+                          "function"
+                      ) {
+                        $steps["updateLaboratoryDataOpen"] = await $steps[
+                          "updateLaboratoryDataOpen"
+                        ];
+                      }
+                    }}
+                    onDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "saveLabs",
+                          "deselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onIsDisabledChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "saveLabs",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "saveLabs",
+                          "selected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "saveLabs",
+                          "sortDeselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "saveLabs",
+                          "sortSelected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "saveLabs",
+                      "selected"
+                    ])}
+                    sortDeselected={generateStateValueProp($state, [
+                      "saveLabs",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "saveLabs",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__vXuf7
+                      )}
+                    >
+                      {
+                        "\u0630\u062e\u06cc\u0631\u0647 \u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627"
+                      }
+                    </div>
+                  </Button>
+                </React.Fragment>
               }
               trigger={null}
               width={"85%"}
@@ -4335,38 +5240,53 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                         <React.Fragment>
                                           {(() => {
                                             try {
-                                              return (() => {
-                                                const gregorianDate = new Date(
-                                                  currentItem.issued_datetime
-                                                );
-                                                const shamsiDate =
-                                                  new Intl.DateTimeFormat(
-                                                    "fa-IR"
-                                                  ).format(gregorianDate);
-                                                const shamsiTime =
-                                                  gregorianDate.toLocaleTimeString(
-                                                    "fa-IR",
-                                                    { hour12: false }
-                                                  );
-                                                const englishDate =
-                                                  shamsiDate.replace(
-                                                    /[۰-۹]/g,
-                                                    d =>
-                                                      String.fromCharCode(
-                                                        d.charCodeAt(0) - 1728
-                                                      )
-                                                  );
-                                                const englishTime = shamsiTime
-                                                  .replace(/[۰-۹]/g, d =>
-                                                    String.fromCharCode(
-                                                      d.charCodeAt(0) - 1728
-                                                    )
+                                              return JSON.parse(
+                                                localStorage.getItem(
+                                                  "inlab_user_his_type"
+                                                )
+                                              ) !== "tums_api" &&
+                                                JSON.parse(
+                                                  localStorage.getItem(
+                                                    "inlab_user_his_type"
                                                   )
-                                                  .split(":")
-                                                  .slice(0, 2)
-                                                  .join(":");
-                                                return `${englishDate}-${englishTime}`;
-                                              })();
+                                                ) !== "tebvarayane_db"
+                                                ? (() => {
+                                                    const gregorianDate =
+                                                      new Date(
+                                                        currentItem.issued_datetime
+                                                      );
+                                                    const shamsiDate =
+                                                      new Intl.DateTimeFormat(
+                                                        "fa-IR"
+                                                      ).format(gregorianDate);
+                                                    const shamsiTime =
+                                                      gregorianDate.toLocaleTimeString(
+                                                        "fa-IR",
+                                                        { hour12: false }
+                                                      );
+                                                    const englishDate =
+                                                      shamsiDate.replace(
+                                                        /[۰-۹]/g,
+                                                        d =>
+                                                          String.fromCharCode(
+                                                            d.charCodeAt(0) -
+                                                              1728
+                                                          )
+                                                      );
+                                                    const englishTime =
+                                                      shamsiTime
+                                                        .replace(/[۰-۹]/g, d =>
+                                                          String.fromCharCode(
+                                                            d.charCodeAt(0) -
+                                                              1728
+                                                          )
+                                                        )
+                                                        .split(":")
+                                                        .slice(0, 2)
+                                                        .join(":");
+                                                    return `${englishDate}-${englishTime}`;
+                                                  })()
+                                                : currentItem.issued_datetime;
                                             } catch (e) {
                                               if (
                                                 e instanceof TypeError ||
@@ -4489,67 +5409,6 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                                     ) {
                                                       return;
                                                     }
-
-                                                    (async val => {
-                                                      const $steps = {};
-
-                                                      $steps[
-                                                        "updateSelectedLaboratoryData"
-                                                      ] = true
-                                                        ? (() => {
-                                                            const actionArgs = {
-                                                              variable: {
-                                                                objRoot: $state,
-                                                                variablePath: [
-                                                                  "selectedLaboratoryData"
-                                                                ]
-                                                              },
-                                                              operation: 0,
-                                                              value: true
-                                                            };
-                                                            return (({
-                                                              variable,
-                                                              value,
-                                                              startIndex,
-                                                              deleteCount
-                                                            }) => {
-                                                              if (!variable) {
-                                                                return;
-                                                              }
-                                                              const {
-                                                                objRoot,
-                                                                variablePath
-                                                              } = variable;
-
-                                                              $stateSet(
-                                                                objRoot,
-                                                                variablePath,
-                                                                value
-                                                              );
-                                                              return value;
-                                                            })?.apply(null, [
-                                                              actionArgs
-                                                            ]);
-                                                          })()
-                                                        : undefined;
-                                                      if (
-                                                        $steps[
-                                                          "updateSelectedLaboratoryData"
-                                                        ] != null &&
-                                                        typeof $steps[
-                                                          "updateSelectedLaboratoryData"
-                                                        ] === "object" &&
-                                                        typeof $steps[
-                                                          "updateSelectedLaboratoryData"
-                                                        ].then === "function"
-                                                      ) {
-                                                        $steps[
-                                                          "updateSelectedLaboratoryData"
-                                                        ] = await $steps[
-                                                          "updateSelectedLaboratoryData"
-                                                        ];
-                                                      }
-                                                    }).apply(null, eventArgs);
                                                   },
                                                   patientId: (() => {
                                                     try {
@@ -4697,7 +5556,7 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                 "open"
               ])}
               title={
-                "\u0622\u0632\u0645\u0627\u06cc\u0634 \u0647\u0627\u06cc \u0632\u06cc\u0631 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
+                " \u06af\u0632\u0627\u0631\u0634 \u0647\u0627\u06cc \u0631\u0627\u062f\u06cc\u0648\u0644\u0648\u0698\u06cc \u0632\u06cc\u0631 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
               }
               trigger={null}
               width={"85%"}
@@ -4750,7 +5609,8 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                         </div>
                       ) : null}
                       {$ctx.fetched_data.loading === false &&
-                      $ctx.fetched_data.data === 0 ? (
+                      $ctx.fetched_data.data &&
+                      $ctx.fetched_data.data.length === 0 ? (
                         <div
                           className={classNames(
                             projectcss.all,
@@ -4759,7 +5619,7 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                           )}
                         >
                           {
-                            "\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
+                            "\u06af\u0632\u0627\u0631\u0634\u06cc \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a"
                           }
                         </div>
                       ) : null}
@@ -4889,36 +5749,49 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                   <React.Fragment>
                                     {(() => {
                                       try {
-                                        return (() => {
-                                          const gregorianDate = new Date(
-                                            currentItem.issued_datetime
-                                          );
-                                          const shamsiDate =
-                                            new Intl.DateTimeFormat(
-                                              "fa-IR"
-                                            ).format(gregorianDate);
-                                          const shamsiTime =
-                                            gregorianDate.toLocaleTimeString(
-                                              "fa-IR",
-                                              { hour12: false }
-                                            );
-                                          const englishDate =
-                                            shamsiDate.replace(/[۰-۹]/g, d =>
-                                              String.fromCharCode(
-                                                d.charCodeAt(0) - 1728
-                                              )
-                                            );
-                                          const englishTime = shamsiTime
-                                            .replace(/[۰-۹]/g, d =>
-                                              String.fromCharCode(
-                                                d.charCodeAt(0) - 1728
-                                              )
+                                        return JSON.parse(
+                                          localStorage.getItem(
+                                            "inlab_user_his_type"
+                                          )
+                                        ) !== "tums_api" &&
+                                          JSON.parse(
+                                            localStorage.getItem(
+                                              "inlab_user_his_type"
                                             )
-                                            .split(":")
-                                            .slice(0, 2)
-                                            .join(":");
-                                          return `${englishDate}-${englishTime}`;
-                                        })();
+                                          ) !== "tebvarayane_db"
+                                          ? (() => {
+                                              const gregorianDate = new Date(
+                                                currentItem.issued_datetime
+                                              );
+                                              const shamsiDate =
+                                                new Intl.DateTimeFormat(
+                                                  "fa-IR"
+                                                ).format(gregorianDate);
+                                              const shamsiTime =
+                                                gregorianDate.toLocaleTimeString(
+                                                  "fa-IR",
+                                                  { hour12: false }
+                                                );
+                                              const englishDate =
+                                                shamsiDate.replace(
+                                                  /[۰-۹]/g,
+                                                  d =>
+                                                    String.fromCharCode(
+                                                      d.charCodeAt(0) - 1728
+                                                    )
+                                                );
+                                              const englishTime = shamsiTime
+                                                .replace(/[۰-۹]/g, d =>
+                                                  String.fromCharCode(
+                                                    d.charCodeAt(0) - 1728
+                                                  )
+                                                )
+                                                .split(":")
+                                                .slice(0, 2)
+                                                .join(":");
+                                              return `${englishDate}-${englishTime}`;
+                                            })()
+                                          : currentItem.issued_datetime;
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
@@ -8264,7 +9137,10 @@ const PlasmicDescendants = {
     "getSummaryApi",
     "loading",
     "getDischargeSummarySection",
+    "printEditSection",
     "printButton",
+    "editButton",
+    "deleteButton",
     "eachSummary",
     "getChiefComplaintSection2",
     "getFinalDiagnosisSection2",
@@ -8317,6 +9193,7 @@ const PlasmicDescendants = {
     "labIssuedDatetime",
     "bookmarkLab",
     "labResults",
+    "saveLabs",
     "paraclinicReports",
     "apiFetcherComponent2",
     "paraclinicReportList",
@@ -8364,7 +9241,10 @@ const PlasmicDescendants = {
     "getSummaryApi",
     "loading",
     "getDischargeSummarySection",
+    "printEditSection",
     "printButton",
+    "editButton",
+    "deleteButton",
     "eachSummary",
     "getChiefComplaintSection2",
     "getFinalDiagnosisSection2",
@@ -8417,6 +9297,7 @@ const PlasmicDescendants = {
     "labIssuedDatetime",
     "bookmarkLab",
     "labResults",
+    "saveLabs",
     "paraclinicReports",
     "apiFetcherComponent2",
     "paraclinicReportList",
@@ -8461,7 +9342,10 @@ const PlasmicDescendants = {
     "getSummaryApi",
     "loading",
     "getDischargeSummarySection",
+    "printEditSection",
     "printButton",
+    "editButton",
+    "deleteButton",
     "eachSummary",
     "getChiefComplaintSection2",
     "getFinalDiagnosisSection2",
@@ -8476,7 +9360,10 @@ const PlasmicDescendants = {
   loading: ["loading"],
   getDischargeSummarySection: [
     "getDischargeSummarySection",
+    "printEditSection",
     "printButton",
+    "editButton",
+    "deleteButton",
     "eachSummary",
     "getChiefComplaintSection2",
     "getFinalDiagnosisSection2",
@@ -8488,7 +9375,15 @@ const PlasmicDescendants = {
     "getDrugsSection",
     "getFollowupSection"
   ],
+  printEditSection: [
+    "printEditSection",
+    "printButton",
+    "editButton",
+    "deleteButton"
+  ],
   printButton: ["printButton"],
+  editButton: ["editButton"],
+  deleteButton: ["deleteButton"],
   eachSummary: [
     "eachSummary",
     "getChiefComplaintSection2",
@@ -8613,7 +9508,8 @@ const PlasmicDescendants = {
     "labValues",
     "labIssuedDatetime",
     "bookmarkLab",
-    "labResults"
+    "labResults",
+    "saveLabs"
   ],
   getLabs: [
     "getLabs",
@@ -8663,6 +9559,7 @@ const PlasmicDescendants = {
   labIssuedDatetime: ["labIssuedDatetime"],
   bookmarkLab: ["bookmarkLab"],
   labResults: ["labResults"],
+  saveLabs: ["saveLabs"],
   paraclinicReports: [
     "paraclinicReports",
     "apiFetcherComponent2",
@@ -8816,7 +9713,10 @@ type NodeDefaultElementType = {
   getSummaryApi: typeof ApiFetcherComponentPlus;
   loading: "div";
   getDischargeSummarySection: "div";
+  printEditSection: "div";
   printButton: typeof Button;
+  editButton: typeof Button;
+  deleteButton: typeof Button;
   eachSummary: "div";
   getChiefComplaintSection2: "div";
   getFinalDiagnosisSection2: "div";
@@ -8869,6 +9769,7 @@ type NodeDefaultElementType = {
   labIssuedDatetime: "div";
   bookmarkLab: typeof BookmarkLab;
   labResults: "div";
+  saveLabs: typeof Button;
   paraclinicReports: typeof AntdModal;
   apiFetcherComponent2: typeof ApiFetcherComponent;
   paraclinicReportList: "div";
@@ -8976,7 +9877,10 @@ export const PlasmicPatientDischargeSummary = Object.assign(
     getSummaryApi: makeNodeComponent("getSummaryApi"),
     loading: makeNodeComponent("loading"),
     getDischargeSummarySection: makeNodeComponent("getDischargeSummarySection"),
+    printEditSection: makeNodeComponent("printEditSection"),
     printButton: makeNodeComponent("printButton"),
+    editButton: makeNodeComponent("editButton"),
+    deleteButton: makeNodeComponent("deleteButton"),
     eachSummary: makeNodeComponent("eachSummary"),
     getChiefComplaintSection2: makeNodeComponent("getChiefComplaintSection2"),
     getFinalDiagnosisSection2: makeNodeComponent("getFinalDiagnosisSection2"),
@@ -9039,6 +9943,7 @@ export const PlasmicPatientDischargeSummary = Object.assign(
     labIssuedDatetime: makeNodeComponent("labIssuedDatetime"),
     bookmarkLab: makeNodeComponent("bookmarkLab"),
     labResults: makeNodeComponent("labResults"),
+    saveLabs: makeNodeComponent("saveLabs"),
     paraclinicReports: makeNodeComponent("paraclinicReports"),
     apiFetcherComponent2: makeNodeComponent("apiFetcherComponent2"),
     paraclinicReportList: makeNodeComponent("paraclinicReportList"),
