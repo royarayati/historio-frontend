@@ -12,6 +12,9 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "@ant-design/pro-components": "^2.6.4",
+    "@chakra-ui/react": "^2.10.9",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@plasmicapp/react-web": "^0.2.405",
     "@plasmicpkgs/antd": "^2.0.150",
     "@plasmicpkgs/antd5": "^0.0.285",
@@ -27,6 +30,10 @@
     "@plasmicpkgs/react-awesome-reveal": "^3.8.230",
     "@plasmicpkgs/react-parallax-tilt": "^0.0.216",
     "@plasmicpkgs/tiptap": "^0.0.3",
+    "@rjsf/chakra-ui": "^5.24.13",
+    "@rjsf/core": "^5.24.13",
+    "@rjsf/utils": "^5.24.13",
+    "@rjsf/validator-ajv8": "^5.24.13",
     "@sentry/nextjs": "^9.17.0",
     "@tiptap/core": "^2.12.0",
     "@tiptap/extension-bold": "^2.12.0",
@@ -48,9 +55,11 @@
     "copy-to-clipboard": "^3.3.3",
     "dexie": "^4.0.11",
     "firebase": "^10.8.1",
+    "framer-motion": "^12.23.24",
     "next": "14.0.4",
     "next-pwa": "^5.6.0",
     "node-html-parser": "^7.0.1",
+    "react-jsonschema-form": "^1.8.1",
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
