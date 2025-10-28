@@ -67,8 +67,6 @@ import { inputHelpers as AntdTextArea_Helpers } from "@plasmicpkgs/antd5/skinny/
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Select from "../../Select"; // plasmic-import: Ll-T-rC5P8LC/component
 import MenuItem from "../../MenuItem"; // plasmic-import: 8n8tp8Zp9D88/component
-import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
-import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import BookmarkLab from "../../BookmarkLab"; // plasmic-import: yhUiLESiXQuk/component
@@ -83,7 +81,6 @@ import sty from "./PlasmicPatientDischargeSummary.module.css"; // plasmic-import
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: I6pxicA96WJm/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: vsUaT3pPwdP4/icon
 import Icons8CloseSvgIcon from "./icons/PlasmicIcon__Icons8CloseSvg"; // plasmic-import: -xG_spDBispP/icon
-import HospitalSvgrepoComSvgIcon from "./icons/PlasmicIcon__HospitalSvgrepoComSvg"; // plasmic-import: je3YY87Oac_G/icon
 import PersonCropSquareFillSvgrepoComSvgIcon from "./icons/PlasmicIcon__PersonCropSquareFillSvgrepoComSvg"; // plasmic-import: KRqJj_I4xpne/icon
 import MdiAccountIcon from "./icons/PlasmicIcon__MdiAccount"; // plasmic-import: mC78MSouMgiO/icon
 import EvaEdit2OutlineIcon from "./icons/PlasmicIcon__EvaEdit2Outline"; // plasmic-import: pE37P96Dcs-s/icon
@@ -149,11 +146,11 @@ export type PlasmicPatientDischargeSummary__OverridesType = {
   رضایتشخصی?: Flex__<typeof MenuItem>;
   followUpSuggestionSection?: Flex__<"div">;
   dietSection?: Flex__<"div">;
-  diet?: Flex__<typeof AntdInput>;
+  diet?: Flex__<typeof AntdTextArea>;
   drugsSection?: Flex__<"div">;
-  drug?: Flex__<typeof AntdInput>;
+  drug?: Flex__<typeof AntdTextArea>;
   followupSection?: Flex__<"div">;
-  nextVisits?: Flex__<typeof TextInput>;
+  nextVisits?: Flex__<typeof AntdTextArea>;
   postSummary?: Flex__<typeof Button>;
   laboratoryData?: Flex__<typeof AntdModal>;
   getLabs?: Flex__<typeof ApiFetcherComponent>;
@@ -297,14 +294,6 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "diet.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
-      },
-      {
         path: "selectParaclinicReportsButton.isDisabled",
         type: "private",
         variableType: "boolean",
@@ -437,12 +426,6 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
-      },
-      {
-        path: "nextVisits.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       },
       {
         path: "postSummary.isDisabled",
@@ -717,14 +700,6 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "drug.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
-      },
-      {
         path: "diseaseProgress.value",
         type: "private",
         variableType: "text",
@@ -859,6 +834,48 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
       },
       {
         path: "showDeleteSummaryAlarmText",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "nextVisits.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdTextArea_Helpers)
+      },
+      {
+        path: "drug.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdTextArea_Helpers)
+      },
+      {
+        path: "diet.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdTextArea_Helpers)
+      },
+      {
+        path: "showPrinting",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "showPrintingError",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "showPrintingSuccess",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -1229,7 +1246,7 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                       const showSuccessAlarmText =
                         $state.showDeleteSummaryAlarmText;
                       setTimeout(() => {
-                        $state.showSuccessAlarmText = false;
+                        $state.showDeleteSummaryAlarmText = false;
                       }, 3000);
                       return showSuccessAlarmText;
                     })() ? (
@@ -1242,6 +1259,50 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                       >
                         {
                           "\u062e\u0644\u0627\u0635\u0647 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062d\u0630\u0641 \u0634\u062f"
+                        }
+                      </div>
+                    ) : null}
+                    {(() => {
+                      try {
+                        return $state.showPrinting === true;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return true;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text___9QoKz
+                        )}
+                      >
+                        {
+                          "\u062f\u0631\u062d\u0627\u0644 \u067e\u0631\u06cc\u0646\u062a"
+                        }
+                      </div>
+                    ) : null}
+                    {(() => {
+                      const showSuccessAlarmText = $state.showPrintingError;
+                      setTimeout(() => {
+                        $state.showPrintingError = false;
+                      }, 3000);
+                      return showSuccessAlarmText;
+                    })() ? (
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__a1Ys
+                        )}
+                      >
+                        {
+                          "\u0645\u0634\u06a9\u0644\u06cc \u067e\u06cc\u0634 \u0622\u0645\u062f\u0647 \u060c \u0644\u0637\u0641\u0627 \u062f\u0648\u0628\u0627\u0631\u0647 \u062a\u0644\u0627\u0634 \u06a9\u0646\u06cc\u062f "
                         }
                       </div>
                     ) : null}
@@ -1303,6 +1364,49 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                 ]),
                                 onClick: async event => {
                                   const $steps = {};
+
+                                  $steps["updateShowPrinting"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["showPrinting"]
+                                          },
+                                          operation: 0,
+                                          value: true
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateShowPrinting"] != null &&
+                                    typeof $steps["updateShowPrinting"] ===
+                                      "object" &&
+                                    typeof $steps["updateShowPrinting"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateShowPrinting"] = await $steps[
+                                      "updateShowPrinting"
+                                    ];
+                                  }
 
                                   $steps["postPrintSummary"] = true
                                     ? (() => {
@@ -1419,6 +1523,93 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                     typeof $steps["runCode"].then === "function"
                                   ) {
                                     $steps["runCode"] = await $steps["runCode"];
+                                  }
+
+                                  $steps["updateShowPrinting2"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["showPrinting"]
+                                          },
+                                          operation: 0,
+                                          value: false
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateShowPrinting2"] != null &&
+                                    typeof $steps["updateShowPrinting2"] ===
+                                      "object" &&
+                                    typeof $steps["updateShowPrinting2"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateShowPrinting2"] =
+                                      await $steps["updateShowPrinting2"];
+                                  }
+
+                                  $steps["updateShowPrintingError"] =
+                                    $steps.postPrintSummary.status !== 200
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "showPrintingError"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: true
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps["updateShowPrintingError"] != null &&
+                                    typeof $steps["updateShowPrintingError"] ===
+                                      "object" &&
+                                    typeof $steps["updateShowPrintingError"]
+                                      .then === "function"
+                                  ) {
+                                    $steps["updateShowPrintingError"] =
+                                      await $steps["updateShowPrintingError"];
                                   }
                                 },
                                 onDeselectedChange: async (
@@ -2361,49 +2552,7 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                               key={currentIndex}
                                             >
                                               <React.Fragment>
-                                                {"آزمایش های بیمار : " +
-                                                  (() => {
-                                                    const gregorianDate =
-                                                      new Date(
-                                                        currentItem.issued_datetime
-                                                      );
-                                                    const shamsiDate =
-                                                      new Intl.DateTimeFormat(
-                                                        "fa-IR"
-                                                      ).format(gregorianDate);
-                                                    const shamsiTime =
-                                                      gregorianDate.toLocaleTimeString(
-                                                        "fa-IR",
-                                                        { hour12: false }
-                                                      );
-                                                    const englishDate =
-                                                      shamsiDate.replace(
-                                                        /[۰-۹]/g,
-                                                        d =>
-                                                          String.fromCharCode(
-                                                            d.charCodeAt(0) -
-                                                              1728
-                                                          )
-                                                      );
-                                                    const englishTime =
-                                                      shamsiTime
-                                                        .replace(/[۰-۹]/g, d =>
-                                                          String.fromCharCode(
-                                                            d.charCodeAt(0) -
-                                                              1728
-                                                          )
-                                                        )
-                                                        .split(":")
-                                                        .slice(0, 2)
-                                                        .join(":");
-                                                    return `(${englishDate}-${englishTime}`;
-                                                  })() +
-                                                  " - " +
-                                                  currentItem.value
-                                                    .factor_name +
-                                                  " : " +
-                                                  currentItem.value.value +
-                                                  ")"}
+                                                {currentItem}
                                               </React.Fragment>
                                             </div>
                                           );
@@ -3633,7 +3782,23 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                       variablePath: ["selectedLabDataObject"]
                                     },
                                     operation: 0,
-                                    value: $ctx.fetched_data.data
+                                    value: (() => {
+                                      const items = $ctx.fetched_data.data;
+                                      const formattedList = items.map(
+                                        currentItem => {
+                                          return (
+                                            currentItem.group_title +
+                                            " - " +
+                                            currentItem.issued_datetime +
+                                            " - " +
+                                            currentItem.value.factor_name +
+                                            " : " +
+                                            currentItem.value.value
+                                          );
+                                        }
+                                      );
+                                      return formattedList;
+                                    })()
                                   };
                                   return (({
                                     variable,
@@ -4339,13 +4504,14 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                   </div>
                   {(() => {
                     const child$Props = {
+                      autoSize: true,
                       className: classNames("__wab_instance", sty.diet),
                       onChange: async (...eventArgs: any) => {
                         generateStateOnChangePropForCodeComponents(
                           $state,
                           "value",
                           ["diet", "value"],
-                          AntdInput_Helpers
+                          AntdTextArea_Helpers
                         ).apply(null, eventArgs);
                       },
                       value: generateStateValueProp($state, ["diet", "value"])
@@ -4359,12 +4525,12 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                         }
                       ],
                       [],
-                      AntdInput_Helpers ?? {},
+                      AntdTextArea_Helpers ?? {},
                       child$Props
                     );
 
                     return (
-                      <AntdInput
+                      <AntdTextArea
                         data-plasmic-name={"diet"}
                         data-plasmic-override={overrides.diet}
                         {...child$Props}
@@ -4390,13 +4556,14 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                   </div>
                   {(() => {
                     const child$Props = {
+                      autoSize: true,
                       className: classNames("__wab_instance", sty.drug),
                       onChange: async (...eventArgs: any) => {
                         generateStateOnChangePropForCodeComponents(
                           $state,
                           "value",
                           ["drug", "value"],
-                          AntdInput_Helpers
+                          AntdTextArea_Helpers
                         ).apply(null, eventArgs);
                       },
                       value: generateStateValueProp($state, ["drug", "value"])
@@ -4410,12 +4577,12 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                         }
                       ],
                       [],
-                      AntdInput_Helpers ?? {},
+                      AntdTextArea_Helpers ?? {},
                       child$Props
                     );
 
                     return (
-                      <AntdInput
+                      <AntdTextArea
                         data-plasmic-name={"drug"}
                         data-plasmic-override={overrides.drug}
                         {...child$Props}
@@ -4439,37 +4606,44 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                       "\u0645\u0631\u0627\u062c\u0639\u0627\u062a \u0628\u0639\u062f\u06cc \u0628\u06cc\u0645\u0627\u0631"
                     }
                   </div>
-                  <TextInput
-                    data-plasmic-name={"nextVisits"}
-                    data-plasmic-override={overrides.nextVisits}
-                    className={classNames("__wab_instance", sty.nextVisits)}
-                    onChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "nextVisits",
-                          "value"
-                        ])((e => e.target?.value).apply(null, eventArgs));
-                      }).apply(null, eventArgs);
+                  {(() => {
+                    const child$Props = {
+                      autoSize: true,
+                      className: classNames("__wab_instance", sty.nextVisits),
+                      onChange: async (...eventArgs: any) => {
+                        generateStateOnChangePropForCodeComponents(
+                          $state,
+                          "value",
+                          ["nextVisits", "value"],
+                          AntdTextArea_Helpers
+                        ).apply(null, eventArgs);
+                      },
+                      value: generateStateValueProp($state, [
+                        "nextVisits",
+                        "value"
+                      ])
+                    };
+                    initializeCodeComponentStates(
+                      $state,
+                      [
+                        {
+                          name: "value",
+                          plasmicStateName: "nextVisits.value"
+                        }
+                      ],
+                      [],
+                      AntdTextArea_Helpers ?? {},
+                      child$Props
+                    );
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    startIcon={
-                      <HospitalSvgrepoComSvgIcon
-                        className={classNames(projectcss.all, sty.svg__l81Uw)}
-                        role={"img"}
+                    return (
+                      <AntdTextArea
+                        data-plasmic-name={"nextVisits"}
+                        data-plasmic-override={overrides.nextVisits}
+                        {...child$Props}
                       />
-                    }
-                    value={
-                      generateStateValueProp($state, ["nextVisits", "value"]) ??
-                      ""
-                    }
-                  />
+                    );
+                  })()}
                 </div>
               </div>
               {(() => {
@@ -9752,11 +9926,11 @@ type NodeDefaultElementType = {
   رضایتشخصی: typeof MenuItem;
   followUpSuggestionSection: "div";
   dietSection: "div";
-  diet: typeof AntdInput;
+  diet: typeof AntdTextArea;
   drugsSection: "div";
-  drug: typeof AntdInput;
+  drug: typeof AntdTextArea;
   followupSection: "div";
-  nextVisits: typeof TextInput;
+  nextVisits: typeof AntdTextArea;
   postSummary: typeof Button;
   laboratoryData: typeof AntdModal;
   getLabs: typeof ApiFetcherComponent;
