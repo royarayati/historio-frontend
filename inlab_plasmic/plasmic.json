@@ -2135,6 +2135,19 @@
           "cssFilePath": "plasmic/inlab/PlasmicModal.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "qij1nVQZfRCY",
+          "name": "Drawer",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicDrawer.tsx",
+          "importSpec": {
+            "modulePath": "Drawer.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicDrawer.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

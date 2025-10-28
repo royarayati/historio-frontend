@@ -2,9 +2,9 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import {
-  PlasmicRedirectToNamespaceSelection,
-  DefaultRedirectToNamespaceSelectionProps
-} from "./plasmic/inlab/PlasmicRedirectToNamespaceSelection";
+  PlasmicDrawer,
+  DefaultDrawerProps
+} from "./plasmic/inlab/PlasmicDrawer";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -13,34 +13,31 @@ import {
 // If you don't want to expose certain variants or slots as a prop, you can use
 // Omit to hide them:
 //
-// interface RedirectToNamespaceSelectionProps extends Omit<DefaultRedirectToNamespaceSelectionProps, "hideProps1"|"hideProp2"> {
+// interface DrawerProps extends Omit<DefaultDrawerProps, "hideProps1"|"hideProp2"> {
 //   // etc.
 // }
 //
-// You can also stop extending from DefaultRedirectToNamespaceSelectionProps altogether and have
+// You can also stop extending from DefaultDrawerProps altogether and have
 // total control over the props for your component.
-export interface RedirectToNamespaceSelectionProps
-  extends DefaultRedirectToNamespaceSelectionProps {}
+export interface DrawerProps extends DefaultDrawerProps {}
 
-function RedirectToNamespaceSelection(
-  props: RedirectToNamespaceSelectionProps
-) {
-  // Use PlasmicRedirectToNamespaceSelection to render this component as it was
+function Drawer(props: DrawerProps) {
+  // Use PlasmicDrawer to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicRedirectToNamespaceSelection are:
+  // Props you can pass into PlasmicDrawer are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, we are just piping all RedirectToNamespaceSelectionProps here, but feel free
+  // By default, we are just piping all DrawerProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToNamespaceSelection  />;
+  return <PlasmicDrawer {...props} />;
 }
 
-export default RedirectToNamespaceSelection;
+export default Drawer;
