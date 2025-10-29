@@ -61,6 +61,9 @@ import {
 
 import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"; // plasmic-import: CnSDJxtIOp8H/codeComponent
 import Button from "../../Button"; // plasmic-import: IoZvAstVrNqa/component
+import { AntdAccordion } from "@plasmicpkgs/antd5/skinny/registerCollapse";
+import { accordionHelpers as AntdAccordion_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
+import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import { ApiFetcherComponent } from "../../../utils/ApiFetcherComponent"; // plasmic-import: kxxsrihQ2d7W/codeComponent
 import BookmarkLab from "../../BookmarkLab"; // plasmic-import: yhUiLESiXQuk/component
@@ -68,9 +71,6 @@ import TextInput from "../../TextInput"; // plasmic-import: WB4OwDxc51ck/compone
 import { AntdTextArea } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdTextArea_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
-import { AntdAccordion } from "@plasmicpkgs/antd5/skinny/registerCollapse";
-import { accordionHelpers as AntdAccordion_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
-import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import Select from "../../Select"; // plasmic-import: Ll-T-rC5P8LC/component
 import MenuItem from "../../MenuItem"; // plasmic-import: 8n8tp8Zp9D88/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
@@ -125,6 +125,7 @@ export type PlasmicPatientDischargeSummary__OverridesType = {
   getProceduresSection?: Flex__<"div">;
   getLaboratorySection?: Flex__<"div">;
   getParaclinicReportsSection?: Flex__<"div">;
+  accordion2?: Flex__<typeof AntdAccordion>;
   getPatientConditionSection?: Flex__<"div">;
   getDrugsSection?: Flex__<"div">;
   getFollowupSection?: Flex__<"div">;
@@ -978,6 +979,16 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
           "activePanelId",
           AntdAccordion_Helpers
         )
+      },
+      {
+        path: "accordion2[][][].activePanelId",
+        type: "private",
+        variableType: "text",
+
+        onMutate: generateOnMutateForSpec(
+          "activePanelId",
+          AntdAccordion_Helpers
+        )
       }
     ],
     [$props, $ctx, $refs]
@@ -1547,7 +1558,8 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                 try {
                   return [
                     $state.showDeleteSummaryAlarmText,
-                    $state.addPatientSummary
+                    $state.addPatientSummary,
+                    $state.showSuccessAdmitSummary
                   ];
                 } catch (e) {
                   if (
@@ -3084,56 +3096,277 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                               )}
                                               key={currentIndex}
                                             >
-                                              <div
-                                                className={classNames(
-                                                  projectcss.all,
-                                                  projectcss.__wab_text,
-                                                  sty.text___3H5CA
-                                                )}
-                                              >
-                                                <React.Fragment>
-                                                  {(() => {
-                                                    const gregorianDate =
-                                                      new Date(
-                                                        currentItem.issued_datetime
-                                                      );
-                                                    const shamsiDate =
-                                                      new Intl.DateTimeFormat(
-                                                        "fa-IR"
-                                                      ).format(gregorianDate);
-                                                    const shamsiTime =
-                                                      gregorianDate.toLocaleTimeString(
-                                                        "fa-IR",
-                                                        { hour12: false }
-                                                      );
-                                                    const englishDate =
-                                                      shamsiDate.replace(
-                                                        /[۰-۹]/g,
-                                                        d =>
-                                                          String.fromCharCode(
-                                                            d.charCodeAt(0) -
-                                                              1728
+                                              {false ? (
+                                                <div
+                                                  className={classNames(
+                                                    projectcss.all,
+                                                    projectcss.__wab_text,
+                                                    sty.text___3H5CA
+                                                  )}
+                                                >
+                                                  <React.Fragment>
+                                                    {(() => {
+                                                      const gregorianDate =
+                                                        new Date(
+                                                          currentItem.issued_datetime
+                                                        );
+                                                      const shamsiDate =
+                                                        new Intl.DateTimeFormat(
+                                                          "fa-IR"
+                                                        ).format(gregorianDate);
+                                                      const shamsiTime =
+                                                        gregorianDate.toLocaleTimeString(
+                                                          "fa-IR",
+                                                          { hour12: false }
+                                                        );
+                                                      const englishDate =
+                                                        shamsiDate.replace(
+                                                          /[۰-۹]/g,
+                                                          d =>
+                                                            String.fromCharCode(
+                                                              d.charCodeAt(0) -
+                                                                1728
+                                                            )
+                                                        );
+                                                      const englishTime =
+                                                        shamsiTime
+                                                          .replace(
+                                                            /[۰-۹]/g,
+                                                            d =>
+                                                              String.fromCharCode(
+                                                                d.charCodeAt(
+                                                                  0
+                                                                ) - 1728
+                                                              )
                                                           )
-                                                      );
-                                                    const englishTime =
-                                                      shamsiTime
-                                                        .replace(/[۰-۹]/g, d =>
-                                                          String.fromCharCode(
-                                                            d.charCodeAt(0) -
-                                                              1728
-                                                          )
-                                                        )
-                                                        .split(":")
-                                                        .slice(0, 2)
-                                                        .join(":");
-                                                    return `(${englishDate}-${englishTime}`;
-                                                  })() +
-                                                    " - " +
-                                                    currentItem.title +
-                                                    " : " +
-                                                    currentItem.report}
-                                                </React.Fragment>
-                                              </div>
+                                                          .split(":")
+                                                          .slice(0, 2)
+                                                          .join(":");
+                                                      return `(${englishDate}-${englishTime}`;
+                                                    })() +
+                                                      " - " +
+                                                      currentItem.title +
+                                                      " : " +
+                                                      currentItem.report}
+                                                  </React.Fragment>
+                                                </div>
+                                              ) : null}
+                                              {(() => {
+                                                const child$Props = {
+                                                  activeKey:
+                                                    generateStateValueProp(
+                                                      $state,
+                                                      [
+                                                        "accordion2",
+                                                        __plasmic_idx_0,
+                                                        __plasmic_idx_1,
+                                                        __plasmic_idx_2,
+                                                        "activePanelId"
+                                                      ]
+                                                    ),
+                                                  bordered: true,
+                                                  className: classNames(
+                                                    "__wab_instance",
+                                                    sty.accordion2
+                                                  ),
+                                                  items: (
+                                                    <React.Fragment>
+                                                      <AntdAccordionItem
+                                                        className={classNames(
+                                                          "__wab_instance",
+                                                          sty.accordionItem__ig0Dy
+                                                        )}
+                                                        id={1}
+                                                        label2={
+                                                          <div
+                                                            className={classNames(
+                                                              projectcss.all,
+                                                              projectcss.__wab_text,
+                                                              sty.text__bhWEl
+                                                            )}
+                                                          >
+                                                            <React.Fragment>
+                                                              {(JSON.parse(
+                                                                localStorage.getItem(
+                                                                  "inlab_user_his_type"
+                                                                )
+                                                              ) !==
+                                                                "tums_api" &&
+                                                              JSON.parse(
+                                                                localStorage.getItem(
+                                                                  "inlab_user_his_type"
+                                                                )
+                                                              ) !==
+                                                                "tebvarayane_db"
+                                                                ? (() => {
+                                                                    const gregorianDate =
+                                                                      new Date(
+                                                                        currentItem.issued_datetime
+                                                                      );
+                                                                    const shamsiDate =
+                                                                      new Intl.DateTimeFormat(
+                                                                        "fa-IR"
+                                                                      ).format(
+                                                                        gregorianDate
+                                                                      );
+                                                                    const shamsiTime =
+                                                                      gregorianDate.toLocaleTimeString(
+                                                                        "fa-IR",
+                                                                        {
+                                                                          hour12:
+                                                                            false
+                                                                        }
+                                                                      );
+                                                                    const englishDate =
+                                                                      shamsiDate.replace(
+                                                                        /[۰-۹]/g,
+                                                                        d =>
+                                                                          String.fromCharCode(
+                                                                            d.charCodeAt(
+                                                                              0
+                                                                            ) -
+                                                                              1728
+                                                                          )
+                                                                      );
+                                                                    const englishTime =
+                                                                      shamsiTime
+                                                                        .replace(
+                                                                          /[۰-۹]/g,
+                                                                          d =>
+                                                                            String.fromCharCode(
+                                                                              d.charCodeAt(
+                                                                                0
+                                                                              ) -
+                                                                                1728
+                                                                            )
+                                                                        )
+                                                                        .split(
+                                                                          ":"
+                                                                        )
+                                                                        .slice(
+                                                                          0,
+                                                                          2
+                                                                        )
+                                                                        .join(
+                                                                          ":"
+                                                                        );
+                                                                    return `${englishDate}-${englishTime}`;
+                                                                  })()
+                                                                : currentItem.issued_datetime) +
+                                                                " - " +
+                                                                currentItem.paraclinic_name}
+                                                            </React.Fragment>
+                                                          </div>
+                                                        }
+                                                        showArrow={true}
+                                                      >
+                                                        <div
+                                                          className={classNames(
+                                                            projectcss.all,
+                                                            projectcss.__wab_text,
+                                                            sty.text__uaB
+                                                          )}
+                                                        >
+                                                          <React.Fragment>
+                                                            {currentItem.report}
+                                                          </React.Fragment>
+                                                        </div>
+                                                      </AntdAccordionItem>
+                                                      <AntdAccordionItem
+                                                        className={classNames(
+                                                          "__wab_instance",
+                                                          sty.accordionItem__km1Nj
+                                                        )}
+                                                        id={2}
+                                                        label2={
+                                                          <div
+                                                            className={classNames(
+                                                              projectcss.all,
+                                                              projectcss.__wab_text,
+                                                              sty.text___5Yy39
+                                                            )}
+                                                          >
+                                                            {"Second Item"}
+                                                          </div>
+                                                        }
+                                                        showArrow={true}
+                                                      >
+                                                        <div
+                                                          className={classNames(
+                                                            projectcss.all,
+                                                            projectcss.__wab_text,
+                                                            sty.text__egZsb
+                                                          )}
+                                                        >
+                                                          {"Second Children"}
+                                                        </div>
+                                                      </AntdAccordionItem>
+                                                    </React.Fragment>
+                                                  ),
+                                                  onChange: async (
+                                                    ...eventArgs: any
+                                                  ) => {
+                                                    generateStateOnChangePropForCodeComponents(
+                                                      $state,
+                                                      "activePanelId",
+                                                      [
+                                                        "accordion2",
+                                                        __plasmic_idx_0,
+                                                        __plasmic_idx_1,
+                                                        __plasmic_idx_2,
+                                                        "activePanelId"
+                                                      ],
+                                                      AntdAccordion_Helpers
+                                                    ).apply(null, eventArgs);
+                                                  }
+                                                };
+                                                initializeCodeComponentStates(
+                                                  $state,
+                                                  [
+                                                    {
+                                                      name: "activePanelId",
+                                                      plasmicStateName:
+                                                        "accordion2[][][].activePanelId"
+                                                    }
+                                                  ],
+                                                  [
+                                                    __plasmic_idx_0,
+                                                    __plasmic_idx_1,
+                                                    __plasmic_idx_2
+                                                  ],
+                                                  AntdAccordion_Helpers ?? {},
+                                                  child$Props
+                                                );
+                                                initializePlasmicStates(
+                                                  $state,
+                                                  [
+                                                    {
+                                                      name: "accordion2[][][].activePanelId",
+                                                      initFunc: ({
+                                                        $props,
+                                                        $state,
+                                                        $queries
+                                                      }) => undefined
+                                                    }
+                                                  ],
+                                                  [
+                                                    __plasmic_idx_0,
+                                                    __plasmic_idx_1,
+                                                    __plasmic_idx_2
+                                                  ]
+                                                );
+                                                return (
+                                                  <AntdAccordion
+                                                    data-plasmic-name={
+                                                      "accordion2"
+                                                    }
+                                                    data-plasmic-override={
+                                                      overrides.accordion2
+                                                    }
+                                                    {...child$Props}
+                                                  />
+                                                );
+                                              })()}
                                             </div>
                                           );
                                         }
@@ -5672,9 +5905,52 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                           )}
                                         >
                                           <React.Fragment>
-                                            {currentItem.paraclinic_name +
+                                            {(JSON.parse(
+                                              localStorage.getItem(
+                                                "inlab_user_his_type"
+                                              )
+                                            ) !== "tums_api" &&
+                                            JSON.parse(
+                                              localStorage.getItem(
+                                                "inlab_user_his_type"
+                                              )
+                                            ) !== "tebvarayane_db"
+                                              ? (() => {
+                                                  const gregorianDate =
+                                                    new Date(
+                                                      currentItem.issued_datetime
+                                                    );
+                                                  const shamsiDate =
+                                                    new Intl.DateTimeFormat(
+                                                      "fa-IR"
+                                                    ).format(gregorianDate);
+                                                  const shamsiTime =
+                                                    gregorianDate.toLocaleTimeString(
+                                                      "fa-IR",
+                                                      { hour12: false }
+                                                    );
+                                                  const englishDate =
+                                                    shamsiDate.replace(
+                                                      /[۰-۹]/g,
+                                                      d =>
+                                                        String.fromCharCode(
+                                                          d.charCodeAt(0) - 1728
+                                                        )
+                                                    );
+                                                  const englishTime = shamsiTime
+                                                    .replace(/[۰-۹]/g, d =>
+                                                      String.fromCharCode(
+                                                        d.charCodeAt(0) - 1728
+                                                      )
+                                                    )
+                                                    .split(":")
+                                                    .slice(0, 2)
+                                                    .join(":");
+                                                  return `${englishDate}-${englishTime}`;
+                                                })()
+                                              : currentItem.issued_datetime) +
                                               " - " +
-                                              currentItem.issued_datetime}
+                                              currentItem.paraclinic_name}
                                           </React.Fragment>
                                         </div>
                                       </div>
@@ -6641,9 +6917,29 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                                               return (() => {
                                                                 const a =
                                                                   $state.selectedParaclinicReports.slice();
-                                                                a.push(
-                                                                  currentItem
-                                                                );
+                                                                const plainReport =
+                                                                  currentItem.report
+                                                                    ? currentItem.report
+                                                                        .replace(
+                                                                          /<[^>]*>/g,
+                                                                          ""
+                                                                        )
+                                                                        .replace(
+                                                                          /\s+/g,
+                                                                          " "
+                                                                        )
+                                                                        .trim()
+                                                                    : "";
+                                                                const newItem =
+                                                                  {
+                                                                    issued_datetime:
+                                                                      currentItem.issued_datetime,
+                                                                    paraclinic_name:
+                                                                      currentItem.paraclinic_name,
+                                                                    report:
+                                                                      plainReport
+                                                                  };
+                                                                a.push(newItem);
                                                                 return ($state.selectedParaclinicReports =
                                                                   a);
                                                               })();
@@ -6956,9 +7252,58 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                               )}
                                             >
                                               <React.Fragment>
-                                                {currentItem.paraclinic_name +
+                                                {(JSON.parse(
+                                                  localStorage.getItem(
+                                                    "inlab_user_his_type"
+                                                  )
+                                                ) !== "tums_api" &&
+                                                JSON.parse(
+                                                  localStorage.getItem(
+                                                    "inlab_user_his_type"
+                                                  )
+                                                ) !== "tebvarayane_db"
+                                                  ? (() => {
+                                                      const gregorianDate =
+                                                        new Date(
+                                                          currentItem.issued_datetime
+                                                        );
+                                                      const shamsiDate =
+                                                        new Intl.DateTimeFormat(
+                                                          "fa-IR"
+                                                        ).format(gregorianDate);
+                                                      const shamsiTime =
+                                                        gregorianDate.toLocaleTimeString(
+                                                          "fa-IR",
+                                                          { hour12: false }
+                                                        );
+                                                      const englishDate =
+                                                        shamsiDate.replace(
+                                                          /[۰-۹]/g,
+                                                          d =>
+                                                            String.fromCharCode(
+                                                              d.charCodeAt(0) -
+                                                                1728
+                                                            )
+                                                        );
+                                                      const englishTime =
+                                                        shamsiTime
+                                                          .replace(
+                                                            /[۰-۹]/g,
+                                                            d =>
+                                                              String.fromCharCode(
+                                                                d.charCodeAt(
+                                                                  0
+                                                                ) - 1728
+                                                              )
+                                                          )
+                                                          .split(":")
+                                                          .slice(0, 2)
+                                                          .join(":");
+                                                      return `${englishDate}-${englishTime}`;
+                                                    })()
+                                                  : currentItem.issued_datetime) +
                                                   " - " +
-                                                  currentItem.issued_datetime}
+                                                  currentItem.paraclinic_name}
                                               </React.Fragment>
                                             </div>
                                           </div>
@@ -10431,6 +10776,7 @@ const PlasmicDescendants = {
     "getProceduresSection",
     "getLaboratorySection",
     "getParaclinicReportsSection",
+    "accordion2",
     "getPatientConditionSection",
     "getDrugsSection",
     "getFollowupSection",
@@ -10544,6 +10890,7 @@ const PlasmicDescendants = {
     "getProceduresSection",
     "getLaboratorySection",
     "getParaclinicReportsSection",
+    "accordion2",
     "getPatientConditionSection",
     "getDrugsSection",
     "getFollowupSection",
@@ -10645,6 +10992,7 @@ const PlasmicDescendants = {
     "getProceduresSection",
     "getLaboratorySection",
     "getParaclinicReportsSection",
+    "accordion2",
     "getPatientConditionSection",
     "getDrugsSection",
     "getFollowupSection"
@@ -10663,6 +11011,7 @@ const PlasmicDescendants = {
     "getProceduresSection",
     "getLaboratorySection",
     "getParaclinicReportsSection",
+    "accordion2",
     "getPatientConditionSection",
     "getDrugsSection",
     "getFollowupSection"
@@ -10684,6 +11033,7 @@ const PlasmicDescendants = {
     "getProceduresSection",
     "getLaboratorySection",
     "getParaclinicReportsSection",
+    "accordion2",
     "getPatientConditionSection",
     "getDrugsSection",
     "getFollowupSection"
@@ -10693,7 +11043,8 @@ const PlasmicDescendants = {
   getDiseaseProgressSection2: ["getDiseaseProgressSection2"],
   getProceduresSection: ["getProceduresSection"],
   getLaboratorySection: ["getLaboratorySection"],
-  getParaclinicReportsSection: ["getParaclinicReportsSection"],
+  getParaclinicReportsSection: ["getParaclinicReportsSection", "accordion2"],
+  accordion2: ["accordion2"],
   getPatientConditionSection: ["getPatientConditionSection"],
   getDrugsSection: ["getDrugsSection"],
   getFollowupSection: ["getFollowupSection"],
@@ -11064,6 +11415,7 @@ type NodeDefaultElementType = {
   getProceduresSection: "div";
   getLaboratorySection: "div";
   getParaclinicReportsSection: "div";
+  accordion2: typeof AntdAccordion;
   getPatientConditionSection: "div";
   getDrugsSection: "div";
   getFollowupSection: "div";
@@ -11239,6 +11591,7 @@ export const PlasmicPatientDischargeSummary = Object.assign(
     getParaclinicReportsSection: makeNodeComponent(
       "getParaclinicReportsSection"
     ),
+    accordion2: makeNodeComponent("accordion2"),
     getPatientConditionSection: makeNodeComponent("getPatientConditionSection"),
     getDrugsSection: makeNodeComponent("getDrugsSection"),
     getFollowupSection: makeNodeComponent("getFollowupSection"),
