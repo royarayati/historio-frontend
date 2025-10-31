@@ -2876,8 +2876,8 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                                     )}
                                   >
                                     <React.Fragment>
-                                      {currentItem.disease_progress
-                                        ? currentItem.disease_progress
+                                      {currentItem.procedures
+                                        ? currentItem.procedures
                                         : "ثبت نشده است"}
                                     </React.Fragment>
                                   </div>
@@ -6546,7 +6546,7 @@ function PlasmicPatientDischargeSummary__RenderFunc(props: {
                           const actionArgs = {
                             variable: {
                               objRoot: $state,
-                              variablePath: ["addPatientSummary"]
+                              variablePath: ["addDischargeSummary", "open"]
                             },
                             operation: 0,
                             value: false

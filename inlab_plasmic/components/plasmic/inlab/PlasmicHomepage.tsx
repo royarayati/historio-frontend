@@ -296,6 +296,7 @@ export type PlasmicHomepage__OverridesType = {
   بیمارییافتنشد3?: Flex__<"div">;
   بیمارییافتنشد4?: Flex__<"div">;
   error423?: Flex__<"div">;
+  لطفامنتظربمانید4?: Flex__<"div">;
   bookmarkGuide2?: Flex__<"div">;
   bookmarkImage2?: Flex__<"svg">;
   bookmarkedImage2?: Flex__<"svg">;
@@ -21303,6 +21304,42 @@ function PlasmicHomepage__RenderFunc(props: {
                     ) : null}
                     {(
                       hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? (() => {
+                            try {
+                              return $ctx.fetched_data.loading == true;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return true;
+                              }
+                              throw e;
+                            }
+                          })()
+                        : $ctx.fetched_data.status !== 200
+                    ) ? (
+                      <div
+                        data-plasmic-name={
+                          "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f4"
+                        }
+                        data-plasmic-override={overrides.لطفامنتظربمانید4}
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.لطفامنتظربمانید4
+                        )}
+                      >
+                        <React.Fragment>
+                          {$ctx.fetched_data &&
+                            $ctx.fetched_data.response &&
+                            $ctx.fetched_data.response.data &&
+                            $ctx.fetched_data.response.data.detail}
+                        </React.Fragment>
+                      </div>
+                    ) : null}
+                    {(
+                      hasVariant(globalVariants, "screen", "mobileFirst")
                         ? $state.mainSelectedTab == "patients" &&
                           $state.patientsSelectedTab == "bookmark" &&
                           $state.searchbarFname.value === "" &&
@@ -30198,6 +30235,7 @@ const PlasmicDescendants = {
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f3",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f4",
     "error423",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f4",
     "bookmarkGuide2",
     "bookmarkImage2",
     "bookmarkedImage2",
@@ -30447,6 +30485,7 @@ const PlasmicDescendants = {
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f3",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f4",
     "error423",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f4",
     "bookmarkGuide2",
     "bookmarkImage2",
     "bookmarkedImage2",
@@ -31131,6 +31170,7 @@ const PlasmicDescendants = {
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f3",
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f4",
     "error423",
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f4",
     "bookmarkGuide2",
     "bookmarkImage2",
     "bookmarkedImage2",
@@ -31279,6 +31319,9 @@ const PlasmicDescendants = {
     "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f4"
   ],
   error423: ["error423"],
+  لطفامنتظربمانید4: [
+    "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f4"
+  ],
   bookmarkGuide2: ["bookmarkGuide2", "bookmarkImage2", "bookmarkedImage2"],
   bookmarkImage2: ["bookmarkImage2"],
   bookmarkedImage2: ["bookmarkedImage2"],
@@ -31692,6 +31735,7 @@ type NodeDefaultElementType = {
   بیمارییافتنشد3: "div";
   بیمارییافتنشد4: "div";
   error423: "div";
+  لطفامنتظربمانید4: "div";
   bookmarkGuide2: "div";
   bookmarkImage2: "svg";
   bookmarkedImage2: "svg";
@@ -32029,6 +32073,9 @@ export const PlasmicHomepage = Object.assign(
       "\u0628\u06cc\u0645\u0627\u0631\u06cc\u06cc\u0627\u0641\u062a\u0646\u0634\u062f4"
     ),
     error423: makeNodeComponent("error423"),
+    لطفامنتظربمانید4: makeNodeComponent(
+      "\u0644\u0637\u0641\u0627\u0645\u0646\u062a\u0638\u0631\u0628\u0645\u0627\u0646\u06cc\u062f4"
+    ),
     bookmarkGuide2: makeNodeComponent("bookmarkGuide2"),
     bookmarkImage2: makeNodeComponent("bookmarkImage2"),
     bookmarkedImage2: makeNodeComponent("bookmarkedImage2"),
