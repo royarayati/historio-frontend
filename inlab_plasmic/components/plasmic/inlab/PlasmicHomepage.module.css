@@ -4618,6 +4618,15 @@
   margin: 0px;
   border: 1px solid var(--token-9iYGdL7i3GKE);
 }
+.text__iPaMr {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: var(--token-b7Myz3RtiwPQ);
+  font-weight: 700;
+  min-width: 0;
+}
 .freeBox__rmb7C {
   display: flex;
   flex-direction: column;
@@ -4721,6 +4730,15 @@
 .conditionGuard___765V:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
+}
+.text__wl6X6 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: var(--token-b7Myz3RtiwPQ);
+  font-weight: 700;
+  min-width: 0;
 }
 .serviceList2 {
   display: flex;
@@ -4963,6 +4981,14 @@
     margin-top: 15px;
     border-radius: 5px;
   }
+}
+.text__d6Fc3 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: var(--token-b7Myz3RtiwPQ);
+  font-weight: 700;
+  min-width: 0;
 }
 .freeBox__rkeNk {
   display: flex;
