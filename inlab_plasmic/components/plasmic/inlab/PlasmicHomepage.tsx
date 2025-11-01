@@ -75,6 +75,7 @@ import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import BookmarkIcon from "../../BookmarkIcon"; // plasmic-import: PK_hwsu90gKT/component
 import Alert3 from "../../Alert3"; // plasmic-import: EFrzqPluJe9j/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
 
@@ -5055,7 +5056,17 @@ function PlasmicHomepage__RenderFunc(props: {
                         !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                         (() => {
                           try {
-                            return $ctx.fetched_data.data.items;
+                            return $ctx.fetched_data.data.items.filter(item => {
+                              const isStateLessThan4 = item.state < 4;
+                              const sevenDaysAgo = new Date(
+                                Date.now() - 7 * 24 * 60 * 60 * 1000
+                              );
+                              const isOlderThan7Days =
+                                new Date(item.effective_request_datetime) <
+                                sevenDaysAgo;
+
+                              return !(isStateLessThan4 && isOlderThan7Days);
+                            });
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
