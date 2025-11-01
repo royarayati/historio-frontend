@@ -4994,8 +4994,17 @@ function PlasmicHomepage__RenderFunc(props: {
                       {(() => {
                         try {
                           return (
-                            $ctx.fetched_data.loading === false &&
-                            $ctx.fetched_data.data.items == 0
+                            $ctx.fetched_data.data.items.filter(item => {
+                              const isStateLessThan4 = item.state < 4;
+                              const sevenDaysAgo = new Date(
+                                Date.now() - 7 * 24 * 60 * 60 * 1000
+                              );
+                              const isOlderThan7Days =
+                                new Date(item.effective_request_datetime) <
+                                sevenDaysAgo;
+
+                              return !(isStateLessThan4 && isOlderThan7Days);
+                            }) == 0 && $ctx.fetched_data.loading === false
                           );
                         } catch (e) {
                           if (
