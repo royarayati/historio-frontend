@@ -4994,6 +4994,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       {(() => {
                         try {
                           return (
+                            $ctx.fetched_data.loading === false &&
                             $ctx.fetched_data.data.items.filter(item => {
                               const isStateLessThan4 = item.state < 4;
                               const sevenDaysAgo = new Date(
@@ -5004,7 +5005,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 sevenDaysAgo;
 
                               return !(isStateLessThan4 && isOlderThan7Days);
-                            }) == 0 && $ctx.fetched_data.loading === false
+                            }) == 0
                           );
                         } catch (e) {
                           if (
