@@ -1079,8 +1079,12 @@
   color: var(--token-9iYGdL7i3GKE);
   height: 25px;
   align-self: center;
+  transform-style: preserve-3d;
   border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
   border-left: 0px none var(--token-8PxxXPNrIohQ);
+}
+.lastPatient2 * {
+  transform-style: preserve-3d;
 }
 .homepage {
   position: relative;
@@ -1156,7 +1160,7 @@
 .nextPatient2 {
   object-fit: cover;
   max-width: 100%;
-  transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+  transform: rotate3d(0, 1, 0, 180deg);
   width: 15%;
   color: var(--token-9iYGdL7i3GKE);
   height: 25px;

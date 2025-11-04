@@ -4973,7 +4973,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 })()}
                 method={"GET"}
-                path={`/api/v3/consults?archived_search=false&dismissed_consult=true&drafted_consult=false${
+                path={`/api/v3/consults?archived_search=false&dismissed_consult=true&drafted_consult=false&is_recent_unreplied=true${
                   localStorage.getItem("GET_V3_consult_query_param")
                     ? localStorage.getItem("GET_V3_consult_query_param")
                     : ""
@@ -4995,17 +4995,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         try {
                           return (
                             $ctx.fetched_data.loading === false &&
-                            $ctx.fetched_data.data.items.filter(item => {
-                              const isStateLessThan4 = item.state < 4;
-                              const sevenDaysAgo = new Date(
-                                Date.now() - 7 * 24 * 60 * 60 * 1000
-                              );
-                              const isOlderThan7Days =
-                                new Date(item.effective_request_datetime) <
-                                sevenDaysAgo;
-
-                              return !(isStateLessThan4 && isOlderThan7Days);
-                            }) == 0
+                            $ctx.fetched_data.data.items == 0
                           );
                         } catch (e) {
                           if (
@@ -5066,17 +5056,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         !_par ? [] : Array.isArray(_par) ? _par : [_par])(
                         (() => {
                           try {
-                            return $ctx.fetched_data.data.items.filter(item => {
-                              const isStateLessThan4 = item.state < 4;
-                              const sevenDaysAgo = new Date(
-                                Date.now() - 7 * 24 * 60 * 60 * 1000
-                              );
-                              const isOlderThan7Days =
-                                new Date(item.effective_request_datetime) <
-                                sevenDaysAgo;
-
-                              return !(isStateLessThan4 && isOlderThan7Days);
-                            });
+                            return $ctx.fetched_data.data.items;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
