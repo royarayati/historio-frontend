@@ -9,13 +9,35 @@
   height: 2em;
   justify-self: flex-start;
   transform: none;
+  transform-style: preserve-3d;
+}
+.bookmark * {
+  transform-style: preserve-3d;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .bookmark {
+    transform-style: preserve-3d;
+  }
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .bookmark * {
+    transform-style: preserve-3d;
+  }
 }
 .bookmarkbookmarked {
   color: var(--token-9iYGdL7i3GKE);
+  transform-style: preserve-3d;
+}
+.bookmarkbookmarked * {
+  transform-style: preserve-3d;
 }
 .bookmarkloadingBookmark {
   color: var(--token-4VVKgsFPDvBb);
   max-width: 100%;
   width: 3em;
   height: 3em;
+  transform-style: preserve-3d;
+}
+.bookmarkloadingBookmark * {
+  transform-style: preserve-3d;
 }

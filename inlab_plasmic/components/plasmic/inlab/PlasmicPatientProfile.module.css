@@ -172,7 +172,7 @@
   align-self: center;
   height: 25px;
   width: 10%;
-  transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+  transform: rotate3d(0, 1, 0, 180deg);
   color: var(--token-9iYGdL7i3GKE);
   transform-style: preserve-3d;
   border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
