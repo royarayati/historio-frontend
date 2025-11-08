@@ -8,6 +8,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="manifest" href="/new_inlab/manifest.json" />
+          <link rel="icon" href="/new_inlab/favicon.ico" />
         </Head>
         <body>
           <Main />
