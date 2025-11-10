@@ -435,19 +435,20 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(
-          `https://inlabgr.synappsgroup.com/api/v3/remote_his_manual/templates/${templateId}`
-        );
+        const url = `https://inlabgr.synappsgroup.com/api/v3/remote_his_manual/templates${templateId ? `?template_id=${encodeURIComponent(templateId)}` : ""}`;
+        const res = await fetch(url);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
-        // 👇 طبق پاسخ واقعی سرور:
-        const loadedSchema = data?.items?.schema;
+        // Expecting { status_code: 200, data: { id, name, version, schema, ui_schema, ... } }
+        const templateData = data?.data;
+        const loadedSchema = templateData?.schema;
+        const loadedUiSchema = templateData?.ui_schema || {};
 
         console.log("✅ Loaded schema", loadedSchema);
 
         setSchema(loadedSchema || {});
-        setUiSchema({});
+        setUiSchema(loadedUiSchema);
       } catch (err: any) {
         setError(err.message);
       } finally {

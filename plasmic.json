@@ -2981,6 +2981,12 @@
           "name": "ApiFetcherComponentPlus",
           "displayName": "ApiFetcherComponentPlus",
           "componentImportPath": "./utils/ApiFetcherComponentPlus"
+        },
+        {
+          "id": "jEqVmdAbnKYc",
+          "name":"SimpleFormBuilder"  ,
+          "displayName": "SimpleFormBuilder",
+          "componentImportPath": "./utils/SimpleFormBuilder"
         }
       ],
       "customFunctions": [
