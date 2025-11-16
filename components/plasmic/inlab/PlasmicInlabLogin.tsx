@@ -639,9 +639,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                                 const actionArgs = {
                                   customFunction: async () => {
                                     return console.log(
-                                      `"new_notice_datetime": ${localStorage.getItem(
-                                        "new_notice_datetime"
-                                      )}`
+                                      `"new_notice_datetime": ${localStorage.getItem("new_notice_datetime")}`
                                     );
                                   }
                                 };
@@ -852,9 +850,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                       typeof $steps["updateUsernameValue"] === "object" &&
                       typeof $steps["updateUsernameValue"].then === "function"
                     ) {
-                      $steps["updateUsernameValue"] = await $steps[
-                        "updateUsernameValue"
-                      ];
+                      $steps["updateUsernameValue"] =
+                        await $steps["updateUsernameValue"];
                     }
 
                     $steps["updateUsernameValue2"] = true
@@ -878,9 +875,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                       typeof $steps["updateUsernameValue2"] === "object" &&
                       typeof $steps["updateUsernameValue2"].then === "function"
                     ) {
-                      $steps["updateUsernameValue2"] = await $steps[
-                        "updateUsernameValue2"
-                      ];
+                      $steps["updateUsernameValue2"] =
+                        await $steps["updateUsernameValue2"];
                     }
                   }}
                   role={"img"}
@@ -981,9 +977,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                       typeof $steps["updatePasswordValue"] === "object" &&
                       typeof $steps["updatePasswordValue"].then === "function"
                     ) {
-                      $steps["updatePasswordValue"] = await $steps[
-                        "updatePasswordValue"
-                      ];
+                      $steps["updatePasswordValue"] =
+                        await $steps["updatePasswordValue"];
                     }
 
                     $steps["updateWrongUser"] = true
@@ -1007,9 +1002,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                       typeof $steps["updateWrongUser"] === "object" &&
                       typeof $steps["updateWrongUser"].then === "function"
                     ) {
-                      $steps["updateWrongUser"] = await $steps[
-                        "updateWrongUser"
-                      ];
+                      $steps["updateWrongUser"] =
+                        await $steps["updateWrongUser"];
                     }
                   }}
                   role={"img"}
@@ -1128,9 +1122,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 typeof $steps["deactiveteWrongUser"] === "object" &&
                 typeof $steps["deactiveteWrongUser"].then === "function"
               ) {
-                $steps["deactiveteWrongUser"] = await $steps[
-                  "deactiveteWrongUser"
-                ];
+                $steps["deactiveteWrongUser"] =
+                  await $steps["deactiveteWrongUser"];
               }
 
               $steps["disablerLoginButton"] = true
@@ -1154,9 +1147,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 typeof $steps["disablerLoginButton"] === "object" &&
                 typeof $steps["disablerLoginButton"].then === "function"
               ) {
-                $steps["disablerLoginButton"] = await $steps[
-                  "disablerLoginButton"
-                ];
+                $steps["disablerLoginButton"] =
+                  await $steps["disablerLoginButton"];
               }
 
               $steps["loginAction"] = true
@@ -1230,9 +1222,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 typeof $steps["goToNamespacesSelection"] === "object" &&
                 typeof $steps["goToNamespacesSelection"].then === "function"
               ) {
-                $steps["goToNamespacesSelection"] = await $steps[
-                  "goToNamespacesSelection"
-                ];
+                $steps["goToNamespacesSelection"] =
+                  await $steps["goToNamespacesSelection"];
               }
 
               $steps["activeteWrongUser"] =
@@ -1278,9 +1269,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 typeof $steps["enablerLoginButton"] === "object" &&
                 typeof $steps["enablerLoginButton"].then === "function"
               ) {
-                $steps["enablerLoginButton"] = await $steps[
-                  "enablerLoginButton"
-                ];
+                $steps["enablerLoginButton"] =
+                  await $steps["enablerLoginButton"];
               }
             }}
             onDeselectedChange={async (...eventArgs: any) => {
@@ -1453,9 +1443,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                   typeof $steps["goToGoogleFormOfCreateEditAccount"].then ===
                     "function"
                 ) {
-                  $steps["goToGoogleFormOfCreateEditAccount"] = await $steps[
-                    "goToGoogleFormOfCreateEditAccount"
-                  ];
+                  $steps["goToGoogleFormOfCreateEditAccount"] =
+                    await $steps["goToGoogleFormOfCreateEditAccount"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -1613,9 +1602,8 @@ function PlasmicInlabLogin__RenderFunc(props: {
                   typeof $steps["goToGoogleFormOfCreateEditAccount"].then ===
                     "function"
                 ) {
-                  $steps["goToGoogleFormOfCreateEditAccount"] = await $steps[
-                    "goToGoogleFormOfCreateEditAccount"
-                  ];
+                  $steps["goToGoogleFormOfCreateEditAccount"] =
+                    await $steps["goToGoogleFormOfCreateEditAccount"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -1821,7 +1809,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicInlabLogin__VariantsArgs;
     args?: PlasmicInlabLogin__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicInlabLogin__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicInlabLogin__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicInlabLogin__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

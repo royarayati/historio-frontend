@@ -226,10 +226,10 @@ function PlasmicHighlightIcon__RenderFunc(props: {
         hasVariant($state, "loadingHighlighting", "loadingHighlighting")
           ? LoaderSpinnerIcon
           : hasVariant($state, "loadingHighlighting", "loadingHighlighting")
-          ? LoaderSpinnerIcon
-          : hasVariant($state, "highlighting", "highlighting")
-          ? CheckCircleSvgrepoCom1SvgIcon
-          : EmptyCircleSvgrepoComSvgIcon
+            ? LoaderSpinnerIcon
+            : hasVariant($state, "highlighting", "highlighting")
+              ? CheckCircleSvgrepoCom1SvgIcon
+              : EmptyCircleSvgrepoComSvgIcon
       }
       className={classNames(
         projectcss.all,
@@ -278,9 +278,8 @@ function PlasmicHighlightIcon__RenderFunc(props: {
           typeof $steps["activateLoadingHighlightVariant"] === "object" &&
           typeof $steps["activateLoadingHighlightVariant"].then === "function"
         ) {
-          $steps["activateLoadingHighlightVariant"] = await $steps[
-            "activateLoadingHighlightVariant"
-          ];
+          $steps["activateLoadingHighlightVariant"] =
+            await $steps["activateLoadingHighlightVariant"];
         }
 
         $steps["toggleHighlightPost"] =
@@ -337,11 +336,7 @@ function PlasmicHighlightIcon__RenderFunc(props: {
                 const actionArgs = {
                   args: [
                     "DELETE",
-                    `/api/v3/messages?namespace_id=${localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )}&admission_id=${$props.admissionId}&body_exact=${
-                      $props.body
-                    }&type=${$props.type}`
+                    `/api/v3/messages?namespace_id=${localStorage.getItem("inlab_user_namespace_id")}&admission_id=${$props.admissionId}&body_exact=${$props.body}&type=${$props.type}`
                   ]
                 };
                 return $globalActions["AuthGlobalContext.apiFetcher"]?.apply(
@@ -355,9 +350,8 @@ function PlasmicHighlightIcon__RenderFunc(props: {
           typeof $steps["toggleHighlightDelete"] === "object" &&
           typeof $steps["toggleHighlightDelete"].then === "function"
         ) {
-          $steps["toggleHighlightDelete"] = await $steps[
-            "toggleHighlightDelete"
-          ];
+          $steps["toggleHighlightDelete"] =
+            await $steps["toggleHighlightDelete"];
         }
 
         $steps["runTrigerReload"] = true
@@ -399,9 +393,8 @@ function PlasmicHighlightIcon__RenderFunc(props: {
           typeof $steps["deactivateLoadingHighlightVariant"] === "object" &&
           typeof $steps["deactivateLoadingHighlightVariant"].then === "function"
         ) {
-          $steps["deactivateLoadingHighlightVariant"] = await $steps[
-            "deactivateLoadingHighlightVariant"
-          ];
+          $steps["deactivateLoadingHighlightVariant"] =
+            await $steps["deactivateLoadingHighlightVariant"];
         }
       }}
       role={"img"}
@@ -430,7 +423,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicHighlightIcon__VariantsArgs;
     args?: PlasmicHighlightIcon__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicHighlightIcon__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicHighlightIcon__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicHighlightIcon__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

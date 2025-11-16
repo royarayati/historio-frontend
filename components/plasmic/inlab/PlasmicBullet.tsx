@@ -195,7 +195,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicBullet__VariantsArgs;
     args?: PlasmicBullet__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicBullet__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicBullet__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicBullet__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

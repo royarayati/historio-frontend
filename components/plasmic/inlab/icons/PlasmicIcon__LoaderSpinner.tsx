@@ -19,7 +19,7 @@ export function LoaderSpinnerIcon(props: LoaderSpinnerIconProps) {
       style={{
         background: '0 0"',
 
-        ...(style || {}),
+        ...(style || {})
       }}
       shapeRendering={"auto"}
       display={"block"}

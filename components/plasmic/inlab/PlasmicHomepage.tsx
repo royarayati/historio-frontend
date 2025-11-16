@@ -1866,8 +1866,8 @@ function PlasmicHomepage__RenderFunc(props: {
           hasVariant(globalVariants, "screen", "mobileFirst")
             ? []
             : hasVariant($state, "patientSummary", "patientSummary")
-            ? []
-            : "sortDeselected"
+              ? []
+              : "sortDeselected"
       },
       {
         path: "patientsSummary.sortSelected",
@@ -1878,8 +1878,8 @@ function PlasmicHomepage__RenderFunc(props: {
           hasVariant(globalVariants, "screen", "mobileFirst")
             ? "sortSelected"
             : hasVariant($state, "patientSummary", "patientSummary")
-            ? "sortSelected"
-            : undefined
+              ? "sortSelected"
+              : undefined
       },
       {
         path: "patientSummary",
@@ -3092,8 +3092,8 @@ function PlasmicHomepage__RenderFunc(props: {
           hasVariant(globalVariants, "screen", "mobileFirst")
             ? []
             : hasVariant($state, "patientSummary", "patientSummary")
-            ? []
-            : "sortDeselected"
+              ? []
+              : "sortDeselected"
       },
       {
         path: "patientsSummary2.sortSelected",
@@ -3104,8 +3104,8 @@ function PlasmicHomepage__RenderFunc(props: {
           hasVariant(globalVariants, "screen", "mobileFirst")
             ? "sortSelected"
             : hasVariant($state, "patientSummary", "patientSummary")
-            ? "sortSelected"
-            : undefined
+              ? "sortSelected"
+              : undefined
       },
       {
         path: "buttonپاککردنهمهبوکمارکها2.isDisabled",
@@ -3441,9 +3441,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       typeof $steps["updateModalRemoveBookmarksOpen"].then ===
                         "function"
                     ) {
-                      $steps["updateModalRemoveBookmarksOpen"] = await $steps[
-                        "updateModalRemoveBookmarksOpen"
-                      ];
+                      $steps["updateModalRemoveBookmarksOpen"] =
+                        await $steps["updateModalRemoveBookmarksOpen"];
                     }
                   }}
                   onDeselectedChange={async (...eventArgs: any) => {
@@ -3574,9 +3573,7 @@ function PlasmicHomepage__RenderFunc(props: {
                           const actionArgs = {
                             args: [
                               "DELETE",
-                              `/n8n/webhook/bookmark_patientcard?namespace_id=${localStorage.getItem(
-                                "inlab_user_namespace_id"
-                              )}`,
+                              `/n8n/webhook/bookmark_patientcard?namespace_id=${localStorage.getItem("inlab_user_namespace_id")}`,
                               {}
                             ]
                           };
@@ -3591,9 +3588,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       typeof $steps["deletePatientsBookmarked"].then ===
                         "function"
                     ) {
-                      $steps["deletePatientsBookmarked"] = await $steps[
-                        "deletePatientsBookmarked"
-                      ];
+                      $steps["deletePatientsBookmarked"] =
+                        await $steps["deletePatientsBookmarked"];
                     }
 
                     $steps["updateModalRemoveBookmarksOpen"] = true
@@ -3629,9 +3625,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       typeof $steps["updateModalRemoveBookmarksOpen"].then ===
                         "function"
                     ) {
-                      $steps["updateModalRemoveBookmarksOpen"] = await $steps[
-                        "updateModalRemoveBookmarksOpen"
-                      ];
+                      $steps["updateModalRemoveBookmarksOpen"] =
+                        await $steps["updateModalRemoveBookmarksOpen"];
                     }
                   }}
                   onDeselectedChange={async (...eventArgs: any) => {
@@ -3874,9 +3869,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       typeof $steps["goToUserSetting"] === "object" &&
                       typeof $steps["goToUserSetting"].then === "function"
                     ) {
-                      $steps["goToUserSetting"] = await $steps[
-                        "goToUserSetting"
-                      ];
+                      $steps["goToUserSetting"] =
+                        await $steps["goToUserSetting"];
                     }
                   }}
                   role={"img"}
@@ -3927,9 +3921,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["updateSearchbar2Value"].then ===
                             "function"
                         ) {
-                          $steps["updateSearchbar2Value"] = await $steps[
-                            "updateSearchbar2Value"
-                          ];
+                          $steps["updateSearchbar2Value"] =
+                            await $steps["updateSearchbar2Value"];
                         }
                       }}
                       role={"img"}
@@ -4014,9 +4007,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["updateSearchbar2Value"].then ===
                             "function"
                         ) {
-                          $steps["updateSearchbar2Value"] = await $steps[
-                            "updateSearchbar2Value"
-                          ];
+                          $steps["updateSearchbar2Value"] =
+                            await $steps["updateSearchbar2Value"];
                         }
                       }}
                       role={"img"}
@@ -4064,9 +4056,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["updatePatientSummary"].then ===
                           "function"
                       ) {
-                        $steps["updatePatientSummary"] = await $steps[
-                          "updatePatientSummary"
-                        ];
+                        $steps["updatePatientSummary"] =
+                          await $steps["updatePatientSummary"];
                       }
                     }).apply(null, eventArgs);
                   }}
@@ -4146,9 +4137,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["updateSearchDismissed"].then ===
                             "function"
                         ) {
-                          $steps["updateSearchDismissed"] = await $steps[
-                            "updateSearchDismissed"
-                          ];
+                          $steps["updateSearchDismissed"] =
+                            await $steps["updateSearchDismissed"];
                         }
                       }).apply(null, eventArgs);
                     }}
@@ -4226,9 +4216,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["updateSearchDismissed"].then ===
                             "function"
                         ) {
-                          $steps["updateSearchDismissed"] = await $steps[
-                            "updateSearchDismissed"
-                          ];
+                          $steps["updateSearchDismissed"] =
+                            await $steps["updateSearchDismissed"];
                         }
                       }).apply(null, eventArgs);
                     }}
@@ -4292,9 +4281,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateMainSelectedTab"] === "object" &&
                     typeof $steps["updateMainSelectedTab"].then === "function"
                   ) {
-                    $steps["updateMainSelectedTab"] = await $steps[
-                      "updateMainSelectedTab"
-                    ];
+                    $steps["updateMainSelectedTab"] =
+                      await $steps["updateMainSelectedTab"];
                   }
 
                   $steps["setConsultLocalstorgae"] = true
@@ -4317,9 +4305,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["setConsultLocalstorgae"] === "object" &&
                     typeof $steps["setConsultLocalstorgae"].then === "function"
                   ) {
-                    $steps["setConsultLocalstorgae"] = await $steps[
-                      "setConsultLocalstorgae"
-                    ];
+                    $steps["setConsultLocalstorgae"] =
+                      await $steps["setConsultLocalstorgae"];
                   }
                 }}
               >
@@ -4501,9 +4488,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateMainSelectedTab"] === "object" &&
                     typeof $steps["updateMainSelectedTab"].then === "function"
                   ) {
-                    $steps["updateMainSelectedTab"] = await $steps[
-                      "updateMainSelectedTab"
-                    ];
+                    $steps["updateMainSelectedTab"] =
+                      await $steps["updateMainSelectedTab"];
                   }
 
                   $steps["setPatientsLocalstorgae"] = true
@@ -4526,9 +4512,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["setPatientsLocalstorgae"] === "object" &&
                     typeof $steps["setPatientsLocalstorgae"].then === "function"
                   ) {
-                    $steps["setPatientsLocalstorgae"] = await $steps[
-                      "setPatientsLocalstorgae"
-                    ];
+                    $steps["setPatientsLocalstorgae"] =
+                      await $steps["setPatientsLocalstorgae"];
                   }
                 }}
               >
@@ -4973,17 +4958,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   }
                 })()}
                 method={"GET"}
-                path={`/api/v3/consults?archived_search=false&dismissed_consult=true&drafted_consult=false&is_recent_unreplied=true${
-                  localStorage.getItem("GET_V3_consult_query_param")
-                    ? localStorage.getItem("GET_V3_consult_query_param")
-                    : ""
-                }&limit=10&offset=${`${
-                  ((localStorage.getItem("consult_page_number")
-                    ? parseInt(localStorage.getItem("consult_page_number"), 10)
-                    : 1) -
-                    1) *
-                  10
-                }`}`}
+                path={`/api/v3/consults?archived_search=false&dismissed_consult=true&drafted_consult=false&is_recent_unreplied=true${localStorage.getItem("GET_V3_consult_query_param") ? localStorage.getItem("GET_V3_consult_query_param") : ""}&limit=10&offset=${`${((localStorage.getItem("consult_page_number") ? parseInt(localStorage.getItem("consult_page_number"), 10) : 1) - 1) * 10}`}`}
                 ref={ref => {
                   $refs["consults"] = ref;
                 }}
@@ -5674,9 +5649,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateDeleteConsultUnsuccessfullyAlert"
-                                            ] = await $steps[
-                                              "updateDeleteConsultUnsuccessfullyAlert"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateDeleteConsultUnsuccessfullyAlert"
+                                              ];
                                           }
 
                                           $steps["updateConsultId"] = true
@@ -5777,9 +5753,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateModalDeleteConsultConfirmationOpen"
-                                            ] = await $steps[
-                                              "updateModalDeleteConsultConfirmationOpen"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateModalDeleteConsultConfirmationOpen"
+                                              ];
                                           }
                                         }}
                                         role={"img"}
@@ -5966,9 +5943,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                         ) {
                                           $steps[
                                             "goToConsultSendReplyAndDetail"
-                                          ] = await $steps[
-                                            "goToConsultSendReplyAndDetail"
-                                          ];
+                                          ] =
+                                            await $steps[
+                                              "goToConsultSendReplyAndDetail"
+                                            ];
                                         }
                                       }}
                                     >
@@ -6085,9 +6063,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                         ) {
                                           $steps[
                                             "goToConsultSendReplyAndDetail"
-                                          ] = await $steps[
-                                            "goToConsultSendReplyAndDetail"
-                                          ];
+                                          ] =
+                                            await $steps[
+                                              "goToConsultSendReplyAndDetail"
+                                            ];
                                         }
                                       }}
                                     >
@@ -6168,9 +6147,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                       ) {
                                         $steps[
                                           "setThePatientIdAdmissionIdToLocalStorage"
-                                        ] = await $steps[
-                                          "setThePatientIdAdmissionIdToLocalStorage"
-                                        ];
+                                        ] =
+                                          await $steps[
+                                            "setThePatientIdAdmissionIdToLocalStorage"
+                                          ];
                                       }
 
                                       $steps["goToPatientProfile"] = true
@@ -6305,9 +6285,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                       ) {
                                         $steps[
                                           "setThePatientIdAdmissionIdToLocalStorage"
-                                        ] = await $steps[
-                                          "setThePatientIdAdmissionIdToLocalStorage"
-                                        ];
+                                        ] =
+                                          await $steps[
+                                            "setThePatientIdAdmissionIdToLocalStorage"
+                                          ];
                                       }
 
                                       $steps["goToConsultList"] = true
@@ -6440,9 +6421,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                       ) {
                                         $steps[
                                           "setThePatientIdAdmissionIdToLocalStorage"
-                                        ] = await $steps[
-                                          "setThePatientIdAdmissionIdToLocalStorage"
-                                        ];
+                                        ] =
+                                          await $steps[
+                                            "setThePatientIdAdmissionIdToLocalStorage"
+                                          ];
                                       }
 
                                       $steps["goToImagingReportList"] = true
@@ -6578,9 +6560,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                       ) {
                                         $steps[
                                           "setThePatientIdAdmissionIdToLocalStorage"
-                                        ] = await $steps[
-                                          "setThePatientIdAdmissionIdToLocalStorage"
-                                        ];
+                                        ] =
+                                          await $steps[
+                                            "setThePatientIdAdmissionIdToLocalStorage"
+                                          ];
                                       }
 
                                       $steps[
@@ -6621,9 +6604,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                       ) {
                                         $steps[
                                           "deleteLabDataFromTheLocalStorage"
-                                        ] = await $steps[
-                                          "deleteLabDataFromTheLocalStorage"
-                                        ];
+                                        ] =
+                                          await $steps[
+                                            "deleteLabDataFromTheLocalStorage"
+                                          ];
                                       }
 
                                       $steps["goToLaboratoryData"] = true
@@ -6762,9 +6746,8 @@ function PlasmicHomepage__RenderFunc(props: {
                               typeof $steps["updatePageNumberValue"].then ===
                                 "function"
                             ) {
-                              $steps["updatePageNumberValue"] = await $steps[
-                                "updatePageNumberValue"
-                              ];
+                              $steps["updatePageNumberValue"] =
+                                await $steps["updatePageNumberValue"];
                             }
                           }}
                           role={"img"}
@@ -6892,9 +6875,10 @@ function PlasmicHomepage__RenderFunc(props: {
                       ) {
                         $steps[
                           "updateChangeConsultPageNumberReloadGetConsult"
-                        ] = await $steps[
-                          "updateChangeConsultPageNumberReloadGetConsult"
-                        ];
+                        ] =
+                          await $steps[
+                            "updateChangeConsultPageNumberReloadGetConsult"
+                          ];
                       }
                     }}
                     onDeselectedChange={async (...eventArgs: any) => {
@@ -7057,9 +7041,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["decreaseConsultPageNumber"].then ===
                             "function"
                         ) {
-                          $steps["decreaseConsultPageNumber"] = await $steps[
-                            "decreaseConsultPageNumber"
-                          ];
+                          $steps["decreaseConsultPageNumber"] =
+                            await $steps["decreaseConsultPageNumber"];
                         }
 
                         $steps[
@@ -7108,9 +7091,10 @@ function PlasmicHomepage__RenderFunc(props: {
                         ) {
                           $steps[
                             "updateChangeConsultPageNumberReloadGetConsult"
-                          ] = await $steps[
-                            "updateChangeConsultPageNumberReloadGetConsult"
-                          ];
+                          ] =
+                            await $steps[
+                              "updateChangeConsultPageNumberReloadGetConsult"
+                            ];
                         }
                       },
                       onDeselectedChange: async (...eventArgs: any) => {
@@ -7312,9 +7296,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["increaseConsultPageNumber"].then ===
                           "function"
                       ) {
-                        $steps["increaseConsultPageNumber"] = await $steps[
-                          "increaseConsultPageNumber"
-                        ];
+                        $steps["increaseConsultPageNumber"] =
+                          await $steps["increaseConsultPageNumber"];
                       }
 
                       $steps["updateChangeConsultPageNumberReloadGetConsult"] =
@@ -7362,9 +7345,10 @@ function PlasmicHomepage__RenderFunc(props: {
                       ) {
                         $steps[
                           "updateChangeConsultPageNumberReloadGetConsult"
-                        ] = await $steps[
-                          "updateChangeConsultPageNumberReloadGetConsult"
-                        ];
+                        ] =
+                          await $steps[
+                            "updateChangeConsultPageNumberReloadGetConsult"
+                          ];
                       }
                     }}
                     onDeselectedChange={async (...eventArgs: any) => {
@@ -7490,52 +7474,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
               }}
               method={"GET"}
-              path={`/api/v3/bookmark/admissions?first_name=${
-                $state.searchbarFname.value !== ""
-                  ? $state.searchbarFname.value
-                  : ""
-              }&ward_id=${
-                $state.filterWard &
-                ($state.searchbarFname.value == "") &
-                ($state.searchbarLnameNcode.value == "")
-                  ? localStorage.getItem("filter_ward_id")
-                  : 0
-              }&physician_id=${
-                $state.filterPhysician &
-                ($state.searchbarFname.value == "") &
-                ($state.searchbarLnameNcode.value == "")
-                  ? localStorage.getItem("filter_physician_id")
-                  : 0
-              }&national_code=${
-                parseInt($state.searchbarLnameNcode.value)
-                  ? $state.searchbarLnameNcode.value
-                  : ""
-              }&last_name=${
-                parseInt($state.searchbarLnameNcode.value) ||
-                $state.searchbarLnameNcode.value == ""
-                  ? ""
-                  : $state.searchbarLnameNcode.value
-              }&dismissed=${$state.searchDismissed}&bookmarked=${
-                $state.searchbarFname.value === "" &&
-                $state.searchbarLnameNcode.value === "" &&
-                $state.patientsSelectedTab === "bookmark"
-                  ? true
-                  : false
-              }&offset=0&limit=${
-                ($state.searchbarFname.value ||
-                  $state.searchbarLnameNcode.value) !== "" &&
-                $state.searchDismissed
-                  ? 10
-                  : 40
-              }&sort_by_bed=${$state.sortingByBed}&type=${
-                $state.bookmarkType
-              }&service_id=${
-                $state.filterService2 &
-                ($state.searchbarFname.value == "") &
-                ($state.searchbarLnameNcode.value == "")
-                  ? localStorage.getItem("filter_service_id")
-                  : 0
-              }`}
+              path={`/api/v3/bookmark/admissions?first_name=${$state.searchbarFname.value !== "" ? $state.searchbarFname.value : ""}&ward_id=${$state.filterWard & ($state.searchbarFname.value == "") & ($state.searchbarLnameNcode.value == "") ? localStorage.getItem("filter_ward_id") : 0}&physician_id=${$state.filterPhysician & ($state.searchbarFname.value == "") & ($state.searchbarLnameNcode.value == "") ? localStorage.getItem("filter_physician_id") : 0}&national_code=${parseInt($state.searchbarLnameNcode.value) ? $state.searchbarLnameNcode.value : ""}&last_name=${parseInt($state.searchbarLnameNcode.value) || $state.searchbarLnameNcode.value == "" ? "" : $state.searchbarLnameNcode.value}&dismissed=${$state.searchDismissed}&bookmarked=${$state.searchbarFname.value === "" && $state.searchbarLnameNcode.value === "" && $state.patientsSelectedTab === "bookmark" ? true : false}&offset=0&limit=${($state.searchbarFname.value || $state.searchbarLnameNcode.value) !== "" && $state.searchDismissed ? 10 : 40}&sort_by_bed=${$state.sortingByBed}&type=${$state.bookmarkType}&service_id=${$state.filterService2 & ($state.searchbarFname.value == "") & ($state.searchbarLnameNcode.value == "") ? localStorage.getItem("filter_service_id") : 0}`}
               ref={ref => {
                 $refs["exPatients"] = ref;
               }}
@@ -7606,9 +7545,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["scrollToPreviousPatientCard"].then ===
                             "function"
                         ) {
-                          $steps["scrollToPreviousPatientCard"] = await $steps[
-                            "scrollToPreviousPatientCard"
-                          ];
+                          $steps["scrollToPreviousPatientCard"] =
+                            await $steps["scrollToPreviousPatientCard"];
                         }
 
                         $steps["setLocalBookmarkedList"] =
@@ -7624,9 +7562,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         JSON.stringify($ctx.fetched_data.data)
                                       );
                                       return console.log(
-                                        `bookmarked_list: ${localStorage.getItem(
-                                          "bookmarked_list"
-                                        )}`
+                                        `bookmarked_list: ${localStorage.getItem("bookmarked_list")}`
                                       );
                                     })();
                                   }
@@ -7643,9 +7579,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setLocalBookmarkedList"].then ===
                             "function"
                         ) {
-                          $steps["setLocalBookmarkedList"] = await $steps[
-                            "setLocalBookmarkedList"
-                          ];
+                          $steps["setLocalBookmarkedList"] =
+                            await $steps["setLocalBookmarkedList"];
                         }
 
                         $steps["setLocalPatientList"] = true
@@ -7658,9 +7593,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       JSON.stringify($ctx.fetched_data.data)
                                     );
                                     console.log(
-                                      `patient_list: ${localStorage.getItem(
-                                        "patient_list"
-                                      )}`
+                                      `patient_list: ${localStorage.getItem("patient_list")}`
                                     );
                                     const updatedBookmarkIdList = (
                                       $ctx.fetched_data?.data || []
@@ -7689,9 +7622,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setLocalPatientList"].then ===
                             "function"
                         ) {
-                          $steps["setLocalPatientList"] = await $steps[
-                            "setLocalPatientList"
-                          ];
+                          $steps["setLocalPatientList"] =
+                            await $steps["setLocalPatientList"];
                         }
 
                         $steps["setLocalBookmarkId"] = false
@@ -7726,9 +7658,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setLocalBookmarkId"].then ===
                             "function"
                         ) {
-                          $steps["setLocalBookmarkId"] = await $steps[
-                            "setLocalBookmarkId"
-                          ];
+                          $steps["setLocalBookmarkId"] =
+                            await $steps["setLocalBookmarkId"];
                         }
 
                         $steps["updatePatientNumber"] =
@@ -7769,9 +7700,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["updatePatientNumber"].then ===
                             "function"
                         ) {
-                          $steps["updatePatientNumber"] = await $steps[
-                            "updatePatientNumber"
-                          ];
+                          $steps["updatePatientNumber"] =
+                            await $steps["updatePatientNumber"];
                         }
 
                         $steps["setLocalPatientsNumber"] =
@@ -7786,9 +7716,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         $state.patientNumber
                                       );
                                       return console.log(
-                                        `patients_number: ${localStorage.getItem(
-                                          "patients_number"
-                                        )}`
+                                        `patients_number: ${localStorage.getItem("patients_number")}`
                                       );
                                     })();
                                   }
@@ -7805,9 +7733,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setLocalPatientsNumber"].then ===
                             "function"
                         ) {
-                          $steps["setLocalPatientsNumber"] = await $steps[
-                            "setLocalPatientsNumber"
-                          ];
+                          $steps["setLocalPatientsNumber"] =
+                            await $steps["setLocalPatientsNumber"];
                         }
 
                         $steps["setPatientIndexIdList"] = true
@@ -7844,9 +7771,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setPatientIndexIdList"].then ===
                             "function"
                         ) {
-                          $steps["setPatientIndexIdList"] = await $steps[
-                            "setPatientIndexIdList"
-                          ];
+                          $steps["setPatientIndexIdList"] =
+                            await $steps["setPatientIndexIdList"];
                         }
                       }}
                       skipPaths={[]}
@@ -8016,9 +7942,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       typeof $steps["updateModalOpen"].then ===
                                         "function"
                                     ) {
-                                      $steps["updateModalOpen"] = await $steps[
-                                        "updateModalOpen"
-                                      ];
+                                      $steps["updateModalOpen"] =
+                                        await $steps["updateModalOpen"];
                                     }
 
                                     $steps["setStateSelectedTab"] =
@@ -8124,19 +8049,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                                   `state_filter_professors: ${$state.filterProfessors}`
                                                 );
                                                 console.log(
-                                                  `patients_selected_tab: ${localStorage.getItem(
-                                                    "patients_selected_tab"
-                                                  )}`
+                                                  `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                                 );
                                                 console.log(
-                                                  `filter_ward_name: ${localStorage.getItem(
-                                                    "filter_ward_name"
-                                                  )}`
+                                                  `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                                 );
                                                 return console.log(
-                                                  `filter_ward_id: ${localStorage.getItem(
-                                                    "filter_ward_id"
-                                                  )}`
+                                                  `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                                 );
                                               })();
                                             }
@@ -8153,9 +8072,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       typeof $steps["logConsole"].then ===
                                         "function"
                                     ) {
-                                      $steps["logConsole"] = await $steps[
-                                        "logConsole"
-                                      ];
+                                      $steps["logConsole"] =
+                                        await $steps["logConsole"];
                                     }
                                   }}
                                   onDeselectedChange={async (
@@ -8449,9 +8367,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["updateModalOpen"].then ===
                                       "function"
                                   ) {
-                                    $steps["updateModalOpen"] = await $steps[
-                                      "updateModalOpen"
-                                    ];
+                                    $steps["updateModalOpen"] =
+                                      await $steps["updateModalOpen"];
                                   }
 
                                   $steps["setStateSelectedTab"] =
@@ -8552,19 +8469,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_professors: ${$state.filterProfessors}`
                                               );
                                               console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                               console.log(
-                                                `filter_ward_name: ${localStorage.getItem(
-                                                  "filter_ward_name"
-                                                )}`
+                                                `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                               );
                                               return console.log(
-                                                `filter_ward_id: ${localStorage.getItem(
-                                                  "filter_ward_id"
-                                                )}`
+                                                `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                               );
                                             })();
                                           }
@@ -8580,9 +8491,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["logConsole"].then ===
                                       "function"
                                   ) {
-                                    $steps["logConsole"] = await $steps[
-                                      "logConsole"
-                                    ];
+                                    $steps["logConsole"] =
+                                      await $steps["logConsole"];
                                   }
 
                                   $steps["updatePatientSummary"] = true
@@ -8903,9 +8813,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["updateModalOpen"].then ===
                                       "function"
                                   ) {
-                                    $steps["updateModalOpen"] = await $steps[
-                                      "updateModalOpen"
-                                    ];
+                                    $steps["updateModalOpen"] =
+                                      await $steps["updateModalOpen"];
                                   }
 
                                   $steps["setStateSelectedTab"] =
@@ -9004,19 +8913,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_physician: ${$state.filterPhysician}`
                                               );
                                               console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                               console.log(
-                                                `filter_physician_name: ${localStorage.getItem(
-                                                  "filter_physician_name"
-                                                )}`
+                                                `filter_physician_name: ${localStorage.getItem("filter_physician_name")}`
                                               );
                                               return console.log(
-                                                `filter_physician_id: ${localStorage.getItem(
-                                                  "filter_physician_id"
-                                                )}`
+                                                `filter_physician_id: ${localStorage.getItem("filter_physician_id")}`
                                               );
                                             })();
                                           }
@@ -9032,9 +8935,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["logConsole"].then ===
                                       "function"
                                   ) {
-                                    $steps["logConsole"] = await $steps[
-                                      "logConsole"
-                                    ];
+                                    $steps["logConsole"] =
+                                      await $steps["logConsole"];
                                   }
 
                                   $steps["setPatientcardidEmpty"] = true
@@ -9402,9 +9304,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_bookmarked: ${$state.filterBookmarked} `
                                               );
                                               return console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                             })();
                                           }
@@ -9420,9 +9320,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["consoleLog"].then ===
                                       "function"
                                   ) {
-                                    $steps["consoleLog"] = await $steps[
-                                      "consoleLog"
-                                    ];
+                                    $steps["consoleLog"] =
+                                      await $steps["consoleLog"];
                                   }
                                 }}
                                 onDeselectedChange={async (
@@ -9737,9 +9636,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_bookmarked: ${$state.filterBookmarked} `
                                               );
                                               return console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                             })();
                                           }
@@ -9755,9 +9652,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["consoleLog"].then ===
                                       "function"
                                   ) {
-                                    $steps["consoleLog"] = await $steps[
-                                      "consoleLog"
-                                    ];
+                                    $steps["consoleLog"] =
+                                      await $steps["consoleLog"];
                                   }
                                 }}
                                 onDeselectedChange={async (
@@ -10110,9 +10006,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps[
@@ -10165,9 +10062,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["runCode"] = true
@@ -10208,9 +10106,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["0"]["label"] =
@@ -10325,9 +10222,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps[
@@ -10380,9 +10278,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["runCode"] = true
@@ -10423,9 +10322,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["1"]["label"] =
@@ -10541,9 +10439,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps[
@@ -10596,9 +10495,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["runCode"] = true
@@ -10639,9 +10539,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["2"]["label"] =
@@ -10775,9 +10674,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["updatePatientsSelectedTab"] =
@@ -10829,9 +10729,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps["runCode"] = true
@@ -10872,9 +10773,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["0"]["label"] =
@@ -10991,9 +10891,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["updatePatientsSelectedTab"] =
@@ -11045,9 +10946,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps["runCode"] = true
@@ -11088,9 +10990,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["1"]["label"] =
@@ -11206,9 +11107,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["updatePatientsSelectedTab"] =
@@ -11260,9 +11162,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps["runCode"] = true
@@ -11303,9 +11206,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["2"]["label"] =
@@ -11530,9 +11432,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_bookmarked: ${$state.filterBookmarked} `
                                               );
                                               return console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                             })();
                                           }
@@ -11548,9 +11448,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["consoleLog"].then ===
                                       "function"
                                   ) {
-                                    $steps["consoleLog"] = await $steps[
-                                      "consoleLog"
-                                    ];
+                                    $steps["consoleLog"] =
+                                      await $steps["consoleLog"];
                                   }
                                 }}
                                 onDeselectedChange={async (
@@ -11833,9 +11732,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateSortingByBed"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateSortingByBed"] = await $steps[
-                                    "updateSortingByBed"
-                                  ];
+                                  $steps["updateSortingByBed"] =
+                                    await $steps["updateSortingByBed"];
                                 }
 
                                 $steps["setSortByBedLocalstorgae"] = true
@@ -12063,9 +11961,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateSortingByBed"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateSortingByBed"] = await $steps[
-                                    "updateSortingByBed"
-                                  ];
+                                  $steps["updateSortingByBed"] =
+                                    await $steps["updateSortingByBed"];
                                 }
 
                                 $steps["setSortByBedLocalstorgae"] = true
@@ -12317,9 +12214,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateBookmarkType"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateBookmarkType"] = await $steps[
-                                    "updateBookmarkType"
-                                  ];
+                                  $steps["updateBookmarkType"] =
+                                    await $steps["updateBookmarkType"];
                                 }
 
                                 $steps["runCode"] = true
@@ -12510,9 +12406,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateBookmarkType"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateBookmarkType"] = await $steps[
-                                    "updateBookmarkType"
-                                  ];
+                                  $steps["updateBookmarkType"] =
+                                    await $steps["updateBookmarkType"];
                                 }
 
                                 $steps["runCode"] = true
@@ -12710,9 +12605,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateBookmarkType"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateBookmarkType"] = await $steps[
-                                    "updateBookmarkType"
-                                  ];
+                                  $steps["updateBookmarkType"] =
+                                    await $steps["updateBookmarkType"];
                                 }
 
                                 $steps["runCode"] = true
@@ -13047,12 +12941,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                   )
                                     ? "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
                                     : hasVariant(
-                                        globalVariants,
-                                        "screen",
-                                        "mobileFirst"
-                                      )
-                                    ? "\u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
-                                    : "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 "}
+                                          globalVariants,
+                                          "screen",
+                                          "mobileFirst"
+                                        )
+                                      ? "\u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
+                                      : "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 "}
                                 </div>
                               </Button>
                             ) : null}
@@ -13871,9 +13765,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                         ) {
                                           $steps[
                                             "updatePatientHistoryModalOpen"
-                                          ] = await $steps[
-                                            "updatePatientHistoryModalOpen"
-                                          ];
+                                          ] =
+                                            await $steps[
+                                              "updatePatientHistoryModalOpen"
+                                            ];
                                         }
                                       };
                                     __composite["1"]["type"] = "submenu";
@@ -13903,9 +13798,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 const actionArgs = {
                                                   args: [
                                                     "PATCH",
-                                                    `/api/v3/bookmark/bookmark_type?admission_id=${
-                                                      currentItem.id
-                                                    }&type=${"shift"}`,
+                                                    `/api/v3/bookmark/bookmark_type?admission_id=${currentItem.id}&type=${"shift"}`,
                                                     (() => {
                                                       try {
                                                         return {
@@ -13999,9 +13892,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateShowSuccessAlarmText"
-                                            ] = await $steps[
-                                              "updateShowSuccessAlarmText"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateShowSuccessAlarmText"
+                                              ];
                                           }
                                         };
                                       __composite["1"]["label"] =
@@ -14015,9 +13909,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 const actionArgs = {
                                                   args: [
                                                     "PATCH",
-                                                    `/api/v3/bookmark/bookmark_type?admission_id=${
-                                                      currentItem.id
-                                                    }&type=${"rotation"}`,
+                                                    `/api/v3/bookmark/bookmark_type?admission_id=${currentItem.id}&type=${"rotation"}`,
                                                     (() => {
                                                       try {
                                                         return {
@@ -14111,9 +14003,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateShowSuccessAlarmText"
-                                            ] = await $steps[
-                                              "updateShowSuccessAlarmText"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateShowSuccessAlarmText"
+                                              ];
                                           }
                                         };
                                       return __composite;
@@ -14274,8 +14167,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                         (currentItem.bed === null
                                           ? ""
                                           : currentItem.bed.includes("تخت")
-                                          ? currentItem.bed
-                                          : "تخت " + currentItem.bed)}
+                                            ? currentItem.bed
+                                            : "تخت " + currentItem.bed)}
                                     </React.Fragment>
                                   </div>
                                 ) : null}
@@ -14294,8 +14187,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     {currentItem.type === "shift"
                                       ? "کشیک"
                                       : currentItem.type === "rotation"
-                                      ? "سایت صبح"
-                                      : ""}
+                                        ? "سایت صبح"
+                                        : ""}
                                   </React.Fragment>
                                 </div>
                                 {false
@@ -14374,9 +14267,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateSelectedAdmissionId"
-                                            ] = await $steps[
-                                              "updateSelectedAdmissionId"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateSelectedAdmissionId"
+                                              ];
                                           }
 
                                           $steps["updateSelectedPatientId"] =
@@ -14486,9 +14380,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientSummaryModalOpen"
-                                            ] = await $steps[
-                                              "updatePatientSummaryModalOpen"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientSummaryModalOpen"
+                                              ];
                                           }
                                         },
                                         onDeselectedChange: async (
@@ -14742,8 +14637,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       (currentItem.bed === null
                                         ? ""
                                         : currentItem.bed.includes("تخت")
-                                        ? currentItem.bed
-                                        : "تخت " + currentItem.bed)}
+                                          ? currentItem.bed
+                                          : "تخت " + currentItem.bed)}
                                   </React.Fragment>
                                 </div>
                               </div>
@@ -14990,9 +14885,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       typeof $steps["goToConsultList"].then ===
                                         "function"
                                     ) {
-                                      $steps["goToConsultList"] = await $steps[
-                                        "goToConsultList"
-                                      ];
+                                      $steps["goToConsultList"] =
+                                        await $steps["goToConsultList"];
                                     }
                                   }}
                                   src={{
@@ -15208,9 +15102,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                     ) {
                                       $steps[
                                         "deleteLabDataFromTheLocalStorage"
-                                      ] = await $steps[
-                                        "deleteLabDataFromTheLocalStorage"
-                                      ];
+                                      ] =
+                                        await $steps[
+                                          "deleteLabDataFromTheLocalStorage"
+                                        ];
                                     }
 
                                     $steps["goToLaboratoryData"] = true
@@ -15358,52 +15253,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 }
               })()}
               method={"GET"}
-              path={`/api/v3/bookmark/admissions?first_name=${
-                $state.searchbarFname.value !== ""
-                  ? $state.searchbarFname.value
-                  : ""
-              }&ward_id=${
-                $state.filterWard &
-                ($state.searchbarFname.value == "") &
-                ($state.searchbarLnameNcode.value == "")
-                  ? localStorage.getItem("filter_ward_id")
-                  : 0
-              }&physician_id=${
-                $state.filterPhysician &
-                ($state.searchbarFname.value == "") &
-                ($state.searchbarLnameNcode.value == "")
-                  ? localStorage.getItem("filter_physician_id")
-                  : 0
-              }&national_code=${
-                parseInt($state.searchbarLnameNcode.value)
-                  ? $state.searchbarLnameNcode.value
-                  : ""
-              }&last_name=${
-                parseInt($state.searchbarLnameNcode.value) ||
-                $state.searchbarLnameNcode.value == ""
-                  ? ""
-                  : $state.searchbarLnameNcode.value
-              }&dismissed=${$state.searchDismissed}&bookmarked=${
-                $state.searchbarFname.value === "" &&
-                $state.searchbarLnameNcode.value === "" &&
-                $state.patientsSelectedTab === "bookmark"
-                  ? true
-                  : false
-              }&offset=0&limit=${
-                ($state.searchbarFname.value ||
-                  $state.searchbarLnameNcode.value) !== "" &&
-                $state.searchDismissed
-                  ? 10
-                  : 40
-              }&sort_by_bed=${$state.sortingByBed}&type=${
-                $state.bookmarkType
-              }&service_id=${
-                $state.filterService2 &
-                ($state.searchbarFname.value == "") &
-                ($state.searchbarLnameNcode.value == "")
-                  ? localStorage.getItem("filter_service_id")
-                  : 0
-              }`}
+              path={`/api/v3/bookmark/admissions?first_name=${$state.searchbarFname.value !== "" ? $state.searchbarFname.value : ""}&ward_id=${$state.filterWard & ($state.searchbarFname.value == "") & ($state.searchbarLnameNcode.value == "") ? localStorage.getItem("filter_ward_id") : 0}&physician_id=${$state.filterPhysician & ($state.searchbarFname.value == "") & ($state.searchbarLnameNcode.value == "") ? localStorage.getItem("filter_physician_id") : 0}&national_code=${parseInt($state.searchbarLnameNcode.value) ? $state.searchbarLnameNcode.value : ""}&last_name=${parseInt($state.searchbarLnameNcode.value) || $state.searchbarLnameNcode.value == "" ? "" : $state.searchbarLnameNcode.value}&dismissed=${$state.searchDismissed}&bookmarked=${$state.searchbarFname.value === "" && $state.searchbarLnameNcode.value === "" && $state.patientsSelectedTab === "bookmark" ? true : false}&offset=0&limit=${($state.searchbarFname.value || $state.searchbarLnameNcode.value) !== "" && $state.searchDismissed ? 10 : 40}&sort_by_bed=${$state.sortingByBed}&type=${$state.bookmarkType}&service_id=${$state.filterService2 & ($state.searchbarFname.value == "") & ($state.searchbarLnameNcode.value == "") ? localStorage.getItem("filter_service_id") : 0}`}
               ref={ref => {
                 $refs["patients"] = ref;
               }}
@@ -15473,9 +15323,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["scrollToPreviousPatientCard"].then ===
                             "function"
                         ) {
-                          $steps["scrollToPreviousPatientCard"] = await $steps[
-                            "scrollToPreviousPatientCard"
-                          ];
+                          $steps["scrollToPreviousPatientCard"] =
+                            await $steps["scrollToPreviousPatientCard"];
                         }
 
                         $steps["setLocalBookmarkedList"] =
@@ -15491,9 +15340,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         JSON.stringify($ctx.fetched_data.data)
                                       );
                                       return console.log(
-                                        `bookmarked_list: ${localStorage.getItem(
-                                          "bookmarked_list"
-                                        )}`
+                                        `bookmarked_list: ${localStorage.getItem("bookmarked_list")}`
                                       );
                                     })();
                                   }
@@ -15510,9 +15357,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setLocalBookmarkedList"].then ===
                             "function"
                         ) {
-                          $steps["setLocalBookmarkedList"] = await $steps[
-                            "setLocalBookmarkedList"
-                          ];
+                          $steps["setLocalBookmarkedList"] =
+                            await $steps["setLocalBookmarkedList"];
                         }
 
                         $steps["setLocalPatientList"] = true
@@ -15525,9 +15371,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       JSON.stringify($ctx.fetched_data.data)
                                     );
                                     console.log(
-                                      `patient_list: ${localStorage.getItem(
-                                        "patient_list"
-                                      )}`
+                                      `patient_list: ${localStorage.getItem("patient_list")}`
                                     );
                                     const updatedBookmarkIdList = (
                                       $ctx.fetched_data?.data || []
@@ -15556,9 +15400,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setLocalPatientList"].then ===
                             "function"
                         ) {
-                          $steps["setLocalPatientList"] = await $steps[
-                            "setLocalPatientList"
-                          ];
+                          $steps["setLocalPatientList"] =
+                            await $steps["setLocalPatientList"];
                         }
 
                         $steps["setLocalBookmarkId"] = false
@@ -15593,9 +15436,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setLocalBookmarkId"].then ===
                             "function"
                         ) {
-                          $steps["setLocalBookmarkId"] = await $steps[
-                            "setLocalBookmarkId"
-                          ];
+                          $steps["setLocalBookmarkId"] =
+                            await $steps["setLocalBookmarkId"];
                         }
 
                         $steps["updatePatientNumber"] =
@@ -15636,9 +15478,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["updatePatientNumber"].then ===
                             "function"
                         ) {
-                          $steps["updatePatientNumber"] = await $steps[
-                            "updatePatientNumber"
-                          ];
+                          $steps["updatePatientNumber"] =
+                            await $steps["updatePatientNumber"];
                         }
 
                         $steps["setLocalPatientsNumber"] =
@@ -15653,9 +15494,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         $state.patientNumber
                                       );
                                       return console.log(
-                                        `patients_number: ${localStorage.getItem(
-                                          "patients_number"
-                                        )}`
+                                        `patients_number: ${localStorage.getItem("patients_number")}`
                                       );
                                     })();
                                   }
@@ -15672,9 +15511,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setLocalPatientsNumber"].then ===
                             "function"
                         ) {
-                          $steps["setLocalPatientsNumber"] = await $steps[
-                            "setLocalPatientsNumber"
-                          ];
+                          $steps["setLocalPatientsNumber"] =
+                            await $steps["setLocalPatientsNumber"];
                         }
 
                         $steps["setPatientIndexIdList"] = true
@@ -15711,9 +15549,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setPatientIndexIdList"].then ===
                             "function"
                         ) {
-                          $steps["setPatientIndexIdList"] = await $steps[
-                            "setPatientIndexIdList"
-                          ];
+                          $steps["setPatientIndexIdList"] =
+                            await $steps["setPatientIndexIdList"];
                         }
                       }}
                       skipPaths={[]}
@@ -15883,9 +15720,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       typeof $steps["updateModalOpen"].then ===
                                         "function"
                                     ) {
-                                      $steps["updateModalOpen"] = await $steps[
-                                        "updateModalOpen"
-                                      ];
+                                      $steps["updateModalOpen"] =
+                                        await $steps["updateModalOpen"];
                                     }
 
                                     $steps["setStateSelectedTab"] =
@@ -15991,19 +15827,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                                   `state_filter_professors: ${$state.filterProfessors}`
                                                 );
                                                 console.log(
-                                                  `patients_selected_tab: ${localStorage.getItem(
-                                                    "patients_selected_tab"
-                                                  )}`
+                                                  `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                                 );
                                                 console.log(
-                                                  `filter_ward_name: ${localStorage.getItem(
-                                                    "filter_ward_name"
-                                                  )}`
+                                                  `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                                 );
                                                 return console.log(
-                                                  `filter_ward_id: ${localStorage.getItem(
-                                                    "filter_ward_id"
-                                                  )}`
+                                                  `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                                 );
                                               })();
                                             }
@@ -16020,9 +15850,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       typeof $steps["logConsole"].then ===
                                         "function"
                                     ) {
-                                      $steps["logConsole"] = await $steps[
-                                        "logConsole"
-                                      ];
+                                      $steps["logConsole"] =
+                                        await $steps["logConsole"];
                                     }
                                   }}
                                   onDeselectedChange={async (
@@ -16316,9 +16145,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["updateModalOpen"].then ===
                                       "function"
                                   ) {
-                                    $steps["updateModalOpen"] = await $steps[
-                                      "updateModalOpen"
-                                    ];
+                                    $steps["updateModalOpen"] =
+                                      await $steps["updateModalOpen"];
                                   }
 
                                   $steps["setStateSelectedTab"] =
@@ -16419,19 +16247,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_professors: ${$state.filterProfessors}`
                                               );
                                               console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                               console.log(
-                                                `filter_ward_name: ${localStorage.getItem(
-                                                  "filter_ward_name"
-                                                )}`
+                                                `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                               );
                                               return console.log(
-                                                `filter_ward_id: ${localStorage.getItem(
-                                                  "filter_ward_id"
-                                                )}`
+                                                `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                               );
                                             })();
                                           }
@@ -16447,9 +16269,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["logConsole"].then ===
                                       "function"
                                   ) {
-                                    $steps["logConsole"] = await $steps[
-                                      "logConsole"
-                                    ];
+                                    $steps["logConsole"] =
+                                      await $steps["logConsole"];
                                   }
 
                                   $steps["updatePatientSummary"] = true
@@ -16770,9 +16591,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["updateModalOpen"].then ===
                                       "function"
                                   ) {
-                                    $steps["updateModalOpen"] = await $steps[
-                                      "updateModalOpen"
-                                    ];
+                                    $steps["updateModalOpen"] =
+                                      await $steps["updateModalOpen"];
                                   }
 
                                   $steps["setStateSelectedTab"] =
@@ -16871,19 +16691,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_physician: ${$state.filterPhysician}`
                                               );
                                               console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                               console.log(
-                                                `filter_physician_name: ${localStorage.getItem(
-                                                  "filter_physician_name"
-                                                )}`
+                                                `filter_physician_name: ${localStorage.getItem("filter_physician_name")}`
                                               );
                                               return console.log(
-                                                `filter_physician_id: ${localStorage.getItem(
-                                                  "filter_physician_id"
-                                                )}`
+                                                `filter_physician_id: ${localStorage.getItem("filter_physician_id")}`
                                               );
                                             })();
                                           }
@@ -16899,9 +16713,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["logConsole"].then ===
                                       "function"
                                   ) {
-                                    $steps["logConsole"] = await $steps[
-                                      "logConsole"
-                                    ];
+                                    $steps["logConsole"] =
+                                      await $steps["logConsole"];
                                   }
 
                                   $steps["setPatientcardidEmpty"] = true
@@ -17271,9 +17084,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_bookmarked: ${$state.filterBookmarked} `
                                               );
                                               return console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                             })();
                                           }
@@ -17289,9 +17100,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["consoleLog"].then ===
                                       "function"
                                   ) {
-                                    $steps["consoleLog"] = await $steps[
-                                      "consoleLog"
-                                    ];
+                                    $steps["consoleLog"] =
+                                      await $steps["consoleLog"];
                                   }
                                 }}
                                 onDeselectedChange={async (
@@ -17606,9 +17416,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_bookmarked: ${$state.filterBookmarked} `
                                               );
                                               return console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                             })();
                                           }
@@ -17624,9 +17432,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["consoleLog"].then ===
                                       "function"
                                   ) {
-                                    $steps["consoleLog"] = await $steps[
-                                      "consoleLog"
-                                    ];
+                                    $steps["consoleLog"] =
+                                      await $steps["consoleLog"];
                                   }
                                 }}
                                 onDeselectedChange={async (
@@ -17979,9 +17786,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps[
@@ -18034,9 +17842,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["runCode"] = false
@@ -18077,9 +17886,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["0"]["label"] =
@@ -18194,9 +18002,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps[
@@ -18249,9 +18058,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["runCode"] = false
@@ -18292,9 +18102,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["1"]["label"] =
@@ -18410,9 +18219,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps[
@@ -18465,9 +18275,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["runCode"] = false
@@ -18508,9 +18319,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["2"]["label"] =
@@ -18644,9 +18454,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["updatePatientsSelectedTab"] =
@@ -18698,9 +18509,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps["runCode"] = false
@@ -18741,9 +18553,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["0"]["label"] =
@@ -18860,9 +18671,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["updatePatientsSelectedTab"] =
@@ -18914,9 +18726,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps["runCode"] = false
@@ -18957,9 +18770,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["1"]["label"] =
@@ -19075,9 +18887,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientFilterSelection"
-                                            ] = await $steps[
-                                              "updatePatientFilterSelection"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientFilterSelection"
+                                              ];
                                           }
 
                                           $steps["updatePatientsSelectedTab"] =
@@ -19129,9 +18942,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientsSelectedTab"
-                                            ] = await $steps[
-                                              "updatePatientsSelectedTab"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientsSelectedTab"
+                                              ];
                                           }
 
                                           $steps["runCode"] = false
@@ -19172,9 +18986,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                             typeof $steps["runCode"].then ===
                                               "function"
                                           ) {
-                                            $steps["runCode"] = await $steps[
-                                              "runCode"
-                                            ];
+                                            $steps["runCode"] =
+                                              await $steps["runCode"];
                                           }
                                         };
                                       __composite["2"]["label"] =
@@ -19401,9 +19214,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 `state_filter_bookmarked: ${$state.filterBookmarked} `
                                               );
                                               return console.log(
-                                                `patients_selected_tab: ${localStorage.getItem(
-                                                  "patients_selected_tab"
-                                                )}`
+                                                `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                               );
                                             })();
                                           }
@@ -19419,9 +19230,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["consoleLog"].then ===
                                       "function"
                                   ) {
-                                    $steps["consoleLog"] = await $steps[
-                                      "consoleLog"
-                                    ];
+                                    $steps["consoleLog"] =
+                                      await $steps["consoleLog"];
                                   }
                                 }}
                                 onDeselectedChange={async (
@@ -19704,9 +19514,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateSortingByBed"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateSortingByBed"] = await $steps[
-                                    "updateSortingByBed"
-                                  ];
+                                  $steps["updateSortingByBed"] =
+                                    await $steps["updateSortingByBed"];
                                 }
 
                                 $steps["setSortByBedLocalstorgae"] = true
@@ -19934,9 +19743,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateSortingByBed"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateSortingByBed"] = await $steps[
-                                    "updateSortingByBed"
-                                  ];
+                                  $steps["updateSortingByBed"] =
+                                    await $steps["updateSortingByBed"];
                                 }
 
                                 $steps["setSortByBedLocalstorgae"] = true
@@ -20188,9 +19996,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateBookmarkType"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateBookmarkType"] = await $steps[
-                                    "updateBookmarkType"
-                                  ];
+                                  $steps["updateBookmarkType"] =
+                                    await $steps["updateBookmarkType"];
                                 }
 
                                 $steps["runCode"] = true
@@ -20381,9 +20188,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateBookmarkType"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateBookmarkType"] = await $steps[
-                                    "updateBookmarkType"
-                                  ];
+                                  $steps["updateBookmarkType"] =
+                                    await $steps["updateBookmarkType"];
                                 }
 
                                 $steps["runCode"] = true
@@ -20581,9 +20387,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   typeof $steps["updateBookmarkType"].then ===
                                     "function"
                                 ) {
-                                  $steps["updateBookmarkType"] = await $steps[
-                                    "updateBookmarkType"
-                                  ];
+                                  $steps["updateBookmarkType"] =
+                                    await $steps["updateBookmarkType"];
                                 }
 
                                 $steps["runCode"] = true
@@ -20918,12 +20723,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                   )
                                     ? "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
                                     : hasVariant(
-                                        globalVariants,
-                                        "screen",
-                                        "mobileFirst"
-                                      )
-                                    ? "\u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
-                                    : "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 "}
+                                          globalVariants,
+                                          "screen",
+                                          "mobileFirst"
+                                        )
+                                      ? "\u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
+                                      : "\u0645\u0634\u0627\u0647\u062f\u0647 \u062e\u0644\u0627\u0635\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 "}
                                 </div>
                               </Button>
                             ) : null}
@@ -21780,9 +21585,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                         ) {
                                           $steps[
                                             "updatePatientHistoryModalOpen"
-                                          ] = await $steps[
-                                            "updatePatientHistoryModalOpen"
-                                          ];
+                                          ] =
+                                            await $steps[
+                                              "updatePatientHistoryModalOpen"
+                                            ];
                                         }
                                       };
                                     __composite["1"]["type"] = "submenu";
@@ -21812,9 +21618,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 const actionArgs = {
                                                   args: [
                                                     "PATCH",
-                                                    `/api/v3/bookmark/bookmark_type?admission_id=${
-                                                      currentItem.id
-                                                    }&type=${"shift"}`,
+                                                    `/api/v3/bookmark/bookmark_type?admission_id=${currentItem.id}&type=${"shift"}`,
                                                     (() => {
                                                       try {
                                                         return {
@@ -21908,9 +21712,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateShowSuccessAlarmText"
-                                            ] = await $steps[
-                                              "updateShowSuccessAlarmText"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateShowSuccessAlarmText"
+                                              ];
                                           }
                                         };
                                       __composite["1"]["label"] =
@@ -21924,9 +21729,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 const actionArgs = {
                                                   args: [
                                                     "PATCH",
-                                                    `/api/v3/bookmark/bookmark_type?admission_id=${
-                                                      currentItem.id
-                                                    }&type=${"rotation"}`,
+                                                    `/api/v3/bookmark/bookmark_type?admission_id=${currentItem.id}&type=${"rotation"}`,
                                                     (() => {
                                                       try {
                                                         return {
@@ -22020,9 +21823,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateShowSuccessAlarmText"
-                                            ] = await $steps[
-                                              "updateShowSuccessAlarmText"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateShowSuccessAlarmText"
+                                              ];
                                           }
                                         };
                                       return __composite;
@@ -22183,8 +21987,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                         (currentItem.bed === null
                                           ? ""
                                           : currentItem.bed.includes("تخت")
-                                          ? currentItem.bed
-                                          : "تخت " + currentItem.bed)}
+                                            ? currentItem.bed
+                                            : "تخت " + currentItem.bed)}
                                     </React.Fragment>
                                   </div>
                                 ) : null}
@@ -22203,8 +22007,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     {currentItem.type === "shift"
                                       ? "کشیک"
                                       : currentItem.type === "rotation"
-                                      ? "سایت صبح"
-                                      : ""}
+                                        ? "سایت صبح"
+                                        : ""}
                                   </React.Fragment>
                                 </div>
                                 {false
@@ -22283,9 +22087,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateSelectedAdmissionId"
-                                            ] = await $steps[
-                                              "updateSelectedAdmissionId"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateSelectedAdmissionId"
+                                              ];
                                           }
 
                                           $steps["updateSelectedPatientId"] =
@@ -22395,9 +22200,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updatePatientSummaryModalOpen"
-                                            ] = await $steps[
-                                              "updatePatientSummaryModalOpen"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updatePatientSummaryModalOpen"
+                                              ];
                                           }
                                         },
                                         onDeselectedChange: async (
@@ -22651,8 +22457,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       (currentItem.bed === null
                                         ? ""
                                         : currentItem.bed.includes("تخت")
-                                        ? currentItem.bed
-                                        : "تخت " + currentItem.bed)}
+                                          ? currentItem.bed
+                                          : "تخت " + currentItem.bed)}
                                   </React.Fragment>
                                 </div>
                               </div>
@@ -22899,9 +22705,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       typeof $steps["goToConsultList"].then ===
                                         "function"
                                     ) {
-                                      $steps["goToConsultList"] = await $steps[
-                                        "goToConsultList"
-                                      ];
+                                      $steps["goToConsultList"] =
+                                        await $steps["goToConsultList"];
                                     }
                                   }}
                                   src={{
@@ -23115,9 +22920,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                     ) {
                                       $steps[
                                         "deleteLabDataFromTheLocalStorage"
-                                      ] = await $steps[
-                                        "deleteLabDataFromTheLocalStorage"
-                                      ];
+                                      ] =
+                                        await $steps[
+                                          "deleteLabDataFromTheLocalStorage"
+                                        ];
                                     }
 
                                     $steps["goToLaboratoryData"] = true
@@ -23389,9 +23195,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateModalWardOpen"] === "object" &&
                     typeof $steps["updateModalWardOpen"].then === "function"
                   ) {
-                    $steps["updateModalWardOpen"] = await $steps[
-                      "updateModalWardOpen"
-                    ];
+                    $steps["updateModalWardOpen"] =
+                      await $steps["updateModalWardOpen"];
                   }
 
                   $steps["runActionOnPatients"] = true
@@ -23410,9 +23215,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["runActionOnPatients"] === "object" &&
                     typeof $steps["runActionOnPatients"].then === "function"
                   ) {
-                    $steps["runActionOnPatients"] = await $steps[
-                      "runActionOnPatients"
-                    ];
+                    $steps["runActionOnPatients"] =
+                      await $steps["runActionOnPatients"];
                   }
                 }}
                 role={"img"}
@@ -23461,9 +23265,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["updateSearchbarWardValue"].then ===
                           "function"
                       ) {
-                        $steps["updateSearchbarWardValue"] = await $steps[
-                          "updateSearchbarWardValue"
-                        ];
+                        $steps["updateSearchbarWardValue"] =
+                          await $steps["updateSearchbarWardValue"];
                       }
                     }}
                     role={"img"}
@@ -23579,9 +23382,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       JSON.stringify($ctx.fetched_data.data)
                                     );
                                     return console.log(
-                                      `ward_list: ${localStorage.getItem(
-                                        "ward_list"
-                                      )}`
+                                      `ward_list: ${localStorage.getItem("ward_list")}`
                                     );
                                   })();
                                 }
@@ -23596,9 +23397,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["setLocalWardList"] === "object" &&
                         typeof $steps["setLocalWardList"].then === "function"
                       ) {
-                        $steps["setLocalWardList"] = await $steps[
-                          "setLocalWardList"
-                        ];
+                        $steps["setLocalWardList"] =
+                          await $steps["setLocalWardList"];
                       }
                     }}
                     skipPaths={[]}
@@ -23677,9 +23477,8 @@ function PlasmicHomepage__RenderFunc(props: {
                               typeof $steps["updateModalWardOpen"].then ===
                                 "function"
                             ) {
-                              $steps["updateModalWardOpen"] = await $steps[
-                                "updateModalWardOpen"
-                              ];
+                              $steps["updateModalWardOpen"] =
+                                await $steps["updateModalWardOpen"];
                             }
 
                             $steps["updateStateSelectedTab"] = true
@@ -23715,9 +23514,8 @@ function PlasmicHomepage__RenderFunc(props: {
                               typeof $steps["updateStateSelectedTab"].then ===
                                 "function"
                             ) {
-                              $steps["updateStateSelectedTab"] = await $steps[
-                                "updateStateSelectedTab"
-                              ];
+                              $steps["updateStateSelectedTab"] =
+                                await $steps["updateStateSelectedTab"];
                             }
 
                             $steps["updateStatePatientFilterSelection"] = true
@@ -23838,19 +23636,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                           `state_filter_physicians: ${$state.filterphysician}`
                                         );
                                         console.log(
-                                          `patients_selected_tab: ${localStorage.getItem(
-                                            "patients_selected_tab"
-                                          )}`
+                                          `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                         );
                                         console.log(
-                                          `filter_ward_name: ${localStorage.getItem(
-                                            "filter_ward_name"
-                                          )}`
+                                          `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                         );
                                         return console.log(
-                                          `filter_ward_id: ${localStorage.getItem(
-                                            "filter_ward_id"
-                                          )}`
+                                          `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                         );
                                       })();
                                     }
@@ -23867,9 +23659,8 @@ function PlasmicHomepage__RenderFunc(props: {
                               typeof $steps["setStatesLocalStorage"].then ===
                                 "function"
                             ) {
-                              $steps["setStatesLocalStorage"] = await $steps[
-                                "setStatesLocalStorage"
-                              ];
+                              $steps["setStatesLocalStorage"] =
+                                await $steps["setStatesLocalStorage"];
                             }
 
                             $steps["logConsole"] = false
@@ -23896,19 +23687,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                           `state_filter_physicians: ${$state.filterphysician}`
                                         );
                                         console.log(
-                                          `patients_selected_tab: ${localStorage.getItem(
-                                            "patients_selected_tab"
-                                          )}`
+                                          `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                         );
                                         console.log(
-                                          `filter_ward_name: ${localStorage.getItem(
-                                            "filter_ward_name"
-                                          )}`
+                                          `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                         );
                                         return console.log(
-                                          `filter_ward_id: ${localStorage.getItem(
-                                            "filter_ward_id"
-                                          )}`
+                                          `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                         );
                                       })();
                                     }
@@ -24064,9 +23849,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateModalWardOpen"] === "object" &&
                     typeof $steps["updateModalWardOpen"].then === "function"
                   ) {
-                    $steps["updateModalWardOpen"] = await $steps[
-                      "updateModalWardOpen"
-                    ];
+                    $steps["updateModalWardOpen"] =
+                      await $steps["updateModalWardOpen"];
                   }
 
                   $steps["runActionOnPatients"] = true
@@ -24085,9 +23869,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["runActionOnPatients"] === "object" &&
                     typeof $steps["runActionOnPatients"].then === "function"
                   ) {
-                    $steps["runActionOnPatients"] = await $steps[
-                      "runActionOnPatients"
-                    ];
+                    $steps["runActionOnPatients"] =
+                      await $steps["runActionOnPatients"];
                   }
                 }}
                 role={"img"}
@@ -24136,9 +23919,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["updateSearchbarWardValue"].then ===
                           "function"
                       ) {
-                        $steps["updateSearchbarWardValue"] = await $steps[
-                          "updateSearchbarWardValue"
-                        ];
+                        $steps["updateSearchbarWardValue"] =
+                          await $steps["updateSearchbarWardValue"];
                       }
                     }}
                     role={"img"}
@@ -24256,9 +24038,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       JSON.stringify($ctx.fetched_data.data)
                                     );
                                     return console.log(
-                                      `service_list: ${localStorage.getItem(
-                                        "service_list"
-                                      )}`
+                                      `service_list: ${localStorage.getItem("service_list")}`
                                     );
                                   })();
                                 }
@@ -24273,9 +24053,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["setLocalWardList"] === "object" &&
                         typeof $steps["setLocalWardList"].then === "function"
                       ) {
-                        $steps["setLocalWardList"] = await $steps[
-                          "setLocalWardList"
-                        ];
+                        $steps["setLocalWardList"] =
+                          await $steps["setLocalWardList"];
                       }
                     }}
                     skipPaths={[]}
@@ -24385,9 +24164,8 @@ function PlasmicHomepage__RenderFunc(props: {
                               typeof $steps["updateModalServiceOpen"].then ===
                                 "function"
                             ) {
-                              $steps["updateModalServiceOpen"] = await $steps[
-                                "updateModalServiceOpen"
-                              ];
+                              $steps["updateModalServiceOpen"] =
+                                await $steps["updateModalServiceOpen"];
                             }
 
                             $steps["updateStateSelectedTab"] = true
@@ -24423,9 +24201,8 @@ function PlasmicHomepage__RenderFunc(props: {
                               typeof $steps["updateStateSelectedTab"].then ===
                                 "function"
                             ) {
-                              $steps["updateStateSelectedTab"] = await $steps[
-                                "updateStateSelectedTab"
-                              ];
+                              $steps["updateStateSelectedTab"] =
+                                await $steps["updateStateSelectedTab"];
                             }
 
                             $steps["updatePatientFilterSelection"] = true
@@ -24548,19 +24325,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                           `state_filter_physicians: ${$state.filterphysician}`
                                         );
                                         console.log(
-                                          `patients_selected_tab: ${localStorage.getItem(
-                                            "patients_selected_tab"
-                                          )}`
+                                          `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                         );
                                         console.log(
-                                          `filter_ward_name: ${localStorage.getItem(
-                                            "filter_ward_name"
-                                          )}`
+                                          `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                         );
                                         return console.log(
-                                          `filter_ward_id: ${localStorage.getItem(
-                                            "filter_ward_id"
-                                          )}`
+                                          `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                         );
                                       })();
                                     }
@@ -24577,9 +24348,8 @@ function PlasmicHomepage__RenderFunc(props: {
                               typeof $steps["setStatesLocalStorage"].then ===
                                 "function"
                             ) {
-                              $steps["setStatesLocalStorage"] = await $steps[
-                                "setStatesLocalStorage"
-                              ];
+                              $steps["setStatesLocalStorage"] =
+                                await $steps["setStatesLocalStorage"];
                             }
 
                             $steps["setSelectedTabLocalStorage"] = false
@@ -24641,9 +24411,8 @@ function PlasmicHomepage__RenderFunc(props: {
                               typeof $steps["updateFilterService2"].then ===
                                 "function"
                             ) {
-                              $steps["updateFilterService2"] = await $steps[
-                                "updateFilterService2"
-                              ];
+                              $steps["updateFilterService2"] =
+                                await $steps["updateFilterService2"];
                             }
 
                             $steps["logConsole"] = false
@@ -24670,19 +24439,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                           `state_filter_physicians: ${$state.filterphysician}`
                                         );
                                         console.log(
-                                          `patients_selected_tab: ${localStorage.getItem(
-                                            "patients_selected_tab"
-                                          )}`
+                                          `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                         );
                                         console.log(
-                                          `filter_ward_name: ${localStorage.getItem(
-                                            "filter_ward_name"
-                                          )}`
+                                          `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                         );
                                         return console.log(
-                                          `filter_ward_id: ${localStorage.getItem(
-                                            "filter_ward_id"
-                                          )}`
+                                          `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                         );
                                       })();
                                     }
@@ -24777,9 +24540,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateModalphysicianOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalphysicianOpen"] = await $steps[
-                      "updateModalphysicianOpen"
-                    ];
+                    $steps["updateModalphysicianOpen"] =
+                      await $steps["updateModalphysicianOpen"];
                   }
 
                   $steps["runActionOnPatients"] = true
@@ -24798,9 +24560,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["runActionOnPatients"] === "object" &&
                     typeof $steps["runActionOnPatients"].then === "function"
                   ) {
-                    $steps["runActionOnPatients"] = await $steps[
-                      "runActionOnPatients"
-                    ];
+                    $steps["runActionOnPatients"] =
+                      await $steps["runActionOnPatients"];
                   }
                 }}
                 role={"img"}
@@ -24860,9 +24621,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["updateSearchbarWardValue"].then ===
                             "function"
                         ) {
-                          $steps["updateSearchbarWardValue"] = await $steps[
-                            "updateSearchbarWardValue"
-                          ];
+                          $steps["updateSearchbarWardValue"] =
+                            await $steps["updateSearchbarWardValue"];
                         }
                       }}
                       role={"img"}
@@ -24950,9 +24710,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["updateSearchbarWardValue"].then ===
                             "function"
                         ) {
-                          $steps["updateSearchbarWardValue"] = await $steps[
-                            "updateSearchbarWardValue"
-                          ];
+                          $steps["updateSearchbarWardValue"] =
+                            await $steps["updateSearchbarWardValue"];
                         }
                       }}
                       role={"img"}
@@ -25204,9 +24963,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                 typeof $steps["updateStateSelectedTab"].then ===
                                   "function"
                               ) {
-                                $steps["updateStateSelectedTab"] = await $steps[
-                                  "updateStateSelectedTab"
-                                ];
+                                $steps["updateStateSelectedTab"] =
+                                  await $steps["updateStateSelectedTab"];
                               }
 
                               $steps["updatePatientFilterSelection"] = true
@@ -25331,19 +25089,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                             `state_filter_physicians: ${$state.filterphysician}`
                                           );
                                           console.log(
-                                            `patients_selected_tab: ${localStorage.getItem(
-                                              "patients_selected_tab"
-                                            )}`
+                                            `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                           );
                                           console.log(
-                                            `filter_physician_name: ${localStorage.getItem(
-                                              "filter_physician_name"
-                                            )}`
+                                            `filter_physician_name: ${localStorage.getItem("filter_physician_name")}`
                                           );
                                           return console.log(
-                                            `filter_physician_id: ${localStorage.getItem(
-                                              "filter_physician_id"
-                                            )}`
+                                            `filter_physician_id: ${localStorage.getItem("filter_physician_id")}`
                                           );
                                         })();
                                       }
@@ -25360,9 +25112,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                 typeof $steps["setStatesLocalStorage"].then ===
                                   "function"
                               ) {
-                                $steps["setStatesLocalStorage"] = await $steps[
-                                  "setStatesLocalStorage"
-                                ];
+                                $steps["setStatesLocalStorage"] =
+                                  await $steps["setStatesLocalStorage"];
                               }
 
                               $steps["logConsole"] = false
@@ -25389,19 +25140,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                             `state_filter_physicians: ${$state.filterphysician}`
                                           );
                                           console.log(
-                                            `patients_selected_tab: ${localStorage.getItem(
-                                              "patients_selected_tab"
-                                            )}`
+                                            `patients_selected_tab: ${localStorage.getItem("patients_selected_tab")}`
                                           );
                                           console.log(
-                                            `filter_physician_name: ${localStorage.getItem(
-                                              "filter_physician_name"
-                                            )}`
+                                            `filter_physician_name: ${localStorage.getItem("filter_physician_name")}`
                                           );
                                           return console.log(
-                                            `filter_physician_id: ${localStorage.getItem(
-                                              "filter_physician_id"
-                                            )}`
+                                            `filter_physician_id: ${localStorage.getItem("filter_physician_id")}`
                                           );
                                         })();
                                       }
@@ -25416,9 +25161,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                 typeof $steps["logConsole"] === "object" &&
                                 typeof $steps["logConsole"].then === "function"
                               ) {
-                                $steps["logConsole"] = await $steps[
-                                  "logConsole"
-                                ];
+                                $steps["logConsole"] =
+                                  await $steps["logConsole"];
                               }
 
                               $steps["clearSearchbarLnameNcodeValue"] = true
@@ -25734,9 +25478,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateSearchBarServicesValue"].then ===
                       "function"
                   ) {
-                    $steps["updateSearchBarServicesValue"] = await $steps[
-                      "updateSearchBarServicesValue"
-                    ];
+                    $steps["updateSearchBarServicesValue"] =
+                      await $steps["updateSearchBarServicesValue"];
                   }
 
                   $steps["setLocalConsultFilterType"] = true
@@ -25760,9 +25503,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["setLocalConsultFilterType"].then ===
                       "function"
                   ) {
-                    $steps["setLocalConsultFilterType"] = await $steps[
-                      "setLocalConsultFilterType"
-                    ];
+                    $steps["setLocalConsultFilterType"] =
+                      await $steps["setLocalConsultFilterType"];
                   }
 
                   $steps["updateModalConsultFilterTypeOpen"] = true
@@ -25798,9 +25540,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateModalConsultFilterTypeOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalConsultFilterTypeOpen"] = await $steps[
-                      "updateModalConsultFilterTypeOpen"
-                    ];
+                    $steps["updateModalConsultFilterTypeOpen"] =
+                      await $steps["updateModalConsultFilterTypeOpen"];
                   }
 
                   $steps["updateModalConsultSenderServiceOpen"] = true
@@ -25888,9 +25629,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateSearchBarServicesValue"].then ===
                       "function"
                   ) {
-                    $steps["updateSearchBarServicesValue"] = await $steps[
-                      "updateSearchBarServicesValue"
-                    ];
+                    $steps["updateSearchBarServicesValue"] =
+                      await $steps["updateSearchBarServicesValue"];
                   }
 
                   $steps["setLocalConsultFilterType"] = true
@@ -25914,9 +25654,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["setLocalConsultFilterType"].then ===
                       "function"
                   ) {
-                    $steps["setLocalConsultFilterType"] = await $steps[
-                      "setLocalConsultFilterType"
-                    ];
+                    $steps["setLocalConsultFilterType"] =
+                      await $steps["setLocalConsultFilterType"];
                   }
 
                   $steps["updateModalConsultFilterTypeOpen"] = true
@@ -25952,9 +25691,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateModalConsultFilterTypeOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalConsultFilterTypeOpen"] = await $steps[
-                      "updateModalConsultFilterTypeOpen"
-                    ];
+                    $steps["updateModalConsultFilterTypeOpen"] =
+                      await $steps["updateModalConsultFilterTypeOpen"];
                   }
 
                   $steps["updateModalConsultServiceListOpen"] = true
@@ -25990,9 +25728,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateModalConsultServiceListOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalConsultServiceListOpen"] = await $steps[
-                      "updateModalConsultServiceListOpen"
-                    ];
+                    $steps["updateModalConsultServiceListOpen"] =
+                      await $steps["updateModalConsultServiceListOpen"];
                   }
                 }}
               >
@@ -26029,9 +25766,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["setLocalConsultFilterType"].then ===
                       "function"
                   ) {
-                    $steps["setLocalConsultFilterType"] = await $steps[
-                      "setLocalConsultFilterType"
-                    ];
+                    $steps["setLocalConsultFilterType"] =
+                      await $steps["setLocalConsultFilterType"];
                   }
 
                   $steps["setLocalFilterServiceId"] = true
@@ -26051,9 +25787,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["setLocalFilterServiceId"] === "object" &&
                     typeof $steps["setLocalFilterServiceId"].then === "function"
                   ) {
-                    $steps["setLocalFilterServiceId"] = await $steps[
-                      "setLocalFilterServiceId"
-                    ];
+                    $steps["setLocalFilterServiceId"] =
+                      await $steps["setLocalFilterServiceId"];
                   }
 
                   $steps["setLocalFilterServiceName"] = true
@@ -26076,9 +25811,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["setLocalFilterServiceName"].then ===
                       "function"
                   ) {
-                    $steps["setLocalFilterServiceName"] = await $steps[
-                      "setLocalFilterServiceName"
-                    ];
+                    $steps["setLocalFilterServiceName"] =
+                      await $steps["setLocalFilterServiceName"];
                   }
 
                   $steps["setLocalGetV3ConsultQueryParam"] = true
@@ -26102,9 +25836,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["setLocalGetV3ConsultQueryParam"].then ===
                       "function"
                   ) {
-                    $steps["setLocalGetV3ConsultQueryParam"] = await $steps[
-                      "setLocalGetV3ConsultQueryParam"
-                    ];
+                    $steps["setLocalGetV3ConsultQueryParam"] =
+                      await $steps["setLocalGetV3ConsultQueryParam"];
                   }
 
                   $steps["updateModalConsultFilterTypeOpen"] = true
@@ -26140,9 +25873,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateModalConsultFilterTypeOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalConsultFilterTypeOpen"] = await $steps[
-                      "updateModalConsultFilterTypeOpen"
-                    ];
+                    $steps["updateModalConsultFilterTypeOpen"] =
+                      await $steps["updateModalConsultFilterTypeOpen"];
                   }
                 }}
               >
@@ -26343,9 +26075,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       JSON.stringify($ctx.fetched_data.data)
                                     );
                                     return console.log(
-                                      `consult_service_list_for_filter: ${localStorage.getItem(
-                                        "consult_service_list_for_filter"
-                                      )}`
+                                      `consult_service_list_for_filter: ${localStorage.getItem("consult_service_list_for_filter")}`
                                     );
                                   })();
                                 }
@@ -26362,9 +26092,8 @@ function PlasmicHomepage__RenderFunc(props: {
                           typeof $steps["setLocalConsultServiceList"].then ===
                             "function"
                         ) {
-                          $steps["setLocalConsultServiceList"] = await $steps[
-                            "setLocalConsultServiceList"
-                          ];
+                          $steps["setLocalConsultServiceList"] =
+                            await $steps["setLocalConsultServiceList"];
                         }
                       }}
                       skipPaths={[]}
@@ -26612,9 +26341,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       customFunction: async () => {
                                         return localStorage.setItem(
                                           "GET_V3_consult_query_param",
-                                          `&sender_service_id=${localStorage.getItem(
-                                            "filter_service_id"
-                                          )}`
+                                          `&sender_service_id=${localStorage.getItem("filter_service_id")}`
                                         );
                                       }
                                     };
@@ -26636,9 +26363,10 @@ function PlasmicHomepage__RenderFunc(props: {
                             ) {
                               $steps[
                                 "localStorageSetGetV3ConsultSenderServiceQueryParam"
-                              ] = await $steps[
-                                "localStorageSetGetV3ConsultSenderServiceQueryParam"
-                              ];
+                              ] =
+                                await $steps[
+                                  "localStorageSetGetV3ConsultSenderServiceQueryParam"
+                                ];
                             }
 
                             $steps[
@@ -26651,9 +26379,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       customFunction: async () => {
                                         return localStorage.setItem(
                                           "GET_V3_consult_query_param",
-                                          `&receiver_service_id=${localStorage.getItem(
-                                            "filter_service_id"
-                                          )}`
+                                          `&receiver_service_id=${localStorage.getItem("filter_service_id")}`
                                         );
                                       }
                                     };
@@ -26675,9 +26401,10 @@ function PlasmicHomepage__RenderFunc(props: {
                             ) {
                               $steps[
                                 "localStorageSetGetV3ConsultReceiverServiceQueryParam"
-                              ] = await $steps[
-                                "localStorageSetGetV3ConsultReceiverServiceQueryParam"
-                              ];
+                              ] =
+                                await $steps[
+                                  "localStorageSetGetV3ConsultReceiverServiceQueryParam"
+                                ];
                             }
 
                             $steps["consultPageNumberToOnr"] = true
@@ -26702,9 +26429,8 @@ function PlasmicHomepage__RenderFunc(props: {
                               typeof $steps["consultPageNumberToOnr"].then ===
                                 "function"
                             ) {
-                              $steps["consultPageNumberToOnr"] = await $steps[
-                                "consultPageNumberToOnr"
-                              ];
+                              $steps["consultPageNumberToOnr"] =
+                                await $steps["consultPageNumberToOnr"];
                             }
 
                             $steps["consoleLogFilterServiceId"] = true
@@ -27211,9 +26937,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       typeof $steps["runActionOnConsults"] === "object" &&
                       typeof $steps["runActionOnConsults"].then === "function"
                     ) {
-                      $steps["runActionOnConsults"] = await $steps[
-                        "runActionOnConsults"
-                      ];
+                      $steps["runActionOnConsults"] =
+                        await $steps["runActionOnConsults"];
                     }
 
                     $steps["updateModalDeleteConsultConfirmationOpen"] =
@@ -27702,9 +27427,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                     typeof $steps["openDeleteModal"].then ===
                                       "function"
                                   ) {
-                                    $steps["openDeleteModal"] = await $steps[
-                                      "openDeleteModal"
-                                    ];
+                                    $steps["openDeleteModal"] =
+                                      await $steps["openDeleteModal"];
                                   }
                                 },
                                 onDeselectedChange: async (
@@ -28012,9 +27736,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateUploadPatientHistoryStatus"].then ===
                       "function"
                   ) {
-                    $steps["updateUploadPatientHistoryStatus"] = await $steps[
-                      "updateUploadPatientHistoryStatus"
-                    ];
+                    $steps["updateUploadPatientHistoryStatus"] =
+                      await $steps["updateUploadPatientHistoryStatus"];
                   }
 
                   $steps["updateCompressedImage"] = true
@@ -28050,9 +27773,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateCompressedImage"] === "object" &&
                     typeof $steps["updateCompressedImage"].then === "function"
                   ) {
-                    $steps["updateCompressedImage"] = await $steps[
-                      "updateCompressedImage"
-                    ];
+                    $steps["updateCompressedImage"] =
+                      await $steps["updateCompressedImage"];
                   }
 
                   $steps["updateCompressedImage2"] = true
@@ -28088,9 +27810,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateCompressedImage2"] === "object" &&
                     typeof $steps["updateCompressedImage2"].then === "function"
                   ) {
-                    $steps["updateCompressedImage2"] = await $steps[
-                      "updateCompressedImage2"
-                    ];
+                    $steps["updateCompressedImage2"] =
+                      await $steps["updateCompressedImage2"];
                   }
 
                   $steps["runCode"] = true
@@ -28111,9 +27832,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   const sizeKB =
                                     (compressedBase64.length * 0.75) / 1024;
                                   console.log(
-                                    `Compressed image size: ${sizeKB.toFixed(
-                                      1
-                                    )} KB`
+                                    `Compressed image size: ${sizeKB.toFixed(1)} KB`
                                   );
                                 }
                               );
@@ -28138,15 +27857,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         const actionArgs = {
                           args: [
                             "POST",
-                            `/api/v3/patient/media?patient_id=${
-                              $state.selectedPatientId
-                            }&admission_id=${
-                              $state.selectedAdmissionId
-                            }&title=${`${Math.floor(
-                              Math.random() * 1000000
-                            )} - ${
-                              $state.selectedAdmissionId
-                            } - patient_history`}`,
+                            `/api/v3/patient/media?patient_id=${$state.selectedPatientId}&admission_id=${$state.selectedAdmissionId}&title=${`${Math.floor(Math.random() * 1000000)} - ${$state.selectedAdmissionId} - patient_history`}`,
                             (() => {
                               try {
                                 return {
@@ -28469,9 +28180,8 @@ function PlasmicHomepage__RenderFunc(props: {
                   typeof $steps["updateDeletePatientHistoryModalOpen"].then ===
                     "function"
                 ) {
-                  $steps["updateDeletePatientHistoryModalOpen"] = await $steps[
-                    "updateDeletePatientHistoryModalOpen"
-                  ];
+                  $steps["updateDeletePatientHistoryModalOpen"] =
+                    await $steps["updateDeletePatientHistoryModalOpen"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -28628,9 +28338,8 @@ function PlasmicHomepage__RenderFunc(props: {
                   typeof $steps["deletePatientHistory"] === "object" &&
                   typeof $steps["deletePatientHistory"].then === "function"
                 ) {
-                  $steps["deletePatientHistory"] = await $steps[
-                    "deletePatientHistory"
-                  ];
+                  $steps["deletePatientHistory"] =
+                    await $steps["deletePatientHistory"];
                 }
 
                 $steps["updateDeletePatientHistoryModalOpen"] = true
@@ -28666,9 +28375,8 @@ function PlasmicHomepage__RenderFunc(props: {
                   typeof $steps["updateDeletePatientHistoryModalOpen"].then ===
                     "function"
                 ) {
-                  $steps["updateDeletePatientHistoryModalOpen"] = await $steps[
-                    "updateDeletePatientHistoryModalOpen"
-                  ];
+                  $steps["updateDeletePatientHistoryModalOpen"] =
+                    await $steps["updateDeletePatientHistoryModalOpen"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -28787,12 +28495,8 @@ function PlasmicHomepage__RenderFunc(props: {
             method={"GET"}
             path={
               hasVariant(globalVariants, "screen", "mobileFirst")
-                ? `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
-                    "inlab_user_namespace_id"
-                  )}`
-                : `/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
-                    "inlab_user_namespace_id"
-                  )}`
+                ? `/api/v3/user/namespaces?namespace_id=${localStorage.getItem("inlab_user_namespace_id")}`
+                : `/api/v3/user/namespaces?namespace_id=${localStorage.getItem("inlab_user_namespace_id")}`
             }
             ref={ref => {
               $refs["exNamespaceChecker"] = ref;
@@ -28860,33 +28564,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                   )
                                 );
                                 console.log(
-                                  `namespace_is_expired: ${JSON.parse(
-                                    localStorage.getItem("namespace_is_expired")
-                                  )}`
+                                  `namespace_is_expired: ${JSON.parse(localStorage.getItem("namespace_is_expired"))}`
                                 );
                                 console.log(
-                                  `namespace_expiration_datetime: ${JSON.parse(
-                                    localStorage.getItem(
-                                      "namespace_expiration_datetime"
-                                    )
-                                  )}`
+                                  `namespace_expiration_datetime: ${JSON.parse(localStorage.getItem("namespace_expiration_datetime"))}`
                                 );
                                 console.log(
-                                  `inlab_user_his_type: ${JSON.parse(
-                                    localStorage.getItem("inlab_user_his_type")
-                                  )}`
+                                  `inlab_user_his_type: ${JSON.parse(localStorage.getItem("inlab_user_his_type"))}`
                                 );
                                 console.log(
-                                  `namespace_show_message: ${JSON.parse(
-                                    localStorage.getItem(
-                                      "namespace_show_message"
-                                    )
-                                  )}`
+                                  `namespace_show_message: ${JSON.parse(localStorage.getItem("namespace_show_message"))}`
                                 );
                                 return console.log(
-                                  `namespace_message: ${JSON.parse(
-                                    localStorage.getItem("namespace_message")
-                                  )}`
+                                  `namespace_message: ${JSON.parse(localStorage.getItem("namespace_message"))}`
                                 );
                               })();
                             }
@@ -28935,9 +28625,8 @@ function PlasmicHomepage__RenderFunc(props: {
                       typeof $steps["updateCheckNamespace"] === "object" &&
                       typeof $steps["updateCheckNamespace"].then === "function"
                     ) {
-                      $steps["updateCheckNamespace"] = await $steps[
-                        "updateCheckNamespace"
-                      ];
+                      $steps["updateCheckNamespace"] =
+                        await $steps["updateCheckNamespace"];
                     }
                   }}
                 />
@@ -28951,9 +28640,7 @@ function PlasmicHomepage__RenderFunc(props: {
           autoFetch={true}
           className={classNames("__wab_instance", sty.namespaceChecker)}
           method={"GET"}
-          path={`/api/v3/user/namespaces?namespace_id=${localStorage.getItem(
-            "inlab_user_namespace_id"
-          )}`}
+          path={`/api/v3/user/namespaces?namespace_id=${localStorage.getItem("inlab_user_namespace_id")}`}
           ref={ref => {
             $refs["namespaceChecker"] = ref;
           }}
@@ -29012,28 +28699,16 @@ function PlasmicHomepage__RenderFunc(props: {
                                 )
                               );
                               console.log(
-                                `namespace_expiration_datetime: ${JSON.parse(
-                                  localStorage.getItem(
-                                    "namespace_expiration_datetime"
-                                  )
-                                )}`
+                                `namespace_expiration_datetime: ${JSON.parse(localStorage.getItem("namespace_expiration_datetime"))}`
                               );
                               console.log(
-                                `inlab_user_his_type: ${JSON.parse(
-                                  localStorage.getItem("inlab_user_his_type")
-                                )}`
+                                `inlab_user_his_type: ${JSON.parse(localStorage.getItem("inlab_user_his_type"))}`
                               );
                               console.log(
-                                `namespace_message_datetime: ${JSON.parse(
-                                  localStorage.getItem(
-                                    "namespace_message_datetime"
-                                  )
-                                )}`
+                                `namespace_message_datetime: ${JSON.parse(localStorage.getItem("namespace_message_datetime"))}`
                               );
                               return console.log(
-                                `namespace_message: ${JSON.parse(
-                                  localStorage.getItem("namespace_message")
-                                )}`
+                                `namespace_message: ${JSON.parse(localStorage.getItem("namespace_message"))}`
                               );
                             })();
                           }
@@ -29082,9 +28757,8 @@ function PlasmicHomepage__RenderFunc(props: {
                     typeof $steps["updateCheckNamespace"] === "object" &&
                     typeof $steps["updateCheckNamespace"].then === "function"
                   ) {
-                    $steps["updateCheckNamespace"] = await $steps[
-                      "updateCheckNamespace"
-                    ];
+                    $steps["updateCheckNamespace"] =
+                      await $steps["updateCheckNamespace"];
                   }
                 }}
               />
@@ -29442,9 +29116,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["setUpdateVersionLocalStorage"].then ===
                           "function"
                       ) {
-                        $steps["setUpdateVersionLocalStorage"] = await $steps[
-                          "setUpdateVersionLocalStorage"
-                        ];
+                        $steps["setUpdateVersionLocalStorage"] =
+                          await $steps["setUpdateVersionLocalStorage"];
                       }
 
                       $steps["updateModalNoticeBannerOpen"] = true
@@ -29483,9 +29156,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["updateModalNoticeBannerOpen"].then ===
                           "function"
                       ) {
-                        $steps["updateModalNoticeBannerOpen"] = await $steps[
-                          "updateModalNoticeBannerOpen"
-                        ];
+                        $steps["updateModalNoticeBannerOpen"] =
+                          await $steps["updateModalNoticeBannerOpen"];
                       }
 
                       $steps["runCode"] = true
@@ -29493,9 +29165,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             const actionArgs = {
                               customFunction: async () => {
                                 return console.log(
-                                  `"new_notice_datetime": ${localStorage.getItem(
-                                    "new_notice_datetime"
-                                  )}`
+                                  `"new_notice_datetime": ${localStorage.getItem("new_notice_datetime")}`
                                 );
                               }
                             };
@@ -29888,9 +29558,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["setReviewDatetimeLocalStorage"].then ===
                           "function"
                       ) {
-                        $steps["setReviewDatetimeLocalStorage"] = await $steps[
-                          "setReviewDatetimeLocalStorage"
-                        ];
+                        $steps["setReviewDatetimeLocalStorage"] =
+                          await $steps["setReviewDatetimeLocalStorage"];
                       }
 
                       $steps["updateModalNoticeBannerOpen"] = true
@@ -29926,9 +29595,8 @@ function PlasmicHomepage__RenderFunc(props: {
                         typeof $steps["updateModalNoticeBannerOpen"].then ===
                           "function"
                       ) {
-                        $steps["updateModalNoticeBannerOpen"] = await $steps[
-                          "updateModalNoticeBannerOpen"
-                        ];
+                        $steps["updateModalNoticeBannerOpen"] =
+                          await $steps["updateModalNoticeBannerOpen"];
                       }
 
                       $steps["runCode"] = true
@@ -29936,9 +29604,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             const actionArgs = {
                               customFunction: async () => {
                                 return console.log(
-                                  `"review_namespace_message_datetime": ${localStorage.getItem(
-                                    "review_namespace_message_datetime"
-                                  )}`
+                                  `"review_namespace_message_datetime": ${localStorage.getItem("review_namespace_message_datetime")}`
                                 );
                               }
                             };
@@ -31832,7 +31498,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicHomepage__VariantsArgs;
     args?: PlasmicHomepage__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicHomepage__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicHomepage__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicHomepage__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

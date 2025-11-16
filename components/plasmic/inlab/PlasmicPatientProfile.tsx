@@ -470,9 +470,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     typeof $steps["getAdmIdPatientId"] === "object" &&
                     typeof $steps["getAdmIdPatientId"].then === "function"
                   ) {
-                    $steps["getAdmIdPatientId"] = await $steps[
-                      "getAdmIdPatientId"
-                    ];
+                    $steps["getAdmIdPatientId"] =
+                      await $steps["getAdmIdPatientId"];
                   }
 
                   $steps["goToPatientProfile"] = true
@@ -523,9 +522,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     typeof $steps["goToPatientProfile"] === "object" &&
                     typeof $steps["goToPatientProfile"].then === "function"
                   ) {
-                    $steps["goToPatientProfile"] = await $steps[
-                      "goToPatientProfile"
-                    ];
+                    $steps["goToPatientProfile"] =
+                      await $steps["goToPatientProfile"];
                   }
                 }}
                 role={"img"}
@@ -717,9 +715,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                       typeof $steps["goToPatientProfile"] === "object" &&
                       typeof $steps["goToPatientProfile"].then === "function"
                     ) {
-                      $steps["goToPatientProfile"] = await $steps[
-                        "goToPatientProfile"
-                      ];
+                      $steps["goToPatientProfile"] =
+                        await $steps["goToPatientProfile"];
                     }
                   }}
                   src={{
@@ -792,9 +789,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     typeof $steps["goToImagingReport1"] === "object" &&
                     typeof $steps["goToImagingReport1"].then === "function"
                   ) {
-                    $steps["goToImagingReport1"] = await $steps[
-                      "goToImagingReport1"
-                    ];
+                    $steps["goToImagingReport1"] =
+                      await $steps["goToImagingReport1"];
                   }
                 }}
                 src={{
@@ -868,9 +864,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     typeof $steps["goToLaboratoryData"] === "object" &&
                     typeof $steps["goToLaboratoryData"].then === "function"
                   ) {
-                    $steps["goToLaboratoryData"] = await $steps[
-                      "goToLaboratoryData"
-                    ];
+                    $steps["goToLaboratoryData"] =
+                      await $steps["goToLaboratoryData"];
                   }
 
                   $steps["daleteLabDataFromLocalStorage"] = true
@@ -892,9 +887,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     typeof $steps["daleteLabDataFromLocalStorage"].then ===
                       "function"
                   ) {
-                    $steps["daleteLabDataFromLocalStorage"] = await $steps[
-                      "daleteLabDataFromLocalStorage"
-                    ];
+                    $steps["daleteLabDataFromLocalStorage"] =
+                      await $steps["daleteLabDataFromLocalStorage"];
                   }
                 }}
                 src={{
@@ -980,9 +974,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                       typeof $steps["updateBookmarkedPatient"].then ===
                         "function"
                     ) {
-                      $steps["updateBookmarkedPatient"] = await $steps[
-                        "updateBookmarkedPatient"
-                      ];
+                      $steps["updateBookmarkedPatient"] =
+                        await $steps["updateBookmarkedPatient"];
                     }
                   }
                 };
@@ -1083,9 +1076,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     typeof $steps["getAdmIdPatientId"] === "object" &&
                     typeof $steps["getAdmIdPatientId"].then === "function"
                   ) {
-                    $steps["getAdmIdPatientId"] = await $steps[
-                      "getAdmIdPatientId"
-                    ];
+                    $steps["getAdmIdPatientId"] =
+                      await $steps["getAdmIdPatientId"];
                   }
 
                   $steps["goToPatientProfile"] = true
@@ -1136,9 +1128,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                     typeof $steps["goToPatientProfile"] === "object" &&
                     typeof $steps["goToPatientProfile"].then === "function"
                   ) {
-                    $steps["goToPatientProfile"] = await $steps[
-                      "goToPatientProfile"
-                    ];
+                    $steps["goToPatientProfile"] =
+                      await $steps["goToPatientProfile"];
                   }
                 }}
                 role={"img"}
@@ -1603,8 +1594,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                           item.gender === "F"
                                             ? " \u2640️"
                                             : item.gender === "M"
-                                            ? " \u2642️"
-                                            : "";
+                                              ? " \u2642️"
+                                              : "";
                                         let ageString;
                                         if (
                                           hisType === "tums_api" ||
@@ -1789,8 +1780,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                           item.gender === "F"
                                             ? " \u2640️"
                                             : item.gender === "M"
-                                            ? " \u2642️"
-                                            : "";
+                                              ? " \u2642️"
+                                              : "";
                                         let ageString;
                                         if (
                                           hisType === "tums_api" ||
@@ -1996,11 +1987,11 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                       }
                                     })()
                                   : $ctx.fetched_data.data.length !== 0
-                                  ? $ctx.fetched_data.data[0].dismissed
-                                    ? $ctx.fetched_data.data[0]
-                                        .dismission_datetime
-                                    : "بستری"
-                                  : ""}
+                                    ? $ctx.fetched_data.data[0].dismissed
+                                      ? $ctx.fetched_data.data[0]
+                                          .dismission_datetime
+                                      : "بستری"
+                                    : ""}
                               </React.Fragment>
                             </div>
                             <div
@@ -2171,8 +2162,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                   !_par
                                     ? []
                                     : Array.isArray(_par)
-                                    ? _par
-                                    : [_par])(
+                                      ? _par
+                                      : [_par])(
                                   (() => {
                                     try {
                                       return $ctx.fetched_data.data;
@@ -2399,9 +2390,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                     typeof $steps["goToLabPage"].then ===
                                       "function"
                                   ) {
-                                    $steps["goToLabPage"] = await $steps[
-                                      "goToLabPage"
-                                    ];
+                                    $steps["goToLabPage"] =
+                                      await $steps["goToLabPage"];
                                   }
 
                                   $steps["deleteLabCache"] = true
@@ -2426,9 +2416,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                     typeof $steps["deleteLabCache"].then ===
                                       "function"
                                   ) {
-                                    $steps["deleteLabCache"] = await $steps[
-                                      "deleteLabCache"
-                                    ];
+                                    $steps["deleteLabCache"] =
+                                      await $steps["deleteLabCache"];
                                   }
                                 }}
                                 onDeselectedChange={async (
@@ -2655,8 +2644,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                 !_par
                                   ? []
                                   : Array.isArray(_par)
-                                  ? _par
-                                  : [_par])(
+                                    ? _par
+                                    : [_par])(
                                 (() => {
                                   try {
                                     return $ctx.fetched_data.data;
@@ -2874,9 +2863,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                   typeof $steps["goToLabPage"].then ===
                                     "function"
                                 ) {
-                                  $steps["goToLabPage"] = await $steps[
-                                    "goToLabPage"
-                                  ];
+                                  $steps["goToLabPage"] =
+                                    await $steps["goToLabPage"];
                                 }
 
                                 $steps["deleteLabCache"] = true
@@ -2901,9 +2889,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                   typeof $steps["deleteLabCache"].then ===
                                     "function"
                                 ) {
-                                  $steps["deleteLabCache"] = await $steps[
-                                    "deleteLabCache"
-                                  ];
+                                  $steps["deleteLabCache"] =
+                                    await $steps["deleteLabCache"];
                                 }
                               }}
                               onDeselectedChange={async (...eventArgs: any) => {
@@ -3148,8 +3135,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                   !_par
                                     ? []
                                     : Array.isArray(_par)
-                                    ? _par
-                                    : [_par])(
+                                      ? _par
+                                      : [_par])(
                                   (() => {
                                     try {
                                       return $ctx.fetched_data.data;
@@ -3399,9 +3386,8 @@ function PlasmicPatientProfile__RenderFunc(props: {
                                     typeof $steps["goToRadiologyPage"].then ===
                                       "function"
                                   ) {
-                                    $steps["goToRadiologyPage"] = await $steps[
-                                      "goToRadiologyPage"
-                                    ];
+                                    $steps["goToRadiologyPage"] =
+                                      await $steps["goToRadiologyPage"];
                                   }
                                 }}
                                 onDeselectedChange={async (
@@ -3527,172 +3513,178 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 ) : null}
               </div>
             ) : null}
-            <Button
-              data-plasmic-name={"dischargeSummary"}
-              data-plasmic-override={overrides.dischargeSummary}
-              className={classNames("__wab_instance", sty.dischargeSummary)}
-              color={"blue"}
-              deselected={generateStateValueProp($state, [
-                "dischargeSummary",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "dischargeSummary",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
+            {window.location.origin !==
+            [
+              "https://synapps.tums.ac.ir",
+              "https://sina.synappsgroup.com",
+              "https://cmcsynapps.tums.ac.ir"
+            ] ? (
+              <Button
+                data-plasmic-name={"dischargeSummary"}
+                data-plasmic-override={overrides.dischargeSummary}
+                className={classNames("__wab_instance", sty.dischargeSummary)}
+                color={"blue"}
+                deselected={generateStateValueProp($state, [
+                  "dischargeSummary",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "dischargeSummary",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
 
-                $steps["goToPatientSummary"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: `/patient/${(() => {
-                          try {
-                            return $ctx.params.code;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
+                  $steps["goToPatientSummary"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: `/patient/${(() => {
+                            try {
+                              return $ctx.params.code;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
                             }
-                            throw e;
-                          }
-                        })()}/summary/${(() => {
-                          try {
-                            return $ctx.params.adm_id;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
+                          })()}/summary/${(() => {
+                            try {
+                              return $ctx.params.adm_id;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
                             }
-                            throw e;
+                          })()}`
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
                           }
-                        })()}`
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToPatientSummary"] != null &&
-                  typeof $steps["goToPatientSummary"] === "object" &&
-                  typeof $steps["goToPatientSummary"].then === "function"
-                ) {
-                  $steps["goToPatientSummary"] = await $steps[
-                    "goToPatientSummary"
-                  ];
-                }
-              }}
-              onDeselectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "dischargeSummary",
-                    "deselected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToPatientSummary"] != null &&
+                    typeof $steps["goToPatientSummary"] === "object" &&
+                    typeof $steps["goToPatientSummary"].then === "function"
+                  ) {
+                    $steps["goToPatientSummary"] =
+                      await $steps["goToPatientSummary"];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "dischargeSummary",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onIsDisabledChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "dischargeSummary",
-                    "isDisabled"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "dischargeSummary",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "dischargeSummary",
-                    "selected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "dischargeSummary",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSortDeselectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "dischargeSummary",
-                    "sortDeselected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "dischargeSummary",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSortSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "dischargeSummary",
-                    "sortSelected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "dischargeSummary",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "dischargeSummary",
+                  "selected"
+                ])}
+                sortDeselected={generateStateValueProp($state, [
+                  "dischargeSummary",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "dischargeSummary",
+                  "sortSelected"
+                ])}
+              >
+                {
+                  "\u062b\u0628\u062a \u062e\u0644\u0627\u0635\u0647 \u067e\u0631\u0648\u0646\u062f\u0647 \u0628\u06cc\u0645\u0627\u0631 "
                 }
-              }}
-              selected={generateStateValueProp($state, [
-                "dischargeSummary",
-                "selected"
-              ])}
-              sortDeselected={generateStateValueProp($state, [
-                "dischargeSummary",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "dischargeSummary",
-                "sortSelected"
-              ])}
-            >
-              {
-                "\u062b\u0628\u062a \u062e\u0644\u0627\u0635\u0647 \u067e\u0631\u0648\u0646\u062f\u0647 \u0628\u06cc\u0645\u0627\u0631 "
-              }
-            </Button>
+              </Button>
+            ) : null}
           </div>
         </div>
       </div>
@@ -4052,7 +4044,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicPatientProfile__VariantsArgs;
     args?: PlasmicPatientProfile__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicPatientProfile__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicPatientProfile__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicPatientProfile__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

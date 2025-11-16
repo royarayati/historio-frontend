@@ -21,7 +21,7 @@ export function SquareMinusSvgIcon(props: SquareMinusSvgIconProps) {
       style={{
         stroke: "currentcolor",
 
-        ...(style || {}),
+        ...(style || {})
       }}
       className={classNames("plasmic-default__svg", className)}
       {...restProps}

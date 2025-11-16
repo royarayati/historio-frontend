@@ -214,9 +214,8 @@ function PlasmicShareTool__RenderFunc(props: {
           typeof $steps["inlabPlusLinkCopyToClipboard"] === "object" &&
           typeof $steps["inlabPlusLinkCopyToClipboard"].then === "function"
         ) {
-          $steps["inlabPlusLinkCopyToClipboard"] = await $steps[
-            "inlabPlusLinkCopyToClipboard"
-          ];
+          $steps["inlabPlusLinkCopyToClipboard"] =
+            await $steps["inlabPlusLinkCopyToClipboard"];
         }
 
         $steps["updateCopyToClipboardAnnouncement"] = true
@@ -242,9 +241,8 @@ function PlasmicShareTool__RenderFunc(props: {
           typeof $steps["updateCopyToClipboardAnnouncement"] === "object" &&
           typeof $steps["updateCopyToClipboardAnnouncement"].then === "function"
         ) {
-          $steps["updateCopyToClipboardAnnouncement"] = await $steps[
-            "updateCopyToClipboardAnnouncement"
-          ];
+          $steps["updateCopyToClipboardAnnouncement"] =
+            await $steps["updateCopyToClipboardAnnouncement"];
         }
       }}
     >
@@ -302,7 +300,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicShareTool__VariantsArgs;
     args?: PlasmicShareTool__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicShareTool__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicShareTool__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicShareTool__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

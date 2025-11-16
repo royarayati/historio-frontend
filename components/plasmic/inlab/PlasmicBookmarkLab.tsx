@@ -222,8 +222,8 @@ function PlasmicBookmarkLab__RenderFunc(props: {
         hasVariant($state, "loadingBookmark", "loadingBookmark")
           ? LoadingLoaderSvgrepoComSvgIcon
           : hasVariant($state, "bookmarked", "bookmarked")
-          ? FavoriteSvgrepoCom1SvgIcon
-          : FavoriteSvgrepoComSvgIcon
+            ? FavoriteSvgrepoCom1SvgIcon
+            : FavoriteSvgrepoComSvgIcon
       }
       className={classNames(
         projectcss.all,
@@ -408,7 +408,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicBookmarkLab__VariantsArgs;
     args?: PlasmicBookmarkLab__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicBookmarkLab__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicBookmarkLab__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicBookmarkLab__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

@@ -382,49 +382,31 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                           customFunction: async () => {
                                             return (() => {
                                               console.log(
-                                                `selected_tab: ${localStorage.getItem(
-                                                  "selected_tab"
-                                                )}`
+                                                `selected_tab: ${localStorage.getItem("selected_tab")}`
                                               );
                                               console.log(
-                                                `bookmark_list: ${localStorage.getItem(
-                                                  "bookmark_list"
-                                                )}`
+                                                `bookmark_list: ${localStorage.getItem("bookmark_list")}`
                                               );
                                               console.log(
-                                                `ward_list: ${localStorage.getItem(
-                                                  "ward_list"
-                                                )}`
+                                                `ward_list: ${localStorage.getItem("ward_list")}`
                                               );
                                               console.log(
-                                                `filter_ward_name: ${localStorage.getItem(
-                                                  "filter_ward_name"
-                                                )}`
+                                                `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                               );
                                               console.log(
-                                                `filter_ward_id: ${localStorage.getItem(
-                                                  "filter_ward_id"
-                                                )}`
+                                                `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                               );
                                               console.log(
-                                                `physicians_list: ${localStorage.getItem(
-                                                  "physicians_list"
-                                                )}`
+                                                `physicians_list: ${localStorage.getItem("physicians_list")}`
                                               );
                                               console.log(
-                                                `filter_physician_name: ${localStorage.getItem(
-                                                  "filter_physician_name"
-                                                )}`
+                                                `filter_physician_name: ${localStorage.getItem("filter_physician_name")}`
                                               );
                                               console.log(
-                                                `filter_physician_id: ${localStorage.getItem(
-                                                  "filter_physician_id"
-                                                )}`
+                                                `filter_physician_id: ${localStorage.getItem("filter_physician_id")}`
                                               );
                                               return console.log(
-                                                `his_type: ${localStorage.getItem(
-                                                  "inlab_user_his_type"
-                                                )}`
+                                                `his_type: ${localStorage.getItem("inlab_user_his_type")}`
                                               );
                                             })();
                                           }
@@ -440,9 +422,8 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                     typeof $steps["logConsole"].then ===
                                       "function"
                                   ) {
-                                    $steps["logConsole"] = await $steps[
-                                      "logConsole"
-                                    ];
+                                    $steps["logConsole"] =
+                                      await $steps["logConsole"];
                                   }
 
                                   $steps["goToHomepage"] = true
@@ -475,9 +456,8 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                     typeof $steps["goToHomepage"].then ===
                                       "function"
                                   ) {
-                                    $steps["goToHomepage"] = await $steps[
-                                      "goToHomepage"
-                                    ];
+                                    $steps["goToHomepage"] =
+                                      await $steps["goToHomepage"];
                                   }
                                 }}
                               >
@@ -631,44 +611,28 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                                     customFunction: async () => {
                                       return (() => {
                                         console.log(
-                                          `selected_tab: ${localStorage.getItem(
-                                            "selected_tab"
-                                          )}`
+                                          `selected_tab: ${localStorage.getItem("selected_tab")}`
                                         );
                                         console.log(
-                                          `bookmark_list: ${localStorage.getItem(
-                                            "bookmark_list"
-                                          )}`
+                                          `bookmark_list: ${localStorage.getItem("bookmark_list")}`
                                         );
                                         console.log(
-                                          `ward_list: ${localStorage.getItem(
-                                            "ward_list"
-                                          )}`
+                                          `ward_list: ${localStorage.getItem("ward_list")}`
                                         );
                                         console.log(
-                                          `filter_ward_name: ${localStorage.getItem(
-                                            "filter_ward_name"
-                                          )}`
+                                          `filter_ward_name: ${localStorage.getItem("filter_ward_name")}`
                                         );
                                         console.log(
-                                          `filter_ward_id: ${localStorage.getItem(
-                                            "filter_ward_id"
-                                          )}`
+                                          `filter_ward_id: ${localStorage.getItem("filter_ward_id")}`
                                         );
                                         console.log(
-                                          `physicians_list: ${localStorage.getItem(
-                                            "physicians_list"
-                                          )}`
+                                          `physicians_list: ${localStorage.getItem("physicians_list")}`
                                         );
                                         console.log(
-                                          `filter_physician_name: ${localStorage.getItem(
-                                            "filter_physician_name"
-                                          )}`
+                                          `filter_physician_name: ${localStorage.getItem("filter_physician_name")}`
                                         );
                                         return console.log(
-                                          `filter_physician_id: ${localStorage.getItem(
-                                            "filter_physician_id"
-                                          )}`
+                                          `filter_physician_id: ${localStorage.getItem("filter_physician_id")}`
                                         );
                                       })();
                                     }
@@ -710,9 +674,8 @@ function PlasmicNamespaceSelection__RenderFunc(props: {
                               typeof $steps["goToHomepage"] === "object" &&
                               typeof $steps["goToHomepage"].then === "function"
                             ) {
-                              $steps["goToHomepage"] = await $steps[
-                                "goToHomepage"
-                              ];
+                              $steps["goToHomepage"] =
+                                await $steps["goToHomepage"];
                             }
                           }}
                         >
@@ -803,7 +766,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicNamespaceSelection__VariantsArgs;
     args?: PlasmicNamespaceSelection__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicNamespaceSelection__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicNamespaceSelection__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicNamespaceSelection__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

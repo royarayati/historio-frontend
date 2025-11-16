@@ -800,8 +800,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                             item.gender === "F"
                               ? " \u2640️"
                               : item.gender === "M"
-                              ? " \u2642️"
-                              : "";
+                                ? " \u2642️"
+                                : "";
                           let ageString;
                           if (
                             hisType === "tums_api" ||
@@ -960,8 +960,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                             item.gender === "F"
                               ? " \u2640️"
                               : item.gender === "M"
-                              ? " \u2642️"
-                              : "";
+                                ? " \u2642️"
+                                : "";
                           let ageString;
                           if (
                             hisType === "tums_api" ||
@@ -1041,9 +1041,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                 typeof $steps["updateCheckedFactors2"] === "object" &&
                 typeof $steps["updateCheckedFactors2"].then === "function"
               ) {
-                $steps["updateCheckedFactors2"] = await $steps[
-                  "updateCheckedFactors2"
-                ];
+                $steps["updateCheckedFactors2"] =
+                  await $steps["updateCheckedFactors2"];
               }
             }}
             onDeselectedChange={async (...eventArgs: any) => {
@@ -1464,9 +1463,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   typeof $steps["updateBookamrkedLabsOpen"] === "object" &&
                   typeof $steps["updateBookamrkedLabsOpen"].then === "function"
                 ) {
-                  $steps["updateBookamrkedLabsOpen"] = await $steps[
-                    "updateBookamrkedLabsOpen"
-                  ];
+                  $steps["updateBookamrkedLabsOpen"] =
+                    await $steps["updateBookamrkedLabsOpen"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -1620,9 +1618,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                           typeof $steps["updateSearchLabsValue"].then ===
                             "function"
                         ) {
-                          $steps["updateSearchLabsValue"] = await $steps[
-                            "updateSearchLabsValue"
-                          ];
+                          $steps["updateSearchLabsValue"] =
+                            await $steps["updateSearchLabsValue"];
                         }
                       }}
                       role={"img"}
@@ -1720,9 +1717,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                       typeof $steps["scrollToSearchedLab"] === "object" &&
                       typeof $steps["scrollToSearchedLab"].then === "function"
                     ) {
-                      $steps["scrollToSearchedLab"] = await $steps[
-                        "scrollToSearchedLab"
-                      ];
+                      $steps["scrollToSearchedLab"] =
+                        await $steps["scrollToSearchedLab"];
                     }
                   }).apply(null, eventArgs);
                 }}
@@ -1788,9 +1784,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     typeof $steps["updateAllAdmissions"] === "object" &&
                     typeof $steps["updateAllAdmissions"].then === "function"
                   ) {
-                    $steps["updateAllAdmissions"] = await $steps[
-                      "updateAllAdmissions"
-                    ];
+                    $steps["updateAllAdmissions"] =
+                      await $steps["updateAllAdmissions"];
                   }
 
                   $steps["deleteTheLabDataFromLocalStorage"] = true
@@ -1818,9 +1813,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     typeof $steps["deleteTheLabDataFromLocalStorage"].then ===
                       "function"
                   ) {
-                    $steps["deleteTheLabDataFromLocalStorage"] = await $steps[
-                      "deleteTheLabDataFromLocalStorage"
-                    ];
+                    $steps["deleteTheLabDataFromLocalStorage"] =
+                      await $steps["deleteTheLabDataFromLocalStorage"];
                   }
 
                   $steps["runActionOnLabData"] = true
@@ -1839,9 +1833,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     typeof $steps["runActionOnLabData"] === "object" &&
                     typeof $steps["runActionOnLabData"].then === "function"
                   ) {
-                    $steps["runActionOnLabData"] = await $steps[
-                      "runActionOnLabData"
-                    ];
+                    $steps["runActionOnLabData"] =
+                      await $steps["runActionOnLabData"];
                   }
                 }).apply(null, eventArgs);
               }}
@@ -2012,9 +2005,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                           typeof $steps["setDataLoadedFalse"].then ===
                             "function"
                         ) {
-                          $steps["setDataLoadedFalse"] = await $steps[
-                            "setDataLoadedFalse"
-                          ];
+                          $steps["setDataLoadedFalse"] =
+                            await $steps["setDataLoadedFalse"];
                         }
 
                         $steps["setTheLaboratoryDataToTheLocalStorage"] =
@@ -2090,9 +2082,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                           typeof $steps["updateDataLoaded"] === "object" &&
                           typeof $steps["updateDataLoaded"].then === "function"
                         ) {
-                          $steps["updateDataLoaded"] = await $steps[
-                            "updateDataLoaded"
-                          ];
+                          $steps["updateDataLoaded"] =
+                            await $steps["updateDataLoaded"];
                         }
                       }}
                     />
@@ -2601,8 +2592,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     !_par
                                       ? []
                                       : Array.isArray(_par)
-                                      ? _par
-                                      : [_par])(
+                                        ? _par
+                                        : [_par])(
                                     (() => {
                                       try {
                                         return currentItem.values;
@@ -2768,9 +2759,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                             ) {
                                               $steps[
                                                 "updateLaboratoryResultNormalRangeOpen"
-                                              ] = await $steps[
-                                                "updateLaboratoryResultNormalRangeOpen"
-                                              ];
+                                              ] =
+                                                await $steps[
+                                                  "updateLaboratoryResultNormalRangeOpen"
+                                                ];
                                             }
                                           }}
                                         >
@@ -2973,9 +2965,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                               ) {
                                                 $steps[
                                                   "updateLabResultObject"
-                                                ] = await $steps[
-                                                  "updateLabResultObject"
-                                                ];
+                                                ] =
+                                                  await $steps[
+                                                    "updateLabResultObject"
+                                                  ];
                                               }
 
                                               $steps[
@@ -3035,9 +3028,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                               ) {
                                                 $steps[
                                                   "updateLaboratoryResultNormalRangeOpen"
-                                                ] = await $steps[
-                                                  "updateLaboratoryResultNormalRangeOpen"
-                                                ];
+                                                ] =
+                                                  await $steps[
+                                                    "updateLaboratoryResultNormalRangeOpen"
+                                                  ];
                                               }
                                             }}
                                           >
@@ -3179,11 +3173,7 @@ function PlasmicLaboratoryData__RenderFunc(props: {
               "X-Namespace": localStorage.getItem("inlab_user_namespace_id")
             }}
             method={"GET"}
-            path={`/api/v3/bookmark/labs?patient_id=${
-              $ctx.params.code
-            }&admission_id=${$ctx.params.adm_id}&all_admissions=${
-              $state.allAdmissions
-            }&bookmarked=false&timestamp=${Date.now()}`}
+            path={`/api/v3/bookmark/labs?patient_id=${$ctx.params.code}&admission_id=${$ctx.params.adm_id}&all_admissions=${$state.allAdmissions}&bookmarked=false&timestamp=${Date.now()}`}
             ref={ref => {
               $refs["exLabData"] = ref;
             }}
@@ -3234,9 +3224,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         typeof $steps["setDataLoadedFalse"] === "object" &&
                         typeof $steps["setDataLoadedFalse"].then === "function"
                       ) {
-                        $steps["setDataLoadedFalse"] = await $steps[
-                          "setDataLoadedFalse"
-                        ];
+                        $steps["setDataLoadedFalse"] =
+                          await $steps["setDataLoadedFalse"];
                       }
 
                       $steps["setTheLaboratoryDataToTheLocalStorage"] =
@@ -3310,9 +3299,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                         typeof $steps["updateDataLoaded"] === "object" &&
                         typeof $steps["updateDataLoaded"].then === "function"
                       ) {
-                        $steps["updateDataLoaded"] = await $steps[
-                          "updateDataLoaded"
-                        ];
+                        $steps["updateDataLoaded"] =
+                          await $steps["updateDataLoaded"];
                       }
                     }}
                   />
@@ -3789,8 +3777,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                     !_par
                                       ? []
                                       : Array.isArray(_par)
-                                      ? _par
-                                      : [_par])(
+                                        ? _par
+                                        : [_par])(
                                     (() => {
                                       try {
                                         return currentItem.values;
@@ -3956,9 +3944,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                             ) {
                                               $steps[
                                                 "updateLaboratoryResultNormalRangeOpen"
-                                              ] = await $steps[
-                                                "updateLaboratoryResultNormalRangeOpen"
-                                              ];
+                                              ] =
+                                                await $steps[
+                                                  "updateLaboratoryResultNormalRangeOpen"
+                                                ];
                                             }
                                           }}
                                         >
@@ -4161,9 +4150,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                               ) {
                                                 $steps[
                                                   "updateLabResultObject"
-                                                ] = await $steps[
-                                                  "updateLabResultObject"
-                                                ];
+                                                ] =
+                                                  await $steps[
+                                                    "updateLabResultObject"
+                                                  ];
                                               }
 
                                               $steps[
@@ -4223,9 +4213,10 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                               ) {
                                                 $steps[
                                                   "updateLaboratoryResultNormalRangeOpen"
-                                                ] = await $steps[
-                                                  "updateLaboratoryResultNormalRangeOpen"
-                                                ];
+                                                ] =
+                                                  await $steps[
+                                                    "updateLaboratoryResultNormalRangeOpen"
+                                                  ];
                                               }
                                             }}
                                           >
@@ -4855,8 +4846,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                   !_par
                                     ? []
                                     : Array.isArray(_par)
-                                    ? _par
-                                    : [_par])(
+                                      ? _par
+                                      : [_par])(
                                   (() => {
                                     try {
                                       return currentItem.factors;
@@ -5116,8 +5107,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                                   !_par
                                     ? []
                                     : Array.isArray(_par)
-                                    ? _par
-                                    : [_par])(
+                                      ? _par
+                                      : [_par])(
                                   (() => {
                                     try {
                                       return currentItem.factors;
@@ -5259,9 +5250,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   typeof $steps["getAdmIdPatientId"] === "object" &&
                   typeof $steps["getAdmIdPatientId"].then === "function"
                 ) {
-                  $steps["getAdmIdPatientId"] = await $steps[
-                    "getAdmIdPatientId"
-                  ];
+                  $steps["getAdmIdPatientId"] =
+                    await $steps["getAdmIdPatientId"];
                 }
 
                 $steps["updateDataLoaded"] = true
@@ -5346,9 +5336,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   typeof $steps["goToLaboratoryData"] === "object" &&
                   typeof $steps["goToLaboratoryData"].then === "function"
                 ) {
-                  $steps["goToLaboratoryData"] = await $steps[
-                    "goToLaboratoryData"
-                  ];
+                  $steps["goToLaboratoryData"] =
+                    await $steps["goToLaboratoryData"];
                 }
               }}
               role={"img"}
@@ -5539,9 +5528,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   typeof $steps["goToPatientProfile"] === "object" &&
                   typeof $steps["goToPatientProfile"].then === "function"
                 ) {
-                  $steps["goToPatientProfile"] = await $steps[
-                    "goToPatientProfile"
-                  ];
+                  $steps["goToPatientProfile"] =
+                    await $steps["goToPatientProfile"];
                 }
               }}
               src={{
@@ -5614,9 +5602,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   typeof $steps["goToImagingReport1"] === "object" &&
                   typeof $steps["goToImagingReport1"].then === "function"
                 ) {
-                  $steps["goToImagingReport1"] = await $steps[
-                    "goToImagingReport1"
-                  ];
+                  $steps["goToImagingReport1"] =
+                    await $steps["goToImagingReport1"];
                 }
               }}
               src={{
@@ -5668,9 +5655,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     typeof $steps["deleteTheLabDataFromLocalStorage"].then ===
                       "function"
                   ) {
-                    $steps["deleteTheLabDataFromLocalStorage"] = await $steps[
-                      "deleteTheLabDataFromLocalStorage"
-                    ];
+                    $steps["deleteTheLabDataFromLocalStorage"] =
+                      await $steps["deleteTheLabDataFromLocalStorage"];
                   }
 
                   $steps["goToLaboratoryPage"] = true
@@ -5721,9 +5707,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                     typeof $steps["goToLaboratoryPage"] === "object" &&
                     typeof $steps["goToLaboratoryPage"].then === "function"
                   ) {
-                    $steps["goToLaboratoryPage"] = await $steps[
-                      "goToLaboratoryPage"
-                    ];
+                    $steps["goToLaboratoryPage"] =
+                      await $steps["goToLaboratoryPage"];
                   }
                 }}
                 src={{
@@ -5905,9 +5890,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   typeof $steps["getAdmIdPatientId"] === "object" &&
                   typeof $steps["getAdmIdPatientId"].then === "function"
                 ) {
-                  $steps["getAdmIdPatientId"] = await $steps[
-                    "getAdmIdPatientId"
-                  ];
+                  $steps["getAdmIdPatientId"] =
+                    await $steps["getAdmIdPatientId"];
                 }
 
                 $steps["updateDataLoaded"] = true
@@ -5992,9 +5976,8 @@ function PlasmicLaboratoryData__RenderFunc(props: {
                   typeof $steps["goToLaboratoryData"] === "object" &&
                   typeof $steps["goToLaboratoryData"].then === "function"
                 ) {
-                  $steps["goToLaboratoryData"] = await $steps[
-                    "goToLaboratoryData"
-                  ];
+                  $steps["goToLaboratoryData"] =
+                    await $steps["goToLaboratoryData"];
                 }
               }}
               role={"img"}
@@ -6471,7 +6454,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicLaboratoryData__VariantsArgs;
     args?: PlasmicLaboratoryData__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicLaboratoryData__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicLaboratoryData__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicLaboratoryData__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

@@ -622,8 +622,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                                   item.gender === "F"
                                     ? " \u2640️"
                                     : item.gender === "M"
-                                    ? " \u2642️"
-                                    : "";
+                                      ? " \u2642️"
+                                      : "";
                                 let ageString;
                                 if (
                                   hisType === "tums_api" ||
@@ -760,9 +760,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["updateSearchBarServicesValue"].then ===
                       "function"
                   ) {
-                    $steps["updateSearchBarServicesValue"] = await $steps[
-                      "updateSearchBarServicesValue"
-                    ];
+                    $steps["updateSearchBarServicesValue"] =
+                      await $steps["updateSearchBarServicesValue"];
                   }
 
                   $steps["setLocalServiceType"] = true
@@ -785,9 +784,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["setLocalServiceType"] === "object" &&
                     typeof $steps["setLocalServiceType"].then === "function"
                   ) {
-                    $steps["setLocalServiceType"] = await $steps[
-                      "setLocalServiceType"
-                    ];
+                    $steps["setLocalServiceType"] =
+                      await $steps["setLocalServiceType"];
                   }
 
                   $steps["consoleLogServiceType"] = true
@@ -810,9 +808,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["consoleLogServiceType"] === "object" &&
                     typeof $steps["consoleLogServiceType"].then === "function"
                   ) {
-                    $steps["consoleLogServiceType"] = await $steps[
-                      "consoleLogServiceType"
-                    ];
+                    $steps["consoleLogServiceType"] =
+                      await $steps["consoleLogServiceType"];
                   }
 
                   $steps["updateModalServiceListOpen"] = true
@@ -847,9 +844,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["updateModalServiceListOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalServiceListOpen"] = await $steps[
-                      "updateModalServiceListOpen"
-                    ];
+                    $steps["updateModalServiceListOpen"] =
+                      await $steps["updateModalServiceListOpen"];
                   }
                 }}
               >
@@ -940,9 +936,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["updateSearchBarServicesValue"].then ===
                       "function"
                   ) {
-                    $steps["updateSearchBarServicesValue"] = await $steps[
-                      "updateSearchBarServicesValue"
-                    ];
+                    $steps["updateSearchBarServicesValue"] =
+                      await $steps["updateSearchBarServicesValue"];
                   }
 
                   $steps["setLocalServiceType"] = true
@@ -965,9 +960,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["setLocalServiceType"] === "object" &&
                     typeof $steps["setLocalServiceType"].then === "function"
                   ) {
-                    $steps["setLocalServiceType"] = await $steps[
-                      "setLocalServiceType"
-                    ];
+                    $steps["setLocalServiceType"] =
+                      await $steps["setLocalServiceType"];
                   }
 
                   $steps["consoleLogServiceType"] = true
@@ -990,9 +984,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["consoleLogServiceType"] === "object" &&
                     typeof $steps["consoleLogServiceType"].then === "function"
                   ) {
-                    $steps["consoleLogServiceType"] = await $steps[
-                      "consoleLogServiceType"
-                    ];
+                    $steps["consoleLogServiceType"] =
+                      await $steps["consoleLogServiceType"];
                   }
 
                   $steps["updateModalServiceListOpen"] = true
@@ -1027,9 +1020,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["updateModalServiceListOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalServiceListOpen"] = await $steps[
-                      "updateModalServiceListOpen"
-                    ];
+                    $steps["updateModalServiceListOpen"] =
+                      await $steps["updateModalServiceListOpen"];
                   }
                 }}
               >
@@ -1119,9 +1111,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["updateModalReceiverDoctorOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalReceiverDoctorOpen"] = await $steps[
-                      "updateModalReceiverDoctorOpen"
-                    ];
+                    $steps["updateModalReceiverDoctorOpen"] =
+                      await $steps["updateModalReceiverDoctorOpen"];
                   }
                 }}
               >
@@ -1372,9 +1363,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["updateEmergencyButtonStatusState"].then ===
                       "function"
                   ) {
-                    $steps["updateEmergencyButtonStatusState"] = await $steps[
-                      "updateEmergencyButtonStatusState"
-                    ];
+                    $steps["updateEmergencyButtonStatusState"] =
+                      await $steps["updateEmergencyButtonStatusState"];
                   }
 
                   $steps["updateConsultEmergencyStatusState"] =
@@ -1411,9 +1401,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["updateConsultEmergencyStatusState"].then ===
                       "function"
                   ) {
-                    $steps["updateConsultEmergencyStatusState"] = await $steps[
-                      "updateConsultEmergencyStatusState"
-                    ];
+                    $steps["updateConsultEmergencyStatusState"] =
+                      await $steps["updateConsultEmergencyStatusState"];
                   }
 
                   $steps["updateConsultEmergencyStatusState2"] =
@@ -1450,9 +1439,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["updateConsultEmergencyStatusState2"].then ===
                       "function"
                   ) {
-                    $steps["updateConsultEmergencyStatusState2"] = await $steps[
-                      "updateConsultEmergencyStatusState2"
-                    ];
+                    $steps["updateConsultEmergencyStatusState2"] =
+                      await $steps["updateConsultEmergencyStatusState2"];
                   }
 
                   $steps["consoleLogConsultEmergencyStatusState"] = true
@@ -1824,9 +1812,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                       typeof $steps["postDraftConsult"] === "object" &&
                       typeof $steps["postDraftConsult"].then === "function"
                     ) {
-                      $steps["postDraftConsult"] = await $steps[
-                        "postDraftConsult"
-                      ];
+                      $steps["postDraftConsult"] =
+                        await $steps["postDraftConsult"];
                     }
 
                     $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
@@ -1920,9 +1907,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                       typeof $steps["goToConsultListPage"] === "object" &&
                       typeof $steps["goToConsultListPage"].then === "function"
                     ) {
-                      $steps["goToConsultListPage"] = await $steps[
-                        "goToConsultListPage"
-                      ];
+                      $steps["goToConsultListPage"] =
+                        await $steps["goToConsultListPage"];
                     }
                   }}
                   onDeselectedChange={async (...eventArgs: any) => {
@@ -2249,9 +2235,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                       typeof $steps["goToConsultListPage"] === "object" &&
                       typeof $steps["goToConsultListPage"].then === "function"
                     ) {
-                      $steps["goToConsultListPage"] = await $steps[
-                        "goToConsultListPage"
-                      ];
+                      $steps["goToConsultListPage"] =
+                        await $steps["goToConsultListPage"];
                     }
                   }}
                   onDeselectedChange={async (...eventArgs: any) => {
@@ -2557,9 +2542,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["goToPatientProfile"] === "object" &&
                     typeof $steps["goToPatientProfile"].then === "function"
                   ) {
-                    $steps["goToPatientProfile"] = await $steps[
-                      "goToPatientProfile"
-                    ];
+                    $steps["goToPatientProfile"] =
+                      await $steps["goToPatientProfile"];
                   }
                 }}
                 src={{
@@ -2633,9 +2617,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["goToImagingReport1"] === "object" &&
                     typeof $steps["goToImagingReport1"].then === "function"
                   ) {
-                    $steps["goToImagingReport1"] = await $steps[
-                      "goToImagingReport1"
-                    ];
+                    $steps["goToImagingReport1"] =
+                      await $steps["goToImagingReport1"];
                   }
                 }}
                 src={{
@@ -2686,9 +2669,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["deleteLabDataFromTheLocalStorage"].then ===
                       "function"
                   ) {
-                    $steps["deleteLabDataFromTheLocalStorage"] = await $steps[
-                      "deleteLabDataFromTheLocalStorage"
-                    ];
+                    $steps["deleteLabDataFromTheLocalStorage"] =
+                      await $steps["deleteLabDataFromTheLocalStorage"];
                   }
 
                   $steps["goToLaboratoryData"] = true
@@ -2739,9 +2721,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                     typeof $steps["goToLaboratoryData"] === "object" &&
                     typeof $steps["goToLaboratoryData"].then === "function"
                   ) {
-                    $steps["goToLaboratoryData"] = await $steps[
-                      "goToLaboratoryData"
-                    ];
+                    $steps["goToLaboratoryData"] =
+                      await $steps["goToLaboratoryData"];
                   }
                 }}
                 src={{
@@ -2925,9 +2906,7 @@ function PlasmicConsultSend__RenderFunc(props: {
                                       JSON.stringify($ctx.fetched_data.data)
                                     );
                                     return console.log(
-                                      `consult_service_list: ${localStorage.getItem(
-                                        "consult_service_list"
-                                      )}`
+                                      `consult_service_list: ${localStorage.getItem("consult_service_list")}`
                                     );
                                   })();
                                 }
@@ -2944,9 +2923,8 @@ function PlasmicConsultSend__RenderFunc(props: {
                           typeof $steps["setLocalConsultServiceList"].then ===
                             "function"
                         ) {
-                          $steps["setLocalConsultServiceList"] = await $steps[
-                            "setLocalConsultServiceList"
-                          ];
+                          $steps["setLocalConsultServiceList"] =
+                            await $steps["setLocalConsultServiceList"];
                         }
                       }}
                     />
@@ -4681,7 +4659,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicConsultSend__VariantsArgs;
     args?: PlasmicConsultSend__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicConsultSend__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicConsultSend__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicConsultSend__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

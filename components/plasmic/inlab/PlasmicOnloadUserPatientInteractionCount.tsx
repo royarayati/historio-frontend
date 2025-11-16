@@ -158,11 +158,7 @@ function PlasmicOnloadUserPatientInteractionCount__RenderFunc(props: {
               const actionArgs = {
                 args: [
                   "POST",
-                  `/n8n/webhook/user/interactions?patient_id=${
-                    $props.patientIdForOnloadUserPatientInteractionCount
-                  }&namespace_id=${localStorage.getItem(
-                    "inlab_user_namespace_id"
-                  )}`
+                  `/n8n/webhook/user/interactions?patient_id=${$props.patientIdForOnloadUserPatientInteractionCount}&namespace_id=${localStorage.getItem("inlab_user_namespace_id")}`
                 ]
               };
               return $globalActions["AuthGlobalContext.apiFetcher"]?.apply(
@@ -176,9 +172,8 @@ function PlasmicOnloadUserPatientInteractionCount__RenderFunc(props: {
           typeof $steps["userPatientInteractionCount"] === "object" &&
           typeof $steps["userPatientInteractionCount"].then === "function"
         ) {
-          $steps["userPatientInteractionCount"] = await $steps[
-            "userPatientInteractionCount"
-          ];
+          $steps["userPatientInteractionCount"] =
+            await $steps["userPatientInteractionCount"];
         }
       }}
     />
@@ -206,10 +201,12 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicOnloadUserPatientInteractionCount__VariantsArgs;
     args?: PlasmicOnloadUserPatientInteractionCount__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit< // Specify variants directly as props
-    PlasmicOnloadUserPatientInteractionCount__VariantsArgs,
-    ReservedPropsType
-  > &
+  } &
+    // Specify variants directly as props
+    Omit<
+      PlasmicOnloadUserPatientInteractionCount__VariantsArgs,
+      ReservedPropsType
+    > &
     // Specify args directly as props
     Omit<
       PlasmicOnloadUserPatientInteractionCount__ArgsType,

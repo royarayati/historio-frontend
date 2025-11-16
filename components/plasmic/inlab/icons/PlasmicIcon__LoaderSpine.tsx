@@ -19,7 +19,7 @@ export function LoaderSpineIcon(props: LoaderSpineIconProps) {
       style={{
         background: '0 0"',
 
-        ...(style || {}),
+        ...(style || {})
       }}
       shapeRendering={"auto"}
       display={"block"}

@@ -819,8 +819,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                   item.gender === "F"
                                     ? " \u2640️"
                                     : item.gender === "M"
-                                    ? " \u2642️"
-                                    : "";
+                                      ? " \u2642️"
+                                      : "";
                                 let ageString;
                                 if (
                                   hisType === "tums_api" ||
@@ -1104,9 +1104,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           typeof $steps["updateSearchBarServicesValue"].then ===
                             "function"
                         ) {
-                          $steps["updateSearchBarServicesValue"] = await $steps[
-                            "updateSearchBarServicesValue"
-                          ];
+                          $steps["updateSearchBarServicesValue"] =
+                            await $steps["updateSearchBarServicesValue"];
                         }
 
                         $steps["updateServiceType"] = true
@@ -1140,9 +1139,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           typeof $steps["updateServiceType"] === "object" &&
                           typeof $steps["updateServiceType"].then === "function"
                         ) {
-                          $steps["updateServiceType"] = await $steps[
-                            "updateServiceType"
-                          ];
+                          $steps["updateServiceType"] =
+                            await $steps["updateServiceType"];
                         }
 
                         $steps["updateModalServicesListOpen"] = true
@@ -1181,9 +1179,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           typeof $steps["updateModalServicesListOpen"].then ===
                             "function"
                         ) {
-                          $steps["updateModalServicesListOpen"] = await $steps[
-                            "updateModalServicesListOpen"
-                          ];
+                          $steps["updateModalServicesListOpen"] =
+                            await $steps["updateModalServicesListOpen"];
                         }
                       }}
                     >
@@ -1277,9 +1274,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           typeof $steps["updateSearchBarServicesValue"].then ===
                             "function"
                         ) {
-                          $steps["updateSearchBarServicesValue"] = await $steps[
-                            "updateSearchBarServicesValue"
-                          ];
+                          $steps["updateSearchBarServicesValue"] =
+                            await $steps["updateSearchBarServicesValue"];
                         }
 
                         $steps["updateServiceType"] = true
@@ -1313,9 +1309,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           typeof $steps["updateServiceType"] === "object" &&
                           typeof $steps["updateServiceType"].then === "function"
                         ) {
-                          $steps["updateServiceType"] = await $steps[
-                            "updateServiceType"
-                          ];
+                          $steps["updateServiceType"] =
+                            await $steps["updateServiceType"];
                         }
 
                         $steps["updateModalServicesListOpen"] = true
@@ -1354,9 +1349,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           typeof $steps["updateModalServicesListOpen"].then ===
                             "function"
                         ) {
-                          $steps["updateModalServicesListOpen"] = await $steps[
-                            "updateModalServicesListOpen"
-                          ];
+                          $steps["updateModalServicesListOpen"] =
+                            await $steps["updateModalServicesListOpen"];
                         }
                       }}
                     >
@@ -1710,8 +1704,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           return $state.emergencyButtonUserInteractionState
                             ? !$state.emergencyButtonStatusState
                             : $ctx.fetched_data.data.items[0].priority == 3
-                            ? true
-                            : false;
+                              ? true
+                              : false;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -1727,8 +1721,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           return $state.emergencyButtonUserInteractionState
                             ? $state.emergencyButtonStatusState
                             : $ctx.fetched_data.data.items[0].priority == 3
-                            ? false
-                            : true;
+                              ? false
+                              : true;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -2339,9 +2333,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                             typeof $steps["goToConsultListPage"].then ===
                               "function"
                           ) {
-                            $steps["goToConsultListPage"] = await $steps[
-                              "goToConsultListPage"
-                            ];
+                            $steps["goToConsultListPage"] =
+                              await $steps["goToConsultListPage"];
                           }
                         }}
                         onDeselectedChange={async (...eventArgs: any) => {
@@ -2599,9 +2592,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                             typeof $steps["patchDraftedToSentConsult"].then ===
                               "function"
                           ) {
-                            $steps["patchDraftedToSentConsult"] = await $steps[
-                              "patchDraftedToSentConsult"
-                            ];
+                            $steps["patchDraftedToSentConsult"] =
+                              await $steps["patchDraftedToSentConsult"];
                           }
 
                           $steps["makeTrueSendConsultUnsuccessfullyAlert"] =
@@ -2701,9 +2693,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                             typeof $steps["goToConsultListPage"].then ===
                               "function"
                           ) {
-                            $steps["goToConsultListPage"] = await $steps[
-                              "goToConsultListPage"
-                            ];
+                            $steps["goToConsultListPage"] =
+                              await $steps["goToConsultListPage"];
                           }
                         }}
                         onDeselectedChange={async (...eventArgs: any) => {
@@ -3012,9 +3003,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     typeof $steps["goToPatientProfile"] === "object" &&
                     typeof $steps["goToPatientProfile"].then === "function"
                   ) {
-                    $steps["goToPatientProfile"] = await $steps[
-                      "goToPatientProfile"
-                    ];
+                    $steps["goToPatientProfile"] =
+                      await $steps["goToPatientProfile"];
                   }
                 }}
                 src={{
@@ -3088,9 +3078,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     typeof $steps["goToImagingReport1"] === "object" &&
                     typeof $steps["goToImagingReport1"].then === "function"
                   ) {
-                    $steps["goToImagingReport1"] = await $steps[
-                      "goToImagingReport1"
-                    ];
+                    $steps["goToImagingReport1"] =
+                      await $steps["goToImagingReport1"];
                   }
                 }}
                 src={{
@@ -3141,9 +3130,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     typeof $steps["deleteLabDataFromTheLocalStorage"].then ===
                       "function"
                   ) {
-                    $steps["deleteLabDataFromTheLocalStorage"] = await $steps[
-                      "deleteLabDataFromTheLocalStorage"
-                    ];
+                    $steps["deleteLabDataFromTheLocalStorage"] =
+                      await $steps["deleteLabDataFromTheLocalStorage"];
                   }
 
                   $steps["goToLaboratoryData"] = true
@@ -3194,9 +3182,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                     typeof $steps["goToLaboratoryData"] === "object" &&
                     typeof $steps["goToLaboratoryData"].then === "function"
                   ) {
-                    $steps["goToLaboratoryData"] = await $steps[
-                      "goToLaboratoryData"
-                    ];
+                    $steps["goToLaboratoryData"] =
+                      await $steps["goToLaboratoryData"];
                   }
                 }}
                 src={{
@@ -3374,9 +3361,7 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                                       JSON.stringify($ctx.fetched_data.data)
                                     );
                                     return console.log(
-                                      `consult_service_list: ${localStorage.getItem(
-                                        "consult_service_list"
-                                      )}`
+                                      `consult_service_list: ${localStorage.getItem("consult_service_list")}`
                                     );
                                   })();
                                 }
@@ -3393,9 +3378,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                           typeof $steps["setLocalConsultServicesList"].then ===
                             "function"
                         ) {
-                          $steps["setLocalConsultServicesList"] = await $steps[
-                            "setLocalConsultServicesList"
-                          ];
+                          $steps["setLocalConsultServicesList"] =
+                            await $steps["setLocalConsultServicesList"];
                         }
                       }}
                     />
@@ -3685,9 +3669,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                               typeof $steps["updateReceiverServiceId"].then ===
                                 "function"
                             ) {
-                              $steps["updateReceiverServiceId"] = await $steps[
-                                "updateReceiverServiceId"
-                              ];
+                              $steps["updateReceiverServiceId"] =
+                                await $steps["updateReceiverServiceId"];
                             }
 
                             $steps["updateReceiverServiceName"] =
@@ -4936,9 +4919,8 @@ function PlasmicConsultSendDraft__RenderFunc(props: {
                       typeof $steps["goToConsultList"] === "object" &&
                       typeof $steps["goToConsultList"].then === "function"
                     ) {
-                      $steps["goToConsultList"] = await $steps[
-                        "goToConsultList"
-                      ];
+                      $steps["goToConsultList"] =
+                        await $steps["goToConsultList"];
                     }
 
                     $steps["updateDeleteConsultUnsuccessfullyAlert2"] =
@@ -5610,7 +5592,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicConsultSendDraft__VariantsArgs;
     args?: PlasmicConsultSendDraft__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicConsultSendDraft__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicConsultSendDraft__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicConsultSendDraft__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

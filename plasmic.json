@@ -2058,14 +2058,14 @@
         },
         {
           "id": "LsXtPkapGRoc",
-          "name": "PatientDischargeSummary",
+          "name": "PatientForms",
           "type": "managed",
           "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicPatientDischargeSummary.tsx",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicPatientForms.tsx",
           "importSpec": {
             "modulePath": "../pages/patient/[code]/summary/[adm_id].tsx"
           },
-          "cssFilePath": "plasmic/inlab/PlasmicPatientDischargeSummary.module.css",
+          "cssFilePath": "plasmic/inlab/PlasmicPatientForms.module.css",
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/patient/[code]/summary/[adm_id]"
@@ -2148,6 +2148,20 @@
           "cssFilePath": "plasmic/inlab/PlasmicDrawer.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "-a-fpDWty9bz",
+          "name": "NewPage",
+          "type": "managed",
+          "projectId": "wjafXWEvDytFogT7SiMy2v",
+          "renderModuleFilePath": "plasmic/inlab/PlasmicNewPage.tsx",
+          "importSpec": {
+            "modulePath": "../pages/new-page.tsx"
+          },
+          "cssFilePath": "plasmic/inlab/PlasmicNewPage.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/new-page"
         }
       ],
       "icons": [
@@ -2983,10 +2997,10 @@
           "componentImportPath": "./utils/ApiFetcherComponentPlus"
         },
         {
-          "id": "jEqVmdAbnKYc",
-          "name":"SimpleFormBuilder"  ,
+          "id": "f6UTVo2tEIbM",
+          "name": "SimpleFormBuilder",
           "displayName": "SimpleFormBuilder",
-          "componentImportPath": "./utils/SimpleFormBuilder"
+          "componentImportPath": "@/components/SimpleFormBuilder"
         }
       ],
       "customFunctions": [
@@ -3018,9 +3032,10 @@
     ]
   },
   "wrapPagesWithGlobalContexts": true,
+  "preserveJsImportExtensions": false,
   "nextjsConfig": {
     "pagesDir": "../pages"
   },
-  "cliVersion": "0.1.342",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.342/dist/plasmic.schema.json"
+  "cliVersion": "0.1.348",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.348/dist/plasmic.schema.json"
 }

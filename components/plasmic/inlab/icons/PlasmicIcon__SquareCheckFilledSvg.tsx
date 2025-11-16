@@ -21,7 +21,7 @@ export function SquareCheckFilledSvgIcon(props: SquareCheckFilledSvgIconProps) {
       style={{
         fill: "currentcolor",
 
-        ...(style || {}),
+        ...(style || {})
       }}
       className={classNames("plasmic-default__svg", className)}
       {...restProps}

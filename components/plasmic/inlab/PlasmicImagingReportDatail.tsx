@@ -305,15 +305,13 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                                   item.gender === "F"
                                     ? " \u2640️"
                                     : item.gender === "M"
-                                    ? " \u2642️"
-                                    : "";
+                                      ? " \u2642️"
+                                      : "";
                                 if (ageYears < 1) {
                                   const ageMonths =
                                     Math.abs(monthDifference) +
                                     (now.getDate() < dob.getDate() ? -1 : 0);
-                                  return `${fullName} ${ageMonths} month ${
-                                    ageMonths !== 1 ? "s" : ""
-                                  }${genderSymbol}`;
+                                  return `${fullName} ${ageMonths} month ${ageMonths !== 1 ? "s" : ""}${genderSymbol}`;
                                 } else {
                                   return `${fullName} ${ageYears} ${genderSymbol}`;
                                 }
@@ -815,9 +813,8 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                     typeof $steps["goToPatientProfile"] === "object" &&
                     typeof $steps["goToPatientProfile"].then === "function"
                   ) {
-                    $steps["goToPatientProfile"] = await $steps[
-                      "goToPatientProfile"
-                    ];
+                    $steps["goToPatientProfile"] =
+                      await $steps["goToPatientProfile"];
                   }
                 }}
                 src={{
@@ -891,9 +888,8 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                     typeof $steps["goToImagingReport1"] === "object" &&
                     typeof $steps["goToImagingReport1"].then === "function"
                   ) {
-                    $steps["goToImagingReport1"] = await $steps[
-                      "goToImagingReport1"
-                    ];
+                    $steps["goToImagingReport1"] =
+                      await $steps["goToImagingReport1"];
                   }
                 }}
                 src={{
@@ -967,9 +963,8 @@ function PlasmicImagingReportDatail__RenderFunc(props: {
                     typeof $steps["goToLaboratoryData"] === "object" &&
                     typeof $steps["goToLaboratoryData"].then === "function"
                   ) {
-                    $steps["goToLaboratoryData"] = await $steps[
-                      "goToLaboratoryData"
-                    ];
+                    $steps["goToLaboratoryData"] =
+                      await $steps["goToLaboratoryData"];
                   }
                 }}
                 src={{
@@ -1095,7 +1090,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicImagingReportDatail__VariantsArgs;
     args?: PlasmicImagingReportDatail__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicImagingReportDatail__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicImagingReportDatail__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicImagingReportDatail__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

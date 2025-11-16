@@ -284,7 +284,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicSwitchingTab2__VariantsArgs;
     args?: PlasmicSwitchingTab2__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicSwitchingTab2__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicSwitchingTab2__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicSwitchingTab2__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

@@ -717,8 +717,8 @@ function PlasmicConsultList__RenderFunc(props: {
                                 item.gender === "F"
                                   ? " \u2640️"
                                   : item.gender === "M"
-                                  ? " \u2642️"
-                                  : "";
+                                    ? " \u2642️"
+                                    : "";
                               let ageString;
                               if (
                                 hisType === "tums_api" ||
@@ -807,9 +807,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["updatePrintErrorState"] === "object" &&
                     typeof $steps["updatePrintErrorState"].then === "function"
                   ) {
-                    $steps["updatePrintErrorState"] = await $steps[
-                      "updatePrintErrorState"
-                    ];
+                    $steps["updatePrintErrorState"] =
+                      await $steps["updatePrintErrorState"];
                   }
 
                   $steps["updateModalPrintPatientConsultOpen"] = true
@@ -845,9 +844,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["updateModalPrintPatientConsultOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalPrintPatientConsultOpen"] = await $steps[
-                      "updateModalPrintPatientConsultOpen"
-                    ];
+                    $steps["updateModalPrintPatientConsultOpen"] =
+                      await $steps["updateModalPrintPatientConsultOpen"];
                   }
                 }}
                 role={"img"}
@@ -1024,9 +1022,8 @@ function PlasmicConsultList__RenderFunc(props: {
                           typeof $steps["updateAllAdmissions"].then ===
                             "function"
                         ) {
-                          $steps["updateAllAdmissions"] = await $steps[
-                            "updateAllAdmissions"
-                          ];
+                          $steps["updateAllAdmissions"] =
+                            await $steps["updateAllAdmissions"];
                         }
                       }).apply(null, eventArgs);
                     }}
@@ -1691,9 +1688,10 @@ function PlasmicConsultList__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateDeleteConsultUnsuccessfullyAlert"
-                                            ] = await $steps[
-                                              "updateDeleteConsultUnsuccessfullyAlert"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateDeleteConsultUnsuccessfullyAlert"
+                                              ];
                                           }
 
                                           $steps["updateConsultId"] = true
@@ -1794,9 +1792,10 @@ function PlasmicConsultList__RenderFunc(props: {
                                           ) {
                                             $steps[
                                               "updateModalDeleteConsultConfirmationOpen"
-                                            ] = await $steps[
-                                              "updateModalDeleteConsultConfirmationOpen"
-                                            ];
+                                            ] =
+                                              await $steps[
+                                                "updateModalDeleteConsultConfirmationOpen"
+                                              ];
                                           }
                                         }}
                                         role={"img"}
@@ -1928,9 +1927,10 @@ function PlasmicConsultList__RenderFunc(props: {
                                         ) {
                                           $steps[
                                             "goToConsultSendReplyAndDetail"
-                                          ] = await $steps[
-                                            "goToConsultSendReplyAndDetail"
-                                          ];
+                                          ] =
+                                            await $steps[
+                                              "goToConsultSendReplyAndDetail"
+                                            ];
                                         }
                                       }}
                                     >
@@ -2046,9 +2046,10 @@ function PlasmicConsultList__RenderFunc(props: {
                                         ) {
                                           $steps[
                                             "goToConsultSendReplyAndDetail"
-                                          ] = await $steps[
-                                            "goToConsultSendReplyAndDetail"
-                                          ];
+                                          ] =
+                                            await $steps[
+                                              "goToConsultSendReplyAndDetail"
+                                            ];
                                         }
                                       }}
                                     >
@@ -2548,9 +2549,8 @@ function PlasmicConsultList__RenderFunc(props: {
                       typeof $steps["goToConsultList"] === "object" &&
                       typeof $steps["goToConsultList"].then === "function"
                     ) {
-                      $steps["goToConsultList"] = await $steps[
-                        "goToConsultList"
-                      ];
+                      $steps["goToConsultList"] =
+                        await $steps["goToConsultList"];
                     }
                   }}
                   src={{
@@ -2624,9 +2624,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["goToPatientProfile"] === "object" &&
                     typeof $steps["goToPatientProfile"].then === "function"
                   ) {
-                    $steps["goToPatientProfile"] = await $steps[
-                      "goToPatientProfile"
-                    ];
+                    $steps["goToPatientProfile"] =
+                      await $steps["goToPatientProfile"];
                   }
                 }}
                 src={{
@@ -2700,9 +2699,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["goToImagingReport1"] === "object" &&
                     typeof $steps["goToImagingReport1"].then === "function"
                   ) {
-                    $steps["goToImagingReport1"] = await $steps[
-                      "goToImagingReport1"
-                    ];
+                    $steps["goToImagingReport1"] =
+                      await $steps["goToImagingReport1"];
                   }
                 }}
                 src={{
@@ -2747,9 +2745,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["deleteLabDataFromTheLocalStorage"].then ===
                       "function"
                   ) {
-                    $steps["deleteLabDataFromTheLocalStorage"] = await $steps[
-                      "deleteLabDataFromTheLocalStorage"
-                    ];
+                    $steps["deleteLabDataFromTheLocalStorage"] =
+                      await $steps["deleteLabDataFromTheLocalStorage"];
                   }
 
                   $steps["goToLaboratoryData"] = true
@@ -2800,9 +2797,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["goToLaboratoryData"] === "object" &&
                     typeof $steps["goToLaboratoryData"].then === "function"
                   ) {
-                    $steps["goToLaboratoryData"] = await $steps[
-                      "goToLaboratoryData"
-                    ];
+                    $steps["goToLaboratoryData"] =
+                      await $steps["goToLaboratoryData"];
                   }
                 }}
                 src={{
@@ -3246,9 +3242,8 @@ function PlasmicConsultList__RenderFunc(props: {
                       typeof $steps["runActionOnGetConsult"] === "object" &&
                       typeof $steps["runActionOnGetConsult"].then === "function"
                     ) {
-                      $steps["runActionOnGetConsult"] = await $steps[
-                        "runActionOnGetConsult"
-                      ];
+                      $steps["runActionOnGetConsult"] =
+                        await $steps["runActionOnGetConsult"];
                     }
 
                     $steps["updateModalDeleteConsultConfirmationOpen"] =
@@ -3592,9 +3587,8 @@ function PlasmicConsultList__RenderFunc(props: {
                         typeof $steps["updateSignature"] === "object" &&
                         typeof $steps["updateSignature"].then === "function"
                       ) {
-                        $steps["updateSignature"] = await $steps[
-                          "updateSignature"
-                        ];
+                        $steps["updateSignature"] =
+                          await $steps["updateSignature"];
                       }
                     }).apply(null, eventArgs);
                   }}
@@ -3657,9 +3651,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["updateModalPrintPatientConsultOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalPrintPatientConsultOpen"] = await $steps[
-                      "updateModalPrintPatientConsultOpen"
-                    ];
+                    $steps["updateModalPrintPatientConsultOpen"] =
+                      await $steps["updateModalPrintPatientConsultOpen"];
                   }
                 }}
                 onDeselectedChange={async (...eventArgs: any) => {
@@ -3815,9 +3808,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["updateModalPrintPatientConsultOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateModalPrintPatientConsultOpen"] = await $steps[
-                      "updateModalPrintPatientConsultOpen"
-                    ];
+                    $steps["updateModalPrintPatientConsultOpen"] =
+                      await $steps["updateModalPrintPatientConsultOpen"];
                   }
 
                   $steps["updatePrintProcessingState"] = true
@@ -3852,9 +3844,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["updatePrintProcessingState"].then ===
                       "function"
                   ) {
-                    $steps["updatePrintProcessingState"] = await $steps[
-                      "updatePrintProcessingState"
-                    ];
+                    $steps["updatePrintProcessingState"] =
+                      await $steps["updatePrintProcessingState"];
                   }
 
                   $steps["postConsultFillTemplate"] = true
@@ -3909,9 +3900,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["postConsultFillTemplate"] === "object" &&
                     typeof $steps["postConsultFillTemplate"].then === "function"
                   ) {
-                    $steps["postConsultFillTemplate"] = await $steps[
-                      "postConsultFillTemplate"
-                    ];
+                    $steps["postConsultFillTemplate"] =
+                      await $steps["postConsultFillTemplate"];
                   }
 
                   $steps["openConsultPrint"] =
@@ -3950,9 +3940,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["openConsultPrint"] === "object" &&
                     typeof $steps["openConsultPrint"].then === "function"
                   ) {
-                    $steps["openConsultPrint"] = await $steps[
-                      "openConsultPrint"
-                    ];
+                    $steps["openConsultPrint"] =
+                      await $steps["openConsultPrint"];
                   }
 
                   $steps["updatePrintProcessingState2"] =
@@ -3988,9 +3977,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["updatePrintProcessingState2"].then ===
                       "function"
                   ) {
-                    $steps["updatePrintProcessingState2"] = await $steps[
-                      "updatePrintProcessingState2"
-                    ];
+                    $steps["updatePrintProcessingState2"] =
+                      await $steps["updatePrintProcessingState2"];
                   }
 
                   $steps["updateSignature"] = $steps.postConsultFillTemplate
@@ -4059,9 +4047,8 @@ function PlasmicConsultList__RenderFunc(props: {
                     typeof $steps["updatePrintErrorState"] === "object" &&
                     typeof $steps["updatePrintErrorState"].then === "function"
                   ) {
-                    $steps["updatePrintErrorState"] = await $steps[
-                      "updatePrintErrorState"
-                    ];
+                    $steps["updatePrintErrorState"] =
+                      await $steps["updatePrintErrorState"];
                   }
                 }}
                 onDeselectedChange={async (...eventArgs: any) => {
@@ -4671,7 +4658,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicConsultList__VariantsArgs;
     args?: PlasmicConsultList__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicConsultList__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicConsultList__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicConsultList__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

@@ -227,7 +227,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicRootpage__VariantsArgs;
     args?: PlasmicRootpage__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicRootpage__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicRootpage__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicRootpage__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

@@ -659,9 +659,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["removeInlabUserNamespaceIdValue"].then ===
                     "function"
                 ) {
-                  $steps["removeInlabUserNamespaceIdValue"] = await $steps[
-                    "removeInlabUserNamespaceIdValue"
-                  ];
+                  $steps["removeInlabUserNamespaceIdValue"] =
+                    await $steps["removeInlabUserNamespaceIdValue"];
                 }
 
                 $steps["consoleLogInlabUserNamespaceId"] = true
@@ -669,9 +668,7 @@ function PlasmicUserSetting__RenderFunc(props: {
                       const actionArgs = {
                         customFunction: async () => {
                           return console.log(
-                            `inlab_user_namespace_id: ${localStorage.getItem(
-                              "inlab_user_namespace_id"
-                            )}`
+                            `inlab_user_namespace_id: ${localStorage.getItem("inlab_user_namespace_id")}`
                           );
                         }
                       };
@@ -687,9 +684,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["consoleLogInlabUserNamespaceId"].then ===
                     "function"
                 ) {
-                  $steps["consoleLogInlabUserNamespaceId"] = await $steps[
-                    "consoleLogInlabUserNamespaceId"
-                  ];
+                  $steps["consoleLogInlabUserNamespaceId"] =
+                    await $steps["consoleLogInlabUserNamespaceId"];
                 }
 
                 $steps["removeLocalStorageOfConsultServices"] = true
@@ -718,9 +714,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["removeLocalStorageOfConsultServices"].then ===
                     "function"
                 ) {
-                  $steps["removeLocalStorageOfConsultServices"] = await $steps[
-                    "removeLocalStorageOfConsultServices"
-                  ];
+                  $steps["removeLocalStorageOfConsultServices"] =
+                    await $steps["removeLocalStorageOfConsultServices"];
                 }
 
                 $steps["goToNamespaceSelection"] = true
@@ -747,9 +742,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["goToNamespaceSelection"] === "object" &&
                   typeof $steps["goToNamespaceSelection"].then === "function"
                 ) {
-                  $steps["goToNamespaceSelection"] = await $steps[
-                    "goToNamespaceSelection"
-                  ];
+                  $steps["goToNamespaceSelection"] =
+                    await $steps["goToNamespaceSelection"];
                 }
               }}
             >
@@ -851,9 +845,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["updatePasswordRepeatPasswordMismatch"].then ===
                     "function"
                 ) {
-                  $steps["updatePasswordRepeatPasswordMismatch"] = await $steps[
-                    "updatePasswordRepeatPasswordMismatch"
-                  ];
+                  $steps["updatePasswordRepeatPasswordMismatch"] =
+                    await $steps["updatePasswordRepeatPasswordMismatch"];
                 }
 
                 $steps["updateSuccessfulChangePasswordState"] = true
@@ -889,9 +882,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["updateSuccessfulChangePasswordState"].then ===
                     "function"
                 ) {
-                  $steps["updateSuccessfulChangePasswordState"] = await $steps[
-                    "updateSuccessfulChangePasswordState"
-                  ];
+                  $steps["updateSuccessfulChangePasswordState"] =
+                    await $steps["updateSuccessfulChangePasswordState"];
                 }
 
                 $steps["updateUnsuccessfulChangePasswordState"] = true
@@ -962,9 +954,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["updateChangePasswordOpen"] === "object" &&
                   typeof $steps["updateChangePasswordOpen"].then === "function"
                 ) {
-                  $steps["updateChangePasswordOpen"] = await $steps[
-                    "updateChangePasswordOpen"
-                  ];
+                  $steps["updateChangePasswordOpen"] =
+                    await $steps["updateChangePasswordOpen"];
                 }
               }}
             >
@@ -1033,9 +1024,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["updateModalUploadSignatureOpen"].then ===
                     "function"
                 ) {
-                  $steps["updateModalUploadSignatureOpen"] = await $steps[
-                    "updateModalUploadSignatureOpen"
-                  ];
+                  $steps["updateModalUploadSignatureOpen"] =
+                    await $steps["updateModalUploadSignatureOpen"];
                 }
 
                 $steps["updateLogoutButtonIsDisabled"] = true
@@ -1069,9 +1059,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["updateLogoutButtonIsDisabled"].then ===
                     "function"
                 ) {
-                  $steps["updateLogoutButtonIsDisabled"] = await $steps[
-                    "updateLogoutButtonIsDisabled"
-                  ];
+                  $steps["updateLogoutButtonIsDisabled"] =
+                    await $steps["updateLogoutButtonIsDisabled"];
                 }
               }}
             >
@@ -1146,9 +1135,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["goToPatientReception"] === "object" &&
                   typeof $steps["goToPatientReception"].then === "function"
                 ) {
-                  $steps["goToPatientReception"] = await $steps[
-                    "goToPatientReception"
-                  ];
+                  $steps["goToPatientReception"] =
+                    await $steps["goToPatientReception"];
                 }
               }}
             >
@@ -1215,9 +1203,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["disablerLogoutButton"] === "object" &&
                   typeof $steps["disablerLogoutButton"].then === "function"
                 ) {
-                  $steps["disablerLogoutButton"] = await $steps[
-                    "disablerLogoutButton"
-                  ];
+                  $steps["disablerLogoutButton"] =
+                    await $steps["disablerLogoutButton"];
                 }
 
                 $steps["logoutAction"] = true
@@ -1259,9 +1246,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["goToInlabLoginPage"] === "object" &&
                   typeof $steps["goToInlabLoginPage"].then === "function"
                 ) {
-                  $steps["goToInlabLoginPage"] = await $steps[
-                    "goToInlabLoginPage"
-                  ];
+                  $steps["goToInlabLoginPage"] =
+                    await $steps["goToInlabLoginPage"];
                 }
 
                 $steps["enablerLogoutButton"] = true
@@ -1286,9 +1272,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                   typeof $steps["enablerLogoutButton"] === "object" &&
                   typeof $steps["enablerLogoutButton"].then === "function"
                 ) {
-                  $steps["enablerLogoutButton"] = await $steps[
-                    "enablerLogoutButton"
-                  ];
+                  $steps["enablerLogoutButton"] =
+                    await $steps["enablerLogoutButton"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -1533,9 +1518,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                             typeof $steps["clearPasswordValue"].then ===
                               "function"
                           ) {
-                            $steps["clearPasswordValue"] = await $steps[
-                              "clearPasswordValue"
-                            ];
+                            $steps["clearPasswordValue"] =
+                              await $steps["clearPasswordValue"];
                           }
                         }}
                         role={"img"}
@@ -1620,9 +1604,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                             typeof $steps["clearRepeatPasswordValue"].then ===
                               "function"
                           ) {
-                            $steps["clearRepeatPasswordValue"] = await $steps[
-                              "clearRepeatPasswordValue"
-                            ];
+                            $steps["clearRepeatPasswordValue"] =
+                              await $steps["clearRepeatPasswordValue"];
                           }
                         }}
                         role={"img"}
@@ -1873,9 +1856,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                     typeof $steps["patchUserPassword"] === "object" &&
                     typeof $steps["patchUserPassword"].then === "function"
                   ) {
-                    $steps["patchUserPassword"] = await $steps[
-                      "patchUserPassword"
-                    ];
+                    $steps["patchUserPassword"] =
+                      await $steps["patchUserPassword"];
                   }
 
                   $steps["makeTrueSuccessfulChangePasswordState"] =
@@ -3117,9 +3099,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                     typeof $steps["goToPatientProfile"] === "object" &&
                     typeof $steps["goToPatientProfile"].then === "function"
                   ) {
-                    $steps["goToPatientProfile"] = await $steps[
-                      "goToPatientProfile"
-                    ];
+                    $steps["goToPatientProfile"] =
+                      await $steps["goToPatientProfile"];
                   }
                 }}
                 src={{
@@ -3179,9 +3160,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                     typeof $steps["goToImagingReport1"] === "object" &&
                     typeof $steps["goToImagingReport1"].then === "function"
                   ) {
-                    $steps["goToImagingReport1"] = await $steps[
-                      "goToImagingReport1"
-                    ];
+                    $steps["goToImagingReport1"] =
+                      await $steps["goToImagingReport1"];
                   }
                 }}
                 src={{
@@ -3241,9 +3221,8 @@ function PlasmicUserSetting__RenderFunc(props: {
                     typeof $steps["goToLaboratoryData"] === "object" &&
                     typeof $steps["goToLaboratoryData"].then === "function"
                   ) {
-                    $steps["goToLaboratoryData"] = await $steps[
-                      "goToLaboratoryData"
-                    ];
+                    $steps["goToLaboratoryData"] =
+                      await $steps["goToLaboratoryData"];
                   }
                 }}
                 src={{
@@ -3504,7 +3483,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicUserSetting__VariantsArgs;
     args?: PlasmicUserSetting__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicUserSetting__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicUserSetting__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicUserSetting__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

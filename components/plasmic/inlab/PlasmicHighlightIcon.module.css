@@ -9,43 +9,17 @@
   height: 15px;
   justify-self: flex-start;
   transform: none;
-  transform-style: preserve-3d;
-}
-.highlightIcon * {
-  transform-style: preserve-3d;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .highlightIcon {
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .highlightIcon * {
-    transform-style: preserve-3d;
-  }
 }
 .highlightIconhighlighting {
   color: var(--token-tawGjJMbHvx-);
-  transform-style: preserve-3d;
-}
-.highlightIconhighlighting * {
-  transform-style: preserve-3d;
 }
 .highlightIconloadingHighlighting {
   color: var(--token-tawGjJMbHvx-);
   max-width: 100%;
   width: 20px;
   height: 20px;
-  transform-style: preserve-3d;
-}
-.highlightIconloadingHighlighting * {
-  transform-style: preserve-3d;
 }
 .highlightIconhighlighting_loadingHighlighting {
   width: 15px;
   height: 15px;
-  transform-style: preserve-3d;
-}
-.highlightIconhighlighting_loadingHighlighting * {
-  transform-style: preserve-3d;
 }

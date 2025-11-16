@@ -811,9 +811,8 @@ function PlasmicMyProfile__RenderFunc(props: {
                   typeof $steps["invokeGlobalAction"] === "object" &&
                   typeof $steps["invokeGlobalAction"].then === "function"
                 ) {
-                  $steps["invokeGlobalAction"] = await $steps[
-                    "invokeGlobalAction"
-                  ];
+                  $steps["invokeGlobalAction"] =
+                    await $steps["invokeGlobalAction"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -1016,7 +1015,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicMyProfile__VariantsArgs;
     args?: PlasmicMyProfile__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicMyProfile__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicMyProfile__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicMyProfile__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

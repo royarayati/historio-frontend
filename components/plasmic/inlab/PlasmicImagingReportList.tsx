@@ -1276,8 +1276,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             item.gender === "F"
                               ? " \u2640️"
                               : item.gender === "M"
-                              ? " \u2642️"
-                              : "";
+                                ? " \u2642️"
+                                : "";
                           let ageString;
                           if (
                             hisType === "tums_api" ||
@@ -1436,8 +1436,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             item.gender === "F"
                               ? " \u2640️"
                               : item.gender === "M"
-                              ? " \u2642️"
-                              : "";
+                                ? " \u2642️"
+                                : "";
                           let ageString;
                           if (
                             hisType === "tums_api" ||
@@ -1646,8 +1646,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                               item.gender === "F"
                                 ? " \u2640️"
                                 : item.gender === "M"
-                                ? " \u2642️"
-                                : "";
+                                  ? " \u2642️"
+                                  : "";
                             let ageString;
                             if (
                               hisType === "tums_api" ||
@@ -1811,8 +1811,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                               item.gender === "F"
                                 ? " \u2640️"
                                 : item.gender === "M"
-                                ? " \u2642️"
-                                : "";
+                                  ? " \u2642️"
+                                  : "";
                             let ageString;
                             if (
                               hisType === "tums_api" ||
@@ -1899,9 +1899,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["updateStateParaclinics"] === "object" &&
                   typeof $steps["updateStateParaclinics"].then === "function"
                 ) {
-                  $steps["updateStateParaclinics"] = await $steps[
-                    "updateStateParaclinics"
-                  ];
+                  $steps["updateStateParaclinics"] =
+                    await $steps["updateStateParaclinics"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -2044,9 +2043,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                 typeof $steps["updateStateParaclinics"] === "object" &&
                 typeof $steps["updateStateParaclinics"].then === "function"
               ) {
-                $steps["updateStateParaclinics"] = await $steps[
-                  "updateStateParaclinics"
-                ];
+                $steps["updateStateParaclinics"] =
+                  await $steps["updateStateParaclinics"];
               }
             }}
             onDeselectedChange={async (...eventArgs: any) => {
@@ -3337,9 +3335,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       typeof $steps["copyTextToClipboard"] === "object" &&
                       typeof $steps["copyTextToClipboard"].then === "function"
                     ) {
-                      $steps["copyTextToClipboard"] = await $steps[
-                        "copyTextToClipboard"
-                      ];
+                      $steps["copyTextToClipboard"] =
+                        await $steps["copyTextToClipboard"];
                     }
 
                     $steps["updateCopiedToClipboard"] = true
@@ -3374,9 +3371,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       typeof $steps["updateCopiedToClipboard"].then ===
                         "function"
                     ) {
-                      $steps["updateCopiedToClipboard"] = await $steps[
-                        "updateCopiedToClipboard"
-                      ];
+                      $steps["updateCopiedToClipboard"] =
+                        await $steps["updateCopiedToClipboard"];
                     }
                   }}
                   role={"img"}
@@ -3534,9 +3530,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                             typeof $steps["updateReportSummaryValue"].then ===
                               "function"
                           ) {
-                            $steps["updateReportSummaryValue"] = await $steps[
-                              "updateReportSummaryValue"
-                            ];
+                            $steps["updateReportSummaryValue"] =
+                              await $steps["updateReportSummaryValue"];
                           }
                         }}
                         role={"img"}
@@ -3658,9 +3653,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       typeof $steps["invokeGlobalAction"] === "object" &&
                       typeof $steps["invokeGlobalAction"].then === "function"
                     ) {
-                      $steps["invokeGlobalAction"] = await $steps[
-                        "invokeGlobalAction"
-                      ];
+                      $steps["invokeGlobalAction"] =
+                        await $steps["invokeGlobalAction"];
                     }
 
                     $steps["updateShowSuccessMassage"] = true
@@ -3695,9 +3689,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       typeof $steps["updateShowSuccessMassage"].then ===
                         "function"
                     ) {
-                      $steps["updateShowSuccessMassage"] = await $steps[
-                        "updateShowSuccessMassage"
-                      ];
+                      $steps["updateShowSuccessMassage"] =
+                        await $steps["updateShowSuccessMassage"];
                     }
                   }}
                   onDeselectedChange={async (...eventArgs: any) => {
@@ -3950,9 +3943,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                         typeof $steps["updateTitleTextinputValue"].then ===
                           "function"
                       ) {
-                        $steps["updateTitleTextinputValue"] = await $steps[
-                          "updateTitleTextinputValue"
-                        ];
+                        $steps["updateTitleTextinputValue"] =
+                          await $steps["updateTitleTextinputValue"];
                       }
                     }}
                     role={"img"}
@@ -4212,9 +4204,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["updateUploadStatus"] === "object" &&
                   typeof $steps["updateUploadStatus"].then === "function"
                 ) {
-                  $steps["updateUploadStatus"] = await $steps[
-                    "updateUploadStatus"
-                  ];
+                  $steps["updateUploadStatus"] =
+                    await $steps["updateUploadStatus"];
                 }
 
                 $steps["updateCompressedImage"] =
@@ -4251,9 +4242,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["updateCompressedImage"] === "object" &&
                   typeof $steps["updateCompressedImage"].then === "function"
                 ) {
-                  $steps["updateCompressedImage"] = await $steps[
-                    "updateCompressedImage"
-                  ];
+                  $steps["updateCompressedImage"] =
+                    await $steps["updateCompressedImage"];
                 }
 
                 $steps["updateCompressedImage2"] =
@@ -4290,9 +4280,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["updateCompressedImage2"] === "object" &&
                   typeof $steps["updateCompressedImage2"].then === "function"
                 ) {
-                  $steps["updateCompressedImage2"] = await $steps[
-                    "updateCompressedImage2"
-                  ];
+                  $steps["updateCompressedImage2"] =
+                    await $steps["updateCompressedImage2"];
                 }
 
                 $steps["postData"] = true
@@ -4699,9 +4688,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     typeof $steps["closeDeleteMediaAlarm"] === "object" &&
                     typeof $steps["closeDeleteMediaAlarm"].then === "function"
                   ) {
-                    $steps["closeDeleteMediaAlarm"] = await $steps[
-                      "closeDeleteMediaAlarm"
-                    ];
+                    $steps["closeDeleteMediaAlarm"] =
+                      await $steps["closeDeleteMediaAlarm"];
                   }
                 }}
                 onDeselectedChange={async (...eventArgs: any) => {
@@ -4889,9 +4877,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     typeof $steps["updateShowSuccessMassage"].then ===
                       "function"
                   ) {
-                    $steps["updateShowSuccessMassage"] = await $steps[
-                      "updateShowSuccessMassage"
-                    ];
+                    $steps["updateShowSuccessMassage"] =
+                      await $steps["updateShowSuccessMassage"];
                   }
 
                   $steps["closeDelteMediaAlarmModal"] = true
@@ -4926,9 +4913,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     typeof $steps["closeDelteMediaAlarmModal"].then ===
                       "function"
                   ) {
-                    $steps["closeDelteMediaAlarmModal"] = await $steps[
-                      "closeDelteMediaAlarmModal"
-                    ];
+                    $steps["closeDelteMediaAlarmModal"] =
+                      await $steps["closeDelteMediaAlarmModal"];
                   }
                 }}
                 onDeselectedChange={async (...eventArgs: any) => {
@@ -5179,9 +5165,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     typeof $steps["closeDeleteMediaAlarm"] === "object" &&
                     typeof $steps["closeDeleteMediaAlarm"].then === "function"
                   ) {
-                    $steps["closeDeleteMediaAlarm"] = await $steps[
-                      "closeDeleteMediaAlarm"
-                    ];
+                    $steps["closeDeleteMediaAlarm"] =
+                      await $steps["closeDeleteMediaAlarm"];
                   }
                 }}
                 onDeselectedChange={async (...eventArgs: any) => {
@@ -5364,9 +5349,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     typeof $steps["closeDelteMediaAlarmModal"].then ===
                       "function"
                   ) {
-                    $steps["closeDelteMediaAlarmModal"] = await $steps[
-                      "closeDelteMediaAlarmModal"
-                    ];
+                    $steps["closeDelteMediaAlarmModal"] =
+                      await $steps["closeDelteMediaAlarmModal"];
                   }
                 }}
                 onDeselectedChange={async (...eventArgs: any) => {
@@ -5531,9 +5515,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["getAdmIdPatientId"] === "object" &&
                   typeof $steps["getAdmIdPatientId"].then === "function"
                 ) {
-                  $steps["getAdmIdPatientId"] = await $steps[
-                    "getAdmIdPatientId"
-                  ];
+                  $steps["getAdmIdPatientId"] =
+                    await $steps["getAdmIdPatientId"];
                 }
 
                 $steps["goToImagingReportList"] = true
@@ -5584,9 +5567,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["goToImagingReportList"] === "object" &&
                   typeof $steps["goToImagingReportList"].then === "function"
                 ) {
-                  $steps["goToImagingReportList"] = await $steps[
-                    "goToImagingReportList"
-                  ];
+                  $steps["goToImagingReportList"] =
+                    await $steps["goToImagingReportList"];
                 }
               }}
               role={"img"}
@@ -5776,9 +5758,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["goToPatientProfile"] === "object" &&
                   typeof $steps["goToPatientProfile"].then === "function"
                 ) {
-                  $steps["goToPatientProfile"] = await $steps[
-                    "goToPatientProfile"
-                  ];
+                  $steps["goToPatientProfile"] =
+                    await $steps["goToPatientProfile"];
                 }
               }}
               src={{
@@ -5853,9 +5834,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     typeof $steps["goToImagingReportList"] === "object" &&
                     typeof $steps["goToImagingReportList"].then === "function"
                   ) {
-                    $steps["goToImagingReportList"] = await $steps[
-                      "goToImagingReportList"
-                    ];
+                    $steps["goToImagingReportList"] =
+                      await $steps["goToImagingReportList"];
                   }
                 }}
                 src={{
@@ -5899,9 +5879,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["daleteLabDataFromLocalStorage"].then ===
                     "function"
                 ) {
-                  $steps["daleteLabDataFromLocalStorage"] = await $steps[
-                    "daleteLabDataFromLocalStorage"
-                  ];
+                  $steps["daleteLabDataFromLocalStorage"] =
+                    await $steps["daleteLabDataFromLocalStorage"];
                 }
 
                 $steps["goToLaboratoryData"] = true
@@ -5952,9 +5931,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["goToLaboratoryData"] === "object" &&
                   typeof $steps["goToLaboratoryData"].then === "function"
                 ) {
-                  $steps["goToLaboratoryData"] = await $steps[
-                    "goToLaboratoryData"
-                  ];
+                  $steps["goToLaboratoryData"] =
+                    await $steps["goToLaboratoryData"];
                 }
               }}
               src={{
@@ -6038,9 +6016,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                     typeof $steps["updateBookmarked"] === "object" &&
                     typeof $steps["updateBookmarked"].then === "function"
                   ) {
-                    $steps["updateBookmarked"] = await $steps[
-                      "updateBookmarked"
-                    ];
+                    $steps["updateBookmarked"] =
+                      await $steps["updateBookmarked"];
                   }
                 }
               };
@@ -6141,9 +6118,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["getAdmIdPatientId"] === "object" &&
                   typeof $steps["getAdmIdPatientId"].then === "function"
                 ) {
-                  $steps["getAdmIdPatientId"] = await $steps[
-                    "getAdmIdPatientId"
-                  ];
+                  $steps["getAdmIdPatientId"] =
+                    await $steps["getAdmIdPatientId"];
                 }
 
                 $steps["goToImagingReportList"] = true
@@ -6194,9 +6170,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                   typeof $steps["goToImagingReportList"] === "object" &&
                   typeof $steps["goToImagingReportList"].then === "function"
                 ) {
-                  $steps["goToImagingReportList"] = await $steps[
-                    "goToImagingReportList"
-                  ];
+                  $steps["goToImagingReportList"] =
+                    await $steps["goToImagingReportList"];
                 }
               }}
               role={"img"}
@@ -6245,9 +6220,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
               typeof $steps["openUploadMediaModal"] === "object" &&
               typeof $steps["openUploadMediaModal"].then === "function"
             ) {
-              $steps["openUploadMediaModal"] = await $steps[
-                "openUploadMediaModal"
-              ];
+              $steps["openUploadMediaModal"] =
+                await $steps["openUploadMediaModal"];
             }
           }}
           onDeselectedChange={async (...eventArgs: any) => {
@@ -6419,11 +6393,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       )
                     }}
                     method={"GET"}
-                    path={`/api/v3/patient/pacs_url?admission_id=${
-                      $ctx.params.adm_id
-                    }&user_id=${localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )}&patient_id=${$ctx.params.code}&national_code=${
+                    path={`/api/v3/patient/pacs_url?admission_id=${$ctx.params.adm_id}&user_id=${localStorage.getItem("inlab_user_namespace_id")}&patient_id=${$ctx.params.code}&national_code=${
                       $ctx.fetched_data.loading === false &&
                       $ctx.fetched_data.data?.[0]?.national_code
                         ? $ctx.fetched_data.data[0].national_code
@@ -6657,13 +6627,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                       }
                     })()}
                     method={"GET"}
-                    path={`/api/v3/patient/pacs_url?admission_id=${
-                      $ctx.params.adm_id
-                    }&patient_id=${
-                      $ctx.params.code
-                    }&user_id=${localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )}&national_code=${
+                    path={`/api/v3/patient/pacs_url?admission_id=${$ctx.params.adm_id}&patient_id=${$ctx.params.code}&user_id=${localStorage.getItem("inlab_user_namespace_id")}&national_code=${
                       $ctx.fetched_data.loading === false &&
                       $ctx.fetched_data.data?.[0]?.national_code
                         ? $ctx.fetched_data.data[0].national_code
@@ -7181,9 +7145,10 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                       ) {
                                         $steps[
                                           "updateParaclinicReportDatetime"
-                                        ] = await $steps[
-                                          "updateParaclinicReportDatetime"
-                                        ];
+                                        ] =
+                                          await $steps[
+                                            "updateParaclinicReportDatetime"
+                                          ];
                                       }
 
                                       $steps["updateParaclinicReportId"] = true
@@ -7388,9 +7353,10 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                       ) {
                                         $steps[
                                           "updateParaclinicReportModalOpen"
-                                        ] = await $steps[
-                                          "updateParaclinicReportModalOpen"
-                                        ];
+                                        ] =
+                                          await $steps[
+                                            "updateParaclinicReportModalOpen"
+                                          ];
                                       }
                                     }}
                                   >
@@ -7890,9 +7856,10 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                                 ) {
                                                   $steps[
                                                     "updateShowReportSummary"
-                                                  ] = await $steps[
-                                                    "updateShowReportSummary"
-                                                  ];
+                                                  ] =
+                                                    await $steps[
+                                                      "updateShowReportSummary"
+                                                    ];
                                                 }
                                               },
                                               onDeselectedChange: async (
@@ -8290,8 +8257,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                                       !_par
                                                         ? []
                                                         : Array.isArray(_par)
-                                                        ? _par
-                                                        : [_par])(
+                                                          ? _par
+                                                          : [_par])(
                                                       (() => {
                                                         try {
                                                           return $ctx
@@ -8547,8 +8514,7 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                                                                         ]
                                                                                     },
                                                                                   operation: 0,
-                                                                                  value:
-                                                                                    true
+                                                                                  value: true
                                                                                 };
                                                                               return (({
                                                                                 variable,
@@ -9132,9 +9098,8 @@ function PlasmicImagingReportList__RenderFunc(props: {
                                         typeof $steps["updateItemId"].then ===
                                           "function"
                                       ) {
-                                        $steps["updateItemId"] = await $steps[
-                                          "updateItemId"
-                                        ];
+                                        $steps["updateItemId"] =
+                                          await $steps["updateItemId"];
                                       }
 
                                       $steps["updateDeleteMediaAlarmOpen"] =
@@ -10025,7 +9990,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicImagingReportList__VariantsArgs;
     args?: PlasmicImagingReportList__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicImagingReportList__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicImagingReportList__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicImagingReportList__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

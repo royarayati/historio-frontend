@@ -118,24 +118,24 @@ export default function GlobalContextsProvider(
         antdConfigProviderProps && "themeStyles" in antdConfigProviderProps
           ? antdConfigProviderProps.themeStyles!
           : hasVariant(globalVariants, "screen", "mobileFirst")
-          ? {
-              fontFamily: "var(--VazirmatnCustom)",
-              fontSize: "14px",
-              fontWeight: "400",
-              lineHeight: "1.5",
-              color: "#000000",
-              letterSpacing: "normal"
-            }
-          : true
-          ? {
-              fontFamily: "var(--VazirmatnCustom)",
-              fontSize: "14px",
-              fontWeight: "400",
-              lineHeight: "1.5",
-              color: "#000000",
-              letterSpacing: "normal"
-            }
-          : undefined
+            ? {
+                fontFamily: "var(--VazirmatnCustom)",
+                fontSize: "14px",
+                fontWeight: "400",
+                lineHeight: "1.5",
+                color: "#000000",
+                letterSpacing: "normal"
+              }
+            : true
+              ? {
+                  fontFamily: "var(--VazirmatnCustom)",
+                  fontSize: "14px",
+                  fontWeight: "400",
+                  lineHeight: "1.5",
+                  color: "#000000",
+                  letterSpacing: "normal"
+                }
+              : undefined
       }
       wireframe={
         antdConfigProviderProps && "wireframe" in antdConfigProviderProps

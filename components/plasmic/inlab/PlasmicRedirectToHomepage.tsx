@@ -165,9 +165,8 @@ function PlasmicRedirectToHomepage__RenderFunc(props: {
           typeof $steps["consoleLogOfInlabUser"] === "object" &&
           typeof $steps["consoleLogOfInlabUser"].then === "function"
         ) {
-          $steps["consoleLogOfInlabUser"] = await $steps[
-            "consoleLogOfInlabUser"
-          ];
+          $steps["consoleLogOfInlabUser"] =
+            await $steps["consoleLogOfInlabUser"];
         }
 
         $steps["consoleLogOfInlabUserNamespaceId"] = true
@@ -175,9 +174,7 @@ function PlasmicRedirectToHomepage__RenderFunc(props: {
               const actionArgs = {
                 customFunction: async () => {
                   return console.log(
-                    `inlab_user_namespace_id: ${localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )}`
+                    `inlab_user_namespace_id: ${localStorage.getItem("inlab_user_namespace_id")}`
                   );
                 }
               };
@@ -191,9 +188,8 @@ function PlasmicRedirectToHomepage__RenderFunc(props: {
           typeof $steps["consoleLogOfInlabUserNamespaceId"] === "object" &&
           typeof $steps["consoleLogOfInlabUserNamespaceId"].then === "function"
         ) {
-          $steps["consoleLogOfInlabUserNamespaceId"] = await $steps[
-            "consoleLogOfInlabUserNamespaceId"
-          ];
+          $steps["consoleLogOfInlabUserNamespaceId"] =
+            await $steps["consoleLogOfInlabUserNamespaceId"];
         }
 
         $steps["consoleLogOfTokenExpirationStatus"] = localStorage.getItem(
@@ -227,9 +223,8 @@ function PlasmicRedirectToHomepage__RenderFunc(props: {
           typeof $steps["consoleLogOfTokenExpirationStatus"] === "object" &&
           typeof $steps["consoleLogOfTokenExpirationStatus"].then === "function"
         ) {
-          $steps["consoleLogOfTokenExpirationStatus"] = await $steps[
-            "consoleLogOfTokenExpirationStatus"
-          ];
+          $steps["consoleLogOfTokenExpirationStatus"] =
+            await $steps["consoleLogOfTokenExpirationStatus"];
         }
 
         $steps["goToHomepage"] = (() => {
@@ -299,7 +294,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicRedirectToHomepage__VariantsArgs;
     args?: PlasmicRedirectToHomepage__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicRedirectToHomepage__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicRedirectToHomepage__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicRedirectToHomepage__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

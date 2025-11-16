@@ -235,7 +235,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicGuideToMakeNewPage__VariantsArgs;
     args?: PlasmicGuideToMakeNewPage__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicGuideToMakeNewPage__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicGuideToMakeNewPage__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicGuideToMakeNewPage__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

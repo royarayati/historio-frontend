@@ -21,7 +21,7 @@ export function ScreenContextProvider(
 }
 
 export const useScreenVariants = createUseScreenVariants(true, {
-  mobileFirst: "(min-width:0px) and (max-width:760px)",
+  mobileFirst: "(min-width:0px) and (max-width:760px)"
 });
 
 export default ScreenContext;

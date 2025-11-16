@@ -418,8 +418,8 @@ function PlasmicTextInput__RenderFunc(props: {
         hasVariant($state, "showEndIcon", "showEndIcon")
           ? true
           : hasVariant(globalVariants, "screen", "mobileFirst")
-          ? true
-          : $state.value !== ""
+            ? true
+            : $state.value !== ""
       ) ? (
         <div
           data-plasmic-name={"endIconContainer"}
@@ -556,7 +556,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicTextInput__VariantsArgs;
     args?: PlasmicTextInput__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicTextInput__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicTextInput__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicTextInput__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

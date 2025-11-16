@@ -323,9 +323,8 @@ function PlasmicReport__RenderFunc(props: {
                       typeof $steps["goToImagingReports2"] === "object" &&
                       typeof $steps["goToImagingReports2"].then === "function"
                     ) {
-                      $steps["goToImagingReports2"] = await $steps[
-                        "goToImagingReports2"
-                      ];
+                      $steps["goToImagingReports2"] =
+                        await $steps["goToImagingReports2"];
                     }
                   }}
                 >
@@ -536,7 +535,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicReport__VariantsArgs;
     args?: PlasmicReport__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicReport__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicReport__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicReport__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

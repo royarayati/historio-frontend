@@ -216,8 +216,8 @@ function PlasmicBookmarkIcon2__RenderFunc(props: {
         hasVariant($state, "loadingBookmark", "loadingBookmark")
           ? LoadingLoaderSvgrepoComSvgIcon
           : hasVariant($state, "bookmarked", "bookmarked")
-          ? BookmarkDashFillSvgrepoComSvgIcon
-          : BookmarkPlusSvgrepoComSvgIcon
+            ? BookmarkDashFillSvgrepoComSvgIcon
+            : BookmarkPlusSvgrepoComSvgIcon
       }
       className={classNames(
         projectcss.all,
@@ -314,9 +314,8 @@ function PlasmicBookmarkIcon2__RenderFunc(props: {
           typeof $steps["updateOrDeleteBookmarkIdList"] === "object" &&
           typeof $steps["updateOrDeleteBookmarkIdList"].then === "function"
         ) {
-          $steps["updateOrDeleteBookmarkIdList"] = await $steps[
-            "updateOrDeleteBookmarkIdList"
-          ];
+          $steps["updateOrDeleteBookmarkIdList"] =
+            await $steps["updateOrDeleteBookmarkIdList"];
         }
 
         $steps["postBookmark"] = true
@@ -452,7 +451,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicBookmarkIcon2__VariantsArgs;
     args?: PlasmicBookmarkIcon2__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicBookmarkIcon2__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicBookmarkIcon2__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicBookmarkIcon2__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

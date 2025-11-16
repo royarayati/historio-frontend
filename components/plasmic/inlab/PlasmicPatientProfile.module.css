@@ -174,22 +174,12 @@
   width: 10%;
   transform: rotate3d(0, 1, 0, 180deg);
   color: var(--token-9iYGdL7i3GKE);
-  transform-style: preserve-3d;
   border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
   border-left: 0.5px none var(--token-8PxxXPNrIohQ);
-}
-.nextPatient * {
-  transform-style: preserve-3d;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .nextPatient {
     border-left-width: 0px;
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .nextPatient * {
-    transform-style: preserve-3d;
   }
 }
 .patientDataList {

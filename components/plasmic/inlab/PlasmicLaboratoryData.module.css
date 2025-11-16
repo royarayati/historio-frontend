@@ -1594,21 +1594,7 @@
   height: 25px;
   align-self: center;
   transform: none;
-  transform-style: preserve-3d;
   border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
-}
-.lastPatient2 * {
-  transform-style: preserve-3d;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .lastPatient2 {
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .lastPatient2 * {
-    transform-style: preserve-3d;
-  }
 }
 .homepage {
   position: relative;
@@ -1685,19 +1671,5 @@
   height: 25px;
   align-self: center;
   transform: rotate3d(0, 1, 0, 180deg);
-  transform-style: preserve-3d;
   border-right: 0.5px solid var(--token-8PxxXPNrIohQ);
-}
-.nextPatient2 * {
-  transform-style: preserve-3d;
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .nextPatient2 {
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .nextPatient2 * {
-    transform-style: preserve-3d;
-  }
 }

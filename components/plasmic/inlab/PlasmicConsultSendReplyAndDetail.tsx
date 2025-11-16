@@ -984,8 +984,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                   item.gender === "F"
                                     ? " \u2640️"
                                     : item.gender === "M"
-                                    ? " \u2642️"
-                                    : "";
+                                      ? " \u2642️"
+                                      : "";
                                 let ageString;
                                 if (
                                   hisType === "tums_api" ||
@@ -1246,9 +1246,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             ) {
                               $steps[
                                 "updateModalDeleteConsultConfirmationOpen"
-                              ] = await $steps[
-                                "updateModalDeleteConsultConfirmationOpen"
-                              ];
+                              ] =
+                                await $steps[
+                                  "updateModalDeleteConsultConfirmationOpen"
+                                ];
                             }
                           }}
                           role={"img"}
@@ -1374,9 +1375,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               typeof $steps["updatePrintErrorState"].then ===
                                 "function"
                             ) {
-                              $steps["updatePrintErrorState"] = await $steps[
-                                "updatePrintErrorState"
-                              ];
+                              $steps["updatePrintErrorState"] =
+                                await $steps["updatePrintErrorState"];
                             }
 
                             $steps[
@@ -1432,9 +1432,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             ) {
                               $steps[
                                 "updateModalSetPaperReplyTrueBeforePrintAndSetSignatureOpen"
-                              ] = await $steps[
-                                "updateModalSetPaperReplyTrueBeforePrintAndSetSignatureOpen"
-                              ];
+                              ] =
+                                await $steps[
+                                  "updateModalSetPaperReplyTrueBeforePrintAndSetSignatureOpen"
+                                ];
                             }
 
                             $steps["updateModalSetSignatureBeforeConsultOpen"] =
@@ -1488,9 +1489,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             ) {
                               $steps[
                                 "updateModalSetSignatureBeforeConsultOpen"
-                              ] = await $steps[
-                                "updateModalSetSignatureBeforeConsultOpen"
-                              ];
+                              ] =
+                                await $steps[
+                                  "updateModalSetSignatureBeforeConsultOpen"
+                                ];
                             }
                           }}
                           role={"img"}
@@ -1856,9 +1858,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             ) {
                               $steps[
                                 "updateCopyPatientPresentIllnessMessageState2"
-                              ] = await $steps[
-                                "updateCopyPatientPresentIllnessMessageState2"
-                              ];
+                              ] =
+                                await $steps[
+                                  "updateCopyPatientPresentIllnessMessageState2"
+                                ];
                             }
                           }}
                           role={"img"}
@@ -2567,9 +2570,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               ) {
                                 $steps[
                                   "updateConsultSendDraftReplyUnsuccessfullyAlert"
-                                ] = await $steps[
-                                  "updateConsultSendDraftReplyUnsuccessfullyAlert"
-                                ];
+                                ] =
+                                  await $steps[
+                                    "updateConsultSendDraftReplyUnsuccessfullyAlert"
+                                  ];
                               }
 
                               $steps["patchConsultDraftReply"] = true
@@ -2638,9 +2642,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                 typeof $steps["patchConsultDraftReply"].then ===
                                   "function"
                               ) {
-                                $steps["patchConsultDraftReply"] = await $steps[
-                                  "patchConsultDraftReply"
-                                ];
+                                $steps["patchConsultDraftReply"] =
+                                  await $steps["patchConsultDraftReply"];
                               }
 
                               $steps[
@@ -2688,9 +2691,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               ) {
                                 $steps[
                                   "updateConsultSendDraftReplyButtonIsDisabled2"
-                                ] = await $steps[
-                                  "updateConsultSendDraftReplyButtonIsDisabled2"
-                                ];
+                                ] =
+                                  await $steps[
+                                    "updateConsultSendDraftReplyButtonIsDisabled2"
+                                  ];
                               }
 
                               $steps["goToConsultList"] =
@@ -2749,9 +2753,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                                 typeof $steps["goToConsultList"].then ===
                                   "function"
                               ) {
-                                $steps["goToConsultList"] = await $steps[
-                                  "goToConsultList"
-                                ];
+                                $steps["goToConsultList"] =
+                                  await $steps["goToConsultList"];
                               }
                             }}
                             onDeselectedChange={async (...eventArgs: any) => {
@@ -2954,9 +2957,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               ) {
                                 $steps[
                                   "updateModalConsultSendReplyConfirmationOpen"
-                                ] = await $steps[
-                                  "updateModalConsultSendReplyConfirmationOpen"
-                                ];
+                                ] =
+                                  await $steps[
+                                    "updateModalConsultSendReplyConfirmationOpen"
+                                  ];
                               }
                             }}
                             onDeselectedChange={async (...eventArgs: any) => {
@@ -3202,9 +3206,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                               ) {
                                 $steps[
                                   "updateCopyFinalConsultReplyTitleState"
-                                ] = await $steps[
-                                  "updateCopyFinalConsultReplyTitleState"
-                                ];
+                                ] =
+                                  await $steps[
+                                    "updateCopyFinalConsultReplyTitleState"
+                                  ];
                               }
                             }}
                             role={"img"}
@@ -3727,9 +3732,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                             typeof $steps["patchConsultReview"].then ===
                               "function"
                           ) {
-                            $steps["patchConsultReview"] = await $steps[
-                              "patchConsultReview"
-                            ];
+                            $steps["patchConsultReview"] =
+                              await $steps["patchConsultReview"];
                           }
 
                           $steps["updateConsultReviewStateToReloadGetConsult"] =
@@ -3777,9 +3781,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                           ) {
                             $steps[
                               "updateConsultReviewStateToReloadGetConsult"
-                            ] = await $steps[
-                              "updateConsultReviewStateToReloadGetConsult"
-                            ];
+                            ] =
+                              await $steps[
+                                "updateConsultReviewStateToReloadGetConsult"
+                              ];
                           }
 
                           $steps["updateConsultReviewUnsuccessfullyAlert2"] =
@@ -4131,9 +4136,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                     typeof $steps["goToPatientProfile"] === "object" &&
                     typeof $steps["goToPatientProfile"].then === "function"
                   ) {
-                    $steps["goToPatientProfile"] = await $steps[
-                      "goToPatientProfile"
-                    ];
+                    $steps["goToPatientProfile"] =
+                      await $steps["goToPatientProfile"];
                   }
                 }}
                 src={{
@@ -4207,9 +4211,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                     typeof $steps["goToImagingReport1"] === "object" &&
                     typeof $steps["goToImagingReport1"].then === "function"
                   ) {
-                    $steps["goToImagingReport1"] = await $steps[
-                      "goToImagingReport1"
-                    ];
+                    $steps["goToImagingReport1"] =
+                      await $steps["goToImagingReport1"];
                   }
                 }}
                 src={{
@@ -4260,9 +4263,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                     typeof $steps["deleteLabDataFromTheLocalStorage"].then ===
                       "function"
                   ) {
-                    $steps["deleteLabDataFromTheLocalStorage"] = await $steps[
-                      "deleteLabDataFromTheLocalStorage"
-                    ];
+                    $steps["deleteLabDataFromTheLocalStorage"] =
+                      await $steps["deleteLabDataFromTheLocalStorage"];
                   }
 
                   $steps["goToLaboratoryData"] = true
@@ -4313,9 +4315,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                     typeof $steps["goToLaboratoryData"] === "object" &&
                     typeof $steps["goToLaboratoryData"].then === "function"
                   ) {
-                    $steps["goToLaboratoryData"] = await $steps[
-                      "goToLaboratoryData"
-                    ];
+                    $steps["goToLaboratoryData"] =
+                      await $steps["goToLaboratoryData"];
                   }
                 }}
                 src={{
@@ -4723,9 +4724,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["patchConsultReply"] === "object" &&
                       typeof $steps["patchConsultReply"].then === "function"
                     ) {
-                      $steps["patchConsultReply"] = await $steps[
-                        "patchConsultReply"
-                      ];
+                      $steps["patchConsultReply"] =
+                        await $steps["patchConsultReply"];
                     }
 
                     $steps["updateSendConsultReplyUnsuccessfullyAlert2"] =
@@ -4824,9 +4824,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["goToConsultList"] === "object" &&
                       typeof $steps["goToConsultList"].then === "function"
                     ) {
-                      $steps["goToConsultList"] = await $steps[
-                        "goToConsultList"
-                      ];
+                      $steps["goToConsultList"] =
+                        await $steps["goToConsultList"];
                     }
                   }}
                   onDeselectedChange={async (...eventArgs: any) => {
@@ -5100,9 +5099,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         typeof $steps["updateSignature"] === "object" &&
                         typeof $steps["updateSignature"].then === "function"
                       ) {
-                        $steps["updateSignature"] = await $steps[
-                          "updateSignature"
-                        ];
+                        $steps["updateSignature"] =
+                          await $steps["updateSignature"];
                       }
                     }).apply(null, eventArgs);
                   }}
@@ -5324,9 +5322,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["updatePrintErrorState"] === "object" &&
                       typeof $steps["updatePrintErrorState"].then === "function"
                     ) {
-                      $steps["updatePrintErrorState"] = await $steps[
-                        "updatePrintErrorState"
-                      ];
+                      $steps["updatePrintErrorState"] =
+                        await $steps["updatePrintErrorState"];
                     }
 
                     $steps["updatePrintProcessingState"] = true
@@ -5362,9 +5359,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["updatePrintProcessingState"].then ===
                         "function"
                     ) {
-                      $steps["updatePrintProcessingState"] = await $steps[
-                        "updatePrintProcessingState"
-                      ];
+                      $steps["updatePrintProcessingState"] =
+                        await $steps["updatePrintProcessingState"];
                     }
 
                     $steps["postConsultFillTemplate"] = true
@@ -5424,9 +5420,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["postConsultFillTemplate"].then ===
                         "function"
                     ) {
-                      $steps["postConsultFillTemplate"] = await $steps[
-                        "postConsultFillTemplate"
-                      ];
+                      $steps["postConsultFillTemplate"] =
+                        await $steps["postConsultFillTemplate"];
                     }
 
                     $steps["patchConsultPaperReply"] =
@@ -5449,9 +5444,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["patchConsultPaperReply"].then ===
                         "function"
                     ) {
-                      $steps["patchConsultPaperReply"] = await $steps[
-                        "patchConsultPaperReply"
-                      ];
+                      $steps["patchConsultPaperReply"] =
+                        await $steps["patchConsultPaperReply"];
                     }
 
                     $steps["openConsultPrint"] =
@@ -5493,9 +5487,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["openConsultPrint"] === "object" &&
                       typeof $steps["openConsultPrint"].then === "function"
                     ) {
-                      $steps["openConsultPrint"] = await $steps[
-                        "openConsultPrint"
-                      ];
+                      $steps["openConsultPrint"] =
+                        await $steps["openConsultPrint"];
                     }
 
                     $steps["updatePrintProcessingState2"] =
@@ -5532,9 +5525,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["updatePrintProcessingState2"].then ===
                         "function"
                     ) {
-                      $steps["updatePrintProcessingState2"] = await $steps[
-                        "updatePrintProcessingState2"
-                      ];
+                      $steps["updatePrintProcessingState2"] =
+                        await $steps["updatePrintProcessingState2"];
                     }
 
                     $steps[
@@ -5582,9 +5574,10 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                     ) {
                       $steps[
                         "updateModalSetPaperReplyTrueBeforePrintAndSetSignatureOpen"
-                      ] = await $steps[
-                        "updateModalSetPaperReplyTrueBeforePrintAndSetSignatureOpen"
-                      ];
+                      ] =
+                        await $steps[
+                          "updateModalSetPaperReplyTrueBeforePrintAndSetSignatureOpen"
+                        ];
                     }
 
                     $steps["updateSignature"] = $steps.postConsultFillTemplate
@@ -5618,9 +5611,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["updateSignature"] === "object" &&
                       typeof $steps["updateSignature"].then === "function"
                     ) {
-                      $steps["updateSignature"] = await $steps[
-                        "updateSignature"
-                      ];
+                      $steps["updateSignature"] =
+                        await $steps["updateSignature"];
                     }
 
                     $steps["updatePrintErrorState2"] =
@@ -5657,9 +5649,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["updatePrintErrorState2"].then ===
                         "function"
                     ) {
-                      $steps["updatePrintErrorState2"] = await $steps[
-                        "updatePrintErrorState2"
-                      ];
+                      $steps["updatePrintErrorState2"] =
+                        await $steps["updatePrintErrorState2"];
                     }
                   }}
                   onDeselectedChange={async (...eventArgs: any) => {
@@ -5948,9 +5939,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                         typeof $steps["updateSignature"] === "object" &&
                         typeof $steps["updateSignature"].then === "function"
                       ) {
-                        $steps["updateSignature"] = await $steps[
-                          "updateSignature"
-                        ];
+                        $steps["updateSignature"] =
+                          await $steps["updateSignature"];
                       }
                     }).apply(null, eventArgs);
                   }}
@@ -6227,9 +6217,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["updatePrintProcessingState"].then ===
                         "function"
                     ) {
-                      $steps["updatePrintProcessingState"] = await $steps[
-                        "updatePrintProcessingState"
-                      ];
+                      $steps["updatePrintProcessingState"] =
+                        await $steps["updatePrintProcessingState"];
                     }
 
                     $steps["postConsultFillTemplate"] = true
@@ -6289,9 +6278,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["postConsultFillTemplate"].then ===
                         "function"
                     ) {
-                      $steps["postConsultFillTemplate"] = await $steps[
-                        "postConsultFillTemplate"
-                      ];
+                      $steps["postConsultFillTemplate"] =
+                        await $steps["postConsultFillTemplate"];
                     }
 
                     $steps["openConsultPrint"] =
@@ -6333,9 +6321,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["openConsultPrint"] === "object" &&
                       typeof $steps["openConsultPrint"].then === "function"
                     ) {
-                      $steps["openConsultPrint"] = await $steps[
-                        "openConsultPrint"
-                      ];
+                      $steps["openConsultPrint"] =
+                        await $steps["openConsultPrint"];
                     }
 
                     $steps["updatePrintProcessingState2"] =
@@ -6372,9 +6359,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["updatePrintProcessingState2"].then ===
                         "function"
                     ) {
-                      $steps["updatePrintProcessingState2"] = await $steps[
-                        "updatePrintProcessingState2"
-                      ];
+                      $steps["updatePrintProcessingState2"] =
+                        await $steps["updatePrintProcessingState2"];
                     }
 
                     $steps["updateSignature"] = $steps.postConsultFillTemplate
@@ -6408,9 +6394,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["updateSignature"] === "object" &&
                       typeof $steps["updateSignature"].then === "function"
                     ) {
-                      $steps["updateSignature"] = await $steps[
-                        "updateSignature"
-                      ];
+                      $steps["updateSignature"] =
+                        await $steps["updateSignature"];
                     }
 
                     $steps["updatePrintErrorState"] =
@@ -6445,9 +6430,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["updatePrintErrorState"] === "object" &&
                       typeof $steps["updatePrintErrorState"].then === "function"
                     ) {
-                      $steps["updatePrintErrorState"] = await $steps[
-                        "updatePrintErrorState"
-                      ];
+                      $steps["updatePrintErrorState"] =
+                        await $steps["updatePrintErrorState"];
                     }
                   }}
                   onDeselectedChange={async (...eventArgs: any) => {
@@ -6978,9 +6962,8 @@ function PlasmicConsultSendReplyAndDetail__RenderFunc(props: {
                       typeof $steps["goToConsultList"] === "object" &&
                       typeof $steps["goToConsultList"].then === "function"
                     ) {
-                      $steps["goToConsultList"] = await $steps[
-                        "goToConsultList"
-                      ];
+                      $steps["goToConsultList"] =
+                        await $steps["goToConsultList"];
                     }
 
                     $steps["updateDeleteConsultUnsuccessfullyAlert2"] =
@@ -7894,7 +7877,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicConsultSendReplyAndDetail__VariantsArgs;
     args?: PlasmicConsultSendReplyAndDetail__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicConsultSendReplyAndDetail__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicConsultSendReplyAndDetail__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicConsultSendReplyAndDetail__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

@@ -169,9 +169,8 @@ function PlasmicRedirectToNamespaceSelection__RenderFunc(props: {
           typeof $steps["consoleLogOfInlabUser"] === "object" &&
           typeof $steps["consoleLogOfInlabUser"].then === "function"
         ) {
-          $steps["consoleLogOfInlabUser"] = await $steps[
-            "consoleLogOfInlabUser"
-          ];
+          $steps["consoleLogOfInlabUser"] =
+            await $steps["consoleLogOfInlabUser"];
         }
 
         $steps["cosoleLogOfInlabUserNamespaceId"] = true
@@ -179,9 +178,7 @@ function PlasmicRedirectToNamespaceSelection__RenderFunc(props: {
               const actionArgs = {
                 customFunction: async () => {
                   return console.log(
-                    `inlab_user_namespace_id: ${localStorage.getItem(
-                      "inlab_user_namespace_id"
-                    )}`
+                    `inlab_user_namespace_id: ${localStorage.getItem("inlab_user_namespace_id")}`
                   );
                 }
               };
@@ -195,9 +192,8 @@ function PlasmicRedirectToNamespaceSelection__RenderFunc(props: {
           typeof $steps["cosoleLogOfInlabUserNamespaceId"] === "object" &&
           typeof $steps["cosoleLogOfInlabUserNamespaceId"].then === "function"
         ) {
-          $steps["cosoleLogOfInlabUserNamespaceId"] = await $steps[
-            "cosoleLogOfInlabUserNamespaceId"
-          ];
+          $steps["cosoleLogOfInlabUserNamespaceId"] =
+            await $steps["cosoleLogOfInlabUserNamespaceId"];
         }
 
         $steps["consoleLogOfTokenExpirationStatus"] = localStorage.getItem(
@@ -231,9 +227,8 @@ function PlasmicRedirectToNamespaceSelection__RenderFunc(props: {
           typeof $steps["consoleLogOfTokenExpirationStatus"] === "object" &&
           typeof $steps["consoleLogOfTokenExpirationStatus"].then === "function"
         ) {
-          $steps["consoleLogOfTokenExpirationStatus"] = await $steps[
-            "consoleLogOfTokenExpirationStatus"
-          ];
+          $steps["consoleLogOfTokenExpirationStatus"] =
+            await $steps["consoleLogOfTokenExpirationStatus"];
         }
 
         $steps["goToNamespaceSelection"] = (() => {
@@ -275,9 +270,8 @@ function PlasmicRedirectToNamespaceSelection__RenderFunc(props: {
           typeof $steps["goToNamespaceSelection"] === "object" &&
           typeof $steps["goToNamespaceSelection"].then === "function"
         ) {
-          $steps["goToNamespaceSelection"] = await $steps[
-            "goToNamespaceSelection"
-          ];
+          $steps["goToNamespaceSelection"] =
+            await $steps["goToNamespaceSelection"];
         }
       }}
     />
@@ -305,10 +299,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicRedirectToNamespaceSelection__VariantsArgs;
     args?: PlasmicRedirectToNamespaceSelection__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit< // Specify variants directly as props
-    PlasmicRedirectToNamespaceSelection__VariantsArgs,
-    ReservedPropsType
-  > &
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicRedirectToNamespaceSelection__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicRedirectToNamespaceSelection__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

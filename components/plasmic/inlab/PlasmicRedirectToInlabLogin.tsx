@@ -165,9 +165,8 @@ function PlasmicRedirectToInlabLogin__RenderFunc(props: {
           typeof $steps["consoleLogOfInlabUser"] === "object" &&
           typeof $steps["consoleLogOfInlabUser"].then === "function"
         ) {
-          $steps["consoleLogOfInlabUser"] = await $steps[
-            "consoleLogOfInlabUser"
-          ];
+          $steps["consoleLogOfInlabUser"] =
+            await $steps["consoleLogOfInlabUser"];
         }
 
         $steps["goToInlabLoginIfInlabUserNull"] =
@@ -194,9 +193,8 @@ function PlasmicRedirectToInlabLogin__RenderFunc(props: {
           typeof $steps["goToInlabLoginIfInlabUserNull"] === "object" &&
           typeof $steps["goToInlabLoginIfInlabUserNull"].then === "function"
         ) {
-          $steps["goToInlabLoginIfInlabUserNull"] = await $steps[
-            "goToInlabLoginIfInlabUserNull"
-          ];
+          $steps["goToInlabLoginIfInlabUserNull"] =
+            await $steps["goToInlabLoginIfInlabUserNull"];
         }
 
         $steps["consoleLogOfTokenExpirationStatus"] = localStorage.getItem(
@@ -230,9 +228,8 @@ function PlasmicRedirectToInlabLogin__RenderFunc(props: {
           typeof $steps["consoleLogOfTokenExpirationStatus"] === "object" &&
           typeof $steps["consoleLogOfTokenExpirationStatus"].then === "function"
         ) {
-          $steps["consoleLogOfTokenExpirationStatus"] = await $steps[
-            "consoleLogOfTokenExpirationStatus"
-          ];
+          $steps["consoleLogOfTokenExpirationStatus"] =
+            await $steps["consoleLogOfTokenExpirationStatus"];
         }
 
         $steps["goToInlabLoginIfTokenExpired"] = (() => {
@@ -268,9 +265,8 @@ function PlasmicRedirectToInlabLogin__RenderFunc(props: {
           typeof $steps["goToInlabLoginIfTokenExpired"] === "object" &&
           typeof $steps["goToInlabLoginIfTokenExpired"].then === "function"
         ) {
-          $steps["goToInlabLoginIfTokenExpired"] = await $steps[
-            "goToInlabLoginIfTokenExpired"
-          ];
+          $steps["goToInlabLoginIfTokenExpired"] =
+            await $steps["goToInlabLoginIfTokenExpired"];
         }
       }}
     />
@@ -298,7 +294,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicRedirectToInlabLogin__VariantsArgs;
     args?: PlasmicRedirectToInlabLogin__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicRedirectToInlabLogin__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicRedirectToInlabLogin__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicRedirectToInlabLogin__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

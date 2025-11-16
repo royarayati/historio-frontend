@@ -415,7 +415,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicFilterIcon__VariantsArgs;
     args?: PlasmicFilterIcon__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicFilterIcon__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicFilterIcon__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicFilterIcon__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

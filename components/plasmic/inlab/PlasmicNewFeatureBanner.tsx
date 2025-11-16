@@ -223,7 +223,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicNewFeatureBanner__VariantsArgs;
     args?: PlasmicNewFeatureBanner__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicNewFeatureBanner__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicNewFeatureBanner__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicNewFeatureBanner__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

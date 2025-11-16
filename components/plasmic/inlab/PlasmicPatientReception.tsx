@@ -1207,9 +1207,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                   typeof $steps["updateTabSelection"] === "object" &&
                   typeof $steps["updateTabSelection"].then === "function"
                 ) {
-                  $steps["updateTabSelection"] = await $steps[
-                    "updateTabSelection"
-                  ];
+                  $steps["updateTabSelection"] =
+                    await $steps["updateTabSelection"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -1355,9 +1354,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                   typeof $steps["updateTabSelection"] === "object" &&
                   typeof $steps["updateTabSelection"].then === "function"
                 ) {
-                  $steps["updateTabSelection"] = await $steps[
-                    "updateTabSelection"
-                  ];
+                  $steps["updateTabSelection"] =
+                    await $steps["updateTabSelection"];
                 }
               }}
               onDeselectedChange={async (...eventArgs: any) => {
@@ -1991,9 +1989,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                         typeof $steps["updateWardModalOpen"] === "object" &&
                         typeof $steps["updateWardModalOpen"].then === "function"
                       ) {
-                        $steps["updateWardModalOpen"] = await $steps[
-                          "updateWardModalOpen"
-                        ];
+                        $steps["updateWardModalOpen"] =
+                          await $steps["updateWardModalOpen"];
                       }
                     }}
                   >
@@ -2078,9 +2075,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                         typeof $steps["updateServiceModalOpen"].then ===
                           "function"
                       ) {
-                        $steps["updateServiceModalOpen"] = await $steps[
-                          "updateServiceModalOpen"
-                        ];
+                        $steps["updateServiceModalOpen"] =
+                          await $steps["updateServiceModalOpen"];
                       }
                     }}
                   >
@@ -2728,9 +2724,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                     typeof $steps["callPostEndpoint"] === "object" &&
                     typeof $steps["callPostEndpoint"].then === "function"
                   ) {
-                    $steps["callPostEndpoint"] = await $steps[
-                      "callPostEndpoint"
-                    ];
+                    $steps["callPostEndpoint"] =
+                      await $steps["callPostEndpoint"];
                   }
 
                   $steps["updateShowSuccessMassage"] = true
@@ -2765,9 +2760,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                     typeof $steps["updateShowSuccessMassage"].then ===
                       "function"
                   ) {
-                    $steps["updateShowSuccessMassage"] = await $steps[
-                      "updateShowSuccessMassage"
-                    ];
+                    $steps["updateShowSuccessMassage"] =
+                      await $steps["updateShowSuccessMassage"];
                   }
 
                   $steps["updateTabSelection"] = true
@@ -2801,9 +2795,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                     typeof $steps["updateTabSelection"] === "object" &&
                     typeof $steps["updateTabSelection"].then === "function"
                   ) {
-                    $steps["updateTabSelection"] = await $steps[
-                      "updateTabSelection"
-                    ];
+                    $steps["updateTabSelection"] =
+                      await $steps["updateTabSelection"];
                   }
                 }}
                 onDeselectedChange={async (...eventArgs: any) => {
@@ -3047,9 +3040,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                     typeof $steps["updateAdmissionId"].then ===
                                       "function"
                                   ) {
-                                    $steps["updateAdmissionId"] = await $steps[
-                                      "updateAdmissionId"
-                                    ];
+                                    $steps["updateAdmissionId"] =
+                                      await $steps["updateAdmissionId"];
                                   }
 
                                   $steps["updateNationalCode"] = true
@@ -3090,9 +3082,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                     typeof $steps["updateNationalCode"].then ===
                                       "function"
                                   ) {
-                                    $steps["updateNationalCode"] = await $steps[
-                                      "updateNationalCode"
-                                    ];
+                                    $steps["updateNationalCode"] =
+                                      await $steps["updateNationalCode"];
                                   }
 
                                   $steps["updateDeletePatientOpen"] = true
@@ -3353,9 +3344,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                     typeof $steps["updateAdmissionId"].then ===
                                       "function"
                                   ) {
-                                    $steps["updateAdmissionId"] = await $steps[
-                                      "updateAdmissionId"
-                                    ];
+                                    $steps["updateAdmissionId"] =
+                                      await $steps["updateAdmissionId"];
                                   }
 
                                   $steps["updateNationalCode"] = true
@@ -3396,9 +3386,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                     typeof $steps["updateNationalCode"].then ===
                                       "function"
                                   ) {
-                                    $steps["updateNationalCode"] = await $steps[
-                                      "updateNationalCode"
-                                    ];
+                                    $steps["updateNationalCode"] =
+                                      await $steps["updateNationalCode"];
                                   }
 
                                   $steps["updateEditPatient"] = true
@@ -3439,9 +3428,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                     typeof $steps["updateEditPatient"].then ===
                                       "function"
                                   ) {
-                                    $steps["updateEditPatient"] = await $steps[
-                                      "updateEditPatient"
-                                    ];
+                                    $steps["updateEditPatient"] =
+                                      await $steps["updateEditPatient"];
                                   }
 
                                   $steps["updatePatientListGetApi3"] = true
@@ -3760,8 +3748,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                     (currentItem.bed === null
                                       ? ""
                                       : currentItem.bed.includes("تخت")
-                                      ? currentItem.bed
-                                      : "تخت " + currentItem.bed)}
+                                        ? currentItem.bed
+                                        : "تخت " + currentItem.bed)}
                                 </React.Fragment>
                               </div>
                             ) : null}
@@ -3778,8 +3766,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                 {currentItem.type === "shift"
                                   ? "کشیک"
                                   : currentItem.type === "rotation"
-                                  ? "سایت صبح"
-                                  : ""}
+                                    ? "سایت صبح"
+                                    : ""}
                               </React.Fragment>
                             </div>
                             {false
@@ -4041,8 +4029,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                   (currentItem.bed === null
                                     ? ""
                                     : currentItem.bed.includes("تخت")
-                                    ? currentItem.bed
-                                    : "تخت " + currentItem.bed)}
+                                      ? currentItem.bed
+                                      : "تخت " + currentItem.bed)}
                               </React.Fragment>
                             </div>
                           </div>
@@ -4124,9 +4112,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                   typeof $steps["goToPatientProfile"].then ===
                                     "function"
                                 ) {
-                                  $steps["goToPatientProfile"] = await $steps[
-                                    "goToPatientProfile"
-                                  ];
+                                  $steps["goToPatientProfile"] =
+                                    await $steps["goToPatientProfile"];
                                 }
                               }}
                               src={{
@@ -4208,9 +4195,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                   typeof $steps["goToConsultList"].then ===
                                     "function"
                                 ) {
-                                  $steps["goToConsultList"] = await $steps[
-                                    "goToConsultList"
-                                  ];
+                                  $steps["goToConsultList"] =
+                                    await $steps["goToConsultList"];
                                 }
                               }}
                               src={{
@@ -4373,9 +4359,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                   typeof $steps["goToLaboratoryData"].then ===
                                     "function"
                                 ) {
-                                  $steps["goToLaboratoryData"] = await $steps[
-                                    "goToLaboratoryData"
-                                  ];
+                                  $steps["goToLaboratoryData"] =
+                                    await $steps["goToLaboratoryData"];
                                 }
                               }}
                               src={{
@@ -4526,9 +4511,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                           typeof $steps["updateSelectedWardId"].then ===
                             "function"
                         ) {
-                          $steps["updateSelectedWardId"] = await $steps[
-                            "updateSelectedWardId"
-                          ];
+                          $steps["updateSelectedWardId"] =
+                            await $steps["updateSelectedWardId"];
                         }
 
                         $steps["updateSelectedWardName"] = true
@@ -4569,9 +4553,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                           typeof $steps["updateSelectedWardName"].then ===
                             "function"
                         ) {
-                          $steps["updateSelectedWardName"] = await $steps[
-                            "updateSelectedWardName"
-                          ];
+                          $steps["updateSelectedWardName"] =
+                            await $steps["updateSelectedWardName"];
                         }
 
                         $steps["updateSelectedServiceId"] = true
@@ -4612,9 +4595,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                           typeof $steps["updateSelectedServiceId"].then ===
                             "function"
                         ) {
-                          $steps["updateSelectedServiceId"] = await $steps[
-                            "updateSelectedServiceId"
-                          ];
+                          $steps["updateSelectedServiceId"] =
+                            await $steps["updateSelectedServiceId"];
                         }
 
                         $steps["updateSelectedServiceName"] = true
@@ -4655,9 +4637,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                           typeof $steps["updateSelectedServiceName"].then ===
                             "function"
                         ) {
-                          $steps["updateSelectedServiceName"] = await $steps[
-                            "updateSelectedServiceName"
-                          ];
+                          $steps["updateSelectedServiceName"] =
+                            await $steps["updateSelectedServiceName"];
                         }
                       }}
                     />
@@ -5579,9 +5560,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                 typeof $steps["updateWardModalOpen"].then ===
                                   "function"
                               ) {
-                                $steps["updateWardModalOpen"] = await $steps[
-                                  "updateWardModalOpen"
-                                ];
+                                $steps["updateWardModalOpen"] =
+                                  await $steps["updateWardModalOpen"];
                               }
                             }}
                           >
@@ -5671,9 +5651,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                                 typeof $steps["updateServiceModalOpen"].then ===
                                   "function"
                               ) {
-                                $steps["updateServiceModalOpen"] = await $steps[
-                                  "updateServiceModalOpen"
-                                ];
+                                $steps["updateServiceModalOpen"] =
+                                  await $steps["updateServiceModalOpen"];
                               }
                             }}
                           >
@@ -6816,9 +6795,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                             typeof $steps["callPatchEndpoint"].then ===
                               "function"
                           ) {
-                            $steps["callPatchEndpoint"] = await $steps[
-                              "callPatchEndpoint"
-                            ];
+                            $steps["callPatchEndpoint"] =
+                              await $steps["callPatchEndpoint"];
                           }
 
                           $steps["updateShowSuccessMassage"] = true
@@ -6854,9 +6832,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                             typeof $steps["updateShowSuccessMassage"].then ===
                               "function"
                           ) {
-                            $steps["updateShowSuccessMassage"] = await $steps[
-                              "updateShowSuccessMassage"
-                            ];
+                            $steps["updateShowSuccessMassage"] =
+                              await $steps["updateShowSuccessMassage"];
                           }
 
                           $steps["updateTabSelection"] = true
@@ -6891,9 +6868,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                             typeof $steps["updateTabSelection"].then ===
                               "function"
                           ) {
-                            $steps["updateTabSelection"] = await $steps[
-                              "updateTabSelection"
-                            ];
+                            $steps["updateTabSelection"] =
+                              await $steps["updateTabSelection"];
                           }
                         }}
                         onDeselectedChange={async (...eventArgs: any) => {
@@ -7085,9 +7061,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                 typeof $steps["updatePatientDeleted"] === "object" &&
                 typeof $steps["updatePatientDeleted"].then === "function"
               ) {
-                $steps["updatePatientDeleted"] = await $steps[
-                  "updatePatientDeleted"
-                ];
+                $steps["updatePatientDeleted"] =
+                  await $steps["updatePatientDeleted"];
               }
             }}
             onOpenChange={async (...eventArgs: any) => {
@@ -7277,9 +7252,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                               typeof $steps["updateSelectedWardId"].then ===
                                 "function"
                             ) {
-                              $steps["updateSelectedWardId"] = await $steps[
-                                "updateSelectedWardId"
-                              ];
+                              $steps["updateSelectedWardId"] =
+                                await $steps["updateSelectedWardId"];
                             }
 
                             $steps["updateSelectedWardName"] = true
@@ -7315,9 +7289,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                               typeof $steps["updateSelectedWardName"].then ===
                                 "function"
                             ) {
-                              $steps["updateSelectedWardName"] = await $steps[
-                                "updateSelectedWardName"
-                              ];
+                              $steps["updateSelectedWardName"] =
+                                await $steps["updateSelectedWardName"];
                             }
 
                             $steps["updateWardModalOpen"] = true
@@ -7353,9 +7326,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                               typeof $steps["updateWardModalOpen"].then ===
                                 "function"
                             ) {
-                              $steps["updateWardModalOpen"] = await $steps[
-                                "updateWardModalOpen"
-                              ];
+                              $steps["updateWardModalOpen"] =
+                                await $steps["updateWardModalOpen"];
                             }
                           }}
                         >
@@ -7544,9 +7516,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                               typeof $steps["updateSelectedServiceId"].then ===
                                 "function"
                             ) {
-                              $steps["updateSelectedServiceId"] = await $steps[
-                                "updateSelectedServiceId"
-                              ];
+                              $steps["updateSelectedServiceId"] =
+                                await $steps["updateSelectedServiceId"];
                             }
 
                             $steps["updateSelectedServiceName"] = true
@@ -7619,9 +7590,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                               typeof $steps["updateServiceModalOpen"].then ===
                                 "function"
                             ) {
-                              $steps["updateServiceModalOpen"] = await $steps[
-                                "updateServiceModalOpen"
-                              ];
+                              $steps["updateServiceModalOpen"] =
+                                await $steps["updateServiceModalOpen"];
                             }
                           }}
                         >
@@ -7753,9 +7723,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                     typeof $steps["goToPatientProfile"] === "object" &&
                     typeof $steps["goToPatientProfile"].then === "function"
                   ) {
-                    $steps["goToPatientProfile"] = await $steps[
-                      "goToPatientProfile"
-                    ];
+                    $steps["goToPatientProfile"] =
+                      await $steps["goToPatientProfile"];
                   }
                 }}
                 src={{
@@ -7815,9 +7784,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                     typeof $steps["goToImagingReport1"] === "object" &&
                     typeof $steps["goToImagingReport1"].then === "function"
                   ) {
-                    $steps["goToImagingReport1"] = await $steps[
-                      "goToImagingReport1"
-                    ];
+                    $steps["goToImagingReport1"] =
+                      await $steps["goToImagingReport1"];
                   }
                 }}
                 src={{
@@ -7877,9 +7845,8 @@ function PlasmicPatientReception__RenderFunc(props: {
                     typeof $steps["goToLaboratoryData"] === "object" &&
                     typeof $steps["goToLaboratoryData"].then === "function"
                   ) {
-                    $steps["goToLaboratoryData"] = await $steps[
-                      "goToLaboratoryData"
-                    ];
+                    $steps["goToLaboratoryData"] =
+                      await $steps["goToLaboratoryData"];
                   }
                 }}
                 src={{
@@ -8653,7 +8620,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicPatientReception__VariantsArgs;
     args?: PlasmicPatientReception__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicPatientReception__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicPatientReception__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicPatientReception__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props

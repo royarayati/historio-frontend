@@ -300,11 +300,7 @@
   top: auto;
   align-self: center;
   transform: translate3d(-6px, 0px, 0px);
-  transform-style: preserve-3d;
   flex-shrink: 0;
-}
-.settingIcon * {
-  transform-style: preserve-3d;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .settingIcon {
@@ -323,12 +319,6 @@
     bottom: auto;
     flex-grow: 0;
     max-width: auto;
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .settingIcon * {
-    transform-style: preserve-3d;
   }
 }
 .searchbarLnameNcode:global(.__wab_instance) {
@@ -367,12 +357,6 @@
   .svg___2WfJc {
     height: 20px;
     transform: translate3d(5px, 0px, 0px);
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .svg___2WfJc * {
-    transform-style: preserve-3d;
   }
 }
 .svg___2L1F5 {
@@ -420,12 +404,6 @@
   .svg__cnc6J {
     height: 20px;
     transform: translate3d(5px, 0px, 0px);
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .svg__cnc6J * {
-    transform-style: preserve-3d;
   }
 }
 .svg__yEqKt {
@@ -2526,13 +2504,9 @@
   top: 280px;
   z-index: 2;
   right: auto;
-  transform-style: preserve-3d;
   min-width: 0;
   border-radius: 15px;
   padding: 4px;
-}
-.bookmarkGuide * {
-  transform-style: preserve-3d;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .bookmarkGuide {
@@ -2542,14 +2516,8 @@
     position: fixed;
     width: 100%;
     height: auto;
-    transform-style: preserve-3d;
     min-width: 0;
     display: flex;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .bookmarkGuide * {
-    transform-style: preserve-3d;
   }
 }
 .freeBox__y0Cq {
@@ -4145,13 +4113,9 @@
   top: auto;
   z-index: 2;
   right: auto;
-  transform-style: preserve-3d;
   min-width: 0;
   border-radius: 15px;
   padding: 4px;
-}
-.bookmarkGuide2 * {
-  transform-style: preserve-3d;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .bookmarkGuide2 {
@@ -4162,14 +4126,8 @@
     width: 100%;
     height: auto;
     right: auto;
-    transform-style: preserve-3d;
     min-width: 0;
     display: flex;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .bookmarkGuide2 * {
-    transform-style: preserve-3d;
   }
 }
 .freeBox__idnTf {
@@ -4595,11 +4553,7 @@
   bottom: 20px;
   flex-grow: 0;
   flex-shrink: 1;
-  transform-style: preserve-3d;
   margin: 5px;
-}
-.commentButton * {
-  transform-style: preserve-3d;
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .commentButton:global(.__wab_instance) {
@@ -4608,12 +4562,6 @@
     bottom: 5px;
     left: 30px;
     z-index: 2;
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .commentButton * {
-    transform-style: preserve-3d;
   }
 }
 .svg__fvg3U {
@@ -4798,12 +4746,6 @@
   .svg__pLnXy {
     height: 20px;
     transform: translate3d(5px, 0px, 0px);
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .svg__pLnXy * {
-    transform-style: preserve-3d;
   }
 }
 .svg__zAnQd {
@@ -4959,12 +4901,6 @@
   .svg___5P4Xq {
     height: 20px;
     transform: translate3d(5px, 0px, 0px);
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .svg___5P4Xq * {
-    transform-style: preserve-3d;
   }
 }
 .svg__c0Rk {
@@ -5186,12 +5122,6 @@
   .svg__eefHg {
     height: 20px;
     transform: translate3d(5px, 0px, 0px);
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .svg__eefHg * {
-    transform-style: preserve-3d;
   }
 }
 .svg__ebXu6 {
@@ -5240,12 +5170,6 @@
   .svg__dx794 {
     height: 20px;
     transform: translate3d(5px, 0px, 0px);
-    transform-style: preserve-3d;
-  }
-}
-@media (min-width: 0px) and (max-width: 760px) {
-  .svg__dx794 * {
-    transform-style: preserve-3d;
   }
 }
 .svg__pDhE4 {

@@ -259,9 +259,8 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                   typeof $steps["goToPatientProfile"] === "object" &&
                   typeof $steps["goToPatientProfile"].then === "function"
                 ) {
-                  $steps["goToPatientProfile"] = await $steps[
-                    "goToPatientProfile"
-                  ];
+                  $steps["goToPatientProfile"] =
+                    await $steps["goToPatientProfile"];
                 }
               }}
               src={{
@@ -381,9 +380,8 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                   typeof $steps["goToImagingReport1"] === "object" &&
                   typeof $steps["goToImagingReport1"].then === "function"
                 ) {
-                  $steps["goToImagingReport1"] = await $steps[
-                    "goToImagingReport1"
-                  ];
+                  $steps["goToImagingReport1"] =
+                    await $steps["goToImagingReport1"];
                 }
               }}
               src={{
@@ -443,9 +441,8 @@ function PlasmicSwitchingTab__RenderFunc(props: {
                   typeof $steps["goToLaboratoryData"] === "object" &&
                   typeof $steps["goToLaboratoryData"].then === "function"
                 ) {
-                  $steps["goToLaboratoryData"] = await $steps[
-                    "goToLaboratoryData"
-                  ];
+                  $steps["goToLaboratoryData"] =
+                    await $steps["goToLaboratoryData"];
                 }
               }}
               src={{
@@ -484,7 +481,9 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicSwitchingTab__VariantsArgs;
     args?: PlasmicSwitchingTab__ArgsType;
     overrides?: NodeOverridesType<T>;
-  } & Omit<PlasmicSwitchingTab__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
+  } &
+    // Specify variants directly as props
+    Omit<PlasmicSwitchingTab__VariantsArgs, ReservedPropsType> &
     // Specify args directly as props
     Omit<PlasmicSwitchingTab__ArgsType, ReservedPropsType> &
     // Specify overrides for each element directly as props
