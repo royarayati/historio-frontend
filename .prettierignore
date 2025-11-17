@@ -1,6 +1,6 @@
-.yarn
-.next
-dist
+**/*.yarn
+**/.next
+**/dist
 **/node_modules
 **/components
 **/pages

@@ -8,23 +8,18 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_BUILDKIT: 1
 
-.before_script_default:
-  before_script:
-    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin  "$CI_REGISTRY"
-
-.ci_default:
-  image: docker:stable
+inlab_plus:
+  image: docker:cli
   stage: build
   tags:
     - not_ir
   services:
     - docker:dind
-
-include:
-  - local: inlab_plasmic/.gitlab-ci.yml
-    rules:
-      - changes:
-          - inlab_plasmic/**/*
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin  "$CI_REGISTRY"
+  script:
+    - docker build -t "${CI_REGISTRY_IMAGE}/inlab_plasmic:${CI_COMMIT_BRANCH}" -f ./.build/Dockerfile .
+    - docker push "${CI_REGISTRY_IMAGE}/inlab_plasmic:${CI_COMMIT_BRANCH}"
 
 bridge-deploy:
   stage: deploy
