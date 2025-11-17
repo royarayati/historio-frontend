@@ -9,7 +9,7 @@ variables:
   DOCKER_BUILDKIT: 1
 
 inlab_plus:
-  image: docker:stable
+  image: docker:cli
   stage: build
   tags:
     - not_ir
