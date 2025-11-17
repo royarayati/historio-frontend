@@ -1363,66 +1363,106 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       return;
     }
 
-    // For filled_form mode, check if submitUrl is provided for updates
-    if (mode === "filled_form") {
-      if (!submitUrl) {
-        console.warn("submitUrl is required to update submission in 'filled_form' mode");
+    // For template mode, require templateId
+    if (mode === "template") {
+      if (!templateId) {
+        console.error("templateId is required for template mode");
         return;
       }
-      // Continue with submission flow (allows updating filled forms)
     }
 
-    // For template mode, require templateId and submitUrl
-    if (mode === "template") {
-      if (!templateId || !submitUrl) return;
+    // For filled_form mode, require submissionId
+    if (mode === "filled_form") {
+      if (!submissionId) {
+        console.error("submissionId is required for filled_form mode");
+        return;
+      }
     }
 
     try {
       // Extract national_code from patientContext
       const nationalCode = patientContext?.national_code || patientContext?.nationalCode || "";
       
-      // Get user_id from patientContext or use empty string
-      const userId = patientContext?.user_id || patientContext?.userId || "";
+      // Get user_id from patientContext and ensure it's a string
+      const userIdRaw = patientContext?.user_id || patientContext?.userId || "";
+      const userId = userIdRaw ? String(userIdRaw) : "";
       
       // Generate current timestamp in ISO format
       const createdAt = new Date().toISOString();
+      
+      // Get template_id - ensure it's a number
+      const templateIdNum = templateInfo.id || (templateId ? parseInt(templateId) : null);
+      if (!templateIdNum) {
+        throw new Error("template_id is required for submission");
+      }
       
       // Build payload according to the required schema
       const payload = {
         patient_data: {
           national_code: nationalCode,
-          data: submittedData, // The actual form field values
+          data: submittedData || {}, // The actual form field values, ensure it's an object
         },
         form_data: {
           user_id: userId,
           created_at: createdAt,
-          template_id: templateInfo.id || (templateId ? parseInt(templateId) : 0),
+          template_id: templateIdNum,
           template_name: templateInfo.name || formName || "",
         },
       };
 
       console.log("📤 Submitting payload:", payload);
 
-      if (!submitUrl) {
-        console.error("submitUrl is required for submission");
-        return;
+      const httpMethod = mode === "template" ? "POST" : "PUT";
+      
+      // Automatically construct the URL based on mode and available props
+      let finalSubmitUrl: string;
+      
+      if (submitUrl) {
+        // If submitUrl is provided, use it as base and append submission_id for PUT if needed
+        if (httpMethod === "PUT" && submissionId) {
+          // Check if URL already has submission_id parameter
+          if (!submitUrl.includes(`submission_id=`) && !submitUrl.includes(`/${submissionId}`)) {
+            const urlObj = new URL(submitUrl, getBaseUrl());
+            urlObj.searchParams.set("submission_id", submissionId);
+            finalSubmitUrl = urlObj.toString();
+          } else {
+            finalSubmitUrl = submitUrl;
+          }
+        } else {
+          finalSubmitUrl = submitUrl;
+        }
+      } else {
+        // Auto-construct URL from base URL
+        const baseUrl = getBaseUrl();
+        if (httpMethod === "POST") {
+          // POST: /api/v3/remote_his_manual/forms/submission
+          finalSubmitUrl = `${baseUrl}/api/v3/remote_his_manual/forms/submission`;
+        } else {
+          // PUT: /api/v3/remote_his_manual/forms/submission?submission_id={id}
+          const urlObj = new URL(`${baseUrl}/api/v3/remote_his_manual/forms/submission`);
+          urlObj.searchParams.set("submission_id", submissionId!);
+          finalSubmitUrl = urlObj.toString();
+        }
       }
+      
+      console.log(`📤 Using ${httpMethod} method to: ${finalSubmitUrl}`);
 
-      const response = await fetch(submitUrl, {
-        method: "POST",
+      const response = await fetch(finalSubmitUrl, {
+        method: httpMethod,
         headers: getAuthHeadersForPost(),
         body: JSON.stringify(payload),
       });
 
+      // Read response body once (can only be read once)
+      const responseText = await response.text();
+
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`خطا در ارسال: ${response.status} - ${errorText}`);
+        throw new Error(`خطا در ارسال: ${response.status} - ${responseText}`);
       }
 
       // Try to parse JSON response, but handle cases where backend returns non-serializable objects
       let result;
       try {
-        const responseText = await response.text();
         result = responseText ? JSON.parse(responseText) : {};
       } catch (parseError) {
         // If JSON parsing fails, the backend likely returned a non-serializable object
@@ -1432,11 +1472,26 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         result = { success: true, message: "Form submitted successfully (backend serialization issue detected)" };
       }
       
+      // For PUT requests, check if different user was detected
+      if (httpMethod === "PUT") {
+        const message = result?.message || "";
+        if (message.toLowerCase().includes("different user") || 
+            message.toLowerCase().includes("different user detected")) {
+          const errorMessage = "خطا: فقط کاربری که این فرم را ایجاد کرده است می‌تواند آن را ویرایش کند.";
+          showMessage(errorMessage, "error");
+          console.error("Different user detected: Only the user who created this submission can edit it.");
+          return; // Exit early, don't show success message
+        }
+      }
+      
       showMessage("فرم با موفقیت ارسال شد!", "success");
       onSubmitData?.(result);
     } catch (err: any) {
       console.error("Submit error:", err);
-      showMessage(`خطا در ارسال فرم: ${err.message}`, "error");
+      // Only show error message if it's not already shown (check if it's the user mismatch error)
+      if (!err.message?.includes("Different user detected")) {
+        showMessage(`خطا در ارسال فرم: ${err.message}`, "error");
+      }
     }
   };
 
