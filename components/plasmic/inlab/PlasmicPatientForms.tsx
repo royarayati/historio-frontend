@@ -74,6 +74,7 @@ import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Select from "../../Select"; // plasmic-import: Ll-T-rC5P8LC/component
 import MenuItem from "../../MenuItem"; // plasmic-import: 8n8tp8Zp9D88/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
+import { SimpleFormBuilder } from "../../../utils/SimpleFormBuilder"; // plasmic-import: f6UTVo2tEIbM/codeComponent
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
 
@@ -106,8 +107,8 @@ export type PlasmicPatientForms__OverridesType = {
   header?: Flex__<"div">;
   patientData?: Flex__<typeof ApiFetcherComponentPlus>;
   tabsSection?: Flex__<"div">;
-  forms?: Flex__<typeof Button>;
   dischargeSummary?: Flex__<typeof Button>;
+  history?: Flex__<typeof Button>;
   dischrgeSummarySection?: Flex__<"div">;
   addDischargeSummaryButton?: Flex__<typeof Button>;
   getSummaryApi?: Flex__<typeof ApiFetcherComponentPlus>;
@@ -216,6 +217,21 @@ export type PlasmicPatientForms__OverridesType = {
   consultList?: Flex__<typeof PlasmicImg__>;
   imagingReportList?: Flex__<typeof PlasmicImg__>;
   laboratoryData2?: Flex__<typeof PlasmicImg__>;
+  patientHistory?: Flex__<"div">;
+  templatesSection?: Flex__<"div">;
+  getTemplateApi?: Flex__<typeof ApiFetcherComponentPlus>;
+  templateSection?: Flex__<"div">;
+  templateCard?: Flex__<"div">;
+  templateName?: Flex__<"div">;
+  templateCategory?: Flex__<"div">;
+  submissionsSection?: Flex__<"div">;
+  getSubmissionApi?: Flex__<typeof ApiFetcherComponentPlus>;
+  submissionSection?: Flex__<"div">;
+  filledTemplateCard?: Flex__<"div">;
+  filledTemplateName2?: Flex__<"div">;
+  templateCategory2?: Flex__<"div">;
+  backToTemplates?: Flex__<typeof Button>;
+  simpleFormBuilder?: Flex__<typeof SimpleFormBuilder>;
 };
 
 export interface DefaultPatientFormsProps {}
@@ -690,31 +706,57 @@ function PlasmicPatientForms__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "forms.isDisabled",
+        path: "history.isDisabled",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "forms.selected",
+        path: "history.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => "selected"
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.tabSelection === "history";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
-        path: "forms.deselected",
+        path: "history.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.tabSelection !== "history";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "history.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "forms.sortDeselected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "forms.sortSelected",
+        path: "history.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -999,13 +1041,39 @@ function PlasmicPatientForms__RenderFunc(props: {
         path: "dischargeSummary.selected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => "selected"
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.tabSelection === "discharge_summary";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "dischargeSummary.deselected",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.tabSelection !== "discharge_summary";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return [];
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "dischargeSummary.sortDeselected",
@@ -1023,7 +1091,80 @@ function PlasmicPatientForms__RenderFunc(props: {
         path: "tabSelection",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => "discharge_summary"
+        initFunc: ({ $props, $state, $queries, $ctx }) => "history"
+      },
+      {
+        path: "formMode",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return "template";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "templateId",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "submissionId",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "showForm",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "backToTemplates.isDisabled",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "backToTemplates.selected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "backToTemplates.deselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "backToTemplates.sortDeselected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "backToTemplates.sortSelected",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "formName",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -1299,157 +1440,6 @@ function PlasmicPatientForms__RenderFunc(props: {
             data-plasmic-override={overrides.tabsSection}
             className={classNames(projectcss.all, sty.tabsSection)}
           >
-            {false ? (
-              <Button
-                data-plasmic-name={"forms"}
-                data-plasmic-override={overrides.forms}
-                className={classNames("__wab_instance", sty.forms)}
-                deselected={generateStateValueProp($state, [
-                  "forms",
-                  "deselected"
-                ])}
-                isDisabled={generateStateValueProp($state, [
-                  "forms",
-                  "isDisabled"
-                ])}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["updateTabSelection"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["tabSelection"]
-                          },
-                          operation: 0,
-                          value: "others"
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateTabSelection"] != null &&
-                    typeof $steps["updateTabSelection"] === "object" &&
-                    typeof $steps["updateTabSelection"].then === "function"
-                  ) {
-                    $steps["updateTabSelection"] =
-                      await $steps["updateTabSelection"];
-                  }
-                }}
-                onDeselectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, ["forms", "deselected"])(
-                      eventArgs[0]
-                    );
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onIsDisabledChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, ["forms", "isDisabled"])(
-                      eventArgs[0]
-                    );
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSelectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, ["forms", "selected"])(
-                      eventArgs[0]
-                    );
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSortDeselectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "forms",
-                      "sortDeselected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onSortSelectedChange={async (...eventArgs: any) => {
-                  ((...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "forms",
-                      "sortSelected"
-                    ])(eventArgs[0]);
-                  }).apply(null, eventArgs);
-
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                selected={generateStateValueProp($state, ["forms", "selected"])}
-                sortDeselected={generateStateValueProp($state, [
-                  "forms",
-                  "sortDeselected"
-                ])}
-                sortSelected={generateStateValueProp($state, [
-                  "forms",
-                  "sortSelected"
-                ])}
-              >
-                {false ? (
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__npX2G
-                    )}
-                  >
-                    {"\u0633\u0627\u06cc\u0631"}
-                  </div>
-                ) : null}
-              </Button>
-            ) : null}
             <Button
               data-plasmic-name={"dischargeSummary"}
               data-plasmic-override={overrides.dischargeSummary}
@@ -1605,20 +1595,155 @@ function PlasmicPatientForms__RenderFunc(props: {
                 }
               </div>
             </Button>
+            <Button
+              data-plasmic-name={"history"}
+              data-plasmic-override={overrides.history}
+              className={classNames("__wab_instance", sty.history)}
+              deselected={generateStateValueProp($state, [
+                "history",
+                "deselected"
+              ])}
+              isDisabled={generateStateValueProp($state, [
+                "history",
+                "isDisabled"
+              ])}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["updateTabSelection"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["tabSelection"]
+                        },
+                        operation: 0,
+                        value: "history"
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateTabSelection"] != null &&
+                  typeof $steps["updateTabSelection"] === "object" &&
+                  typeof $steps["updateTabSelection"].then === "function"
+                ) {
+                  $steps["updateTabSelection"] =
+                    await $steps["updateTabSelection"];
+                }
+              }}
+              onDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["history", "deselected"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onIsDisabledChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["history", "isDisabled"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, ["history", "selected"])(
+                    eventArgs[0]
+                  );
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onSortDeselectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "history",
+                    "sortDeselected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              onSortSelectedChange={async (...eventArgs: any) => {
+                ((...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "history",
+                    "sortSelected"
+                  ])(eventArgs[0]);
+                }).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              selected={generateStateValueProp($state, ["history", "selected"])}
+              sortDeselected={generateStateValueProp($state, [
+                "history",
+                "sortDeselected"
+              ])}
+              sortSelected={generateStateValueProp($state, [
+                "history",
+                "sortSelected"
+              ])}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__npX2G
+                )}
+              >
+                {"\u0634\u0631\u062d \u062d\u0627\u0644"}
+              </div>
+            </Button>
           </div>
-          {(() => {
-            try {
-              return $state.tabSelection === "discharge_summary";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return true;
-              }
-              throw e;
-            }
-          })() ? (
+          {$state.tabSelection === "discharge_summary" ? (
             <div
               data-plasmic-name={"dischrgeSummarySection"}
               data-plasmic-override={overrides.dischrgeSummarySection}
@@ -11223,6 +11348,998 @@ function PlasmicPatientForms__RenderFunc(props: {
               />
             </SwitchingTab>
           </div>
+          {$state.tabSelection === "history" ? (
+            <div
+              data-plasmic-name={"patientHistory"}
+              data-plasmic-override={overrides.patientHistory}
+              className={classNames(projectcss.all, sty.patientHistory)}
+            >
+              {(() => {
+                try {
+                  return $state.showForm === false;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div
+                  data-plasmic-name={"templatesSection"}
+                  data-plasmic-override={overrides.templatesSection}
+                  className={classNames(projectcss.all, sty.templatesSection)}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__mlBuc
+                    )}
+                  >
+                    {
+                      "\u062a\u0645\u067e\u0644\u06cc\u062a \u0647\u0627\u06cc \u0645\u0648\u062c\u0648\u062f"
+                    }
+                  </div>
+                  <ApiFetcherComponentPlus
+                    data-plasmic-name={"getTemplateApi"}
+                    data-plasmic-override={overrides.getTemplateApi}
+                    autoFetch={true}
+                    className={classNames("__wab_instance", sty.getTemplateApi)}
+                    headers={(() => {
+                      try {
+                        return {
+                          "X-Namespace": localStorage.getItem(
+                            "inlab_user_namespace_id"
+                          )
+                        };
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
+                        }
+                        throw e;
+                      }
+                    })()}
+                    method={"GET"}
+                    path={"/api/v3/remote_his_manual/template"}
+                    ref={ref => {
+                      $refs["getTemplateApi"] = ref;
+                    }}
+                  >
+                    <DataCtxReader__>
+                      {$ctx => (
+                        <div
+                          data-plasmic-name={"templateSection"}
+                          data-plasmic-override={overrides.templateSection}
+                          className={classNames(
+                            projectcss.all,
+                            sty.templateSection
+                          )}
+                        >
+                          {(_par =>
+                            !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                            (() => {
+                              try {
+                                return $ctx.fetched_data.data;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return [];
+                                }
+                                throw e;
+                              }
+                            })()
+                          ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                            const currentItem = __plasmic_item_0;
+                            const currentIndex = __plasmic_idx_0;
+                            return (
+                              <div
+                                data-plasmic-name={"templateCard"}
+                                data-plasmic-override={overrides.templateCard}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.templateCard
+                                )}
+                                key={currentIndex}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["updateTemplateId"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["templateId"]
+                                          },
+                                          operation: 0,
+                                          value: currentItem.id
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateTemplateId"] != null &&
+                                    typeof $steps["updateTemplateId"] ===
+                                      "object" &&
+                                    typeof $steps["updateTemplateId"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateTemplateId"] =
+                                      await $steps["updateTemplateId"];
+                                  }
+
+                                  $steps["updateFormMode"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["formMode"]
+                                          },
+                                          operation: 0,
+                                          value: "template"
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateFormMode"] != null &&
+                                    typeof $steps["updateFormMode"] ===
+                                      "object" &&
+                                    typeof $steps["updateFormMode"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateFormMode"] =
+                                      await $steps["updateFormMode"];
+                                  }
+
+                                  $steps["updateFormName"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["formName"]
+                                          },
+                                          operation: 0,
+                                          value: currentItem.name
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateFormName"] != null &&
+                                    typeof $steps["updateFormName"] ===
+                                      "object" &&
+                                    typeof $steps["updateFormName"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateFormName"] =
+                                      await $steps["updateFormName"];
+                                  }
+
+                                  $steps["updateShowForm"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["showForm"]
+                                          },
+                                          operation: 0,
+                                          value: true
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateShowForm"] != null &&
+                                    typeof $steps["updateShowForm"] ===
+                                      "object" &&
+                                    typeof $steps["updateShowForm"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateShowForm"] =
+                                      await $steps["updateShowForm"];
+                                  }
+                                }}
+                              >
+                                <div
+                                  data-plasmic-name={"templateName"}
+                                  data-plasmic-override={overrides.templateName}
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.templateName
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {currentItem.name}
+                                  </React.Fragment>
+                                </div>
+                                {false ? (
+                                  <div
+                                    data-plasmic-name={"templateCategory"}
+                                    data-plasmic-override={
+                                      overrides.templateCategory
+                                    }
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.templateCategory
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return currentItem.category;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                ) : null}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </DataCtxReader__>
+                  </ApiFetcherComponentPlus>
+                </div>
+              ) : null}
+              {(() => {
+                try {
+                  return $state.showForm === false;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div
+                  data-plasmic-name={"submissionsSection"}
+                  data-plasmic-override={overrides.submissionsSection}
+                  className={classNames(projectcss.all, sty.submissionsSection)}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__cUbh
+                    )}
+                  >
+                    {
+                      "\u0641\u0631\u0645 \u0647\u0627\u06cc \u067e\u0631\u0634\u062f\u0647\n"
+                    }
+                  </div>
+                  <ApiFetcherComponentPlus
+                    data-plasmic-name={"getSubmissionApi"}
+                    data-plasmic-override={overrides.getSubmissionApi}
+                    autoFetch={true}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.getSubmissionApi
+                    )}
+                    headers={(() => {
+                      try {
+                        return {
+                          "X-Namespace": localStorage.getItem(
+                            "inlab_user_namespace_id"
+                          )
+                        };
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
+                        }
+                        throw e;
+                      }
+                    })()}
+                    method={"GET"}
+                    path={`/api/v3/remote_his_manual/form/submission?patient_id=${$ctx.params.code}`}
+                    ref={ref => {
+                      $refs["getSubmissionApi"] = ref;
+                    }}
+                  >
+                    <DataCtxReader__>
+                      {$ctx => (
+                        <div
+                          data-plasmic-name={"submissionSection"}
+                          data-plasmic-override={overrides.submissionSection}
+                          className={classNames(
+                            projectcss.all,
+                            sty.submissionSection
+                          )}
+                        >
+                          {(_par =>
+                            !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                            (() => {
+                              try {
+                                return $ctx.fetched_data.data;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return [];
+                                }
+                                throw e;
+                              }
+                            })()
+                          ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                            const currentItem = __plasmic_item_0;
+                            const currentIndex = __plasmic_idx_0;
+                            return (
+                              <div
+                                data-plasmic-name={"filledTemplateCard"}
+                                data-plasmic-override={
+                                  overrides.filledTemplateCard
+                                }
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.filledTemplateCard
+                                )}
+                                key={currentIndex}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["updateTemplateId"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["templateId"]
+                                          },
+                                          operation: 0,
+                                          value:
+                                            currentItem.form_data.template_id
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateTemplateId"] != null &&
+                                    typeof $steps["updateTemplateId"] ===
+                                      "object" &&
+                                    typeof $steps["updateTemplateId"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateTemplateId"] =
+                                      await $steps["updateTemplateId"];
+                                  }
+
+                                  $steps["updateFormMode"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["formMode"]
+                                          },
+                                          operation: 0,
+                                          value: "filled_form"
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateFormMode"] != null &&
+                                    typeof $steps["updateFormMode"] ===
+                                      "object" &&
+                                    typeof $steps["updateFormMode"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateFormMode"] =
+                                      await $steps["updateFormMode"];
+                                  }
+
+                                  $steps["updateSubmissionId"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["submissionId"]
+                                          },
+                                          operation: 0,
+                                          value: currentItem.id
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateSubmissionId"] != null &&
+                                    typeof $steps["updateSubmissionId"] ===
+                                      "object" &&
+                                    typeof $steps["updateSubmissionId"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateSubmissionId"] =
+                                      await $steps["updateSubmissionId"];
+                                  }
+
+                                  $steps["updateShowForm"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["showForm"]
+                                          },
+                                          operation: 0,
+                                          value: true
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateShowForm"] != null &&
+                                    typeof $steps["updateShowForm"] ===
+                                      "object" &&
+                                    typeof $steps["updateShowForm"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateShowForm"] =
+                                      await $steps["updateShowForm"];
+                                  }
+
+                                  $steps["updateFormName"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["formName"]
+                                          },
+                                          operation: 0,
+                                          value:
+                                            currentItem.form_data.template_name
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
+                                          return value;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateFormName"] != null &&
+                                    typeof $steps["updateFormName"] ===
+                                      "object" &&
+                                    typeof $steps["updateFormName"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateFormName"] =
+                                      await $steps["updateFormName"];
+                                  }
+                                }}
+                              >
+                                <div
+                                  data-plasmic-name={"filledTemplateName2"}
+                                  data-plasmic-override={
+                                    overrides.filledTemplateName2
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.filledTemplateName2
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {currentItem.form_data.template_name}
+                                  </React.Fragment>
+                                </div>
+                                <div
+                                  data-plasmic-name={"templateCategory2"}
+                                  data-plasmic-override={
+                                    overrides.templateCategory2
+                                  }
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.templateCategory2
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      try {
+                                        return (() => {
+                                          const gregorianDate = new Date(
+                                            currentItem.created_at
+                                          );
+                                          const shamsiDate =
+                                            new Intl.DateTimeFormat(
+                                              "fa-IR"
+                                            ).format(gregorianDate);
+                                          const shamsiTime =
+                                            gregorianDate.toLocaleTimeString(
+                                              "fa-IR",
+                                              { hour12: false }
+                                            );
+                                          const englishDate =
+                                            shamsiDate.replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            );
+                                          const englishTime = shamsiTime
+                                            .replace(/[۰-۹]/g, d =>
+                                              String.fromCharCode(
+                                                d.charCodeAt(0) - 1728
+                                              )
+                                            )
+                                            .split(":")
+                                            .slice(0, 2)
+                                            .join(":");
+                                          return `${englishDate} ${englishTime}`;
+                                        })();
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return "";
+                                        }
+                                        throw e;
+                                      }
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </DataCtxReader__>
+                  </ApiFetcherComponentPlus>
+                </div>
+              ) : null}
+              {(() => {
+                try {
+                  return $state.showForm === true;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div
+                  className={classNames(projectcss.all, sty.freeBox___3KI7V)}
+                >
+                  <Button
+                    data-plasmic-name={"backToTemplates"}
+                    data-plasmic-override={overrides.backToTemplates}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.backToTemplates
+                    )}
+                    color={"red"}
+                    deselected={generateStateValueProp($state, [
+                      "backToTemplates",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "backToTemplates",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateShowForm"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["showForm"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateShowForm"] != null &&
+                        typeof $steps["updateShowForm"] === "object" &&
+                        typeof $steps["updateShowForm"].then === "function"
+                      ) {
+                        $steps["updateShowForm"] =
+                          await $steps["updateShowForm"];
+                      }
+                    }}
+                    onDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "backToTemplates",
+                          "deselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onIsDisabledChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "backToTemplates",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "backToTemplates",
+                          "selected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "backToTemplates",
+                          "sortDeselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "backToTemplates",
+                          "sortSelected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
+
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "backToTemplates",
+                      "selected"
+                    ])}
+                    sortDeselected={generateStateValueProp($state, [
+                      "backToTemplates",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "backToTemplates",
+                      "sortSelected"
+                    ])}
+                  >
+                    {"\u0628\u0627\u0632\u06af\u0634\u062a"}
+                  </Button>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__bEahD
+                    )}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return $state.formName;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
+                  </div>
+                </div>
+              ) : null}
+              {$state.showForm === true ? (
+                <SimpleFormBuilder
+                  data-plasmic-name={"simpleFormBuilder"}
+                  data-plasmic-override={overrides.simpleFormBuilder}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.simpleFormBuilder
+                  )}
+                  mode={(() => {
+                    try {
+                      return $state.formMode;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "template";
+                      }
+                      throw e;
+                    }
+                  })()}
+                  patientContext={(() => {
+                    try {
+                      return {
+                        national_code: $ctx.params.code,
+                        user_id: JSON.parse(localStorage.getItem("inlab_user"))
+                          ?.user?.id
+                      };
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  patientId={(() => {
+                    try {
+                      return $ctx.params.code;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  submissionId={(() => {
+                    try {
+                      return $state.submissionId;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  submitUrl={`/api/v3/remote_his_manual/forms/submission?submission_id=${$state.submissionId}`}
+                  templateId={(() => {
+                    try {
+                      return $state.templateId;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                />
+              ) : null}
+            </div>
+          ) : null}
         </div>
       </div>
     </React.Fragment>
@@ -11235,8 +12352,8 @@ const PlasmicDescendants = {
     "header",
     "patientData",
     "tabsSection",
-    "forms",
     "dischargeSummary",
+    "history",
     "dischrgeSummarySection",
     "addDischargeSummaryButton",
     "getSummaryApi",
@@ -11344,13 +12461,28 @@ const PlasmicDescendants = {
     "patientProfile",
     "consultList",
     "imagingReportList",
-    "laboratoryData2"
+    "laboratoryData2",
+    "patientHistory",
+    "templatesSection",
+    "getTemplateApi",
+    "templateSection",
+    "templateCard",
+    "templateName",
+    "templateCategory",
+    "submissionsSection",
+    "getSubmissionApi",
+    "submissionSection",
+    "filledTemplateCard",
+    "filledTemplateName2",
+    "templateCategory2",
+    "backToTemplates",
+    "simpleFormBuilder"
   ],
   header: ["header", "patientData"],
   patientData: ["patientData"],
-  tabsSection: ["tabsSection", "forms", "dischargeSummary"],
-  forms: ["forms"],
+  tabsSection: ["tabsSection", "dischargeSummary", "history"],
   dischargeSummary: ["dischargeSummary"],
+  history: ["history"],
   dischrgeSummarySection: [
     "dischrgeSummarySection",
     "addDischargeSummaryButton",
@@ -11866,7 +12998,78 @@ const PlasmicDescendants = {
   patientProfile: ["patientProfile"],
   consultList: ["consultList"],
   imagingReportList: ["imagingReportList"],
-  laboratoryData2: ["laboratoryData2"]
+  laboratoryData2: ["laboratoryData2"],
+  patientHistory: [
+    "patientHistory",
+    "templatesSection",
+    "getTemplateApi",
+    "templateSection",
+    "templateCard",
+    "templateName",
+    "templateCategory",
+    "submissionsSection",
+    "getSubmissionApi",
+    "submissionSection",
+    "filledTemplateCard",
+    "filledTemplateName2",
+    "templateCategory2",
+    "backToTemplates",
+    "simpleFormBuilder"
+  ],
+  templatesSection: [
+    "templatesSection",
+    "getTemplateApi",
+    "templateSection",
+    "templateCard",
+    "templateName",
+    "templateCategory"
+  ],
+  getTemplateApi: [
+    "getTemplateApi",
+    "templateSection",
+    "templateCard",
+    "templateName",
+    "templateCategory"
+  ],
+  templateSection: [
+    "templateSection",
+    "templateCard",
+    "templateName",
+    "templateCategory"
+  ],
+  templateCard: ["templateCard", "templateName", "templateCategory"],
+  templateName: ["templateName"],
+  templateCategory: ["templateCategory"],
+  submissionsSection: [
+    "submissionsSection",
+    "getSubmissionApi",
+    "submissionSection",
+    "filledTemplateCard",
+    "filledTemplateName2",
+    "templateCategory2"
+  ],
+  getSubmissionApi: [
+    "getSubmissionApi",
+    "submissionSection",
+    "filledTemplateCard",
+    "filledTemplateName2",
+    "templateCategory2"
+  ],
+  submissionSection: [
+    "submissionSection",
+    "filledTemplateCard",
+    "filledTemplateName2",
+    "templateCategory2"
+  ],
+  filledTemplateCard: [
+    "filledTemplateCard",
+    "filledTemplateName2",
+    "templateCategory2"
+  ],
+  filledTemplateName2: ["filledTemplateName2"],
+  templateCategory2: ["templateCategory2"],
+  backToTemplates: ["backToTemplates"],
+  simpleFormBuilder: ["simpleFormBuilder"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -11876,8 +13079,8 @@ type NodeDefaultElementType = {
   header: "div";
   patientData: typeof ApiFetcherComponentPlus;
   tabsSection: "div";
-  forms: typeof Button;
   dischargeSummary: typeof Button;
+  history: typeof Button;
   dischrgeSummarySection: "div";
   addDischargeSummaryButton: typeof Button;
   getSummaryApi: typeof ApiFetcherComponentPlus;
@@ -11986,6 +13189,21 @@ type NodeDefaultElementType = {
   consultList: typeof PlasmicImg__;
   imagingReportList: typeof PlasmicImg__;
   laboratoryData2: typeof PlasmicImg__;
+  patientHistory: "div";
+  templatesSection: "div";
+  getTemplateApi: typeof ApiFetcherComponentPlus;
+  templateSection: "div";
+  templateCard: "div";
+  templateName: "div";
+  templateCategory: "div";
+  submissionsSection: "div";
+  getSubmissionApi: typeof ApiFetcherComponentPlus;
+  submissionSection: "div";
+  filledTemplateCard: "div";
+  filledTemplateName2: "div";
+  templateCategory2: "div";
+  backToTemplates: typeof Button;
+  simpleFormBuilder: typeof SimpleFormBuilder;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -12053,8 +13271,8 @@ export const PlasmicPatientForms = Object.assign(
     header: makeNodeComponent("header"),
     patientData: makeNodeComponent("patientData"),
     tabsSection: makeNodeComponent("tabsSection"),
-    forms: makeNodeComponent("forms"),
     dischargeSummary: makeNodeComponent("dischargeSummary"),
+    history: makeNodeComponent("history"),
     dischrgeSummarySection: makeNodeComponent("dischrgeSummarySection"),
     addDischargeSummaryButton: makeNodeComponent("addDischargeSummaryButton"),
     getSummaryApi: makeNodeComponent("getSummaryApi"),
@@ -12195,6 +13413,21 @@ export const PlasmicPatientForms = Object.assign(
     consultList: makeNodeComponent("consultList"),
     imagingReportList: makeNodeComponent("imagingReportList"),
     laboratoryData2: makeNodeComponent("laboratoryData2"),
+    patientHistory: makeNodeComponent("patientHistory"),
+    templatesSection: makeNodeComponent("templatesSection"),
+    getTemplateApi: makeNodeComponent("getTemplateApi"),
+    templateSection: makeNodeComponent("templateSection"),
+    templateCard: makeNodeComponent("templateCard"),
+    templateName: makeNodeComponent("templateName"),
+    templateCategory: makeNodeComponent("templateCategory"),
+    submissionsSection: makeNodeComponent("submissionsSection"),
+    getSubmissionApi: makeNodeComponent("getSubmissionApi"),
+    submissionSection: makeNodeComponent("submissionSection"),
+    filledTemplateCard: makeNodeComponent("filledTemplateCard"),
+    filledTemplateName2: makeNodeComponent("filledTemplateName2"),
+    templateCategory2: makeNodeComponent("templateCategory2"),
+    backToTemplates: makeNodeComponent("backToTemplates"),
+    simpleFormBuilder: makeNodeComponent("simpleFormBuilder"),
 
     // Metadata about props expected for PlasmicPatientForms
     internalVariantProps: PlasmicPatientForms__VariantProps,

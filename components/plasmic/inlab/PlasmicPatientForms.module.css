@@ -79,29 +79,12 @@
     row-gap: 0px;
   }
 }
-.forms:global(.__wab_instance) {
-  max-width: 100%;
-}
-.text__npX2G {
-  text-align: right;
-}
-.svg__hf1ZE {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__hOgdm {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
 .dischargeSummary:global(.__wab_instance) {
   max-width: 100%;
 }
 .text__ezVwF {
   text-align: right;
+  color: var(--token-IYO13gyYJHXG);
 }
 .svg__nq0U {
   position: relative;
@@ -110,6 +93,25 @@
   height: 1em;
 }
 .svg__eoxAb {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.history:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__npX2G {
+  text-align: right;
+  color: var(--token-IYO13gyYJHXG);
+}
+.svg__hf1ZE {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__hOgdm {
   position: relative;
   object-fit: cover;
   width: auto;
@@ -2158,4 +2160,264 @@
 }
 .laboratoryData2 > picture > img {
   object-fit: fill;
+}
+.patientHistory {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  left: 0px;
+  top: 77px;
+  z-index: 1;
+  bottom: 75px;
+  row-gap: 12px;
+  overflow: auto;
+  min-width: 0;
+  padding: 8px;
+}
+.templatesSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
+  background: none;
+  min-width: 0;
+  padding: 4px;
+  border: 0px none #00000040;
+}
+.text__mlBuc {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-weight: 600;
+  box-shadow: 0px 2px 4px 0px #00000033;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  background: none;
+  min-width: 0;
+  border-bottom: 0.5px solid var(--token-8PxxXPNrIohQ);
+}
+.getTemplateApi:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  min-width: 0;
+}
+.templateSection {
+  display: grid;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  grid-template-rows: auto auto;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+  grid-auto-rows: auto;
+  grid-auto-columns: 1fr;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .templateSection {
+    grid-row-gap: 8px;
+    grid-column-gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 4px;
+  }
+}
+.templateCard {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+  left: auto;
+  top: auto;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  min-width: 0;
+  border-radius: 5px;
+  padding: 4px;
+  border: 0.5px solid var(--token-8PxxXPNrIohQ);
+}
+.templateName {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  white-space: pre-wrap;
+  min-width: 0;
+}
+.templateCategory {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  min-width: 0;
+}
+.submissionsSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
+  background: none;
+  min-width: 0;
+  padding: 4px;
+  border: 0px none #00000040;
+}
+.text__cUbh {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-weight: 600;
+  box-shadow: 0px 2px 4px 0px #00000033;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  background: none;
+  min-width: 0;
+  border-bottom: 0.5px solid var(--token-8PxxXPNrIohQ);
+}
+.getSubmissionApi:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  min-width: 0;
+}
+.submissionSection {
+  display: grid;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  grid-template-rows: auto auto;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+  grid-auto-rows: auto;
+  grid-auto-columns: 1fr;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .submissionSection {
+    grid-row-gap: 8px;
+    grid-column-gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 4px;
+  }
+}
+.filledTemplateCard {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+  left: auto;
+  top: auto;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  min-width: 0;
+  border-radius: 5px;
+  padding: 4px;
+  border: 0.5px solid var(--token-8PxxXPNrIohQ);
+}
+.filledTemplateName2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  white-space: pre-wrap;
+  min-width: 0;
+}
+.templateCategory2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  min-width: 0;
+}
+.freeBox___3KI7V {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  background: #ffffff80;
+  min-width: 0;
+  padding: 8px;
+}
+.backToTemplates:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__umWva {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg___8A462 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__bEahD {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: none;
+  min-width: 0;
+  padding: 0px;
+}
+.simpleFormBuilder:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  bottom: auto;
+  width: 100%;
+  min-width: 0;
+  padding: 8px;
 }

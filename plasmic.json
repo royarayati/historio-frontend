@@ -2148,20 +2148,6 @@
           "cssFilePath": "plasmic/inlab/PlasmicDrawer.module.css",
           "scheme": "blackbox",
           "componentType": "component"
-        },
-        {
-          "id": "-a-fpDWty9bz",
-          "name": "NewPage",
-          "type": "managed",
-          "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicNewPage.tsx",
-          "importSpec": {
-            "modulePath": "../pages/new-page.tsx"
-          },
-          "cssFilePath": "plasmic/inlab/PlasmicNewPage.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/new-page"
         }
       ],
       "icons": [
