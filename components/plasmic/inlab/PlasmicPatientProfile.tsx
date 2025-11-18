@@ -3513,12 +3513,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                 ) : null}
               </div>
             ) : null}
-            {window.location.origin !==
-            [
-              "https://synapps.tums.ac.ir",
-              "https://sina.synappsgroup.com",
-              "https://cmcsynapps.tums.ac.ir"
-            ] ? (
+            {false ? (
               <Button
                 data-plasmic-name={"dischargeSummary"}
                 data-plasmic-override={overrides.dischargeSummary}
