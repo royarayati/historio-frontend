@@ -1,7 +1,6 @@
 {
     "platform": "node",
     "port": 3000,
-    "buildCommand": "npm install && npm run build",
+    "buildCommand": "echo 'local build done'",
     "startCommand": "npm run start"
   }
-  
