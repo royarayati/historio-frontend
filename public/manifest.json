@@ -1,0 +1,53 @@
+{
+  "short_name": "InLab",
+  "name": "Intelligent-Laboratory",
+  "icons": [
+    {
+      "src": "plasmic/inlab/images/icon36X36Svg.svg",
+      "type": "image/png",
+      "sizes": "36x36"
+    },
+    {
+      "src": "plasmic/inlab/images/icon48X48Svg.svg",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "plasmic/inlab/images/icon72X72Svg.svg",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "plasmic/inlab/images/icon96X96Svg.svg",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "plasmic/inlab/images/icon144X144Svg.svg",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "plasmic/inlab/images/icon192X192Svg.svg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "plasmic/inlab/images/icon512X512Svg.svg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#386fff",
+  "background_color": "#EDEDEDD9",
+  "screenshots": [
+    {
+      "src": "plasmic/inlab/images/Icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}

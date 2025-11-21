@@ -1,0 +1,81 @@
+.ariaSelect:global(.__wab_instance) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: var(--token-_4-ntd2poXac);
+  min-width: 0;
+}
+.ariaSelect[data-disabled]:global(.__wab_instance) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.ariaButton:global(.__wab_instance) {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: inset 0px 0px 0px 1px var(--token-97i_uC0EPBwU);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  outline-style: none;
+  background: var(--token-AbJ0W-K7opJE);
+  min-width: 0;
+  border-radius: var(--token-gT8GM_eUi3Z2);
+  padding: 0px;
+  border-style: none;
+}
+.ariaSelect[data-focus-visible] .ariaButton:global(.__wab_instance) {
+  outline-style: solid;
+  outline-width: var(--token-goQXpK0S37Un);
+  outline-offset: 1px;
+  outline-color: var(--token-Hm3SlAJH-Xg2);
+}
+.ariaSelectedValue:global(.__wab_instance) {
+  font-size: var(--token-3DlQ9mVQ6NFy);
+  line-height: var(--token-shxF4F_ggPFB);
+  padding-top: var(--token-gT8GM_eUi3Z2);
+  padding-bottom: var(--token-gT8GM_eUi3Z2);
+  padding-left: var(--token-0SUmebUCJbd8);
+}
+.text {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: var(--token-NyTao7Ew0j3m);
+  min-width: 0;
+}
+.freeBox {
+  display: flex;
+  position: relative;
+  width: var(--token-pdEW6FcP2Ces);
+  height: var(--token-pdEW6FcP2Ces);
+  justify-content: center;
+  align-items: center;
+}
+.svg {
+  width: var(--token-2ER69RM1tTPk);
+  height: var(--token-2ER69RM1tTPk);
+  flex-shrink: 0;
+}
+.description:global(.__wab_instance):global(.__wab_instance) {
+  position: relative;
+}
+.menuPopover:global(.__wab_instance):global(.__wab_instance) {
+  position: relative;
+  top: auto;
+  left: auto;
+}
+.menuSection___4Koc:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__hwlzv {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}

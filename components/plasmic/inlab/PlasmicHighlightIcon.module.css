@@ -1,0 +1,25 @@
+.highlightIcon {
+  object-fit: cover;
+  max-width: 100%;
+  position: relative;
+  color: var(--token-8PxxXPNrIohQ);
+  max-height: 100%;
+  min-height: none;
+  width: 15px;
+  height: 15px;
+  justify-self: flex-start;
+  transform: none;
+}
+.highlightIconhighlighting {
+  color: var(--token-tawGjJMbHvx-);
+}
+.highlightIconloadingHighlighting {
+  color: var(--token-tawGjJMbHvx-);
+  max-width: 100%;
+  width: 20px;
+  height: 20px;
+}
+.highlightIconhighlighting_loadingHighlighting {
+  width: 15px;
+  height: 15px;
+}

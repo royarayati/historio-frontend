@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <g data-name="Layer 2">
+    <g data-name="Layer 1">
+      <g data-name="Icon 192 192">
+        <rect width="192" height="192" rx="40" style="isolation:isolate" opacity=".3" fill="#386fff"/>
+        <g data-name="Group 2368">
+          <g data-name="Group 2363">
+            <rect x="17.39" y="19.83" width="157.22" height="157.22" rx="33" fill="#fff"/>
+            <g data-name="Group 2">
+              <rect x="17.39" y="19.84" width="157.22" height="157.22" rx="33" fill="#000e7a"/>
+              <g data-name="Group 2364">
+                <g data-name="Group 2-2">
+                  <rect x="17.39" y="19.84" width="157.22" height="145.84" rx="33" fill="#fafbff"/>
+                  <rect x="17.39" y="19.84" width="157.22" height="135.14" rx="33" fill="#fff"/>
+                </g>
+              </g>
+            </g>
+            <path data-name="Combined Shape" d="M92.87 131.58a7.29 7.29 0 01-7.29-7.29v-20.66H64.92a7.29 7.29 0 01-7.29-7.29v-6.26a7.29 7.29 0 017.29-7.29h20.66V62.13a7.29 7.29 0 017.29-7.29h6.26a7.29 7.29 0 017.3 7.28v20.67h20.65a7.29 7.29 0 017.3 7.29v6.26a7.3 7.3 0 01-7.29 7.3h-20.67v20.65a7.29 7.29 0 01-7.29 7.29h-6.26z" fill="#386fff"/>
+            <path d="M96 37.78l26.36-15a4.38 4.38 0 00-2.17-8.18H71.81a4.37 4.37 0 00-2.16 8.18z" fill="#000e7a"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

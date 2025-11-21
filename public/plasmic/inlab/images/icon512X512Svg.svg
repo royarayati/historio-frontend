@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <filter id="D4wwig20mcora" x="22.1" y="29.962" width="467.828" height="467.828" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#386fff" flood-opacity=".239"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="D4wwig20mcorb" x="34.1" y="41.97" width="443.828" height="413.441" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur-2"/>
+      <feFlood flood-color="#386fff" flood-opacity=".161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="D4wwig20mcorc" x="34.1" y="41.97" width="443.828" height="384.873" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur-3"/>
+      <feFlood flood-color="#386fff" flood-opacity=".161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="D4wwig20mcord" x="167.71" y="26.943" width="176.573" height="85.95" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur-4"/>
+      <feFlood flood-color="#70727a" flood-opacity=".161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g data-name="Icon 512*512" transform="translate(-4498 -630)">
+    <rect data-name="Rectangle" width="512" height="512" rx="100" transform="translate(4498 630)" fill="#386fff" opacity=".3"/>
+    <g data-name="Group 2368">
+      <g data-name="Group 2363">
+        <g transform="translate(4498 630.003)" filter="url(#D4wwig20mcora)">
+          <rect data-name="Rectangle" width="419.828" height="419.828" rx="84" transform="translate(46.1 52.96)" fill="#fff"/>
+        </g>
+        <g data-name="Group 2" transform="translate(4544.1 682.97)">
+          <rect width="419.828" height="419.828" rx="84" fill="#000e7a"/>
+          <g data-name="Group 2364">
+            <g data-name="Group 2">
+              <g filter="url(#D4wwig20mcorb)" transform="translate(-46.1 -52.97)">
+                <rect data-name="Rectangle" width="419.828" height="389.441" rx="84" transform="translate(46.1 52.97)" fill="#fafbff"/>
+              </g>
+              <g filter="url(#D4wwig20mcorc)" transform="translate(-46.1 -52.97)">
+                <rect data-name="Rectangle" width="419.828" height="360.873" rx="84" transform="translate(46.1 52.97)" fill="#fff"/>
+              </g>
+            </g>
+          </g>
+        </g>
+        <path data-name="Combined Shape" d="M4745.65 981.367a19.471 19.471 0 01-19.467-19.471V906.73h-55.162a19.471 19.471 0 01-19.471-19.471v-16.723a19.471 19.471 0 0119.471-19.467h55.166v-55.162a19.471 19.471 0 0119.472-19.471h16.718a19.471 19.471 0 0119.473 19.471v55.166h55.16a19.471 19.471 0 0119.471 19.471v16.718a19.471 19.471 0 01-19.471 19.474h-55.166v55.16a19.471 19.471 0 01-19.471 19.471z" fill="#386fff"/>
+        <g transform="translate(4498 630.003)" filter="url(#D4wwig20mcord)">
+          <path data-name="Oval" d="M256 100.89l70.373-40.111a11.683 11.683 0 00-5.787-21.839H191.413a11.683 11.683 0 00-5.787 21.843z" fill="#000e7a"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
