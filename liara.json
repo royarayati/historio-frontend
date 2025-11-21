@@ -1,6 +1,7 @@
 {
-    "platform": "static",
+    "platform": "node",
+    "port": 3000,
     "buildCommand": "npm install && npm run build",
-    "outputDir": ".next"
+    "startCommand": "npm run start"
   }
   
