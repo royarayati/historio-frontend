@@ -2,5 +2,10 @@
   "platform": "node",
   "port": 3000,
   "buildCommand": "echo 'local build done'",
-  "startCommand": "npm run server"
+  "startCommand": "npm run server",
+  
+  "build": {
+       "location": "germany"
+    }
+  
 }
