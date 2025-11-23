@@ -32,9 +32,24 @@ const nextConfig = {
   output: "standalone",
   // sync basePasth with images.publicUrlPrefix in plasmic.json
   basePath: '/new_inlab',
+  // Optimize build performance
+  experimental: {
+    optimizeCss: true,        // Optimize CSS during build
+  },
+  // Reduce build time by optimizing webpack
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        moduleIds: 'deterministic',
+      };
+    }
+    return config;
+  },
 };
 
 // First apply PWA configuration with simplified settings to avoid GenerateSW warnings
+// Optimize PWA build to reduce build time
 const pwaConfig = withPWA({
   dest: "public",
   disable: process.env.NODE_ENV === 'development', // Disable PWA in development to avoid warnings
@@ -44,6 +59,11 @@ const pwaConfig = withPWA({
   buildExcludes: [/middleware-manifest\.json$/, /\.map$/],
   // Allow larger files to be precached (default is 2MB)
   maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
+  // Optimize PWA build performance
+  mode: 'production',
+  sw: 'sw.js',
+  // Reduce PWA build time
+  runtimeCaching: [],
 })(nextConfig);
 
 // Then apply Sentry configuration
