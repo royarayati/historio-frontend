@@ -32,10 +32,6 @@ const nextConfig = {
   output: "standalone",
   // sync basePasth with images.publicUrlPrefix in plasmic.json
   basePath: '/new_inlab',
-  // Optimize build performance
-  experimental: {
-    optimizeCss: true,        // Optimize CSS during build
-  },
   // Reduce build time by optimizing webpack
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -45,6 +41,11 @@ const nextConfig = {
       };
     }
     return config;
+  },
+  // Allow build to continue even if some pages fail to prerender
+  // (they will be rendered dynamically at runtime in standalone mode)
+  typescript: {
+    ignoreBuildErrors: false,
   },
 };
 
