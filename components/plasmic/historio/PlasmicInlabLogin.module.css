@@ -1,4 +1,5 @@
 .inlabLogin {
+  background: var(--token-pMLlSiAbZkvs);
   display: grid;
   flex-direction: column;
   position: relative;
@@ -9,8 +10,6 @@
   justify-content: flex-start;
   align-items: center;
   grid-row-gap: var(--token-Tf_KtjkxGdsv);
-  background: linear-gradient(135deg, #a98bff 0%, #d8efff 99%, #8bbfff 100%) 0%
-    0% / 100% 100% repeat;
   transform: none;
   overflow: auto;
   min-width: 0;
@@ -53,6 +52,9 @@
 .redirectToHomepage:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
+}
+.redirectToForms:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
 }
 .pageContent {
   display: flex;
@@ -150,7 +152,7 @@
   font-weight: 800;
   text-decoration-line: none;
   font-size: 20px;
-  color: #573b8e;
+  color: var(--token-8JvL6vHdQN9t);
 }
 .text___09DK {
   position: relative;
@@ -162,7 +164,7 @@
   font-weight: 600;
   text-decoration-line: none;
   font-size: var(--token-NjjyizhNP7nM);
-  color: #5a6b92;
+  color: var(--token-8JvL6vHdQN9t);
 }
 .username:global(.__wab_instance) {
   position: relative;

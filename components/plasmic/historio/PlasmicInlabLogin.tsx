@@ -60,6 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import RedirectToHomepage from "../../RedirectToHomepage"; // plasmic-import: kUF6PPfgGFSr/component
+import RedirectToForms from "../../RedirectToForms"; // plasmic-import: Fz6yW9pyu7bN/component
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import NewNoticeBanner from "../../NewNoticeBanner"; // plasmic-import: QxbRB8zzs3Bv/component
 import Button from "../../Button"; // plasmic-import: 7E4Snh8PZrgu/component
@@ -102,6 +103,7 @@ export const PlasmicInlabLogin__ArgProps = new Array<ArgPropType>();
 export type PlasmicInlabLogin__OverridesType = {
   inlabLogin?: Flex__<"div">;
   redirectToHomepage?: Flex__<typeof RedirectToHomepage>;
+  redirectToForms?: Flex__<typeof RedirectToForms>;
   pageContent?: Flex__<"div">;
   modalNoticeBanner?: Flex__<typeof AntdModal>;
   newNoticeBanner?: Flex__<typeof NewNoticeBanner>;
@@ -385,10 +387,17 @@ function PlasmicInlabLogin__RenderFunc(props: {
           }
         )}
       >
-        <RedirectToHomepage
-          data-plasmic-name={"redirectToHomepage"}
-          data-plasmic-override={overrides.redirectToHomepage}
-          className={classNames("__wab_instance", sty.redirectToHomepage)}
+        {false ? (
+          <RedirectToHomepage
+            data-plasmic-name={"redirectToHomepage"}
+            data-plasmic-override={overrides.redirectToHomepage}
+            className={classNames("__wab_instance", sty.redirectToHomepage)}
+          />
+        ) : null}
+        <RedirectToForms
+          data-plasmic-name={"redirectToForms"}
+          data-plasmic-override={overrides.redirectToForms}
+          className={classNames("__wab_instance", sty.redirectToForms)}
         />
 
         <div
@@ -730,6 +739,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
               projectcss.__wab_text,
               sty.text__rBtcc
             )}
+            dir={"rtl"}
           >
             {
               "\u062b\u0627\u0646\u06cc\u0647\u200c\u0647\u0627 \u0645\u0647\u0645\u200c\u0627\u0646\u062f\u060c \u0641\u0642\u0637 \u062a\u06cc\u06a9 \u0628\u0632\u0646!"
@@ -1036,7 +1046,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 "wrongUser"
               )
             })}
-            color={"purple"}
+            color={"blue"}
             deselected={generateStateValueProp($state, [
               "loginButton",
               "deselected"
@@ -1145,7 +1155,7 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 $steps.loginAction.status === 200
                   ? (() => {
                       const actionArgs = {
-                        destination: `/patient/${""}/summary/${""}`
+                        destination: `/patient/${"1234"}/forms`
                       };
                       return (({ destination }) => {
                         if (
@@ -1330,338 +1340,342 @@ function PlasmicInlabLogin__RenderFunc(props: {
                 : "\u0648\u0631\u0648\u062f \u0628\u0647 \u0647\u06cc\u0633\u062a\u0648\u0631\u06cc\u0648"}
             </div>
           </Button>
-          <div
-            data-plasmic-name={"createAccountResetPassword"}
-            data-plasmic-override={overrides.createAccountResetPassword}
-            className={classNames(
-              projectcss.all,
-              sty.createAccountResetPassword
-            )}
-          >
-            <Button
-              data-plasmic-name={"resetPassword"}
-              data-plasmic-override={overrides.resetPassword}
-              className={classNames("__wab_instance", sty.resetPassword, {
-                [sty.resetPassworddisabledLoginButton]: hasVariant(
-                  $state,
-                  "disabledLoginButton",
-                  "disabledLoginButton"
-                )
-              })}
-              color={"clear"}
-              deselected={generateStateValueProp($state, [
-                "resetPassword",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "resetPassword",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["goToGoogleFormOfCreateEditAccount"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination:
-                          "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToGoogleFormOfCreateEditAccount"] != null &&
-                  typeof $steps["goToGoogleFormOfCreateEditAccount"] ===
-                    "object" &&
-                  typeof $steps["goToGoogleFormOfCreateEditAccount"].then ===
-                    "function"
-                ) {
-                  $steps["goToGoogleFormOfCreateEditAccount"] =
-                    await $steps["goToGoogleFormOfCreateEditAccount"];
-                }
-              }}
-              onDeselectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "resetPassword",
-                    "deselected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onIsDisabledChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "resetPassword",
-                    "isDisabled"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "resetPassword",
-                    "selected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSortDeselectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "resetPassword",
-                    "sortDeselected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSortSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "resetPassword",
-                    "sortSelected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              selected={generateStateValueProp($state, [
-                "resetPassword",
-                "selected"
-              ])}
-              sortDeselected={generateStateValueProp($state, [
-                "resetPassword",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "resetPassword",
-                "sortSelected"
-              ])}
-              target={true}
+          {false ? (
+            <div
+              data-plasmic-name={"createAccountResetPassword"}
+              data-plasmic-override={overrides.createAccountResetPassword}
+              className={classNames(
+                projectcss.all,
+                sty.createAccountResetPassword
+              )}
             >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__iTrTz
-                )}
+              <Button
+                data-plasmic-name={"resetPassword"}
+                data-plasmic-override={overrides.resetPassword}
+                className={classNames("__wab_instance", sty.resetPassword, {
+                  [sty.resetPassworddisabledLoginButton]: hasVariant(
+                    $state,
+                    "disabledLoginButton",
+                    "disabledLoginButton"
+                  )
+                })}
+                color={"clear"}
+                deselected={generateStateValueProp($state, [
+                  "resetPassword",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "resetPassword",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToGoogleFormOfCreateEditAccount"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination:
+                            "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToGoogleFormOfCreateEditAccount"] != null &&
+                    typeof $steps["goToGoogleFormOfCreateEditAccount"] ===
+                      "object" &&
+                    typeof $steps["goToGoogleFormOfCreateEditAccount"].then ===
+                      "function"
+                  ) {
+                    $steps["goToGoogleFormOfCreateEditAccount"] =
+                      await $steps["goToGoogleFormOfCreateEditAccount"];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "resetPassword",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "resetPassword",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "resetPassword",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "resetPassword",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "resetPassword",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
+
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "resetPassword",
+                  "selected"
+                ])}
+                sortDeselected={generateStateValueProp($state, [
+                  "resetPassword",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "resetPassword",
+                  "sortSelected"
+                ])}
+                target={true}
               >
-                {
-                  "\u0628\u0627\u0632\u06cc\u0627\u0628\u06cc \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
-                }
-              </div>
-            </Button>
-            <Button
-              data-plasmic-name={"createAccount"}
-              data-plasmic-override={overrides.createAccount}
-              className={classNames("__wab_instance", sty.createAccount, {
-                [sty.createAccountdisabledLoginButton]: hasVariant(
-                  $state,
-                  "disabledLoginButton",
-                  "disabledLoginButton"
-                )
-              })}
-              color={"clear"}
-              deselected={generateStateValueProp($state, [
-                "createAccount",
-                "deselected"
-              ])}
-              isDisabled={generateStateValueProp($state, [
-                "createAccount",
-                "isDisabled"
-              ])}
-              onClick={async event => {
-                const $steps = {};
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__iTrTz
+                  )}
+                >
+                  {
+                    "\u0628\u0627\u0632\u06cc\u0627\u0628\u06cc \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
+                  }
+                </div>
+              </Button>
+              <Button
+                data-plasmic-name={"createAccount"}
+                data-plasmic-override={overrides.createAccount}
+                className={classNames("__wab_instance", sty.createAccount, {
+                  [sty.createAccountdisabledLoginButton]: hasVariant(
+                    $state,
+                    "disabledLoginButton",
+                    "disabledLoginButton"
+                  )
+                })}
+                color={"clear"}
+                deselected={generateStateValueProp($state, [
+                  "createAccount",
+                  "deselected"
+                ])}
+                isDisabled={generateStateValueProp($state, [
+                  "createAccount",
+                  "isDisabled"
+                ])}
+                onClick={async event => {
+                  const $steps = {};
 
-                $steps["goToGoogleFormOfCreateEditAccount"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination:
-                          "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToGoogleFormOfCreateEditAccount"] != null &&
-                  typeof $steps["goToGoogleFormOfCreateEditAccount"] ===
-                    "object" &&
-                  typeof $steps["goToGoogleFormOfCreateEditAccount"].then ===
-                    "function"
-                ) {
-                  $steps["goToGoogleFormOfCreateEditAccount"] =
-                    await $steps["goToGoogleFormOfCreateEditAccount"];
-                }
-              }}
-              onDeselectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "createAccount",
-                    "deselected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                  $steps["goToGoogleFormOfCreateEditAccount"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination:
+                            "https://docs.google.com/forms/d/e/1FAIpQLScmvuKNhINyeNxRDBA6NRMSCqzl5NCC60Hbkqa6X42kIhXGKQ/viewform"
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToGoogleFormOfCreateEditAccount"] != null &&
+                    typeof $steps["goToGoogleFormOfCreateEditAccount"] ===
+                      "object" &&
+                    typeof $steps["goToGoogleFormOfCreateEditAccount"].then ===
+                      "function"
+                  ) {
+                    $steps["goToGoogleFormOfCreateEditAccount"] =
+                      await $steps["goToGoogleFormOfCreateEditAccount"];
+                  }
+                }}
+                onDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "createAccount",
+                      "deselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onIsDisabledChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "createAccount",
-                    "isDisabled"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onIsDisabledChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "createAccount",
+                      "isDisabled"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "createAccount",
-                    "selected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "createAccount",
+                      "selected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSortDeselectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "createAccount",
-                    "sortDeselected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortDeselectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "createAccount",
+                      "sortDeselected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              onSortSelectedChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "createAccount",
-                    "sortSelected"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onSortSelectedChange={async (...eventArgs: any) => {
+                  ((...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "createAccount",
+                      "sortSelected"
+                    ])(eventArgs[0]);
+                  }).apply(null, eventArgs);
 
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
-                }
-              }}
-              selected={generateStateValueProp($state, [
-                "createAccount",
-                "selected"
-              ])}
-              sortDeselected={generateStateValueProp($state, [
-                "createAccount",
-                "sortDeselected"
-              ])}
-              sortSelected={generateStateValueProp($state, [
-                "createAccount",
-                "sortSelected"
-              ])}
-              target={true}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text___4Ry8Z
-                )}
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                selected={generateStateValueProp($state, [
+                  "createAccount",
+                  "selected"
+                ])}
+                sortDeselected={generateStateValueProp($state, [
+                  "createAccount",
+                  "sortDeselected"
+                ])}
+                sortSelected={generateStateValueProp($state, [
+                  "createAccount",
+                  "sortSelected"
+                ])}
+                target={true}
               >
-                {
-                  "\u0633\u0627\u062e\u062a \u062d\u0633\u0627\u0628 \u06a9\u0627\u0631\u0628\u0631\u06cc"
-                }
-              </div>
-            </Button>
-          </div>
-          <ShareTool
-            data-plasmic-name={"shareTool"}
-            data-plasmic-override={overrides.shareTool}
-            className={classNames("__wab_instance", sty.shareTool)}
-          />
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___4Ry8Z
+                  )}
+                >
+                  {
+                    "\u0633\u0627\u062e\u062a \u062d\u0633\u0627\u0628 \u06a9\u0627\u0631\u0628\u0631\u06cc"
+                  }
+                </div>
+              </Button>
+            </div>
+          ) : null}
+          {false ? (
+            <ShareTool
+              data-plasmic-name={"shareTool"}
+              data-plasmic-override={overrides.shareTool}
+              className={classNames("__wab_instance", sty.shareTool)}
+            />
+          ) : null}
         </div>
       </div>
     </React.Fragment>
@@ -1672,6 +1686,7 @@ const PlasmicDescendants = {
   inlabLogin: [
     "inlabLogin",
     "redirectToHomepage",
+    "redirectToForms",
     "pageContent",
     "modalNoticeBanner",
     "newNoticeBanner",
@@ -1685,6 +1700,7 @@ const PlasmicDescendants = {
     "shareTool"
   ],
   redirectToHomepage: ["redirectToHomepage"],
+  redirectToForms: ["redirectToForms"],
   pageContent: [
     "pageContent",
     "modalNoticeBanner",
@@ -1723,6 +1739,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   inlabLogin: "div";
   redirectToHomepage: typeof RedirectToHomepage;
+  redirectToForms: typeof RedirectToForms;
   pageContent: "div";
   modalNoticeBanner: typeof AntdModal;
   newNoticeBanner: typeof NewNoticeBanner;
@@ -1799,6 +1816,7 @@ export const PlasmicInlabLogin = Object.assign(
   {
     // Helper components rendering sub-elements
     redirectToHomepage: makeNodeComponent("redirectToHomepage"),
+    redirectToForms: makeNodeComponent("redirectToForms"),
     pageContent: makeNodeComponent("pageContent"),
     modalNoticeBanner: makeNodeComponent("modalNoticeBanner"),
     newNoticeBanner: makeNodeComponent("newNoticeBanner"),

@@ -5,7 +5,7 @@
   --plasmic-token-titles: var(--token-QaYKfzjjyGNS);
   --token-SgmzWHxAFlng: #418dff;
   --plasmic-token-button-color: var(--token-SgmzWHxAFlng);
-  --token-8JvL6vHdQN9t: #000000;
+  --token-8JvL6vHdQN9t: #2d3436;
   --plasmic-token-main-text-color: var(--token-8JvL6vHdQN9t);
   --token-mzjk3hbAMm76: 1%;
   --plasmic-token-unnamed-style-token-5: var(--token-mzjk3hbAMm76);
@@ -15,14 +15,12 @@
   --plasmic-token-unnamed-style-token-7: var(--token-TLaHzIwDD0Ek);
   --token-FRpV6b9pir0T: 77.3%;
   --plasmic-token-unnamed-style-token-8: var(--token-FRpV6b9pir0T);
-  --token-4Puxyftex8lT: #bdbdbd;
+  --token-4Puxyftex8lT: #cbd5e1;
   --plasmic-token-border-color: var(--token-4Puxyftex8lT);
   --token-0eYOoylpckD-: 12px;
   --plasmic-token-subtitles: var(--token-0eYOoylpckD-);
   --token-NjjyizhNP7nM: 14px;
   --plasmic-token-buttons: var(--token-NjjyizhNP7nM);
-  --token-8QVs0q0FxNgy: #e4d8ff;
-  --plasmic-token-background-color: var(--token-8QVs0q0FxNgy);
   --token-jvA_miW-v7k5: var(--token--ypw6enySR1T);
   --plasmic-token-error-result-text: var(--token-jvA_miW-v7k5);
   --token-wb2UnuP2ovlT: var(--token-4Puxyftex8lT);
@@ -49,8 +47,6 @@
   --plasmic-token-error-primary: var(--token-DQC3yZGltERk);
   --token-wOrZiG1qM1EW: #1b90fa;
   --plasmic-token-information-primary: var(--token-wOrZiG1qM1EW);
-  --token-ZZPBHQ3c_EoZ: #1b90fa57;
-  --plasmic-token-background-information: var(--token-ZZPBHQ3c_EoZ);
   --token-O2DSAQRKa1sk: #faad1480;
   --plasmic-token-warning-primary: var(--token-O2DSAQRKa1sk);
   --token-Du_gi9fXJ6HB: #faad1457;
@@ -169,8 +165,8 @@
   --plasmic-token-destructive-destructive-soft-foreground: var(
     --token-PKg9z0ftkIQV
   );
-  --token-e7UUbTVcfCcG: #d8efff;
-  --plasmic-token-background-color-2: var(--token-e7UUbTVcfCcG);
+  --token-pMLlSiAbZkvs: #dbe4ee;
+  --plasmic-token-main-background: var(--token-pMLlSiAbZkvs);
 }
 
 @media (min-width: 0px) and (max-width: 760px) {
@@ -333,6 +329,10 @@
   --mixin-Cq4mXq_Ifh-__white-space: pre-wrap;
   --plasmic-mixin-error-color_white-space: var(
     --mixin-Cq4mXq_Ifh-__white-space
+  );
+  --mixin-wgCeVafE1Qd-_white-space: pre-wrap;
+  --plasmic-mixin-main-background-color_white-space: var(
+    --mixin-wgCeVafE1Qd-_white-space
   );
 }
 

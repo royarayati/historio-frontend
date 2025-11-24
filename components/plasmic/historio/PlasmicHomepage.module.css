@@ -9,7 +9,7 @@
   justify-content: flex-start;
   align-items: center;
   padding-top: 0px;
-  background: var(--token-8QVs0q0FxNgy);
+  background: #e4d8ff;
   overflow: auto;
   min-width: 0;
   grid-template-columns:
@@ -825,7 +825,7 @@
   text-align: center;
   font-weight: 700;
   box-shadow: 0px 2px 5px 0px var(--token-wOrZiG1qM1EW);
-  background: var(--token-8QVs0q0FxNgy);
+  background: #e4d8ff;
   margin-top: 4px;
   z-index: 3;
   align-self: center;
@@ -2587,7 +2587,7 @@
   position: fixed;
   margin-top: 4px;
   font-size: var(--token-QaYKfzjjyGNS);
-  background: var(--token-8QVs0q0FxNgy);
+  background: #e4d8ff;
   width: auto;
   text-align: center;
   align-self: center;
@@ -2612,7 +2612,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .لطفامنتظربمانید {
-    background: var(--token-8QVs0q0FxNgy);
+    background: #e4d8ff;
     font-size: var(--token-0eYOoylpckD-);
     width: auto;
     max-width: 60%;
@@ -2789,7 +2789,7 @@
   white-space: pre;
   user-select: none;
   text-decoration-line: none;
-  background: var(--token-8QVs0q0FxNgy);
+  background: #e4d8ff;
 }
 .upl5OadPatientHistory:global(.__wab_instance) {
   max-width: 100%;
@@ -4057,7 +4057,7 @@
   position: relative;
   margin-top: 4px;
   font-size: var(--token-QaYKfzjjyGNS);
-  background: var(--token-8QVs0q0FxNgy);
+  background: #e4d8ff;
   width: 100%;
   text-align: center;
   align-self: center;
@@ -4082,7 +4082,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .لطفامنتظربمانید4 {
-    background: var(--token-8QVs0q0FxNgy);
+    background: #e4d8ff;
     font-size: var(--token-0eYOoylpckD-);
     width: 100%;
     max-width: 60%;
@@ -4197,7 +4197,7 @@
   position: fixed;
   margin-top: 4px;
   font-size: var(--token-QaYKfzjjyGNS);
-  background: var(--token-8QVs0q0FxNgy);
+  background: #e4d8ff;
   width: 100%;
   text-align: center;
   align-self: center;
@@ -4222,7 +4222,7 @@
 }
 @media (min-width: 0px) and (max-width: 760px) {
   .لطفامنتظربمانید3 {
-    background: var(--token-8QVs0q0FxNgy);
+    background: #e4d8ff;
     font-size: var(--token-0eYOoylpckD-);
     width: 100%;
     max-width: 60%;
@@ -4399,7 +4399,7 @@
   white-space: pre;
   user-select: none;
   text-decoration-line: none;
-  background: var(--token-8QVs0q0FxNgy);
+  background: #e4d8ff;
 }
 .upl5OadPatientHistory2:global(.__wab_instance) {
   max-width: 100%;

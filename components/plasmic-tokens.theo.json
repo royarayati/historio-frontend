@@ -31,16 +31,6 @@
       }
     },
     {
-      "name": " Background color",
-      "type": "color",
-      "value": "#E4D8FF",
-      "category": "color",
-      "meta": {
-        "projectId": "sZd5R9LnJ4gbMuoYzR9bKq",
-        "id": "8QVs0q0FxNgy"
-      }
-    },
-    {
       "name": " Success Primary",
       "type": "color",
       "value": "#52C41A",
@@ -73,7 +63,7 @@
     {
       "name": " main text color",
       "type": "color",
-      "value": "#000000",
+      "value": "#2D3436",
       "category": "color",
       "meta": {
         "projectId": "sZd5R9LnJ4gbMuoYzR9bKq",
@@ -108,16 +98,6 @@
       "meta": {
         "projectId": "wjafXWEvDytFogT7SiMy2v",
         "id": "RR9zhGuZEkUi"
-      }
-    },
-    {
-      "name": "Background Information ",
-      "type": "color",
-      "value": "#1B90FA57",
-      "category": "color",
-      "meta": {
-        "projectId": "sZd5R9LnJ4gbMuoYzR9bKq",
-        "id": "ZZPBHQ3c_EoZ"
       }
     },
     {
@@ -3461,16 +3441,6 @@
       }
     },
     {
-      "name": "background_color 2",
-      "type": "color",
-      "value": "#D8EFFF",
-      "category": "color",
-      "meta": {
-        "projectId": "sZd5R9LnJ4gbMuoYzR9bKq",
-        "id": "e7UUbTVcfCcG"
-      }
-    },
-    {
       "name": "border color",
       "type": "color",
       "value": "#BDBDBD",
@@ -3483,7 +3453,7 @@
     {
       "name": "border color",
       "type": "color",
-      "value": "#BDBDBD",
+      "value": "#CBD5E1",
       "category": "color",
       "meta": {
         "projectId": "sZd5R9LnJ4gbMuoYzR9bKq",
@@ -3583,11 +3553,21 @@
     {
       "name": "header color",
       "type": "color",
-      "value": "#BDBDBD",
+      "value": "#CBD5E1",
       "category": "color",
       "meta": {
         "projectId": "sZd5R9LnJ4gbMuoYzR9bKq",
         "id": "wb2UnuP2ovlT"
+      }
+    },
+    {
+      "name": "main_background",
+      "type": "color",
+      "value": "#DBE4EE",
+      "category": "color",
+      "meta": {
+        "projectId": "sZd5R9LnJ4gbMuoYzR9bKq",
+        "id": "pMLlSiAbZkvs"
       }
     },
     {

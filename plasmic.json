@@ -3597,7 +3597,7 @@
           "projectId": "sZd5R9LnJ4gbMuoYzR9bKq",
           "renderModuleFilePath": "plasmic/historio/PlasmicPatientForms.tsx",
           "importSpec": {
-            "modulePath": "../pages/patient/[code]/summary/[adm_id].tsx"
+            "modulePath": "../pages/patient/[code]/forms.tsx"
           },
           "cssFilePath": "plasmic/historio/PlasmicPatientForms.module.css",
           "scheme": "blackbox",
@@ -3680,6 +3680,19 @@
             "modulePath": "Drawer.tsx"
           },
           "cssFilePath": "plasmic/historio/PlasmicDrawer.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "Fz6yW9pyu7bN",
+          "name": "RedirectToForms",
+          "type": "managed",
+          "projectId": "sZd5R9LnJ4gbMuoYzR9bKq",
+          "renderModuleFilePath": "plasmic/historio/PlasmicRedirectToForms.tsx",
+          "importSpec": {
+            "modulePath": "RedirectToForms.tsx"
+          },
+          "cssFilePath": "plasmic/historio/PlasmicRedirectToForms.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         }

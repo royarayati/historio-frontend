@@ -3545,19 +3545,7 @@ function PlasmicPatientProfile__RenderFunc(props: {
                               }
                               throw e;
                             }
-                          })()}/summary/${(() => {
-                            try {
-                              return $ctx.params.adm_id;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()}`
+                          })()}/forms`
                         };
                         return (({ destination }) => {
                           if (

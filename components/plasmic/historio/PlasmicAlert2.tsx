@@ -113,15 +113,15 @@ export const PlasmicAlert2__VariantProps = new Array<VariantPropType>(
 );
 
 export type PlasmicAlert2__ArgsType = {
-  icon?: React.ReactNode;
   header?: React.ReactNode;
   body?: React.ReactNode;
+  icon?: React.ReactNode;
 };
 type ArgPropType = keyof PlasmicAlert2__ArgsType;
 export const PlasmicAlert2__ArgProps = new Array<ArgPropType>(
-  "icon",
   "header",
-  "body"
+  "body",
+  "icon"
 );
 
 export type PlasmicAlert2__OverridesType = {
@@ -130,9 +130,9 @@ export type PlasmicAlert2__OverridesType = {
 };
 
 export interface DefaultAlert2Props {
-  icon?: React.ReactNode;
   header?: React.ReactNode;
   body?: React.ReactNode;
+  icon?: React.ReactNode;
   noIcon?: SingleBooleanChoiceArg<"noIcon">;
   noHeader?: SingleBooleanChoiceArg<"noHeader">;
   noBody?: SingleBooleanChoiceArg<"noBody">;

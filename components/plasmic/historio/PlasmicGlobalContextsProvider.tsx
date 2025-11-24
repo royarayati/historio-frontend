@@ -123,7 +123,7 @@ export default function GlobalContextsProvider(
                 fontSize: "14px",
                 fontWeight: "400",
                 lineHeight: "1.5",
-                color: "#000000",
+                color: "#2D3436",
                 letterSpacing: "normal"
               }
             : true
@@ -132,7 +132,7 @@ export default function GlobalContextsProvider(
                   fontSize: "14px",
                   fontWeight: "400",
                   lineHeight: "1.5",
-                  color: "#000000",
+                  color: "#2D3436",
                   letterSpacing: "normal"
                 }
               : undefined
