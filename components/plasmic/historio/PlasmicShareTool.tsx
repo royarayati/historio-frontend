@@ -193,7 +193,7 @@ function PlasmicShareTool__RenderFunc(props: {
                 customFunction: async () => {
                   return (() => {
                     const currentDomain = window.location.origin;
-                    const dynamicLink = `${currentDomain}/new_inlab/`;
+                    const dynamicLink = `${currentDomain}/`;
                     return $$.copyToClipboard(`🥇 پزشک عزیز؛ شما توسط همکارتون به اینلب پلاس دعوت شدید
 
 🥳 از اینلب پلاس، نسخه جدید اینلب، با قابلیت های جدیدتر لذت ببرید

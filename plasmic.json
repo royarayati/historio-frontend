@@ -12,7 +12,7 @@
   "images": {
     "scheme": "public-files",
     "publicDir": "../public",
-    "publicUrlPrefix": "/new_inlab/"
+    "publicUrlPrefix": "/"
   },
   "tokens": {
     "scheme": "theo",

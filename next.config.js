@@ -30,8 +30,6 @@ const nextConfig = {
   },
   trailingSlash: true,
   output: "standalone",
-  // sync basePasth with images.publicUrlPrefix in plasmic.json
-  basePath: '/new_inlab',
   // Reduce build time by optimizing webpack
   webpack: (config, { isServer }) => {
     if (!isServer) {

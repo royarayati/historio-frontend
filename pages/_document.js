@@ -7,8 +7,8 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="manifest" href="/new_inlab/manifest.json" />
-          <link rel="icon" href="/new_inlab/favicon.ico" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
         <body>
           <Main />
