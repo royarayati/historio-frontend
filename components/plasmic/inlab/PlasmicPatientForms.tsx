@@ -74,7 +74,7 @@ import { ConditionGuard } from "@plasmicpkgs/plasmic-basic-components";
 import Select from "../../Select"; // plasmic-import: Ll-T-rC5P8LC/component
 import MenuItem from "../../MenuItem"; // plasmic-import: 8n8tp8Zp9D88/component
 import SwitchingTab from "../../SwitchingTab"; // plasmic-import: 9Hr8d57xz9H9/component
-import { SimpleFormBuilder } from "../../../utils/SimpleFormBuilder"; // plasmic-import: f6UTVo2tEIbM/codeComponent
+import { SimpleFormBuilder } from "@/components/SimpleFormBuilder"; // plasmic-import: f6UTVo2tEIbM/codeComponent
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: wjafXWEvDytFogT7SiMy2v/styleTokensProvider
 

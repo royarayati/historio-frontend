@@ -11,7 +11,7 @@ import { registerFunction } from '@plasmicapp/react-web/lib/host';
 import { ApiFetcherComponentPlusCache, ApiFetcherComponentPlusCacheMeta } from '../utils/ApiFetcherComponentPlusCache';
 import { ApiFetcherComponentPlus, ApiFetcherMetaPlus } from '../utils/ApiFetcherComponentPlus';
 import { processAndCompressBase64 ,compressMultipleBase64Images } from '../utils/ImageCompression';
-import SimpleFormBuilder, { SimpleFormBuilderMeta } from '../utils/SimpleFormBuilder'; 
+import SimpleFormBuilder, { SimpleFormBuilderMeta } from '@/components/SimpleFormBuilder';
 
 
 // Register global context
