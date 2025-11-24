@@ -2057,20 +2057,6 @@
           "componentType": "component"
         },
         {
-          "id": "LsXtPkapGRoc",
-          "name": "PatientForms",
-          "type": "managed",
-          "projectId": "wjafXWEvDytFogT7SiMy2v",
-          "renderModuleFilePath": "plasmic/inlab/PlasmicPatientForms.tsx",
-          "importSpec": {
-            "modulePath": "../pages/patient/[code]/summary/[adm_id].tsx"
-          },
-          "cssFilePath": "plasmic/inlab/PlasmicPatientForms.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/patient/[code]/summary/[adm_id]"
-        },
-        {
           "id": "4gUzMR7IVe-U",
           "name": "Switch",
           "type": "managed",
