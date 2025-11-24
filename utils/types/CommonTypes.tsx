@@ -19,6 +19,6 @@ export interface GlobalContextType {
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
-  baseUrl: 'https://inlabgr.synappsgroup.com',
+  baseUrl: 'https://historio-frontend.liara.run',
   changeUserCallback: (user: InlabUser) => {},
 });

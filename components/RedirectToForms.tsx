@@ -37,7 +37,7 @@ function RedirectToForms(props: RedirectToFormsProps) {
   // By default, we are just piping all RedirectToFormsProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToForms {...props} />;
+  return <PlasmicRedirectToForms  />;
 }
 
 export default RedirectToForms;
