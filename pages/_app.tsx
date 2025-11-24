@@ -24,19 +24,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     // Initialize analytics
     analytics;
 
-    // Register the service worker when the app is loaded
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker
-          .register('/sw.js') // Path to your service worker in the public directory
-          .then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
-          })
-          .catch((error) => {
-            console.error('Service Worker registration failed:', error);
-          });
-      });
-    }
+    // PWA/Service Worker disabled
+    // Service worker registration removed
   }, []);
 
   return (

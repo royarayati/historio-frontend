@@ -47,23 +47,25 @@ const nextConfig = {
   },
 };
 
+// PWA is disabled
+// PWA configuration commented out
 // First apply PWA configuration with simplified settings to avoid GenerateSW warnings
 // Optimize PWA build to reduce build time
-const pwaConfig = withPWA({
-  dest: "public",
-  disable: process.env.NODE_ENV === 'development', // Disable PWA in development to avoid warnings
-  register: true,
-  skipWaiting: true,
-  // Simplified configuration to avoid multiple GenerateSW calls
-  buildExcludes: [/middleware-manifest\.json$/, /\.map$/],
-  // Allow larger files to be precached (default is 2MB)
-  maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
-  // Optimize PWA build performance
-  mode: 'production',
-  sw: 'sw.js',
-  // Reduce PWA build time
-  runtimeCaching: [],
-})(nextConfig);
+// const pwaConfig = withPWA({
+//   dest: "public",
+//   disable: process.env.NODE_ENV === 'development', // Disable PWA in development to avoid warnings
+//   register: true,
+//   skipWaiting: true,
+//   // Simplified configuration to avoid multiple GenerateSW calls
+//   buildExcludes: [/middleware-manifest\.json$/, /\.map$/],
+//   // Allow larger files to be precached (default is 2MB)
+//   maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
+//   // Optimize PWA build performance
+//   mode: 'production',
+//   sw: 'sw.js',
+//   // Reduce PWA build time
+//   runtimeCaching: [],
+// })(nextConfig);
 
 // Then apply Sentry configuration
 // Temporarily disabled due to module resolution issues
@@ -104,6 +106,6 @@ const pwaConfig = withPWA({
 //   }
 // );
 
-// Temporarily export without Sentry to fix module resolution
-module.exports = pwaConfig;
+// Export without PWA
+module.exports = nextConfig;
 
