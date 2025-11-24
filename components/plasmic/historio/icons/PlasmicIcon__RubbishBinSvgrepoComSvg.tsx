@@ -1,0 +1,40 @@
+/* eslint-disable */
+/* tslint:disable */
+// @ts-nocheck
+/* prettier-ignore-start */
+import React from "react";
+import { classNames } from "@plasmicapp/react-web";
+
+export type RubbishBinSvgrepoComSvgIconProps = React.ComponentProps<"svg"> & {
+  title?: string;
+};
+
+export function RubbishBinSvgrepoComSvgIcon(
+  props: RubbishBinSvgrepoComSvgIconProps
+) {
+  const { className, style, title, ...restProps } = props;
+  return (
+    <svg
+      xmlns={"http://www.w3.org/2000/svg"}
+      fill={"currentColor"}
+      version={"1.1"}
+      viewBox={"0 0 408.483 408.483"}
+      xmlSpace={"preserve"}
+      height={"1em"}
+      className={classNames("plasmic-default__svg", className)}
+      style={style}
+      {...restProps}
+    >
+      {title && <title>{title}</title>}
+
+      <path
+        d={
+          "M87.748 388.784c.461 11.01 9.521 19.699 20.539 19.699h191.911c11.018 0 20.078-8.689 20.539-19.699l13.705-289.316H74.043l13.705 289.316zm159.907-217.455a8.35 8.35 0 018.35-8.349h13.355a8.351 8.351 0 018.35 8.349v165.293a8.35 8.35 0 01-8.35 8.349h-13.355a8.35 8.35 0 01-8.35-8.349V171.329zm-58.439 0a8.35 8.35 0 018.349-8.349h13.355a8.35 8.35 0 018.349 8.349v165.293a8.348 8.348 0 01-8.349 8.349h-13.355a8.348 8.348 0 01-8.349-8.349V171.329zm-58.441 0a8.35 8.35 0 018.349-8.349h13.356a8.35 8.35 0 018.349 8.349v165.293a8.349 8.349 0 01-8.349 8.349h-13.356a8.348 8.348 0 01-8.349-8.349V171.329zM343.567 21.043h-88.535V4.305A4.305 4.305 0 00250.727 0h-92.971a4.305 4.305 0 00-4.304 4.305v16.737H64.916c-7.125 0-12.9 5.776-12.9 12.901V74.47h304.451V33.944c0-7.125-5.775-12.901-12.9-12.901z"
+        }
+      ></path>
+    </svg>
+  );
+}
+
+export default RubbishBinSvgrepoComSvgIcon;
+/* prettier-ignore-end */

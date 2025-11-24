@@ -1,0 +1,126 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+  border-radius: 5px;
+}
+.freeBox___2KFcx {
+  display: flex;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-direction: row;
+  column-gap: 12px;
+  border-radius: 8px;
+  padding: 5px;
+  border: 1px solid #e7e7e7;
+}
+.freeBoxinformation___2KFcxYwXOi {
+  background: var(--token-ZZPBHQ3c_EoZ);
+}
+.freeBoxinformationNoDescription___2KFcXsYrfA {
+  background: var(--token-ZZPBHQ3c_EoZ);
+}
+.freeBoxsuccess___2KFcxtq49C {
+  background: var(--token-9VYeuLcpBrmu);
+}
+.freeBoxsuccessNoDescription___2KFcXfTNjw {
+  background: var(--token-9VYeuLcpBrmu);
+}
+.freeBoxerror___2KFcXocK5R {
+  background: var(--token-6w_oFsPax00P);
+}
+.freeBoxerrorNoDescription___2KFcXtuSl4 {
+  background: var(--token-6w_oFsPax00P);
+}
+.freeBoxwarning___2KFcXxDiZ {
+  background: var(--token-Du_gi9fXJ6HB);
+}
+.freeBoxwarningNoDescription___2KFcxqz0UD {
+  background: var(--token-Du_gi9fXJ6HB);
+}
+.freeBox__bT1S {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  row-gap: 8px;
+  min-width: 0;
+  padding: 0px;
+}
+.h6 {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+}
+.h6noHeader {
+  display: none;
+}
+.text__hJued {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.freeBox__dPkfO {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+}
+.freeBoxnoBody__dPkfOCfT1W {
+  display: none;
+}
+.freeBoxinformationNoDescription__dPkfOsYrfA {
+  display: none;
+}
+.freeBoxsuccessNoDescription__dPkfOfTNjw {
+  display: none;
+}
+.freeBoxerrorNoDescription__dPkfOtuSl4 {
+  display: none;
+}
+.freeBoxwarningNoDescription__dPkfOqz0UD {
+  display: none;
+}
+.text__wflLh {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.freeBox__iGigM {
+  display: flex;
+  position: relative;
+  align-self: flex-start;
+}
+.freeBoxnoIcon__iGigMrxTlF {
+  display: none;
+}
+.svg__xFbsy {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}

@@ -1,0 +1,23 @@
+.root {
+  display: flex;
+  position: relative;
+}
+.filterIcon:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.text__z157M {
+  color: #000000;
+}
+.svg__ge8Wr {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__wIpbu {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}

@@ -1,0 +1,33 @@
+.shareContent {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  position: relative;
+  justify-self: flex-start;
+  column-gap: 8px;
+  padding: 8px;
+}
+.text {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  font-weight: 700;
+  white-space: pre-wrap;
+  user-select: none;
+  line-height: 3;
+  font-size: var(--token-QaYKfzjjyGNS);
+}
+.inlabPlusLinkShare2 {
+  object-fit: cover;
+  color: var(--token-SgmzWHxAFlng);
+  max-width: 100%;
+  width: 28px;
+  height: 43px;
+  margin-left: 0px;
+  flex-shrink: 0;
+}

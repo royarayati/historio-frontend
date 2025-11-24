@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicRedirectToHomepage,
   DefaultRedirectToHomepageProps
-} from "./plasmic/inlab/PlasmicRedirectToHomepage";
+} from "./plasmic/historio/PlasmicRedirectToHomepage";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -38,7 +38,7 @@ function RedirectToHomepage(props: RedirectToHomepageProps) {
   // By default, we are just piping all RedirectToHomepageProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToHomepage  />;
+  return <PlasmicRedirectToHomepage {...props} />;
 }
 
 export default RedirectToHomepage;

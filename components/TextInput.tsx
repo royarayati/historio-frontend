@@ -2,7 +2,7 @@ import * as React from "react";
 import {
   PlasmicTextInput,
   DefaultTextInputProps
-} from "./plasmic/inlab/PlasmicTextInput";
+} from "./plasmic/historio/PlasmicTextInput";
 
 import { TextInputRef } from "@plasmicapp/react-web";
 

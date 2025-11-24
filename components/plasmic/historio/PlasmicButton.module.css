@@ -1,0 +1,243 @@
+.root {
+  display: inline-flex;
+  position: relative;
+  cursor: pointer;
+  width: auto;
+  justify-self: flex-start;
+  height: auto;
+  box-shadow: 0px 6px 2px 0px #3f51b54d;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  background: #3f51b5;
+  border-radius: 8px;
+  padding: 7px 10px;
+}
+.rootisDisabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: auto;
+}
+.rootshape_rounded {
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 100px;
+  border-radius: 999px;
+}
+.rootshape_round {
+  border-radius: 50%;
+  padding: 12px;
+}
+.rootshape_sharp {
+  border-radius: 0px;
+}
+.rootsize4_compact {
+  padding: 6px 16px;
+}
+.rootcolor_blue {
+  background: linear-gradient(90deg, #000e7a 0%, #386fff 100%) 0% 0% / 100% 100%
+    repeat;
+}
+.rootcolor_green {
+  background: #30a46c;
+}
+.rootcolor_red {
+  background: #e54d2e;
+}
+.rootcolor_clear {
+  background: #e8ecf2;
+  border: 1px solid #e8ecf2;
+}
+.rootcolor_link {
+  background: #ffffff00;
+}
+.rootcolor_yellow {
+  background: #ffd666;
+}
+.rootcolor_lightRed {
+  background: #fff2f0;
+}
+.rootselected {
+  background: none;
+  border-top-style: none;
+  border-top-width: 0px;
+  border-right-style: none;
+  border-right-width: 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-left-style: none;
+  border-left-width: 0px;
+  border-color: var(--token-GP3f-LQGVMF4);
+}
+.rootdeselected {
+  background: none;
+  border-width: 1px;
+  border-style: none;
+}
+.rootsortDeselected {
+  box-shadow: none;
+  background: none;
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+}
+.rootsortSelected {
+  background: var(--token-Jviw5UhkIq3V);
+  border-radius: 10px;
+  border: 1px solid var(--token-zeOmhvqK1boB);
+}
+.roothoverSelected {
+  background: var(--token-DQC3yZGltERk);
+  border-radius: 10px;
+}
+.roothoverDeselected {
+  background: none;
+  border-radius: 10px;
+  border: 1px solid #000000;
+}
+.rootsize4_compact_shape_round {
+  padding: 6px;
+}
+.rootselected_color_purple {
+  box-shadow: 0px 3px 1px 0px #3f51b54d;
+  background: #5c6bc0;
+  border-style: none;
+}
+.text__xlEkx {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  min-width: 0;
+  display: none;
+}
+.textcolor_clear__xlEkxt8PJz {
+  display: none;
+}
+.text__mTt {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  min-width: 0;
+  display: none;
+}
+.textcolor_clear__mTtT8PJz {
+  display: none;
+}
+.contentContainer {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  left: auto;
+  top: auto;
+}
+.slotTargetChildren {
+  color: var(--token-4Puxyftex8lT);
+  font-weight: 500;
+  white-space: pre;
+}
+.slotTargetChildrenisDisabled {
+  color: #ffffff;
+}
+.slotTargetChildrencolor_blue {
+  color: #ffffff;
+}
+.slotTargetChildrencolor_green {
+  color: #ffffff;
+}
+.slotTargetChildrencolor_red {
+  color: #ffffff;
+}
+.slotTargetChildrencolor_clear {
+  color: #00000080;
+}
+.slotTargetChildrencolor_link {
+  color: #0091ff;
+}
+.slotTargetChildrencolor_yellow {
+  color: var(--token-8JvL6vHdQN9t);
+}
+.slotTargetChildrencolor_lightRed {
+  color: var(--token-WC8fP7iG0l6W);
+}
+.slotTargetChildrencolor_purple {
+  color: #ffffff;
+}
+.slotTargetChildrenselected {
+  color: var(--token-8JvL6vHdQN9t);
+}
+.slotTargetChildrendeselected {
+  color: #bbbbbb;
+}
+.slotTargetChildrensortDeselected {
+  color: var(--token-Le07ngBUPl2h);
+  font-size: var(--token-0eYOoylpckD-);
+}
+.slotTargetChildrensortSelected {
+  color: var(--token-zeOmhvqK1boB);
+  font-size: var(--token-0eYOoylpckD-);
+}
+.slotTargetChildrenselected_color_purple {
+  color: #ffffff;
+}
+.startIconContainer {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  left: auto;
+  top: auto;
+  bottom: auto;
+  right: auto;
+}
+.slotTargetStartIcon {
+  color: #ededec;
+}
+.slotTargetStartIconcolor_clear {
+  color: #1b1b18;
+}
+.slotTargetStartIconcolor_link {
+  color: #0091ff;
+}
+.svg__gCrFn {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.endIconContainer {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  left: auto;
+  top: auto;
+  bottom: auto;
+  right: auto;
+}
+.slotTargetEndIcon {
+  color: #ededec;
+}
+.slotTargetEndIconcolor_clear {
+  color: #1b1b18;
+}
+.slotTargetEndIconcolor_link {
+  color: #0091ff;
+}
+.svg__p6THf {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}

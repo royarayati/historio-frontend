@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicSwitch,
   DefaultSwitchProps
-} from "./plasmic/inlab/PlasmicSwitch";
+} from "./plasmic/historio/PlasmicSwitch";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can

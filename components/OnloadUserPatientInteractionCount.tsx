@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicOnloadUserPatientInteractionCount,
   DefaultOnloadUserPatientInteractionCountProps
-} from "./plasmic/inlab/PlasmicOnloadUserPatientInteractionCount";
+} from "./plasmic/historio/PlasmicOnloadUserPatientInteractionCount";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -40,7 +40,7 @@ function OnloadUserPatientInteractionCount(
   // By default, we are just piping all OnloadUserPatientInteractionCountProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicOnloadUserPatientInteractionCount  />;
+  return <PlasmicOnloadUserPatientInteractionCount {...props} />;
 }
 
 export default OnloadUserPatientInteractionCount;

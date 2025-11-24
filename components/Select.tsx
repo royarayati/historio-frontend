@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicSelect,
   DefaultSelectProps
-} from "./plasmic/inlab/PlasmicSelect";
+} from "./plasmic/historio/PlasmicSelect";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can

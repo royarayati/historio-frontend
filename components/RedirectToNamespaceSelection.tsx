@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicRedirectToNamespaceSelection,
   DefaultRedirectToNamespaceSelectionProps
-} from "./plasmic/inlab/PlasmicRedirectToNamespaceSelection";
+} from "./plasmic/historio/PlasmicRedirectToNamespaceSelection";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -40,7 +40,7 @@ function RedirectToNamespaceSelection(
   // By default, we are just piping all RedirectToNamespaceSelectionProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToNamespaceSelection  />;
+  return <PlasmicRedirectToNamespaceSelection {...props} />;
 }
 
 export default RedirectToNamespaceSelection;

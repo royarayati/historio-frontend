@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicShareTool,
   DefaultShareToolProps
-} from "./plasmic/inlab/PlasmicShareTool";
+} from "./plasmic/historio/PlasmicShareTool";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined

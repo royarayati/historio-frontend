@@ -2,9 +2,9 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import { PageParamsProvider as PageParamsProvider__ } from "@plasmicapp/react-web/lib/host";
-import GlobalContextsProvider from "../../components/plasmic/inlab/PlasmicGlobalContextsProvider";
+import GlobalContextsProvider from "../../components/plasmic/historio/PlasmicGlobalContextsProvider";
 
-import { PlasmicPatientReception } from "../../components/plasmic/inlab/PlasmicPatientReception";
+import { PlasmicPatientReception } from "../../components/plasmic/historio/PlasmicPatientReception";
 import { useRouter } from "next/router";
 
 function PatientReception() {

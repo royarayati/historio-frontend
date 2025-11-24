@@ -1,0 +1,1871 @@
+.root {
+  display: grid;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  align-content: flex-start;
+  justify-items: center;
+  justify-content: flex-start;
+  align-items: center;
+  background: var(--token-8QVs0q0FxNgy);
+  overflow: auto;
+  min-width: 0;
+  min-height: 0;
+  grid-template-columns:
+    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
+    min(
+      var(--plsmc-standard-width),
+      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
+    )
+    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+}
+.root > * {
+  grid-column: 4;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 60px;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  background: #ffffff;
+  column-gap: 12px;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  padding: 8px;
+}
+.addNewPatientPostApi:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__ys66 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__tYIb {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.patientsListGetApi:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__zz6Yg {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__qEdr0 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__l0Bmk {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: var(--token-aTB4YHyJ9irr);
+  color: var(--token-vdN6xpRhglc2);
+  font-weight: 600;
+  left: 0px;
+  top: 75px;
+  z-index: 1;
+  min-width: 0;
+}
+.addPatient {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 95%;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  row-gap: 12px;
+  overflow: auto;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  margin-bottom: 20px;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  padding: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .addPatient {
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+}
+.text__foVno {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.patientDataSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  margin-bottom: 12px;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 4px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__qfIo7 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  border-bottom: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.fisrtLastNameSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__de7E3 {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.fisrtLastNameInput {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px none var(--token-4Puxyftex8lT);
+}
+.lastName:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.firstName:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.nationalCodeSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__vIpUq {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.nationalCodeInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.dateOfBirthSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__yqrhy {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.dateOfBirthInputSection {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  padding: 8px;
+}
+.yearOfBirthInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.monthOfBirthInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.dayOfBirthInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.genderSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__al7K {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.genderButton:global(.__wab_instance) {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  text-align: center;
+  align-self: center;
+  min-width: 0;
+  padding: 8px;
+}
+.radio__cg5IR:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__bDbb2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.radio__qJgGa:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text___8RLCu {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.phoneNumberSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__wFgk {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.phoneNumberInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.admissionDataSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 4px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__bLaqT {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  border-bottom: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.wardIdNameSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__sMuDm {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.text___6TWwY {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  max-width: 100%;
+  align-self: flex-end;
+  background: #ffffff;
+  text-align: center;
+  min-width: 0;
+  flex-shrink: 0;
+  border: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.serviceIdNameSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__tEfxR {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.text__lHRf8 {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  max-width: 100%;
+  align-self: flex-end;
+  background: #ffffff;
+  text-align: center;
+  min-width: 0;
+  flex-shrink: 0;
+  border: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.physicianIdNameSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__xmW6 {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.physicanIdNameInput {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px none var(--token-4Puxyftex8lT);
+}
+.physicianNameInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.physicanIdInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.roomBedSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__pNgWe {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.roomBedInput {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px none var(--token-4Puxyftex8lT);
+}
+.bedNameInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.roomNameInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.admissionDatetimeSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__jzXjt {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.admissionDatetimeSection2 {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  padding: 8px;
+}
+.yearOfAdmissionInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.monthOfAdmissionInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.dayOfAdmissionInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.dismissedSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__ho3EF {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.dismissedButton:global(.__wab_instance) {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  text-align: center;
+  align-self: center;
+  min-width: 0;
+  padding: 8px;
+}
+.radio___4Ak9Q:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__vXoI {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.radio__nv5MJ:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__esN9 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.dismissionDatetimeSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__yq8Wk {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.dismissionDatetimeSection2 {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  padding: 8px;
+}
+.yearOfDismissionInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.monthOfDismissionInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.dayOfDismissionInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.admitPatientButton:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.svg__anTgt {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg___9F7Qt {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.getManualPatientsEndpoint:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  overflow: auto;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  margin-bottom: 20px;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  padding: 12px;
+}
+.patientCard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px;
+  box-shadow: 2.5px 2.5px 5px 0px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+  min-width: 0;
+  border-radius: 9px;
+  padding: 8px;
+  border: 0.5px solid var(--token-4Puxyftex8lT);
+}
+.patientNameBookmarkIcon {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  align-self: center;
+  height: 50px;
+  column-gap: 2px;
+  min-width: 0;
+  flex-shrink: 0;
+  padding: 0px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .patientNameBookmarkIcon {
+    height: 45px;
+    flex-shrink: 0;
+  }
+}
+.editDeletePatient:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg___4WgwX {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__cjWU {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.editDeletePatient2:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__bkeQn {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__hpwu7 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.firstLastName {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  white-space: pre-wrap;
+  align-self: center;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+  padding: 0px;
+}
+.bookmarkIcon:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .bookmarkIcon:global(.__wab_instance) {
+    flex-shrink: 0;
+  }
+}
+.wardBookmarkType {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px 30px 5px 0px;
+}
+.roomBed {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 12px;
+  text-align: left;
+  white-space: pre-wrap;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+}
+.bookmarkType2 {
+  position: relative;
+  max-width: 100%;
+  text-align: left;
+  align-self: center;
+  color: var(--token-8JvL6vHdQN9t);
+  font-size: var(--token-0eYOoylpckD-);
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none;
+  background: var(--token-8QVs0q0FxNgy);
+}
+.upl5OadPatientHistory:global(.__wab_instance) {
+  max-width: 100%;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .upl5OadPatientHistory:global(.__wab_instance) {
+    width: auto;
+  }
+}
+.text__juyy6 {
+  padding-top: 0px;
+  font-size: var(--token-0eYOoylpckD-);
+  font-family: var(--VazirmatnCustom);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__juyy6 {
+    font-size: 10px;
+  }
+}
+.svg__jTkxL {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__q0YAl {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.wardName {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 12px;
+  text-align: right;
+  white-space: pre-wrap;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+}
+.roomBedPart {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px 30px 5px 10px;
+}
+.roomBedName {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 12px;
+  text-align: right;
+  white-space: pre-wrap;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+}
+.patientDataButtons {
+  position: relative;
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: row;
+  display: flex;
+  min-width: 0;
+  padding: 6px 0px 0px;
+  border-top: 0.5px solid var(--token-pRs3-4jrQ4XQ);
+}
+.patientProfile {
+  position: relative;
+  object-fit: contain;
+  max-width: 100%;
+  object-position: center center;
+  width: 20px;
+  flex-shrink: 0;
+}
+.patientProfile > picture > img {
+  object-fit: contain;
+  object-position: center center;
+}
+.consultNotify {
+  object-fit: contain;
+  max-width: 100%;
+  width: 20px;
+  object-position: center center;
+  flex-shrink: 0;
+}
+.consultNotify > picture > img {
+  object-fit: contain;
+  object-position: center center;
+}
+.radiologyReport {
+  position: relative;
+  object-fit: contain;
+  max-width: 100%;
+  object-position: center center;
+  width: 20px;
+  flex-shrink: 0;
+}
+.radiologyReport > picture > img {
+  object-fit: contain;
+  object-position: center center;
+}
+.laboratoryData {
+  position: relative;
+  object-fit: contain;
+  max-width: 100%;
+  object-position: center center;
+  width: 20px;
+  flex-shrink: 0;
+}
+.laboratoryData > picture > img {
+  object-fit: contain;
+  object-position: center center;
+}
+.text__bBfB1 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  min-width: 0;
+  padding: 4px;
+}
+.editManualPatient:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  overflow: auto;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: relative;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  padding: 12px;
+}
+.conditionGuard:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.editAdmittedPatient {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  row-gap: 12px;
+  overflow: auto;
+  min-width: 0;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .editAdmittedPatient {
+    max-width: 100%;
+    padding: 8px;
+  }
+}
+.editPatientDataSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  margin-bottom: 12px;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 4px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__qySWz {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  border-bottom: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.editFisrtLastNameSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__jeDeh {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.editFisrtLastNameInput {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px none var(--token-4Puxyftex8lT);
+}
+.edittedLastName:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedFirstName:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedNationalCodeSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__xSlox {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.edittedNationalCodeInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedDateOfBirthSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__pFx {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.edittedDateOfBirthInputSection {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  padding: 8px;
+}
+.edittedYearOfBirthInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedMonthOfBirthInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedDayOfBirthInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedGenderSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__mdEY {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.edittedGenderButton:global(.__wab_instance) {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  text-align: center;
+  align-self: center;
+  min-width: 0;
+  padding: 8px;
+}
+.radio__a95Kp:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__xZqhm {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.radio__q32N:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text___5U8Q6 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.edittedPhoneNumberSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__gTqQb {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.edittedPhoneNumberInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedAdmissionDataSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 5px;
+  padding: 4px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__qTZgK {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  border-bottom: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.edittedWardIdNameSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__nmWqH {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.text__vxlP1 {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  max-width: 100%;
+  align-self: flex-end;
+  background: #ffffff;
+  text-align: center;
+  min-width: 0;
+  flex-shrink: 0;
+  border: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.edittedServiceIdNameSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__z9Wc7 {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.text__iSVen {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  max-width: 100%;
+  align-self: flex-end;
+  background: #ffffff;
+  text-align: center;
+  min-width: 0;
+  flex-shrink: 0;
+  border: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.edittedPhysicianIdNameSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__z40QX {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.edittedPhysicanIdNameInput {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px none var(--token-4Puxyftex8lT);
+}
+.edittedPhysicianNameInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedPhysicanIdInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedRoomBedSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__vCaXf {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.edittedRoomBedInput {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px none var(--token-4Puxyftex8lT);
+}
+.edittedBedNameInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedRoomNameInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedAdmissionDatetimeSection3 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__w7Klr {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.edittedAdmissionDatetimeSection4 {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  padding: 8px;
+}
+.edittedYearOfAdmissionInput2:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedMonthOfAdmissionInput2:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedDayOfAdmissionInput2:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedDismissedSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__orHjd {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.edittedDismissedButton:global(.__wab_instance) {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  text-align: center;
+  align-self: center;
+  min-width: 0;
+  padding: 8px;
+}
+.radio__mlAaK:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__aofkO {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.radio__tBxdj:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__i051M {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.edittedDismissionDatetimeSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  border-radius: 0px;
+  padding: 8px;
+  border: 0.1px solid var(--token-4Puxyftex8lT);
+}
+.text__xZpov {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  align-self: flex-end;
+}
+.edittedDismissionDatetimeSection2 {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  column-gap: 4px;
+  min-width: 0;
+  padding: 8px;
+}
+.edittedYearOfDismissionInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedMonthOfDismissionInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.edittedDayOfDismissionInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.editPatientButton:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.text__d0V4F {
+  padding-left: 0px;
+}
+.svg___8BAk0 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__aaF07 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.deletePatient:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.freeBox___7EoA4 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.wardModal:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.freeBox__lMed {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.searchWardInput:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__giPnb {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+  color: var(--token-SgmzWHxAFlng);
+}
+.svg___3D4Cx {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.getWardApi:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.freeBox__su0Je {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
+  overflow: auto;
+  min-width: 0;
+  padding: 8px;
+}
+.text__hn048 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 4px;
+  border: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.serviceModal:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.freeBox__czRUu {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.searchServiceInput:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__nbrVm {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+  color: var(--token-SgmzWHxAFlng);
+}
+.svg__opNip {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.getServiceApi:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.freeBox__tnn8J {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
+  overflow: auto;
+  min-width: 0;
+  padding: 8px;
+}
+.text__svzhJ {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 4px;
+  border: 0.1px solid var(--token-GP3f-LQGVMF4);
+}
+.homepageSwitchingTab {
+  position: fixed;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  margin-top: 18px;
+  left: 0;
+  top: auto;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  display: none;
+  padding: 20px 11.3% 5%;
+}
+.switchingTab:global(.__wab_instance) {
+  max-width: 50%;
+  position: relative;
+}
+.img___2ByiR {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  margin: 0;
+  border-right: 1px none #aeaeae;
+}
+.img___2ByiR > picture > img {
+  object-fit: fill;
+}
+.img___3Wr7J {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  display: none;
+  margin: 0;
+  border-left: 1px solid #00000045;
+}
+.img___3Wr7J > picture > img {
+  object-fit: fill;
+}
+.img__rsL72 {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  height: 25px;
+  display: none;
+  margin: 1px;
+  border-right: 1px solid #00000045;
+  border-left: 1px solid #00000045;
+}
+.img__rsL72 > picture > img {
+  object-fit: fill;
+}
+.img__ucQrp {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 25%;
+  border-right-style: none;
+  border-right-width: 1px;
+  height: 25px;
+  display: none;
+  margin: 0;
+}
+.img__ucQrp > picture > img {
+  object-fit: fill;
+}

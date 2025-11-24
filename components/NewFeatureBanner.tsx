@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicNewFeatureBanner,
   DefaultNewFeatureBannerProps
-} from "./plasmic/inlab/PlasmicNewFeatureBanner";
+} from "./plasmic/historio/PlasmicNewFeatureBanner";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined

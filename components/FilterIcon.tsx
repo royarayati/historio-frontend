@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicFilterIcon,
   DefaultFilterIconProps
-} from "./plasmic/inlab/PlasmicFilterIcon";
+} from "./plasmic/historio/PlasmicFilterIcon";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined

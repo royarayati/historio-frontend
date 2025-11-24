@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicRedirectToInlabLogin,
   DefaultRedirectToInlabLoginProps
-} from "./plasmic/inlab/PlasmicRedirectToInlabLogin";
+} from "./plasmic/historio/PlasmicRedirectToInlabLogin";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -38,7 +38,7 @@ function RedirectToInlabLogin(props: RedirectToInlabLoginProps) {
   // By default, we are just piping all RedirectToInlabLoginProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicRedirectToInlabLogin  />;
+  return <PlasmicRedirectToInlabLogin {...props} />;
 }
 
 export default RedirectToInlabLogin;

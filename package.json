@@ -78,7 +78,7 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
-    "@plasmicapp/cli": "^0.1.342",
+    "@plasmicapp/cli": "^0.1.348",
     "typescript": "5.8.3"
   }
 }

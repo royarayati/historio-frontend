@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicBookmarkIcon2,
   DefaultBookmarkIcon2Props
-} from "./plasmic/inlab/PlasmicBookmarkIcon2";
+} from "./plasmic/historio/PlasmicBookmarkIcon2";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined

@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicAlert3,
   DefaultAlert3Props
-} from "./plasmic/inlab/PlasmicAlert3";
+} from "./plasmic/historio/PlasmicAlert3";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined

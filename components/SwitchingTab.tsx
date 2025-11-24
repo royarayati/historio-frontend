@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicSwitchingTab,
   DefaultSwitchingTabProps
-} from "./plasmic/inlab/PlasmicSwitchingTab";
+} from "./plasmic/historio/PlasmicSwitchingTab";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined

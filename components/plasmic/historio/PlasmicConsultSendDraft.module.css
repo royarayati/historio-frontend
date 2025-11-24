@@ -1,0 +1,1193 @@
+.consultSend {
+  display: grid;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  align-content: flex-start;
+  justify-items: center;
+  justify-content: flex-start;
+  align-items: center;
+  background: var(--token-8QVs0q0FxNgy);
+  min-width: 0;
+  min-height: 0;
+  grid-template-columns:
+    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
+    min(
+      var(--plsmc-standard-width),
+      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
+    )
+    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+}
+.consultSend > * {
+  grid-column: 4;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .consultSend > * {
+    grid-column: 4;
+  }
+}
+.redirectToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+}
+.redirectToNamespaceSelection:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  width: 100%;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  padding: 8px;
+  border-bottom: 0.5px solid #000000;
+}
+.patientDataForHeader:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.freeBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.patientNameAgeGender {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin-bottom: 2px;
+  min-width: 0;
+}
+.patientService {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-top-style: dashed;
+  border-top-width: 1px;
+  min-width: 0;
+}
+.sendConsultContent {
+  display: block;
+  position: fixed;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: 0;
+  top: 100px;
+  z-index: 1;
+  bottom: 70px;
+  right: 0;
+  overflow: auto;
+  padding: 8px;
+}
+.getUniqueConsult:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+.sendConsult {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: auto;
+  box-shadow: none;
+  background: #ffffff;
+  left: auto;
+  top: auto;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: auto;
+  max-width: 100%;
+  row-gap: 4px;
+  min-width: 0;
+  border-radius: 5px;
+  border: 1px solid var(--token-4Puxyftex8lT);
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .sendConsult {
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+}
+.consultHeader {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.deleteConsult {
+  object-fit: cover;
+  max-width: 100%;
+  color: var(--token-DQC3yZGltERk);
+  width: 30px;
+  height: 30px;
+  align-self: center;
+  flex-shrink: 0;
+}
+.pageFunctionTopic {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-weight: 700;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+  padding: 10px;
+}
+.senderServiceContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.senderService {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  text-align: right;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+  min-height: 0;
+  padding: 5px 10px 5px 5px;
+  border: 1px none #000000;
+}
+.selectedSenderService {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  background: #ffffff;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: text;
+  text-decoration-line: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  min-width: 0;
+  min-height: 0;
+  padding: 5px;
+}
+.receiverServiceContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.receiverService {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  text-align: right;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+  padding: 5px 10px 5px 5px;
+  border: 1px none #000000;
+}
+.selectedReceiverService {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  background: #ffffff;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: text;
+  text-decoration-line: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  min-width: 0;
+  min-height: 0;
+  padding: 5px;
+}
+.receiverDoctorContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.receiverDoctor {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  text-align: right;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  min-width: 0;
+  padding: 5px 10px 5px 5px;
+  border: 1px none #000000;
+}
+.selectedReceiverDoctor {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  user-select: text;
+  min-width: 0;
+  padding: 5px;
+}
+.patientPresentIllnessContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.presentIlnessTitleContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.presentIllnessTitle {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  font-weight: 700;
+  color: #00000080;
+  text-align: right;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  align-self: center;
+  min-width: 0;
+  padding: 5px 2px 5px 5px;
+  border: 1px none #000000;
+}
+.previousPresentIllness {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  padding-bottom: 5px;
+  font-weight: 700;
+  color: #00000080;
+  text-align: center;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-0eYOoylpckD-);
+  font-style: normal;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  padding-top: 5px;
+  align-self: center;
+  min-width: 0;
+  border-radius: 5px;
+  border: 1px dashed #000000;
+}
+.patientPresentIllness {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-top-style: none;
+  border-top-width: 1px;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-left-style: none;
+  border-left-width: 1px;
+  min-width: 0;
+  padding: 10px;
+}
+.consultEmergencyStatusButton:global(.__wab_instance) {
+  max-width: 100%;
+  width: 70px;
+  height: 30px;
+  margin-right: 30px;
+  margin-bottom: 5px;
+  align-self: flex-end;
+  flex-shrink: 0;
+}
+.emergentOff {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: var(--token-8JvL6vHdQN9t);
+  padding-right: 8px;
+  padding-left: 8px;
+  margin-bottom: 0px;
+  min-width: 0;
+}
+.svg__yxOLm {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__gGPT {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.guide {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 9px;
+  color: #000000b3;
+  min-width: 0;
+}
+.sendConsultAlertContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  padding: 8px;
+}
+.sendConsultUnsuccessfully:global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  margin-top: 5px;
+}
+.text__jiQhT {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text___3D52A {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  min-width: 0;
+}
+.svg__x4Nys {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.sendOrDraftButton {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.draftConsultButton:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+  margin: 5px;
+}
+.saveDraftConsult {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 500;
+  font-style: normal;
+  color: #000000;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__bhLMi {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__oQh9Z {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.sendConsultButton:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+  margin: 5px;
+}
+.sendConsult2 {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__hFKjD {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__y1At4 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.switchingTab {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  left: 0;
+  top: auto;
+  z-index: 1;
+  right: 0;
+  bottom: 10px;
+  padding: 0px 40px 5px;
+}
+.switchingTab___6QrZv:global(.__wab_instance) {
+  max-width: 100%;
+}
+.homepage {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  height: 25px;
+  margin: 0;
+  border-right: 1px none #aeaeae;
+}
+.homepage > picture > img {
+  object-fit: fill;
+}
+.consultList {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  height: 25px;
+  margin: 0;
+  border-left: 1px solid #00000045;
+}
+.consultList > picture > img {
+  object-fit: fill;
+}
+.patientProfile {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  height: 25px;
+  margin: 0;
+  border-left: 1px solid #00000045;
+}
+.patientProfile > picture > img {
+  object-fit: fill;
+}
+.imagingReportList {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  height: 25px;
+  margin: 1px;
+  border-right: 1px solid #00000045;
+  border-left: 1px solid #00000045;
+}
+.imagingReportList > picture > img {
+  object-fit: fill;
+}
+.laboratoryData {
+  position: relative;
+  object-fit: fill;
+  max-width: 100%;
+  width: 20%;
+  border-right-style: none;
+  border-right-width: 1px;
+  height: 25px;
+  margin: 0;
+}
+.laboratoryData > picture > img {
+  object-fit: fill;
+}
+.getServices:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.modalServicesList:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  height: 76px;
+}
+.modalServicesList__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.servicesList {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+.conditionGuard:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.searchBarServicesContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.searchBarServices:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__tBrb8 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+  color: var(--token-SgmzWHxAFlng);
+}
+.clearContent2 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.noServices {
+  height: auto;
+  text-align: center;
+  background: #ffffff;
+  width: 270px;
+  font-size: var(--token-0eYOoylpckD-);
+  text-decoration-line: none;
+  font-style: normal;
+  box-shadow: 0px 4px 16px 0px #07060666;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid var(--token-SgmzWHxAFlng);
+}
+.servicesName {
+  height: auto;
+  text-align: center;
+  background: #ffffff;
+  width: 270px;
+  font-size: var(--token-0eYOoylpckD-);
+  text-decoration-line: none;
+  font-style: normal;
+  box-shadow: 0px 4px 16px 0px #07060666;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid var(--token-SgmzWHxAFlng);
+}
+.text___7DpGq {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  background: #ffffff;
+  min-width: 0;
+}
+.text___3D4Nn {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  background: #ffffff;
+  min-width: 0;
+}
+.getUsers:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.modalReceiverDoctor:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  height: 76px;
+}
+.modalReceiverDoctor__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.receiverDoctorList {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+.doctorNameInputContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin-bottom: 10px;
+  min-width: 0;
+  padding: 8px;
+}
+.doctorNameInput:global(.__wab_instance) {
+  max-width: 100%;
+  width: 270px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.svg__jNDst {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+  color: var(--token-SgmzWHxAFlng);
+}
+.clearContent {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.noDoctors {
+  height: auto;
+  text-align: center;
+  background: #ffffff;
+  width: 270px;
+  font-size: var(--token-0eYOoylpckD-);
+  text-decoration-line: none;
+  font-style: normal;
+  box-shadow: 0px 4px 16px 0px #07060666;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid var(--token-SgmzWHxAFlng);
+}
+.doctorNames {
+  height: auto;
+  text-align: center;
+  background: #ffffff;
+  width: 270px;
+  font-size: var(--token-0eYOoylpckD-);
+  text-decoration-line: none;
+  font-style: normal;
+  box-shadow: 0px 4px 16px 0px #07060666;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid var(--token-SgmzWHxAFlng);
+}
+.text___00PTt {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  background: #ffffff;
+}
+.getPresentIlness:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.modalPatientPresentIlness:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  height: 76px;
+}
+.modalPatientPresentIlness__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.patientPresentIlness {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+.presentIllness {
+  height: auto;
+  text-align: center;
+  background: #ffffff;
+  width: 270px;
+  font-size: var(--token-0eYOoylpckD-);
+  text-decoration-line: none;
+  font-style: normal;
+  box-shadow: 0px 4px 16px 0px #07060666;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid var(--token-SgmzWHxAFlng);
+}
+.noPresentIllness {
+  height: auto;
+  text-align: center;
+  background: #ff4d4f;
+  width: 270px;
+  font-size: var(--token-0eYOoylpckD-);
+  text-decoration-line: none;
+  font-style: normal;
+  box-shadow: 0px 4px 16px 0px #07060666;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-family: var(--VazirmatnCustom);
+  font-weight: 400;
+  color: var(--token-8JvL6vHdQN9t);
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid #ff4d4f;
+}
+.titleContent {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+.text__fwhOu {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+  background: #ffffff;
+  min-width: 0;
+}
+.svg {
+  object-fit: cover;
+  max-width: 100%;
+  height: 1em;
+  display: none;
+}
+.modalDeleteConsultConfirmation:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.modalDeleteConsultConfirmation__modal :global(.ant-modal-content) {
+  background: #ffffff;
+  outline: none;
+}
+.confirmationContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+}
+.confirmationYesNo {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  min-width: 0;
+}
+.noConfirm:global(.__wab_instance) {
+  max-width: 100%;
+}
+.text__wtqJr {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg__fwenU {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__u8L {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.confirm:global(.__wab_instance) {
+  max-width: 100%;
+  margin-left: 30px;
+}
+.text___8NR5D {
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre;
+  user-select: none;
+  text-decoration-line: none !important;
+}
+.svg___9TIAw {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__gob7I {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.unsuccessfulDeleteConsult:global(.__wab_instance) {
+  max-width: 100%;
+  width: 188px;
+  margin-right: 0px;
+}
+.text__dc4ZX {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__jhA6C {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none !important;
+  min-width: 0;
+}
+.svg__eeptt {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  height: 24px;
+  align-self: auto;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  background: #ffffff;
+  min-width: 0;
+}
+.text__rtlUi {
+  background: none;
+  margin-bottom: 10px;
+  font-family: var(--VazirmatnCustom);
+  font-size: var(--token-QaYKfzjjyGNS);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--token-8JvL6vHdQN9t);
+  text-align: center;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  user-select: none;
+  text-decoration-line: none;
+}
