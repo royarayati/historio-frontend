@@ -24,8 +24,31 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     // Initialize analytics
     analytics;
 
-    // PWA/Service Worker disabled
-    // Service worker registration removed
+    // Unregister any existing service workers (PWA disabled)
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (const registration of registrations) {
+          registration.unregister().then((success) => {
+            if (success) {
+              console.log('Service Worker unregistered successfully');
+            }
+          });
+        }
+      });
+      
+      // Also clear service worker cache
+      if ('caches' in window) {
+        caches.keys().then((cacheNames) => {
+          return Promise.all(
+            cacheNames.map((cacheName) => {
+              return caches.delete(cacheName);
+            })
+          );
+        }).then(() => {
+          console.log('Service Worker caches cleared');
+        });
+      }
+    }
   }, []);
 
   return (
