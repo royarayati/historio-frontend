@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "NODE_OPTIONS=--max-old-space-size=4096 next build",
-    "start": "HOSTNAME=0.0.0.0 PORT=3000 node .next/standalone/server.js",
-    "server": "HOSTNAME=0.0.0.0 PORT=3000 node .next/standalone/server.js",
+    "start": "next start -H 0.0.0.0 -p 3000",
+    "server": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint"
   },
   "dependencies": {

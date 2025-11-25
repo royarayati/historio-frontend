@@ -29,7 +29,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV !== "development"     // Remove console.log in production
   },
   trailingSlash: true,
-  output: "standalone",
+  // output: "standalone", // Disabled - causing static file serving issues on Liara
   // Reduce build time by optimizing webpack
   webpack: (config, { isServer }) => {
     if (!isServer) {
