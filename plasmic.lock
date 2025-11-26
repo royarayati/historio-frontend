@@ -219,15 +219,10 @@
     },
     {
       "projectId": "caTPwKxj5ZrD9LQ7DMdK4Z",
-      "version": "3.47.0",
+      "version": "3.48.0",
       "dependencies": {},
       "lang": "ts",
       "fileLocks": [
-        {
-          "assetId": "caTPwKxj5ZrD9LQ7DMdK4Z",
-          "type": "projectCss",
-          "checksum": "56a5d447501c0753e4cf451641894e78"
-        },
         {
           "assetId": "caTPwKxj5ZrD9LQ7DMdK4Z",
           "checksum": "efdcd613ac98718578f9c563cd75fd38",
@@ -237,6 +232,11 @@
           "assetId": "caTPwKxj5ZrD9LQ7DMdK4Z",
           "checksum": "da63876a1ab2ffe408f66af115d28c46",
           "type": "styleTokensProvider"
+        },
+        {
+          "assetId": "caTPwKxj5ZrD9LQ7DMdK4Z",
+          "type": "projectCss",
+          "checksum": "56a5d447501c0753e4cf451641894e78"
         }
       ],
       "codegenVersion": "0.0.2"
@@ -1751,7 +1751,7 @@
         "i3z63WaCLuRiSZRBwZC8d1": "6.26.0",
         "28Ba3BDvRe7EiWdfFNnLB6": "2.44.0",
         "jkU633o1Cz7HrJdwdxhVHk": "16.19.0",
-        "caTPwKxj5ZrD9LQ7DMdK4Z": "3.47.0",
+        "caTPwKxj5ZrD9LQ7DMdK4Z": "3.48.0",
         "9Vr5YWkf3w7jj6SsTcCEta": "0.19.0",
         "szjgMQpPpxhmkjnaBvZQJG": "2.34.0",
         "q8iq2J191QypeBqVSHzb6M": "0.15.0",
@@ -1956,12 +1956,12 @@
         {
           "type": "renderModule",
           "assetId": "TI2lO6OXxrG1",
-          "checksum": "23647af6d62a2f0ed76f8e23d1ab42d5"
+          "checksum": "f907046e2a9e26b0ba538e848bad0d3f"
         },
         {
           "type": "cssRules",
           "assetId": "TI2lO6OXxrG1",
-          "checksum": "23647af6d62a2f0ed76f8e23d1ab42d5"
+          "checksum": "f907046e2a9e26b0ba538e848bad0d3f"
         },
         {
           "type": "renderModule",
