@@ -1,3 +1,3 @@
 window.env = {
-    INLAB_API_URL: "https://inlabdemo.synappsgroup.com"
+    INLAB_API_URL: "https://historio-backend.liara.run"
 };

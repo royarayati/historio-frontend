@@ -23,7 +23,20 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
   let baseUrl = '';
   if (typeof window !== 'undefined') {
     logForDev('AuthGlobalContext: window is defined');
-    baseUrl = window.env.INLAB_API_URL;
+    // Safely read INLAB_API_URL from window.env if available
+    if (window.env && window.env.INLAB_API_URL) {
+      baseUrl = window.env.INLAB_API_URL;
+    } else {
+      // Fallback: use environment variable or backend default
+      // Note: update NEXT_PUBLIC_API_BASE in your env if needed
+      baseUrl = process.env.NEXT_PUBLIC_API_BASE || '';
+      logForDev(
+        `AuthGlobalContext: window.env.INLAB_API_URL is undefined, using fallback baseUrl="${baseUrl}"`
+      );
+    }
+  } else {
+    // Server-side render fallback – try env var
+    baseUrl = process.env.NEXT_PUBLIC_API_BASE || '';
   }
 
   ///////// SETUP USER //////////
