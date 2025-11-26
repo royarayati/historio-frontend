@@ -20,10 +20,13 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
   const router = useRouter();
   ////////// SET BASE URL //////////
 
-  let baseUrl = '';
-  if (typeof window !== 'undefined') {
-    logForDev('AuthGlobalContext: window is defined');
+  // Decide backend base URL
+  let baseUrl = 'https://historio-backend.liara.run'; // safe default for production
+  if (typeof window !== 'undefined' && (window as any).env?.INLAB_API_URL) {
+    logForDev('AuthGlobalContext: window is defined, using window.env.INLAB_API_URL');
     baseUrl = window.env.INLAB_API_URL;
+  } else {
+    logForDev('AuthGlobalContext: window.env.INLAB_API_URL not found, using default baseUrl: ' + baseUrl);
   }
 
   ///////// SETUP USER //////////
