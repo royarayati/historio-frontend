@@ -19,6 +19,7 @@ export interface GlobalContextType {
 }
 
 export const GlobalContext = createContext<GlobalContextType>({
-  baseUrl: 'https://historio-frontend.liara.run',
+  // Default backend base URL for all API calls from static contexts
+  baseUrl: 'https://historio-backend.liara.run',
   changeUserCallback: (user: InlabUser) => {},
 });
