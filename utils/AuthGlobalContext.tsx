@@ -21,7 +21,6 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
   ////////// SET BASE URL //////////
 
   let baseUrl = '';
-
   if (typeof window !== 'undefined') {
     logForDev('AuthGlobalContext: window is defined');
     baseUrl = window.env.INLAB_API_URL;
