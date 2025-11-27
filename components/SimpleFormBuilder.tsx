@@ -1070,8 +1070,8 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
             const baseUrl = getBaseUrl();
             const authHeaders = getAuthHeaders();
             
-            // Use the specific endpoint format: /template/template_id=1
-            const templateUrl = `${baseUrl}/api/v3/remote_his_manual/template/template_id=${finalTemplateId}`;
+            // Use query parameter format: /template?template_id=1
+            const templateUrl = `${baseUrl}/api/v3/remote_his_manual/template?template_id=${finalTemplateId}`;
             
             console.log(`🔍 Fetching template from: ${templateUrl}`);
             
@@ -1145,8 +1145,8 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
           const baseUrl = getBaseUrl();
           const authHeaders = getAuthHeaders();
           
-          // Use the specific endpoint format: /template/template_id=1
-          const templateUrl = `${baseUrl}/api/v3/remote_his_manual/template/template_id=${templateId}`;
+          // Use query parameter format: /template?template_id=1
+          const templateUrl = `${baseUrl}/api/v3/remote_his_manual/template?template_id=${templateId}`;
           
           console.log(`🔍 Fetching template from: ${templateUrl}`);
           
