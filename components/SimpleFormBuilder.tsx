@@ -878,8 +878,28 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 }) => {
   // Dynamic base URL - use environment variable or fallback to current origin
   const getBaseUrl = () => {
-    return process.env.NEXT_PUBLIC_API_BASE || (typeof window !== 'undefined' ? window.location.origin : '');
-  };
+  const raw =
+    process.env.NEXT_PUBLIC_API_BASE ||
+    (typeof window !== "undefined" ? window.location.origin : "");
+
+  return raw.replace(/\/+$/, "");
+};
+
+
+
+const buildApiUrl = (path: string, params?: Record<string, any>): string => {
+  const base = getBaseUrl();
+  const url = new URL(path.startsWith("/") ? path : `/${path}` , base);
+  if (params) {
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        url.searchParams.set(key, String(value));
+      }
+    });
+  }
+  return url.toString();
+};
+
 
   // Get authentication token from localStorage
   const getAuthToken = (): string | null => {
@@ -1068,16 +1088,26 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 
           try {
             const baseUrl = getBaseUrl();
-            const templateUrl = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
-            templateUrl.searchParams.set("template_id", finalTemplateId);
-            const templateRes = await fetch(templateUrl.toString(), {
+            const authHeaders = getAuthHeaders();
+            
+            // Use query parameter format: /template?template_id=1
+            const url = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
+            url.searchParams.set("template_id", finalTemplateId);
+            const templateUrl = url.toString();
+            
+            console.log(`🔍 Fetching template from: ${templateUrl}`);
+            
+            const templateRes = await fetch(templateUrl, {
               method: 'GET',
-              headers: getAuthHeaders(),
+              headers: authHeaders,
             });
+            
             if (!templateRes.ok) {
               throw new Error(`HTTP ${templateRes.status}: خطا در واکشی قالب`);
             }
+            
             const templateData = await templateRes.json();
+            
             const template = templateData?.data || templateData;
             loadedSchema = template?.schema;
             loadedUiSchema = template?.ui_schema || template?.uiSchema || {};
@@ -1130,26 +1160,39 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         setLoading(true);
         setError(null);
         try {
-          const baseUrl = getBaseUrl();
-          const url = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
-          if (templateId) {
-            url.searchParams.set("template_id", templateId);
+          if (!templateId) {
+            throw new Error("templateId is required");
           }
-          const res = await fetch(url.toString(), {
+          
+          const baseUrl = getBaseUrl();
+          const authHeaders = getAuthHeaders();
+          
+          // Use query parameter format: /template?template_id=1
+          const url = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
+          url.searchParams.set("template_id", templateId);
+          const templateUrl = url.toString();
+          
+          console.log(`🔍 Fetching template from: ${templateUrl}`);
+          
+          const res = await fetch(templateUrl, {
             method: 'GET',
-            headers: getAuthHeaders(),
+            headers: authHeaders,
           });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = await res.json();
+          
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status}: خطا در واکشی قالب`);
+          }
+          
+          const templateData = await res.json();
 
           // Handle both response formats:
           // 1. Wrapped: { status_code: 200, data: { schema, ui_schema, ... } }
           // 2. Direct: { schema, ui_schema, ... }
-          const templateData = data?.data || data;
-          const loadedSchema = templateData?.schema;
-          const loadedUiSchema = templateData?.ui_schema || templateData?.uiSchema || {};
-          const loadedName = templateData?.name || loadedSchema?.title;
-          const loadedTemplateId = templateData?.id ? parseInt(templateData.id) : (templateId ? parseInt(templateId) : null);
+          const template = templateData?.data || templateData;
+          const loadedSchema = template?.schema;
+          const loadedUiSchema = template?.ui_schema || template?.uiSchema || {};
+          const loadedName = template?.name || loadedSchema?.title;
+          const loadedTemplateId = template?.id ? parseInt(template.id) : (templateId ? parseInt(templateId) : null);
 
           console.log("✅ Loaded schema", loadedSchema);
           console.log("✅ Loaded uiSchema", loadedUiSchema);
