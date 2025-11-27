@@ -878,7 +878,8 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 }) => {
   // Dynamic base URL - use environment variable or fallback to current origin
   const getBaseUrl = () => {
-    return process.env.NEXT_PUBLIC_API_BASE || (typeof window !== 'undefined' ? window.location.origin : '');
+    const raw = process.env.NEXT_PUBLIC_API_BASE || (typeof window !== 'undefined' ? window.location.origin : '');
+    return raw.replace(/\/+$/, ''); // 🔥 حذف اسلش‌های انتهایی برای جلوگیری از /template/?
   };
 
   // Get authentication token from localStorage
