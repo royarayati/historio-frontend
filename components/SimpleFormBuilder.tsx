@@ -876,14 +876,25 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
   onSubmit,
   onChange,
 }) => {
-  // Dynamic base URL - use environment variable or fallback to current origin
+  // Dynamic base URL - use same logic as AuthGlobalContext for consistency
   const getBaseUrl = () => {
-  const raw =
-    process.env.NEXT_PUBLIC_API_BASE ||
-    (typeof window !== "undefined" ? window.location.origin : "");
-
-  return raw.replace(/\/+$/, "");
-};
+    // First check window.env.INLAB_API_URL (from inlab_env.js)
+    if (typeof window !== 'undefined' && (window as any).env?.INLAB_API_URL) {
+      return (window as any).env.INLAB_API_URL.replace(/\/+$/, "");
+    }
+    
+    // Fallback to default backend URL
+    const defaultBackend = 'https://historio-backend.liara.run';
+    
+    // Check NEXT_PUBLIC_API_BASE environment variable
+    if (process.env.NEXT_PUBLIC_API_BASE) {
+      return process.env.NEXT_PUBLIC_API_BASE.replace(/\/+$/, "");
+    }
+    
+    // Fallback to default backend or current origin
+    const raw = defaultBackend || (typeof window !== "undefined" ? window.location.origin : "");
+    return raw.replace(/\/+$/, "");
+  };
 
 
 
