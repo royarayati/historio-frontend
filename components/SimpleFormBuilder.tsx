@@ -6,6 +6,7 @@ import { CodeComponentMeta } from "@plasmicapp/host";
 import { WidgetProps, ObjectFieldTemplateProps } from "@rjsf/utils";
 // Chakra UI Theme - Good RTL support
 import Form from "@rjsf/chakra-ui";
+import { getBaseUrl } from "@/utils/getBaseUrl";
 
 // Create Chakra UI theme with RTL support for Farsi/Persian
 const theme = extendTheme({
@@ -876,27 +877,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
   onSubmit,
   onChange,
 }) => {
-  // Dynamic base URL - use same logic as AuthGlobalContext for consistency
-  const getBaseUrl = () => {
-    // Default backend URL - always use backend, never frontend
-    const defaultBackend = 'https://historio-backend.liara.run';
-    
-    // First check window.env.INLAB_API_URL (from inlab_env.js)
-    if (typeof window !== 'undefined' && (window as any).env?.INLAB_API_URL) {
-      return (window as any).env.INLAB_API_URL.replace(/\/+$/, "");
-    }
-    
-    // Check NEXT_PUBLIC_API_BASE environment variable
-    if (process.env.NEXT_PUBLIC_API_BASE) {
-      return process.env.NEXT_PUBLIC_API_BASE.replace(/\/+$/, "");
-    }
-    
-    // Always fallback to default backend URL (never use window.location.origin)
-    return defaultBackend.replace(/\/+$/, "");
-  };
-
-
-
 const buildApiUrl = (path: string, params?: Record<string, any>): string => {
   const base = getBaseUrl();
   const url = new URL(path.startsWith("/") ? path : `/${path}` , base);

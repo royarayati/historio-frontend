@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { getBaseUrl } from '../getBaseUrl';
 
 export type InlabUser =
   | null
@@ -20,6 +21,6 @@ export interface GlobalContextType {
 
 export const GlobalContext = createContext<GlobalContextType>({
   // Default backend base URL for all API calls from static contexts
-  baseUrl: 'https://historio-backend.liara.run',
+  baseUrl: getBaseUrl(),
   changeUserCallback: (user: InlabUser) => {},
 });

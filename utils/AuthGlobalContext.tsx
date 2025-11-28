@@ -11,6 +11,7 @@ import { axiosCall } from './ApiFetcherAction';
 import { axiosCallPlus } from './ApiFetcherActionPlus';
 import { useRouter } from 'next/router';
 import LoaderSpinnerIcon from '@/components/plasmic/inlab/icons/PlasmicIcon__LoaderSpinner';
+import { getBaseUrl } from './getBaseUrl';
 
 interface AuthGlobalContextProps {
   // Any props plasmic-studio users want to set as project settings
@@ -20,14 +21,12 @@ export const AuthGlobalContext = ({ children }: PropsWithChildren<AuthGlobalCont
   const router = useRouter();
   ////////// SET BASE URL //////////
 
-  // Decide backend base URL
-  let baseUrl = 'https://historio-backend.liara.run'; // safe default for production
-  if (typeof window !== 'undefined' && (window as any).env?.INLAB_API_URL) {
-    logForDev('AuthGlobalContext: window is defined, using window.env.INLAB_API_URL');
-    baseUrl = window.env.INLAB_API_URL;
-  } else {
-    logForDev('AuthGlobalContext: window.env.INLAB_API_URL not found, using default baseUrl: ' + baseUrl);
-  }
+  // Use centralized getBaseUrl function
+  const baseUrl = useMemo(() => {
+    const url = getBaseUrl();
+    logForDev('AuthGlobalContext: baseUrl resolved to: ' + url);
+    return url;
+  }, []);
 
   ///////// SETUP USER //////////
 
