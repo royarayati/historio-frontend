@@ -1448,21 +1448,28 @@ const buildApiUrl = (path: string, params?: Record<string, any>): string => {
       const httpMethod = mode === "template" ? "POST" : "PUT";
       
       // Automatically construct the URL based on mode and available props
-      let finalSubmitUrl: string;
+  let finalSubmitUrl: string;
+  const resolveSubmitUrl = (url: string) => {
+    if (/^https?:\/\//i.test(url)) {
+      return url;
+    }
+    return new URL(url, getBaseUrl()).toString();
+  };
       
       if (submitUrl) {
+        const normalizedSubmitUrl = resolveSubmitUrl(submitUrl);
         // If submitUrl is provided, use it as base and append submission_id for PUT if needed
         if (httpMethod === "PUT" && submissionId) {
           // Check if URL already has submission_id parameter
-          if (!submitUrl.includes(`submission_id=`) && !submitUrl.includes(`/${submissionId}`)) {
-            const urlObj = new URL(submitUrl, getBaseUrl());
+          if (!normalizedSubmitUrl.includes(`submission_id=`) && !normalizedSubmitUrl.includes(`/${submissionId}`)) {
+            const urlObj = new URL(normalizedSubmitUrl);
             urlObj.searchParams.set("submission_id", submissionId);
             finalSubmitUrl = urlObj.toString();
           } else {
-            finalSubmitUrl = submitUrl;
+            finalSubmitUrl = normalizedSubmitUrl;
           }
         } else {
-          finalSubmitUrl = submitUrl;
+          finalSubmitUrl = normalizedSubmitUrl;
         }
       } else {
         // Auto-construct URL from base URL
