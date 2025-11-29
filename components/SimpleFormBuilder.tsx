@@ -6,7 +6,6 @@ import { CodeComponentMeta } from "@plasmicapp/host";
 import { WidgetProps, ObjectFieldTemplateProps } from "@rjsf/utils";
 // Chakra UI Theme - Good RTL support
 import Form from "@rjsf/chakra-ui";
-import { getBaseUrl } from "@/utils/getBaseUrl";
 
 // Create Chakra UI theme with RTL support for Farsi/Persian
 const theme = extendTheme({
@@ -877,19 +876,10 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
   onSubmit,
   onChange,
 }) => {
-const buildApiUrl = (path: string, params?: Record<string, any>): string => {
-  const base = getBaseUrl();
-  const url = new URL(path.startsWith("/") ? path : `/${path}` , base);
-  if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        url.searchParams.set(key, String(value));
-      }
-    });
-  }
-  return url.toString();
-};
-
+  // Dynamic base URL - use environment variable or fallback to current origin
+  const getBaseUrl = () => {
+    return process.env.NEXT_PUBLIC_API_BASE || (typeof window !== 'undefined' ? window.location.origin : '');
+  };
 
   // Get authentication token from localStorage
   const getAuthToken = (): string | null => {
@@ -1078,26 +1068,16 @@ const buildApiUrl = (path: string, params?: Record<string, any>): string => {
 
           try {
             const baseUrl = getBaseUrl();
-            const authHeaders = getAuthHeaders();
-            
-            // Use query parameter format: /template?template_id=1
-            const url = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
-            url.searchParams.set("template_id", finalTemplateId);
-            const templateUrl = url.toString();
-            
-            console.log(`🔍 Fetching template from: ${templateUrl}`);
-            
-            const templateRes = await fetch(templateUrl, {
+            const templateUrl = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
+            templateUrl.searchParams.set("template_id", finalTemplateId);
+            const templateRes = await fetch(templateUrl.toString(), {
               method: 'GET',
-              headers: authHeaders,
+              headers: getAuthHeaders(),
             });
-            
             if (!templateRes.ok) {
               throw new Error(`HTTP ${templateRes.status}: خطا در واکشی قالب`);
             }
-            
             const templateData = await templateRes.json();
-            
             const template = templateData?.data || templateData;
             loadedSchema = template?.schema;
             loadedUiSchema = template?.ui_schema || template?.uiSchema || {};
@@ -1150,39 +1130,26 @@ const buildApiUrl = (path: string, params?: Record<string, any>): string => {
         setLoading(true);
         setError(null);
         try {
-          if (!templateId) {
-            throw new Error("templateId is required");
-          }
-          
           const baseUrl = getBaseUrl();
-          const authHeaders = getAuthHeaders();
-          
-          // Use query parameter format: /template?template_id=1
           const url = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
-          url.searchParams.set("template_id", templateId);
-          const templateUrl = url.toString();
-          
-          console.log(`🔍 Fetching template from: ${templateUrl}`);
-          
-          const res = await fetch(templateUrl, {
-            method: 'GET',
-            headers: authHeaders,
-          });
-          
-          if (!res.ok) {
-            throw new Error(`HTTP ${res.status}: خطا در واکشی قالب`);
+          if (templateId) {
+            url.searchParams.set("template_id", templateId);
           }
-          
-          const templateData = await res.json();
+          const res = await fetch(url.toString(), {
+            method: 'GET',
+            headers: getAuthHeaders(),
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
 
           // Handle both response formats:
           // 1. Wrapped: { status_code: 200, data: { schema, ui_schema, ... } }
           // 2. Direct: { schema, ui_schema, ... }
-          const template = templateData?.data || templateData;
-          const loadedSchema = template?.schema;
-          const loadedUiSchema = template?.ui_schema || template?.uiSchema || {};
-          const loadedName = template?.name || loadedSchema?.title;
-          const loadedTemplateId = template?.id ? parseInt(template.id) : (templateId ? parseInt(templateId) : null);
+          const templateData = data?.data || data;
+          const loadedSchema = templateData?.schema;
+          const loadedUiSchema = templateData?.ui_schema || templateData?.uiSchema || {};
+          const loadedName = templateData?.name || loadedSchema?.title;
+          const loadedTemplateId = templateData?.id ? parseInt(templateData.id) : (templateId ? parseInt(templateId) : null);
 
           console.log("✅ Loaded schema", loadedSchema);
           console.log("✅ Loaded uiSchema", loadedUiSchema);
@@ -1416,6 +1383,9 @@ const buildApiUrl = (path: string, params?: Record<string, any>): string => {
       // Extract national_code from patientContext
       const nationalCode = patientContext?.national_code || patientContext?.nationalCode || "";
       
+      // Extract patient_name from patientContext
+      const patientName = patientContext?.patient_name || patientContext?.patientName || "";
+      
       // Get user_id from patientContext and ensure it's a string
       const userIdRaw = patientContext?.user_id || patientContext?.userId || "";
       const userId = userIdRaw ? String(userIdRaw) : "";
@@ -1433,6 +1403,7 @@ const buildApiUrl = (path: string, params?: Record<string, any>): string => {
       const payload = {
         patient_data: {
           national_code: nationalCode,
+          patient_name: patientName,
           data: submittedData || {}, // The actual form field values, ensure it's an object
         },
         form_data: {
@@ -1448,28 +1419,21 @@ const buildApiUrl = (path: string, params?: Record<string, any>): string => {
       const httpMethod = mode === "template" ? "POST" : "PUT";
       
       // Automatically construct the URL based on mode and available props
-  let finalSubmitUrl: string;
-  const resolveSubmitUrl = (url: string) => {
-    if (/^https?:\/\//i.test(url)) {
-      return url;
-    }
-    return new URL(url, getBaseUrl()).toString();
-  };
+      let finalSubmitUrl: string;
       
       if (submitUrl) {
-        const normalizedSubmitUrl = resolveSubmitUrl(submitUrl);
         // If submitUrl is provided, use it as base and append submission_id for PUT if needed
         if (httpMethod === "PUT" && submissionId) {
           // Check if URL already has submission_id parameter
-          if (!normalizedSubmitUrl.includes(`submission_id=`) && !normalizedSubmitUrl.includes(`/${submissionId}`)) {
-            const urlObj = new URL(normalizedSubmitUrl);
+          if (!submitUrl.includes(`submission_id=`) && !submitUrl.includes(`/${submissionId}`)) {
+            const urlObj = new URL(submitUrl, getBaseUrl());
             urlObj.searchParams.set("submission_id", submissionId);
             finalSubmitUrl = urlObj.toString();
           } else {
-            finalSubmitUrl = normalizedSubmitUrl;
+            finalSubmitUrl = submitUrl;
           }
         } else {
-          finalSubmitUrl = normalizedSubmitUrl;
+          finalSubmitUrl = submitUrl;
         }
       } else {
         // Auto-construct URL from base URL
