@@ -6,6 +6,7 @@ import { CodeComponentMeta } from "@plasmicapp/host";
 import { WidgetProps, ObjectFieldTemplateProps } from "@rjsf/utils";
 // Chakra UI Theme - Good RTL support
 import Form from "@rjsf/chakra-ui";
+import { getBaseUrl } from "@/utils/getBaseUrl";
 
 // Create Chakra UI theme with RTL support for Farsi/Persian
 const theme = extendTheme({
@@ -876,11 +877,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
   onSubmit,
   onChange,
 }) => {
-  // Dynamic base URL - use environment variable or fallback to current origin
-  const getBaseUrl = () => {
-    return process.env.NEXT_PUBLIC_API_BASE || (typeof window !== 'undefined' ? window.location.origin : '');
-  };
-
   // Get authentication token from localStorage
   const getAuthToken = (): string | null => {
     if (typeof window === 'undefined') return null;
