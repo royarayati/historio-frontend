@@ -63,6 +63,8 @@ import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"
 import Button from "../../Button"; // plasmic-import: 7E4Snh8PZrgu/component
 import TextInput from "../../TextInput"; // plasmic-import: 7SMSkwN_rIbt/component
 import { SimpleFormBuilder } from "@/components/SimpleFormBuilder"; // plasmic-import: p3qfIhfZiUBK/codeComponent
+import Modal from "../../Modal"; // plasmic-import: QTj-x20Fs8xo/component
+import Button2 from "../../Button2"; // plasmic-import: tLrTa_OD8qSN/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: sZd5R9LnJ4gbMuoYzR9bKq/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: sZd5R9LnJ4gbMuoYzR9bKq/styleTokensProvider
 
@@ -74,6 +76,8 @@ import sty from "./PlasmicPatientForms.module.css"; // plasmic-import: fLPqSBMdW
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: hKBWRzUTVvmB/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: GHuHoNtICogY/icon
 import EvaEdit2OutlineIcon from "./icons/PlasmicIcon__EvaEdit2Outline"; // plasmic-import: q4lIi4fdRAmm/icon
+import CircleIcon from "./icons/PlasmicIcon__Circle"; // plasmic-import: LkHy4_FZCtDm/icon
+import ChevronDownIcon from "./icons/PlasmicIcon__ChevronDown"; // plasmic-import: fkpUC2nzfI_f/icon
 
 createPlasmicElementProxy;
 
@@ -105,7 +109,7 @@ export type PlasmicPatientForms__OverridesType = {
   formSection?: Flex__<"div">;
   formNameBackButton?: Flex__<"div">;
   backToTemplates?: Flex__<typeof Button>;
-  backToTemplates2?: Flex__<typeof Button>;
+  previewForm?: Flex__<typeof Button>;
   deleteHistory?: Flex__<typeof Button>;
   printHistory?: Flex__<typeof Button>;
   patientDemographicData?: Flex__<"div">;
@@ -113,6 +117,9 @@ export type PlasmicPatientForms__OverridesType = {
   patientNationalcode?: Flex__<typeof TextInput>;
   patientName?: Flex__<typeof TextInput>;
   simpleFormBuilderComponent?: Flex__<typeof SimpleFormBuilder>;
+  formPreview?: Flex__<typeof Modal>;
+  getPreviewForm?: Flex__<typeof ApiFetcherComponentPlus>;
+  freeBox?: Flex__<"div">;
 };
 
 export interface DefaultPatientFormsProps {}
@@ -414,34 +421,40 @@ function PlasmicPatientForms__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
       },
       {
-        path: "backToTemplates2.isDisabled",
+        path: "previewForm.isDisabled",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "backToTemplates2.selected",
+        path: "previewForm.selected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "backToTemplates2.deselected",
+        path: "previewForm.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "backToTemplates2.sortDeselected",
+        path: "previewForm.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "backToTemplates2.sortSelected",
+        path: "previewForm.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "formPreview.isOpen",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => true
       }
     ],
     [$props, $ctx, $refs]
@@ -1445,155 +1458,164 @@ function PlasmicPatientForms__RenderFunc(props: {
                   >
                     {"\u0628\u0627\u0632\u06af\u0634\u062a"}
                   </Button>
-                  <Button
-                    data-plasmic-name={"backToTemplates2"}
-                    data-plasmic-override={overrides.backToTemplates2}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.backToTemplates2
-                    )}
-                    color={"yellow"}
-                    deselected={generateStateValueProp($state, [
-                      "backToTemplates2",
-                      "deselected"
-                    ])}
-                    isDisabled={generateStateValueProp($state, [
-                      "backToTemplates2",
-                      "isDisabled"
-                    ])}
-                    onClick={async event => {
-                      const $steps = {};
+                  {false ? (
+                    <Button
+                      data-plasmic-name={"previewForm"}
+                      data-plasmic-override={overrides.previewForm}
+                      className={classNames("__wab_instance", sty.previewForm)}
+                      color={"purple"}
+                      deselected={generateStateValueProp($state, [
+                        "previewForm",
+                        "deselected"
+                      ])}
+                      isDisabled={generateStateValueProp($state, [
+                        "previewForm",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
 
-                      $steps["updateShowForm"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["showForm"]
-                              },
-                              operation: 0,
-                              value: false
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
+                        $steps["updateShowForm"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["showForm"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
 
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateShowForm"] != null &&
-                        typeof $steps["updateShowForm"] === "object" &&
-                        typeof $steps["updateShowForm"].then === "function"
-                      ) {
-                        $steps["updateShowForm"] =
-                          await $steps["updateShowForm"];
-                      }
-                    }}
-                    onDeselectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "backToTemplates2",
-                          "deselected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateShowForm"] != null &&
+                          typeof $steps["updateShowForm"] === "object" &&
+                          typeof $steps["updateShowForm"].then === "function"
+                        ) {
+                          $steps["updateShowForm"] =
+                            await $steps["updateShowForm"];
+                        }
+                      }}
+                      onDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewForm",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onIsDisabledChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "backToTemplates2",
-                          "isDisabled"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onIsDisabledChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewForm",
+                            "isDisabled"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSelectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "backToTemplates2",
-                          "selected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewForm",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSortDeselectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "backToTemplates2",
-                          "sortDeselected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewForm",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSortSelectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "backToTemplates2",
-                          "sortSelected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewForm",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
 
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    selected={generateStateValueProp($state, [
-                      "backToTemplates2",
-                      "selected"
-                    ])}
-                    sortDeselected={generateStateValueProp($state, [
-                      "backToTemplates2",
-                      "sortDeselected"
-                    ])}
-                    sortSelected={generateStateValueProp($state, [
-                      "backToTemplates2",
-                      "sortSelected"
-                    ])}
-                  >
-                    {"\u0628\u0627\u0632\u06af\u0634\u062a"}
-                  </Button>
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      selected={generateStateValueProp($state, [
+                        "previewForm",
+                        "selected"
+                      ])}
+                      sortDeselected={generateStateValueProp($state, [
+                        "previewForm",
+                        "sortDeselected"
+                      ])}
+                      sortSelected={generateStateValueProp($state, [
+                        "previewForm",
+                        "sortSelected"
+                      ])}
+                    >
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__dj6Qq
+                        )}
+                      >
+                        {
+                          "\u067e\u06cc\u0634 \u0646\u0645\u0627\u06cc\u0634 \u0634\u0631\u062d \u062d\u0627\u0644"
+                        }
+                      </div>
+                    </Button>
+                  ) : null}
                   {false ? (
                     <Button
                       data-plasmic-name={"deleteHistory"}
@@ -2316,6 +2338,69 @@ function PlasmicPatientForms__RenderFunc(props: {
               </div>
             ) : null}
           </div>
+          {false ? (
+            <Modal
+              data-plasmic-name={"formPreview"}
+              data-plasmic-override={overrides.formPreview}
+              className={classNames("__wab_instance", sty.formPreview)}
+              content={
+                <ApiFetcherComponentPlus
+                  data-plasmic-name={"getPreviewForm"}
+                  data-plasmic-override={overrides.getPreviewForm}
+                  autoFetch={true}
+                  className={classNames("__wab_instance", sty.getPreviewForm)}
+                  headers={(() => {
+                    try {
+                      return {
+                        "X-Namespace": localStorage.getItem(
+                          "inlab_user_namespace_id"
+                        )
+                      };
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  method={"GET"}
+                  path={`/api/v3/remote_his_manual/forms/submission/preview?submission_id=${$state.submissionId}`}
+                  ref={ref => {
+                    $refs["getPreviewForm"] = ref;
+                  }}
+                >
+                  <DataCtxReader__>
+                    {$ctx => (
+                      <div
+                        data-plasmic-name={"freeBox"}
+                        data-plasmic-override={overrides.freeBox}
+                        className={classNames(projectcss.all, sty.freeBox)}
+                      />
+                    )}
+                  </DataCtxReader__>
+                </ApiFetcherComponentPlus>
+              }
+              isOpen={generateStateValueProp($state, ["formPreview", "isOpen"])}
+              onOpenChange={async (...eventArgs: any) => {
+                generateStateOnChangeProp($state, [
+                  "formPreview",
+                  "isOpen"
+                ]).apply(null, eventArgs);
+
+                if (
+                  eventArgs.length > 1 &&
+                  eventArgs[1] &&
+                  eventArgs[1]._plasmic_state_init_
+                ) {
+                  return;
+                }
+              }}
+              trigger={null}
+            />
+          ) : null}
         </div>
       </div>
     </React.Fragment>
@@ -2342,14 +2427,17 @@ const PlasmicDescendants = {
     "formSection",
     "formNameBackButton",
     "backToTemplates",
-    "backToTemplates2",
+    "previewForm",
     "deleteHistory",
     "printHistory",
     "patientDemographicData",
     "submitPatientDemographicData",
     "patientNationalcode",
     "patientName",
-    "simpleFormBuilderComponent"
+    "simpleFormBuilderComponent",
+    "formPreview",
+    "getPreviewForm",
+    "freeBox"
   ],
   patientHistory: [
     "patientHistory",
@@ -2369,7 +2457,7 @@ const PlasmicDescendants = {
     "formSection",
     "formNameBackButton",
     "backToTemplates",
-    "backToTemplates2",
+    "previewForm",
     "deleteHistory",
     "printHistory",
     "patientDemographicData",
@@ -2439,7 +2527,7 @@ const PlasmicDescendants = {
     "formSection",
     "formNameBackButton",
     "backToTemplates",
-    "backToTemplates2",
+    "previewForm",
     "deleteHistory",
     "printHistory",
     "patientDemographicData",
@@ -2451,12 +2539,12 @@ const PlasmicDescendants = {
   formNameBackButton: [
     "formNameBackButton",
     "backToTemplates",
-    "backToTemplates2",
+    "previewForm",
     "deleteHistory",
     "printHistory"
   ],
   backToTemplates: ["backToTemplates"],
-  backToTemplates2: ["backToTemplates2"],
+  previewForm: ["previewForm"],
   deleteHistory: ["deleteHistory"],
   printHistory: ["printHistory"],
   patientDemographicData: [
@@ -2468,7 +2556,10 @@ const PlasmicDescendants = {
   submitPatientDemographicData: ["submitPatientDemographicData"],
   patientNationalcode: ["patientNationalcode"],
   patientName: ["patientName"],
-  simpleFormBuilderComponent: ["simpleFormBuilderComponent"]
+  simpleFormBuilderComponent: ["simpleFormBuilderComponent"],
+  formPreview: ["formPreview", "getPreviewForm", "freeBox"],
+  getPreviewForm: ["getPreviewForm", "freeBox"],
+  freeBox: ["freeBox"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -2492,7 +2583,7 @@ type NodeDefaultElementType = {
   formSection: "div";
   formNameBackButton: "div";
   backToTemplates: typeof Button;
-  backToTemplates2: typeof Button;
+  previewForm: typeof Button;
   deleteHistory: typeof Button;
   printHistory: typeof Button;
   patientDemographicData: "div";
@@ -2500,6 +2591,9 @@ type NodeDefaultElementType = {
   patientNationalcode: typeof TextInput;
   patientName: typeof TextInput;
   simpleFormBuilderComponent: typeof SimpleFormBuilder;
+  formPreview: typeof Modal;
+  getPreviewForm: typeof ApiFetcherComponentPlus;
+  freeBox: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -2581,7 +2675,7 @@ export const PlasmicPatientForms = Object.assign(
     formSection: makeNodeComponent("formSection"),
     formNameBackButton: makeNodeComponent("formNameBackButton"),
     backToTemplates: makeNodeComponent("backToTemplates"),
-    backToTemplates2: makeNodeComponent("backToTemplates2"),
+    previewForm: makeNodeComponent("previewForm"),
     deleteHistory: makeNodeComponent("deleteHistory"),
     printHistory: makeNodeComponent("printHistory"),
     patientDemographicData: makeNodeComponent("patientDemographicData"),
@@ -2591,6 +2685,9 @@ export const PlasmicPatientForms = Object.assign(
     patientNationalcode: makeNodeComponent("patientNationalcode"),
     patientName: makeNodeComponent("patientName"),
     simpleFormBuilderComponent: makeNodeComponent("simpleFormBuilderComponent"),
+    formPreview: makeNodeComponent("formPreview"),
+    getPreviewForm: makeNodeComponent("getPreviewForm"),
+    freeBox: makeNodeComponent("freeBox"),
 
     // Metadata about props expected for PlasmicPatientForms
     internalVariantProps: PlasmicPatientForms__VariantProps,
