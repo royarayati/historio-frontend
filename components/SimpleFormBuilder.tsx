@@ -961,6 +961,13 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
           const endpoints = [];
           
           const baseUrl = getBaseUrl();
+          console.log("[SimpleFormBuilder] getBaseUrl() returned:", baseUrl);
+          
+          // Safety check: ensure baseUrl is valid and not frontend
+          if (!baseUrl || baseUrl.includes("historio-frontend")) {
+            console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
+            throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
+          }
           
           // Correct endpoint: /api/v3/remote_his_manual/form/submission (singular "form")
           if (submissionId) {
@@ -1064,6 +1071,14 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 
           try {
             const baseUrl = getBaseUrl();
+            console.log("[SimpleFormBuilder] getBaseUrl() returned for template:", baseUrl);
+            
+            // Safety check: ensure baseUrl is valid and not frontend
+            if (!baseUrl || baseUrl.includes("historio-frontend")) {
+              console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
+              throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
+            }
+            
             const templateUrl = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
             templateUrl.searchParams.set("template_id", finalTemplateId);
             const templateRes = await fetch(templateUrl.toString(), {
@@ -1127,6 +1142,14 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         setError(null);
         try {
           const baseUrl = getBaseUrl();
+          console.log("[SimpleFormBuilder] getBaseUrl() returned for template fetch:", baseUrl);
+          
+          // Safety check: ensure baseUrl is valid and not frontend
+          if (!baseUrl || baseUrl.includes("historio-frontend")) {
+            console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
+            throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
+          }
+          
           const url = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
           if (templateId) {
             url.searchParams.set("template_id", templateId);
@@ -1434,6 +1457,14 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       } else {
         // Auto-construct URL from base URL
         const baseUrl = getBaseUrl();
+        console.log("[SimpleFormBuilder] getBaseUrl() returned for submit:", baseUrl);
+        
+        // Safety check: ensure baseUrl is valid and not frontend
+        if (!baseUrl || baseUrl.includes("historio-frontend")) {
+          console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
+          throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
+        }
+        
         if (httpMethod === "POST") {
           // POST: /api/v3/remote_his_manual/forms/submission
           finalSubmitUrl = `${baseUrl}/api/v3/remote_his_manual/forms/submission`;
