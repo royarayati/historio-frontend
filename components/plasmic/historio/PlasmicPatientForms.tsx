@@ -163,6 +163,8 @@ function PlasmicPatientForms__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const globalVariants = _useGlobalVariants();
+
   const $globalActions = useGlobalActions?.();
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
@@ -878,7 +880,9 @@ function PlasmicPatientForms__RenderFunc(props: {
                     }
                   })()}
                   method={"GET"}
-                  path={`/api/v3/remote_his_manual/form/submission?patient_id=${$ctx.params.code}`}
+                  path={
+                    "/api/v3/remote_his_manual/form/submission?patient_id=1234"
+                  }
                   ref={ref => {
                     $refs["getSubmissionApi"] = ref;
                   }}
@@ -2238,7 +2242,9 @@ function PlasmicPatientForms__RenderFunc(props: {
                       }
                     }}
                     placeholder={
-                      "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0628\u06cc\u0645\u0627\u0631 (\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)"
+                      hasVariant(globalVariants, "screen", "mobileFirst")
+                        ? "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc(\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)"
+                        : "\u0646\u0627\u0645 \u0648 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc \u0628\u06cc\u0645\u0627\u0631 (\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)"
                     }
                     startIcon={
                       <EvaEdit2OutlineIcon
