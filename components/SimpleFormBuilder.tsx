@@ -1441,18 +1441,32 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       let finalSubmitUrl: string;
       
       if (submitUrl) {
-        // If submitUrl is provided, use it as base and append submission_id for PUT if needed
-        if (httpMethod === "PUT" && submissionId) {
-          // Check if URL already has submission_id parameter
-          if (!submitUrl.includes(`submission_id=`) && !submitUrl.includes(`/${submissionId}`)) {
-            const urlObj = new URL(submitUrl, getBaseUrl());
-            urlObj.searchParams.set("submission_id", submissionId);
-            finalSubmitUrl = urlObj.toString();
-          } else {
-            finalSubmitUrl = submitUrl;
-          }
+        // Normalize submitUrl to always go to backend, even if it's a relative path
+        const baseUrlForSubmit = getBaseUrl();
+        console.log("[SimpleFormBuilder] submitUrl prop received:", submitUrl);
+        console.log("[SimpleFormBuilder] getBaseUrl() returned for submit (submitUrl branch):", baseUrlForSubmit);
+
+        // Safety check: ensure base URL is valid and not frontend
+        if (!baseUrlForSubmit || baseUrlForSubmit.includes("historio-frontend")) {
+          console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected in submitUrl branch:", baseUrlForSubmit);
+          throw new Error(`Invalid API base URL: ${baseUrlForSubmit}. Must point to backend, not frontend.`);
+        }
+
+        // If submitUrl is relative (starts with /api/...), resolve it against backend base URL
+        if (!submitUrl.startsWith("http://") && !submitUrl.startsWith("https://")) {
+          const urlObj = new URL(submitUrl, baseUrlForSubmit);
+          finalSubmitUrl = urlObj.toString();
         } else {
           finalSubmitUrl = submitUrl;
+        }
+
+        // For PUT with submissionId, ensure query param is present (if missing)
+        if (httpMethod === "PUT" && submissionId) {
+          const urlObj = new URL(finalSubmitUrl);
+          if (!urlObj.searchParams.get("submission_id")) {
+            urlObj.searchParams.set("submission_id", submissionId);
+            finalSubmitUrl = urlObj.toString();
+          }
         }
       } else {
         // Auto-construct URL from base URL
