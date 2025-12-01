@@ -63,8 +63,7 @@ import { ApiFetcherComponentPlus } from "../../../utils/ApiFetcherComponentPlus"
 import Button from "../../Button"; // plasmic-import: 7E4Snh8PZrgu/component
 import TextInput from "../../TextInput"; // plasmic-import: 7SMSkwN_rIbt/component
 import { SimpleFormBuilder } from "@/components/SimpleFormBuilder"; // plasmic-import: p3qfIhfZiUBK/codeComponent
-import Modal from "../../Modal"; // plasmic-import: QTj-x20Fs8xo/component
-import Button2 from "../../Button2"; // plasmic-import: tLrTa_OD8qSN/component
+import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: sZd5R9LnJ4gbMuoYzR9bKq/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: sZd5R9LnJ4gbMuoYzR9bKq/styleTokensProvider
 
@@ -76,8 +75,7 @@ import sty from "./PlasmicPatientForms.module.css"; // plasmic-import: fLPqSBMdW
 import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: hKBWRzUTVvmB/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: GHuHoNtICogY/icon
 import EvaEdit2OutlineIcon from "./icons/PlasmicIcon__EvaEdit2Outline"; // plasmic-import: q4lIi4fdRAmm/icon
-import CircleIcon from "./icons/PlasmicIcon__Circle"; // plasmic-import: LkHy4_FZCtDm/icon
-import ChevronDownIcon from "./icons/PlasmicIcon__ChevronDown"; // plasmic-import: fkpUC2nzfI_f/icon
+import CopyIconSvgIcon from "./icons/PlasmicIcon__CopyIconSvg"; // plasmic-import: -tQKZDP3mdlS/icon
 
 createPlasmicElementProxy;
 
@@ -110,14 +108,14 @@ export type PlasmicPatientForms__OverridesType = {
   formNameBackButton?: Flex__<"div">;
   backToTemplates?: Flex__<typeof Button>;
   previewForm?: Flex__<typeof Button>;
-  deleteHistory?: Flex__<typeof Button>;
+  previewHistory?: Flex__<typeof Button>;
   printHistory?: Flex__<typeof Button>;
   patientDemographicData?: Flex__<"div">;
   submitPatientDemographicData?: Flex__<typeof Button>;
   patientNationalcode?: Flex__<typeof TextInput>;
   patientName?: Flex__<typeof TextInput>;
   simpleFormBuilderComponent?: Flex__<typeof SimpleFormBuilder>;
-  formPreview?: Flex__<typeof Modal>;
+  formPreview?: Flex__<typeof AntdModal>;
   getPreviewForm?: Flex__<typeof ApiFetcherComponentPlus>;
   freeBox?: Flex__<"div">;
 };
@@ -321,31 +319,31 @@ function PlasmicPatientForms__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
       },
       {
-        path: "deleteHistory.isDisabled",
+        path: "previewHistory.isDisabled",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "deleteHistory.selected",
+        path: "previewHistory.selected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "deleteHistory.deselected",
+        path: "previewHistory.deselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "deleteHistory.sortDeselected",
+        path: "previewHistory.sortDeselected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "deleteHistory.sortSelected",
+        path: "previewHistory.sortSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -453,10 +451,16 @@ function PlasmicPatientForms__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "formPreview.isOpen",
+        path: "formPreview.open",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => true
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "updateHistory",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -1620,21 +1624,212 @@ function PlasmicPatientForms__RenderFunc(props: {
                       </div>
                     </Button>
                   ) : null}
-                  {false ? (
+                  {$state.formMode === "filled_form" ? (
                     <Button
-                      data-plasmic-name={"deleteHistory"}
-                      data-plasmic-override={overrides.deleteHistory}
+                      data-plasmic-name={"previewHistory"}
+                      data-plasmic-override={overrides.previewHistory}
                       className={classNames(
                         "__wab_instance",
-                        sty.deleteHistory
+                        sty.previewHistory
                       )}
-                      color={"red"}
+                      color={"purple"}
                       deselected={generateStateValueProp($state, [
-                        "deleteHistory",
+                        "previewHistory",
                         "deselected"
                       ])}
                       isDisabled={generateStateValueProp($state, [
-                        "deleteHistory",
+                        "previewHistory",
+                        "isDisabled"
+                      ])}
+                      onClick={async event => {
+                        const $steps = {};
+
+                        $steps["updateFormPreviewIsOpen"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["formPreview", "open"]
+                                },
+                                operation: 0,
+                                value: true
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateFormPreviewIsOpen"] != null &&
+                          typeof $steps["updateFormPreviewIsOpen"] ===
+                            "object" &&
+                          typeof $steps["updateFormPreviewIsOpen"].then ===
+                            "function"
+                        ) {
+                          $steps["updateFormPreviewIsOpen"] =
+                            await $steps["updateFormPreviewIsOpen"];
+                        }
+
+                        $steps["updateUpdateHistory"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["updateHistory"]
+                                },
+                                operation: 4
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                const oldValue = $stateGet(
+                                  objRoot,
+                                  variablePath
+                                );
+                                $stateSet(objRoot, variablePath, !oldValue);
+                                return !oldValue;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateUpdateHistory"] != null &&
+                          typeof $steps["updateUpdateHistory"] === "object" &&
+                          typeof $steps["updateUpdateHistory"].then ===
+                            "function"
+                        ) {
+                          $steps["updateUpdateHistory"] =
+                            await $steps["updateUpdateHistory"];
+                        }
+                      }}
+                      onDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewHistory",
+                            "deselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onIsDisabledChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewHistory",
+                            "isDisabled"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewHistory",
+                            "selected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortDeselectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewHistory",
+                            "sortDeselected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      onSortSelectedChange={async (...eventArgs: any) => {
+                        ((...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "previewHistory",
+                            "sortSelected"
+                          ])(eventArgs[0]);
+                        }).apply(null, eventArgs);
+
+                        if (
+                          eventArgs.length > 1 &&
+                          eventArgs[1] &&
+                          eventArgs[1]._plasmic_state_init_
+                        ) {
+                          return;
+                        }
+                      }}
+                      selected={generateStateValueProp($state, [
+                        "previewHistory",
+                        "selected"
+                      ])}
+                      sortDeselected={generateStateValueProp($state, [
+                        "previewHistory",
+                        "sortDeselected"
+                      ])}
+                      sortSelected={generateStateValueProp($state, [
+                        "previewHistory",
+                        "sortSelected"
+                      ])}
+                    >
+                      {
+                        "\u067e\u06cc\u0634 \u0646\u0645\u0627\u06cc\u0634 \u0634\u0631\u062d \u062d\u0627\u0644"
+                      }
+                    </Button>
+                  ) : null}
+                  {false ? (
+                    <Button
+                      data-plasmic-name={"printHistory"}
+                      data-plasmic-override={overrides.printHistory}
+                      className={classNames("__wab_instance", sty.printHistory)}
+                      color={"green"}
+                      deselected={generateStateValueProp($state, [
+                        "printHistory",
+                        "deselected"
+                      ])}
+                      isDisabled={generateStateValueProp($state, [
+                        "printHistory",
                         "isDisabled"
                       ])}
                       onClick={async event => {
@@ -1644,8 +1839,8 @@ function PlasmicPatientForms__RenderFunc(props: {
                           ? (() => {
                               const actionArgs = {
                                 args: [
-                                  "DELETE",
-                                  `/api/v3/remote_his_manual/forms/submission?submission_id=${$state.submissionId}`,
+                                  "POST",
+                                  `/api/v3/remote_his_manual/forms/submission/print?submission_id=${$state.submissionId}`,
                                   (() => {
                                     try {
                                       return {
@@ -1680,11 +1875,52 @@ function PlasmicPatientForms__RenderFunc(props: {
                         ) {
                           $steps["callPrintApi"] = await $steps["callPrintApi"];
                         }
+
+                        $steps["runCode"] =
+                          $steps.callPrintApi.status === 200
+                            ? (() => {
+                                const actionArgs = {
+                                  customFunction: async () => {
+                                    return (() => {
+                                      const response = $steps.callPrintApi;
+                                      if (response.data instanceof Blob) {
+                                        const pdfUrl = URL.createObjectURL(
+                                          response.data
+                                        );
+                                        window.open(pdfUrl, "_blank");
+                                        return setTimeout(
+                                          () => URL.revokeObjectURL(pdfUrl),
+                                          10000
+                                        );
+                                      } else {
+                                        console.error(
+                                          "Received non-Blob response:",
+                                          response
+                                        );
+                                        return alert(
+                                          "Error: Could not generate PDF"
+                                        );
+                                      }
+                                    })();
+                                  }
+                                };
+                                return (({ customFunction }) => {
+                                  return customFunction();
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                        if (
+                          $steps["runCode"] != null &&
+                          typeof $steps["runCode"] === "object" &&
+                          typeof $steps["runCode"].then === "function"
+                        ) {
+                          $steps["runCode"] = await $steps["runCode"];
+                        }
                       }}
                       onDeselectedChange={async (...eventArgs: any) => {
                         ((...eventArgs) => {
                           generateStateOnChangeProp($state, [
-                            "deleteHistory",
+                            "printHistory",
                             "deselected"
                           ])(eventArgs[0]);
                         }).apply(null, eventArgs);
@@ -1700,7 +1936,7 @@ function PlasmicPatientForms__RenderFunc(props: {
                       onIsDisabledChange={async (...eventArgs: any) => {
                         ((...eventArgs) => {
                           generateStateOnChangeProp($state, [
-                            "deleteHistory",
+                            "printHistory",
                             "isDisabled"
                           ])(eventArgs[0]);
                         }).apply(null, eventArgs);
@@ -1716,7 +1952,7 @@ function PlasmicPatientForms__RenderFunc(props: {
                       onSelectedChange={async (...eventArgs: any) => {
                         ((...eventArgs) => {
                           generateStateOnChangeProp($state, [
-                            "deleteHistory",
+                            "printHistory",
                             "selected"
                           ])(eventArgs[0]);
                         }).apply(null, eventArgs);
@@ -1732,7 +1968,7 @@ function PlasmicPatientForms__RenderFunc(props: {
                       onSortDeselectedChange={async (...eventArgs: any) => {
                         ((...eventArgs) => {
                           generateStateOnChangeProp($state, [
-                            "deleteHistory",
+                            "printHistory",
                             "sortDeselected"
                           ])(eventArgs[0]);
                         }).apply(null, eventArgs);
@@ -1748,7 +1984,7 @@ function PlasmicPatientForms__RenderFunc(props: {
                       onSortSelectedChange={async (...eventArgs: any) => {
                         ((...eventArgs) => {
                           generateStateOnChangeProp($state, [
-                            "deleteHistory",
+                            "printHistory",
                             "sortSelected"
                           ])(eventArgs[0]);
                         }).apply(null, eventArgs);
@@ -1762,218 +1998,23 @@ function PlasmicPatientForms__RenderFunc(props: {
                         }
                       }}
                       selected={generateStateValueProp($state, [
-                        "deleteHistory",
+                        "printHistory",
                         "selected"
                       ])}
                       sortDeselected={generateStateValueProp($state, [
-                        "deleteHistory",
+                        "printHistory",
                         "sortDeselected"
                       ])}
                       sortSelected={generateStateValueProp($state, [
-                        "deleteHistory",
+                        "printHistory",
                         "sortSelected"
                       ])}
                     >
                       {
-                        "\u062d\u0630\u0641 \u0634\u0631\u062d \u062d\u0627\u0644"
+                        "\u067e\u0631\u06cc\u0646\u062a \u0634\u0631\u062d \u062d\u0627\u0644"
                       }
                     </Button>
                   ) : null}
-                  <Button
-                    data-plasmic-name={"printHistory"}
-                    data-plasmic-override={overrides.printHistory}
-                    className={classNames("__wab_instance", sty.printHistory)}
-                    color={"green"}
-                    deselected={generateStateValueProp($state, [
-                      "printHistory",
-                      "deselected"
-                    ])}
-                    isDisabled={generateStateValueProp($state, [
-                      "printHistory",
-                      "isDisabled"
-                    ])}
-                    onClick={async event => {
-                      const $steps = {};
-
-                      $steps["callPrintApi"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              args: [
-                                "POST",
-                                `/api/v3/remote_his_manual/forms/submission/print?submission_id=${$state.submissionId}`,
-                                (() => {
-                                  try {
-                                    return {
-                                      "X-Namespace": localStorage.getItem(
-                                        "inlab_user_namespace_id"
-                                      )
-                                    };
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return undefined;
-                                    }
-                                    throw e;
-                                  }
-                                })(),
-                                undefined,
-                                "blob"
-                              ]
-                            };
-                            return $globalActions[
-                              "AuthGlobalContext.apiFetcherPlus"
-                            ]?.apply(null, [...actionArgs.args]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["callPrintApi"] != null &&
-                        typeof $steps["callPrintApi"] === "object" &&
-                        typeof $steps["callPrintApi"].then === "function"
-                      ) {
-                        $steps["callPrintApi"] = await $steps["callPrintApi"];
-                      }
-
-                      $steps["runCode"] =
-                        $steps.callPrintApi.status === 200
-                          ? (() => {
-                              const actionArgs = {
-                                customFunction: async () => {
-                                  return (() => {
-                                    const response = $steps.callPrintApi;
-                                    if (response.data instanceof Blob) {
-                                      const pdfUrl = URL.createObjectURL(
-                                        response.data
-                                      );
-                                      window.open(pdfUrl, "_blank");
-                                      return setTimeout(
-                                        () => URL.revokeObjectURL(pdfUrl),
-                                        10000
-                                      );
-                                    } else {
-                                      console.error(
-                                        "Received non-Blob response:",
-                                        response
-                                      );
-                                      return alert(
-                                        "Error: Could not generate PDF"
-                                      );
-                                    }
-                                  })();
-                                }
-                              };
-                              return (({ customFunction }) => {
-                                return customFunction();
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                      if (
-                        $steps["runCode"] != null &&
-                        typeof $steps["runCode"] === "object" &&
-                        typeof $steps["runCode"].then === "function"
-                      ) {
-                        $steps["runCode"] = await $steps["runCode"];
-                      }
-                    }}
-                    onDeselectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "printHistory",
-                          "deselected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onIsDisabledChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "printHistory",
-                          "isDisabled"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSelectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "printHistory",
-                          "selected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSortDeselectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "printHistory",
-                          "sortDeselected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    onSortSelectedChange={async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "printHistory",
-                          "sortSelected"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
-
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                    selected={generateStateValueProp($state, [
-                      "printHistory",
-                      "selected"
-                    ])}
-                    sortDeselected={generateStateValueProp($state, [
-                      "printHistory",
-                      "sortDeselected"
-                    ])}
-                    sortSelected={generateStateValueProp($state, [
-                      "printHistory",
-                      "sortSelected"
-                    ])}
-                  >
-                    {
-                      "\u067e\u0631\u06cc\u0646\u062a \u0634\u0631\u062d \u062d\u0627\u0644"
-                    }
-                  </Button>
                 </div>
                 <div
                   data-plasmic-name={"patientDemographicData"}
@@ -2344,69 +2385,132 @@ function PlasmicPatientForms__RenderFunc(props: {
               </div>
             ) : null}
           </div>
-          {false ? (
-            <Modal
-              data-plasmic-name={"formPreview"}
-              data-plasmic-override={overrides.formPreview}
-              className={classNames("__wab_instance", sty.formPreview)}
-              content={
-                <ApiFetcherComponentPlus
-                  data-plasmic-name={"getPreviewForm"}
-                  data-plasmic-override={overrides.getPreviewForm}
-                  autoFetch={true}
-                  className={classNames("__wab_instance", sty.getPreviewForm)}
-                  headers={(() => {
-                    try {
-                      return {
-                        "X-Namespace": localStorage.getItem(
-                          "inlab_user_namespace_id"
-                        )
-                      };
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}
-                  method={"GET"}
-                  path={`/api/v3/remote_his_manual/forms/submission/preview?submission_id=${$state.submissionId}`}
-                  ref={ref => {
-                    $refs["getPreviewForm"] = ref;
-                  }}
-                >
-                  <DataCtxReader__>
-                    {$ctx => (
-                      <div
-                        data-plasmic-name={"freeBox"}
-                        data-plasmic-override={overrides.freeBox}
-                        className={classNames(projectcss.all, sty.freeBox)}
-                      />
-                    )}
-                  </DataCtxReader__>
-                </ApiFetcherComponentPlus>
-              }
-              isOpen={generateStateValueProp($state, ["formPreview", "isOpen"])}
-              onOpenChange={async (...eventArgs: any) => {
-                generateStateOnChangeProp($state, [
-                  "formPreview",
-                  "isOpen"
-                ]).apply(null, eventArgs);
-
-                if (
-                  eventArgs.length > 1 &&
-                  eventArgs[1] &&
-                  eventArgs[1]._plasmic_state_init_
-                ) {
-                  return;
+          <AntdModal
+            data-plasmic-name={"formPreview"}
+            data-plasmic-override={overrides.formPreview}
+            className={classNames("__wab_instance", sty.formPreview)}
+            defaultStylesClassName={classNames(
+              projectcss.root_reset,
+              projectcss.plasmic_default_styles,
+              projectcss.plasmic_mixins,
+              styleTokensClassNames
+            )}
+            hideFooter={true}
+            modalContentClassName={classNames({
+              [sty["pcls_0L8X7KaUUZ2l"]]: true
+            })}
+            modalScopeClassName={sty["formPreview__modal"]}
+            onOpenChange={async (...eventArgs: any) => {
+              generateStateOnChangeProp($state, ["formPreview", "open"]).apply(
+                null,
+                eventArgs
+              );
+            }}
+            open={generateStateValueProp($state, ["formPreview", "open"])}
+            title={
+              "\u067e\u06cc\u0634 \u0646\u0645\u0627\u06cc\u0634 \u0634\u0631\u062d \u062d\u0627\u0644 \u062b\u0628\u062a \u0634\u062f\u0647"
+            }
+            trigger={null}
+            width={"90%"}
+          >
+            <ApiFetcherComponentPlus
+              data-plasmic-name={"getPreviewForm"}
+              data-plasmic-override={overrides.getPreviewForm}
+              autoFetch={true}
+              className={classNames("__wab_instance", sty.getPreviewForm)}
+              fetchTriggers={(() => {
+                try {
+                  return [$state.submissionId, $state.templateId];
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
                 }
+              })()}
+              headers={(() => {
+                try {
+                  return {
+                    "X-Namespace": localStorage.getItem(
+                      "inlab_user_namespace_id"
+                    )
+                  };
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              method={"GET"}
+              path={`/api/v3/remote_his_manual/forms/submission/preview?submission_id=${$state.submissionId}`}
+              ref={ref => {
+                $refs["getPreviewForm"] = ref;
               }}
-              trigger={null}
-            />
-          ) : null}
+            >
+              <DataCtxReader__>
+                {$ctx => (
+                  <div
+                    data-plasmic-name={"freeBox"}
+                    data-plasmic-override={overrides.freeBox}
+                    className={classNames(projectcss.all, sty.freeBox)}
+                  >
+                    {false ? (
+                      <CopyIconSvgIcon
+                        className={classNames(projectcss.all, sty.svg__jU3Gg)}
+                        role={"img"}
+                      />
+                    ) : null}
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__lS4CS
+                      )}
+                      dir={"rtl"}
+                    >
+                      <React.Fragment>
+                        {$ctx.fetched_data.loading === false &&
+                          $ctx.fetched_data.data &&
+                          $ctx.fetched_data.data.formatted_data}
+                      </React.Fragment>
+                    </div>
+                    {(() => {
+                      try {
+                        return $ctx.fetched_data.loading === true;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return false;
+                        }
+                        throw e;
+                      }
+                    })() ? (
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text___14Uhu
+                        )}
+                      >
+                        {
+                          "\u0644\u0637\u0641\u0627 \u0645\u0646\u062a\u0638\u0631 \u0628\u0645\u0627\u0646\u06cc\u062f "
+                        }
+                      </div>
+                    ) : null}
+                  </div>
+                )}
+              </DataCtxReader__>
+            </ApiFetcherComponentPlus>
+          </AntdModal>
         </div>
       </div>
     </React.Fragment>
@@ -2434,7 +2538,7 @@ const PlasmicDescendants = {
     "formNameBackButton",
     "backToTemplates",
     "previewForm",
-    "deleteHistory",
+    "previewHistory",
     "printHistory",
     "patientDemographicData",
     "submitPatientDemographicData",
@@ -2464,7 +2568,7 @@ const PlasmicDescendants = {
     "formNameBackButton",
     "backToTemplates",
     "previewForm",
-    "deleteHistory",
+    "previewHistory",
     "printHistory",
     "patientDemographicData",
     "submitPatientDemographicData",
@@ -2534,7 +2638,7 @@ const PlasmicDescendants = {
     "formNameBackButton",
     "backToTemplates",
     "previewForm",
-    "deleteHistory",
+    "previewHistory",
     "printHistory",
     "patientDemographicData",
     "submitPatientDemographicData",
@@ -2546,12 +2650,12 @@ const PlasmicDescendants = {
     "formNameBackButton",
     "backToTemplates",
     "previewForm",
-    "deleteHistory",
+    "previewHistory",
     "printHistory"
   ],
   backToTemplates: ["backToTemplates"],
   previewForm: ["previewForm"],
-  deleteHistory: ["deleteHistory"],
+  previewHistory: ["previewHistory"],
   printHistory: ["printHistory"],
   patientDemographicData: [
     "patientDemographicData",
@@ -2590,14 +2694,14 @@ type NodeDefaultElementType = {
   formNameBackButton: "div";
   backToTemplates: typeof Button;
   previewForm: typeof Button;
-  deleteHistory: typeof Button;
+  previewHistory: typeof Button;
   printHistory: typeof Button;
   patientDemographicData: "div";
   submitPatientDemographicData: typeof Button;
   patientNationalcode: typeof TextInput;
   patientName: typeof TextInput;
   simpleFormBuilderComponent: typeof SimpleFormBuilder;
-  formPreview: typeof Modal;
+  formPreview: typeof AntdModal;
   getPreviewForm: typeof ApiFetcherComponentPlus;
   freeBox: "div";
 };
@@ -2682,7 +2786,7 @@ export const PlasmicPatientForms = Object.assign(
     formNameBackButton: makeNodeComponent("formNameBackButton"),
     backToTemplates: makeNodeComponent("backToTemplates"),
     previewForm: makeNodeComponent("previewForm"),
-    deleteHistory: makeNodeComponent("deleteHistory"),
+    previewHistory: makeNodeComponent("previewHistory"),
     printHistory: makeNodeComponent("printHistory"),
     patientDemographicData: makeNodeComponent("patientDemographicData"),
     submitPatientDemographicData: makeNodeComponent(
