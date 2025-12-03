@@ -317,10 +317,23 @@
   min-width: 0;
   padding: 8px;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .formNameBackButton {
+    column-gap: 4px;
+    row-gap: 0px;
+    padding: 4px;
+  }
+}
 .backToTemplates:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__zZtOt {
+    font-size: var(--token-0eYOoylpckD-);
+    text-decoration-line: none !important;
+  }
 }
 .svg__iPwn7 {
   position: relative;
@@ -356,6 +369,11 @@
   width: 100%;
   min-width: 0;
 }
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__nztZ {
+    font-size: var(--token-0eYOoylpckD-);
+  }
+}
 .svg__j9NWm {
   position: relative;
   object-fit: cover;
@@ -372,6 +390,11 @@
   max-width: 100%;
   width: 100%;
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .text__gVgH {
+    font-size: var(--token-0eYOoylpckD-);
+  }
 }
 .svg__goWpt {
   position: relative;

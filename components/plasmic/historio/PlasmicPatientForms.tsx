@@ -1464,7 +1464,15 @@ function PlasmicPatientForms__RenderFunc(props: {
                       "sortSelected"
                     ])}
                   >
-                    {"\u0628\u0627\u0632\u06af\u0634\u062a"}
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__zZtOt
+                      )}
+                    >
+                      {"\u0628\u0627\u0632\u06af\u0634\u062a"}
+                    </div>
                   </Button>
                   {false ? (
                     <Button
@@ -1813,208 +1821,222 @@ function PlasmicPatientForms__RenderFunc(props: {
                         "sortSelected"
                       ])}
                     >
-                      {
-                        "\u067e\u06cc\u0634 \u0646\u0645\u0627\u06cc\u0634 \u0634\u0631\u062d \u062d\u0627\u0644"
-                      }
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__nztZ
+                        )}
+                      >
+                        {hasVariant(globalVariants, "screen", "mobileFirst")
+                          ? "\u067e\u06cc\u0634 \u0646\u0645\u0627\u06cc\u0634"
+                          : "\u067e\u06cc\u0634 \u0646\u0645\u0627\u06cc\u0634 \u0634\u0631\u062d \u062d\u0627\u0644"}
+                      </div>
                     </Button>
                   ) : null}
-                  {false ? (
-                    <Button
-                      data-plasmic-name={"printHistory"}
-                      data-plasmic-override={overrides.printHistory}
-                      className={classNames("__wab_instance", sty.printHistory)}
-                      color={"green"}
-                      deselected={generateStateValueProp($state, [
-                        "printHistory",
-                        "deselected"
-                      ])}
-                      isDisabled={generateStateValueProp($state, [
-                        "printHistory",
-                        "isDisabled"
-                      ])}
-                      onClick={async event => {
-                        const $steps = {};
+                  <Button
+                    data-plasmic-name={"printHistory"}
+                    data-plasmic-override={overrides.printHistory}
+                    className={classNames("__wab_instance", sty.printHistory)}
+                    color={"green"}
+                    deselected={generateStateValueProp($state, [
+                      "printHistory",
+                      "deselected"
+                    ])}
+                    isDisabled={generateStateValueProp($state, [
+                      "printHistory",
+                      "isDisabled"
+                    ])}
+                    onClick={async event => {
+                      const $steps = {};
 
-                        $steps["callPrintApi"] = true
+                      $steps["callPrintApi"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                "POST",
+                                `/api/v3/remote_his_manual/forms/submission/print?submission_id=${$state.submissionId}`,
+                                (() => {
+                                  try {
+                                    return {
+                                      "X-Namespace": localStorage.getItem(
+                                        "inlab_user_namespace_id"
+                                      )
+                                    };
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })(),
+                                undefined,
+                                "blob"
+                              ]
+                            };
+                            return $globalActions[
+                              "AuthGlobalContext.apiFetcherPlus"
+                            ]?.apply(null, [...actionArgs.args]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["callPrintApi"] != null &&
+                        typeof $steps["callPrintApi"] === "object" &&
+                        typeof $steps["callPrintApi"].then === "function"
+                      ) {
+                        $steps["callPrintApi"] = await $steps["callPrintApi"];
+                      }
+
+                      $steps["runCode"] =
+                        $steps.callPrintApi.status === 200
                           ? (() => {
                               const actionArgs = {
-                                args: [
-                                  "POST",
-                                  `/api/v3/remote_his_manual/forms/submission/print?submission_id=${$state.submissionId}`,
-                                  (() => {
-                                    try {
-                                      return {
-                                        "X-Namespace": localStorage.getItem(
-                                          "inlab_user_namespace_id"
-                                        )
-                                      };
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
+                                customFunction: async () => {
+                                  return (() => {
+                                    const response = $steps.callPrintApi;
+                                    if (response.data instanceof Blob) {
+                                      const pdfUrl = URL.createObjectURL(
+                                        response.data
+                                      );
+                                      window.open(pdfUrl, "_blank");
+                                      return setTimeout(
+                                        () => URL.revokeObjectURL(pdfUrl),
+                                        10000
+                                      );
+                                    } else {
+                                      console.error(
+                                        "Received non-Blob response:",
+                                        response
+                                      );
+                                      return alert(
+                                        "Error: Could not generate PDF"
+                                      );
                                     }
-                                  })(),
-                                  undefined,
-                                  "blob"
-                                ]
+                                  })();
+                                }
                               };
-                              return $globalActions[
-                                "AuthGlobalContext.apiFetcherPlus"
-                              ]?.apply(null, [...actionArgs.args]);
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
                             })()
                           : undefined;
-                        if (
-                          $steps["callPrintApi"] != null &&
-                          typeof $steps["callPrintApi"] === "object" &&
-                          typeof $steps["callPrintApi"].then === "function"
-                        ) {
-                          $steps["callPrintApi"] = await $steps["callPrintApi"];
-                        }
+                      if (
+                        $steps["runCode"] != null &&
+                        typeof $steps["runCode"] === "object" &&
+                        typeof $steps["runCode"].then === "function"
+                      ) {
+                        $steps["runCode"] = await $steps["runCode"];
+                      }
+                    }}
+                    onDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "printHistory",
+                          "deselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
 
-                        $steps["runCode"] =
-                          $steps.callPrintApi.status === 200
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      const response = $steps.callPrintApi;
-                                      if (response.data instanceof Blob) {
-                                        const pdfUrl = URL.createObjectURL(
-                                          response.data
-                                        );
-                                        window.open(pdfUrl, "_blank");
-                                        return setTimeout(
-                                          () => URL.revokeObjectURL(pdfUrl),
-                                          10000
-                                        );
-                                      } else {
-                                        console.error(
-                                          "Received non-Blob response:",
-                                          response
-                                        );
-                                        return alert(
-                                          "Error: Could not generate PDF"
-                                        );
-                                      }
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["runCode"] != null &&
-                          typeof $steps["runCode"] === "object" &&
-                          typeof $steps["runCode"].then === "function"
-                        ) {
-                          $steps["runCode"] = await $steps["runCode"];
-                        }
-                      }}
-                      onDeselectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "deselected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onIsDisabledChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "printHistory",
+                          "isDisabled"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onIsDisabledChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "isDisabled"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "printHistory",
+                          "selected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onSelectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "selected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortDeselectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "printHistory",
+                          "sortDeselected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onSortDeselectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "sortDeselected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    onSortSelectedChange={async (...eventArgs: any) => {
+                      ((...eventArgs) => {
+                        generateStateOnChangeProp($state, [
+                          "printHistory",
+                          "sortSelected"
+                        ])(eventArgs[0]);
+                      }).apply(null, eventArgs);
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onSortSelectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "sortSelected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
-
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      selected={generateStateValueProp($state, [
-                        "printHistory",
-                        "selected"
-                      ])}
-                      sortDeselected={generateStateValueProp($state, [
-                        "printHistory",
-                        "sortDeselected"
-                      ])}
-                      sortSelected={generateStateValueProp($state, [
-                        "printHistory",
-                        "sortSelected"
-                      ])}
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    selected={generateStateValueProp($state, [
+                      "printHistory",
+                      "selected"
+                    ])}
+                    sortDeselected={generateStateValueProp($state, [
+                      "printHistory",
+                      "sortDeselected"
+                    ])}
+                    sortSelected={generateStateValueProp($state, [
+                      "printHistory",
+                      "sortSelected"
+                    ])}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__gVgH
+                      )}
                     >
                       {
                         "\u067e\u0631\u06cc\u0646\u062a \u0634\u0631\u062d \u062d\u0627\u0644"
                       }
-                    </Button>
-                  ) : null}
+                    </div>
+                  </Button>
                 </div>
                 <div
                   data-plasmic-name={"patientDemographicData"}
