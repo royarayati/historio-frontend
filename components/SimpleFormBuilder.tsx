@@ -6,6 +6,7 @@ import { CodeComponentMeta } from "@plasmicapp/host";
 import { WidgetProps, ObjectFieldTemplateProps } from "@rjsf/utils";
 // Chakra UI Theme - Good RTL support
 import Form from "@rjsf/chakra-ui";
+import { getBaseUrl } from "@/utils/getBaseUrl";
 
 // Create Chakra UI theme with RTL support for Farsi/Persian
 const theme = extendTheme({
@@ -876,11 +877,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
   onSubmit,
   onChange,
 }) => {
-  // Dynamic base URL - use environment variable or fallback to current origin
-  const getBaseUrl = () => {
-    return process.env.NEXT_PUBLIC_API_BASE || (typeof window !== 'undefined' ? window.location.origin : '');
-  };
-
   // Get authentication token from localStorage
   const getAuthToken = (): string | null => {
     if (typeof window === 'undefined') return null;
@@ -965,6 +961,13 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
           const endpoints = [];
           
           const baseUrl = getBaseUrl();
+          console.log("[SimpleFormBuilder] getBaseUrl() returned:", baseUrl);
+          
+          // Safety check: ensure baseUrl is valid and not frontend
+          if (!baseUrl || baseUrl.includes("historio-frontend")) {
+            console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
+            throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
+          }
           
           // Correct endpoint: /api/v3/remote_his_manual/form/submission (singular "form")
           if (submissionId) {
@@ -1068,6 +1071,14 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 
           try {
             const baseUrl = getBaseUrl();
+            console.log("[SimpleFormBuilder] getBaseUrl() returned for template:", baseUrl);
+            
+            // Safety check: ensure baseUrl is valid and not frontend
+            if (!baseUrl || baseUrl.includes("historio-frontend")) {
+              console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
+              throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
+            }
+            
             const templateUrl = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
             templateUrl.searchParams.set("template_id", finalTemplateId);
             const templateRes = await fetch(templateUrl.toString(), {
@@ -1131,6 +1142,14 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         setError(null);
         try {
           const baseUrl = getBaseUrl();
+          console.log("[SimpleFormBuilder] getBaseUrl() returned for template fetch:", baseUrl);
+          
+          // Safety check: ensure baseUrl is valid and not frontend
+          if (!baseUrl || baseUrl.includes("historio-frontend")) {
+            console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
+            throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
+          }
+          
           const url = new URL(`${baseUrl}/api/v3/remote_his_manual/template`);
           if (templateId) {
             url.searchParams.set("template_id", templateId);
@@ -1173,44 +1192,54 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
   }, [mode, templateId, submissionId, patientId, formData]);
 
   // Process schema to conditionally show/hide fields based on dependencies
-  const processConditionalSchema = (baseSchema: any, currentFormData: any, originalUiSchema: any): { schema: any; uiSchema: any } => {
+  const processConditionalSchema = (
+    baseSchema: any,
+    currentFormData: any,
+    originalUiSchema: any
+  ): { schema: any; uiSchema: any } => {
     if (!baseSchema) {
       return { schema: baseSchema, uiSchema: originalUiSchema };
     }
-    
+
     // Always remove title to hide it from the form
     const processedSchema = JSON.parse(JSON.stringify(baseSchema));
     delete processedSchema.title;
-    
+
     // Deep clone uiSchema to avoid mutations
-    const processedUiSchema = originalUiSchema ? JSON.parse(JSON.stringify(originalUiSchema)) : {};
-    
+    const processedUiSchema = originalUiSchema
+      ? JSON.parse(JSON.stringify(originalUiSchema))
+      : {};
+
     // Ensure root-level RTL options are preserved
-    if (!processedUiSchema['ui:options']) {
-      processedUiSchema['ui:options'] = { dir: 'rtl', textAlign: 'right' };
+    if (!processedUiSchema["ui:options"]) {
+      processedUiSchema["ui:options"] = { dir: "rtl", textAlign: "right" };
     } else {
-      processedUiSchema['ui:options'] = {
-        ...processedUiSchema['ui:options'],
-        dir: 'rtl',
-        textAlign: 'right'
+      processedUiSchema["ui:options"] = {
+        ...processedUiSchema["ui:options"],
+        dir: "rtl",
+        textAlign: "right",
       };
     }
-    
+
     if (!baseSchema.dependencies) {
       // Ensure all fields have RTL options even without dependencies,
       // and recursively process nested object fields that may have their own dependencies.
       Object.keys(baseSchema.properties || {}).forEach((fieldName) => {
         const fieldSchema = baseSchema.properties[fieldName];
         const fieldFormData = currentFormData ? currentFormData[fieldName] : undefined;
-        const originalFieldUiSchema = originalUiSchema && originalUiSchema[fieldName] ? originalUiSchema[fieldName] : {};
+        const originalFieldUiSchema =
+          originalUiSchema && originalUiSchema[fieldName]
+            ? originalUiSchema[fieldName]
+            : {};
 
         // If this field is an object, recursively process its schema so nested dependencies work
-        if (fieldSchema?.type === 'object') {
-          const { schema: childSchema, uiSchema: childUiSchema } = processConditionalSchema(
-            fieldSchema,
-            fieldFormData || {},
-            originalFieldUiSchema
-          );
+        if (fieldSchema?.type === "object") {
+          const { schema: childSchema, uiSchema: childUiSchema } =
+            processConditionalSchema(
+              fieldSchema,
+              fieldFormData || {},
+              originalFieldUiSchema
+            );
 
           processedSchema.properties[fieldName] = childSchema;
 
@@ -1229,19 +1258,25 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
           if (!processedUiSchema[fieldName]) {
             processedUiSchema[fieldName] = {};
           }
-          if (!processedUiSchema[fieldName]['ui:options']) {
-            processedUiSchema[fieldName]['ui:options'] = { dir: 'rtl', textAlign: 'right' };
+          if (!processedUiSchema[fieldName]["ui:options"]) {
+            processedUiSchema[fieldName]["ui:options"] = {
+              dir: "rtl",
+              textAlign: "right",
+            };
           } else {
-            processedUiSchema[fieldName]['ui:options'] = {
-              ...processedUiSchema[fieldName]['ui:options'],
-              dir: 'rtl',
-              textAlign: 'right'
+            processedUiSchema[fieldName]["ui:options"] = {
+              ...processedUiSchema[fieldName]["ui:options"],
+              dir: "rtl",
+              textAlign: "right",
             };
           }
 
           // For checkbox (boolean) fields, ensure title is preserved in schema
-          if (fieldSchema?.type === 'boolean') {
-            if (processedSchema.properties[fieldName] && fieldSchema.title) {
+          if (fieldSchema?.type === "boolean") {
+            if (
+              processedSchema.properties[fieldName] &&
+              fieldSchema.title
+            ) {
               processedSchema.properties[fieldName].title = fieldSchema.title;
             }
           }
@@ -1252,7 +1287,10 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 
     // Helper to build an evaluator for when a dependent field should be shown
     const buildConditionEvaluator = (conditionSchema: any) => {
-      if (conditionSchema?.type === "array" && conditionSchema?.contains?.const !== undefined) {
+      if (
+        conditionSchema?.type === "array" &&
+        conditionSchema?.contains?.const !== undefined
+      ) {
         const target = conditionSchema.contains.const;
         return (value: any) => Array.isArray(value) && value.includes(target);
       }
@@ -1263,7 +1301,10 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         const target = conditionSchema.const;
         return (value: any) => value === target;
       }
-      if (Array.isArray(conditionSchema?.enum) && conditionSchema.enum.length > 0) {
+      if (
+        Array.isArray(conditionSchema?.enum) &&
+        conditionSchema.enum.length > 0
+      ) {
         const allowed = conditionSchema.enum;
         return (value: any) => allowed.includes(value);
       }
@@ -1275,25 +1316,26 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         return Boolean(value);
       };
     };
-    
+
     type DependencyEntry = {
       parentField: string;
       dependentField: string;
       shouldDisplay: (parentValue: any) => boolean;
     };
     const dependencyEntries: DependencyEntry[] = [];
-    
+
     Object.keys(baseSchema.dependencies || {}).forEach((conditionField) => {
       const dependency = baseSchema.dependencies[conditionField];
       if (dependency.oneOf) {
         // Find the oneOf entry that has properties (the true case)
         const trueCase = dependency.oneOf.find(
-          (item: any) => item.properties && Object.keys(item.properties).length > 1
+          (item: any) =>
+            item.properties && Object.keys(item.properties).length > 1
         );
         if (trueCase && trueCase.properties) {
           const conditionSchema = trueCase.properties?.[conditionField];
           const evaluator = buildConditionEvaluator(conditionSchema);
-          
+
           // Get all properties except the condition field itself
           Object.keys(trueCase.properties).forEach((prop) => {
             if (prop !== conditionField) {
@@ -1310,14 +1352,18 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 
     // Get original field order from base schema
     const originalFieldOrder = Object.keys(baseSchema.properties || {});
-    
+
     // Build ordered properties: insert dependent fields right after their parent
     const orderedProperties: Record<string, any> = {};
-    const processedUiSchemaOrdered: Record<string, any> = { ...processedUiSchema };
+    const processedUiSchemaOrdered: Record<string, any> = {
+      ...processedUiSchema,
+    };
     const addedFields = new Set<string>();
 
     // First, identify all dependent fields to exclude them from initial rendering
-    const allDependentFields = new Set(dependencyEntries.map((entry) => entry.dependentField));
+    const allDependentFields = new Set(
+      dependencyEntries.map((entry) => entry.dependentField)
+    );
 
     // Build ordered properties with dependent fields right after their parents
     originalFieldOrder.forEach((fieldName) => {
@@ -1333,69 +1379,81 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 
       // This is a regular field or condition field (checkbox) - add it ONCE
       orderedProperties[fieldName] = { ...baseSchema.properties[fieldName] };
-      
+
       // Ensure RTL options are set for this field
       if (!processedUiSchemaOrdered[fieldName]) {
         processedUiSchemaOrdered[fieldName] = {};
       }
-      if (!processedUiSchemaOrdered[fieldName]['ui:options']) {
-        processedUiSchemaOrdered[fieldName]['ui:options'] = { dir: 'rtl', textAlign: 'right' };
+      if (!processedUiSchemaOrdered[fieldName]["ui:options"]) {
+        processedUiSchemaOrdered[fieldName]["ui:options"] = {
+          dir: "rtl",
+          textAlign: "right",
+        };
       } else {
-        processedUiSchemaOrdered[fieldName]['ui:options'] = {
-          ...processedUiSchemaOrdered[fieldName]['ui:options'],
-          dir: 'rtl',
-          textAlign: 'right'
+        processedUiSchemaOrdered[fieldName]["ui:options"] = {
+          ...processedUiSchemaOrdered[fieldName]["ui:options"],
+          dir: "rtl",
+          textAlign: "right",
         };
       }
-      
+
       // For checkbox (boolean) fields, ensure title is preserved in schema
       // The widget will use schema.title directly, so we keep it in the schema
-      if (baseSchema.properties[fieldName]?.type === 'boolean') {
-        // Keep the schema title - don't clear it
-        // The FieldTemplate will hide the label for checkboxes, and the widget will use schema.title
+      if (baseSchema.properties[fieldName]?.type === "boolean") {
         const originalField = baseSchema.properties[fieldName];
         if (originalField?.title) {
           orderedProperties[fieldName].title = originalField.title;
         }
       }
-      
+
       // For nested object fields, preserve the title so ObjectFieldTemplate can display it
-      if (baseSchema.properties[fieldName]?.type === 'object') {
+      if (baseSchema.properties[fieldName]?.type === "object") {
         const originalField = baseSchema.properties[fieldName];
         if (originalField?.title) {
           orderedProperties[fieldName].title = originalField.title;
         }
       }
-      
+
       addedFields.add(fieldName);
 
       // Check if this field has dependent fields that should be shown
       const dependentsForField = dependencyEntries.filter(
         (entry) => entry.parentField === fieldName
       );
-      
+
       if (dependentsForField.length > 0) {
         const conditionValue = currentFormData[fieldName];
         dependentsForField.forEach((dep) => {
-          if (!addedFields.has(dep.dependentField) && dep.shouldDisplay(conditionValue)) {
-            orderedProperties[dep.dependentField] = baseSchema.properties[dep.dependentField];
-            
+          if (
+            !addedFields.has(dep.dependentField) &&
+            dep.shouldDisplay(conditionValue)
+          ) {
+            orderedProperties[dep.dependentField] =
+              baseSchema.properties[dep.dependentField];
+
             // Ensure RTL options are set for dependent field
             if (!processedUiSchemaOrdered[dep.dependentField]) {
               processedUiSchemaOrdered[dep.dependentField] = {};
             }
-            processedUiSchemaOrdered[dep.dependentField] = { 
-              ...(originalUiSchema && originalUiSchema[dep.dependentField] ? originalUiSchema[dep.dependentField] : {}),
-              'ui:widget': (originalUiSchema && originalUiSchema[dep.dependentField] && originalUiSchema[dep.dependentField]['ui:widget']) 
-                ? originalUiSchema[dep.dependentField]['ui:widget'] 
-                : 'text',
-              'ui:options': {
-                ...(originalUiSchema && originalUiSchema[dep.dependentField] && originalUiSchema[dep.dependentField]['ui:options'] 
-                  ? originalUiSchema[dep.dependentField]['ui:options'] 
+            processedUiSchemaOrdered[dep.dependentField] = {
+              ...(originalUiSchema && originalUiSchema[dep.dependentField]
+                ? originalUiSchema[dep.dependentField]
+                : {}),
+              "ui:widget":
+                originalUiSchema &&
+                originalUiSchema[dep.dependentField] &&
+                originalUiSchema[dep.dependentField]["ui:widget"]
+                  ? originalUiSchema[dep.dependentField]["ui:widget"]
+                  : "text",
+              "ui:options": {
+                ...(originalUiSchema &&
+                originalUiSchema[dep.dependentField] &&
+                originalUiSchema[dep.dependentField]["ui:options"]
+                  ? originalUiSchema[dep.dependentField]["ui:options"]
                   : {}),
-                dir: 'rtl',
-                textAlign: 'right'
-              }
+                dir: "rtl",
+                textAlign: "right",
+              },
             };
             addedFields.add(dep.dependentField);
           }
@@ -1408,7 +1466,7 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     delete processedSchema.dependencies;
     // Remove title to hide it from the form
     delete processedSchema.title;
-    
+
     return { schema: processedSchema, uiSchema: processedUiSchemaOrdered };
   };
 
@@ -1478,22 +1536,44 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       let finalSubmitUrl: string;
       
       if (submitUrl) {
-        // If submitUrl is provided, use it as base and append submission_id for PUT if needed
-        if (httpMethod === "PUT" && submissionId) {
-          // Check if URL already has submission_id parameter
-          if (!submitUrl.includes(`submission_id=`) && !submitUrl.includes(`/${submissionId}`)) {
-            const urlObj = new URL(submitUrl, getBaseUrl());
-            urlObj.searchParams.set("submission_id", submissionId);
-            finalSubmitUrl = urlObj.toString();
-          } else {
-            finalSubmitUrl = submitUrl;
-          }
+        // Normalize submitUrl to always go to backend, even if it's a relative path
+        const baseUrlForSubmit = getBaseUrl();
+        console.log("[SimpleFormBuilder] submitUrl prop received:", submitUrl);
+        console.log("[SimpleFormBuilder] getBaseUrl() returned for submit (submitUrl branch):", baseUrlForSubmit);
+
+        // Safety check: ensure base URL is valid and not frontend
+        if (!baseUrlForSubmit || baseUrlForSubmit.includes("historio-frontend")) {
+          console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected in submitUrl branch:", baseUrlForSubmit);
+          throw new Error(`Invalid API base URL: ${baseUrlForSubmit}. Must point to backend, not frontend.`);
+        }
+
+        // If submitUrl is relative (starts with /api/...), resolve it against backend base URL
+        if (!submitUrl.startsWith("http://") && !submitUrl.startsWith("https://")) {
+          const urlObj = new URL(submitUrl, baseUrlForSubmit);
+          finalSubmitUrl = urlObj.toString();
         } else {
           finalSubmitUrl = submitUrl;
+        }
+
+        // For PUT with submissionId, ensure query param is present (if missing)
+        if (httpMethod === "PUT" && submissionId) {
+          const urlObj = new URL(finalSubmitUrl);
+          if (!urlObj.searchParams.get("submission_id")) {
+            urlObj.searchParams.set("submission_id", submissionId);
+            finalSubmitUrl = urlObj.toString();
+          }
         }
       } else {
         // Auto-construct URL from base URL
         const baseUrl = getBaseUrl();
+        console.log("[SimpleFormBuilder] getBaseUrl() returned for submit:", baseUrl);
+        
+        // Safety check: ensure baseUrl is valid and not frontend
+        if (!baseUrl || baseUrl.includes("historio-frontend")) {
+          console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
+          throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
+        }
+        
         if (httpMethod === "POST") {
           // POST: /api/v3/remote_his_manual/forms/submission
           finalSubmitUrl = `${baseUrl}/api/v3/remote_his_manual/forms/submission`;
