@@ -1704,7 +1704,16 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     <ChakraProvider theme={theme}>
       <div className={className} style={style}>
         <style>{`
-[data-form-container] .field {
+[data-form-container] {
+          /* Allow selecting text inside the form even if parent containers disable selection */
+          user-select: text;
+          -webkit-user-select: text;
+          -ms-user-select: text;
+          direction: rtl;
+          text-align: right;
+          font-family: Vazirmatn, sans-serif !important;
+        }
+        [data-form-container] .field {
           margin-bottom: 12px;
         }
         [data-form-container] .form-group {
@@ -1720,11 +1729,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
           display: none !important;
         }
         /* Ensure RTL and Vazirmatn font */
-        [data-form-container] {
-          direction: rtl;
-          text-align: right;
-          font-family: Vazirmatn, sans-serif !important;
-        }
         [data-form-container] * {
           font-family: Vazirmatn, sans-serif !important;
         }
