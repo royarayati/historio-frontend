@@ -1464,6 +1464,14 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     // Remove dependencies from schema to prevent RJSF from rendering duplicate fields
     processedSchema.properties = orderedProperties;
     delete processedSchema.dependencies;
+
+    // Ensure required only includes fields that are actually rendered
+    if (Array.isArray(processedSchema.required)) {
+      processedSchema.required = processedSchema.required.filter(
+        (fieldName: string) => !!orderedProperties[fieldName]
+      );
+    }
+
     // Remove title to hide it from the form
     delete processedSchema.title;
 
