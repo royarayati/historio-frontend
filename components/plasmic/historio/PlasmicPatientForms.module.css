@@ -607,3 +607,6 @@
   max-width: 100%;
   min-width: 0;
 }
+.redirectToInlabLogin:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+}

@@ -64,6 +64,7 @@ import Button from "../../Button"; // plasmic-import: 7E4Snh8PZrgu/component
 import TextInput from "../../TextInput"; // plasmic-import: 7SMSkwN_rIbt/component
 import { SimpleFormBuilder } from "@/components/SimpleFormBuilder"; // plasmic-import: p3qfIhfZiUBK/codeComponent
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal";
+import RedirectToInlabLogin from "../../RedirectToInlabLogin"; // plasmic-import: g0UeaUFG4hMi/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: sZd5R9LnJ4gbMuoYzR9bKq/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: sZd5R9LnJ4gbMuoYzR9bKq/styleTokensProvider
 
@@ -119,6 +120,7 @@ export type PlasmicPatientForms__OverridesType = {
   formPreview?: Flex__<typeof AntdModal>;
   getPreviewForm?: Flex__<typeof ApiFetcherComponentPlus>;
   freeBox?: Flex__<"div">;
+  redirectToInlabLogin?: Flex__<typeof RedirectToInlabLogin>;
 };
 
 export interface DefaultPatientFormsProps {}
@@ -2783,6 +2785,11 @@ function PlasmicPatientForms__RenderFunc(props: {
               </DataCtxReader__>
             </ApiFetcherComponentPlus>
           </AntdModal>
+          <RedirectToInlabLogin
+            data-plasmic-name={"redirectToInlabLogin"}
+            data-plasmic-override={overrides.redirectToInlabLogin}
+            className={classNames("__wab_instance", sty.redirectToInlabLogin)}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -2820,7 +2827,8 @@ const PlasmicDescendants = {
     "simpleFormBuilderComponent",
     "formPreview",
     "getPreviewForm",
-    "freeBox"
+    "freeBox",
+    "redirectToInlabLogin"
   ],
   patientHistory: [
     "patientHistory",
@@ -2952,7 +2960,8 @@ const PlasmicDescendants = {
   simpleFormBuilderComponent: ["simpleFormBuilderComponent"],
   formPreview: ["formPreview", "getPreviewForm", "freeBox"],
   getPreviewForm: ["getPreviewForm", "freeBox"],
-  freeBox: ["freeBox"]
+  freeBox: ["freeBox"],
+  redirectToInlabLogin: ["redirectToInlabLogin"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -2988,6 +2997,7 @@ type NodeDefaultElementType = {
   formPreview: typeof AntdModal;
   getPreviewForm: typeof ApiFetcherComponentPlus;
   freeBox: "div";
+  redirectToInlabLogin: typeof RedirectToInlabLogin;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -3083,6 +3093,7 @@ export const PlasmicPatientForms = Object.assign(
     formPreview: makeNodeComponent("formPreview"),
     getPreviewForm: makeNodeComponent("getPreviewForm"),
     freeBox: makeNodeComponent("freeBox"),
+    redirectToInlabLogin: makeNodeComponent("redirectToInlabLogin"),
 
     // Metadata about props expected for PlasmicPatientForms
     internalVariantProps: PlasmicPatientForms__VariantProps,
