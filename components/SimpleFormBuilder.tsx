@@ -1327,26 +1327,38 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     Object.keys(baseSchema.dependencies || {}).forEach((conditionField) => {
       const dependency = baseSchema.dependencies[conditionField];
       if (dependency.oneOf) {
-        // Find the oneOf entry that has properties (the true case)
-        const trueCase = dependency.oneOf.find(
-          (item: any) =>
-            item.properties && Object.keys(item.properties).length > 1
-        );
-        if (trueCase && trueCase.properties) {
-          const conditionSchema = trueCase.properties?.[conditionField];
-          const evaluator = buildConditionEvaluator(conditionSchema);
-
-          // Get all properties except the condition field itself
-          Object.keys(trueCase.properties).forEach((prop) => {
-            if (prop !== conditionField) {
-              dependencyEntries.push({
-                parentField: conditionField,
-                dependentField: prop,
-                shouldDisplay: evaluator,
+        const conditionValue = currentFormData[conditionField];
+        
+        // Process all matching oneOf cases, not just the first one
+        dependency.oneOf.forEach((item: any) => {
+          if (item.properties && Object.keys(item.properties).length > 1) {
+            const conditionSchema = item.properties?.[conditionField];
+            const evaluator = buildConditionEvaluator(conditionSchema);
+            
+            // Check if this case matches
+            if (evaluator(conditionValue)) {
+              // Get all properties except the condition field itself
+              Object.keys(item.properties).forEach((prop) => {
+                if (prop !== conditionField) {
+                  // Check if this dependency entry already exists
+                  const existingIndex = dependencyEntries.findIndex(
+                    (entry) => entry.parentField === conditionField && entry.dependentField === prop
+                  );
+                  
+                  if (existingIndex === -1) {
+                    // Create a new evaluator for this specific field
+                    const fieldEvaluator = buildConditionEvaluator(conditionSchema);
+                    dependencyEntries.push({
+                      parentField: conditionField,
+                      dependentField: prop,
+                      shouldDisplay: fieldEvaluator,
+                    });
+                  }
+                }
               });
             }
-          });
-        }
+          }
+        });
       }
     });
 
