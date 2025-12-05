@@ -294,6 +294,30 @@
     padding: 4px;
   }
 }
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  left: auto;
+  top: 12px;
+  z-index: 2;
+  background: #ffffff;
+  min-width: 0;
+  padding: 4px;
+}
+@media (min-width: 0px) and (max-width: 760px) {
+  .headerSection {
+    top: 4px;
+    left: 0;
+    right: 0;
+    width: auto;
+  }
+}
 .text__jbVx0 {
   position: relative;
   width: 100%;
@@ -456,6 +480,7 @@
   height: auto;
   max-width: 100%;
   column-gap: 12px;
+  margin-top: 75px;
   min-width: 0;
   padding: 4px;
 }
@@ -465,6 +490,7 @@
     justify-content: space-around;
     row-gap: 0px;
     padding: 2px;
+    margin: 30px 0px 0px;
   }
 }
 .submitPatientDemographicData:global(.__wab_instance) {
