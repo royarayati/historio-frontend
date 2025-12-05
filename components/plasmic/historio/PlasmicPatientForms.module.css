@@ -408,6 +408,44 @@
   width: auto;
   height: 1em;
 }
+.text__ocCBp {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  right: auto;
+  background: #ffffff;
+  min-width: 0;
+  padding: 4px;
+}
+.text__zwY1 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  right: auto;
+  background: #ff0000;
+  color: var(--token-vdN6xpRhglc2);
+  min-width: 0;
+  padding: 4px;
+}
+.text__gGoMu {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  left: auto;
+  top: auto;
+  right: auto;
+  background: #52c41a;
+  color: var(--token-vdN6xpRhglc2);
+  min-width: 0;
+  padding: 4px;
+}
 .patientDemographicData {
   display: flex;
   flex-direction: row;

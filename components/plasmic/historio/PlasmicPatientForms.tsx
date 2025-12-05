@@ -1850,6 +1850,41 @@ function PlasmicPatientForms__RenderFunc(props: {
                     onClick={async event => {
                       const $steps = {};
 
+                      $steps["updateShowPrinting"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["showPrinting"]
+                              },
+                              operation: 0,
+                              value: true
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateShowPrinting"] != null &&
+                        typeof $steps["updateShowPrinting"] === "object" &&
+                        typeof $steps["updateShowPrinting"].then === "function"
+                      ) {
+                        $steps["updateShowPrinting"] =
+                          await $steps["updateShowPrinting"];
+                      }
+
                       $steps["callPrintApi"] = true
                         ? (() => {
                             const actionArgs = {
@@ -1930,6 +1965,118 @@ function PlasmicPatientForms__RenderFunc(props: {
                         typeof $steps["runCode"].then === "function"
                       ) {
                         $steps["runCode"] = await $steps["runCode"];
+                      }
+
+                      $steps["updateShowPrintingFalse"] =
+                        $steps.callPrintApi.status === 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["showPrinting"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateShowPrintingFalse"] != null &&
+                        typeof $steps["updateShowPrintingFalse"] === "object" &&
+                        typeof $steps["updateShowPrintingFalse"].then ===
+                          "function"
+                      ) {
+                        $steps["updateShowPrintingFalse"] =
+                          await $steps["updateShowPrintingFalse"];
+                      }
+
+                      $steps["updateShowPrintingSuccess"] =
+                        $steps.callPrintApi.status === 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["showPrintingSuccess"]
+                                },
+                                operation: 0,
+                                value: true
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateShowPrintingSuccess"] != null &&
+                        typeof $steps["updateShowPrintingSuccess"] ===
+                          "object" &&
+                        typeof $steps["updateShowPrintingSuccess"].then ===
+                          "function"
+                      ) {
+                        $steps["updateShowPrintingSuccess"] =
+                          await $steps["updateShowPrintingSuccess"];
+                      }
+
+                      $steps["updateShowPrintingError"] =
+                        $steps.callPrintApi.status !== 200
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["showPrintingError"]
+                                },
+                                operation: 0,
+                                value: true
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                      if (
+                        $steps["updateShowPrintingError"] != null &&
+                        typeof $steps["updateShowPrintingError"] === "object" &&
+                        typeof $steps["updateShowPrintingError"].then ===
+                          "function"
+                      ) {
+                        $steps["updateShowPrintingError"] =
+                          await $steps["updateShowPrintingError"];
                       }
                     }}
                     onDeselectedChange={async (...eventArgs: any) => {
@@ -2038,6 +2185,93 @@ function PlasmicPatientForms__RenderFunc(props: {
                     </div>
                   </Button>
                 </div>
+                {(() => {
+                  try {
+                    return $state.showPrinting === true;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__ocCBp
+                    )}
+                  >
+                    {
+                      "\u062f\u0631\u062d\u0627\u0644 \u0622\u0645\u0627\u062f\u0647 \u0633\u0627\u0632\u06cc \u0628\u0631\u0627\u06cc \u067e\u0631\u06cc\u0646\u062a"
+                    }
+                  </div>
+                ) : null}
+                {(() => {
+                  try {
+                    return (() => {
+                      const showSuccessAlarmText = $state.showPrintingError;
+                      setTimeout(() => {
+                        $state.showPrintingError = false;
+                      }, 4000);
+                      return showSuccessAlarmText;
+                    })();
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__zwY1
+                    )}
+                  >
+                    {
+                      "\u0645\u0634\u06a9\u0644\u06cc \u067e\u06cc\u0634 \u0622\u0645\u062f\u0647 \u060c \u0644\u0637\u0641\u0627 \u062f\u0648\u0628\u0627\u0631\u0647 \u062a\u0644\u0627\u0634 \u06a9\u0646\u06cc\u062f!"
+                    }
+                  </div>
+                ) : null}
+                {(() => {
+                  try {
+                    return (() => {
+                      const showSuccessAlarmText = $state.showPrintingSuccess;
+                      setTimeout(() => {
+                        $state.showPrintingSuccess = false;
+                      }, 4000);
+                      return showSuccessAlarmText;
+                    })();
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__gGoMu
+                    )}
+                  >
+                    {
+                      "\u067e\u0631\u06cc\u0646\u062a \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0627\u0646\u062c\u0627\u0645 \u0634\u062f "
+                    }
+                  </div>
+                ) : null}
                 <div
                   data-plasmic-name={"patientDemographicData"}
                   data-plasmic-override={overrides.patientDemographicData}
