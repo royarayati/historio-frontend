@@ -1848,142 +1848,39 @@ function PlasmicPatientForms__RenderFunc(props: {
                         </div>
                       </Button>
                     ) : null}
-                    <Button
-                      data-plasmic-name={"printHistory"}
-                      data-plasmic-override={overrides.printHistory}
-                      className={classNames("__wab_instance", sty.printHistory)}
-                      color={"green"}
-                      deselected={generateStateValueProp($state, [
-                        "printHistory",
-                        "deselected"
-                      ])}
-                      isDisabled={generateStateValueProp($state, [
-                        "printHistory",
-                        "isDisabled"
-                      ])}
-                      onClick={async event => {
-                        const $steps = {};
-
-                        $steps["updateShowPrinting"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["showPrinting"]
-                                },
-                                operation: 0,
-                                value: true
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
+                    {(() => {
+                      try {
+                        return $state.formMode === "filled_form";
+                      } catch (e) {
                         if (
-                          $steps["updateShowPrinting"] != null &&
-                          typeof $steps["updateShowPrinting"] === "object" &&
-                          typeof $steps["updateShowPrinting"].then ===
-                            "function"
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
                         ) {
-                          $steps["updateShowPrinting"] =
-                            await $steps["updateShowPrinting"];
+                          return true;
                         }
+                        throw e;
+                      }
+                    })() ? (
+                      <Button
+                        data-plasmic-name={"printHistory"}
+                        data-plasmic-override={overrides.printHistory}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.printHistory
+                        )}
+                        color={"green"}
+                        deselected={generateStateValueProp($state, [
+                          "printHistory",
+                          "deselected"
+                        ])}
+                        isDisabled={generateStateValueProp($state, [
+                          "printHistory",
+                          "isDisabled"
+                        ])}
+                        onClick={async event => {
+                          const $steps = {};
 
-                        $steps["callPrintApi"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                args: [
-                                  "POST",
-                                  `/api/v3/remote_his_manual/forms/submission/print?submission_id=${$state.submissionId}`,
-                                  (() => {
-                                    try {
-                                      return {
-                                        "X-Namespace": localStorage.getItem(
-                                          "inlab_user_namespace_id"
-                                        )
-                                      };
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })(),
-                                  undefined,
-                                  "blob"
-                                ]
-                              };
-                              return $globalActions[
-                                "AuthGlobalContext.apiFetcherPlus"
-                              ]?.apply(null, [...actionArgs.args]);
-                            })()
-                          : undefined;
-                        if (
-                          $steps["callPrintApi"] != null &&
-                          typeof $steps["callPrintApi"] === "object" &&
-                          typeof $steps["callPrintApi"].then === "function"
-                        ) {
-                          $steps["callPrintApi"] = await $steps["callPrintApi"];
-                        }
-
-                        $steps["runCode"] =
-                          $steps.callPrintApi.status === 200
-                            ? (() => {
-                                const actionArgs = {
-                                  customFunction: async () => {
-                                    return (() => {
-                                      const response = $steps.callPrintApi;
-                                      if (response.data instanceof Blob) {
-                                        const pdfUrl = URL.createObjectURL(
-                                          response.data
-                                        );
-                                        window.open(pdfUrl, "_blank");
-                                        return setTimeout(
-                                          () => URL.revokeObjectURL(pdfUrl),
-                                          10000
-                                        );
-                                      } else {
-                                        console.error(
-                                          "Received non-Blob response:",
-                                          response
-                                        );
-                                        return alert(
-                                          "Error: Could not generate PDF"
-                                        );
-                                      }
-                                    })();
-                                  }
-                                };
-                                return (({ customFunction }) => {
-                                  return customFunction();
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["runCode"] != null &&
-                          typeof $steps["runCode"] === "object" &&
-                          typeof $steps["runCode"].then === "function"
-                        ) {
-                          $steps["runCode"] = await $steps["runCode"];
-                        }
-
-                        $steps["updateShowPrintingFalse"] =
-                          $steps.callPrintApi.status === 200
+                          $steps["updateShowPrinting"] = true
                             ? (() => {
                                 const actionArgs = {
                                   variable: {
@@ -1991,7 +1888,7 @@ function PlasmicPatientForms__RenderFunc(props: {
                                     variablePath: ["showPrinting"]
                                   },
                                   operation: 0,
-                                  value: false
+                                  value: true
                                 };
                                 return (({
                                   variable,
@@ -2009,198 +1906,319 @@ function PlasmicPatientForms__RenderFunc(props: {
                                 })?.apply(null, [actionArgs]);
                               })()
                             : undefined;
-                        if (
-                          $steps["updateShowPrintingFalse"] != null &&
-                          typeof $steps["updateShowPrintingFalse"] ===
-                            "object" &&
-                          typeof $steps["updateShowPrintingFalse"].then ===
-                            "function"
-                        ) {
+                          if (
+                            $steps["updateShowPrinting"] != null &&
+                            typeof $steps["updateShowPrinting"] === "object" &&
+                            typeof $steps["updateShowPrinting"].then ===
+                              "function"
+                          ) {
+                            $steps["updateShowPrinting"] =
+                              await $steps["updateShowPrinting"];
+                          }
+
+                          $steps["callPrintApi"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    `/api/v3/remote_his_manual/forms/submission/print?submission_id=${$state.submissionId}`,
+                                    (() => {
+                                      try {
+                                        return {
+                                          "X-Namespace": localStorage.getItem(
+                                            "inlab_user_namespace_id"
+                                          )
+                                        };
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })(),
+                                    undefined,
+                                    "blob"
+                                  ]
+                                };
+                                return $globalActions[
+                                  "AuthGlobalContext.apiFetcherPlus"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["callPrintApi"] != null &&
+                            typeof $steps["callPrintApi"] === "object" &&
+                            typeof $steps["callPrintApi"].then === "function"
+                          ) {
+                            $steps["callPrintApi"] =
+                              await $steps["callPrintApi"];
+                          }
+
+                          $steps["runCode"] =
+                            $steps.callPrintApi.status === 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    customFunction: async () => {
+                                      return (() => {
+                                        const response = $steps.callPrintApi;
+                                        if (response.data instanceof Blob) {
+                                          const pdfUrl = URL.createObjectURL(
+                                            response.data
+                                          );
+                                          window.open(pdfUrl, "_blank");
+                                          return setTimeout(
+                                            () => URL.revokeObjectURL(pdfUrl),
+                                            10000
+                                          );
+                                        } else {
+                                          console.error(
+                                            "Received non-Blob response:",
+                                            response
+                                          );
+                                          return alert(
+                                            "Error: Could not generate PDF"
+                                          );
+                                        }
+                                      })();
+                                    }
+                                  };
+                                  return (({ customFunction }) => {
+                                    return customFunction();
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["runCode"] != null &&
+                            typeof $steps["runCode"] === "object" &&
+                            typeof $steps["runCode"].then === "function"
+                          ) {
+                            $steps["runCode"] = await $steps["runCode"];
+                          }
+
                           $steps["updateShowPrintingFalse"] =
-                            await $steps["updateShowPrintingFalse"];
-                        }
+                            $steps.callPrintApi.status === 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["showPrinting"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
 
-                        $steps["updateShowPrintingSuccess"] =
-                          $steps.callPrintApi.status === 200
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["showPrintingSuccess"]
-                                  },
-                                  operation: 0,
-                                  value: true
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateShowPrintingFalse"] != null &&
+                            typeof $steps["updateShowPrintingFalse"] ===
+                              "object" &&
+                            typeof $steps["updateShowPrintingFalse"].then ===
+                              "function"
+                          ) {
+                            $steps["updateShowPrintingFalse"] =
+                              await $steps["updateShowPrintingFalse"];
+                          }
 
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["updateShowPrintingSuccess"] != null &&
-                          typeof $steps["updateShowPrintingSuccess"] ===
-                            "object" &&
-                          typeof $steps["updateShowPrintingSuccess"].then ===
-                            "function"
-                        ) {
                           $steps["updateShowPrintingSuccess"] =
-                            await $steps["updateShowPrintingSuccess"];
-                        }
+                            $steps.callPrintApi.status === 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["showPrintingSuccess"]
+                                    },
+                                    operation: 0,
+                                    value: true
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
 
-                        $steps["updateShowPrintingError"] =
-                          $steps.callPrintApi.status !== 200
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["showPrintingError"]
-                                  },
-                                  operation: 0,
-                                  value: true
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateShowPrintingSuccess"] != null &&
+                            typeof $steps["updateShowPrintingSuccess"] ===
+                              "object" &&
+                            typeof $steps["updateShowPrintingSuccess"].then ===
+                              "function"
+                          ) {
+                            $steps["updateShowPrintingSuccess"] =
+                              await $steps["updateShowPrintingSuccess"];
+                          }
 
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                        if (
-                          $steps["updateShowPrintingError"] != null &&
-                          typeof $steps["updateShowPrintingError"] ===
-                            "object" &&
-                          typeof $steps["updateShowPrintingError"].then ===
-                            "function"
-                        ) {
                           $steps["updateShowPrintingError"] =
-                            await $steps["updateShowPrintingError"];
-                        }
-                      }}
-                      onDeselectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "deselected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                            $steps.callPrintApi.status !== 200
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["showPrintingError"]
+                                    },
+                                    operation: 0,
+                                    value: true
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onIsDisabledChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "isDisabled"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["updateShowPrintingError"] != null &&
+                            typeof $steps["updateShowPrintingError"] ===
+                              "object" &&
+                            typeof $steps["updateShowPrintingError"].then ===
+                              "function"
+                          ) {
+                            $steps["updateShowPrintingError"] =
+                              await $steps["updateShowPrintingError"];
+                          }
+                        }}
+                        onDeselectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "printHistory",
+                              "deselected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onSelectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "selected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        onIsDisabledChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "printHistory",
+                              "isDisabled"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onSortDeselectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "sortDeselected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        onSelectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "printHistory",
+                              "selected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      onSortSelectedChange={async (...eventArgs: any) => {
-                        ((...eventArgs) => {
-                          generateStateOnChangeProp($state, [
-                            "printHistory",
-                            "sortSelected"
-                          ])(eventArgs[0]);
-                        }).apply(null, eventArgs);
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        onSortDeselectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "printHistory",
+                              "sortDeselected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
 
-                        if (
-                          eventArgs.length > 1 &&
-                          eventArgs[1] &&
-                          eventArgs[1]._plasmic_state_init_
-                        ) {
-                          return;
-                        }
-                      }}
-                      selected={generateStateValueProp($state, [
-                        "printHistory",
-                        "selected"
-                      ])}
-                      sortDeselected={generateStateValueProp($state, [
-                        "printHistory",
-                        "sortDeselected"
-                      ])}
-                      sortSelected={generateStateValueProp($state, [
-                        "printHistory",
-                        "sortSelected"
-                      ])}
-                    >
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__gVgH
-                        )}
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        onSortSelectedChange={async (...eventArgs: any) => {
+                          ((...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "printHistory",
+                              "sortSelected"
+                            ])(eventArgs[0]);
+                          }).apply(null, eventArgs);
+
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                        selected={generateStateValueProp($state, [
+                          "printHistory",
+                          "selected"
+                        ])}
+                        sortDeselected={generateStateValueProp($state, [
+                          "printHistory",
+                          "sortDeselected"
+                        ])}
+                        sortSelected={generateStateValueProp($state, [
+                          "printHistory",
+                          "sortSelected"
+                        ])}
                       >
-                        {
-                          "\u067e\u0631\u06cc\u0646\u062a \u0634\u0631\u062d \u062d\u0627\u0644"
-                        }
-                      </div>
-                    </Button>
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__gVgH
+                          )}
+                        >
+                          {
+                            "\u067e\u0631\u06cc\u0646\u062a \u0634\u0631\u062d \u062d\u0627\u0644"
+                          }
+                        </div>
+                      </Button>
+                    ) : null}
                   </div>
                   {(() => {
                     try {
