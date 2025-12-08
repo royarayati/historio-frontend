@@ -1,14 +1,18 @@
 {
   "id": 6,
-  "name": "شرح حال درد قفسه سینه",
+  "name": "شرح حال جنرال",
   "category": "Emergency/Cardiology",
   "schema": {
     "type": "object",
-    "title": "شرح حال درد قفسه سینه",
+    "title": "شرح حال جنرال",
     "properties": {
       "age": {
         "type": "string",
         "title": "سن"
+      },
+      "main_complaint": {
+        "type": "string",
+        "title": "شکایت اصلی بیمار"
       },
       "gender": {
         "enum": [
@@ -17,48 +21,6 @@
         ],
         "type": "string",
         "title": "جنس"
-      },
-      "lung_exam": {
-        "type": "object",
-        "title": "معاینه ریه",
-        "properties": {
-          "has_rale": {
-            "enum": [
-              "ندارد",
-              "دارد"
-            ],
-            "type": "string",
-            "title": "رال ریوی",
-            "default": "ندارد"
-          }
-        },
-        "dependencies": {
-          "has_rale": {
-            "oneOf": [
-              {
-                "properties": {
-                  "has_rale": {
-                    "const": "ندارد"
-                  }
-                }
-              },
-              {
-                "required": [
-                  "rale_location"
-                ],
-                "properties": {
-                  "has_rale": {
-                    "const": "دارد"
-                  },
-                  "rale_location": {
-                    "type": "string",
-                    "title": "محل رال ریوی"
-                  }
-                }
-              }
-            ]
-          }
-        }
       },
       "vital_signs": {
         "type": "object",
@@ -86,69 +48,528 @@
           }
         }
       },
-      "cardiac_exam": {
+      "general_appearance": {
         "type": "object",
-        "title": "معاینه قلب",
+        "title": "ظاهر عمومی",
         "properties": {
-          "murmur": {
+          "appearance": {
             "enum": [
-              "ندارد",
-              "دارد"
+              "هوشیار و بیدار و ill و toxic نیست",
+              "ill است اما toxic نیست",
+              "ill, toxic",
+              "بیهوش",
+              "سایر"
             ],
             "type": "string",
-            "title": "سوفل",
-            "default": "ندارد"
+            "title": "ظاهر عمومی"
           },
-          "heart_sounds": {
-            "enum": [
-              "نرمال",
-              "غیرنرمال"
-            ],
+          "appearance_other": {
             "type": "string",
-            "title": "صدای قلب",
-            "default": "نرمال"
-          }
-        }
-      },
-      "abdominal_exam": {
-        "type": "object",
-        "title": "معاینه شکم",
-        "properties": {
-          "has_tenderness": {
-            "enum": [
-              "ندارد",
-              "دارد"
-            ],
-            "type": "string",
-            "title": "تندرنس شکمی",
-            "default": "ندارد"
+            "title": "توضیحات ظاهر عمومی دیگر"
           }
         },
         "dependencies": {
-          "has_tenderness": {
+          "appearance": {
             "oneOf": [
               {
                 "properties": {
-                  "has_tenderness": {
+                  "appearance": {
+                    "enum": [
+                      "هوشیار و بیدار و ill و toxic نیست",
+                      "ill است اما toxic نیست",
+                      "ill, toxic",
+                      "بیهوش"
+                    ],
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "required": [
+                  "appearance_other"
+                ],
+                "properties": {
+                  "appearance": {
+                    "const": "سایر"
+                  },
+                  "appearance_other": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "drug_history": {
+        "type": "object",
+        "title": "داروهای مصرفی",
+        "properties": {
+          "has_medications": {
+            "enum": [
+              "دارد",
+              "ندارد"
+            ],
+            "type": "string",
+            "title": "داروهای مصرفی"
+          },
+          "medications": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "اسپرین 80 Daily",
+                "لوزارتان 25 BD",
+                "متفورمین 500BD",
+                "آتورواستاتین 20 Daily",
+                "سایر"
+              ],
+              "type": "string"
+            },
+            "title": "داروهای مصرفی",
+            "uniqueItems": true
+          },
+          "other_medications_detail": {
+            "type": "string",
+            "title": "توضیحات سایر داروها"
+          }
+        },
+        "dependencies": {
+          "has_medications": {
+            "oneOf": [
+              {
+                "properties": {
+                  "has_medications": {
                     "const": "ندارد"
                   }
                 }
               },
               {
                 "required": [
-                  "tenderness_area"
+                  "medications"
                 ],
                 "properties": {
-                  "has_tenderness": {
+                  "has_medications": {
                     "const": "دارد"
                   },
-                  "tenderness_area": {
-                    "type": "string",
-                    "title": "محل تندرنس شکمی"
+                  "medications": {
+                    "type": "array"
                   }
                 }
               }
             ]
+          },
+          "medications": {
+            "oneOf": [
+              {
+                "properties": {
+                  "medications": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "اسپرین 80 Daily",
+                        "لوزارتان 25 BD",
+                        "متفورمین 500BD",
+                        "آتورواستاتین 20 Daily"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "required": [
+                  "other_medications_detail"
+                ],
+                "properties": {
+                  "medications": {
+                    "type": "array",
+                    "contains": {
+                      "const": "سایر"
+                    }
+                  },
+                  "other_medications_detail": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "physical_exam": {
+        "type": "object",
+        "title": "معاینه فیزیکی",
+        "properties": {
+          "lung_exam": {
+            "type": "object",
+            "title": "معاینه ریه",
+            "properties": {
+              "lung_findings": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "نرمال",
+                    "ویزینگ",
+                    "رال"
+                  ],
+                  "type": "string"
+                },
+                "title": "معاینه ریه",
+                "uniqueItems": true
+              },
+              "lung_location": {
+                "type": "string",
+                "title": "محل :"
+              }
+            },
+            "dependencies": {
+              "lung_findings": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "lung_findings": {
+                        "type": "array",
+                        "items": {
+                          "enum": [
+                            "نرمال"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "required": [
+                      "lung_location"
+                    ],
+                    "properties": {
+                      "lung_findings": {
+                        "type": "array",
+                        "contains": {
+                          "anyOf": [
+                            {
+                              "const": "رال"
+                            },
+                            {
+                              "const": "ویزینگ"
+                            }
+                          ]
+                        }
+                      },
+                      "lung_location": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "skin_exam": {
+            "type": "object",
+            "title": "معاینه پوست",
+            "properties": {
+              "skin_lesion": {
+                "enum": [
+                  "ندارد",
+                  "دارد"
+                ],
+                "type": "string",
+                "title": "ضایعه پوستی"
+              },
+              "lesion_type": {
+                "type": "string",
+                "title": "نوع ضایعه :"
+              }
+            },
+            "dependencies": {
+              "skin_lesion": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "skin_lesion": {
+                        "const": "ندارد"
+                      }
+                    }
+                  },
+                  {
+                    "required": [
+                      "lesion_type"
+                    ],
+                    "properties": {
+                      "lesion_type": {
+                        "type": "string"
+                      },
+                      "skin_lesion": {
+                        "const": "دارد"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "joint_exam": {
+            "type": "object",
+            "title": "معاینه مفصلی",
+            "properties": {
+              "joint_status": {
+                "enum": [
+                  "نرمال",
+                  "غیرنرمال"
+                ],
+                "type": "string",
+                "title": "معاینه مفصلی"
+              },
+              "joint_name": {
+                "type": "string",
+                "title": "نام مفصل"
+              },
+              "joint_warmth": {
+                "enum": [
+                  "ندارد",
+                  "دارد"
+                ],
+                "type": "string",
+                "title": "گرمی مفصل"
+              },
+              "joint_redness": {
+                "enum": [
+                  "ندارد",
+                  "دارد"
+                ],
+                "type": "string",
+                "title": "قرمزی مفصل"
+              },
+              "joint_swelling": {
+                "enum": [
+                  "ندارد",
+                  "دارد"
+                ],
+                "type": "string",
+                "title": "تورم مفصل"
+              },
+              "joint_limitation": {
+                "enum": [
+                  "ندارد",
+                  "دارد"
+                ],
+                "type": "string",
+                "title": "محدودیت حرکتی"
+              }
+            },
+            "dependencies": {
+              "joint_status": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "joint_status": {
+                        "const": "نرمال"
+                      }
+                    }
+                  },
+                  {
+                    "required": [
+                      "joint_name"
+                    ],
+                    "properties": {
+                      "joint_name": {
+                        "type": "string"
+                      },
+                      "joint_status": {
+                        "const": "غیرنرمال"
+                      },
+                      "joint_warmth": {
+                        "type": "string"
+                      },
+                      "joint_redness": {
+                        "type": "string"
+                      },
+                      "joint_swelling": {
+                        "type": "string"
+                      },
+                      "joint_limitation": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "neuro_exam": {
+            "type": "object",
+            "title": "معاینه عصبی",
+            "properties": {
+              "neuro_status": {
+                "enum": [
+                  "نرمال",
+                  "غیرنرمال"
+                ],
+                "type": "string",
+                "title": "معاینه عصبی"
+              },
+              "romberg": {
+                "enum": [
+                  "نرمال",
+                  "غیرنرمال"
+                ],
+                "type": "string",
+                "title": "تست Romberg"
+              },
+              "tandem_gait": {
+                "enum": [
+                  "نرمال",
+                  "غیرنرمال"
+                ],
+                "type": "string",
+                "title": "راه رفتن خطی (Tandem Gait)"
+              },
+              "finger_to_nose": {
+                "enum": [
+                  "نرمال",
+                  "غیرنرمال"
+                ],
+                "type": "string",
+                "title": "تست انگشت به بینی"
+              },
+              "heel_to_shin": {
+                "enum": [
+                  "نرمال",
+                  "غیرنرمال"
+                ],
+                "type": "string",
+                "title": "تست پاشنه به ساق"
+              },
+              "neuro_detail": {
+                "type": "string",
+                "title": "توضیحات معاینه عصبی"
+              }
+            },
+            "dependencies": {
+              "neuro_status": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "neuro_status": {
+                        "const": "نرمال"
+                      }
+                    }
+                  },
+                  {
+                    "required": [
+                      "romberg",
+                      "tandem_gait",
+                      "finger_to_nose",
+                      "heel_to_shin",
+                      "neuro_detail"
+                    ],
+                    "properties": {
+                      "romberg": {
+                        "type": "string"
+                      },
+                      "tandem_gait": {
+                        "type": "string"
+                      },
+                      "heel_to_shin": {
+                        "type": "string"
+                      },
+                      "neuro_detail": {
+                        "type": "string"
+                      },
+                      "neuro_status": {
+                        "const": "غیرنرمال"
+                      },
+                      "finger_to_nose": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "cardiac_exam": {
+            "type": "object",
+            "title": "معاینه قلب",
+            "properties": {
+              "cardiac_status": {
+                "enum": [
+                  "نرمال",
+                  "غیرنرمال"
+                ],
+                "type": "string",
+                "title": "معاینه قلب"
+              }
+            }
+          },
+          "abdominal_exam": {
+            "type": "object",
+            "title": "معاینه شکم",
+            "properties": {
+              "abdominal_findings": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "نرم و بدون تندرنس و گاردینگ",
+                    "ادماتو",
+                    "تندرنس",
+                    "ریباند",
+                    "گاردینگ"
+                  ],
+                  "type": "string"
+                },
+                "title": "معاینه شکم",
+                "uniqueItems": true
+              },
+              "abdominal_location": {
+                "type": "string",
+                "title": "محل :"
+              }
+            },
+            "dependencies": {
+              "abdominal_findings": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "abdominal_findings": {
+                        "type": "array",
+                        "items": {
+                          "enum": [
+                            "نرم و بدون تندرنس و گاردینگ",
+                            "ادماتو"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "required": [
+                      "abdominal_location"
+                    ],
+                    "properties": {
+                      "abdominal_findings": {
+                        "type": "array",
+                        "contains": {
+                          "anyOf": [
+                            {
+                              "const": "تندرنس"
+                            },
+                            {
+                              "const": "گاردینگ"
+                            },
+                            {
+                              "const": "ریباند"
+                            }
+                          ]
+                        }
+                      },
+                      "abdominal_location": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
           }
         }
       },
@@ -311,31 +732,49 @@
         "type": "object",
         "title": "علائم همراه",
         "properties": {
-          "cough": {
+          "fever_chills": {
             "enum": [
               "بله",
               "خیر"
             ],
             "type": "string",
-            "title": "سرفه",
+            "title": "تب و لرز",
             "default": "خیر"
           },
-          "nausea": {
+          "weakness_body_pain": {
             "enum": [
               "بله",
               "خیر"
             ],
             "type": "string",
-            "title": "تهوع",
+            "title": "ضعف و بدن درد",
             "default": "خیر"
           },
-          "dyspnea": {
+          "dyspnea_exertional": {
             "enum": [
               "بله",
               "خیر"
             ],
             "type": "string",
-            "title": "تنگی نفس",
+            "title": "تنگی نفس فعالیتی",
+            "default": "خیر"
+          },
+          "dyspnea_rest": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "تنگی نفس در استراحت",
+            "default": "خیر"
+          },
+          "palpitations": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "احساس تپش قلب",
             "default": "خیر"
           },
           "syncope": {
@@ -347,6 +786,33 @@
             "title": "سنکوپ",
             "default": "خیر"
           },
+          "cough": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "سرفه",
+            "default": "خیر"
+          },
+          "sore_throat": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "گلودرد",
+            "default": "خیر"
+          },
+          "nausea": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "تهوع",
+            "default": "خیر"
+          },
           "vomiting": {
             "enum": [
               "بله",
@@ -356,13 +822,67 @@
             "title": "استفراغ",
             "default": "خیر"
           },
-          "weakness": {
+          "vomiting_bloody": {
             "enum": [
               "بله",
               "خیر"
             ],
             "type": "string",
-            "title": "ضعف عمومی",
+            "title": "استفراغ خونی",
+            "default": "خیر"
+          },
+          "vomiting_bilious": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "استفراغ صفراوی",
+            "default": "خیر"
+          },
+          "vomiting_non_bloody_non_bilious": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "استفراغ غیرخونی غیرصفراوی",
+            "default": "خیر"
+          },
+          "vomiting_after_food": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "استفراغ بلافاصله پس از غذا خوردن",
+            "default": "خیر"
+          },
+          "vomiting_projectile": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "استفراغ جهنده",
+            "default": "خیر"
+          },
+          "weight_loss": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "کاهش وزن",
+            "default": "خیر"
+          },
+          "night_sweats": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "تعریق شبانه",
             "default": "خیر"
           },
           "dizziness": {
@@ -371,57 +891,162 @@
               "خیر"
             ],
             "type": "string",
-            "title": "سرگیجة",
+            "title": "سرگیجه",
             "default": "خیر"
           },
-          "dysphagia": {
+          "limb_swelling": {
             "enum": [
               "بله",
               "خیر"
             ],
             "type": "string",
-            "title": "دیسفاژی",
+            "title": "تورم اندام",
             "default": "خیر"
           },
-          "heartburn": {
+          "defecation": {
             "enum": [
               "بله",
               "خیر"
             ],
             "type": "string",
-            "title": "سوزش سردل",
+            "title": "دفع مدفوع",
             "default": "خیر"
           },
-          "hemoptysis": {
+          "gas_passing": {
             "enum": [
               "بله",
               "خیر"
             ],
             "type": "string",
-            "title": "خلط خونی",
+            "title": "دفع گاز",
             "default": "خیر"
           },
-          "diaphoresis": {
+          "melena": {
             "enum": [
               "بله",
               "خیر"
             ],
             "type": "string",
-            "title": "تعریق",
+            "title": "ملنا",
             "default": "خیر"
           },
-          "palpitations": {
+          "diarrhea": {
             "enum": [
               "بله",
               "خیر"
             ],
             "type": "string",
-            "title": "تپش قلب",
+            "title": "اسهال",
             "default": "خیر"
           },
-          "other_associated_symptoms": {
+          "urination": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "دفع ادرار",
+            "default": "خیر"
+          },
+          "hematuria": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "هماچوری",
+            "default": "خیر"
+          },
+          "dysuria": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "سوزش ادرار",
+            "default": "خیر"
+          },
+          "frequency": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "تکرر ادرار",
+            "default": "خیر"
+          },
+          "nocturia": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "ناکچوری",
+            "default": "خیر"
+          },
+          "delayed_period": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "تاخیر در پریود",
+            "default": "خیر"
+          },
+          "pregnancy": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "بارداری",
+            "default": "خیر"
+          },
+          "other_symptoms": {
             "type": "string",
             "title": "سایر علائم"
+          }
+        },
+        "dependencies": {
+          "vomiting": {
+            "oneOf": [
+              {
+                "properties": {
+                  "vomiting": {
+                    "const": "خیر"
+                  }
+                }
+              },
+              {
+                "required": [
+                  "vomiting_bloody",
+                  "vomiting_bilious",
+                  "vomiting_non_bloody_non_bilious",
+                  "vomiting_after_food",
+                  "vomiting_projectile"
+                ],
+                "properties": {
+                  "vomiting": {
+                    "const": "بله"
+                  },
+                  "vomiting_bloody": {
+                    "type": "string"
+                  },
+                  "vomiting_bilious": {
+                    "type": "string"
+                  },
+                  "vomiting_non_bloody_non_bilious": {
+                    "type": "string"
+                  },
+                  "vomiting_after_food": {
+                    "type": "string"
+                  },
+                  "vomiting_projectile": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
           }
         }
       },
@@ -441,13 +1066,13 @@
             "type": "array",
             "items": {
               "enum": [
+                "کولیکی",
+                "سوزش",
                 "فشارنده",
-                "سوزشی",
-                "خنجری",
+                "ضربان دار",
                 "تیرکشنده",
-                "مبهم",
-                "ضربان‌دار",
-                "دیگر"
+                "افزایش یابنده-کاهش یابنده",
+                "سایر"
               ],
               "type": "string"
             },
@@ -455,20 +1080,43 @@
             "uniqueItems": true
           },
           "pain_duration": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "کمتر از 30 دقیقه",
+                "بیش از 30 دقیقه و کمتر از یک ساعت",
+                "چند ساعت",
+                "چند روز",
+                "سایر"
+              ],
+              "type": "string"
+            },
+            "title": "مدت زمان درد",
+            "uniqueItems": true
+          },
+          "pain_duration_other": {
             "type": "string",
-            "title": "مدت زمان درد"
+            "title": "توضیحات مدت زمان دیگر درد"
           },
           "pain_location": {
             "type": "array",
             "items": {
               "enum": [
-                "مرکزی",
-                "سمت چپ",
-                "سمت راست",
-                "منتشر",
-                "پشت قفسه سینه",
-                "اپی‌گاستر",
-                "دیگر"
+                "سر درد",
+                "گردن درد",
+                "کمر درد",
+                "درد قفسه سینه",
+                "درد شکم در RUQ",
+                "درد شکم در اپیگاستر",
+                "دردشکم در RLQ",
+                "درد شکم در اطراف ناف",
+                "درد در زیرشکم",
+                "درد پلوی راست",
+                "درد پهلوی چپ",
+                "درد اندام تحتانی",
+                "درد اندام فوقانی",
+                "درد بیضه ها",
+                "سایر"
               ],
               "type": "string"
             },
@@ -479,7 +1127,8 @@
             "type": "number",
             "title": "شدت درد (۰ تا ۱۰)",
             "maximum": 10,
-            "minimum": 0
+            "minimum": 0,
+            "default": 5
           },
           "pain_radiation": {
             "enum": [
@@ -490,8 +1139,23 @@
             "title": "آیا درد انتشار دارد؟"
           },
           "pain_onset_since": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "چند ساعت پیش",
+                "چند روز پیش",
+                "چند هفته قبل",
+                "چند ماه پیش",
+                "سایر"
+              ],
+              "type": "string"
+            },
+            "title": "درد از کی شروع شده ؟",
+            "uniqueItems": true
+          },
+          "pain_onset_since_other": {
             "type": "string",
-            "title": "درد از کی شروع شده ؟"
+            "title": "توضیحات زمان شروع دیگر درد"
           },
           "pain_quality_other": {
             "type": "string",
@@ -518,6 +1182,14 @@
             "title": "محل انتشار درد",
             "uniqueItems": true
           },
+          "has_pain_aggravating_factors": {
+            "enum": [
+              "دارد",
+              "ندارد"
+            ],
+            "type": "string",
+            "title": "عوامل تشدید کننده"
+          },
           "pain_aggravating_factors": {
             "type": "array",
             "items": {
@@ -535,6 +1207,14 @@
             },
             "title": "عوامل تشدید کننده",
             "uniqueItems": true
+          },
+          "has_pain_alleviating_factors": {
+            "enum": [
+              "دارد",
+              "ندارد"
+            ],
+            "type": "string",
+            "title": "عوامل تسکین‌دهنده"
           },
           "pain_alleviating_factors": {
             "type": "array",
@@ -558,6 +1238,10 @@
           "pain_alleviating_factors_other": {
             "type": "string",
             "title": "توضیحات عوامل تسکین‌دهنده دیگر"
+          },
+          "other_symptoms": {
+            "type": "string",
+            "title": "سایر علائم"
           }
         },
         "dependencies": {
@@ -569,12 +1253,12 @@
                     "type": "array",
                     "items": {
                       "enum": [
+                        "کولیکی",
+                        "سوزش",
                         "فشارنده",
-                        "سوزشی",
-                        "خنجری",
+                        "ضربان دار",
                         "تیرکشنده",
-                        "مبهم",
-                        "ضربان‌دار"
+                        "افزایش یابنده-کاهش یابنده"
                       ]
                     }
                   }
@@ -588,7 +1272,7 @@
                   "pain_quality": {
                     "type": "array",
                     "contains": {
-                      "const": "دیگر"
+                      "const": "سایر"
                     }
                   },
                   "pain_quality_other": {
@@ -606,12 +1290,20 @@
                     "type": "array",
                     "items": {
                       "enum": [
-                        "مرکزی",
-                        "سمت چپ",
-                        "سمت راست",
-                        "منتشر",
-                        "پشت قفسه سینه",
-                        "اپی‌گاستر"
+                        "سر درد",
+                        "گردن درد",
+                        "کمر درد",
+                        "درد قفسه سینه",
+                        "درد شکم در RUQ",
+                        "درد شکم در اپیگاستر",
+                        "دردشکم در RLQ",
+                        "درد شکم در اطراف ناف",
+                        "درد در زیرشکم",
+                        "درد پلوی راست",
+                        "درد پهلوی چپ",
+                        "درد اندام تحتانی",
+                        "درد اندام فوقانی",
+                        "درد بیضه ها"
                       ]
                     }
                   }
@@ -625,7 +1317,7 @@
                   "pain_location": {
                     "type": "array",
                     "contains": {
-                      "const": "دیگر"
+                      "const": "سایر"
                     }
                   },
                   "pain_location_other": {
@@ -677,6 +1369,30 @@
               }
             ]
           },
+          "has_pain_aggravating_factors": {
+            "oneOf": [
+              {
+                "properties": {
+                  "has_pain_aggravating_factors": {
+                    "const": "ندارد"
+                  }
+                }
+              },
+              {
+                "required": [
+                  "pain_aggravating_factors"
+                ],
+                "properties": {
+                  "has_pain_aggravating_factors": {
+                    "const": "دارد"
+                  },
+                  "pain_aggravating_factors": {
+                    "type": "array"
+                  }
+                }
+              }
+            ]
+          },
           "pain_aggravating_factors": {
             "oneOf": [
               {
@@ -710,6 +1426,30 @@
                   },
                   "pain_aggravating_factors_other": {
                     "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          "has_pain_alleviating_factors": {
+            "oneOf": [
+              {
+                "properties": {
+                  "has_pain_alleviating_factors": {
+                    "const": "ندارد"
+                  }
+                }
+              },
+              {
+                "required": [
+                  "pain_alleviating_factors"
+                ],
+                "properties": {
+                  "has_pain_alleviating_factors": {
+                    "const": "دارد"
+                  },
+                  "pain_alleviating_factors": {
+                    "type": "array"
                   }
                 }
               }
@@ -749,6 +1489,76 @@
                 }
               }
             ]
+          },
+          "pain_duration": {
+            "oneOf": [
+              {
+                "properties": {
+                  "pain_duration": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "کمتر از 30 دقیقه",
+                        "بیش از 30 دقیقه و کمتر از یک ساعت",
+                        "چند ساعت",
+                        "چند روز"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "required": [
+                  "pain_duration_other"
+                ],
+                "properties": {
+                  "pain_duration": {
+                    "type": "array",
+                    "contains": {
+                      "const": "سایر"
+                    }
+                  },
+                  "pain_duration_other": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          "pain_onset_since": {
+            "oneOf": [
+              {
+                "properties": {
+                  "pain_onset_since": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "چند ساعت پیش",
+                        "چند روز پیش",
+                        "چند هفته قبل",
+                        "چند ماه پیش"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "required": [
+                  "pain_onset_since_other"
+                ],
+                "properties": {
+                  "pain_onset_since": {
+                    "type": "array",
+                    "contains": {
+                      "const": "سایر"
+                    }
+                  },
+                  "pain_onset_since_other": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
           }
         }
       },
@@ -756,305 +1566,334 @@
         "type": "object",
         "title": "بیماری‌های قبلی",
         "properties": {
-          "conditions": {
-            "type": "array",
-            "items": {
-              "enum": [
-                "ندارد",
-                "سکته قلبی",
-                "دیابت",
-                "آنژیو قلبی",
-                "دیس‌لیپیدمی",
-                "فشار خون بالا",
-                "هیپرتیروئیدی",
-                "دیگر"
-              ],
-              "type": "string"
-            },
-            "title": "بیماری‌های گذشته",
-            "uniqueItems": true
-          },
-          "other_conditions": {
+          "has_past_medical_history": {
+            "enum": [
+              "خیر",
+              "بله"
+            ],
             "type": "string",
-            "title": "سایر بیماری‌ها (در صورت وجود ذکر کنید)"
-          },
-          "disease_start_year": {
-            "type": "string",
-            "title": "سال شروع بیماری‌ها"
+            "title": "آیا بیماری قبلی دارد؟",
+            "default": "خیر"
           }
         },
-        "dependencies": {
-          "conditions": {
-            "oneOf": [
-              {
-                "properties": {
-                  "conditions": {
-                    "type": "array",
-                    "items": {
-                      "enum": [
-                        "ندارد",
-                        "سکته قلبی",
-                        "دیابت",
-                        "آنژیو قلبی",
-                        "دیس‌لیپیدمی",
-                        "فشار خون بالا",
-                        "هیپرتیروئیدی"
-                      ]
-                    }
-                  }
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "has_past_medical_history": {
+                  "const": "بله"
                 }
-              },
-              {
-                "required": [
-                  "other_conditions"
-                ],
-                "properties": {
-                  "conditions": {
-                    "type": "array",
-                    "contains": {
-                      "const": "دیگر"
-                    }
-                  },
-                  "other_conditions": {
+              }
+            },
+            "then": {
+              "required": [
+                "conditions"
+              ],
+              "properties": {
+                "conditions": {
+                  "type": "array",
+                  "items": {
+                    "enum": [
+                      "سکته قلبی",
+                      "دیابت",
+                      "آنژیو قلبی",
+                      "دیس‌لیپیدمی",
+                      "فشار خون بالا",
+                      "هیپرتیروئیدی",
+                      "دیگر"
+                    ],
                     "type": "string"
+                  },
+                  "title": "بیماری‌های گذشته",
+                  "uniqueItems": true
+                },
+                "mi_year": {
+                  "type": "string",
+                  "title": "سال سکته قلبی"
+                },
+                "diabetes_year": {
+                  "type": "string",
+                  "title": "سال تشخیص دیابت"
+                },
+                "angiography_year": {
+                  "type": "string",
+                  "title": "سال آنژیو قلبی"
+                },
+                "dyslipidemia_year": {
+                  "type": "string",
+                  "title": "سال تشخیص دیس‌لیپیدمی"
+                },
+                "hypertension_year": {
+                  "type": "string",
+                  "title": "سال تشخیص فشار خون بالا"
+                },
+                "hyperthyroid_year": {
+                  "type": "string",
+                  "title": "سال تشخیص هیپرتیروئیدی"
+                },
+                "other_conditions": {
+                  "type": "string",
+                  "title": "سایر بیماری‌ها (در صورت وجود ذکر کنید)"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "has_past_medical_history": {
+                  "const": "بله"
+                },
+                "conditions": {
+                  "contains": {
+                    "enum": [
+                      "سکته قلبی",
+                      "دیابت",
+                      "آنژیو قلبی",
+                      "دیس‌لیپیدمی",
+                      "فشار خون بالا",
+                      "هیپرتیروئیدی",
+                      "دیگر"
+                    ]
                   }
                 }
               }
-            ]
+            },
+            "then": {
+              "required": [
+                "disease_start_year"
+              ],
+              "properties": {
+                "disease_start_year": {
+                  "type": "string",
+                  "title": "سال شروع بیماری‌ها"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "has_past_medical_history": {
+                  "const": "بله"
+                },
+                "conditions": {
+                  "contains": {
+                    "const": "دیگر"
+                  }
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "other_conditions"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "has_past_medical_history": {
+                  "const": "بله"
+                },
+                "conditions": {
+                  "contains": {
+                    "const": "سکته قلبی"
+                  }
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "mi_year"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "has_past_medical_history": {
+                  "const": "بله"
+                },
+                "conditions": {
+                  "contains": {
+                    "const": "دیابت"
+                  }
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "diabetes_year"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "has_past_medical_history": {
+                  "const": "بله"
+                },
+                "conditions": {
+                  "contains": {
+                    "const": "آنژیو قلبی"
+                  }
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "angiography_year"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "has_past_medical_history": {
+                  "const": "بله"
+                },
+                "conditions": {
+                  "contains": {
+                    "const": "دیس‌لیپیدمی"
+                  }
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "dyslipidemia_year"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "has_past_medical_history": {
+                  "const": "بله"
+                },
+                "conditions": {
+                  "contains": {
+                    "const": "فشار خون بالا"
+                  }
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "hypertension_year"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "has_past_medical_history": {
+                  "const": "بله"
+                },
+                "conditions": {
+                  "contains": {
+                    "const": "هیپرتیروئیدی"
+                  }
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "hyperthyroid_year"
+              ]
+            }
           }
-        }
+        ]
       },
       "past_surgical_history": {
         "type": "object",
         "title": "جراحی‌های قبلی",
         "properties": {
-          "surgeries": {
-            "type": "array",
-            "items": {
-              "enum": [
-                "ندارد",
-                "کله‌سیستکتومی",
-                "آپاندکتومی",
-                "CABG",
-                "تیروئیدکتومی",
-                "سزارین",
-                "دیگر"
-              ],
-              "type": "string"
-            },
-            "title": "جراحی‌های قبلی",
-            "uniqueItems": true
-          },
-          "surgery_year": {
-            "type": "string",
-            "title": "سال جراحی"
-          },
-          "other_surgeries": {
-            "type": "string",
-            "title": "سایر جراحی‌ها (در صورت وجود ذکر کنید)"
-          }
-        },
-        "dependencies": {
-          "surgeries": {
-            "oneOf": [
-              {
-                "properties": {
-                  "surgeries": {
-                    "type": "array",
-                    "items": {
-                      "enum": [
-                        "ندارد",
-                        "کله‌سیستکتومی",
-                        "آپاندکتومی",
-                        "CABG",
-                        "تیروئیدکتومی",
-                        "سزارین"
-                      ]
-                    }
-                  }
-                }
-              },
-              {
-                "required": [
-                  "other_surgeries"
-                ],
-                "properties": {
-                  "surgeries": {
-                    "type": "array",
-                    "contains": {
-                      "const": "دیگر"
-                    }
-                  },
-                  "other_surgeries": {
-                    "type": "string"
-                  }
-                }
-              }
-            ]
-          }
-        }
-      },
-      "drug_history": {
-        "type": "object",
-        "title": "داروهای مصرفی",
-        "properties": {
-          "has_medications": {
+          "has_past_surgical_history": {
             "enum": [
-              "دارد",
-              "ندارد"
+              "خیر",
+              "بله"
             ],
             "type": "string",
-            "title": "داروهای مصرفی"
+            "title": "آیا جراحی قبلی دارد؟",
+            "default": "خیر"
           }
         },
-        "dependencies": {
-          "has_medications": {
-            "oneOf": [
-              {
-                "properties": {
-                  "has_medications": {
-                    "const": "ندارد"
-                  }
-                }
-              },
-              {
-                "required": [
-                  "medications"
-                ],
-                "properties": {
-                  "has_medications": {
-                    "const": "دارد"
-                  },
-                  "medications": {
-                    "type": "array",
-                    "items": {
-                      "enum": [
-                        "اسپرین",
-                        "لوزارتان",
-                        "اتورواستاتین",
-                        "متفورمین",
-                        "سایر"
-                      ],
-                      "type": "string"
-                    },
-                    "title": "داروهای مصرفی",
-                    "uniqueItems": true
-                  }
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "has_past_surgical_history": {
+                  "const": "بله"
                 }
               }
-            ]
+            },
+            "then": {
+              "required": [
+                "surgeries"
+              ],
+              "properties": {
+                "surgeries": {
+                  "type": "array",
+                  "items": {
+                    "enum": [
+                      "کله‌سیستکتومی",
+                      "آپاندکتومی",
+                      "CABG",
+                      "تیروئیدکتومی",
+                      "سزارین",
+                      "دیگر"
+                    ],
+                    "type": "string"
+                  },
+                  "title": "جراحی‌های قبلی",
+                  "uniqueItems": true
+                },
+                "surgery_year": {
+                  "type": "string",
+                  "title": "سال جراحی"
+                },
+                "other_surgeries": {
+                  "type": "string",
+                  "title": "سایر جراحی‌ها (در صورت وجود ذکر کنید)"
+                }
+              }
+            }
           },
-          "medications": {
-            "oneOf": [
-              {
-                "properties": {
-                  "medications": {
-                    "type": "array",
-                    "items": {
-                      "enum": [
-                        "اسپرین",
-                        "لوزارتان",
-                        "اتورواستاتین",
-                        "متفورمین"
-                      ]
-                    }
-                  }
-                }
-              },
-              {
-                "required": [
-                  "other_medications"
-                ],
-                "properties": {
-                  "medications": {
-                    "type": "array",
-                    "contains": {
-                      "const": "سایر"
-                    }
-                  },
-                  "other_medications": {
-                    "type": "string",
-                    "title": "سایر داروها"
-                  }
-                }
-              },
-              {
-                "required": [
-                  "aspirin_dosage"
-                ],
-                "properties": {
-                  "medications": {
-                    "type": "array",
-                    "contains": {
-                      "const": "اسپرین"
-                    }
-                  },
-                  "aspirin_dosage": {
-                    "type": "string",
-                    "title": "میزان دارو مصرفی"
-                  }
-                }
-              },
-              {
-                "required": [
-                  "losartan_dosage"
-                ],
-                "properties": {
-                  "medications": {
-                    "type": "array",
-                    "contains": {
-                      "const": "لوزارتان"
-                    }
-                  },
-                  "losartan_dosage": {
-                    "type": "string",
-                    "title": "میزان دارو مصرفی"
-                  }
-                }
-              },
-              {
-                "required": [
-                  "atorvastatin_dosage"
-                ],
-                "properties": {
-                  "medications": {
-                    "type": "array",
-                    "contains": {
-                      "const": "اتورواستاتین"
-                    }
-                  },
-                  "atorvastatin_dosage": {
-                    "type": "string",
-                    "title": "میزان دارو مصرفی"
-                  }
-                }
-              },
-              {
-                "required": [
-                  "metformin_dosage"
-                ],
-                "properties": {
-                  "medications": {
-                    "type": "array",
-                    "contains": {
-                      "const": "متفورمین"
-                    }
-                  },
-                  "metformin_dosage": {
-                    "type": "string",
-                    "title": "میزان دارو مصرفی"
+          {
+            "if": {
+              "properties": {
+                "has_past_surgical_history": {
+                  "const": "بله"
+                },
+                "surgeries": {
+                  "contains": {
+                    "const": "دیگر"
                   }
                 }
               }
-            ]
+            },
+            "then": {
+              "required": [
+                "other_surgeries"
+              ]
+            }
           }
-        }
+        ]
       }
     }
   },
   "ui_schema": {
     "age": {
       "ui:widget": "text"
+    },
+    "main_complaint": {
+      "ui:widget": "text",
+      "ui:options": {
+        "dir": "rtl",
+        "textAlign": "right"
+      }
     },
     "gender": {
       "ui:widget": "radio",
@@ -1065,6 +1904,7 @@
     "ui:order": [
       "age",
       "gender",
+      "main_complaint",
       "pain_characteristics",
       "associated_symptoms",
       "past_medical_history",
@@ -1073,21 +1913,9 @@
       "habitual_history",
       "allergy_history",
       "vital_signs",
-      "cardiac_exam",
-      "abdominal_exam",
-      "lung_exam"
+      "general_appearance",
+      "physical_exam"
     ],
-    "lung_exam": {
-      "has_rale": {
-        "ui:widget": "radio",
-        "ui:options": {
-          "inline": true
-        }
-      },
-      "rale_location": {
-        "ui:widget": "text"
-      }
-    },
     "ui:options": {
       "dir": "rtl",
       "textAlign": "right"
@@ -1100,18 +1928,59 @@
         "respiratory_rate"
       ]
     },
-    "cardiac_exam": {
-      "murmur": {
+    "general_appearance": {
+      "ui:order": [
+        "appearance",
+        "appearance_other"
+      ],
+      "appearance": {
         "ui:widget": "radio",
         "ui:options": {
-          "inline": true
+          "dir": "rtl",
+          "inline": false,
+          "textAlign": "right"
         }
       },
-      "heart_sounds": {
+      "appearance_other": {
+        "ui:widget": "text",
+        "ui:help": "لطفاً ظاهر عمومی بیمار را به صورت دقیق توضیح دهید",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً وضعیت هوشیاری، ظاهر فیزیکی"
+      }
+    },
+    "drug_history": {
+      "ui:order": [
+        "has_medications",
+        "medications",
+        "other_medications_detail"
+      ],
+      "has_medications": {
         "ui:widget": "radio",
         "ui:options": {
-          "inline": true
+          "dir": "rtl",
+          "inline": true,
+          "textAlign": "right"
         }
+      },
+      "medications": {
+        "ui:widget": "checkboxes",
+        "ui:options": {
+          "dir": "rtl",
+          "inline": false,
+          "textAlign": "right"
+        }
+      },
+      "other_medications_detail": {
+        "ui:widget": "text",
+        "ui:help": "لطفاً سایر داروهای مصرفی را که در لیست بالا نیستند ذکر کنید",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً نام دارو، دوز، زمان مصرف"
       }
     },
     "abdominal_exam": {
@@ -1180,6 +2049,7 @@
       ],
       "other_habits": {
         "ui:widget": "text",
+        "ui:help": "لطفاً سایر عادات که در لیست بالا نیستند را ذکر کنید",
         "ui:options": {
           "dir": "rtl",
           "textAlign": "right"
@@ -1188,67 +2058,58 @@
       }
     },
     "associated_symptoms": {
-      "cough": {
+      "ui:order": [
+        "fever_chills",
+        "weakness_body_pain",
+        "dyspnea_exertional",
+        "dyspnea_rest",
+        "palpitations",
+        "syncope",
+        "cough",
+        "sore_throat",
+        "nausea",
+        "vomiting",
+        "vomiting_bloody",
+        "vomiting_bilious",
+        "vomiting_non_bloody_non_bilious",
+        "vomiting_after_food",
+        "vomiting_projectile",
+        "weight_loss",
+        "night_sweats",
+        "dizziness",
+        "limb_swelling",
+        "defecation",
+        "gas_passing",
+        "melena",
+        "diarrhea",
+        "urination",
+        "hematuria",
+        "dysuria",
+        "frequency",
+        "nocturia",
+        "delayed_period",
+        "pregnancy",
+        "other_symptoms"
+      ],
+      "fever_chills": {
         "ui:widget": "radio",
         "ui:options": {
           "inline": true
         }
       },
-      "nausea": {
+      "weakness_body_pain": {
         "ui:widget": "radio",
         "ui:options": {
           "inline": true
         }
       },
-      "dyspnea": {
+      "dyspnea_exertional": {
         "ui:widget": "radio",
         "ui:options": {
           "inline": true
         }
       },
-      "syncope": {
-        "ui:widget": "radio",
-        "ui:options": {
-          "inline": true
-        }
-      },
-      "vomiting": {
-        "ui:widget": "radio",
-        "ui:options": {
-          "inline": true
-        }
-      },
-      "weakness": {
-        "ui:widget": "radio",
-        "ui:options": {
-          "inline": true
-        }
-      },
-      "dizziness": {
-        "ui:widget": "radio",
-        "ui:options": {
-          "inline": true
-        }
-      },
-      "dysphagia": {
-        "ui:widget": "radio",
-        "ui:options": {
-          "inline": true
-        }
-      },
-      "heartburn": {
-        "ui:widget": "radio",
-        "ui:options": {
-          "inline": true
-        }
-      },
-      "hemoptysis": {
-        "ui:widget": "radio",
-        "ui:options": {
-          "inline": true
-        }
-      },
-      "diaphoresis": {
+      "dyspnea_rest": {
         "ui:widget": "radio",
         "ui:options": {
           "inline": true
@@ -1260,26 +2121,192 @@
           "inline": true
         }
       },
-      "other_associated_symptoms": {
-        "ui:widget": "text"
+      "syncope": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "cough": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "sore_throat": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "nausea": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "vomiting": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "vomiting_bloody": {
+        "ui:widget": "radio",
+        "ui:help": "آیا استفراغ حاوی خون است؟",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "vomiting_bilious": {
+        "ui:widget": "radio",
+        "ui:help": "آیا استفراغ صفراوی (زرد-سبز رنگ) است؟",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "vomiting_non_bloody_non_bilious": {
+        "ui:widget": "radio",
+        "ui:help": "آیا استفراغ بدون خون و صفرا است؟",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "vomiting_after_food": {
+        "ui:widget": "radio",
+        "ui:help": "آیا استفراغ بلافاصله پس از غذا خوردن رخ می‌دهد؟",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "vomiting_projectile": {
+        "ui:widget": "radio",
+        "ui:help": "آیا استفراغ به صورت جهنده و با فشار است؟",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "weight_loss": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "night_sweats": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "dizziness": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "limb_swelling": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "defecation": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "gas_passing": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "melena": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "diarrhea": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "urination": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "hematuria": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "dysuria": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "frequency": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "nocturia": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "delayed_period": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "pregnancy": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "other_symptoms": {
+        "ui:widget": "text",
+        "ui:help": "لطفاً سایر علائمی که در لیست بالا نیستند را ذکر کنید",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً خستگی، بی‌اشتهایی، تب"
       }
     },
     "pain_characteristics": {
       "ui:order": [
-        "pain_onset",
         "pain_onset_since",
-        "pain_quality",
-        "pain_quality_other",
+        "pain_onset_since_other",
+        "pain_onset",
         "pain_duration",
+        "pain_duration_other",
         "pain_location",
         "pain_location_other",
+        "pain_quality",
+        "pain_quality_other",
         "pain_intensity",
         "pain_radiation",
         "pain_radiation_detail",
+        "has_pain_aggravating_factors",
         "pain_aggravating_factors",
         "pain_aggravating_factors_other",
+        "has_pain_alleviating_factors",
         "pain_alleviating_factors",
-        "pain_alleviating_factors_other"
+        "pain_alleviating_factors_other",
+        "other_symptoms"
       ],
       "pain_onset": {
         "ui:widget": "radio",
@@ -1291,7 +2318,14 @@
         "ui:widget": "checkboxes"
       },
       "pain_duration": {
-        "ui:widget": "text"
+        "ui:widget": "checkboxes"
+      },
+      "pain_duration_other": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        }
       },
       "pain_location": {
         "ui:widget": "checkboxes"
@@ -1310,36 +2344,107 @@
         }
       },
       "pain_onset_since": {
-        "ui:widget": "text"
+        "ui:widget": "checkboxes"
+      },
+      "pain_onset_since_other": {
+        "ui:widget": "text",
+        "ui:help": "لطفاً زمان دقیق شروع درد را مشخص کنید",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً دیروز صبح، هفته گذشته"
       },
       "pain_quality_other": {
-        "ui:widget": "text"
+        "ui:widget": "text",
+        "ui:help": "لطفاً کیفیت درد را به صورت دقیق توضیح دهید",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً تیرکشنده، ضربان‌دار، مبهم"
       },
       "pain_location_other": {
-        "ui:widget": "text"
+        "ui:widget": "text",
+        "ui:help": "لطفاً محل دقیق درد را مشخص کنید",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً سمت راست قفسه سینه، زیر دنده‌ها"
       },
       "pain_radiation_detail": {
-        "ui:widget": "checkboxes"
+        "ui:widget": "checkboxes",
+        "ui:help": "لطفاً محل‌هایی که درد به آن‌ها انتشار دارد را انتخاب کنید"
+      },
+      "has_pain_aggravating_factors": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
       },
       "pain_aggravating_factors": {
         "ui:widget": "checkboxes"
+      },
+      "has_pain_alleviating_factors": {
+        "ui:widget": "radio",
+        "ui:help": "آیا عواملی وجود دارد که درد را بهتر می‌کند؟",
+        "ui:options": {
+          "inline": true
+        }
       },
       "pain_alleviating_factors": {
         "ui:widget": "checkboxes"
       },
       "pain_aggravating_factors_other": {
-        "ui:widget": "text"
+        "ui:widget": "text",
+        "ui:help": "لطفاً سایر عوامل تشدید کننده درد را ذکر کنید",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً خم شدن، بلند کردن اجسام"
       },
       "pain_alleviating_factors_other": {
-        "ui:widget": "text"
+        "ui:widget": "text",
+        "ui:help": "لطفاً سایر عوامل تسکین‌دهنده درد را ذکر کنید",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً استفاده از کمپرس گرم، ماساژ"
+      },
+      "other_symptoms": {
+        "ui:widget": "text",
+        "ui:help": "لطفاً سایر علائمی که در لیست بالا نیستند را ذکر کنید",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً خستگی، بی‌اشتهایی، تب"
       }
     },
     "past_medical_history": {
       "ui:order": [
+        "has_past_medical_history",
         "conditions",
-        "other_conditions",
-        "disease_start_year"
+        "disease_start_year",
+        "mi_year",
+        "diabetes_year",
+        "angiography_year",
+        "dyslipidemia_year",
+        "hypertension_year",
+        "hyperthyroid_year",
+        "other_conditions"
       ],
+      "has_past_medical_history": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "dir": "rtl",
+          "inline": true,
+          "textAlign": "right"
+        }
+      },
       "conditions": {
         "ui:widget": "checkboxes",
         "ui:options": {
@@ -1348,14 +2453,6 @@
           "textAlign": "right"
         }
       },
-      "other_conditions": {
-        "ui:widget": "text",
-        "ui:options": {
-          "dir": "rtl",
-          "textAlign": "right"
-        },
-        "ui:placeholder": "مثلاً آسم، زخم معده، صرع"
-      },
       "disease_start_year": {
         "ui:widget": "text",
         "ui:options": {
@@ -1363,14 +2460,79 @@
           "textAlign": "right"
         },
         "ui:placeholder": "مثلاً ۱۳۹۸"
+      },
+      "mi_year": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً ۱۳۹۸"
+      },
+      "diabetes_year": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً ۱۳۹۸"
+      },
+      "angiography_year": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً ۱۳۹۸"
+      },
+      "dyslipidemia_year": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً ۱۳۹۸"
+      },
+      "hypertension_year": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً ۱۳۹۸"
+      },
+      "hyperthyroid_year": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً ۱۳۹۸"
+      },
+      "other_conditions": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً آسم، زخم معده، صرع"
       }
     },
     "past_surgical_history": {
       "ui:order": [
+        "has_past_surgical_history",
         "surgeries",
         "surgery_year",
         "other_surgeries"
       ],
+      "has_past_surgical_history": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "dir": "rtl",
+          "inline": true,
+          "textAlign": "right"
+        }
+      },
       "surgeries": {
         "ui:widget": "checkboxes",
         "ui:options": {
@@ -1389,6 +2551,7 @@
       },
       "other_surgeries": {
         "ui:widget": "text",
+        "ui:help": "لطفاً سایر جراحی‌های قبلی که در لیست بالا نیستند را ذکر کنید",
         "ui:options": {
           "dir": "rtl",
           "textAlign": "right"
@@ -1396,71 +2559,201 @@
         "ui:placeholder": "مثلاً هرنی، سنگ کلیه، زایمان طبیعی"
       }
     },
-    "drug_history": {
+    "physical_exam": {
       "ui:order": [
-        "has_medications",
-        "medications",
-        "other_medications",
-        "aspirin_dosage",
-        "losartan_dosage",
-        "atorvastatin_dosage",
-        "metformin_dosage"
+        "abdominal_exam",
+        "cardiac_exam",
+        "lung_exam",
+        "joint_exam",
+        "neuro_exam",
+        "skin_exam"
       ],
-      "has_medications": {
-        "ui:widget": "radio",
-        "ui:options": {
-          "dir": "rtl",
-          "inline": true,
-          "textAlign": "right"
+      "lung_exam": {
+        "ui:order": [
+          "lung_findings",
+          "lung_location"
+        ],
+        "lung_findings": {
+          "ui:widget": "checkboxes",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": false,
+            "textAlign": "right"
+          }
+        },
+        "lung_location": {
+          "ui:widget": "text",
+          "ui:options": {
+            "dir": "rtl",
+            "textAlign": "right"
+          }
         }
       },
-      "medications": {
-        "ui:widget": "checkboxes",
-        "ui:options": {
-          "dir": "rtl",
-          "inline": false,
-          "textAlign": "right"
+      "skin_exam": {
+        "ui:order": [
+          "skin_lesion",
+          "lesion_type"
+        ],
+        "skin_lesion": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        },
+        "lesion_type": {
+          "ui:widget": "text",
+          "ui:options": {
+            "dir": "rtl",
+            "textAlign": "right"
+          }
         }
       },
-      "other_medications": {
-        "ui:widget": "text",
-        "ui:options": {
-          "dir": "rtl",
-          "textAlign": "right"
+      "joint_exam": {
+        "ui:order": [
+          "joint_status",
+          "joint_name",
+          "joint_warmth",
+          "joint_redness",
+          "joint_swelling",
+          "joint_limitation"
+        ],
+        "joint_status": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
         },
-        "ui:placeholder": "مثلاً آسپرین، متورال، لوزارتان"
+        "joint_warmth": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        },
+        "joint_redness": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        },
+        "joint_swelling": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        },
+        "joint_limitation": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        },
+        "joint_name": {
+          "ui:widget": "text",
+          "ui:options": {
+            "dir": "rtl",
+            "textAlign": "right"
+          }
+        }
       },
-      "aspirin_dosage": {
-        "ui:widget": "text",
-        "ui:options": {
-          "dir": "rtl",
-          "textAlign": "right"
+      "neuro_exam": {
+        "ui:order": [
+          "neuro_status",
+          "neuro_detail",
+          "romberg",
+          "tandem_gait",
+          "finger_to_nose",
+          "heel_to_shin"
+        ],
+        "neuro_status": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
         },
-        "ui:placeholder": "مثلاً 80mg روزانه"
+        "romberg": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        },
+        "tandem_gait": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        },
+        "finger_to_nose": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        },
+        "heel_to_shin": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        },
+        "neuro_detail": {
+          "ui:widget": "text",
+          "ui:options": {
+            "dir": "rtl",
+            "textAlign": "right"
+          }
+        }
       },
-      "losartan_dosage": {
-        "ui:widget": "text",
-        "ui:options": {
-          "dir": "rtl",
-          "textAlign": "right"
-        },
-        "ui:placeholder": "مثلاً 50mg روزانه"
+      "cardiac_exam": {
+        "cardiac_status": {
+          "ui:widget": "radio",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": true,
+            "textAlign": "right"
+          }
+        }
       },
-      "atorvastatin_dosage": {
-        "ui:widget": "text",
-        "ui:options": {
-          "dir": "rtl",
-          "textAlign": "right"
+      "abdominal_exam": {
+        "ui:order": [
+          "abdominal_findings",
+          "abdominal_location"
+        ],
+        "abdominal_findings": {
+          "ui:widget": "checkboxes",
+          "ui:options": {
+            "dir": "rtl",
+            "inline": false,
+            "textAlign": "right"
+          }
         },
-        "ui:placeholder": "مثلاً 20mg شبانه"
-      },
-      "metformin_dosage": {
-        "ui:widget": "text",
-        "ui:options": {
-          "dir": "rtl",
-          "textAlign": "right"
-        },
-        "ui:placeholder": "مثلاً 500mg دو بار در روز"
+        "abdominal_location": {
+          "ui:widget": "text",
+          "ui:options": {
+            "dir": "rtl",
+            "textAlign": "right"
+          }
+        }
       }
     }
   },

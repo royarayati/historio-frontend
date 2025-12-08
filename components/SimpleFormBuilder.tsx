@@ -1287,6 +1287,21 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 
     // Helper to build an evaluator for when a dependent field should be shown
     const buildConditionEvaluator = (conditionSchema: any) => {
+      // Handle array with contains.anyOf pattern
+      if (
+        conditionSchema?.type === "array" &&
+        conditionSchema?.contains?.anyOf
+      ) {
+        const anyOfArray = conditionSchema.contains.anyOf;
+        const targets = anyOfArray
+          .map((item: any) => item?.const)
+          .filter((val: any) => val !== undefined);
+        return (value: any) => {
+          if (!Array.isArray(value)) return false;
+          return targets.some((target: any) => value.includes(target));
+        };
+      }
+      // Handle array with contains.const pattern
       if (
         conditionSchema?.type === "array" &&
         conditionSchema?.contains?.const !== undefined
@@ -1327,7 +1342,7 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     Object.keys(baseSchema.dependencies || {}).forEach((conditionField) => {
       const dependency = baseSchema.dependencies[conditionField];
       if (dependency.oneOf) {
-        const conditionValue = currentFormData[conditionField];
+        const conditionValue = currentFormData ? currentFormData[conditionField] : undefined;
         
         // Process all matching oneOf cases, not just the first one
         dependency.oneOf.forEach((item: any) => {
@@ -1434,14 +1449,28 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       );
 
       if (dependentsForField.length > 0) {
-        const conditionValue = currentFormData[fieldName];
+        const conditionValue = currentFormData ? currentFormData[fieldName] : undefined;
         dependentsForField.forEach((dep) => {
           if (
             !addedFields.has(dep.dependentField) &&
             dep.shouldDisplay(conditionValue)
           ) {
-            orderedProperties[dep.dependentField] =
-              baseSchema.properties[dep.dependentField];
+            // Try to get the property from baseSchema.properties first, then from dependencies
+            let dependentProperty = baseSchema.properties?.[dep.dependentField];
+            
+            // If not found in base properties, look in dependency properties
+            if (!dependentProperty && baseSchema.dependencies?.[fieldName]?.oneOf) {
+              for (const oneOfCase of baseSchema.dependencies[fieldName].oneOf) {
+                if (oneOfCase.properties?.[dep.dependentField]) {
+                  dependentProperty = oneOfCase.properties[dep.dependentField];
+                  break;
+                }
+              }
+            }
+            
+            if (dependentProperty) {
+              orderedProperties[dep.dependentField] = dependentProperty;
+            }
 
             // Ensure RTL options are set for dependent field
             if (!processedUiSchemaOrdered[dep.dependentField]) {
