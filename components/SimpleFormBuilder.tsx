@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { ChakraProvider, extendTheme, Switch, FormControl, FormLabel, Box, Input, Image, Text, Button, Heading, Divider } from "@chakra-ui/react";
 import validator from "@rjsf/validator-ajv8";
 import { CodeComponentMeta } from "@plasmicapp/host";
@@ -1741,6 +1741,12 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       </div>
     );
 
+  // Memoize processed schema to reactively update when form data changes
+  // This ensures dependencies are re-evaluated whenever form values change
+  const processedSchema = useMemo(() => {
+    return processConditionalSchema(schema, rjsfFormData, uiSchema);
+  }, [schema, rjsfFormData, uiSchema]);
+
   return (
     <ChakraProvider theme={theme}>
       <div className={className} style={style}>
@@ -1824,8 +1830,8 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
             >
               <Form
                 key={`form-${mode}-${templateInfo.id || templateId || 'unknown'}`}
-                schema={processConditionalSchema(schema, rjsfFormData, uiSchema).schema}
-                uiSchema={processConditionalSchema(schema, rjsfFormData, uiSchema).uiSchema}
+                schema={processedSchema.schema}
+                uiSchema={processedSchema.uiSchema}
                 validator={validator}
                 formData={rjsfFormData}
                 widgets={{

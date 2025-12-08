@@ -573,6 +573,121 @@
           }
         }
       },
+      "limb_exam": {
+        "type": "object",
+        "title": "معاینه اندام ها",
+        "properties": {
+          "limb_findings": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "ادم اندام فوقانی",
+                "ادم اندام تختانی",
+                "نبض اندام ها پر و قرینه",
+                "فاقد نبض دیستال اندام",
+                "سایر"
+              ],
+              "type": "string"
+            },
+            "title": "معاینه اندام ها",
+            "uniqueItems": true
+          },
+          "upper_limb_edema_location": {
+            "type": "string",
+            "title": "محل ادم"
+          },
+          "lower_limb_edema_location": {
+            "type": "string",
+            "title": "محل ادم"
+          },
+          "absent_pulse_location": {
+            "type": "string",
+            "title": "محل"
+          },
+          "limb_exam_other": {
+            "type": "string",
+            "title": "توضیحات معاینه اندام دیگر"
+          }
+        },
+        "dependencies": {
+          "limb_findings": {
+            "oneOf": [
+              {
+                "required": [
+                  "upper_limb_edema_location"
+                ],
+                "properties": {
+                  "limb_findings": {
+                    "type": "array",
+                    "contains": {
+                      "const": "ادم اندام فوقانی"
+                    }
+                  },
+                  "upper_limb_edema_location": {
+                    "type": "string",
+                    "title": "محل ادم"
+                  }
+                }
+              },
+              {
+                "required": [
+                  "lower_limb_edema_location"
+                ],
+                "properties": {
+                  "limb_findings": {
+                    "type": "array",
+                    "contains": {
+                      "const": "ادم اندام تختانی"
+                    }
+                  },
+                  "lower_limb_edema_location": {
+                    "type": "string",
+                    "title": "محل ادم"
+                  }
+                }
+              },
+              {
+                "required": [
+                  "absent_pulse_location"
+                ],
+                "properties": {
+                  "limb_findings": {
+                    "type": "array",
+                    "contains": {
+                      "const": "فاقد نبض دیستال اندام"
+                    }
+                  },
+                  "absent_pulse_location": {
+                    "type": "string",
+                    "title": "محل"
+                  }
+                }
+              },
+              {
+                "required": [
+                  "limb_exam_other"
+                ],
+                "properties": {
+                  "limb_findings": {
+                    "type": "array",
+                    "contains": {
+                      "const": "سایر"
+                    }
+                  },
+                  "limb_exam_other": {
+                    "type": "string",
+                    "title": "توضیحات معاینه اندام دیگر"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "patient_documents": {
+        "type": "string",
+        "title": "مدارک همراه بیمار"
+      },
       "allergy_history": {
         "type": "object",
         "title": "حساسیت",
@@ -1914,11 +2029,70 @@
       "allergy_history",
       "vital_signs",
       "general_appearance",
-      "physical_exam"
+      "physical_exam",
+      "limb_exam",
+      "patient_documents"
     ],
     "ui:options": {
       "dir": "rtl",
       "textAlign": "right"
+    },
+    "patient_documents": {
+      "ui:widget": "textarea",
+      "ui:options": {
+        "dir": "rtl",
+        "textAlign": "right"
+      },
+      "ui:placeholder": "مثلاً نتایج آزمایشات، تصاویر رادیولوژی، نسخه‌های قبلی و..."
+    },
+    "limb_exam": {
+      "ui:order": [
+        "limb_findings",
+        "upper_limb_edema_location",
+        "lower_limb_edema_location",
+        "absent_pulse_location",
+        "limb_exam_other"
+      ],
+      "limb_findings": {
+        "ui:widget": "checkboxes",
+        "ui:options": {
+          "dir": "rtl",
+          "inline": false,
+          "textAlign": "right"
+        }
+      },
+      "upper_limb_edema_location": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً دست راست، دست چپ، هر دو دست"
+      },
+      "lower_limb_edema_location": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً پای راست، پای چپ، هر دو پا"
+      },
+      "absent_pulse_location": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "مثلاً نبض رادیال راست، نبض پدال چپ"
+      },
+      "limb_exam_other": {
+        "ui:widget": "text",
+        "ui:options": {
+          "dir": "rtl",
+          "textAlign": "right"
+        },
+        "ui:placeholder": "لطفاً سایر یافته‌های معاینه اندام را ذکر کنید"
+      }
     },
     "vital_signs": {
       "ui:order": [
