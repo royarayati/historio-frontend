@@ -42,6 +42,9 @@
 }
 .textInput:hover {
   background: #ffffff;
+  color: var(--token-8JvL6vHdQN9t);
+  font-family: var(--VazirmatnCustom);
+  text-align: right;
   flex-grow: 0;
   border-color: var(--token-SgmzWHxAFlng);
 }
