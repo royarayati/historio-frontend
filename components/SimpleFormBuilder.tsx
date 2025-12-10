@@ -1519,6 +1519,14 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     return { schema: processedSchema, uiSchema: processedUiSchemaOrdered };
   };
 
+  // Always compute processed schema to keep hook order stable across renders
+  const processedSchema = useMemo(() => {
+    if (!schema) {
+      return { schema: null, uiSchema: {} };
+    }
+    return processConditionalSchema(schema, rjsfFormData, uiSchema);
+  }, [schema, rjsfFormData, uiSchema]);
+
   const handleSubmit = async ({ formData: submittedData }: any) => {
     // If using direct formData prop with custom onSubmit
     if (formData && onSubmit) {
@@ -1740,12 +1748,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         </div>
       </div>
     );
-
-  // Memoize processed schema to reactively update when form data changes
-  // This ensures dependencies are re-evaluated whenever form values change
-  const processedSchema = useMemo(() => {
-    return processConditionalSchema(schema, rjsfFormData, uiSchema);
-  }, [schema, rjsfFormData, uiSchema]);
 
   return (
     <ChakraProvider theme={theme}>
