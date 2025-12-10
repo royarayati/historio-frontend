@@ -1623,6 +1623,19 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
           originalFieldUiSchema
         );
 
+        // Ensure the child schema's required array only includes visible fields
+        if (childSchema && Array.isArray(childSchema.required) && childSchema.properties) {
+          childSchema.required = childSchema.required.filter(
+            (fieldName: string) => !!childSchema.properties[fieldName]
+          );
+        }
+        
+        // Remove allOf and dependencies from child schema to prevent RJSF from validating them
+        if (childSchema) {
+          delete childSchema.allOf;
+          delete childSchema.dependencies;
+        }
+
         orderedProperties[fieldName] = childSchema;
 
         // Preserve object title for ObjectFieldTemplate rendering
@@ -1689,8 +1702,12 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       })
       .map((item) => item.fieldName);
     
-    // Combine and deduplicate
-    processedSchema.required = Array.from(new Set([...baseRequired, ...conditionalRequired]));
+    // Combine and deduplicate, ensuring all required fields actually exist in properties
+    const allRequired = Array.from(new Set([...baseRequired, ...conditionalRequired]));
+    processedSchema.required = allRequired.filter((fieldName: string) => {
+      // Field must exist in orderedProperties
+      return !!orderedProperties[fieldName];
+    });
 
     // Filter ui:order to only include fields that are actually rendered
     if (Array.isArray(processedUiSchemaOrdered["ui:order"])) {
@@ -2017,7 +2034,7 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
               data-form-container
             >
               <Form
-                key={`form-${mode}-${templateInfo.id || templateId || 'unknown'}`}
+                key={`form-${mode}-${templateInfo.id || templateId || 'unknown'}-${JSON.stringify(rjsfFormData).slice(0, 100)}`}
                 schema={processedSchema.schema}
                 uiSchema={processedSchema.uiSchema}
                 validator={validator}
