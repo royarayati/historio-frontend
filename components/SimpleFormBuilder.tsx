@@ -1489,8 +1489,12 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
             !addedFields.has(dep.dependentField) &&
             dep.shouldDisplay(conditionValue)
           ) {
-            // Try to get the property from baseSchema.properties first, then from dependencies
-            let dependentProperty = baseSchema.properties?.[dep.dependentField];
+            // Try to get the property from multiple sources:
+            // 1. processedSchema.properties (includes fields from allOf.then.properties)
+            // 2. baseSchema.properties
+            // 3. dependencies oneOf
+            let dependentProperty = processedSchema.properties?.[dep.dependentField] 
+              || baseSchema.properties?.[dep.dependentField];
             
             // If not found in base properties, look in dependency properties
             if (!dependentProperty && baseSchema.dependencies?.[fieldName]?.oneOf) {
@@ -1502,8 +1506,77 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
               }
             }
             
+            // If still not found, check allOf.then.properties
+            if (!dependentProperty && Array.isArray(baseSchema.allOf)) {
+              for (const allOfItem of baseSchema.allOf) {
+                if (allOfItem.then?.properties?.[dep.dependentField]) {
+                  dependentProperty = allOfItem.then.properties[dep.dependentField];
+                  break;
+                }
+              }
+            }
+            
             if (dependentProperty) {
               orderedProperties[dep.dependentField] = dependentProperty;
+              
+              // Recursively process dependencies for this newly added dependent field
+              // This handles nested dependencies (e.g., pain_aggravating_factors → pain_aggravating_factors_other)
+              const nestedDependents = dependencyEntries.filter(
+                (entry) => entry.parentField === dep.dependentField
+              );
+              
+              if (nestedDependents.length > 0) {
+                const nestedConditionValue = currentFormData ? currentFormData[dep.dependentField] : undefined;
+                nestedDependents.forEach((nestedDep) => {
+                  if (
+                    !addedFields.has(nestedDep.dependentField) &&
+                    nestedDep.shouldDisplay(nestedConditionValue)
+                  ) {
+                    // Get nested dependent property
+                    let nestedProperty = processedSchema.properties?.[nestedDep.dependentField] 
+                      || baseSchema.properties?.[nestedDep.dependentField];
+                    
+                    if (!nestedProperty && Array.isArray(baseSchema.allOf)) {
+                      for (const allOfItem of baseSchema.allOf) {
+                        if (allOfItem.then?.properties?.[nestedDep.dependentField]) {
+                          nestedProperty = allOfItem.then.properties[nestedDep.dependentField];
+                          break;
+                        }
+                      }
+                    }
+                    
+                    if (nestedProperty) {
+                      orderedProperties[nestedDep.dependentField] = nestedProperty;
+                      addedFields.add(nestedDep.dependentField);
+                      
+                      // Set up uiSchema for nested dependent
+                      if (!processedUiSchemaOrdered[nestedDep.dependentField]) {
+                        processedUiSchemaOrdered[nestedDep.dependentField] = {};
+                      }
+                      processedUiSchemaOrdered[nestedDep.dependentField] = {
+                        ...(originalUiSchema && originalUiSchema[nestedDep.dependentField]
+                          ? originalUiSchema[nestedDep.dependentField]
+                          : {}),
+                        "ui:widget":
+                          originalUiSchema &&
+                          originalUiSchema[nestedDep.dependentField] &&
+                          originalUiSchema[nestedDep.dependentField]["ui:widget"]
+                            ? originalUiSchema[nestedDep.dependentField]["ui:widget"]
+                            : "text",
+                        "ui:options": {
+                          ...(originalUiSchema &&
+                          originalUiSchema[nestedDep.dependentField] &&
+                          originalUiSchema[nestedDep.dependentField]["ui:options"]
+                            ? originalUiSchema[nestedDep.dependentField]["ui:options"]
+                            : {}),
+                          dir: "rtl",
+                          textAlign: "right",
+                        },
+                      };
+                    }
+                  }
+                });
+              }
             }
 
             // Ensure RTL options are set for dependent field
@@ -1565,16 +1638,59 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       }
     });
 
-    // Remove dependencies from schema to prevent RJSF from rendering duplicate fields
+    // Remove dependencies and allOf from schema to prevent RJSF from validating them directly
+    // We handle conditional logic ourselves through the processed schema
     processedSchema.properties = orderedProperties;
     delete processedSchema.dependencies;
+    delete processedSchema.allOf;
 
-    // Ensure required only includes fields that are actually rendered
-    if (Array.isArray(processedSchema.required)) {
-      processedSchema.required = processedSchema.required.filter(
-        (fieldName: string) => !!orderedProperties[fieldName]
-      );
+    // Process conditional required fields from allOf.then blocks
+    const conditionalRequiredFields: Array<{
+      fieldName: string;
+      conditionField: string;
+      shouldBeRequired: (parentValue: any) => boolean;
+    }> = [];
+    
+    if (Array.isArray(baseSchema.allOf)) {
+      baseSchema.allOf.forEach((allOfItem: any) => {
+        if (allOfItem.if && allOfItem.then && Array.isArray(allOfItem.then.required)) {
+          const ifCondition = allOfItem.if;
+          if (ifCondition.properties) {
+            Object.keys(ifCondition.properties).forEach((conditionField) => {
+              const conditionSchema = ifCondition.properties[conditionField];
+              const evaluator = buildConditionEvaluator(conditionSchema);
+              
+              allOfItem.then.required.forEach((requiredField: string) => {
+                conditionalRequiredFields.push({
+                  fieldName: requiredField,
+                  conditionField: conditionField,
+                  shouldBeRequired: evaluator,
+                });
+              });
+            });
+          }
+        }
+      });
     }
+    
+    // Build the final required array: base required + conditional required (only if condition is met and field is visible)
+    const baseRequired = Array.isArray(processedSchema.required) 
+      ? processedSchema.required.filter((fieldName: string) => !!orderedProperties[fieldName])
+      : [];
+    
+    const conditionalRequired = conditionalRequiredFields
+      .filter((item) => {
+        // Only include if field is visible
+        if (!orderedProperties[item.fieldName]) return false;
+        
+        // Check if condition is met
+        const conditionValue = currentFormData ? currentFormData[item.conditionField] : undefined;
+        return item.shouldBeRequired(conditionValue);
+      })
+      .map((item) => item.fieldName);
+    
+    // Combine and deduplicate
+    processedSchema.required = Array.from(new Set([...baseRequired, ...conditionalRequired]));
 
     // Filter ui:order to only include fields that are actually rendered
     if (Array.isArray(processedUiSchemaOrdered["ui:order"])) {

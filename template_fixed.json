@@ -1066,6 +1066,24 @@
             "type": "string",
             "title": "استفراغ غیرخونی غیرصفراوی",
             "default": "خیر"
+          },
+          "double_vision": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "دوبینی",
+            "default": "خیر"
+          },
+          "blurred_vision": {
+            "enum": [
+              "بله",
+              "خیر"
+            ],
+            "type": "string",
+            "title": "تاری دید",
+            "default": "خیر"
           }
         },
         "allOf": [
@@ -2272,6 +2290,8 @@
         "weight_loss",
         "night_sweats",
         "dizziness",
+        "double_vision",
+        "blurred_vision",
         "limb_swelling",
         "defecation",
         "gas_passing",
@@ -2293,6 +2313,18 @@
         }
       },
       "dizziness": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "double_vision": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true
+        }
+      },
+      "blurred_vision": {
         "ui:widget": "radio",
         "ui:options": {
           "inline": true
