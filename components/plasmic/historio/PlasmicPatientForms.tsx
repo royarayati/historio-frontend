@@ -2000,8 +2000,7 @@ function PlasmicPatientForms__RenderFunc(props: {
                           }
 
                           $steps["updateShowPrintingFalse"] =
-                            $steps.callPrintApi.status === 200 ||
-                            $steps.callPrintApi.status !== 200
+                            $steps.callPrintApi.status === 200
                               ? (() => {
                                   const actionArgs = {
                                     variable: {
