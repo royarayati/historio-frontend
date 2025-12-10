@@ -1339,6 +1339,7 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     };
     const dependencyEntries: DependencyEntry[] = [];
 
+    // Process dependencies pattern
     Object.keys(baseSchema.dependencies || {}).forEach((conditionField) => {
       const dependency = baseSchema.dependencies[conditionField];
       if (dependency.oneOf) {
@@ -1369,6 +1370,46 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         });
       }
     });
+
+    // Process allOf pattern with if/then conditions
+    if (Array.isArray(baseSchema.allOf)) {
+      baseSchema.allOf.forEach((allOfItem: any) => {
+        if (allOfItem.if && allOfItem.then) {
+          const ifCondition = allOfItem.if;
+          // Extract the condition field and value from if.properties
+          if (ifCondition.properties) {
+            Object.keys(ifCondition.properties).forEach((conditionField) => {
+              const conditionSchema = ifCondition.properties[conditionField];
+              const evaluator = buildConditionEvaluator(conditionSchema);
+              
+              // Extract dependent fields from then.properties
+              if (allOfItem.then.properties) {
+                Object.keys(allOfItem.then.properties).forEach((dependentField) => {
+                  // Check if this dependency entry already exists
+                  const existingIndex = dependencyEntries.findIndex(
+                    (entry) => entry.parentField === conditionField && entry.dependentField === dependentField
+                  );
+                  
+                  if (existingIndex === -1) {
+                    dependencyEntries.push({
+                      parentField: conditionField,
+                      dependentField: dependentField,
+                      shouldDisplay: evaluator,
+                    });
+                    
+                    // Add the dependent field property to baseSchema.properties if it doesn't exist
+                    // This ensures the field schema is available when condition is met
+                    if (!processedSchema.properties[dependentField] && allOfItem.then.properties[dependentField]) {
+                      processedSchema.properties[dependentField] = allOfItem.then.properties[dependentField];
+                    }
+                  }
+                });
+              }
+            });
+          }
+        }
+      });
+    }
 
     // Get original field order from base schema
     const originalFieldOrder = Object.keys(baseSchema.properties || {});
@@ -1531,6 +1572,13 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     // Ensure required only includes fields that are actually rendered
     if (Array.isArray(processedSchema.required)) {
       processedSchema.required = processedSchema.required.filter(
+        (fieldName: string) => !!orderedProperties[fieldName]
+      );
+    }
+
+    // Filter ui:order to only include fields that are actually rendered
+    if (Array.isArray(processedUiSchemaOrdered["ui:order"])) {
+      processedUiSchemaOrdered["ui:order"] = processedUiSchemaOrdered["ui:order"].filter(
         (fieldName: string) => !!orderedProperties[fieldName]
       );
     }
