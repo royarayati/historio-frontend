@@ -1502,6 +1502,35 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       }
     });
 
+    // Recursively process nested object fields so their own dependencies work
+    Object.keys(orderedProperties).forEach((fieldName) => {
+      const fieldSchema = orderedProperties[fieldName];
+      if (fieldSchema?.type === "object") {
+        const originalTitle = fieldSchema.title;
+        const childFormData = currentFormData ? currentFormData[fieldName] || {} : {};
+        const originalFieldUiSchema = processedUiSchemaOrdered[fieldName] || {};
+
+        const { schema: childSchema, uiSchema: childUiSchema } = processConditionalSchema(
+          fieldSchema,
+          childFormData,
+          originalFieldUiSchema
+        );
+
+        orderedProperties[fieldName] = childSchema;
+
+        // Preserve object title for ObjectFieldTemplate rendering
+        if (originalTitle && !orderedProperties[fieldName].title) {
+          orderedProperties[fieldName].title = originalTitle;
+        }
+
+        // Merge container-level uiSchema (like ui:order) with processed child uiSchema
+        processedUiSchemaOrdered[fieldName] = {
+          ...originalFieldUiSchema,
+          ...childUiSchema,
+        };
+      }
+    });
+
     // Remove dependencies from schema to prevent RJSF from rendering duplicate fields
     processedSchema.properties = orderedProperties;
     delete processedSchema.dependencies;
