@@ -278,68 +278,190 @@ const FileWidget = (props: WidgetProps) => {
   const label = schema?.title || "";
   const accept = (typeof uiOptions.accept === "string" ? uiOptions.accept : "*/*");
   const isRTL = uiOptions.dir === "rtl" || true; // Default to RTL
-  const format = schema?.format || "";
+  // For array types, format is on items, not schema itself
+  const itemsFormat = schema?.items && typeof schema.items === "object" && !Array.isArray(schema.items) 
+    ? (schema.items as any)?.format 
+    : "";
+  const format = schema?.format || itemsFormat || "";
 
   const fileInputRef = React.useRef<HTMLInputElement>(null);
-  const [fileName, setFileName] = useState<string>("");
-  const [preview, setPreview] = useState<string>("");
+  const [fileNames, setFileNames] = useState<string[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
+  const [isMultiple, setIsMultiple] = useState<boolean>(false);
 
-  // Load existing value if it's a data URL
+  // Check if multiple files are allowed from ui:options
   useEffect(() => {
-    if (value && typeof value === "string" && value.startsWith("data:")) {
-      setPreview(value);
-      // Try to extract filename from data URL if possible
-      const match = value.match(/filename=([^;]+)/);
-      if (match) {
-        setFileName(match[1]);
+    const allowMultiple = uiOptions.multiple === true || uiOptions.multiple === "true";
+    setIsMultiple(allowMultiple);
+  }, [uiOptions]);
+
+  // Load existing value if it's a data URL or media object or array
+  useEffect(() => {
+    if (value) {
+      // Handle array of files (multiple images)
+      if (Array.isArray(value)) {
+        const dataUrls: string[] = [];
+        const names: string[] = [];
+        value.forEach((item) => {
+          if (typeof item === "object" && item !== null) {
+            const dataUrl = item.dataUrl || item.value || "";
+            const filename = item.filename || item.original_filename || "";
+            if (dataUrl && dataUrl.startsWith("data:")) {
+              dataUrls.push(dataUrl);
+              names.push(filename || "فایل بارگذاری شده");
+            }
+          } else if (typeof item === "string" && item.startsWith("data:")) {
+            dataUrls.push(item);
+            const match = item.match(/filename=([^;]+)/);
+            names.push(match ? match[1] : "فایل بارگذاری شده");
+          }
+        });
+        setPreviews(dataUrls);
+        setFileNames(names);
+      } else if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+        // Handle single object format: { dataUrl: "...", filename: "..." }
+        const dataUrl = value.dataUrl || value.value || "";
+        const filename = value.filename || value.original_filename || "";
+        if (dataUrl && dataUrl.startsWith("data:")) {
+          setPreviews([dataUrl]);
+          setFileNames([filename || "فایل بارگذاری شده"]);
+        } else {
+          setPreviews([]);
+          setFileNames([]);
+        }
+      } else if (typeof value === "string" && value.startsWith("data:")) {
+        // Handle single string data URL
+        setPreviews([value]);
+        const match = value.match(/filename=([^;]+)/);
+        setFileNames([match ? match[1] : "فایل بارگذاری شده"]);
       } else {
-        setFileName("تصویر بارگذاری شده");
+        setPreviews([]);
+        setFileNames([]);
       }
-    } else if (value) {
-      setPreview("");
-      setFileName("");
+    } else {
+      setPreviews([]);
+      setFileNames([]);
     }
   }, [value]);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) {
+    const files = event.target.files;
+    if (!files || files.length === 0) {
       onChange(undefined);
-      setFileName("");
-      setPreview("");
+      setFileNames([]);
+      setPreviews([]);
       return;
     }
 
-    setFileName(file.name);
+    // Convert FileList to Array
+    const fileArray = Array.from(files);
 
     // If format is data-url, convert to base64
-    if (format === "data-url") {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const dataUrl = e.target?.result as string;
-        onChange(dataUrl);
-        setPreview(dataUrl);
-        onBlur(id, dataUrl);
-      };
-      reader.onerror = () => {
-        console.error("Error reading file");
+    // Also check if this is an array field with data-url items
+    const itemsFormat = schema?.items && typeof schema.items === "object" && !Array.isArray(schema.items) 
+      ? (schema.items as any)?.format 
+      : "";
+    const isDataUrlFormat = format === "data-url" || itemsFormat === "data-url";
+    if (isDataUrlFormat) {
+      const filePromises = fileArray.map((file) => {
+        return new Promise<{ dataUrl: string; filename: string; original_filename: string }>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const dataUrl = e.target?.result as string;
+            resolve({
+              dataUrl: dataUrl,
+              filename: file.name,
+              original_filename: file.name,
+            });
+          };
+          reader.onerror = () => {
+            reject(new Error(`Error reading file: ${file.name}`));
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      try {
+        const fileValues = await Promise.all(filePromises);
+        
+        // If multiple is enabled, store as array; otherwise store as single object (first file)
+        if (isMultiple) {
+          // Get existing files from value (if any)
+          const existingFiles = Array.isArray(value) ? value : [];
+          
+          // Append new files to existing ones (avoid duplicates by filename)
+          const existingFilenames = new Set(existingFiles.map((f: any) => 
+            typeof f === "object" ? (f.filename || f.original_filename) : ""
+          ));
+          
+          const newFilesToAdd = fileValues.filter((f) => 
+            !existingFilenames.has(f.filename)
+          );
+          
+          const allFiles = [...existingFiles, ...newFilesToAdd];
+          
+          onChange(allFiles);
+          setFileNames(allFiles.map((f: any) => 
+            typeof f === "object" ? (f.filename || f.original_filename || "فایل") : "فایل"
+          ));
+          setPreviews(allFiles.map((f: any) => 
+            typeof f === "object" ? (f.dataUrl || f.value || "") : (typeof f === "string" ? f : "")
+          ));
+        } else {
+          // Single file mode - use first file only
+          const firstFile = fileValues[0];
+          onChange(firstFile);
+          setFileNames([firstFile.filename]);
+          setPreviews([firstFile.dataUrl]);
+        }
+        onBlur(id, isMultiple ? fileValues : fileValues[0]);
+      } catch (error) {
         onChange(undefined);
-        setFileName("");
-        setPreview("");
-      };
-      reader.readAsDataURL(file);
+        setFileNames([]);
+        setPreviews([]);
+      }
     } else {
-      // For other formats, just store the file name or handle differently
-      onChange(file.name);
+      // For other formats, just store the file name(s)
+      if (isMultiple) {
+        onChange(fileArray.map((f) => f.name));
+        setFileNames(fileArray.map((f) => f.name));
+      } else {
+        onChange(fileArray[0].name);
+        setFileNames([fileArray[0].name]);
+      }
     }
   };
 
   const handleRemove = () => {
     onChange(undefined);
-    setFileName("");
-    setPreview("");
+    setFileNames([]);
+    setPreviews([]);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
+    }
+  };
+
+  const handleRemoveFile = (index: number) => {
+    if (isMultiple && Array.isArray(value)) {
+      // Remove file from array
+      const newValue = value.filter((_: any, i: number) => i !== index);
+      
+      if (newValue.length > 0) {
+        onChange(newValue);
+        setFileNames(newValue.map((f: any) => 
+          typeof f === "object" ? (f.filename || f.original_filename || "فایل") : "فایل"
+        ));
+        setPreviews(newValue.map((f: any) => 
+          typeof f === "object" ? (f.dataUrl || f.value || "") : (typeof f === "string" ? f : "")
+        ));
+      } else {
+        onChange(undefined);
+        setFileNames([]);
+        setPreviews([]);
+      }
+    } else {
+      // Single file mode - remove all
+      handleRemove();
     }
   };
 
@@ -348,8 +470,6 @@ const FileWidget = (props: WidgetProps) => {
       fileInputRef.current.click();
     }
   };
-
-  const isImage = preview && preview.startsWith("data:image/");
 
   return (
     <FormControl
@@ -377,6 +497,7 @@ const FileWidget = (props: WidgetProps) => {
           ref={fileInputRef}
           type="file"
           accept={accept}
+          multiple={isMultiple}
           onChange={handleFileChange}
           onBlur={() => onBlur(id, value)}
           onFocus={() => onFocus(id, value)}
@@ -392,37 +513,49 @@ const FileWidget = (props: WidgetProps) => {
           mb={2}
           fontFamily="Vazirmatn, sans-serif"
         >
-          {fileName ? "تغییر فایل" : "انتخاب فایل"}
+          {fileNames.length > 0 
+            ? (isMultiple ? `افزودن فایل بیشتر (${fileNames.length} فایل)` : "تغییر فایل")
+            : (isMultiple ? "انتخاب فایل‌ها" : "انتخاب فایل")}
         </Button>
 
-        {fileName && (
+        {fileNames.length > 0 && (
           <Box mb={2}>
-            <Text fontSize="sm" color="gray.600" fontFamily="Vazirmatn, sans-serif">
-              {fileName}
-            </Text>
-            <Button
-              onClick={handleRemove}
-              size="sm"
-              colorScheme="red"
-              variant="outline"
-              ml={2}
-              fontFamily="Vazirmatn, sans-serif"
-            >
-              حذف
-            </Button>
+            {fileNames.map((fileName, index) => (
+              <Box key={index} mb={2} p={2} border="1px solid" borderColor="gray.200" borderRadius="md">
+                <Text fontSize="sm" color="gray.600" fontFamily="Vazirmatn, sans-serif" mb={1}>
+                  {fileName}
+                </Text>
+                <Button
+                  onClick={() => handleRemoveFile(index)}
+                  size="sm"
+                  colorScheme="red"
+                  variant="outline"
+                  fontFamily="Vazirmatn, sans-serif"
+                >
+                  حذف
+                </Button>
+              </Box>
+            ))}
           </Box>
         )}
 
-        {isImage && preview && (
-          <Box mt={2}>
-            <Image
-              src={preview}
-              alt="Preview"
-              maxH="200px"
-              borderRadius="md"
-              border="1px solid"
-              borderColor="gray.200"
-            />
+        {previews.length > 0 && (
+          <Box mt={2} display="flex" flexWrap="wrap" gap={2}>
+            {previews.map((preview, index) => {
+              const isImage = preview && preview.startsWith("data:image/");
+              return isImage ? (
+                <Box key={index}>
+                  <Image
+                    src={preview}
+                    alt={`Preview ${index + 1}`}
+                    maxH="200px"
+                    borderRadius="md"
+                    border="1px solid"
+                    borderColor="gray.200"
+                  />
+                </Box>
+              ) : null;
+            })}
           </Box>
         )}
       </Box>
@@ -887,7 +1020,7 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         return user?.access || null;
       }
     } catch (e) {
-      console.warn('Failed to get auth token from localStorage:', e);
+      // Failed to get auth token
     }
     return null;
   };
@@ -947,13 +1080,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         setLoading(true);
         setError(null);
         try {
-          console.log(`🚀 Starting fetchSubmission with:`, {
-            mode,
-            templateId,
-            submissionId,
-            patientId
-          });
-          
           // Fetch submission data first
           let submissionData: any = null;
           
@@ -961,11 +1087,9 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
           const endpoints = [];
           
           const baseUrl = getBaseUrl();
-          console.log("[SimpleFormBuilder] getBaseUrl() returned:", baseUrl);
           
           // Safety check: ensure baseUrl is valid and not frontend
           if (!baseUrl || baseUrl.includes("historio-frontend")) {
-            console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
             throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
           }
           
@@ -999,62 +1123,40 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
             endpoints.push(url3.toString());
           }
           
-          console.log(`📋 Will try ${endpoints.length} endpoints:`, endpoints);
-          
-          if (endpoints.length === 0) {
-            console.warn(`⚠️ No endpoints to try! submissionId=${submissionId}, templateId=${templateId}, patientId=${patientId}`);
-          }
-          
           let lastError: any = null;
           const authHeaders = getAuthHeaders();
           for (const endpoint of endpoints) {
             try {
-              console.log(`🔍 Trying endpoint: ${endpoint}`);
               const res = await fetch(endpoint, {
                 method: 'GET',
                 headers: authHeaders,
               });
               if (res.ok) {
                 const response = await res.json();
-                console.log(`✅ Response from ${endpoint}:`, JSON.stringify(response, null, 2));
                 // Handle both wrapped and direct response formats
                 submissionData = response?.data || response;
-                console.log(`📦 Extracted submissionData:`, JSON.stringify(submissionData, null, 2));
                 break; // Success, exit loop
               } else {
-                console.log(`❌ Endpoint ${endpoint} returned HTTP ${res.status}`);
                 lastError = new Error(`HTTP ${res.status}`);
               }
             } catch (fetchErr: any) {
-              console.log(`❌ Error fetching from ${endpoint}:`, fetchErr.message);
               lastError = fetchErr;
               continue; // Try next endpoint
             }
           }
           
           // Extract data from submission response if found
-          // Response structure: { id, patient_data: { data: {...}, national_code }, form_data: { template_id, template_name, ... } }
+          // Response structure: { id, patient_data: { data: {...}, national_code }, form_data: { template_id, template_name, ... }, media_properties: {...} }
           let loadedFormData: any = {};
           let templateIdFromSubmission: string | null = null;
           let loadedName: string | null = null;
+          let mediaProperties: any = null;
           
           if (submissionData) {
-            console.log(`🔍 Extracting from submissionData:`, {
-              hasPatientData: !!submissionData.patient_data,
-              hasPatientDataData: !!submissionData.patient_data?.data,
-              patientDataKeys: submissionData.patient_data ? Object.keys(submissionData.patient_data) : [],
-              fullPatientData: submissionData.patient_data,
-            });
-            
             loadedFormData = submissionData?.patient_data?.data || {};
             templateIdFromSubmission = submissionData?.form_data?.template_id?.toString() || submissionData?.form_data?.templateId?.toString() || null;
             loadedName = submissionData?.form_data?.template_name || submissionData?.form_data?.templateName || null;
-            
-            console.log(`📋 Extracted loadedFormData:`, JSON.stringify(loadedFormData, null, 2));
-            console.log(`📋 Extracted templateIdFromSubmission:`, templateIdFromSubmission);
-            console.log(`📋 Extracted loadedName:`, loadedName);
-          } else {
-            console.warn(`⚠️ No submissionData found after trying all endpoints`);
+            mediaProperties = submissionData?.media_properties || null;
           }
           
           // Use templateId from prop, submission, or throw error
@@ -1071,11 +1173,9 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
 
           try {
             const baseUrl = getBaseUrl();
-            console.log("[SimpleFormBuilder] getBaseUrl() returned for template:", baseUrl);
             
             // Safety check: ensure baseUrl is valid and not frontend
             if (!baseUrl || baseUrl.includes("historio-frontend")) {
-              console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
               throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
             }
             
@@ -1106,19 +1206,113 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
             throw new Error("Could not load schema from template.");
           }
 
-          console.log("✅ Loaded submission form data", JSON.stringify(loadedFormData, null, 2));
-          console.log("✅ Loaded template schema", loadedSchema);
-          console.log("✅ Loaded template uiSchema", loadedUiSchema);
-          console.log("✅ Loaded form name", loadedName);
-          console.log("✅ Loaded template ID", loadedTemplateId);
-          console.log("📋 Form will render with pre-filled data:", Object.keys(loadedFormData).length > 0 ? "YES" : "NO (empty form)");
-
+          // Set schema and UI schema first
           setSchema(loadedSchema || {});
           setUiSchema(loadedUiSchema);
-          // Set form data - this will populate all fields with the submission values
-          setRjsfFormData(loadedFormData);
           setFormName(loadedName || null);
           setTemplateInfo({ id: loadedTemplateId, name: loadedName || null });
+
+          // Restore media from media_properties if available
+          if (mediaProperties && mediaProperties.file_path && loadedSchema) {
+            try {
+              const baseUrl = getBaseUrl();
+              // Construct full URL for media file
+              let mediaUrl: string;
+              if (mediaProperties.file_path.startsWith("http://") || mediaProperties.file_path.startsWith("https://")) {
+                mediaUrl = mediaProperties.file_path;
+              } else if (mediaProperties.file_path.startsWith("/")) {
+                // Relative path - resolve against base URL
+                mediaUrl = `${baseUrl}${mediaProperties.file_path}`;
+              } else {
+                // Relative path without leading slash
+                mediaUrl = `${baseUrl}/${mediaProperties.file_path}`;
+              }
+              
+              // Fetch media file and convert to data URL
+              const mediaResponse = await fetch(mediaUrl, {
+                method: 'GET',
+                headers: getAuthHeaders(),
+              });
+              
+              if (mediaResponse.ok) {
+                const blob = await mediaResponse.blob();
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                  const dataUrl = e.target?.result as string;
+                  const originalFilename = mediaProperties.original_filename || mediaProperties.filename || "file";
+                  
+                  // Find the first file field in the schema and populate it
+                  const findFirstFileField = (properties: any, data: any, path: string = ""): boolean => {
+                    if (!properties) return false;
+                    
+                    for (const key of Object.keys(properties)) {
+                      const fieldSchema = properties[key];
+                      const fieldPath = path ? `${path}.${key}` : key;
+                      
+                      // Check if this is a file field (single or array)
+                      const isFileField = (fieldSchema?.format === "data-url") || 
+                                         (fieldSchema?.type === "string" && fieldSchema?.format === "data-url") ||
+                                         (fieldSchema?.type === "array" && fieldSchema?.items?.format === "data-url");
+                      if (isFileField) {
+                        // Determine if this is an array field
+                        const isArrayField = fieldSchema?.type === "array";
+                        // Create the media object
+                        const mediaObject = {
+                          dataUrl: dataUrl,
+                          filename: originalFilename,
+                          original_filename: originalFilename,
+                        };
+                        // Populate this field with media data
+                        if (path) {
+                          // Nested field
+                          const pathParts = path.split(".");
+                          let current = data;
+                          for (let i = 0; i < pathParts.length - 1; i++) {
+                            if (!current[pathParts[i]]) {
+                              current[pathParts[i]] = {};
+                            }
+                            current = current[pathParts[i]];
+                          }
+                          // Set as array if field is array type, otherwise single object
+                          current[key] = isArrayField ? [mediaObject] : mediaObject;
+                        } else {
+                          // Root level field
+                          // Set as array if field is array type, otherwise single object
+                          data[key] = isArrayField ? [mediaObject] : mediaObject;
+                        }
+                        return true;
+                      } else if (fieldSchema?.type === "object" && fieldSchema?.properties) {
+                        // Recursively search nested objects
+                        if (!data[key]) {
+                          data[key] = {};
+                        }
+                        if (findFirstFileField(fieldSchema.properties, data[key], fieldPath)) {
+                          return true;
+                        }
+                      }
+                    }
+                    return false;
+                  };
+                  
+                  const formDataWithMedia = { ...loadedFormData };
+                  findFirstFileField(loadedSchema.properties || {}, formDataWithMedia);
+                  
+                  setRjsfFormData(formDataWithMedia);
+                };
+                reader.onerror = () => {
+                  setRjsfFormData(loadedFormData);
+                };
+                reader.readAsDataURL(blob);
+              } else {
+                setRjsfFormData(loadedFormData);
+              }
+            } catch (mediaErr: any) {
+              setRjsfFormData(loadedFormData);
+            }
+          } else {
+            // No media to restore, set form data as is
+            setRjsfFormData(loadedFormData);
+          }
         } catch (err: any) {
           setError(err.message);
         } finally {
@@ -1142,11 +1336,9 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         setError(null);
         try {
           const baseUrl = getBaseUrl();
-          console.log("[SimpleFormBuilder] getBaseUrl() returned for template fetch:", baseUrl);
           
           // Safety check: ensure baseUrl is valid and not frontend
           if (!baseUrl || baseUrl.includes("historio-frontend")) {
-            console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
             throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
           }
           
@@ -1169,11 +1361,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
           const loadedUiSchema = templateData?.ui_schema || templateData?.uiSchema || {};
           const loadedName = templateData?.name || loadedSchema?.title;
           const loadedTemplateId = templateData?.id ? parseInt(templateData.id) : (templateId ? parseInt(templateId) : null);
-
-          console.log("✅ Loaded schema", loadedSchema);
-          console.log("✅ Loaded uiSchema", loadedUiSchema);
-          console.log("✅ Loaded form name", loadedName);
-          console.log("✅ Loaded template ID", loadedTemplateId);
 
           setSchema(loadedSchema || {});
           setUiSchema(loadedUiSchema);
@@ -1730,6 +1917,164 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     return processConditionalSchema(schema, rjsfFormData, uiSchema);
   }, [schema, rjsfFormData, uiSchema]);
 
+  // Helper function to extract media from form data
+  const extractMediaFromFormData = (formData: any, schema: any): { media_content: string | null; original_filename: string | null; cleanedFormData: any } => {
+    if (!formData || !schema || !schema.properties) {
+      return { media_content: null, original_filename: null, cleanedFormData: formData || {} };
+    }
+
+    let mediaContent: string | null = null;
+    let originalFilename: string | null = null;
+    const cleanedFormData: any = { ...formData };
+
+    // Recursively search for file fields in form data
+    const findMediaFields = (data: any, properties: any, cleanedData: any, path: string = ""): void => {
+      if (!data || typeof data !== "object" || Array.isArray(data)) return;
+      if (!cleanedData || typeof cleanedData !== "object" || Array.isArray(cleanedData)) return;
+
+      Object.keys(properties || {}).forEach((key) => {
+        const fieldSchema = properties[key];
+        const fieldValue = data[key];
+        const fieldPath = path ? `${path}.${key}` : key;
+
+        if (fieldValue === undefined || fieldValue === null) return;
+
+        // Check if this field is a file field (format: data-url or widget: file)
+        // Handle both single file (string with format: data-url) and multiple files (array with items format: data-url)
+        const isFileField = (fieldSchema?.format === "data-url") || 
+                           (fieldSchema?.type === "string" && fieldSchema?.format === "data-url") ||
+                           (fieldSchema?.type === "array" && fieldSchema?.items?.format === "data-url");
+        
+        // Also check if the value itself looks like a file (data URL or file object)
+        const valueLooksLikeFile = fieldValue && (
+          (typeof fieldValue === "string" && fieldValue.startsWith("data:")) ||
+          (typeof fieldValue === "object" && fieldValue !== null && !Array.isArray(fieldValue) && (fieldValue.dataUrl || fieldValue.value)) ||
+          (Array.isArray(fieldValue) && fieldValue.length > 0 && (
+            (typeof fieldValue[0] === "string" && fieldValue[0].startsWith("data:")) ||
+            (typeof fieldValue[0] === "object" && fieldValue[0] !== null && (fieldValue[0].dataUrl || fieldValue[0].value))
+          ))
+        );
+        
+        // Use file field detection OR value-based detection
+        const shouldProcessAsFile = isFileField || valueLooksLikeFile;
+
+        if (shouldProcessAsFile) {
+          // Handle array of files (multiple images)
+          if (Array.isArray(fieldValue)) {
+            // Process first image (backend currently supports one media per submission)
+            // In the future, backend can be updated to accept array of media files
+            if (fieldValue.length > 0) {
+              const firstFile = fieldValue[0];
+              
+              if (typeof firstFile === "object" && firstFile !== null) {
+                const dataUrl = firstFile.dataUrl || firstFile.value || "";
+                const filename = firstFile.filename || firstFile.original_filename || "";
+                
+                if (dataUrl && dataUrl.startsWith("data:")) {
+                  const base64Match = dataUrl.match(/^data:[^;]+;base64,(.+)$/);
+                  if (base64Match && base64Match[1] && !mediaContent) {
+                    mediaContent = base64Match[1];
+                    originalFilename = filename || `file_${fieldPath.replace(/\./g, "_")}`;
+                  }
+                }
+              } else if (typeof firstFile === "string" && firstFile.startsWith("data:")) {
+                const base64Match = firstFile.match(/^data:[^;]+;base64,(.+)$/);
+                if (base64Match && base64Match[1] && !mediaContent) {
+                  mediaContent = base64Match[1];
+                  const filenameMatch = firstFile.match(/filename=([^;]+)/);
+                  originalFilename = filenameMatch ? filenameMatch[1] : `file_${fieldPath.replace(/\./g, "_")}`;
+                }
+              }
+            }
+            // Remove from cleaned form data (media is sent separately)
+            if (path) {
+              const pathParts = path.split(".");
+              let current = cleanedData;
+              for (let i = 0; i < pathParts.length; i++) {
+                if (!current[pathParts[i]]) {
+                  current[pathParts[i]] = {};
+                }
+                current = current[pathParts[i]];
+              }
+              delete current[key];
+            } else {
+              delete cleanedData[key];
+            }
+          } else if (typeof fieldValue === "object" && fieldValue !== null && !Array.isArray(fieldValue)) {
+            // Handle single object format: { dataUrl: "...", filename: "..." }
+            const dataUrl = fieldValue.dataUrl || fieldValue.value || "";
+            const filename = fieldValue.filename || fieldValue.original_filename || "";
+            if (dataUrl && dataUrl.startsWith("data:")) {
+              // Extract base64 part from data URL
+              const base64Match = dataUrl.match(/^data:[^;]+;base64,(.+)$/);
+              if (base64Match && base64Match[1]) {
+                // Use the first media field found (backend supports one media per submission)
+                if (!mediaContent) {
+                  mediaContent = base64Match[1];
+                  originalFilename = filename || `file_${fieldPath.replace(/\./g, "_")}`;
+                }
+                // Remove from cleaned form data (media is sent separately)
+                if (path) {
+                  // Nested field - navigate to the nested object
+                  const pathParts = path.split(".");
+                  let current = cleanedData;
+                  for (let i = 0; i < pathParts.length; i++) {
+                    if (!current[pathParts[i]]) {
+                      current[pathParts[i]] = {};
+                    }
+                    current = current[pathParts[i]];
+                  }
+                  delete current[key];
+                } else {
+                  delete cleanedData[key];
+                }
+              }
+            }
+          } else if (typeof fieldValue === "string" && fieldValue.startsWith("data:")) {
+            // Handle string data URL format
+            const base64Match = fieldValue.match(/^data:[^;]+;base64,(.+)$/);
+            if (base64Match && base64Match[1]) {
+              if (!mediaContent) {
+                mediaContent = base64Match[1];
+                // Try to extract filename from data URL if available
+                const filenameMatch = fieldValue.match(/filename=([^;]+)/);
+                originalFilename = filenameMatch ? filenameMatch[1] : `file_${fieldPath.replace(/\./g, "_")}`;
+              }
+              if (path) {
+                // Nested field - navigate to the nested object
+                const pathParts = path.split(".");
+                let current = cleanedData;
+                for (let i = 0; i < pathParts.length; i++) {
+                  if (!current[pathParts[i]]) {
+                    current[pathParts[i]] = {};
+                  }
+                  current = current[pathParts[i]];
+                }
+                delete current[key];
+              } else {
+                delete cleanedData[key];
+              }
+            }
+          }
+        } else if (fieldSchema?.type === "object" && fieldSchema?.properties) {
+          // Recursively search nested objects
+          if (!cleanedData[key]) {
+            cleanedData[key] = {};
+          }
+          findMediaFields(fieldValue, fieldSchema.properties, cleanedData[key], fieldPath);
+        }
+      });
+    };
+
+    findMediaFields(formData, schema.properties, cleanedFormData);
+
+    return {
+      media_content: mediaContent,
+      original_filename: originalFilename,
+      cleanedFormData,
+    };
+  };
+
   const handleSubmit = async ({ formData: submittedData }: any) => {
     // If using direct formData prop with custom onSubmit
     if (formData && onSubmit) {
@@ -1740,7 +2085,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     // For template mode, require templateId
     if (mode === "template") {
       if (!templateId) {
-        console.error("templateId is required for template mode");
         return;
       }
     }
@@ -1748,7 +2092,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
     // For filled_form mode, require submissionId
     if (mode === "filled_form") {
       if (!submissionId) {
-        console.error("submissionId is required for filled_form mode");
         return;
       }
     }
@@ -1773,12 +2116,18 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         throw new Error("template_id is required for submission");
       }
       
+      // Extract media from form data
+      const { media_content, original_filename, cleanedFormData } = extractMediaFromFormData(
+        submittedData,
+        schema
+      );
+      
       // Build payload according to the required schema
-      const payload = {
+      const payload: any = {
         patient_data: {
           national_code: nationalCode,
           patient_name: patientName,
-          data: submittedData || {}, // The actual form field values, ensure it's an object
+          data: cleanedFormData || {}, // The actual form field values (without media fields)
         },
         form_data: {
           user_id: userId,
@@ -1788,7 +2137,13 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         },
       };
 
-      console.log("📤 Submitting payload:", payload);
+      // Add media if present
+      if (media_content) {
+        payload.media_content = media_content;
+        if (original_filename) {
+          payload.original_filename = original_filename;
+        }
+      }
 
       const httpMethod = mode === "template" ? "POST" : "PUT";
       
@@ -1798,12 +2153,9 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       if (submitUrl) {
         // Normalize submitUrl to always go to backend, even if it's a relative path
         const baseUrlForSubmit = getBaseUrl();
-        console.log("[SimpleFormBuilder] submitUrl prop received:", submitUrl);
-        console.log("[SimpleFormBuilder] getBaseUrl() returned for submit (submitUrl branch):", baseUrlForSubmit);
 
         // Safety check: ensure base URL is valid and not frontend
         if (!baseUrlForSubmit || baseUrlForSubmit.includes("historio-frontend")) {
-          console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected in submitUrl branch:", baseUrlForSubmit);
           throw new Error(`Invalid API base URL: ${baseUrlForSubmit}. Must point to backend, not frontend.`);
         }
 
@@ -1826,11 +2178,9 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       } else {
         // Auto-construct URL from base URL
         const baseUrl = getBaseUrl();
-        console.log("[SimpleFormBuilder] getBaseUrl() returned for submit:", baseUrl);
         
         // Safety check: ensure baseUrl is valid and not frontend
         if (!baseUrl || baseUrl.includes("historio-frontend")) {
-          console.error("[SimpleFormBuilder] ERROR: Invalid baseUrl detected:", baseUrl);
           throw new Error(`Invalid API base URL: ${baseUrl}. Must point to backend, not frontend.`);
         }
         
@@ -1844,8 +2194,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
           finalSubmitUrl = urlObj.toString();
         }
       }
-      
-      console.log(`📤 Using ${httpMethod} method to: ${finalSubmitUrl}`);
 
       const response = await fetch(finalSubmitUrl, {
         method: httpMethod,
@@ -1866,8 +2214,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
         result = responseText ? JSON.parse(responseText) : {};
       } catch (parseError) {
         // If JSON parsing fails, the backend likely returned a non-serializable object
-        console.error("⚠️ Backend returned non-JSON response. This usually means the backend needs to serialize the response object.");
-        console.error("Parse error:", parseError);
         // Still treat as success if status was OK, but log the issue
         result = { success: true, message: "Form submitted successfully (backend serialization issue detected)" };
       }
@@ -1879,7 +2225,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
             message.toLowerCase().includes("different user detected")) {
           const errorMessage = "خطا: فقط کاربری که این فرم را ایجاد کرده است می‌تواند آن را ویرایش کند.";
           showMessage(errorMessage, "error");
-          console.error("Different user detected: Only the user who created this submission can edit it.");
           return; // Exit early, don't show success message
         }
       }
@@ -1887,7 +2232,6 @@ export const SimpleFormBuilder: React.FC<SimpleFormBuilderProps> = ({
       showMessage("فرم با موفقیت ارسال شد!", "success");
       onSubmitData?.(result);
     } catch (err: any) {
-      console.error("Submit error:", err);
       // Only show error message if it's not already shown (check if it's the user mismatch error)
       if (!err.message?.includes("Different user detected")) {
         showMessage(`خطا در ارسال فرم: ${err.message}`, "error");
